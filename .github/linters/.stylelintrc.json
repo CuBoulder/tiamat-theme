@@ -1,0 +1,7 @@
+{
+    "rules": {
+        "no-descending-specificity": null,
+        "value-no-vendor-prefix": null,
+        "selector-class-pattern": null
+    }
+}
