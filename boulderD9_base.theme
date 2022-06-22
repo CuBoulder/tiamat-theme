@@ -1,0 +1,203 @@
+<?php
+
+use Drupal\Core\Entity\ContentEntityBase;
+
+/**
+ * @file
+ * Functions to support the UCB Base 2019 theme.
+ */
+
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function ucb2021_base_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+  if ($node = \Drupal::routeMatch()->getParameter('node')) {
+    $content_type = $node->bundle();
+    $suggestions[] = 'page__'.$content_type;
+  }
+}
+
+/***
+ * This a helper function to set the favicon appropriately
+ */
+function ucb2021_base_page_attachments_alter(array &$page) {
+  foreach($page['#attached']['html_head_link'] as $k => $v) {
+    if (array_key_exists('rel', $v[0]) && $v[0]['rel'] == 'shortcut icon') {
+      $page['#attached']['html_head_link'][$k][0]['href'] = base_path() . \Drupal::service('extension.list.theme')->getPath('ucb2021_base') . '/favicon.png';
+    }
+  }
+}
+
+/***
+ * Preprocess function to get the variables we'll need on the html template
+ */
+function ucb2021_base_preprocess_html(array &$variables) {
+  $variables['ucb_gtm_account'] = theme_get_setting('ucb_gtm_account');
+  $variables['theme_path'] = base_path() . $variables['directory'];
+}
+
+/***
+ * Preprocess function to get the variables we'll need on the block template
+ */
+function ucb2021_base_preprocess_block(array &$variables) {
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+}
+
+/***
+ * Preprocess function to get the variables we'll need on the page template
+ */
+function ucb2021_base_preprocess_page(array &$variables) {
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+  $variables['site_slogan'] = $config->get('slogan');
+  $variables['ucb_secondary_menu'] = theme_get_setting('ucb_secondary_menu');
+  $variables['ucb_footer_menu'] = theme_get_setting('ucb_footer_menu');
+  $variables['theme_path'] = base_path() . $variables['directory'];
+  $variables['ucb_campus_header_color'] = theme_get_setting('ucb_campus_header_color');
+  $variables['ucb_header_color'] = theme_get_setting('ucb_header_color');
+  $variables['ucb_be_boulder'] = theme_get_setting('ucb_be_boulder');
+
+  // check to see if we're on the homepage or not
+  try {
+    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+  }
+  catch (Exception $e) {
+    $variables['is_front'] = FALSE;
+  }
+}
+
+/***
+ * Preprocess function to get the variables we'll need on the page user template
+ */
+function ucb2021_base_preprocess_page__user(array &$variables) {
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+  $variables['site_slogan'] = $config->get('slogan');
+  $variables['ucb_secondary_menu'] = theme_get_setting('ucb_secondary_menu');
+  $variables['ucb_footer_menu'] = theme_get_setting('ucb_footer_menu');
+  $variables['theme_path'] = base_path() . $variables['directory'];
+  $variables['ucb_campus_header_color'] = theme_get_setting('ucb_campus_header_color');
+  $variables['ucb_header_color'] = theme_get_setting('ucb_header_color');
+  $variables['ucb_be_boulder'] = theme_get_setting('ucb_be_boulder');
+}
+
+/***
+ * Preprocess function to get the variables we'll need on the page user login template
+ */
+function ucb2021_base_preprocess_page__user__login(array &$variables) {
+  $config = \Drupal::config('system.site');
+  $variables['site_name'] = $config->get('name');
+  $variables['site_slogan'] = $config->get('slogan');
+  $variables['ucb_secondary_menu'] = theme_get_setting('ucb_secondary_menu');
+  $variables['ucb_footer_menu'] = theme_get_setting('ucb_footer_menu');
+  $variables['theme_path'] = base_path() . $variables['directory'];
+  $variables['ucb_campus_header_color'] = theme_get_setting('ucb_campus_header_color');
+  $variables['ucb_header_color'] = theme_get_setting('ucb_header_color');
+  $variables['ucb_be_boulder'] = theme_get_setting('ucb_be_boulder');
+}
+
+
+/***
+ * Preprocess function to get the variables we'll need on the header region template
+ */
+function ucb2021_base_preprocess_region__header(array &$variables) {
+  $variables['theme_path'] = base_path() . $variables['directory'];
+  $variables['ucb_be_boulder'] = theme_get_setting('ucb_be_boulder');
+}
+
+/***
+ * Preprocess function to get the variables we'll need on the footer region template
+ */
+function ucb2021_base_preprocess_region__footer(array &$variables) {
+  $variables['theme_path'] = base_path() . $variables['directory'];
+  $variables['ucb_be_boulder'] = theme_get_setting('ucb_be_boulder');
+}
+
+/***
+ * preprocess function to get the variables we'll need on the Organization node template
+ */
+function ucb2021_base_preprocess_node__organization(array &$variables) {
+  $variables['uuid'] = $variables['node']->uuid();
+}
+
+/***
+ *  Custom theme settings worker function
+ ***/
+function ucb2021_base_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface &$form_state, $form_id = NULL)
+{
+  // Work-around for a core bug affecting admin themes. See issue #943212.
+  if (isset($form_id)) {
+    return;
+  }
+
+  $form['ucb_campus_header_color'] = array(
+    '#type'         => 'select',
+    '#title'        => t('CU Boulder campus header color'),
+    '#default_value'    => theme_get_setting('ucb_campus_header_color'),
+    '#options'          => array(
+      t('Black'),
+      t('White'),
+    ),
+    '#description'      => t("Select the color for the header background for the campus branding information at the top of the page."),
+  );
+
+  $form['ucb_header_color'] = array(
+    '#type'         => 'select',
+    '#title'        => t('CU Boulder site header color'),
+    '#default_value'    => theme_get_setting('ucb_header_color'),
+    '#options'          => array(
+      t('Black'),
+      t('White'),
+      t('Light'),
+      t('Dark'),
+    ),
+    '#description'      => t("Select the color for the header background for the site information at the top of the page."),
+  );
+
+  $form['ucb_sidebar_position'] = array(
+    '#type'           => 'select',
+    '#title'          => t('Where to show sidebar content on a page'),
+    '#default_value'    => 'Left',
+    '#options'        => array(
+      t('Left'),
+      t('Right'),
+    ),
+    '#description'    => t("Select if sidebar content should appear on the left or right side of a page."),
+  );
+
+  $form['ucb_be_boulder'] = array(
+    '#type'           => 'select',
+    '#title'          => t('Where to display the Be Boulder slogan on the site.'),
+    '#default_value'    => theme_get_setting('ucb_be_boulder'),
+    '#options'        => array(
+      t('None'),
+      t('Footer'),
+      t('Header'),
+    ),
+    '#description'    => t("Check this box if you would like to display the 'Be Boulder' slogan in the header."),
+  );
+
+  $form['ucb_gtm_account'] = array(
+    '#type'             => 'textfield',
+    '#title'            => t('GTM Account Number'),
+    '#default_value'    => theme_get_setting('ucb_gtm_account'),
+    '#description'      => t('Google Tag Manager account number e.g. GTM-123456.'),
+  );
+
+  $form['ucb_secondary_menu'] = array(
+    '#type'           => 'checkbox',
+    '#title'          => t('Display the standard Boulder secondary menu in the header navigation region.'),
+    '#default_value'    => theme_get_setting('ucb_secondary_menu'),
+    '#description'    => t("Check this box if you would like to display the default Boulder secondary menu links in the header."),
+  );
+
+  $form['ucb_footer_menu'] = array(
+    '#type'           => 'checkbox',
+    '#title'          => t('Display the standard Boulder menus in the header footer region.'),
+    '#default_value'    => theme_get_setting('ucb_footer_menu'),
+    '#description'    => t("Check this box if you would like to display the default Boulder footer menu links in the footer."),
+  );
+
+}
+
