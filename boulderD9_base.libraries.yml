@@ -1,0 +1,22 @@
+ucb-global:
+  version: 1.x
+  css:
+    layout:
+      css/bootstrap/bootstrap.min.css: {}
+      css/layout.css: {}
+    theme:
+      css/style.css: {}
+      css/style-responsive.css: {}
+      css/fontawesome/all.min.css: {}
+      css/styleguide/branding.css: {}
+      css/styleguide/buttons.css: {}
+      css/styleguide/colors.css: {}
+      css/styleguide/type.css: {}
+      css/styleguide/icons.css: {}
+  js:
+    js/bootstrap/bootstrap.min.js: {}
+    js/fontawesome/all.min.js: {}
+  dependencies: 
+    - core/drupal
+
+

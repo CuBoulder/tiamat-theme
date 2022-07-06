@@ -1,0 +1,34 @@
+{#
+/**
+ * Theme layout to display a UCB Breadcrumb Menu Navigation page.
+ *
+ * Created by jsparks on 6/18/19
+ */
+#}
+{#
+/**
+ * @file
+ * Theme override for a breadcrumb trail.
+ *
+ * Available variables:
+ * - breadcrumb: Breadcrumb trail items.
+ */
+#}
+{% if breadcrumb %}
+    <div class="ucb-breadcrumb">
+        <nav role="navigation" aria-labelledby="system-breadcrumb">
+            <h2 id="system-breadcrumb" class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
+            <ul>
+                {% for item in breadcrumb %}
+                    <li>
+                        {% if item.url %}
+                            <a href="{{ item.url }}">{{ item.text }}</a>
+                        {% else %}
+                            {{ item.text }}
+                        {% endif %}
+                    </li>
+                {% endfor %}
+            </ul>
+        </nav>
+    </div>
+{% endif %}
