@@ -1,0 +1,5 @@
+# css/base-ckeditor5.css
+/* Prefix the h2 with .ck-content to keep the style in the editor, and avoid polluting the page with unwanted h2 styles */
+.ck-content h2 {
+  color: blue;
+}
