@@ -22,4 +22,14 @@ ucb-global:
     - core/drupal
 
 
+ucb-page:
+  version: 1.x
+  css:
+    layout: 
+      css/ucb-page.css: {}
 
+ucb-user-login:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-user-login.css: {}
