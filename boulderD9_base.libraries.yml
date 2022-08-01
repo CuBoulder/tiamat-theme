@@ -33,3 +33,9 @@ ucb-user-login:
   css:
     theme:
       css/ucb-user-login.css: {}
+
+ucb-person:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-person.css: {}
