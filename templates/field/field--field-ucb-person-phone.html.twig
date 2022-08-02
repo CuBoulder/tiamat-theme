@@ -1,0 +1,13 @@
+{#
+/**
+* Theme layout to display a UCB Person Phone Field.
+*/
+#}
+
+<ul class="ucb-person-phone-numbers">
+    {% for item in items %}
+    <li>
+        <i class="fa fal fa-phone"></i>{{ item.attributes }} {{ item.content }}
+    </li>
+    {% endfor %}
+</ul>
