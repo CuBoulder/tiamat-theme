@@ -20,8 +20,6 @@ ucb-global:
     js/fontawesome/all.min.js: {}
   dependencies: 
     - core/drupal
-
-
 ucb-page:
   version: 1.x
   css:
