@@ -57,6 +57,8 @@ function boulderD9_base_preprocess_page(array &$variables) {
   $variables['ucb_campus_header_color'] = theme_get_setting('ucb_campus_header_color');
   $variables['ucb_header_color'] = theme_get_setting('ucb_header_color');
   $variables['ucb_be_boulder'] = theme_get_setting('ucb_be_boulder');
+  $variables['ucb_social_share_position'] = theme_get_setting('ucb_social_share_position');
+  $variables['ucb_rave_alerts'] = theme_get_setting('ucb_rave_alerts');
 
   // check to see if we're on the homepage or not
   try {
@@ -131,73 +133,11 @@ function boulderD9_base_form_system_theme_settings_alter(&$form, \Drupal\Core\Fo
     return;
   }
 
-  $form['ucb_campus_header_color'] = array(
-    '#type'         => 'select',
-    '#title'        => t('CU Boulder campus header color'),
-    '#default_value'    => theme_get_setting('ucb_campus_header_color'),
-    '#options'          => array(
-      t('Black'),
-      t('White'),
-    ),
-    '#description'      => t("Select the color for the header background for the campus branding information at the top of the page."),
-  );
-
-  $form['ucb_header_color'] = array(
-    '#type'         => 'select',
-    '#title'        => t('CU Boulder site header color'),
-    '#default_value'    => theme_get_setting('ucb_header_color'),
-    '#options'          => array(
-      t('Black'),
-      t('White'),
-      t('Light'),
-      t('Dark'),
-    ),
-    '#description'      => t("Select the color for the header background for the site information at the top of the page."),
-  );
-
-  $form['ucb_sidebar_position'] = array(
-    '#type'           => 'select',
-    '#title'          => t('Where to show sidebar content on a page'),
-    '#default_value'    => 'Left',
-    '#options'        => array(
-      t('Left'),
-      t('Right'),
-    ),
-    '#description'    => t("Select if sidebar content should appear on the left or right side of a page."),
-  );
-
-  $form['ucb_be_boulder'] = array(
-    '#type'           => 'select',
-    '#title'          => t('Where to display the Be Boulder slogan on the site.'),
-    '#default_value'    => theme_get_setting('ucb_be_boulder'),
-    '#options'        => array(
-      t('None'),
-      t('Footer'),
-      t('Header'),
-    ),
-    '#description'    => t("Check this box if you would like to display the 'Be Boulder' slogan in the header."),
-  );
-
-  $form['ucb_gtm_account'] = array(
-    '#type'             => 'textfield',
-    '#title'            => t('GTM Account Number'),
-    '#default_value'    => theme_get_setting('ucb_gtm_account'),
-    '#description'      => t('Google Tag Manager account number e.g. GTM-123456.'),
-  );
-
-  $form['ucb_secondary_menu'] = array(
-    '#type'           => 'checkbox',
-    '#title'          => t('Display the standard Boulder secondary menu in the header navigation region.'),
-    '#default_value'    => theme_get_setting('ucb_secondary_menu'),
-    '#description'    => t("Check this box if you would like to display the default Boulder secondary menu links in the header."),
-  );
-
-  $form['ucb_footer_menu'] = array(
-    '#type'           => 'checkbox',
-    '#title'          => t('Display the standard Boulder menus in the header footer region.'),
-    '#default_value'    => theme_get_setting('ucb_footer_menu'),
-    '#description'    => t("Check this box if you would like to display the default Boulder footer menu links in the footer."),
-  );
-
+  if(\Drupal::service('module_handler')->moduleExists('ucb_site_configuration')) {
+	// This call relies on the module dependency `ucb_site_configuration`.
+	// It uses the function `buildThemeSettingsForm` in the module to build the theme settings form.
+	\Drupal::service('ucb_site_configuration')->buildThemeSettingsForm($form, $form_state);
+  } else {
+	\Drupal::service('messenger')->addError('Module `CU Boulder Site Configuration`, required to display the CU Boulder theme settings form, isn\'t installed.');
+  }
 }
-

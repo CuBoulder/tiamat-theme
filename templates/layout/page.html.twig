@@ -63,6 +63,10 @@
       {% set header_color = 'dark' %}
     {% endif %}
 
+	{% if ucb_rave_alerts %}
+		<rave-alert feed="https://www.getrave.com/rss/cuboulder/channel1" link="https://alerts.colorado.edu"></rave-alert>
+	{% endif %}
+
     {{ page.header }}
     <div class="page-header">
     {% if user.hasPermission('access administration pages') %}
