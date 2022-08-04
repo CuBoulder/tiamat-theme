@@ -1,0 +1,69 @@
+.ucb-article-meta {
+  display: flex;
+  flex-direction: row;
+  font-size: 14px;
+  margin-bottom: 1em;
+}
+
+.ucb-article-date {
+  padding-right: 0.5em;
+}
+
+.ucb-article-author-name {
+  font-weight: 700;
+}
+
+i.fas.fa-circle,
+i.far.fa-calendar {
+  color: #999;
+}
+
+i.fas.fa-circle {
+  font-size: 0.5rem;
+  vertical-align: middle;
+}
+
+.ucb-article-image img {
+  max-width: 100%;
+  height: auto;
+  margin: 1em 0;
+}
+
+.ucb-article-tags,
+.ucb-article-categories {
+  margin-bottom: 1em;
+  display: flex;
+  font-size: 12px;
+  line-height: 1em;
+}
+
+.ucb-article-categories div,
+.ucb-article-tags div {
+  display: flex;
+  flex-direction: row;
+  margin-right: 1em;
+  line-height: 1.5em;
+}
+
+.ucb-article-categories a:link,
+.ucb-article-categories a:visited,
+.ucb-article-tags a:link,
+.ucb-article-tags a:visited {
+  background: #e7e7e7;
+  color: #555;
+  padding: 2px 6px;
+}
+
+.ucb-article-categories a:hover,
+.ucb-article-tags a:hover {
+  background: #555;
+  color: #fff;
+}
+
+.ucb-article-tags i.fas,
+.ucb-article-categories i.fas {
+  padding: 0.5em;
+  background: #555;
+  color: #fff;
+  margin-right: -1em;
+}

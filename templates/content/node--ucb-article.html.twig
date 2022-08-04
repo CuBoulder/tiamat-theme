@@ -1,0 +1,102 @@
+{#
+/**
+* Theme layout to display a UCB Article Page.
+*
+* Created by jcsparks on 9/23/21
+*/
+#}
+
+{{ attach_library('boulderD9_base/ucb-page') }}
+{{ attach_library('boulderD9_base/ucb-article') }}
+
+{%
+set classes = [
+'node',
+'node--type-' ~ node.bundle|clean_class,
+not node.isPublished() ? 'node--unpublished',
+view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+]
+%}
+
+{% set social_share_button_position = drupal_config('ucb2021_base.settings', 'ucb_social_share_position')%}
+{% set social_share_class = "" %}
+{% if social_share_button_position == "0"%}
+  {% set social_share_class = "social-share-none" %}
+{% elseif social_share_button_position=="1"%}
+  {% set social_share_class = "social-share-left-side-below-title" %}
+{% elseif social_share_button_position=="2"%}
+  {% set social_share_class = "social-share-left-side-below-content" %}
+{% elseif social_share_button_position == "3" %}
+  {% set social_share_class = "social-share-below-content"%}
+{% elseif social_share_button_position == "4" %}
+  {% set social_share_class = "social-share-below-title" %}
+{% else %} 
+  {% set social_share_class = "social-share-none" %}
+{% endif %}
+
+{#Dummy variable to ensure that all content tags are set for caching purposes#}
+{% set content_render = content|render %}
+
+{% if not content.field_ucb_article_external_url|render %}
+<article{{attributes.addClass(classes)}}>
+    <div class="container ucb-article" itemscope itemtype="https://schema.org/Article">
+        {{ label }}
+        {# TO DO - conditional render #}
+        {% if social_share_button_position == "4" or social_share_button_position == "1"%}
+            <div id={{social_share_class}} class="ucb-social-share-container">
+                {{ drupal_block("social_sharing_buttons_block") }}
+            </div>
+        {% endif %}
+        <div class="ucb-article-meta">
+            <div class="ucb-article-date">
+                <i class="far fa-calendar"></i>
+                <span class="sr-only">Published:</span>
+                <span itemprop="datePublished">
+                 {{ node.published_at.value|date('F d, Y') }}
+                </span> 
+            </div>
+        {% if content.field_ucb_article_byline|render %}
+            <div class="ucb-article-byline">
+                <i class="fas fa-circle"></i> By <span class="ucb-article-author-name" itemprop="author"> 
+                    {{ content.field_ucb_article_byline|render|striptags|trim }} 
+                </span>
+            </div>
+        {% endif %}
+
+        </div>
+        {% if content.field_ucb_article_content|render %}
+            <div class="ucb-article-body">{{ content.field_ucb_article_content }}</div>
+        {% endif %}
+        {% if content.field_ucb_article_categories|render %}
+            <div class="ucb-article-categories" itemprop="about">
+                <span class="sr-only">Categories:</span>
+                <div> <i class="fas fa-folder-open"></i> </div>
+                {{ content.field_ucb_article_categories }}
+            </div>
+        {% endif %}
+        {% if content.field_ucb_article_tags|render %}
+            <div class="ucb-article-tags" itemprop="keywords">
+                <div>
+                <span class="sr-only">Tags:</span>
+                <i class="fas fa-tags"></i> 
+                </div>
+                {{ content.field_ucb_article_tags }}
+            </div>
+        {% endif %}
+    </div>
+</article>
+{% else %}
+    {% if not user.hasPermission('update node') %}
+        {# redirect non-authenticated users to the specified URL #}
+        {{ content.field_ucb_article_external_url }} 
+    {% else %}
+        <article{{attributes.addClass(classes)}}>
+            <div class="container ucb-article">
+                {{ label }}
+                {% set externalURL = content.field_ucb_article_external_url[0]['#url']|render|striptags|trim %}
+
+                <h2>Non-authenticated users would be redirected to : <a href={{ externalURL }}>{{ externalURL }}</a></h2>
+            </div>
+        </article>
+    {% endif %}
+{% endif %}

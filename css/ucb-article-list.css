@@ -1,0 +1,35 @@
+.ucb-list-msg {
+  font-size: 1.25em;
+  font-weight: bolder;
+  text-align: center;
+  display: none;
+}
+
+.ucb-loading-data {
+  color: #01579b;
+}
+
+.ucb-article-card-data {
+  display: flex;
+  flex-direction: column;
+}
+
+.ucb-article-card {
+  margin-bottom: 2em;
+}
+
+.ucb-article-card-title {
+  font-size: 1.5rem;
+  font-weight: bolder;
+}
+
+.ucb-article-card-date {
+  font-size: 0.75rem;
+  line-height: 0.75rem;
+  margin-bottom: 10px;
+}
+
+.ucb-article-card-img {
+  max-width: 100%;
+  height: auto;
+}

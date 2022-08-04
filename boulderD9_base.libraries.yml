@@ -28,6 +28,20 @@ ucb-page:
     layout: 
       css/ucb-page.css: {}
 
+ucb-article:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-article.css: {}
+
+ucb-article-list:
+  version: 1.x
+  js:
+    js/ucb-article-list.js: {}
+  css:
+    theme:
+      css/ucb-article-list.css: {}
+
 ucb-user-login:
   version: 1.x
   css:
