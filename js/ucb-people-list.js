@@ -81,7 +81,6 @@ function getStaff(JSONAPI) {
       fetch(JSONAPI)
         .then((response) => response.json())
         .then((data) => {
-          console.log("Person Data is : ", data)
           if(data.data.length === 0) {
             console.log("No people matching the filter returned.")
             toggleMessage('ucb-al-end-of-data', 'block')
@@ -342,7 +341,7 @@ function displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY) {
       })
       // creates the urlObj, key: data id, value: url
       filteredData.map((pair) => {
-        console.log(pair)
+        // console.log(pair)
         urlObj[pair.id] = pair.attributes.uri.url
       })
 
@@ -381,7 +380,7 @@ function displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY) {
       thisPerson['PhotoURL'] = ''
       thisPerson['Email'] = person.attributes.field_ucb_person_email
       thisPerson['Phone'] = person.attributes.field_ucb_person_phone
-      thisPerson['Link'] = person.attributes.path.alias
+      thisPerson['Link'] = `/node/${person.attributes.drupal_internal__nid}`
       // needed to verify body exists on the Person page, if so, use that
       if (person.attributes.body) {
         myBody = person.attributes.body.processed
@@ -419,7 +418,7 @@ function displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY) {
         if(ORDERBY === "firstpass") {
           firstPassCount++;
         }
-        console.log("my display format is", DISPLAYFORMAT)
+        // console.log("my display format is", DISPLAYFORMAT)
         thisPersonCard = displayPersonCard(DISPLAYFORMAT, thisPerson)
 
         let thisCard
@@ -488,11 +487,11 @@ function displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY) {
                 </th>
                 `
               GroupTitle.innerHTML = GroupTitleHTML;
-              console.log('table body', tablebody)
+              // console.log('table body', tablebody)
               tablebody.appendChild(GroupTitle);
             }
           }
-          console.log('table body', tablebody)
+          // console.log('table body', tablebody)
           
           tablebody.appendChild(thisCard)
         }
