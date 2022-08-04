@@ -1,3 +1,8 @@
+/// STUFF TO DO --- 
+// Re-export fields & person page, change visibility
+// Fix JobTypes filtering
+// Focal Image Enable
+
 /* naughty global variables!!! */
 let Departments = {} // translate table for department id => department name
 let JobTypes = {} // translate table for type id => type name
@@ -301,6 +306,7 @@ function displayPersonCard(Format, Person) {
  */
 function displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY) {
   console.log("display people format", DISPLAYFORMAT)
+  console.log('groupby', GROUPBY)
   let renderThisGroup = 0; 
   let el = document.getElementById('ucb-people-list-page')
   let thisDeptName = ""
@@ -526,8 +532,9 @@ function displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY) {
   })
 
   getTaxonomy('ucb_person_job_type').then((response) => {
+    console.log("get tax resp", response)
     JobTypes = response
-    // console.log('Our Job types are : ', JobTypes);
+    console.log('Our Job types are : ', JobTypes);
   })
 
   toggleMessage('ucb-al-loading', 'block')
@@ -538,6 +545,7 @@ function displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY) {
     })
     .then(() => {
       toggleMessage('ucb-al-loading', 'none')
+      console.log(GROUPBY)
       if (GROUPBY == 'department') {
         for (const [key] of Object.entries(Departments)) {
           // let thisDeptID = Departments[key].id
@@ -546,6 +554,7 @@ function displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY) {
           // console.log("Group by Dept : " + thisDeptName.name)
 
           if(ORDERBY === "type") {
+            console.log('i match type')
             firstPassCount = 0; 
             displayPeople(FORMAT, GROUPBY, Departments[key].id, "firstpass")
             displayPeople(FORMAT, GROUPBY, Departments[key].id, "secondpass")
@@ -555,10 +564,10 @@ function displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY) {
         }
       } else if (GROUPBY == 'type') {
         for (const [key] of Object.entries(JobTypes)) {
-          // let thisTypeID = JobTypes[key].id
-          // let thisTypeName = getTaxonomyName(JobTypes, thisTypeID) 
-          // console.log("Group by Type : " + thisTypeID)
-          // console.log("Group by Name : " + thisTypeName.name)
+          let thisTypeID = JobTypes[key].id
+          let thisTypeName = getTaxonomyName(JobTypes, thisTypeID) 
+          console.log("Group by Type : " + thisTypeID)
+          console.log("Group by Name : " + thisTypeName.name)
           if(ORDERBY === "type") {
             firstPassCount = 0; 
             displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "firstpass")
