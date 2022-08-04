@@ -40,3 +40,11 @@ ucb-site-contact-info-footer:
   css:
     theme:
       css/ucb-site-contact-info-footer.css: {}
+
+ucb-hero-unit:
+  version: 1.x
+  js:
+    js/ucb-hero-unit.js: {}
+  css:
+    theme:
+      css/block/hero-unit.css: {}
