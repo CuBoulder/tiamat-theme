@@ -45,3 +45,8 @@ ucb-people-list-page:
   css:
     theme:
       css/ucb-people-list.css: {}
+ucb-site-contact-info-footer:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-site-contact-info-footer.css: {}
