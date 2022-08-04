@@ -1,0 +1,16 @@
+{% extends "block.html.twig" %}
+{#
+/**
+ * @file
+ * Theme override for local tasks (primary content editor actions.)
+ */
+#}
+{% block content %}
+    {% if content %}
+        <div id="local-tasks-menu" class="ucb-local-tasks">
+          <div>
+            {{ content }}
+          </div>
+        </div>
+    {% endif %}
+{% endblock %}
