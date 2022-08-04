@@ -25,6 +25,7 @@
   
   main {
     flex: 1;
+	padding: 20px 0;
   }
   
   h1,

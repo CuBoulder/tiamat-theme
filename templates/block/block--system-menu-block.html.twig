@@ -1,0 +1,22 @@
+{#
+/**
+ * Theme layout to display a CU Boulder System Menu Block.
+ *
+ * Created by jsparks on 6/6/19
+ */
+#}
+
+{% if label|render %}
+<div class="ucb-system-menu-block">
+    <span class="ucb-menu-title">
+        {{ label|render|striptags|trim }}
+    </span>
+
+    {% if content|render %}
+        {{ content }}
+    {% endif %}
+</div>
+{% else %}
+    {{ content }}
+{% endif %}
+
