@@ -197,7 +197,7 @@ function displayPersonCard(Format, Person) {
                         <span class="ucb-person-card-email">
                             ${
                               Person.Email
-                                ? `<a href="mailto:${Person.Email}"><i class="fa fa-envelope people-list-icon"><span class="ucb-people-list-contact">  ${Person.Email}</span></i></a>`
+                                ? `<a href="mailto:${Person.Email}"><span class="ucb-people-list-contact">  ${Person.Email}</span></a>`
                                 : ''
                             }
                         </span>
@@ -207,9 +207,9 @@ function displayPersonCard(Format, Person) {
                                 ? `<a href="tel:${Person.Phone.replace(
                                     /[^+\d]+/g,
                                     '',
-                                  )}"><p><i class="fa fa-phone people-list-icon"><span class="ucb-people-list-contact">  ${
+                                  )}"><p><span class="ucb-people-list-contact">  ${
                                     Person.Phone
-                                  }</span></i></p></a>`
+                                  }</span></p></a>`
                                 : ''
                             }
                         </span>
@@ -267,7 +267,7 @@ function displayPersonCard(Format, Person) {
                   <span class="ucb-person-card-email">
                             ${
                               Person.Email
-                                ? `<a href="mailto:${Person.Email}"><i class="fa fa-envelope people-list-icon"><span class="ucb-people-list-contact"> ${Person.Email}</span></i></p></a>`
+                                ? `<a href="mailto:${Person.Email}"><span class="ucb-people-list-contact"> ${Person.Email}</span></p></a>`
                                 : ''
                             }
                         </span>
@@ -277,9 +277,9 @@ function displayPersonCard(Format, Person) {
                                 ? `<a href="tel:${Person.Phone.replace(
                                     /[^+\d]+/g,
                                     '',
-                                  )}"><p><i class="fa fa-phone people-list-icon">
+                                  )}"><p>
                                     <span class="ucb-people-list-contact"> 
-                                  ${Person.Phone}</span></i></p></a>`
+                                  ${Person.Phone}</span></p></a>`
                                 : ''
                             }
                         </span>

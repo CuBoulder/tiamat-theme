@@ -7,7 +7,7 @@
  *  - Display filters on rendered page 
  */
 #}
-
+{{ attach_library('boulderD9_base/ucb-page') }}
 {{ attach_library('boulderD9_base/ucb-people-list-page') }}
 
 {# Display format variable #}
@@ -163,8 +163,6 @@
 			{{ label }}
 		</h1>
 	</div>
-
-  <h1>{{displayFormat|trim}}</h1>
 
 	<div id="ucb-pl-content" class="ucb-people-list-content">
     <!--  <h3>{{ peopleJSON }}{{ IncludeFilter }}{{ sortFilter }}</h3> -->
