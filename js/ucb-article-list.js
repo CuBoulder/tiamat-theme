@@ -89,7 +89,8 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
           });
           // finds the focial point version of the thumbnail
           altFilterData.map((item)=>{
-            altObj[item.id] = item.links.focal_image.href
+            if(item.links.focal_image)
+              altObj[item.id] = item.links.focal_image.href
           })
 
           // using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
