@@ -49,7 +49,7 @@
 
 {# get the state of the overlay toggle and the color of the text #}
 {% set overlayClass = "" %}
-{% if content['#block_content'].field_ucb_hero_overlay.value %}
+{% if content['#block_content'].field_hero_overlay.value %}
 	{# overlay requested set to dark #}
 	{% set overlayClass = "ucb-overlay-dark" %}
 
@@ -62,7 +62,7 @@
 <div{{attributes.addClass(classes)}}>
 	{{ title_prefix }}
 	{% if label %}
-		<h2{{title_attributes}}>{{ label }}</h2>
+		<h2{{title_attributes}} style="color: black;">{{ label }}</h2>
 	{% endif %}
 	{{ title_suffix }}
 	{% block content %}
