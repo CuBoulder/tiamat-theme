@@ -478,3 +478,8 @@
     background-color: inherit;
     opacity: inherit;
 }
+
+/**** Layouut Builder Placeholder Color ****/
+.layout-builder-block__content-preview-placeholder-label {
+  color: black!important;
+}
