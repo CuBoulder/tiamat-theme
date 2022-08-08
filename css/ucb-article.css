@@ -67,3 +67,11 @@ i.fas.fa-circle {
   color: #fff;
   margin-right: -1em;
 }
+
+.ucb-article-content-media-above {
+	margin-bottom: 1em;
+}
+
+.ucb-article-content-media-below {
+	margin-top: 1em;
+}

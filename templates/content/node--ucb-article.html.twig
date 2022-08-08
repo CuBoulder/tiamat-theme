@@ -40,14 +40,16 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 {% if not content.field_ucb_article_external_url|render %}
 <article{{attributes.addClass(classes)}}>
     <div class="container ucb-article" itemscope itemtype="https://schema.org/Article">
-        {{ label }}
+        <header role="banner" class="ucb-article-banner">
+			<h1 class="ucb-article-heading">{{ label }}</h1>
+		</header>
         {# TO DO - conditional render #}
         {% if social_share_button_position == "4" or social_share_button_position == "1"%}
             <div id={{social_share_class}} class="ucb-social-share-container">
                 {{ drupal_block("social_sharing_buttons_block") }}
             </div>
         {% endif %}
-        <div class="ucb-article-meta">
+        <div role="contentinfo" class="ucb-article-meta">
             <div class="ucb-article-date">
                 <i class="far fa-calendar"></i>
                 <span class="sr-only">Published:</span>
@@ -65,17 +67,17 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 
         </div>
         {% if content.field_ucb_article_content|render %}
-            <div class="ucb-article-body">{{ content.field_ucb_article_content }}</div>
+            <div role="main" class="ucb-article-body">{{ content.field_ucb_article_content }}</div>
         {% endif %}
         {% if content.field_ucb_article_categories|render %}
-            <div class="ucb-article-categories" itemprop="about">
+            <div role="contentinfo" class="ucb-article-categories" itemprop="about">
                 <span class="sr-only">Categories:</span>
                 <div> <i class="fas fa-folder-open"></i> </div>
                 {{ content.field_ucb_article_categories }}
             </div>
         {% endif %}
         {% if content.field_ucb_article_tags|render %}
-            <div class="ucb-article-tags" itemprop="keywords">
+            <div role="contentinfo" class="ucb-article-tags" itemprop="keywords">
                 <div>
                 <span class="sr-only">Tags:</span>
                 <i class="fas fa-tags"></i> 
