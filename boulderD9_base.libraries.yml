@@ -48,3 +48,9 @@ ucb-hero-unit:
   css:
     theme:
       css/block/hero-unit.css: {}
+
+ucb-events-calendar:
+  version: 1.x
+  css:
+    theme:
+      css/block/events-calendar.css: {}

@@ -13,8 +13,7 @@
   set classes = [
     'block-content',
     'block-content--type--hero-unit' ~ block.bundle|clean_class,
-    view_mode ? 'block--view-mode--' ~ view_mode|clean_class,
-    not block.isPublished() ? 'block--unpublished',
+    view_mode ? 'content-block--view-mode--' ~ view_mode|clean_class,
     content['#block_content'].field_text_align.value,
     content['#block_content'].field_text_color.value
   ]
