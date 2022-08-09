@@ -1,0 +1,302 @@
+{#
+/**
+ * @file
+ * Theme override to display a node.
+ *
+ * Available variables:
+ * - node: The node entity with limited access to object properties and methods.
+ *   Only method names starting with "get", "has", or "is" and a few common
+ *   methods such as "id", "label", and "bundle" are available. For example:
+ *   - node.getCreatedTime() will return the node creation timestamp.
+ *   - node.hasField('field_example') returns TRUE if the node bundle includes
+ *     field_example. (This does not indicate the presence of a value in this
+ *     field.)
+ *   - node.isPublished() will return whether the node is published or not.
+ *   Calling other methods, such as node.delete(), will result in an exception.
+ *   See \Drupal\node\Entity\Node for a full list of public properties and
+ *   methods for the node object.
+ * - label: The title of the node.
+ * - content: All node items. Use {{ content }} to print them all,
+ *   or print a subset such as {{ content.field_example }}. Use
+ *   {{ content|without('field_example') }} to temporarily suppress the printing
+ *   of a given child element.
+ * - author_picture: The node author user entity, rendered using the "compact"
+ *   view mode.
+ * - metadata: Metadata for this node.
+ * - date: Themed creation date field.
+ * - author_name: Themed author name field.
+ * - url: Direct URL of the current node.
+ * - display_submitted: Whether submission information should be displayed.
+ * - attributes: HTML attributes for the containing element.
+ *   The attributes.class element may contain one or more of the following
+ *   classes:
+ *   - node: The current template type (also known as a "theming hook").
+ *   - node--type-[type]: The current node type. For example, if the node is an
+ *     "Article" it would result in "node--type-article". Note that the machine
+ *     name will often be in a short form of the human readable label.
+ *   - node--view-mode-[view_mode]: The View Mode of the node; for example, a
+ *     teaser would result in: "node--view-mode-teaser", and
+ *     full: "node--view-mode-full".
+ *   The following are controlled through the node publishing options.
+ *   - node--promoted: Appears on nodes promoted to the front page.
+ *   - node--sticky: Appears on nodes ordered above other non-sticky nodes in
+ *     teaser listings.
+ *   - node--unpublished: Appears on unpublished nodes visible only to site
+ *     admins.
+ * - title_attributes: Same as attributes, except applied to the main title
+ *   tag that appears in the template.
+ * - content_attributes: Same as attributes, except applied to the main
+ *   content tag that appears in the template.
+ * - author_attributes: Same as attributes, except applied to the author of
+ *   the node tag that appears in the template.
+ * - title_prefix: Additional output populated by modules, intended to be
+ *   displayed in front of the main title tag that appears in the template.
+ * - title_suffix: Additional output populated by modules, intended to be
+ *   displayed after the main title tag that appears in the template.
+ * - view_mode: View mode; for example, "teaser" or "full".
+ * - teaser: Flag for the teaser state. Will be true if view_mode is 'teaser'.
+ * - page: Flag for the full page state. Will be true if view_mode is 'full'.
+ * - readmore: Flag for more state. Will be true if the teaser content of the
+ *   node cannot hold the main body content.
+ * - logged_in: Flag for authenticated user status. Will be true when the
+ *   current user is a logged-in member.
+ * - is_admin: Flag for admin user status. Will be true when the current user
+ *   is an administrator.
+ *
+ * @see template_preprocess_node()
+ *
+ * TODO : 
+ *  - Set output on Thumbnail to be reasonable size in Article schema 
+ *  - if no Thumbnail, get the image from the first included paragraph  
+ *  - clean up console log message 
+ *  - expose filters on the client side as requested
+ */
+#}
+
+{{ attach_library('boulderD9_base/ucb-article-list') }}
+
+{# NEW #}
+{# JSON API Endpoint information #}
+{% set articlesJSON = (url('<front>')|render|trim('/'))
+  ~ '/jsonapi/node/ucb_article'
+  ~ '?include[node--ucb_article]=uid,title,ucb_article_content,created,field_ucb_article_summary,field_ucb_article_categories,field_ucb_article_tags,field_ucb_article_thumbnail'
+  ~ '&include=field_ucb_article_thumbnail.field_media_image'
+  ~ '&fields[file--file]=uri,url'
+%}
+
+{# Filter on only published (status = true) content #}
+{% set PublishedFilter = '&filter[publish-check][condition][path]=status'
+  ~ '&filter[publish-check][condition][value]=1'
+  ~ '&filter[publish-check][condition][memberOf]=published'
+%}
+
+{# include and exclude options set by the user #}
+{% set includeCategories = [] %}
+{% set myCategories =
+  content.field_ucb_filter_by_category|render|striptags|trim|split(' ')
+%}
+{% set includeTags = [] %}
+{% set myTags =
+  content.field_ucb_filter_by_tag|render|striptags|trim|split(' ')
+%}
+{% set excludeCategories = '' %}
+{% set myExCategories =
+  content.field_ucb_exclude_category|render|striptags|trim|split(' ')
+%}
+{% set excludeTags = '' %}
+{% set myExTags =
+  content.field_ucb_exclude_tag|render|striptags|trim|split(' ')
+%}
+
+{# two passes to clear out the blank entries that are mysteriously added by default #}
+{% for item in myCategories %}
+  {% if item %}
+    {% set includeCategories = includeCategories|merge([item]) %}
+  {% endif %}
+{% endfor %}
+
+{% for item in myTags %}
+  {% if item %}
+    {% set includeTags = includeTags|merge([item]) %}
+  {% endif %}
+{% endfor %}
+
+{% for item in myExCategories %}
+  {% if item %}
+    {% if loop.last %}
+      {% set excludeCategories = excludeCategories ~ (item|trim) %}
+    {% else %}
+      {% set excludeCategories = excludeCategories ~ (item|trim) ~ ',' %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{% for item in myExTags %}
+  {% if item %}
+    {% if loop.last %}
+      {% set excludeTags = excludeTags ~ (item|trim) %}
+    {% else %}
+      {% set excludeTags = excludeTags ~ (item|trim) ~ ',' %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{# placeholder variables for our include and exclude filters, default to blank strings #}
+{% set IncludeFilter = '' %}
+{% set IncludeCategoryFilter = '' %}
+{% set IncludeTagsFilter = '' %}
+{% set ExcludeCategoryFilter = '' %}
+{% set ExcludeTagsFilter = '' %}
+
+{# Setup Include Category Filter using a logical OR between included category IDs #}
+{% if includeCategories|length %}
+  {% set includeGroupMembers = '' %}
+  {% for item in includeCategories %}
+    {% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-cat'
+      ~ (item|trim)
+      ~ '][condition][path]=field_ucb_article_categories.meta.drupal_internal__target_id'
+      ~ '&filter[filter-cat'
+      ~ (item|trim)
+      ~ '][condition][value]='
+      ~ (item|trim)
+      ~ '&filter[filter-cat'
+      ~ (item|trim)
+      ~ '][condition][memberOf]=cat-include'
+    %}
+  {% endfor %}
+  {% set IncludeCategoryFilter = '&filter[cat-include][group][conjunction]=OR'
+    ~ includeGroupMembers
+  %}
+{% endif %}
+
+{# Setup Include Tags Filter using a logical OR between included tag IDs #}
+{% if includeTags|length %}
+  {% set includeGroupMembers = '' %}
+  {% for item in includeTags %}
+    {% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-tag'
+      ~ (item|trim)
+      ~ '][condition][path]=field_ucb_article_tags.meta.drupal_internal__target_id'
+      ~ '&filter[filter-tag'
+      ~ (item|trim)
+      ~ '][condition][value]='
+      ~ (item|trim)
+      ~ '&filter[filter-tag'
+      ~ (item|trim)
+      ~ '][condition][memberOf]=tag-include'
+    %}
+  {% endfor %}
+  {% set IncludeTagsFilter = '&filter[tag-include][group][conjunction]=OR'
+    ~ includeGroupMembers
+  %}
+{% endif %}
+
+{# check to see if we have both Categories and Tags to filter on #}
+{# if so... setup a logicial AND Between both include filters #}
+{% if IncludeCategoryFilter and IncludeTagsFilter %}
+  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
+    ~ PublishedFilter
+    ~ '&filter[include-group][group][conjunction]=AND'
+    ~ '&filter[include-group][group][memberOf]=published'
+    ~ IncludeCategoryFilter
+    ~ '&filter[cat-include][group][memberOf]=include-group'
+    ~ IncludeTagsFilter
+    ~ '&filter[tag-include][group][memberOf]=include-group'
+  %}
+  {# Otherwise default to either the Category filter or the Tag filter as defined #}
+{% elseif IncludeCategoryFilter %}
+  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
+    ~ '&filter[cat-include][group][memberOf]=published'
+    ~ PublishedFilter
+    ~ IncludeCategoryFilter
+  %}
+{% elseif IncludeTagsFilter %}
+  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
+    ~ '&filter[tag-include][group][memberOf]=published'
+    ~ PublishedFilter
+    ~ IncludeTagsFilter
+  %}
+
+{# no includeded Categories or Tags ... still need to filter on published articles #}
+{% else %}
+  {% set IncludeFilter = '&filter[status][value]=1' %}
+{% endif %}
+
+{# pagination filter #}
+{% set pageCount = 10 %}
+{% set pageCountFilter = '&page[limit]=' ~ pageCount %}
+
+{# sorting filter #}
+{% set sortFilter = '&sort[sort-created][path]=created&sort[sort-created][direction]=DESC' %}
+
+
+{# Check for Exclude Categories and setup the filter to exclude anything that matches "NOT IN SET" #}
+{# {% if excludeCategories|length %}
+  {% set excludeGroupMembers = "" %}
+  {% for item in excludeCategories %}
+     {% set excludeGroupMembers = excludeGroupMembers ~ 
+       '&filter[filter-excat][condition][value][' ~ loop.index ~ ']=' ~ item 
+     %}
+  {% endfor %}
+  {% set ExcludeCategoryFilter = 
+       '&filter[filter-excat][condition][path]=field_ucb_article_categories.meta.drupal_internal__target_id' ~
+       '&filter[filter-excat][condition][operator]=NOT%20IN' ~ 
+       excludeGroupMembers 
+  %}
+{% endif %} #}
+{# 
+{% if excludeCategories|length %}
+  {% set excludeGroupMembers = "" %}
+  {% for item in excludeCategories %}
+     {% set excludeGroupMembers = excludeGroupMembers ~ 
+       '&filter[filter-excat' ~ item ~'][condition][path]=field_ucb_article_categories.meta.drupal_internal__target_id' ~
+       '&filter[filter-excat' ~ item ~'][condition][operator]=%3C%3E' ~
+       '&filter[filter-excat' ~ item ~'][condition][value]=' ~ item ~
+       '&filter[filter-excat' ~ item ~'][condition][memberOf]=cat-exclude' 
+     %}
+     
+  {% endfor %}
+  {% set ExcludeCategoryFilter = "&filter[cat-exclude][group][conjunction]=AND" ~ excludeGroupMembers %}
+{% endif %} #}
+
+{# JSON API Filter logic #}
+<article {{ attributes.addClass('container') }}>
+  <h2>
+    {{ label }}
+  </h2>
+
+  <div {{ content_attributes }}>
+    <div class="ucb-article-list-body">
+      {{ content.body }}
+      {# <h3> Full URL : {{ articlesJSON}}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}</h3>  #}
+    </div>
+    {# <div id="ucb-article-listing" class="ucb-article-list-container" data-jsonapi="{{ articlesJSON }}{{ IncludeFilter }}"> #}
+    <div id="ucb-article-listing"
+      class="ucb-article-list-container"
+      data-jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}"
+      data-excats="{{ excludeCategories }}"
+      data-extags="{{ excludeTags }}">
+      {# No Data message #}
+      <div id="ucb-al-no-results" class="ucb-list-msg ucb-no-data">
+        No articles were returned, please check your filters and try again.
+      </div>
+
+      {# dynamically loaded data goes here... #}
+      <div id="ucb-al-data"></div>
+
+      {# Loading message #}
+      <div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
+        <i class="fas fa-spinner fa-3x fa-pulse"></i>
+      </div>
+
+      {# No more Data #}
+      <div id="ucb-al-end-of-data" class="ucb-list-msg ucb-end-of-results">
+        No more results matching your filters.
+      </div>
+
+      {# Error in the response from the API endpoint, display an error #}
+      <div id="ucb-al-error" class="ucb-list-msg ucb-error">
+        Error retrieving article list from the API endpoint.  Please try again later.  
+      </div>
+    </div>
+  </div>
+</article>
