@@ -1,0 +1,131 @@
+/*
+ * Styles for expandable content paragraph
+ *
+*/
+
+.vertical-tab-content {
+  width: 100%;
+}
+
+.nav-tabs,
+.vertical-tabs {
+  display: none;
+}
+
+.accordion-flush :last-child {
+  border-bottom: 0;
+}
+
+.accordion-button {
+  color: #0277bd;
+  font-size: 18px;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: transparent;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+}
+
+.accordion-button::after {
+  background: none;
+}
+
+.accordion-button:not(.collapsed)::after {
+  background: none;
+}
+
+.accordion-button::before {
+  flex-shrink: 0;
+  margin-right: 0.25em;
+  content: "\f0fe";
+  transition: transform 0.2s ease-in-out;
+  font-family: 'Font Awesome 5 Free', sans-serif;
+  font-weight: 900;
+  color: #0277bd;
+}
+
+.accordion-button:not(.collapsed)::before {
+  content: "\f146";
+}
+
+.accordion-button:hover {
+  color: #b71c1c;
+}
+
+.accordion-button:hover::before {
+  color: #b71c1c;
+}
+
+.horizontal-tab-link.nav-link {
+  color: black;
+}
+
+.horizontal-tab-link.nav-link.active {
+  color: white;
+  background-color: black;
+  border-radius: 0;
+}
+
+.horizontal-tab-link.nav-link:hover {
+  border-radius: 0;
+}
+
+.vertical-tab-link.nav-link {
+  background-color: #e7e7e7;
+  color: #6a6a6a;
+  border-radius: 0;
+}
+
+.vertical-tab-link.nav-link.active {
+  background: white;
+  color: black;
+}
+
+@media (min-width: 768px) {
+  .nav-tabs,
+  .vertical-tabs {
+    display: flex;
+  }
+
+  .tab-pane .border {
+    display: none;
+  }
+
+  .tab-pane .collapse {
+    display: block;
+  }
+
+  .vertical-tabs {
+    width: 100%;
+    max-width: 25%;
+  }
+
+  .vertical-tab-content {
+    display: flex;
+    max-width: 75%;
+  }
+
+  .horizontal-accordion-tab,
+  .vertical-accordion-tab {
+    display: none;
+  }
+
+  .tab-content .accordion-item {
+    border: none;
+  }
+
+  .vertical-tab-accordion {
+    background: #f2f2f2;
+    border: 1px solid rgba(128, 128, 128, 0.333);
+  }
+}
+
+@media (max-width: 767px) {
+  .tab-content > .tab-pane {
+    display: block;
+  }
+}

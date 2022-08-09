@@ -78,3 +78,9 @@ ucb-image-gallery:
     theme:
       css/block/image-gallery.css: {}
       js/glightbox/glightbox.min.css: {}
+
+  ucb-expandable-content:
+    version: 1.x
+    css:
+      theme:
+        css/block/expandable-content.css: {}

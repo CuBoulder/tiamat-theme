@@ -1,0 +1,238 @@
+.ucb-events-calendar .localist_minicalendar_events {
+  flex-grow: 1;
+}
+
+.localist_widget_wrapper {
+  flex-grow: 1;
+}
+
+.template-1,
+.template-2,
+.template-3,
+.template-4,
+.template-5,
+.template-6 {
+  flex-grow: 1;
+}
+
+.ucb-events-calendar .localist_minicalendar {
+  padding: 0 20px;
+}
+
+.ucb-events-calendar .localist_widget_container li.lw_event_item:first-child {
+  margin-top: 0;
+}
+
+.ucb-events-calendar .localist_widget_container ul.lw_event_list {
+  max-width: none;
+}
+
+.ucb-events-calendar .localist_widget_container .lw_event_item_image img {
+  max-width: 150px;
+}
+
+.ucb-events-calendar .localist_widget_container span.lw_event_item_date {
+  background: rgba(0, 0, 0, 0.75);
+  font-weight: bold;
+}
+
+.ucb-events-calendar .localist-wrapper .le-date-day {
+  font-weight: 900;
+}
+
+.ucb-events-calendar .localist-link {
+  clear: both;
+}
+
+.ucb-events-calendar #lclst_widget_footer {
+  display: none;
+}
+
+.ucb-events-calendar .lwn,
+.ucb-events-calendar .lwd,
+.ucb-events-calendar .lwn0,
+.ucb-events-calendar .lwl,
+.ucb-events-calendar .lwl0 {
+  color: inherit;
+}
+
+.ucb-events-calendar .le-wrapper {
+  border-bottom-color: rgba(117, 117, 117, 0.35);
+}
+
+.ucb-events-calendar .localist-widget-hl .event-title {
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.ucb-events-calendar .localist_widget_container {
+  background: none;
+}
+
+.ucb-events-calendar .localist_widget_container li.lw_event_item {
+  background: none;
+  border: 1px solid rgba(117, 117, 117, 0.25);
+  font: inherit;
+}
+
+.ucb-events-calendar .localist_widget_container .action_button {
+  text-align: right;
+}
+
+.ucb-events-calendar .localist_widget_container .action_button a:link,
+.ucb-events-calendar .localist_widget_container .action_button a:visited {
+  color: #555;
+  display: inline-block;
+  line-height: 1;
+  font-weight: bold;
+  padding: 10px;
+  font-size: 75%;
+}
+
+.ucb-events-calendar .localist_minicalendar_events::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.ucb-events-calendar .localist_minicalendar .localist_minicalendar_nav,
+.ucb-events-calendar .localist_minicalendar .localist_minicalendar_pager {
+  padding: 10px;
+  margin-bottom: 10px;
+  font-size: 85%;
+}
+
+.ucb-events-calendar .localist_minicalendar .localist_minicalendar_pager a:link,
+.ucb-events-calendar .localist_minicalendar .localist_minicalendar_pager a:visited {
+  color: #fff;
+  background-color: #0277bd;
+}
+
+.ucb-events-calendar .localist_minicalendar .localist_minicalendar_pager a:hover {
+  background-color: #444;
+}
+
+.ucb-events-calendar .localist_minicalendar .localist_minicalendar_pager a.disabled:link,
+.ucb-events-calendar .localist_minicalendar .localist_minicalendar_pager a.disabled:visited {
+  color: #999;
+  background-color: #ddd;
+}
+
+.ucb-events-calendar .localist_minicalendar .localist_minicalendar_minicalendar {
+  margin-bottom: 10px;
+  background: none;
+  border: none;
+}
+
+.ucb-events-calendar .localist_minicalendar .localist_minicalendar_minicalendar th {
+  background: none;
+  color: inherit;
+}
+
+.ucb-events-calendar .localist_minicalendar .localist_minicalendar_minicalendar td {
+  background-color: #f2f2f2;
+}
+
+.ucb-events-calendar .localist_minicalendar .localist_minicalendar_minicalendar td:hover {
+  background: #e0e0e0;
+}
+
+.ucb-events-calendar .localist_minicalendar .localist_minicalendar_minicalendar td a {
+  color: #01578b;
+}
+
+.ucb-events-calendar .localist_minicalendar .localist_minicalendar_minicalendar td a:hover {
+  background: none;
+  font-weight: inherit;
+}
+
+.ucb-events-calendar .localist_minicalendar .localist_minicalendar_minicalendar .localist_minicalendar_today {
+  background: #0277bd;
+  border-bottom: inherit;
+}
+
+.ucb-events-calendar .localist_minicalendar .localist_minicalendar_minicalendar .localist_minicalendar_today a:link,
+.ucb-events-calendar .localist_minicalendar .localist_minicalendar_minicalendar .localist_minicalendar_today a:visited {
+  color: #fff;
+}
+
+.ucb-events-calendar .localist-widget-hl .event-details {
+  background: rgba(0, 0, 0, 0.65);
+}
+
+.ucb-events-calendar .localist-widget-hl .event-card .content p {
+  font-family: inherit;
+}
+
+.ucb-events-calendar .localist-widget-hl .event-card .event-short-date {
+  background: #0277bd;
+}
+
+.ucb-events-calendar .localist-widget-hl .event-card {
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+  border: none;
+}
+
+.ucb-events-calendar .localist-widget-hl .event-card:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+}
+
+.localist-wrapper > ul,
+.localist-wrapper > ul > li {
+  list-style: none;
+  list-style-image: none;
+  margin: 0;
+  padding: 0;
+}
+
+.ucb-events-calendar ul#lwe {
+  padding-left: 0;
+}
+
+.ucb-events-calendar #lw {
+  background: none;
+}
+
+.ucb-events-calendar .localist_minicalendar_page_heading {
+  font-weight: bold;
+}
+
+.ucb-events-calendar ol.event-list {
+  overflow: hidden;
+}
+
+table.localist_minicalendar_minicalendar caption {
+  border: 0;
+  height: 1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
+/* Template 5 */
+.template-5 .le-date-wrapper .le-date-month {
+  line-height: 1;
+}
+
+.template-5 .le-date-wrapper .le-date-day {
+  line-height: 1;
+}
+
+@media screen and (min-width: 600px) {
+  .template-5 .le-date-wrapper .le-date-month {
+    font-size: 250%;
+  }
+
+  .template-5 .le-date-wrapper .le-date-day {
+    font-size: 350%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .ucb-events-calendar .localist-widget {
+    display: flex;
+    flex-direction: row-reverse;
+  }
+}
