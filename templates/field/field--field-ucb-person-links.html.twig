@@ -1,0 +1,134 @@
+{#
+/**
+* Theme layout to display a UCB Person Link Field.
+*/
+#}
+
+{% if items %}
+	<ul class="ucb-person-links">
+		{% for item in items %}
+			{%
+    set classes = [
+    'social-media-item',
+    'person-menu-item',
+    item.is_expanded ? 'menu-item--expanded',
+    item.is_collapsed ? 'menu-item--collapsed',
+    item.in_active_trail ? 'menu-item--active-trail',
+    ]
+    %}
+			<li{{item.attributes.addClass(classes)}}>
+
+				{% set linkTitle = item.content['#title'] %}
+				{% set linkUrl = item.content['#url']|render|striptags|trim|upper  %}
+
+				{% if 'FACEBOOK' in linkUrl %}
+					<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-facebook-link" title="FaceBook" alt="FaceBook">
+						<span class="sr-only">FaceBook</span>
+						<i class="fab fa-facebook"></i>
+						<span>{{ linkTitle }}</span>
+					</a>
+                    
+                {% elseif 'TWITTER' in linkUrl %}
+                    <a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-twitter-link" title="Twitter" alt="Twitter">
+                        <span class="sr-only">Twitter</span>
+                        <i class="fab fa-twitter"></i>
+                        <span>{{ linkTitle }}</span>
+                    </a>
+
+                {% elseif 'FLICKR' in linkUrl %}
+                    <a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-flickr-link" title="Flickr" alt="Flickr">
+                        <span class="sr-only">Flickr</span>
+                        <i class="fab fa-flickr"></i>
+                        <span>{{ linkTitle }}</span>
+                    </a>
+
+                {% elseif 'LINKEDIN' in linkUrl %}
+                    <a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-linkedin-link" title="LinkedIn" alt="LinkedIn">
+                        <span class="sr-only">LinkedIn</span>
+                        <i class="fab fa-linkedin"></i>
+                        <span>{{ linkTitle }}</span>
+                    </a>
+
+                {% elseif 'YOUTUBE' in linkUrl %}
+                    <a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-youtube-link" title="YouTube" alt="YouTube">
+                        <span class="sr-only">YouTube</span>
+                        <i class="fab fa-youtube"></i>
+                        <span>{{ linkTitle }}</span>
+                    </a>
+
+                {% elseif 'INSTAGRAM' in linkUrl %}
+                    <a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-instagram-link" title="Instagram" alt="Instagram">
+                        <span class="sr-only">Instagram</span>
+                        <i class="fab fa-instagram"></i>
+                        <span>{{ linkTitle }}</span>
+                    </a>
+
+                {% elseif 'DISCORD' in linkUrl %}
+                    <a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-discord-link" title="Discord" alt="Discord">
+                        <span class="sr-only">Discord</span>
+                        <i class="fab fa-discord"></i>
+                        <span>{{ linkTitle }}</span>
+                    </a>
+
+                {% elseif 'PINTREST' in linkUrl %}
+                    <a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-pintrest-link" title="Pintrest" alt="Pintrest">
+                        <span class="sr-only">Pintrest</span>
+                        <i class="fab fa-pinterest-p"></i>
+                        <span>{{ linkTitle }}</span>
+                    </a>
+
+                {% elseif 'VIMEO' in linkUrl %}
+                    <a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-vimeo-link" title="Vimeo" alt="Vimeo">
+                        <span class="sr-only">Vimeo</span>
+                        <i class="fab fa-vimeo-v"></i>
+                        <span>{{ linkTitle }}</span>
+                    </a>
+
+                {% elseif 'WORDPRESS' in linkUrl %}
+                    <a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-wordpress-link" title="Wordpress" alt="Wordpress">
+                        <span class="sr-only">Wordpress</span>
+                        <i class="fab fa-wordpress-simple"></i>
+                        <span>{{ linkTitle }}</span>
+                    </a>
+
+                {% elseif 'TIKTOK' in linkUrl %}
+                    <a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-tiktok-link" title="TikTok" alt="TikTok">
+                        <span class="sr-only">TikTok</span>
+                        <i class="fab fa-tiktok"></i>
+                        <span>{{ linkTitle }}</span>
+                    </a>
+
+                {% elseif 'REDDIT' in linkUrl %}
+                    <a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-reddit-link" title="Reddit" alt="Reddit">
+                        <span class="sr-only">Reddit</span>
+                        <i class="fab fa-reddit-alien"></i>
+                        <span>{{ linkTitle }}</span>
+                    </a>
+
+                {% elseif 'PATREON' in linkUrl %}
+                    <a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-patreon-link" title="Patreon" alt="Patreon">
+                        <span class="sr-only">Patreon</span>
+                        <i class="fab fa-patreon"></i>
+                        <span>{{ linkTitle }}</span>
+                    </a>
+
+                {% else %}
+                    <a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-other-link" title="Social Media" alt="Social Media">
+                        <span class="sr-only">Link</span>
+                        <i class="fa fa-external-link-alt"></i>
+                        {% if linkTitle|render %}
+                            <span>{{ linkTitle }}</span>
+                        {% else %}
+                            <span>{{ linkUrl }}</span>
+                        {% endif %}
+                    </a>
+
+
+				{% endif %}
+
+				{#{{ link(item.title, item.url) }}#}
+
+			</li>
+		{% endfor %}
+	</ul>
+{% endif %}

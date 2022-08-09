@@ -1,0 +1,188 @@
+{#
+/**
+ * Theme layout to display a People List Page.
+ *
+ * TODO: 
+ *  - Image styles (try : https://www.drupal.org/project/consumer_image_styles )
+ *  - Display filters on rendered page 
+ */
+#}
+{{ attach_library('boulderD9_base/ucb-page') }}
+{{ attach_library('boulderD9_base/ucb-people-list-page') }}
+
+{# Display format variable #}
+{% set displayFormat = content.field_ucb_people_display|render|striptags|trim %}
+
+{# JSON API Endpoint information #}
+{% set peopleJSON = (url('<front>')|render|trim('/'))
+  ~ '/jsonapi/node/ucb_person'
+  ~ '?include[node--ucb_person]=uid,body,field_ucb_person_first_name,field_ucb_person_last_name,field_ucb_person_job_type,'
+  ~ 'field_ucb_person_department,field_ucb_person_email,field_ucb_person_phone,field_ucb_person_title,field_ucb_person_photo'
+  ~ '&include=field_ucb_person_photo.field_media_image'
+  ~ '&fields[file--file]=uri,url'
+%}
+
+{# Filter on only published (status = true) content #}
+{% set PublishedFilter = '&filter[publish-check][condition][path]=status'
+  ~ '&filter[publish-check][condition][value]=1'
+  ~ '&filter[publish-check][condition][memberOf]=published'
+%}
+
+{# include filter options set by the user #}
+{% set includeDepartments = [] %}
+{% set myDepartments =
+  content.field_ucb_people_department|render|striptags|trim|split(' ')
+%}
+{% set includeTypes = [] %}
+{% set myTypes =
+  content.field_ucb_people_job_type|render|striptags|trim|split(' ')
+%}
+
+{# two passes to clear out the blank entries that are mysteriously added by default #}
+{% for item in myDepartments %}
+  {% if item %}
+    {% set includeDepartments = includeDepartments|merge([item]) %}
+  {% endif %}
+{% endfor %}
+
+{% for item in myTypes %}
+  {% if item %}
+    {% set includeTypes = includeTypes|merge([item]) %}
+  {% endif %}
+{% endfor %}
+
+
+{# placeholder variables for our include and exclude filters, default to blank strings #}
+{% set IncludeFilter = '' %}
+{% set IncludeDeptFilter = '' %}
+{% set IncludeTypeFilter = '' %}
+
+{# Setup Include Department Filter using a logical OR between included department IDs #}
+{% if includeDepartments|length %}
+  {% set includeGroupMembers = '' %}
+  {% for item in includeDepartments %}
+    {% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-dept'
+      ~ (item|trim)
+      ~ '][condition][path]=field_ucb_person_department.meta.drupal_internal__target_id'
+      ~ '&filter[filter-dept'
+      ~ (item|trim)
+      ~ '][condition][value]='
+      ~ (item|trim)
+      ~ '&filter[filter-dept'
+      ~ (item|trim)
+      ~ '][condition][memberOf]=dept-include'
+    %}
+  {% endfor %}
+  {% set IncludeDeptFilter = '&filter[dept-include][group][conjunction]=OR'
+    ~ includeGroupMembers
+  %}
+{% endif %}
+
+{# Setup Include Type Filter using a logical OR between included job type IDs #}
+{% if includeTypes|length %}
+  {% set includeGroupMembers = '' %}
+  {% for item in includeTypes %}
+    {% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-type'
+      ~ (item|trim)
+      ~ '][condition][path]=field_ucb_person_job_type.meta.drupal_internal__target_id'
+      ~ '&filter[filter-type'
+      ~ (item|trim)
+      ~ '][condition][value]='
+      ~ (item|trim)
+      ~ '&filter[filter-type'
+      ~ (item|trim)
+      ~ '][condition][memberOf]=type-include'
+    %}
+  {% endfor %}
+  {% set IncludeTypeFilter = '&filter[type-include][group][conjunction]=OR'
+    ~ includeGroupMembers
+  %}
+{% endif %}
+
+{# check to see if we have both Departments and Types to filter on #}
+{# if so... setup a logicial AND Between both include filters #}
+{% if IncludeDeptFilter and IncludeTypeFilter %}
+  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
+    ~ PublishedFilter
+    ~ '&filter[include-group][group][conjunction]=AND'
+    ~ '&filter[include-group][group][memberOf]=published'
+    ~ IncludeDeptFilter
+    ~ '&filter[dept-include][group][memberOf]=include-group'
+    ~ IncludeTypeFilter
+    ~ '&filter[type-include][group][memberOf]=include-group'
+  %}
+  {# Otherwise default to either the Department filter or the Type filter as defined #}
+{% elseif IncludeDeptFilter %}
+  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
+    ~ '&filter[dept-include][group][memberOf]=published'
+    ~ PublishedFilter
+    ~ IncludeDeptFilter
+  %}
+{% elseif IncludeTypeFilter %}
+  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
+    ~ '&filter[type-include][group][memberOf]=published'
+    ~ PublishedFilter
+    ~ IncludeTypeFilter
+  %}
+
+{# no includeded Departments or Types ... still need to filter on published people #}
+{% else %}
+  {% set IncludeFilter = '&filter[status][value]=1' %}
+{% endif %}
+
+{# sorting filter #}
+{% set sortFilter = '&sort=field_ucb_person_last_name' %}
+
+{# Group By paramater #}
+{% set GroupBy = content.field_ucb_people_group_by|render|striptags|trim %}
+
+{# Order By paramater #}
+{% set OrderBy = content.field_ucb_people_order_by|render|striptags|trim %}
+
+{%
+  set classes = [
+  'node',
+  'container',
+  'node--type-' ~ node.bundle|clean_class,
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+]
+%}
+
+<article id="ucb-people-list-page"
+    data-JSON={{peopleJSON}}{{ IncludeFilter }}{{ sortFilter}}
+    data-format={{ displayFormat|trim }}
+    data-groupby={{ GroupBy }}
+    data-orderby={{ OrderBy }}
+    {{attributes.addClass(classes)}}>
+
+	<div class="ucb-people-list-title">
+		<h1{{title_attributes}}>
+			{{ label }}
+		</h1>
+	</div>
+
+	<div id="ucb-pl-content" class="ucb-people-list-content">
+    <!--  <h3>{{ peopleJSON }}{{ IncludeFilter }}{{ sortFilter }}</h3> -->
+		<div class="row">
+			{{ content.body }}
+		</div>
+
+    {# Loading message #}
+    <div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
+      <i class="fas fa-spinner fa-3x fa-pulse"></i>
+    </div>
+
+    {# No more Data #}
+    <div id="ucb-al-end-of-data" class="ucb-list-msg ucb-end-of-results">
+      No results matching your filters.
+    </div>
+
+    {# Error in the response from the API endpoint, display an error #}
+    <div id="ucb-al-error" class="ucb-list-msg ucb-error">
+      Error retrieving people from the API endpoint.  Please try again later.  
+    </div>
+	</div>
+</article>

@@ -1,0 +1,48 @@
+h1.ucb-person-name {
+  display: flex;
+  flex-direction: row;
+  padding: 0.25em 0;
+}
+
+h1.ucb-person-name span {
+  margin-right: 0.25em;
+}
+
+.ucb-person-name {
+  background: lightgray;
+}
+
+.ucb-person-main img {
+  max-width: 300px;
+  height: auto;
+  border-radius: 2px;
+}
+
+ul.ucb-person-email-address,
+ul.ucb-person-links,
+ul.ucb-person-phone-numbers {
+  list-style: none;
+  padding: 0;
+  color: #aaa;
+  margin: 0;
+}
+
+a.ucb-person-social-link i.fa,
+a.ucb-person-social-link i.fab {
+  color: #aaa;
+}
+
+.ucb-person-contact-section {
+  margin-top: 0.5em;
+}
+
+.ucb-person-contact p {
+  margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .ucb-person-main img {
+    float: right;
+    padding: 0 1em 1em;
+  }
+}

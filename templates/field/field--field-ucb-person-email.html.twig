@@ -1,0 +1,15 @@
+{#
+/**
+* Theme layout to display a UCB Person Email Field.
+*/
+#}
+
+<ul class="ucb-person-email-address">
+    {% for item in items %}
+    <li>
+        <i class="fa fal fa-envelope"></i>&nbsp;<a href="mailto:{{ item.content|render|striptags|trim }}">{{
+            item.attributes
+            }}{{ item.content }}</a>
+    </li>
+    {% endfor %}
+</ul>
