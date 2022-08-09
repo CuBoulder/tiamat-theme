@@ -21,8 +21,6 @@ ucb-global:
     js/ucb-rave-alert.js: {}
   dependencies: 
     - core/drupal
-
-
 ucb-page:
   version: 1.x
   css:
@@ -49,6 +47,19 @@ ucb-user-login:
     theme:
       css/ucb-user-login.css: {}
 
+ucb-person:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-person.css: {}
+      
+ucb-people-list-page:
+  version: 1.x
+  js:
+    js/ucb-people-list.js: {}
+  css:
+    theme:
+      css/ucb-people-list.css: {}
 ucb-site-contact-info-footer:
   version: 1.x
   css:
