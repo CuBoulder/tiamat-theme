@@ -13,17 +13,15 @@
   ]
 %}
 
-
-<div{{attributes.addClass(classes)}}>
-	{{ title_prefix }}
-	{% if label %}
-		<h2{{title_attributes}} style="color: black;">{{ label }}</h2>
-	{% endif %}
-	{{ title_suffix }}
 {% block content %}
-  <div{{ attributes.addClass(classes) }}>
-      <div class="card-body container">
-        {{ content }}
-      </div>
-  </div>
-{% endblock content %}
+	<div{{attributes.addClass(classes)}}>
+		<div class="card-body container">
+			{{ title_prefix }}
+			{% if label %}
+				<h2{{title_attributes}} style="color: black;">{{ label }}</h2>
+			{% endif %}
+			{{ title_suffix }}
+			{{ content }}
+		</div>
+	</div>
+{% endblock %}

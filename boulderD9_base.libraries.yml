@@ -54,3 +54,13 @@ ucb-events-calendar:
   css:
     theme:
       css/block/events-calendar.css: {}
+
+ucb-image-gallery:
+  version: 1.x
+  js:
+    js/glightbox/glightbox.min.js: {}
+    js/glightbox/ucb-gallery-lightbox-settings.js: {}
+  css:
+    theme:
+      css/block/image-gallery.css: {}
+      js/glightbox/glightbox.min.css: {}

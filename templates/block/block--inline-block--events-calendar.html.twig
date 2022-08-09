@@ -7,7 +7,7 @@
 *
 #}
 
-{{ attach_library('ucb2021_base/ucb-events-calendar') }}
+{{ attach_library('boulderD9_base/ucb-events-calendar') }}
 {%
   set classes = [
     'content-block',
@@ -22,8 +22,9 @@
 		<h2{{title_attributes}} style="color: black;">{{ label }}</h2>
 	{% endif %}
 	{{ title_suffix }}
+  </div>
 {% block content %}
 	<div{{attributes.addClass(classes)}}>
         {{ content }}
     </div>
-{% endblock content %}
+{% endblock %}
