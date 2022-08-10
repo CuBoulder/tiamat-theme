@@ -1,0 +1,10 @@
+{#
+/**
+ * Theme layout to display copy for grid layouts
+ * Created by jnichol on 1/11/22
+ */
+#}
+
+{% for item in items %}
+    {{ item.content|render|striptags|trim }}
+{% endfor %}
