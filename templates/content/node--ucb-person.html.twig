@@ -1,0 +1,64 @@
+{#
+/**
+* Theme layout to display a UCB Person Page.
+*
+* Created by jcsparks on 8/31/21
+*/
+#}
+
+{{ attach_library('boulderD9_base/ucb-page') }}
+{{ attach_library('boulderD9_base/ucb-person') }}
+
+{%
+set classes = [
+'node',
+'node--type-' ~ node.bundle|clean_class,
+not node.isPublished() ? 'node--unpublished',
+view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+]
+%}
+
+{#Dummy variable to ensure that all content tags are set for caching purposes#}
+{% set content_render = content|render %}
+
+<article{{attributes.addClass(classes)}}>
+    <div class="container-fluid ucb-person-name">
+        <div class="container">
+        <h1 class="ucb-person-name ">
+            <span itemprop="givenName">{{ content.field_ucb_person_first_name }}</span> <span itemprop="familyName">{{ content.field_ucb_person_last_name }}</span>
+        </h1>
+        </div>
+    </div>
+    <div class="container ucb-person" itemscope itemtype="https://schema.org/Person">
+        <div class="row ucb-person-personal">
+            <div class="col ucb-person-main">
+                {% if content.field_ucb_person_photo|render %}
+                    <span itemprop="image"> {{ content.field_ucb_person_photo }} </span> 
+                {% endif %}
+                    <span itemprop="jobTitle"> {{ content.field_ucb_person_title }} </span>
+                {% if content.field_ucb_person_department|render %}
+                    {{ content.field_ucb_person_department }}
+                {% endif %}
+                {% if content.field_ucb_person_email|render %}
+                    <span itemprop="email"> {{ content.field_ucb_person_email }} </span> 
+                {% endif %}
+                {% if content.field_ucb_person_phone|render %}
+                    <span itemprop="telephone"> {{ content.field_ucb_person_phone }} </span> 
+                {% endif %}
+                {% if content.field_ucb_person_links|render %}
+                    {{ content.field_ucb_person_links }} 
+                {% endif %}
+                {% if content.field_ucb_person_address|render %}
+                    <span itemprop="address"> {{ content.field_ucb_person_address }} </span>
+                {% endif %}
+                {% if content.field_ucb_person_office_hours|render %}
+                    {{ content.field_ucb_person_office_hours }}
+                {% endif %}
+                </span>
+                {% if content.body|render %}
+                    {{ content.body }}
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</article>

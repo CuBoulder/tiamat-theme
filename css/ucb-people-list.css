@@ -1,0 +1,94 @@
+.ucb-list-msg {
+  font-size: 1.25em;
+  font-weight: bolder;
+  text-align: center;
+  display: none;
+}
+
+.ucb-loading-data {
+  color: #01579b;
+}
+
+.ucb-person-card-list {
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(20 20 20 / 20%);
+}
+
+.ucb-person-card-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.ucb-person-card-name {
+  font-size: 1.25rem;
+  font-weight: bolder;
+  margin-bottom: 0.25rem;
+}
+
+.ucb-person-card-dept {
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  margin-bottom: 0.25rem;
+}
+
+.ucb-person-card-contact {
+  display: flex;
+  flex-direction: column;
+}
+
+.departments-grid {
+  text-transform: uppercase;
+  font-size: 65%;
+  line-height: 120%;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.ucb-person-card-img-grid {
+  margin-bottom: 10px;
+}
+
+.ucb-people-list-table-head {
+  width: 100%;
+}
+
+.ucb-people-list-table-photo {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.people-list-icon {
+  color: #aaa;
+}
+
+.ucb-people-list-contact {
+  color: #0277bd;
+  font-family: Roboto, Helvetica, sans-serif;
+  font-weight: 400;
+}
+
+.ucb-person-card-dept-ul {
+  display: flex;
+  flex-direction: row;
+  padding-left: 0;
+}
+
+.ucb-person-card-dept-ul li {
+  margin-right: 2em;
+}
+
+.ucb-person-card-dept-ul li:first-of-type {
+  list-style: none;
+}
+
+thead.ucb-people-list-table-head {
+  background: #ccc;
+}
+
+tbody#ucb-people-list-table-tablebody {
+  background: #fafafa;
+}
