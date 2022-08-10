@@ -68,10 +68,46 @@ i.fas.fa-circle {
   margin-right: -1em;
 }
 
-.ucb-article-content-media-above {
-	margin-bottom: 1em;
+.ucb-article-blockquote {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  text-align: left;
+  margin: 1em 1em 1em 0;
+  padding: 20px;
 }
 
-.ucb-article-content-media-below {
-	margin-top: 1em;
+.ucb-article-content-image {
+  text-align: center;
+}
+
+.ucb-article-content-media-left img,
+.ucb-article-content-media-right img,
+.ucb-article-content-media-above img,
+.ucb-article-content-media-below img {
+  width: auto;
+  height: auto;
+  margin: auto;
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.ucb-article-content-media-left,
+.ucb-article-content-media-right {
+  align-self: center;
+  text-align: center;
+}
+
+.ucb-article-content-media.ucb-article-content-media-above,
+.ucb-article-content-media.ucb-article-content-media-below {
+  text-align: center;
+}
+
+.ucb-article-blockquote-icon {
+	font-size: 150%;
+	padding-right: 20px;
+}
+
+.ucb-article-blockquote-text {
+	font-weight: bold;
 }

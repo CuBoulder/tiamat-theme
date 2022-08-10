@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Article blockquote template
+ */
+#}
+{% set iconName = content.field_article_blockquote_icon.0['#markup']|striptags %}
+{% set iconClass = '' %}
+{% if iconName == 'Quote' %}
+	{% set iconClass = 'quote-left' %}
+{% endif %}
+{% if iconName == 'Exclamation Mark' %}
+	{% set iconClass = 'exclamation' %}
+{% endif %}
+{% if iconName == 'Question Mark' %}
+	{% set iconClass = 'question' %}
+{% endif %}
+{% if iconName == 'Lightbulb' %}
+	{% set iconClass = 'lightbulb' %}
+	{# `lightbulb-on` is avaliable in Font Awesome 5 and looks nicer #}
+{% endif %}
+{% if iconName == 'Person' %}
+	{% set iconClass = 'user' %}
+{% endif %}
+<blockquote class="ucb-article-blockquote">
+	{% if iconClass %}
+		<div class="ucb-article-blockquote-icon font-gold">
+			<i class="fas fa-solid fa-{{ iconClass }}"></i>
+		</div>
+	{% endif %}
+	<div class="ucb-article-blockquote-text">
+		{{ content.field_article_blockquote_text }}
+	</span>
+</blockquote>
