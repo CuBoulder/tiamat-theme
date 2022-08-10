@@ -65,3 +65,9 @@ ucb-site-contact-info-footer:
   css:
     theme:
       css/ucb-site-contact-info-footer.css: {}
+
+ucb-how-to-page:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-how-to-page.css: {}
