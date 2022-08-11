@@ -2,9 +2,7 @@
 /**
  * @file
  * Theme to implement a article text and media block Paragraph
- *
- * Created by Joshua Nicholson on 11/22/21
-*
+*/
 #}
 {%
   set classes = [
@@ -17,78 +15,72 @@
   ]
 %}
 
-  {# set classes for the location of the media in the component #}
+{# set classes for the location of the media in the component #}
 {% set imgLocation = '' %}
 
 {% if content.field_article_media_selection|render %}
-    {% set imgLocation = 'top' %}
+	{% set imgLocation = 'top' %}
 
-    {% if paragraph.field_article_media_location.value is same as("0") %}
-      {% set imgLocation = "top" %}
-    {% elseif paragraph.field_article_media_location.value is same as("1") %}
-      {% set imgLocation = "bottom" %}
-    {% elseif paragraph.field_article_media_location.value is same as("2") %}
-      {% set imgLocation = "left" %}
-    {% elseif paragraph.field_article_media_location.value is same as("3") %}
-      {% set imgLocation = "right" %}
-    {% endif %}
+	{% if paragraph.field_article_media_location.value is same as("0") %}
+		{% set imgLocation = "top" %}
+	{% elseif paragraph.field_article_media_location.value is same as("1") %}
+		{% set imgLocation = "bottom" %}
+	{% elseif paragraph.field_article_media_location.value is same as("2") %}
+		{% set imgLocation = "left" %}
+	{% elseif paragraph.field_article_media_location.value is same as("3") %}
+		{% set imgLocation = "right" %}
+	{% endif %}
 {% endif %}
 
+{% set articleText %}
+	<div class="ucb-article-text" itemprop="articleBody">
+		{{ content.field_article_text }}
+	</div>
+{% endset %}
+
+
 {% block paragraph %}
-  <div{{ attributes.addClass(classes) }}>
-    {% if imgLocation %}
-        {% if imgLocation == 'top' %}
-        <div class="ucb-article-content-media ucb-article-content-media-above">
-            {{ content.field_article_media_selection }}
-        </div>
-          <div class="ucb-article-text" itemprop="articleBody">
-            {{ content.field_article_text }}
-          </div>
-        {% elseif imgLocation == 'bottom' %}
-          <div class="ucb-article-text below-content" itemprop="articleBody">
-            {{ content.field_article_text }}
-          </div>
-          <div class="ucb-article-content-media ucb-article-content-media-below">
-            {{ content.field_article_media_selection }}
-          </div>
-        {% elseif imgLocation == 'left' %}
-            <div class="ucb-article-row-subrow row">
-                <div class="ucb-article-content-media ucb-article-content-media-left col-lg">
-                    {{ content.field_article_media_selection }}
-                </div>
-                <div class="col-lg ucb-article-text" itemprop="articleBody">
-                    {{ content.field_article_text }}
-                </div>
-            </div>
-        {% elseif imgLocation == 'right' %}
-            <div class="ucb-article-row-subrow row">
-                <div class="col-lg ucb-article-text" itemprop="articleBody">
-                    {{ content.field_article_text }}
-                </div>
-                <div class="ucb-article-content-media ucb-article-content-media-right col-lg">
-                  {{ content.field_article_media_selection }}
-                </div>
-            </div>
-        {% else %}
-            {% if content.field_article_media|render %}
-              <div class="ucb-article-content-media">
-                {{ content.field_article_media_selection }}
-              </div>
-            {% endif %}
-            {% if content.field_article_text|render %}
-              <div class="ucb-article-text" itemprop="articleBody">
-                {{ content.field_article_text }}
-              </div>
-            {% endif %}
-        {% endif %}
-
-    {% else %}
-      <div class="ucb-article-text" itemprop="articleBody">
-        {{ content.field_article_text }}
-      </div>
-    {% endif %}
-  </div>
+	<div{{attributes.addClass(classes)}}>
+		{% if imgLocation %}
+			{% if imgLocation == 'top' %}
+				<div class="ucb-article-content-media ucb-article-content-media-above">
+					{{ content.field_article_media_selection }}
+				</div>
+				{{ articleText }}
+			{% elseif imgLocation == 'bottom' %}
+				{{ articleText }}
+				<div class="ucb-article-content-media ucb-article-content-media-below">
+					{{ content.field_article_media_selection }}
+				</div>
+			{% elseif imgLocation == 'left' %}
+				<div class="ucb-article-row-subrow row">
+					<div class="ucb-article-content-media ucb-article-content-media-left col-lg">
+						{{ content.field_article_media_selection }}
+					</div>
+					{{ articleText }}
+				</div>
+			{% elseif imgLocation == 'right' %}
+				<div class="ucb-article-row-subrow row">
+					{{ articleText }}
+					<div class="ucb-article-content-media ucb-article-content-media-right col-lg">
+						{{ content.field_article_media_selection }}
+					</div>
+				</div>
+			{% else %}
+				{% if content.field_article_media|render %}
+					<div class="ucb-article-content-media">
+						{{ content.field_article_media_selection }}
+					</div>
+				{% endif %}
+				{{ articleText }}
+			{% endif %}
+		{% else %}
+			<div class="ucb-article-text" itemprop="articleBody">
+				{{ content.field_article_text }}
+			</div>
+		{% endif %}
+		{% if content.field_article_blockquote|render %}
+			{{ content.field_article_blockquote }}
+		{% endif %}
+	</div>
 {% endblock paragraph %}
-
-
-
