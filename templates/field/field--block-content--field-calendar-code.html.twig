@@ -1,0 +1,14 @@
+{#
+/**
+ * Theme layout to display copy for grid layouts
+ * Created by jnichol on 4/07/22
+ */
+#}
+
+{% for item in items %}
+       {% if ('text/javascript' in item.content['#context'].value|raw) and ('src="https://calendar.colorado.edu/widget' in item.content['#context'].value|raw) %}
+        <div class="ucb-events-calendar">{{ item.content['#context'].value|raw }}</div>
+    {% else %}
+    <strong>Error: Only calendar.colorado.edu events embed code is allowed.</strong>
+    {% endif %}
+{% endfor %}

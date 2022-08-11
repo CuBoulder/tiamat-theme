@@ -1,0 +1,10 @@
+{#
+/**
+ * Theme layout to display link for grid layouts
+ * Created by jnichol on 3/23/22
+ */
+#}
+
+{% for item in items %}
+    {{ item.content['#url']|render|striptags|trim }}
+{% endfor %}

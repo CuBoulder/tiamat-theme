@@ -1,0 +1,65 @@
+{#
+/**
+ * @file
+ * Theme to implement an Image Slider Paragraph
+ *
+#}
+
+{{ attach_library('boulderD9_base/ucb-slider') }}
+
+
+{%
+  set classes = [
+    'content-block',
+    'content-blcok--type--' ~ block.bundle|clean_class,
+    view_mode ? 'content-block--view-mode--' ~ view_mode|clean_class,
+    content['#block_content'].field_slider_text_style.value
+  ]
+%}
+
+{# set classes for the size of the component #}
+{% if content['#block_content'].field_slider_size.value is same as("0") %}
+	{% set size = "size-ultrawide" %}
+{% elseif content['#block_content'].field_slider_size.value is same as("1") %}
+	{% set size = "size-widescreen" %}
+{% elseif content['#block_content'].field_slider_size.value is same as("2") %}
+	{% set size = "size-threetwo" %}
+{% else %}
+	{% set size = "size-large" %}
+{% endif %}
+
+{% set id = "carousel-" ~ content['#block_content'].id() %}
+
+
+<div{{attributes.addClass(classes)}}>
+	{{ title_prefix }}
+	{% if label %}
+		<h2{{title_attributes}} style="color: black;">{{ label }}</h2>
+	{% endif %}
+	{{ title_suffix }}
+</div>
+{% block content %}
+	<div{{attributes.addClass(classes).addClass(size)}}>
+		{# <h1> {{ dump(content['#block_content'].field_slider_slide.value) }} </h1> #}
+		<div id="{{ id }}" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				{% for i in 1..content['#block_content'].field_slider_slide.value|length %}
+					<button type="button" {% if loop.first %} class="active" {% endif %} data-bs-target="#{{ id }}" data-bs-slide-to="{{ i - 1 }}" aria-label="Slide {{ i }}"></button>
+				{% endfor %}
+			</div>
+			<div
+				class="carousel-inner">
+				{# Don't render these fields #}
+				{{ content|without('field_slider_size','field_slider_text_style') }}
+			</div>
+			<button class="carousel-control-prev" type="button" data-bs-target="#{{ id }}" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Previous</span>
+			</button>
+			<button class="carousel-control-next" type="button" data-bs-target="#{{ id }}" data-bs-slide="next">
+				<span class="carousel-control-next-icon" aria-hidden="true"></span>
+				<span class="visually-hidden">Next</span>
+			</button>
+		</div>
+	</div>
+{% endblock %}

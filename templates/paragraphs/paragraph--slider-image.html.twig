@@ -1,0 +1,49 @@
+{#
+/**
+ * @file
+ * Theme to format images that appear within the Image Slider Paragraph
+ *
+#}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+
+{% block paragraph %}
+	{% block content %}
+    <div class="slide-image-container">
+      {% if paragraph.field_slide_link.value is not empty %}
+        <a href="{{ paragraph.field_slide_link.value }}">
+          {{ content.field_slide_image|render }}
+        </a>
+      {% else %}
+        {{ content.field_slide_image|render }}
+      {% endif %}
+    </div>
+		{% if paragraph.field_slide_image_text.value is not empty or paragraph.field_slide_image_text is not empty %}
+			<div class="carousel-caption d-md-block">
+      <div class="slide-text-container">
+				{% if paragraph.field_slide_image_text is not empty %}
+					<span>
+						<h3>{{ content.field_slide_title|render|striptags|trim }}
+							{% if paragraph.field_slide_link.value is not empty %}
+								<a href="{{ paragraph.field_slide_link.value }}" class="slide-link">
+									<i class="fa fa-external-link-alt"></i>
+								</a>
+							{% endif %}
+						</h3>
+					</span>
+
+				{% endif %}
+				{% if paragraph.field_slide_image_text.value is not empty %}
+					<p>{{ content.field_slide_image_text|render }}</p>
+				{% endif %}
+			</div>
+      </div>
+		{% endif %}
+	{% endblock %}
+{% endblock paragraph %}
