@@ -1,0 +1,10 @@
+{#
+/**
+ * Theme layout to display link for row layouts
+ * Created by jnichol on 08/09/2022
+ */
+#}
+
+{% for item in items %}
+    {{ item.content['#url']|render|striptags|trim }}
+{% endfor %}

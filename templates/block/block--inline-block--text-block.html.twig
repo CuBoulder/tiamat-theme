@@ -1,0 +1,34 @@
+{#
+/**
+ * @file
+ * Theme to implement a Text block Paragraph
+ *
+#}
+{%
+  set classes = [
+    'content-block',
+    'content-blcok--type--' ~ block.bundle|clean_class,
+    view_mode ? 'content-block--view-mode--' ~ view_mode|clean_class,
+    'card'
+  ]
+%}
+
+<div{{attributes.addClass(classes)}}>
+	{{ title_prefix }}
+	{% if label %}
+		<h2{{title_attributes}} style="color: black;">{{ label }}</h2>
+	{% endif %}
+	{{ title_suffix }}
+  </div>
+{% block content %}
+	<div{{attributes.addClass(classes)}}>
+		<div class="card-body container">
+			{{ title_prefix }}
+			{% if label %}
+				<h2{{title_attributes}} style="color: black;">{{ label }}</h2>
+			{% endif %}
+			{{ title_suffix }}
+			{{ content }}
+		</div>
+	</div>
+{% endblock %}
