@@ -13,18 +13,19 @@ ucb-global:
       css/styleguide/colors.css: {}
       css/styleguide/type.css: {}
       css/styleguide/icons.css: {}
-  ckeditor5-stylesheets: 
+  ckeditor5-stylesheets:
     - css/base-ckeditor5.css
   js:
     js/bootstrap/bootstrap.min.js: {}
     js/fontawesome/all.min.js: {}
     js/ucb-rave-alert.js: {}
-  dependencies: 
+  dependencies:
     - core/drupal
+
 ucb-page:
   version: 1.x
   css:
-    layout: 
+    layout:
       css/ucb-page.css: {}
 
 ucb-article:
@@ -71,3 +72,61 @@ ucb-how-to-page:
   css:
     theme:
       css/ucb-how-to-page.css: {}
+      
+ucb-hero-unit:
+  version: 1.x
+  js:
+    js/ucb-hero-unit.js: {}
+  css:
+    theme:
+      css/block/hero-unit.css: {}
+
+ucb-events-calendar:
+  version: 1.x
+  css:
+    theme:
+      css/block/events-calendar.css: {}
+
+ucb-image-gallery:
+  version: 1.x
+  js:
+    js/glightbox/glightbox.min.js: {}
+    js/glightbox/ucb-gallery-lightbox-settings.js: {}
+  css:
+    theme:
+      css/block/image-gallery.css: {}
+      js/glightbox/glightbox.min.css: {}
+
+ucb-expandable-content:
+  version: 1.x
+  css:
+    theme:
+      css/block/expandable-content.css: {}
+
+ucb-content-grid:
+  version: 1.x
+  js:
+    js/ucb-equalize-height.js: {}
+  css:
+    theme:
+      css/block/content-grid.css: {}
+
+ucb-content-row:
+  version: 1.x
+  css:
+    theme:
+      css/block/content-row.css: {}
+
+ucb-video-reveal:
+  version: 1.x
+  js:
+    js/ucb-video-reveal.js: {}
+  css:
+    theme:
+      css/block/video-reveal.css: {}
+
+ucb-slider:
+  version: 1.x
+  css:
+    theme:
+      css/block/slider.css: {}

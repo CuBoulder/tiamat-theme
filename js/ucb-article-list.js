@@ -89,9 +89,13 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
           });
           // finds the focial point version of the thumbnail
           altFilterData.map((item)=>{
-            if(item.links.focal_image)
-              altObj[item.id] = item.links.focal_image.href
-          })
+            // checks if consumer is working, else default to standard image instead of focal image
+            if(item.links.focal_image_square != undefined){
+              altObj[item.id] = item.links.focal_image_square.href
+            } else {
+              altObj[item.id] = item.attributes.uri.url
+            }
+        })
 
           // using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
           idFilterData.map((pair) => {

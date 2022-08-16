@@ -1,0 +1,16 @@
+.gallery-div {
+  background: white;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.gallery-div .gallery-item {
+  margin-bottom: calc(var(--bs-gutter-x));
+}
+
+.ucb-above-content .block-content--type--image-gallery,
+.ucb-below-content .block-content--type--image-gallery {
+  padding: 1.5em;
+}

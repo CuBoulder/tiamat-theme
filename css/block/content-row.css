@@ -1,0 +1,116 @@
+/*
+ * Styles for content row paragraph
+ *
+*/
+
+/* Overall Content Row CSS */
+
+.feature-row-image-container .contextual-region button,
+.row-image-container .contextual-region button {
+  display: none;
+}
+
+.ucb-above-content .paragraph--type--content-row,
+.ucb-below-content .paragraph--type--content-row {
+  padding: 1.5em;
+}
+
+.row-content {
+  margin-bottom: 1em;
+}
+
+.row-text-container {
+  padding: 0 1em;
+}
+
+.row-card .row-text-container {
+  padding: 1em;
+}
+
+.row-fill {
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+}
+
+.row-fill img {
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+.row-fill article {
+  width: 100%;
+  height: auto;
+}
+
+.row-fill article div {
+  height: 100%;
+}
+
+/*** Row Alternating ***/
+.row-alternate {
+  flex-direction: row-reverse;
+}
+
+/* Features Layout CSS */
+
+.feature-row {
+  margin-bottom: 1em;
+}
+
+.feature-row-fill img {
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+  margin-bottom: 0;
+}
+
+.feature-row-image-container {
+  position: relative;
+  width: 100%;
+}
+
+.feature-row-image-container .feature-row-text {
+  padding: 0.75rem;
+  position: absolute;
+  bottom: 0;
+}
+
+.small-feature:first-child {
+  margin-bottom: 0.5em;
+}
+
+.small-feature:last-child {
+  margin-top: 0.5em;
+}
+
+.small-feature-row-image-container {
+  height: 100%;
+  display: flex;
+  align-items: self-end;
+}
+
+.feature-row-text {
+  background: rgba(0, 0, 0, 0.7);
+  margin-bottom: 0;
+  color: white;
+  padding: 0.75em;
+}
+
+@media screen and (max-width: 975px) {
+  .small-feature-row {
+    margin-top: 1em;
+    padding-right: 0;
+  }
+
+  .small-feature:first-child {
+    padding-right: 0;
+  }
+
+  .small-feature:last-child {
+    padding-right: 0;
+  }
+}
