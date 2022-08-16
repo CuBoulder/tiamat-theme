@@ -1,0 +1,19 @@
+{% set excludeCategories = '' %}
+{% set myExCategories =
+  items|render|striptags|trim|split(' ')
+%}
+
+
+{% for item in myExCategories %}
+  {% if item %}
+    {% if loop.last %}
+      {% set excludeCategories = excludeCategories ~ (item|trim) %}
+    {% else %}
+      {% set excludeCategories = excludeCategories ~ (item|trim) ~ ',' %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+   <div id="ucb-related-articles-exclude-categories" data-excludeCategories="{{excludeCategories}}"></div>
+
+

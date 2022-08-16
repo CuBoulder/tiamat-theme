@@ -8,6 +8,7 @@
 
 {{ attach_library('boulderD9_base/ucb-page') }}
 {{ attach_library('boulderD9_base/ucb-article') }}
+{{ attach_library('ucb2021_base/ucb-related-articles') }}
 
 {%
 set classes = [
@@ -85,6 +86,10 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
                 {{ content.field_ucb_article_tags }}
             </div>
         {% endif %}
+        {# TO DO -- Related Articles Block #}
+        <div class="ucb-related-articles-block" data-catsjson="{{content.field_ucb_article_categories| json_encode(constant('JSON_PRETTY_PRINT'))}}" data-tagsjson="{{ content.field_ucb_article_tags| json_encode(constant('JSON_PRETTY_PRINT')) }}"data-relatedshown="{{showRelated|striptags|trim}}"data-tags="{{myTags|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}"data-cats="{{myCats|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}">
+            {{content.field_ucb_related_articles_parag}}
+    </div>
     </div>
 </article>
 {% else %}
