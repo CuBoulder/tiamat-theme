@@ -37,7 +37,7 @@
 							{% set matList = '"supply": [' %}
 							<ul>
 								{% for key, item in content.field_how_to_materials if key|first != '#' %}
-									{% set matList = matList ~ '{ "@type": "HowToSupply", "name": ' ~ item.value|render|striptags|trim|json_encode ~ ' },' %}
+									{% set matList = matList ~ '{ "@type": "HowToSupply", "name": ' ~ item|render|striptags|trim|json_encode ~ ' },' %}
 									<li>{{item|render}}</li>
 								{% endfor %}
 							</ul>
@@ -51,7 +51,7 @@
 							<ul>
 								{% for key, item in content.field_how_to_tools if key|first != '#' %}
 
-									{% set toolList = toolList ~ '{ "@type": "HowToTool", "name": ' ~ item.value|render|striptags|trim|json_encode ~ ' },' %}
+									{% set toolList = toolList ~ '{ "@type": "HowToTool", "name": ' ~ item|render|striptags|trim|json_encode ~ ' },' %}
 									<li>{{item|render}}</li>
 
 								{% endfor %}
