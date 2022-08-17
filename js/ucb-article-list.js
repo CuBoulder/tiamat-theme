@@ -145,11 +145,8 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
             )
           }
 
-          // console.log(excludeCatArray, thisArticleCats,doesIncludeCat)
-          // console.log(excludeTagArray,thisArticleTags,doesIncludeTag)
-
           // if we didn't match any of the filtered tags or cats, then render the content
-          if (doesIncludeCat.length == 0 || doesIncludeTag.length == 0) {
+          if (doesIncludeCat.length == 0 && doesIncludeTag.length == 0) {
             // we need to render the Article Card view for this returned element
 
             // **ADD DATA**
@@ -250,7 +247,10 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
         // turn off spinner
         toggleMessage("ucb-al-loading", "none");
         // turn on default error message
-        toggleMessage("ucb-al-error", "block");
+        if(error){
+          toggleMessage("ucb-al-error", "block");
+
+        }
 
     });
 
