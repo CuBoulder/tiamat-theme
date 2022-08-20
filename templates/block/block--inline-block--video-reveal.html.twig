@@ -12,24 +12,24 @@
 {%
   set classes = [
     'ucb-video-reveal',
-    'content-block',
-    'content-blcok--type--' ~ block.bundle|clean_class,
-    view_mode ? 'content-block--view-mode--' ~ view_mode|clean_class
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    bundle ? 'block--type-' ~ bundle|clean_class,
+    view_mode ? 'block--view-mode-' ~ view_mode|clean_class
   ]
 %}
 
 {% set myId = content['#block_content'].id() %}
 
-<div{{attributes.addClass(classes)}}>
-	{{ title_prefix }}
-	{% if label %}
-		<h2{{title_attributes}} style="color: black;">{{ label }}</h2>
-	{% endif %}
-	{{ title_suffix }}
-</div>
 
 {% block content %}
 	<div{{attributes.addClass(classes)}}>
+		{{ title_prefix }}
+		{% if label %}
+			<h2{{title_attributes}} style="color: black;">{{ label }}</h2>
+		{% endif %}
+		{{ title_suffix }}
 		<div id="ucb-video-block-{{ myId }}" class="ucb-video-text-div">
 			<div class="ucb-video-reveal-controls">
 				<span class="ucb-video-reveal-icon">
@@ -42,8 +42,8 @@
 			</div>
 			<div class="ucb-video-reveal-close">
 				<i class="fas fa-times-circle ucb-video-reveal-close-button"></i>
-			</span>
+			</div>
 			{{ content.field_video_reveal_video|render }}
 		</div>
 	</div>
-</div></div>{% endblock content %}
+{% endblock content %}

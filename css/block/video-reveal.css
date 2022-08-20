@@ -1,0 +1,60 @@
+.ucb-vid-reveal {
+  position: relative;
+}
+
+.ucb-video-reveal-controls {
+  position: absolute;
+  text-align: center;
+  font-size: 2.25em;
+  font-weight: bold;
+  color: white;
+  text-shadow: 2px 2px 2px rgba(20, 20, 20, 0.3);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  line-height: 1.75em;
+  z-index: 99;
+}
+
+span.ucb-vid-reveal-icon {
+  font-size: 2em;
+}
+
+.ucb-video-reveal-video {
+  display: none;
+}
+
+.ucb-video-reveal-close {
+  width: 100%;
+  display: none;
+  background: #222;
+  color: white;
+  text-align: right;
+  height: fit-content;
+  margin: 0;
+  padding-top: 0.25em;
+}
+
+.ucb-video-reveal-close i.fas.fa-times-circle {
+  font-size: 2em;
+  margin-right: 0.25em;
+  cursor: pointer;
+}
+
+.ucb-video-reveal-video .contextual {
+  display: none;
+}
+
+.ucb-video-reveal-video iframe {
+  max-width: 100%;
+  width: 100%;
+  min-height: 600px;
+  height: 100%;
+}
+
+@media screen and (max-width: 768px) {
+  .ucb-video-reveal-controls {
+    font-size: 1.25em;
+  }
+}

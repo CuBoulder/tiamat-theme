@@ -10,24 +10,24 @@
 }
 
 /* sizes */
- img {
+img {
   width: 100%;
   object-fit: cover;
 }
 
 .size-ultrawide img {
   max-height: 600px;
-  max-width: 1600px
+  max-width: 1600px;
 }
 
 .size-widescreen img {
   max-height: 900px;
-  max-width: 1600px
+  max-width: 1600px;
 }
 
 .size-threetwo img {
   max-height: 500px;
-  max-width: 1500px
+  max-width: 1500px;
 }
 
 .size-large img {
@@ -89,7 +89,10 @@
 }
 
 .right-content .carousel-item.active,
-.carousel-item.carousel-item-next.carousel-item-start {
+.carousel-item.carousel-item-next.carousel-item-start,
+.carousel-item.carousel-item-next.carousel-item-end,
+.carousel-item.carousel-item-prev.carousel-item-start,
+.carousel-item.carousel-item-prev.carousel-item-end {
   display: flex;
   flex-direction: row;
 }
@@ -177,14 +180,16 @@ a.slide-link i.fab {
   }
 
   .right-content .carousel-item.active,
-  .carousel-item.carousel-item-next.carousel-item-start {
+  .carousel-item.carousel-item-next.carousel-item-start,
+  .carousel-item.carousel-item-next.carousel-item-end,
+  .carousel-item.carousel-item-prev.carousel-item-start,
+  .carousel-item.carousel-item-prev.carousel-item-end {
     display: block;
     flex-direction: row;
   }
 }
 
 @media screen and (max-width: 768px) {
-
   .bottom-overlay .carousel-inner .carousel-caption,
   .right-overlay .carousel-inner .carousel-caption,
   .center-overlay .carousel-inner .carousel-caption,
@@ -200,7 +205,7 @@ a.slide-link i.fab {
     position: relative;
   }
 
-   .carousel-inner .carousel-caption {
+  .carousel-inner .carousel-caption {
     top: auto;
     bottom: 0;
     background-color: var(--ucb-darker);
