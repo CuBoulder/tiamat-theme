@@ -231,7 +231,7 @@ function renderArticleList(site, JSONURL, ExcludeCategories = "", ExcludeTags = 
               .slice(1)
               .join(" ");
             let title = item.attributes.title;
-            let link = item.attributes.path.alias;
+            let link = site.url + item.attributes.path.alias;
             let image = "";
             if(link) {
                 image = `<a href="${link}">` + (imageSrc ? `<img src="${imageSrc}">` : defaultArticleImage()) + '</a>';
