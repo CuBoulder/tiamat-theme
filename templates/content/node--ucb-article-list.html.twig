@@ -77,8 +77,7 @@
 
 {# NEW #}
 {# JSON API Endpoint information #}
-{% set articlesJSON = (url('<front>')|render|trim('/'))
-  ~ '/jsonapi/node/ucb_article'
+{% set articlesJSON = '/jsonapi/node/ucb_article'
   ~ '?include[node--ucb_article]=uid,title,ucb_article_content,created,field_ucb_article_summary,field_ucb_article_categories,field_ucb_article_tags,field_ucb_article_thumbnail'
   ~ '&include=field_ucb_article_thumbnail.field_media_image'
   ~ '&fields[file--file]=uri,url'
@@ -91,6 +90,10 @@
 %}
 
 {# include and exclude options set by the user #}
+
+{% set includeURLs = [] %}
+{% set includeURLsField = content.field_article_list_sites %}
+
 {% set includeCategories = [] %}
 {% set myCategories =
   content.field_ucb_filter_by_category|render|striptags|trim|split(' ')
@@ -107,6 +110,10 @@
 {% set myExTags =
   content.field_ucb_exclude_tag|render|striptags|trim|split(' ')
 %}
+
+{% for includeURL in includeURLsField if includeURL['#url'] %}
+	{% set includeURLs = includeURLs|merge([{'title' : includeURL['#title']|render|striptags|trim, 'url': includeURL['#url']|render|striptags|trim|trim('/')}]) %}
+{% endfor %}
 
 {# two passes to clear out the blank entries that are mysteriously added by default #}
 {% for item in myCategories %}
@@ -272,6 +279,7 @@
     {# <div id="ucb-article-listing" class="ucb-article-list-container" data-jsonapi="{{ articlesJSON }}{{ IncludeFilter }}"> #}
     <div id="ucb-article-listing"
       class="ucb-article-list-container"
+	  data-sites="{{ includeURLs|json_encode }}"
       data-jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}"
       data-excats="{{ excludeCategories }}"
       data-extags="{{ excludeTags }}">

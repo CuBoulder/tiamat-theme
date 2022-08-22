@@ -1,11 +1,35 @@
+class ArticleListSite {
+	constructor(title, url) {
+		this.title = title;
+		this.url = url;
+		this.nextURL = null;
+		this.page = 0;
+		this.loadingFinished = false;
+	}
+	makeRequest(JSONURL, CategoryExclude, TagsExclude) {
+		this.loadingFinished = false;
+		return new Promise((resolve, reject) => {
+			renderArticleList(this, this.url + JSONURL, CategoryExclude, TagsExclude).then((response) => {
+				this.loadingFinished = true;
+				this.page++;
+				if(response)
+					this.nextURL = '/jsonapi/' + response;
+				else this.nextURL = null;
+				resolve();
+			});
+		});
+	}
+}
+
 /**  
  * Get additional data from the paragraph content attached to the Article node
+ * @param {ArticleListSite} site - The site to which this request is directed
  * @param {string} id - internal id used by Drupal to get the specific paragraph
  */ 
-async function getArticleParagraph(id) {
+async function getArticleParagraph(site, id) {
   if(id) {
     const response = await fetch(
-      `/jsonapi/paragraph/article_content/${id}`
+      `${site.url}/jsonapi/paragraph/article_content/${id}`
     );
     return response;
   } else {
@@ -34,13 +58,14 @@ function toggleMessage(id, display = "none") {
 
 /**
  * Main function that will load the initial data from the given URL and start processing it for display
+ * @param {ArticleListSite} site - The site to which this request was directed
  * @param {string} JSONURL - URL for the JSON:API endpoint with filters, sort and pagination 
  * @param {string} id - target DOM element to add the content to 
  * @param {string} ExcludeCategories - array of categories to filter out when rendering 
  * @param {string} ExcludeTags - array of tags to filter out when rendering
  * @returns - Promise with resolve or reject
  */
-function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
+function renderArticleList(site, JSONURL, ExcludeCategories = "", ExcludeTags = "") {
   return new Promise(function(resolve, reject) {
   let excludeCatArray = ExcludeCategories.split(",").map(Number);
   let excludeTagArray = ExcludeTags.split(",").map(Number);
@@ -69,7 +94,7 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
         // if no articles of returned, stop the loading spinner and let the user know we received no data that matches their query
         if (!data.data.length) {
           toggleMessage("ucb-al-loading", "none");
-          toggleMessage("ucb-al-no-results", "block");
+          // toggleMessage("ucb-al-no-results", "block");
           reject;
         }
 
@@ -158,7 +183,7 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
 
             // if no article summary, use a simplified article body
             if (!body.length) {
-              getArticleParagraph(bodyAndImageId)
+              getArticleParagraph(site, bodyAndImageId)
                 .then((response) => response.json())
                 .then((data) => {
                   // Remove any html tags within the article
@@ -263,7 +288,10 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
  */
 (function () {
   // get the url from the data-jsonapi variable
-  let el = document.getElementById("ucb-article-listing");
+  const
+  	el = document.getElementById("ucb-article-listing"),
+  	sites = new Set(),
+  	sitesWithArticlesRemaining = new Set();
   let JSONURL = ""; // JSON:API URL 
   let NEXTJSONURL = ""; // next link for pagination 
   let CategoryExclude = ""; // categories to exclude
@@ -276,17 +304,23 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
 
   // check to see if we have the data we need to work with.  
   if (el) {
+	JSON.parse(el.dataset['sites']).forEach((siteData) => {
+		const site = new ArticleListSite(siteData['title'], siteData['url']);
+		sites.add(site);
+	});
     JSONURL = el.dataset.jsonapi;
     CategoryExclude = el.dataset.excats;
     TagsExclude = el.dataset.extags;
   }
   
   // attempt to render the data requested 
-  renderArticleList( JSONURL, CategoryExclude, TagsExclude,).then((response) => {
-    if(response) {
-      NEXTJSONURL = "/jsonapi/" + response;
-    }
-  });
+  for(let iterator = sites.values(), site; site = iterator.next().value;) {
+	site.makeRequest(JSONURL, CategoryExclude, TagsExclude).then(() => {
+		if(site.nextURL)
+			sitesWithArticlesRemaining.add(site);
+		else sitesWithArticlesRemaining.delete(site);
+	});
+  }
 
   // watch for scrolling and determine if we're at the bottom of the content and need to request more 
   document.addEventListener("scroll", function () {
@@ -296,20 +330,23 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
       window.requestAnimationFrame(function () {
         // check to see if we've scrolled through our content and need to attempt to load more
         if ( lastKnownScrollPosition + window.innerHeight >= document.documentElement.scrollHeight) {
-          // grab the next link from our JSON data object and call the loader
-          loadingData = true;
-          // if we have another set of data to load, get the next batch.
-          if(NEXTJSONURL) {
-            renderArticleList( NEXTJSONURL, CategoryExclude, TagsExclude,).then((response) => {
-              if(response) {
-                NEXTJSONURL = "/jsonapi/" + response;
-                loadingData = false;
-              } else {
-                NEXTJSONURL = "";
-                toggleMessage("ucb-al-end-of-data", "block");
-              }
-            });
-          }
+			for(let iterator = new Set(sitesWithArticlesRemaining).values(), value; value = iterator.next().value;) {
+				if(site.loadingFinished) {
+					site.makeRequest(JSONURL, CategoryExclude, TagsExclude).then(() => {
+						if(!site.nextURL && sitesWithArticlesRemaining.delete(site) && sitesWithArticlesRemaining.size == 0) {
+							let loadingFinished = true;
+							for(let iterator = sites.values(), site; site = iterator.next().value;) {
+								if(!site.loadingFinished){
+									loadingFinished = false;
+									break;
+								}
+							}
+							if(loadingFinished)
+								toggleMessage("ucb-al-end-of-data", "block");
+						}
+					});
+				}
+			}
         }
         ticking = false;
       })
