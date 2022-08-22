@@ -2,9 +2,6 @@ const relatedArticlesBlock = document.querySelector(".ucb-related-articles-block
 const excludeTagEl = document.querySelector("#ucb-related-articles-exclude-tags")
 const excludeCatEl = document.querySelector("#ucb-related-articles-exclude-categories")
 
-
-console.log('i am connected!');
-
 // Get the tax ids for excluded Cats and Tags
 let excludeCatArr = [];
 if (excludeCatEl){
@@ -16,7 +13,7 @@ if (excludeTagEl){
     excludeTagArr = excludeTagEl.getAttribute('data-excludetags').split(',').filter(Number)
 }
 
-console.log('my excluded tags', excludeTagArr)
+// console.log('my excluded tags', excludeTagArr)
 
 // Global variable to store articles that are good matches. Danger!
 let articleArrayWithScores = []
@@ -118,7 +115,7 @@ async function getArticlesWithTags(url, array, articleTags ,numLeft){
             })
             // creates the urlObj, key: data id, value: url
             filteredData.map((pair) => {
-                console.log('my pair', pair)
+                // console.log('my pair', pair)
               urlObj[pair.id] = pair.links.focal_image_square.href;
             })
   
@@ -257,7 +254,7 @@ if(relatedShown){
 
           // creates the urlObj, key: data id, value: url
           filteredData.map((pair) => {
-            console.log(pair)
+            // console.log(pair)
             urlObj[pair.id] = pair.links.focal_image_square.href;
           })
 
