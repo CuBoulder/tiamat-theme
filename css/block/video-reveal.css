@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.ucb-video-text-div {
+  position: relative;
+}
+
 .ucb-video-reveal-controls {
   position: absolute;
   text-align: center;
