@@ -16,6 +16,8 @@ if (excludeTagEl){
     excludeTagArr = excludeTagEl.getAttribute('data-excludetags').split(',').filter(Number)
 }
 
+console.log('my excluded tags', excludeTagArr)
+
 // Global variable to store articles that are good matches. Danger!
 let articleArrayWithScores = []
 
@@ -61,7 +63,7 @@ async function getArticlesWithTags(url, array, articleTags ,numLeft){
                     thisArticleTags.forEach((tag)=>{
                         let id = tag.meta.drupal_internal__target_id.toString();
                         // console.log(id)
-                         if(excludeCatArr.includes(id)){
+                         if(excludeTagArr.includes(id)){
                             toInclude = false;
                             return
                          }
@@ -277,11 +279,11 @@ if(relatedShown){
                 let urlCheck = article.attributes.path.alias;
                 let toInclude = true;
                 //remove excluded category & tagss
-                if(thisArticleTags.length){ // if there are categories
+                if(thisArticleTags.length){ // if there are tags
                     thisArticleTags.forEach((tag)=>{
                         let id = tag.meta.drupal_internal__target_id.toString();
                         // console.log(id)
-                         if(excludeCatArr.includes(id)){
+                         if(excludeTagArr.includes(id)){
                             toInclude = false;
                             return
                          }
