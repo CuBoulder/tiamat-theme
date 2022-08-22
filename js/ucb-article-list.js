@@ -56,6 +56,10 @@ function toggleMessage(id, display = "none") {
   }
 }
 
+function defaultArticleImage() {
+	return '<div class="ucb-article-card-default-img"><i class="fas fa-solid fa-newspaper"></i></div>'
+}
+
 /**
  * Main function that will load the initial data from the given URL and start processing it for display
  * @param {ArticleListSite} site - The site to which this request was directed
@@ -204,10 +208,9 @@ function renderArticleList(site, JSONURL, ExcludeCategories = "", ExcludeTags = 
                         trimmedString.lastIndexOf(" ")
                       )
                     )
-                    body = `${trimmedString}...`;
                   }
                   // set the contentBody of Article Summary card to the minified body instead
-                  body = `${trimmedString}`;
+                  body = `${trimmedString}...`;
                   document.getElementById(`body-${bodyAndImageId}`).innerHTML = body;
                 })
             }
@@ -230,16 +233,16 @@ function renderArticleList(site, JSONURL, ExcludeCategories = "", ExcludeTags = 
             let title = item.attributes.title;
             let link = item.attributes.path.alias;
             let image = "";
-            if(link && imageSrc) {
-                image = `<a href="${link}"><img src="${imageSrc}" /></a>`;
+            if(link) {
+                image = `<a href="${link}">` + (imageSrc ? `<img src="${imageSrc}">` : defaultArticleImage()) + '</a>';
             }
 
             let outputHTML = `
                             <div class='ucb-article-card row'>
-                                <div id='img-${bodyAndImageId}' class='col-sm-12 col-md-2 ucb-article-card-img'>${image}</div>
+                                <div id='img-${bodyAndImageId}' class='col-sm-12 col-md-2 ucb-article-card-img'>${image || defaultArticleImage()}</div>
                                 <div class='col-sm-12 col-md-10 ucb-article-card-data'>
                                     <span class='ucb-article-card-title'><a href="${link}">${title}</a></span>
-                                    <span class='ucb-article-card-date'>${date}</span>
+                                    <span class="ucb-article-card-info"><span class='ucb-article-card-date'>${date}</span>` + (site.title ? ' • <span class="ucb-article-card-site"><a href="' + site.url + '/">' + site.title + '</a></span>' : '') + `</span>
                                     <span id='body-${bodyAndImageId}' class='ucb-article-card-body'>${body}</span>
                                     <span class='ucb-article-card-more'>
                                         <a href="${link}">Read more <i class="fal fa-chevron-double-right"></i></a></span>
@@ -330,13 +333,13 @@ function renderArticleList(site, JSONURL, ExcludeCategories = "", ExcludeTags = 
       window.requestAnimationFrame(function () {
         // check to see if we've scrolled through our content and need to attempt to load more
         if ( lastKnownScrollPosition + window.innerHeight >= document.documentElement.scrollHeight) {
-			for(let iterator = new Set(sitesWithArticlesRemaining).values(), value; value = iterator.next().value;) {
+			for(let iterator = new Set(sitesWithArticlesRemaining).values(), site; site = iterator.next().value;) {
 				if(site.loadingFinished) {
-					site.makeRequest(JSONURL, CategoryExclude, TagsExclude).then(() => {
+					site.makeRequest(site.nextURL, CategoryExclude, TagsExclude).then(() => {
 						if(!site.nextURL && sitesWithArticlesRemaining.delete(site) && sitesWithArticlesRemaining.size == 0) {
 							let loadingFinished = true;
-							for(let iterator = sites.values(), site; site = iterator.next().value;) {
-								if(!site.loadingFinished){
+							for(let iterator = sites.values(), site2; site2 = iterator.next().value;) {
+								if(!site2.loadingFinished){
 									loadingFinished = false;
 									break;
 								}

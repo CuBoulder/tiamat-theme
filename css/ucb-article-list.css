@@ -23,13 +23,25 @@
   font-weight: bolder;
 }
 
-.ucb-article-card-date {
+.ucb-article-card-info, .ucb-article-card-date, .ucb-article-card-site {
   font-size: 0.75rem;
   line-height: 0.75rem;
   margin-bottom: 10px;
 }
 
-.ucb-article-card-img {
-  max-width: 100%;
-  height: auto;
+.ucb-article-card-img, .ucb-article-card-default-img {
+	display: flex;
+	max-width: 100%;
+	height: auto;
+	justify-content: center;
+}
+
+.ucb-article-card-default-img {
+	font-size: 72pt;
+}
+
+@media only screen and (max-width: 991px) {
+	.ucb-article-card-default-img {
+		font-size: 55pt;
+	}	
 }
