@@ -131,6 +131,12 @@ ucb-slider:
     theme:
       css/block/slider.css: {}
 
+ucb-text-block:
+  version: 1.x
+  css:
+    theme:
+      css/block/text-block.css: {}
+
 ucb-related-articles:
   version: 1.x
   js:

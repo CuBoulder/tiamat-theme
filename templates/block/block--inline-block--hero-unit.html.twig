@@ -5,15 +5,19 @@
  *
  * Background settings are set inline CSS
  * All other styling done through classes
+*
+* Implemented by Joshau Nicholson on 08/09/22
 #}
 
 {{ attach_library('boulderD9_base/ucb-hero-unit') }}
 
 {%
   set classes = [
-    'block-content',
-    'block-content--type--hero-unit' ~ block.bundle|clean_class,
-    view_mode ? 'content-block--view-mode--' ~ view_mode|clean_class,
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    bundle ? 'block--type-' ~ bundle|clean_class,
+    view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
     content['#block_content'].field_text_align.value,
     content['#block_content'].field_text_color.value
   ]
@@ -78,7 +82,7 @@
 					</div>
 				</div>
 				<script type="text/javascript">
-					window.addEventListener('load', () => enableVideoHero('{{ videoURL }}', 'ucb_hero_unit_video_player_  {{ blockId }}'));
+					window.addEventListener('load', () => enableVideoHero('{{ videoURL }}', 'ucb_hero_unit_video_player_{{ blockId }}'));
 				</script>
 			{% endif %}
 			{% set linkColor = content['#block_content'].field_link_color.value %}

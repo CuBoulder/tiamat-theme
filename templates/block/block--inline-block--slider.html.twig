@@ -3,6 +3,10 @@
  * @file
  * Theme to implement an Image Slider Paragraph
  *
+ *
+ * Created by Joshua Nicholson on 08/09/22
+ *
+ *
 #}
 
 {{ attach_library('boulderD9_base/ucb-slider') }}
@@ -10,9 +14,11 @@
 
 {%
   set classes = [
-    'content-block',
-    'content-blcok--type--' ~ block.bundle|clean_class,
-    view_mode ? 'content-block--view-mode--' ~ view_mode|clean_class,
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    bundle ? 'block--type-' ~ bundle|clean_class,
+    view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
     content['#block_content'].field_slider_text_style.value
   ]
 %}
@@ -31,15 +37,13 @@
 {% set id = "carousel-" ~ content['#block_content'].id() %}
 
 
-<div{{attributes.addClass(classes)}}>
-	{{ title_prefix }}
-	{% if label %}
-		<h2{{title_attributes}} style="color: black;">{{ label }}</h2>
-	{% endif %}
-	{{ title_suffix }}
-</div>
 {% block content %}
 	<div{{attributes.addClass(classes).addClass(size)}}>
+		{{ title_prefix }}
+		{% if label %}
+			<h2{{title_attributes}} style="color: black;">{{ label }}</h2>
+		{% endif %}
+		{{ title_suffix }}
 		{# <h1> {{ dump(content['#block_content'].field_slider_slide.value) }} </h1> #}
 		<div id="{{ id }}" class="carousel slide" data-bs-ride="carousel">
 			<div class="carousel-indicators">

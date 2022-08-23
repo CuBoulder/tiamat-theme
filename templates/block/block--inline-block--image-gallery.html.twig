@@ -1,9 +1,22 @@
+{#
+/**
+ * @file
+ * Theme to implement the image gallery
+ *
+ * Created by Joshua Nicholson on 08/09/22
+*
+#}
+
+
 {{ attach_library('boulderD9_base/ucb-image-gallery') }}
+
 {%
   set classes = [
-    'content-block',
-    'content-blcok--type--' ~ block.bundle|clean_class,
-    view_mode ? 'content-block--view-mode--' ~ view_mode|clean_class
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    bundle ? 'block--type-' ~ bundle|clean_class,
+    view_mode ? 'block--view-mode-' ~ view_mode|clean_class
   ]
 %}
 
