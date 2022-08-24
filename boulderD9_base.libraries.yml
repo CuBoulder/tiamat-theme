@@ -136,3 +136,11 @@ ucb-text-block:
   css:
     theme:
       css/block/text-block.css: {}
+
+ucb-related-articles:
+  version: 1.x
+  js:
+    js/ucb-related-articles.js: {}
+  css:
+    theme:
+      css/ucb-related-articles.css: {}

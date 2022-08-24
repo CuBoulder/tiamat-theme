@@ -1,0 +1,21 @@
+.ucb-related-articles-block{
+    display: none;
+}
+
+.ucb-article-card-img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .ucb-article-card-data {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .ucb-article-card {
+    margin-bottom: 2em;
+  }
+
+  .ucb-related-article-card-body{
+    font-size: 85%;
+  }
