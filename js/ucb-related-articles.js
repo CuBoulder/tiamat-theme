@@ -1,6 +1,8 @@
 const relatedArticlesBlock = document.querySelector(".ucb-related-articles-block");
 const excludeTagEl = document.querySelector("#ucb-related-articles-exclude-tags")
 const excludeCatEl = document.querySelector("#ucb-related-articles-exclude-categories")
+const loggedIn = relatedArticlesBlock.getAttribute('data-loggedin') == 'true' ? true : false;
+let childCount = 0;
 
 // Get the tax ids for excluded Cats and Tags
 let excludeCatArr = [];
@@ -393,20 +395,32 @@ if(relatedShown){
     // Append
     articleCard.innerHTML = outputHTML
     relatedArticlesDiv.appendChild(articleCard)
-        })           
+        }) 
 
+    // Check to see what was rendered
+        // sets global counter of children
+        childCount = relatedArticlesDiv.childElementCount
+            // If no matches and logged in, render error message for admin
+        if(childCount == 0 && loggedIn == true){
+            console.log('I am logged in and there are no children')
+            let message = document.createElement('h3')
+            message.innerText = 'There are no returned article matches - check exclusion filters and try again'
+            relatedArticlesDiv.appendChild(message)
+            // If no matches and not logged in, hide section
+        } else if (relatedArticlesDiv.childElementCount == 0 && loggedIn == false){
+            let header = relatedArticlesBlock.children[0]
+            header.innerText = ''
+            // console.log('am i available', relatedArticlesBlock.children[0])
+            
+        } else {
+            //do nothing and proceed
+        }
     })
 }
         
         getArticles(URL) // init
 
-
-
-    
-
-    // Reveal related block after creating cards
     relatedArticlesBlock.style.display = "block"
-
 } else {
     relatedArticlesBlock.style.display = "none";
 }
