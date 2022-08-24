@@ -1,8 +1,7 @@
 {% set excludeCategories = '' %}
 {% set myExCategories =
-  items|render|striptags|trim|split(' ')
+  items|render|striptags|trim|split('')
 %}
-
 
 {% for item in myExCategories %}
   {% if item %}

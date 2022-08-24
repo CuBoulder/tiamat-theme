@@ -15,8 +15,6 @@ if (excludeTagEl){
     excludeTagArr = excludeTagEl.getAttribute('data-excludetags').split(',').filter(Number)
 }
 
-// console.log('my excluded tags', excludeTagArr)
-
 // Global variable to store articles that are good matches. Danger!
 let articleArrayWithScores = []
 
@@ -53,6 +51,8 @@ async function getArticlesWithTags(url, array, articleTags ,numLeft){
         let filterData = []
         returnedArticles.map((article)=>{
 
+            
+
             let thisArticleCats = article.relationships.field_ucb_article_categories.data
                 let thisArticleTags = article.relationships.field_ucb_article_tags.data
                 let urlCheck = article.attributes.path.alias;
@@ -67,6 +67,11 @@ async function getArticlesWithTags(url, array, articleTags ,numLeft){
                             return
                          }
                     }) 
+                }
+
+                if(article.attributes.field_ucb_article_external_url){
+                    toInclude = false;
+                    return
                 }
 
                 if(thisArticleCats.length){ // if there are categories
@@ -244,6 +249,7 @@ if(relatedShown){
         fetch(URL)
             .then(response=>response.json())
             .then(data=> {
+                console.log(data)
         // Below objects are needed to match images with their corresponding articles. 
         // There are two endpoints => data.data (article) and data.included (incl. media), both needed to associate a media library image with its respective article
         let urlObj = {};
@@ -277,6 +283,13 @@ if(relatedShown){
                 let thisArticleTags = article.relationships.field_ucb_article_tags.data
                 let urlCheck = article.attributes.path.alias;
                 let toInclude = true;
+
+                // If article is external,
+                if(article.attributes.field_ucb_article_external_url){
+                    toInclude = false;
+                    return
+                }
+
                 //remove excluded category & tagss
                 if(thisArticleTags.length){ // if there are tags
                     thisArticleTags.forEach((tag)=>{
@@ -292,6 +305,7 @@ if(relatedShown){
                 if(thisArticleCats.length){ // if there are categories
                     thisArticleCats.forEach((category)=>{ // check each category
                         let id = category.meta.drupal_internal__target_id.toString();
+                        // console.log('exclude cat arr' , excludeCatArr)
                         // console.log('cat id', id)                        
                          if(excludeCatArr.includes(id)){ // if excluded, do not proceed
                             // console.log('i have an included id')
@@ -402,7 +416,6 @@ if(relatedShown){
         childCount = relatedArticlesDiv.childElementCount
             // If no matches and logged in, render error message for admin
         if(childCount == 0 && loggedIn == true){
-            console.log('I am logged in and there are no children')
             let message = document.createElement('h3')
             message.innerText = 'There are no returned article matches - check exclusion filters and try again'
             relatedArticlesDiv.appendChild(message)
