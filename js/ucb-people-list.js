@@ -1,7 +1,3 @@
-/// STUFF TO DO --- 
-// Re-export fields & person page, change visibility
-// Fix JobTypes filtering
-// Focal Image Enable
 
 /* naughty global variables!!! */
 let Departments = {} // translate table for department id => department name
@@ -71,7 +67,7 @@ function getTaxonomy(taxonomyName) {
  * @returns hash {{ name => "name", id => "id"}}
  */
 function getTaxonomyName(taxonomy, tid) {
-  console.log(taxonomy)
+  // console.log(taxonomy)
   return taxonomy.find( ({ id }) => id === tid );
 }
 
@@ -106,7 +102,7 @@ function getStaff(JSONAPI) {
  * @returns document.elment 
  */
 function getParentContainer(Format) {
-  console.log("my format is", Format)
+  // console.log("my format is", Format)
   let container = ''
   switch (Format) {
     case 'List':
@@ -305,8 +301,8 @@ function displayPersonCard(Format, Person) {
  * @param {string} ORDERBY // do we sort the current group by last or type+last 
  */
 function displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY) {
-  console.log("display people format", DISPLAYFORMAT)
-  console.log('groupby', GROUPBY)
+  // console.log("display people format", DISPLAYFORMAT)
+  // console.log('groupby', GROUPBY)
   let renderThisGroup = 0; 
   let el = document.getElementById('ucb-people-list-page')
   let thisDeptName = ""
@@ -347,8 +343,12 @@ function displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY) {
       })
       // creates the urlObj, key: data id, value: url
       filteredData.map((pair) => {
-        // console.log(pair)
-        urlObj[pair.id] = pair.attributes.uri.url
+        // checks if consumer is working, else default to standard image instead of focal image
+        if(pair.links.focal_image_square != undefined){
+          urlObj[pair.id] = pair.links.focal_image_square.href
+        } else {
+          urlObj[pair.id] = pair.attributes.uri.url
+        }
       })
 
       // removes all other included data besides images in our included media
@@ -532,20 +532,21 @@ function displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY) {
   })
 
   getTaxonomy('ucb_person_job_type').then((response) => {
-    console.log("get tax resp", response)
+    // console.log("get tax resp", response)
     JobTypes = response
-    console.log('Our Job types are : ', JobTypes);
+    // console.log('Our Job types are : ', JobTypes);
   })
 
   toggleMessage('ucb-al-loading', 'block')
 
   getStaff(JSONAPI)
     .then((response) => {
+      // console.log(response)
       ourPepole = response
     })
     .then(() => {
       toggleMessage('ucb-al-loading', 'none')
-      console.log(GROUPBY)
+      // console.log(GROUPBY)
       if (GROUPBY == 'department') {
         for (const [key] of Object.entries(Departments)) {
           // let thisDeptID = Departments[key].id
@@ -554,7 +555,7 @@ function displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY) {
           // console.log("Group by Dept : " + thisDeptName.name)
 
           if(ORDERBY === "type") {
-            console.log('i match type')
+            // console.log('i match type')
             firstPassCount = 0; 
             displayPeople(FORMAT, GROUPBY, Departments[key].id, "firstpass")
             displayPeople(FORMAT, GROUPBY, Departments[key].id, "secondpass")
@@ -566,8 +567,8 @@ function displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY) {
         for (const [key] of Object.entries(JobTypes)) {
           let thisTypeID = JobTypes[key].id
           let thisTypeName = getTaxonomyName(JobTypes, thisTypeID) 
-          console.log("Group by Type : " + thisTypeID)
-          console.log("Group by Name : " + thisTypeName.name)
+          // console.log("Group by Type : " + thisTypeID)
+          // console.log("Group by Name : " + thisTypeName.name)
           if(ORDERBY === "type") {
             firstPassCount = 0; 
             displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "firstpass")

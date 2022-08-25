@@ -1,0 +1,93 @@
+/*
+ * Styles for content grid paragraph
+ *
+*/
+
+/* Overall Content Grid CSS */
+.ucb-above-content .paragraph--type--content-grid,
+.ucb-below-content .paragraph--type--content-grid {
+  padding: 1.5em;
+}
+
+.grid-image-container {
+  padding-bottom: 1em;
+}
+
+.grid-text-container {
+  padding-bottom: 1em;
+}
+
+.grid-card .grid-text-container {
+  padding: 1em;
+}
+
+.grid-fill {
+  display: flex;
+  overflow: hidden;
+  justify-content: center;
+}
+
+.grid-fill img {
+  flex-shrink: 0;
+  min-width: 100%;
+  min-height: 100%;
+  object-fit: cover;
+}
+
+.grid-fill article {
+  width: 100%;
+  height: auto;
+}
+
+.grid-fill article div {
+  height: 100%;
+  display: flex;
+}
+
+.overlay-grid-image-container a,
+.grid-image-container a {
+  width: 100%;
+}
+
+/* Card Layout CSS */
+.grid-card {
+  -webkit-box-shadow: 0 0 10px rgb(0, 0, 0, 10%);
+  -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 0 10px rgb(0, 0, 0, 10%);
+  transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+  margin-bottom: 1.5em;
+}
+
+.grid-card:hover {
+  -webkit-box-shadow: 0 0 20px rgb(0, 0, 0, 25%);
+  -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 20px rgb(0, 0, 0, 25%);
+}
+
+/* Overlay Layout CSS */
+
+.overlay-grid-image-container {
+  position: relative;
+  width: 100%;
+  margin-bottom: 1em;
+}
+
+.overlay-grid-image-container h3 {
+  padding: 0.75rem;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.7);
+  margin-bottom: 0;
+  color: white;
+  width: 100%;
+}
+
+.overlay-grid-text {
+  margin-bottom: 1em;
+}
+
+/*** Offest Grid Layout ***/
+.grid-image-container-large .grid-fill {
+  display: initial;
+}

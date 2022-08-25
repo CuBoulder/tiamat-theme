@@ -89,9 +89,13 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
           });
           // finds the focial point version of the thumbnail
           altFilterData.map((item)=>{
-            if(item.links.focal_image)
-              altObj[item.id] = item.links.focal_image.href
-          })
+            // checks if consumer is working, else default to standard image instead of focal image
+            if(item.links.focal_image_square != undefined){
+              altObj[item.id] = item.links.focal_image_square.href
+            } else {
+              altObj[item.id] = item.attributes.uri.url
+            }
+        })
 
           // using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
           idFilterData.map((pair) => {
@@ -141,11 +145,8 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
             )
           }
 
-          // console.log(excludeCatArray, thisArticleCats,doesIncludeCat)
-          // console.log(excludeTagArray,thisArticleTags,doesIncludeTag)
-
           // if we didn't match any of the filtered tags or cats, then render the content
-          if (doesIncludeCat.length == 0 || doesIncludeTag.length == 0) {
+          if (doesIncludeCat.length == 0 && doesIncludeTag.length == 0) {
             // we need to render the Article Card view for this returned element
 
             // **ADD DATA**
@@ -246,7 +247,10 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
         // turn off spinner
         toggleMessage("ucb-al-loading", "none");
         // turn on default error message
-        toggleMessage("ucb-al-error", "block");
+        if(error){
+          toggleMessage("ucb-al-error", "block");
+
+        }
 
     });
 

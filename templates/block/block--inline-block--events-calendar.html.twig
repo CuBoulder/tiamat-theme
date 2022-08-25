@@ -1,0 +1,31 @@
+{#
+/**
+ * @file
+ * Theme to implement the events calendar embedder
+ *
+ * Created by Joshua Nicholson on 08/09/22
+*
+#}
+
+{{ attach_library('boulderD9_base/ucb-events-calendar') }}
+{%
+  set classes = [
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    bundle ? 'block--type-' ~ bundle|clean_class,
+    view_mode ? 'block--view-mode-' ~ view_mode|clean_class
+  ]
+%}
+
+
+{% block content %}
+	<div{{attributes.addClass(classes)}}>
+		{{ title_prefix }}
+		{% if label %}
+			<h2{{title_attributes}} style="color: black;">{{ label }}</h2>
+		{% endif %}
+		{{ title_suffix }}
+		{{ content }}
+	</div>
+{% endblock %}

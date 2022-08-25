@@ -1,0 +1,10 @@
+{% if items %}
+	<div class="toolDiv">
+		<span class="toolSpan stepTitle">Tools:</span>
+		{% for item in items %}
+			<ul class = "stepText">
+					<li class="toolValue">{{ item.content }}</li>
+			</ul>
+		{% endfor %}
+	</div>
+{% endif %}
