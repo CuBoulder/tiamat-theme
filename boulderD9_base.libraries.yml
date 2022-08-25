@@ -144,3 +144,11 @@ ucb-form-page:
   css:
     theme:
       css/ucb-form-page.css: {}
+
+ucb-related-articles:
+  version: 1.x
+  js:
+    js/ucb-related-articles.js: {}
+  css:
+    theme:
+      css/ucb-related-articles.css: {}
