@@ -33,7 +33,7 @@
 {% endif %}
 
 {% set articleText %}
-	<div class="ucb-article-text" itemprop="articleBody">
+	<div class="ucb-article-text{% if imgLocation == 'left' or imgLocation == 'right' %} col-lg{% endif %} d-flex align-items-center" itemprop="articleBody">
 		{{ content.field_article_text }}
 	</div>
 {% endset %}
@@ -78,9 +78,6 @@
 			<div class="ucb-article-text" itemprop="articleBody">
 				{{ content.field_article_text }}
 			</div>
-		{% endif %}
-		{% if content.field_article_blockquote|render %}
-			{{ content.field_article_blockquote }}
 		{% endif %}
 	</div>
 {% endblock paragraph %}

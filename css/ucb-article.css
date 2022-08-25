@@ -92,10 +92,10 @@ i.fas.fa-circle {
   max-height: 100%;
 }
 
-.ucb-article-content-media-left,
-.ucb-article-content-media-right {
+.ucb-article-content-media {
   align-self: center;
   text-align: center;
+  padding-bottom: 20px;
 }
 
 .ucb-article-content-media.ucb-article-content-media-above,
