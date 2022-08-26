@@ -10,8 +10,6 @@
 {% set sidebar_position = drupal_config('boulderD9_base.settings', 'ucb_sidebar_position') %}
 
 <article{{attributes.addClass(classes)}}>
-	{{ drupal_block('system_breadcrumb_block') }}
-
 	<div class="container">
 		<h1{{title_attributes}}>
 			{{ label }}
@@ -23,7 +21,7 @@
 			<div class="col-sm-8">
 				{{ content['#block_content'].body }}
 				<div class="form-page-webform">
-					{{ item.field_form_page_webform }}
+					{{ content.field_form_page_webform }}
 				</div>
 			</div>
 		</div>
