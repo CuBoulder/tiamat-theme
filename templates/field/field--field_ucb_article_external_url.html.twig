@@ -1,0 +1,11 @@
+{% for item in items %}
+{% set linkURL = item.content['#url']|render|striptags|trim %}
+{% set linkTitle = item.content['#title']|render|striptags|trim %}
+
+    {% if linkURL|length > 1 %}
+    <script>
+        window.location.href = `{{ linkURL }}`;
+    </script>
+    {% endif %}
+
+{% endfor %}
