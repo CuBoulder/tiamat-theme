@@ -1,16 +1,16 @@
-{#
-/**
- * Theme layout to display a Form Page.
- *
- */
-#}
-
 {{ attach_library('boulderD9_base/ucb-form-page') }}
 
-{% set sidebar_position = drupal_config('boulderD9_base.settings', 'ucb_sidebar_position') %}
+{%
+  set classes = [
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class
+]
+%}
 
 <article{{attributes.addClass(classes)}}>
-	{{ drupal_block('system_breadcrumb_block') }}
 
 	<div class="container">
 		<h1{{title_attributes}}>
@@ -21,9 +21,9 @@
 	<div class="container mb-4">
 		<div class="row">
 			<div class="col-sm-8">
-				{{ content['#block_content'].body }}
+				{{ content.body }}
 				<div class="form-page-webform">
-					{{ item.field_form_page_webform }}
+					{{ content.field_ucb_form_block }}
 				</div>
 			</div>
 		</div>
