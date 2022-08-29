@@ -91,8 +91,10 @@
 
 {# include and exclude options set by the user #}
 
-{% set includeURLs = [] %}
-{% set includeURLsField = content.field_article_list_sites %}
+{% set contentProviders = [] %}
+{% set endpointConfig = {'sort': 'DESC', 'count': '10'} %}
+{% set endpointFilters = {'categories': [], 'tags': []} %}
+{% set linksField = content.field_article_list_sites %}
 
 {% set includeCategories = [] %}
 {% set myCategories =
@@ -111,20 +113,20 @@
   content.field_ucb_exclude_tag|render|striptags|trim|split(' ')
 %}
 
-{% for includeURL in includeURLsField if includeURL['#url'] %}
-	{% set includeURLs = includeURLs|merge([{'title' : includeURL['#title']|render|striptags|trim, 'url': includeURL['#url']|render|striptags|trim|trim('/')}]) %}
+{% for contentProvider in linksField if contentProvider['#url'] %}
+	{% set contentProviders = contentProviders|merge([{'title' : contentProvider['#title']|render|striptags|trim, 'url': contentProvider['#url']|render|striptags|trim|trim('/')}]) %}
 {% endfor %}
 
 {# two passes to clear out the blank entries that are mysteriously added by default #}
 {% for item in myCategories %}
   {% if item %}
-    {% set includeCategories = includeCategories|merge([item]) %}
+    {% set endpointFilters['categories'] = endpointFilters['categories']|merge([item]) %}
   {% endif %}
 {% endfor %}
 
 {% for item in myTags %}
   {% if item %}
-    {% set includeTags = includeTags|merge([item]) %}
+    {% set endpointFilters['tags'] = endpointFilters['tags']|merge([item]) %}
   {% endif %}
 {% endfor %}
 
@@ -148,92 +150,7 @@
   {% endif %}
 {% endfor %}
 
-{# placeholder variables for our include and exclude filters, default to blank strings #}
-{% set IncludeFilter = '' %}
-{% set IncludeCategoryFilter = '' %}
-{% set IncludeTagsFilter = '' %}
-{% set ExcludeCategoryFilter = '' %}
-{% set ExcludeTagsFilter = '' %}
-
-{# Setup Include Category Filter using a logical OR between included category IDs #}
-{% if includeCategories|length %}
-  {% set includeGroupMembers = '' %}
-  {% for item in includeCategories %}
-    {% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-cat'
-      ~ (item|trim)
-      ~ '][condition][path]=field_ucb_article_categories.meta.drupal_internal__target_id'
-      ~ '&filter[filter-cat'
-      ~ (item|trim)
-      ~ '][condition][value]='
-      ~ (item|trim)
-      ~ '&filter[filter-cat'
-      ~ (item|trim)
-      ~ '][condition][memberOf]=cat-include'
-    %}
-  {% endfor %}
-  {% set IncludeCategoryFilter = '&filter[cat-include][group][conjunction]=OR'
-    ~ includeGroupMembers
-  %}
-{% endif %}
-
-{# Setup Include Tags Filter using a logical OR between included tag IDs #}
-{% if includeTags|length %}
-  {% set includeGroupMembers = '' %}
-  {% for item in includeTags %}
-    {% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-tag'
-      ~ (item|trim)
-      ~ '][condition][path]=field_ucb_article_tags.meta.drupal_internal__target_id'
-      ~ '&filter[filter-tag'
-      ~ (item|trim)
-      ~ '][condition][value]='
-      ~ (item|trim)
-      ~ '&filter[filter-tag'
-      ~ (item|trim)
-      ~ '][condition][memberOf]=tag-include'
-    %}
-  {% endfor %}
-  {% set IncludeTagsFilter = '&filter[tag-include][group][conjunction]=OR'
-    ~ includeGroupMembers
-  %}
-{% endif %}
-
-{# check to see if we have both Categories and Tags to filter on #}
-{# if so... setup a logicial AND Between both include filters #}
-{% if IncludeCategoryFilter and IncludeTagsFilter %}
-  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
-    ~ PublishedFilter
-    ~ '&filter[include-group][group][conjunction]=AND'
-    ~ '&filter[include-group][group][memberOf]=published'
-    ~ IncludeCategoryFilter
-    ~ '&filter[cat-include][group][memberOf]=include-group'
-    ~ IncludeTagsFilter
-    ~ '&filter[tag-include][group][memberOf]=include-group'
-  %}
-  {# Otherwise default to either the Category filter or the Tag filter as defined #}
-{% elseif IncludeCategoryFilter %}
-  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
-    ~ '&filter[cat-include][group][memberOf]=published'
-    ~ PublishedFilter
-    ~ IncludeCategoryFilter
-  %}
-{% elseif IncludeTagsFilter %}
-  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
-    ~ '&filter[tag-include][group][memberOf]=published'
-    ~ PublishedFilter
-    ~ IncludeTagsFilter
-  %}
-
-{# no includeded Categories or Tags ... still need to filter on published articles #}
-{% else %}
-  {% set IncludeFilter = '&filter[status][value]=1' %}
-{% endif %}
-
-{# pagination filter #}
-{% set pageCount = 10 %}
-{% set pageCountFilter = '&page[limit]=' ~ pageCount %}
-
-{# sorting filter #}
-{% set sortFilter = '&sort[sort-created][path]=created&sort[sort-created][direction]=DESC' %}
+{% set endpointConfig['filters'] = endpointFilters %}
 
 
 {# Check for Exclude Categories and setup the filter to exclude anything that matches "NOT IN SET" #}
@@ -277,10 +194,10 @@
       {# <h3> Full URL : {{ articlesJSON}}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}</h3>  #}
     </div>
     {# <div id="ucb-article-listing" class="ucb-article-list-container" data-jsonapi="{{ articlesJSON }}{{ IncludeFilter }}"> #}
-    <div id="ucb-article-listing"
+    <article-list id="ucb-article-listing"
       class="ucb-article-list-container"
-	  data-sites="{{ includeURLs|json_encode }}"
-      data-jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}"
+	  providers="{{ contentProviders|json_encode }}"
+      config="{{ endpointconfig }}"
       data-excats="{{ excludeCategories }}"
       data-extags="{{ excludeTags }}">
       {# No Data message #}
@@ -306,5 +223,5 @@
         Error retrieving article list from the API endpoint.  Please try again later.  
       </div>
     </div>
-  </div>
+  </article-list>
 </article>
