@@ -72,14 +72,14 @@ class ArticleProvider {
 			filters = config['filters'], categories = filters['categories'], tags = filters['tags'],
 			resultsPerPage = config['count'], sort = config['sort'];
 		let params = '', catFilter = '', tagFilter = '';
-		if (categories) { // Setup Include Category Filter using a logical OR between included category IDs
+		if (categories && categories.length) { // Setup Include Category Filter using a logical OR between included category IDs
 			catFilter += '&filter[cat-include][group][conjunction]=OR';
 			categories.forEach(category =>
 				catFilter += '&filter[filter-cat-' + category + '][condition][path]=field_ucb_article_categories.meta.drupal_internal__target_id'
 					+ '&filter[filter-cat-' + category + '][condition][value]=' + category
 					+ '&filter[filter-cat-' + category + '][condition][memberOf]=cat-include');
 		}
-		if (tags) { // Setup Include Tags Filter using a logical OR between included tag IDs
+		if (tags && tags.length) { // Setup Include Tags Filter using a logical OR between included tag IDs
 			tagFilter += '&filter[tag-include][group][conjunction]=OR';
 			tags.forEach(tag =>
 				tagFilter += '&filter[filter-tag-' + tag + '][condition][path]=field_ucb_article_tags.meta.drupal_internal__target_id'
@@ -121,20 +121,37 @@ class ArticleProvider {
 class ArticleListElement extends HTMLElement {
 	constructor() {
 		super();
+
 		this.providers = new Set();
 		this.providersWithArticlesRemaining = new Set();
 		this.nextPageReady = true; // If this is true then at lease one site is ready to reqeust the next page
 		this.done = false; // If this is true then there are no more articles left to fetch
 		this.defaultConfig = JSON.parse(this.getAttribute('config'));
 
-		let CategoryExclude = this.dataset['excats']; // categories to exclude
-		let TagsExclude = this.dataset['extags']; // tags to exclude 
+		const
+			CategoryExclude = this.dataset['excats'], // categories to exclude
+			TagsExclude = this.dataset['extags']; // tags to exclude 
+		
 		let lastKnownScrollPosition = 0; // scroll position to determine if we need to load more articles
 		/* Note that event tracking on scroll is expensive and noisy -- these two flag will help to make sure
 			that we're not overwhelming the system by tracking scroll events when we don't need to */
 		let ticking = false; // flag to know if we're currently scrolling 
 
-		// check to see if we have the data we need to work with.  
+		this.innerHTML = `
+			<div class="ucb-al-no-results ucb-list-msg ucb-no-data">
+				No articles were returned, please check your filters and try again.
+			</div>
+			<div class="ucb-al-data"></div>
+			<div class="ucb-al-loading ucb-list-msg ucb-loading-data">
+				<i class="fas fa-spinner fa-3x fa-pulse"></i>
+			</div>
+			<div class="ucb-al-end-of-data ucb-list-msg ucb-end-of-results">
+				No more results matching your filters.
+			</div>
+			<div class="ucb-al-error ucb-list-msg ucb-error">
+				Error retrieving article list from the API endpoint.  Please try again later.  
+			</div>`;
+
 		JSON.parse(this.getAttribute('providers')).forEach((providerData) => {
 			const provider = new ArticleProvider(providerData['title'], providerData['url'], providerData['config'] || this.defaultConfig);
 			this.providers.add(provider);
@@ -194,8 +211,8 @@ class ArticleListElement extends HTMLElement {
 
 		// if no articles of returned, stop the loading spinner and let the user know we received no data that matches their query
 		if (!data['data'].length) {
-			toggleMessage("ucb-al-loading", "none");
-			// toggleMessage("ucb-al-no-results", "block");
+			this.toggleMessage("ucb-al-loading", "none");
+			// this.toggleMessage("ucb-al-no-results", "block");
 			return;
 		}
 
@@ -284,7 +301,7 @@ class ArticleListElement extends HTMLElement {
 
 				// if no article summary, use a simplified article body
 				if (!body.length) {
-					getArticleParagraph(provider, bodyAndImageId)
+					this.getArticleParagraph(provider, bodyAndImageId)
 						.then((response) => response.json())
 						.then((data) => {
 							// Remove any html tags within the article
@@ -308,7 +325,7 @@ class ArticleListElement extends HTMLElement {
 							}
 							// set the contentBody of Article Summary card to the minified body instead
 							body = `${trimmedString}...`;
-							document.getElementById(`body-${bodyAndImageId}`).innerText = body;
+							this.querySelector('.ucb-article-content-id-' + bodyAndImageId + ' .ucb-article-card-body').innerText = body;
 						})
 				}
 
@@ -331,26 +348,24 @@ class ArticleListElement extends HTMLElement {
 				let link = provider.url + item['attributes']['path']['alias'];
 				let image = "";
 				if (link) {
-					image = `<a href="${link}">` + (imageSrc ? `<img src="${imageSrc}">` : defaultArticleImage()) + '</a>';
+					image = `<a href="${link}">` + (imageSrc ? `<img src="${imageSrc}">` : this.defaultArticleImage()) + '</a>';
 				}
 
-				let outputHTML = `
-			<div class='ucb-article-card row'>
-				<div id='img-${bodyAndImageId}' class='col-sm-12 col-md-2 ucb-article-card-img'>${image || defaultArticleImage()}</div>
+				const outputHTML = `
+			<div class='ucb-article-card row ucb-article-content-id-${bodyAndImageId}'>
+				<div class='col-sm-12 col-md-2 ucb-article-card-img'>${image || this.defaultArticleImage()}</div>
 				<div class='col-sm-12 col-md-10 ucb-article-card-data'>
 					<span class='ucb-article-card-title'><a href="${link}">${title}</a></span>
 					<span class="ucb-article-card-info"><span class='ucb-article-card-date'>${date}</span>` + (provider.title ? ' • <span class="ucb-article-card-site"><a href="' + provider.url + '/">' + provider.title + '</a></span>' : '') + `</span>
-					<span id='body-${bodyAndImageId}' class='ucb-article-card-body'>${body}</span>
+					<span class='ucb-article-card-body'>${body}</span>
 					<span class='ucb-article-card-more'>
 						<a href="${link}">Read more <i class="fal fa-chevron-double-right"></i></a></span>
 				</div>
 			</div>
 		`;
-
-				let dataOutput = document.getElementById("ucb-al-data");
-				let thisArticle = document.createElement("article");
+				const dataOutput = this.querySelector(".ucb-al-data");
+				const thisArticle = document.createElement("article");
 				thisArticle.innerHTML = outputHTML;
-
 				dataOutput.append(thisArticle);
 			}
 		})
@@ -363,47 +378,46 @@ class ArticleListElement extends HTMLElement {
 		// }
 
 		// done loading -- hide the loading spinner graphic
-		toggleMessage("ucb-al-loading", "none");
+		this.toggleMessage("ucb-al-loading", "none");
 	}
-}
 
-/**  
- * Get additional data from the paragraph content attached to the Article node
- * @param {ArticleListSite} provider - The site to which this request is directed
- * @param {string} id - internal id used by Drupal to get the specific paragraph
- */
-async function getArticleParagraph(provider, id) {
-	if (id) {
-		const response = await fetch(
-			`${provider.url}/jsonapi/paragraph/article_content/${id}`
-		);
-		return response;
-	} else {
-		return "";
-	}
-}
-
-/**
- * Helper function to show/hide elements in the DOM
- * @param {string} id - CSS ID of the element to target
- * @param {string} display - display mode for that element (block | none) 
- */
-function toggleMessage(id, display = "none") {
-	if (id) {
-		var toggle = document.getElementById(id);
-
-		if (toggle) {
-			if (display === "block") {
-				toggle.style.display = "block";
-			} else {
-				toggle.style.display = "none";
+	/**
+	 * Helper function to show/hide elements in the DOM
+	 * @param {string} id - CSS ID of the element to target
+	 * @param {string} display - display mode for that element (block | none) 
+	 */
+	toggleMessage(id, display = "none") {
+		if (id) {
+			const toggle = this.querySelector('.' + id);
+			if (toggle) {
+				if (display === "block") {
+					toggle.style.display = "block";
+				} else {
+					toggle.style.display = "none";
+				}
 			}
 		}
 	}
-}
 
-function defaultArticleImage() {
-	return '<div class="ucb-article-card-default-img"><i class="fas fa-solid fa-newspaper"></i></div>'
+	defaultArticleImage() {
+		return '<div class="ucb-article-card-default-img"><i class="fas fa-solid fa-newspaper"></i></div>'
+	}
+
+	/**  
+	 * Get additional data from the paragraph content attached to the Article node
+	 * @param {ArticleListSite} provider - The site to which this request is directed
+	 * @param {string} id - internal id used by Drupal to get the specific paragraph
+	 */
+	async getArticleParagraph(provider, id) {
+		if (id) {
+			const response = await fetch(
+				`${provider.url}/jsonapi/paragraph/article_content/${id}`
+			);
+			return response;
+		} else {
+			return "";
+		}
+	}
 }
 
 customElements.define('article-list', ArticleListElement);

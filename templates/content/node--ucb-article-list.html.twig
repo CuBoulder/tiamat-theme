@@ -92,8 +92,8 @@
 {# include and exclude options set by the user #}
 
 {% set contentProviders = [] %}
-{% set endpointConfig = {'sort': 'DESC', 'count': '10'} %}
-{% set endpointFilters = {'categories': [], 'tags': []} %}
+{% set includeTags = [] %}
+{% set includeCategories = [] %}
 {% set linksField = content.field_article_list_sites %}
 
 {% set includeCategories = [] %}
@@ -120,13 +120,13 @@
 {# two passes to clear out the blank entries that are mysteriously added by default #}
 {% for item in myCategories %}
   {% if item %}
-    {% set endpointFilters['categories'] = endpointFilters['categories']|merge([item]) %}
+    {% set includeCategories = includeCategories|merge([item]) %}
   {% endif %}
 {% endfor %}
 
 {% for item in myTags %}
   {% if item %}
-    {% set endpointFilters['tags'] = endpointFilters['tags']|merge([item]) %}
+    {% set includeTags = includeTags|merge([item]) %}
   {% endif %}
 {% endfor %}
 
@@ -150,7 +150,7 @@
   {% endif %}
 {% endfor %}
 
-{% set endpointConfig['filters'] = endpointFilters %}
+{% set endpointConfig = {'sort': 'DESC', 'count': '10', 'filters': {'categories': includeCategories, 'tags': includeTags}} %}
 
 
 {# Check for Exclude Categories and setup the filter to exclude anything that matches "NOT IN SET" #}
@@ -184,44 +184,18 @@
 
 {# JSON API Filter logic #}
 <article {{ attributes.addClass('container') }}>
-  <h2>
-    {{ label }}
-  </h2>
-
-  <div {{ content_attributes }}>
-    <div class="ucb-article-list-body">
-      {{ content.body }}
-      {# <h3> Full URL : {{ articlesJSON}}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}</h3>  #}
+	<h2>{{ label }}</h2>
+	<div {{ content_attributes }}>
+	<div class="ucb-article-list-body">
+		{{ content.body }}
+		{# <h3> Full URL : {{ articlesJSON}}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}</h3>  #}
     </div>
     {# <div id="ucb-article-listing" class="ucb-article-list-container" data-jsonapi="{{ articlesJSON }}{{ IncludeFilter }}"> #}
-    <article-list id="ucb-article-listing"
-      class="ucb-article-list-container"
-	  providers="{{ contentProviders|json_encode }}"
-      config="{{ endpointconfig }}"
-      data-excats="{{ excludeCategories }}"
-      data-extags="{{ excludeTags }}">
-      {# No Data message #}
-      <div id="ucb-al-no-results" class="ucb-list-msg ucb-no-data">
-        No articles were returned, please check your filters and try again.
-      </div>
-
-      {# dynamically loaded data goes here... #}
-      <div id="ucb-al-data"></div>
-
-      {# Loading message #}
-      <div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
-        <i class="fas fa-spinner fa-3x fa-pulse"></i>
-      </div>
-
-      {# No more Data #}
-      <div id="ucb-al-end-of-data" class="ucb-list-msg ucb-end-of-results">
-        No more results matching your filters.
-      </div>
-
-      {# Error in the response from the API endpoint, display an error #}
-      <div id="ucb-al-error" class="ucb-list-msg ucb-error">
-        Error retrieving article list from the API endpoint.  Please try again later.  
-      </div>
-    </div>
-  </article-list>
+	<article-list
+		class="ucb-article-list-container"
+		providers="{{ contentProviders|json_encode }}"
+		config="{{ endpointConfig|json_encode }}"
+		data-excats="{{ excludeCategories }}"
+		data-extags="{{ excludeTags }}">
+	</article-list>
 </article>
