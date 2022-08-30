@@ -1,0 +1,16 @@
+{% set excludeTags = '' %}
+{% set myExTags =
+  items|render|striptags|trim|split('')
+%}
+
+{% for item in myExTags %}
+  {% if item %}
+    {% if loop.last %}
+      {% set excludeTags = excludeTags ~ (item|trim) %}
+    {% else %}
+      {% set excludeTags = excludeTags ~ (item|trim) ~ ',' %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+   <div id="ucb-related-articles-exclude-tags" data-excludeTags="{{excludeTags}}"></div>
