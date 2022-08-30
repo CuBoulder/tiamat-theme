@@ -325,8 +325,10 @@ class ArticleListElement extends HTMLElement {
 							}
 							// set the contentBody of Article Summary card to the minified body instead
 							body = `${trimmedString}...`;
-							this.querySelector('.ucb-article-content-id-' + bodyAndImageId + ' .ucb-article-card-body').innerText = body;
-						})
+							const articleElements = this.getElementsByClassName('ucb-article-content-id-' + bodyAndImageId);
+							for(let articleElementIndex = 0; articleElementIndex < articleElements.length; articleElementIndex++)
+								articleElements[articleElementIndex].querySelector('.ucb-article-card-body').innerText = body;
+						});
 				}
 
 				// if no thumbnail, show no image

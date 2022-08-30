@@ -94,7 +94,7 @@
 {% set contentProviders = [] %}
 {% set includeTags = [] %}
 {% set includeCategories = [] %}
-{% set linksField = content.field_article_list_sites %}
+{% set externalLinksField = content.field_article_list_sites %}
 
 {% set includeCategories = [] %}
 {% set myCategories =
@@ -113,9 +113,17 @@
   content.field_ucb_exclude_tag|render|striptags|trim|split(' ')
 %}
 
-{% for contentProvider in linksField if contentProvider['#url'] %}
-	{% set contentProviders = contentProviders|merge([{'title' : contentProvider['#title']|render|striptags|trim, 'url': contentProvider['#url']|render|striptags|trim|trim('/')}]) %}
+{% for externalContentProvider in externalLinksField if externalContentProvider['#url'] %}
+	{% set contentProviders = contentProviders|merge([{
+		'title' : externalContentProvider['#title']|render|striptags|trim,
+		'url': externalContentProvider['#url']|render|striptags|trim|trim('/'),
+		'config': {'sort': 'DESC', 'count': '10', 'filters': {}}}]) %}
 {% endfor %}
+
+
+{% if 'Off' not in content.field_article_list_include_self.0 %}
+	{% set contentProviders = contentProviders|merge([{'url': url('<front>')|render|trim('/')}]) %}
+{% endif %}
 
 {# two passes to clear out the blank entries that are mysteriously added by default #}
 {% for item in myCategories %}
