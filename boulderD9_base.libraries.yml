@@ -137,6 +137,14 @@ ucb-text-block:
     theme:
       css/block/text-block.css: {}
 
+ucb-form-page:
+  version: 1.x
+  js:
+    js/ucb-form-page.js: {}
+  css:
+    theme:
+      css/ucb-form-page.css: {}
+
 ucb-related-articles:
   version: 1.x
   js:
