@@ -6,6 +6,7 @@
  *
  * Background settings are set inline CSS
  * All other styling done through classes
+ * Break out of Bootstrap container css -> margin: 0 calc(50% - 50vw)
 #}
 {%
   set classes = [
@@ -50,9 +51,8 @@
 
 
 {% block paragraph %}
-  <div{{ attributes.addClass(classes).setAttribute("style","#{bgValue}").addClass("size-large", overlayClass) }}>
+  <div{{ attributes.addClass(classes).setAttribute("style","#{bgValue} margin: 0 calc(50% - 50vw)").addClass("size-large", overlayClass) }}>
     {% block content %}
-      {% set linkColor = paragraph.field_link_color.value %}
       {# Dont let twig render the links #}
       <div class="container ucb-hero-unit-content">
         <div class="row">
