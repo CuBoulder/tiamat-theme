@@ -1,0 +1,12 @@
+{#
+/**
+ * @file
+ * Theme override for Hero Unit Paragraph Field
+ *
+ */
+#}
+<div{{attributes}}>
+	{% for item in items %}
+		<h2{{item.attributes}}>{{ item.content }}</h2>
+	{% endfor %}
+</div>

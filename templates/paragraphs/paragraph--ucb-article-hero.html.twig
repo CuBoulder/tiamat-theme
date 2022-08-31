@@ -1,0 +1,76 @@
+{#
+/**
+ * @file
+ * Theme to implement a Article Hero Paragraph
+ * Much like the Hero Unit, this removes features not needed on an Article (links, video)
+ *
+ * Background settings are set inline CSS
+ * All other styling done through classes
+#}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+    paragraph.field_text_align.value,
+    paragraph.field_text_color.value
+  ]
+%}
+{% set paragraphId = paragraph.id() %}
+
+{# set style for backgroung settings #}
+{% if paragraph.field_solid_colors.value is defined %}
+  {% set bgValue = "background: var(#{paragraph.field_solid_colors.value});" %}
+{% else %}
+  {% set bgValue = "background-color: inherit;" %}
+{% endif %}
+
+{# A background image will be used over a solid color #}
+{% if paragraph.field_background_image.entity.field_media_image.entity is defined %}
+  {% set bgValue = "background-image:url(#{ file_url(paragraph.field_background_image.entity.field_media_image.entity.fileuri) });background-repeat:no-repeat;background-position:center;background-size:cover;" %}
+{% endif %}
+
+{# URL if a video is used instead of an image #}
+{% if paragraph.field_background_video.entity.field_media_oembed_video is defined %}
+  {% set videoURL = paragraph.field_background_video.entity.field_media_oembed_video.value %}
+{% endif %}
+
+{# get the state of the overlay toggle and the color of the text #}
+{% set overlayClass = "" %} 
+{% if paragraph.field_ucb_article_hero_overlay.value %}
+  {# overlay requested set to dark #}
+  {% set overlayClass = "ucb-overlay-dark" %}
+
+  {# dark text, so switch to the light overlay instead #}
+  {% if paragraph.field_text_color.value == "text-body" %}
+    {% set overlayClass = "ucb-overlay-light" %}
+  {% endif %}
+{% endif %} 
+
+
+{% block paragraph %}
+  <div{{ attributes.addClass(classes).setAttribute("style","#{bgValue}").addClass("size-large", overlayClass) }}>
+    {% block content %}
+      {% set linkColor = paragraph.field_link_color.value %}
+      {# Dont let twig render the links #}
+      <div class="container ucb-hero-unit-content">
+        <div class="row">
+          {% if paragraph.field_text_align.value == "text-righthalf" %}
+              <div class="col-12 col-md-6"></div>
+          {% endif %}
+          <div class="col">
+            {{ content|without('field_links') }}
+            {# <p> {{ dump(paragraph.field_links.value) }} </p> #}
+            {% for item in paragraph.field_links.value %}
+              <a href="{{ item.uri }}" class="button {{ linkColor }}" > {{ item.title }} </a>
+            {% endfor %}
+          </div>
+          {% if paragraph.field_text_align.value == "text-lefthalf" %}
+              <div class="col-12 col-md-6"></div>
+          {% endif %}
+        </div>
+      </div>
+    {% endblock %}
+  </div>
+{% endblock paragraph %}
