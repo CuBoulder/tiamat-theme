@@ -1,7 +1,12 @@
 /*
- * Styles for hero unit paragraph
+ * Styles for hero unit paragraph & Article Hero variant
  *
  */
+
+
+ main{
+  overflow-x: hidden;
+ }
 
 .paragraph.paragraph--type--hero-unit, .paragraph.paragraph--type--ucb-article-hero{
   font-size: 120%;
