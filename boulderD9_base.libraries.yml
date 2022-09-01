@@ -33,6 +33,7 @@ ucb-article:
   css:
     theme:
       css/ucb-article.css: {}
+      css/hero-unit.css: {}
 
 ucb-article-list:
   version: 1.x
