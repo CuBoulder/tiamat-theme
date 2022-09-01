@@ -8,6 +8,10 @@
   margin-bottom: 1em;
 }
 
+.paragraph.paragraph--type--ucb-article-hero p {
+  font-size: 125%;
+}
+
 .paragraph.paragraph--type--hero-unit.size-large, .paragraph.paragraph--type--ucb-article-hero {
   padding: 100px 2rem;
 }

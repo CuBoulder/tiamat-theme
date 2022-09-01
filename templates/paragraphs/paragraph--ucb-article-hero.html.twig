@@ -51,7 +51,7 @@
 
 
 {% block paragraph %}
-  <div{{ attributes.addClass(classes).setAttribute("style","#{bgValue} margin: 0 calc(50% - 50vw)").addClass("size-large", overlayClass) }}>
+  <div{{ attributes.addClass(classes).setAttribute("style","#{bgValue} margin: 0 calc(50% - 50vw - 8px)").addClass("size-large", overlayClass) }}>
     {% block content %}
       {# Dont let twig render the links #}
       <div class="container ucb-hero-unit-content">
