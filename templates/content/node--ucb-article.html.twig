@@ -70,7 +70,7 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
                 <i class="far fa-calendar"></i>
                 <span class="sr-only">Published:</span>
                 <span itemprop="datePublished">
-                 {{ node.published_at.value|date('F d, Y') }}
+                 {{ node.created.value|date('F d, Y') }}
                 </span> 
             </div>
         {% if content.field_ucb_article_byline|render %}
