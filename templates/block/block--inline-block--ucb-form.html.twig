@@ -1,0 +1,31 @@
+{{ attach_library('boulderD9_base/ucb-form-page') }}
+
+{%
+  set classes = [
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class
+]
+%}
+
+<article{{attributes.addClass(classes)}}>
+
+	<div class="container">
+		<h1{{title_attributes}}>
+			{{ label }}
+		</h1>
+	</div>
+
+	<div class="container mb-4">
+		<div class="row">
+			<div class="col-sm-8">
+				{{ content.body }}
+				<div class="form-page-webform">
+					{{ content.field_ucb_form_block }}
+				</div>
+			</div>
+		</div>
+	</div>
+</article>

@@ -33,6 +33,7 @@ ucb-article:
   css:
     theme:
       css/ucb-article.css: {}
+      css/hero-unit.css: {}
 
 ucb-article-list:
   version: 1.x
@@ -136,6 +137,14 @@ ucb-text-block:
   css:
     theme:
       css/block/text-block.css: {}
+
+ucb-form-page:
+  version: 1.x
+  js:
+    js/ucb-form-page.js: {}
+  css:
+    theme:
+      css/ucb-form-page.css: {}
 
 ucb-related-articles:
   version: 1.x
