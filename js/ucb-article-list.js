@@ -333,10 +333,10 @@ class ArticleListElement extends HTMLElement {
 										trimmedString.length,
 										trimmedString.lastIndexOf(" ")
 									)
-								)
-							}
-							// set the contentBody of Article Summary card to the minified body instead
-							body = `${trimmedString}...`;
+								);
+								// set the contentBody of Article Summary card to the minified body instead
+								body = `${trimmedString}...`;
+							} else body = trimmedString;
 							const articleElements = this.getElementsByClassName('ucb-article-content-id-' + bodyAndImageId);
 							for(let articleElementIndex = 0; articleElementIndex < articleElements.length; articleElementIndex++)
 								articleElements[articleElementIndex].querySelector('.ucb-article-card-body').innerText = body;
