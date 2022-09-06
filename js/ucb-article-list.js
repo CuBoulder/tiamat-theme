@@ -51,7 +51,7 @@ class ArticleProvider {
 						});
 			}
 			return await this.fetchRequest;
-		} else throw new Error('Attempted to request an invalid page of articles for site `' + this.title + '`, please make sure requests are sequential and aren\'t attempted multiple times before results are returned!');
+		} else throw new Error('Attempted to request an invalid page of articles for provider `' + this.url + '`, please make sure requests are sequential and aren\'t attempted multiple times before results are returned!');
 	}
 	/**
 	 * @param {object} config
@@ -180,22 +180,43 @@ class ArticleListElement extends HTMLElement {
 		if(!this.nextPageReady)
 			return;
 		this.nextPageReady = false;
-		for (let iterator = new Set(this.providersWithArticlesRemaining).values(), provider; provider = iterator.next().value;) {
+		this.toggleMessage('ucb-al-loading', 'block'); // Show loading spinner
+		const providerCount = this.providersWithArticlesRemaining.size;
+		for (let iterator = new Set(this.providersWithArticlesRemaining).values(), provider, loadedCount = 0, erroredCount = 0; provider = iterator.next().value;) {
 			if(!provider.loadingData && !provider.errorOccurred) {
 				const nextPage = provider.nextPage;
-				provider.getArticleListData(nextPage).then((data) => {
+				provider.getArticleListData(nextPage).then(data => {
+					loadedCount++;
+					if(loadedCount + erroredCount == providerCount)
+						this.toggleMessage('ucb-al-loading', 'none'); // Hide loading spinner
 					this.renderArticleList(provider, data, CategoryExclude, TagsExclude);
 					if (provider.nextPage > nextPage) // The site is ready to load a next page
 						this.providersWithArticlesRemaining.add(provider);
 					else this.providersWithArticlesRemaining.delete(provider);
-					if(this.providersWithArticlesRemaining.size == 0) { // All sites have reached the max page, no more articles left to load
-						this.nextPageReady = false;
-						this.done = true;
-						document.removeEventListener('scroll', this.infiniteScrollFunction);
-					} else this.nextPageReady = true; // If at least one of the sites comes back with results, mark as next page ready
+					if(!this.checkDone()) this.nextPageReady = true; // If at least one of the sites comes back with results and isn't done, mark as next page ready
+				}).catch(error => {
+					erroredCount++;
+					if(loadedCount + erroredCount == providerCount)
+						this.toggleMessage('ucb-al-loading', 'none'); // Hide loading spinner
+					if(erroredCount == providerCount)
+						this.toggleMessage('ucb-al-error', 'block');
+					console.error('Failed to load articles for provider `' + site.url + '`');
+					this.providersWithArticlesRemaining.remove(site);
+					this.checkDone();
 				});
 			}
-		}		
+		}	
+	}
+		
+	checkDone() {
+		if(this.providersWithArticlesRemaining.size == 0) {
+			this.nextPageReady = false;
+			this.done = true;
+			document.removeEventListener('scroll', this.infiniteScrollFunction);
+			this.toggleMessage('ucb-al-end-of-data', 'block'); // Show "no more results" message
+			return true;
+		}
+		return false;
 	}
 
 	/**
@@ -209,18 +230,10 @@ class ArticleListElement extends HTMLElement {
 	renderArticleList(provider, data, ExcludeCategories = "", ExcludeTags = "") {
 		//console.log("data obj", data);
 
-		// if no articles of returned, stop the loading spinner and let the user know we received no data that matches their query
-		if (!data['data'].length) {
-			this.toggleMessage("ucb-al-loading", "none");
-			// this.toggleMessage("ucb-al-no-results", "block");
-			return;
-		}
-
 		let excludeCatArray = ExcludeCategories.split(",").map(Number);
 		let excludeTagArray = ExcludeTags.split(",").map(Number);
 
 		// Below objects are needed to match images with their corresponding articles. There are two endpoints => data.data (article) and data.included (incl. media), both needed to associate a media library image with its respective article
-		let urlObj = {};
 		let idObj = {};
 		let altObj = {};
 		// Remove any blanks from our articles before map
@@ -249,7 +262,6 @@ class ArticleListElement extends HTMLElement {
 			});
 		}
 		// console.log("idObj", idObj);
-		// console.log("urlObj", urlObj);
 		// console.log('altObj', altObj)
 		//iterate over each item in the array
 		data['data'].map((item) => {
