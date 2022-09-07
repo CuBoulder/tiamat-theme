@@ -1,0 +1,20 @@
+.ucb-newsletter-promo-one,
+.ucb-newsletter-promo-two {
+  margin-bottom: 20px;
+}
+
+.article-teaser-meta {
+  background-color: #e7e7e7;
+  padding: 3px;
+  line-height: 100%;
+  margin: 0 5px 5px 0;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 75%;
+  text-transform: uppercase;
+}
+
+.article-teaser-meta a {
+  color: #666;
+}

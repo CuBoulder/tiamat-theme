@@ -153,3 +153,9 @@ ucb-related-articles:
   css:
     theme:
       css/ucb-related-articles.css: {}
+      
+ucb-newsletter:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-newsletter.css: {}

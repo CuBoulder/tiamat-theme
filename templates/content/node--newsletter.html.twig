@@ -1,0 +1,95 @@
+{#
+/**
+* Theme layout to display a UCB Newsletter Page.
+*
+* Created by jnichol on 5/05/22
+*/
+#}
+
+{{ attach_library('boulderD9_base/ucb-page') }}
+{{ attach_library('boulderD9_base/ucb-newsletter') }}
+
+{%
+set classes = [
+'node',
+'node--type-' ~ node.bundle|clean_class,
+not node.isPublished() ? 'node--unpublished',
+view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+]
+%}
+
+{#Dummy variable to ensure that all content tags are set for caching purposes#}
+{% set content_render = content|render %}
+
+<article{{attributes.addClass(classes)}}>
+	<div
+		class="container ucb-newsletter">
+		{# Newsletter Title #}
+		<h1 class="ucb-newsletter-title" itemprop="name">{{ content.field_newsletter_type }}</h1>
+
+		{# Newsletter Intro #}
+		{% if content.field_newsletter_intro_image|render %}
+			{{ content.field_newsletter_intro_image }}
+		{% endif %}
+		{% if content.field_newsletter_intro_body|render %}
+			{{ content.field_newsletter_intro_body }}
+		{% endif %}
+
+		{# Newsletter Sections Content #}
+		<div class="ucb-newsletter-section-content">
+			{% if content.field_newsletter_section_block|render %}
+				<div class="ucb-article-body">
+					{{ content.field_newsletter_section_block }}
+				</div>
+			{% endif %}
+		</div>
+
+		{# Newsletter Promo/Ad One #}
+		<div class="row row-content ucb-newsletter-promo-one">
+			{% if content.field_newsletter_promo_image_one|render %}
+				{% if content.field_newsletter_promo_link_one|render %}
+					<a href="{{ content.field_newsletter_promo_link_one|render|striptags|trim }}">
+					{{ content.field_newsletter_promo_image_one|render	}}
+				</a>
+				{% else %}	
+					{{ content.field_newsletter_promo_image_one|render	}}
+				{% endif %}
+			{% endif %}
+		</div>
+
+		{# Newsletter Blocks #}
+		<div class="row row-content ucb-newsletter-blocks">
+			<div class="col-lg-6 col-12">
+				{% if content.field_newsletter_block_title_one|render %}
+					<h3>{{ content.field_newsletter_block_title_one|render }}</h3>
+				{% endif %}
+
+				{% if content.field_newsletter_block_text_one|render %}
+					{{ content.field_newsletter_block_text_one|render }}
+				{% endif %}
+			</div>
+			<div class="col-lg-6 col-12">
+				{% if content.field_newsletter_block_title_two|render %}
+					<h3>{{ content.field_newsletter_block_title_two|render }}</h3>
+				{% endif %}
+
+				{% if content.field_newsletter_block_text_two|render %}
+					{{ content.field_newsletter_block_text_two|render }}
+				{% endif %}
+			</div>
+		</div>
+
+		{# Newsletter Promo/Ad Two #}
+		<div class="row row-content ucb-newsletter-promo-one">
+			{% if content.field_newsletter_promo_image_two|render %}
+				{% if content.field_newsletter_promo_link_two|render %}
+					<a href="{{ content.field_newsletter_promo_link_two|render|striptags|trim }}">
+					{{ content.field_newsletter_promo_image_two|render	}}
+				</a>
+				{% else %}	
+					{{ content.field_newsletter_promo_image_two|render	}}
+				{% endif %}
+			{% endif %}
+		</div>
+	</div>
+</article>
