@@ -21,9 +21,16 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 {#Dummy variable to ensure that all content tags are set for caching purposes#}
 {% set content_render = content|render %}
 
+{% set isLoggedIn = "false" %}
+{% if logged_in %}
+    {% set isLoggedIn = "true" %}
+{% endif %}
+
 <article{{attributes.addClass(classes)}}>
 	<div
-		class="container ucb-newsletter">
+		class="container ucb-newsletter"
+		data-loggedin="{{isLoggedIn}}"
+		>
 		{# Newsletter Title #}
 		<h1 class="ucb-newsletter-title" itemprop="name">{{ content.field_newsletter_type }}</h1>
 
