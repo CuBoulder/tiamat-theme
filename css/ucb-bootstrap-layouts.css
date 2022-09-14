@@ -1,0 +1,7 @@
+/*
+  Styles for the layout builder bootstrap layouts
+*/
+
+.ucb-bootstrap-layout__background-color--gold {
+    background-color: var(--ucb-gold);
+}
