@@ -2,6 +2,19 @@
   Styles for the layout builder bootstrap layouts
 */
 
+.js-form-item-layout-settings-background-background-color .form-radio:checked,
+.js-form-item-layout-settings-layout-column-width .form-radio:checked,
+.js-form-item-layout-settings-layout-container-width .form-radio:checked,
+.js-form-item-layout-settings-background-background-color .form-radio:hover,
+.js-form-item-layout-settings-layout-column-width .form-radio:hover,
+.js-form-item-layout-settings-layout-container-width .form-radio:hover,
+.js-form-item-layout-settings-background-background-color .form-radio:hover:focus,
+.js-form-item-layout-settings-layout-column-width .form-radio:hover:focus,
+.js-form-item-layout-settings-layout-container-width .form-radio:hover:focus {
+    box-shadow: none!important;
+    -webkit-box-shadow: none!important;
+}
+
 .ucb-bootstrap-layout__background-color--gold {
     background-color: var(--ucb-gold);
     color: var(--ucb-black);
