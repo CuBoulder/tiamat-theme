@@ -5,3 +5,15 @@
 .ucb-bootstrap-layout__background-color--gold {
     background-color: var(--ucb-gold);
 }
+
+.ucb-bootstrap-layout__background-color--light-gray {
+  background-color: var(--ucb-light-gray);
+}
+
+.ucb-bootstrap-layout__background-color--dark-gray {
+  background-color: var(--ucb-dark-gray);
+}
+
+.ucb-bootstrap-layout__background-color--black {
+  background-color: var(--ucb-black);
+}

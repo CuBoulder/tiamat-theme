@@ -77,22 +77,23 @@
     set classes = [
         'node',
         'ucb-basic-page',
-        'container'
+        'container-fluid'
     ]
 %}
 
-<article{{ attributes.addClass(classes) }}>
-  {% if label %}
-    <h1{{ title_attributes }}>
-      {{ label }}
-    </h1>
-  {% endif %}
+<article{{attributes.addClass(classes)}}>
+	{% if label %}
+		<div class="container">
+			<h1{{title_attributes}}>
+				{{ label }}
+			</h1>
+		</div>
+	{% endif %}
 
-  {% if content %}
-    <div{{ content_attributes }}>
-      {{ content }}
-    </div>
-  {% endif %}
+	{% if content %}
+		<div{{content_attributes}}>
+			{{ content }}
+		</div>
+	{% endif %}
 
 </article>
-
