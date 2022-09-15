@@ -111,3 +111,6 @@ i.fas.fa-circle {
 .ucb-article-blockquote-text {
 	font-weight: bold;
 }
+.zebraPageStyle:nth-child(odd) {
+  background-color:#EEEEEE;
+}

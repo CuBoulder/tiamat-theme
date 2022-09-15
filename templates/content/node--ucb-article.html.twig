@@ -67,7 +67,7 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 
 {% if not content.field_ucb_article_external_url|render %}
 	<article{{attributes.addClass(classes)}}>
-		<div class="container ucb-article" itemscope itemtype="https://schema.org/Article">
+		<div class="container ucb-article {{pageStyleCSS}}" itemscope itemtype="https://schema.org/Article">
 			<header role="banner" class="ucb-article-banner">
 				<h1 class="ucb-article-heading">{{ label }}</h1>
 			</header>
