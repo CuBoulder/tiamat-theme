@@ -182,6 +182,27 @@ async function getArticlesWithTags(url, array, articleTags ,numLeft){
         articleCard.innerHTML = outputHTML
         relatedArticlesDiv.appendChild(articleCard)
             })
+
+        // Check to see what was rendered
+        // sets global counter of children
+        childCount = relatedArticlesDiv.childElementCount
+        // If no matches and logged in, render error message for admin
+    if(childCount == 0 && loggedIn == true){
+        let message = document.createElement('h3')
+        message.innerText = 'There are no returned article matches - check exclusion filters and try again'
+        relatedArticlesDiv.appendChild(message)
+        // If no matches and not logged in, hide section
+    } else if (relatedArticlesDiv.childElementCount == 0 && loggedIn == false){
+        let header = relatedArticlesBlock.children[0]
+        header.innerText = ''
+        // console.log('am i available', relatedArticlesBlock.children[0])
+        
+    } else if(childCount > 1 && loggedIn==true){
+        var message = document.getElementById('admin-notif-message')
+        message.remove()
+    }else {
+        // last check for error message
+    }
     
     })
 }
@@ -249,7 +270,7 @@ if(relatedShown){
         fetch(URL)
             .then(response=>response.json())
             .then(data=> {
-                console.log(data)
+                // console.log(data)
         // Below objects are needed to match images with their corresponding articles. 
         // There are two endpoints => data.data (article) and data.included (incl. media), both needed to associate a media library image with its respective article
         let urlObj = {};
@@ -417,6 +438,7 @@ if(relatedShown){
             // If no matches and logged in, render error message for admin
         if(childCount == 0 && loggedIn == true){
             let message = document.createElement('h3')
+            message.id = 'admin-notif-message'
             message.innerText = 'There are no returned article matches - check exclusion filters and try again'
             relatedArticlesDiv.appendChild(message)
             // If no matches and not logged in, hide section
