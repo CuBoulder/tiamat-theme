@@ -69,40 +69,42 @@ pageStyleCSS
 
 {% if not content.field_ucb_article_external_url|render %}
 	<article{{attributes.addClass(classes)}}>
-		<div class="container ucb-article" itemscope itemtype="https://schema.org/Article">
-			<header role="banner" class="ucb-article-banner">
-				<h1 class="ucb-article-heading">{{ label }}</h1>
-			</header>
-			{# TO DO - conditional render #}
-			{% if social_share_button_position == "4" or social_share_button_position == "1"%}
-				<div id={{social_share_class}} class="ucb-social-share-container">
-					{{ drupal_block("social_sharing_buttons_block") }}
-				</div>
-			{% endif %}
-			<div role="contentinfo" class="ucb-article-meta">
-				<div class="ucb-article-date">
-					<i class="far fa-calendar"></i>
-					<span class="sr-only">Published:</span>
-					<span itemprop="datePublished">
-						{{ node.created.value|date('F d, Y') }}
-					</span>
-				</div>
-				{% if content.field_ucb_article_byline|render %}
-					<div class="ucb-article-byline">
-						<i class="fas fa-circle"></i>
-						By
-						<span class="ucb-article-author-name" itemprop="author">
-							{{ content.field_ucb_article_byline|render|striptags|trim }}
-						</span>
+		<div class="ucb-article" itemscope itemtype="https://schema.org/Article">
+			<div class="container">
+				<header role="banner" class="ucb-article-banner">
+					<h1 class="ucb-article-heading">{{ label }}</h1>
+				</header>
+				{# TO DO - conditional render #}
+				{% if social_share_button_position == "4" or social_share_button_position == "1"%}
+					<div id={{social_share_class}} class="ucb-social-share-container">
+						{{ drupal_block("social_sharing_buttons_block") }}
 					</div>
 				{% endif %}
+				<div role="contentinfo" class="ucb-article-meta">
+					<div class="ucb-article-date">
+						<i class="far fa-calendar"></i>
+						<span class="sr-only">Published:</span>
+						<span itemprop="datePublished">
+							{{ node.created.value|date('F d, Y') }}
+						</span>
+					</div>
+					{% if content.field_ucb_article_byline|render %}
+						<div class="ucb-article-byline">
+							<i class="fas fa-circle"></i>
+							By
+							<span class="ucb-article-author-name" itemprop="author">
+								{{ content.field_ucb_article_byline|render|striptags|trim }}
+							</span>
+						</div>
+					{% endif %}
 
+				</div>
 			</div>
 			{% if content.field_ucb_article_content|render %}
 				<div role="main" class="ucb-article-body">{{ content.field_ucb_article_content }}</div>
 			{% endif %}
 			{% if content.field_ucb_article_categories|render %}
-				<div role="contentinfo" class="ucb-article-categories" itemprop="about">
+				<div role="contentinfo" class="container ucb-article-categories" itemprop="about">
 					<span class="sr-only">Categories:</span>
 					<div>
 						<i class="fas fa-folder-open"></i>
@@ -111,7 +113,7 @@ pageStyleCSS
 				</div>
 			{% endif %}
 			{% if content.field_ucb_article_tags|render %}
-				<div role="contentinfo" class="ucb-article-tags" itemprop="keywords">
+				<div role="contentinfo" class="container ucb-article-tags" itemprop="keywords">
 					<div>
 						<span class="sr-only">Tags:</span>
 						<i class="fas fa-tags"></i>
@@ -120,7 +122,7 @@ pageStyleCSS
 				</div>
 			{% endif %}
 			{# TO DO -- Related Articles Block #}
-			<div class="ucb-related-articles-block" data-loggedin="{{isLoggedIn}}" data-catsjson="{{content.field_ucb_article_categories| json_encode(constant('JSON_PRETTY_PRINT'))}}" data-tagsjson="{{ content.field_ucb_article_tags| json_encode(constant('JSON_PRETTY_PRINT')) }}" data-relatedshown="{{showRelated|striptags|trim}}" data-tags="{{myTags|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}" data-cats="{{myCats|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}">
+			<div class="container ucb-related-articles-block" data-loggedin="{{isLoggedIn}}" data-catsjson="{{content.field_ucb_article_categories| json_encode(constant('JSON_PRETTY_PRINT'))}}" data-tagsjson="{{ content.field_ucb_article_tags| json_encode(constant('JSON_PRETTY_PRINT')) }}" data-relatedshown="{{showRelated|striptags|trim}}" data-tags="{{myTags|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}" data-cats="{{myCats|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}">
 				{{content.field_ucb_related_articles_parag}}
 			</div>
 		</div>
