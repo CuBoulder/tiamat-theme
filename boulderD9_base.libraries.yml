@@ -5,6 +5,7 @@ ucb-global:
       css/bootstrap/bootstrap.min.css: {}
       css/layout.css: {}
     theme:
+      https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@400;700&display=swap: { type: external }
       css/style.css: {}
       css/style-responsive.css: {}
       css/fontawesome/all.min.css: {}
