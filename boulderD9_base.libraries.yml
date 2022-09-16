@@ -14,6 +14,7 @@ ucb-global:
       css/styleguide/colors.css: {}
       css/styleguide/type.css: {}
       css/styleguide/icons.css: {}
+      css/ucb-bootstrap-layouts.css: {}
   ckeditor5-stylesheets:
     - css/base-ckeditor5.css
   js:
