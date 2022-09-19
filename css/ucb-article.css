@@ -95,7 +95,7 @@ i.fas.fa-circle {
 .ucb-article-content-media {
   align-self: center;
   text-align: center;
-  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .ucb-article-content-media.ucb-article-content-media-above,
@@ -115,4 +115,6 @@ i.fas.fa-circle {
 	background-color:#EEEEEE;
 	padding-top: 20px;
 	margin-bottom: 20px;
+	border-top: 1px solid rgba(187, 187, 187, 0.4);
+	border-bottom: 1px solid rgba(187, 187, 187, 0.4);
 }
