@@ -18,3 +18,15 @@
 .article-teaser-meta a {
   color: #666;
 }
+
+.admin-html-button{
+  display: flex;
+  justify-content: center;
+}
+
+.admin-html-button button{
+  padding: 10px;
+  box-shadow: rgb(0 0 0 / 20%) 0px 1px 2px 0px;
+  border-radius: 3px;
+  background-color: goldenrod;
+}
