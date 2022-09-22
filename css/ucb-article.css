@@ -117,7 +117,7 @@ i.fas.fa-circle {
 	background-color: rgb(32, 32, 32);
 }
 
-.ucb-page-style-dark h1, .ucb-page-style-dark h2, .ucb-page-style-dark h3, .ucb-page-style-dark h4, .ucb-page-style-dark h5, .ucb-page-style-dark h6, .ucb-page-style-dark strong {
+.ucb-page-style-dark h1, .ucb-page-style-dark h2, .ucb-page-style-dark h3, .ucb-page-style-dark h4, .ucb-page-style-dark h5, .ucb-page-style-dark h6, .ucb-page-style-dark strong, .ucb-page-style-dark blockquote {
 	color: rgb(231, 231, 231);
 }
 
