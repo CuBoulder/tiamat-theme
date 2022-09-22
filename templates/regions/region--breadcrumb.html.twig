@@ -21,9 +21,11 @@
 %}
 
 {% if content %}
-  <div{{ attributes.addClass(classes) }}>
-    <div class="ucb-breadcrumb-row row">
-      {{ content }}
-    </div>
-  </div>
+	<div class="ucb-breadcrumb-region">
+		<div{{ attributes.addClass(classes) }}>
+			<div class="ucb-breadcrumb-row row">
+				{{ content }}
+			</div>
+		</div>
+	</div>
 {% endif %}

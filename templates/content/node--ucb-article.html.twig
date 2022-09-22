@@ -14,11 +14,11 @@
 {% set pageStyleInt = content.field_ucb_article_style|render|striptags|trim %}
 {% set pageStyleCSS = "" %}
 {% if pageStyleInt == "Traditional"%}
-	{% set pageStyleCSS = "tradPageStyle" %}
+	{% set pageStyleCSS = "ucb-page-style-traditional" %}
 {% elseif pageStyleInt =="Dark Mode"%}
-	{% set pageStyleCSS = "darkPageStyle" %}
+	{% set pageStyleCSS = "ucb-page-style-dark" %}
 {% elseif pageStyleInt =="Zebra Striped"%}
-	{% set pageStyleCSS = "zebraPageStyle" %}
+	{% set pageStyleCSS = "ucb-page-style-striped" %}
 {% endif %}
 
 {%

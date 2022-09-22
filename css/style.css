@@ -23,9 +23,12 @@
     text-rendering: optimizelegibility;
   }
   
-  main {
+  .ucb-page-content {
     flex: 1;
-	padding: 20px 0;
+  }
+
+  main {
+    padding: 20px 0;
   }
   
   h1,
