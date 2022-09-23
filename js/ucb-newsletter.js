@@ -18,90 +18,99 @@ if(loggedIn){
     var emailIntroImg = document.getElementById('newsletter-email-intro-img')
     emailIntroImg.src = newsletterIntroImg[0].src
 
-    // For each article section, fill in templates and append
     var newsletterArticleSections = document.getElementsByClassName('paragraph--type--newsletter-section')
+    // If there are article sections
+    if(newsletterArticleSections){
+    // For each article section, fill in templates and append
 
     // Iterate through article sections
-  for (var i = 0; i < newsletterArticleSections.length; i++) {
+    for (var i = 0; i < newsletterArticleSections.length; i++) {
 
-    // Grab titles
-    var articleSection = newsletterArticleSections[i].getElementsByTagName('h2')[0]
-    var articleSectionTitle = articleSection.innerText
-
-    // Grab Button
-    var newsletterSectionButton = newsletterArticleSections[i].getElementsByClassName('button')[0]
-    // Grab Article Sections
-    var articleSectionArticles = newsletterArticleSections[i].getElementsByClassName('col-lg-5')
-
-    // Create Article Section Table for Email
-    var table = document.createElement('table')
-    table.id = `article-table-${i}`
-    table.setAttribute('role','presentation')
-    table.setAttribute('border','0')
-    table.setAttribute('width',"100%")
-
-    // Add the header to the article section
-    var tableHeader = document.createElement('tr')
-    tableHeader.style = "padding: 15px 15px 15px 60px; padding: 15px 15px 15px 60px;"
-    tableHeader.innerHTML = `<td style="padding: 15px 15px 15px 60px";><h2 class="newsletter-email-article-header"style="font-size: 28px; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"> ${articleSectionTitle}</h2></td>`
-    table.appendChild(tableHeader)
-
-    document.getElementById('email-newsletter-article-section').appendChild(table)
-
-    // Grab articles from each section 
-    for(var x=0; x<articleSectionArticles.length; x++){
-
-        var article = articleSectionArticles[x] // each article
-
-        // Get img src and alt from newsletter page articles
-        var articleImg = article.nextElementSibling.children[0]
-        var articleImgSrc = articleImg.src
-        var articleImgAlt = articleImg.alt
-
-        // Create a table cell
-        var emailArticleSection = document.createElement('td')
-        emailArticleSection.style = "vertical-align: top;padding: 15px 15px 30px 60px"
-        // Create an image
-        var emailArticleImg = document.createElement('img')
-        emailArticleImg.style = 'width:200px; align:center'
-        // Set img src and alt tag
-        emailArticleImg.src = articleImgSrc
-        emailArticleImg.alt = articleImg
-
-        // Create Linked Header
-        var emailHeaderLink = document.createElement('a')
-        emailHeaderLink.href = article.children[0].children[0].href // get link from newsletter article
-        emailHeaderLink.innerHTML = `<h3>${article.children[0].children[0].innerText}</h3>`
-
-        // Create summary
-        newsletterArticleSummary = article.getElementsByClassName('article-summary')[0].innerText // from newsletter node
-        var emailArticleSummary = document.createElement('p')
-        emailArticleSummary.style = "margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"
-        emailArticleSummary.innerHTML = newsletterArticleSummary
+        // Grab titles
+        var articleSection = newsletterArticleSections[i].getElementsByTagName('h2')[0]
+        var articleSectionTitle = articleSection.innerText
+    
+        // Grab Button
+        var newsletterSectionButton = newsletterArticleSections[i].getElementsByClassName('button')[0]
+        // Grab Article Sections
+        var articleSectionArticles = newsletterArticleSections[i].getElementsByClassName('col-lg-5')
+    
+        // Create Article Section Table for Email
+        var table = document.createElement('table')
+        table.id = `article-table-${i}`
+        table.setAttribute('role','presentation')
+        table.setAttribute('border','0')
+        table.setAttribute('width',"100%")
+    
+        // Add the header to the article section
+        var tableHeader = document.createElement('tr')
+        tableHeader.style = "padding: 15px 15px 15px 60px; padding: 15px 15px 15px 60px;"
+        tableHeader.innerHTML = `<td style="padding: 15px 15px 15px 60px";><h2 class="newsletter-email-article-header"style="font-size: 28px; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"> ${articleSectionTitle}</h2></td>`
+        table.appendChild(tableHeader)
+    
+        document.getElementById('email-newsletter-article-section').appendChild(table)
+    
+        // Grab articles from each section 
+        for(var x=0; x<articleSectionArticles.length; x++){
+    
+            var article = articleSectionArticles[x] // each article
+    
+            // Get img src and alt from newsletter page articles
+            var articleImg = article.nextElementSibling.children[0]
+            var articleImgSrc = articleImg.src
+            var articleImgAlt = articleImg.alt
+    
+            // Create a table cell
+            var emailArticleSection = document.createElement('td')
+            emailArticleSection.style = "vertical-align: top;padding: 15px 15px 30px 60px"
+            // Create an image
+            var emailArticleImg = document.createElement('img')
+            emailArticleImg.style = 'width:200px; align:center'
+            // Set img src and alt tag
+            emailArticleImg.src = articleImgSrc
+            emailArticleImg.alt = articleImg
+    
+            // Create Linked Header
+            var emailHeaderLink = document.createElement('a')
+            emailHeaderLink.href = article.children[0].children[0].href // get link from newsletter article
+            emailHeaderLink.innerHTML = `<h3>${article.children[0].children[0].innerText}</h3>`
+    
+            // Create summary
+            newsletterArticleSummary = article.getElementsByClassName('article-summary')[0].innerText // from newsletter node
+            var emailArticleSummary = document.createElement('p')
+            emailArticleSummary.style = "margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"
+            emailArticleSummary.innerHTML = newsletterArticleSummary
+            
+    
+    
+            // Append 
+            // Create breaks in the table using blank tr's to force 2 articles per stylistic 'row'
+            if(x%3 && x!=1){
+                var newRow = document.createElement('tr')
+                table.appendChild(newRow)
+            }
+            emailArticleSection.appendChild(emailArticleImg) // image first
+            emailArticleSection.appendChild(emailHeaderLink)
+            emailArticleSection.appendChild(emailArticleSummary) // summary
+            table.appendChild(emailArticleSection) // add table section to email
+        }
+    
         
-
-
-        // Append
-        emailArticleSection.appendChild(emailArticleImg) // image first
-        emailArticleSection.appendChild(emailHeaderLink)
-        emailArticleSection.appendChild(emailArticleSummary) // summary
-        table.appendChild(emailArticleSection) // add table section to email
+        // After articles, create and append newsletter button, button containers
+        var buttonRow = document.createElement('tr')
+        var buttonCell = document.createElement('td')
+        // Style container
+        buttonCell.style = "padding: 15px 15px 15px 60px;"
+    
+        var emailButton = document.createElement('a')
+        emailButton.style = 'display: inline-block;padding: 5px 10px;font-weight: bold;text-decoration: none !important;border-radius: 3px;background-color: #0277BD;color: #fff !important;'
+        emailButton.href = newsletterSectionButton.href
+        emailButton.innerText = newsletterSectionButton.innerText
+        buttonCell.appendChild(emailButton)
+        buttonRow.appendChild(buttonCell)
+        table.appendChild(buttonRow)
     }
-    // After articles, create and append newsletter button, button containers
-    var buttonRow = document.createElement('tr')
-    var buttonCell = document.createElement('td')
-    // Style container
-    buttonCell.style = "padding: 15px 15px 15px 60px;"
-
-    var emailButton = document.createElement('a')
-    emailButton.style = 'display: inline-block;padding: 5px 10px;font-weight: bold;text-decoration: none !important;border-radius: 3px;background-color: #0277BD;color: #fff !important;'
-    emailButton.href = newsletterSectionButton.href
-    emailButton.innerText = newsletterSectionButton.innerText
-    buttonCell.appendChild(emailButton)
-    buttonRow.appendChild(buttonCell)
-    table.appendChild(buttonRow)
-
-}
+    }
 
 // PROMO ONE
     // Conditional render if Promo sections exist
@@ -136,6 +145,7 @@ if(loggedIn){
         promoOneRow.appendChild(promoOneTd)
         promoOneTable.appendChild(promoOneRow)
         document.getElementById('email-newsletter-promo-one-section').appendChild(promoOneTable)
+        
     }
     // Make the Blocks
     var newsletterBlocksSection = document.getElementsByClassName('ucb-newsletter-blocks')
@@ -182,6 +192,7 @@ if(loggedIn){
         emailBlocksTable.appendChild(blockTableBody)
         document.getElementById('email-newsletter-blocks-section').appendChild(emailBlocksTable)
 
+        
     }
 
     // PROMO TWO
@@ -218,11 +229,6 @@ if(loggedIn){
         promoTwoTable.appendChild(promoTwoRow)
         document.getElementById('email-newsletter-promo-two-section').appendChild(promoTwoTable)
     }
-
-
-
-
-
 
     // Create the admin button for copying HTML and the admin messages
     var codeContainer = document.createElement('div')
