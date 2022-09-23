@@ -24,11 +24,9 @@
 	<div{{attributes.addClass(classes)}}>
 		{{ title_prefix }}
 		{% if label %}
-			<h2{{title_attributes}} style="color: black;">{{ label }}</h2>
+			<h2{{title_attributes}}>{{ label }}</h2>
 		{% endif %}
 		{{ title_suffix }}
-	</div>
-	<div{{attributes.addClass(classes)}}>
 		<div class="row row-cols-lg-6 row-cols-md-3 row-cols-2 justify-content-center gallery-div">
 			{% for key, item in content['#block_content'].field_image_gallery_photo if key|first != '#' %}
 				{% if item.entity.field_media_image_caption.value|render|striptags|trim %}
