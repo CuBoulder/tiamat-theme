@@ -1,6 +1,5 @@
     var article = document.querySelector('.ucb-newsletter')
     var loggedIn = article.getAttribute('data-loggedin') == 'true' ? true : false;
-    var email = document.getElementById('email-preview')
     var newsletterPromos = document.getElementsByClassName('ucb-newsletter-promo-one')
 
 // init
@@ -26,7 +25,8 @@ if(loggedIn){
 
     // Iterate through article sections
     for (var i = 0; i < newsletterArticleSections.length; i++) {
-
+        var comment = document.createComment(`Article Section ${i+1}`)
+        document.getElementById('email-newsletter-article-section').appendChild(comment)
         // Grab titles
         var articleSection = newsletterArticleSections[i].getElementsByTagName('h2')[0]
         var articleSectionTitle = articleSection.innerText
@@ -118,21 +118,27 @@ if(loggedIn){
                     //Title
                 var featureTitle = document.createElement('h3')
                 featureTitle.innerHTML = thisArticleHeader.innerHTML
-                featureTitle.style = 'vertical-align: top; padding: 15px 15px 15px 60px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;'
+                var featureLink = featureTitle.getElementsByTagName('a')[0]
+                featureLink.style = 'text-decoration: none;color: #0277BD; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;'
+                featureTitle.style = 'text-decoration:none;padding: 15px 15px 0px 60px; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;'
                     //Summary
                 var featureSummary = document.createElement('p')
                 featureSummary.style = "font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"
                 featureSummary.innerText = thisArticleSummary
-                featureSummary.style = 'vertical-align: top; padding: 0px 15px 15px 60px;'
+                featureSummary.style = 'vertical-align: top; padding: 0px 15px 15px 60px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;'
                     // Table Elements
                 var featureTitleRow = document.createElement('tr')
                 var featureSummaryRow = document.createElement('tr')
+                var featureTitleTd = document.createElement('td')
+                var featureSummaryTd = document.createElement('td')
 
                 // Append Title
-                featureTitleRow.appendChild(featureTitle)
+                featureTitleTd.appendChild(featureTitle)
+                featureTitleRow.appendChild(featureTitleTd)
                 featureTbody.appendChild(featureTitleRow)
                 // Append Summary
-                featureSummaryRow.appendChild(featureSummary)
+                featureSummaryTd.appendChild(featureSummary)
+                featureSummaryRow.appendChild(featureSummaryTd)
                 featureTbody.appendChild(featureSummaryRow)
             }
 
@@ -175,7 +181,7 @@ if(loggedIn){
     
             // Create Linked Header
             var emailHeaderLink = document.createElement('a')
-            emailHeaderLink.style = 'text-decoration: none;    color: #0277BD'
+            emailHeaderLink.style = 'text-decoration: none;color: #0277BD; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;'
             emailHeaderLink.href = article.children[0].children[0].href // get link from newsletter article
             emailHeaderLink.innerHTML = `<h3>${article.children[0].children[0].innerText}</h3>`
     
@@ -185,8 +191,7 @@ if(loggedIn){
             emailArticleSummary.style = "margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"
             emailArticleSummary.innerHTML = newsletterArticleSummary
             
-    
-    
+
             // Append 
             // Create breaks in the table using blank tr's to force 2 articles per stylistic 'row'
             if(x%3 && x!=1){
@@ -200,13 +205,16 @@ if(loggedIn){
         }
     }
         // After articles, create and append newsletter button, button containers
+        var buttonComment = document.createComment(`Button ${i+1}`)
+        document.getElementById('email-newsletter-article-section').appendChild(buttonComment)
+
         var buttonRow = document.createElement('tr')
         var buttonCell = document.createElement('td')
         // Style container
-        buttonCell.style = "padding: 15px 15px 15px 60px;"
+        buttonCell.style = "padding: 15px 15px 15px 0px;"
     
         var emailButton = document.createElement('a')
-        emailButton.style = 'display: inline-block;padding: 5px 10px;font-weight: bold;text-decoration: none !important;border-radius: 3px;background-color: #0277BD;color: #fff !important;'
+        emailButton.style = 'margin-left:60px;margin-top:20px;margin-bottom:20px;display: inline-block;padding: 5px 10px;font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;font-weight: bold;text-decoration: none !important;border-radius: 3px;background-color: #0277BD;color: #fff !important;'
         emailButton.href = newsletterSectionButton.href
         emailButton.innerText = newsletterSectionButton.innerText
         buttonCell.appendChild(emailButton)
@@ -340,6 +348,7 @@ if(loggedIn){
     // Create copy button and functionality
     var button = document.createElement('button')
     button.onclick = function(){
+        var email = document.getElementById('email-preview')
         navigator.clipboard.writeText(email.innerHTML)
         button.innerText = 'Your email-ready HTML has been copied to clipboard!'
         button.style.backgroundColor = 'grey'
