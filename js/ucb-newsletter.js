@@ -19,6 +19,7 @@ if(loggedIn){
     emailIntroImg.src = newsletterIntroImg[0].src
 
     var newsletterArticleSections = document.getElementsByClassName('paragraph--type--newsletter-section')
+
     // If there are article sections
     if(newsletterArticleSections){
     // For each article section, fill in templates and append
@@ -32,9 +33,111 @@ if(loggedIn){
     
         // Grab Button
         var newsletterSectionButton = newsletterArticleSections[i].getElementsByClassName('button')[0]
-        // Grab Article Sections
+        // Grab Article Sections - if Teasers
         var articleSectionArticles = newsletterArticleSections[i].getElementsByClassName('col-lg-5')
-    
+
+        // Render if Feature
+        if(articleSectionArticles.length==0){
+            // Get the Headers
+            var articleHeaders = newsletterArticleSections[i].getElementsByTagName('h3')
+
+            // Count of articles -- headers are used because they are required
+            var articleCount = articleHeaders.length
+            // Create & Append Header
+            var tableHeader = document.createElement('h2')
+            tableHeader.style = "padding: 60px 15px 15px 60px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"
+            tableHeader.innerText = articleSectionTitle
+            document.getElementById('email-newsletter-article-section').appendChild(tableHeader)
+
+            // Iterate through and grab images, headers, summaries
+            for(var a = 0; a<articleCount; a++){
+                // Img
+                var thisArticleImage
+                // If thumbnail is provided, use that. Else use body image
+                if(document.getElementById(`feature-article-thumbnail-${a}`)){
+                    thisArticleImage = document.getElementById(`feature-article-thumbnail-${a}`).getElementsByTagName('img')[0]
+                } else {
+                    thisArticleImage = document.getElementById(`feature-article-content-${a}`).children[0].children[0].children[1].children[0]
+                }
+                // Thumbnail image may not be provided, use article content image instead
+
+                
+                // Link
+                // Init variables, assign values depending on what user has provided
+                var thisArticleHeader
+                var thisArticleLink
+
+                if(document.getElementById(`feature-article-thumbnail-${a}`)){
+                    thisArticleHeader = document.getElementById(`feature-article-thumbnail-${a}`).getElementsByTagName('h3')[0]
+                    thisArticleLink = document.getElementById(`feature-article-thumbnail-${a}`).getElementsByTagName('h3')[0].children[0]
+
+                } else {
+                    thisArticleHeader = document.getElementById(`feature-article-title-${a}`).getElementsByTagName('h3')[0]
+                    thisArticleLink = document.getElementById(`feature-article-title-${a}`).getElementsByTagName('h3')[0].children[0]
+                }
+                // Summary
+                var thisArticleSummary = '';
+
+                // Summary may not be provided, use summary id or summary generated text id
+                if(document.getElementById(`feature-article-summary-${a}`)){
+                    thisArticleSummary = document.getElementById(`feature-article-summary-${a}`).children[0].innerText
+                } else {
+                    thisArticleSummary = document.getElementById(`feature-article-summary-text-${a}`).children[0].innerText
+                }
+
+
+                // Create feature article table
+                var featureTable = document.createElement('table')
+                featureTable.setAttribute('role','presentation')
+                featureTable.setAttribute('border','0')
+                featureTable.setAttribute('width',"100%")
+
+                // Create Parent Table Elements
+                var featureTbody = document.createElement('tbody')
+                var featureTr = document.createElement('tr')
+                var featureTd = document.createElement('td')
+                featureTd.setAttribute('align', 'center')
+                featureTd.style = "color:white;"
+
+                // Create Table Img
+                var featureImg = document.createElement('img')
+                featureImg.src = thisArticleImage.src
+                featureImg.alt = thisArticleImage.alt
+                featureImg.setAttribute('width','100%')
+
+                // Append Img
+                featureTd.appendChild(featureImg)
+                featureTr.appendChild(featureTd)
+                featureTbody.appendChild(featureTr)
+                featureTable.appendChild(featureTbody)
+                
+                // Append the Feature article to email
+                document.getElementById('email-newsletter-article-section').appendChild(featureTable)
+
+                // Create Elements
+                    //Title
+                var featureTitle = document.createElement('h3')
+                featureTitle.innerHTML = thisArticleHeader.innerHTML
+                featureTitle.style = 'vertical-align: top; padding: 15px 15px 15px 60px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;'
+                    //Summary
+                var featureSummary = document.createElement('p')
+                featureSummary.style = "font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"
+                featureSummary.innerText = thisArticleSummary
+                featureSummary.style = 'vertical-align: top; padding: 0px 15px 15px 60px;'
+                    // Table Elements
+                var featureTitleRow = document.createElement('tr')
+                var featureSummaryRow = document.createElement('tr')
+
+                // Append Title
+                featureTitleRow.appendChild(featureTitle)
+                featureTbody.appendChild(featureTitleRow)
+                // Append Summary
+                featureSummaryRow.appendChild(featureSummary)
+                featureTbody.appendChild(featureSummaryRow)
+            }
+
+        } else { // Render if Teasers
+
         // Create Article Section Table for Email
         var table = document.createElement('table')
         table.id = `article-table-${i}`
@@ -49,9 +152,9 @@ if(loggedIn){
         table.appendChild(tableHeader)
     
         document.getElementById('email-newsletter-article-section').appendChild(table)
-    
-        // Grab articles from each section 
-        for(var x=0; x<articleSectionArticles.length; x++){
+
+             // Grab articles from each section 
+            for(var x=0; x<articleSectionArticles.length; x++){
     
             var article = articleSectionArticles[x] // each article
     
@@ -72,6 +175,7 @@ if(loggedIn){
     
             // Create Linked Header
             var emailHeaderLink = document.createElement('a')
+            emailHeaderLink.style = 'text-decoration: none;    color: #0277BD'
             emailHeaderLink.href = article.children[0].children[0].href // get link from newsletter article
             emailHeaderLink.innerHTML = `<h3>${article.children[0].children[0].innerText}</h3>`
     
@@ -94,8 +198,7 @@ if(loggedIn){
             emailArticleSection.appendChild(emailArticleSummary) // summary
             table.appendChild(emailArticleSection) // add table section to email
         }
-    
-        
+    }
         // After articles, create and append newsletter button, button containers
         var buttonRow = document.createElement('tr')
         var buttonCell = document.createElement('td')
@@ -108,9 +211,9 @@ if(loggedIn){
         emailButton.innerText = newsletterSectionButton.innerText
         buttonCell.appendChild(emailButton)
         buttonRow.appendChild(buttonCell)
-        table.appendChild(buttonRow)
+        document.getElementById('email-newsletter-article-section').appendChild(buttonRow)
     }
-    }
+}
 
 // PROMO ONE
     // Conditional render if Promo sections exist
