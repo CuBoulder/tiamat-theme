@@ -146,3 +146,8 @@ i.fas.fa-circle {
 	border-top: 1px solid rgba(187, 187, 187, 0.4);
 	border-bottom: 1px solid rgba(187, 187, 187, 0.4);
 }
+
+article.ucb-page-style-dark {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
