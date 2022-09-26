@@ -112,42 +112,10 @@ i.fas.fa-circle {
 	font-weight: bold;
 }
 
-.ucb-page-style-dark {
-	color: rgb(211, 211, 211);
-	background-color: rgb(32, 32, 32);
-}
-
-.ucb-page-style-dark h1, .ucb-page-style-dark h2, .ucb-page-style-dark h3, .ucb-page-style-dark h4, .ucb-page-style-dark h5, .ucb-page-style-dark h6, .ucb-page-style-dark strong, .ucb-page-style-dark blockquote {
-	color: rgb(231, 231, 231);
-}
-
-.ucb-page-style-dark article p a:link, article.ucb-page-style-dark p a:link, .ucb-page-style-dark .ucb-breadcrumb a:link, .ucb-page-style-dark .ucb-related-articles-block a:link, .ucb-page-style-dark article p a:visited, article.ucb-page-style-dark p a:visited, .ucb-page-style-dark .ucb-breadcrumb a:visited, .ucb-page-style-dark .ucb-related-articles-block a:visited {
-	color: #cfb87c;
-}
-
-.ucb-page-style-dark article p a:hover, article.ucb-page-style-dark p a:hover, .ucb-page-style-dark .ucb-breadcrumb a:hover, .ucb-page-style-dark .ucb-related-articles-block a:hover {
-	color: #FFF;
-}
-
-.ucb-page-style-dark .ucb-article-categories a:link, .ucb-page-style-dark .ucb-article-categories a:visited, .ucb-page-style-dark .ucb-article-tags a:link, .ucb-page-style-dark .ucb-article-tags a:visited {
-	color: rgb(191, 191, 191);
-	background-color: rgb(8, 8, 8);
-}
-
-.ucb-page-style-dark .ucb-article-categories a:hover, .ucb-page-style-dark .ucb-article-tags a:hover {
-	color: #000;
-	background-color: #cfb87c;
+.ucb-striped-content {
+  padding: 0.5em 0;
 }
 
 .ucb-page-style-striped .ucb-striped-content:nth-child(even) {
 	background-color:#EEEEEE;
-	padding-top: 20px;
-	margin-bottom: 20px;
-	border-top: 1px solid rgba(187, 187, 187, 0.4);
-	border-bottom: 1px solid rgba(187, 187, 187, 0.4);
-}
-
-article.ucb-page-style-dark {
-	padding-top: 20px;
-	padding-bottom: 20px;
 }

@@ -17,9 +17,13 @@
 	{% set pageStyleCSS = "ucb-page-style-traditional" %}
 {% elseif pageStyleInt =="Dark Mode"%}
 	{% set pageStyleCSS = "ucb-page-style-dark" %}
+	{{ attach_library('boulderD9_base/ucb-article-dark') }}
 {% elseif pageStyleInt =="Zebra Striped"%}
 	{% set pageStyleCSS = "ucb-page-style-striped" %}
 {% endif %}
+
+
+
 
 {%
 set classes = [
