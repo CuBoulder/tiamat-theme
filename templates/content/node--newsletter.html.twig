@@ -101,7 +101,7 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 	</div>
 </article>
 
-{# TO DO -- MAKE A TABLE #}
+{% if isLoggedIn == 'true' %}
 <div class="container" id="email-preview" style="background-color: grey">
 
 	<div id="email" style="width:600px;margin: auto;background:white;">		
@@ -132,3 +132,4 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 
 	  </div>
 </div>
+{% endif %}
