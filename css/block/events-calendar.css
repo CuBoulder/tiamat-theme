@@ -1,6 +1,8 @@
 .ucb-events-calendar {
   max-height: 600px;
   overflow: auto;
+  background: white;
+  color: black;
 }
 
 .ucb-events-calendar .localist_minicalendar_events {
