@@ -62,7 +62,6 @@
 
 .ucb-accordion-content .accordion-item {
   background-color: initial;
-  color: initial;
 }
 
 .ucb-accordion-content .accordion-button {
@@ -94,14 +93,16 @@
 }
 
 .vertical-tab-link.nav-link {
-  background-color: var(--ucb-white);
-  color: #6a6a6a;
+  background: none;
   border-radius: 0;
+  opacity: .7;
+  color: inherit;
 }
 
 .vertical-tab-link.nav-link.active {
-  background: var(--ucb-white);
-  color: var(--ucb-black);
+  background: none;
+  opacity: 1;
+  color: inherit;
 }
 
 .vertical-tab-content .accordion-item {
@@ -130,6 +131,7 @@
   .vertical-tab-content {
     display: flex;
     max-width: 75%;
+    padding: 0 1em;
   }
 
   .horizontal-accordion-tab,
@@ -142,10 +144,18 @@
   }
 
   .vertical-tab-accordion {
-    background: var(--ucb-white);
-    border: 1px solid rgba(128, 128, 128, 0.333);
-    color: var(--ucb-black);
+    background: none;
   }
+
+  .vertical-tab-link.nav-link:not(:first-child) {
+    border-top: 1px solid rgba(200, 200, 200, 0.5);
+  }
+
+  .ucb-bootstrap-layout__background-color--gold .vertical-tab-link.nav-link:not(:first-child) {
+    border-top: 1px solid var(--ucb-black);
+  }
+
+  
 }
 
 @media (max-width: 767px) {
