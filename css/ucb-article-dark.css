@@ -1,3 +1,7 @@
+main {
+    padding-bottom: 0;
+}
+
 .ucb-page-style-dark {
 	color: rgb(211, 211, 211);
 	background-color: rgb(32, 32, 32);
@@ -30,7 +34,7 @@ article.ucb-page-style-dark {
 	padding-bottom: 0.5em;
 }
 
-div#block-boulderd9-base-content::after {
+/* div#block-boulderd9-base-content::after {
   content: "";
   width: 100%;
   height: 2em;
@@ -45,4 +49,4 @@ div#block-boulderd9-base-content::before {
   display: inline-block;
   margin-bottom: -7px;
   background-image: linear-gradient(0deg, rgba(32,32,32,1) 0%, rgba(86,86,86,0.75) 35%, rgba(255,255,255,0) 100%);
-}
+} */
