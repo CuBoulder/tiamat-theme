@@ -112,6 +112,7 @@
   {% endblock %}
 
   {# MAIN PAGE CONTENT #}
+  <div class="ucb-page-content">
   {% if not is_front %}
     {{ page.breadcrumb }}
   {% endif %}
@@ -164,6 +165,7 @@
       {% endif %}
     </div>{# /.layout-content #}
   </main>
+  </div>
 
   {# FOOTER BLOCK #}
   {% block page_footer %}
