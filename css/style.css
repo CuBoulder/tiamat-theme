@@ -23,9 +23,12 @@
     text-rendering: optimizelegibility;
   }
   
-  main {
+  .ucb-page-content {
     flex: 1;
-	padding: 20px 0;
+  }
+
+  main {
+    padding: 10px 0;
   }
   
   h1,
@@ -477,9 +480,4 @@
     cursor: pointer;
     background-color: inherit;
     opacity: inherit;
-}
-
-/**** Layouut Builder Placeholder Color ****/
-.layout-builder-block__content-preview-placeholder-label {
-  color: black!important;
 }

@@ -182,6 +182,27 @@ async function getArticlesWithTags(url, array, articleTags ,numLeft){
         articleCard.innerHTML = outputHTML
         relatedArticlesDiv.appendChild(articleCard)
             })
+
+        // Check to see what was rendered
+        // sets global counter of children
+        childCount = relatedArticlesDiv.childElementCount
+        // If no matches and logged in, render error message for admin
+    if(childCount == 0 && loggedIn == true){
+        let message = document.createElement('h3')
+        message.innerText = 'There are no returned article matches - check exclusion filters and try again'
+        relatedArticlesDiv.appendChild(message)
+        // If no matches and not logged in, hide section
+    } else if (relatedArticlesDiv.childElementCount == 0 && loggedIn == false){
+        let header = relatedArticlesBlock.children[0]
+        header.innerText = ''
+        // console.log('am i available', relatedArticlesBlock.children[0])
+        
+    } else if(childCount > 1 && loggedIn==true){
+        var message = document.getElementById('admin-notif-message')
+        message.remove()
+    }else {
+        // last check for error message
+    }
     
     })
 }
@@ -192,34 +213,34 @@ if(relatedShown){
     let x=0
     let n=0
     // Tag array - iterate through and store taxonomy ID's for fetch
-    const tagJSON = JSON.parse(relatedArticlesBlock.getAttribute('data-tagsjson'));
-    const myTagIDs = []
+    var tagJSON = JSON.parse(relatedArticlesBlock.getAttribute('data-tagsjson'));
+    var myTagIDs = []
 
     while(tagJSON[n]!=undefined){
         myTagIDs.push(tagJSON[n]["#cache"].tags[0])
         n++;
     }
-    const myTags = myTagIDs.map((id)=> id.replace(/\D/g,'')) // remove blanks, get only the tag ID#s
+    var myTags = myTagIDs.map((id)=> id.replace(/\D/g,'')) // remove blanks, get only the tag ID#s
 
     // console.log("my tags", myTags)
 
     // Cat array - iterate through and store taxonomy ID's for fetch
-    const catsJSON = JSON.parse(relatedArticlesBlock.getAttribute('data-catsjson'));
-    const myCatsID= [];
+    var catsJSON = JSON.parse(relatedArticlesBlock.getAttribute('data-catsjson'));
+    var myCatsID= [];
     while(catsJSON[x]!=undefined){
         myCatsID.push(catsJSON[x]["#cache"].tags[0])
         x++;
     }
 
-    const myCats = myCatsID.map((id)=> id.replace(/\D/g,''))// remove blanks, get only the cat ID#s
+    var myCats = myCatsID.map((id)=> id.replace(/\D/g,''))// remove blanks, get only the cat ID#s
 
     // Using tags and categories, construct an API call
-    const rootURL = `/jsonapi/node/ucb_article?include[node--ucb_article]=uid,title,ucb_article_content,created,field_ucb_article_summary,field_ucb_article_categories,field_ucb_article_tags,field_ucb_article_thumbnail&include=field_ucb_article_thumbnail.field_media_image&fields[file--file]=uri,url%20&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published`;
+    var rootURL = `/jsonapi/node/ucb_article?include[node--ucb_article]=uid,title,ucb_article_content,created,field_ucb_article_summary,field_ucb_article_categories,field_ucb_article_tags,field_ucb_article_thumbnail&include=field_ucb_article_thumbnail.field_media_image&fields[file--file]=uri,url%20&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published`;
 
-    const tagQuery = buildTagFilter(myTags)
-    const catQuery = buildCatFilter(myCats)
+    var tagQuery = buildTagFilter(myTags)
+    var catQuery = buildCatFilter(myCats)
 
-    // Constructs the tag portion of the API filter
+    // varructs the tag portion of the API filter
     function buildTagFilter(array){
         let string = `${rootURL}`
 
@@ -242,14 +263,14 @@ if(relatedShown){
         return string
     }
 
-    const URL = `${catQuery}`
+    var URL = `${catQuery}`
 
     // Fetch
     async function getArticles(URL){
         fetch(URL)
             .then(response=>response.json())
             .then(data=> {
-                console.log(data)
+                // console.log(data)
         // Below objects are needed to match images with their corresponding articles. 
         // There are two endpoints => data.data (article) and data.included (incl. media), both needed to associate a media library image with its respective article
         let urlObj = {};
@@ -344,7 +365,7 @@ if(relatedShown){
             articleArrayWithScores.sort((a, b) => a.catMatches - b.catMatches).reverse(); // sort in order
 
             //Remove articles without matches from those availabile in the block
-            const finalArr = articleArrayWithScores.filter(article=> article.catMatches > 0)
+            var finalArr = articleArrayWithScores.filter(article=> article.catMatches > 0)
 
             // console.log("LASST PASS ARTICLES WITH SCORES", finalArr)
             // if more than 3 articles, take the top 3
@@ -417,6 +438,7 @@ if(relatedShown){
             // If no matches and logged in, render error message for admin
         if(childCount == 0 && loggedIn == true){
             let message = document.createElement('h3')
+            message.id = 'admin-notif-message'
             message.innerText = 'There are no returned article matches - check exclusion filters and try again'
             relatedArticlesDiv.appendChild(message)
             // If no matches and not logged in, hide section
