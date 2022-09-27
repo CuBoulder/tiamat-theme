@@ -9,6 +9,21 @@
 {{ attach_library('boulderD9_base/ucb-page') }}
 {{ attach_library('boulderD9_base/ucb-article') }}
 {{ attach_library('boulderD9_base/ucb-related-articles') }}
+{# Added class to article class 'pageStyleCSS' to control page style #}
+
+{% set pageStyleInt = content.field_ucb_article_style|render|striptags|trim %}
+{% set pageStyleCSS = "" %}
+{% if pageStyleInt == "Traditional"%}
+	{% set pageStyleCSS = "ucb-page-style-traditional" %}
+{% elseif pageStyleInt =="Dark Mode"%}
+	{% set pageStyleCSS = "ucb-page-style-dark" %}
+	{{ attach_library('boulderD9_base/ucb-article-dark') }}
+{% elseif pageStyleInt =="Zebra Striped"%}
+	{% set pageStyleCSS = "ucb-page-style-striped" %}
+{% endif %}
+
+
+
 
 {%
 set classes = [
@@ -16,109 +31,120 @@ set classes = [
 'node--type-' ~ node.bundle|clean_class,
 not node.isPublished() ? 'node--unpublished',
 view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+pageStyleCSS
 ]
 %}
+
+
 
 {% set social_share_button_position = drupal_config('ucb2021_base.settings', 'ucb_social_share_position')%}
 {% set social_share_class = "" %}
 {% if social_share_button_position == "0"%}
-  {% set social_share_class = "social-share-none" %}
+	{% set social_share_class = "social-share-none" %}
 {% elseif social_share_button_position=="1"%}
-  {% set social_share_class = "social-share-left-side-below-title" %}
+	{% set social_share_class = "social-share-left-side-below-title" %}
 {% elseif social_share_button_position=="2"%}
-  {% set social_share_class = "social-share-left-side-below-content" %}
+	{% set social_share_class = "social-share-left-side-below-content" %}
 {% elseif social_share_button_position == "3" %}
-  {% set social_share_class = "social-share-below-content"%}
+	{% set social_share_class = "social-share-below-content"%}
 {% elseif social_share_button_position == "4" %}
-  {% set social_share_class = "social-share-below-title" %}
-{% else %} 
-  {% set social_share_class = "social-share-none" %}
+	{% set social_share_class = "social-share-below-title" %}
+{% else %}
+	{% set social_share_class = "social-share-none" %}
 {% endif %}
 
 {% set myTags %}
-    {{ content.field_ucb_article_tags }}
+{{ content.field_ucb_article_tags }}
 {% endset %}
 {% set myCats %}
-    {{ content.field_ucb_article_categories }}
+{{ content.field_ucb_article_categories }}
 {% endset %}
 {% set showRelated %}
-    {{content.field_ucb_related_articles_parag.0}}
+{{content.field_ucb_related_articles_parag.0}}
 {% endset %}
 
 {% set isLoggedIn = "false" %}
 {% if logged_in %}
-    {% set isLoggedIn = "true" %}
+	{% set isLoggedIn = "true" %}
 {% endif %}
 
 {#Dummy variable to ensure that all content tags are set for caching purposes#}
 {% set content_render = content|render %}
 
 {% if not content.field_ucb_article_external_url|render %}
-<article{{attributes.addClass(classes)}}>
-    <div class="container ucb-article" itemscope itemtype="https://schema.org/Article">
-        <header role="banner" class="ucb-article-banner">
-			<h1 class="ucb-article-heading">{{ label }}</h1>
-		</header>
-        {# TO DO - conditional render #}
-        {% if social_share_button_position == "4" or social_share_button_position == "1"%}
-            <div id={{social_share_class}} class="ucb-social-share-container">
-                {{ drupal_block("social_sharing_buttons_block") }}
-            </div>
-        {% endif %}
-        <div role="contentinfo" class="ucb-article-meta">
-            <div class="ucb-article-date">
-                <i class="far fa-calendar"></i>
-                <span class="sr-only">Published:</span>
-                <span itemprop="datePublished">
-                 {{ node.created.value|date('F d, Y') }}
-                </span> 
-            </div>
-        {% if content.field_ucb_article_byline|render %}
-            <div class="ucb-article-byline">
-                <i class="fas fa-circle"></i> By <span class="ucb-article-author-name" itemprop="author"> 
-                    {{ content.field_ucb_article_byline|render|striptags|trim }} 
-                </span>
-            </div>
-        {% endif %}
+	<article{{attributes.addClass(classes)}}>
+		<div class="ucb-article" itemscope itemtype="https://schema.org/Article">
+			<div class="container">
+				<header role="banner" class="ucb-article-banner">
+					<h1 class="ucb-article-heading">{{ label }}</h1>
+				</header>
+				{# TO DO - conditional render #}
+				{% if social_share_button_position == "4" or social_share_button_position == "1"%}
+					<div id={{social_share_class}} class="ucb-social-share-container">
+						{{ drupal_block("social_sharing_buttons_block") }}
+					</div>
+				{% endif %}
+				<div role="contentinfo" class="ucb-article-meta">
+					<div class="ucb-article-date">
+						<i class="far fa-calendar"></i>
+						<span class="sr-only">Published:</span>
+						<span itemprop="datePublished">
+							{{ node.created.value|date('F d, Y') }}
+						</span>
+					</div>
+					{% if content.field_ucb_article_byline|render %}
+						<div class="ucb-article-byline">
+							<i class="fas fa-circle"></i>
+							By
+							<span class="ucb-article-author-name" itemprop="author">
+								{{ content.field_ucb_article_byline|render|striptags|trim }}
+							</span>
+						</div>
+					{% endif %}
 
-        </div>
-        {% if content.field_ucb_article_content|render %}
-            <div role="main" class="ucb-article-body">{{ content.field_ucb_article_content }}</div>
-        {% endif %}
-        {% if content.field_ucb_article_categories|render %}
-            <div role="contentinfo" class="ucb-article-categories" itemprop="about">
-                <span class="sr-only">Categories:</span>
-                <div> <i class="fas fa-folder-open"></i> </div>
-                {{ content.field_ucb_article_categories }}
-            </div>
-        {% endif %}
-        {% if content.field_ucb_article_tags|render %}
-            <div role="contentinfo" class="ucb-article-tags" itemprop="keywords">
-                <div>
-                <span class="sr-only">Tags:</span>
-                <i class="fas fa-tags"></i> 
-                </div>
-                {{ content.field_ucb_article_tags }}
-            </div>
-        {% endif %}
-        {# TO DO -- Related Articles Block #}
-        <div class="ucb-related-articles-block" data-loggedin="{{isLoggedIn}}" data-catsjson="{{content.field_ucb_article_categories| json_encode(constant('JSON_PRETTY_PRINT'))}}" data-tagsjson="{{ content.field_ucb_article_tags| json_encode(constant('JSON_PRETTY_PRINT')) }}" data-relatedshown="{{showRelated|striptags|trim}}" data-tags="{{myTags|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}"data-cats="{{myCats|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}">
-            {{content.field_ucb_related_articles_parag}}
-    </div>
-    </div>
-</article>
+				</div>
+			</div>
+			{% if content.field_ucb_article_content|render %}
+				<div role="main" class="ucb-article-body">{{ content.field_ucb_article_content }}</div>
+			{% endif %}
+			{% if content.field_ucb_article_categories|render %}
+				<div role="contentinfo" class="container ucb-article-categories" itemprop="about">
+					<span class="sr-only">Categories:</span>
+					<div>
+						<i class="fas fa-folder-open"></i>
+					</div>
+					{{ content.field_ucb_article_categories }}
+				</div>
+			{% endif %}
+			{% if content.field_ucb_article_tags|render %}
+				<div role="contentinfo" class="container ucb-article-tags" itemprop="keywords">
+					<div>
+						<span class="sr-only">Tags:</span>
+						<i class="fas fa-tags"></i>
+					</div>
+					{{ content.field_ucb_article_tags }}
+				</div>
+			{% endif %}
+			{# TO DO -- Related Articles Block #}
+			<div class="container ucb-related-articles-block" data-loggedin="{{isLoggedIn}}" data-catsjson="{{content.field_ucb_article_categories| json_encode(constant('JSON_PRETTY_PRINT'))}}" data-tagsjson="{{ content.field_ucb_article_tags| json_encode(constant('JSON_PRETTY_PRINT')) }}" data-relatedshown="{{showRelated|striptags|trim}}" data-tags="{{myTags|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}" data-cats="{{myCats|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}">
+				{{content.field_ucb_related_articles_parag}}
+			</div>
+		</div>
+	</article>
 {% else %}
-    {% if not user.hasPermission('update node') %}
-        {# redirect non-authenticated users to the specified URL #}
-        {{ content.field_ucb_article_external_url }} 
-    {% else %}
-        <article{{attributes.addClass(classes)}}>
-            <div class="container ucb-article">
-                {{ label }}
-                {% set externalURL = content.field_ucb_article_external_url[0]['#url']|render|striptags|trim %}
+	{% if not user.hasPermission('update node') %}
+		{# redirect non-authenticated users to the specified URL #}
+		{{ content.field_ucb_article_external_url }}
+	{% else %}
+		<article{{attributes.addClass(classes)}}>
+			<div class="container ucb-article">
+				{{ label }}
+				{% set externalURL = content.field_ucb_article_external_url[0]['#url']|render|striptags|trim %}
 
-                <h2>Non-authenticated users would be redirected to : <a href={{ externalURL }}>{{ externalURL }}</a></h2>
-            </div>
-        </article>
-    {% endif %}
+				<h2>Non-authenticated users would be redirected to :
+					<a href={{ externalURL }}>{{ externalURL }}</a>
+				</h2>
+			</div>
+		</article>
+	{% endif %}
 {% endif %}
