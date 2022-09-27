@@ -3,6 +3,41 @@
  *
  */
 
- .block-inline-blocktext-block {
-    margin-bottom: 1em;
+.block-inline-blocktext-block {
+  margin-bottom: 1em;
+}
+
+.text-block-light-gray {
+  background: var(--ucb-light-gray);
+  color: var(--ucb-black);
+}
+
+.text-block-dark-gray {
+  background: var(--ucb-dark-gray);
+  color: var(--ucb-white);
+}
+
+.text-block-black {
+  background: var(--ucb-black);
+  color: var(--ucb-white);
+}
+
+.text-block-gold {
+  background: var(--ucb-gold);
+  color: var(--ucb-black);
+}
+
+.text-block-card {
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  padding: 1em;
+}
+
+.text-block-gold.text-block-card {
+  background: var(--ucb-gold);
+  color: var(--ucb-black);
+  border: 1px solid var(--ucb-black);
+}
+
+.ucb-bootstrap-layout__background-color--gold .text-block-card {
+  border: 1px solid var(--ucb-black);
 }

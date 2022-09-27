@@ -104,6 +104,10 @@
   color: var(--ucb-black);
 }
 
+.vertical-tab-content .accordion-item {
+  padding-top: 8px;
+}
+
 @media (min-width: 768px) {
   .nav-tabs,
   .vertical-tabs {
@@ -140,6 +144,7 @@
   .vertical-tab-accordion {
     background: var(--ucb-white);
     border: 1px solid rgba(128, 128, 128, 0.333);
+    color: var(--ucb-black);
   }
 }
 
