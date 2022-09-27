@@ -37,6 +37,12 @@ ucb-article:
       css/ucb-article.css: {}
       css/hero-unit.css: {}
 
+ucb-article-dark:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-article-dark.css: {}
+
 ucb-article-list:
   version: 1.x
   js:

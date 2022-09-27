@@ -49,18 +49,20 @@
 
 <div class="layout-container ucb-page-container">
 	{{ block("page_header", "page.html.twig") }}
-	{{ page.highlighted }}
-	{{ page.help }}
-	<main role="main">
-		<a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
-		<div class="ucb-above-content-region container">
-			{{ page.above_content }}
-		</div>
-		<div class="layout-content container">
-			<div class="ucb-user-login-container">
-				{{ page.content }}
+	<div class="ucb-page-content">
+		{{ page.highlighted }}
+		{{ page.help }}
+		<main role="main">
+			<a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+			<div class="ucb-above-content-region container">
+				{{ page.above_content }}
 			</div>
-		</div>{# /.layout-content #}
-	</main>
+			<div class="layout-content container">
+				<div class="ucb-user-login-container">
+					{{ page.content }}
+				</div>
+			</div>{# /.layout-content #}
+		</main>
+	</div>
 	{{ block("page_footer", "page.html.twig") }}
 </div>{# /.layout-container #}

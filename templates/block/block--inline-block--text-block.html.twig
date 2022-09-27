@@ -21,16 +21,33 @@
   ]
 %}
 
+{% if content['#block_content'].field_text_block_background.value == '1' %}
+	{% set blockBackground = 'text-block-light-gray' %}
+{% elseif content['#block_content'].field_text_block_background.value == '2' %}
+	{% set blockBackground = 'text-block-dark-gray' %}
+{% elseif content['#block_content'].field_text_block_background.value == '3' %}
+	{% set blockBackground = 'text-block-black' %}
+{% elseif content['#block_content'].field_text_block_background.value == '4' %}
+	{% set blockBackground = 'text-block-gold' %}
+{% else %}
+	{% set blockBackground = 'text-block-white' %}
+{% endif %}
+
+{% if content['#block_content'].field_text_block_style.value  == '1' %}
+	{% set blockStyle = 'text-block-card' %}
+{% else %}
+	{% set blockStyle = 'text-block-default' %}
+{% endif %}
 
 {% block content %}
 	<div{{attributes.addClass(classes)}}>
-		<div class="container">
+		<div class="{{ blockBackground }} {{ blockStyle }}">
 			{{ title_prefix }}
 			{% if label %}
 				<h2{{title_attributes}}>{{ label }}</h2>
 			{% endif %}
 			{{ title_suffix }}
-			{{ content }}
+			{{ content.field_text_block_body }}
 		</div>
 	</div>
 {% endblock %}

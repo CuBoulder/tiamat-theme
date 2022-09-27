@@ -1,0 +1,9 @@
+{# Need to break out of bootstrap and then get back in
+nonsense breaks out, container returns to bootstrap#}
+{% for item in items %}
+	<div class="ucb-striped-content">
+		<div class="container">
+			{{ item.content }}
+		</div>
+	</div>
+{% endfor %}

@@ -5,15 +5,18 @@
 
 .block-inline-blockhero-unit {
   font-size: 120%;
-  margin-bottom: 1em;
+}
+
+.ucb-boostrap-layout-section .column .block:first-child.block-inline-blockhero-unit {
+  margin-top: 0;
 }
 
 .block-inline-blockhero-unit.size-large {
-  padding: 300px 2rem;
+  padding: 100px 2rem;
 }
 
 .block-inline-blockhero-unit.size-large h2 {
-  font-size: 250%;
+  font-size: 200%;
 }
 
 .block-inline-blockhero-unit.size-medium {
