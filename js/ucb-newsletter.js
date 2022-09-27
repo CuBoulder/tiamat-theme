@@ -226,7 +226,10 @@ if(loggedIn){
 // PROMO ONE
     // Conditional render if Promo sections exist
     if(newsletterPromos[0]){
+        // If only one promo section is loaded. Needs this check because if one is enabled, both promo section divs are rendered
+        if(newsletterPromos[0].children.length != 0){
         var newsletterPromoLink = newsletterPromos[0].children[0].href
+        
         var newsletterPromoImg = newsletterPromos[0].getElementsByTagName('img')[0]
         // Create & Style promo one elements
         var promoOneTable = document.createElement('table')
@@ -256,7 +259,7 @@ if(loggedIn){
         promoOneRow.appendChild(promoOneTd)
         promoOneTable.appendChild(promoOneRow)
         document.getElementById('email-newsletter-promo-one-section').appendChild(promoOneTable)
-        
+        }
     }
     // Make the Blocks
     var newsletterBlocksSection = document.getElementsByClassName('ucb-newsletter-blocks')
@@ -309,6 +312,8 @@ if(loggedIn){
     // PROMO TWO
     // Conditional render if Promo sections exist
     if(newsletterPromos[1]){
+        // If only one promo section is loaded
+        if(newsletterPromos[1].children.length !=0) {
         var newsletterPromoLink = newsletterPromos[1].children[0].href
         var newsletterPromoImg = newsletterPromos[1].getElementsByTagName('img')[0]
         // Create & Style promo one elements
@@ -339,6 +344,7 @@ if(loggedIn){
         promoTwoRow.appendChild(promoTwoTd)
         promoTwoTable.appendChild(promoTwoRow)
         document.getElementById('email-newsletter-promo-two-section').appendChild(promoTwoTable)
+        }
     }
 
     // Create the admin button for copying HTML and the admin messages
