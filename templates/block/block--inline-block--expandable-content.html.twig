@@ -30,7 +30,7 @@
 		{{ title_suffix }}
 		<!-- Accordion -->
 		{% if layoutSelection == 0 %}
-			<div class="accordion accordion-flush" id="ucb-accordion{{ content['#block_content'].id() }}">
+			<div class="accordion accordion-flush ucb-accordion-content" id="ucb-accordion{{ content['#block_content'].id() }}">
 				{% for key, item in content['#block_content'].field_expandable_content_copy if key|first != '#' %}
 					<div class="accordion-item">
 						<h2 class="accordion-header" id="ucb-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}">
@@ -65,7 +65,7 @@
 			</ul>
 			<!-- horizontal tab/accordion tabs ends -->
 			<!-- horizontal tab/accordion content -->
-			<div id="ucb-tab-accordion{{ content['#block_content'].id() }}" class="tab-content accordion-flush" role="tablist">
+			<div id="ucb-tab-accordion{{ content['#block_content'].id() }}" class="tab-content accordion-flush horizontal-tab-content" role="tablist">
 				{% for key, item in content['#block_content'].field_expandable_content_copy if key|first != '#' %}
 					{% if loop.first == true %}
 						<div class="tab-pane fade show active accordion-item" id="ucb-horizontal-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}" role="tabpanel" aria-labelledby="ucb-horizontal-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}-tab">
