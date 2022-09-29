@@ -296,7 +296,7 @@
   
   .ucb-breadcrumb nav {
     margin: 0 auto;
-    padding: 5px;
+    padding: 5px 0;
     font-size: 15px;
   }
   
@@ -308,15 +308,18 @@
   }
   
   .ucb-breadcrumb li {
+    display: inline-block;
     padding: 0;
-    float: left;
   }
   
-  .ucb-breadcrumb li li::before {
-    padding-right: 0.25rem;
-    color: #444;
-    content: ">";
-    font-weight: normal;
+  .ucb-breadcrumb li:not(:first-of-type)::before {
+    display: inline-block;
+    margin: 0 0.25rem;
+    background-color: currentColor;
+    mask: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAzODQgNTEyIj48cGF0aCBkPSJNMzQyLjYgMjMzLjRjMTIuNSAxMi41IDEyLjUgMzIuOCAwIDQ1LjNsLTE5MiAxOTJjLTEyLjUgMTIuNS0zMi44IDEyLjUtNDUuMyAwcy0xMi41LTMyLjggMC00NS4zTDI3NC43IDI1NiAxMDUuNCA4Ni42Yy0xMi41LTEyLjUtMTIuNS0zMi44IDAtNDUuM3MzMi44LTEyLjUgNDUuMyAwbDE5MiAxOTJ6Ii8+PC9zdmc+') no-repeat;
+    width: 0.5625em;
+    height: 0.75em;
+    content: '';
   }
   
   /****** Local Tasks ********/
