@@ -113,9 +113,11 @@
 
   {# MAIN PAGE CONTENT #}
   <div class="ucb-page-content">
+  <div class="ucb-breadcrumb-region">
   {% if not is_front %}
     {{ page.breadcrumb }}
   {% endif %}
+  </div>
 
   {{ page.highlighted }}
 
