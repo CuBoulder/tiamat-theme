@@ -28,6 +28,10 @@
     padding-top: 0.75rem;
   }
 
+  .ucb-breadcrumb-region {
+    min-height: 20px;
+  }
+
   main {
     padding: 0 0 10px 0;
   }
@@ -274,10 +278,6 @@
   li.main-menu-item a.nav-link.active {
     background: var(--ucb-gold);
     color: var(--ucb-black);
-  }
-
-  .ucb-breadcrumb-region {
-	min-height: 20px;
   }
     
   /****** Local Tasks ********/

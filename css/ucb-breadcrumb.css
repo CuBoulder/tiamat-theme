@@ -10,12 +10,6 @@
 	display: inline-block;
 }
 
-.ucb-breadcrumb nav {
-	margin: 0 auto;
-	padding: 5px 0;
-	font-size: 15px;
-}
-
 .ucb-breadcrumb ul {
 	margin: 0;
 	padding: 0;
