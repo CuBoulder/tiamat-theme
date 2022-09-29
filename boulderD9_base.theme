@@ -62,10 +62,13 @@ function boulderD9_base_preprocess_page(array &$variables) {
 
   // check to see if we're on the homepage or not
   try {
-    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
-  }
-  catch (Exception $e) {
-    $variables['is_front'] = FALSE;
+	$current_path = \Drupal::service('path.current')->getPath();
+	$front_uri = Drupal::config('system.site')->get('page.front');
+	$front_alias = \Drupal::service('path_alias.manager')->getAliasByPath($front_uri);
+	$current_alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+	$variables['is_front']  = \Drupal::service('path.matcher')->isFrontPage() || $front_alias === $current_alias;
+  } catch (Exception $e) {
+	$variables['is_front'] = FALSE;
   }
 }
 

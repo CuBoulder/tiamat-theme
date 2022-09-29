@@ -25,6 +25,7 @@
   
   .ucb-page-content {
     flex: 1;
+    padding-top: 0.75rem;
   }
 
   main {
@@ -278,12 +279,11 @@
   /******* Breadcrumbs ********/
   .ucb-breadcrumb-region {
     width: 100%;
-    margin: 2px 0 0;
+    margin: 0;
     padding: 0;
   }
   
   .ucb-breadcrumb {
-    margin: 0.75rem 0 0;
     background: transparent;
     border-radius: 0;
     padding: 0 0 0.25em;
