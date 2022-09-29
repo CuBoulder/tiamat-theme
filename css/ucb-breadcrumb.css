@@ -8,6 +8,7 @@
 	width: fit-content;
 	line-height: 1em;
 	display: inline-block;
+	padding-top: 0.75rem;
 }
 
 .ucb-breadcrumb ul {
