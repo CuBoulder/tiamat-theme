@@ -30,7 +30,7 @@
 }
 
 .ucb-breadcrumb li::after {
-	--ucb-breadcrumb-chevron: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><path d="M342.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>');
+	--ucb-breadcrumb-chevron: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCI+PHBhdGggZmlsbD0ibm9uZSIgZD0ibTggMjAgOC04LTgtOCIgc3Ryb2tlPSIjMDAwIiBzdHJva2Utd2lkdGg9IjMiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCIvPjwvc3ZnPg==');
 	display: inline-block;
 	content: '';
 	background-color: currentColor;
@@ -40,7 +40,7 @@
 	mask-repeat: no-repeat;
 	-webkit-mask-position: center center;
 	mask-position: center center;
-	width: 0.5625em;
+	width: 0.75em;
 	height: 0.75em;
 	margin: 0 0.25rem;
 }
