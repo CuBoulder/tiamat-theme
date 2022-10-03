@@ -73,6 +73,13 @@
 {#Dummy variable to ensure that all content tags are set for caching purposes#}
 {% set content_render = content|render %}
 
+{# Used for hiding site title visibly using sr-only bootstrap class #}
+{% set site_url = path("<current>") %} 
+{% set srOnly = '' %}
+{% if site_url is same as '/homepage' %}
+	{% set srOnly = 'sr-only' %}
+{% endif %}
+
 {%
     set classes = [
         'node',
@@ -83,7 +90,7 @@
 <article{{attributes.addClass(classes)}}>
 	{% if label %}
 		<div class="container">
-			<h1{{title_attributes}}>
+			<h1{{title_attributes}} class="{{srOnly}}">
 				{{ label }}
 			</h1>
 		</div>
