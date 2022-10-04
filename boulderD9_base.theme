@@ -62,10 +62,13 @@ function boulderD9_base_preprocess_page(array &$variables) {
 
   // check to see if we're on the homepage or not
   try {
-    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
-  }
-  catch (Exception $e) {
-    $variables['is_front'] = FALSE;
+	$current_path = \Drupal::service('path.current')->getPath();
+	$front_uri = Drupal::config('system.site')->get('page.front');
+	$front_alias = \Drupal::service('path_alias.manager')->getAliasByPath($front_uri);
+	$current_alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
+	$variables['is_front']  = \Drupal::service('path.matcher')->isFrontPage() || $front_alias === $current_alias;
+  } catch (Exception $e) {
+	$variables['is_front'] = FALSE;
   }
 }
 
@@ -99,6 +102,16 @@ function boulderD9_base_preprocess_page__user__login(array &$variables) {
   $variables['ucb_be_boulder'] = theme_get_setting('ucb_be_boulder');
 }
 
+/**
+ * Preprocess function to enable the current page title to show up in the breadcrumb nav
+ */
+function boulderD9_base_preprocess_breadcrumb(array &$variables) {
+	$variables['current_page_title'] = \Drupal::service('title_resolver')->getTitle(\Drupal::request(), \Drupal::routeMatch()->getRouteObject());
+	$variables['#cache']['contexts'][] = 'url';
+	$node = \Drupal::routeMatch()->getParameter('node');
+	if ($node instanceof \Drupal\node\NodeInterface)
+		$variables['#cache']['tags'][] = 'node:' . $node->id();
+}
 
 /***
  * Preprocess function to get the variables we'll need on the header region template
