@@ -31,6 +31,11 @@
 						</li>
 					{% endif %}
 				{% endfor %}
+				{% if current_page_title %}
+					<li class="ucb-breadcrumb-static">
+						<span>{{ current_page_title }}</span>
+					</li>
+				{% endif %}
 			</ul>
 		</nav>
 	</div>

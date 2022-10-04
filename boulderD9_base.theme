@@ -102,6 +102,12 @@ function boulderD9_base_preprocess_page__user__login(array &$variables) {
   $variables['ucb_be_boulder'] = theme_get_setting('ucb_be_boulder');
 }
 
+/**
+ * Preprocess function to enable the current page title to show up in the breadcrumb nav
+ */
+function boulderD9_base_preprocess_breadcrumb(array &$variables) {
+	$variables['current_page_title'] = \Drupal::service('title_resolver')->getTitle(\Drupal::request(), \Drupal::routeMatch()->getRouteObject());
+}
 
 /***
  * Preprocess function to get the variables we'll need on the header region template
