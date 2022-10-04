@@ -13,9 +13,14 @@ if(loggedIn){
     emailTitle.innerText = newsletterTitle[0].innerText
 
     // Add intro image to email newsletter
-    var newsletterIntroImg = document.getElementById('newsletter-intro-img').getElementsByTagName('img')// newsletter image
-    var emailIntroImg = document.getElementById('newsletter-email-intro-img')
-    emailIntroImg.src = newsletterIntroImg[0].src
+    if(document.getElementById('newsletter-intro-img')){
+        var newsletterIntroImg = document.getElementById('newsletter-intro-img').getElementsByTagName('img')// newsletter image
+        var emailIntroImg = document.getElementById('newsletter-email-intro-img')
+        emailIntroImg.src = newsletterIntroImg[0].src
+    } else {
+        var emailImgContainer = document.getElementById('email').children[1].children[0].children[0]
+        emailImgContainer.remove()
+    }
 
     var newsletterArticleSections = document.getElementsByClassName('paragraph--type--newsletter-section')
 
@@ -372,7 +377,7 @@ if(loggedIn){
     // Create copy button and functionality
     var button = document.createElement('button')
     button.onclick = function(){
-        var email = document.getElementById('email-preview')
+        var email = document.getElementById('email')
         navigator.clipboard.writeText(email.innerHTML)
         button.innerText = 'Your email-ready HTML has been copied to clipboard!'
         button.style.backgroundColor = 'grey'
