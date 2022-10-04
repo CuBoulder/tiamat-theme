@@ -287,18 +287,36 @@ if(loggedIn){
                 blockData.style = "vertical-align: top;padding: 15px 30px 30px 60px;"
             }
             // Create Header
-            var emailBlockHeader = document.createElement('h3')
-            emailBlockHeader.style = "font-size: 28px; margin:0 0 20px 0; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"
-            emailBlockHeader.innerText = newsletterBlocksArr[y].children[0].innerText
+            // Check if exists, and is the header and not the Text (if header wasn't passed)
+            if(newsletterBlocksArr[y].children[0] != undefined && newsletterBlocksArr[y].children[0].tagName === "H3"){
+                var emailBlockHeader = document.createElement('h3')
+                emailBlockHeader.style = "font-size: 28px; margin:0 0 20px 0; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"
+                emailBlockHeader.innerText = newsletterBlocksArr[y].children[0].innerText
+                blockData.appendChild(emailBlockHeader)
+
+            }
             
             // Create Text
-            var emailBlockText = document.createElement('p')
-            emailBlockText.style = "margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"
-            emailBlockText.innerText = newsletterBlocksArr[y].children[1].innerText
+            // Check if exists
+            if((newsletterBlocksArr[y].children[1] !=undefined && newsletterBlocksArr[y].children[1].tagName === "DIV") || newsletterBlocksArr[y].children[0] != undefined){
+                var emailBlockText = document.createElement('p')
+                emailBlockText.style = "margin:0 0 12px 0;font-size:16px;line-height:24px;font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"
+                // If no title was passed, use first child if that child is a Div containing a p tag
+                if(newsletterBlocksArr[y].children[0].tagName === "DIV"){
+                    emailBlockText.innerText = newsletterBlocksArr[y].children[0].innerText
+                    blockData.appendChild(emailBlockText)
+
+                // If only title, do nothing
+                } else if(newsletterBlocksArr[y].children[0].tagName === "H3" && newsletterBlocksArr[y].children.length == 1){
+                    // Do nothing
+                    // Else render normally
+                } else{
+                    emailBlockText.innerText = newsletterBlocksArr[y].children[1].innerText
+                    blockData.appendChild(emailBlockText)
+                }
+            }
 
             // Append
-            blockData.appendChild(emailBlockHeader)
-            blockData.appendChild(emailBlockText)
             blockRow.appendChild(blockData)
         }
         // Append finished Blocks to email preview DOM
