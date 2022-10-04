@@ -107,6 +107,10 @@ function boulderD9_base_preprocess_page__user__login(array &$variables) {
  */
 function boulderD9_base_preprocess_breadcrumb(array &$variables) {
 	$variables['current_page_title'] = \Drupal::service('title_resolver')->getTitle(\Drupal::request(), \Drupal::routeMatch()->getRouteObject());
+	$variables['#cache']['contexts'][] = 'url';
+	$node = \Drupal::routeMatch()->getParameter('node');
+	if ($node instanceof \Drupal\node\NodeInterface)
+		$variables['#cache']['tags'][] = 'node:' . $node->id();
 }
 
 /***
