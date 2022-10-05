@@ -112,14 +112,14 @@ i.fas.fa-circle {
 	font-weight: bold;
 }
 
-.ucb-striped-content {
-  padding: 0.5em 0;
+.ucb-article-hero {
+	margin-bottom: 20px;
 }
 
 .ucb-page-style-striped .ucb-striped-content:nth-child(even) {
 	background-color:#EEEEEE;
 	border-top: 1px solid rgba(187, 187, 187, 0.4);
 	border-bottom: 1px solid rgba(187, 187, 187, 0.4);
+	padding-top: 20px;
 	margin-bottom: 20px;
-	padding-top: calc(20px + 0.5em);
 }
