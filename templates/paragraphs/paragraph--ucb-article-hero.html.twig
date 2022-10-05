@@ -51,26 +51,30 @@
 
 
 {% block paragraph %}
-  <div{{ attributes.addClass(classes).setAttribute("style","#{bgValue} margin: 0 calc(50% - 50vw)").addClass("size-large", overlayClass) }}>
-    {% block content %}
-      {# Dont let twig render the links #}
-      <div class="container ucb-hero-unit-content">
-        <div class="row">
-          {% if paragraph.field_text_align.value == "text-righthalf" %}
-              <div class="col-12 col-md-6"></div>
-          {% endif %}
-          <div class="col">
-            {{ content|without('field_links') }}
-            {# <p> {{ dump(paragraph.field_links.value) }} </p> #}
-            {% for item in paragraph.field_links.value %}
-              <a href="{{ item.uri }}" class="button {{ linkColor }}" > {{ item.title }} </a>
-            {% endfor %}
-          </div>
-          {% if paragraph.field_text_align.value == "text-lefthalf" %}
-              <div class="col-12 col-md-6"></div>
-          {% endif %}
-        </div>
-      </div>
-    {% endblock %}
-  </div>
+	<div class="ucb-article-hero">
+		<div class="container">
+			<div{{ attributes.addClass(classes).setAttribute("style","#{bgValue} margin: 0 calc(50% - 50vw)").addClass("size-large", overlayClass) }}>
+				{% block content %}
+				{# Dont let twig render the links #}
+				<div class="container ucb-hero-unit-content">
+					<div class="row">
+					{% if paragraph.field_text_align.value == "text-righthalf" %}
+						<div class="col-12 col-md-6"></div>
+					{% endif %}
+					<div class="col">
+						{{ content|without('field_links') }}
+						{# <p> {{ dump(paragraph.field_links.value) }} </p> #}
+						{% for item in paragraph.field_links.value %}
+						<a href="{{ item.uri }}" class="button {{ linkColor }}" > {{ item.title }} </a>
+						{% endfor %}
+					</div>
+					{% if paragraph.field_text_align.value == "text-lefthalf" %}
+						<div class="col-12 col-md-6"></div>
+					{% endif %}
+					</div>
+				</div>
+				{% endblock %}
+			</div>
+		</div>
+	</div>
 {% endblock paragraph %}
