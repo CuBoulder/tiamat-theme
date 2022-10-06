@@ -19,7 +19,7 @@
 			<li{{item.attributes.addClass(classes)}}>
 
 				{% set linkTitle = item.content['#title'] %}
-				{% set linkUrl = item.content['#url']|render|striptags|trim|upper  %}
+				{% set linkUrl = item.content['#url']|render|striptags|trim  %}
 
 				{% if 'FACEBOOK' in linkUrl %}
 					<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-facebook-link" title="FaceBook" alt="FaceBook">
