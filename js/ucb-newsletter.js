@@ -45,7 +45,6 @@ if(loggedIn){
         if(articleSectionArticles.length==0){
             // Get the Headers
             var articleHeaders = newsletterArticleSections[i].getElementsByTagName('h3')
-            console.log('article headers', articleHeaders)
             // Count of articles -- headers are used because they are required
             var articleCount = articleHeaders.length
             // Create & Append Header
