@@ -1,15 +1,14 @@
 h1.ucb-person-name {
   display: flex;
   flex-direction: row;
-  padding: 0.25em 0;
 }
 
 h1.ucb-person-name span {
   margin-right: 0.25em;
 }
 
-.ucb-person-name {
-  background: lightgray;
+.ucb-person-main span {
+	display: block;
 }
 
 .ucb-person-main img {

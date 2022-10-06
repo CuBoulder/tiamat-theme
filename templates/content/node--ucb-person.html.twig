@@ -35,9 +35,9 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
                 {% if content.field_ucb_person_photo|render %}
                     <span itemprop="image"> {{ content.field_ucb_person_photo }} </span> 
                 {% endif %}
-                    <span itemprop="jobTitle"> {{ content.field_ucb_person_title }} </span>
+                    <span itemprop="jobTitle">{{ content.field_ucb_person_title|render|striptags|trim }}</span>
                 {% if content.field_ucb_person_department|render %}
-                    {{ content.field_ucb_person_department }}
+                    <span itemprop="department">{{ content.field_ucb_person_department|render|striptags|trim }}</span>
                 {% endif %}
                 {% if content.field_ucb_person_email|render %}
                     <span itemprop="email"> {{ content.field_ucb_person_email }} </span> 
