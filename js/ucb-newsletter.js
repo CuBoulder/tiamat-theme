@@ -210,7 +210,7 @@ if(loggedIn){
 
             // Append 
             // Create breaks in the table using blank tr's to force 2 articles per stylistic 'row'
-            if(x%3 && x!=1){
+            if(x%2===0 && x){
                 var newRow = document.createElement('tr')
                 table.appendChild(newRow)
             }
