@@ -40,12 +40,12 @@ if(loggedIn){
         var newsletterSectionButton = newsletterArticleSections[i].getElementsByClassName('button')[0]
         // Grab Article Sections - if Teasers
         var articleSectionArticles = newsletterArticleSections[i].getElementsByClassName('col-lg-5')
-
+    
         // Render if Feature
         if(articleSectionArticles.length==0){
             // Get the Headers
             var articleHeaders = newsletterArticleSections[i].getElementsByTagName('h3')
-
+            console.log('article headers', articleHeaders)
             // Count of articles -- headers are used because they are required
             var articleCount = articleHeaders.length
             // Create & Append Header
@@ -56,39 +56,51 @@ if(loggedIn){
 
             // Iterate through and grab images, headers, summaries
             for(var a = 0; a<articleCount; a++){
+                var articleContainerImages = document.getElementsByClassName('paragraph--type--newsletter-section')[i].getElementsByTagName('img')
+                var articleContainerHeaders = document.getElementsByClassName('paragraph--type--newsletter-section')[i].getElementsByTagName('h3')
+                var articleContainerSummaries = document.getElementsByClassName('paragraph--type--newsletter-section')[i].getElementsByClassName('article-summary')
                 // Img
-                var thisArticleImage
+                var thisArticleImage = articleContainerImages[a]
+                // Header
+                var thisArticleHeader = articleContainerHeaders[a]
+                // Summary 
+                var thisArticleSummary = articleContainerSummaries[a].innerText
+                // Link
+                var thisArticleLink = articleContainerHeaders[a].children[0]
+                // Makes href absolute
+                thisArticleLink.href = thisArticleLink.href
+                        
                 // If thumbnail is provided, use that. Else use body image
-                if(document.getElementById(`feature-article-thumbnail-${a}`)){
-                    thisArticleImage = document.getElementById(`feature-article-thumbnail-${a}`).getElementsByTagName('img')[0]
-                } else {
-                    thisArticleImage = document.getElementById(`feature-article-content-${a}`).children[0].children[0].children[1].children[0]
-                }
+
+                // else {
+                //     thisArticleImage = document.getElementById(`feature-article-content-${a}`).children[0].children[0].children[1].children[0]
+                // }
                 // Thumbnail image may not be provided, use article content image instead
 
                 
                 // Link
                 // Init variables, assign values depending on what user has provided
-                var thisArticleHeader
-                var thisArticleLink
+                // var thisArticleLink
 
-                if(document.getElementById(`feature-article-thumbnail-${a}`)){
-                    thisArticleHeader = document.getElementById(`feature-article-thumbnail-${a}`).getElementsByTagName('h3')[0]
-                    thisArticleLink = document.getElementById(`feature-article-thumbnail-${a}`).getElementsByTagName('h3')[0].children[0]
+                // if(document.getElementById(`feature-article-thumbnail-${a}`)){
+                //     thisArticleHeader = articleContainer.getElementById(`feature-article-title-${a}`).getElementsByTagName('h3')[0]
+                //     console.log('thisArticleHeader', thisArticleHeader)
+                //     thisArticleLink = articleContainer.getElementById(`feature-article-title-${a}`).getElementsByTagName('h3')[0].children[0]
 
-                } else {
-                    thisArticleHeader = document.getElementById(`feature-article-title-${a}`).getElementsByTagName('h3')[0]
-                    thisArticleLink = document.getElementById(`feature-article-title-${a}`).getElementsByTagName('h3')[0].children[0]
-                }
-                // Summary
-                var thisArticleSummary = '';
+                // } 
+                // // else {
+                // //     thisArticleHeader = document.getElementById(`feature-article-title-${a}`).getElementsByTagName('h3')[0]
+                // //     thisArticleLink = document.getElementById(`feature-article-title-${a}`).getElementsByTagName('h3')[0].children[0]
+                // // }
+                // // Summary
+                // var thisArticleSummary = '';
 
-                // Summary may not be provided, use summary id or summary generated text id
-                if(document.getElementById(`feature-article-summary-${a}`)){
-                    thisArticleSummary = document.getElementById(`feature-article-summary-${a}`).children[0].innerText
-                } else {
-                    thisArticleSummary = document.getElementById(`feature-article-summary-text-${a}`).children[0].innerText
-                }
+                // // Summary may not be provided, use summary id or summary generated text id
+                // if(document.getElementById(`feature-article-summary-${a}`)){
+                //     thisArticleSummary = articleContainer.getElementById(`feature-article-summary-${a}`).children[0].innerText
+                // } else {
+                //     thisArticleSummary = articleContainer.getElementById(`feature-article-summary-text-${a}`).children[0].innerText
+                // }
 
 
                 // Create feature article table
@@ -123,25 +135,25 @@ if(loggedIn){
                     //Title
                 var featureTitle = document.createElement('h3')
                 featureTitle.innerHTML = thisArticleHeader.innerHTML
-                var featureLink = featureTitle.getElementsByTagName('a')[0]
-                featureLink.style = 'text-decoration: none;color: #0277BD; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;'
+                // Style link in title
+                featureTitle.children[0].style = 'text-decoration: none;color: #0277BD; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;'
                 featureTitle.style = 'text-decoration:none;padding: 15px 15px 0px 60px; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;'
-                    //Summary
+                //     //Summary
                 var featureSummary = document.createElement('p')
                 featureSummary.style = "font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"
                 featureSummary.innerText = thisArticleSummary
                 featureSummary.style = 'vertical-align: top; padding: 0px 15px 15px 60px;font-family: Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;'
-                    // Table Elements
+                //     // Table Elements
                 var featureTitleRow = document.createElement('tr')
                 var featureSummaryRow = document.createElement('tr')
                 var featureTitleTd = document.createElement('td')
                 var featureSummaryTd = document.createElement('td')
 
-                // Append Title
+                // // Append Title
                 featureTitleTd.appendChild(featureTitle)
                 featureTitleRow.appendChild(featureTitleTd)
                 featureTbody.appendChild(featureTitleRow)
-                // Append Summary
+                // // Append Summary
                 featureSummaryTd.appendChild(featureSummary)
                 featureSummaryRow.appendChild(featureSummaryTd)
                 featureTbody.appendChild(featureSummaryRow)
