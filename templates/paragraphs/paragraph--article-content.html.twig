@@ -40,44 +40,48 @@
 
 
 {% block paragraph %}
-	<div{{attributes.addClass(classes)}}>
-		{% if imgLocation %}
-			{% if imgLocation == 'top' %}
-				<div class="ucb-article-content-media ucb-article-content-media-above">
-					{{ content.field_article_media_selection }}
-				</div>
-				{{ articleText }}
-			{% elseif imgLocation == 'bottom' %}
-				{{ articleText }}
-				<div class="ucb-article-content-media ucb-article-content-media-below">
-					{{ content.field_article_media_selection }}
-				</div>
-			{% elseif imgLocation == 'left' %}
-				<div class="ucb-article-row-subrow row">
-					<div class="ucb-article-content-media ucb-article-content-media-left col-lg">
-						{{ content.field_article_media_selection }}
-					</div>
-					{{ articleText }}
-				</div>
-			{% elseif imgLocation == 'right' %}
-				<div class="ucb-article-row-subrow row">
-					{{ articleText }}
-					<div class="ucb-article-content-media ucb-article-content-media-right col-lg">
-						{{ content.field_article_media_selection }}
-					</div>
-				</div>
-			{% else %}
-				{% if content.field_article_media|render %}
-					<div class="ucb-article-content-media">
-						{{ content.field_article_media_selection }}
+	<div class="ucb-article-content ucb-striped-content">
+		<div class="container">
+			<div{{attributes.addClass(classes)}}>
+				{% if imgLocation %}
+					{% if imgLocation == 'top' %}
+						<div class="ucb-article-content-media ucb-article-content-media-above">
+							{{ content.field_article_media_selection }}
+						</div>
+						{{ articleText }}
+					{% elseif imgLocation == 'bottom' %}
+						{{ articleText }}
+						<div class="ucb-article-content-media ucb-article-content-media-below">
+							{{ content.field_article_media_selection }}
+						</div>
+					{% elseif imgLocation == 'left' %}
+						<div class="ucb-article-row-subrow row">
+							<div class="ucb-article-content-media ucb-article-content-media-left col-lg">
+								{{ content.field_article_media_selection }}
+							</div>
+							{{ articleText }}
+						</div>
+					{% elseif imgLocation == 'right' %}
+						<div class="ucb-article-row-subrow row">
+							{{ articleText }}
+							<div class="ucb-article-content-media ucb-article-content-media-right col-lg">
+								{{ content.field_article_media_selection }}
+							</div>
+						</div>
+					{% else %}
+						{% if content.field_article_media|render %}
+							<div class="ucb-article-content-media">
+								{{ content.field_article_media_selection }}
+							</div>
+						{% endif %}
+						{{ articleText }}
+					{% endif %}
+				{% else %}
+					<div class="ucb-article-text" itemprop="articleBody">
+						{{ content.field_article_text }}
 					</div>
 				{% endif %}
-				{{ articleText }}
-			{% endif %}
-		{% else %}
-			<div class="ucb-article-text" itemprop="articleBody">
-				{{ content.field_article_text }}
 			</div>
-		{% endif %}
+		</div>
 	</div>
 {% endblock paragraph %}
