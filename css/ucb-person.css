@@ -1,15 +1,14 @@
 h1.ucb-person-name {
   display: flex;
   flex-direction: row;
-  padding: 0.25em 0;
 }
 
 h1.ucb-person-name span {
   margin-right: 0.25em;
 }
 
-.ucb-person-name {
-  background: lightgray;
+.ucb-person-section {
+	margin-bottom: 10px;
 }
 
 .ucb-person-main img {
@@ -45,4 +44,13 @@ a.ucb-person-social-link i.fab {
     float: right;
     padding: 0 1em 1em;
   }
+}
+
+.ucb-person-section-header {
+	display: block;
+	font-weight: bold;
+}
+
+.ucb-person-section.ucb-person-links, .ucb-person-section.ucb-person-address, .ucb-person-section.ucb-person-office-hours, .ucb-person-section.ucb-person-body {
+	margin-top: 20px;
 }
