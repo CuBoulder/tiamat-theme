@@ -221,21 +221,26 @@ if(loggedIn){
         }
     }
         // After articles, create and append newsletter button, button containers
-        var buttonComment = document.createComment(`Button ${i+1}`)
-        document.getElementById('email-newsletter-article-section').appendChild(buttonComment)
 
-        var buttonRow = document.createElement('tr')
-        var buttonCell = document.createElement('td')
-        // Style container
-        buttonCell.style = "padding: 15px 15px 15px 0px;"
+        // Check if button exists, render if it does
+        if(newsletterSectionButton != undefined){
+
+            var buttonComment = document.createComment(`Button ${i+1}`)
+            document.getElementById('email-newsletter-article-section').appendChild(buttonComment)
     
-        var emailButton = document.createElement('a')
-        emailButton.style = 'margin-left:60px;margin-top:20px;margin-bottom:20px;display: inline-block;padding: 5px 10px;font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;font-weight: bold;text-decoration: none !important;border-radius: 3px;background-color: #0277BD;color: #fff !important;'
-        emailButton.href = newsletterSectionButton.href
-        emailButton.innerText = newsletterSectionButton.innerText
-        buttonCell.appendChild(emailButton)
-        buttonRow.appendChild(buttonCell)
-        document.getElementById('email-newsletter-article-section').appendChild(buttonRow)
+            var buttonRow = document.createElement('tr')
+            var buttonCell = document.createElement('td')
+            // Style container
+            buttonCell.style = "padding: 15px 15px 15px 0px;"
+        
+            var emailButton = document.createElement('a')
+            emailButton.style = 'margin-left:60px;margin-top:20px;margin-bottom:20px;display: inline-block;padding: 5px 10px;font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;font-weight: bold;text-decoration: none !important;border-radius: 3px;background-color: #0277BD;color: #fff !important;'
+            emailButton.href = newsletterSectionButton.href
+            emailButton.innerText = newsletterSectionButton.innerText
+            buttonCell.appendChild(emailButton)
+            buttonRow.appendChild(buttonCell)
+            document.getElementById('email-newsletter-article-section').appendChild(buttonRow)
+        }
     }
 }
 
