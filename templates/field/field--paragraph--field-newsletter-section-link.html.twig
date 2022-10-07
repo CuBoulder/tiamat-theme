@@ -1,0 +1,14 @@
+{#
+/**
+ * Theme layout to display copy for grid layouts
+ * Created by jnichol on 5/11/22
+ */
+#}
+
+{% for item in items %}
+    {% set linkTitle = item.content['#title'] %}
+    {% set linkUrl = item.content['#url'] %}
+
+    <a href="{{ linkUrl }}" class="button button-blue">{{ linkTitle }}</a>
+    
+{% endfor %}
