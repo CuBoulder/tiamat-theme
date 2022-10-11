@@ -73,7 +73,7 @@ for (let i = 0, x = closeEls.length; i < x; i++) {
       videoEl.style.display = "none";
 
       // find the text controls and show them
-      myParentEl.querySelector(".ucb-video-reveal-controls").style.display = "block";
+      myParentEl.querySelector(".ucb-video-reveal-controls").style.display = "flex";
 
       // find the image and hide it
       myParentEl.querySelector(".ucb-video-reveal-image").style.display = "block";
