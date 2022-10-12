@@ -179,6 +179,12 @@
     max-width: 100%;
     height: auto;
   }
+
+/** Image size in layout builder editor as article does not exist **/
+  .layout-builder img {
+    width: 100%;
+    height: auto;
+}
   
   .homepage-logo img {
     max-width: 320px;
