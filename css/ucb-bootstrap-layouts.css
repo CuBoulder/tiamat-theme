@@ -48,33 +48,36 @@
 color: var(--ucb-white);
 }
 
-.ucb-bootstrap-layout__background-color--gold a:link {
-  color: var(--ucb-black);
+.ucb-bootstrap-layout__background-color--gold a {
+  color: #111111  ;
   text-decoration: underline;
   text-decoration-color: rgba(68, 68, 68, 0.65);
 }
 
-.ucb-bootstrap-layout__background-color--gold a:link:hover {
-  color: var(--ucb-black);
+.ucb-bootstrap-layout__background-color--gold a:hover {
+  color: #111111;
   text-decoration-color: var(--ucb-black);
 }
 
-.ucb-bootstrap-layout__background-color--light-white a:link,
-.ucb-bootstrap-layout__background-color--light-gray a:link {
+.ucb-bootstrap-layout__background-color--light-white a {
   color: var(--ucb-link);
 }
 
-.ucb-bootstrap-layout__background-color--light-white a:link:hover,
-.ucb-bootstrap-layout__background-color--light-gray a:link:hover {
+.ucb-bootstrap-layout__background-color--light-gray a {
+  color: #01579B;
+}
+
+.ucb-bootstrap-layout__background-color--light-white a:hover,
+.ucb-bootstrap-layout__background-color--light-gray a:hover {
   color: var(--ucb-link-visited);
 }
 
-.ucb-bootstrap-layout__background-color--black a:link,
-.ucb-bootstrap-layout__background-color--dark-gray a:link {
+.ucb-bootstrap-layout__background-color--black a,
+.ucb-bootstrap-layout__background-color--dark-gray a {
   color: var(--ucb-gold);
 }
 
-.ucb-bootstrap-layout__background-color--black a:link:hover,
-.ucb-bootstrap-layout__background-color--dark-gray a:link:hover {
+.ucb-bootstrap-layout__background-color--black a:hover,
+.ucb-bootstrap-layout__background-color--dark-gray a:hover {
   color: var(--ucb-white);
 }
