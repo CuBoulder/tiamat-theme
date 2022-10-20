@@ -7,12 +7,15 @@
 .js-form-item-layout-settings-background-background-color .form-radio:checked,
 .js-form-item-layout-settings-layout-column-width .form-radio:checked,
 .js-form-item-layout-settings-layout-container-width .form-radio:checked,
+.js-form-item-layout-settings-background-overlay-color .form-radio:checked,
 .js-form-item-layout-settings-background-background-color .form-radio:hover,
 .js-form-item-layout-settings-layout-column-width .form-radio:hover,
 .js-form-item-layout-settings-layout-container-width .form-radio:hover,
+.js-form-item-layout-settings-background-overlay-color .form-radio:hover,
 .js-form-item-layout-settings-background-background-color .form-radio:hover:focus,
 .js-form-item-layout-settings-layout-column-width .form-radio:hover:focus,
-.js-form-item-layout-settings-layout-container-width .form-radio:hover:focus {
+.js-form-item-layout-settings-layout-container-width .form-radio:hover:focus,
+.js-form-item-layout-settings-background-overlay-color .form-radio:hover:focus {
     box-shadow: none!important;
     -webkit-box-shadow: none!important;
 }
@@ -43,7 +46,6 @@
   color: var(--ucb-black);
 }
 
-
 .ucb-bootstrap-layout-section-dark {
 color: var(--ucb-white);
 }
@@ -59,7 +61,7 @@ color: var(--ucb-white);
   text-decoration-color: var(--ucb-black);
 }
 
-.ucb-bootstrap-layout__background-color--light-white a {
+.ucb-bootstrap-layout__background-color--white a {
   color: var(--ucb-link);
 }
 
@@ -67,7 +69,7 @@ color: var(--ucb-white);
   color: #01579B;
 }
 
-.ucb-bootstrap-layout__background-color--light-white a:hover,
+.ucb-bootstrap-layout__background-color--white a:hover,
 .ucb-bootstrap-layout__background-color--light-gray a:hover {
   color: var(--ucb-link-visited);
 }
@@ -80,4 +82,32 @@ color: var(--ucb-white);
 .ucb-bootstrap-layout__background-color--black a:hover,
 .ucb-bootstrap-layout__background-color--dark-gray a:hover {
   color: var(--ucb-white);
+}
+
+.ucb-bootstrap-layout-section-overlay-dark {
+  color: var(--ucb-white);
+}
+
+.ucb-bootstrap-layout-section-overlay-dark a {
+  color: var(--ucb-gold);
+  text-decoration: none;
+}
+
+.ucb-bootstrap-layout-section-overlay-dark a:hover {
+  color: var(--ucb-white);
+  text-decoration: none;
+}
+
+.ucb-bootstrap-layout-section-overlay-light {
+  color: var(--ucb-black);
+}
+
+.ucb-bootstrap-layout-section-overlay-light a {
+  color: var(--ucb-link);
+  text-decoration: none;
+}
+
+.ucb-bootstrap-layout-section-overlay-light a:hover {
+  color: var(--ucb-link-visited);
+  text-decoration: none;
 }
