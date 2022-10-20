@@ -84,30 +84,30 @@ color: var(--ucb-white);
   color: var(--ucb-white);
 }
 
-.ucb-bootstrap-layout-section-overlay-black {
+.ucb-bootstrap-layout-section-overlay-dark {
   color: var(--ucb-white);
 }
 
-.ucb-bootstrap-layout-section-overlay-black a {
+.ucb-bootstrap-layout-section-overlay-dark a {
   color: var(--ucb-gold);
   text-decoration: none;
 }
 
-.ucb-bootstrap-layout-section-overlay-black a:hover {
+.ucb-bootstrap-layout-section-overlay-dark a:hover {
   color: var(--ucb-white);
   text-decoration: none;
 }
 
-.ucb-bootstrap-layout-section-overlay-white {
+.ucb-bootstrap-layout-section-overlay-light {
   color: var(--ucb-black);
 }
 
-.ucb-bootstrap-layout-section-overlay-white a {
+.ucb-bootstrap-layout-section-overlay-light a {
   color: var(--ucb-link);
   text-decoration: none;
 }
 
-.ucb-bootstrap-layout-section-overlay-white a:hover {
+.ucb-bootstrap-layout-section-overlay-light a:hover {
   color: var(--ucb-link-visited);
   text-decoration: none;
 }

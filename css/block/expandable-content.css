@@ -60,24 +60,24 @@
   color: #b71c1c;
 }
 
-.ucb-bootstrap-layout-section-overlay-black .accordion-button {
+.ucb-bootstrap-layout-section-overlay-dark .accordion-button {
   color: var(--ucb-gold);
 }
 
-.ucb-bootstrap-layout-section-overlay-black .accordion-button::before {
+.ucb-bootstrap-layout-section-overlay-dark .accordion-button::before {
   color: var(--ucb-gold);
 }
 
-.ucb-bootstrap-layout-section-overlay-black .accordion-button:hover {
+.ucb-bootstrap-layout-section-overlay-dark .accordion-button:hover {
   color: var(--ucb-white);
 }
 
-.ucb-bootstrap-layout-section-overlay-black .accordion-button:hover::before {
+.ucb-bootstrap-layout-section-overlay-dark .accordion-button:hover::before {
   color: var(--ucb-white);
 }
 
 
-.ucb-bootstrap-layout-section-overlay-black .accordion-body {
+.ucb-bootstrap-layout-section-overlay-dark .accordion-body {
   color: var(--ucb-white);
 }
 
