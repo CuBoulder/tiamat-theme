@@ -440,10 +440,12 @@
     padding-right: 1em;
   }
 
-/**** Admin Style Fixes *****/
-.gin-breadcrumb__link em.placeholder {
-    vertical-align: baseline;
-    cursor: pointer;
-    background-color: inherit;
-    opacity: inherit;
+/* Resets Bootstrap's `placeholder` class styles */
+.placeholder {
+	display: initial;
+	vertical-align: initial;
+	min-height: initial;
+	cursor: auto;
+	background-color: initial;
+	opacity: initial;
 }
