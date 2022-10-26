@@ -40,7 +40,7 @@
 {% endif %}
 
 {% block content %}
-	<div{{attributes.addClass(classes)}} class="container">
+	<div{{attributes.addClass(classes).addClass('container')}}>
 		<div class="{{ blockBackground }} {{ blockStyle }}">
 			{{ title_prefix }}
 			{% if label %}
