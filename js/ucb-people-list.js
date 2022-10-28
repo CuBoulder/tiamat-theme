@@ -127,7 +127,12 @@ class PeopleListElement extends HTMLElement {
             resolve(data)
           })
       } else {
-        this.toggleMessage('ucb-al-error', 'block')
+        // this.toggleMessage('ucb-al-error', 'block')
+        console.log("Error retrieving people from the API endpoint.  Please try again later. ")
+        var errorEl = document.getElementsByClassName('ucb-error')[0]
+        errorEl.style.display = 'block'
+        var loaderEl = document.getElementsByClassName('ucb-list-msg ucb-loading-data')[0]
+        loaderEl.style.display= 'none'
         reject
       }
     })
@@ -540,7 +545,6 @@ class PeopleListElement extends HTMLElement {
   toggleMessage(id, display = 'none') {
   if (id) {
     var toggle = document.getElementById(id)
-    console.log(toggle)
     if (toggle) {
       if (display === 'block') {
         toggle.style.display = 'block'
