@@ -117,8 +117,12 @@ class PeopleListElement extends HTMLElement {
           .then((response) => response.json())
           .then((data) => {
             if(data.data.length === 0) {
+              // Show Error El and Hide loader
               console.log("No people matching the filter returned.")
-              this.toggleMessage('ucb-al-end-of-data', 'block')
+              var errorEl = document.getElementsByClassName('ucb-list-msg ucb-end-of-results')[0]
+              errorEl.style.display = 'block'
+              var loaderEl = document.getElementsByClassName('ucb-list-msg ucb-loading-data')[0]
+              loaderEl.style.display= 'none'
             }
             resolve(data)
           })
@@ -536,7 +540,7 @@ class PeopleListElement extends HTMLElement {
   toggleMessage(id, display = 'none') {
   if (id) {
     var toggle = document.getElementById(id)
-
+    console.log(toggle)
     if (toggle) {
       if (display === 'block') {
         toggle.style.display = 'block'
