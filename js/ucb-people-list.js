@@ -588,3 +588,103 @@ function displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY) {
       }
     })
 })()
+
+
+
+
+
+class PeopleListElement extends HTMLElement {
+	constructor() {
+		super();
+    // Pre build logic
+    var Departments = {} // translate table for department id => department name
+    var JobTypes = {} // translate table for type id => type name
+
+    // Fetch all available Departments and Job Types then enter the build stage
+    this.getTaxonomy('department').then(departments=>{
+      // console.log('I am logging departments',departments)
+      Departments=departments
+      this.getTaxonomy('ucb_person_job_type').then(jobs=>{
+        // console.log("these are my jobs", jobs)
+        JobTypes=jobs
+        // Enter build method
+        this.build(Departments,JobTypes)
+      })
+    })
+	}
+
+	build(Departments, JobTypes) {
+    var JSONAPI = this.getAttribute("JSON")
+    var FORMAT = this.getAttribute("format")
+    var GROUPBY = this.getAttribute("groupby")
+    var ORDERBY = this.getAttribute("orderby")
+
+    var ourPepole = {} // all of the pepole that match our filter 
+    var renderedTable = 0;  // flag to know if we've rendered the table header or not yet
+    var firstPassCount = 0; // count for the first pass per group.  
+
+    console.log("These are my Departments", Departments)
+    console.log('These are my job types', JobTypes)
+    console.log('API point', JSONAPI)
+    console.log('Format?', FORMAT)
+    console.log('group my results by', GROUPBY)
+    console.log('order my results by', ORDERBY)
+
+    //Get our people
+    this.getStaff(JSONAPI).then(response=>{
+      ourPepole = response;
+      console.log(ourPepole)
+    })
+  }
+
+  // Getter function for Departments and Job Types
+  getTaxonomy(taxonomyName) {
+    return new Promise(function (resolve, reject) {
+      if (taxonomyName) {
+        let result = [] 
+        let taxonomyURL = `/jsonapi/taxonomy_term/${taxonomyName}?sort=weight,name`
+  
+        fetch(taxonomyURL)
+          .then((response) => response.json())
+          .then((data) => {
+            // console.log("Taxonomy Object : ", data)
+            data.data.map((attributes) => {
+              let id = attributes.attributes.drupal_internal__tid
+              let name = attributes.attributes.name
+              let thisTerm = {}
+  
+              thisTerm['id'] = id
+              thisTerm['name'] = name
+              result.push(thisTerm) 
+            })
+  
+            resolve(result)
+          })
+      } else {
+        // no taxonomy term to load
+        reject
+      }
+    })
+  }
+
+  getStaff(JSONAPI) {
+    return new Promise(function (resolve, reject) {
+      if (JSONAPI) {
+        fetch(JSONAPI)
+          .then((response) => response.json())
+          .then((data) => {
+            if(data.data.length === 0) {
+              console.log("No people matching the filter returned.")
+              // toggleMessage('ucb-al-end-of-data', 'block')
+            }
+            resolve(data)
+          })
+      } else {
+        // toggleMessage('ucb-al-error', 'block')
+        reject
+      }
+    })
+  }
+}
+
+customElements.define('ucb-people-list', PeopleListElement);
