@@ -217,8 +217,12 @@ class PeopleListElement extends HTMLElement {
             person.relationships.field_ucb_person_job_type.data[i].meta.drupal_internal__target_id
           );
         }
-        thisPerson['PhotoID'] =
-          person.relationships.field_ucb_person_photo.data.id
+        if(!person.relationships.field_ucb_person_photo.data){
+          thisPerson['PhotoID']= ""
+        } else {
+          thisPerson['PhotoID'] =
+            person.relationships.field_ucb_person_photo.data.id
+        }
         thisPerson['PhotoURL'] = ''
         thisPerson['Email'] = person.attributes.field_ucb_person_email
         thisPerson['Phone'] = person.attributes.field_ucb_person_phone
