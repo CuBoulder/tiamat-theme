@@ -152,10 +152,6 @@
 %}
 
 <article id="ucb-people-list-page"
-    data-JSON={{peopleJSON}}{{ IncludeFilter }}{{ sortFilter}}
-    data-format={{ displayFormat|trim }}
-    data-groupby={{ GroupBy }}
-    data-orderby={{ OrderBy }}
     {{attributes.addClass(classes)}}>
 
 	<div class="ucb-people-list-title">
@@ -165,7 +161,6 @@
 	</div>
 
 	<div id="ucb-pl-content" class="ucb-people-list-content">
-    <!--  <h3>{{ peopleJSON }}{{ IncludeFilter }}{{ sortFilter }}</h3> -->
 		<div class="row">
 			{{ content.body }}
 		</div>
@@ -185,12 +180,15 @@
       Error retrieving people from the API endpoint.  Please try again later.  
     </div>
 	</div>
-</article>
 
-<ucb-people-list
+  <ucb-people-list
   JSON={{peopleJSON}}{{ IncludeFilter }}{{ sortFilter}}
   format={{ displayFormat|trim }}
   groupby={{ GroupBy }}
   orderby={{ OrderBy }}
 >
 </ucb-people-list>
+
+</article>
+
+
