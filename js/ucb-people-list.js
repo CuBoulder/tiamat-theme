@@ -1,4 +1,3 @@
-
 // /* naughty global variables!!! */
 let Departments = {} // translate table for department id => department name
 let JobTypes = {} // translate table for type id => type name
@@ -32,51 +31,57 @@ class PeopleListElement extends HTMLElement {
     var ourPeople = {} // all of the pepole that match our filter 
      // count for the first pass per group.  
 
-    this.toggleMessage('ucb-al-loading','block')
+    this.toggleMessage('ucb-loading-data','block')
 
     //Get our people
     this.getStaff(JSONAPI).then(response=>{
       ourPeople = response;
 
-      if (GROUPBY == 'department') {
-        for (const [key] of Object.entries(Departments)) {
-          // let thisDeptID = Departments[key].id
-          // let thisDeptName = getTaxonomyName(Departments, thisDeptID);
-          // console.log("Group by Dept : " + thisDeptID)
-          // console.log("Group by Dept : " + thisDeptName.name)
-
-          if(ORDERBY === "type") {
-            // console.log('i match type')
-            firstPassCount = 0; 
-            this.displayPeople(FORMAT, GROUPBY, Departments[key].id, "firstpass", ourPeople, Departments)
-            this.displayPeople(FORMAT, GROUPBY, Departments[key].id, "secondpass", ourPeople, Departments)
-          }else {
-            this.displayPeople(FORMAT, GROUPBY, Departments[key].id, "", ourPeople, Departments)
-          }
-        }
-      } else if (GROUPBY == 'type') {
-        for (const [key] of Object.entries(JobTypes)) {
-          let thisTypeID = JobTypes[key].id
-          let thisTypeName = this.getTaxonomyName(JobTypes, thisTypeID) 
-          // console.log("Group by Type : " + thisTypeID)
-          // console.log("Group by Name : " + thisTypeName.name)
-          if(ORDERBY === "type") {
-            firstPassCount = 0; 
-            this.displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "firstpass", ourPeople, Departments)
-            this.displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "secondpass", ourPeople, Departments)
-          }else {
-            this.displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "", ourPeople, Departments)
-          }
-        }
+      if(ourPeople.data.length==0){
+        this.toggleMessage('ucb-end-of-results','block')
+        this.toggleMessage('ucb-loading-data')
       } else {
-        if(ORDERBY === "type") {
-          firstPassCount = 0; 
-          this.displayPeople(FORMAT, "", "", "firstpass", ourPeople, Departments)
-          this.displayPeople(FORMAT, "", "", "secondpass", ourPeople, Departments)
-        }else {
-          this.displayPeople(FORMAT, "", "", "", ourPeople, Departments)
+        if (GROUPBY == 'department') {
+          for (const [key] of Object.entries(Departments)) {
+            // let thisDeptID = Departments[key].id
+            // let thisDeptName = getTaxonomyName(Departments, thisDeptID);
+            // console.log("Group by Dept : " + thisDeptID)
+            // console.log("Group by Dept : " + thisDeptName.name)
+  
+            if(ORDERBY === "type") {
+              // console.log('i match type')
+              firstPassCount = 0; 
+              this.displayPeople(FORMAT, GROUPBY, Departments[key].id, "firstpass", ourPeople, Departments)
+              this.displayPeople(FORMAT, GROUPBY, Departments[key].id, "secondpass", ourPeople, Departments)
+            }else {
+              this.displayPeople(FORMAT, GROUPBY, Departments[key].id, "", ourPeople, Departments)
+            }
+          }
+        } else if (GROUPBY == 'type') {
+          for (const [key] of Object.entries(JobTypes)) {
+            let thisTypeID = JobTypes[key].id
+            let thisTypeName = this.getTaxonomyName(JobTypes, thisTypeID) 
+            // console.log("Group by Type : " + thisTypeID)
+            // console.log("Group by Name : " + thisTypeName.name)
+            if(ORDERBY === "type") {
+              firstPassCount = 0; 
+              this.displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "firstpass", ourPeople, Departments)
+              this.displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "secondpass", ourPeople, Departments)
+            }else {
+              this.displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "", ourPeople, Departments)
+            }
+          }
+        } else {
+          if(ORDERBY === "type") {
+            firstPassCount = 0; 
+            this.displayPeople(FORMAT, "", "", "firstpass", ourPeople, Departments)
+            this.displayPeople(FORMAT, "", "", "secondpass", ourPeople, Departments)
+          }else {
+            this.displayPeople(FORMAT, "", "", "", ourPeople, Departments)
+          }
         }
       }
+
     })
   }
 
@@ -119,20 +124,12 @@ class PeopleListElement extends HTMLElement {
             if(data.data.length === 0) {
               // Show Error El and Hide loader
               console.log("No people matching the filter returned.")
-              var errorEl = document.getElementsByClassName('ucb-list-msg ucb-end-of-results')[0]
-              errorEl.style.display = 'block'
-              var loaderEl = document.getElementsByClassName('ucb-list-msg ucb-loading-data')[0]
-              loaderEl.style.display= 'none'
             }
             resolve(data)
           })
       } else {
-        // this.toggleMessage('ucb-al-error', 'block')
+        this.toggleMessage('ucb-error', 'block')
         console.log("Error retrieving people from the API endpoint.  Please try again later. ")
-        var errorEl = document.getElementsByClassName('ucb-error')[0]
-        errorEl.style.display = 'block'
-        var loaderEl = document.getElementsByClassName('ucb-list-msg ucb-loading-data')[0]
-        loaderEl.style.display= 'none'
         reject
       }
     })
@@ -293,7 +290,7 @@ class PeopleListElement extends HTMLElement {
                 el.appendChild(GroupTitle);
               }
             }
-            this.toggleMessage('ucb-al-loading')
+            this.toggleMessage('ucb-loading-data')
 
             el.appendChild(thisCard)
           } else if (DISPLAYFORMAT === 'Grid') {
@@ -313,13 +310,15 @@ class PeopleListElement extends HTMLElement {
   
             thisCard.classList = 'col-sm-12 col-md-6 col-lg-4'
             thisCard.innerHTML = thisPersonCard
-            this.toggleMessage('ucb-al-loading')
+            this.toggleMessage('ucb-loading-data')
             parentContainer.appendChild(thisCard)
           } else {
             // if table display, append to inner tablebody instead of parent element
-            let tablebody = document.getElementById(
+            let tablebody = this.getElementsByClassName(
               'ucb-people-list-table-tablebody',
-            )
+            )[0]
+
+            // let tablebody = this.getElementById('ucb-people-list-table-tablebody')
   
             // check to see if this is the first time we're adding in a member of this group
             // if so, add the name of the group first 
@@ -349,7 +348,7 @@ class PeopleListElement extends HTMLElement {
       })
     } else {
       console.log('empty staff object, no people to render ', ourPepole)
-      this.toggleMessage('ucb-al-end-of-data', 'block')
+      this.toggleMessage('ucb-end-of-results', 'block')
     }
     // done with cards, clean up and close any HTML tags we have opened.
     // el.append(footerHTML)
@@ -385,8 +384,8 @@ class PeopleListElement extends HTMLElement {
               <th>Contact Information</th>
         `
         var tableBody = document.createElement('tbody')
-        tableBody.id = 'ucb-people-list-table-tablebody'
-        this.toggleMessage('ucb-al-loading')
+        tableBody.classList = 'ucb-people-list-table-tablebody'
+        this.toggleMessage('ucb-loading-data')
 
         tableHead.appendChild(tableRow)
         container.appendChild(tableHead)
@@ -548,7 +547,7 @@ class PeopleListElement extends HTMLElement {
   }
   toggleMessage(id, display = 'none') {
   if (id) {
-    var toggle = document.getElementById(id)
+    var toggle = this.parentElement.children[1].getElementsByClassName(id)[0]
     if (toggle) {
       if (display === 'block') {
         toggle.style.display = 'block'

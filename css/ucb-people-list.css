@@ -89,6 +89,6 @@ thead.ucb-people-list-table-head {
   background: #ccc;
 }
 
-tbody#ucb-people-list-table-tablebody {
+tbody.ucb-people-list-table-tablebody {
   background: #fafafa;
 }
