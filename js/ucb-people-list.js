@@ -392,7 +392,7 @@ class PeopleListElement extends HTMLElement {
     }
     // done with cards, clean up and close any HTML tags we have opened.
     // el.append(footerHTML)
-  
+  this.generateDropdown()
     // console.log(el.dataset.json)
   }
   getParentContainer(Format) // flag to know if we've rendered the table header or not yet
@@ -596,6 +596,197 @@ class PeopleListElement extends HTMLElement {
       }
     }
   }
+  }
+/**
+ * 
+ * TO DO -
+ * 
+ * - Add functionality to re-filter list after user input
+ * - Assign Filter 1,2,3 names
+ * - Programatically assign options - (value and innerText)
+ *
+ */
+  generateDropdown(){
+    // Create Elements
+    var form = document.createElement('form')
+    form.classList = 'people-list-filter'
+    var formDiv = document.createElement('div')
+    formDiv.classList = 'd-flex align-items-center'
+
+    // If User-Filterable...
+    // Departments, create filterable dropdown of Departments
+    if(this.getAttribute('allowUserDeptFilters')==='True'){
+      var formItemDeptContainer = document.createElement('div')
+      formItemDeptContainer.classList = 'form-item-department form-item'
+  
+      var formItemDeptLabel = document.createElement('label')
+      formItemDeptLabel.htmlFor = "Edit Departments"
+      formItemDeptLabel.innerText = 'Departments'
+  
+      var selectDept = document.createElement('select')
+      selectDept.id = 'edit-department'
+      // Create options programmatically - TO DO
+      var option4 = document.createElement('option')
+      var option5 = document.createElement('option')
+      var option6 = document.createElement('option')
+      
+      option4.value = '0'
+      option4.innerText = 'Example 4'
+      option5.value = '1'
+      option5.innerText = 'Example 5'
+      option6.value = '3'
+      option6.innerText = 'Example 6'
+  
+      selectDept.appendChild(option4)
+      selectDept.appendChild(option5)
+      selectDept.appendChild(option6)
+  
+      formItemDeptContainer.appendChild(formItemDeptLabel)
+      formItemDeptContainer.appendChild(selectDept)
+  
+      formDiv.appendChild(formItemDeptContainer)
+    }
+
+    // Create filterable dropdown of Job Types
+    if(this.getAttribute('allowUserJobTypeFilters')==='True'){
+      var formItemJobTypeContainer = document.createElement('div')
+      formItemJobTypeContainer.classList = 'form-item-job-type form-item'
+  
+      var formItemJobTypeLabel = document.createElement('label')
+      formItemJobTypeLabel.htmlFor = "Edit Job Types"
+      formItemJobTypeLabel.innerText = 'Job Types'
+  
+      var selectJobType = document.createElement('select')
+      selectJobType.id = 'edit-job-types'
+      // Create options programmatically - TO DO
+      var option1 = document.createElement('option')
+      var option2 = document.createElement('option')
+      var option3 = document.createElement('option')
+      
+      option1.value = '0'
+      option1.innerText = 'Example'
+      option2.value = '1'
+      option2.innerText = 'Example 2'
+      option3.value = '3'
+      option3.innerText = 'Example 3'
+  
+      selectJobType.appendChild(option1)
+      selectJobType.appendChild(option2)
+      selectJobType.appendChild(option3)
+  
+      formItemJobTypeContainer.appendChild(formItemJobTypeLabel)
+      formItemJobTypeContainer.appendChild(selectJobType)
+  
+      formDiv.appendChild(formItemJobTypeContainer)
+    }
+    // Create Filter 1
+    if(this.getAttribute('allowUserFilter1')==='True'){
+      var formItemFilter1Container = document.createElement('div')
+      formItemFilter1Container.classList = 'form-item-filter-one form-item'
+  
+      var formItemFilter1Label = document.createElement('label')
+      formItemFilter1Label.htmlFor = "Edit Filer 1"
+      formItemFilter1Label.innerText = 'Filter 1'
+  
+      var selectFilter1 = document.createElement('select')
+      selectFilter1.id = 'edit-filter-one'
+      // Create options programmatically - TO DO
+      var option7 = document.createElement('option')
+      var option8 = document.createElement('option')
+      var option9 = document.createElement('option')
+      
+      option7.value = '0'
+      option7.innerText = 'Example'
+      option8.value = '1'
+      option8.innerText = 'Example 2'
+      option9.value = '3'
+      option9.innerText = 'Example 3'
+  
+      selectFilter1.appendChild(option7)
+      selectFilter1.appendChild(option8)
+      selectFilter1.appendChild(option9)
+  
+      formItemFilter1Container.appendChild(formItemFilter1Label)
+      formItemFilter1Container.appendChild(selectFilter1)
+  
+      formDiv.appendChild(formItemFilter1Container)
+    }
+    // Create Filter 2
+    if(this.getAttribute('allowUserFilter2')==='True'){
+      var formItemFilter2Container = document.createElement('div')
+      formItemFilter2Container.classList = 'form-item-filter-two form-item'
+  
+      var formItemFilter2Label = document.createElement('label')
+      formItemFilter2Label.htmlFor = "Edit Filter 2"
+      formItemFilter2Label.innerText = 'Filter 2'
+  
+      var selectFilter2 = document.createElement('select')
+      selectFilter2.id = 'edit-filter-two'
+      // Create options programmatically - TO DO
+      var option10 = document.createElement('option')
+      var option11 = document.createElement('option')
+      var option12 = document.createElement('option')
+      
+      option10.value = '0'
+      option10.innerText = 'Example'
+      option11.value = '1'
+      option11.innerText = 'Example 2'
+      option12.value = '3'
+      option12.innerText = 'Example 3'
+  
+      selectFilter2.appendChild(option10)
+      selectFilter2.appendChild(option11)
+      selectFilter2.appendChild(option12)
+  
+      formItemFilter2Container.appendChild(formItemFilter2Label)
+      formItemFilter2Container.appendChild(selectFilter2)
+  
+      formDiv.appendChild(formItemFilter2Container)
+    }
+    // Create Filter 3
+    if(this.getAttribute('allowUserFilter3')==='True'){
+      var formItemFilter3Container = document.createElement('div')
+      formItemFilter3Container.classList = 'form-item-filter-three form-item'
+  
+      var formItemFilter3Label = document.createElement('label')
+      formItemFilter3Label.htmlFor = "Edit Filter 3"
+      formItemFilter3Label.innerText = 'Filter 3'
+  
+      var selectFilter3 = document.createElement('select')
+      selectFilter3.id = 'edit-filter-three'
+      // Create options programmatically - TO DO
+      var option13 = document.createElement('option')
+      var option14 = document.createElement('option')
+      var option15 = document.createElement('option')
+      
+      option13.value = '0'
+      option13.innerText = 'Example'
+      option14.value = '1'
+      option14.innerText = 'Example 2'
+      option15.value = '3'
+      option15.innerText = 'Example 3'
+  
+      selectFilter3.appendChild(option13)
+      selectFilter3.appendChild(option14)
+      selectFilter3.appendChild(option15)
+  
+      formItemFilter3Container.appendChild(formItemFilter3Label)
+      formItemFilter3Container.appendChild(selectFilter3)
+  
+      formDiv.appendChild(formItemFilter3Container)
+    }
+    // Create Filter button after filters are rendered
+    var formButtonContainer = document.createElement('div')
+    formButtonContainer.classList = 'form-item-button form-item'
+
+    var formButton = document.createElement('input')
+    formButton.classList = 'form-submit-btn'
+    formButton.type = 'submit'
+    formButtonContainer.appendChild(formButton)
+    formDiv.appendChild(formButtonContainer)
+    form.appendChild(formDiv)
+    // Append final container
+    this.parentElement.insertBefore(form, this.parentElement.children[2])
   }
 }
 

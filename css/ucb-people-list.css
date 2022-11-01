@@ -92,3 +92,34 @@ thead.ucb-people-list-table-head {
 tbody.ucb-people-list-table-tablebody {
   background: #fafafa;
 }
+
+.form-item{
+  margin: 0;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.form-item > label{
+  display: block;
+  font-size: 75%;
+  font-weight: 500;
+}
+
+.people-list-filter{
+    padding: 10px 10px 0;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: #e7e7e7;
+}
+
+.form-item >.form-submit-btn{
+  margin-top: 21px;
+  font-size: 11px;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 5px 10px;
+    color: #222;
+    background: #EEEEEE;
+}
