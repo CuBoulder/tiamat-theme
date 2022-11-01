@@ -11,127 +11,15 @@
 {{ attach_library('boulderD9_base/ucb-people-list-page') }}
 
 {# Display format variable #}
-{% set displayFormat = content.field_ucb_people_display|render|striptags|trim %}
-
-{# JSON API Endpoint information #}
-{% set peopleJSON = (url('<front>')|render|trim('/'))
-  ~ '/jsonapi/node/ucb_person'
-  ~ '?include[node--ucb_person]=uid,body,field_ucb_person_first_name,field_ucb_person_last_name,field_ucb_person_job_type,'
-  ~ 'field_ucb_person_department,field_ucb_person_email,field_ucb_person_phone,field_ucb_person_title,field_ucb_person_photo'
-  ~ '&include=field_ucb_person_photo.field_media_image'
-  ~ '&fields[file--file]=uri,url'
-%}
-
-{# Filter on only published (status = true) content #}
-{% set PublishedFilter = '&filter[publish-check][condition][path]=status'
-  ~ '&filter[publish-check][condition][value]=1'
-  ~ '&filter[publish-check][condition][memberOf]=published'
-%}
+{% set displayFormat = content.field_ucb_people_display|render|striptags|trim|lower %}
 
 {# include filter options set by the user #}
-{% set includeDepartments = [] %}
 {% set myDepartments =
   content.field_ucb_people_department|render|striptags|trim|split(' ')
 %}
-{% set includeTypes = [] %}
 {% set myTypes =
   content.field_ucb_people_job_type|render|striptags|trim|split(' ')
 %}
-
-{# two passes to clear out the blank entries that are mysteriously added by default #}
-{% for item in myDepartments %}
-  {% if item %}
-    {% set includeDepartments = includeDepartments|merge([item]) %}
-  {% endif %}
-{% endfor %}
-
-{% for item in myTypes %}
-  {% if item %}
-    {% set includeTypes = includeTypes|merge([item]) %}
-  {% endif %}
-{% endfor %}
-
-
-{# placeholder variables for our include and exclude filters, default to blank strings #}
-{% set IncludeFilter = '' %}
-{% set IncludeDeptFilter = '' %}
-{% set IncludeTypeFilter = '' %}
-
-{# Setup Include Department Filter using a logical OR between included department IDs #}
-{% if includeDepartments|length %}
-  {% set includeGroupMembers = '' %}
-  {% for item in includeDepartments %}
-    {% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-dept'
-      ~ (item|trim)
-      ~ '][condition][path]=field_ucb_person_department.meta.drupal_internal__target_id'
-      ~ '&filter[filter-dept'
-      ~ (item|trim)
-      ~ '][condition][value]='
-      ~ (item|trim)
-      ~ '&filter[filter-dept'
-      ~ (item|trim)
-      ~ '][condition][memberOf]=dept-include'
-    %}
-  {% endfor %}
-  {% set IncludeDeptFilter = '&filter[dept-include][group][conjunction]=OR'
-    ~ includeGroupMembers
-  %}
-{% endif %}
-
-{# Setup Include Type Filter using a logical OR between included job type IDs #}
-{% if includeTypes|length %}
-  {% set includeGroupMembers = '' %}
-  {% for item in includeTypes %}
-    {% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-type'
-      ~ (item|trim)
-      ~ '][condition][path]=field_ucb_person_job_type.meta.drupal_internal__target_id'
-      ~ '&filter[filter-type'
-      ~ (item|trim)
-      ~ '][condition][value]='
-      ~ (item|trim)
-      ~ '&filter[filter-type'
-      ~ (item|trim)
-      ~ '][condition][memberOf]=type-include'
-    %}
-  {% endfor %}
-  {% set IncludeTypeFilter = '&filter[type-include][group][conjunction]=OR'
-    ~ includeGroupMembers
-  %}
-{% endif %}
-
-{# check to see if we have both Departments and Types to filter on #}
-{# if so... setup a logicial AND Between both include filters #}
-{% if IncludeDeptFilter and IncludeTypeFilter %}
-  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
-    ~ PublishedFilter
-    ~ '&filter[include-group][group][conjunction]=AND'
-    ~ '&filter[include-group][group][memberOf]=published'
-    ~ IncludeDeptFilter
-    ~ '&filter[dept-include][group][memberOf]=include-group'
-    ~ IncludeTypeFilter
-    ~ '&filter[type-include][group][memberOf]=include-group'
-  %}
-  {# Otherwise default to either the Department filter or the Type filter as defined #}
-{% elseif IncludeDeptFilter %}
-  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
-    ~ '&filter[dept-include][group][memberOf]=published'
-    ~ PublishedFilter
-    ~ IncludeDeptFilter
-  %}
-{% elseif IncludeTypeFilter %}
-  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
-    ~ '&filter[type-include][group][memberOf]=published'
-    ~ PublishedFilter
-    ~ IncludeTypeFilter
-  %}
-
-{# no includeded Departments or Types ... still need to filter on published people #}
-{% else %}
-  {% set IncludeFilter = '&filter[status][value]=1' %}
-{% endif %}
-
-{# sorting filter #}
-{% set sortFilter = '&sort=field_ucb_person_last_name' %}
 
 {# Group By paramater #}
 {% set GroupBy = content.field_ucb_people_group_by|render|striptags|trim %}
@@ -153,21 +41,34 @@
 	set config = {
 		'filters': {
 			'department': {
-				'includes': myDepartments
+				'includes': myDepartments,
+				'userAccessible': content.field_ucb_people_department_s|render|striptags|trim == 'On',
+				'label': 'Department',
 			},
 			'job_type': {
-				'includes': myTypes
+				'includes': myTypes,
+				'userAccessible': content.field_ucb_people_job_type_s|render|striptags|trim == 'On',
+				'label': 'Job Type'
 			},
 			'filter_1': {
-				'includes': content.field_ucb_people_filter_1|render|striptags|trim|split(' ')
+				'includes': content.field_ucb_people_filter_1|render|striptags|trim|split(' '),
+				'userAccessible': content.field_ucb_people_filter_1_s|render|striptags|trim == 'On',
+				'label': 'Filter 1'
 			},
 			'filter_2': {
-				'includes': content.field_ucb_people_filter_2|render|striptags|trim|split(' ')
+				'includes': content.field_ucb_people_filter_2|render|striptags|trim|split(' '),
+				'userAccessible': content.field_ucb_people_filter_2_s|render|striptags|trim == 'On',
+				'label': 'Filter 2'
 			},
 			'filter_3': {
-				'includes': content.field_ucb_people_filter_3|render|striptags|trim|split(' ')
+				'includes': content.field_ucb_people_filter_3|render|striptags|trim|split(' '),
+				'userAccessible': content.field_ucb_people_filter_3_s|render|striptags|trim == 'On',
+				'label': 'Filter 3'
 			}
-		}
+		},
+		'format': displayFormat,
+		'groupby': GroupBy,
+		'orderby': OrderBy
 	}
 %}
 
@@ -202,28 +103,10 @@
 	</div>
 
   <ucb-people-list
-  base-uri={{ url('<front>')|render|trim('/') }}
-  config={{ config|json_encode }}
-  JSON={{peopleJSON}}{{ IncludeFilter }}{{ sortFilter}}
-  format={{ displayFormat|trim }}
-  groupby={{ GroupBy }}
-  orderby={{ OrderBy }}
-  allowUserDeptFilters={{content.field_ucb_people_department_s|render|striptags|trim}}
-  allowUserJobTypeFilters={{content.field_ucb_people_job_type_s|render|striptags|trim}}
-  allowUserFilter1={{content.field_ucb_people_filter_1_s|render|striptags|trim}}
-  allowUserFilter2={{content.field_ucb_people_filter_2_s|render|striptags|trim}}
-  allowUserFilter3={{content.field_ucb_people_filter_3_s|render|striptags|trim}}
->
+  base-uri="{{ url('<front>')|render|trim('/') }}/jsonapi"
+  config="{{ config|json_encode }}">
 </ucb-people-list>
 
 </article>
-
-<div>
-  <h3> Allow visitors filter on department : {{content.field_ucb_people_department_s}}</h3>
-  <h3> Allow visitors filter on Job Type : {{content.field_ucb_people_job_type_s}}</h3>
-  <h3> Allow visitors filter on Filter 1 : {{content.field_ucb_people_filter_1_s}}</h3>
-  <h3> Allow visitors filter on Filter 2 : {{content.field_ucb_people_filter_2_s}}</h3>
-  <h3> Allow visitors filter on Filter 3 : {{content.field_ucb_people_filter_3_s}}</h3>
-</div>
 
 
