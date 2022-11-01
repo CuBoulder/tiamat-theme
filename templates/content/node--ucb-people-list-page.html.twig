@@ -186,9 +186,22 @@
   format={{ displayFormat|trim }}
   groupby={{ GroupBy }}
   orderby={{ OrderBy }}
+  allowUserDeptFilters={{content.field_ucb_people_department_s|render|striptags|trim}}
+  allowUserJobTypeFilters={{content.field_ucb_people_job_type_s|render|striptags|trim}}
+  allowUserFilter1={{content.field_ucb_people_filter_1_s|render|striptags|trim}}
+  allowUserFilter2={{content.field_ucb_people_filter_2_s|render|striptags|trim}}
+  allowUserFilter3={{content.field_ucb_people_filter_3_s|render|striptags|trim}}
 >
 </ucb-people-list>
 
 </article>
+
+<div>
+  <h3> Allow visitors filter on department : {{content.field_ucb_people_department_s}}</h3>
+  <h3> Allow visitors filter on Job Type : {{content.field_ucb_people_job_type_s}}</h3>
+  <h3> Allow visitors filter on Filter 1 : {{content.field_ucb_people_filter_1_s}}</h3>
+  <h3> Allow visitors filter on Filter 2 : {{content.field_ucb_people_filter_2_s}}</h3>
+  <h3> Allow visitors filter on Filter 3 : {{content.field_ucb_people_filter_3_s}}</h3>
+</div>
 
 
