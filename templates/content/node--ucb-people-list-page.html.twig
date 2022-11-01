@@ -140,15 +140,35 @@
 {% set OrderBy = content.field_ucb_people_order_by|render|striptags|trim %}
 
 {%
-  set classes = [
-  'node',
-  'container',
-  'node--type-' ~ node.bundle|clean_class,
-  node.isPromoted() ? 'node--promoted',
-  node.isSticky() ? 'node--sticky',
-  not node.isPublished() ? 'node--unpublished',
-  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-]
+	set classes = [
+		'node',
+		'container',
+		'node--type-' ~ node.bundle|clean_class,
+		node.isPromoted() ? 'node--promoted',
+		node.isSticky() ? 'node--sticky',
+		not node.isPublished() ? 'node--unpublished',
+		view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+	]
+%}{% 
+	set config = {
+		'filters': {
+			'department': {
+				'includes': myDepartments
+			},
+			'job_type': {
+				'includes': myTypes
+			},
+			'filter_1': {
+				'includes': content.field_ucb_people_filter_1|render|striptags|trim|split(' ')
+			},
+			'filter_2': {
+				'includes': content.field_ucb_people_filter_2|render|striptags|trim|split(' ')
+			},
+			'filter_3': {
+				'includes': content.field_ucb_people_filter_3|render|striptags|trim|split(' ')
+			}
+		}
+	}
 %}
 
 <article id="ucb-people-list-page"
@@ -182,6 +202,8 @@
 	</div>
 
   <ucb-people-list
+  base-uri={{ url('<front>')|render|trim('/') }}
+  config={{ config|json_encode }}
   JSON={{peopleJSON}}{{ IncludeFilter }}{{ sortFilter}}
   format={{ displayFormat|trim }}
   groupby={{ GroupBy }}

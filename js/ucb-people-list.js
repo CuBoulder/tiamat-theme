@@ -5,6 +5,46 @@ let ourPepole = {} // all of the pepole that match our filter
 let renderedTable = 0;  // flag to know if we've rendered the table header or not yet
 let firstPassCount = 0; // count for the first pass per group.  
 
+class PeopleListProvider {
+	constructor(baseURI, config = {'filters': {}}) {
+		this.baseURI = baseURI;
+		this.config = config;
+		this.nextPath = PeopleListProvider.buildEndpointPath(config);
+	}
+	static buildEndpointPath(config) {
+		const
+			// JSON API Endpoint information
+			endpoint = '/jsonapi/node/ucb_person',
+			baseParams = 'include[node--ucb_person]=uid,body,field_ucb_person_first_name,field_ucb_person_last_name,field_ucb_person_job_type,'
+				+ 'field_ucb_person_department,field_ucb_person_email,field_ucb_person_phone,field_ucb_person_title,field_ucb_person_photo'
+				+ '&include=field_ucb_person_photo.field_media_image'
+				+ '&fields[file--file]=uri,url',
+			// Filter on only published (status = true) content
+			publishedParams = '&filter[published][group][conjunction]=AND'
+				+ '&filter[publish-check][condition][path]=status'
+				+ '&filter[publish-check][condition][value]=1'
+				+ '&filter[publish-check][condition][memberOf]=published',
+			sortParams = '&sort=field_ucb_person_last_name',
+			filters = config['filters'];
+		let params = '';
+		for(const filterName in filters) {
+			const filterIncludes = filters[filterName]['includes'];
+			if(!filterIncludes || !filterIncludes.length || filterIncludes[0] == '') continue;
+			params += '&filter[' + filterName + '-include][group][conjunction]=OR';
+			filterIncludes.forEach(filterItem => 
+				params += '&filter[filter-' + filterName + '-' + filterItem + '][condition][path]=field_ucb_person_' + filterName + '.meta.drupal_internal__target_id'
+					+ '&filter[filter-' + filterName + '-' + filterItem + '][condition][value]=' + filterItem
+					+ '&filter[filter-' + filterName + '-' + filterItem + '][condition][memberOf]=' + filterName + '-include');
+			params += '&filter[' + filterName + '-include][group][memberOf]=include-group';
+		}
+		if(params)
+			params = '&filter[include-group][group][conjunction]=AND'
+				+ '&filter[include-group][group][memberOf]=published'
+				+ params
+		return endpoint + '?' + baseParams + publishedParams + params + sortParams;
+	}
+}
+
 class PeopleListElement extends HTMLElement {
 	constructor() {
 		super();
@@ -23,7 +63,7 @@ class PeopleListElement extends HTMLElement {
 	}
 
 	build(Departments, JobTypes) {
-    var JSONAPI = this.getAttribute("JSON")
+    var JSONAPI = this.getAttribute("base-uri") + PeopleListProvider.buildEndpointPath(JSON.parse(this.getAttribute("config")));
     var FORMAT = this.getAttribute("format")
     var GROUPBY = this.getAttribute("groupby")
     var ORDERBY = this.getAttribute("orderby")
