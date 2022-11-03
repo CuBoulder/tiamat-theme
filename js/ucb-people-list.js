@@ -40,7 +40,7 @@ class PeopleListProvider {
 			});
 			if(!filterParams) continue;
 			params += '&filter[' + filterName + '-include][group][conjunction]=OR'
-				+ filterParams;
+				+ filterParams
 				+ '&filter[' + filterName + '-include][group][memberOf]=include-group';
 		}
 		if(params)
