@@ -1,0 +1,12 @@
+{#
+/**
+ * Theme layout to display main body copy on basic page
+ * Created by jnichol on 1/11/22
+ */
+#}
+
+<div class="container">
+    {% for item in items %}
+        {{ item|render }}
+    {% endfor %}
+</div>
