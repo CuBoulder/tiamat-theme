@@ -41,23 +41,12 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 				{% if content.field_ucb_person_title|render or content.field_ucb_person_department|render %}
 					<div class="ucb-person-section ucb-person-job">
 						{% if content.field_ucb_person_title|render %}
-							<span class="d-block" itemprop="jobTitle">
-								{% for key, item in content.field_ucb_person_title if key|first != '#' %}
-									{% if loop.first == false %}
-										&bull;
-									{% endif %}
-									{{ item|render|striptags|trim}}
-								{% endfor %}
+							<span class="d-block">
+								{{ content.field_ucb_person_title}}
 							</span>
 						{% endif %}
 						{% if content.field_ucb_person_department|render %}
-							<span class="d-block">
-								{% for key, item in content.field_ucb_person_department if key|first != '#' %}
-									{% if loop.first == false %}
-										&bull;
-									{% endif %}
-									{{ item|render|striptags|trim}}
-								{% endfor %}</span>
+							<span class="d-block">{{ content.field_ucb_person_department}}</span>
 						{% endif %}
 					</div>
 				{% endif %}
