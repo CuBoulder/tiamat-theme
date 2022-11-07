@@ -3,17 +3,16 @@ let renderedTable = 0;  // flag to know if we've rendered the table header or no
 let firstPassCount = 0; // count for the first pass per group.  
 
 class PeopleListProvider {
-	constructor(baseURI, config) {
+	constructor(baseURI, userConfig, config) {
 		this.baseURI = baseURI;
-		this.config = config;
-		this.nextPath = PeopleListProvider.buildEndpointPath(config);
+		this.nextPath = PeopleListProvider.buildEndpointPath(userConfig, config);
 	}
 	/**
 	 * 
 	 * @param {object} config The People List configuration object
 	 * @returns {string} The API path (including all query parameters)
 	 */
-	static buildEndpointPath(config) {
+	static buildEndpointPath(userConfig, config) {
 		const
 			// JSON API Endpoint information
 			endpoint = '/node/ucb_person',
@@ -26,11 +25,13 @@ class PeopleListProvider {
 				+ '&filter[publish-check][condition][value]=1'
 				+ '&filter[publish-check][condition][memberOf]=published',
 			sortParams = '&sort=field_ucb_person_last_name',
-			filters = config['filters'];
+			userFilters = userConfig['filters'] || {},
+			filters = config['filters'] || {},
+			allFilterNames = Object.keys(filters).concat(Object.keys(userFilters));
 		let params = '';
-		for(const filterName in filters) {
-			const filterIncludes = filters[filterName]['includes'];
-			if(!filterIncludes || !filterIncludes.length) continue;
+		allFilterNames.forEach(filterName => {
+			const filterIncludes = (userFilters[filterName] || {})['includes'] || (filters[filterName] || {})['includes'];
+			if(!filterIncludes || !filterIncludes.length) return;
 			let filterParams = '';
 			filterIncludes.forEach(filterItem => {
 				if(!filterItem) return;
@@ -38,11 +39,11 @@ class PeopleListProvider {
 					+ '&filter[filter-' + filterName + '-' + filterItem + '][condition][value]=' + filterItem
 					+ '&filter[filter-' + filterName + '-' + filterItem + '][condition][memberOf]=' + filterName + '-include';
 			});
-			if(!filterParams) continue;
+			if(!filterParams) return;
 			params += '&filter[' + filterName + '-include][group][conjunction]=OR'
 				+ filterParams
 				+ '&filter[' + filterName + '-include][group][memberOf]=include-group';
-		}
+		});
 		if(params)
 			params = '&filter[include-group][group][conjunction]=AND'
 				+ '&filter[include-group][group][memberOf]=published'
@@ -70,34 +71,43 @@ class PeopleListElement extends HTMLElement {
 	constructor() {
 		super();
 		this._baseURI = this.getAttribute('base-uri');
-		let taxonomiesLoaded = 0, Departments = [], JobTypes = [];
+		this.taxonomiesLoaded = 0;
+		this.departments = [];
+		this.jobTypes = [];
 		// Pre build logic
 		// Fetch all available Departments and Job Types then enter the build stage
 		this.getTaxonomy('department').then(departments => {
-			Departments = departments;
-			taxonomiesLoaded++;
-			if(taxonomiesLoaded == 2) // Enter build method
-				this.build(Departments, JobTypes);
+			this.departments = departments;
+			this.taxonomiesLoaded++;
+			if(this.taxonomiesLoaded == 2) // Enter build method
+				this.build(this.departments, this.jobTypes);
 		}).catch(reason => this.fatalError(reason));
 		this.getTaxonomy('ucb_person_job_type').then(jobs => {
-			JobTypes = jobs;
-			taxonomiesLoaded++;
-			if(taxonomiesLoaded == 2) // Enter build method
-				this.build(Departments, JobTypes);
+			this.jobTypes = jobs;
+			this.taxonomiesLoaded++;
+			if(this.taxonomiesLoaded == 2) // Enter build method
+				this.build(this.departments, this.jobTypes);
 		}).catch(reason => this.fatalError(reason));
 	}
 
+	static get observedAttributes() { return ['user-config']; }
+	attributeChangedCallback(name, oldValue, newValue) {
+		if(name == 'user-config' && this.taxonomiesLoaded == 2)
+			this.build(this.departments, this.jobTypes);
+	}
+
 	build(Departments, JobTypes) {
-		let config = {'filters': {}};
+		let userConfig = {}, config = {};
 		try {
+			userConfig = JSON.parse(this.getAttribute('user-config'));
 			config = JSON.parse(this.getAttribute('config'));
 		} catch(e) {}
 		const
 			baseURI = this._baseURI,
-			peopleListProvider = this._peopleListProvider = new PeopleListProvider(baseURI, config),
-			FORMAT = config['format'] || 'list',
-			GROUPBY = config['groupby'] || 'none',
-			ORDERBY = config['orderby'] || 'type';
+			peopleListProvider = this._peopleListProvider = new PeopleListProvider(baseURI, userConfig, config),
+			FORMAT = userConfig['format'] || config['format'] || 'list',
+			GROUPBY = userConfig['groupby'] || config['groupby'] || 'none',
+			ORDERBY = userConfig['orderby'] || config['orderby'] || 'type';
     
 		this.toggleMessage('ucb-loading-data', 'block');
 		// Get our people
