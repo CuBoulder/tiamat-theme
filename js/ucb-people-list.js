@@ -145,7 +145,7 @@ class PeopleListElement extends HTMLElement {
 				}
 			}
 			this.toggleMessage('ucb-loading-data');
-		}).catch(reason => this.fatalError(reason));
+		})/*.catch(reason => this.fatalError(reason)*/;
 	}
 
 	// Getter function for Departments and Job Types
@@ -326,7 +326,7 @@ class PeopleListElement extends HTMLElement {
             }
 
             el.appendChild(thisCard)
-          } else if (DISPLAYFORMAT === 'Grid') {
+          } else if (DISPLAYFORMAT === 'grid') {
   
             // check to see if this is the first time we're adding in a member of this group
             // if so, add the name of the group first 
@@ -390,13 +390,13 @@ class PeopleListElement extends HTMLElement {
   getParentContainer(Format) // flag to know if we've rendered the table header or not yet
    {
     // console.log("my format is", Format)
-    let container = ''
+    let container = null;
     switch (Format) {
       case 'list':
         break
       case 'grid':
-        container = this
-        container.classList = "row ucb-people-list-content"
+        container = document.createElement('div');
+        container.classList = "row ucb-people-list-content";
         break
       case 'table':
         // we only need to render the table header the first time
