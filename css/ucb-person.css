@@ -8,7 +8,7 @@ h1.ucb-person-name span {
 }
 
 .ucb-person-section {
-	margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .ucb-person-main img {
@@ -47,10 +47,34 @@ a.ucb-person-social-link i.fab {
 }
 
 .ucb-person-section-header {
-	display: block;
-	font-weight: bold;
+  display: block;
+  font-weight: bold;
 }
 
-.ucb-person-section.ucb-person-links, .ucb-person-section.ucb-person-address, .ucb-person-section.ucb-person-office-hours, .ucb-person-section.ucb-person-body {
-	margin-top: 20px;
+.ucb-person-section.ucb-person-links,
+.ucb-person-section.ucb-person-address,
+.ucb-person-section.ucb-person-office-hours,
+.ucb-person-section.ucb-person-body {
+  margin-top: 20px;
+}
+
+ul.ucb-person-title li:not(:first-child):before,
+ul.ucb-person-department li:not(:first-child):before {
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+ font-size: 0.25em;
+  content: "\f111";
+  vertical-align: middle;
+  padding: 0 0.25em;
+}
+
+.ucb-person-title li,
+.ucb-person-department li{
+  display: inline-block;
+}
+
+.ucb-person-title,
+.ucb-person-department {
+  padding-left: 0;
+  margin-bottom: 0;
 }
