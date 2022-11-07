@@ -114,10 +114,10 @@ class PeopleListElement extends HTMLElement {
 						// console.log("Group by Dept : " + thisDeptName.name)
 						if(ORDERBY == "type") {
 							firstPassCount = 0; 
-							this.displayPeople(FORMAT, GROUPBY, Departments[key].id, "firstpass", ourPeople, Departments);
-							this.displayPeople(FORMAT, GROUPBY, Departments[key].id, "secondpass", ourPeople, Departments);
+							this.displayPeople(FORMAT, GROUPBY, Departments[key].id, "firstpass", ourPeople, Departments, JobTypes);
+							this.displayPeople(FORMAT, GROUPBY, Departments[key].id, "secondpass", ourPeople, Departments, JobTypes);
 						} else {
-							this.displayPeople(FORMAT, GROUPBY, Departments[key].id, "", ourPeople, Departments);
+							this.displayPeople(FORMAT, GROUPBY, Departments[key].id, "", ourPeople, Departments, JobTypes);
 						}
 					}
 				} else if (GROUPBY == 'type') {
@@ -128,24 +128,24 @@ class PeopleListElement extends HTMLElement {
 						// console.log("Group by Name : " + thisTypeName.name)
 						if(ORDERBY == "type") {
 							firstPassCount = 0; 
-							this.displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "firstpass", ourPeople, Departments);
-							this.displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "secondpass", ourPeople, Departments);
+							this.displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "firstpass", ourPeople, Departments, JobTypes);
+							this.displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "secondpass", ourPeople, Departments, JobTypes);
 						} else {
-							this.displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "", ourPeople, Departments);
+							this.displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "", ourPeople, Departments, JobTypes);
 						}
 					}
 				} else {
 					if(ORDERBY == "type") {
 						firstPassCount = 0; 
-						this.displayPeople(FORMAT, "", "", "firstpass", ourPeople, Departments);
-						this.displayPeople(FORMAT, "", "", "secondpass", ourPeople, Departments);
+						this.displayPeople(FORMAT, "", "", "firstpass", ourPeople, Departments, JobTypes);
+						this.displayPeople(FORMAT, "", "", "secondpass", ourPeople, Departments, JobTypes);
 					} else {
-						this.displayPeople(FORMAT, "", "", "", ourPeople, Departments);
+						this.displayPeople(FORMAT, "", "", "", ourPeople, Departments, JobTypes);
 					}
 				}
 			}
 			this.toggleMessage('ucb-loading-data');
-		})/*.catch(reason => this.fatalError(reason)*/;
+		}).catch(reason => this.fatalError(reason));
 	}
 
 	// Getter function for Departments and Job Types
@@ -167,9 +167,10 @@ class PeopleListElement extends HTMLElement {
 	fatalError(reason) {
 		this.toggleMessage('ucb-error', 'block');
 		this.toggleMessage('ucb-loading-data');
+		throw reason;
 	}
 
-  displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY, ourPeople, Departments) {
+  displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY, ourPeople, Departments, JobTypes) {
     let renderThisGroup = 0; 
     let el = this
     let thisDeptName = ""
@@ -300,7 +301,7 @@ class PeopleListElement extends HTMLElement {
   
           let thisCard
           // Needed to switch types of container for individual person cards => article for grid & list displays, tr for table display
-          if (DISPLAYFORMAT === 'Table') {
+          if (DISPLAYFORMAT === 'table') {
             thisCard = document.createElement('tr')
           } else {
             thisCard = document.createElement('article')
