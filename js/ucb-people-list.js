@@ -71,19 +71,22 @@ class PeopleListProvider {
 }
 
 class PeopleListElement extends HTMLElement {
+	static escapeHTML(raw) { return raw ? raw.replace(/\&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;') : ''; }
 	static get observedAttributes() { return ['user-config']; }
-	
+
 	constructor() {
 		super();
 		const
 			chromeElement = this._chromeElement = document.createElement('div'),
 			contentElement = this._contentElement = document.createElement('div'),
+			userFormElement = this._userFormElement = document.createElement('div'),
 			messageElement = this._messageElement = document.createElement('div'),
 			loadingElement = this._loadingElement = document.createElement('div');
 		messageElement.className = 'ucb-list-msg';
 		messageElement.setAttribute('hidden', '');
 		loadingElement.className = 'ucb-loading-data';
 		loadingElement.innerHTML = '<i class="fas fa-spinner fa-3x fa-pulse"></i>';
+		chromeElement.appendChild(userFormElement);
 		chromeElement.appendChild(messageElement);
 		chromeElement.appendChild(loadingElement);
 		this.appendChild(chromeElement);
@@ -205,9 +208,9 @@ class PeopleListElement extends HTMLElement {
     let thisDeptName = ""
     let thisTypeName = ""
     if(GROUPBY === "department") {
-      thisDeptName = this.getTaxonomyName(Departments, groupID).name
+      thisDeptName = this.getTaxonomyName(Departments, groupID)['name'];
     } else if(GROUPBY === "type") {
-      thisTypeName = this.getTaxonomyName(JobTypes, groupID).name
+      thisTypeName = this.getTaxonomyName(JobTypes, groupID)['name'];
     }
     // el.classList = 'container'
     // let headerHTML = layoutHeader(DISPLAYFORMAT)
@@ -216,7 +219,6 @@ class PeopleListElement extends HTMLElement {
   
     // TO DO -- issue here with header adding correctly to grid
     if (DISPLAYFORMAT === 'grid' || DISPLAYFORMAT === 'table') {
-      console.log(el)
       el.appendChild(parentContainer)
     }
   
@@ -235,27 +237,27 @@ class PeopleListElement extends HTMLElement {
       let urlObj = {} // key from data.data to key from data.includes
       let idObj = {} // key from data.includes to URL
       // Remove any blanks from our articles before map
-      if (ourPeople.included) {
-        let filteredData = ourPeople.included.filter((url) => {
-          return url.attributes.uri !== undefined
+      if (ourPeople['included']) {
+        let filteredData = ourPeople['included'].filter((url) => {
+          return url['attributes']['uri'] !== undefined
         })
         // creates the urlObj, key: data id, value: url
         filteredData.map((pair) => {
           // checks if consumer is working, else default to standard image instead of focal image
-          if(pair.links.focal_image_square != undefined){
-            urlObj[pair.id] = pair.links.focal_image_square.href
+          if(pair['links']['focal_image_square'] != undefined){
+            urlObj[pair['id']] = pair['links']['focal_image_square']['href']
           } else {
-            urlObj[pair.id] = pair.attributes.uri.url
+            urlObj[pair['id']] = pair['attributes']['uri']['url']
           }
         })
   
         // removes all other included data besides images in our included media
-        let idFilterData = ourPeople.included.filter((item) => {
-          return item.type == 'media--image'
+        let idFilterData = ourPeople['included'].filter((item) => {
+          return item['type'] == 'media--image'
         })
         // using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
         idFilterData.map((pair) => {
-          idObj[pair.id] = pair.relationships.thumbnail.data.id
+          idObj[pair.id] = pair['relationships']['thumbnail']['data']['id']
         })
       }
   
@@ -265,50 +267,49 @@ class PeopleListElement extends HTMLElement {
         let renderMe = true;
         let thisPerson = {}
         let thisPersonCard = '' // placeholder for the HTML to render this card in the required format
-        thisPerson['Name'] = person.attributes.title
-        thisPerson['Title'] = person.attributes.field_ucb_person_title[0]
-        thisPerson['Dept'] = []
-        for(let i = 0; i < person.relationships.field_ucb_person_department.data.length; i++) {
-          thisPerson['Dept'].push(
-            person.relationships.field_ucb_person_department.data[i].meta.drupal_internal__target_id
+        thisPerson.name = person['attributes']['title']
+        thisPerson.title = person['attributes']['field_ucb_person_title'][0]
+        thisPerson.departments = []
+        for(let i = 0; i < person['relationships']['field_ucb_person_department']['data'].length; i++) {
+          thisPerson.departments.push(
+            person['relationships']['field_ucb_person_department']['data'][i]['meta']['drupal_internal__target_id']
           );
         } 
-        thisPerson['Jobtype'] = []
-        for(let i = 0; i < person.relationships.field_ucb_person_job_type.data.length; i++) {
-          thisPerson['Jobtype'].push(
-            person.relationships.field_ucb_person_job_type.data[i].meta.drupal_internal__target_id
+        thisPerson.jobTypes = []
+        for(let i = 0; i < person['relationships']['field_ucb_person_job_type']['data'].length; i++) {
+          thisPerson.jobTypes.push(
+            person['relationships']['field_ucb_person_job_type']['data'][i]['meta']['drupal_internal__target_id']
           );
         }
-        if(!person.relationships.field_ucb_person_photo.data){
-          thisPerson['PhotoID']= ""
+        if(!person['relationships']['field_ucb_person_photo']['data']){
+          thisPerson.photoId= ""
         } else {
-          thisPerson['PhotoID'] =
-            person.relationships.field_ucb_person_photo.data.id
+          thisPerson.photoId =
+            person['relationships']['field_ucb_person_photo']['data']['id']
         }
-        thisPerson['PhotoURL'] = ''
-        thisPerson['Email'] = person.attributes.field_ucb_person_email
-        thisPerson['Phone'] = person.attributes.field_ucb_person_phone
-        thisPerson['Link'] = `/node/${person.attributes.drupal_internal__nid}`
+        thisPerson.photoURI = ''
+        thisPerson.email = person['attributes']['field_ucb_person_email']
+        thisPerson.phone = person['attributes']['field_ucb_person_phone']
+        thisPerson.link = `/node/${person['attributes']['drupal_internal__nid']}`
         // needed to verify body exists on the Person page, if so, use that
-        if (person.attributes.body) {
-          var myBody = person.attributes.body.processed
-          myBody.replace(/<\/?[^>]+(>|$)/g, '') // strip out HTML characters
-          myBody.replace(/(\r\n|\n|\r)/gm, '') // strip out line breaks
-          thisPerson['Body'] = myBody
+        if (person['attributes']['body']) {
+          const myBody = person['attributes']['body']['processed'];
+          myBody.replace(/(\r\n|\n|\r)/gm, ''); // strip out line breaks
+          thisPerson.body = myBody;
         } else {
           // if no body, set to empty
-          thisPerson['Body'] = ''
+          thisPerson.body = '';
         }
         if (thisPerson.PhotoID) {
-          thisPerson['PhotoURL'] = urlObj[idObj[thisPerson.PhotoID]]
+          thisPerson.photoURI = urlObj[idObj[thisPerson.PhotoID]]
           // console.log('Am I an image URL? : ' + thisPerson.PhotoURL)
         }
   
         // if first pass (sort by type first) then only render the people with a Job Type 
         // else if second pass (sort by type first) then only render the people without a Job Type
-        if(ORDERBY === "firstpass" && !thisPerson['Jobtype'].length) {
+        if(ORDERBY === "firstpass" && !thisPerson.jobTypes.length) {
           renderMe = false;
-        } else if(ORDERBY === "secondpass" && thisPerson['Jobtype'].length) {
+        } else if(ORDERBY === "secondpass" && thisPerson.jobTypes.length) {
           renderMe = false;
         }
   
@@ -318,8 +319,8 @@ class PeopleListElement extends HTMLElement {
   
         // check to see if we need to filter based on a group by seeting
         // and if so that this person matches our groupID
-        if ((!GROUPBY || !groupID) || (thisPerson['Dept'].find(deptid => deptid == groupID) || thisPerson['Jobtype'].find(typeid => typeid == groupID))) {
-          //console.log( "I'm a match! " + groupID + ' = ' + thisPerson['Dept'] + ' or ' + thisPerson['Jobtype'],)
+        if ((!GROUPBY || !groupID) || (thisPerson.departments.find(deptid => deptid == groupID) || thisPerson.jobTypes.find(typeid => typeid == groupID))) {
+          //console.log( "I'm a match! " + groupID + ' = ' + thisPerson.departments + ' or ' + thisPerson.jobTypes,)
   
           // increment flags for rendering in this group as necessary
           renderThisGroup++; 
@@ -405,7 +406,7 @@ class PeopleListElement extends HTMLElement {
             tablebody.appendChild(thisCard)
           }
         } else {
-          // console.log( 'Not a match! ' + groupID + ' != ' + thisPerson['Dept'] + ' or ' + thisPerson['Jobtype'],);
+          // console.log( 'Not a match! ' + groupID + ' != ' + thisPerson.departments + ' or ' + thisPerson.jobTypes,);
         }
       }
       })
@@ -455,7 +456,7 @@ class PeopleListElement extends HTMLElement {
         pageBody.appendChild(container)
         
         }else {
-          container = this._contentElement.children[0];
+			container = this._contentElement.children[0];
         }
         renderedTable++; 
         break
@@ -464,145 +465,153 @@ class PeopleListElement extends HTMLElement {
     return container
   }
   displayPersonCard(Format, Person, Departments) {
-    // console.log('Rendering the card for ' + Person.Name)
-    let cardHTML = ''
-    // grab the friendly name from the global variable
-    // note: there may be a race condidtion here as we're also querying
-    //  to get those friendly names from the API endpoint.
-    // console.log('Departments :', Departments)
-    let myDept = ""
-    for(let i = 0; i < Person.Dept.length; i++) {
-      let thisDeptID = Person.Dept[i]
-      let thisDeptName = this.getTaxonomyName(Departments, thisDeptID).name;
-      myDept += `<li>${thisDeptName}</li>`
-    }
-    let myPhoto = ''
-    if (Person.PhotoURL) {
-      myPhoto = `<img src="${Person.PhotoURL}"  />`
-    }
+	// console.log('Rendering the card for ' + Person.Name)
+	let cardHTML = '';
+	// grab the friendly name from the global variable
+	// note: there may be a race condidtion here as we're also querying
+	//  to get those friendly names from the API endpoint.
+	// console.log('Departments :', Departments)
+	let myDept = "";
+	for(let i = 0; i < Person.departments.length; i++) {
+	let thisDeptID = Person.departments[i]
+	let thisDeptName = this.getTaxonomyName(Departments, thisDeptID)['name'];
+	myDept += `<li>${PeopleListElement.escapeHTML(thisDeptName)}</li>`;
+	}
+	let myPhoto = '';
+	if (Person.photoURI) {
+		myPhoto = `<img src="${PeopleListElement.escapeHTML(Person.photoURI)}">`;
+	}
+
+	const
+		personLink = Person.link,
+		personName = PeopleListElement.escapeHTML(Person.name),
+		personTitle = PeopleListElement.escapeHTML(Person.title),
+		personBody = PeopleListElement.escapeHTML(Person.body),
+		personEmail = PeopleListElement.escapeHTML(Person.email),
+		personPhone = PeopleListElement.escapeHTML(Person.phone);
   
-    switch (Format) {
-      case 'list':
-        cardHTML = `
-                  <div class="ucb-person-card-list row">
-                      <div class="col-sm-12 col-md-3 ucb-person-card-img">
-                          <a href="${Person.Link}">${myPhoto}</a>
-                      </div>
-                      <div class="col-sm-12 col-md-9 ucb-person-card-details">
-                          <a href="${Person.Link}">
-                              <span class="ucb-person-card-name">
-                                  ${Person.Name ? Person.Name : ''}
-                              </span>
-                          </a>
-                          <span class="ucb-person-card-title">
-                              ${Person.Title ? Person.Title : ''}
-                          </span>
-                      <span class="ucb-person-card-dept">
-                        <ul class="ucb-person-card-dept-ul">
-                          ${myDept} 
-                        </ul>
-                      </span>
-                      <span class="ucb-person-card-body">
-                          ${Person.Body ? Person.Body : ''}
-                      </span>
-                      <div class="ucb-person-card-contact">
-                          <span class="ucb-person-card-email">
-                              ${
-                                Person.Email
-                                  ? `<a href="mailto:${Person.Email}"><span class="ucb-people-list-contact">  ${Person.Email}</span></a>`
-                                  : ''
-                              }
-                          </span>
-                          <span class="ucb-person-card-phone">
-                              ${
-                                Person.Phone
-                                  ? `<a href="tel:${Person.Phone.replace(
-                                      /[^+\d]+/g,
-                                      '',
-                                    )}"><p><span class="ucb-people-list-contact">  ${
-                                      Person.Phone
-                                    }</span></p></a>`
-                                  : ''
-                              }
-                          </span>
-                      </div>
-                      </div>
-                  </div>
-              `
-        break
-      case 'grid':
-        cardHTML = `
-                  <div class="col-sm mb-3">
-                      <div class="col-sm-12 ucb-person-card-img-grid">
-                          <a href="${Person.Link}">${myPhoto}</a>
-                      </div>
-                  <div>
-                  <a href="${Person.Link}">
-                              <span class="ucb-person-card-name">
-                                  ${Person.Name ? Person.Name : ''}
-                              </span>
-                          </a>
-                  <span class="ucb-person-card-title departments-grid">
-                    ${Person.Title ? Person.Title : ''}
-                  </span>
-                  <span class="ucb-person-card-dept departments-grid">
-                    <ul class="ucb-person-card-dept-ul">
-                     ${myDept}
-                    </ul>
-                   </span>
-                  </div>
-                  </div>
-          `
-        break
-      case 'table':
-        cardHTML = `
-  
-                    <td class="ucb-people-list-table-photo">
-                      <a href="${Person.Link}">${myPhoto}</a>  
-                    </td>
-                    <td>
-                      <a href="${Person.Link}">
-                        <span class="ucb-person-card-name">
-                          ${Person.Name ? Person.Name : ''}
-                        </span>
-                      </a>
-                      <span class="ucb-person-card-title departments-grid">
-                    ${Person.Title ? Person.Title : ''}
-                  </span>
-                  <span class="ucb-person-card-dept departments-grid">
-                    <ul class="ucb-person-card-dept-ul">
-                     ${myDept}
-                    </ul>
-                   </span>
-                    </td>
-                    <td>
-                    <span class="ucb-person-card-email">
-                              ${
-                                Person.Email
-                                  ? `<a href="mailto:${Person.Email}"><span class="ucb-people-list-contact"> ${Person.Email}</span></p></a>`
-                                  : ''
-                              }
-                          </span>
-                          <span class="ucb-person-card-phone">
-                              ${
-                                Person.Phone
-                                  ? `<a href="tel:${Person.Phone.replace(
-                                      /[^+\d]+/g,
-                                      '',
-                                    )}"><p>
-                                      <span class="ucb-people-list-contact"> 
-                                    ${Person.Phone}</span></p></a>`
-                                  : ''
-                              }
-                          </span>
-                    </td>
-  
-          `
-        break
-      default:
-    }
-    return cardHTML
-  }
+	switch (Format) {
+	case 'list':
+		cardHTML = `
+				<div class="ucb-person-card-list row">
+					<div class="col-sm-12 col-md-3 ucb-person-card-img">
+						<a href="${personLink}">${myPhoto}</a>
+					</div>
+					<div class="col-sm-12 col-md-9 ucb-person-card-details">
+						<a href="${personLink}">
+							<span class="ucb-person-card-name">
+								${personName ? personName : ''}
+							</span>
+						</a>
+						<span class="ucb-person-card-title">
+							${personTitle ? personTitle : ''}
+						</span>
+					<span class="ucb-person-card-dept">
+						<ul class="ucb-person-card-dept-ul">
+						${myDept} 
+						</ul>
+					</span>
+					<span class="ucb-person-card-body">
+						${personBody ? personBody : ''}
+					</span>
+					<div class="ucb-person-card-contact">
+						<span class="ucb-person-card-email">
+							${
+								personEmail
+								? `<a href="mailto:${personEmail}"><span class="ucb-people-list-contact">  ${personEmail}</span></a>`
+								: ''
+							}
+						</span>
+						<span class="ucb-person-card-phone">
+							${
+								personPhone
+								? `<a href="tel:${personPhone.replace(
+									/[^+\d]+/g,
+									'',
+									)}"><p><span class="ucb-people-list-contact">  ${
+										personPhone
+									}</span></p></a>`
+								: ''
+							}
+						</span>
+					</div>
+					</div>
+				</div>
+			`
+		break
+	case 'grid':
+		cardHTML = `
+				<div class="col-sm mb-3">
+					<div class="col-sm-12 ucb-person-card-img-grid">
+						<a href="${personLink}">${myPhoto}</a>
+					</div>
+				<div>
+				<a href="${personLink}">
+							<span class="ucb-person-card-name">
+								${personBody ? personBody : ''}
+							</span>
+						</a>
+				<span class="ucb-person-card-title departments-grid">
+					${personTitle ? personTitle : ''}
+				</span>
+				<span class="ucb-person-card-dept departments-grid">
+					<ul class="ucb-person-card-dept-ul">
+					${myDept}
+					</ul>
+				</span>
+				</div>
+				</div>
+		`
+		break
+	case 'table':
+		cardHTML = `
+
+					<td class="ucb-people-list-table-photo">
+					<a href="${personLink}">${myPhoto}</a>  
+					</td>
+					<td>
+					<a href="${personLink}">
+						<span class="ucb-person-card-name">
+						${personName ? personName : ''}
+						</span>
+					</a>
+					<span class="ucb-person-card-title departments-grid">
+					${personTitle ? personTitle : ''}
+				</span>
+				<span class="ucb-person-card-dept departments-grid">
+					<ul class="ucb-person-card-dept-ul">
+					${myDept}
+					</ul>
+				</span>
+					</td>
+					<td>
+					<span class="ucb-person-card-email">
+							${
+								personEmail
+								? `<a href="mailto:${personEmail}"><span class="ucb-people-list-contact"> ${personEmail}</span></p></a>`
+								: ''
+							}
+						</span>
+						<span class="ucb-person-card-phone">
+							${
+								personPhone
+								? `<a href="tel:${personPhone.replace(
+									/[^+\d]+/g,
+									'',
+									)}"><p>
+									<span class="ucb-people-list-contact"> 
+									${personPhone}</span></p></a>`
+								: ''
+							}
+						</span>
+					</td>
+
+		`
+		break
+	default:
+	}
+	return cardHTML;
+}
 	getTaxonomyName(taxonomy, tid) {
 		return taxonomy.find( ({ id }) => id === tid );
 	}
@@ -805,7 +814,7 @@ class PeopleListElement extends HTMLElement {
     formDiv.appendChild(formButtonContainer)
     form.appendChild(formDiv)
     // Append final container
-    // this.parentElement.insertBefore(form, this.parentElement.children[2])
+    this._userFormElement.appendChild(form);
   }
 }
 
