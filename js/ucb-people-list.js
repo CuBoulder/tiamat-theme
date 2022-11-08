@@ -3,6 +3,9 @@ let renderedTable = 0;  // flag to know if we've rendered the table header or no
 let firstPassCount = 0; // count for the first pass per group.  
 
 class PeopleListProvider {
+	static get noResultsMessage() { return 'No results matching your filters.'; }
+	static get errorMessage() { return 'Error retrieving people from the API endpoint. Please try again later.'; }
+
 	constructor(baseURI, userConfig, config) {
 		this.baseURI = baseURI;
 		this.nextPath = PeopleListProvider.buildEndpointPath(userConfig, config);
@@ -58,18 +61,16 @@ class PeopleListProvider {
 				data = await response.json(),
 				results = data['data'];
 			if (results.length === 0)
-				console.log("No people matching the filter returned.");
+				console.warn('PeopleListProvider: ' + PeopleListProvider.noResultsMessage);
 			return data;
 		} catch (reason) {
-			console.error("Error retrieving people from the API endpoint. Please try again later.");
+			console.error('PeopleListProvider: ' + PeopleListProvider.errorMessage);
 			throw reason;
 		}
 	}
 }
 
 class PeopleListElement extends HTMLElement {
-	static get noResultsMessage() { return 'No results matching your filters.'; }
-	static get errorMessage() { return 'Error retrieving people from the API endpoint. Please try again later.'; }
 	static get observedAttributes() { return ['user-config']; }
 	
 	constructor() {
@@ -125,13 +126,14 @@ class PeopleListElement extends HTMLElement {
 			GROUPBY = userConfig['groupby'] || config['groupby'] || 'none',
 			ORDERBY = userConfig['orderby'] || config['orderby'] || 'type';
     
+		this.toggleMessageDisplay(this._messageElement, 'none', null, null);
 		this.toggleMessageDisplay(this._loadingElement, 'block', null, null);
 		// Get our people
 		peopleListProvider.fetchPeople().then(response => {
 			this._contentElement.innerText = '';
 			const ourPeople = response;
 			if(ourPeople['data'].length == 0){
-				this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-msg ucb-end-of-results', this.noResultsMessage);
+				this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-end-of-results', PeopleListProvider.noResultsMessage);
 			} else {
 				if (GROUPBY == 'department') {
 					for (const [key] of Object.entries(Departments)) {
@@ -192,7 +194,7 @@ class PeopleListElement extends HTMLElement {
 	}
 
 	fatalError(reason) {
-		this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-msg ucb-error', this.errorMessage);
+		this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-error', PeopleListProvider.errorMessage);
 		this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
 		throw reason;
 	}
