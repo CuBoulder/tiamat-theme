@@ -216,6 +216,7 @@ class PeopleListElement extends HTMLElement {
   
     // TO DO -- issue here with header adding correctly to grid
     if (DISPLAYFORMAT === 'grid' || DISPLAYFORMAT === 'table') {
+      console.log(el)
       el.appendChild(parentContainer)
     }
   
@@ -454,7 +455,7 @@ class PeopleListElement extends HTMLElement {
         pageBody.appendChild(container)
         
         }else {
-          container = this._contentElement;
+          container = this._contentElement.children[0];
         }
         renderedTable++; 
         break
@@ -804,7 +805,7 @@ class PeopleListElement extends HTMLElement {
     formDiv.appendChild(formButtonContainer)
     form.appendChild(formDiv)
     // Append final container
-    this.parentElement.insertBefore(form, this.parentElement.children[2])
+    // this.parentElement.insertBefore(form, this.parentElement.children[2])
   }
 }
 
