@@ -1,12 +1,19 @@
 .ucb-list-msg {
-  font-size: 1.25em;
-  font-weight: bolder;
-  text-align: center;
-  display: none;
+	font-size: 1.25em;
+	font-weight: bolder;
+	text-align: center;
 }
 
 .ucb-loading-data {
-  color: #01579b;
+	color: #01579b;
+	text-align: center;
+}  
+
+.ucb-list-msg, .ucb-loading-data {
+	display: block;
+}
+.ucb-list-msg[hidden], .ucb-loading-data[hidden] {
+	display: none;
 }
 
 .ucb-person-card-list {

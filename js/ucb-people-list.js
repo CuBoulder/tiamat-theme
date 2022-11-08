@@ -61,46 +61,62 @@ class PeopleListProvider {
 				console.log("No people matching the filter returned.");
 			return data;
 		} catch (reason) {
-			console.error("Error retrieving people from the API endpoint.  Please try again later.");
+			console.error("Error retrieving people from the API endpoint. Please try again later.");
 			throw reason;
 		}
 	}
 }
 
 class PeopleListElement extends HTMLElement {
+	static get noResultsMessage() { return 'No results matching your filters.'; }
+	static get errorMessage() { return 'Error retrieving people from the API endpoint. Please try again later.'; }
+	static get observedAttributes() { return ['user-config']; }
+	
 	constructor() {
 		super();
+		const
+			chromeElement = this._chromeElement = document.createElement('div'),
+			contentElement = this._contentElement = document.createElement('div'),
+			messageElement = this._messageElement = document.createElement('div'),
+			loadingElement = this._loadingElement = document.createElement('div');
+		messageElement.className = 'ucb-list-msg';
+		messageElement.setAttribute('hidden', '');
+		loadingElement.className = 'ucb-loading-data';
+		loadingElement.innerHTML = '<i class="fas fa-spinner fa-3x fa-pulse"></i>';
+		chromeElement.appendChild(messageElement);
+		chromeElement.appendChild(loadingElement);
+		this.appendChild(chromeElement);
+		this.appendChild(contentElement);
 		this._baseURI = this.getAttribute('base-uri');
-		this.taxonomiesLoaded = 0;
-		this.departments = [];
-		this.jobTypes = [];
+		this._taxonomiesLoaded = 0;
+		this._departments = [];
+		this._jobTypes = [];
 		// Pre build logic
 		// Fetch all available Departments and Job Types then enter the build stage
 		this.getTaxonomy('department').then(departments => {
-			this.departments = departments;
-			this.taxonomiesLoaded++;
-			if(this.taxonomiesLoaded == 2) // Enter build method
-				this.build(this.departments, this.jobTypes);
+			this._departments = departments;
+			this._taxonomiesLoaded++;
+			if(this._taxonomiesLoaded == 2) // Enter build method
+				this.build(this._departments, this._jobTypes);
 		}).catch(reason => this.fatalError(reason));
 		this.getTaxonomy('ucb_person_job_type').then(jobs => {
-			this.jobTypes = jobs;
-			this.taxonomiesLoaded++;
-			if(this.taxonomiesLoaded == 2) // Enter build method
-				this.build(this.departments, this.jobTypes);
+			this._jobTypes = jobs;
+			this._taxonomiesLoaded++;
+			if(this._taxonomiesLoaded == 2) // Enter build method
+				this.build(this._departments, this._jobTypes);
 		}).catch(reason => this.fatalError(reason));
 	}
 
-	static get observedAttributes() { return ['user-config']; }
 	attributeChangedCallback(name, oldValue, newValue) {
-		if(name == 'user-config' && this.taxonomiesLoaded == 2)
-			this.build(this.departments, this.jobTypes);
+		if(name == 'user-config' && this._taxonomiesLoaded == 2)
+			this.build(this._departments, this._jobTypes);
 	}
 
 	build(Departments, JobTypes) {
-		let userConfig = {}, config = {};
+		let userConfig = this._userConfig || {}, config = this._config || {};
 		try {
-			userConfig = JSON.parse(this.getAttribute('user-config'));
-			config = JSON.parse(this.getAttribute('config'));
+			userConfig = this._userConfig = JSON.parse(this.getAttribute('user-config'));
+			config = this._config = this._config || JSON.parse(this.getAttribute('config'));
 		} catch(e) {}
 		const
 			baseURI = this._baseURI,
@@ -109,12 +125,13 @@ class PeopleListElement extends HTMLElement {
 			GROUPBY = userConfig['groupby'] || config['groupby'] || 'none',
 			ORDERBY = userConfig['orderby'] || config['orderby'] || 'type';
     
-		this.toggleMessage('ucb-loading-data', 'block');
+		this.toggleMessageDisplay(this._loadingElement, 'block', null, null);
 		// Get our people
 		peopleListProvider.fetchPeople().then(response => {
+			this._contentElement.innerText = '';
 			const ourPeople = response;
 			if(ourPeople['data'].length == 0){
-				this.toggleMessage('ucb-end-of-results', 'block');
+				this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-msg ucb-end-of-results', this.noResultsMessage);
 			} else {
 				if (GROUPBY == 'department') {
 					for (const [key] of Object.entries(Departments)) {
@@ -154,7 +171,7 @@ class PeopleListElement extends HTMLElement {
 					}
 				}
 			}
-			this.toggleMessage('ucb-loading-data');
+			this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
 		}).catch(reason => this.fatalError(reason));
 	}
 
@@ -175,14 +192,14 @@ class PeopleListElement extends HTMLElement {
 	}
 
 	fatalError(reason) {
-		this.toggleMessage('ucb-error', 'block');
-		this.toggleMessage('ucb-loading-data');
+		this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-msg ucb-error', this.errorMessage);
+		this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
 		throw reason;
 	}
 
   displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY, ourPeople, Departments, JobTypes) {
     let renderThisGroup = 0; 
-    let el = this
+    let el = this._contentElement;
     let thisDeptName = ""
     let thisTypeName = ""
     if(GROUPBY === "department") {
@@ -414,7 +431,7 @@ class PeopleListElement extends HTMLElement {
         // this function will be called multiple times so check to 
         // see if we've already rendered the table header HTML
         if(!renderedTable) {
-        let pageBody = this
+        let pageBody = this._contentElement;
         container = document.createElement('table')
         container.id = 'ucb-pl-table'
         container.classList = 'table  table-bordered table-striped'
@@ -435,7 +452,7 @@ class PeopleListElement extends HTMLElement {
         pageBody.appendChild(container)
         
         }else {
-          container = this
+          container = this._contentElement;
         }
         renderedTable++; 
         break
@@ -583,22 +600,19 @@ class PeopleListElement extends HTMLElement {
     }
     return cardHTML
   }
-  getTaxonomyName(taxonomy, tid) {
-  // console.log(taxonomy)
-    return taxonomy.find( ({ id }) => id === tid );
-  }
-  toggleMessage(id, display = 'none') {
-  if (id) {
-    var toggle = this.parentElement.children[1].getElementsByClassName(id)[0]
-    if (toggle) {
-      if (display === 'block') {
-        toggle.style.display = 'block'
-      } else {
-        toggle.style.display = 'none'
-      }
-    }
-  }
-  }
+	getTaxonomyName(taxonomy, tid) {
+		return taxonomy.find( ({ id }) => id === tid );
+	}
+
+	toggleMessageDisplay(element, display, className, innerText) {
+		if(className)
+			element.className = className;
+		if(innerText)
+			element.innerText = innerText;
+		if(display === 'none')
+			element.setAttribute('hidden', '');
+		else element.removeAttribute('hidden');
+	}
 /**
  * 
  * TO DO -
