@@ -298,16 +298,22 @@ class PeopleListElement extends HTMLElement {
         thisPerson.link = `/node/${person['attributes']['drupal_internal__nid']}`
         // needed to verify body exists on the Person page, if so, use that
         if (person['attributes']['body']) {
-          const myBody = person['attributes']['body']['processed'];
-          myBody.replace(/(\r\n|\n|\r)/gm, ''); // strip out line breaks
-          thisPerson.body = myBody;
+          // use summary if available
+          if(person['attributes']['body']['summary']){
+            const myBody = person['attributes']['body']['summary'];
+            myBody.replace(/(\r\n|\n|\r)/gm, ''); // strip out line breaks
+            thisPerson.body = myBody;
+          } else {
+            // no summary but body, leave blank?
+            thisPerson.body = '';
+          }
         } else {
           // if no body, set to empty
           thisPerson.body = '';
         }
-        if (thisPerson.PhotoID) {
-          thisPerson.photoURI = urlObj[idObj[thisPerson.PhotoID]]
-          // console.log('Am I an image URL? : ' + thisPerson.PhotoURL)
+        if (thisPerson.photoId) {
+          thisPerson.photoURI = urlObj[idObj[thisPerson.photoId]]
+          // console.log('Am I an image URL? : ' + thisPerson.photoId)
         }
   
         // if first pass (sort by type first) then only render the people with a Job Type 
@@ -483,7 +489,8 @@ class PeopleListElement extends HTMLElement {
 				thisDeptName = this.getTaxonomyName(departments, thisDeptID)['name'];
 			myDept += `<li>${PeopleListElement.escapeHTML(thisDeptName)}</li>`;
 		}
-		const
+
+    const
 			personLink = person.link,
 			personName = PeopleListElement.escapeHTML(person.name),
 			personPhoto = person.photoURI ? `<img src="${PeopleListElement.escapeHTML(person.photoURI)}">` : '',
@@ -548,7 +555,7 @@ class PeopleListElement extends HTMLElement {
 						<div>
 							<a href="${personLink}">
 								<span class="ucb-person-card-name">
-									${personBody ? personBody : ''}
+									${personName ? personName : ''}
 								</span>
 							</a>
 							<span class="ucb-person-card-title departments-grid">
