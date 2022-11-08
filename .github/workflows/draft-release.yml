@@ -1,0 +1,16 @@
+name: "Draft new release"
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: 'The version you want to release.'
+        required: true
+
+
+jobs:
+  draft-new-release:
+    uses: CuBoulder/action-collection/.github/workflows/draft-release.yml@main
+    secrets:
+      envPAT: ${{ secrets.GITHUB_TOKEN }}
+

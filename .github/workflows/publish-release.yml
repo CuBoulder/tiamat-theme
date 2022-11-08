@@ -1,0 +1,15 @@
+name: "Publish new release"
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+jobs:
+  release:
+    uses: CuBoulder/action-collection/.github/workflows/publish-release.yml@main
+    secrets:
+      envPAT: ${{ secrets.GITHUB_TOKEN }}
+

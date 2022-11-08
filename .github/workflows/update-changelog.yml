@@ -1,0 +1,11 @@
+name: Update changelog on PR merge
+on:
+  pull_request:
+    branches:
+      - main
+    types: closed
+
+jobs:
+  update_changelog:
+    uses: CuBoulder/action-collection/.github/workflows/update-changelog.yml@main
+

@@ -1,0 +1,7 @@
+<ul class="ucb-person-title">
+	{% for item in items %}
+		<li itemprop="jobTitle">
+			{{ item.content|render|striptags|trim }}
+		</li>
+	{% endfor %}
+</ul>

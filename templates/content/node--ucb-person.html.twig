@@ -24,34 +24,43 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 <article{{attributes.addClass(classes)}}>
 	<div class="container-fluid ucb-person-name">
 		<div class="container">
-		<h1 class="ucb-person-name ">
-			<span itemprop="givenName">{{ content.field_ucb_person_first_name }}</span> <span itemprop="familyName">{{ content.field_ucb_person_last_name }}</span>
-		</h1>
+			<h1 class="ucb-person-name ">
+				<span itemprop="givenName">{{ content.field_ucb_person_first_name }}</span>
+				<span itemprop="familyName">{{ content.field_ucb_person_last_name }}</span>
+			</h1>
 		</div>
 	</div>
 	<div class="container ucb-person" itemscope itemtype="https://schema.org/Person">
 		<div class="row ucb-person-personal">
 			<div class="col ucb-person-main">
 				{% if content.field_ucb_person_photo|render %}
-					<div itemprop="image"> {{ content.field_ucb_person_photo }} </div> 
+					<div itemprop="image">
+						{{ content.field_ucb_person_photo }}
+					</div>
 				{% endif %}
 				{% if content.field_ucb_person_title|render or content.field_ucb_person_department|render %}
 					<div class="ucb-person-section ucb-person-job">
 						{% if content.field_ucb_person_title|render %}
-							<span class="d-block" itemprop="jobTitle">{{ content.field_ucb_person_title|render|striptags|trim }}</span>
+							<span class="d-block">
+								{{ content.field_ucb_person_title}}
+							</span>
 						{% endif %}
 						{% if content.field_ucb_person_department|render %}
-							<span class="d-block">{{ content.field_ucb_person_department|render|striptags|trim }}</span>
+							<span class="d-block">{{ content.field_ucb_person_department}}</span>
 						{% endif %}
 					</div>
 				{% endif %}
 				{% if content.field_ucb_person_email|render or content.field_ucb_person_phone|render %}
 					<div class="ucb-person-section ucb-person-contact">
 						{% if content.field_ucb_person_email|render %}
-							<div itemprop="email"> {{ content.field_ucb_person_email }} </div> 
+							<div itemprop="email">
+								{{ content.field_ucb_person_email }}
+							</div>
 						{% endif %}
 						{% if content.field_ucb_person_phone|render %}
-							<div itemprop="telephone"> {{ content.field_ucb_person_phone }} </div> 
+							<div itemprop="telephone">
+								{{ content.field_ucb_person_phone }}
+							</div>
 						{% endif %}
 					</div>
 				{% endif %}
