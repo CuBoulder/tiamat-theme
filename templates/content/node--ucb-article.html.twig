@@ -17,33 +17,7 @@
 {% set showDate = true %}
 {% set localDateOverride = content.field_ucb_article_date_override|render|striptags|trim %}
 
-{# short date #}
-{% if global_date_format == "0" %}
-	{% set article_date_format = node.created.value|date("n/j/Y") %}
-	{# medium date #}
-{% elseif global_date_format == "1"%}
-	{% set article_date_format = node.created.value|date("M. j, Y") %}
-	{# long date #}
-{% elseif global_date_format == "2"%}
-	{% set article_date_format = node.created.value|date("l, M. j, Y") %}
-	{# short date w time #}
-{% elseif global_date_format == "3" %}
-	{% set article_date_format = node.created.value|date("m/j/y  - g:i a", "America/Denver") %}
-	{# medium date w time #}
-{% elseif global_date_format == "4" %}
-	{% set article_date_format = node.created.value|date("M. d, Y  - g:i a", "America/Denver") %}
-	{# long date with time #}
-{% elseif global_date_format == "5" %}
-	{% set article_date_format = node.created.value|date("l, M. j, Y  - g:i a", "America/Denver") %}
-	{# none - hide #}
-{% elseif global_date_format == "6" %}
-	{% set article_date_format = "hidden" %}
-	{% set showDate = false %}
-{% else %}
-	{% set article_date_format = node.created.value|date('F d, Y') %}
-{% endif %}
-
-{# Local Date/Time Overrides #}
+{# Local Date/Time Overrides, else use Global Settings #}
 {% if localDateOverride != 0 %}
 	{% if localDateOverride == 1 %}
 		{% set article_date_format = node.created.value|date("n/j/Y") %}
@@ -58,6 +32,33 @@
 	{% elseif localDateOverride == 6 %}
 		{% set article_date_format = node.created.value|date("l, M. j, Y  - g:i a", "America/Denver") %}
 	{% elseif localDateOverride == 7 %}
+		{% set article_date_format = "hidden" %}
+		{% set showDate = false %}
+	{% else %}
+		{% set article_date_format = node.created.value|date('F d, Y') %}
+	{% endif %}
+{% else %}
+	{# Global Settings #}
+		{# short date #}
+	{% if global_date_format == "0" %}
+		{% set article_date_format = node.created.value|date("n/j/Y") %}
+		{# medium date #}
+	{% elseif global_date_format == "1"%}
+		{% set article_date_format = node.created.value|date("M. j, Y") %}
+		{# long date #}
+	{% elseif global_date_format == "2"%}
+		{% set article_date_format = node.created.value|date("l, M. j, Y") %}
+		{# short date w time #}
+	{% elseif global_date_format == "3" %}
+		{% set article_date_format = node.created.value|date("m/j/y  - g:i a", "America/Denver") %}
+		{# medium date w time #}
+	{% elseif global_date_format == "4" %}
+		{% set article_date_format = node.created.value|date("M. d, Y  - g:i a", "America/Denver") %}
+		{# long date with time #}
+	{% elseif global_date_format == "5" %}
+		{% set article_date_format = node.created.value|date("l, M. j, Y  - g:i a", "America/Denver") %}
+		{# none - hide #}
+	{% elseif global_date_format == "6" %}
 		{% set article_date_format = "hidden" %}
 		{% set showDate = false %}
 	{% else %}
@@ -133,8 +134,6 @@ pageStyleCSS
 			<div class="container">
 				<header role="banner" class="ucb-article-banner">
 					<h1 class="ucb-article-heading">{{ label }}</h1>
-					<h2> my global date/time setting is : {{global_date_format}}</h2>
-					<h2> my per article date setting is : {{localDateOverride}}</h2>
 				</header>
 				{# TO DO - conditional render #}
 				{% if social_share_button_position == "4" or social_share_button_position == "1"%}
