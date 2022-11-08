@@ -71,6 +71,11 @@ class PeopleListProvider {
 }
 
 class PeopleListElement extends HTMLElement {
+	/**
+	 * 
+	 * @param {string|null|undefined} raw A raw string
+	 * @returns {string} An HTML-safe string (or an empty string if `raw` is `null` or `undefined`)
+	 */
 	static escapeHTML(raw) { return raw ? raw.replace(/\&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;') : ''; }
 	static get observedAttributes() { return ['user-config']; }
 
@@ -257,7 +262,7 @@ class PeopleListElement extends HTMLElement {
         })
         // using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
         idFilterData.map((pair) => {
-          idObj[pair.id] = pair['relationships']['thumbnail']['data']['id']
+          idObj[pair['id']] = pair['relationships']['thumbnail']['data']['id']
         })
       }
   
@@ -464,154 +469,144 @@ class PeopleListElement extends HTMLElement {
     }
     return container
   }
-  displayPersonCard(Format, Person, Departments) {
-	// console.log('Rendering the card for ' + Person.Name)
-	let cardHTML = '';
-	// grab the friendly name from the global variable
-	// note: there may be a race condidtion here as we're also querying
-	//  to get those friendly names from the API endpoint.
-	// console.log('Departments :', Departments)
-	let myDept = "";
-	for(let i = 0; i < Person.departments.length; i++) {
-	let thisDeptID = Person.departments[i]
-	let thisDeptName = this.getTaxonomyName(Departments, thisDeptID)['name'];
-	myDept += `<li>${PeopleListElement.escapeHTML(thisDeptName)}</li>`;
-	}
-	let myPhoto = '';
-	if (Person.photoURI) {
-		myPhoto = `<img src="${PeopleListElement.escapeHTML(Person.photoURI)}">`;
-	}
-
-	const
-		personLink = Person.link,
-		personName = PeopleListElement.escapeHTML(Person.name),
-		personTitle = PeopleListElement.escapeHTML(Person.title),
-		personBody = PeopleListElement.escapeHTML(Person.body),
-		personEmail = PeopleListElement.escapeHTML(Person.email),
-		personPhone = PeopleListElement.escapeHTML(Person.phone);
-  
-	switch (Format) {
-	case 'list':
-		cardHTML = `
-				<div class="ucb-person-card-list row">
-					<div class="col-sm-12 col-md-3 ucb-person-card-img">
-						<a href="${personLink}">${myPhoto}</a>
-					</div>
-					<div class="col-sm-12 col-md-9 ucb-person-card-details">
-						<a href="${personLink}">
-							<span class="ucb-person-card-name">
-								${personName ? personName : ''}
+	displayPersonCard(format, person, departments) {
+		// console.log('Rendering the card for ' + Person.Name)
+		let cardHTML = '';
+		// grab the friendly name from the global variable
+		// note: there may be a race condidtion here as we're also querying
+		//  to get those friendly names from the API endpoint.
+		// console.log('Departments :', Departments)
+		let myDept = "";
+		for(let i = 0; i < person.departments.length; i++) {
+			const 
+				thisDeptID = person.departments[i], 
+				thisDeptName = this.getTaxonomyName(departments, thisDeptID)['name'];
+			myDept += `<li>${PeopleListElement.escapeHTML(thisDeptName)}</li>`;
+		}
+		const
+			personLink = person.link,
+			personName = PeopleListElement.escapeHTML(person.name),
+			personPhoto = person.photoURI ? `<img src="${PeopleListElement.escapeHTML(person.photoURI)}">` : '',
+			personTitle = PeopleListElement.escapeHTML(person.title),
+			personBody = PeopleListElement.escapeHTML(person.body),
+			personEmail = PeopleListElement.escapeHTML(person.email),
+			personPhone = PeopleListElement.escapeHTML(person.phone);
+	
+		switch (format) {
+			case 'list':
+				cardHTML = `
+					<div class="ucb-person-card-list row">
+						<div class="col-sm-12 col-md-3 ucb-person-card-img">
+							<a href="${personLink}">${personPhoto}</a>
+						</div>
+						<div class="col-sm-12 col-md-9 ucb-person-card-details">
+							<a href="${personLink}">
+								<span class="ucb-person-card-name">
+									${personName}
+								</span>
+							</a>
+							<span class="ucb-person-card-title">
+								${personTitle}
 							</span>
-						</a>
-						<span class="ucb-person-card-title">
-							${personTitle ? personTitle : ''}
-						</span>
-					<span class="ucb-person-card-dept">
-						<ul class="ucb-person-card-dept-ul">
-						${myDept} 
-						</ul>
-					</span>
-					<span class="ucb-person-card-body">
-						${personBody ? personBody : ''}
-					</span>
-					<div class="ucb-person-card-contact">
-						<span class="ucb-person-card-email">
-							${
-								personEmail
-								? `<a href="mailto:${personEmail}"><span class="ucb-people-list-contact">  ${personEmail}</span></a>`
-								: ''
-							}
-						</span>
-						<span class="ucb-person-card-phone">
-							${
-								personPhone
-								? `<a href="tel:${personPhone.replace(
-									/[^+\d]+/g,
-									'',
-									)}"><p><span class="ucb-people-list-contact">  ${
-										personPhone
-									}</span></p></a>`
-								: ''
-							}
-						</span>
-					</div>
-					</div>
-				</div>
-			`
-		break
-	case 'grid':
-		cardHTML = `
-				<div class="col-sm mb-3">
-					<div class="col-sm-12 ucb-person-card-img-grid">
-						<a href="${personLink}">${myPhoto}</a>
-					</div>
-				<div>
-				<a href="${personLink}">
-							<span class="ucb-person-card-name">
-								${personBody ? personBody : ''}
+							<span class="ucb-person-card-dept">
+								<ul class="ucb-person-card-dept-ul">
+									${myDept} 
+								</ul>
 							</span>
-						</a>
-				<span class="ucb-person-card-title departments-grid">
-					${personTitle ? personTitle : ''}
-				</span>
-				<span class="ucb-person-card-dept departments-grid">
-					<ul class="ucb-person-card-dept-ul">
-					${myDept}
-					</ul>
-				</span>
-				</div>
-				</div>
-		`
-		break
-	case 'table':
-		cardHTML = `
-
+							<span class="ucb-person-card-body">
+								${personBody}
+							</span>
+							<div class="ucb-person-card-contact">
+								<span class="ucb-person-card-email">
+									${
+										personEmail ?
+											`<a href="mailto:${personEmail}">
+												<span class="ucb-people-list-contact">  ${personEmail}</span>
+											</a>`
+										: ''
+									}
+								</span>
+								<span class="ucb-person-card-phone">
+									${
+										personPhone ?
+											`<a href="tel:${personPhone.replace(/[^+\d]+/g, '',)}">
+												<p><span class="ucb-people-list-contact">  ${personPhone}</span></p>
+											</a>`
+										: ''
+									}
+								</span>
+							</div>
+						</div>
+					</div>`;
+			break;
+			case 'grid':
+				cardHTML = `
+					<div class="col-sm mb-3">
+						<div class="col-sm-12 ucb-person-card-img-grid">
+							<a href="${personLink}">${personPhoto}</a>
+						</div>
+						<div>
+							<a href="${personLink}">
+								<span class="ucb-person-card-name">
+									${personBody ? personBody : ''}
+								</span>
+							</a>
+							<span class="ucb-person-card-title departments-grid">
+								${personTitle}
+							</span>
+							<span class="ucb-person-card-dept departments-grid">
+								<ul class="ucb-person-card-dept-ul">
+									${myDept}
+								</ul>
+							</span>
+						</div>
+					</div>`;
+			break;
+			case 'table':
+				cardHTML = `
 					<td class="ucb-people-list-table-photo">
-					<a href="${personLink}">${myPhoto}</a>  
+						<a href="${personLink}">${personPhoto}</a>  
 					</td>
 					<td>
-					<a href="${personLink}">
-						<span class="ucb-person-card-name">
-						${personName ? personName : ''}
+						<a href="${personLink}">
+							<span class="ucb-person-card-name">
+								${personName}
+							</span>
+						</a>
+						<span class="ucb-person-card-title departments-grid">
+							${personTitle}
 						</span>
-					</a>
-					<span class="ucb-person-card-title departments-grid">
-					${personTitle ? personTitle : ''}
-				</span>
-				<span class="ucb-person-card-dept departments-grid">
-					<ul class="ucb-person-card-dept-ul">
-					${myDept}
-					</ul>
-				</span>
+						<span class="ucb-person-card-dept departments-grid">
+							<ul class="ucb-person-card-dept-ul">
+								${myDept}
+							</ul>
+						</span>
 					</td>
 					<td>
 					<span class="ucb-person-card-email">
-							${
-								personEmail
-								? `<a href="mailto:${personEmail}"><span class="ucb-people-list-contact"> ${personEmail}</span></p></a>`
-								: ''
-							}
+						${
+							personEmail ?
+								`<a href="mailto:${personEmail}">
+									<span class="ucb-people-list-contact"> ${personEmail}</span>
+								</a>`
+							: ''
+						}
 						</span>
 						<span class="ucb-person-card-phone">
 							${
-								personPhone
-								? `<a href="tel:${personPhone.replace(
-									/[^+\d]+/g,
-									'',
-									)}"><p>
-									<span class="ucb-people-list-contact"> 
-									${personPhone}</span></p></a>`
+								personPhone ?
+									`<a href="tel:${personPhone.replace(/[^+\d]+/g, '',)}">
+										<p><span class="ucb-people-list-contact">${personPhone}</span></p>
+									</a>`
 								: ''
 							}
 						</span>
-					</td>
-
-		`
-		break
-	default:
+					</td>`;
+			break;
+			default:
+		}
+		return cardHTML;
 	}
-	return cardHTML;
-}
 	getTaxonomyName(taxonomy, tid) {
 		return taxonomy.find( ({ id }) => id === tid );
 	}
