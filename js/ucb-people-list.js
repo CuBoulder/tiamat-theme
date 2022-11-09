@@ -138,13 +138,14 @@ class PeopleListElement extends HTMLElement {
 		this.toggleMessageDisplay(this._loadingElement, 'block', null, null);
 		// Get our people
 		peopleListProvider.fetchPeople().then(response => {
+      this.generateDropdown()
 			this._contentElement.innerText = '';
 			const ourPeople = response;
 			if(ourPeople['data'].length == 0){
 				this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-end-of-results', PeopleListProvider.noResultsMessage);
 			} else {
 				if (GROUPBY == 'department') {
-					for (const [key] of Object.entries(Departments)) {
+					for (const [key] of Object.entries(Departments)) {  
 						// let thisDeptID = Departments[key].id
 						// let thisDeptName = getTaxonomyName(Departments, thisDeptID);
 						// console.log("Group by Dept : " + thisDeptID)
@@ -427,7 +428,6 @@ class PeopleListElement extends HTMLElement {
     }
     // done with cards, clean up and close any HTML tags we have opened.
     // el.append(footerHTML)
-  this.generateDropdown()
     // console.log(el.dataset.json)
   }
   getParentContainer(Format) // flag to know if we've rendered the table header or not yet
@@ -636,7 +636,8 @@ class PeopleListElement extends HTMLElement {
  * - Programatically assign options - (value and innerText)
  *
  */
-  generateDropdown(){
+  async generateDropdown(){
+    var config = JSON.parse(this.getAttribute('config'))
     // Create Elements
     var form = document.createElement('form')
     form.classList = 'people-list-filter'
@@ -645,7 +646,7 @@ class PeopleListElement extends HTMLElement {
 
     // If User-Filterable...
     // Departments, create filterable dropdown of Departments
-    if(this.getAttribute('allowUserDeptFilters')==='True'){
+    if(config.filters.department.userAccessible){
       var formItemDeptContainer = document.createElement('div')
       formItemDeptContainer.classList = 'form-item-department form-item'
   
@@ -655,22 +656,20 @@ class PeopleListElement extends HTMLElement {
   
       var selectDept = document.createElement('select')
       selectDept.id = 'edit-department'
-      // Create options programmatically - TO DO
-      var option4 = document.createElement('option')
-      var option5 = document.createElement('option')
-      var option6 = document.createElement('option')
-      
-      option4.value = '0'
-      option4.innerText = 'Example 4'
-      option5.value = '1'
-      option5.innerText = 'Example 5'
-      option6.value = '3'
-      option6.innerText = 'Example 6'
-  
-      selectDept.appendChild(option4)
-      selectDept.appendChild(option5)
-      selectDept.appendChild(option6)
-  
+      // Get departments and IDs and iterate over creating options
+      const departments = await this.getTaxonomy('department')
+      // All option as first entry
+      var allOption = document.createElement('option')
+      allOption.value = ''
+      allOption.innerText = 'All'
+      selectDept.appendChild(allOption)
+      departments.forEach(department=>{
+        let option = document.createElement('option')
+        option.value = department.id
+        option.innerText = department.name
+        selectDept.appendChild(option)
+      })
+      // Append
       formItemDeptContainer.appendChild(formItemDeptLabel)
       formItemDeptContainer.appendChild(selectDept)
   
@@ -678,7 +677,7 @@ class PeopleListElement extends HTMLElement {
     }
 
     // Create filterable dropdown of Job Types
-    if(this.getAttribute('allowUserJobTypeFilters')==='True'){
+    if(config.filters.job_type.userAccessible){
       var formItemJobTypeContainer = document.createElement('div')
       formItemJobTypeContainer.classList = 'form-item-job-type form-item'
   
@@ -688,21 +687,20 @@ class PeopleListElement extends HTMLElement {
   
       var selectJobType = document.createElement('select')
       selectJobType.id = 'edit-job-types'
-      // Create options programmatically - TO DO
-      var option1 = document.createElement('option')
-      var option2 = document.createElement('option')
-      var option3 = document.createElement('option')
-      
-      option1.value = '0'
-      option1.innerText = 'Example'
-      option2.value = '1'
-      option2.innerText = 'Example 2'
-      option3.value = '3'
-      option3.innerText = 'Example 3'
-  
-      selectJobType.appendChild(option1)
-      selectJobType.appendChild(option2)
-      selectJobType.appendChild(option3)
+
+      const jobTypes = await this.getTaxonomy('ucb_person_job_type')
+      // All option as first entry
+      var allOption = document.createElement('option')
+      allOption.value = ''
+      allOption.innerText = 'All'
+      // Get ID's of departments
+      selectJobType.appendChild(allOption)
+      jobTypes.forEach(type=>{
+        let option = document.createElement('option')
+        option.value = type.id
+        option.innerText = type.name
+        selectJobType.appendChild(option)
+      })
   
       formItemJobTypeContainer.appendChild(formItemJobTypeLabel)
       formItemJobTypeContainer.appendChild(selectJobType)
@@ -710,7 +708,7 @@ class PeopleListElement extends HTMLElement {
       formDiv.appendChild(formItemJobTypeContainer)
     }
     // Create Filter 1
-    if(this.getAttribute('allowUserFilter1')==='True'){
+    if(config.filters.filter_1.userAccessible){
       var formItemFilter1Container = document.createElement('div')
       formItemFilter1Container.classList = 'form-item-filter-one form-item'
   
@@ -720,21 +718,37 @@ class PeopleListElement extends HTMLElement {
   
       var selectFilter1 = document.createElement('select')
       selectFilter1.id = 'edit-filter-one'
+
+
+      const filter1s = await this.getTaxonomy('filter_1')
+      // All option as first entry
+      var allOption = document.createElement('option')
+      allOption.value = ''
+      allOption.innerText = 'All'
+      // Get ID's of filter 1
+      selectFilter1.appendChild(allOption)
+      filter1s.forEach(type=>{
+        let option = document.createElement('option')
+        option.value = type.id
+        option.innerText = type.name
+        selectFilter1.appendChild(option)
+      })
       // Create options programmatically - TO DO
-      var option7 = document.createElement('option')
-      var option8 = document.createElement('option')
-      var option9 = document.createElement('option')
+      // var option7 = document.createElement('option')
+      // var option8 = document.createElement('option')
+      // var option9 = document.createElement('option')
       
-      option7.value = '0'
-      option7.innerText = 'Example'
-      option8.value = '1'
-      option8.innerText = 'Example 2'
-      option9.value = '3'
-      option9.innerText = 'Example 3'
+      // option7.value = '0'
+      // option7.innerText = 'Example'
+      // option8.value = '1'
+      // option8.innerText = 'Example 2'
+      // option9.value = '3'
+      // option9.innerText = 'Example 3'
   
-      selectFilter1.appendChild(option7)
-      selectFilter1.appendChild(option8)
-      selectFilter1.appendChild(option9)
+      // selectFilter1.appendChild(option7)
+      // selectFilter1.appendChild(option8)
+      // selectFilter1.appendChild(option9)
+      
   
       formItemFilter1Container.appendChild(formItemFilter1Label)
       formItemFilter1Container.appendChild(selectFilter1)
@@ -742,7 +756,7 @@ class PeopleListElement extends HTMLElement {
       formDiv.appendChild(formItemFilter1Container)
     }
     // Create Filter 2
-    if(this.getAttribute('allowUserFilter2')==='True'){
+    if(config.filters.filter_2.userAccessible){
       var formItemFilter2Container = document.createElement('div')
       formItemFilter2Container.classList = 'form-item-filter-two form-item'
   
@@ -753,20 +767,34 @@ class PeopleListElement extends HTMLElement {
       var selectFilter2 = document.createElement('select')
       selectFilter2.id = 'edit-filter-two'
       // Create options programmatically - TO DO
-      var option10 = document.createElement('option')
-      var option11 = document.createElement('option')
-      var option12 = document.createElement('option')
+      // var option10 = document.createElement('option')
+      // var option11 = document.createElement('option')
+      // var option12 = document.createElement('option')
       
-      option10.value = '0'
-      option10.innerText = 'Example'
-      option11.value = '1'
-      option11.innerText = 'Example 2'
-      option12.value = '3'
-      option12.innerText = 'Example 3'
+      // option10.value = '0'
+      // option10.innerText = 'Example'
+      // option11.value = '1'
+      // option11.innerText = 'Example 2'
+      // option12.value = '3'
+      // option12.innerText = 'Example 3'
   
-      selectFilter2.appendChild(option10)
-      selectFilter2.appendChild(option11)
-      selectFilter2.appendChild(option12)
+      // selectFilter2.appendChild(option10)
+      // selectFilter2.appendChild(option11)
+      // selectFilter2.appendChild(option12)
+
+      const filter2s = await this.getTaxonomy('filter_2')
+      // All option as first entry
+      var allOption = document.createElement('option')
+      allOption.value = ''
+      allOption.innerText = 'All'
+      // Get ID's of filter 1
+      selectFilter2.appendChild(allOption)
+      filter2s.forEach(type=>{
+        let option = document.createElement('option')
+        option.value = type.id
+        option.innerText = type.name
+        selectFilter2.appendChild(option)
+      })
   
       formItemFilter2Container.appendChild(formItemFilter2Label)
       formItemFilter2Container.appendChild(selectFilter2)
@@ -774,7 +802,7 @@ class PeopleListElement extends HTMLElement {
       formDiv.appendChild(formItemFilter2Container)
     }
     // Create Filter 3
-    if(this.getAttribute('allowUserFilter3')==='True'){
+    if(config.filters.filter_3.userAccessible){
       var formItemFilter3Container = document.createElement('div')
       formItemFilter3Container.classList = 'form-item-filter-three form-item'
   
@@ -785,20 +813,34 @@ class PeopleListElement extends HTMLElement {
       var selectFilter3 = document.createElement('select')
       selectFilter3.id = 'edit-filter-three'
       // Create options programmatically - TO DO
-      var option13 = document.createElement('option')
-      var option14 = document.createElement('option')
-      var option15 = document.createElement('option')
+      // var option13 = document.createElement('option')
+      // var option14 = document.createElement('option')
+      // var option15 = document.createElement('option')
       
-      option13.value = '0'
-      option13.innerText = 'Example'
-      option14.value = '1'
-      option14.innerText = 'Example 2'
-      option15.value = '3'
-      option15.innerText = 'Example 3'
+      // option13.value = '0'
+      // option13.innerText = 'Example'
+      // option14.value = '1'
+      // option14.innerText = 'Example 2'
+      // option15.value = '3'
+      // option15.innerText = 'Example 3'
   
-      selectFilter3.appendChild(option13)
-      selectFilter3.appendChild(option14)
-      selectFilter3.appendChild(option15)
+      // selectFilter3.appendChild(option13)
+      // selectFilter3.appendChild(option14)
+      // selectFilter3.appendChild(option15)
+
+      const filter3s = await this.getTaxonomy('filter_3')
+      // All option as first entry
+      var allOption = document.createElement('option')
+      allOption.value = ''
+      allOption.innerText = 'All'
+      // Get ID's of filter 3
+      selectFilter3.appendChild(allOption)
+      filter3s.forEach(type=>{
+        let option = document.createElement('option')
+        option.value = type.id
+        option.innerText = type.name
+        selectFilter3.appendChild(option)
+      })
   
       formItemFilter3Container.appendChild(formItemFilter3Label)
       formItemFilter3Container.appendChild(selectFilter3)
