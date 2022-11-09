@@ -11,6 +11,62 @@
 {{ attach_library('boulderD9_base/ucb-related-articles') }}
 {# Added class to article class 'pageStyleCSS' to control page style #}
 
+
+{# DATE FORMATTER - use global setting for all, unless override in article provided #}
+{% set global_date_format = drupal_config('boulderD9_base.settings', 'ucb_date_format') %}
+{% set showDate = true %}
+{% set localDateOverride = content.field_ucb_article_date_override|render|striptags|trim %}
+
+{# Local Date/Time Overrides, else use Global Settings #}
+{% if localDateOverride != 0 %}
+	{% if localDateOverride == 1 %}
+		{% set article_date_format = node.created.value|date("n/j/Y") %}
+	{% elseif localDateOverride == 2 %}
+		{% set article_date_format = node.created.value|date("M. j, Y") %}
+	{% elseif localDateOverride == 3 %}
+		{% set article_date_format = node.created.value|date("l, M. j, Y") %}
+	{% elseif localDateOverride == 4 %}
+		{% set article_date_format = node.created.value|date("m/j/y  - g:i a", "America/Denver") %}
+	{% elseif localDateOverride == 5 %}
+		{% set article_date_format = node.created.value|date("M. d, Y  - g:i a", "America/Denver") %}
+	{% elseif localDateOverride == 6 %}
+		{% set article_date_format = node.created.value|date("l, M. j, Y  - g:i a", "America/Denver") %}
+	{% elseif localDateOverride == 7 %}
+		{% set article_date_format = "hidden" %}
+		{% set showDate = false %}
+	{% else %}
+		{% set article_date_format = node.created.value|date('F d, Y') %}
+	{% endif %}
+{% else %}
+	{# Global Settings #}
+		{# short date #}
+	{% if global_date_format == "0" %}
+		{% set article_date_format = node.created.value|date("n/j/Y") %}
+		{# medium date #}
+	{% elseif global_date_format == "1"%}
+		{% set article_date_format = node.created.value|date("M. j, Y") %}
+		{# long date #}
+	{% elseif global_date_format == "2"%}
+		{% set article_date_format = node.created.value|date("l, M. j, Y") %}
+		{# short date w time #}
+	{% elseif global_date_format == "3" %}
+		{% set article_date_format = node.created.value|date("m/j/y  - g:i a", "America/Denver") %}
+		{# medium date w time #}
+	{% elseif global_date_format == "4" %}
+		{% set article_date_format = node.created.value|date("M. d, Y  - g:i a", "America/Denver") %}
+		{# long date with time #}
+	{% elseif global_date_format == "5" %}
+		{% set article_date_format = node.created.value|date("l, M. j, Y  - g:i a", "America/Denver") %}
+		{# none - hide #}
+	{% elseif global_date_format == "6" %}
+		{% set article_date_format = "hidden" %}
+		{% set showDate = false %}
+	{% else %}
+		{% set article_date_format = node.created.value|date('F d, Y') %}
+	{% endif %}
+{% endif %}
+
+
 {% set pageStyleInt = content.field_ucb_article_style|render|striptags|trim %}
 {% set pageStyleCSS = "" %}
 {% if pageStyleInt == "Traditional"%}
@@ -21,8 +77,6 @@
 {% elseif pageStyleInt =="Zebra Striped"%}
 	{% set pageStyleCSS = "ucb-page-style-striped" %}
 {% endif %}
-
-
 
 
 {%
@@ -68,6 +122,9 @@ pageStyleCSS
 	{% set isLoggedIn = "true" %}
 {% endif %}
 
+
+{# {% set publishedDate = node.created.value|date('F d, Y') %} #}
+
 {#Dummy variable to ensure that all content tags are set for caching purposes#}
 {% set content_render = content|render %}
 
@@ -84,14 +141,16 @@ pageStyleCSS
 						{{ drupal_block("social_sharing_buttons_block") }}
 					</div>
 				{% endif %}
+			{% if showDate %}
 				<div role="contentinfo" class="ucb-article-meta">
 					<div class="ucb-article-date">
 						<i class="far fa-calendar"></i>
-						<span class="sr-only">Published:</span>
+						<span class="sr-only">Published:{{article_date_format}}</span>
 						<span itemprop="datePublished">
-							{{ node.created.value|date('F d, Y') }}
+							{{ article_date_format }}
 						</span>
 					</div>
+			{% endif %}
 					{% if content.field_ucb_article_byline|render %}
 						<div class="ucb-article-byline">
 							<i class="fas fa-circle"></i>
