@@ -130,9 +130,9 @@ class PeopleListElement extends HTMLElement {
 		const
 			baseURI = this._baseURI,
 			peopleListProvider = this._peopleListProvider = new PeopleListProvider(baseURI, userConfig, config),
-			FORMAT = userConfig['format'] || config['format'] || 'list',
-			GROUPBY = userConfig['groupby'] || config['groupby'] || 'none',
-			ORDERBY = userConfig['orderby'] || config['orderby'] || 'type';
+			FORMAT = this._format = userConfig['format'] || config['format'] || 'list',
+			GROUPBY = this._groupBy = userConfig['groupby'] || config['groupby'] || 'none',
+			ORDERBY = this._orderBNy = userConfig['orderby'] || config['orderby'] || 'type';
     
 		this.toggleMessageDisplay(this._messageElement, 'none', null, null);
 		this.toggleMessageDisplay(this._loadingElement, 'block', null, null);
@@ -271,52 +271,28 @@ class PeopleListElement extends HTMLElement {
       ourPeople.data.map((person) => {
         // get the person data we need
         let renderMe = true;
-        let thisPerson = {}
-        let thisPersonCard = '' // placeholder for the HTML to render this card in the required format
-        thisPerson.name = person['attributes']['title']
-        thisPerson.title = person['attributes']['field_ucb_person_title'][0]
-        thisPerson.departments = []
-        for(let i = 0; i < person['relationships']['field_ucb_person_department']['data'].length; i++) {
-          thisPerson.departments.push(
-            person['relationships']['field_ucb_person_department']['data'][i]['meta']['drupal_internal__target_id']
-          );
-        } 
-        thisPerson.jobTypes = []
-        for(let i = 0; i < person['relationships']['field_ucb_person_job_type']['data'].length; i++) {
-          thisPerson.jobTypes.push(
-            person['relationships']['field_ucb_person_job_type']['data'][i]['meta']['drupal_internal__target_id']
-          );
-        }
-        if(!person['relationships']['field_ucb_person_photo']['data']){
-          thisPerson.photoId= ""
-        } else {
-          thisPerson.photoId =
-            person['relationships']['field_ucb_person_photo']['data']['id']
-        }
-        thisPerson.photoURI = ''
-        thisPerson.email = person['attributes']['field_ucb_person_email']
-        thisPerson.phone = person['attributes']['field_ucb_person_phone']
-        thisPerson.link = `/node/${person['attributes']['drupal_internal__nid']}`
-        // needed to verify body exists on the Person page, if so, use that
-        if (person['attributes']['body']) {
-          // use summary if available
-          if(person['attributes']['body']['summary']){
-            const myBody = person['attributes']['body']['summary'];
-            myBody.replace(/(\r\n|\n|\r)/gm, ''); // strip out line breaks
-            thisPerson.body = myBody;
-          } else {
-            // no summary but body, leave blank?
-            thisPerson.body = '';
-          }
-        } else {
-          // if no body, set to empty
-          thisPerson.body = '';
-        }
-        if (thisPerson.photoId) {
-          thisPerson.photoURI = urlObj[idObj[thisPerson.photoId]]
-          // console.log('Am I an image URL? : ' + thisPerson.photoId)
-        }
-  
+        let thisPerson = {};
+        let thisPersonCard = ''; // placeholder for the HTML to render this card in the required format
+		thisPerson.name = person['attributes']['title'];
+		thisPerson.title = person['attributes']['field_ucb_person_title'][0];
+		thisPerson.departments = [];
+		person['relationships']['field_ucb_person_department']['data'].forEach(
+			departmentData => thisPerson.departments.push(departmentData['meta']['drupal_internal__target_id']));
+		thisPerson.jobTypes = [];
+		person['relationships']['field_ucb_person_job_type']['data'].forEach(
+			jobTypeData => thisPerson.jobTypes.push(jobTypeData['meta']['drupal_internal__target_id']));
+		thisPerson.photoId = person['relationships']['field_ucb_person_photo']['data'] ? person['relationships']['field_ucb_person_photo']['data']['id'] : '';
+		thisPerson.photoURI = thisPerson.photoId ? urlObj[idObj[thisPerson.photoId]] : '';
+		thisPerson.body = '';
+		thisPerson.email = person['attributes']['field_ucb_person_email'];
+		thisPerson.phone = person['attributes']['field_ucb_person_phone'];
+		thisPerson.link = (person['attributes']['path'] || {})['alias'] || `/node/${person['attributes']['drupal_internal__nid']}`;
+		// needed to verify body exists on the Person page, if so, use that
+		if (person['attributes']['body']) {
+			// use summary if available
+			if (person['attributes']['body']['summary'])
+				thisPerson.body = person['attributes']['body']['summary'].replace(/(\r\n|\n|\r)/gm, ''); // strip out line breaks
+		}
         // if first pass (sort by type first) then only render the people with a Job Type 
         // else if second pass (sort by type first) then only render the people without a Job Type
         if(ORDERBY === "firstpass" && !thisPerson.jobTypes.length) {
@@ -490,7 +466,7 @@ class PeopleListElement extends HTMLElement {
 			myDept += `<li>${PeopleListElement.escapeHTML(thisDeptName)}</li>`;
 		}
 
-    const
+		const
 			personLink = person.link,
 			personName = PeopleListElement.escapeHTML(person.name),
 			personPhoto = person.photoURI ? `<img src="${PeopleListElement.escapeHTML(person.photoURI)}">` : '',
