@@ -616,6 +616,19 @@ class PeopleListElement extends HTMLElement {
     var config = JSON.parse(this.getAttribute('config'))
     // Create Elements
     var form = document.createElement('form')
+    form.id = 'user-filter'
+    form.addEventListener('submit',(event)=> {
+      event.preventDefault()
+      var formData = new FormData(document.forms['user-filter']);
+      var dataObj = {}
+      // Create a dataObject with ids for second render
+      for (var p of formData) {
+        dataObj[p[0]] = p[1]
+      }
+      // TO DO --
+      // Call a function here, passing ids for each thing. 
+      // Re render page
+    })
     form.classList = 'people-list-filter'
     var formDiv = document.createElement('div')
     formDiv.classList = 'd-flex align-items-center'
@@ -631,6 +644,7 @@ class PeopleListElement extends HTMLElement {
       formItemDeptLabel.innerText = 'Departments'
   
       var selectDept = document.createElement('select')
+      selectDept.name = 'editDepartment'
       selectDept.id = 'edit-department'
       // Get departments and IDs and iterate over creating options
       const departments = await this.getTaxonomy('department')
@@ -662,6 +676,7 @@ class PeopleListElement extends HTMLElement {
       formItemJobTypeLabel.innerText = 'Job Types'
   
       var selectJobType = document.createElement('select')
+      selectJobType.name = 'editJobType'
       selectJobType.id = 'edit-job-types'
 
       const jobTypes = await this.getTaxonomy('ucb_person_job_type')
@@ -693,6 +708,7 @@ class PeopleListElement extends HTMLElement {
       formItemFilter1Label.innerText = 'Filter 1'
   
       var selectFilter1 = document.createElement('select')
+      selectFilter1.name = 'editFilterOne'
       selectFilter1.id = 'edit-filter-one'
 
 
@@ -741,6 +757,7 @@ class PeopleListElement extends HTMLElement {
       formItemFilter2Label.innerText = 'Filter 2'
   
       var selectFilter2 = document.createElement('select')
+      selectFilter2.name = 'editFilterTwo'
       selectFilter2.id = 'edit-filter-two'
       // Create options programmatically - TO DO
       // var option10 = document.createElement('option')
@@ -787,6 +804,7 @@ class PeopleListElement extends HTMLElement {
       formItemFilter3Label.innerText = 'Filter 3'
   
       var selectFilter3 = document.createElement('select')
+      selectFilter3.name = 'editFilterThree'
       selectFilter3.id = 'edit-filter-three'
       // Create options programmatically - TO DO
       // var option13 = document.createElement('option')
