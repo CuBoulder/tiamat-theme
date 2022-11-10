@@ -112,6 +112,7 @@ class PeopleListElement extends HTMLElement {
 			this._jobTypes = jobs;
 			this._taxonomiesLoaded++;
 			if(this._taxonomiesLoaded == 2) // Enter build method
+      console.log(this._departments, this._jobTypes)
 				this.build(this._departments, this._jobTypes);
 		}).catch(reason => this.fatalError(reason));
 	}
@@ -613,246 +614,264 @@ class PeopleListElement extends HTMLElement {
  *
  */
   async generateDropdown(){
-    var config = JSON.parse(this.getAttribute('config'))
-    // Create Elements
-    var form = document.createElement('form')
-    form.id = 'user-filter'
-    form.addEventListener('submit',(event)=> {
-      event.preventDefault()
-      var formData = new FormData(document.forms['user-filter']);
-      var dataObj = {}
-      // Create a dataObject with ids for second render
-      for (var p of formData) {
-        dataObj[p[0]] = p[1]
+    if(this._userFormElement.children.length == 0){
+      var config = JSON.parse(this.getAttribute('config'))
+      // Create Elements
+      var form = document.createElement('form')
+      form.id = 'user-filter'
+      form.addEventListener('submit',(event)=> {
+        event.preventDefault()
+        var formData = new FormData(document.forms['user-filter']);
+        var dataObj = {}
+        // Create a dataObject with ids for second render
+        for (var p of formData) {
+          dataObj[p[0]] = p[1]
+        }
+        var deptObj = JSON.parse(dataObj.editDepartment)
+        var typeObj = JSON.parse(dataObj.editJobType)
+        var filter1Obj = JSON.parse(dataObj.editFilterOne)
+        var filter2Obj = JSON.parse(dataObj.editFilterTwo)
+        var filter3Obj = JSON.parse(dataObj.editFilterThree)
+        
+        console.log('=====================')
+        console.log('dropdown dept', deptObj)
+        console.log('dropdown type', typeObj)
+        console.log('filter 1 obj', filter1Obj)
+        console.log('filter 2 obj', filter2Obj)
+        console.log('filter 3 obj', filter3Obj)
+  
+        renderedTable = 0;  // flag to know if we've rendered the table header or not yet
+        firstPassCount = 0;
+         // TO DO -- fix build
+        // this.build(deptObj, typeObj)
+
+      })
+      form.classList = 'people-list-filter'
+      var formDiv = document.createElement('div')
+      formDiv.classList = 'd-flex align-items-center'
+  
+      // If User-Filterable...
+      // Departments, create filterable dropdown of Departments
+      if(config.filters.department.userAccessible){
+        var formItemDeptContainer = document.createElement('div')
+        formItemDeptContainer.classList = 'form-item-department form-item'
+    
+        var formItemDeptLabel = document.createElement('label')
+        formItemDeptLabel.htmlFor = "Edit Departments"
+        formItemDeptLabel.innerText = 'Departments'
+    
+        var selectDept = document.createElement('select')
+        selectDept.name = 'editDepartment'
+        selectDept.id = 'edit-department'
+        // Get departments and IDs and iterate over creating options
+        const departments = await this.getTaxonomy('department')
+        // All option as first entry
+        var allOption = document.createElement('option')
+        allOption.value = JSON.stringify([{id:"", name: "" }])
+        allOption.innerText = 'All'
+        selectDept.appendChild(allOption)
+        departments.forEach(department=>{
+          let option = document.createElement('option')
+          option.value = JSON.stringify([{id:department.id, name: department.name}])
+          option.innerText = department.name
+          selectDept.appendChild(option)
+        })
+        // Append
+        formItemDeptContainer.appendChild(formItemDeptLabel)
+        formItemDeptContainer.appendChild(selectDept)
+    
+        formDiv.appendChild(formItemDeptContainer)
       }
-      // TO DO --
-      // Call a function here, passing ids for each thing. 
-      // Re render page
-    })
-    form.classList = 'people-list-filter'
-    var formDiv = document.createElement('div')
-    formDiv.classList = 'd-flex align-items-center'
-
-    // If User-Filterable...
-    // Departments, create filterable dropdown of Departments
-    if(config.filters.department.userAccessible){
-      var formItemDeptContainer = document.createElement('div')
-      formItemDeptContainer.classList = 'form-item-department form-item'
   
-      var formItemDeptLabel = document.createElement('label')
-      formItemDeptLabel.htmlFor = "Edit Departments"
-      formItemDeptLabel.innerText = 'Departments'
+      // Create filterable dropdown of Job Types
+      if(config.filters.job_type.userAccessible){
+        var formItemJobTypeContainer = document.createElement('div')
+        formItemJobTypeContainer.classList = 'form-item-job-type form-item'
+    
+        var formItemJobTypeLabel = document.createElement('label')
+        formItemJobTypeLabel.htmlFor = "Edit Job Types"
+        formItemJobTypeLabel.innerText = 'Job Types'
+    
+        var selectJobType = document.createElement('select')
+        selectJobType.name = 'editJobType'
+        selectJobType.id = 'edit-job-types'
   
-      var selectDept = document.createElement('select')
-      selectDept.name = 'editDepartment'
-      selectDept.id = 'edit-department'
-      // Get departments and IDs and iterate over creating options
-      const departments = await this.getTaxonomy('department')
-      // All option as first entry
-      var allOption = document.createElement('option')
-      allOption.value = ''
-      allOption.innerText = 'All'
-      selectDept.appendChild(allOption)
-      departments.forEach(department=>{
-        let option = document.createElement('option')
-        option.value = department.id
-        option.innerText = department.name
-        selectDept.appendChild(option)
-      })
-      // Append
-      formItemDeptContainer.appendChild(formItemDeptLabel)
-      formItemDeptContainer.appendChild(selectDept)
+        const jobTypes = await this.getTaxonomy('ucb_person_job_type')
+        // All option as first entry
+        var allOption = document.createElement('option')
+        allOption.value = JSON.stringify([{id:'', name: ""}])
+        allOption.innerText = 'All'
+        // Get ID's of departments
+        selectJobType.appendChild(allOption)
+        jobTypes.forEach(type=>{
+          let option = document.createElement('option')
+          option.value = JSON.stringify([{id:type.id, name: type.name}])
+          option.innerText = type.name
+          selectJobType.appendChild(option)
+        })
+    
+        formItemJobTypeContainer.appendChild(formItemJobTypeLabel)
+        formItemJobTypeContainer.appendChild(selectJobType)
+    
+        formDiv.appendChild(formItemJobTypeContainer)
+      }
+      // Create Filter 1
+      if(config.filters.filter_1.userAccessible){
+        var formItemFilter1Container = document.createElement('div')
+        formItemFilter1Container.classList = 'form-item-filter-one form-item'
+    
+        var formItemFilter1Label = document.createElement('label')
+        formItemFilter1Label.htmlFor = "Edit Filer 1"
+        formItemFilter1Label.innerText = 'Filter 1'
+    
+        var selectFilter1 = document.createElement('select')
+        selectFilter1.name = 'editFilterOne'
+        selectFilter1.id = 'edit-filter-one'
   
-      formDiv.appendChild(formItemDeptContainer)
+  
+        const filter1s = await this.getTaxonomy('filter_1')
+        // All option as first entry
+        var allOption = document.createElement('option')
+        allOption.value = JSON.stringify([{id:'', name: ''}])
+        allOption.innerText = 'All'
+        // Get ID's of filter 1
+        selectFilter1.appendChild(allOption)
+        filter1s.forEach(type=>{
+          let option = document.createElement('option')
+          option.value = JSON.stringify([{id:type.id, name: type.name}])
+          option.innerText = type.name
+          selectFilter1.appendChild(option)
+        })
+        // Create options programmatically - TO DO
+        // var option7 = document.createElement('option')
+        // var option8 = document.createElement('option')
+        // var option9 = document.createElement('option')
+        
+        // option7.value = '0'
+        // option7.innerText = 'Example'
+        // option8.value = '1'
+        // option8.innerText = 'Example 2'
+        // option9.value = '3'
+        // option9.innerText = 'Example 3'
+    
+        // selectFilter1.appendChild(option7)
+        // selectFilter1.appendChild(option8)
+        // selectFilter1.appendChild(option9)
+        
+    
+        formItemFilter1Container.appendChild(formItemFilter1Label)
+        formItemFilter1Container.appendChild(selectFilter1)
+    
+        formDiv.appendChild(formItemFilter1Container)
+      }
+      // Create Filter 2
+      if(config.filters.filter_2.userAccessible){
+        var formItemFilter2Container = document.createElement('div')
+        formItemFilter2Container.classList = 'form-item-filter-two form-item'
+    
+        var formItemFilter2Label = document.createElement('label')
+        formItemFilter2Label.htmlFor = "Edit Filter 2"
+        formItemFilter2Label.innerText = 'Filter 2'
+    
+        var selectFilter2 = document.createElement('select')
+        selectFilter2.name = 'editFilterTwo'
+        selectFilter2.id = 'edit-filter-two'
+        // Create options programmatically - TO DO
+        // var option10 = document.createElement('option')
+        // var option11 = document.createElement('option')
+        // var option12 = document.createElement('option')
+        
+        // option10.value = '0'
+        // option10.innerText = 'Example'
+        // option11.value = '1'
+        // option11.innerText = 'Example 2'
+        // option12.value = '3'
+        // option12.innerText = 'Example 3'
+    
+        // selectFilter2.appendChild(option10)
+        // selectFilter2.appendChild(option11)
+        // selectFilter2.appendChild(option12)
+  
+        const filter2s = await this.getTaxonomy('filter_2')
+        // All option as first entry
+        var allOption = document.createElement('option')
+        allOption.value = JSON.stringify([{id:'', name: ''}])
+        allOption.innerText = 'All'
+        // Get ID's of filter 1
+        selectFilter2.appendChild(allOption)
+        filter2s.forEach(type=>{
+          let option = document.createElement('option')
+          option.value = JSON.stringify([{id:type.id, name: type.name}])
+          option.innerText = type.name
+          selectFilter2.appendChild(option)
+        })
+    
+        formItemFilter2Container.appendChild(formItemFilter2Label)
+        formItemFilter2Container.appendChild(selectFilter2)
+    
+        formDiv.appendChild(formItemFilter2Container)
+      }
+      // Create Filter 3
+      if(config.filters.filter_3.userAccessible){
+        var formItemFilter3Container = document.createElement('div')
+        formItemFilter3Container.classList = 'form-item-filter-three form-item'
+    
+        var formItemFilter3Label = document.createElement('label')
+        formItemFilter3Label.htmlFor = "Edit Filter 3"
+        formItemFilter3Label.innerText = 'Filter 3'
+    
+        var selectFilter3 = document.createElement('select')
+        selectFilter3.name = 'editFilterThree'
+        selectFilter3.id = 'edit-filter-three'
+        // Create options programmatically - TO DO
+        // var option13 = document.createElement('option')
+        // var option14 = document.createElement('option')
+        // var option15 = document.createElement('option')
+        
+        // option13.value = '0'
+        // option13.innerText = 'Example'
+        // option14.value = '1'
+        // option14.innerText = 'Example 2'
+        // option15.value = '3'
+        // option15.innerText = 'Example 3'
+    
+        // selectFilter3.appendChild(option13)
+        // selectFilter3.appendChild(option14)
+        // selectFilter3.appendChild(option15)
+  
+        const filter3s = await this.getTaxonomy('filter_3')
+        // All option as first entry
+        var allOption = document.createElement('option')
+        allOption.value = JSON.stringify([{id:'', name: ''}])
+        allOption.innerText = 'All'
+        // Get ID's of filter 3
+        selectFilter3.appendChild(allOption)
+        filter3s.forEach(type=>{
+          let option = document.createElement('option')
+          option.value = JSON.stringify([{id:type.id, name: type.name}])
+          option.innerText = type.name
+          selectFilter3.appendChild(option)
+        })
+    
+        formItemFilter3Container.appendChild(formItemFilter3Label)
+        formItemFilter3Container.appendChild(selectFilter3)
+    
+        formDiv.appendChild(formItemFilter3Container)
+      }
+      // Create Filter button after filters are rendered
+      var formButtonContainer = document.createElement('div')
+      formButtonContainer.classList = 'form-item-button form-item'
+  
+      var formButton = document.createElement('input')
+      formButton.classList = 'form-submit-btn'
+      formButton.type = 'submit'
+      formButtonContainer.appendChild(formButton)
+      formDiv.appendChild(formButtonContainer)
+      form.appendChild(formDiv)
+      // Append final container
+      this._userFormElement.appendChild(form);
     }
-
-    // Create filterable dropdown of Job Types
-    if(config.filters.job_type.userAccessible){
-      var formItemJobTypeContainer = document.createElement('div')
-      formItemJobTypeContainer.classList = 'form-item-job-type form-item'
-  
-      var formItemJobTypeLabel = document.createElement('label')
-      formItemJobTypeLabel.htmlFor = "Edit Job Types"
-      formItemJobTypeLabel.innerText = 'Job Types'
-  
-      var selectJobType = document.createElement('select')
-      selectJobType.name = 'editJobType'
-      selectJobType.id = 'edit-job-types'
-
-      const jobTypes = await this.getTaxonomy('ucb_person_job_type')
-      // All option as first entry
-      var allOption = document.createElement('option')
-      allOption.value = ''
-      allOption.innerText = 'All'
-      // Get ID's of departments
-      selectJobType.appendChild(allOption)
-      jobTypes.forEach(type=>{
-        let option = document.createElement('option')
-        option.value = type.id
-        option.innerText = type.name
-        selectJobType.appendChild(option)
-      })
-  
-      formItemJobTypeContainer.appendChild(formItemJobTypeLabel)
-      formItemJobTypeContainer.appendChild(selectJobType)
-  
-      formDiv.appendChild(formItemJobTypeContainer)
-    }
-    // Create Filter 1
-    if(config.filters.filter_1.userAccessible){
-      var formItemFilter1Container = document.createElement('div')
-      formItemFilter1Container.classList = 'form-item-filter-one form-item'
-  
-      var formItemFilter1Label = document.createElement('label')
-      formItemFilter1Label.htmlFor = "Edit Filer 1"
-      formItemFilter1Label.innerText = 'Filter 1'
-  
-      var selectFilter1 = document.createElement('select')
-      selectFilter1.name = 'editFilterOne'
-      selectFilter1.id = 'edit-filter-one'
-
-
-      const filter1s = await this.getTaxonomy('filter_1')
-      // All option as first entry
-      var allOption = document.createElement('option')
-      allOption.value = ''
-      allOption.innerText = 'All'
-      // Get ID's of filter 1
-      selectFilter1.appendChild(allOption)
-      filter1s.forEach(type=>{
-        let option = document.createElement('option')
-        option.value = type.id
-        option.innerText = type.name
-        selectFilter1.appendChild(option)
-      })
-      // Create options programmatically - TO DO
-      // var option7 = document.createElement('option')
-      // var option8 = document.createElement('option')
-      // var option9 = document.createElement('option')
-      
-      // option7.value = '0'
-      // option7.innerText = 'Example'
-      // option8.value = '1'
-      // option8.innerText = 'Example 2'
-      // option9.value = '3'
-      // option9.innerText = 'Example 3'
-  
-      // selectFilter1.appendChild(option7)
-      // selectFilter1.appendChild(option8)
-      // selectFilter1.appendChild(option9)
-      
-  
-      formItemFilter1Container.appendChild(formItemFilter1Label)
-      formItemFilter1Container.appendChild(selectFilter1)
-  
-      formDiv.appendChild(formItemFilter1Container)
-    }
-    // Create Filter 2
-    if(config.filters.filter_2.userAccessible){
-      var formItemFilter2Container = document.createElement('div')
-      formItemFilter2Container.classList = 'form-item-filter-two form-item'
-  
-      var formItemFilter2Label = document.createElement('label')
-      formItemFilter2Label.htmlFor = "Edit Filter 2"
-      formItemFilter2Label.innerText = 'Filter 2'
-  
-      var selectFilter2 = document.createElement('select')
-      selectFilter2.name = 'editFilterTwo'
-      selectFilter2.id = 'edit-filter-two'
-      // Create options programmatically - TO DO
-      // var option10 = document.createElement('option')
-      // var option11 = document.createElement('option')
-      // var option12 = document.createElement('option')
-      
-      // option10.value = '0'
-      // option10.innerText = 'Example'
-      // option11.value = '1'
-      // option11.innerText = 'Example 2'
-      // option12.value = '3'
-      // option12.innerText = 'Example 3'
-  
-      // selectFilter2.appendChild(option10)
-      // selectFilter2.appendChild(option11)
-      // selectFilter2.appendChild(option12)
-
-      const filter2s = await this.getTaxonomy('filter_2')
-      // All option as first entry
-      var allOption = document.createElement('option')
-      allOption.value = ''
-      allOption.innerText = 'All'
-      // Get ID's of filter 1
-      selectFilter2.appendChild(allOption)
-      filter2s.forEach(type=>{
-        let option = document.createElement('option')
-        option.value = type.id
-        option.innerText = type.name
-        selectFilter2.appendChild(option)
-      })
-  
-      formItemFilter2Container.appendChild(formItemFilter2Label)
-      formItemFilter2Container.appendChild(selectFilter2)
-  
-      formDiv.appendChild(formItemFilter2Container)
-    }
-    // Create Filter 3
-    if(config.filters.filter_3.userAccessible){
-      var formItemFilter3Container = document.createElement('div')
-      formItemFilter3Container.classList = 'form-item-filter-three form-item'
-  
-      var formItemFilter3Label = document.createElement('label')
-      formItemFilter3Label.htmlFor = "Edit Filter 3"
-      formItemFilter3Label.innerText = 'Filter 3'
-  
-      var selectFilter3 = document.createElement('select')
-      selectFilter3.name = 'editFilterThree'
-      selectFilter3.id = 'edit-filter-three'
-      // Create options programmatically - TO DO
-      // var option13 = document.createElement('option')
-      // var option14 = document.createElement('option')
-      // var option15 = document.createElement('option')
-      
-      // option13.value = '0'
-      // option13.innerText = 'Example'
-      // option14.value = '1'
-      // option14.innerText = 'Example 2'
-      // option15.value = '3'
-      // option15.innerText = 'Example 3'
-  
-      // selectFilter3.appendChild(option13)
-      // selectFilter3.appendChild(option14)
-      // selectFilter3.appendChild(option15)
-
-      const filter3s = await this.getTaxonomy('filter_3')
-      // All option as first entry
-      var allOption = document.createElement('option')
-      allOption.value = ''
-      allOption.innerText = 'All'
-      // Get ID's of filter 3
-      selectFilter3.appendChild(allOption)
-      filter3s.forEach(type=>{
-        let option = document.createElement('option')
-        option.value = type.id
-        option.innerText = type.name
-        selectFilter3.appendChild(option)
-      })
-  
-      formItemFilter3Container.appendChild(formItemFilter3Label)
-      formItemFilter3Container.appendChild(selectFilter3)
-  
-      formDiv.appendChild(formItemFilter3Container)
-    }
-    // Create Filter button after filters are rendered
-    var formButtonContainer = document.createElement('div')
-    formButtonContainer.classList = 'form-item-button form-item'
-
-    var formButton = document.createElement('input')
-    formButton.classList = 'form-submit-btn'
-    formButton.type = 'submit'
-    formButtonContainer.appendChild(formButton)
-    formDiv.appendChild(formButtonContainer)
-    form.appendChild(formDiv)
-    // Append final container
-    this._userFormElement.appendChild(form);
+   
   }
 }
 
