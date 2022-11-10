@@ -1,7 +1,3 @@
-// /* naughty global variables!!! */
-let renderedTable = 0;  // flag to know if we've rendered the table header or not yet
-let firstPassCount = 0; // count for the first pass per group.  
-
 class PeopleListProvider {
 	static get noResultsMessage() { return 'No results matching your filters.'; }
 	static get errorMessage() { return 'Error retrieving people from the API endpoint. Please try again later.'; }
@@ -81,6 +77,11 @@ class PeopleListElement extends HTMLElement {
 
 	constructor() {
 		super();
+		let config = {};
+		try {
+			config = this._config = JSON.parse(this.getAttribute('config')) || config;
+		} catch(e) {}
+		this._baseURI = this.getAttribute('base-uri');
 		const
 			chromeElement = this._chromeElement = document.createElement('div'),
 			contentElement = this._contentElement = document.createElement('div'),
@@ -96,365 +97,272 @@ class PeopleListElement extends HTMLElement {
 		chromeElement.appendChild(loadingElement);
 		this.appendChild(chromeElement);
 		this.appendChild(contentElement);
-		this._baseURI = this.getAttribute('base-uri');
-		this._taxonomiesLoaded = 0;
-		this._departments = [];
-		this._jobTypes = [];
-		// Pre build logic
-		// Fetch all available Departments and Job Types then enter the build stage
-		this.getTaxonomy('department').then(departments => {
-			this._departments = departments;
-			this._taxonomiesLoaded++;
-			if(this._taxonomiesLoaded == 2) // Enter build method
-				this.build(this._departments, this._jobTypes);
-		}).catch(reason => this.fatalError(reason));
-		this.getTaxonomy('ucb_person_job_type').then(jobs => {
-			this._jobTypes = jobs;
-			this._taxonomiesLoaded++;
-			if(this._taxonomiesLoaded == 2) // Enter build method
-      console.log(this._departments, this._jobTypes)
-				this.build(this._departments, this._jobTypes);
-		}).catch(reason => this.fatalError(reason));
+		// this.generateDropdown();
+		const taxonomyIds = this._taxonomyIds = config['taxonomies'], 
+			groupBy = this._groupBy = config['groupby'] || 'none',
+			syncTaxonomies = this._syncTaxonomies = new Set(['department', 'job_type']),
+			asyncTaxonomies = this._asyncTaxonomies = new Set();
+		this._loadedTaxonomies = {};
+		if (groupBy !== 'none' && taxonomyIds[groupBy]) // The taxonomy used for groups must be fetched sync
+			syncTaxonomies.add(groupBy);
+		else this._groupBy = 'none';
+		for(const filterName in config['filters']) { // If user filter dropdowns are necessary, they can be generated async
+			if(config['filters'][filterName]['userAccessible'])
+				asyncTaxonomies.add(filterName);
+		}
+		this._syncTaxonomiesLoaded = 0;
+		Array.from(syncTaxonomies).forEach(taxonomyFieldName => {
+			this.fetchTaxonomy(taxonomyIds[taxonomyFieldName], taxonomyFieldName).then(taxonomy => {
+				this.onTaxonomyLoaded(taxonomyFieldName, taxonomy);
+				this._syncTaxonomiesLoaded++;
+				if(this._syncTaxonomiesLoaded >= syncTaxonomies.size) // Enter build method
+					this.build();
+			}).catch(reason => this.onFatalError(reason));	
+		});
+		Array.from(asyncTaxonomies).forEach(taxonomyFieldName => {
+			const taxonomyId = taxonomyIds[taxonomyFieldName];
+			this.fetchTaxonomy(taxonomyId, taxonomyFieldName).then(taxonomy => {
+				this.onTaxonomyLoaded(taxonomyFieldName, taxonomy);
+			}).catch(reason => console.warn('Taxonomy with id `' + taxonomyId + '` failed to load!'));	
+		});
 	}
 
 	attributeChangedCallback(name, oldValue, newValue) {
-		if(name == 'user-config' && this._taxonomiesLoaded == 2)
-			this.build(this._departments, this._jobTypes);
+		if(name == 'user-config' && this._syncTaxonomiesLoaded >= this._syncTaxonomies.size)
+			this.build();
 	}
 
-	build(Departments, JobTypes) {
-		let userConfig = this._userConfig || {}, config = this._config || {};
+	build() {
+		let userConfig = this._userConfig || {};
 		try {
 			userConfig = this._userConfig = JSON.parse(this.getAttribute('user-config'));
-			config = this._config = this._config || JSON.parse(this.getAttribute('config'));
 		} catch(e) {}
 		const
+			config = this._config,
 			baseURI = this._baseURI,
 			peopleListProvider = this._peopleListProvider = new PeopleListProvider(baseURI, userConfig, config),
-			FORMAT = this._format = userConfig['format'] || config['format'] || 'list',
-			GROUPBY = this._groupBy = userConfig['groupby'] || config['groupby'] || 'none',
-			ORDERBY = this._orderBNy = userConfig['orderby'] || config['orderby'] || 'type';
+			format = this._format = userConfig['format'] || config['format'] || 'list',
+			groupBy = this._groupBy,
+			orderBy = this._orderBy = userConfig['orderby'] || config['orderby'] || 'type';
     
 		this.toggleMessageDisplay(this._messageElement, 'none', null, null);
 		this.toggleMessageDisplay(this._loadingElement, 'block', null, null);
 		// Get our people
 		peopleListProvider.fetchPeople().then(response => {
-      this.generateDropdown()
 			this._contentElement.innerText = '';
-			const ourPeople = response;
-			if(ourPeople['data'].length == 0){
+			const results = response['data'];
+			if(!results.length)
 				this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-end-of-results', PeopleListProvider.noResultsMessage);
-			} else {
-				if (GROUPBY == 'department') {
-					for (const [key] of Object.entries(Departments)) {  
-						// let thisDeptID = Departments[key].id
-						// let thisDeptName = getTaxonomyName(Departments, thisDeptID);
-						// console.log("Group by Dept : " + thisDeptID)
-						// console.log("Group by Dept : " + thisDeptName.name)
-						if(ORDERBY == "type") {
-							firstPassCount = 0; 
-							this.displayPeople(FORMAT, GROUPBY, Departments[key].id, "firstpass", ourPeople, Departments, JobTypes);
-							this.displayPeople(FORMAT, GROUPBY, Departments[key].id, "secondpass", ourPeople, Departments, JobTypes);
-						} else {
-							this.displayPeople(FORMAT, GROUPBY, Departments[key].id, "", ourPeople, Departments, JobTypes);
-						}
-					}
-				} else if (GROUPBY == 'type') {
-					for (const [key] of Object.entries(JobTypes)) {
-						let thisTypeID = JobTypes[key].id
-						// let thisTypeName = this.getTaxonomyName(JobTypes, thisTypeID) 
-						// console.log("Group by Type : " + thisTypeID)
-						// console.log("Group by Name : " + thisTypeName.name)
-						if(ORDERBY == "type") {
-							firstPassCount = 0; 
-							this.displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "firstpass", ourPeople, Departments, JobTypes);
-							this.displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "secondpass", ourPeople, Departments, JobTypes);
-						} else {
-							this.displayPeople(FORMAT, GROUPBY, JobTypes[key].id, "", ourPeople, Departments, JobTypes);
-						}
-					}
-				} else {
-					if(ORDERBY == "type") {
-						firstPassCount = 0; 
-						this.displayPeople(FORMAT, "", "", "firstpass", ourPeople, Departments, JobTypes);
-						this.displayPeople(FORMAT, "", "", "secondpass", ourPeople, Departments, JobTypes);
-					} else {
-						this.displayPeople(FORMAT, "", "", "", ourPeople, Departments, JobTypes);
-					}
+			else {
+				// get all of the include images id => url
+				const urlObj = {}; // key from data.data to key from data.includes
+				const idObj = {}; // key from data.includes to URL
+				// Remove any blanks from our articles before map
+				if (response['included']) {
+					const filteredData = response['included'].filter(url => !!url['attributes']['uri']);
+					// creates the urlObj, key: data id, value: url
+					filteredData.map((pair) => {
+						// checks if consumer is working, else default to standard image instead of focal image
+						if(pair['links']['focal_image_square'])
+							urlObj[pair['id']] = pair['links']['focal_image_square']['href'];
+						else
+							urlObj[pair['id']] = pair['attributes']['uri']['url'];
+					});
+					// removes all other included data besides images in our included media
+					const idFilterData = response['included'].filter(item => item['type'] == 'media--image');
+					// using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
+					idFilterData.map(pair => idObj[pair['id']] = pair['relationships']['thumbnail']['data']['id']);
 				}
+				(groupBy !== 'none' ? this._loadedTaxonomies[groupBy] || [null] : [null]).forEach(taxonomy => {
+					const peopleInGroup = this.getPeopleInGroup(results, taxonomy);
+					if(!peopleInGroup) return;
+					const groupContainerElement = this.buildGroup(format, taxonomy);
+					if(orderBy == 'type') {
+						firstPassCount = 0; 
+						this.displayPeople(format, "firstpass", peopleInGroup, urlObj, idObj, groupContainerElement);
+						this.displayPeople(format, "secondpass", peopleInGroup, urlObj, idObj, groupContainerElement);
+					} else {
+						this.displayPeople(format, "", peopleInGroup, urlObj, idObj, groupContainerElement);
+					}
+				});
 			}
 			this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
-		}).catch(reason => this.fatalError(reason));
+		}).catch(reason => this.onFatalError(reason));
 	}
 
 	// Getter function for Departments and Job Types
-	async getTaxonomy(taxonomyName) {
-		const
-			response = await fetch(this._baseURI + '/taxonomy_term/' + taxonomyName + '?sort=weight,name'),
+	async fetchTaxonomy(taxonomyId, taxonomyFieldName) {
+		const response = await fetch(this._baseURI + '/taxonomy_term/' + taxonomyId + '?sort=weight,name'),
 			data = await response.json(),
 			results = data['data'],
 			terms = [];
 		results.map(termResult => {
-			const
-				id = termResult['attributes']['drupal_internal__tid'],
+			const id = termResult['attributes']['drupal_internal__tid'],
 				name = termResult['attributes']['name'];
-			terms.push({ id: id, name: name });
+			terms.push({ id: id, name: name, fieldName: taxonomyFieldName });
 		});
 		return terms;
 	}
 
-	fatalError(reason) {
-		this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-error', PeopleListProvider.errorMessage);
-		this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
-		throw reason;
+	static getTaxonomyName(taxonomy, termId) {
+		return taxonomy.find( ({ id }) => id === termId ).name;
 	}
 
-  displayPeople(DISPLAYFORMAT, GROUPBY, groupID, ORDERBY, ourPeople, Departments, JobTypes) {
-    let renderThisGroup = 0; 
-    let el = this._contentElement;
-    let thisDeptName = ""
-    let thisTypeName = ""
-    if(GROUPBY === "department") {
-      thisDeptName = this.getTaxonomyName(Departments, groupID)['name'];
-    } else if(GROUPBY === "type") {
-      thisTypeName = this.getTaxonomyName(JobTypes, groupID)['name'];
-    }
-    // el.classList = 'container'
-    // let headerHTML = layoutHeader(DISPLAYFORMAT)
-    // let footerHTML = layoutFooter(DISPLAYFORMAT)
-    let parentContainer = this.getParentContainer(DISPLAYFORMAT)
-  
-    // TO DO -- issue here with header adding correctly to grid
-    if (DISPLAYFORMAT === 'grid' || DISPLAYFORMAT === 'table') {
-      el.appendChild(parentContainer)
-    }
-  
-    // if this is our second pass on rendering content we don't need a group-by title 
-    // we also don't some of the opening DOM elements before the card info.  
-    if(ORDERBY === "secondpass" && firstPassCount) {
-      renderThisGroup++;
-    }
-  
-    // fetch(JSONURL)
-    //   .then((response) => response.json())
-    //   .then((data) => {
-    //     console.log(data) // our data obj
-    if (Object.keys(ourPeople) != 0) {
-      // get all of the include images id => url
-      let urlObj = {} // key from data.data to key from data.includes
-      let idObj = {} // key from data.includes to URL
-      // Remove any blanks from our articles before map
-      if (ourPeople['included']) {
-        let filteredData = ourPeople['included'].filter((url) => {
-          return url['attributes']['uri'] !== undefined
-        })
-        // creates the urlObj, key: data id, value: url
-        filteredData.map((pair) => {
-          // checks if consumer is working, else default to standard image instead of focal image
-          if(pair['links']['focal_image_square'] != undefined){
-            urlObj[pair['id']] = pair['links']['focal_image_square']['href']
-          } else {
-            urlObj[pair['id']] = pair['attributes']['uri']['url']
-          }
-        })
-  
-        // removes all other included data besides images in our included media
-        let idFilterData = ourPeople['included'].filter((item) => {
-          return item['type'] == 'media--image'
-        })
-        // using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
-        idFilterData.map((pair) => {
-          idObj[pair['id']] = pair['relationships']['thumbnail']['data']['id']
-        })
-      }
-  
-      // maps over data
-      ourPeople.data.map((person) => {
-        // get the person data we need
-        let renderMe = true;
-        let thisPerson = {};
-        let thisPersonCard = ''; // placeholder for the HTML to render this card in the required format
-		thisPerson.name = person['attributes']['title'];
-		thisPerson.title = person['attributes']['field_ucb_person_title'][0];
-		thisPerson.departments = [];
-		person['relationships']['field_ucb_person_department']['data'].forEach(
-			departmentData => thisPerson.departments.push(departmentData['meta']['drupal_internal__target_id']));
-		thisPerson.jobTypes = [];
-		person['relationships']['field_ucb_person_job_type']['data'].forEach(
-			jobTypeData => thisPerson.jobTypes.push(jobTypeData['meta']['drupal_internal__target_id']));
-		thisPerson.photoId = person['relationships']['field_ucb_person_photo']['data'] ? person['relationships']['field_ucb_person_photo']['data']['id'] : '';
-		thisPerson.photoURI = thisPerson.photoId ? urlObj[idObj[thisPerson.photoId]] : '';
-		thisPerson.body = '';
-		thisPerson.email = person['attributes']['field_ucb_person_email'];
-		thisPerson.phone = person['attributes']['field_ucb_person_phone'];
-		thisPerson.link = (person['attributes']['path'] || {})['alias'] || `/node/${person['attributes']['drupal_internal__nid']}`;
-		// needed to verify body exists on the Person page, if so, use that
-		if (person['attributes']['body']) {
-			// use summary if available
-			if (person['attributes']['body']['summary'])
-				thisPerson.body = person['attributes']['body']['summary'].replace(/(\r\n|\n|\r)/gm, ''); // strip out line breaks
+	onTaxonomyLoaded(taxonomyFieldName, taxonomy) {
+		this._loadedTaxonomies[taxonomyFieldName] = taxonomy;
+		const showContainerElements = this.getElementsByClassName('taxonomy-visible-' + taxonomyFieldName),
+			hideContainerElements = this.getElementsByClassName('taxonomy-hidden-' + taxonomyFieldName),
+			selectContainerElements = this.getElementsByClassName('taxonomy-select-' + taxonomyFieldName),
+			taxonomyElements = this.getElementsByClassName('taxonomy-' + taxonomyFieldName);
+		for(let index = 0; index < showContainerElements.length; index++)
+			showContainerElements[index].removeAttribute('hidden');
+		for(let index = 0; index < hideContainerElements.length; index++)
+			showContainerElements[index].setAttribute('hidden', '');
+		// for(let index = 0; index < selectContainerElements.length; index++)
+			// TODO: Construct dropdowns in form
+		for(let index = 0; index < taxonomyElements.length; index++) {
+			const taxonomyElement = taxonomyElements[index];
+			taxonomyElement.innerText = PeopleListElement.getTaxonomyName(taxonomy, parseInt(taxonomyElement.dataset['termId'])) || '';
 		}
-        // if first pass (sort by type first) then only render the people with a Job Type 
-        // else if second pass (sort by type first) then only render the people without a Job Type
-        if(ORDERBY === "firstpass" && !thisPerson.jobTypes.length) {
-          renderMe = false;
-        } else if(ORDERBY === "secondpass" && thisPerson.jobTypes.length) {
-          renderMe = false;
-        }
-  
-        // check to see if this person needs to be rendered 
-        if(renderMe) {
-  
-  
-        // check to see if we need to filter based on a group by seeting
-        // and if so that this person matches our groupID
-        if ((!GROUPBY || !groupID) || (thisPerson.departments.find(deptid => deptid == groupID) || thisPerson.jobTypes.find(typeid => typeid == groupID))) {
-          //console.log( "I'm a match! " + groupID + ' = ' + thisPerson.departments + ' or ' + thisPerson.jobTypes,)
-  
-          // increment flags for rendering in this group as necessary
-          renderThisGroup++; 
-          if(ORDERBY === "firstpass") {
-            firstPassCount++;
-          }
-          // console.log("my display format is", DISPLAYFORMAT)
-          thisPersonCard = this.displayPersonCard(DISPLAYFORMAT, thisPerson, Departments)
-  
-          let thisCard
-          // Needed to switch types of container for individual person cards => article for grid & list displays, tr for table display
-          if (DISPLAYFORMAT === 'table') {
-            thisCard = document.createElement('tr')
-          } else {
-            thisCard = document.createElement('article')
-          }
-  
-          thisCard.innerHTML = thisPersonCard
-  
-          // This section apprends the generated cards for each respective display type
-          if (DISPLAYFORMAT === 'list') {
-            // check to see if this is the first time we're adding in a member of this group
-            // if so, add the name of the group first 
-            if(renderThisGroup === 1 && groupID) {
-              // we may be on a second pass and have already rendered the title in the first pass
-              // if so, skip the title so we don't end up with two 
-              // console.log("First Pass Count is : " + firstPassCount)
-              // console.log("Render pass is : " + ORDERBY)
-              if((ORDERBY === "secondpass" && !firstPassCount) || ORDERBY != "secondpass") {
-                let GroupTitle = document.createElement('div');
-                GroupTitle.innerHTML = ` 
-                  <h2>${GROUPBY == 'type' ? thisTypeName : thisDeptName}</h2>`
-                el.appendChild(GroupTitle);
-              }
-            }
+	}
 
-            el.appendChild(thisCard)
-          } else if (DISPLAYFORMAT === 'grid') {
-  
-            // check to see if this is the first time we're adding in a member of this group
-            // if so, add the name of the group first 
-            if(renderThisGroup === 1 && groupID) {
-              // we may be on a second pass and have already rendered the title in the first pass
-              // if so, skip the title so we don't end up with two 
-              if((ORDERBY === "secondpass" && !firstPassCount) || ORDERBY != "secondpass") {
-                let GroupTitle = document.createElement('div');
-                GroupTitle.classList = "col-12";
-                GroupTitle.innerHTML = `<h2>${GROUPBY == 'type' ? thisTypeName : thisDeptName}</h2>`
-                parentContainer.appendChild(GroupTitle)
-              }
-            }
-  
-            thisCard.classList = 'col-sm-12 col-md-6 col-lg-4'
-            thisCard.innerHTML = thisPersonCard
-            parentContainer.appendChild(thisCard)
-          } else {
-            // if table display, append to inner tablebody instead of parent element
-            let tablebody = this.getElementsByClassName(
-              'ucb-people-list-table-tablebody',
-            )[0]
+	buildListGroup(taxonomy) {
+		const wrapper = document.createElement('section');
+		if(taxonomy) {
+			const groupTitleContainer = document.createElement('div'), groupTitleH2 = document.createElement('h2');
+			groupTitleH2.className = 'taxonomy-' + taxonomy.fieldName;
+			groupTitleH2.dataset['termId'] = taxonomy.id;
+			groupTitleH2.innerText = taxonomy.name;
+			groupTitleContainer.appendChild(groupTitleH2);
+			wrapper.appendChild(groupTitleContainer);
+		}
+		this._contentElement.appendChild(wrapper);
+		return wrapper;
+	}
 
-            // let tablebody = this.getElementById('ucb-people-list-table-tablebody')
-  
-            // check to see if this is the first time we're adding in a member of this group
-            // if so, add the name of the group first 
-            if(renderThisGroup === 1 && groupID) { 
-              // we may be on a second pass and have already rendered the title in the first pass
-              // if so, skip the title so we don't end up with two 
-              if((ORDERBY === "secondpass" && !firstPassCount) || ORDERBY != "secondpass") {
-                let GroupTitle = document.createElement('tr');
-                let GroupTitleHTML = `
-                  <th colspan="3" class="ucb-people-list-group-title-th">
-                  ${GROUPBY == 'type' ? thisTypeName : thisDeptName}
-                  </th>
-                  `
-                GroupTitle.innerHTML = GroupTitleHTML;
-                // console.log('table body', tablebody)
-                tablebody.appendChild(GroupTitle);
-              }
-            }
-            // console.log('table body', tablebody)
-            
-            tablebody.appendChild(thisCard)
-          }
-        } else {
-          // console.log( 'Not a match! ' + groupID + ' != ' + thisPerson.departments + ' or ' + thisPerson.jobTypes,);
-        }
-      }
-      })
-    } else {
-      console.log('empty staff object, no people to render ', ourPeople)
-      this.toggleMessage('ucb-end-of-results', 'block')
-    }
-    // done with cards, clean up and close any HTML tags we have opened.
-    // el.append(footerHTML)
-    // console.log(el.dataset.json)
-  }
-  getParentContainer(Format) // flag to know if we've rendered the table header or not yet
-   {
-    // console.log("my format is", Format)
-    let container = null;
-    switch (Format) {
-      case 'list':
-        break
-      case 'grid':
-        container = document.createElement('div');
-        container.classList = "row ucb-people-list-content";
-        break
-      case 'table':
-        // we only need to render the table header the first time
-        // this function will be called multiple times so check to 
-        // see if we've already rendered the table header HTML
-        if(!renderedTable) {
-        let pageBody = this._contentElement;
-        container = document.createElement('table')
-        container.id = 'ucb-pl-table'
-        container.classList = 'table  table-bordered table-striped'
-        var tableHead = document.createElement('thead')
-        tableHead.classList = 'ucb-people-list-table-head'
-        var tableRow = document.createElement('tr')
-        tableRow.innerHTML = `
-              <th><span class="sr-only">Photo</span></th>
-              <th>Name</th>
-              <th>Contact Information</th>
-        `
-        var tableBody = document.createElement('tbody')
-        tableBody.classList = 'ucb-people-list-table-tablebody'
+	buildGridGroup(taxonomy) {
+		const wrapper = document.createElement('section');
+		wrapper.className = 'row ucb-people-list-content';
+		if(taxonomy) {
+			const groupTitleContainer = document.createElement('div'), groupTitleH2 = document.createElement('h2');
+			groupTitleContainer.className = 'col-12';
+			groupTitleH2.className = 'taxonomy-' + taxonomy.fieldName;
+			groupTitleH2.dataset['termId'] = taxonomy.id;
+			groupTitleH2.innerText = taxonomy.name;
+			groupTitleContainer.appendChild(groupTitleH2);
+			wrapper.appendChild(groupTitleContainer);
+		}
+		this._contentElement.appendChild(wrapper);
+		return wrapper;
+	}
 
-        tableHead.appendChild(tableRow)
-        container.appendChild(tableHead)
-        container.appendChild(tableBody)
-        pageBody.appendChild(container)
-        
-        }else {
-			container = this._contentElement.children[0];
-        }
-        renderedTable++; 
-        break
-      default:
-    }
-    return container
-  }
-	displayPersonCard(format, person, departments) {
+	buildTableGroup(taxonomy) {
+		let table = this._contentElement.querySelector('table'), tableBody;
+		// we only need to render the table header the first time
+		// this function will be called multiple times so check to 
+		// see if we've already rendered the table header HTML
+		if(!table) {
+			table = document.createElement('table');
+			table.id = 'ucb-pl-table';
+			table.classList = 'table table-bordered table-striped';
+			const tableHead = document.createElement('thead');
+			tableHead.classList = 'ucb-people-list-table-head';
+			const tableRow = document.createElement('tr');
+			tableRow.innerHTML = '<th><span class="sr-only">Photo</span></th><th>Name</th><th>Contact Information</th>';
+			tableBody = document.createElement('tbody');
+			tableBody.className = 'ucb-people-list-table-tablebody';
+			tableHead.appendChild(tableRow);
+			table.appendChild(tableHead);
+			table.appendChild(tableBody);
+			this._contentElement.appendChild(table);
+		}
+		tableBody = tableBody || table.querySelector('tbody.ucb-people-list-table-tablebody');
+		if(taxonomy) {
+			const groupTitleContainer = document.createElement('tr'), groupTitleTh = document.createElement('th');
+			groupTitleTh.className = 'ucb-people-list-group-title-th taxonomy-' + taxonomy.fieldName;
+			groupTitleTh.setAttribute('colspan', '3');
+			groupTitleTh.dataset['termId'] = taxonomy.id;
+			groupTitleTh.innerText = taxonomy.name;
+			groupTitleContainer.appendChild(groupTitleTh);
+			tableBody.appendChild(groupTitleContainer);
+		}
+		return tableBody;
+	}
+
+	buildGroup(format, taxonomy) {
+		switch (format) {
+			case 'list': default: return this.buildListGroup(taxonomy);
+			case 'grid': return this.buildGridGroup(taxonomy);
+			case 'table': return this.buildTableGroup(taxonomy);
+		}
+	}
+
+	getPeopleInGroup(people, taxonomy) {
+		if(!taxonomy)
+			return people;
+		if(!this._groupedPeople) {
+			this._groupedPeople = new Map();
+			people.forEach(person => {
+				((person['relationships']['field_ucb_person_' + taxonomy.fieldName] || {})['data'] || []).forEach(
+					termData => {
+						const termId = termData['meta']['drupal_internal__target_id'];
+						let termPeople = this._groupedPeople.get(termId);
+						if(!termPeople) {
+							termPeople = [];
+							this._groupedPeople.set(termId, termPeople);
+						}
+						termPeople.push(person);
+					});
+			});
+		}
+		return this._groupedPeople.get(taxonomy.id);
+	}
+
+	displayPeople(format, ORDERBY, people, urlObj, idObj, containerElement) {
+		// maps over data
+		people.forEach((person) => {
+			const personRelationshipData = person['relationships'],
+				departmentsData = personRelationshipData['field_ucb_person_department']['data'],
+				jobTypesData = personRelationshipData['field_ucb_person_department']['data'];
+			
+			// if first pass (sort by type first) then only render the people with a Job Type 
+			// else if second pass (sort by type first) then only render the people without a Job Type
+			if((ORDERBY === "firstpass" && !jobTypesData.length) || (ORDERBY === "secondpass" && jobTypesData.length))
+				return;
+
+			const personAttributeData = person['attributes'],
+				departments = [], jobTypes = [], photoId = (personRelationshipData['field_ucb_person_photo']['data'] || {})['id'] || '',
+				thisPerson = {
+					link: (personAttributeData['path'] || {})['alias'] || `/node/${personAttributeData['drupal_internal__nid']}`,
+					name: personAttributeData['title'],
+					title: personAttributeData['field_ucb_person_title'][0],
+					departments: departments,
+					jobTypes: jobTypes,
+					photoId: photoId,
+					photoURI: photoId ? urlObj[idObj[photoId]] : '',
+					body: '',
+					email: personAttributeData['field_ucb_person_email'],
+					phone: personAttributeData['field_ucb_person_phone']
+				};
+
+			// Builds arrays of department and job type ids
+			departmentsData.forEach(departmentData => departments.push(departmentData['meta']['drupal_internal__target_id']));
+			jobTypesData.forEach(jobTypeData => jobTypes.push(jobTypeData['meta']['drupal_internal__target_id']));	
+							
+			// needed to verify body exists on the Person page, if so, use that
+			if (personAttributeData['body']) {
+				// use summary if available
+				if (personAttributeData['body']['summary'])
+					thisPerson.body = personAttributeData['body']['summary'].replace(/(\r\n|\n|\r)/gm, ''); // strip out line breaks
+			}
+			
+			this.appendPerson(format, thisPerson, containerElement);
+		});
+	}
+
+	appendPerson(format, person, containerElement) {
 		// console.log('Rendering the card for ' + Person.Name)
-		let cardHTML = '';
+		let cardElement, cardHTML = '';
 		// grab the friendly name from the global variable
 		// note: there may be a race condidtion here as we're also querying
 		//  to get those friendly names from the API endpoint.
@@ -463,21 +371,22 @@ class PeopleListElement extends HTMLElement {
 		for(let i = 0; i < person.departments.length; i++) {
 			const 
 				thisDeptID = person.departments[i], 
-				thisDeptName = this.getTaxonomyName(departments, thisDeptID)['name'];
+				thisDeptName = PeopleListElement.getTaxonomyName(this._loadedTaxonomies['department'], thisDeptID);
 			myDept += `<li>${PeopleListElement.escapeHTML(thisDeptName)}</li>`;
 		}
 
 		const
 			personLink = person.link,
 			personName = PeopleListElement.escapeHTML(person.name),
-			personPhoto = person.photoURI ? `<img src="${PeopleListElement.escapeHTML(person.photoURI)}">` : '',
 			personTitle = PeopleListElement.escapeHTML(person.title),
+			personPhoto = person.photoURI ? `<img src="${person.photoURI}">` : '',
 			personBody = PeopleListElement.escapeHTML(person.body),
 			personEmail = PeopleListElement.escapeHTML(person.email),
 			personPhone = PeopleListElement.escapeHTML(person.phone);
 	
 		switch (format) {
-			case 'list':
+			case 'list': default:
+				cardElement = document.createElement('div');
 				cardHTML = `
 					<div class="ucb-person-card-list row">
 						<div class="col-sm-12 col-md-3 ucb-person-card-img">
@@ -524,6 +433,8 @@ class PeopleListElement extends HTMLElement {
 					</div>`;
 			break;
 			case 'grid':
+				cardElement = document.createElement('div');
+				cardElement.className = 'col-sm-12 col-md-6 col-lg-4';
 				cardHTML = `
 					<div class="col-sm mb-3">
 						<div class="col-sm-12 ucb-person-card-img-grid">
@@ -547,6 +458,7 @@ class PeopleListElement extends HTMLElement {
 					</div>`;
 			break;
 			case 'table':
+				cardElement = document.createElement('tr');
 				cardHTML = `
 					<td class="ucb-people-list-table-photo">
 						<a href="${personLink}">${personPhoto}</a>  
@@ -586,13 +498,16 @@ class PeopleListElement extends HTMLElement {
 							}
 						</span>
 					</td>`;
-			break;
-			default:
 		}
-		return cardHTML;
+		cardElement.innerHTML = cardHTML;
+		containerElement.appendChild(cardElement);
+		return cardElement;
 	}
-	getTaxonomyName(taxonomy, tid) {
-		return taxonomy.find( ({ id }) => id === tid );
+
+	onFatalError(reason) {
+		this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-error', PeopleListProvider.errorMessage);
+		this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
+		throw reason;
 	}
 
 	toggleMessageDisplay(element, display, className, innerText) {

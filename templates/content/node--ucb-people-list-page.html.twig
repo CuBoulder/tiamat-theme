@@ -21,6 +21,13 @@
 	]
 %}{% 
 	set config = {
+		'taxonomies' : {
+			'department': 'department',
+			'job_type': 'ucb_person_job_type',
+			'filter_1': 'filter_1',
+			'filter_2': 'filter_2',
+			'filter_3': 'filter_3'
+		},
 		'filters': {
 			'department': {
 				'includes': content.field_ucb_people_department|render|striptags|trim|split(' '),
