@@ -100,25 +100,19 @@ class PeopleListElement extends HTMLElement {
 		// this.generateDropdown();
 		const taxonomyIds = this._taxonomyIds = config['taxonomies'], 
 			groupBy = this._groupBy = config['groupby'] || 'none',
-			syncTaxonomies = this._syncTaxonomies = new Set(['department', 'job_type']),
-			asyncTaxonomies = this._asyncTaxonomies = new Set();
-		this._loadedTaxonomies = {};
-		if (groupBy !== 'none' && taxonomyIds[groupBy]) // The taxonomy used for groups must be fetched sync
+			syncTaxonomies = this._syncTaxonomies = new Set(),
+			asyncTaxonomies = this._asyncTaxonomies = new Set(['department']);
+		if (groupBy !== 'none' && taxonomyIds[groupBy]) { // The taxonomy used for groups must be fetched sync
 			syncTaxonomies.add(groupBy);
-		else this._groupBy = 'none';
+			asyncTaxonomies.delete(groupBy);
+		} else this._groupBy = 'none';
 		for(const filterName in config['filters']) { // If user filter dropdowns are necessary, they can be generated async
-			if(config['filters'][filterName]['userAccessible'])
+			if(config['filters'][filterName]['userAccessible'] && !syncTaxonomies.has(filterName))
 				asyncTaxonomies.add(filterName);
 		}
+		this._loadedTaxonomies = {};
 		this._syncTaxonomiesLoaded = 0;
-		Array.from(syncTaxonomies).forEach(taxonomyFieldName => {
-			this.fetchTaxonomy(taxonomyIds[taxonomyFieldName], taxonomyFieldName).then(taxonomy => {
-				this.onTaxonomyLoaded(taxonomyFieldName, taxonomy);
-				this._syncTaxonomiesLoaded++;
-				if(this._syncTaxonomiesLoaded >= syncTaxonomies.size) // Enter build method
-					this.build();
-			}).catch(reason => this.onFatalError(reason));	
-		});
+		this.loadSyncTaxonomies();
 		Array.from(asyncTaxonomies).forEach(taxonomyFieldName => {
 			const taxonomyId = taxonomyIds[taxonomyFieldName];
 			this.fetchTaxonomy(taxonomyId, taxonomyFieldName).then(taxonomy => {
@@ -127,26 +121,54 @@ class PeopleListElement extends HTMLElement {
 		});
 	}
 
+	loadSyncTaxonomies() {
+		if(this._syncTaxonomiesLoaded < this._syncTaxonomies.size) {
+			Array.from(this._syncTaxonomies).forEach(taxonomyFieldName => {
+				if(!this.taxonomyHasLoaded(taxonomyFieldName)) {
+					this.fetchTaxonomy(this._taxonomyIds[taxonomyFieldName], taxonomyFieldName).then(taxonomy => {
+						if(!this.taxonomyHasLoaded(taxonomyFieldName)) {
+							this.onTaxonomyLoaded(taxonomyFieldName, taxonomy);
+							this._syncTaxonomiesLoaded++;
+							if(this._syncTaxonomiesLoaded >= this._syncTaxonomies.size) // Enter build method
+								this.build();
+						}
+					}).catch(reason => this.onFatalError(reason));	
+				}
+			});
+		} else this.build();
+	}
+
 	attributeChangedCallback(name, oldValue, newValue) {
-		if(name == 'user-config' && this._syncTaxonomiesLoaded >= this._syncTaxonomies.size)
+		if(name == 'user-config' && oldValue !== null && this._syncTaxonomiesLoaded >= this._syncTaxonomies.size)
 			this.build();
 	}
 
 	build() {
-		let userConfig = this._userConfig || {};
+		let userConfig = {};
 		try {
 			userConfig = this._userConfig = JSON.parse(this.getAttribute('user-config'));
 		} catch(e) {}
+		
 		const
 			config = this._config,
 			baseURI = this._baseURI,
 			peopleListProvider = this._peopleListProvider = new PeopleListProvider(baseURI, userConfig, config),
 			format = this._format = userConfig['format'] || config['format'] || 'list',
-			groupBy = this._groupBy,
-			orderBy = this._orderBy = userConfig['orderby'] || config['orderby'] || 'type';
+			groupBy = userConfig['groupby'] || config['groupby'] || 'none',
+			orderBy = this._orderBy = userConfig['orderby'] || config['orderby'] || 'last';
     
 		this.toggleMessageDisplay(this._messageElement, 'none', null, null);
 		this.toggleMessageDisplay(this._loadingElement, 'block', null, null);
+
+		// User-specified grouping is working as a feature to add in the future
+		if(groupBy !== this._groupBy && groupBy !== 'none' && this._taxonomyIds[groupBy] && !this.taxonomyHasLoaded(groupBy)) {
+			this._groupBy = groupBy;
+			this._syncTaxonomies.add(groupBy);
+			this.loadSyncTaxonomies();
+			return;
+		}
+		this._groupBy = groupBy;
+
 		// Get our people
 		peopleListProvider.fetchPeople().then(response => {
 			this._contentElement.innerText = '';
@@ -173,17 +195,14 @@ class PeopleListElement extends HTMLElement {
 					// using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
 					idFilterData.map(pair => idObj[pair['id']] = pair['relationships']['thumbnail']['data']['id']);
 				}
-				(groupBy !== 'none' ? this._loadedTaxonomies[groupBy] || [null] : [null]).forEach(taxonomy => {
+				(groupBy !== 'none' ? this.getTaxonomy(groupBy) || [null] : [null]).forEach(taxonomy => {
 					const peopleInGroup = this.getPeopleInGroup(results, taxonomy);
 					if(!peopleInGroup) return;
 					const groupContainerElement = this.buildGroup(format, taxonomy);
 					if(orderBy == 'type') {
-						firstPassCount = 0; 
-						this.displayPeople(format, "firstpass", peopleInGroup, urlObj, idObj, groupContainerElement);
-						this.displayPeople(format, "secondpass", peopleInGroup, urlObj, idObj, groupContainerElement);
-					} else {
-						this.displayPeople(format, "", peopleInGroup, urlObj, idObj, groupContainerElement);
-					}
+						this.displayPeople(format, peopleInGroup.filter(person => person['relationships']['field_ucb_person_job_type']['data'].length > 0), urlObj, idObj, groupContainerElement);
+						this.displayPeople(format, peopleInGroup.filter(person => person['relationships']['field_ucb_person_job_type']['data'].length == 0), urlObj, idObj, groupContainerElement);
+					} else this.displayPeople(format, peopleInGroup, urlObj, idObj, groupContainerElement);
 				});
 			}
 			this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
@@ -224,6 +243,14 @@ class PeopleListElement extends HTMLElement {
 			const taxonomyElement = taxonomyElements[index];
 			taxonomyElement.innerText = PeopleListElement.getTaxonomyName(taxonomy, parseInt(taxonomyElement.dataset['termId'])) || '';
 		}
+	}
+
+	getTaxonomy(taxonomyFieldName) {
+		return this._loadedTaxonomies[taxonomyFieldName];
+	}
+
+	taxonomyHasLoaded(taxonomyFieldName) {
+		return !!this._loadedTaxonomies[taxonomyFieldName];
 	}
 
 	buildListGroup(taxonomy) {
@@ -318,19 +345,13 @@ class PeopleListElement extends HTMLElement {
 		return this._groupedPeople.get(taxonomy.id);
 	}
 
-	displayPeople(format, ORDERBY, people, urlObj, idObj, containerElement) {
+	displayPeople(format, people, urlObj, idObj, containerElement) {
 		// maps over data
 		people.forEach((person) => {
 			const personRelationshipData = person['relationships'],
 				departmentsData = personRelationshipData['field_ucb_person_department']['data'],
-				jobTypesData = personRelationshipData['field_ucb_person_department']['data'];
-			
-			// if first pass (sort by type first) then only render the people with a Job Type 
-			// else if second pass (sort by type first) then only render the people without a Job Type
-			if((ORDERBY === "firstpass" && !jobTypesData.length) || (ORDERBY === "secondpass" && jobTypesData.length))
-				return;
-
-			const personAttributeData = person['attributes'],
+				jobTypesData = personRelationshipData['field_ucb_person_department']['data'],
+				personAttributeData = person['attributes'],
 				departments = [], jobTypes = [], photoId = (personRelationshipData['field_ucb_person_photo']['data'] || {})['id'] || '',
 				thisPerson = {
 					link: (personAttributeData['path'] || {})['alias'] || `/node/${personAttributeData['drupal_internal__nid']}`,
@@ -361,20 +382,7 @@ class PeopleListElement extends HTMLElement {
 	}
 
 	appendPerson(format, person, containerElement) {
-		// console.log('Rendering the card for ' + Person.Name)
-		let cardElement, cardHTML = '';
-		// grab the friendly name from the global variable
-		// note: there may be a race condidtion here as we're also querying
-		//  to get those friendly names from the API endpoint.
-		// console.log('Departments :', Departments)
-		let myDept = "";
-		for(let i = 0; i < person.departments.length; i++) {
-			const 
-				thisDeptID = person.departments[i], 
-				thisDeptName = PeopleListElement.getTaxonomyName(this._loadedTaxonomies['department'], thisDeptID);
-			myDept += `<li>${PeopleListElement.escapeHTML(thisDeptName)}</li>`;
-		}
-
+		let cardElement, cardHTML = '', myDept = '';
 		const
 			personLink = person.link,
 			personName = PeopleListElement.escapeHTML(person.name),
@@ -382,8 +390,12 @@ class PeopleListElement extends HTMLElement {
 			personPhoto = person.photoURI ? `<img src="${person.photoURI}">` : '',
 			personBody = PeopleListElement.escapeHTML(person.body),
 			personEmail = PeopleListElement.escapeHTML(person.email),
-			personPhone = PeopleListElement.escapeHTML(person.phone);
-	
+			personPhone = PeopleListElement.escapeHTML(person.phone),
+			departmentTaxonomy = this.getTaxonomy('department');
+		person.departments.forEach(termId => {
+			const thisDeptName = departmentTaxonomy ? PeopleListElement.escapeHTML(PeopleListElement.getTaxonomyName(departmentTaxonomy, termId)) : '';
+			myDept += '<li class="taxonomy-department" data-term-id="' + termId + '">' + thisDeptName + '</li>';
+		});	
 		switch (format) {
 			case 'list': default:
 				cardElement = document.createElement('div');
@@ -402,7 +414,7 @@ class PeopleListElement extends HTMLElement {
 								${personTitle}
 							</span>
 							<span class="ucb-person-card-dept">
-								<ul class="ucb-person-card-dept-ul">
+								<ul${departmentTaxonomy ? '' : ' hidden'} class="ucb-person-card-dept-ul taxonomy-visible-department">
 									${myDept} 
 								</ul>
 							</span>
@@ -450,7 +462,7 @@ class PeopleListElement extends HTMLElement {
 								${personTitle}
 							</span>
 							<span class="ucb-person-card-dept departments-grid">
-								<ul class="ucb-person-card-dept-ul">
+								<ul${departmentTaxonomy ? '' : ' hidden'} class="ucb-person-card-dept-ul taxonomy-visible-department">
 									${myDept}
 								</ul>
 							</span>
@@ -473,7 +485,7 @@ class PeopleListElement extends HTMLElement {
 							${personTitle}
 						</span>
 						<span class="ucb-person-card-dept departments-grid">
-							<ul class="ucb-person-card-dept-ul">
+							<ul${departmentTaxonomy ? '' : ' hidden'} class="ucb-person-card-dept-ul taxonomy-visible-department">
 								${myDept}
 							</ul>
 						</span>
