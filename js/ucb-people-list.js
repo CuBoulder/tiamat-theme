@@ -2,16 +2,14 @@ class PeopleListProvider {
 	static get noResultsMessage() { return 'No results matching your filters.'; }
 	static get errorMessage() { return 'Error retrieving people from the API endpoint. Please try again later.'; }
 
-	constructor(baseURI, userConfig, config) {
+	constructor(baseURI, filters = {}, userFilters = {}) {
 		this.baseURI = baseURI;
-		this.nextPath = PeopleListProvider.buildEndpointPath(userConfig, config);
+		this.nextPath = PeopleListProvider.buildEndpointPath(filters, userFilters);
 	}
 	/**
-	 * 
-	 * @param {object} config The People List configuration object
 	 * @returns {string} The API path (including all query parameters)
 	 */
-	static buildEndpointPath(userConfig, config) {
+	static buildEndpointPath(filters = {}, userFilters = {}) {
 		const
 			// JSON API Endpoint information
 			endpoint = '/node/ucb_person',
@@ -24,8 +22,6 @@ class PeopleListProvider {
 				+ '&filter[publish-check][condition][value]=1'
 				+ '&filter[publish-check][condition][memberOf]=published',
 			sortParams = '&sort=field_ucb_person_last_name',
-			userFilters = userConfig['filters'] || {},
-			filters = config['filters'] || {},
 			allFilterNames = Object.keys(filters).concat(Object.keys(userFilters));
 		let params = '';
 		allFilterNames.forEach(filterName => {
@@ -68,7 +64,6 @@ class PeopleListProvider {
 
 class PeopleListElement extends HTMLElement {
 	/**
-	 * 
 	 * @param {string|null|undefined} raw A raw string
 	 * @returns {string} An HTML-safe string (or an empty string if `raw` is `null` or `undefined`)
 	 */
@@ -99,15 +94,16 @@ class PeopleListElement extends HTMLElement {
 		this.appendChild(contentElement);
 		// this.generateDropdown();
 		const taxonomyIds = this._taxonomyIds = config['taxonomies'], 
+			filters = this._filters = config['filters'] || {},
 			groupBy = this._groupBy = config['groupby'] || 'none',
 			syncTaxonomies = this._syncTaxonomies = new Set(),
 			asyncTaxonomies = this._asyncTaxonomies = new Set(['department']);
-		if (groupBy !== 'none' && taxonomyIds[groupBy]) { // The taxonomy used for groups must be fetched sync
+		if (groupBy != 'none' && taxonomyIds[groupBy]) { // The taxonomy used for groups must be fetched sync
 			syncTaxonomies.add(groupBy);
 			asyncTaxonomies.delete(groupBy);
 		} else this._groupBy = 'none';
-		for(const filterName in config['filters']) { // If user filter dropdowns are necessary, they can be generated async
-			if(config['filters'][filterName]['userAccessible'] && !syncTaxonomies.has(filterName))
+		for(const filterName in filters) { // If user filter dropdowns are necessary, they can be generated async
+			if(filters[filterName]['userAccessible'] && !syncTaxonomies.has(filterName))
 				asyncTaxonomies.add(filterName);
 		}
 		this._loadedTaxonomies = {};
@@ -152,7 +148,9 @@ class PeopleListElement extends HTMLElement {
 		const
 			config = this._config,
 			baseURI = this._baseURI,
-			peopleListProvider = this._peopleListProvider = new PeopleListProvider(baseURI, userConfig, config),
+			filters = this._filters,
+			userFilters = userConfig['filters'] || {},
+			peopleListProvider = this._peopleListProvider = new PeopleListProvider(baseURI, filters, userFilters),
 			format = this._format = userConfig['format'] || config['format'] || 'list',
 			groupBy = userConfig['groupby'] || config['groupby'] || 'none',
 			orderBy = this._orderBy = userConfig['orderby'] || config['orderby'] || 'last';
@@ -195,7 +193,7 @@ class PeopleListElement extends HTMLElement {
 					// using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
 					idFilterData.map(pair => idObj[pair['id']] = pair['relationships']['thumbnail']['data']['id']);
 				}
-				(groupBy !== 'none' ? this.getTaxonomy(groupBy) || [null] : [null]).forEach(taxonomy => {
+				(groupBy == 'none' ? [null] : this.getTaxonomy(groupBy) || [null]).forEach(taxonomy => {
 					const peopleInGroup = this.getPeopleInGroup(results, taxonomy);
 					if(!peopleInGroup) return;
 					const groupContainerElement = this.buildGroup(format, taxonomy);
