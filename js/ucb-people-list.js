@@ -92,7 +92,6 @@ class PeopleListElement extends HTMLElement {
 		chromeElement.appendChild(loadingElement);
 		this.appendChild(chromeElement);
 		this.appendChild(contentElement);
-		// this.generateDropdown();
 		const taxonomyIds = this._taxonomyIds = config['taxonomies'], 
 			filters = this._filters = config['filters'] || {},
 			groupBy = this._groupBy = config['groupby'] || 'none',
@@ -106,6 +105,7 @@ class PeopleListElement extends HTMLElement {
 			if(filters[filterName]['userAccessible'] && !syncTaxonomies.has(filterName))
 				asyncTaxonomies.add(filterName);
 		}
+    this.generateForm();
 		this._loadedTaxonomies = {};
 		this._syncTaxonomiesLoaded = 0;
 		this.loadSyncTaxonomies();
@@ -235,7 +235,8 @@ class PeopleListElement extends HTMLElement {
 			showContainerElements[index].removeAttribute('hidden');
 		for(let index = 0; index < hideContainerElements.length; index++)
 			showContainerElements[index].setAttribute('hidden', '');
-		// for(let index = 0; index < selectContainerElements.length; index++)
+		for(let index = 0; index < selectContainerElements.length; index++)
+      this.generateDropdown(taxonomy, selectContainerElements[0])
 			// TODO: Construct dropdowns in form
 		for(let index = 0; index < taxonomyElements.length; index++) {
 			const taxonomyElement = taxonomyElements[index];
@@ -538,7 +539,7 @@ class PeopleListElement extends HTMLElement {
  * - Programatically assign options - (value and innerText)
  *
  */
-  async generateDropdown(){
+  async generateForm(){
     if(this._userFormElement.children.length == 0){
       var config = JSON.parse(this.getAttribute('config'))
       // Create Elements
@@ -564,9 +565,7 @@ class PeopleListElement extends HTMLElement {
         console.log('filter 1 obj', filter1Obj)
         console.log('filter 2 obj', filter2Obj)
         console.log('filter 3 obj', filter3Obj)
-  
-        renderedTable = 0;  // flag to know if we've rendered the table header or not yet
-        firstPassCount = 0;
+
          // TO DO -- fix build
         // this.build(deptObj, typeObj)
 
@@ -588,23 +587,15 @@ class PeopleListElement extends HTMLElement {
         var selectDept = document.createElement('select')
         selectDept.name = 'editDepartment'
         selectDept.id = 'edit-department'
-        // Get departments and IDs and iterate over creating options
-        const departments = await this.getTaxonomy('department')
+        selectDept.className = "taxonomy-select-department"
         // All option as first entry
         var allOption = document.createElement('option')
-        allOption.value = JSON.stringify([{id:"", name: "" }])
+        allOption.value = JSON.stringify([{id:"", name: "",fieldName:''}])
         allOption.innerText = 'All'
         selectDept.appendChild(allOption)
-        departments.forEach(department=>{
-          let option = document.createElement('option')
-          option.value = JSON.stringify([{id:department.id, name: department.name}])
-          option.innerText = department.name
-          selectDept.appendChild(option)
-        })
         // Append
         formItemDeptContainer.appendChild(formItemDeptLabel)
         formItemDeptContainer.appendChild(selectDept)
-    
         formDiv.appendChild(formItemDeptContainer)
       }
   
@@ -620,21 +611,14 @@ class PeopleListElement extends HTMLElement {
         var selectJobType = document.createElement('select')
         selectJobType.name = 'editJobType'
         selectJobType.id = 'edit-job-types'
+        selectJobType.className = "taxonomy-select-job_type"
   
-        const jobTypes = await this.getTaxonomy('ucb_person_job_type')
         // All option as first entry
         var allOption = document.createElement('option')
-        allOption.value = JSON.stringify([{id:'', name: ""}])
+        allOption.value = JSON.stringify([{id:'', name: "",fieldName:''}])
         allOption.innerText = 'All'
-        // Get ID's of departments
-        selectJobType.appendChild(allOption)
-        jobTypes.forEach(type=>{
-          let option = document.createElement('option')
-          option.value = JSON.stringify([{id:type.id, name: type.name}])
-          option.innerText = type.name
-          selectJobType.appendChild(option)
-        })
-    
+        // Append
+        selectJobType.appendChild(allOption)    
         formItemJobTypeContainer.appendChild(formItemJobTypeLabel)
         formItemJobTypeContainer.appendChild(selectJobType)
     
@@ -652,41 +636,16 @@ class PeopleListElement extends HTMLElement {
         var selectFilter1 = document.createElement('select')
         selectFilter1.name = 'editFilterOne'
         selectFilter1.id = 'edit-filter-one'
+        selectFilter1.className = "taxonomy-select-filter_1"
   
-  
-        const filter1s = await this.getTaxonomy('filter_1')
         // All option as first entry
         var allOption = document.createElement('option')
-        allOption.value = JSON.stringify([{id:'', name: ''}])
+        allOption.value = JSON.stringify([{id:'', name: '',fieldName:''}])
         allOption.innerText = 'All'
-        // Get ID's of filter 1
+        // Append
         selectFilter1.appendChild(allOption)
-        filter1s.forEach(type=>{
-          let option = document.createElement('option')
-          option.value = JSON.stringify([{id:type.id, name: type.name}])
-          option.innerText = type.name
-          selectFilter1.appendChild(option)
-        })
-        // Create options programmatically - TO DO
-        // var option7 = document.createElement('option')
-        // var option8 = document.createElement('option')
-        // var option9 = document.createElement('option')
-        
-        // option7.value = '0'
-        // option7.innerText = 'Example'
-        // option8.value = '1'
-        // option8.innerText = 'Example 2'
-        // option9.value = '3'
-        // option9.innerText = 'Example 3'
-    
-        // selectFilter1.appendChild(option7)
-        // selectFilter1.appendChild(option8)
-        // selectFilter1.appendChild(option9)
-        
-    
         formItemFilter1Container.appendChild(formItemFilter1Label)
         formItemFilter1Container.appendChild(selectFilter1)
-    
         formDiv.appendChild(formItemFilter1Container)
       }
       // Create Filter 2
@@ -701,39 +660,15 @@ class PeopleListElement extends HTMLElement {
         var selectFilter2 = document.createElement('select')
         selectFilter2.name = 'editFilterTwo'
         selectFilter2.id = 'edit-filter-two'
-        // Create options programmatically - TO DO
-        // var option10 = document.createElement('option')
-        // var option11 = document.createElement('option')
-        // var option12 = document.createElement('option')
-        
-        // option10.value = '0'
-        // option10.innerText = 'Example'
-        // option11.value = '1'
-        // option11.innerText = 'Example 2'
-        // option12.value = '3'
-        // option12.innerText = 'Example 3'
-    
-        // selectFilter2.appendChild(option10)
-        // selectFilter2.appendChild(option11)
-        // selectFilter2.appendChild(option12)
-  
-        const filter2s = await this.getTaxonomy('filter_2')
+        selectFilter2.className = "taxonomy-select-filter_2"
         // All option as first entry
         var allOption = document.createElement('option')
-        allOption.value = JSON.stringify([{id:'', name: ''}])
+        allOption.value = JSON.stringify([{id:'', name: '',fieldName:''}])
         allOption.innerText = 'All'
-        // Get ID's of filter 1
-        selectFilter2.appendChild(allOption)
-        filter2s.forEach(type=>{
-          let option = document.createElement('option')
-          option.value = JSON.stringify([{id:type.id, name: type.name}])
-          option.innerText = type.name
-          selectFilter2.appendChild(option)
-        })
-    
+        // Append
+        selectFilter2.appendChild(allOption)    
         formItemFilter2Container.appendChild(formItemFilter2Label)
         formItemFilter2Container.appendChild(selectFilter2)
-    
         formDiv.appendChild(formItemFilter2Container)
       }
       // Create Filter 3
@@ -748,39 +683,15 @@ class PeopleListElement extends HTMLElement {
         var selectFilter3 = document.createElement('select')
         selectFilter3.name = 'editFilterThree'
         selectFilter3.id = 'edit-filter-three'
-        // Create options programmatically - TO DO
-        // var option13 = document.createElement('option')
-        // var option14 = document.createElement('option')
-        // var option15 = document.createElement('option')
-        
-        // option13.value = '0'
-        // option13.innerText = 'Example'
-        // option14.value = '1'
-        // option14.innerText = 'Example 2'
-        // option15.value = '3'
-        // option15.innerText = 'Example 3'
-    
-        // selectFilter3.appendChild(option13)
-        // selectFilter3.appendChild(option14)
-        // selectFilter3.appendChild(option15)
-  
-        const filter3s = await this.getTaxonomy('filter_3')
+        selectFilter3.className = "taxonomy-select-filter_3"
         // All option as first entry
         var allOption = document.createElement('option')
-        allOption.value = JSON.stringify([{id:'', name: ''}])
+        allOption.value = JSON.stringify([{id:'', name: '', fieldName:''}])
         allOption.innerText = 'All'
-        // Get ID's of filter 3
-        selectFilter3.appendChild(allOption)
-        filter3s.forEach(type=>{
-          let option = document.createElement('option')
-          option.value = JSON.stringify([{id:type.id, name: type.name}])
-          option.innerText = type.name
-          selectFilter3.appendChild(option)
-        })
-    
+        // Append
+        selectFilter3.appendChild(allOption)    
         formItemFilter3Container.appendChild(formItemFilter3Label)
         formItemFilter3Container.appendChild(selectFilter3)
-    
         formDiv.appendChild(formItemFilter3Container)
       }
       // Create Filter button after filters are rendered
@@ -797,6 +708,16 @@ class PeopleListElement extends HTMLElement {
       this._userFormElement.appendChild(form);
     }
    
+  }
+
+  generateDropdown(taxonomy, selectContainerElements){
+    taxonomy.forEach(taxonomy=>{
+          let option = document.createElement('option')
+          option.value = JSON.stringify([{id:taxonomy.id, name: taxonomy.name, fieldName: taxonomy.fieldName}])
+          option.innerText = taxonomy.name
+          selectContainerElements.appendChild(option)
+    })
+
   }
 }
 
