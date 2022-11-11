@@ -105,7 +105,7 @@ class PeopleListElement extends HTMLElement {
 			if(filters[filterName]['userAccessible'] && !syncTaxonomies.has(filterName))
 				asyncTaxonomies.add(filterName);
 		}
-    this.generateForm();
+    this.generateForm(config);
 		this._loadedTaxonomies = {};
 		this._syncTaxonomiesLoaded = 0;
 		this.loadSyncTaxonomies();
@@ -535,13 +535,10 @@ class PeopleListElement extends HTMLElement {
  * TO DO -
  * 
  * - Add functionality to re-filter list after user input
- * - Assign Filter 1,2,3 names
- * - Programatically assign options - (value and innerText)
  *
  */
-  async generateForm(){
+  async generateForm(config){
     if(this._userFormElement.children.length == 0){
-      var config = JSON.parse(this.getAttribute('config'))
       // Create Elements
       var form = document.createElement('form')
       form.id = 'user-filter'
@@ -551,20 +548,9 @@ class PeopleListElement extends HTMLElement {
         var dataObj = {}
         // Create a dataObject with ids for second render
         for (var p of formData) {
-          dataObj[p[0]] = p[1]
-        }
-        var deptObj = JSON.parse(dataObj.editDepartment)
-        var typeObj = JSON.parse(dataObj.editJobType)
-        var filter1Obj = JSON.parse(dataObj.editFilterOne)
-        var filter2Obj = JSON.parse(dataObj.editFilterTwo)
-        var filter3Obj = JSON.parse(dataObj.editFilterThree)
-        
-        console.log('=====================')
-        console.log('dropdown dept', deptObj)
-        console.log('dropdown type', typeObj)
-        console.log('filter 1 obj', filter1Obj)
-        console.log('filter 2 obj', filter2Obj)
-        console.log('filter 3 obj', filter3Obj)
+          dataObj[p[0]] = JSON.parse(p[1])
+        } 
+        console.log("results", dataObj)
 
          // TO DO -- fix build
         // this.build(deptObj, typeObj)
@@ -578,7 +564,7 @@ class PeopleListElement extends HTMLElement {
       // Departments, create filterable dropdown of Departments
       if(config.filters.department.userAccessible){
         var formItemDeptContainer = document.createElement('div')
-        formItemDeptContainer.classList = 'form-item-department form-item'
+        formItemDeptContainer.classList = 'form-item-department form-item taxonomy-select-department'
     
         var formItemDeptLabel = document.createElement('label')
         formItemDeptLabel.htmlFor = "Edit Departments"
@@ -587,7 +573,7 @@ class PeopleListElement extends HTMLElement {
         var selectDept = document.createElement('select')
         selectDept.name = 'editDepartment'
         selectDept.id = 'edit-department'
-        selectDept.className = "taxonomy-select-department"
+        selectDept.className = "taxonomy-select"
         // All option as first entry
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:"", name: "",fieldName:''}])
@@ -602,7 +588,7 @@ class PeopleListElement extends HTMLElement {
       // Create filterable dropdown of Job Types
       if(config.filters.job_type.userAccessible){
         var formItemJobTypeContainer = document.createElement('div')
-        formItemJobTypeContainer.classList = 'form-item-job-type form-item'
+        formItemJobTypeContainer.classList = 'form-item-job-type form-item taxonomy-select-job_type'
     
         var formItemJobTypeLabel = document.createElement('label')
         formItemJobTypeLabel.htmlFor = "Edit Job Types"
@@ -611,7 +597,7 @@ class PeopleListElement extends HTMLElement {
         var selectJobType = document.createElement('select')
         selectJobType.name = 'editJobType'
         selectJobType.id = 'edit-job-types'
-        selectJobType.className = "taxonomy-select-job_type"
+        selectJobType.className = "taxonomy-select"
   
         // All option as first entry
         var allOption = document.createElement('option')
@@ -627,7 +613,7 @@ class PeopleListElement extends HTMLElement {
       // Create Filter 1
       if(config.filters.filter_1.userAccessible){
         var formItemFilter1Container = document.createElement('div')
-        formItemFilter1Container.classList = 'form-item-filter-one form-item'
+        formItemFilter1Container.classList = 'form-item-filter-one form-item taxonomy-select-filter_1'
     
         var formItemFilter1Label = document.createElement('label')
         formItemFilter1Label.htmlFor = "Edit Filer 1"
@@ -636,7 +622,7 @@ class PeopleListElement extends HTMLElement {
         var selectFilter1 = document.createElement('select')
         selectFilter1.name = 'editFilterOne'
         selectFilter1.id = 'edit-filter-one'
-        selectFilter1.className = "taxonomy-select-filter_1"
+        selectFilter1.className = "taxonomy-select"
   
         // All option as first entry
         var allOption = document.createElement('option')
@@ -651,7 +637,7 @@ class PeopleListElement extends HTMLElement {
       // Create Filter 2
       if(config.filters.filter_2.userAccessible){
         var formItemFilter2Container = document.createElement('div')
-        formItemFilter2Container.classList = 'form-item-filter-two form-item'
+        formItemFilter2Container.classList = 'form-item-filter-two form-item taxonomy-select-filter_2'
     
         var formItemFilter2Label = document.createElement('label')
         formItemFilter2Label.htmlFor = "Edit Filter 2"
@@ -660,7 +646,7 @@ class PeopleListElement extends HTMLElement {
         var selectFilter2 = document.createElement('select')
         selectFilter2.name = 'editFilterTwo'
         selectFilter2.id = 'edit-filter-two'
-        selectFilter2.className = "taxonomy-select-filter_2"
+        selectFilter2.className = "taxonomy-select"
         // All option as first entry
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:'', name: '',fieldName:''}])
@@ -674,7 +660,7 @@ class PeopleListElement extends HTMLElement {
       // Create Filter 3
       if(config.filters.filter_3.userAccessible){
         var formItemFilter3Container = document.createElement('div')
-        formItemFilter3Container.classList = 'form-item-filter-three form-item'
+        formItemFilter3Container.classList = 'form-item-filter-three form-item taxonomy-select-filter_3'
     
         var formItemFilter3Label = document.createElement('label')
         formItemFilter3Label.htmlFor = "Edit Filter 3"
@@ -683,7 +669,7 @@ class PeopleListElement extends HTMLElement {
         var selectFilter3 = document.createElement('select')
         selectFilter3.name = 'editFilterThree'
         selectFilter3.id = 'edit-filter-three'
-        selectFilter3.className = "taxonomy-select-filter_3"
+        selectFilter3.className = "taxonomy-select"
         // All option as first entry
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:'', name: '', fieldName:''}])
@@ -711,13 +697,15 @@ class PeopleListElement extends HTMLElement {
   }
 
   generateDropdown(taxonomy, selectContainerElements){
-    taxonomy.forEach(taxonomy=>{
-          let option = document.createElement('option')
-          option.value = JSON.stringify([{id:taxonomy.id, name: taxonomy.name, fieldName: taxonomy.fieldName}])
-          option.innerText = taxonomy.name
-          selectContainerElements.appendChild(option)
-    })
-
+    if(selectContainerElements.getElementsByClassName('taxonomy-select')[0]){
+      let selectEl = selectContainerElements.getElementsByClassName('taxonomy-select')[0]
+      taxonomy.forEach(taxonomy=>{
+            let option = document.createElement('option')
+            option.value = JSON.stringify([{id:taxonomy.id, name: taxonomy.name, fieldName: taxonomy.fieldName}])
+            option.innerText = taxonomy.name
+            selectEl.appendChild(option)
+      })
+    }
   }
 }
 
