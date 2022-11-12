@@ -33,26 +33,31 @@
 				'includes': content.field_ucb_people_department|render|striptags|trim|split(' '),
 				'userAccessible': content.field_ucb_people_department_s|render|striptags|trim == 'On',
 				'label': 'Department',
+				'restrict': content.field_ucb_people_department_r|render|striptags|trim == 'On'
 			},
 			'job_type': {
 				'includes': content.field_ucb_people_job_type|render|striptags|trim|split(' '),
 				'userAccessible': content.field_ucb_people_job_type_s|render|striptags|trim == 'On',
-				'label': 'Job Type'
+				'label': 'Job Type',
+				'restrict': content.field_ucb_people_job_type_r|render|striptags|trim == 'On'
 			},
 			'filter_1': {
 				'includes': content.field_ucb_people_filter_1|render|striptags|trim|split(' '),
 				'userAccessible': content.field_ucb_people_filter_1_s|render|striptags|trim == 'On',
-				'label': 'Filter 1'
+				'label': content.field_ucb_people_filter_1_label|render|striptags|trim,
+				'restrict': content.field_ucb_people_filter_1_r|render|striptags|trim == 'On'
 			},
 			'filter_2': {
 				'includes': content.field_ucb_people_filter_2|render|striptags|trim|split(' '),
 				'userAccessible': content.field_ucb_people_filter_2_s|render|striptags|trim == 'On',
-				'label': 'Filter 2'
+				'label': content.field_ucb_people_filter_2_label|render|striptags|trim,
+				'restrict': content.field_ucb_people_filter_2_r|render|striptags|trim == 'On'
 			},
 			'filter_3': {
 				'includes': content.field_ucb_people_filter_3|render|striptags|trim|split(' '),
 				'userAccessible': content.field_ucb_people_filter_3_s|render|striptags|trim == 'On',
-				'label': 'Filter 3'
+				'label': content.field_ucb_people_filter_3_label|render|striptags|trim,
+				'restrict': content.field_ucb_people_filter_3_r|render|striptags|trim == 'On'
 			}
 		},
 		'format': content.field_ucb_people_display|render|striptags|trim,
