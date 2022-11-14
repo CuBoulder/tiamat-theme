@@ -105,7 +105,17 @@ class PeopleListElement extends HTMLElement {
 			if(filters[filterName]['userAccessible'] && !syncTaxonomies.has(filterName))
 				asyncTaxonomies.add(filterName);
 		}
-    this.generateForm(config);
+		// If no filters are visitor accessible, skip the form entirely
+		var formRenderBool = false // running check
+		for(var key in config.filters){
+			if(config.filters[key]['userAccessible'] == true){
+				formRenderBool = true
+			}
+		}
+		// call generateForm method if there's atleast one vistor accessible field
+		if (formRenderBool){
+			this.generateForm(config)
+		}
 		this._loadedTaxonomies = {};
 		this._syncTaxonomiesLoaded = 0;
 		this.loadSyncTaxonomies(config);
@@ -161,7 +171,6 @@ class PeopleListElement extends HTMLElement {
 			groupBy = 'none';
 		// User-specified grouping is working as a feature to add in the future
 		if(groupBy != this._groupBy && !this.taxonomyHasLoaded(groupBy)) {
-			this._groupBy = groupBy;
 			this._syncTaxonomies.add(groupBy);
 			this.loadSyncTaxonomies();
 			return;
@@ -531,6 +540,7 @@ class PeopleListElement extends HTMLElement {
 	}
 
   async generateForm(config){
+	// for(filter in config.)
     if(this._userFormElement.children.length == 0){
       // Create Elements
       var form = document.createElement('form')
