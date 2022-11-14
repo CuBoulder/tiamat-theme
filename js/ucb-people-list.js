@@ -108,22 +108,22 @@ class PeopleListElement extends HTMLElement {
     this.generateForm(config);
 		this._loadedTaxonomies = {};
 		this._syncTaxonomiesLoaded = 0;
-		this.loadSyncTaxonomies();
+		this.loadSyncTaxonomies(config);
 		Array.from(asyncTaxonomies).forEach(taxonomyFieldName => {
 			const taxonomyId = taxonomyIds[taxonomyFieldName];
 			this.fetchTaxonomy(taxonomyId, taxonomyFieldName).then(taxonomy => {
-				this.onTaxonomyLoaded(taxonomyFieldName, taxonomy);
+				this.onTaxonomyLoaded(taxonomyFieldName, taxonomy, config);
 			}).catch(reason => console.warn('Taxonomy with id `' + taxonomyId + '` failed to load!'));	
 		});
 	}
 
-	loadSyncTaxonomies() {
+	loadSyncTaxonomies(config) {
 		if(this._syncTaxonomiesLoaded < this._syncTaxonomies.size) {
 			Array.from(this._syncTaxonomies).forEach(taxonomyFieldName => {
 				if(!this.taxonomyHasLoaded(taxonomyFieldName)) {
 					this.fetchTaxonomy(this._taxonomyIds[taxonomyFieldName], taxonomyFieldName).then(taxonomy => {
 						if(!this.taxonomyHasLoaded(taxonomyFieldName)) {
-							this.onTaxonomyLoaded(taxonomyFieldName, taxonomy);
+							this.onTaxonomyLoaded(taxonomyFieldName, taxonomy, config);
 							this._syncTaxonomiesLoaded++;
 							if(this._syncTaxonomiesLoaded >= this._syncTaxonomies.size) // Enter build method
 								this.build();
@@ -225,7 +225,7 @@ class PeopleListElement extends HTMLElement {
 		return taxonomy.find( ({ id }) => id === termId ).name;
 	}
 
-	onTaxonomyLoaded(taxonomyFieldName, taxonomy) {
+	onTaxonomyLoaded(taxonomyFieldName, taxonomy, config) {
 		this._loadedTaxonomies[taxonomyFieldName] = taxonomy;
 		const showContainerElements = this.getElementsByClassName('taxonomy-visible-' + taxonomyFieldName),
 			hideContainerElements = this.getElementsByClassName('taxonomy-hidden-' + taxonomyFieldName),
@@ -236,7 +236,7 @@ class PeopleListElement extends HTMLElement {
 		for(let index = 0; index < hideContainerElements.length; index++)
 			showContainerElements[index].setAttribute('hidden', '');
 		for(let index = 0; index < selectContainerElements.length; index++)
-      this.generateDropdown(taxonomy, selectContainerElements[0])
+      this.generateDropdown(taxonomy, selectContainerElements[0], config)
 			// TODO: Construct dropdowns in form
 		for(let index = 0; index < taxonomyElements.length; index++) {
 			const taxonomyElement = taxonomyElements[index];
@@ -617,7 +617,7 @@ class PeopleListElement extends HTMLElement {
     
         var formItemFilter1Label = document.createElement('label')
         formItemFilter1Label.htmlFor = "Edit Filer 1"
-        formItemFilter1Label.innerText = 'Filter 1'
+        formItemFilter1Label.innerText = config.filters.filter_1.label
     
         var selectFilter1 = document.createElement('select')
         selectFilter1.name = 'editFilterOne'
@@ -641,7 +641,7 @@ class PeopleListElement extends HTMLElement {
     
         var formItemFilter2Label = document.createElement('label')
         formItemFilter2Label.htmlFor = "Edit Filter 2"
-        formItemFilter2Label.innerText = 'Filter 2'
+        formItemFilter2Label.innerText = config.filters.filter_2.label
     
         var selectFilter2 = document.createElement('select')
         selectFilter2.name = 'editFilterTwo'
@@ -664,7 +664,7 @@ class PeopleListElement extends HTMLElement {
     
         var formItemFilter3Label = document.createElement('label')
         formItemFilter3Label.htmlFor = "Edit Filter 3"
-        formItemFilter3Label.innerText = 'Filter 3'
+        formItemFilter3Label.innerText = config.filters.filter_3.label
     
         var selectFilter3 = document.createElement('select')
         selectFilter3.name = 'editFilterThree'
@@ -696,14 +696,21 @@ class PeopleListElement extends HTMLElement {
    
   }
 
-  generateDropdown(taxonomy, selectContainerElements){
+  generateDropdown(taxonomy, selectContainerElements, config){
     if(selectContainerElements.getElementsByClassName('taxonomy-select')[0]){
       let selectEl = selectContainerElements.getElementsByClassName('taxonomy-select')[0]
       taxonomy.forEach(taxonomy=>{
-            let option = document.createElement('option')
-            option.value = JSON.stringify([{id:taxonomy.id, name: taxonomy.name, fieldName: taxonomy.fieldName}])
-            option.innerText = taxonomy.name
-            selectEl.appendChild(option)
+            let fieldName = taxonomy.fieldName
+            let taxonomyConfig = config.filters[fieldName]
+            let taxonomiesIncluded = taxonomyConfig.includes[0] == "" ? taxonomyConfig.includes : taxonomyConfig.includes.map(Number)
+
+            // Render selection if no taxonomies were selected to filter, if restricted is on and the taxonomy is included, or if restricted = false
+            if((taxonomyConfig.includes[0] == "") || (taxonomyConfig.restrict && taxonomiesIncluded.includes(taxonomy.id)) || taxonomyConfig.restrict == false){
+              let option = document.createElement('option')
+              option.value = JSON.stringify([{id:taxonomy.id, name: taxonomy.name, fieldName: taxonomy.fieldName}])
+              option.innerText = taxonomy.name
+              selectEl.appendChild(option)
+            }
       })
     }
   }
