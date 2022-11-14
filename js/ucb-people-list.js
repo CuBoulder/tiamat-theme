@@ -152,19 +152,21 @@ class PeopleListElement extends HTMLElement {
 			userFilters = userConfig['filters'] || {},
 			peopleListProvider = this._peopleListProvider = new PeopleListProvider(baseURI, filters, userFilters),
 			format = this._format = userConfig['format'] || config['format'] || 'list',
-			groupBy = userConfig['groupby'] || config['groupby'] || 'none',
 			orderBy = this._orderBy = userConfig['orderby'] || config['orderby'] || 'last';
 		this.toggleMessageDisplay(this._messageElement, 'none', null, null);
 		this.toggleMessageDisplay(this._loadingElement, 'block', null, null);
 
+		let groupBy = userConfig['groupby'] || config['groupby'] || 'none';
+		if(groupBy != 'none' && !this._taxonomyIds[groupBy]) // Group by is invalid!
+			groupBy = 'none';
 		// User-specified grouping is working as a feature to add in the future
-		if(groupBy !== this._groupBy && groupBy !== 'none' && this._taxonomyIds[groupBy] && !this.taxonomyHasLoaded(groupBy)) {
+		if(groupBy != this._groupBy && !this.taxonomyHasLoaded(groupBy)) {
 			this._groupBy = groupBy;
 			this._syncTaxonomies.add(groupBy);
 			this.loadSyncTaxonomies();
 			return;
 		}
-		this._groupBy = groupBy;
+		this._groupBy = groupBy = groupBy;
 
 		// Get our people
 		peopleListProvider.fetchPeople().then(response => {
@@ -173,6 +175,21 @@ class PeopleListElement extends HTMLElement {
 			if(!results.length)
 				this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-end-of-results', PeopleListProvider.noResultsMessage);
 			else {
+				if(groupBy != 'none') { // Build person -> term mapping
+					const groupedPeople = this._groupedPeople = new Map();
+					results.forEach(person => {
+						((person['relationships']['field_ucb_person_' + groupBy] || {})['data'] || []).forEach(
+							termData => {
+								const termId = termData['meta']['drupal_internal__target_id'];
+								let termPeople = groupedPeople.get(termId);
+								if(!termPeople) {
+									termPeople = [];
+									groupedPeople.set(termId, termPeople);
+								}
+								termPeople.push(person);
+							});
+					});
+				}	
 				// get all of the include images id => url
 				const urlObj = {}; // key from data.data to key from data.includes
 				const idObj = {}; // key from data.includes to URL
@@ -323,24 +340,7 @@ class PeopleListElement extends HTMLElement {
 	}
 
 	getPeopleInGroup(people, taxonomy) {
-		if(!taxonomy)
-			return people;
-		if(!this._groupedPeople) {
-			this._groupedPeople = new Map();
-			people.forEach(person => {
-				((person['relationships']['field_ucb_person_' + taxonomy.fieldName] || {})['data'] || []).forEach(
-					termData => {
-						const termId = termData['meta']['drupal_internal__target_id'];
-						let termPeople = this._groupedPeople.get(termId);
-						if(!termPeople) {
-							termPeople = [];
-							this._groupedPeople.set(termId, termPeople);
-						}
-						termPeople.push(person);
-					});
-			});
-		}
-		return this._groupedPeople.get(taxonomy.id);
+		return taxonomy && this._groupedPeople ? this._groupedPeople.get(taxonomy.id) : people;
 	}
 
 	displayPeople(format, people, urlObj, idObj, containerElement) {
