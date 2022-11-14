@@ -154,7 +154,6 @@ class PeopleListElement extends HTMLElement {
 			format = this._format = userConfig['format'] || config['format'] || 'list',
 			groupBy = userConfig['groupby'] || config['groupby'] || 'none',
 			orderBy = this._orderBy = userConfig['orderby'] || config['orderby'] || 'last';
-    
 		this.toggleMessageDisplay(this._messageElement, 'none', null, null);
 		this.toggleMessageDisplay(this._loadingElement, 'block', null, null);
 
@@ -530,13 +529,7 @@ class PeopleListElement extends HTMLElement {
 			element.setAttribute('hidden', '');
 		else element.removeAttribute('hidden');
 	}
-/**
- * 
- * TO DO -
- * 
- * - Add functionality to re-filter list after user input
- *
- */
+
   async generateForm(config){
     if(this._userFormElement.children.length == 0){
       // Create Elements
@@ -550,11 +543,41 @@ class PeopleListElement extends HTMLElement {
         for (var p of formData) {
           dataObj[p[0]] = JSON.parse(p[1])
         } 
-        console.log("results", dataObj)
-
-         // TO DO -- fix build
-        // this.build(deptObj, typeObj)
-
+        var userSettings = {
+          filters: {
+            department: {
+              includes: [dataObj.department[0].id],
+              userAccessible: config.filters.department.userAccessible,
+              label: config.filters.department.label,
+              restrict: config.filters.department.restrict
+            },
+            filter_1:{
+                includes: [dataObj.filter_1[0].id],
+                userAccessible: config.filters.filter_1.userAccessible,
+                label: config.filters.filter_1.label,
+                restrict: config.filters.filter_1.restrict
+            },
+            filter_2:{
+                includes: [dataObj.filter_2[0].id],
+                userAccessible: config.filters.filter_2.userAccessible,
+                label: config.filters.filter_2.label,
+                restrict: config.filters.filter_2.restrict
+            },
+            filter_3:{
+                includes: [dataObj.filter_3[0].id],
+                userAccessible: config.filters.filter_3.userAccessible,
+                label: config.filters.filter_3.label,
+                restrict: config.filters.filter_3.restrict
+            },
+            job_type:{
+                includes: [dataObj.job_type[0].id],
+                userAccessible: config.filters.job_type.userAccessible,
+                label: config.filters.job_type.label,
+                restrict: config.filters.job_type.restrict
+            },            
+        }
+      }
+      this.setAttribute('user-config', JSON.stringify(userSettings))
       })
       form.classList = 'people-list-filter'
       var formDiv = document.createElement('div')
@@ -571,7 +594,7 @@ class PeopleListElement extends HTMLElement {
         formItemDeptLabel.innerText = 'Departments'
     
         var selectDept = document.createElement('select')
-        selectDept.name = 'editDepartment'
+        selectDept.name = 'department'
         selectDept.id = 'edit-department'
         selectDept.className = "taxonomy-select"
         // All option as first entry
@@ -595,7 +618,7 @@ class PeopleListElement extends HTMLElement {
         formItemJobTypeLabel.innerText = 'Job Types'
     
         var selectJobType = document.createElement('select')
-        selectJobType.name = 'editJobType'
+        selectJobType.name = 'job_type'
         selectJobType.id = 'edit-job-types'
         selectJobType.className = "taxonomy-select"
   
@@ -620,7 +643,7 @@ class PeopleListElement extends HTMLElement {
         formItemFilter1Label.innerText = config.filters.filter_1.label
     
         var selectFilter1 = document.createElement('select')
-        selectFilter1.name = 'editFilterOne'
+        selectFilter1.name = 'filter_1'
         selectFilter1.id = 'edit-filter-one'
         selectFilter1.className = "taxonomy-select"
   
@@ -644,7 +667,7 @@ class PeopleListElement extends HTMLElement {
         formItemFilter2Label.innerText = config.filters.filter_2.label
     
         var selectFilter2 = document.createElement('select')
-        selectFilter2.name = 'editFilterTwo'
+        selectFilter2.name = 'filter_2'
         selectFilter2.id = 'edit-filter-two'
         selectFilter2.className = "taxonomy-select"
         // All option as first entry
@@ -667,7 +690,7 @@ class PeopleListElement extends HTMLElement {
         formItemFilter3Label.innerText = config.filters.filter_3.label
     
         var selectFilter3 = document.createElement('select')
-        selectFilter3.name = 'editFilterThree'
+        selectFilter3.name = 'filter_3'
         selectFilter3.id = 'edit-filter-three'
         selectFilter3.className = "taxonomy-select"
         // All option as first entry
