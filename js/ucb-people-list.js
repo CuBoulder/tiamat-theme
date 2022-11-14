@@ -552,19 +552,19 @@ class PeopleListElement extends HTMLElement {
               restrict: config.filters.department.restrict
             },
             filter_1:{
-                includes: [dataObj.filter_1[0].id],
+                includes: dataObj.filter_1 ? [dataObj.filter_1[0].id] : [""],
                 userAccessible: config.filters.filter_1.userAccessible,
                 label: config.filters.filter_1.label,
                 restrict: config.filters.filter_1.restrict
             },
             filter_2:{
-                includes: [dataObj.filter_2[0].id],
+                includes: dataObj.filter_2 ? [dataObj.filter_2[0].id] : [""],
                 userAccessible: config.filters.filter_2.userAccessible,
                 label: config.filters.filter_2.label,
                 restrict: config.filters.filter_2.restrict
             },
             filter_3:{
-                includes: [dataObj.filter_3[0].id],
+                includes: dataObj.filter_3 ? [dataObj.filter_3[0].id] : [""],
                 userAccessible: config.filters.filter_3.userAccessible,
                 label: config.filters.filter_3.label,
                 restrict: config.filters.filter_3.restrict
