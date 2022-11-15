@@ -690,9 +690,9 @@ class PeopleListElement extends HTMLElement {
         allOption.value = JSON.stringify([{id:'', name: '',fieldName:''}])
         // If restricted, set to Default instead of All
 		if(filters.filter_2.restrict && filters.filter_2.includes.length > 0){
-			allOption.innerText = 'All'
-		} else {
 			allOption.innerText = 'Default'
+		} else {
+			allOption.innerText = 'All'
 		}
         // Append
         selectFilter2.appendChild(allOption)    
@@ -717,7 +717,7 @@ class PeopleListElement extends HTMLElement {
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:'', name: '', fieldName:''}])
         // If restricted, set to Default instead of All
-		if(filters.filter_3.restrict && filters.department.includes.length > 0){
+		if(filters.filter_3.restrict && filters.filter_3.includes.length > 0){
 			allOption.innerText = 'Default'
 		} else {
 			allOption.innerText = 'All'
@@ -745,24 +745,32 @@ class PeopleListElement extends HTMLElement {
 	generateDropdown(taxonomy, selectContainerElements){
 		const filters = this._filters;
 		let selectEl = selectContainerElements.getElementsByClassName('taxonomy-select')[0]
-    if(selectContainerElements.getElementsByClassName('taxonomy-select')[0]){
-      taxonomy.forEach(taxonomy=>{
-            let fieldName = taxonomy.fieldName
-            let taxonomyConfig = filters[fieldName]
-            let taxonomiesIncluded = taxonomyConfig.includes[0] == "" ? taxonomyConfig.includes : taxonomyConfig.includes.map(Number)
+		if(selectContainerElements.getElementsByClassName('taxonomy-select')[0]){
+		taxonomy.forEach(taxonomy=>{
+				let fieldName = taxonomy.fieldName
+				let taxonomyConfig = filters[fieldName]
+				let taxonomiesIncluded = taxonomyConfig.includes[0] == "" ? taxonomyConfig.includes : taxonomyConfig.includes.map(Number)
 
-            // Render selection if no taxonomies were selected to filter, if restricted is on and the taxonomy is included, or if restricted = false
-            if((taxonomyConfig.includes[0] == "") || (taxonomyConfig.restrict && taxonomiesIncluded.includes(taxonomy.id)) || (taxonomyConfig.restrict && taxonomiesIncluded.length == 0) || taxonomyConfig.restrict == false){
-              let option = document.createElement('option')
-              option.value = JSON.stringify([{id:taxonomy.id, name: taxonomy.name, fieldName: taxonomy.fieldName}])
-              option.innerText = taxonomy.name
-              selectEl.appendChild(option)
-            }
-      })
-	  // If only 2 options- default and one other option, these mean the same thing. Remove default.
-	  if(selectEl.children.length == 2 && selectEl.children[0].innerText == 'Default'){
-		  selectEl.removeChild(selectEl.children[0])
-	  }
+				// Render selection if no taxonomies were selected to filter, if restricted is on and the taxonomy is included, or if restricted = false
+				if((taxonomyConfig.includes[0] == "") || (taxonomyConfig.restrict && taxonomiesIncluded.includes(taxonomy.id)) || (taxonomyConfig.restrict && taxonomiesIncluded.length == 0) || taxonomyConfig.restrict == false){
+				let option = document.createElement('option')
+				option.id = `option-${taxonomy.name}`
+				option.value = JSON.stringify([{id:taxonomy.id, name: taxonomy.name, fieldName: taxonomy.fieldName}])
+				option.innerText = taxonomy.name
+
+				if(taxonomiesIncluded.includes(taxonomy.id) && taxonomyConfig.restrict==false && taxonomiesIncluded.length == 1){
+					option.selected = true
+					selectEl.appendChild(option)
+				} else {
+					selectEl.appendChild(option)
+				}
+				}
+		})
+
+		// If only 2 options- default and one other option, these mean the same thing. Remove default.
+		if(selectEl.children.length == 2){
+			selectEl.removeChild(selectEl.children[0])
+		}
     }
   }
 }
