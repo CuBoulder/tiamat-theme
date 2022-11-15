@@ -600,8 +600,8 @@ class PeopleListElement extends HTMLElement {
         // All option as first entry
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:"", name: "",fieldName:''}])
-		// If restricted, set to Default instead of All
-		if(filters.department.restrict){
+		// If restricted, and has filters set to Default instead of All
+		if(filters.department.restrict && filters.department.includes.length > 0){
 			allOption.innerText = 'Default'
 		} else {
 			allOption.innerText = 'All'
@@ -631,7 +631,7 @@ class PeopleListElement extends HTMLElement {
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:'', name: "",fieldName:''}])
         	// If restricted, set to Default instead of All
-		if(filters.job_type.restrict){
+		if(filters.job_type.restrict && filters.job_type.includes.length >0){
 			allOption.innerText = 'Default'
 		} else {
 			allOption.innerText = 'All'
@@ -661,7 +661,7 @@ class PeopleListElement extends HTMLElement {
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:'', name: '',fieldName:''}])
         // If restricted, set to Default instead of All
-		if(filters.filter_1.restrict){
+		if(filters.filter_1.restrict && filters.filter_1.includes.length > 0){
 			allOption.innerText = 'Default'
 		} else {
 			allOption.innerText = 'All'
@@ -689,7 +689,7 @@ class PeopleListElement extends HTMLElement {
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:'', name: '',fieldName:''}])
         // If restricted, set to Default instead of All
-		if(filters.filter_2.restrict){
+		if(filters.filter_2.restrict && filters.filter_2.includes.length > 0){
 			allOption.innerText = 'All'
 		} else {
 			allOption.innerText = 'Default'
@@ -717,7 +717,7 @@ class PeopleListElement extends HTMLElement {
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:'', name: '', fieldName:''}])
         // If restricted, set to Default instead of All
-		if(filters.filter_3.restrict){
+		if(filters.filter_3.restrict && filters.department.includes.length > 0){
 			allOption.innerText = 'Default'
 		} else {
 			allOption.innerText = 'All'
@@ -760,7 +760,7 @@ class PeopleListElement extends HTMLElement {
             }
       })
 	  // If only 2 options- default and one other option, these mean the same thing. Remove default.
-	  if(selectEl.children.length == 2 && selectEl.children[0].innerText == 'All'){
+	  if(selectEl.children.length == 2 && selectEl.children[0].innerText == 'Default'){
 		  selectEl.removeChild(selectEl.children[0])
 	  }
     }
