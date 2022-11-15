@@ -166,6 +166,7 @@ class PeopleListElement extends HTMLElement {
 			this.loadSyncTaxonomies();
 			return;
 		}
+		this._groupBy = groupBy;
 
 		// Get our people
 		peopleListProvider.fetchPeople().then(response => {
@@ -531,14 +532,14 @@ class PeopleListElement extends HTMLElement {
 	}
 
 	generateForm(){
-		const config = this._config, filters = config['filters'], userFilters = {};
+		const config = this._config, filters = config['filters'], userAccessibleFilters = {};
 		// If no filters are visitor accessible, skip the form entirely
 		let formRenderBool = false; // running check
 		for(const filterName in filters){
 			const filter = filters[filterName];
 			if(filter['userAccessible']/* && filter['includes'].filter(include => include != '').length > 0 */) {
 				formRenderBool = true;
-				userFilters[filterName] = filter;
+				userAccessibleFilters[filterName] = filter;
 			}
 		}
 		// run generateForm method if there's atleast one vistor accessible field
