@@ -558,37 +558,28 @@ class PeopleListElement extends HTMLElement {
         var userSettings = {
           filters: {
             department: {
-              includes: dataObj.department ? [dataObj.department[0].id] : [""],
-            //   userAccessible: config.filters.department.userAccessible,
-            //   label: config.filters.department.label,
-            //   restrict: config.filters.department.restrict
+              includes: dataObj.department ? [dataObj.department[0].id] : [],
             },
             filter_1:{
-                includes: dataObj.filter_1 ? [dataObj.filter_1[0].id] : [""],
-                // userAccessible: config.filters.filter_1.userAccessible,
-                // label: config.filters.filter_1.label,
-                // restrict: config.filters.filter_1.restrict
+                includes: dataObj.filter_1 ? [dataObj.filter_1[0].id] : [],
             },
             filter_2:{
-                includes: dataObj.filter_2 ? [dataObj.filter_2[0].id] : [""],
-                // userAccessible: config.filters.filter_2.userAccessible,
-                // label: config.filters.filter_2.label,
-                // restrict: config.filters.filter_2.restrict
+                includes: dataObj.filter_2 ? [dataObj.filter_2[0].id] : [],
             },
             filter_3:{
-                includes: dataObj.filter_3 ? [dataObj.filter_3[0].id] : [""],
-                // userAccessible: config.filters.filter_3.userAccessible,
-                // label: config.filters.filter_3.label,
-                // restrict: config.filters.filter_3.restrict
+                includes: dataObj.filter_3 ? [dataObj.filter_3[0].id] : [],
             },
             job_type:{
-                includes: dataObj.job_type ? [dataObj.job_type[0].id] : [""],
-                // userAccessible: config.filters.job_type.userAccessible,
-                // label: config.filters.job_type.label,
-                // restrict: config.filters.job_type.restrict
+                includes: dataObj.job_type ? [dataObj.job_type[0].id] : [],
             },            
         }
-      }
+	}
+		// If restricted, remove user config filters from the user filter, default to config obj
+		for(let key in userSettings['filters']){
+			if(userSettings['filters'][key]['includes'][0] == "" && config['filters'][key]['restrict']){
+				delete userSettings['filters'][key]
+			}
+		}
       this.setAttribute('user-config', JSON.stringify(userSettings))
       })
       form.classList = 'people-list-filter'
