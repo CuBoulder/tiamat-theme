@@ -558,34 +558,34 @@ class PeopleListElement extends HTMLElement {
         var userSettings = {
           filters: {
             department: {
-              includes: [dataObj.department[0].id],
-              userAccessible: config.filters.department.userAccessible,
-              label: config.filters.department.label,
-              restrict: config.filters.department.restrict
+              includes: dataObj.department ? [dataObj.department[0].id] : [""],
+            //   userAccessible: config.filters.department.userAccessible,
+            //   label: config.filters.department.label,
+            //   restrict: config.filters.department.restrict
             },
             filter_1:{
                 includes: dataObj.filter_1 ? [dataObj.filter_1[0].id] : [""],
-                userAccessible: config.filters.filter_1.userAccessible,
-                label: config.filters.filter_1.label,
-                restrict: config.filters.filter_1.restrict
+                // userAccessible: config.filters.filter_1.userAccessible,
+                // label: config.filters.filter_1.label,
+                // restrict: config.filters.filter_1.restrict
             },
             filter_2:{
                 includes: dataObj.filter_2 ? [dataObj.filter_2[0].id] : [""],
-                userAccessible: config.filters.filter_2.userAccessible,
-                label: config.filters.filter_2.label,
-                restrict: config.filters.filter_2.restrict
+                // userAccessible: config.filters.filter_2.userAccessible,
+                // label: config.filters.filter_2.label,
+                // restrict: config.filters.filter_2.restrict
             },
             filter_3:{
                 includes: dataObj.filter_3 ? [dataObj.filter_3[0].id] : [""],
-                userAccessible: config.filters.filter_3.userAccessible,
-                label: config.filters.filter_3.label,
-                restrict: config.filters.filter_3.restrict
+                // userAccessible: config.filters.filter_3.userAccessible,
+                // label: config.filters.filter_3.label,
+                // restrict: config.filters.filter_3.restrict
             },
             job_type:{
-                includes: [dataObj.job_type[0].id],
-                userAccessible: config.filters.job_type.userAccessible,
-                label: config.filters.job_type.label,
-                restrict: config.filters.job_type.restrict
+                includes: dataObj.job_type ? [dataObj.job_type[0].id] : [""],
+                // userAccessible: config.filters.job_type.userAccessible,
+                // label: config.filters.job_type.label,
+                // restrict: config.filters.job_type.restrict
             },            
         }
       }
@@ -612,7 +612,12 @@ class PeopleListElement extends HTMLElement {
         // All option as first entry
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:"", name: "",fieldName:''}])
-        allOption.innerText = 'All'
+		// If restricted, set to Default instead of All
+		if(config.filters.department.restrict){
+			allOption.innerText = 'Default'
+		} else {
+			allOption.innerText = 'All'
+		}
         selectDept.appendChild(allOption)
         // Append
         formItemDeptContainer.appendChild(formItemDeptLabel)
@@ -637,7 +642,12 @@ class PeopleListElement extends HTMLElement {
         // All option as first entry
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:'', name: "",fieldName:''}])
-        allOption.innerText = 'All'
+        	// If restricted, set to Default instead of All
+		if(config.filters.job_type.restrict){
+			allOption.innerText = 'Default'
+		} else {
+			allOption.innerText = 'All'
+		}
         // Append
         selectJobType.appendChild(allOption)    
         formItemJobTypeContainer.appendChild(formItemJobTypeLabel)
@@ -662,7 +672,12 @@ class PeopleListElement extends HTMLElement {
         // All option as first entry
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:'', name: '',fieldName:''}])
-        allOption.innerText = 'All'
+        // If restricted, set to Default instead of All
+		if(config.filters.filter_1.restrict){
+			allOption.innerText = 'Default'
+		} else {
+			allOption.innerText = 'All'
+		}
         // Append
         selectFilter1.appendChild(allOption)
         formItemFilter1Container.appendChild(formItemFilter1Label)
@@ -685,7 +700,12 @@ class PeopleListElement extends HTMLElement {
         // All option as first entry
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:'', name: '',fieldName:''}])
-        allOption.innerText = 'All'
+        // If restricted, set to Default instead of All
+		if(config.filters.filter_2.restrict){
+			allOption.innerText = 'Default'
+		} else {
+			allOption.innerText = 'All'
+		}
         // Append
         selectFilter2.appendChild(allOption)    
         formItemFilter2Container.appendChild(formItemFilter2Label)
@@ -708,7 +728,12 @@ class PeopleListElement extends HTMLElement {
         // All option as first entry
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:'', name: '', fieldName:''}])
-        allOption.innerText = 'All'
+        // If restricted, set to Default instead of All
+		if(config.filters.filter_3.restrict){
+			allOption.innerText = 'Default'
+		} else {
+			allOption.innerText = 'All'
+		}
         // Append
         selectFilter3.appendChild(allOption)    
         formItemFilter3Container.appendChild(formItemFilter3Label)
