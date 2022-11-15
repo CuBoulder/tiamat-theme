@@ -752,7 +752,7 @@ class PeopleListElement extends HTMLElement {
             let taxonomiesIncluded = taxonomyConfig.includes[0] == "" ? taxonomyConfig.includes : taxonomyConfig.includes.map(Number)
 
             // Render selection if no taxonomies were selected to filter, if restricted is on and the taxonomy is included, or if restricted = false
-            if((taxonomyConfig.includes[0] == "") || (taxonomyConfig.restrict && taxonomiesIncluded.includes(taxonomy.id)) || taxonomyConfig.restrict == false){
+            if((taxonomyConfig.includes[0] == "") || (taxonomyConfig.restrict && taxonomiesIncluded.includes(taxonomy.id)) || (taxonomyConfig.restrict && taxonomiesIncluded.length == 0) || taxonomyConfig.restrict == false){
               let option = document.createElement('option')
               option.value = JSON.stringify([{id:taxonomy.id, name: taxonomy.name, fieldName: taxonomy.fieldName}])
               option.innerText = taxonomy.name
