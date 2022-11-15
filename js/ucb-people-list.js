@@ -29,7 +29,7 @@ class PeopleListProvider {
 			if(!filterIncludes || !filterIncludes.length) return;
 			let filterParams = '';
 			filterIncludes.forEach(filterItem => {
-				if(!filterItem) return;
+				if(filterItem == '') return;
 				filterParams += '&filter[filter-' + filterName + '-' + filterItem + '][condition][path]=field_ucb_person_' + filterName + '.meta.drupal_internal__target_id'
 					+ '&filter[filter-' + filterName + '-' + filterItem + '][condition][value]=' + filterItem
 					+ '&filter[filter-' + filterName + '-' + filterItem + '][condition][memberOf]=' + filterName + '-include';
@@ -105,35 +105,25 @@ class PeopleListElement extends HTMLElement {
 			if(filters[filterName]['userAccessible'] && !syncTaxonomies.has(filterName))
 				asyncTaxonomies.add(filterName);
 		}
-		// If no filters are visitor accessible, skip the form entirely
-		var formRenderBool = false // running check
-		for(var key in config.filters){
-			if(config.filters[key]['userAccessible'] == true){
-				formRenderBool = true
-			}
-		}
-		// call generateForm method if there's atleast one vistor accessible field
-		if (formRenderBool){
-			this.generateForm(config)
-		}
+		this.generateForm();
 		this._loadedTaxonomies = {};
 		this._syncTaxonomiesLoaded = 0;
-		this.loadSyncTaxonomies(config);
+		this.loadSyncTaxonomies();
 		Array.from(asyncTaxonomies).forEach(taxonomyFieldName => {
 			const taxonomyId = taxonomyIds[taxonomyFieldName];
 			this.fetchTaxonomy(taxonomyId, taxonomyFieldName).then(taxonomy => {
-				this.onTaxonomyLoaded(taxonomyFieldName, taxonomy, config);
+				this.onTaxonomyLoaded(taxonomyFieldName, taxonomy);
 			}).catch(reason => console.warn('Taxonomy with id `' + taxonomyId + '` failed to load!'));	
 		});
 	}
 
-	loadSyncTaxonomies(config) {
+	loadSyncTaxonomies() {
 		if(this._syncTaxonomiesLoaded < this._syncTaxonomies.size) {
 			Array.from(this._syncTaxonomies).forEach(taxonomyFieldName => {
 				if(!this.taxonomyHasLoaded(taxonomyFieldName)) {
 					this.fetchTaxonomy(this._taxonomyIds[taxonomyFieldName], taxonomyFieldName).then(taxonomy => {
 						if(!this.taxonomyHasLoaded(taxonomyFieldName)) {
-							this.onTaxonomyLoaded(taxonomyFieldName, taxonomy, config);
+							this.onTaxonomyLoaded(taxonomyFieldName, taxonomy);
 							this._syncTaxonomiesLoaded++;
 							if(this._syncTaxonomiesLoaded >= this._syncTaxonomies.size) // Enter build method
 								this.build();
@@ -171,11 +161,11 @@ class PeopleListElement extends HTMLElement {
 			groupBy = 'none';
 		// User-specified grouping is working as a feature to add in the future
 		if(groupBy != this._groupBy && !this.taxonomyHasLoaded(groupBy)) {
+			this._groupBy = groupBy;
 			this._syncTaxonomies.add(groupBy);
 			this.loadSyncTaxonomies();
 			return;
 		}
-		this._groupBy = groupBy = groupBy;
 
 		// Get our people
 		peopleListProvider.fetchPeople().then(response => {
@@ -250,7 +240,7 @@ class PeopleListElement extends HTMLElement {
 		return taxonomy.find( ({ id }) => id === termId ).name;
 	}
 
-	onTaxonomyLoaded(taxonomyFieldName, taxonomy, config) {
+	onTaxonomyLoaded(taxonomyFieldName, taxonomy) {
 		this._loadedTaxonomies[taxonomyFieldName] = taxonomy;
 		const showContainerElements = this.getElementsByClassName('taxonomy-visible-' + taxonomyFieldName),
 			hideContainerElements = this.getElementsByClassName('taxonomy-hidden-' + taxonomyFieldName),
@@ -261,8 +251,7 @@ class PeopleListElement extends HTMLElement {
 		for(let index = 0; index < hideContainerElements.length; index++)
 			showContainerElements[index].setAttribute('hidden', '');
 		for(let index = 0; index < selectContainerElements.length; index++)
-      this.generateDropdown(taxonomy, selectContainerElements[0], config)
-			// TODO: Construct dropdowns in form
+			this.generateDropdown(taxonomy, selectContainerElements[index], this._config);
 		for(let index = 0; index < taxonomyElements.length; index++) {
 			const taxonomyElement = taxonomyElements[index];
 			taxonomyElement.innerText = PeopleListElement.getTaxonomyName(taxonomy, parseInt(taxonomyElement.dataset['termId'])) || '';
@@ -277,14 +266,21 @@ class PeopleListElement extends HTMLElement {
 		return !!this._loadedTaxonomies[taxonomyFieldName];
 	}
 
+	attachElementToTaxonomy(element, taxonomy) {
+		const taxonomyClass = 'taxonomy-' + taxonomy.fieldName;
+		if(element.className)
+			element.className += ' ' + taxonomyClass;
+		else element.className = taxonomyClass;
+		element.dataset['termId'] = taxonomy.id;
+		element.innerText = taxonomy.name;
+		return element;
+	}
+
 	buildListGroup(taxonomy) {
 		const wrapper = document.createElement('section');
 		if(taxonomy) {
-			const groupTitleContainer = document.createElement('div'), groupTitleH2 = document.createElement('h2');
-			groupTitleH2.className = 'taxonomy-' + taxonomy.fieldName;
-			groupTitleH2.dataset['termId'] = taxonomy.id;
-			groupTitleH2.innerText = taxonomy.name;
-			groupTitleContainer.appendChild(groupTitleH2);
+			const groupTitleContainer = document.createElement('div');
+			groupTitleContainer.appendChild(this.attachElementToTaxonomy(document.createElement('h2'), taxonomy));
 			wrapper.appendChild(groupTitleContainer);
 		}
 		this._contentElement.appendChild(wrapper);
@@ -295,12 +291,9 @@ class PeopleListElement extends HTMLElement {
 		const wrapper = document.createElement('section');
 		wrapper.className = 'row ucb-people-list-content';
 		if(taxonomy) {
-			const groupTitleContainer = document.createElement('div'), groupTitleH2 = document.createElement('h2');
+			const groupTitleContainer = document.createElement('div');
 			groupTitleContainer.className = 'col-12';
-			groupTitleH2.className = 'taxonomy-' + taxonomy.fieldName;
-			groupTitleH2.dataset['termId'] = taxonomy.id;
-			groupTitleH2.innerText = taxonomy.name;
-			groupTitleContainer.appendChild(groupTitleH2);
+			groupTitleContainer.appendChild(this.attachElementToTaxonomy(document.createElement('h2'), taxonomy));
 			wrapper.appendChild(groupTitleContainer);
 		}
 		this._contentElement.appendChild(wrapper);
@@ -330,11 +323,9 @@ class PeopleListElement extends HTMLElement {
 		tableBody = tableBody || table.querySelector('tbody.ucb-people-list-table-tablebody');
 		if(taxonomy) {
 			const groupTitleContainer = document.createElement('tr'), groupTitleTh = document.createElement('th');
-			groupTitleTh.className = 'ucb-people-list-group-title-th taxonomy-' + taxonomy.fieldName;
+			groupTitleTh.className = 'ucb-people-list-group-title-th';
 			groupTitleTh.setAttribute('colspan', '3');
-			groupTitleTh.dataset['termId'] = taxonomy.id;
-			groupTitleTh.innerText = taxonomy.name;
-			groupTitleContainer.appendChild(groupTitleTh);
+			groupTitleContainer.appendChild(this.attachElementToTaxonomy(groupTitleTh, taxonomy));
 			tableBody.appendChild(groupTitleContainer);
 		}
 		return tableBody;
@@ -539,15 +530,25 @@ class PeopleListElement extends HTMLElement {
 		else element.removeAttribute('hidden');
 	}
 
-  async generateForm(config){
+	generateForm(){
+		const config = this._config, filters = config['filters'], userFilters = {};
+		// If no filters are visitor accessible, skip the form entirely
+		let formRenderBool = false; // running check
+		for(const filterName in filters){
+			const filter = filters[filterName];
+			if(filter['userAccessible']/* && filter['includes'].filter(include => include != '').length > 0 */) {
+				formRenderBool = true;
+				userFilters[filterName] = filter;
+			}
+		}
+		// run generateForm method if there's atleast one vistor accessible field
+		if (!formRenderBool) return;
 	// for(filter in config.)
-    if(this._userFormElement.children.length == 0){
       // Create Elements
       var form = document.createElement('form')
-      form.id = 'user-filter'
       form.addEventListener('submit',(event)=> {
         event.preventDefault()
-        var formData = new FormData(document.forms['user-filter']);
+        var formData = new FormData(event.target);
         var dataObj = {}
         // Create a dataObject with ids for second render
         for (var p of formData) {
@@ -723,13 +724,12 @@ class PeopleListElement extends HTMLElement {
       formButtonContainer.appendChild(formButton)
       formDiv.appendChild(formButtonContainer)
       form.appendChild(formDiv)
-      // Append final container
-      this._userFormElement.appendChild(form);
-    }
-   
-  }
+		// Append final container
+		this._userFormElement.appendChild(form);   
+	}
 
-  generateDropdown(taxonomy, selectContainerElements, config){
+	generateDropdown(taxonomy, selectContainerElements){
+		const config = this._config;
     if(selectContainerElements.getElementsByClassName('taxonomy-select')[0]){
       let selectEl = selectContainerElements.getElementsByClassName('taxonomy-select')[0]
       taxonomy.forEach(taxonomy=>{
