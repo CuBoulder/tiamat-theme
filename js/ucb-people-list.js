@@ -96,16 +96,25 @@ class PeopleListElement extends HTMLElement {
 			filters = this._filters = config['filters'] || {},
 			groupBy = this._groupBy = config['groupby'] || 'none',
 			syncTaxonomies = this._syncTaxonomies = new Set(),
-			asyncTaxonomies = this._asyncTaxonomies = new Set(['department']);
+			asyncTaxonomies = this._asyncTaxonomies = new Set(['department']),
+			userAccessibleFilters = this._userAccessibleFilters = {};
 		if (groupBy != 'none' && taxonomyIds[groupBy]) { // The taxonomy used for groups must be fetched sync
 			syncTaxonomies.add(groupBy);
 			asyncTaxonomies.delete(groupBy);
 		} else this._groupBy = 'none';
+		// If no filters are visitor accessible, skip the form entirely
+		let formRenderBool = false; // running check
 		for(const filterName in filters) { // If user filter dropdowns are necessary, they can be generated async
-			if(filters[filterName]['userAccessible'] && !syncTaxonomies.has(filterName))
-				asyncTaxonomies.add(filterName);
+			const filter = filters[filterName];
+			if(filter['userAccessible']) {
+				userAccessibleFilters[filterName] = filter;
+				if(!syncTaxonomies.has(filterName))
+					asyncTaxonomies.add(filterName);
+				formRenderBool = true;
+			}
 		}
-		this.generateForm();
+		// call generateForm method if there's atleast one vistor accessible field
+		if (formRenderBool) this.generateForm();
 		this._loadedTaxonomies = {};
 		this._syncTaxonomiesLoaded = 0;
 		this.loadSyncTaxonomies();
@@ -209,10 +218,10 @@ class PeopleListElement extends HTMLElement {
 					// using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
 					idFilterData.map(pair => idObj[pair['id']] = pair['relationships']['thumbnail']['data']['id']);
 				}
-				(groupBy == 'none' ? [null] : this.getTaxonomy(groupBy) || [null]).forEach(taxonomy => {
-					const peopleInGroup = this.getPeopleInGroup(results, taxonomy);
+				(groupBy == 'none' ? [null] : this.getTaxonomy(groupBy) || [null]).forEach(taxonomyTerm => {
+					const peopleInGroup = this.getPeopleInGroup(results, taxonomyTerm);
 					if(!peopleInGroup) return;
-					const groupContainerElement = this.buildGroup(format, taxonomy);
+					const groupContainerElement = this.buildGroup(format, taxonomyTerm);
 					if(orderBy == 'type') {
 						this.displayPeople(format, peopleInGroup.filter(person => person['relationships']['field_ucb_person_job_type']['data'].length > 0), urlObj, idObj, groupContainerElement);
 						this.displayPeople(format, peopleInGroup.filter(person => person['relationships']['field_ucb_person_job_type']['data'].length == 0), urlObj, idObj, groupContainerElement);
@@ -267,41 +276,41 @@ class PeopleListElement extends HTMLElement {
 		return !!this._loadedTaxonomies[taxonomyFieldName];
 	}
 
-	attachElementToTaxonomy(element, taxonomy) {
-		const taxonomyClass = 'taxonomy-' + taxonomy.fieldName;
+	attachElementToTaxonomyTerm(element, taxonomyTerm) {
+		const taxonomyClass = 'taxonomy-' + taxonomyTerm.fieldName;
 		if(element.className)
 			element.className += ' ' + taxonomyClass;
 		else element.className = taxonomyClass;
-		element.dataset['termId'] = taxonomy.id;
-		element.innerText = taxonomy.name;
+		element.dataset['termId'] = taxonomyTerm.id;
+		element.innerText = taxonomyTerm.name;
 		return element;
 	}
 
-	buildListGroup(taxonomy) {
+	buildListGroup(taxonomyTerm) {
 		const wrapper = document.createElement('section');
-		if(taxonomy) {
+		if(taxonomyTerm) {
 			const groupTitleContainer = document.createElement('div');
-			groupTitleContainer.appendChild(this.attachElementToTaxonomy(document.createElement('h2'), taxonomy));
+			groupTitleContainer.appendChild(this.attachElementToTaxonomyTerm(document.createElement('h2'), taxonomyTerm));
 			wrapper.appendChild(groupTitleContainer);
 		}
 		this._contentElement.appendChild(wrapper);
 		return wrapper;
 	}
 
-	buildGridGroup(taxonomy) {
+	buildGridGroup(taxonomyTerm) {
 		const wrapper = document.createElement('section');
 		wrapper.className = 'row ucb-people-list-content';
-		if(taxonomy) {
+		if(taxonomyTerm) {
 			const groupTitleContainer = document.createElement('div');
 			groupTitleContainer.className = 'col-12';
-			groupTitleContainer.appendChild(this.attachElementToTaxonomy(document.createElement('h2'), taxonomy));
+			groupTitleContainer.appendChild(this.attachElementToTaxonomyTerm(document.createElement('h2'), taxonomyTerm));
 			wrapper.appendChild(groupTitleContainer);
 		}
 		this._contentElement.appendChild(wrapper);
 		return wrapper;
 	}
 
-	buildTableGroup(taxonomy) {
+	buildTableGroup(taxonomyTerm) {
 		let table = this._contentElement.querySelector('table'), tableBody;
 		// we only need to render the table header the first time
 		// this function will be called multiple times so check to 
@@ -322,26 +331,26 @@ class PeopleListElement extends HTMLElement {
 			this._contentElement.appendChild(table);
 		}
 		tableBody = tableBody || table.querySelector('tbody.ucb-people-list-table-tablebody');
-		if(taxonomy) {
+		if(taxonomyTerm) {
 			const groupTitleContainer = document.createElement('tr'), groupTitleTh = document.createElement('th');
 			groupTitleTh.className = 'ucb-people-list-group-title-th';
 			groupTitleTh.setAttribute('colspan', '3');
-			groupTitleContainer.appendChild(this.attachElementToTaxonomy(groupTitleTh, taxonomy));
+			groupTitleContainer.appendChild(this.attachElementToTaxonomyTerm(groupTitleTh, taxonomyTerm));
 			tableBody.appendChild(groupTitleContainer);
 		}
 		return tableBody;
 	}
 
-	buildGroup(format, taxonomy) {
+	buildGroup(format, taxonomyTerm) {
 		switch (format) {
-			case 'list': default: return this.buildListGroup(taxonomy);
-			case 'grid': return this.buildGridGroup(taxonomy);
-			case 'table': return this.buildTableGroup(taxonomy);
+			case 'list': default: return this.buildListGroup(taxonomyTerm);
+			case 'grid': return this.buildGridGroup(taxonomyTerm);
+			case 'table': return this.buildTableGroup(taxonomyTerm);
 		}
 	}
 
-	getPeopleInGroup(people, taxonomy) {
-		return taxonomy && this._groupedPeople ? this._groupedPeople.get(taxonomy.id) : people;
+	getPeopleInGroup(people, taxonomyTerm) {
+		return taxonomyTerm && this._groupedPeople ? this._groupedPeople.get(taxonomyTerm.id) : people;
 	}
 
 	displayPeople(format, people, urlObj, idObj, containerElement) {
@@ -532,18 +541,7 @@ class PeopleListElement extends HTMLElement {
 	}
 
 	generateForm(){
-		const config = this._config, filters = config['filters'], userAccessibleFilters = {};
-		// If no filters are visitor accessible, skip the form entirely
-		let formRenderBool = false; // running check
-		for(const filterName in filters){
-			const filter = filters[filterName];
-			if(filter['userAccessible']/* && filter['includes'].filter(include => include != '').length > 0 */) {
-				formRenderBool = true;
-				userAccessibleFilters[filterName] = filter;
-			}
-		}
-		// run generateForm method if there's atleast one vistor accessible field
-		if (!formRenderBool) return;
+		const filters = this._filters, userAccessibleFilters = this._userAccessibleFilters;
 	// for(filter in config.)
       // Create Elements
       var form = document.createElement('form')
@@ -576,7 +574,7 @@ class PeopleListElement extends HTMLElement {
 	}
 		// If restricted, remove user config filters from the user filter, default to config obj
 		for(let key in userSettings['filters']){
-			if(userSettings['filters'][key]['includes'][0] == "" && config['filters'][key]['restrict']){
+			if(userSettings['filters'][key]['includes'][0] == "" && filters[key]['restrict']){
 				delete userSettings['filters'][key]
 			}
 		}
@@ -588,7 +586,7 @@ class PeopleListElement extends HTMLElement {
   
       // If User-Filterable...
       // Departments, create filterable dropdown of Departments
-      if(config.filters.department.userAccessible){
+      if(filters.department.userAccessible){
         var formItemDeptContainer = document.createElement('div')
         formItemDeptContainer.classList = 'form-item-department form-item taxonomy-select-department'
     
@@ -604,7 +602,7 @@ class PeopleListElement extends HTMLElement {
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:"", name: "",fieldName:''}])
 		// If restricted, set to Default instead of All
-		if(config.filters.department.restrict){
+		if(filters.department.restrict){
 			allOption.innerText = 'Default'
 		} else {
 			allOption.innerText = 'All'
@@ -617,7 +615,7 @@ class PeopleListElement extends HTMLElement {
       }
   
       // Create filterable dropdown of Job Types
-      if(config.filters.job_type.userAccessible){
+      if(filters.job_type.userAccessible){
         var formItemJobTypeContainer = document.createElement('div')
         formItemJobTypeContainer.classList = 'form-item-job-type form-item taxonomy-select-job_type'
     
@@ -634,7 +632,7 @@ class PeopleListElement extends HTMLElement {
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:'', name: "",fieldName:''}])
         	// If restricted, set to Default instead of All
-		if(config.filters.job_type.restrict){
+		if(filters.job_type.restrict){
 			allOption.innerText = 'Default'
 		} else {
 			allOption.innerText = 'All'
@@ -647,13 +645,13 @@ class PeopleListElement extends HTMLElement {
         formDiv.appendChild(formItemJobTypeContainer)
       }
       // Create Filter 1
-      if(config.filters.filter_1.userAccessible){
+      if(filters.filter_1.userAccessible){
         var formItemFilter1Container = document.createElement('div')
         formItemFilter1Container.classList = 'form-item-filter-one form-item taxonomy-select-filter_1'
     
         var formItemFilter1Label = document.createElement('label')
         formItemFilter1Label.htmlFor = "Edit Filer 1"
-        formItemFilter1Label.innerText = config.filters.filter_1.label
+        formItemFilter1Label.innerText = filters.filter_1.label
     
         var selectFilter1 = document.createElement('select')
         selectFilter1.name = 'filter_1'
@@ -664,7 +662,7 @@ class PeopleListElement extends HTMLElement {
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:'', name: '',fieldName:''}])
         // If restricted, set to Default instead of All
-		if(config.filters.filter_1.restrict){
+		if(filters.filter_1.restrict){
 			allOption.innerText = 'Default'
 		} else {
 			allOption.innerText = 'All'
@@ -676,13 +674,13 @@ class PeopleListElement extends HTMLElement {
         formDiv.appendChild(formItemFilter1Container)
       }
       // Create Filter 2
-      if(config.filters.filter_2.userAccessible){
+      if(filters.filter_2.userAccessible){
         var formItemFilter2Container = document.createElement('div')
         formItemFilter2Container.classList = 'form-item-filter-two form-item taxonomy-select-filter_2'
     
         var formItemFilter2Label = document.createElement('label')
         formItemFilter2Label.htmlFor = "Edit Filter 2"
-        formItemFilter2Label.innerText = config.filters.filter_2.label
+        formItemFilter2Label.innerText = filters.filter_2.label
     
         var selectFilter2 = document.createElement('select')
         selectFilter2.name = 'filter_2'
@@ -692,7 +690,7 @@ class PeopleListElement extends HTMLElement {
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:'', name: '',fieldName:''}])
         // If restricted, set to Default instead of All
-		if(config.filters.filter_2.restrict){
+		if(filters.filter_2.restrict){
 			allOption.innerText = 'Default'
 		} else {
 			allOption.innerText = 'All'
@@ -704,13 +702,13 @@ class PeopleListElement extends HTMLElement {
         formDiv.appendChild(formItemFilter2Container)
       }
       // Create Filter 3
-      if(config.filters.filter_3.userAccessible){
+      if(filters.filter_3.userAccessible){
         var formItemFilter3Container = document.createElement('div')
         formItemFilter3Container.classList = 'form-item-filter-three form-item taxonomy-select-filter_3'
     
         var formItemFilter3Label = document.createElement('label')
         formItemFilter3Label.htmlFor = "Edit Filter 3"
-        formItemFilter3Label.innerText = config.filters.filter_3.label
+        formItemFilter3Label.innerText = filters.filter_3.label
     
         var selectFilter3 = document.createElement('select')
         selectFilter3.name = 'filter_3'
@@ -720,7 +718,7 @@ class PeopleListElement extends HTMLElement {
         var allOption = document.createElement('option')
         allOption.value = JSON.stringify([{id:'', name: '', fieldName:''}])
         // If restricted, set to Default instead of All
-		if(config.filters.filter_3.restrict){
+		if(filters.filter_3.restrict){
 			allOption.innerText = 'Default'
 		} else {
 			allOption.innerText = 'All'
@@ -746,12 +744,12 @@ class PeopleListElement extends HTMLElement {
 	}
 
 	generateDropdown(taxonomy, selectContainerElements){
-		const config = this._config;
+		const filters = this._filters;
 		let selectEl = selectContainerElements.getElementsByClassName('taxonomy-select')[0]
     if(selectContainerElements.getElementsByClassName('taxonomy-select')[0]){
       taxonomy.forEach(taxonomy=>{
             let fieldName = taxonomy.fieldName
-            let taxonomyConfig = config.filters[fieldName]
+            let taxonomyConfig = filters[fieldName]
             let taxonomiesIncluded = taxonomyConfig.includes[0] == "" ? taxonomyConfig.includes : taxonomyConfig.includes.map(Number)
 
             // Render selection if no taxonomies were selected to filter, if restricted is on and the taxonomy is included, or if restricted = false
