@@ -29,7 +29,7 @@ class PeopleListProvider {
 			if(!filterIncludes || !filterIncludes.length) return;
 			let filterParams = '';
 			filterIncludes.forEach(filterItem => {
-				if(filterItem == '') return;
+				if(!filterItem) return;
 				filterParams += '&filter[filter-' + filterName + '-' + filterItem + '][condition][path]=field_ucb_person_' + filterName + '.meta.drupal_internal__target_id'
 					+ '&filter[filter-' + filterName + '-' + filterItem + '][condition][value]=' + filterItem
 					+ '&filter[filter-' + filterName + '-' + filterItem + '][condition][memberOf]=' + filterName + '-include';
@@ -106,6 +106,7 @@ class PeopleListElement extends HTMLElement {
 		let formRenderBool = false; // running check
 		for(const filterName in filters) { // If user filter dropdowns are necessary, they can be generated async
 			const filter = filters[filterName];
+			filter['includes'] = filter['includes'].filter(include => !!include);
 			if(filter['userAccessible']) {
 				userAccessibleFilters[filterName] = filter;
 				if(!syncTaxonomies.has(filterName))
