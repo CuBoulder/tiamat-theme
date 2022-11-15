@@ -691,9 +691,9 @@ class PeopleListElement extends HTMLElement {
         allOption.value = JSON.stringify([{id:'', name: '',fieldName:''}])
         // If restricted, set to Default instead of All
 		if(filters.filter_2.restrict){
-			allOption.innerText = 'Default'
-		} else {
 			allOption.innerText = 'All'
+		} else {
+			allOption.innerText = 'Default'
 		}
         // Append
         selectFilter2.appendChild(allOption)    
@@ -761,7 +761,7 @@ class PeopleListElement extends HTMLElement {
             }
       })
 	  // If only 2 options- default and one other option, these mean the same thing. Remove default.
-	  if(selectEl.children.length == 2 && selectEl.children[0].innerText == 'Default'){
+	  if(selectEl.children.length == 2 && selectEl.children[0].innerText == 'All'){
 		  selectEl.removeChild(selectEl.children[0])
 	  }
     }
