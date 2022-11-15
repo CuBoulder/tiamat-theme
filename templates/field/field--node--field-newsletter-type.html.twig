@@ -6,5 +6,5 @@
 #}
 
 {% for item in items %}
-    {{ item|render|striptags|trim }}
+    {{ item.content|render|striptags|trim }}
 {% endfor %}
