@@ -747,8 +747,8 @@ class PeopleListElement extends HTMLElement {
 
 	generateDropdown(taxonomy, selectContainerElements){
 		const config = this._config;
+		let selectEl = selectContainerElements.getElementsByClassName('taxonomy-select')[0]
     if(selectContainerElements.getElementsByClassName('taxonomy-select')[0]){
-      let selectEl = selectContainerElements.getElementsByClassName('taxonomy-select')[0]
       taxonomy.forEach(taxonomy=>{
             let fieldName = taxonomy.fieldName
             let taxonomyConfig = config.filters[fieldName]
@@ -762,6 +762,10 @@ class PeopleListElement extends HTMLElement {
               selectEl.appendChild(option)
             }
       })
+	  // If only 2 options- default and one other option, these mean the same thing. Remove default.
+	  if(selectEl.children.length == 2 && selectEl.children[0].innerText == 'Default'){
+		  selectEl.removeChild(selectEl.children[0])
+	  }
     }
   }
 }
