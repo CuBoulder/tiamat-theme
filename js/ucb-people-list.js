@@ -364,7 +364,7 @@ class PeopleListElement extends HTMLElement {
 				thisPerson = {
 					link: (personAttributeData['path'] || {})['alias'] || `/node/${personAttributeData['drupal_internal__nid']}`,
 					name: personAttributeData['title'],
-					title: personAttributeData['field_ucb_person_title'][0],
+					titles: personAttributeData['field_ucb_person_title'],
 					departments: departments,
 					jobTypes: jobTypes,
 					photoId: photoId,
@@ -390,20 +390,24 @@ class PeopleListElement extends HTMLElement {
 	}
 
 	appendPerson(format, person, containerElement) {
-		let cardElement, cardHTML = '', myDept = '';
+		let cardElement, cardHTML = '', personTitleList = '', personDepartmentList = '';
 		const
 			personLink = person.link,
 			personName = PeopleListElement.escapeHTML(person.name),
-			personTitle = PeopleListElement.escapeHTML(person.title),
-			personPhoto = person.photoURI ? `<img src="${person.photoURI}">` : '',
+			personPhoto = person.photoURI ? '<img src="' + person.photoURI + '">' : '',
 			personBody = PeopleListElement.escapeHTML(person.body),
 			personEmail = PeopleListElement.escapeHTML(person.email),
 			personPhone = PeopleListElement.escapeHTML(person.phone),
 			departmentTaxonomy = this.getTaxonomy('department');
+		person.titles.forEach(title => {
+			personTitleList += (personTitleList ? ' &bull; ' : '') + PeopleListElement.escapeHTML(title);
+		});
 		person.departments.forEach(termId => {
-			const thisDeptName = departmentTaxonomy ? PeopleListElement.escapeHTML(PeopleListElement.getTaxonomyName(departmentTaxonomy, termId)) : '';
-			myDept += '<li class="taxonomy-department" data-term-id="' + termId + '">' + thisDeptName + '</li>';
-		});	
+			const department = departmentTaxonomy ? PeopleListElement.escapeHTML(PeopleListElement.getTaxonomyName(departmentTaxonomy, termId)) : '';
+			personDepartmentList +=  (personDepartmentList ? ' &bull; ' : '') + '<span class="taxonomy-department" data-term-id="' + termId + '">' + department + '</span>';
+		});
+		if(personDepartmentList)
+			personDepartmentList = '<span' + (departmentTaxonomy ? '' : ' hidden') + ' class="taxonomy-visible-department">' + personDepartmentList + '</span>';
 		switch (format) {
 			case 'list': default:
 				cardElement = document.createElement('div');
@@ -419,12 +423,10 @@ class PeopleListElement extends HTMLElement {
 								</span>
 							</a>
 							<span class="ucb-person-card-title">
-								${personTitle}
+								${personTitleList}
 							</span>
 							<span class="ucb-person-card-dept">
-								<ul${departmentTaxonomy ? '' : ' hidden'} class="ucb-person-card-dept-ul taxonomy-visible-department">
-									${myDept} 
-								</ul>
+								${personDepartmentList} 
 							</span>
 							<span class="ucb-person-card-body">
 								${personBody}
@@ -467,12 +469,10 @@ class PeopleListElement extends HTMLElement {
 								</span>
 							</a>
 							<span class="ucb-person-card-title departments-grid">
-								${personTitle}
+								${personTitleList}
 							</span>
 							<span class="ucb-person-card-dept departments-grid">
-								<ul${departmentTaxonomy ? '' : ' hidden'} class="ucb-person-card-dept-ul taxonomy-visible-department">
-									${myDept}
-								</ul>
+								${personDepartmentList}
 							</span>
 						</div>
 					</div>`;
@@ -490,12 +490,10 @@ class PeopleListElement extends HTMLElement {
 							</span>
 						</a>
 						<span class="ucb-person-card-title departments-grid">
-							${personTitle}
+							${personTitleList}
 						</span>
 						<span class="ucb-person-card-dept departments-grid">
-							<ul${departmentTaxonomy ? '' : ' hidden'} class="ucb-person-card-dept-ul taxonomy-visible-department">
-								${myDept}
-							</ul>
+							${personDepartmentList}
 						</span>
 					</td>
 					<td>
