@@ -553,8 +553,8 @@ class PeopleListElement extends HTMLElement {
 			} 
 			var userSettings = {}
 			for(let key in dataObj){
-				if(dataObj[key][0]['id']){
-					if(dataObj[key][0]['id'] == "" && filters[key]['restrict']){
+				if(dataObj[key]){
+					if(dataObj[key][0]['id'] == "remove" || (dataObj[key][0]['id'] == "" && filters[key].restrict)){
 						delete dataObj[key]
 					} else {
 						let fieldName = dataObj[key][0]['fieldName']
@@ -567,16 +567,13 @@ class PeopleListElement extends HTMLElement {
 			
 			}
 			let finalObj = {filters: userSettings}
-			// If restricted, remove user config filters from the user filter, default to config obj
-		this.setAttribute('user-config', JSON.stringify(finalObj))
+			this.setAttribute('user-config', JSON.stringify(finalObj))
 		})
 		form.classList = 'people-list-filter'
 		var formDiv = document.createElement('div')
 		formDiv.classList = 'd-flex align-items-center'
 	
-		// If User-Filterable...
-		// Departments, create filterable dropdown of Departments
-		// Create Dropdowns
+		// If User-Filterable...Create Dropdowns
 		for(let key in filters){
 			if(filters[key].userAccessible){
 				// Create container
@@ -605,16 +602,15 @@ class PeopleListElement extends HTMLElement {
 					defaultOption.innerText = 'All'
 					selectFilter.appendChild(defaultOption)
 				}else {
-					defaultOption.value = JSON.stringify([{id: "", name: "",fieldName:key}])
-					defaultOption.innerText = 'All'
-					selectFilter.appendChild(defaultOption)
 					if(!filters[key]['restrict']){
 						var allOptions = document.createElement('option')
 						allOptions.innerText = 'Default'
-						// TO DO - fix
-						allOptions.value = JSON.stringify([{id:"", name: "",fieldName:key}])
+						allOptions.value = JSON.stringify([{id:"remove", name: "",fieldName:key}])
 						selectFilter.appendChild(allOptions)
 					}
+					defaultOption.value = JSON.stringify([{id: "", name: "",fieldName:key}])
+					defaultOption.innerText = 'All'
+					selectFilter.appendChild(defaultOption)
 				}
 				// Append
 				container.appendChild(itemLabel)
