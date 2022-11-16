@@ -541,193 +541,89 @@ class PeopleListElement extends HTMLElement {
 
 	generateForm(){
 		const filters = this._filters, userAccessibleFilters = this._userAccessibleFilters;
-	// for(filter in config.)
-      // Create Elements
-      var form = document.createElement('form')
-      form.addEventListener('submit',(event)=> {
-        event.preventDefault()
-        var formData = new FormData(event.target);
-        var dataObj = {}
-        // Create a dataObject with ids for second render
-        for (var p of formData) {
-          dataObj[p[0]] = JSON.parse(p[1])
-        } 
-        var userSettings = {
-          filters: {
-            department: {
-              includes: dataObj.department ? [dataObj.department[0].id] : [],
-            },
-            filter_1:{
-                includes: dataObj.filter_1 ? [dataObj.filter_1[0].id] : [],
-            },
-            filter_2:{
-                includes: dataObj.filter_2 ? [dataObj.filter_2[0].id] : [],
-            },
-            filter_3:{
-                includes: dataObj.filter_3 ? [dataObj.filter_3[0].id] : [],
-            },
-            job_type:{
-                includes: dataObj.job_type ? [dataObj.job_type[0].id] : [],
-            },            
-        }
-	}
-		// If restricted, remove user config filters from the user filter, default to config obj
-		for(let key in userSettings['filters']){
-			if(userSettings['filters'][key]['includes'][0] == "" && filters[key]['restrict']){
-				delete userSettings['filters'][key]
+		// Create Elements
+      	var form = document.createElement('form')
+		form.addEventListener('submit',(event)=> {
+			event.preventDefault()
+			var formData = new FormData(event.target);
+			var dataObj = {}
+			// Create a dataObject with ids for second render
+			for (var p of formData) {
+				dataObj[p[0]] = JSON.parse(p[1])
+			} 
+			console.log(dataObj)
+			var userSettings = {}
+			for(let key in dataObj){
+				if(dataObj[key][0]['id']){
+					if(dataObj[key][0]['id'] == "" && filters[key]['restrict']){
+						delete dataObj[key]
+					} else {
+						let fieldName = dataObj[key][0]['fieldName']
+						let ids = dataObj[key][0]["id"]
+						
+						let value = {includes: [ids]}
+						userSettings[fieldName] = value
+					}
+				}
+			
+			}
+			let finalObj = {filters: userSettings}
+			// If restricted, remove user config filters from the user filter, default to config obj
+		this.setAttribute('user-config', JSON.stringify(finalObj))
+		})
+		form.classList = 'people-list-filter'
+		var formDiv = document.createElement('div')
+		formDiv.classList = 'd-flex align-items-center'
+	
+		// If User-Filterable...
+		// Departments, create filterable dropdown of Departments
+		// Create Dropdowns
+		for(let key in filters){
+			if(filters[key].userAccessible){
+				// Create container
+				var container = document.createElement('div')
+				container.classList = `form-item-${key} form-item taxonomy-select-${key}`
+				// Create label el
+				var itemLabel = document.createElement('label')
+				itemLabel.htmlFor = `Edit ${filters[key]['label']}`
+				itemLabel.innerText = filters[key]['label']
+				// Create select el
+				var selectFilter = document.createElement('select')
+				selectFilter.name = key
+				selectFilter.id = `edit-${key}`
+				selectFilter.className = "taxonomy-select"
+
+				// All option as first entry
+				var defaultOption = document.createElement('option')
+				defaultOption.value = JSON.stringify([{id:"", name: "",fieldName:''}])
+
+				if(filters[key]['includes'].length == 0){
+					defaultOption.value = JSON.stringify([{id:"", name: "",fieldName:key}])
+					defaultOption.innerText = 'All'
+					selectFilter.appendChild(defaultOption)
+				} else if(filters[key]['restrict'] && filters[key]['includes'].length >=2 ){
+					defaultOption.value = JSON.stringify([{id:"", name: "",fieldName:key}])
+					defaultOption.innerText = 'All'
+					selectFilter.appendChild(defaultOption)
+				}else {
+					console.log(key,filters[key]['includes'])
+					defaultOption.value = JSON.stringify([{id: filters[key]['includes'], name: "",fieldName:key}])
+					defaultOption.innerText = 'Default'
+					console.log(JSON.parse(defaultOption.value))
+					selectFilter.appendChild(defaultOption)
+					if(!filters[key]['restrict']){
+						var allOptions = document.createElement('option')
+						allOptions.innerText = 'All'
+						allOptions.value = JSON.stringify([{id:"", name: "",fieldName:key}])
+						selectFilter.appendChild(allOptions)
+					}
+				}
+				// Append
+				container.appendChild(itemLabel)
+				container.appendChild(selectFilter)
+				formDiv.appendChild(container)
 			}
 		}
-      this.setAttribute('user-config', JSON.stringify(userSettings))
-      })
-      form.classList = 'people-list-filter'
-      var formDiv = document.createElement('div')
-      formDiv.classList = 'd-flex align-items-center'
-  
-      // If User-Filterable...
-      // Departments, create filterable dropdown of Departments
-      if(filters.department.userAccessible){
-        var formItemDeptContainer = document.createElement('div')
-        formItemDeptContainer.classList = 'form-item-department form-item taxonomy-select-department'
-    
-        var formItemDeptLabel = document.createElement('label')
-        formItemDeptLabel.htmlFor = "Edit Departments"
-        formItemDeptLabel.innerText = 'Departments'
-    
-        var selectDept = document.createElement('select')
-        selectDept.name = 'department'
-        selectDept.id = 'edit-department'
-        selectDept.className = "taxonomy-select"
-        // All option as first entry
-        var allOption = document.createElement('option')
-        allOption.value = JSON.stringify([{id:"", name: "",fieldName:''}])
-		// If restricted, and has filters set to Default instead of All
-		if(filters.department.restrict && filters.department.includes.length > 0){
-			allOption.innerText = 'Default'
-		} else {
-			allOption.innerText = 'All'
-		}
-        selectDept.appendChild(allOption)
-        // Append
-        formItemDeptContainer.appendChild(formItemDeptLabel)
-        formItemDeptContainer.appendChild(selectDept)
-        formDiv.appendChild(formItemDeptContainer)
-      }
-  
-      // Create filterable dropdown of Job Types
-      if(filters.job_type.userAccessible){
-        var formItemJobTypeContainer = document.createElement('div')
-        formItemJobTypeContainer.classList = 'form-item-job-type form-item taxonomy-select-job_type'
-    
-        var formItemJobTypeLabel = document.createElement('label')
-        formItemJobTypeLabel.htmlFor = "Edit Job Types"
-        formItemJobTypeLabel.innerText = 'Job Types'
-    
-        var selectJobType = document.createElement('select')
-        selectJobType.name = 'job_type'
-        selectJobType.id = 'edit-job-types'
-        selectJobType.className = "taxonomy-select"
-  
-        // All option as first entry
-        var allOption = document.createElement('option')
-        allOption.value = JSON.stringify([{id:'', name: "",fieldName:''}])
-        	// If restricted, set to Default instead of All
-		if(filters.job_type.restrict && filters.job_type.includes.length >0){
-			allOption.innerText = 'Default'
-		} else {
-			allOption.innerText = 'All'
-		}
-        // Append
-        selectJobType.appendChild(allOption)    
-        formItemJobTypeContainer.appendChild(formItemJobTypeLabel)
-        formItemJobTypeContainer.appendChild(selectJobType)
-    
-        formDiv.appendChild(formItemJobTypeContainer)
-      }
-      // Create Filter 1
-      if(filters.filter_1.userAccessible){
-        var formItemFilter1Container = document.createElement('div')
-        formItemFilter1Container.classList = 'form-item-filter-one form-item taxonomy-select-filter_1'
-    
-        var formItemFilter1Label = document.createElement('label')
-        formItemFilter1Label.htmlFor = "Edit Filer 1"
-        formItemFilter1Label.innerText = filters.filter_1.label
-    
-        var selectFilter1 = document.createElement('select')
-        selectFilter1.name = 'filter_1'
-        selectFilter1.id = 'edit-filter-one'
-        selectFilter1.className = "taxonomy-select"
-  
-        // All option as first entry
-        var allOption = document.createElement('option')
-        allOption.value = JSON.stringify([{id:'', name: '',fieldName:''}])
-        // If restricted, set to Default instead of All
-		if(filters.filter_1.restrict && filters.filter_1.includes.length > 0){
-			allOption.innerText = 'Default'
-		} else {
-			allOption.innerText = 'All'
-		}
-        // Append
-        selectFilter1.appendChild(allOption)
-        formItemFilter1Container.appendChild(formItemFilter1Label)
-        formItemFilter1Container.appendChild(selectFilter1)
-        formDiv.appendChild(formItemFilter1Container)
-      }
-      // Create Filter 2
-      if(filters.filter_2.userAccessible){
-        var formItemFilter2Container = document.createElement('div')
-        formItemFilter2Container.classList = 'form-item-filter-two form-item taxonomy-select-filter_2'
-    
-        var formItemFilter2Label = document.createElement('label')
-        formItemFilter2Label.htmlFor = "Edit Filter 2"
-        formItemFilter2Label.innerText = filters.filter_2.label
-    
-        var selectFilter2 = document.createElement('select')
-        selectFilter2.name = 'filter_2'
-        selectFilter2.id = 'edit-filter-two'
-        selectFilter2.className = "taxonomy-select"
-        // All option as first entry
-        var allOption = document.createElement('option')
-        allOption.value = JSON.stringify([{id:'', name: '',fieldName:''}])
-        // If restricted, set to Default instead of All
-		if(filters.filter_2.restrict && filters.filter_2.includes.length > 0){
-			allOption.innerText = 'Default'
-		} else {
-			allOption.innerText = 'All'
-		}
-        // Append
-        selectFilter2.appendChild(allOption)    
-        formItemFilter2Container.appendChild(formItemFilter2Label)
-        formItemFilter2Container.appendChild(selectFilter2)
-        formDiv.appendChild(formItemFilter2Container)
-      }
-      // Create Filter 3
-      if(filters.filter_3.userAccessible){
-        var formItemFilter3Container = document.createElement('div')
-        formItemFilter3Container.classList = 'form-item-filter-three form-item taxonomy-select-filter_3'
-    
-        var formItemFilter3Label = document.createElement('label')
-        formItemFilter3Label.htmlFor = "Edit Filter 3"
-        formItemFilter3Label.innerText = filters.filter_3.label
-    
-        var selectFilter3 = document.createElement('select')
-        selectFilter3.name = 'filter_3'
-        selectFilter3.id = 'edit-filter-three'
-        selectFilter3.className = "taxonomy-select"
-        // All option as first entry
-        var allOption = document.createElement('option')
-        allOption.value = JSON.stringify([{id:'', name: '', fieldName:''}])
-        // If restricted, set to Default instead of All
-		if(filters.filter_3.restrict && filters.filter_3.includes.length > 0){
-			allOption.innerText = 'Default'
-		} else {
-			allOption.innerText = 'All'
-		}
-        // Append
-        selectFilter3.appendChild(allOption)    
-        formItemFilter3Container.appendChild(formItemFilter3Label)
-        formItemFilter3Container.appendChild(selectFilter3)
-        formDiv.appendChild(formItemFilter3Container)
-      }
       // Create Filter button after filters are rendered
       var formButtonContainer = document.createElement('div')
       formButtonContainer.classList = 'form-item-button form-item'
