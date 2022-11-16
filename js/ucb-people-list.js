@@ -605,12 +605,13 @@ class PeopleListElement extends HTMLElement {
 					defaultOption.innerText = 'All'
 					selectFilter.appendChild(defaultOption)
 				}else {
-					defaultOption.value = JSON.stringify([{id: filters[key]['includes'], name: "",fieldName:key}])
+					defaultOption.value = JSON.stringify([{id: "", name: "",fieldName:key}])
 					defaultOption.innerText = 'Default'
 					selectFilter.appendChild(defaultOption)
 					if(!filters[key]['restrict']){
 						var allOptions = document.createElement('option')
 						allOptions.innerText = 'All'
+						// TO DO - fix
 						allOptions.value = JSON.stringify([{id:"", name: "",fieldName:key}])
 						selectFilter.appendChild(allOptions)
 					}
