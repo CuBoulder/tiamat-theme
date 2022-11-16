@@ -8,14 +8,17 @@
 .js-form-item-layout-settings-layout-column-width .form-radio:checked,
 .js-form-item-layout-settings-layout-container-width .form-radio:checked,
 .js-form-item-layout-settings-background-overlay-color .form-radio:checked,
+.js-form-item-layout-settings-background-background-effect .form-radio:checked,
 .js-form-item-layout-settings-background-background-color .form-radio:hover,
 .js-form-item-layout-settings-layout-column-width .form-radio:hover,
 .js-form-item-layout-settings-layout-container-width .form-radio:hover,
 .js-form-item-layout-settings-background-overlay-color .form-radio:hover,
+.js-form-item-layout-settings-background-background-effect .form-radio:hover,
 .js-form-item-layout-settings-background-background-color .form-radio:hover:focus,
 .js-form-item-layout-settings-layout-column-width .form-radio:hover:focus,
 .js-form-item-layout-settings-layout-container-width .form-radio:hover:focus,
-.js-form-item-layout-settings-background-overlay-color .form-radio:hover:focus {
+.js-form-item-layout-settings-background-overlay-color .form-radio:hover:focus,
+.js-form-item-layout-settings-background-background-effect .form-radio:hover:focus {
     box-shadow: none!important;
     -webkit-box-shadow: none!important;
 }
@@ -110,4 +113,14 @@ color: var(--ucb-white);
 .ucb-bootstrap-layout-section-overlay-light a:hover {
   color: var(--ucb-link-visited);
   text-decoration: none;
+}
+
+/*** !important needed to override inline background image styles ***/
+
+.scrolling-background {
+  background-attachment: scroll!important;
+}
+
+.scrolling-background {
+  background-attachment: fixed!important;
 }
