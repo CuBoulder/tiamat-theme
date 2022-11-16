@@ -551,7 +551,6 @@ class PeopleListElement extends HTMLElement {
 			for (var p of formData) {
 				dataObj[p[0]] = JSON.parse(p[1])
 			} 
-			console.log(dataObj)
 			var userSettings = {}
 			for(let key in dataObj){
 				if(dataObj[key][0]['id']){
@@ -606,10 +605,8 @@ class PeopleListElement extends HTMLElement {
 					defaultOption.innerText = 'All'
 					selectFilter.appendChild(defaultOption)
 				}else {
-					console.log(key,filters[key]['includes'])
 					defaultOption.value = JSON.stringify([{id: filters[key]['includes'], name: "",fieldName:key}])
 					defaultOption.innerText = 'Default'
-					console.log(JSON.parse(defaultOption.value))
 					selectFilter.appendChild(defaultOption)
 					if(!filters[key]['restrict']){
 						var allOptions = document.createElement('option')
