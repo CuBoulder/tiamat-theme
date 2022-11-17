@@ -71,6 +71,11 @@
 			{{ label }}
 		</h1>
 	</div>
+	{% if content.body|render %}
+	<div class="ucb-person-section ucb-person-body">
+		{{ content.body }}
+	</div>
+	{% endif %}
 	<ucb-people-list base-uri="{{ url('<front>')|render|trim('/') }}/jsonapi" config="{{ config|json_encode }}" user-config="{}">
 		<noscript><div class="ucb-list-msg ucb-error">Please enable JavaScript to see this page.</div></noscript>
 	</ucb-people-list>
