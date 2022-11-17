@@ -262,7 +262,7 @@ class PeopleListElement extends HTMLElement {
 		for(let index = 0; index < hideContainerElements.length; index++)
 			showContainerElements[index].setAttribute('hidden', '');
 		for(let index = 0; index < selectContainerElements.length; index++)
-			this.generateDropdown(taxonomy, selectContainerElements[index], this._config);
+			this.generateDropdown(taxonomy, taxonomyFieldName, selectContainerElements[index]);
 		for(let index = 0; index < taxonomyElements.length; index++) {
 			const taxonomyElement = taxonomyElements[index];
 			taxonomyElement.innerText = PeopleListElement.getTaxonomyName(taxonomy, parseInt(taxonomyElement.dataset['termId'])) || '';
@@ -318,7 +318,6 @@ class PeopleListElement extends HTMLElement {
 		// see if we've already rendered the table header HTML
 		if(!table) {
 			table = document.createElement('table');
-			table.id = 'ucb-pl-table';
 			table.classList = 'table table-bordered table-striped';
 			const tableHead = document.createElement('thead');
 			tableHead.classList = 'ucb-people-list-table-head';
@@ -540,129 +539,122 @@ class PeopleListElement extends HTMLElement {
 	}
 
 	generateForm(){
-		const filters = this._filters, userAccessibleFilters = this._userAccessibleFilters;
+		const userAccessibleFilters = this._userAccessibleFilters;
 		// Create Elements
-      	var form = document.createElement('form')
+      	var form = document.createElement('form');
 		form.addEventListener('submit',(event)=> {
-			event.preventDefault()
+			event.preventDefault();
 			var formData = new FormData(event.target);
-			var dataObj = {}
+			var dataObj = {};
 			// Create a dataObject with ids for second render
 			for (var p of formData) {
-				dataObj[p[0]] = JSON.parse(p[1])
+				dataObj[p[0]] = JSON.parse(p[1]);
 			} 
 			var userSettings = {}
 			for(let key in dataObj){
 				if(dataObj[key]){
-					if(dataObj[key][0]['id'] == "remove" || (dataObj[key][0]['id'] == "" && filters[key].restrict)){
-						delete dataObj[key]
+					if(dataObj[key][0]['id'] == "remove" || (dataObj[key][0]['id'] == "" && userAccessibleFilters[key]['restrict'])){
+						delete dataObj[key];
 					} else {
-						let fieldName = dataObj[key][0]['fieldName']
-						let ids = dataObj[key][0]["id"]
+						let fieldName = dataObj[key][0]['fieldName'];
+						let ids = dataObj[key][0]["id"];
 						
-						let value = {includes: [ids]}
-						userSettings[fieldName] = value
+						let value = {includes: [ids]};
+						userSettings[fieldName] = value;
 					}
 				}
 			
 			}
-			let finalObj = {filters: userSettings}
-			this.setAttribute('user-config', JSON.stringify(finalObj))
+			let finalObj = {filters: userSettings};
+			this.setAttribute('user-config', JSON.stringify(finalObj));
 		})
-		form.classList = 'people-list-filter'
-		var formDiv = document.createElement('div')
-		formDiv.classList = 'd-flex align-items-center'
+		form.classList = 'people-list-filter';
+		var formDiv = document.createElement('div');
+		formDiv.classList = 'd-flex align-items-center';
 	
 		// If User-Filterable...Create Dropdowns
-		for(let key in filters){
-			if(filters[key].userAccessible){
-				// Create container
-				var container = document.createElement('div')
-				container.classList = `form-item-${key} form-item taxonomy-select-${key}`
-				// Create label el
-				var itemLabel = document.createElement('label')
-				itemLabel.htmlFor = `Edit ${filters[key]['label']}`
-				itemLabel.innerText = filters[key]['label']
-				// Create select el
-				var selectFilter = document.createElement('select')
-				selectFilter.name = key
-				selectFilter.id = `edit-${key}`
-				selectFilter.className = "taxonomy-select"
+		for(let key in userAccessibleFilters){
+			const filter = userAccessibleFilters[key];
+			// Create container
+			var container = document.createElement('div');
+			container.className = `form-item-${key} form-item`;
+			// Create label el
+			var itemLabel = document.createElement('label');
+			itemLabel.htmlFor = `Edit ${filter['label']}`;
+			itemLabel.innerText = filter['label'];
+			// Create select el
+			var selectFilter = document.createElement('select');
+			selectFilter.name = key;
+			selectFilter.className = 'taxonomy-select-' + key + ' taxonomy-select';
 
-				// All option as first entry
-				var defaultOption = document.createElement('option')
-				defaultOption.value = JSON.stringify([{id:"", name: "",fieldName:''}])
+			// All option as first entry
+			var defaultOption = document.createElement('option');
+			defaultOption.value = JSON.stringify([{id:"", name: "",fieldName:''}]);
 
-				if(filters[key]['includes'].length == 0){
-					defaultOption.value = JSON.stringify([{id:"", name: "",fieldName:key}])
-					defaultOption.innerText = 'All'
-					selectFilter.appendChild(defaultOption)
-				} else if(filters[key]['restrict'] && filters[key]['includes'].length >=2 ){
-					defaultOption.value = JSON.stringify([{id:"", name: "",fieldName:key}])
-					defaultOption.innerText = 'All'
-					selectFilter.appendChild(defaultOption)
-				}else {
-					if(!filters[key]['restrict']&& !filters[key]['includes'].length == 1){
-						var allOptions = document.createElement('option')
-						allOptions.innerText = 'Default'
-						allOptions.value = JSON.stringify([{id:"remove", name: "",fieldName:key}])
-						selectFilter.appendChild(allOptions)
-					}
-					defaultOption.value = JSON.stringify([{id: "", name: "",fieldName:key}])
-					defaultOption.innerText = 'All'
-					selectFilter.appendChild(defaultOption)
+			if(filter['includes'].length == 0){
+				defaultOption.value = JSON.stringify([{id:"", name: "",fieldName:key}]);
+				defaultOption.innerText = 'All';
+				defaultOption.className = 'taxonomy-option-all';
+				selectFilter.appendChild(defaultOption);
+			} else if(filter['restrict'] && filter['includes'].length > 1){
+				defaultOption.value = JSON.stringify([{id:"", name: "",fieldName:key}]);
+				defaultOption.innerText = 'All';
+				defaultOption.className = 'taxonomy-option-all';
+				selectFilter.appendChild(defaultOption);
+			} else {
+				if(!filter['restrict'] && filter['includes'].length > 1){
+					var allOptions = document.createElement('option');
+					allOptions.innerText = 'Default';
+					allOptions.value = JSON.stringify([{id:"remove", name: "",fieldName:key}]);
+					allOptions.className = 'taxonomy-option-default';
+					selectFilter.appendChild(allOptions);
 				}
-				// Append
-				container.appendChild(itemLabel)
-				container.appendChild(selectFilter)
-				formDiv.appendChild(container)
+				defaultOption.value = JSON.stringify([{id: "", name: "",fieldName:key}]);
+				defaultOption.innerText = 'All';
+				defaultOption.className = 'taxonomy-option-all';
+				selectFilter.appendChild(defaultOption);
 			}
+			// Append
+			container.appendChild(itemLabel);
+			container.appendChild(selectFilter);
+			formDiv.appendChild(container);
 		}
-      // Create Filter button after filters are rendered
-      var formButtonContainer = document.createElement('div')
-      formButtonContainer.classList = 'form-item-button form-item'
-  
-      var formButton = document.createElement('input')
-      formButton.classList = 'form-submit-btn'
-      formButton.type = 'submit'
-      formButtonContainer.appendChild(formButton)
-      formDiv.appendChild(formButtonContainer)
-      form.appendChild(formDiv)
+		// Create Filter button after filters are rendered
+		var formButtonContainer = document.createElement('div');
+		formButtonContainer.classList = 'form-item-button form-item';
+	
+		var formButton = document.createElement('input');
+		formButton.classList = 'form-submit-btn';
+		formButton.type = 'submit';
+		formButtonContainer.appendChild(formButton);
+		formDiv.appendChild(formButtonContainer);
+		form.appendChild(formDiv);
 		// Append final container
 		this._userFormElement.appendChild(form);   
 	}
 
-	generateDropdown(taxonomy, selectContainerElements){
-		const filters = this._filters;
-		let selectEl = selectContainerElements.getElementsByClassName('taxonomy-select')[0]
-		if(selectContainerElements.getElementsByClassName('taxonomy-select')[0]){
-		taxonomy.forEach(taxonomy=>{
-				let fieldName = taxonomy.fieldName
-				let taxonomyConfig = filters[fieldName]
-				let taxonomiesIncluded = taxonomyConfig.includes[0] == "" ? taxonomyConfig.includes : taxonomyConfig.includes.map(Number)
-
-				// Render selection if no taxonomies were selected to filter, if restricted is on and the taxonomy is included, or if restricted = false
-				if((taxonomyConfig.includes[0] == "") || (taxonomyConfig.restrict && taxonomiesIncluded.includes(taxonomy.id)) || (taxonomyConfig.restrict && taxonomiesIncluded.length == 0) || taxonomyConfig.restrict == false){
-				let option = document.createElement('option')
-				option.id = `option-${taxonomy.name}`
-				option.value = JSON.stringify([{id:taxonomy.id, name: taxonomy.name, fieldName: taxonomy.fieldName}])
-				option.innerText = taxonomy.name
-
-				if(taxonomiesIncluded.includes(taxonomy.id) && taxonomyConfig.restrict==false && taxonomiesIncluded.length == 1){
-					option.selected = true
-					selectEl.appendChild(option)
-				} else {
-					selectEl.appendChild(option)
-				}
-				}
-		})
-
-		// If only 2 options- default and one other option, these mean the same thing. Remove default.
-		if(selectEl.children.length == 2){
-			selectEl.removeChild(selectEl.children[0])
+	generateDropdown(taxonomy, taxonomyFieldName, selectElement){
+		if(taxonomy.length === 0) return;
+		const
+			filters = this._filters,
+			taxonomyConfig = filters[taxonomyFieldName],
+			taxonomiesIncluded = taxonomyConfig['includes'].map(Number), // The data type for taxonomyTerm.id is Number, the includes may be strings
+			restrict = taxonomyConfig['restrict'] && taxonomiesIncluded.length > 0;
+		taxonomy.forEach(taxonomyTerm => {
+			if(restrict && taxonomiesIncluded.indexOf(taxonomyTerm.id) === -1) return; // Rejects a restricted option
+			const option = document.createElement('option');
+			option.value = JSON.stringify([{id: taxonomyTerm.id, name: taxonomyTerm.name, fieldName: taxonomyFieldName}]);
+			option.innerText = taxonomyTerm.name;
+			option.selected = taxonomiesIncluded.length === 1 && taxonomiesIncluded[0] == taxonomyTerm.id;
+			selectElement.appendChild(option);
+		});
+		if(!restrict && taxonomy.length > 1 && taxonomy.length === taxonomiesIncluded.length) { // Removes the "Default" option if all the taxonomy terms are included
+			const defaultOption = selectElement.querySelector('.taxonomy-option-default');
+			if(selectElement.options[selectElement.selectedIndex] == defaultOption)
+				selectElement.querySelector('.taxonomy-option-all').selected = true;
+			selectElement.removeChild(defaultOption);
 		}
-    }
-  }
+	}
 }
 
 customElements.define('ucb-people-list', PeopleListElement);
