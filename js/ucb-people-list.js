@@ -602,7 +602,7 @@ class PeopleListElement extends HTMLElement {
 					defaultOption.innerText = 'All'
 					selectFilter.appendChild(defaultOption)
 				}else {
-					if(!filters[key]['restrict']){
+					if(!filters[key]['restrict']&& !filters[key]['includes'].length == 1){
 						var allOptions = document.createElement('option')
 						allOptions.innerText = 'Default'
 						allOptions.value = JSON.stringify([{id:"remove", name: "",fieldName:key}])
