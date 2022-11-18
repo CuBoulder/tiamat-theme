@@ -130,3 +130,7 @@ tbody.ucb-people-list-table-tablebody {
     color: #222;
     background: #EEEEEE;
 }
+
+.people-list-filter .taxonomy-select {
+	max-width: 150px;
+}

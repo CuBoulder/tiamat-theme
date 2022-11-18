@@ -541,93 +541,59 @@ class PeopleListElement extends HTMLElement {
 	generateForm(){
 		const userAccessibleFilters = this._userAccessibleFilters;
 		// Create Elements
-      	var form = document.createElement('form');
-		form.addEventListener('submit',(event)=> {
-			event.preventDefault();
-			var formData = new FormData(event.target);
-			var dataObj = {};
+      	const form = document.createElement('form'), formDiv = document.createElement('div'), onChange = event => {
+			const form = event.target.form, formItemsData = new FormData(form),
+				userSettings = {};
 			// Create a dataObject with ids for second render
-			for (var p of formData) {
-				dataObj[p[0]] = JSON.parse(p[1]);
+			for (const formItemData of formItemsData) {
+				const filterName = formItemData[0], filterInclude = formItemData[1];
+				if(filterInclude != '-1')
+					userSettings[filterName] = {'includes': [filterInclude]};
 			} 
-			var userSettings = {}
-			for(let key in dataObj){
-				if(dataObj[key]){
-					if(dataObj[key][0]['id'] == "remove" || (dataObj[key][0]['id'] == "" && userAccessibleFilters[key]['restrict'])){
-						delete dataObj[key];
-					} else {
-						let fieldName = dataObj[key][0]['fieldName'];
-						let ids = dataObj[key][0]["id"];
-						
-						let value = {includes: [ids]};
-						userSettings[fieldName] = value;
-					}
-				}
-			
-			}
-			let finalObj = {filters: userSettings};
-			this.setAttribute('user-config', JSON.stringify(finalObj));
-		})
-		form.classList = 'people-list-filter';
-		var formDiv = document.createElement('div');
-		formDiv.classList = 'd-flex align-items-center';
+			this.setAttribute('user-config', JSON.stringify({'filters': userSettings}));
+		};
+		form.className = 'people-list-filter';
+		formDiv.className = 'd-flex align-items-center';
 	
 		// If User-Filterable...Create Dropdowns
-		for(let key in userAccessibleFilters){
+		for(const key in userAccessibleFilters){
 			const filter = userAccessibleFilters[key];
 			// Create container
-			var container = document.createElement('div');
+			const container = document.createElement('div');
 			container.className = `form-item-${key} form-item`;
 			// Create label el
-			var itemLabel = document.createElement('label');
+			const itemLabel = document.createElement('label');
 			itemLabel.htmlFor = `Edit ${filter['label']}`;
 			itemLabel.innerText = filter['label'];
 			// Create select el
-			var selectFilter = document.createElement('select');
+			const selectFilter = document.createElement('select');
 			selectFilter.name = key;
 			selectFilter.className = 'taxonomy-select-' + key + ' taxonomy-select';
+			selectFilter.onchange = onChange;
 
-			// All option as first entry
-			var defaultOption = document.createElement('option');
-			defaultOption.value = JSON.stringify([{id:"", name: "",fieldName:''}]);
-
-			if(filter['includes'].length == 0){
-				defaultOption.value = JSON.stringify([{id:"", name: "",fieldName:key}]);
+			if(filter['includes'].length != 1) {
+				// All option as first entry
+				const defaultOption = document.createElement('option');
+				defaultOption.value = '-1';
 				defaultOption.innerText = 'All';
 				defaultOption.className = 'taxonomy-option-all';
-				selectFilter.appendChild(defaultOption);
-			} else if(filter['restrict'] && filter['includes'].length > 1){
-				defaultOption.value = JSON.stringify([{id:"", name: "",fieldName:key}]);
-				defaultOption.innerText = 'All';
-				defaultOption.className = 'taxonomy-option-all';
-				selectFilter.appendChild(defaultOption);
-			} else {
 				if(!filter['restrict'] && filter['includes'].length > 1){
-					var allOptions = document.createElement('option');
-					allOptions.innerText = 'Default';
-					allOptions.value = JSON.stringify([{id:"remove", name: "",fieldName:key}]);
-					allOptions.className = 'taxonomy-option-default';
+					defaultOption.innerText = 'Default';
+					defaultOption.className = 'taxonomy-option-default';
+					const allOptions = document.createElement('option');
+					allOptions.innerText = 'All';
+					allOptions.value = '';
+					allOptions.className = 'taxonomy-option-all';
 					selectFilter.appendChild(allOptions);
 				}
-				defaultOption.value = JSON.stringify([{id: "", name: "",fieldName:key}]);
-				defaultOption.innerText = 'All';
-				defaultOption.className = 'taxonomy-option-all';
+				defaultOption.selected = true;
+				// Append
 				selectFilter.appendChild(defaultOption);
 			}
-			// Append
 			container.appendChild(itemLabel);
 			container.appendChild(selectFilter);
 			formDiv.appendChild(container);
 		}
-		// Create Filter button after filters are rendered
-		var formButtonContainer = document.createElement('div');
-		formButtonContainer.classList = 'form-item-button form-item';
-	
-		var formButton = document.createElement('input');
-		formButton.classList = 'form-submit-btn';
-		formButton.type = 'submit';
-		formButtonContainer.appendChild(formButton);
-		formDiv.appendChild(formButtonContainer);
 		form.appendChild(formDiv);
 		// Append final container
 		this._userFormElement.appendChild(form);   
@@ -643,7 +609,7 @@ class PeopleListElement extends HTMLElement {
 		taxonomy.forEach(taxonomyTerm => {
 			if(restrict && taxonomiesIncluded.indexOf(taxonomyTerm.id) === -1) return; // Rejects a restricted option
 			const option = document.createElement('option');
-			option.value = JSON.stringify([{id: taxonomyTerm.id, name: taxonomyTerm.name, fieldName: taxonomyFieldName}]);
+			option.value = taxonomyTerm.id;
 			option.innerText = taxonomyTerm.name;
 			option.selected = taxonomiesIncluded.length === 1 && taxonomiesIncluded[0] == taxonomyTerm.id;
 			selectElement.appendChild(option);
