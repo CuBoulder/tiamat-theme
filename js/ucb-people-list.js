@@ -541,7 +541,7 @@ class PeopleListElement extends HTMLElement {
 	generateForm(){
 		const userAccessibleFilters = this._userAccessibleFilters;
 		// Create Elements
-      	const form = document.createElement('form'), formDiv = document.createElement('div'), onChange = event => {
+		const form = document.createElement('form'), formDiv = document.createElement('div'), onChange = event => {
 			const form = event.target.form, formItemsData = new FormData(form),
 				userSettings = {};
 			// Create a dataObject with ids for second render
@@ -562,9 +562,9 @@ class PeopleListElement extends HTMLElement {
 			const container = document.createElement('div');
 			container.className = `form-item-${key} form-item`;
 			// Create label el
-			const itemLabel = document.createElement('label');
-			itemLabel.htmlFor = `Edit ${filter['label']}`;
-			itemLabel.innerText = filter['label'];
+			const itemLabel = document.createElement('label'), itemLabelSpan = document.createElement('span');
+			itemLabelSpan.innerText = filter['label'];
+			itemLabel.appendChild(itemLabelSpan);
 			// Create select el
 			const selectFilter = document.createElement('select');
 			selectFilter.name = key;
@@ -590,8 +590,8 @@ class PeopleListElement extends HTMLElement {
 				// Append
 				selectFilter.appendChild(defaultOption);
 			}
+			itemLabel.appendChild(selectFilter);
 			container.appendChild(itemLabel);
-			container.appendChild(selectFilter);
 			formDiv.appendChild(container);
 		}
 		form.appendChild(formDiv);
