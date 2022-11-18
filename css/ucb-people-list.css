@@ -106,7 +106,7 @@ tbody.ucb-people-list-table-tablebody {
   margin-bottom: 10px;
 }
 
-.form-item > label{
+.form-item > label select {
   display: block;
   font-size: 75%;
   font-weight: 500;
