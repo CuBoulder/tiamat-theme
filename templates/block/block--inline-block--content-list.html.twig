@@ -31,27 +31,38 @@
 		{% if display == 'teaser' %}{% for key, item in blockContent.field_content_list_content if key|first != '#' %}<div class="row ucb-content-list-row">
 			<div class="col-9">
 				<h4 class="ucb-content-list-title"><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></h4>
-				{% set summary = item.entity.body.0.summary %}{% if summary %}<p class="ucb-content-list-summary">{{ summary }}</p>{% endif %}
+				{% set summary = item.entity.body.0.summary ?? item.entity.field_ucb_article_summary.0.value %}
+				<p class="ucb-content-list-summary">{{ summary }} <a href="{{ item.entity.path.alias }}">Read&nbsp;more&nbsp;&raquo;</a></p>
 			</div>
-			{% set image = item.entity.field_ucb_person_photo.entity.field_media_image %}
+			{% set image = item.entity.field_ucb_person_photo.entity.field_media_image ?? item.entity.field_ucb_article_thumbnail.entity.field_media_image %}
 			<div class="ucb-content-list-image-container col-3{{ image ? '' : ' ucb-content-list-image-empty' }}">{% if image %}
 				{% set imageURI = image.entity.fileuri|image_style('focal_image_square') %}{% set imageAlt = image.alt|render %}
-				<img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}">
+				<a href="{{ item.entity.path.alias }}"><img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}"></a>
 			{% endif %}</div>
 		</div>{% endfor %}{% elseif display == 'embed' %}{% for key, item in blockContent.field_content_list_content if key|first != '#' %}<div class="row ucb-content-list-row">
-			{% set image = item.entity.field_ucb_person_photo.entity.field_media_image %}
-			<div class="ucb-content-list-image-container col-2{{ image ? '' : ' ucb-content-list-image-empty' }}">{% if image %}
+			{% set image = item.entity.field_ucb_person_photo.entity.field_media_image ?? item.entity.field_ucb_article_thumbnail.entity.field_media_image %}
+			<div class="ucb-content-list-image-container col-3{{ image ? '' : ' ucb-content-list-image-empty' }}">{% if image %}
 				{% set imageURI = image.entity.fileuri|image_style('focal_image_square') %}{% set imageAlt = image.alt|render %}
-				<img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}">
+				<a href="{{ item.entity.path.alias }}"><img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}"></a>
 			{% endif %}</div>
 			<div class="col-9">
-				<h4 class="ucb-content-list-title"><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></h4>
-				{% set summary = item.entity.body.0.summary %}{% if summary %}<p class="ucb-content-list-summary">{{ summary }}</p>{% endif %}
+				<h3 class="ucb-content-list-title"><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></h3>
+				{% set summary = item.entity.body.0.summary ?? item.entity.field_ucb_article_summary.0.value %}
+				<p class="ucb-content-list-summary">{{ summary }} <a href="{{ item.entity.path.alias }}">Read&nbsp;more&nbsp;&raquo;</a></p>
 			</div>
-		</div>{% endfor %}{% elseif display == 'title' %}<ul>{% for key, item in blockContent.field_content_list_content if key|first != '#' %}
+		</div>{% endfor %}{% elseif display == 'title' %}
+		<ul>{% for key, item in blockContent.field_content_list_content if key|first != '#' %}
 			<li class="ucb-content-list-row ucb-content-list-title"><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></li>
 		{% endfor %}</ul>
-		{% elseif display == 'sidebar' %}{# TODO Sidebar #}
-		{% endif %}
+		{% elseif display == 'sidebar' %}{% for key, item in blockContent.field_content_list_content if key|first != '#' %}<div class="row ucb-content-list-row">
+			<div class="col-9">
+				<span class="ucb-content-list-title"><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></span>
+			</div>
+			{% set image = item.entity.field_ucb_person_photo.entity.field_media_image ?? item.entity.field_ucb_article_thumbnail.entity.field_media_image %}
+			<div class="ucb-content-list-image-container col-3{{ image ? '' : ' ucb-content-list-image-empty' }}">{% if image %}
+				{% set imageURI = image.entity.fileuri|image_style('focal_image_square') %}{% set imageAlt = image.alt|render %}
+				<a href="{{ item.entity.path.alias }}"><img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}"></a>
+			{% endif %}</div>
+		</div>{% endfor %}{% endif %}
 	</div>
 </div>{% endblock content %}
