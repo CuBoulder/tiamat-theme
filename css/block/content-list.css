@@ -1,0 +1,18 @@
+.ucb-content-list-display-teaser .ucb-content-list-row, .ucb-content-list-display-embed .ucb-content-list-row {
+	border-bottom: 1px solid rgba(20 20 20 / 20%);
+	margin-bottom: 20px;
+}
+
+.ucb-content-list-display-teaser .ucb-content-list-title, .ucb-content-list-display-embed .ucb-content-list-title {
+	font-size: 1.25rem;
+	font-weight: bolder;
+	margin-bottom: 10px;
+}
+
+.ucb-content-list-display-embed .ucb-content-list-title {
+	font-size: 1.2rem;
+}
+
+.ucb-content-list-display-embed .ucb-content-list-image-empty {
+	display: none;
+}

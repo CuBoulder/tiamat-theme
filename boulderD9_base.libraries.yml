@@ -126,6 +126,12 @@ ucb-content-grid:
     theme:
       css/block/content-grid.css: {}
 
+ucb-content-list:
+  version: 1.x
+  css:
+    theme:
+      css/block/content-list.css: {}
+
 ucb-content-row:
   version: 1.x
   css:
