@@ -1,0 +1,55 @@
+{#
+/**
+ * @file Template to implement the "Content List" block type
+ * @author Timur Tripp
+*/
+#}
+
+{#{ attach_library('boulderD9_base/ucb-content-list') }#}
+
+{% set blockContent = content['#block_content'] %}
+{% set sort = blockContent.field_content_list_sort.value %}
+{% set display = blockContent.field_content_list_display.value %}
+
+{%
+	set classes = [
+		'container',
+		'block',
+		'block-' ~ configuration.provider|clean_class,
+		'block-' ~ plugin_id|clean_class,
+		bundle ? 'block--type-' ~ bundle|clean_class,
+		view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
+		'ucb-content-list-display-' ~ display
+	]
+%}
+
+{% block content %}<div{{ attributes.addClass(classes) }}>
+	{{ title_prefix }}
+	{% if label %}<h2{{ title_attributes }}>{{ label }}</h2>{% endif %}
+	{{ title_suffix }}
+	{% if display == 'teaser' %}{% for key, item in blockContent.field_content_list_content if key|first != '#' %}<div class="row ucb-content-list-row">
+		<div class="col-9">
+			<h3 class="ucb-content-list-header"><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></h3>
+			<p class="ucb-content-list-body">{{ item.entity.body.0.summary }}</p>
+		</div>
+		<div class="col-3">
+			{% set imageURI = item.entity.field_ucb_person_photo.entity.field_media_image.entity.fileuri|image_style('focal_image_square') %}
+			{% set imageAlt = item.entity.field_ucb_person_photo.entity.field_media_image.alt|render %}
+			<img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}">
+		</div>
+	</div>{% endfor %}{% elseif display == 'embed' %}{% for key, item in blockContent.field_content_list_content if key|first != '#' %}<div class="row ucb-content-list-row">
+		<div class="col-2">
+			{% set imageURI = item.entity.field_ucb_person_photo.entity.field_media_image.entity.fileuri|image_style('focal_image_square') %}
+			{% set imageAlt = item.entity.field_ucb_person_photo.entity.field_media_image.alt|render %}
+			<img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}">
+		</div>
+		<div class="col-9">
+			<h4 class="ucb-content-list-header"><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></h4>
+			<p class="ucb-content-list-body">{{ item.entity.body.0.summary }}</p>
+		</div>
+	</div>{% endfor %}{% elseif display == 'title' %}<ul>{% for key, item in blockContent.field_content_list_content if key|first != '#' %}
+		<li><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></li>
+	{% endfor %}</ul>
+	{% elseif display == 'sidebar' %}{# TODO Sidebar #}
+	{% endif %}
+</div>{% endblock content %}
