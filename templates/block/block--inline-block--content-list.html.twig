@@ -10,6 +10,16 @@
 {% set blockContent = content['#block_content'] %}
 {% set sort = blockContent.field_content_list_sort.value %}
 {% set display = blockContent.field_content_list_display.value %}
+{% set content = blockContent.field_content_list_content %}
+
+{# sorting #}
+{% if sort == 'created_asc' %}
+	{% set content = content|sort((a, b) => a.entity.created.value <=> b.entity.created.value) %}
+{% elseif sort == 'created_desc' %}
+	{% set content = content|sort((a, b) => b.entity.created.value <=> a.entity.created.value) %}
+{% elseif sort == 'alphabetical' %}
+	{% set content = content|sort((a, b) => a.entity.title.0.value|trim <=> b.entity.title.0.value|trim) %}
+{% endif %}
 
 {%
 	set classes = [
@@ -28,7 +38,7 @@
 	{% if label %}<h2{{ title_attributes }}>{{ label }}</h2>{% endif %}
 	{{ title_suffix }}
 	<div class="ucb-content-list-container">
-		{% if display == 'teaser' %}{% for key, item in blockContent.field_content_list_content if key|first != '#' %}<div class="row ucb-content-list-row">
+		{% if display == 'teaser' %}{% for key, item in content %}<div class="row ucb-content-list-row">
 			<div class="col-9">
 				<h4 class="ucb-content-list-title"><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></h4>
 				{% set summary = item.entity.body.0.summary ?? item.entity.field_ucb_article_summary.0.value %}
@@ -39,7 +49,7 @@
 				{% set imageURI = image.entity.fileuri|image_style('focal_image_square') %}{% set imageAlt = image.alt|render %}
 				<a href="{{ item.entity.path.alias }}"><img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}"></a>
 			{% endif %}</div>
-		</div>{% endfor %}{% elseif display == 'embed' %}{% for key, item in blockContent.field_content_list_content if key|first != '#' %}<div class="row ucb-content-list-row">
+		</div>{% endfor %}{% elseif display == 'embed' %}{% for key, item in content %}<div class="row ucb-content-list-row">
 			{% set image = item.entity.field_ucb_person_photo.entity.field_media_image ?? item.entity.field_ucb_article_thumbnail.entity.field_media_image %}
 			<div class="ucb-content-list-image-container col-3{{ image ? '' : ' ucb-content-list-image-empty' }}">{% if image %}
 				{% set imageURI = image.entity.fileuri|image_style('focal_image_square') %}{% set imageAlt = image.alt|render %}
@@ -51,10 +61,10 @@
 				<p class="ucb-content-list-summary">{{ summary }} <a href="{{ item.entity.path.alias }}">Read&nbsp;more&nbsp;&raquo;</a></p>
 			</div>
 		</div>{% endfor %}{% elseif display == 'title' %}
-		<ul>{% for key, item in blockContent.field_content_list_content if key|first != '#' %}
+		<ul>{% for key, item in content %}
 			<li class="ucb-content-list-row ucb-content-list-title"><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></li>
 		{% endfor %}</ul>
-		{% elseif display == 'sidebar' %}{% for key, item in blockContent.field_content_list_content if key|first != '#' %}<div class="row ucb-content-list-row">
+		{% elseif display == 'sidebar' %}{% for key, item in content %}<div class="row ucb-content-list-row">
 			<div class="col-9">
 				<span class="ucb-content-list-title"><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></span>
 			</div>
