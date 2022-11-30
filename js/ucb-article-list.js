@@ -206,12 +206,12 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
             let link = item.attributes.path.alias;
             let image = "";
             if(link && imageSrc) {
-                image = `<a href="${link}"><img src="${imageSrc}" /></a>`;
+                image = `<div id='img-${bodyAndImageId}' class='col-sm-12 col-md-2 ucb-article-card-img'><a href="${link}"><img src="${imageSrc}" /></a></div>`;
             }
 
             let outputHTML = `
                             <div class='ucb-article-card row'>
-                                <div id='img-${bodyAndImageId}' class='col-sm-12 col-md-2 ucb-article-card-img'>${image}</div>
+                                ${image}
                                 <div class='col-sm-12 col-md-10 ucb-article-card-data'>
                                     <span class='ucb-article-card-title'><a href="${link}">${title}</a></span>
                                     <span class='ucb-article-card-date'>${date}</span>
