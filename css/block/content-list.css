@@ -17,6 +17,10 @@
 	margin-bottom: 10px;
 }
 
+.ucb-content-list-read-more {
+	white-space: nowrap;
+}
+
 .ucb-content-list-display-embed .ucb-content-list-title {
 	font-size: 1.2rem;
 }
@@ -28,10 +32,6 @@
 
 .ucb-content-list-display-sidebar .ucb-content-list-title {
 	display: block;
-}
-
-.ucb-content-list-display-embed .ucb-content-list-image-empty {
-	display: none;
 }
 
 .ucb-content-list-image-container {
