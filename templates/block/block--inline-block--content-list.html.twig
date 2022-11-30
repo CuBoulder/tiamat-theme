@@ -56,7 +56,7 @@
 				<a href="{{ item.entity.path.alias }}"><img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}"></a>
 			{% endif %}</div>
 			<div class="col-9">
-				<h3 class="ucb-content-list-title"><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></h3>
+				<h4 class="ucb-content-list-title"><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></h4>
 				{% set summary = item.entity.body.0.summary ?? item.entity.field_ucb_article_summary.0.value %}
 				<p class="ucb-content-list-summary">{{ summary }} <a href="{{ item.entity.path.alias }}">Read&nbsp;more&nbsp;&raquo;</a></p>
 			</div>
