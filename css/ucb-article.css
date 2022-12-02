@@ -13,14 +13,8 @@
   font-weight: 700;
 }
 
-i.fas.fa-circle,
 i.far.fa-calendar {
   color: #999;
-}
-
-i.fas.fa-circle {
-  font-size: 0.5rem;
-  vertical-align: middle;
 }
 
 .ucb-article-image img {
@@ -104,22 +98,26 @@ i.fas.fa-circle {
 }
 
 .ucb-article-blockquote-icon {
-	font-size: 150%;
-	padding-right: 20px;
+  font-size: 150%;
+  padding-right: 20px;
 }
 
 .ucb-article-blockquote-text {
-	font-weight: bold;
+  font-weight: bold;
 }
 
 .ucb-article-hero {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .ucb-page-style-striped .ucb-striped-content:nth-child(even) {
-	background-color:#EEEEEE;
-	border-top: 1px solid transparent;
-	border-bottom: 1px solid transparent;
-	padding-top: 20px;
-	margin-bottom: 20px;
+  background-color: #eeeeee;
+  border-top: 1px solid transparent;
+  border-bottom: 1px solid transparent;
+  padding-top: 20px;
+  margin-bottom: 20px;
+}
+
+.ucb-article-author-name span:not(:last-of-type):after{
+  content: ",";
 }
