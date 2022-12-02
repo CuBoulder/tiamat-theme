@@ -45,7 +45,19 @@
 			{% set image = item.entity.field_ucb_article_thumbnail.entity.field_media_image ?? item.entity.field_ucb_person_photo.entity.field_media_image ?? item.entity.field_how_to_initial_image.entity.field_media_image %}
 			<div class="ucb-content-list-text-container{{ image ? ' col-9' : ' container' }}">
 				<h4 class="ucb-content-list-title"><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></h4>
-				{% set summary = item.entity.body.0.summary ?? item.entity.field_ucb_article_summary.0.value %}
+				{% if item.entity.type.0.entity.id == 'ucb_person' %}<div class="ucb-content-list-person-info">
+					<div class="ucb-content-list-person-titles">
+						{% for title in item.entity.field_ucb_person_title %}<span class="ucb-content-list-person-title">{{ title.value }}</span>{% endfor %}
+					</div>
+					<div class="ucb-content-list-person-departments">
+						{% for department in item.entity.field_ucb_person_department %}<span class="ucb-content-list-person-department">{{ department.entity.label|render|striptags|trim }}</span>{% endfor %}
+					</div>
+					<div class="ucb-content-list-person-contact">
+						{% set email = item.entity.field_ucb_person_email.0.value %}{% if email %}<span class="ucb-content-list-person-contact-item ucb-content-list-person-email"><a href="mailto:{{ email }}">{{ email }}</a></span>{% endif %}
+						{% set phone = item.entity.field_ucb_person_phone.0.value %}{% if phone %}<span class="ucb-content-list-person-contact-item ucb-content-list-person-phone"><a href="tel:{{ phone|preg_replace('/[^0-9\+]/', '') }}">{{ phone }}</a></span>{% endif %}
+					</div>
+				</div>{% endif %}{% set summary = item.entity.body.0.summary ?? item.entity.field_ucb_article_summary.0.value %}
+				{% if not summary %}{% set body = (item.entity.body.0 ?? item.entity.field_ucb_article_content.0.entity.field_article_text.0).value|striptags|trim %}{% set bodyTrimmed = body|slice(0, 512) %}{% set summary = bodyTrimmed ~ (body|length > bodyTrimmed|length ? '...') %}{% endif %}
 				<p class="ucb-content-list-summary">{{ summary }} <a class="ucb-content-list-read-more" href="{{ item.entity.path.alias }}">Read more &raquo;</a></p>
 			</div>
 			<div class="ucb-content-list-image-container{{ image ? ' col-3' : '' }}">{% if image %}
@@ -60,7 +72,19 @@
 			{% endif %}</div>
 			<div class="ucb-content-list-text-container{{ image ? (display == 'condensed' ? ' col-10' : ' col-lg-9 col-10') : ' container' }}">
 				<h4 class="ucb-content-list-title"><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></h4>
-				{% set summary = item.entity.body.0.summary ?? item.entity.field_ucb_article_summary.0.value %}
+				{% if item.entity.type.0.entity.id == 'ucb_person' %}<div class="ucb-content-list-person-info">
+					<div class="ucb-content-list-person-titles">
+						{% for title in item.entity.field_ucb_person_title %}<span class="ucb-content-list-person-title">{{ title.value }}</span>{% endfor %}
+					</div>
+					<div class="ucb-content-list-person-departments">
+						{% for department in item.entity.field_ucb_person_department %}<span class="ucb-content-list-person-department">{{ department.entity.label|render|striptags|trim }}</span>{% endfor %}
+					</div>
+					<div class="ucb-content-list-person-contact">
+						{% set email = item.entity.field_ucb_person_email.0.value %}{% if email %}<span class="ucb-content-list-person-contact-item ucb-content-list-person-email"><a href="mailto:{{ email }}">{{ email }}</a></span>{% endif %}
+						{% set phone = item.entity.field_ucb_person_phone.0.value %}{% if phone %}<span class="ucb-content-list-person-contact-item ucb-content-list-person-phone"><a href="tel:{{ phone|preg_replace('/[^0-9\+]/', '') }}">{{ phone }}</a></span>{% endif %}
+					</div>
+				</div>{% endif %}{% set summary = item.entity.body.0.summary ?? item.entity.field_ucb_article_summary.0.value %}
+				{% if not summary %}{% set body = (item.entity.body.0 ?? item.entity.field_ucb_article_content.0.entity.field_article_text.0).value|striptags|trim %}{% set bodyTrimmed = body|slice(0, 128) %}{% set summary = bodyTrimmed ~ (body|length > bodyTrimmed|length ? '...') %}{% endif %}
 				<p class="ucb-content-list-summary">{{ summary }} <a class="ucb-content-list-read-more" href="{{ item.entity.path.alias }}">Read more &raquo;</a></p>
 			</div>
 		</div>{% endfor %}{% elseif display == 'title' %}

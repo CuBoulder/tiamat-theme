@@ -76,3 +76,22 @@
 .ucb-content-list-display-title .ucb-content-list-list {
 	margin-bottom: 0;
 }
+
+/* Person node styles */
+
+.ucb-content-list-person-info {
+	padding-bottom: 10px;
+}
+
+.ucb-content-list-person-departments {
+	text-transform: uppercase;
+	font-size: 0.8rem;
+}
+
+.ucb-content-list-person-titles .ucb-content-list-person-title::after, .ucb-content-list-person-departments .ucb-content-list-person-department::after, .ucb-content-list-person-contact .ucb-content-list-person-contact-item::after {
+	content: ' • ';
+}
+
+.ucb-content-list-person-titles .ucb-content-list-person-title:last-child::after, .ucb-content-list-person-departments .ucb-content-list-person-department:last-child::after, .ucb-content-list-person-contact .ucb-content-list-person-contact-item:last-child::after {
+	content: '';
+}
