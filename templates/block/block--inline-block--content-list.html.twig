@@ -57,8 +57,12 @@
 						{% set phone = item.entity.field_ucb_person_phone.0.value %}{% if phone %}<span class="ucb-content-list-person-contact-item ucb-content-list-person-phone"><a href="tel:{{ phone|preg_replace('/[^0-9\+]/', '') }}">{{ phone }}</a></span>{% endif %}
 					</div>
 				</div>{% endif %}{% set summary = item.entity.body.0.summary ?? item.entity.field_ucb_article_summary.0.value %}
-				{% if not summary %}{% set body = (item.entity.body.0 ?? item.entity.field_ucb_article_content.0.entity.field_article_text.0).value|striptags|trim %}{% set bodyTrimmed = body|slice(0, 512) %}{% set summary = bodyTrimmed ~ (body|length > bodyTrimmed|length ? '...') %}{% endif %}
-				<p class="ucb-content-list-summary">{{ summary }} <a class="ucb-content-list-read-more" href="{{ item.entity.path.alias }}">Read more &raquo;</a></p>
+				{% if not summary %}{% set body = (item.entity.body.0 ?? item.entity.field_ucb_article_content.0.entity.field_article_text.0).value|render %}{% set bodyTrimmed = body|slice(0, 512) %}{% set summary = bodyTrimmed ~ (body|length > bodyTrimmed|length ? '...') %}{% endif %}
+				<p class="ucb-content-list-summary">
+					{% autoescape false %}
+						{{ summary }}
+					{% endautoescape %}
+						<a class="ucb-content-list-read-more" href="{{ item.entity.path.alias }}">Read more &raquo;</a></p>
 			</div>
 			<div class="ucb-content-list-image-container{{ image ? ' col-3' : '' }}">{% if image %}
 				{% set imageURI = image.entity.fileuri|image_style('focal_image_square') %}{% set imageAlt = image.alt|render %}
@@ -84,8 +88,12 @@
 						{% set phone = item.entity.field_ucb_person_phone.0.value %}{% if phone %}<span class="ucb-content-list-person-contact-item ucb-content-list-person-phone"><a href="tel:{{ phone|preg_replace('/[^0-9\+]/', '') }}">{{ phone }}</a></span>{% endif %}
 					</div>
 				</div>{% endif %}{% set summary = item.entity.body.0.summary ?? item.entity.field_ucb_article_summary.0.value %}
-				{% if not summary %}{% set body = (item.entity.body.0 ?? item.entity.field_ucb_article_content.0.entity.field_article_text.0).value|striptags|trim %}{% set bodyTrimmed = body|slice(0, 128) %}{% set summary = bodyTrimmed ~ (body|length > bodyTrimmed|length ? '...') %}{% endif %}
-				<p class="ucb-content-list-summary">{{ summary }} <a class="ucb-content-list-read-more" href="{{ item.entity.path.alias }}">Read more &raquo;</a></p>
+				{% if not summary %}{% set body = (item.entity.body.0 ?? item.entity.field_ucb_article_content.0.entity.field_article_text.0).value|render %}{% set bodyTrimmed = body|slice(0, 128) %}{% set summary = bodyTrimmed ~ (body|length > bodyTrimmed|length ? '...') %}{% endif %}
+				<p class="ucb-content-list-summary">
+					{% autoescape false %}
+						{{ summary }}
+					{% endautoescape %}
+					    <a class="ucb-content-list-read-more" href="{{ item.entity.path.alias }}">Read more &raquo;</a></p>
 			</div>
 		</div>{% endfor %}{% elseif display == 'title' %}
 		<ul class="ucb-content-list-list">{% for key, item in content %}
