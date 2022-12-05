@@ -205,10 +205,10 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
             let title = item.attributes.title;
             let link = item.attributes.path.alias;
             let image = "";
-            let articleSummarySize = "col-md-10";
+            let articleSummarySize = "col-md-12";
             if(link && imageSrc) {
                 image = `<div id='img-${bodyAndImageId}' class='col-sm-12 col-md-2 ucb-article-card-img'><a href="${link}"><img src="${imageSrc}" /></a></div>`;
-                articleSummarySize = "col-md-12"
+                articleSummarySize = "col-md-10"
               }
 
             let outputHTML = `
