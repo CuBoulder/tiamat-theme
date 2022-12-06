@@ -1,0 +1,97 @@
+.ucb-content-list-display-condensed .ucb-content-list-row, .ucb-content-list-display-teaser .ucb-content-list-row, .ucb-content-list-display-full .ucb-content-list-row, .ucb-content-list-display-sidebar .ucb-content-list-row {
+	border-bottom: 1px solid rgba(128, 128, 128, 0.333);
+	padding: 20px 0 0 0;
+}
+
+.ucb-content-list-display-teaser h2, .ucb-content-list-display-title h2, .ucb-content-list-display-sidebar h2 {
+	font-size: 1.3rem;
+}
+
+.ucb-content-list {
+	margin-bottom: 20px;
+}
+
+.ucb-content-list-title {
+	font-size: 1.25rem;
+	font-weight: bolder;
+	margin-bottom: 10px;
+}
+
+.ucb-content-list-read-more {
+	white-space: nowrap;
+}
+
+.ucb-content-list-image {
+	margin-bottom: 20px;
+}
+
+.ucb-content-list-display-full .ucb-content-list-title, .ucb-content-list-display-condensed .ucb-content-list-title, .ucb-content-list-display-teaser .ucb-content-list-title {
+	font-size: 1.2rem;
+}
+
+@media screen and (min-width: 960px) {
+	.ucb-content-list-display-full .ucb-content-list-title {
+		font-size: 1.45rem;
+	}
+}
+
+.ucb-content-list-display-title .ucb-content-list-title, .ucb-content-list-display-sidebar .ucb-content-list-title {
+	font-size: 1rem;
+	font-weight: 400;
+}
+
+.ucb-content-list-display-sidebar .ucb-content-list-title {
+	display: block;
+}
+
+.ucb-content-list-display-teaser, .ucb-content-list-display-title, .ucb-content-list-display-sidebar {
+	padding: 20px 20px 20px 20px;
+}
+
+.ucb-content-list-display-title {
+	border: 1px solid rgba(128, 128, 128, 0.333);
+}
+
+.ucb-content-list-display-sidebar .ucb-content-list-title {
+	padding-bottom: 20px;
+}
+
+.ucb-content-list-row {
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.ucb-content-list-row:first-child {
+	padding-top: 0;
+}
+
+.ucb-content-list-display-full .ucb-content-list-text-container, .ucb-content-list-display-condensed .ucb-content-list-image-container, .ucb-content-list-display-condensed .ucb-content-list-text-container, .ucb-content-list-display-teaser .ucb-content-list-image-container, .ucb-content-list-display-teaser .ucb-content-list-text-container, .ucb-content-list-display-sidebar .ucb-content-list-text-container {
+	padding-left: 0;
+}
+
+.ucb-content-list-display-full .ucb-content-list-image-container, .ucb-content-list-display-condensed .ucb-content-list-text-container, .ucb-content-list-display-teaser .ucb-content-list-text-container, .ucb-content-list-display-sidebar .ucb-content-list-text-container, .ucb-content-list-display-sidebar .ucb-content-list-image-container {
+	padding-right: 0;
+}
+
+.ucb-content-list-display-title .ucb-content-list-list {
+	margin-bottom: 0;
+}
+
+/* Person node styles */
+
+.ucb-content-list-person-info {
+	padding-bottom: 10px;
+}
+
+.ucb-content-list-person-departments {
+	text-transform: uppercase;
+	font-size: 0.8rem;
+}
+
+.ucb-content-list-person-titles .ucb-content-list-person-title::after, .ucb-content-list-person-departments .ucb-content-list-person-department::after, .ucb-content-list-person-contact .ucb-content-list-person-contact-item::after {
+	content: ' • ';
+}
+
+.ucb-content-list-person-titles .ucb-content-list-person-title:last-child::after, .ucb-content-list-person-departments .ucb-content-list-person-department:last-child::after, .ucb-content-list-person-contact .ucb-content-list-person-contact-item:last-child::after {
+	content: '';
+}
