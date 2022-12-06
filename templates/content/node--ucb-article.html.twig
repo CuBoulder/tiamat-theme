@@ -18,8 +18,8 @@
 {% set localDateOverride = content.field_ucb_article_date_override|render|striptags|trim %}
 
 {# Local Date/Time Overrides, else use Global Settings #}
-{% if localDateOverride != 0 %}
-	{% if localDateOverride == 1 %}
+	{% if localDateOverride != 0 %}
+		{% if localDateOverride == 1 %}
 		{% set article_date_format = node.created.value|date("n/j/Y") %}
 	{% elseif localDateOverride == 2 %}
 		{% set article_date_format = node.created.value|date("M. j, Y") %}
@@ -39,8 +39,8 @@
 	{% endif %}
 {% else %}
 	{# Global Settings #}
-		{# short date #}
-	{% if global_date_format == "0" %}
+	{# short date #}
+		{% if global_date_format == "0" %}
 		{% set article_date_format = node.created.value|date("n/j/Y") %}
 		{# medium date #}
 	{% elseif global_date_format == "1"%}
@@ -88,7 +88,6 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 pageStyleCSS
 ]
 %}
-
 
 
 {% set social_share_button_position = drupal_config('ucb2021_base.settings', 'ucb_social_share_position')%}
@@ -141,22 +140,25 @@ pageStyleCSS
 						{{ drupal_block("social_sharing_buttons_block") }}
 					</div>
 				{% endif %}
-			{% if showDate %}
-				<div role="contentinfo" class="ucb-article-meta">
-					<div class="ucb-article-date">
-						<i class="far fa-calendar"></i>
-						<span class="sr-only">Published:{{article_date_format}}</span>
-						<span itemprop="datePublished">
-							{{ article_date_format }}
-						</span>
-					</div>
-			{% endif %}
+				{% if showDate %}
+					<div role="contentinfo" class="ucb-article-meta">
+						<div class="ucb-article-date">
+							<i class="far fa-calendar"></i>
+							<span class="sr-only">Published:{{article_date_format}}</span>
+							<span itemprop="datePublished">
+								{{ article_date_format }}
+							</span>
+						</div>
+					{% endif %}
 					{% if content.field_ucb_article_byline|render %}
 						<div class="ucb-article-byline">
-							<i class="fas fa-circle"></i>
+							{% if showDate %}
+								&bull;
+							{% endif %}
+
 							By
 							<span class="ucb-article-author-name" itemprop="author">
-								{{ content.field_ucb_article_byline|render|striptags|trim }}
+								{{ content.field_ucb_article_byline}}
 							</span>
 						</div>
 					{% endif %}
