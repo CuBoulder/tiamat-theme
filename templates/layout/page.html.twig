@@ -172,14 +172,14 @@
   {# FOOTER BLOCK #}
   {% block page_footer %}
   <footer class="ucb-homepage-footer background-black">
-    {% if page.footer_cta|render or page.footer_nav_one|render or ucb_footer_menu %}
+    {% if page.footer_cta|render or page.footer_nav_one|render or footer_menu %}
       <div class="ucb-footer-top">
         {% if page.footer_cta|render %}
           <div class="ucb-footer-container footer-cta-block container">
             {{ page.footer_cta }}
           </div>
         {% endif %}
-        {% if ucb_footer_menu %}
+        {% if footer_menu %}
           {% include "@boulderD9_base/includes/ucb-footer-menus.html.twig" %}
         {% elseif page.footer_nav_one|render %}
           <div class="ucb-footer-nav-container container">
@@ -205,6 +205,7 @@
         {% endif %}
       </div>
     {% endif %}
+	{{ page.footer_menu }}
     <div class="ucb-footer-bottom">
     {% if page.social|render %}
       <div class="ucb-social-container container">

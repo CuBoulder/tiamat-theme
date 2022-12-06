@@ -82,6 +82,18 @@ ucb-breadcrumb:
     theme:
       css/ucb-breadcrumb.css: {}
     
+ucb-footer-menu-region:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-footer-menu-region.css: {}
+
+ucb-footer-menu:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-footer-menu.css: {}
+
 ucb-site-contact-info-footer:
   version: 1.x
   css:
