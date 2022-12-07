@@ -51,8 +51,8 @@ function boulderD9_base_preprocess_page(array &$variables) {
   $config = \Drupal::config('system.site');
   $variables['site_name'] = $config->get('name');
   $variables['site_slogan'] = $config->get('slogan');
-  $variables['ucb_secondary_menu'] = theme_get_setting('ucb_secondary_menu');
-  $variables['ucb_footer_menu'] = theme_get_setting('ucb_footer_menu');
+  $variables['ucb_secondary_menu_default_links'] = theme_get_setting('ucb_secondary_menu_default_links');
+  $variables['ucb_footer_menu_default_links'] = theme_get_setting('ucb_footer_menu_default_links');
   $variables['theme_path'] = base_path() . $variables['directory'];
   $variables['ucb_campus_header_color'] = theme_get_setting('ucb_campus_header_color');
   $variables['ucb_header_color'] = theme_get_setting('ucb_header_color');
@@ -80,8 +80,8 @@ function boulderD9_base_preprocess_page__user(array &$variables) {
   $config = \Drupal::config('system.site');
   $variables['site_name'] = $config->get('name');
   $variables['site_slogan'] = $config->get('slogan');
-  $variables['ucb_secondary_menu'] = theme_get_setting('ucb_secondary_menu');
-  $variables['ucb_footer_menu'] = theme_get_setting('ucb_footer_menu');
+  $variables['ucb_secondary_menu_default_links'] = theme_get_setting('ucb_secondary_menu_default_links');
+  $variables['ucb_footer_menu_default_links'] = theme_get_setting('ucb_footer_menu_default_links');
   $variables['theme_path'] = base_path() . $variables['directory'];
   $variables['ucb_campus_header_color'] = theme_get_setting('ucb_campus_header_color');
   $variables['ucb_header_color'] = theme_get_setting('ucb_header_color');
@@ -95,8 +95,8 @@ function boulderD9_base_preprocess_page__user__login(array &$variables) {
   $config = \Drupal::config('system.site');
   $variables['site_name'] = $config->get('name');
   $variables['site_slogan'] = $config->get('slogan');
-  $variables['ucb_secondary_menu'] = theme_get_setting('ucb_secondary_menu');
-  $variables['ucb_footer_menu'] = theme_get_setting('ucb_footer_menu');
+  $variables['ucb_secondary_menu_default_links'] = theme_get_setting('ucb_secondary_menu_default_links');
+  $variables['ucb_footer_menu_default_links'] = theme_get_setting('ucb_footer_menu_default_links');
   $variables['theme_path'] = base_path() . $variables['directory'];
   $variables['ucb_campus_header_color'] = theme_get_setting('ucb_campus_header_color');
   $variables['ucb_header_color'] = theme_get_setting('ucb_header_color');

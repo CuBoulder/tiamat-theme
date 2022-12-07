@@ -101,7 +101,7 @@
         {% if page.primary_menu|render %}
           {{ page.primary_menu }}
         {% endif %}
-        {% if ucb_secondary_menu %}
+        {% if ucb_secondary_menu_default_links %}
           {% include "@boulderD9_base/includes/ucb-header-secondary-menu.html.twig" %}
         {% elseif page.secondary_menu|render %}
           {{ page.secondary_menu }}
@@ -172,14 +172,14 @@
   {# FOOTER BLOCK #}
   {% block page_footer %}
   <footer class="ucb-homepage-footer background-black">
-    {% if page.footer_cta|render or page.footer_nav_one|render or footer_menu %}
+    {% if page.footer_cta|render or page.footer_nav_one|render or ucb_footer_menu_default_links %}
       <div class="ucb-footer-top">
         {% if page.footer_cta|render %}
           <div class="ucb-footer-container footer-cta-block container">
             {{ page.footer_cta }}
           </div>
         {% endif %}
-        {% if footer_menu %}
+        {% if ucb_footer_menu_default_links %}
           {% include "@boulderD9_base/includes/ucb-footer-menus.html.twig" %}
         {% elseif page.footer_nav_one|render %}
           <div class="ucb-footer-nav-container container">
