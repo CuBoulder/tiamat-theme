@@ -97,13 +97,11 @@
       </div>
     </header>
     <section class="ucb-main-nav-section mobile" role="navigation">
-      <div class="container ucb-main-nav-continer">
+      <div class="container ucb-main-nav-continer ucb-secondary-menu-position-{{ ucb_secondary_menu_position == 'above' ? 'above' : 'inline'}}">
         {% if page.primary_menu|render %}
           {{ page.primary_menu }}
         {% endif %}
-        {% if ucb_secondary_menu_default_links %}
-          {% include "@boulderD9_base/includes/ucb-header-secondary-menu.html.twig" %}
-        {% elseif page.secondary_menu|render %}
+        {% if page.secondary_menu|render %}
           {{ page.secondary_menu }}
         {% endif %}
       </div>

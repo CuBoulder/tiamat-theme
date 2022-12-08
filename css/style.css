@@ -203,13 +203,13 @@
   section.ucb-main-nav-section {
     box-shadow: 0 2px 5px rgba(0 0 0 /10%);
     background: white;
-    height: 40px;
   }
   
   .ucb-main-nav-continer {
     display: flex;
     flex-grow: 0;
     flex-shrink: 0;
+	justify-content: space-between;
     padding: 0;
     height: inherit;
     align-items: center;

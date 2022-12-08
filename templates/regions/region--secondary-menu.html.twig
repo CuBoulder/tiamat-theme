@@ -12,7 +12,11 @@
  * @see template_preprocess_region()
  */
 #}
-{{ attach_library('boulderD9_base/ucb-footer-menu-region') }}
-<div class="ucb-footer-menu-region">
-	<div class="container">{{ content }}</div>
+{{ attach_library('boulderD9_base/ucb-secondary-menu-region') }}
+<div class="ucb-secondary-menu-region">
+{% if ucb_secondary_menu_default_links %}
+	{% include "@boulderD9_base/includes/ucb-header-secondary-menu.html.twig" %}
+{% endif %}{% if content|render %}
+	{{ content }}
+{% endif %}
 </div>

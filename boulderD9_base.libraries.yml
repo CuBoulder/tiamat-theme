@@ -76,6 +76,12 @@ ucb-how-to-page:
     theme:
       css/ucb-how-to-page.css: {}
 
+ucb-secondary-menu-region:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-secondary-menu-region: {}
+
 ucb-breadcrumb:
   version: 1.x
   css:
@@ -87,12 +93,6 @@ ucb-footer-menu-region:
   css:
     theme:
       css/ucb-footer-menu-region.css: {}
-
-ucb-footer-menu:
-  version: 1.x
-  css:
-    theme:
-      css/ucb-footer-menu.css: {}
 
 ucb-site-contact-info-footer:
   version: 1.x

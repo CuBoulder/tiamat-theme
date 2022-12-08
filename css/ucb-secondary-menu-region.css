@@ -1,0 +1,13 @@
+.ucb-secondary-menu-region {
+	display: flex;
+	flex-direction: row;
+}
+
+.ucb-secondary-menu-region .ucb-menu {
+	display: flex;
+	flex-direction: row;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-above {
+	flex-direction: column-reverse;
+}
