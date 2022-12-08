@@ -97,13 +97,9 @@
       </div>
     </header>
     <section class="ucb-main-nav-section mobile" role="navigation">
-      <div class="container ucb-main-nav-continer ucb-secondary-menu-position-{{ ucb_secondary_menu_position == 'above' ? 'above' : 'inline'}}">
-        {% if page.primary_menu|render %}
-          {{ page.primary_menu }}
-        {% endif %}
-        {% if page.secondary_menu|render %}
-          {{ page.secondary_menu }}
-        {% endif %}
+      <div class="ucb-main-nav-continer ucb-secondary-menu-position-{{ ucb_secondary_menu_position == 'above' ? 'above' : 'inline container'}}">
+        {{ page.primary_menu }}
+        {{ page.secondary_menu }}
       </div>
     </section>
     </div>

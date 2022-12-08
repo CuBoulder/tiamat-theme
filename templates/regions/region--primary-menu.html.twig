@@ -1,0 +1,17 @@
+{#
+/**
+ * @file
+ * Theme override to display a region.
+ *
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region <div>.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
+ */
+#}
+<div class="ucb-primary-menu-region ucb-primary-menu-region">
+	<div class="ucb-primary-menu-region-container{{ ucb_secondary_menu_position == 'above' ? ' container' : ''}}">{{ content }}</div>
+</div>

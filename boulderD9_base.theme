@@ -104,9 +104,17 @@ function boulderD9_base_preprocess_page__user__login(array &$variables) {
 }
 
 /**
+ * Exposes theme variables to the primary menu region.
+ */
+function boulderD9_base_preprocess_region__primary_menu(array &$variables) {
+	$variables['ucb_secondary_menu_position'] = theme_get_setting('ucb_secondary_menu_position');
+}
+
+/**
  * Exposes theme variables to the secondary menu region.
  */
 function boulderD9_base_preprocess_region__secondary_menu(array &$variables) {
+	$variables['ucb_secondary_menu_position'] = theme_get_setting('ucb_secondary_menu_position');
 	$variables['ucb_secondary_menu_default_links'] = theme_get_setting('ucb_secondary_menu_default_links');
 }
 

@@ -2,10 +2,14 @@
 	background-color: #272727;
 }
 
+.ucb-footer-menu-region .ucb-menu {
+	gap: 1.5rem;
+}
+
 .ucb-footer-menu-region .menu-item a {
 	color: #FFF;
 	line-height: 2.5rem;
-	margin: 0 1.5rem 0 0;
+	margin: 0;
 	padding: 0;
 }
 
