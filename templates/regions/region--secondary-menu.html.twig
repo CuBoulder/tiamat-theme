@@ -13,7 +13,7 @@
  */
 #}
 {{ attach_library('boulderD9_base/ucb-secondary-menu-region') }}
-<div class="ucb-secondary-menu-region">
+<div class="ucb-secondary-menu-region{{ ucb_secondary_menu_button_display ? ' ucb-secondary-menu-button-display' : ''}}">
 	<div class="ucb-secondary-menu-region-container{{ ucb_secondary_menu_position == 'above' ? ' container' : ''}}">
 		{% if ucb_secondary_menu_default_links %}{% include "@boulderD9_base/includes/ucb-header-secondary-menu.html.twig" %}{% endif %}
 		{{ content }}
