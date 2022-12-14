@@ -80,7 +80,7 @@ ucb-secondary-menu-region:
   version: 1.x
   css:
     theme:
-      css/ucb-secondary-menu-region: {}
+      css/ucb-secondary-menu-region.css: {}
 
 ucb-breadcrumb:
   version: 1.x
