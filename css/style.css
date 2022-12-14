@@ -203,7 +203,6 @@
   section.ucb-main-nav-section {
     box-shadow: 0 2px 5px rgba(0 0 0 /10%);
     background: white;
-    height: 40px;
   }
   
   .ucb-main-nav-continer {
@@ -235,8 +234,9 @@
     color: var(--ucb-darker);
     border-bottom: 2px solid #fff;
     font-weight: 600;
-    padding: 0.25rem 1rem;
-    margin: 0.5rem 0;
+    line-height: 2rem;
+    padding: .25rem 1rem;
+    margin: 2px 0 0 0;
   }
   
   .ucb-footer-top .ucb-menu a.nav-link {

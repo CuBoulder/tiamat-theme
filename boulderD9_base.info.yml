@@ -25,4 +25,5 @@ regions:
   footer_nav_two: "Footer Navigation Two"
   footer_nav_three: "Footer Navigation Three"
   footer_nav_four: "Footer Navigation Four"
+  footer_menu: 'Footer Menu'
   footer: "Footer"
