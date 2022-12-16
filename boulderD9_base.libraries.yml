@@ -198,6 +198,9 @@ ucb-slate-form:
   version: 1.x
   js:
     js/ucb-slate-form.js: {}
-  css:
-    theme:
-      css/ucb-slate-form.css: {}
+
+ucb-status-page:
+  version: 1.x
+  js:
+    js/ucb-status-page.js: {}
+
