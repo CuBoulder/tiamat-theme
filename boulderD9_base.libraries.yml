@@ -193,3 +193,11 @@ ucb-newsletter:
   css:
     theme:
       css/ucb-newsletter.css: {}
+      
+ucb-slate-form:
+  version: 1.x
+  js:
+    js/ucb-slate-form.js: {}
+  css:
+    theme:
+      css/ucb-slate-form.css: {}

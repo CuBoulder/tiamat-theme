@@ -1,0 +1,21 @@
+{{ attach_library('boulderD9_base/ucb-slate-form') }}
+
+{%
+  set classes = [
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class
+]
+%}
+
+	<div class="container">
+		<h1{{title_attributes}}>
+			{{ label }}
+		</h1>
+        <slate-form slateId="{{content.field_ucb_slate_form_id|render|striptags|trim|lower}}" slateDomain="{{content.field_ucb_slate_form_domain.0['#url']}}"></slate-form>
+	</div>
+
+
+
