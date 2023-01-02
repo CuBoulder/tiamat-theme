@@ -11,9 +11,9 @@
 %}
 
 	<div class="container">
-		<h1{{title_attributes}}>
+		<h2{{title_attributes}}>
 			{{ label }}
-		</h1>
+		</h2>
         <slate-form slateId="{{content.field_ucb_slate_form_id|render|striptags|trim|lower}}" slateDomain="{{content.field_ucb_slate_form_domain.0['#url']}}"></slate-form>
 	</div>
 
