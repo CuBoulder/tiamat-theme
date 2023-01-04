@@ -20,15 +20,17 @@
 		<nav role="navigation" aria-labelledby="system-breadcrumb">
 			<h2 id="system-breadcrumb" class="visually-hidden">{{ 'Breadcrumb'|t }}</h2>
 			<ul>
-				{% for item in breadcrumb if item.text %}
-					{% if item.url %}
-						<li class="ucb-breadcrumb-link">
-							<a href="{{ item.url }}">{{ item.text }}</a>
-						</li>
-					{% else %}
-						<li class="ucb-breadcrumb-static">
-							<span>{{ item.text }}</span>
-						</li>
+				{% for item in breadcrumb %}
+					{% if item.text %}
+						{% if item.url %}
+							<li class="ucb-breadcrumb-link">
+								<a href="{{ item.url }}">{{ item.text }}</a>
+							</li>
+						{% else %}
+							<li class="ucb-breadcrumb-static">
+								<span>{{ item.text }}</span>
+							</li>
+						{% endif %}
 					{% endif %}
 				{% endfor %}
 				{% if current_page_title %}

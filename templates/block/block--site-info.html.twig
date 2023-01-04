@@ -42,36 +42,42 @@
     <div class="ucb-site-contact-info-footer">
       {% if data.address_visible == '1' %}
       <div class="ucb-site-contact-info-footer-left">
-        {% for address in data.address if address.visible == '1' %}
-          <div class="ucb-site-contact-info-footer-address">
-            {% if address.label %}
-              <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-address-label">{{ address.label }}: </span>
-            {% endif %}
-            <span class="ucb-site-contact-info-footer-content ucb-site-contact-info-footer-address-content">{{ address.value | nl2br }}</span>
-          </div>
+        {% for address in data.address %}
+          {% if address.visible == '1' %}
+            <div class="ucb-site-contact-info-footer-address">
+              {% if address.label %}
+                <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-address-label">{{ address.label }}: </span>
+              {% endif %}
+              <span class="ucb-site-contact-info-footer-content ucb-site-contact-info-footer-address-content">{{ address.value | nl2br }}</span>
+            </div>
+          {% endif %}
         {% endfor %}
       </div>
       {% endif %}
       <div class="ucb-site-contact-info-footer-right">
         {% if data.email_visible == '1' %}
         <div class="ucb-site-contact-info-footer-emails">
-          {% for email in data.email if email.visible == '1' %}
-            <div class="ucb-site-contact-info-footer-email">
-            {% if email.label %}
-              <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-email-label">{% if icons_visible %}<i class="fas fa-envelope-open"></i> {% endif %}{{ email.label }}: </span>
+          {% for email in data.email %}
+            {% if email.visible == '1' %}
+              <div class="ucb-site-contact-info-footer-email">
+              {% if email.label %}
+                <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-email-label">{% if icons_visible %}<i class="fas fa-envelope-open"></i> {% endif %}{{ email.label }}: </span>
+              {% endif %}
+              <a class="ucb-site-contact-info-footer-content ucb-site-contact-info-footer-email-content" href="mailto:{{ email.value }}">{% if not email.label and icons_visible %}<i class="fas fa-envelope-open"></i> {% endif %}{{ email.value }}</a></div>
             {% endif %}
-            <a class="ucb-site-contact-info-footer-content ucb-site-contact-info-footer-email-content" href="mailto:{{ email.value }}">{% if not email.label and icons_visible %}<i class="fas fa-envelope-open"></i> {% endif %}{{ email.value }}</a></div>
           {% endfor %}
         </div>
         {% endif %}
         {% if data.phone_visible == '1' %}
         <div class="ucb-site-contact-info-footer-phones">
-          {% for phone in data.phone if phone.visible == '1' %}
-            <div class="ucb-site-contact-info-footer-phone">
-            {% if phone.label %}
-              <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-phone-label">{% if icons_visible %}<i class="fas fa-phone-alt"></i> {% endif %}{{ phone.label }}: </span>
+          {% for phone in data.phone %}
+            {% if phone.visible == '1' %}
+              <div class="ucb-site-contact-info-footer-phone">
+              {% if phone.label %}
+                <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-phone-label">{% if icons_visible %}<i class="fas fa-phone-alt"></i> {% endif %}{{ phone.label }}: </span>
+              {% endif %}
+              <a class="ucb-site-contact-info-footer-content ucb-site-contact-info-footer-phone-content" href="tel:{{ phone.value }}">{% if not phone.label and icons_visible %}<i class="fas fa-phone-alt"></i> {% endif %}{{ phone.value }}</a></div>
             {% endif %}
-            <a class="ucb-site-contact-info-footer-content ucb-site-contact-info-footer-phone-content" href="tel:{{ phone.value }}">{% if not phone.label and icons_visible %}<i class="fas fa-phone-alt"></i> {% endif %}{{ phone.value }}</a></div>
           {% endfor %}
         </div>
         {% endif %}

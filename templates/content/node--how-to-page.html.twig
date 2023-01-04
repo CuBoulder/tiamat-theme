@@ -36,9 +36,17 @@
 							</h2>
 							{% set matList = '"supply": [' %}
 							<ul>
+<<<<<<< Updated upstream
 								{% for child in content.field_how_to_materials|children %}
 									{% set matList = matList ~ '{ "@type": "HowToSupply", "name": ' ~ child|render|striptags|trim|json_encode ~ ' },' %}
 									<li>{{child|render}}</li>
+=======
+								{% for key, item in content.field_how_to_materials %}
+									{%  if key|first != '#' %}
+										{% set matList = matList ~ '{ "@type": "HowToSupply", "name": ' ~ item|render|striptags|trim|json_encode ~ ' },' %}
+										<li>{{item|render}}</li>
+									{% endif %}
+>>>>>>> Stashed changes
 								{% endfor %}
 							</ul>
 							{% set matList = matList|slice(0, -1) ~ '],' %}
@@ -49,11 +57,19 @@
 							</h2>
 							{% set toolList = '"tool": [' %}
 							<ul>
+<<<<<<< Updated upstream
 								{% for child in content.field_how_to_tools|children %}
 
 									{% set toolList = toolList ~ '{ "@type": "HowToTool", "name": ' ~ child|render|striptags|trim|json_encode ~ ' },' %}
 									<li>{{child|render}}</li>
 
+=======
+								{% for key, item in content.field_how_to_tools %}
+									{%  if key|first != '#' %}
+										{% set toolList = toolList ~ '{ "@type": "HowToTool", "name": ' ~ item|render|striptags|trim|json_encode ~ ' },' %}
+										<li>{{item|render}}</li>
+									{% endif %}
+>>>>>>> Stashed changes
 								{% endfor %}
 							</ul>
 							{% set toolList = toolList|slice(0, -1) ~ '],' %}
@@ -63,9 +79,17 @@
 								<span id="estimatedCostValue">
 
 							{% set estimatedC = '' %}
+<<<<<<< Updated upstream
 									{% for child in content.field_how_to_estimated_costs|children %}
 										{% set estimatedC = '"estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": ' ~ child|render|striptags|trim|json_encode ~' },'  %}
 										${{child|render}}
+=======
+									{% for key, item in content.field_how_to_estimated_costs %}
+										{%  if key|first != '#' %}
+											{% set estimatedC = '"estimatedCost": { "@type": "MonetaryAmount", "currency": "USD", "value": ' ~item|render|striptags|trim|json_encode ~' },'  %}
+											${{item|render}}
+										{% endif %}
+>>>>>>> Stashed changes
 									{% endfor %}
 								</span>
 							</h2>
@@ -74,13 +98,22 @@
 
 				</div>
 				<div class="initialImage">
+<<<<<<< Updated upstream
 					{% for child in node.field_how_to_initial_image|children %}
 						{% set initialImageJSON = '"image": { "@type": "ImageObject","url": "' ~ file_url(child.entity.field_media_image.entity.fileuri) ~ '", "height": "406", "width": "305"},' %}
 						{{item|view}}
+=======
+					{% for key, item in node.field_how_to_initial_image %}
+						{%  if key|first != '#' %}
+							{% set initialImageJSON = '"image": { "@type": "ImageObject","url": "' ~ file_url(item.entity.field_media_image.entity.fileuri) ~ '", "height": "406", "width": "305"},' %}
+							{{item|view}}
+						{% endif %}
+>>>>>>> Stashed changes
 					{% endfor %}
 				</div>
 			</div>
 			{% set stepList = '"step": [' %}
+<<<<<<< Updated upstream
 			{% for child in node.field_how_to_steps|children %}
 				<div class="howToStep eachStepDiv">
 					<div class="eachStepImage">
@@ -106,9 +139,38 @@
 						{% set stepList = stepList|slice(0,-1) ~ '],' %}
 						{% set stepList = stepList ~ stepImage %}
 						{% set stepList = stepList ~ '},' %}
-					</div>
-				</div>
+=======
+			{% for key, item in node.field_how_to_steps %}
+				{%  if key|first != '#' %}
+					<div class="howToStep eachStepDiv">
+						<div class="eachStepImage">
+							{{item.entity.field_how_to_step_image|view}}
+							{% set imgURL =  file_url(item.entity.field_how_to_step_image.entity.field_media_image.entity.fileuri) %}
+							{% set stepImage = '"image": { "@type": "ImageObject","url": "' ~ imgURL ~ '", "height": "406", "width": "305"}' %}
+						</div>
+						<div class="eachStepContentDiv stepFlex">
+							{% set stepList = stepList ~ '{"@type": "HowToStep",' %}
+							<h1 id="step{{key}}">{{item.entity.field_how_to_step_title|view}}</h1>
+							{% set stepList = stepList ~ '"url": "' ~ url("<current>")|render ~ '#step' ~ key ~'",' %}
+							{% set stepList = stepList ~ '"name": ' ~ item.entity.field_how_to_step_title.value|render|striptags|trim|json_encode ~ ',' %}
 
+
+							{% set stepList = stepList ~ '"itemListElement": [' %}
+							<ul>
+								{% for key2, item2 in item.entity.field_how_to_sub_steps %}
+									{%  if key2|first != '#' %}
+										<li>{{item2|view}}</li>
+										{% set stepList = stepList ~  '{ "@type": "HowToDirection", "text": ' ~ item2.value|render|striptags|trim|json_encode ~ '},' %}
+									{% endif %}
+								{% endfor %}
+							</ul>
+							{% set stepList = stepList|slice(0,-1) ~ '],' %}
+							{% set stepList = stepList ~ stepImage %}
+							{% set stepList = stepList ~ '},' %}
+						</div>
+>>>>>>> Stashed changes
+					</div>
+				{% endif %}
 			{% endfor %}
 			{% set stepList = stepList|slice(0,-1) ~ ']' %}
 		</div>
