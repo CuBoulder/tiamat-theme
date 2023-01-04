@@ -20,141 +20,141 @@
 	<div{{attributes.addClass(classes)}}>
 		<h2>{{ content.field_newsletter_section_title }}</h2>
 		{% if paragraph.field_newsletter_section_style.value is same as("0") %}
-			{% for key, item in paragraph.field_newsletter_section_select if key|first != '#' %}
+			{% for child in paragraph.field_newsletter_section_select|children %}
 				{# Code to render selected article content (thumbnail) #}
-				{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render %}
-					<div id='feature-article-thumbnail-{{key}}'> {{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail|view }} </div>
+				{% if child.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render %}
+					<div id='feature-article-thumbnail-{{key}}'> {{ child.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail|view }} </div>
 
 					{# Code to render selected article content (!thumbnail) #}
-				{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render %}
-					<div id='feature-article-content-{{key}}'>{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media|view }}</div>
+				{% elseif child.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render %}
+					<div id='feature-article-content-{{key}}'>{{ child.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media|view }}</div>
 
 					{# Code to render user made content #}
-				{% elseif item.entity.field_newsletter_content_image.entity.field_media_image.alt|render %}
-					<div id='feature-article-media-img-{{key}}'>{{ item.entity.field_newsletter_content_image|view }}</div>
+				{% elseif child.entity.field_newsletter_content_image.entity.field_media_image.alt|render %}
+					<div id='feature-article-media-img-{{key}}'>{{ child.entity.field_newsletter_content_image|view }}</div>
 				{% endif %}
 
 				{# Code to render selected article title/url #}
-				{% if item.entity.field_newsletter_article_select.entity.title.value|render %}
+				{% if child.entity.field_newsletter_article_select.entity.title.value|render %}
 				<div id="feature-article-title-{{key}}">
 					<h3>
-						<a href="{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
-							{{ item.entity.field_newsletter_article_select.entity.title.value|render|striptags|trim }}
+						<a href="{{ path('entity.node.canonical', {'node': child.entity.field_newsletter_article_select.target_id}) }}">
+							{{ child.entity.field_newsletter_article_select.entity.title.value|render|striptags|trim }}
 						</a>
 					</h3>
 				</div>
 					{# Code to render user made content (title) #}
-				{% elseif item.entity.field_newsletter_content_title.value|render %}
+				{% elseif child.entity.field_newsletter_content_title.value|render %}
 				<div id="feature-article-user-title-{{key}}">
 					<h3>
-						{{ item.entity.field_newsletter_content_title|view }}
+						{{ child.entity.field_newsletter_content_title|view }}
 					</h3>
 				</div>
 				{% endif %}
 
 
 				{# Code to render selected article content (categories) #}
-				{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_categories is not empty %}
+				{% if child.entity.field_newsletter_article_select.entity.field_ucb_article_categories is not empty %}
 					<div class="article-teaser-meta">
-						{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}
+						{{ child.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}
 					</div>
 
 					{# Code to render user made content (categories) #}
-				{% elseif item.entity.field_news_content_categories is not empty %}
+				{% elseif child.entity.field_news_content_categories is not empty %}
 					<div class="article-teaser-meta">
-						{{ item.entity.field_news_content_categories|view }}
+						{{ child.entity.field_news_content_categories|view }}
 					</div>
 				{% endif %}
 
 
 				{# Code to render selected article content (summary) #}
-				{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_summary.value|render %}
+				{% if child.entity.field_newsletter_article_select.entity.field_ucb_article_summary.value|render %}
 					<div class="article-summary" id="feature-article-summary-{{key}}">
-						{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_summary|view }}
+						{{ child.entity.field_newsletter_article_select.entity.field_ucb_article_summary|view }}
 					</div>
 
 					{# Code to render selected article content (article text) #}
-				{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|render %}
+				{% elseif child.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|render %}
 					<div class="article-summary" id="feature-article-summary-text-{{key}}">
-						{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text|view }}
+						{{ child.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text|view }}
 					</div>
 
 					{# Code to render user made content (content text) #}
-				{% elseif item.entity.field_newsletter_content_text.value|render %}
+				{% elseif child.entity.field_newsletter_content_text.value|render %}
 					<div class="article-summary" id="feature-article-summary-user-text-{{key}}">
-						{{ item.entity.field_newsletter_content_text|view }}
+						{{ child.entity.field_newsletter_content_text|view }}
 					</div>
 				{% endif %}
 			{% endfor %}
 		{% else %}
 			<div class="row row-content">
-				{% for key, item in paragraph.field_newsletter_section_select if key|first != '#' %}
+				{% for child in paragraph.field_newsletter_section_select|children %}
 					<div class="col-lg-5 col-8">
 
 						{# Code to render selected article title/url #}
-						{% if item.entity.field_newsletter_article_select.entity.title.value|render %}
+						{% if child.entity.field_newsletter_article_select.entity.title.value|render %}
 							<h3>
-								<a href="{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
-									{{ item.entity.field_newsletter_article_select.entity.title.value|render|striptags|trim }}
+								<a href="{{ path('entity.node.canonical', {'node': child.entity.field_newsletter_article_select.target_id}) }}">
+									{{ child.entity.field_newsletter_article_select.entity.title.value|render|striptags|trim }}
 								</a>
 							</h3>
 
 							{# Code to render user made content (title) #}
-						{% elseif item.entity.field_newsletter_content_title.value|render %}
+						{% elseif child.entity.field_newsletter_content_title.value|render %}
 							<h3>
-								{{ item.entity.field_newsletter_content_title|view }}
+								{{ child.entity.field_newsletter_content_title|view }}
 							</h3>
 						{% endif %}
 
 
 						{# Code to render selected article content (categories) #}
-						{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_categories is not empty %}
+						{% if child.entity.field_newsletter_article_select.entity.field_ucb_article_categories is not empty %}
 							<div class="article-teaser-meta">
-								{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}
+								{{ child.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}
 							</div>
 
 							{# Code to render user made content (categories) #}
-						{% elseif item.entity.field_news_content_categories is not empty %}
+						{% elseif child.entity.field_news_content_categories is not empty %}
 							<div class="article-teaser-meta">
-								{{ item.entity.field_news_content_categories|view }}
+								{{ child.entity.field_news_content_categories|view }}
 							</div>
 						{% endif %}
 
 
 						{# Code to render selected article content (summary) #}
-						{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_summary.value|render %}
+						{% if child.entity.field_newsletter_article_select.entity.field_ucb_article_summary.value|render %}
 							<div class="article-summary">
-								{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_summary|view }}
+								{{ child.entity.field_newsletter_article_select.entity.field_ucb_article_summary|view }}
 							</div>
 
 							{# Code to render selected article content (article text) #}
-						{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|render %}
+						{% elseif child.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|render %}
 							<div class="article-summary">
-								{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text|view }}
+								{{ child.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text|view }}
 							</div>
 
 							{# Code to render user made content (content text) #}
-						{% elseif item.entity.field_newsletter_content_text.value|render %}
+						{% elseif child.entity.field_newsletter_content_text.value|render %}
 							<div class="article-summary">
-								{{ item.entity.field_newsletter_content_text|view }}
+								{{ child.entity.field_newsletter_content_text|view }}
 							</div>
 						{% endif %}
 					</div>
 					<div
 						class="col-lg-1 col-4 align-self-center">
 						{# Code to render selected article content (thumbnail) #}
-						{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render %}
+						{% if child.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render %}
 							<img
-							src="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render }}"/>
+							src="{{ child.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ child.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render }}"/>
 
 							{# Code to render selected article content (!thumbnail) #}
-						{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render %}
+						{% elseif child.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render %}
 							<img
-							src="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render }}"/>
+							src="{{ child.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ child.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render }}"/>
 
 							{# Code to render user made content #}
-						{% elseif item.entity.field_newsletter_content_image.entity.field_media_image.alt|render %}
-							<img src="{{ item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ item.entity.field_newsletter_content_image.entity.field_media_image.alt|render }}"/>
+						{% elseif child.entity.field_newsletter_content_image.entity.field_media_image.alt|render %}
+							<img src="{{ child.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ child.entity.field_newsletter_content_image.entity.field_media_image.alt|render }}"/>
 						{% endif %}
 					</div>
 				{% endfor %}

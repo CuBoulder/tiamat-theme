@@ -32,73 +32,73 @@
 		{{ title_suffix }}
 		{# Teaser Row Layout #}
 		{% if layoutSelection == 0 %}
-			{% for key, item in content['#block_content'].field_row_layout_content if key|first != '#' %}
-				{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
+			{% for child in content['#block_content'].field_row_layout_content|children %}
+				{% set rowLink = child.entity.field_row_layout_content_link.0.url|render %}
 				<div class="row row-content">
 					<div class="col-4 row-image-container">
-						{% if item.entity.field_row_layout_content_link.0.url|render %}
+						{% if child.entity.field_row_layout_content_link.0.url|render %}
 							<a href=" {{ rowLink }} ">
-								{{ item.entity.field_row_layout_content_image|view }}
+								{{ child.entity.field_row_layout_content_image|view }}
 							</a>
 						{% else %}
-							{{ item.entity.field_row_layout_content_image|view }}
+							{{ child.entity.field_row_layout_content_image|view }}
 						{% endif %}
 					</div>
 					<div class="col-8 row-text-container">
-						{% if item.entity.field_row_layout_content_link.0.url|render %}
+						{% if child.entity.field_row_layout_content_link.0.url|render %}
 							<a href=" {{ rowLink }} ">
-								<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+								<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 							</a>
 						{% else %}
-							<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+							<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 						{% endif %}
-						{{item.entity.field_row_layout_content_text|view}}
+						{{child.entity.field_row_layout_content_text|view}}
 					</div>
 				</div>
 			{% endfor %}
 			{# Teaser Alternate Row Layout #}
 		{% elseif layoutSelection == 1 %}
-			{% for key, item in content['#block_content'].field_row_layout_content if key|first != '#' %}
-				{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
+			{% for child in content['#block_content'].field_row_layout_content|children %}
+				{% set rowLink = child.entity.field_row_layout_content_link.0.url|render %}
 				<div class="row d-flex row-content">
 					{% if (loop.index is odd) %}
 						<div class="col-4 row-image-container">
-							{% if item.entity.field_row_layout_content_link.0.url|render %}
+							{% if child.entity.field_row_layout_content_link.0.url|render %}
 								<a href=" {{ rowLink }} ">
-									{{ item.entity.field_row_layout_content_image|view }}
+									{{ child.entity.field_row_layout_content_image|view }}
 								</a>
 							{% else %}
-								{{ item.entity.field_row_layout_content_image|view }}
+								{{ child.entity.field_row_layout_content_image|view }}
 							{% endif %}
 						</div>
 						<div class="col-8 row-text-container">
-							{% if item.entity.field_row_layout_content_link.0.url|render %}
+							{% if child.entity.field_row_layout_content_link.0.url|render %}
 								<a href=" {{ rowLink }} ">
-									<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+									<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 								</a>
 							{% else %}
-								<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+								<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 							{% endif %}
-							{{item.entity.field_row_layout_content_text|view}}
+							{{child.entity.field_row_layout_content_text|view}}
 						</div>
 					{% else %}
 						<div class="col-8 row-text-container">
-							{% if item.entity.field_row_layout_content_link.0.url|render %}
+							{% if child.entity.field_row_layout_content_link.0.url|render %}
 								<a href=" {{ rowLink }} ">
-									<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+									<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 								</a>
 							{% else %}
-								<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+								<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 							{% endif %}
-							{{item.entity.field_row_layout_content_text|view}}
+							{{child.entity.field_row_layout_content_text|view}}
 						</div>
 						<div class="col-4 row-image-container">
-							{% if item.entity.field_row_layout_content_link.0.url|render %}
+							{% if child.entity.field_row_layout_content_link.0.url|render %}
 								<a href=" {{ rowLink }} ">
-									{{ item.entity.field_row_layout_content_image|view }}
+									{{ child.entity.field_row_layout_content_image|view }}
 								</a>
 							{% else %}
-								{{ item.entity.field_row_layout_content_image|view }}
+								{{ child.entity.field_row_layout_content_image|view }}
 							{% endif %}
 						</div>
 					{% endif %}
@@ -106,47 +106,47 @@
 			{% endfor %}
 			{# Tiles Row Layout #}
 		{% elseif layoutSelection == 2 %}
-			{% for key, item in content['#block_content'].field_row_layout_content if key|first != '#' %}
-				{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
+			{% for child in content['#block_content'].field_row_layout_content|children %}
+				{% set rowLink = child.entity.field_row_layout_content_link.0.url|render %}
 				<div class="row d-flex row-content">
 					{% if (loop.index is odd) %}
 						<div class="col-6 row-image-container">
-							{% if item.entity.field_row_layout_content_link.0.url|render %}
+							{% if child.entity.field_row_layout_content_link.0.url|render %}
 								<a href=" {{ rowLink }} ">
-									{{ item.entity.field_row_layout_content_image|view }}
+									{{ child.entity.field_row_layout_content_image|view }}
 								</a>
 							{% else %}
-								{{ item.entity.field_row_layout_content_image|view }}
+								{{ child.entity.field_row_layout_content_image|view }}
 							{% endif %}
 						</div>
 						<div class="col-6 row-text-container">
-							{% if item.entity.field_row_layout_content_link.0.url|render %}
+							{% if child.entity.field_row_layout_content_link.0.url|render %}
 								<a href=" {{ rowLink }} ">
-									<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+									<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 								</a>
 							{% else %}
-								<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+								<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 							{% endif %}
-							{{item.entity.field_row_layout_content_text|view}}
+							{{child.entity.field_row_layout_content_text|view}}
 						</div>
 					{% else %}
 						<div class="col-6 row-text-container">
-							{% if item.entity.field_row_layout_content_link.0.url|render %}
+							{% if child.entity.field_row_layout_content_link.0.url|render %}
 								<a href=" {{ rowLink }} ">
-									<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+									<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 								</a>
 							{% else %}
-								<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+								<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 							{% endif %}
-							{{item.entity.field_row_layout_content_text|view}}
+							{{child.entity.field_row_layout_content_text|view}}
 						</div>
 						<div class="col-6 row-image-container">
-							{% if item.entity.field_row_layout_content_link.0.url|render %}
+							{% if child.entity.field_row_layout_content_link.0.url|render %}
 								<a href=" {{ rowLink }} ">
-									{{ item.entity.field_row_layout_content_image|view }}
+									{{ child.entity.field_row_layout_content_image|view }}
 								</a>
 							{% else %}
-								{{ item.entity.field_row_layout_content_image|view }}
+								{{ child.entity.field_row_layout_content_image|view }}
 							{% endif %}
 						</div>
 					{% endif %}
@@ -155,28 +155,28 @@
 			{# Features Row Layout #}
 		{% else %}
 			<div class="row row-cols-lg-2 row-cols-1 feature-row">
-				{% for key, item in content['#block_content'].field_row_layout_content if key|first != '#' %}
-					{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
-					{% set smallFeatureBGValue = "background-image:url(#{ file_url( item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri ) });background-repeat:no-repeat;background-position:center;background-size:cover;" %}
+				{% for child in content['#block_content'].field_row_layout_content|children %}
+					{% set rowLink = child.entity.field_row_layout_content_link.0.url|render %}
+					{% set smallFeatureBGValue = "background-image:url(#{ file_url( child.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri ) });background-repeat:no-repeat;background-position:center;background-size:cover;" %}
 					{% if (loop.index0 % 3 == 0) or (loop.index0 == 0) %}
 						<div class="col">
 							<div class="feature-row-image-container feature-row-fill">
-								{% if item.entity.field_row_layout_content_link.0.url|render %}
+								{% if child.entity.field_row_layout_content_link.0.url|render %}
 									<a href=" {{ rowLink }} ">
-										{{ item.entity.field_row_layout_content_image|view }}
+										{{ child.entity.field_row_layout_content_image|view }}
 									</a>
 								{% else %}
-									{{ item.entity.field_row_layout_content_image|view }}
+									{{ child.entity.field_row_layout_content_image|view }}
 								{% endif %}
 								<div class="feature-row-text">
-									{% if item.entity.field_row_layout_content_link.0.url|render %}
+									{% if child.entity.field_row_layout_content_link.0.url|render %}
 										<a href=" {{ rowLink }} ">
-											<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+											<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 										</a>
 									{% else %}
-										<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+										<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 									{% endif %}
-									{{ item.entity.field_row_layout_content_text|view }}
+									{{ child.entity.field_row_layout_content_text|view }}
 								</div>
 							</div>
 						</div>
@@ -185,14 +185,14 @@
 							<div class="col-lg-12 small-feature">
 								<div class="small-feature-row-image-container" style={{ smallFeatureBGValue }}>
 									<div class="feature-row-text">
-										{% if item.entity.field_row_layout_content_link.0.url|render %}
+										{% if child.entity.field_row_layout_content_link.0.url|render %}
 											<a href=" {{ rowLink }} ">
-												<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+												<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 											</a>
 										{% else %}
-											<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+											<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 										{% endif %}
-										{{ item.entity.field_row_layout_content_text|view }}
+										{{ child.entity.field_row_layout_content_text|view }}
 									</div>
 								</div>
 							</div>
@@ -200,14 +200,14 @@
 							<div class="col-lg-12 small-feature">
 								<div class="small-feature-row-image-container" style={{ smallFeatureBGValue }}>
 									<div class="feature-row-text">
-										{% if item.entity.field_row_layout_content_link.0.url|render %}
+										{% if child.entity.field_row_layout_content_link.0.url|render %}
 											<a href=" {{ rowLink }} ">
-												<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+												<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 											</a>
 										{% else %}
-											<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+											<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 										{% endif %}
-										{{ item.entity.field_row_layout_content_text|view }}
+										{{ child.entity.field_row_layout_content_text|view }}
 									</div>
 								</div>
 							</div>
