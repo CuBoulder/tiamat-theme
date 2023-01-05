@@ -208,3 +208,9 @@ mainstay:
   version: 1.x
   js:
     js/mainstay.js: {}
+      
+ucb-slate-form:
+  version: 1.x
+  js:
+    js/ucb-slate-form.js: {}
+
