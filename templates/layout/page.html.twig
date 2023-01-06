@@ -224,7 +224,7 @@
   {% if service_livechat_includes|length > 0%}
   {{ attach_library('boulderD9_base/livechat') }}
   {% for service in service_livechat_includes %}
-  <livechat-service id="{{service.service_settings.license_id}}"></livechat-service>
+  <livechat-service license-id="{{service.service_settings.license_id}}"></livechat-service>
   {% endfor %}
   {% endif %}
 
@@ -232,7 +232,7 @@
   {% if service_statuspage_includes|length > 0%}
   {{ attach_library('boulderD9_base/statuspage') }}
   {% for service in service_statuspage_includes %}
-  <statuspage-service id="{{service.service_settings.page_id}}"></statuspage-service>
+  <statuspage-service page-id="{{service.service_settings.page_id}}"></statuspage-service>
   {% endfor %}
   {% endif %} 
  
@@ -240,6 +240,6 @@
   {% if service_mainstay_includes|length > 0%}
   {{ attach_library('boulderD9_base/mainstay') }}
   {% for service in service_mainstay_includes %}
-  <mainstay-service id="{{service.service_settings.license_id}}" college="{{service.service_settings.college_id}}"></mainstay-service>
+  <mainstay-service bot-token="{{service.service_settings.license_id}}" college-id="{{service.service_settings.college_id}}"></mainstay-service>
   {% endfor %}
   {% endif %} 

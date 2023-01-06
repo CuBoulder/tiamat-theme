@@ -1,15 +1,18 @@
 class LiveChat extends HTMLElement{
-    constructor() {
+	constructor() {
 		super();
-        const id = this.getAttribute('id')
-		this.build(id)
+		const id = this.getAttribute('license-id');
+		this.build(id);
 	}
 
-    build(id){
-        const script = document.createElement('script')
-        script.innerText = `var __lc = {}; __lc.license = ${id};(function() {var lc = document.createElement('script'); lc.type = 'text/javascript'; lc.async = true;lc.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'cdn.livechatinc.com/tracking.js';var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(lc, s);})();`
-        this.appendChild(script)
-    }
+	build(id){
+		window.__lc = {'license': id};
+		const script = document.createElement('script');
+		script.type = 'text/javascript';
+		script.async = true;
+		script.src = 'https://cdn.livechatinc.com/tracking.js';
+		this.appendChild(script);
+	}
 }
 
 customElements.define('livechat-service', LiveChat);
