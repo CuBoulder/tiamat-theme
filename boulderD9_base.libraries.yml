@@ -193,6 +193,21 @@ ucb-newsletter:
   css:
     theme:
       css/ucb-newsletter.css: {}
+
+livechat:
+  version: 1.x
+  js:
+    js/livechat.js: {}
+
+statuspage:
+  version: 1.x
+  js:
+    js/statuspage.js: {}
+    
+mainstay:
+  version: 1.x
+  js:
+    js/mainstay.js: {}
       
 ucb-slate-form:
   version: 1.x

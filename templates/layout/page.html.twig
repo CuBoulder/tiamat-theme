@@ -43,6 +43,7 @@
  * @see html.html.twig
  */
 #}
+
 <div class="layout-container ucb-page-container">
   {# HEADER CONTENT #}
   {% block page_header %}
@@ -215,4 +216,30 @@
   </footer>
   {% endblock %}
 
+
 </div>{# /.layout-container #}
+
+  {# Services -- see ucb_site_config #}
+  {# LiveChat #}
+  {% if service_livechat_includes|length > 0%}
+  {{ attach_library('boulderD9_base/livechat') }}
+  {% for service in service_livechat_includes %}
+  <livechat-service license-id="{{service.service_settings.license_id}}"></livechat-service>
+  {% endfor %}
+  {% endif %}
+
+  {# statuspage #}
+  {% if service_statuspage_includes|length > 0%}
+  {{ attach_library('boulderD9_base/statuspage') }}
+  {% for service in service_statuspage_includes %}
+  <statuspage-service page-id="{{service.service_settings.page_id}}"></statuspage-service>
+  {% endfor %}
+  {% endif %} 
+ 
+  {# mainstay #}
+  {% if service_mainstay_includes|length > 0%}
+  {{ attach_library('boulderD9_base/mainstay') }}
+  {% for service in service_mainstay_includes %}
+  <mainstay-service bot-token="{{service.service_settings.bot_token}}" college-id="{{service.service_settings.college_id}}"></mainstay-service>
+  {% endfor %}
+  {% endif %} 
