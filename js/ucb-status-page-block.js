@@ -14,16 +14,16 @@ class StatusPageElement extends HTMLElement {
         fetch(`https://${pageId}.statuspage.io/api/v2/status.json`)
             .then(handleError)
             .then((data) => this.build(data))
-            .catch(console.log);
+            .catch(Error=> this.handleError(Error));
     }
 
     build(response){
-        console.log("buildin", response);
         const container = document.createElement('div');
         container.className = 'ucb-status-block-container';
 
         const link = document.createElement('a');
         link.className = 'ucb-status-block-link'
+        link.target = "_blank"
         link.href = response.page.url;
 
         container.appendChild(link)
@@ -41,11 +41,11 @@ class StatusPageElement extends HTMLElement {
         switch (response.status.indicator) {
             case 'none':
                 container.classList.add('ucb-status-none');
-                link.firstChild.classList = 'fas fa-smile'
+                link.firstChild.classList = 'far fa-smile'
                 break;
             case 'minor':
                 container.classList.add('ucb-status-minor')
-                link.firstChild.classList = 'fas fa-exclamation-circle'
+                link.firstChild.classList = 'far fa-question-circle'
                 break;
             case 'major':
                 container.classList.add('ucb-status-major')
@@ -63,6 +63,12 @@ class StatusPageElement extends HTMLElement {
         }
         // Add final container
         this.appendChild(container)
+    }
+
+    handleError(Error){
+        const container = document.createElement('div');
+        container.className = 'ucb-status-block-container';
+        
     }
 }
 
