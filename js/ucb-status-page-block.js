@@ -5,7 +5,7 @@ class StatusPageElement extends HTMLElement {
 
         const handleError = response => {
             if (!response.ok) { 
-               throw Error(response.statusText);
+               throw new Error;
             } else {
                return response.json();
             }
@@ -67,7 +67,22 @@ class StatusPageElement extends HTMLElement {
 
     handleError(Error){
         const container = document.createElement('div');
-        container.className = 'ucb-status-block-container';
+        container.className = 'ucb-status-block-container ucb-status-error';
+        const span = document.createElement('span')
+        span.classList = "ucb-status-block-link"
+        container.appendChild(span)
+
+        const icon = document.createElement('i');
+        icon.className = 'ucb-status-block-icon fas fa-exclamation-triangle'
+        span.appendChild(icon)
+
+        const message = document.createElement('p');
+        message.className = 'ucb-status-block-message'
+        message.innerText = 'Error with Service - Check the console';
+        span.appendChild(message)
+
+        this.appendChild(container)
+        console.error(Error)
 
     }
 }

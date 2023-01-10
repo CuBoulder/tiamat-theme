@@ -1,6 +1,10 @@
-/* .ucb-status-block-container{
-    max-width: 300px;
-} */
+.ucb-status-block-container{
+    margin-bottom: 20px
+;}
+
+.ucb-status-error{
+    background-color: black;
+}
 
 .ucb-status-none{
     background-color: #198754;
