@@ -49,7 +49,7 @@ class StatusPageElement extends HTMLElement {
                 break;
             case 'major':
                 container.classList.add('ucb-status-major')
-                link.firstChild.classList = 'fas fa-exclamation-square'
+                link.firstChild.classList = 'fas fa-exclamation-triangle'
                 break;
             case 'critical':
                 container.classList.add('ucb-status-crtical')
@@ -68,7 +68,7 @@ class StatusPageElement extends HTMLElement {
     handleError(Error){
         const container = document.createElement('div');
         container.className = 'ucb-status-block-container';
-        
+
     }
 }
 
