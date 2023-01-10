@@ -45,139 +45,6 @@
 		{# Column Grid Layout #}
 		{% if layoutSelection == 0 %}
 			<div class="row row-cols-lg-{{ columnNumbers }} row-cols-md-2 row-cols-1 justify-content-evenly">
-<<<<<<< Updated upstream
-				{% for child in content['#block_content'].field_grid_layout_content|children %}
-					{% if imgStyle == "square-img" %}
-						{% set imgUrl = child.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square') %}
-						{% set imgAlt = child.entity.field_grid_layout_content_image.entity.field_media_image.alt|render %}
-					{% else %}
-						{% set imgUrl = child.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide') %}
-						{% set imgAlt = child.entity.field_grid_layout_content_image.entity.field_media_image.alt|render %}
-					{% endif %}
-					{% set gridLink = child.entity.field_grid_layout_content_link.0.url|render %}
-					<div class="col">
-						<div class="grid-column">
-							{% if child.entity.field_grid_layout_content_image|view %}
-								<div class="grid-image-container grid-fill {{ imgStyle }}">
-									{% if child.entity.field_grid_layout_content_link.0.url|render %}
-										<a href=" {{ gridLink }} ">
-											<img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
-										</a>
-									{% else %}
-										<img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
-									{% endif %}
-								</div>
-							{% endif %}
-							{% if (child.entity.field_grid_layout_content_title.value|render|striptags|trim) or (child.entity.field_grid_layout_content_text|view) %}
-								<div class="grid-text-container">
-									{% if child.entity.field_grid_layout_content_link.0.url|render %}
-										<a href=" {{ gridLink }} ">
-											<h3>{{child.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
-										</a>
-									{% else %}
-										<h3>{{child.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
-									{% endif %}
-									{{child.entity.field_grid_layout_content_text|view}}
-								</div>
-							{% endif %}
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-			{# Card Grid Layout #}
-		{% elseif layoutSelection == 1 %}
-			<div class="row row-cols-lg-{{ columnNumbers }} row-cols-md-2 row-cols-1 justify-content-evenly">
-				{% for child in content['#block_content'].field_grid_layout_content|children %}
-					{% if imgStyle == "square-img" %}
-						{% set imgUrl = child.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square') %}
-						{% set imgAlt = child.entity.field_grid_layout_content_image.entity.field_media_image.alt|render %}
-					{% else %}
-						{% set imgUrl = child.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide') %}
-						{% set imgAlt = child.entity.field_grid_layout_content_image.entity.field_media_image.alt|render %}
-					{% endif %}
-					{% set gridLink = child.entity.field_grid_layout_content_link.0.url|render %}
-					<div class="col">
-						<div class="grid-card">
-							{% if child.entity.field_grid_layout_content_image|view %}
-								<div class="grid-image-container grid-fill {{ imgStyle }}">
-									{% if child.entity.field_grid_layout_content_link.0.url|render %}
-										<a href=" {{ gridLink }} ">
-											<img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
-										</a>
-									{% else %}
-										<img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
-									{% endif %}
-								</div>
-							{% endif %}
-							{% if (child.entity.field_grid_layout_content_title.value|render|striptags|trim) or (child.entity.field_grid_layout_content_text|view) %}
-								<div class="grid-text-container">
-									{% if child.entity.field_grid_layout_content_link.0.url|render %}
-										<a href=" {{ gridLink }} ">
-											<h3>{{child.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
-										</a>
-									{% else %}
-										<h3>{{child.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
-									{% endif %}
-									{{child.entity.field_grid_layout_content_text|view}}
-								</div>
-							{% endif %}
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-			{# Overlay Grid Layout #}
-		{% elseif layoutSelection == 2 %}
-			<div class="row row-cols-lg-{{ columnNumbers }} row-cols-md-2 row-cols-1 justify-content-evenly">
-				{% for child in content['#block_content'].field_grid_layout_content|children %}
-					{% if imgStyle == "square-img" %}
-						{% set imgUrl = child.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square') %}
-						{% set imgAlt = child.entity.field_grid_layout_content_image.entity.field_media_image.alt|render %}
-					{% else %}
-						{% set imgUrl = child.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide') %}
-						{% set imgAlt = child.entity.field_grid_layout_content_image.entity.field_media_image.alt|render %}
-					{% endif %}
-					{% set gridLink = child.entity.field_grid_layout_content_link.0.url|render %}
-					<div class="col">
-						<div class="grid-column">
-							{% if child.entity.field_grid_layout_content_image|view %}
-								<div class="overlay-grid-image-container grid-fill {{ imgStyle }}">
-									{% if child.entity.field_grid_layout_content_link.0.url|render %}
-										<a href=" {{ gridLink }} ">
-											<img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
-											<h3>{{child.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
-										</a>
-									{% else %}
-										<img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
-										<h3>{{child.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
-									{% endif %}
-								</div>
-							{% endif %}
-							{% if child.entity.field_grid_layout_content_text|view %}
-								<div class="overlay-grid-text">
-									{{child.entity.field_grid_layout_content_text|view}}
-								</div>
-							{% endif %}
-						</div>
-					</div>
-				{% endfor %}
-			</div>
-			{# Offset Grid Layout #}
-		{% else %}
-			<div class="row row-cols-lg-2 row-cols-1">
-				{% for child in content['#block_content'].field_grid_layout_content|children %}
-					{% if imgStyle == "square-img" %}
-						{% set imgUrl = child.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square') %}
-						{% set imgAlt = child.entity.field_grid_layout_content_image.entity.field_media_image.alt|render %}
-					{% else %}
-						{% set imgUrl = child.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide') %}
-						{% set imgAlt = child.entity.field_grid_layout_content_image.entity.field_media_image.alt|render %}
-					{% endif %}
-					{% set gridLink = child.entity.field_grid_layout_content_link.0.url|render %}
-					{% if (loop.index0 % 3 == 0) and ((loop.index0 is even) or (loop.index0 == 0)) %}
-						<div class="col">
-							<div class="grid-image-container-large">
-								{% if child.entity.field_grid_layout_content_image|view %}
-=======
 				{% for key, item in content['#block_content'].field_grid_layout_content %}
 					{%  if key|first != '#' %}
 						{% if imgStyle == "square-img" %}
@@ -191,7 +58,6 @@
 						<div class="col">
 							<div class="grid-column">
 								{% if item.entity.field_grid_layout_content_image|view %}
->>>>>>> Stashed changes
 									<div class="grid-image-container grid-fill {{ imgStyle }}">
 										{% if child.entity.field_grid_layout_content_link.0.url|render %}
 											<a href=" {{ gridLink }} ">
@@ -233,13 +99,8 @@
 						{% endif %}
 						{% set gridLink = item.entity.field_grid_layout_content_link.0.url|render %}
 						<div class="col">
-<<<<<<< Updated upstream
-							<div class="grid-image-container-large">
-								{% if child.entity.field_grid_layout_content_image|view %}
-=======
 							<div class="grid-card">
 								{% if item.entity.field_grid_layout_content_image|view %}
->>>>>>> Stashed changes
 									<div class="grid-image-container grid-fill {{ imgStyle }}">
 										{% if child.entity.field_grid_layout_content_link.0.url|render %}
 											<a href=" {{ gridLink }} ">
@@ -264,14 +125,6 @@
 								{% endif %}
 							</div>
 						</div>
-<<<<<<< Updated upstream
-					{% else %}
-						<div class="col-lg-3 col-md-6 col">
-							<div class="grid-image-container-small">
-								{% if child.entity.field_grid_layout_content_image|view %}
-									<div class="grid-image-container grid-fill {{ imgStyle }}">
-										{% if child.entity.field_grid_layout_content_image|view %}
-=======
 					{% endif %}
 				{% endfor %}
 			</div>
@@ -293,7 +146,6 @@
 								{% if item.entity.field_grid_layout_content_image|view %}
 									<div class="overlay-grid-image-container grid-fill {{ imgStyle }}">
 										{% if item.entity.field_grid_layout_content_link.0.url|render %}
->>>>>>> Stashed changes
 											<a href=" {{ gridLink }} ">
 												<img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
 												<h3>{{item.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
@@ -304,22 +156,9 @@
 										{% endif %}
 									</div>
 								{% endif %}
-<<<<<<< Updated upstream
-								{% if (child.entity.field_grid_layout_content_title.value|render|striptags|trim) or (child.entity.field_grid_layout_content_text|view) %}
-									<div class="grid-text-container">
-										{% if child.entity.field_grid_layout_content_link.0.url|render %}
-											<a href=" {{ gridLink }} ">
-												<h3>{{child.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
-											</a>
-										{% else %}
-											<h3>{{child.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
-										{% endif %}
-										{{child.entity.field_grid_layout_content_text|view}}
-=======
 								{% if item.entity.field_grid_layout_content_text|view %}
 									<div class="overlay-grid-text">
 										{{item.entity.field_grid_layout_content_text|view}}
->>>>>>> Stashed changes
 									</div>
 								{% endif %}
 							</div>
