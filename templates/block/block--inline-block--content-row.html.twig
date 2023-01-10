@@ -37,23 +37,23 @@
 					{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
 					<div class="row row-content">
 						<div class="col-4 row-image-container">
-							{% if child.entity.field_row_layout_content_link.0.url|render %}
+							{% if item.entity.field_row_layout_content_link.0.url|render %}
 								<a href=" {{ rowLink }} ">
-									{{ child.entity.field_row_layout_content_image|view }}
+									{{ item.entity.field_row_layout_content_image|view }}
 								</a>
 							{% else %}
-								{{ child.entity.field_row_layout_content_image|view }}
+								{{ item.entity.field_row_layout_content_image|view }}
 							{% endif %}
 						</div>
 						<div class="col-8 row-text-container">
-							{% if child.entity.field_row_layout_content_link.0.url|render %}
+							{% if item.entity.field_row_layout_content_link.0.url|render %}
 								<a href=" {{ rowLink }} ">
-									<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+									<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 								</a>
 							{% else %}
-								<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+								<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 							{% endif %}
-							{{child.entity.field_row_layout_content_text|view}}
+							{{item.entity.field_row_layout_content_text|view}}
 						</div>
 					</div>
 				{% endif %}
@@ -148,10 +148,10 @@
 							<div class="col-6 row-image-container">
 								{% if item.entity.field_row_layout_content_link.0.url|render %}
 									<a href=" {{ rowLink }} ">
-										{{ child.entity.field_row_layout_content_image|view }}
+										{{ item.entity.field_row_layout_content_image|view }}
 									</a>
 								{% else %}
-									{{ child.entity.field_row_layout_content_image|view }}
+									{{ item.entity.field_row_layout_content_image|view }}
 								{% endif %}
 							</div>
 						{% endif %}
@@ -176,14 +176,14 @@
 										{{ item.entity.field_row_layout_content_image|view }}
 									{% endif %}
 									<div class="feature-row-text">
-										{% if child.entity.field_row_layout_content_link.0.url|render %}
+										{% if item.entity.field_row_layout_content_link.0.url|render %}
 											<a href=" {{ rowLink }} ">
-												<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+												<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 											</a>
 										{% else %}
-											<h3>{{child.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
+											<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 										{% endif %}
-										{{ child.entity.field_row_layout_content_text|view }}
+										{{ item.entity.field_row_layout_content_text|view }}
 									</div>
 								</div>
 							</div>

@@ -59,7 +59,7 @@
 							<div class="grid-column">
 								{% if item.entity.field_grid_layout_content_image|view %}
 									<div class="grid-image-container grid-fill {{ imgStyle }}">
-										{% if child.entity.field_grid_layout_content_link.0.url|render %}
+										{% if item.entity.field_grid_layout_content_link.0.url|render %}
 											<a href=" {{ gridLink }} ">
 												<img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
 											</a>
@@ -68,16 +68,16 @@
 										{% endif %}
 									</div>
 								{% endif %}
-								{% if (child.entity.field_grid_layout_content_title.value|render|striptags|trim) or (child.entity.field_grid_layout_content_text|view) %}
+								{% if (item.entity.field_grid_layout_content_title.value|render|striptags|trim) or (item.entity.field_grid_layout_content_text|view) %}
 									<div class="grid-text-container">
-										{% if child.entity.field_grid_layout_content_link.0.url|render %}
+										{% if item.entity.field_grid_layout_content_link.0.url|render %}
 											<a href=" {{ gridLink }} ">
-												<h3>{{child.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
+												<h3>{{item.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
 											</a>
 										{% else %}
-											<h3>{{child.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
+											<h3>{{item.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
 										{% endif %}
-										{{child.entity.field_grid_layout_content_text|view}}
+										{{item.entity.field_grid_layout_content_text|view}}
 									</div>
 								{% endif %}
 							</div>
@@ -102,7 +102,7 @@
 							<div class="grid-card">
 								{% if item.entity.field_grid_layout_content_image|view %}
 									<div class="grid-image-container grid-fill {{ imgStyle }}">
-										{% if child.entity.field_grid_layout_content_link.0.url|render %}
+										{% if item.entity.field_grid_layout_content_link.0.url|render %}
 											<a href=" {{ gridLink }} ">
 												<img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
 											</a>
@@ -111,16 +111,16 @@
 										{% endif %}
 									</div>
 								{% endif %}
-								{% if (child.entity.field_grid_layout_content_title.value|render|striptags|trim) or (child.entity.field_grid_layout_content_text|view) %}
+								{% if (item.entity.field_grid_layout_content_title.value|render|striptags|trim) or (item.entity.field_grid_layout_content_text|view) %}
 									<div class="grid-text-container">
-										{% if child.entity.field_grid_layout_content_link.0.url|render %}
+										{% if item.entity.field_grid_layout_content_link.0.url|render %}
 											<a href=" {{ gridLink }} ">
-												<h3>{{child.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
+												<h3>{{item.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
 											</a>
 										{% else %}
-											<h3>{{child.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
+											<h3>{{item.entity.field_grid_layout_content_title.value|render|striptags|trim}}</h3>
 										{% endif %}
-										{{child.entity.field_grid_layout_content_text|view}}
+										{{item.entity.field_grid_layout_content_text|view}}
 									</div>
 								{% endif %}
 							</div>

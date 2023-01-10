@@ -78,13 +78,13 @@
 								<div class="horizontal-accordion-tab" role="tab" id="ucb-tab-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}">
 									<h5 class="mb-0">
 										<button class="accordion-button collapsed" data-bs-toggle="collapse" href="#ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" aria-expanded="true" aria-controls="ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}">
-											{{ child.entity.field_expandable_content_title|view }}
+											{{ item.entity.field_expandable_content_title|view }}
 										</a>
 									</h5>
 								</div>
 								<div id="ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" class="collapse" data-bs-parent="#ucb-tab-accordion{{ content['#block_content'].id() }}" role="tabpanel" aria-labelledby="ucb-tab-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}">
 									<div class="card-body">
-										{{ child.entity.field_expandable_content_body|view }}
+										{{ item.entity.field_expandable_content_body|view }}
 									</div>
 								</div>
 							</div>
@@ -93,13 +93,13 @@
 								<div class="horizontal-accordion-tab" role="tab" id="ucb-tab-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}">
 									<h5 class="mb-0">
 										<button class="accordion-button collapsed" data-bs-toggle="collapse" href="#ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" aria-expanded="false" aria-controls="ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}">
-											{{ child.entity.field_expandable_content_title|view }}
+											{{ item.entity.field_expandable_content_title|view }}
 										</a>
 									</h5>
 								</div>
 								<div id="ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" class="collapse" data-bs-parent="#ucb-tab-accordion{{ content['#block_content'].id() }}" role="tabpanel" aria-labelledby="ucb-tab-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}">
 									<div class="card-body">
-										{{ child.entity.field_expandable_content_body|view }}
+										{{ item.entity.field_expandable_content_body|view }}
 									</div>
 								</div>
 							</div>
