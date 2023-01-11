@@ -1,0 +1,41 @@
+.ucb-status-block-container{
+    margin-bottom: 20px
+;}
+
+.ucb-status-error{
+    background-color: black;
+}
+
+.ucb-status-none{
+    background-color: #198754;
+}
+
+.ucb-status-minor{
+    background-color: #ffc107
+}
+
+.ucb-status-major, .ucb-status-critical{
+    background-color: #dc3545;;
+}
+
+.ucb-status-block-link{
+    display: flex;
+    padding: 20px;
+    align-items: center;
+    flex-direction: row;
+}
+
+.ucb-status-block-link{
+    text-decoration: none;
+}
+
+.ucb-status-block-link > svg{
+    margin-right: 20px;
+    color: white;
+}
+
+.ucb-status-block-message{
+    margin-bottom: 0;
+    color:white;
+    font-weight: bolder;
+}

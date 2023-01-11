@@ -214,3 +214,11 @@ ucb-slate-form:
   js:
     js/ucb-slate-form.js: {}
 
+ucb-status-page:
+  version: 1.x
+  js:
+    js/ucb-status-page-block.js: {}
+  css:
+    theme:
+      css/ucb-status-page-block.css: {}
+
