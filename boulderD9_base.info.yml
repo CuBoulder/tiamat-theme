@@ -1,7 +1,7 @@
 name: "University of Colorado Boulder Drupal 9 Base Theme"
 description: "Drupal 9 theme for CU Boulder branded web properties"
 package: Custom
-core_version_requirement: ^8 || ^9
+core_version_requirement: ^9 || ^10
 type: theme
 base theme: stable9
 
