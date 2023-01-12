@@ -1,0 +1,28 @@
+
+{{ attach_library('boulderD9_base/ucb-page') }}
+{{ attach_library('boulderD9_base/ucb-issue') }}
+
+{%
+    set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    ]
+    %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-2">
+            {{content.field_ucb_issue_image|render}}
+        </div>
+    <div class="col-sm-10">
+        {{content.field_ucb_issue_section}}
+    </div>
+
+    </div>
+
+</div>
+
+
+

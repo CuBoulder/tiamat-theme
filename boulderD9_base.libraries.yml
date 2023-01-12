@@ -221,4 +221,8 @@ ucb-status-page:
   css:
     theme:
       css/ucb-status-page-block.css: {}
-
+ucb-issue:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-issue.css: {}
