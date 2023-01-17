@@ -13,10 +13,16 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-sm-2">
+        <header role="banner" class="ucb-article-banner">
+			<h1 class="ucb-article-heading">{{ label }}</h1>
+		</header>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-4">
             {{content.field_ucb_issue_image|render}}
         </div>
-    <div class="col-sm-10">
+    <div class="col-sm-8">
         {{content.field_ucb_issue_section}}
     </div>
 

@@ -1,0 +1,36 @@
+{# 
+
+    {{paragraph.field_ucb_issue_section_style.value}}
+
+    0 = teaser
+    1 = feature
+    2 = title & thumb
+    3 = title only
+    #}
+
+{% block paragraph %}
+    <div{{attributes.addClass(classes)}}>
+        <h1>{{content.field_ucb_issue_section_title}}</h1>
+        <div class="issue-display-{{content.field_ucb_issue_section_style|render|striptags|trim|lower}}">
+
+    {% for key, item in paragraph.field_ucb_issue_article_select %}
+						<div id='teaser-article-thumbnail-{{key}}'> {{ item.entity.field_ucb_article_thumbnail|view }} </div>
+                        {% if paragraph.field_ucb_issue_section_style.value is same as("0") %}
+                        <p> I am a teaser!</p>
+                        
+                        {% endif %}
+            {# If teaser #}
+
+            {# If feature #}
+
+            {# title & thumbnail #}
+
+            {# title only #}
+
+    {% endfor %}
+
+                </div>
+            </div>
+
+
+{% endblock paragraph %}
