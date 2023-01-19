@@ -1,5 +1,5 @@
 .secondary-issue-image{
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .issue-section-content{
@@ -78,4 +78,22 @@ img {
 
 .issue-section-title-only{
     padding-bottom: 10px;
+}
+
+.issue-content-box{
+    margin-bottom: 20px;
+    margin-top:20px;
+}
+
+.issue-title-box{
+    padding: 20px;
+    background-color: #4B4B4B;
+    color: #fff;
+    font-weight: bold
+}
+
+.issue-body-box{
+    background-color: #424242;
+    color: #fff;
+    padding: 20px;
 }
