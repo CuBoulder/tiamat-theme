@@ -1,3 +1,7 @@
+.secondary-issue-image{
+    margin-top: 10px;
+}
+
 .issue-section-content{
     display: flex;
     flex-direction: row;
