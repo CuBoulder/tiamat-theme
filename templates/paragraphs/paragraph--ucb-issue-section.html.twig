@@ -18,16 +18,16 @@
         {% if paragraph.field_ucb_issue_section_style.value is same as("0") %}
         <div class="issue-section-content-teaser">
             <a href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
-                <div id='teaser-article-thumbnail-{{key}}'> {{ item.entity.field_ucb_article_thumbnail|view }} </div>
+                <div class="teaser-article-thumbnail" id='teaser-article-thumbnail-{{key}}'> {{ item.entity.field_ucb_article_thumbnail|view }} </div>
             </a>
             <div class="issue-section-content-summary">
                 <a class="issue-article-title-link" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
-                    <h3 class="issue-section-teaser-title">title : {{item.entity.title.value}}</h3>
+                    <h3 class="issue-section-teaser-title">{{item.entity.title.value}}</h3>
                 </a>
                 <div class="issue-article-categories">{{item.entity.field_ucb_article_categories|view}}</div>
                 <div class="issue-article-tags">{{item.entity.field_ucb_article_tags|view}}</div>
                 <p class="issue-section-teaser-summary">{{item.entity.field_ucb_article_summary.value}}</p>
-                <a href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">READ MORE</a>
+                <a class="issue-section-teaser-read" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">READ MORE</a>
             </div>
         </div>
                         

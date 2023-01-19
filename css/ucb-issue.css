@@ -1,4 +1,55 @@
+.issue-section-content-teaser{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.333);
+    padding-bottom: 20px;
+}
+
 img {
     width: 100%;
-    height: auto;
+    height: 100%;
+}
+
+.teaser-article-thumbnail{
+    min-width: 100px;
+    min-height: 100px;
+    max-width: 100px;
+    max-height: 100px;
+    margin-right: 20px;
+    margin-bottom: 20px;
+    object-fit: cover;
+
+}
+
+.issue-article-categories, .issue-article-tags{
+    display: block;
+    padding-bottom: 5px;
+    margin: 0 5px 5px 0;
+}
+
+.issue-section-teaser-summary{
+    margin: 0;
+}
+
+.issue-section-teaser-read{
+    color: #0277BD;
+    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+    text-decoration: none;
+    text-decoration-color: rgba(2, 119, 189, 0.65);
+    font-size: 75%;
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+.issue-article-categories > a, .issue-article-tags > a{
+    margin:3px;
+    padding:3px;
+    color: #666 !important;
+    background-color: #e7e7e7;
+    font-weight: 600;
+    text-decoration: none;
+    padding: 3px;
+    /* line-height: 100%; */
+    font-size: 75%;
 }
