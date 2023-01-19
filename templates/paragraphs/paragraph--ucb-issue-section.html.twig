@@ -10,7 +10,7 @@
 
 {% block paragraph %}
     <div{{attributes.addClass(classes)}}>
-        <h1>{{content.field_ucb_issue_section_title}}</h1>
+        <h2>{{content.field_ucb_issue_section_title}}</h2>
         <div class="issue-display-{{content.field_ucb_issue_section_style|render|striptags|trim|lower}}">
 
     {% for key, item in paragraph.field_ucb_issue_article_select %}						
@@ -35,7 +35,7 @@
         {% elseif paragraph.field_ucb_issue_section_style.value is same as ("1") %}
             <div class="issue-section-content-feature">
                 <a href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
-                    <div class="feature-article-feature" id='feature-article-thumbnail-{{key}}'> {{ item.entity.field_ucb_article_thumbnail|view }} </div>
+                    <div class="feature-article-thumbnail" id='feature-article-thumbnail-{{key}}'> {{ item.entity.field_ucb_article_thumbnail|view }} </div>
                 </a>
                 <div class="issue-section-content-summary">
                     <a class="issue-article-title-link" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">

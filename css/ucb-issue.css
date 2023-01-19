@@ -40,7 +40,7 @@ img {
     margin: 0;
 }
 
-.issue-section-teaser-read{
+.issue-section-teaser-read, .issue-section-feature-read{
     color: #0277BD;
     transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
     text-decoration: none;
@@ -58,6 +58,18 @@ img {
     font-weight: 600;
     text-decoration: none;
     padding: 3px;
-    /* line-height: 100%; */
     font-size: 75%;
+}
+
+.feature-article-thumbnail > div > div > div > img{
+    width: 600px;
+    height: 250px;
+    object-fit: cover;
+    margin-bottom: 10px;
+}
+
+.teaser-article-thumbnail > div > div > div > img, .title-thumb-article-thumbnail > div > div > div > img{
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
 }
