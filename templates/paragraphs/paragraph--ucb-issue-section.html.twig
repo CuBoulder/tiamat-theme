@@ -13,24 +13,41 @@
         <h1>{{content.field_ucb_issue_section_title}}</h1>
         <div class="issue-display-{{content.field_ucb_issue_section_style|render|striptags|trim|lower}}">
 
-    {% for key, item in paragraph.field_ucb_issue_article_select %}
-						<div id='teaser-article-thumbnail-{{key}}'> {{ item.entity.field_ucb_article_thumbnail|view }} </div>
-                        {% if paragraph.field_ucb_issue_section_style.value is same as("0") %}
-                        <p> I am a teaser!</p>
+    {% for key, item in paragraph.field_ucb_issue_article_select %}						
+    {# If teaser #}
+        {% if paragraph.field_ucb_issue_section_style.value is same as("0") %}
+        <div class="issue-section-content-teaser">
+            <a href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
+                <div id='teaser-article-thumbnail-{{key}}'> {{ item.entity.field_ucb_article_thumbnail|view }} </div>
+            </a>
+            <div class="issue-section-content-summary">
+                <a class="issue-article-title-link" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
+                    <h3 class="issue-section-teaser-title">title : {{item.entity.title.value}}</h3>
+                </a>
+                <div class="issue-article-categories">{{item.entity.field_ucb_article_categories|view}}</div>
+                <div class="issue-article-tags">{{item.entity.field_ucb_article_tags|view}}</div>
+                <p class="issue-section-teaser-summary">{{item.entity.field_ucb_article_summary.value}}</p>
+                <a href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">READ MORE</a>
+            </div>
+        </div>
                         
-                        {% endif %}
-            {# If teaser #}
+    {# If feature #}
+        {% elseif paragraph.field_ucb_issue_section_style.value is same as ("1") %}
+            <p> I am a feature!</p>
 
-            {# If feature #}
+    {# title & thumbnail #}
+        {% elseif paragraph.field_ucb_issue_section_style.value is same as ("2") %}
+            <p> I am a title and thumb!</p>
 
-            {# title & thumbnail #}
+    {# title only #}
+        {% else %}
+            <p> I am a title only!</p>
 
-            {# title only #}
-
+        {% endif %}
     {% endfor %}
 
-                </div>
-            </div>
+    </div>
+</div>
 
 
 {% endblock paragraph %}
