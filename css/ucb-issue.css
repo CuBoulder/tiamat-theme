@@ -1,6 +1,14 @@
-.issue-section-content-teaser{
+.issue-section-content{
     display: flex;
     flex-direction: row;
+    margin-bottom: 20px;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.333);
+    padding-bottom: 20px;
+}
+
+.issue-section-content-feature{
+    display: flex;
+    flex-direction: column;
     margin-bottom: 20px;
     border-bottom: 1px solid rgba(128, 128, 128, 0.333);
     padding-bottom: 20px;
@@ -11,7 +19,7 @@ img {
     height: 100%;
 }
 
-.teaser-article-thumbnail{
+.teaser-article-thumbnail, .title-thumb-article-thumbnail{
     min-width: 100px;
     min-height: 100px;
     max-width: 100px;
