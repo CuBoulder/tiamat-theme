@@ -75,3 +75,7 @@ img {
 .issue-content > .issue-section-content:last-child, .issue-content > .issue-section-content-feature:last-child{
     border-bottom: none;
 }
+
+.issue-section-title-only{
+    padding-bottom: 10px;
+}

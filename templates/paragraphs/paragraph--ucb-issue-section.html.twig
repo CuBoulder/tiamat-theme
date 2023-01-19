@@ -63,7 +63,7 @@
 
     {# title only #}
         {% else %}
-        <div class="issue-section-content-summary">
+        <div class="issue-section-title-only">
             <a class="issue-article-title-link" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
                 {{item.entity.title.value}}
             </a>
