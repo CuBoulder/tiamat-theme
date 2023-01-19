@@ -11,7 +11,7 @@
 {% block paragraph %}
     <div{{attributes.addClass(classes)}}>
         <h2>{{content.field_ucb_issue_section_title}}</h2>
-        <div class="issue-display-{{content.field_ucb_issue_section_style|render|striptags|trim|lower}}">
+        <div class="issue-content">
 
     {% for key, item in paragraph.field_ucb_issue_article_select %}						
     {# If teaser #}

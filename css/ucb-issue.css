@@ -71,3 +71,7 @@ img {
     height: 100px;
     object-fit: cover;
 }
+
+.issue-content > .issue-section-content:last-child, .issue-content > .issue-section-content-feature:last-child{
+    border-bottom: none;
+}
