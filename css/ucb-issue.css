@@ -20,14 +20,8 @@ img {
 }
 
 .teaser-article-thumbnail, .title-thumb-article-thumbnail{
-    min-width: 100px;
-    min-height: 100px;
-    max-width: 100px;
-    max-height: 100px;
     margin-right: 20px;
     margin-bottom: 20px;
-    object-fit: cover;
-
 }
 
 .issue-article-categories, .issue-article-tags{
@@ -62,8 +56,8 @@ img {
 }
 
 .feature-article-thumbnail > div > div > div > img{
-    width: 600px;
-    height: 250px;
+    max-width: 700px;
+    max-height: 275px;
     object-fit: cover;
     margin-bottom: 10px;
 }
