@@ -1,5 +1,3 @@
-console.log('Attached')
-
 class CurrentIssueElement extends HTMLElement {
 	constructor() {
 		super();
@@ -19,7 +17,6 @@ class CurrentIssueElement extends HTMLElement {
     }
 
     build(data){
-        console.log(data)
         if(data.data.length == 0){
             this.handleError({name : "No Issues Retrieved", message : "There are no Issues created"} , 'No Issues Found')
         } else {
