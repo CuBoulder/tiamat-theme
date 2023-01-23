@@ -1,10 +1,16 @@
 .ucb-current-issue-block-content{
     display: flex;
-    align-items: center;
     flex-direction: column;
     max-width: 300px;
 }
 
 .ucb-current-issue-block-img{
-    margin-bottom: 20px;
+    margin-bottom: 10px;
+    width: 100%;
+    height: auto;
+}
+
+.ucb-current-issue-block-title-container{
+    text-align: center;
+    margin-bottom: 10;
 }

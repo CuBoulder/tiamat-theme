@@ -22,10 +22,20 @@ class CurrentIssueElement extends HTMLElement {
        console.log(data)
         const title = data.data[0].attributes.title
         const imgURL = data.included[0].attributes.uri.url
-        const articleURL = data.data[0].attributes.path.alias
+        const issueURL = data.data[0].attributes.path.alias
 
-        let div = document.createElement('div')
-        div.classList='ucb-current-issue-block-content'
+        const imgLinkEL = document.createElement('a')
+        imgLinkEL.href = issueURL
+
+        let blockDiv = document.createElement('div')
+        blockDiv.classList='ucb-current-issue-block-content'
+
+        const imgDiv = document.createElement('div')
+        imgDiv.classList = 'ucb-current-issue-block-img-container'
+
+
+        const titleDiv = document.createElement('div')
+        titleDiv.classList = 'ucb-current-issue-block-title-container'
 
         const titleEl = document.createElement('h3')
         titleEl.classList = "ucb-current-issue-block-title"
@@ -35,17 +45,20 @@ class CurrentIssueElement extends HTMLElement {
         imgEL.classList = 'ucb-current-issue-block-img'
         imgEL.src = imgURL
 
-        console.log(imgURL)
-
         const linkEl = document.createElement('a')
-        linkEl.href = articleURL
-
-        div.appendChild(imgEL)
-        div.appendChild(titleEl)
-        linkEl.appendChild(div)
-        this.appendChild(linkEl)
+        linkEl.href = issueURL
 
 
+        linkEl.appendChild(titleEl)
+        titleDiv.appendChild(linkEl)
+
+        imgLinkEL.appendChild(imgEL)
+        imgDiv.appendChild(imgLinkEL)
+        
+        blockDiv.appendChild(imgDiv)
+        blockDiv.appendChild(titleDiv)
+
+        this.appendChild(blockDiv)
 
 
 
