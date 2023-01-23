@@ -5,6 +5,7 @@
 	margin: 0;
 	padding: 0
 }
+
 .block-aggregator-feed-block ul li a {
 	display: block;
 	margin: 10px 0;
@@ -17,6 +18,13 @@
 .block-aggregator-feed-block a {
 	display: block;
 }
-.block-aggregator-feed-block ul li:last-child {
-	border-bottom: none;
+
+.block-aggregator-feed-block a.rss-site-link {
+	display: block;
+	padding: 10px 0;
+	font-size: .85rem;
+}
+
+.block-aggregator-feed-block a.rss-site-link .rss-icon {
+	color: #ff6600;
 }

@@ -42,5 +42,6 @@
   {{ title_suffix }}
   {% block content %}
     {{ content.list|render }}
+	<a href="{{ content.more_link['#url'].options.entity.url.value }}" class="rss-site-link"><span class="rss-icon"><i class="fa fa-rss-square"></i></span> {{ content.more_link['#url'].options.entity.title.value }}</a>
   {% endblock %}
 </div>
