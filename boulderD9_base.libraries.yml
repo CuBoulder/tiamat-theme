@@ -226,3 +226,10 @@ ucb-issue:
   css:
     theme:
       css/ucb-issue.css: {}
+ucb-current-issue:
+  version: 1.x
+  js:
+    js/ucb-current-issue-block.js: {}
+  css:
+    theme:
+      css/ucb-current-issue-block.css: {}
