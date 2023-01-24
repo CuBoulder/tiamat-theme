@@ -198,11 +198,11 @@ pageStyleCSS
 			<h1 class="ucb-article-heading">{{ label }}</h1>
 			{% set externalURL = content.field_ucb_article_external_url[0]['#url']|render|striptags|trim %}
 			<p class="fw-bold">Redirecting to: <a href="{{ externalURL }}">{{ externalURL }}</a></p>
-			{% if not user.hasPermission('update node') %}
+			{% if user_can_edit %}
+				<p>(Most visitors without editing permissions will be redirected from this page automatically)</p>
+			{% else %}
 				{# redirect non-authenticated users to the specified URL #}
 				{{ content.field_ucb_article_external_url }}
-			{% else %}
-				<p>(Most visitors without editing permissions will be redirected from this page automatically)</p>
 			{% endif %}
 			</div>
 	</article>
