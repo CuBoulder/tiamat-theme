@@ -241,3 +241,11 @@ ucb-category-cloud:
   css:
     theme:
       css/ucb-category-cloud.css: {}
+
+ucb-tag-cloud:
+  version: 1.x
+  js:
+    js/ucb-tag-cloud.js: {}
+  css:
+    theme:
+      css/ucb-tag-cloud.css: {}

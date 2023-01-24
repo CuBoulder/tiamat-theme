@@ -1,4 +1,4 @@
-.ucb-category-cloud-link{
+.ucb-tag-cloud-link{
     font-size: 85%;
     padding: 1px 6px;
     background-clip: padding-box;
@@ -13,15 +13,15 @@
     margin: 5px;
 }
 
-.ucb-category-cloud-link:first-child{
+.ucb-tag-cloud-link:first-child{
     margin-left: 0;
 }
 
-.ucb-category-cloud-link:hover{
+.ucb-tag-cloud-link:hover{
     background: #0277BD;
     color: #fff !important;
 }
 
-.ucb-category-cloud-container{
+.ucb-tag-cloud-container{
     padding-bottom: 20px;
 }
