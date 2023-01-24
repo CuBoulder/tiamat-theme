@@ -170,6 +170,12 @@ ucb-text-block:
     theme:
       css/block/text-block.css: {}
 
+aggregator-feed-block:
+  version: 1.x
+  css:
+    theme:
+      css/block/aggregator-feed.css: {}
+
 ucb-form-page:
   version: 1.x
   js:
