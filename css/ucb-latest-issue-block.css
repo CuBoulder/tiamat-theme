@@ -1,0 +1,17 @@
+.ucb-latest-issue-container{
+    display: flex;
+    max-width: 300px;
+    flex-wrap: wrap;
+}
+
+.ucb-latest-issue-card{
+    width: 45%;
+}
+
+.ucb-latest-issue-card:nth-child(odd){
+    margin-right: 5px;
+}
+.ucb-latest-issue-img{
+    height: auto;
+    min-width: 50px
+}

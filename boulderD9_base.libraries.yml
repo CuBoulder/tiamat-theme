@@ -255,3 +255,11 @@ ucb-tag-cloud:
   css:
     theme:
       css/ucb-tag-cloud.css: {}
+
+ucb-latest-issue:
+  version: 1.x
+  js:
+    js/ucb-latest-issue-block.js: {}
+  css:
+    theme:
+      css/ucb-latest-issue-block.css: {}
