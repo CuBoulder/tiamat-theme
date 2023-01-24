@@ -233,3 +233,11 @@ ucb-current-issue:
   css:
     theme:
       css/ucb-current-issue-block.css: {}
+
+ucb-category-cloud:
+  version: 1.x
+  js:
+    js/ucb-category-cloud.js: {}
+  css:
+    theme:
+      css/ucb-category-cloud.css: {}
