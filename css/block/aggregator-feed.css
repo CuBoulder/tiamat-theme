@@ -1,0 +1,30 @@
+.block-aggregator-feed-block ul,
+.block-aggregator-feed-block ul li {
+	list-style: none;
+	list-style-image: none;
+	margin: 0;
+	padding: 0
+}
+
+.block-aggregator-feed-block ul li a {
+	display: block;
+	margin: 10px 0;
+}
+
+.block-aggregator-feed-block ul li {
+	border-bottom: 1px solid #e7e7e7;
+}
+
+.block-aggregator-feed-block a {
+	display: block;
+}
+
+.block-aggregator-feed-block a.rss-site-link {
+	display: block;
+	padding: 10px 0;
+	font-size: .85rem;
+}
+
+.block-aggregator-feed-block a.rss-site-link .rss-icon {
+	color: #ff6600;
+}
