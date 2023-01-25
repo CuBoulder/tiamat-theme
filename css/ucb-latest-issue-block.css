@@ -1,17 +1,29 @@
 .ucb-latest-issue-container{
     display: flex;
-    max-width: 300px;
     flex-wrap: wrap;
+    flex-direction: row;
+    margin-bottom: 20px;
 }
 
 .ucb-latest-issue-card{
-    width: 45%;
+    max-width: 20%;
+    margin-right: 20px;
 }
 
-.ucb-latest-issue-card:nth-child(odd){
-    margin-right: 5px;
-}
+
 .ucb-latest-issue-img{
-    height: auto;
-    min-width: 50px
+    max-height: 200px;
+    max-width: 200px;
+}
+
+.ucb-latest-issue-archive-button{
+    background: #0277BD;
+    color: #fff !important;
+    padding: 10px 20px;
+    font-weight: bold;
+    font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+.ucb-latest-issue-archive-container{
+    margin-bottom: 20px;
 }

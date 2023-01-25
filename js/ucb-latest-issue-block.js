@@ -44,6 +44,10 @@ class LatestIssueElement extends HTMLElement {
                 issueImg.src = imgUrl
                 issueImg.alt = `${title} issue artwork`
 
+                const IssueImgLink = document.createElement('a')
+                IssueImgLink.classList = 'ucb-latest-issue-img-link'
+                IssueImgLink.href = issueUrl
+
                 const issueTitle = document.createElement('h3')
                 issueTitle.classList = 'ucb-latest-issue-title'
                 issueTitle.innerText = title
@@ -52,53 +56,27 @@ class LatestIssueElement extends HTMLElement {
                 titleLink.href = issueUrl
                 titleLink.appendChild(issueTitle)
 
-                issueContainer.appendChild(issueImg)
+                IssueImgLink.appendChild(issueImg)
+                issueContainer.appendChild(IssueImgLink)
                 issueContainer.appendChild(titleLink)
                 latestIssueContainer.appendChild(issueContainer)
-
-                console.log(issues.length)
             }
 
             this.appendChild(latestIssueContainer)
-            // const title = data.data[0].attributes.title
-            // const imgURL = data.included[0].attributes.uri.url
-            // const issueURL = data.data[0].attributes.path.alias
-    
-            // const imgLinkEL = document.createElement('a')
-            // imgLinkEL.href = issueURL
-    
-            // let blockDiv = document.createElement('div')
-            // blockDiv.classList='ucb-current-issue-block-content'
-    
-            // const imgDiv = document.createElement('div')
-            // imgDiv.classList = 'ucb-current-issue-block-img-container'
-    
-    
-            // const titleDiv = document.createElement('div')
-            // titleDiv.classList = 'ucb-current-issue-block-title-container'
-    
-            // const titleEl = document.createElement('h3')
-            // titleEl.classList = "ucb-current-issue-block-title"
-            // titleEl.innerText = title
-    
-            // const imgEL = document.createElement('img')
-            // imgEL.classList = 'ucb-current-issue-block-img'
-            // imgEL.src = imgURL
-    
-            // const linkEl = document.createElement('a')
-            // linkEl.href = issueURL
-    
-    
-            // linkEl.appendChild(titleEl)
-            // titleDiv.appendChild(linkEl)
-    
-            // imgLinkEL.appendChild(imgEL)
-            // imgDiv.appendChild(imgLinkEL)
-            
-            // blockDiv.appendChild(imgDiv)
-            // blockDiv.appendChild(titleDiv)
-    
-            // this.appendChild(blockDiv)
+
+            // Add Archive link if articles >=4
+            if (issues.length >= 4){
+                const archiveContainer = document.createElement('div')
+                archiveContainer.classList = 'ucb-latest-issue-archive-container'
+                const archiveLink = document.createElement('a')
+                archiveLink.classList = 'ucb-latest-issue-archive-button'
+                // TO DO -- add archive link here
+                archiveLink.href = '/'
+                archiveLink.innerText = 'Issue Archive'
+
+                archiveContainer.appendChild(archiveLink)
+                this.appendChild(archiveContainer)
+            }
         }
     }
 
