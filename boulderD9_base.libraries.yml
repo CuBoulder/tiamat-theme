@@ -263,3 +263,10 @@ ucb-latest-issue:
   css:
     theme:
       css/ucb-latest-issue-block.css: {}
+ucb-issue-archive:
+  version: 1.x
+  js:
+    js/ucb-issue-archive.js: {}
+  css:
+    theme:
+      css/ucb-issue-archive.css: {}
