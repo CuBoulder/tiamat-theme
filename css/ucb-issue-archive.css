@@ -1,0 +1,17 @@
+.ucb-issue-archive-container{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.ucb-issue-archive-card{
+    padding-bottom: 20px;
+}
+
+.ucb-archive-card-link{
+    text-align: center;
+}
+
+.ucb-archive-card-img{
+    width: 100%;
+    height: auto;
+}
