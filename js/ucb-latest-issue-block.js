@@ -1,5 +1,3 @@
-console.log('connected')
-
 class LatestIssueElement extends HTMLElement {
 	constructor() {
 		super();
