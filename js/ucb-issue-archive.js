@@ -23,7 +23,7 @@ class IssueArchiveElement extends HTMLElement {
         } else {
             console.log(data)
             const archiveContainer = document.createElement('div')
-            archiveContainer.classList='ucb-issue-archive-container'
+            archiveContainer.classList='ucb-issue-archive-container col-lg-12 col-md-12 col-sm-12 col-xs-12'
             const issues = data.data
             const issuesArt = data.included
 
@@ -36,7 +36,7 @@ class IssueArchiveElement extends HTMLElement {
                 const issueUrl = issue.attributes.path.alias
 
                 const issueContainer = document.createElement('div')
-                issueContainer.classList = 'ucb-issue-archive-card col-sm-2 mx-3'
+                issueContainer.classList = 'ucb-issue-archive-card px-3'
 
                 const issueImg = document.createElement('img')
                 issueImg.classList = 'ucb-archive-card-img'
