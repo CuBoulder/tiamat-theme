@@ -15,6 +15,10 @@
     margin-bottom: 10;
 }
 
+.ucb-current-issue-block-title{
+    font-size: 100%;
+}
+
 .ucb-current-issue-block-message{
     display: inline;
     margin-left: 10px;
