@@ -56,6 +56,7 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
     fetch(JSONURL)
       .then((reponse) => reponse.json())
       .then((data) => {
+        console.log(data)
         // get the next URL and return that if there is one
         if(data.links.next) {
           let nextURL = data.links.next.href.split("/jsonapi/");
@@ -148,16 +149,15 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
           // if we didn't match any of the filtered tags or cats, then render the content
           if (doesIncludeCat.length == 0 && doesIncludeTag.length == 0) {
             // we need to render the Article Card view for this returned element
-
             // **ADD DATA**
             // this is my id of the article body paragraph type we need only if no thumbnail or summary provided
-            let bodyAndImageId = item.relationships.field_ucb_article_content.data[0].id;
-            let body = item.attributes.field_ucb_article_summary?item.attributes.field_ucb_article_summary : "";
+            let bodyAndImageId = item.relationships.field_ucb_article_content.data.length ? item.relationships.field_ucb_article_content.data[0].id : "";
+            let body = item.attributes.field_ucb_article_summary ? item.attributes.field_ucb_article_summary : "";
             body = body.trim();
             let imageSrc = "";
 
             // if no article summary, use a simplified article body
-            if (!body.length) {
+            if (!body.length && bodyAndImageId != "") {
               getArticleParagraph(bodyAndImageId)
                 .then((response) => response.json())
                 .then((data) => {
