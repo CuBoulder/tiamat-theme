@@ -56,7 +56,6 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
     fetch(JSONURL)
       .then((reponse) => reponse.json())
       .then((data) => {
-        console.log(data)
         // get the next URL and return that if there is one
         if(data.links.next) {
           let nextURL = data.links.next.href.split("/jsonapi/");
