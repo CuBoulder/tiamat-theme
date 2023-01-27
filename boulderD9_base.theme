@@ -160,6 +160,17 @@ function boulderD9_base_preprocess_node__organization(array &$variables) {
   $variables['uuid'] = $variables['node']->uuid();
 }
 
+/**
+ * Exposes a variable to indicate if a user can edit a node.
+ */
+function boulderD9_base_preprocess_node__ucb_article(array &$variables) {
+	if ($node = \Drupal::routeMatch()->getParameter('node')) {
+		$user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
+		$userCanEdit = $node->access('update', $user);
+		$variables['user_can_edit'] = $userCanEdit;
+	}
+}
+
 /***
  *  Custom theme settings worker function
  ***/
