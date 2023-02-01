@@ -69,7 +69,7 @@ class LatestIssueElement extends HTMLElement {
                 const archiveLink = document.createElement('a')
                 archiveLink.classList = 'ucb-latest-issue-archive-button'
                 // TO DO -- add archive link here
-                archiveLink.href = '/'
+                archiveLink.href = '/issue/archive'
                 archiveLink.innerText = 'Issue Archive'
 
                 archiveContainer.appendChild(archiveLink)
