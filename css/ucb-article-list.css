@@ -15,12 +15,15 @@
 }
 
 .ucb-article-card {
-  margin-bottom: 2em;
+  margin-bottom: 20px;
+  border-bottom: solid rgba(128, 128, 128, 0.333);
+  padding-bottom: 20px;
 }
 
 .ucb-article-card-title {
   font-size: 1.5rem;
   font-weight: bolder;
+  margin-bottom: 10px;
 }
 
 .ucb-article-card-date {
@@ -29,7 +32,18 @@
   margin-bottom: 10px;
 }
 
+.ucb-article-card-img img{
+  width: 100%;
+  height: 100%;
+}
+
 .ucb-article-card-img {
-  max-width: 100%;
-  height: auto;
+  width: 124px;
+  height: 100px;
+}
+
+.ucb-article-card-more {
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 75%;
 }

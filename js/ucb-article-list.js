@@ -168,7 +168,7 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
                   // Remove any line breaks if media is embedded in the body
                   let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
                   // take only the first 100 words ~ 500 chars
-                  let trimmedString = lineBreakStrip.substr(0, 500);
+                  let trimmedString = lineBreakStrip.substr(0, 250);
                   // if in the middle of the string, take the whole word
                   if(trimmedString.length > 100){
                     trimmedString = trimmedString.substr(
@@ -196,11 +196,8 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
             }
 
             //Date - make human readable
-            let date = new Date(item.attributes.created)
-              .toDateString()
-              .split(" ")
-              .slice(1)
-              .join(" ");
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            let date = new Date(item.attributes.created).toLocaleDateString('en-us', options);
             let title = item.attributes.title;
             let link = item.attributes.path.alias;
             let image = "";
