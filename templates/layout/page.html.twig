@@ -84,9 +84,9 @@
       <div class="container ucb-menu-wrapper">
         <div>
           <a href="{{ front_page }}">{{ site_name }}</a>
-          {% if site_slogan|render|striptags|trim %}
+          {% if site_affiliation.id %}
             <div class="affiliation">
-              {{ site_slogan }}
+              {% if site_affiliation.url %}<a href="{{ site_affiliation.url }}">{{ site_affiliation.label }}</a>{% else %}{{ site_affiliation.label }}{% endif %}
             </div>
           {% endif %}
         </div>
