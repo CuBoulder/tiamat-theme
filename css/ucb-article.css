@@ -132,11 +132,10 @@ i.far.fa-calendar {
 .centeredTitle {
   position: absolute;
   bottom: 10%;
-  left: 25%;
   color: white;
 }
 
-.backgroundTitleDiv > div > div > .imageMediaStyle >img {
+.backgroundTitleDiv > div > div > .imageMediaStyle > img {
   width: 100%;
   max-height: 600px;
   object-fit: cover;
