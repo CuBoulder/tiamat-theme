@@ -121,3 +121,21 @@ i.far.fa-calendar {
 .ucb-article-author-name span:not(:last-of-type):after{
   content: ",";
 }
+
+
+.backgroundTitleDiv {
+  position: relative;
+  z-index: 0;
+}
+
+.centeredTitle {
+  position: absolute;
+  bottom: 10%;
+  left: 25%;
+  color: white;
+}
+
+.backgroundTitleDiv img {
+  max-height: 600px;
+  width: 100%;
+}
