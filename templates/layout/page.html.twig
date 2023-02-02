@@ -80,9 +80,9 @@
         <script type="text/javascript" src="https://cdn.colorado.edu/static/brand-assets/live/js/brand-bar.js" id="ucb-brand-bar-embed" data-color="{{ campus_header_color }}"></script>
       </div>
     </div>
-    <header class="ucb {{ header_color }}" role="banner">
+    <header class="ucb {{ header_color }}{% if site_affiliation.id %} ucb-site-affiliation-{{ site_affiliation.id }}{% endif %}" role="banner">
       <div class="container ucb-menu-wrapper">
-        <div>
+        <div class="ucb-site-name-wrapper">
           <a href="{{ front_page }}">{{ site_name }}</a>
           {% if site_affiliation.id %}
             <div class="affiliation">
