@@ -133,10 +133,18 @@ i.far.fa-calendar {
   position: absolute;
   bottom: 10%;
   color: white;
+  margin-right: 15%;
 }
 
 .backgroundTitleDiv > div > div > .imageMediaStyle > img {
   width: 100%;
   max-height: 600px;
   object-fit: cover;
+  opacity: 75%;
+}
+
+.backgroundTitleDiv > div > div > .imageMediaStyle{
+  padding-bottom: 0;
+  margin-bottom: 20px;
+  background: black;
 }

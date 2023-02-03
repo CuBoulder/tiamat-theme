@@ -130,21 +130,23 @@ pageStyleCSS
 {% if not content.field_ucb_article_external_url|render %}
 	<article{{attributes.addClass(classes)}}>
 		<div class="ucb-article" itemscope itemtype="https://schema.org/Article">
-			<h1 class="sr-only">{{ label }}</h1>
+			{# If using a Title Background img, render that #}
 			{% if content.field_article_title_background|render %}
+			<header><h1 class="sr-only">{{ label }}</h1></header>
 				<div class="backgroundTitleDiv">
 					{{ content.field_article_title_background }}
-
 					<div class="container">
 						<h1 class="centeredTitle">{{label}}</h1>
 					</div>
 				</div>
 			{% endif %}
 			<div class="container">
+				{# If NO Title Background img, render the regular title #}
+				{% if not content.field_article_title_background|render %}
 				<header role="banner" class="ucb-article-banner">
 					<h1 class="ucb-article-heading">{{ label }}</h1>
 				</header>
-				{# TO DO - conditional render #}
+				{% endif %}
 				{% if social_share_button_position == "4" or social_share_button_position == "1"%}
 					<div id={{social_share_class}} class="ucb-social-share-container">
 						{{ drupal_block("social_sharing_buttons_block") }}
