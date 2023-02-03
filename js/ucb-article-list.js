@@ -211,9 +211,9 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
                             <div class='ucb-article-card row'>
                                 ${image}
                                 <div class='col-sm-12 ${articleSummarySize} ucb-article-card-data'>
-                                    <span class='ucb-article-card-title'><a href="${link}">${title}</a></span>
+                                    <a href="${link}"><h2 class='ucb-article-card-title'>${title}</h2></a>
                                     <span class='ucb-article-card-date'>${date}</span>
-                                    <span id='body-${bodyAndImageId}' class='ucb-article-card-body'>${body}</span>
+                                    <p id='body-${bodyAndImageId}' class='ucb-article-card-body'>${body}</p>
                                     <span class='ucb-article-card-more'>
                                         <a href="${link}">Read more <i class="fal fa-chevron-double-right"></i></a></span>
                                 </div>
