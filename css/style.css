@@ -429,11 +429,8 @@ article .align-left .media-image-caption p {
   text-align: center;
 }
 
+article .align-right,
 article .align-left {
-  padding-bottom: 20px;
-}
-
-article .align-right {
   padding-bottom: 20px;
 }
 
@@ -450,8 +447,4 @@ article .align-center {
   cursor: auto;
   background-color: initial;
   opacity: initial;
-}
-
-.imageMediaStyle {
-  padding-bottom: 20px;
 }
