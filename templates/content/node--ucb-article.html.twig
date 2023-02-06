@@ -186,6 +186,16 @@ pageStyleCSS
 					{{ content.field_ucb_article_tags }}
 				</div>
 			{% endif %}
+			{% if content.field_appears_in_issue|render %}
+				<div role="contentinfo" class="container ucb-article-issue" itemprop="keywords">
+					<div>
+						<span class="sr-only">Issues:</span>
+						<i class="fa fa-book"></i>
+					</div>
+					{{ content.field_appears_in_issue }}
+				</div>
+			{% endif %}
+			
 			{# TO DO -- Related Articles Block #}
 			<div class="container ucb-related-articles-block" data-loggedin="{{isLoggedIn}}" data-catsjson="{{content.field_ucb_article_categories| json_encode(constant('JSON_PRETTY_PRINT'))}}" data-tagsjson="{{ content.field_ucb_article_tags| json_encode(constant('JSON_PRETTY_PRINT')) }}" data-relatedshown="{{showRelated|striptags|trim}}" data-tags="{{myTags|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}" data-cats="{{myCats|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}">
 				{{content.field_ucb_related_articles_parag}}
