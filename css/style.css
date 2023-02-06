@@ -95,12 +95,21 @@ input[type="submit"] {
 
 /********* Fonts *************/
 .ucb-roboto-bold {
-  font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family:
+    Roboto,
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
+    sans-serif;
   font-weight: bold;
 }
 
 .ucb-roboto-condensed-bold {
-  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial,
+  font-family:
+    "Roboto Condensed",
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
     sans-serif;
   font-weight: bold;
 }
@@ -132,18 +141,17 @@ input[type="submit"] {
 }
 
 .ucb-alert {
-  text-align: center;
-  border-radius: 0;
-  width: 100%;
-  margin: 0;
+text-align: center;
+border-radius: 0;
+width: 100%;
+margin: 0;
 }
 
-.ucb-alert-link:link,
-.ucb-alert-link:visited {
-  text-decoration: underline;
-  text-decoration-color: #6a1a21;
-  -webkit-text-decoration-color: #6a1a21;
-  white-space: nowrap;
+.ucb-alert-link:link, .ucb-alert-link:visited {
+text-decoration: underline;
+text-decoration-color: #6a1a21;
+-webkit-text-decoration-color: #6a1a21;
+white-space: nowrap;
 }
 
 header#ucb-header-block {
@@ -165,6 +173,15 @@ header#ucb-header-block {
 .ucb-header-container > * {
   flex-grow: 0;
   flex-shrink: 0;
+}
+
+.ucb-site-affiliation-sport_club .ucb-menu-wrapper .ucb-site-name-wrapper {
+background-image: url(../images/cu-buffs-logo.png);
+background-repeat: no-repeat;
+background-position: left center;
+background-size: 45px 33px;
+padding-left: 55px;
+min-height: 33px;
 }
 
 article img {
@@ -227,7 +244,7 @@ li.main-menu-item a.nav-link {
   border-bottom: 2px solid #fff;
   font-weight: 600;
   line-height: 2rem;
-  padding: 0.25rem 1rem;
+  padding: .25rem 1rem;
   margin: 2px 0 0 0;
 }
 
@@ -276,7 +293,7 @@ li.main-menu-item a.nav-link.active {
   background: var(--ucb-gold);
   color: var(--ucb-black);
 }
-
+  
 /****** Local Tasks ********/
 .ucb-local-tasks {
   position: fixed;
@@ -352,7 +369,12 @@ li.main-menu-item a.nav-link.active {
 .ucb-footer-nav-container .ucb-menu-title {
   color: white;
   font-size: 1.4rem;
-  font-family: "Roboto Condensed", Roboto, "Helvetica Neue", Helvetica, Arial,
+  font-family:
+    "Roboto Condensed",
+    Roboto,
+    "Helvetica Neue",
+    Helvetica,
+    Arial,
     sans-serif;
   font-weight: bold;
 }
