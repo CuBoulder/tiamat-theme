@@ -45,8 +45,9 @@
 
 
 .ucb-article-card-img {
-  width: 100px;
-  height: 100px;
+  width: 110px;
+  height: 110px;
+  padding: 0 10px 10px 0;
 }
 
 .ucb-article-card-more {
