@@ -24,7 +24,8 @@ i.far.fa-calendar {
 }
 
 .ucb-article-tags,
-.ucb-article-categories {
+.ucb-article-categories,
+.ucb-article-issue {
   margin-bottom: 1em;
   display: flex;
   font-size: 12px;
@@ -32,7 +33,8 @@ i.far.fa-calendar {
 }
 
 .ucb-article-categories div,
-.ucb-article-tags div {
+.ucb-article-tags div,
+.ucb-article-issue div {
   display: flex;
   flex-direction: row;
   margin-right: 1em;
@@ -42,20 +44,24 @@ i.far.fa-calendar {
 .ucb-article-categories a:link,
 .ucb-article-categories a:visited,
 .ucb-article-tags a:link,
-.ucb-article-tags a:visited {
+.ucb-article-tags a:visited,
+.ucb-article-issue a:link,
+.ucb-article-issue a:visited {
   background: #e7e7e7;
   color: #555;
   padding: 2px 6px;
 }
 
 .ucb-article-categories a:hover,
-.ucb-article-tags a:hover {
+.ucb-article-tags a:hover,
+.ucb-article-issue a:hover {
   background: #555;
   color: #fff;
 }
 
 .ucb-article-tags i.fas,
-.ucb-article-categories i.fas {
+.ucb-article-categories i.fas
+.ucb-article-issue i.fas {
   padding: 0.5em;
   background: #555;
   color: #fff;
