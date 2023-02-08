@@ -127,16 +127,30 @@ pageStyleCSS
 {#Dummy variable to ensure that all content tags are set for caching purposes#}
 {% set content_render = content|render %}
 
+{# Sets overlay class for header img #}
+{% set textColor = content.field_article_header_text_color|render|striptags|trim %}
+{% set overlayClass = ''%}
+
+{% if content.field_ucb_article_header_overlay|render|striptags|trim == 'On' %}
+	{% if textColor is same as 'White' %}
+	{# overlay requested set to dark #}
+		{% set overlayClass = 'ucb-overlay-dark' %}
+	{% else %}
+	{# dark text, so switch to the light overlay instead #}
+		{% set overlayClass = 'ucb-overlay-light' %}
+	{% endif %}
+{% endif %}
+
 {% if not content.field_ucb_article_external_url|render %}
 	<article{{attributes.addClass(classes)}}>
 		<div class="ucb-article" itemscope itemtype="https://schema.org/Article">
 			{# If using a Title Background img, render that #}
 			{% if content.field_article_title_background|render %}
 			<header><h1 class="sr-only">{{ label }}</h1></header>
-				<div class="backgroundTitleDiv">
+				<div class="backgroundTitleDiv {{overlayClass}}">
 					{{ content.field_article_title_background }}
 					<div class="container">
-						<h1 class="centeredTitle">{{label}}</h1>
+						<h1 class="centeredTitle article-header-{{textColor}}">{{label}}</h1>
 					</div>
 				</div>
 			{% endif %}
