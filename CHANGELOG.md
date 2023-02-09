@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Advanced Style Options for Articles: Title Background Image
+  Adds Advanced Styling options for Articles - including an optional Title Background Image, which replaces the default header with a full-width image holding the Article title. Also included is the ability to customize text color and a toggle to automatically add a light or dark overlay for better readability depending on your image.
+  
+  Resolves #154 
+  
+  Change Includes:
+  - `tiamat-custom-entities` => issue/154
+  - `tiamat-theme` => issue/154
+---
+
 - ### Publications Bundle
   Includes the following additions included in the Publication Bundle, resolves #168.
   

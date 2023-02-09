@@ -127,3 +127,57 @@ i.far.fa-calendar {
 .ucb-article-author-name span:not(:last-of-type):after{
   content: ",";
 }
+
+
+.backgroundTitleDiv {
+  position: relative;
+  z-index: 0;
+  object-fit: fill;
+}
+
+.centeredTitle {
+  position: absolute;
+  bottom: 0.5em;
+}
+
+.article-header-White{
+  color: white;
+}
+
+.article-header-Black{
+  color:black
+}
+
+.backgroundTitleDiv > div > div > .imageMediaStyle > img {
+  width: 100%;
+  max-height: 600px;
+  object-fit: cover;
+}
+
+.backgroundTitleDiv > div > div > .imageMediaStyle{
+  padding-bottom: 0;
+  margin-bottom: 20px;
+}
+
+.ucb-overlay-dark > div > div > .imageMediaStyle > img, 
+.ucb-overlay-light > div > div > .imageMediaStyle > img{
+  opacity: 75%;
+}
+
+.ucb-overlay-light > div > div > .imageMediaStyle{
+  background: white;
+}
+.ucb-overlay-dark > div > div > .imageMediaStyle{
+  background: black;
+}
+
+.ucb-article-supplemental-text{
+  margin-bottom: 1em;
+  font-style: italic;
+  font-size: 0.85em;
+}
+
+/* Removes caption on header img */
+.backgroundTitleDiv > div > div > .media-image-caption{
+  display: none;
+}

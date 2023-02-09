@@ -127,14 +127,40 @@ pageStyleCSS
 {#Dummy variable to ensure that all content tags are set for caching purposes#}
 {% set content_render = content|render %}
 
+{# Sets overlay class for header img #}
+{% set textColor = content.field_article_header_text_color|render|striptags|trim %}
+{% set overlayClass = ''%}
+
+{% if content.field_ucb_article_header_overlay|render|striptags|trim == 'On' %}
+	{% if textColor is same as 'White' %}
+	{# overlay requested set to dark #}
+		{% set overlayClass = 'ucb-overlay-dark' %}
+	{% else %}
+	{# dark text, so switch to the light overlay instead #}
+		{% set overlayClass = 'ucb-overlay-light' %}
+	{% endif %}
+{% endif %}
+
 {% if not content.field_ucb_article_external_url|render %}
 	<article{{attributes.addClass(classes)}}>
 		<div class="ucb-article" itemscope itemtype="https://schema.org/Article">
+			{# If using a Title Background img, render that #}
+			{% if content.field_article_title_background|render %}
+			<header><h1 class="sr-only">{{ label }}</h1></header>
+				<div class="backgroundTitleDiv {{overlayClass}}">
+					{{ content.field_article_title_background }}
+					<div class="container">
+						<h1 class="centeredTitle article-header-{{textColor}}">{{label}}</h1>
+					</div>
+				</div>
+			{% endif %}
 			<div class="container">
+				{# If NO Title Background img, render the regular title #}
+				{% if not content.field_article_title_background|render %}
 				<header role="banner" class="ucb-article-banner">
 					<h1 class="ucb-article-heading">{{ label }}</h1>
 				</header>
-				{# TO DO - conditional render #}
+				{% endif %}
 				{% if social_share_button_position == "4" or social_share_button_position == "1"%}
 					<div id={{social_share_class}} class="ucb-social-share-container">
 						{{ drupal_block("social_sharing_buttons_block") }}
@@ -164,6 +190,9 @@ pageStyleCSS
 					{% endif %}
 
 				</div>
+				{% if content.field_article_header_image_text|render %}
+				<p class="ucb-article-supplemental-text">{{content.field_article_header_image_text|render|striptags|trim}}</p>
+				{% endif %}
 			</div>
 			{% if content.field_ucb_article_content|render %}
 				<div role="main" class="ucb-article-body">{{ content.field_ucb_article_content }}</div>
@@ -207,13 +236,15 @@ pageStyleCSS
 		<div class="container ucb-article">
 			<h1 class="ucb-article-heading">{{ label }}</h1>
 			{% set externalURL = content.field_ucb_article_external_url[0]['#url']|render|striptags|trim %}
-			<p class="fw-bold">Redirecting to: <a href="{{ externalURL }}">{{ externalURL }}</a></p>
+			<p class="fw-bold">Redirecting to:
+				<a href="{{ externalURL }}">{{ externalURL }}</a>
+			</p>
 			{% if user_can_edit %}
 				<p>(Most visitors without editing permissions will be redirected from this page automatically)</p>
 			{% else %}
 				{# redirect non-authenticated users to the specified URL #}
 				{{ content.field_ucb_article_external_url }}
 			{% endif %}
-			</div>
+		</div>
 	</article>
 {% endif %}
