@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article List Formatting Changes and Updates
+  - Reduce size of thumbnail image to 100px by 100px
+  - Normalize date format to (Mon. DD, YYYY)
+  - Trim summary length
+  - Adjust padding and spacing 
+  - Adjust the Read more link to be uppercase 
+  - Add divider to the bottom of each article as a border-bottom
+  
+  Closes #199 
+---
+
 - ### Fix for center-align images placed via CKEditor
   Images were left-aligned even when specified to be centered when placed from the media library via the CKEditor interface.  
   

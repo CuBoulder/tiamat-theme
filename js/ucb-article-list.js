@@ -168,7 +168,7 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
                   // Remove any line breaks if media is embedded in the body
                   let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
                   // take only the first 100 words ~ 500 chars
-                  let trimmedString = lineBreakStrip.substr(0, 500);
+                  let trimmedString = lineBreakStrip.substr(0, 250);
                   // if in the middle of the string, take the whole word
                   if(trimmedString.length > 100){
                     trimmedString = trimmedString.substr(
@@ -196,11 +196,8 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
             }
 
             //Date - make human readable
-            let date = new Date(item.attributes.created)
-              .toDateString()
-              .split(" ")
-              .slice(1)
-              .join(" ");
+            const options = { year: 'numeric', month: 'short', day: 'numeric' };
+            let date = new Date(item.attributes.created).toLocaleDateString('en-us', options);
             let title = item.attributes.title;
             let link = item.attributes.path.alias;
             let image = "";
@@ -214,9 +211,9 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
                             <div class='ucb-article-card row'>
                                 ${image}
                                 <div class='col-sm-12 ${articleSummarySize} ucb-article-card-data'>
-                                    <span class='ucb-article-card-title'><a href="${link}">${title}</a></span>
+                                    <a href="${link}"><h2 class='ucb-article-card-title'>${title}</h2></a>
                                     <span class='ucb-article-card-date'>${date}</span>
-                                    <span id='body-${bodyAndImageId}' class='ucb-article-card-body'>${body}</span>
+                                    <p id='body-${bodyAndImageId}' class='ucb-article-card-body'>${body}</p>
                                     <span class='ucb-article-card-more'>
                                         <a href="${link}">Read more <i class="fal fa-chevron-double-right"></i></a></span>
                                 </div>
