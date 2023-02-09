@@ -138,7 +138,6 @@ i.far.fa-calendar {
 .centeredTitle {
   position: absolute;
   bottom: 0.5em;
-  /* margin-right: 15%; */
 }
 
 .article-header-White{
@@ -176,4 +175,9 @@ i.far.fa-calendar {
   margin-bottom: 1em;
   font-style: italic;
   font-size: 0.85em;
+}
+
+/* Removes caption on header img */
+.backgroundTitleDiv > div > div > .media-image-caption{
+  display: none;
 }
