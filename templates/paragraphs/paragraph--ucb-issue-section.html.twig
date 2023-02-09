@@ -1,0 +1,76 @@
+{# 
+
+    {{paragraph.field_ucb_issue_section_style.value}}
+
+    0 = teaser
+    1 = feature
+    2 = title & thumb
+    3 = title only
+    #}
+
+{% block paragraph %}
+    <div{{attributes.addClass(classes)}}>
+        <h2>{{content.field_ucb_issue_section_title}}</h2>
+        <div class="issue-content">
+
+    {% for key, item in paragraph.field_ucb_issue_article_select %}						
+    {# If teaser #}
+        {% if paragraph.field_ucb_issue_section_style.value is same as("0") %}
+        <div class="issue-section-content">
+            <a href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
+                <div class="teaser-article-thumbnail" id='teaser-article-thumbnail-{{key}}'> {{ item.entity.field_ucb_article_thumbnail|view }} </div>
+            </a>
+            <div class="issue-section-content-summary">
+                <a class="issue-article-title-link" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
+                    <h3 class="issue-section-teaser-title">{{item.entity.title.value}}</h3>
+                </a>
+                <div class="issue-article-categories">{{item.entity.field_ucb_article_categories|view}}</div>
+                <p class="issue-section-teaser-summary">{{item.entity.field_ucb_article_summary.value}}</p>
+                <a class="issue-section-teaser-read" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">READ MORE</a>
+            </div>
+        </div>
+                        
+    {# If feature #}
+        {% elseif paragraph.field_ucb_issue_section_style.value is same as ("1") %}
+            <div class="issue-section-content-feature">
+                <a href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
+                    <div class="feature-article-thumbnail" id='feature-article-thumbnail-{{key}}'> {{ item.entity.field_ucb_article_thumbnail|view }} </div>
+                </a>
+                <div class="issue-section-content-summary">
+                    <a class="issue-article-title-link" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
+                        <h3 class="issue-section-feature-title">{{item.entity.title.value}}</h3>
+                    </a>
+                    <div class="issue-article-categories">{{item.entity.field_ucb_article_categories|view}}</div>
+                    <p class="issue-section-feature-summary">{{item.entity.field_ucb_article_summary.value}}</p>
+                    <a class="issue-section-feature-read" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">READ MORE</a>
+                </div>
+            </div>
+
+    {# title & thumbnail #}
+        {% elseif paragraph.field_ucb_issue_section_style.value is same as ("2") %}
+        <div class="issue-section-content">
+            <a href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
+                <div class="title-thumb-article-thumbnail" id='title-thumb-article-thumbnail-{{key}}'> {{ item.entity.field_ucb_article_thumbnail|view }} </div>
+            </a>
+            <div class="issue-section-content-summary">
+                <a class="issue-article-title-link" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
+                    {{item.entity.title.value}}
+                </a>
+            </div>
+        </div>
+
+    {# title only #}
+        {% else %}
+        <div class="issue-section-title-only">
+            <a class="issue-article-title-link" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
+                {{item.entity.title.value}}
+            </a>
+        </div>
+        {% endif %}
+    {% endfor %}
+
+    </div>
+</div>
+
+
+{% endblock paragraph %}
