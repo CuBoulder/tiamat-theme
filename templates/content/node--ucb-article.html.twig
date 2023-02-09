@@ -190,6 +190,9 @@ pageStyleCSS
 					{% endif %}
 
 				</div>
+				{% if content.field_article_header_image_text|render %}
+				<p class="ucb-article-supplemental-text">{{content.field_article_header_image_text|render|striptags|trim}}</p>
+				{% endif %}
 			</div>
 			{% if content.field_ucb_article_content|render %}
 				<div role="main" class="ucb-article-body">{{ content.field_ucb_article_content }}</div>
