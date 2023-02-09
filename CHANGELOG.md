@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fix for center-align images placed via CKEditor
+  Images were left-aligned even when specified to be centered when placed from the media library via the CKEditor interface.  
+  
+  Captions are not being honored either, however this seems to be an issue with CKEditor 5 and the Drupal Media Library.  Should be fixed in a future version of Drupal : (see : https://www.drupal.org/project/drupal/issues/3246385 ) 
+  
+  Closes : #205 
+---
+
 - ### Advanced Style Options for Articles: Title Background Image
   Adds Advanced Styling options for Articles - including an optional Title Background Image, which replaces the default header with a full-width image holding the Article title. Also included is the ability to customize text color and a toggle to automatically add a light or dark overlay for better readability depending on your image.
   
