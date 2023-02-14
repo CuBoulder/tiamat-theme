@@ -42,6 +42,7 @@
 
 			// console.log("TAG DATA", data)
 			let returnedArticles = data.data
+			console.log(data.data)
 			let existingIds = [];
 			// create an array of existing ids
 			array.map(article=>{
@@ -268,10 +269,14 @@
 
 		// Fetch
 		async function getArticles(URL){
+			getPrivateCategories()
+			getPrivateTags()
+			console.log('-------')
 			fetch(URL)
 				.then(response=>response.json())
 				.then(data=> {
-					// console.log(data)
+					console.log(data)
+
 			// Below objects are needed to match images with their corresponding articles. 
 			// There are two endpoints => data.data (article) and data.included (incl. media), both needed to associate a media library image with its respective article
 			let urlObj = {};
@@ -461,3 +466,17 @@
 		relatedArticlesBlock.style.display = "none";
 	}
 })(document.querySelector(".ucb-related-articles-block"));
+
+async function getPrivateCategories(){
+	// /jsonapi/taxonomy_term/category?filter[field_ucb_category_display]=false
+	fetch('/jsonapi/taxonomy_term/category?filter[field_ucb_category_display]=false')
+	.then(response => response.json())
+	.then(data=>{console.log('private cats', data)})
+}
+
+async function getPrivateTags(){
+		fetch('/jsonapi/taxonomy_term/tags?filter[field_ucb_tag_display]=false')
+		.then(response => response.json())
+		.then(data=>{console.log('private tags', data)})
+
+}
