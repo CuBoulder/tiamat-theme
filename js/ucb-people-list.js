@@ -413,9 +413,14 @@ class PeopleListElement extends HTMLElement {
 				cardElement = document.createElement('div');
 				cardHTML = `
 					<div class="ucb-person-card-list row">
-						<div class="col-sm-12 col-md-3 ucb-person-card-img">
-							<a href="${personLink}">${personPhoto}</a>
-						</div>
+					${
+						personPhoto ?
+							`
+							<div class="col-sm-12 col-md-3 ucb-person-card-img">
+								<a href="${personLink}">${personPhoto}</a>
+							</div>`
+						: ''
+					}
 						<div class="col-sm-12 col-md-9 ucb-person-card-details">
 							<a href="${personLink}">
 								<span class="ucb-person-card-name">
@@ -435,7 +440,8 @@ class PeopleListElement extends HTMLElement {
 								<span class="ucb-person-card-email">
 									${
 										personEmail ?
-											`<a href="mailto:${personEmail}">
+											`<i class="fa fa-envelope"></i>
+											<a href="mailto:${personEmail}">
 												<span class="ucb-people-list-contact">  ${personEmail}</span>
 											</a>`
 										: ''
@@ -444,8 +450,9 @@ class PeopleListElement extends HTMLElement {
 								<span class="ucb-person-card-phone">
 									${
 										personPhone ?
-											`<a href="tel:${personPhone.replace(/[^+\d]+/g, '',)}">
-												<p><span class="ucb-people-list-contact">  ${personPhone}</span></p>
+											`<i class="fa fa-phone"></i>
+											<a href="tel:${personPhone.replace(/[^+\d]+/g, '',)}">
+												<span class="ucb-people-list-contact">  ${personPhone}</span>
 											</a>`
 										: ''
 									}
@@ -480,6 +487,7 @@ class PeopleListElement extends HTMLElement {
 			case 'table':
 				cardElement = document.createElement('tr');
 				cardHTML = `
+				
 					<td class="ucb-people-list-table-photo">
 						<a href="${personLink}">${personPhoto}</a>  
 					</td>
@@ -497,24 +505,28 @@ class PeopleListElement extends HTMLElement {
 						</span>
 					</td>
 					<td>
-					<span class="ucb-person-card-email">
-						${
-							personEmail ?
-								`<a href="mailto:${personEmail}">
-									<span class="ucb-people-list-contact"> ${personEmail}</span>
-								</a>`
-							: ''
-						}
-						</span>
-						<span class="ucb-person-card-phone">
-							${
-								personPhone ?
-									`<a href="tel:${personPhone.replace(/[^+\d]+/g, '',)}">
-										<p><span class="ucb-people-list-contact">${personPhone}</span></p>
-									</a>`
-								: ''
-							}
-						</span>
+						<div class="ucb-person-card-contact-table">
+							<span class="ucb-person-card-email">
+								${
+									personEmail ?
+										`<i class="fa fa-envelope"></i>
+										<a href="mailto:${personEmail}">
+											<span class="ucb-people-list-contact"> ${personEmail}</span>
+										</a>`
+									: ''
+								}
+							</span>
+							<span class="ucb-person-card-phone">
+									${
+										personPhone ?
+											`<i class="fa fa-phone"></i>
+											<a href="tel:${personPhone.replace(/[^+\d]+/g, '',)}">
+												<span class="ucb-people-list-contact">${personPhone}</span>
+											</a>`
+										: ''
+									}
+							</span>
+						</div>
 					</td>`;
 		}
 		cardElement.innerHTML = cardHTML;

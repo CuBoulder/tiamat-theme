@@ -41,7 +41,7 @@
 
 .ucb-person-card-contact {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .departments-grid {
@@ -133,4 +133,19 @@ tbody.ucb-people-list-table-tablebody {
 
 .people-list-filter .taxonomy-select {
 	max-width: 150px;
+}
+
+.ucb-person-card-img {
+  padding: 0 10px 10px 0;
+  height: 110px;
+  width: 110px;
+}
+
+.ucb-person-card-email {
+  padding-right: 20px;
+}
+
+.ucb-person-card-contact-table {
+  display: flex;
+  flex-direction: column;
 }
