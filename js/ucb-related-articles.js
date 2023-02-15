@@ -26,6 +26,7 @@
 	function checkMatches(data, ids){
 		let count = 0;
 		let numberArr = ids.map(Number)
+		// TO DO -- add in private taxonomy, dont include on counts
 		data.forEach((article)=>{
 			if(numberArr.includes(article.meta.drupal_internal__target_id)){
 				count++
@@ -269,9 +270,12 @@
 
 		// Fetch
 		async function getArticles(URL){
-			getPrivateCategories()
-			getPrivateTags()
+			const privateTags = getPrivateTags()
+			const privateCats = getPrivateCategories()
 			console.log('-------')
+			console.log('my private tags', privateTags)
+			console.log('my private cats', privateCats)
+			console.log('===========')
 			fetch(URL)
 				.then(response=>response.json())
 				.then(data=> {
@@ -467,16 +471,29 @@
 	}
 })(document.querySelector(".ucb-related-articles-block"));
 
-async function getPrivateCategories(){
-	// /jsonapi/taxonomy_term/category?filter[field_ucb_category_display]=false
-	fetch('/jsonapi/taxonomy_term/category?filter[field_ucb_category_display]=false')
-	.then(response => response.json())
-	.then(data=>{console.log('private cats', data)})
+
+// These functions get the privated Categories and tags to not include them on the match count for their respective taxonomies
+function getPrivateCategories(){
+	let privateCats = []
+		fetch('/jsonapi/taxonomy_term/category?filter[field_ucb_category_display]=false')
+		.then(response => response.json())
+		.then(data=>{ 
+			data.data.forEach(cat=>{
+				privateCats.push(cat.attributes.drupal_internal__tid)
+			})
+		})
+	return privateCats
 }
 
-async function getPrivateTags(){
+function getPrivateTags(){
+	let privateTags = []
 		fetch('/jsonapi/taxonomy_term/tags?filter[field_ucb_tag_display]=false')
 		.then(response => response.json())
-		.then(data=>{console.log('private tags', data)})
+		.then(data=>{ 
+			data.data.forEach(tag=>{
+				privateTags.push(tag.attributes.drupal_internal__tid)
+			})
+		})
+	return privateTags
 
 }
