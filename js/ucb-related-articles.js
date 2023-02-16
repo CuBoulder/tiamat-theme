@@ -23,19 +23,19 @@
 	const relatedShown = relatedArticlesBlock.getAttribute('data-relatedshown') != "Off" ? true : false;
 
 	// This function returns a total of matched categories or tags
-	function checkMatches(data, ids){
+	function checkMatches(data, ids, privateIds = []){
 		let count = 0;
 		let numberArr = ids.map(Number)
 		// TO DO -- add in private taxonomy, dont include on counts
 		data.forEach((article)=>{
-			if(numberArr.includes(article.meta.drupal_internal__target_id)){
+			if(numberArr.includes(article.meta.drupal_internal__target_id) && !privateIds.includes(article.meta.drupal_internal__target_id)){
 				count++
 			}
 		})
 		return count
 	}
 	// This function takes in the tag endpoint and current array of related articles, returns the array of related articles once it has a count of 3. 
-	async function getArticlesWithTags(url, array, articleTags ,numLeft){
+	async function getArticlesWithTags(url, array, articleTags ,numLeft, privateTags){
 		fetch(url)
 		.then(response => response.json())
 		.then(data=>{
@@ -43,7 +43,6 @@
 
 			// console.log("TAG DATA", data)
 			let returnedArticles = data.data
-			console.log(data.data)
 			let existingIds = [];
 			// create an array of existing ids
 			array.map(article=>{
@@ -105,7 +104,7 @@
 				if(toInclude){
 					let articleObj ={}
 					articleObj.id = article.id
-					articleObj.catMatches = checkMatches(article.relationships.field_ucb_article_tags.data, articleTags) // count the number of matches
+					articleObj.catMatches = checkMatches(article.relationships.field_ucb_article_tags.data, articleTags, privateTags) // count the number of matches
 					articleObj.article = article 
 					filterData.push(articleObj)
 				}
@@ -202,7 +201,9 @@
 			
 		} else if(childCount > 1 && loggedIn==true){
 			var message = document.getElementById('admin-notif-message')
-			message.remove()
+			if(message){
+				message.remove()
+			}
 		}else {
 			// last check for error message
 		}
@@ -272,14 +273,9 @@
 		async function getArticles(URL){
 			const privateTags = getPrivateTags()
 			const privateCats = getPrivateCategories()
-			console.log('-------')
-			console.log('my private tags', privateTags)
-			console.log('my private cats', privateCats)
-			console.log('===========')
 			fetch(URL)
 				.then(response=>response.json())
 				.then(data=> {
-					console.log(data)
 
 			// Below objects are needed to match images with their corresponding articles. 
 			// There are two endpoints => data.data (article) and data.included (incl. media), both needed to associate a media library image with its respective article
@@ -357,7 +353,7 @@
 					if(toInclude){
 					let articleObj = {}
 								articleObj.id = article.id
-								articleObj.catMatches = checkMatches(article.relationships.field_ucb_article_categories.data, myCats) // count the number of matches
+								articleObj.catMatches = checkMatches(article.relationships.field_ucb_article_categories.data, myCats, privateCats) // count the number of matches
 								articleObj.article = article // contain the existing article
 								articleArrayWithScores.push(articleObj)
 					}
@@ -384,7 +380,7 @@
 				} else if(finalArr.length<3){
 					let howManyLeft = 3 - finalArr.length
 					// if less than 3, grab the most tags
-				getArticlesWithTags(tagQuery,finalArr, myTags, howManyLeft);
+				getArticlesWithTags(tagQuery,finalArr, myTags, howManyLeft, privateTags);
 				// console.log(howManyLeft)
 				
 				}
