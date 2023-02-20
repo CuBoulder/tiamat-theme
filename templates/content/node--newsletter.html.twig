@@ -30,7 +30,7 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 {% set API = '/jsonapi/node/newsletter?filter[nid]=' 
 	~ node.id 
 	~ '?include[node--newsletter]=uid,title,ucb_article_content,created,field_newsletter_block_text_one,field_newsletter_block_title_one,field_newsletter_promo_image_one,field_newsletter_promo_link_one,field_newsletter_intro_image,field_newsletter_intro_body,field_newsletter_type,field_newsletter_block_text_two,field_newsletter_block_title_two,field_newsletter_promo_image_two,field_newsletter_promo_link_two,field_newsletter_section_block'
-	~ '&include=field_newsletter_promo_image_one,field_newsletter_intro_image,field_newsletter_promo_image_two'
+	~ '&include=field_newsletter_promo_image_one.field_media_image,field_newsletter_intro_image.field_media_image,field_newsletter_promo_image_two.field_media_image'
 	~ '&fields[file--file]=uri,url'
 %} 
 
@@ -41,7 +41,7 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 		>
 		{# Newsletter Title #}
 		<h1 class="ucb-newsletter-title" itemprop="name">{{ content.field_newsletter_type }}</h1>
-		<h1> url : {{API}}</h1>
+		<p> url : {{API}}</p>
 		{# Newsletter Intro #}
 		{% if content.field_newsletter_intro_image|render %}
 			<div id="newsletter-intro-img">{{ content.field_newsletter_intro_image }}</div>
