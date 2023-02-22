@@ -30,10 +30,12 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 {% set API = '/jsonapi/node/newsletter?filter[nid]=' 
 	~ node.id 
 	~ '?fields[node--newsletter]=title,created,field_newsletter_block_text_one,field_newsletter_block_title_one,field_newsletter_promo_image_one,field_newsletter_promo_link_one,field_newsletter_intro_image,field_newsletter_intro_body,field_newsletter_type,field_newsletter_block_text_two,field_newsletter_block_title_two,field_newsletter_promo_image_two,field_newsletter_promo_link_two,field_newsletter_section_block'
-	~ '&fields[paragraph--newsletter_section]=field_newsletter_section_link,field_newsletter_section_select,field_newsletter_section_style,field_newsletter_section_title'
-	~ '&fields=field_newsletter_promo_image_one.field_media_image,field_newsletter_intro_image.field_media_image,field_newsletter_promo_image_two.field_media_image'
+	~ '&include=field_newsletter_promo_image_one.field_media_image,field_newsletter_intro_image.field_media_image,field_newsletter_promo_image_two.field_media_image'
 	~ '&fields[file--file]=uri,url'
 %} 
+
+{# 	~ '&fields[paragraph--newsletter_section]=field_newsletter_section_link,field_newsletter_section_select,field_newsletter_section_style,field_newsletter_section_title'
+ #}
 
 <article{{attributes.addClass(classes)}}>
 	<div
