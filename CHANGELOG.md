@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Hidden Terms: Categories and Tags recieve form option to toggle display for admin-only taxonomies
+  Category and Tag taxonomies receive the form option for them to be hidden from public view, but the terms are still available for administration.
+  
+  - Articles tagged with a private term can still be used to group those articles within Article Lists.
+  - Private terms are NOT used in the Related Articles block - private taxonomies do not affect an Articles 'related-ness' scores
+  - Private terms will not display in the Category/Tag link section on Articles
+  
+  Resolves #217 
+  
+  Change Includes:
+  - `tiamat-theme` => `issue/217`
+  - `tiamat-custom-entities` => `issue/217`
+  
+---
+
 ## [20230209] - 2023-02-09
 
 -   ### Article List Formatting Changes and Updates
