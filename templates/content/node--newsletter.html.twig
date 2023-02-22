@@ -25,12 +25,13 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 {% if logged_in %}
     {% set isLoggedIn = "true" %}
 {% endif %}
-
+{# TO DO -- 2nd line of concat, figure out how to get newsletter section paragraph fields and the nested paragraph field w/ from that #}
 {# Builds JSON API endpoint for programmatic rendering #}
 {% set API = '/jsonapi/node/newsletter?filter[nid]=' 
 	~ node.id 
-	~ '?include[node--newsletter]=uid,title,ucb_article_content,created,field_newsletter_block_text_one,field_newsletter_block_title_one,field_newsletter_promo_image_one,field_newsletter_promo_link_one,field_newsletter_intro_image,field_newsletter_intro_body,field_newsletter_type,field_newsletter_block_text_two,field_newsletter_block_title_two,field_newsletter_promo_image_two,field_newsletter_promo_link_two,field_newsletter_section_block'
-	~ '&include=field_newsletter_promo_image_one.field_media_image,field_newsletter_intro_image.field_media_image,field_newsletter_promo_image_two.field_media_image'
+	~ '?fields[node--newsletter]=title,created,field_newsletter_block_text_one,field_newsletter_block_title_one,field_newsletter_promo_image_one,field_newsletter_promo_link_one,field_newsletter_intro_image,field_newsletter_intro_body,field_newsletter_type,field_newsletter_block_text_two,field_newsletter_block_title_two,field_newsletter_promo_image_two,field_newsletter_promo_link_two,field_newsletter_section_block'
+	~ '&fields[paragraph--newsletter_section]=field_newsletter_section_link,field_newsletter_section_select,field_newsletter_section_style,field_newsletter_section_title'
+	~ '&fields=field_newsletter_promo_image_one.field_media_image,field_newsletter_intro_image.field_media_image,field_newsletter_promo_image_two.field_media_image'
 	~ '&fields[file--file]=uri,url'
 %} 
 
@@ -109,6 +110,10 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 	</div>
 </article>
 
+<div class="container" id="email-preview" style="background-color: grey">
+	<newsletter-component url='{{API}}'></newsletter-component>
+</div>
+{# 
 {% if isLoggedIn == 'true' %}
 <div class="container" id="email-preview" style="background-color: grey">
 
@@ -140,4 +145,4 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 
 	  </div>
 </div>
-{% endif %}
+{% endif %} #}
