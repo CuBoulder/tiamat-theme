@@ -25,17 +25,30 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 {% if logged_in %}
     {% set isLoggedIn = "true" %}
 {% endif %}
-{# TO DO -- 2nd line of concat, figure out how to get newsletter section paragraph fields and the nested paragraph field w/ from that #}
-{# Builds JSON API endpoint for programmatic rendering #}
-{% set API = '/jsonapi/node/newsletter?filter[nid]=' 
-	~ node.id 
-	~ '?fields[node--newsletter]=title,created,field_newsletter_block_text_one,field_newsletter_block_title_one,field_newsletter_promo_image_one,field_newsletter_promo_link_one,field_newsletter_intro_image,field_newsletter_intro_body,field_newsletter_type,field_newsletter_block_text_two,field_newsletter_block_title_two,field_newsletter_promo_image_two,field_newsletter_promo_link_two,field_newsletter_section_block'
-	~ '&include=field_newsletter_promo_image_one.field_media_image,field_newsletter_intro_image.field_media_image,field_newsletter_promo_image_two.field_media_image'
-	~ '&fields[file--file]=uri,url'
-%} 
 
-{# 	~ '&fields[paragraph--newsletter_section]=field_newsletter_section_link,field_newsletter_section_select,field_newsletter_section_style,field_newsletter_section_title'
- #}
+{# EMAIL HTML RENDER #}
+{% if isLoggedIn %}
+	<div class="container" id="email-preview" style="background-color: grey">
+		<div id="email" style="width:600px;margin: auto;background:white;">
+			<table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: #f2f2f2;">
+				<!-- Header --> 
+				<tr>
+					<h1 id="newsletter-email-title" style="padding: 30px 30px 15px 60px;font-size: 52px; margin:0 0 20px 0; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"> {{ content.field_newsletter_type }}</h1>
+				  <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
+				<!-- Intro Img --> 
+					{% if content.field_newsletter_intro_image|render %}
+					<img id="newsletter-email-intro-img" src="{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" width="100%" style="margin-bottom: 20px;">
+					{% endif %}
+				<!-- Intro Text-->
+					{% if content.field_newsletter_intro_body|render %}
+					<div id="newsletter-intro-body">{{ content.field_newsletter_intro_body }}</div>
+					{% endif %}
+					</td>
+				</tr>
+			</table>
+		</div>
+	</div>
+{% endif %}
 
 <article{{attributes.addClass(classes)}}>
 	<div
@@ -44,7 +57,6 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 		>
 		{# Newsletter Title #}
 		<h1 class="ucb-newsletter-title" itemprop="name">{{ content.field_newsletter_type }}</h1>
-		<p> url : {{API}}</p>
 		{# Newsletter Intro #}
 		{% if content.field_newsletter_intro_image|render %}
 			<div id="newsletter-intro-img">{{ content.field_newsletter_intro_image }}</div>
@@ -111,40 +123,3 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 		</div>
 	</div>
 </article>
-
-<div class="container" id="email-preview" style="background-color: grey">
-	<newsletter-component url='{{API}}'></newsletter-component>
-</div>
-{# 
-{% if isLoggedIn == 'true' %}
-<div class="container" id="email-preview" style="background-color: grey">
-
-	<div id="email" style="width:600px;margin: auto;background:white;">		
-		<!-- Header --> 
-		<table role="presentation" border="0" width="100%" cellspacing="0">
-		<tr>
-			<h1 id="newsletter-email-title" style="padding: 30px 30px 15px 60px;font-size: 52px; margin:0 0 20px 0; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"> Header</h1>
-		  <td align="center" style="color: white;">
-			<img id="newsletter-email-intro-img" src="" width="100%">
-		  </tr>
-		  {% if content.field_newsletter_intro_body|render %}
-		  <tr>
-			<td align='left' style="padding:35px 30px 15px 60px;font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;">{{ content.field_newsletter_intro_body.0 }}</td>
-		  </tr>
-	  {% endif %}
-			</td>
-		</table>
-		<!-- Articles --> 
-
-		<div id="email-newsletter-article-section"></div>
- 
-		<div id="email-newsletter-promo-one-section"></div>
-
-	  <!-- Blocks-->
-	  <div id="email-newsletter-blocks-section"></div>
-	  <!--Promo 2-->
-	  <div id="email-newsletter-promo-two-section"></div>
-
-	  </div>
-</div>
-{% endif %} #}
