@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Enables block type templates to work properly with blocks added using either Layout Builder or Block Layout
+  Resolves CuBoulder/tiamat-theme#225
+---
+
 - ### Hidden Terms: Categories and Tags recieve form option to toggle display for admin-only taxonomies
   Category and Tag taxonomies receive the form option for them to be hidden from public view, but the terms are still available for administration.
   

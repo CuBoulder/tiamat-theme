@@ -17,6 +17,16 @@ function boulderD9_base_theme_suggestions_page_alter(array &$suggestions, array 
   }
 }
 
+/**
+ * Implements hook_theme_suggestions_HOOK_alter().
+ */
+function boulderD9_base_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+	if (isset($variables['elements']['content']['#block_content'])) {
+		$bundle = $variables['elements']['content']['#block_content']->bundle();
+		array_splice($suggestions, 1, 0, 'block__' . $bundle);
+	}
+}
+
 /***
  * This a helper function to set the favicon appropriately
  */
