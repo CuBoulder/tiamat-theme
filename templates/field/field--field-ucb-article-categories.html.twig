@@ -6,5 +6,8 @@
 #}
 
 {% for item in items %}
-    {{ item.content|render }}
+{# Only shows Taxonomy terms with display = true #}
+    {% if item.content['#options'].entity.field_ucb_category_display.value == 1 %}
+        {{ item.content|render }}
+    {% endif %}
 {% endfor %}
