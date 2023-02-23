@@ -1,0 +1,25 @@
+{#
+/**
+ * @file
+ * Theme to implement the newsletter section content in email friendly html
+ *
+#}
+
+{%
+    set classes = [
+      'paragraph',
+      'paragraph--type--' ~ paragraph.bundle|clean_class,
+      view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+      not paragraph.isPublished() ? 'paragraph--unpublished'
+    ]
+  %}
+  
+
+  {% block paragraph %}
+  <!-- Newsletter Section-->
+ 
+        <td>
+            <h2>{{ content.field_newsletter_section_title }}</h2>
+        </td>
+  {% endblock %}
+  

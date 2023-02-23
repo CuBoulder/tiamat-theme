@@ -26,7 +26,7 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
     {% set isLoggedIn = "true" %}
 {% endif %}
 
-{# EMAIL HTML RENDER #}
+{# EMAIL HTML RENDER
 {% if isLoggedIn %}
 	<div class="container" id="email-preview" style="background-color: grey">
 		<div id="email" style="width:600px;margin: auto;background:white;">
@@ -46,9 +46,21 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 					</td>
 				</tr>
 			</table>
+			{% if content.field_newsletter_section_block|render %}
+			<!--Newsletter Section-->
+				<tbody>
+					<tr style="max-width: 600px;">
+						<td align="center" style="text-align: left; padding-right:10px; padding-left:10px; width:100%;max-width:600px">
+							{% set displayType = 'email' %}
+							{{ include('paragraph--newsletter-section.html.twig',{displayType:displayType} ) }}
+							{{content.field_newsletter_section_block|render}}						
+						</td>
+					</tr>
+				</tbody>
+			{% endif %}
 		</div>
-	</div>
-{% endif %}
+	</div> #}
+{# {% endif %} #}
 
 <article{{attributes.addClass(classes)}}>
 	<div
@@ -69,7 +81,7 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 		<div class="ucb-newsletter-section-content">
 			{% if content.field_newsletter_section_block|render %}
 				<div class="ucb-article-body">
-					{{ content.field_newsletter_section_block }}
+					{{ content.field_newsletter_section_block|render }}
 				</div>
 			{% endif %}
 		</div>
