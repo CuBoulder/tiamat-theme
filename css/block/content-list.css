@@ -23,6 +23,7 @@
 
 .ucb-content-list-image {
 	margin-bottom: 20px;
+	max-width: 100%;
 }
 
 .ucb-content-list-display-full .ucb-content-list-title, .ucb-content-list-display-condensed .ucb-content-list-title, .ucb-content-list-display-teaser .ucb-content-list-title {
