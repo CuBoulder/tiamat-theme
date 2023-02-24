@@ -33,15 +33,11 @@
                 </td>
             </tr>
         </table>
+        <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: #f2f2f2;">
         {% if content.field_newsletter_section_block|render %}
         <!--Newsletter Section-->
-        <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: #f2f2f2;">
             <tbody>
-                <tr style="max-width: 600px;">
-                    <td align="center" style="text-align: left; padding-right:10px; padding-left:10px; width:100%;max-width:600px">
-                        {{content.field_newsletter_section_block|render}}						
-                    </td>
-                </tr>
+                        {{content.field_newsletter_section_block|render}}	
             </tbody>
         </table>
         {% endif %}
