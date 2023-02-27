@@ -20,7 +20,7 @@
         <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: #f2f2f2;">
             <!-- Header --> 
             <tr>
-                <h1 id="newsletter-email-title" style="padding: 30px 30px 15px 60px;font-size: 52px; margin:0 0 20px 0; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"> {{ content.field_newsletter_type }}</h1>
+                <h1 id="newsletter-email-title" style="padding: 30px 30px 15px 60px;font-size: 52px; margin:0 0 20px 0; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"> {{ label }}</h1>
               <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
             <!-- Intro Img --> 
                 {% if content.field_newsletter_intro_image|render %}
@@ -33,13 +33,12 @@
                 </td>
             </tr>
         </table>
-        <table style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: #f2f2f2;">
+        <!--Second table-->
+        <table>
         {% if content.field_newsletter_section_block|render %}
         <!--Newsletter Section-->
-            <tbody>
-                        {{content.field_newsletter_section_block|render}}	
-            </tbody>
+        {{content.field_newsletter_section_block|render}}
+            {% endif %}
         </table>
-        {% endif %}
     </div>
 </div>
