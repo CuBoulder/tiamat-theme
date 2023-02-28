@@ -7,6 +7,7 @@
  * Otherwise your data will break out of the table and instead become a sibling element to the outer table element
  * See: https://www.w3schools.com/html/html_tables.asp
 #}
+{% block paragraph %}
 <table>
 	<tbody>
   		<tr>
@@ -73,12 +74,14 @@
 				{# Code to render selected article content (categories) #}
 				{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_categories is not empty %}
 				<tr>
+					{# TO DO - Fix categories #}
 					<td>{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}</td>
 				</tr>
 
 				{# Code to render user made content (categories) #}
 				{% elseif item.entity.field_news_content_categories is not empty %}
 				<tr>
+					{# TO DO - Fix categories #}
 					<td>{{ item.entity.field_news_content_categories|view }}</td>
 				</tr>
 				{% endif %}
@@ -105,8 +108,10 @@
 				{% endif %}
 			{% endfor %}
 		{% else %}
+		<!--Teaser Section-->
 				{% for key, item in paragraph.field_newsletter_section_select %}
 					{%  if key|first != '#' %}
+					<!--Teaser Article-->
 					<table>
 						<tbody>
 							<tr>
@@ -164,6 +169,7 @@
 							{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_categories is not empty %}
 							<tr>
 								<td>
+														{# TO DO - Fix categories #}
 									{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}
 								</td>
 							</tr>
@@ -171,12 +177,13 @@
 						{% elseif item.entity.field_news_content_categories is not empty %}
 						<tr>
 							<td>
+													{# TO DO - Fix categories #}
 								{{ item.entity.field_news_content_categories|view }}
 							</td>
 						</tr>
 						{% endif %}
-													{# Code to render selected article content (summary) #}
-													{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_summary.value|render %}
+							{# Code to render selected article content (summary) #}
+						{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_summary.value|render %}
 													<tr>
 														<td>{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_summary|view }}</td>
 													</tr>
@@ -195,23 +202,15 @@
 												{% endif %}
 										</tbody>
 									</table>
-
 								</td>
-
 							</tr>
 						</tbody>
 					</table>
-
-
-
-
-
-
-
-
-					{% endif %}
-				{% endfor %}
+				{% endif %}
+			{% endfor %}
 		{% endif %}
+		<!--Article Section Link-->
 		{% if content.field_newsletter_section_link|render %}
 			{{ content.field_newsletter_section_link }}
 		{% endif %}
+		{% endblock %}
