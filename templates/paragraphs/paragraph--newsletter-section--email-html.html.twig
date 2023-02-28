@@ -14,67 +14,72 @@
 			{% for key, item in paragraph.field_newsletter_section_select %}
 				{%  if key|first != '#' %}
 					{# Code to render selected article content (thumbnail) #}
-					{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render %}
-                    <img style="margin: 0; border: 0; padding: 0; display: block;" src="{{file_url(item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
-						{# Code to render selected article content (!thumbnail) #}
-					{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render %}
-                        <img src="{{file_url(item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.fileuri|image_style('focal_image_square'))}}"/>
-						{# Code to render user made content #}
-					{% elseif item.entity.field_newsletter_content_image.entity.field_media_image.alt|render %}
-                    <img src="{{file_url(item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
-					{% endif %}
-
-					{# Code to render selected article title/url #}
+					<table>
+						<tbody>
+							<tr>
+								{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render %}
+								<td><img src="{{file_url(item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/></td>
+									{# Code to render selected article content (!thumbnail) #}
+								{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render %}
+									<td><img src="{{file_url(item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.fileuri|image_style('focal_image_square'))}}"/></td>
+									{# Code to render user made content #}
+								{% elseif item.entity.field_newsletter_content_image.entity.field_media_image.alt|render %}
+								<td><img src="{{file_url(item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/></td>
+								{% endif %}
+							</tr>
+				{# Code to render selected article title/url #}
 					{% if item.entity.field_newsletter_article_select.entity.title.value|render %}
-					<div id="feature-article-title-email-{{key}}">
+					<tr id="feature-article-title-email-{{key}}">
+						<td>
 						<h3>
 							<a href="{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
 								{{ item.entity.field_newsletter_article_select.entity.title.value|render|striptags|trim }}
 							</a>
 						</h3>
-					</div>
+						</td>
+					</tr>
 						{# Code to render user made content (title) #}
 					{% elseif item.entity.field_newsletter_content_title.value|render %}
-					<div id="feature-article-user-title-email-{{key}}">
-						<h3>
-							{{ item.entity.field_newsletter_content_title|view }}
-						</h3>
-					</div>
+					<tr id="feature-article-user-title-email-{{key}}">
+						<td>
+							<h3>
+								{{ item.entity.field_newsletter_content_title|view }}
+							</h3>
+						</td>
+					</tr>
 					{% endif %}
+				{# Code to render selected article content (categories) #}
+				{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_categories is not empty %}
+				<tr>
+					<td>{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}</td>
+				</tr>
 
-
-					{# Code to render selected article content (categories) #}
-					{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_categories is not empty %}
-						<div>
-							{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}
-						</div>
-
-						{# Code to render user made content (categories) #}
-					{% elseif item.entity.field_news_content_categories is not empty %}
-						<div>
-							{{ item.entity.field_news_content_categories|view }}
-						</div>
-					{% endif %}
-
-
+				{# Code to render user made content (categories) #}
+				{% elseif item.entity.field_news_content_categories is not empty %}
+				<tr>
+					<td>{{ item.entity.field_news_content_categories|view }}</td>
+				</tr>
+				{% endif %}
 					{# Code to render selected article content (summary) #}
 					{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_summary.value|render %}
-						<div id="feature-article-summary-email-{{key}}">
-							{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_summary|view }}
-						</div>
+						<tr id="feature-article-summary-email-{{key}}">
+							<td>{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_summary|view }}</td>
+						</tr>
 
 						{# Code to render selected article content (article text) #}
 					{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|render %}
-						<div id="feature-article-summary-text-email-{{key}}">
-							{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text|view }}
-						</div>
+						<tr id="feature-article-summary-text-email-{{key}}">
+							<td>{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text|view }}</td>
+						</tr>
 
 						{# Code to render user made content (content text) #}
 					{% elseif item.entity.field_newsletter_content_text.value|render %}
-						<div id="feature-article-summary-user-text-email-{{key}}">
-							{{ item.entity.field_newsletter_content_text|view }}
-						</div>
+						<tr id="feature-article-summary-user-text-email-{{key}}">
+							<td>{{ item.entity.field_newsletter_content_text|view }}</td>
+						</tr>
 					{% endif %}
+						</tbody>
+					</table>
 				{% endif %}
 			{% endfor %}
 		{% else %}
