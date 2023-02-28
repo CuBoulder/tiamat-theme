@@ -2,11 +2,13 @@
 /**
  * @file
  * Theme to implement the newsletter section content in email friendly html
- *
+ * 
+ * Notes: You must render Node data within a properly nested <td> element: <table>, <tbody>, <tr>, <td>, THEN your data within the <td> for Twig to nest it properly.
+ * Otherwise your data will break out of the table and instead become a sibling element to the outer table element
+ * See: https://www.w3schools.com/html/html_tables.asp
 #}
   <tr>
       <h2>{{ content.field_newsletter_section_title|render|striptags|trim }}</h2>
-      <h3>what am i: {{paragraph.field_newsletter_section_style.value}}</h3>
  </tr>
     {# Article #}
     {# If feature #}
