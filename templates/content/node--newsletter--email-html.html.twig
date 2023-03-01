@@ -67,6 +67,60 @@
 			{% endif %}
         <!--Promo Blocks-->
         {# TO DO - Promo Blocks #}
+
+        <table>
+			<tbody>
+                <tr>
+                    <td>
+                        <table>
+                            <tbody>
+                        {% if content.field_newsletter_block_title_one|render %}
+                                <tr>
+                                    <td>
+                                        <h3>{{ content.field_newsletter_block_title_one|render }}</h3>
+                                    </td>
+                                </tr>
+                        {% endif %}
+
+                        {% if content.field_newsletter_block_text_one|render %}
+                            <tr>
+                                <td>{{ content.field_newsletter_block_text_one|render }}</td>
+                            </tr>
+                        {% endif %}
+                            </tbody>
+                        </table>
+                    </td>
+                    <td>
+                        <table>
+                            <tbody>
+                    {% if content.field_newsletter_block_title_two|render %}
+                                <tr>
+                                    <td>
+                                        <h3>{{ content.field_newsletter_block_title_two|render }}</h3>
+                                    </td>
+                                </tr>
+                    {% endif %}
+
+                    {% if content.field_newsletter_block_text_two|render %}
+                
+                    <tr><td>    {{ content.field_newsletter_block_text_two|render }}</td></tr>
+                    {% endif %}
+                            </tbody>
+                            </table>
+                            </td>
+                </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+
+
+
+
+
         <!--Ad Two-->
         {% if content.field_newsletter_promo_image_two|render %}
         {% if content.field_newsletter_promo_link_two|render %}
