@@ -2,6 +2,9 @@
 /**
 * Theme layout to display a UCB Newsletter Page in Email HTML.
 *
+* Notes: You must render Node data within a properly nested <td> element: <table>, <tbody>, <tr>, <td>, THEN your data within the <td> for Twig to nest it properly.
+* Otherwise your data will break out of the table and instead become a sibling element to the outer table element
+* See: https://www.w3schools.com/html/html_tables.asp
 */
 #}
 
@@ -42,7 +45,7 @@
         <!--Ad One-->
 			{% if content.field_newsletter_promo_image_one|render %}
 				{% if content.field_newsletter_promo_link_one|render %}
-                <table>
+                <table role="presentation">
                     <tbody>
                         <tr>
                             <td>
@@ -54,7 +57,7 @@
                     </tbody>
                 </table>
 				{% else %}
-                <table>
+                <table role="presentation">
                     <tbody>
                         <tr>
                             <td>
@@ -66,13 +69,12 @@
 				{% endif %}
 			{% endif %}
         <!--Promo Blocks-->
-        {# TO DO - Promo Blocks #}
-
-        <table>
+        <table role="presentation">
 			<tbody>
                 <tr>
                     <td>
-                        <table>
+                        <!--Promo Block 1-->
+                        <table role="presentation">
                             <tbody>
                         {% if content.field_newsletter_block_title_one|render %}
                                 <tr>
@@ -91,7 +93,8 @@
                         </table>
                     </td>
                     <td>
-                        <table>
+                     <!--Promo Block 2-->
+                        <table role="presentation">
                             <tbody>
                     {% if content.field_newsletter_block_title_two|render %}
                                 <tr>
@@ -100,10 +103,11 @@
                                     </td>
                                 </tr>
                     {% endif %}
-
                     {% if content.field_newsletter_block_text_two|render %}
-                
-                    <tr><td>    {{ content.field_newsletter_block_text_two|render }}</td></tr>
+                    <tr>
+                        <td>    {{ content.field_newsletter_block_text_two|render }}</td>
+                    
+                    </tr>
                     {% endif %}
                             </tbody>
                             </table>
@@ -111,20 +115,10 @@
                 </tr>
             </tbody>
         </table>
-
-
-
-
-
-
-
-
-
-
         <!--Ad Two-->
         {% if content.field_newsletter_promo_image_two|render %}
         {% if content.field_newsletter_promo_link_two|render %}
-        <table>
+        <table role="presentation">
             <tbody>
                 <tr>
                     <td>
@@ -136,7 +130,7 @@
             </tbody>
         </table>
         {% else %}
-        <table>
+        <table role="presentation">
             <tbody>
                 <tr>
                     <td>
