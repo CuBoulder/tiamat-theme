@@ -27,10 +27,10 @@
   flex-direction: column;
 }
 
-.ucb-person-card-name {
-  font-size: 1.25rem;
-  font-weight: bolder;
-  margin-bottom: 0.25rem;
+.ucb-person-card-name h2 {
+  margin-bottom: 10px;
+  font-size: 120%;
+  font-weight: 600;
 }
 
 .ucb-person-card-dept {
@@ -148,4 +148,12 @@ tbody.ucb-people-list-table-tablebody {
 .ucb-person-card-contact-table {
   display: flex;
   flex-direction: column;
+}
+
+.iconColor{
+  color: #565A5C;
+}
+
+.ucb-person-card-body {
+  padding-bottom: .5rem;
 }

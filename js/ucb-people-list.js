@@ -424,7 +424,7 @@ class PeopleListElement extends HTMLElement {
 						<div class="col-sm-12 col-md-9 ucb-person-card-details">
 							<a href="${personLink}">
 								<span class="ucb-person-card-name">
-									${personName}
+									<h2>${personName}</h2>
 								</span>
 							</a>
 							<span class="ucb-person-card-title">
@@ -440,7 +440,7 @@ class PeopleListElement extends HTMLElement {
 								<span class="ucb-person-card-email">
 									${
 										personEmail ?
-											`<i class="fa fa-envelope"></i>
+											`<i class="fa fa-envelope iconColor"></i>
 											<a href="mailto:${personEmail}">
 												<span class="ucb-people-list-contact">  ${personEmail}</span>
 											</a>`
@@ -450,7 +450,7 @@ class PeopleListElement extends HTMLElement {
 								<span class="ucb-person-card-phone">
 									${
 										personPhone ?
-											`<i class="fa fa-phone"></i>
+											`<i class="fa fa-phone iconColor"></i>
 											<a href="tel:${personPhone.replace(/[^+\d]+/g, '',)}">
 												<span class="ucb-people-list-contact">  ${personPhone}</span>
 											</a>`
@@ -472,7 +472,7 @@ class PeopleListElement extends HTMLElement {
 						<div>
 							<a href="${personLink}">
 								<span class="ucb-person-card-name">
-									${personName ? personName : ''}
+									<h2>${personName ? personName : ''}<h2>
 								</span>
 							</a>
 							<span class="ucb-person-card-title departments-grid">
@@ -509,7 +509,7 @@ class PeopleListElement extends HTMLElement {
 							<span class="ucb-person-card-email">
 								${
 									personEmail ?
-										`<i class="fa fa-envelope"></i>
+										`<i class="fa fa-envelope iconColor"></i>
 										<a href="mailto:${personEmail}">
 											<span class="ucb-people-list-contact"> ${personEmail}</span>
 										</a>`
@@ -519,7 +519,7 @@ class PeopleListElement extends HTMLElement {
 							<span class="ucb-person-card-phone">
 									${
 										personPhone ?
-											`<i class="fa fa-phone"></i>
+											`<i class="fa fa-phone iconColor"></i>
 											<a href="tel:${personPhone.replace(/[^+\d]+/g, '',)}">
 												<span class="ucb-people-list-contact">${personPhone}</span>
 											</a>`
