@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds "Advanced" appearance settings and custom site logos; modifies contact info settings
+  This update:
+  - Adds an _Advanced_ view at the bottom of the _Appearance_ settings, collapsed by default and visible only to those with the _Edit advanced site settings_ permission.
+  - Moves all theme settings previously restricted to Drupal's default theme settings into the _Advanced_ view.
+  - Adds site-specific custom logos (resolves CuBoulder/tiamat-theme#264) and places the settings for custom logos into the _Advanced_ view:
+    - Custom logo requires _white text on dark header_ and _dark text on white header_ variants.
+    - An image can be uploaded or a path can be manually specified for each.
+    - ~~A scale can be specified, which defaults to _2x_ (Retina) but also allows _1x_ (standard) or _3x_ (enhanced Retina)~~.
+  - Assigns the _Architect_ and _Developer_ user roles the _Edit advanced site settings_ permission.
+  - Replaces address fields with general field and WYSIWYG editor in site contact info; removes colons from site contact info footer (resolves CuBoulder/tiamat-theme#269)
+  
+  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/19), [tiamat-profile](https://github.com/CuBoulder/tiamat-profile/pull/34)
+---
+
 - ### Enables block type templates to work properly with blocks added using either Layout Builder or Block Layout
   Resolves CuBoulder/tiamat-theme#225
 ---

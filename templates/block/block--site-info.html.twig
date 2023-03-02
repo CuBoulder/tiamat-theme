@@ -29,26 +29,21 @@
 {% set data = content['#data'] %}
 {% set icons_visible = data.icons_visible %}
 {%
-  set classes = [
-    data.separate_departments == '1' ? '-ucb-separate-departments',
-    data.address_visible == '1' ? '-ucb-addresses-visible',
-    data.email_visible == '1' ? '-ucb-emails-visible',
-    data.phone_visible == '1' ? '-ucb-phones-visible'
-  ]
+  set classes = []
 %}
 <div{{ attributes.addClass(classes) }}>
-  <h5><a href="/"> {{ site_name }} </a> </h5>
+  <h5><a href="/"> {{ site_name }} </a></h5>
   {% block content %}
     <div class="ucb-site-contact-info-footer">
-      {% if data.address_visible == '1' %}
+      {% if data.general_visible == '1' %}
       <div class="ucb-site-contact-info-footer-left">
-        {% for address in data.address %}
-          {% if address.visible == '1' %}
-            <div class="ucb-site-contact-info-footer-address">
-              {% if address.label %}
-                <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-address-label">{{ address.label }}: </span>
+        {% for item in data.general %}
+          {% if item.visible == '1' %}
+            <div class="ucb-site-contact-info-footer-general">
+              {% if item.label %}
+                <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-general-label">{{ item.label }} </span>
               {% endif %}
-              <span class="ucb-site-contact-info-footer-content ucb-site-contact-info-footer-address-content">{{ address.value | nl2br }}</span>
+              <span class="ucb-site-contact-info-footer-content ucb-site-contact-info-footer-general-content">{% if item.value.format == 'wysiwyg' or item.value.format == 'full_html' %}{{ item.value.value | raw }}{% else %}{{ item.value.value | nl2br }}{% endif %}</span>
             </div>
           {% endif %}
         {% endfor %}
@@ -61,7 +56,7 @@
             {% if email.visible == '1' %}
               <div class="ucb-site-contact-info-footer-email">
               {% if email.label %}
-                <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-email-label">{% if icons_visible %}<i class="fas fa-envelope-open"></i> {% endif %}{{ email.label }}: </span>
+                <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-email-label">{% if icons_visible %}<i class="fas fa-envelope-open"></i> {% endif %}{{ email.label }}</span>
               {% endif %}
               <a class="ucb-site-contact-info-footer-content ucb-site-contact-info-footer-email-content" href="mailto:{{ email.value }}">{% if not email.label and icons_visible %}<i class="fas fa-envelope-open"></i> {% endif %}{{ email.value }}</a></div>
             {% endif %}
@@ -74,7 +69,7 @@
             {% if phone.visible == '1' %}
               <div class="ucb-site-contact-info-footer-phone">
               {% if phone.label %}
-                <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-phone-label">{% if icons_visible %}<i class="fas fa-phone-alt"></i> {% endif %}{{ phone.label }}: </span>
+                <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-phone-label">{% if icons_visible %}<i class="fas fa-phone-alt"></i> {% endif %}{{ phone.label }}</span>
               {% endif %}
               <a class="ucb-site-contact-info-footer-content ucb-site-contact-info-footer-phone-content" href="tel:{{ phone.value }}">{% if not phone.label and icons_visible %}<i class="fas fa-phone-alt"></i> {% endif %}{{ phone.value }}</a></div>
             {% endif %}

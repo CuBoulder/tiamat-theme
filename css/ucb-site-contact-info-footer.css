@@ -14,13 +14,13 @@
     flex-wrap: wrap;
 }
 
-.ucb-site-contact-info-footer-address {
+.ucb-site-contact-info-footer-general {
     display: flex;
     flex-direction: column;
     margin-right: 2em;
 }
 
-.ucb-site-contact-info-footer-department-label, .ucb-site-contact-info-footer-addresses, .ucb-site-contact-info-footer-emails, .ucb-site-contact-info-footer-phones {
+.ucb-site-contact-info-footer-general, .ucb-site-contact-info-footer-emails, .ucb-site-contact-info-footer-phones {
     margin: 10px 0;
 }
 
@@ -38,4 +38,6 @@
     color: var(--ucb-gold);
 }
 
-
+.ucb-site-contact-info-footer-content * {
+	margin-bottom: 0;
+}

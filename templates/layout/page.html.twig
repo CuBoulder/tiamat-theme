@@ -83,7 +83,7 @@
     <header class="ucb {{ header_color }}{% if site_affiliation.id %} ucb-site-affiliation-{{ site_affiliation.id }}{% endif %}" role="banner">
       <div class="container ucb-menu-wrapper">
         <div class="ucb-site-name-wrapper">
-          <a href="{{ front_page }}">{{ site_name }}</a>
+          <a href="{{ front_page }}">{% if ucb_custom_logo %}<img role="img" class="ucb-custom-logo" srcset="{{ ucb_custom_logo.url }} {{ ucb_custom_logo.scale }}" alt="{{ site_name }}">{% else %}{{ site_name }}{% endif %}</a>
           {% if site_affiliation.id %}
             <div class="affiliation">
               {% if site_affiliation.url %}<a href="{{ site_affiliation.url }}">{{ site_affiliation.label }}</a>{% else %}{{ site_affiliation.label }}{% endif %}
