@@ -20,7 +20,7 @@
 
 <div class="container" id="email-preview" style="background-color: grey">
     <div id="email" style="width:600px;margin: auto;background:white;">
-        <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: #f2f2f2;">
+        <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
             <!-- Header --> 
             {# TO DO: Header #}
             <tr>
@@ -45,12 +45,12 @@
         <!--Ad One-->
 			{% if content.field_newsletter_promo_image_one|render %}
 				{% if content.field_newsletter_promo_link_one|render %}
-                <table role="presentation">
+                <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: #f2f2f2;">
                     <tbody>
                         <tr>
-                            <td>
+                            <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
                                 <a href="{{ content.field_newsletter_promo_link_one|render|striptags|trim }}">
-                                    <img src="{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                    <img width="100%" src="{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                 </a>
                             </td>
                         </tr>
@@ -60,8 +60,8 @@
                 <table role="presentation">
                     <tbody>
                         <tr>
-                            <td>
-                                <img src="{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                            <td align="center"style="text-align: left; padding-right:10px; padding-left:10px">
+                                <img width="100%"src="{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                             </td>
                         </tr>
                     </tbody>
@@ -69,43 +69,43 @@
 				{% endif %}
 			{% endif %}
         <!--Promo Blocks-->
-        <table role="presentation">
+        <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white">
 			<tbody>
                 <tr>
-                    <td>
+                    <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
                         <!--Promo Block 1-->
                         <table role="presentation">
                             <tbody>
                         {% if content.field_newsletter_block_title_one|render %}
                                 <tr>
-                                    <td>
+                                    <td style="text-align: left; padding-right:10px; padding-left:10px">
                                         <h3>{{ content.field_newsletter_block_title_one|render }}</h3>
                                     </td>
                                 </tr>
                         {% endif %}
 
                         {% if content.field_newsletter_block_text_one|render %}
-                            <tr>
-                                <td>{{ content.field_newsletter_block_text_one|render }}</td>
+                            <tr style="text-align: left; padding-right:10px; padding-left:10px"> 
+                                <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">{{ content.field_newsletter_block_text_one|render }}</td>
                             </tr>
                         {% endif %}
                             </tbody>
                         </table>
                     </td>
-                    <td>
+                    <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
                      <!--Promo Block 2-->
                         <table role="presentation">
                             <tbody>
                     {% if content.field_newsletter_block_title_two|render %}
                                 <tr>
-                                    <td>
+                                    <td style="text-align: left; padding-right:10px; padding-left:10px"> 
                                         <h3>{{ content.field_newsletter_block_title_two|render }}</h3>
                                     </td>
                                 </tr>
                     {% endif %}
                     {% if content.field_newsletter_block_text_two|render %}
                     <tr>
-                        <td>    {{ content.field_newsletter_block_text_two|render }}</td>
+                        <td style="text-align: left; padding-right:10px; padding-left:10px">    {{ content.field_newsletter_block_text_two|render }}</td>
                     
                     </tr>
                     {% endif %}
@@ -118,22 +118,22 @@
         <!--Ad Two-->
         {% if content.field_newsletter_promo_image_two|render %}
         {% if content.field_newsletter_promo_link_two|render %}
-        <table role="presentation">
+        <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: #f2f2f2;">
             <tbody>
                 <tr>
-                    <td>
+                    <td width="500px" style="text-align: left; padding-right:10px; padding-left:10px"> 
                         <a href="{{ content.field_newsletter_promo_link_two|render|striptags|trim }}">
-                            <img src="{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                            <img width="100%" src="{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                         </a>
                     </td>
                 </tr>
             </tbody>
         </table>
         {% else %}
-        <table role="presentation">
+        <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: #f2f2f2;">
             <tbody>
                 <tr>
-                    <td>
+                    <td style="text-align: left; padding-right:10px; padding-left:10px"> 
                         <img src="{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                     </td>
                 </tr>
