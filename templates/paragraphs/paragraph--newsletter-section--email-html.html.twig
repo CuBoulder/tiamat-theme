@@ -73,13 +73,13 @@
 				{# Code to render selected article content (categories) #}
 				{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_categories is not empty %}
 				<tr>
-					<td align="center" style="text-align: left; padding-right:10px; padding-left:10px">{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}</td>
+					<td class="tags" align="center" style="text-align: left; padding-right:10px; padding-left:10px">{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}</td>
 				</tr>
 
 				{# Code to render user made content (categories) #}
 				{% elseif item.entity.field_news_content_categories is not empty %}
 				<tr>
-					<td align="center" style="text-align: left; padding-right:10px; padding-left:10px">{{ item.entity.field_news_content_categories|view }}</td>
+					<td class="tags" align="center" style="text-align: left; padding-right:10px; padding-left:10px">{{ item.entity.field_news_content_categories|view }}</td>
 				</tr>
 				{% endif %}
 					{# Code to render selected article content (summary) #}
@@ -165,7 +165,7 @@
 							{# Code to render selected article content (categories) #}
 							{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_categories is not empty %}
 							<tr>
-								<td class="article-teaser-meta">
+								<td class="article-teaser-meta tags">
 														{# TO DO - Fix categories #}
 									{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}
 								</td>
@@ -173,7 +173,7 @@
 							{# Code to render user made content (categories) #}
 						{% elseif item.entity.field_news_content_categories is not empty %}
 						<tr>
-							<td>
+							<td class="tags">
 													{# TO DO - Fix categories #}
 								{{ item.entity.field_news_content_categories|view }}
 							</td>

@@ -1,27 +1,4 @@
-    var article = document.querySelector('.ucb-newsletter')
-    var loggedIn = article.getAttribute('data-loggedin') == 'true' ? true : false;
-
-    class NewsletterComponent extends HTMLElement{
-        constructor() {
-            super();
-            const api = this.getAttribute('url');
-            this.build(api);
-        }
-    
-        build(api){
-            console.log("my url",api)
-
-            fetch(api)
-            .then(res=>res.json())
-            .then(data=>{
-                console.log(data)
-            })
-        }
-    }
-    
-    customElements.define('newsletter-component', NewsletterComponent);
-
-
+(function ($, Drupal) {
 //     var newsletterPromos = document.getElementsByClassName('ucb-newsletter-promo-one')
 
 // // init
@@ -409,21 +386,36 @@
 //     }
 
 //     // Create the admin button for copying HTML and the admin messages
-//     var codeContainer = document.createElement('div')
+    var codeContainer = document.createElement('div')
 //     codeContainer.classList = 'container admin-html-button'
 
-//     // Create copy button and functionality
-//     var button = document.createElement('button')
-//     button.onclick = function(){
-//         var email = document.getElementById('email')
-//         navigator.clipboard.writeText(email.innerHTML)
-//         button.innerText = 'Your email-ready HTML has been copied to clipboard!'
-//         button.style.backgroundColor = 'grey'
-//     }
+    // Create copy button and functionality
+    var button = document.createElement('button')
+    button.style.backgroundColor = "gold"
+    button.onclick = function(){
+        var email = document.getElementById('email-preview')
+        var emailTemplate = 
+        `
+        <html>
+            <head>
+                <style>
+                </style>
+            </head>
+        `
 
-//     // Append
-//     var main = document.getElementsByTagName('main')[0]
-//     button.innerText = 'Click to copy your newsletter HTML'
-//     codeContainer.appendChild(button)
-//     main.appendChild(codeContainer)
-// }
+        var emailEnd = `
+        </html>`
+        console.log(email.innerHTML)
+        navigator.clipboard.writeText(emailTemplate+email.innerHTML+emailEnd)
+        button.innerText = 'Your email-ready HTML has been copied to clipboard!'
+        button.style.backgroundColor = 'grey'
+    }
+
+    // Append
+    var main = document.getElementById('block-boulderd9-base-content')
+    button.innerText = 'Click to copy your newsletter HTML'
+    codeContainer.appendChild(button)
+    main.appendChild(codeContainer)
+
+})(jQuery, Drupal);
+

@@ -16,9 +16,26 @@
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
     ]
 %}
-
+{{ attach_library('boulderD9_base/ucb-newsletter') }}
 
 <div class="container" id="email-preview" style="background-color: grey">
+    <html>
+        <head>
+            <style>
+                .tags > a{
+                    color: #656565 !important;
+                    text-decoration: none;
+                    background-color: #e7e7e7 !important;
+                    border-color: #e7e7e7;
+                    border-style: solid;
+                    border-width: 4px;
+                    font-size: 10px;
+                    font-weight: bold;
+                    margin: 0 5px 5px 0;
+                    text-transform: uppercase !important;
+                };
+            </style>
+        </head>
     <div id="email" style="width:600px;margin: auto;background:white;">
         <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
             <!-- Header --> 
@@ -144,4 +161,5 @@
         <!--Footer-->
         {# TO DO: Footer #}
     </div>
+    </html>
 </div>
