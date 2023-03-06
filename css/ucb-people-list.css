@@ -20,6 +20,7 @@
   margin-bottom: 20px;
   padding-bottom: 20px;
   border-bottom: 1px solid rgba(20 20 20 / 20%);
+  margin-left: 0px;
 }
 
 .ucb-person-card-details {
@@ -27,10 +28,10 @@
   flex-direction: column;
 }
 
-.ucb-person-card-name {
-  font-size: 1.25rem;
-  font-weight: bolder;
-  margin-bottom: 0.25rem;
+.ucb-person-card-name h2 {
+  margin-bottom: 10px;
+  font-size: 120%;
+  font-weight: 600;
 }
 
 .ucb-person-card-dept {
@@ -41,7 +42,7 @@
 
 .ucb-person-card-contact {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
 }
 
 .departments-grid {
@@ -133,4 +134,27 @@ tbody.ucb-people-list-table-tablebody {
 
 .people-list-filter .taxonomy-select {
 	max-width: 150px;
+}
+
+.ucb-person-card-img {
+  padding: 0 10px 10px 0;
+  height: 110px;
+  width: 110px;
+}
+
+.ucb-person-card-email {
+  padding-right: 20px;
+}
+
+.ucb-person-card-contact-table {
+  display: flex;
+  flex-direction: column;
+}
+
+.iconColor{
+  color: #565A5C;
+}
+
+.ucb-person-card-body {
+  padding-bottom: .5rem;
 }
