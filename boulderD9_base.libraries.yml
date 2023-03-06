@@ -200,6 +200,14 @@ ucb-newsletter:
     theme:
       css/ucb-newsletter.css: {}
 
+ucb-sticky-menu:
+  version: 1.x
+  js:
+    js/ucb-sticky-menu.js: {}
+  css:
+    theme:
+      css/ucb-sticky-menu.css: {}
+
 livechat:
   version: 1.x
   js:

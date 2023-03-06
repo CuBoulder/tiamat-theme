@@ -1,0 +1,14 @@
+.ucb-sticky-menu {
+	display: block;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+}
+
+.ucb-sticky-menu .ucb-logo {
+	max-width: 200px;
+	height: auto;
+	display: block;
+	margin-bottom: 10px;
+}
