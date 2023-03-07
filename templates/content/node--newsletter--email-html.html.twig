@@ -36,11 +36,15 @@
                     margin: 0 5px 5px 0;
                     text-transform: uppercase !important;
                 };
+                
+                .tags{
+                    padding-bottom: 10px;
+                };
 
                 a.button.button-full,a.button.button-block,.button.button-full,.button.button-block,a.button-ghost.button-full,a.button-ghost.button-block,.button-ghost.button-full,.button-ghost.button-block {
     display: block;
     text-align: center;
-}
+};
 
 .button.button-blue,.buttons-color-blue a,.buttons-color-blue a.button {
     background-color: #0277BD;
@@ -65,7 +69,7 @@
     transition: box-shadow 0.5s ease,background-color 0.5s ease,color 0.5s ease;
     background-color: #0277BD;
     color: #fff !important;
-}
+};
 
 .button.button-blue:hover,.button.button-blue:focus,.buttons-color-blue a:hover,.buttons-color-blue a:focus,.buttons-color-blue a.button:hover,.buttons-color-blue a.button:focus {
     background-color: #026dae;
@@ -73,7 +77,7 @@
     -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     -moz-box-shadow: 0 2px 5px rgba(0,0,0,0.3);
     box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-}
+};
 
 .button.button-blue:active,.buttons-color-blue a:active,.buttons-color-blue a.button:active {
     -webkit-box-shadow: 0 3px 15px rgba(0,0,0,0.35);
@@ -106,11 +110,21 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
     font-family:Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
     text-decoration: none;
 }
-p{
+
+*{
    font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
 }
+
+td>h3>a{
+    text-decoration: none;
+    color: #0277BD;
+}
+
             </style>
         </head>
+
+        {% set base_url = url('<front>')|render|split('/', -1)|join('/') %}
+
     <div id="email" style="width:600px;margin: auto;background:white;">
         <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
             <!-- Header --> 
@@ -120,7 +134,7 @@ p{
               <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
             <!-- Intro Img --> 
                 {% if content.field_newsletter_intro_image|render %}
-                <img id="newsletter-email-intro-img" src="{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" width="100%" style="margin-bottom: 20px;">
+                <img id="newsletter-email-intro-img" src="{{base_url}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" width="100%" style="margin-bottom: 20px;">
                 {% endif %}
             <!-- Intro Text-->
                 {% if content.field_newsletter_intro_body|render %}
@@ -141,8 +155,8 @@ p{
                     <tbody>
                         <tr>
                             <td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
-                                <a href="{{ content.field_newsletter_promo_link_one|render|striptags|trim }}">
-                                    <img width="100%" src="{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                <a href="{{base_url}}{{ content.field_newsletter_promo_link_one|render|striptags|trim }}">
+                                    <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                 </a>
                             </td>
                         </tr>
@@ -153,7 +167,7 @@ p{
                     <tbody>
                         <tr>
                             <td align="center"style="text-align: left; padding-right:10px; padding-left:10px; padding-bottom:20px">
-                                <img width="100%"src="{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                <img width="100%"src="{{base_url}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                             </td>
                         </tr>
                     </tbody>
@@ -214,8 +228,8 @@ p{
             <tbody>
                 <tr>
                     <td width="500px" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px"> 
-                        <a href="{{ content.field_newsletter_promo_link_two|render|striptags|trim }}">
-                            <img width="100%" src="{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                        <a href="{{base_url}}{{ content.field_newsletter_promo_link_two|render|striptags|trim }}">
+                            <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                         </a>
                     </td>
                 </tr>
@@ -226,7 +240,7 @@ p{
             <tbody>
                 <tr>
                     <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px"> 
-                        <img src="{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                        <img src="{{base_url}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                     </td>
                 </tr>
             </tbody>
