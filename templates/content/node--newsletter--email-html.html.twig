@@ -16,6 +16,7 @@
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
     ]
 %}
+{{ attach_library('boulderD9_base/ucb-page') }}
 
 {{ attach_library('boulderD9_base/ucb-newsletter') }}
 
@@ -35,10 +36,83 @@
                     margin: 0 5px 5px 0;
                     text-transform: uppercase !important;
                 };
+
+                a.button.button-full,a.button.button-block,.button.button-full,.button.button-block,a.button-ghost.button-full,a.button-ghost.button-block,.button-ghost.button-full,.button-ghost.button-block {
+    display: block;
+    text-align: center;
+}
+
+.button.button-blue,.buttons-color-blue a,.buttons-color-blue a.button {
+    background-color: #0277BD;
+    color: #fff !important;
+    display: inline-block;
+    padding: 5px 10px;
+    font-weight: bold;
+    transition: background-color 0.5s ease;
+    margin-bottom: 5px;
+    text-decoration: none !important;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
+    transition: -webkit-box-shadow 0.5s ease,background-color 0.5s ease,color 0.5s ease;
+    transition: -moz-box-shadow 0.5s ease,background-color 0.5s ease,color 0.5s ease;
+    transition: box-shadow 0.5s ease,background-color 0.5s ease,color 0.5s ease;
+    background-color: #0277BD;
+    color: #fff !important;
+}
+
+.button.button-blue:hover,.button.button-blue:focus,.buttons-color-blue a:hover,.buttons-color-blue a:focus,.buttons-color-blue a.button:hover,.buttons-color-blue a.button:focus {
+    background-color: #026dae;
+    background-color: #026baa;
+    -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    -moz-box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+}
+
+.button.button-blue:active,.buttons-color-blue a:active,.buttons-color-blue a.button:active {
+    -webkit-box-shadow: 0 3px 15px rgba(0,0,0,0.35);
+    -moz-box-shadow: 0 3px 15px rgba(0,0,0,0.35);
+    box-shadow: 0 3px 15px rgba(0,0,0,0.35);
+};
+a:link,a:visited {
+    color: #0277BD;
+    transition: background-color 0.25s ease,border-color 0.25s ease,color 0.25s ease;
+    text-decoration: none;
+    text-decoration-color: rgba(2,119,189,0.65);
+    -webkit-text-decoration-color: rgba(2,119,189,0.65);
+}
+
+a:hover {
+    color: #B71C1C;
+    text-decoration-color: rgba(183,28,28,0.65);
+    -webkit-text-decoration-color: rgba(183,28,28,0.65);
+}
+
+a:active {
+    color: #B71C1C;
+    text-decoration-color: rgba(183,28,28,0.65);
+    -webkit-text-decoration-color: rgba(183,28,28,0.65);
+}
+
+h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
+    line-height: 1.3;
+    margin: 0 0 10px 0;
+    font-family:Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+    text-decoration: none;
+}
+p{
+   font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+}
             </style>
         </head>
     <div id="email" style="width:600px;margin: auto;background:white;">
-        <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
+        <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
             <!-- Header --> 
             {# TO DO: Header #}
             <tr>
@@ -63,7 +137,7 @@
         <!--Ad One-->
 			{% if content.field_newsletter_promo_image_one|render %}
 				{% if content.field_newsletter_promo_link_one|render %}
-                <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
+                <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
                     <tbody>
                         <tr>
                             <td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
@@ -87,7 +161,7 @@
 				{% endif %}
 			{% endif %}
         <!--Promo Blocks-->
-        <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white">
+        <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white">
 			<tbody>
                 <tr>
                     <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">

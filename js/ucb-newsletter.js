@@ -393,12 +393,20 @@
     var button = document.createElement('button')
     button.style.backgroundColor = "gold"
     button.onclick = function(){
+        var style = document.getElementsByTagName('style')
         var email = document.getElementById('email-preview')
+        var emailStyles = ""
+        for(stylesheet of style){
+            emailStyles += stylesheet.innerText
+        }
+        
         var emailTemplate = 
         `
+        <!DOCTYPE html>
         <html>
             <head>
                 <style>
+                ${emailStyles}
                 </style>
             </head>
         `
