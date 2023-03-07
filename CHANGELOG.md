@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updated people list formatting
+  Adds better formatting to  person list.
+  Closes #219 
+---
+
 - ### Adds "Advanced" appearance settings and custom site logos; modifies contact info settings
   This update:
   - Adds an _Advanced_ view at the bottom of the _Appearance_ settings, collapsed by default and visible only to those with the _Edit advanced site settings_ permission.
