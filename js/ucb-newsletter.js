@@ -392,7 +392,24 @@
     // Create copy button and functionality
     var button = document.createElement('button')
     button.style.backgroundColor = "gold"
+
     button.onclick = function(){
+
+        // Get baseURL
+        var emailContainer = document.getElementById('email')
+        var baseURL = emailContainer.dataset.url
+
+        // Tags -  make absolute
+        var tags = document.getElementsByClassName('tags')
+        // Iterate through all tags and create an absolute url
+        for(tag of tags){
+            for(child of tag.children){
+                var endurl = child.getAttribute('href')
+                child.href = `${baseURL}${endurl}`
+            }
+        }
+
+        // Stick the styles in the header of the email
         var style = document.getElementsByTagName('style')
         var email = document.getElementById('email-preview')
         var emailStyles = ""
@@ -413,13 +430,14 @@
 
         var emailEnd = `
         </html>`
-        console.log(email.innerHTML)
+
+        // Add to clipboard, change text
         navigator.clipboard.writeText(emailTemplate+email.innerHTML+emailEnd)
         button.innerText = 'Your email-ready HTML has been copied to clipboard!'
         button.style.backgroundColor = 'grey'
     }
 
-    // Append
+    // Append Button
     var main = document.getElementById('block-boulderd9-base-content')
     button.innerText = 'Click to copy your newsletter HTML'
     codeContainer.appendChild(button)
