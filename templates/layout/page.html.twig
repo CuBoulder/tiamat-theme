@@ -68,7 +68,9 @@
 		<rave-alert feed="https://www.getrave.com/rss/cuboulder/channel1" link="https://alerts.colorado.edu"></rave-alert>
 	{% endif %}
 
-	{% include '@boulderD9_base/includes/ucb-sticky-menu.html.twig' %}
+	{% if ucb_sticky_menu %}
+		{% include '@boulderD9_base/includes/ucb-sticky-menu.html.twig' %}
+	{% endif %}
 
     {{ page.header }}
     <div class="page-header">

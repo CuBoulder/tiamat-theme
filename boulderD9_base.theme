@@ -69,14 +69,19 @@ function boulderD9_base_preprocess_page(array &$variables) {
   $variables['ucb_be_boulder'] = theme_get_setting('ucb_be_boulder');
   $variables['ucb_social_share_position'] = theme_get_setting('ucb_social_share_position');
   $variables['ucb_rave_alerts'] = theme_get_setting('ucb_rave_alerts');
+  $variables['ucb_sticky_menu'] = theme_get_setting('ucb_sticky_menu');
   $variables['ucb_date_format'] = theme_get_setting('ucb_date_format');
   $useCustomLogo = theme_get_setting('ucb_use_custom_logo');
   if ($useCustomLogo) {
+	$logoDarkURL = file_create_url(theme_get_setting('ucb_custom_logo_dark_path'));
+	$logoLightURL = file_create_url(theme_get_setting('ucb_custom_logo_light_path'));
 	$variables['ucb_custom_logo'] = [
-		'url' =>  file_create_url(theme_get_setting($headerColor == '1' || $headerColor == '2' ? 'ucb_custom_logo_light_path' : 'ucb_custom_logo_dark_path')),
+		'dark_url' => $logoDarkURL,
+		'light_url' => $logoLightURL,
+		'url' =>  $headerColor == '1' || $headerColor == '2' ? $logoLightURL : $logoDarkURL,
 		'scale' => theme_get_setting('ucb_custom_logo_scale') ?? '2x'
 	];
-  } else $variables['ucb_custom_logo'] = null;
+  }
 
   // check to see if we're on the homepage or not
   try {

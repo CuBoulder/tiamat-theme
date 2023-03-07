@@ -1,8 +1,16 @@
 {{ attach_library('boulderD9_base/ucb-sticky-menu') }}
-<div class="ucb-sticky-menu">
-	<div class="background-black">
-		<div class="container">
+<div hidden class="ucb-sticky-menu background-black">
+	<div class="container">
+		<div class="sticky-menu-branding">
 			<a href="https://www.colorado.edu" class="ucb-home-link"><img class="ucb-logo" src="https://cdn.colorado.edu/static/brand-assets/live/images/cu-boulder-logo-text-white.svg" alt="University of Colorado Boulder"></a>
+		</div>
+		<div class="sticky-menu-inner">
+			<div class="sticky-menu-site-name">
+			    <a href="{{ front_page }}">{% if ucb_custom_logo %}<img role="img" srcset="{{ ucb_custom_logo.dark_url }} {{ ucb_custom_logo.scale }}" alt="{{ site_name }}">{% else %}{{ site_name }}{% endif %}</a>
+			</div>
+			<div class="sticky-menu-menu">
+				{{ page.primary_menu }}
+			</div>
 		</div>
 	</div>
 </div>

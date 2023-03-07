@@ -1,14 +1,68 @@
 .ucb-sticky-menu {
-	display: block;
 	position: fixed;
+	display: block;
+	width: 100%;
 	top: 0;
 	left: 0;
-	width: 100%;
+	border-bottom: 1px solid var(--ucb-gold);
+	z-index: 20;
+	padding: .5rem 0;
 }
 
-.ucb-sticky-menu .ucb-logo {
+@media only screen and (max-width: 960px) {
+	.ucb-sticky-menu {
+		display: none;
+	}
+}
+
+.ucb-sticky-menu[hidden] {
+	display: none;
+}
+
+.gin--horizontal-toolbar .ucb-sticky-menu {
+	top: var(--gin-toolbar-height, 53px);
+}
+
+.ucb-sticky-menu img {
+	display: block;
 	max-width: 200px;
 	height: auto;
-	display: block;
-	margin-bottom: 10px;
+}
+
+.ucb-sticky-menu .sticky-menu-branding {
+	margin: .5em 0;
+}
+
+.ucb-sticky-menu .sticky-menu-inner {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.ucb-sticky-menu .sticky-menu-site-name {
+	flex-shrink: 1;
+	font-family: 'Roboto Condensed', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+	font-size: 1rem;
+	min-width: 200px;
+	margin-right: 1.5rem;
+}
+
+.ucb-sticky-menu .sticky-menu-menu {
+	font-size: .75rem;
+	font-weight: bold;
+}
+
+.sticky-menu-inner a:link, .sticky-menu-inner a:visited {
+	color: #FFFFFF;
+}
+
+.sticky-menu-inner li.main-menu-item a.nav-link {
+	color: #FFFFFF;
+	border-bottom: none;
+	padding: 0 .5rem;
+}
+
+.sticky-menu-inner li.main-menu-item a.nav-link:hover {
+	color: var(--ucb-gold);
 }
