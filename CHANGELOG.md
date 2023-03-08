@@ -9,43 +9,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Updated people list formatting
-  Adds better formatting to  person list.
-  Closes #219 
----
+## [20230307] - 2023-03-07
 
-- ### Adds "Advanced" appearance settings and custom site logos; modifies contact info settings
-  This update:
-  - Adds an _Advanced_ view at the bottom of the _Appearance_ settings, collapsed by default and visible only to those with the _Edit advanced site settings_ permission.
-  - Moves all theme settings previously restricted to Drupal's default theme settings into the _Advanced_ view.
-  - Adds site-specific custom logos (resolves CuBoulder/tiamat-theme#264) and places the settings for custom logos into the _Advanced_ view:
-    - Custom logo requires _white text on dark header_ and _dark text on white header_ variants.
-    - An image can be uploaded or a path can be manually specified for each.
-    - ~~A scale can be specified, which defaults to _2x_ (Retina) but also allows _1x_ (standard) or _3x_ (enhanced Retina)~~.
-  - Assigns the _Architect_ and _Developer_ user roles the _Edit advanced site settings_ permission.
-  - Replaces address fields with general field and WYSIWYG editor in site contact info; removes colons from site contact info footer (resolves CuBoulder/tiamat-theme#269)
-  
-  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/19), [tiamat-profile](https://github.com/CuBoulder/tiamat-profile/pull/34)
----
+-   ### Updated people list formatting
+    Adds better formatting to  person list.
+    Closes #219 
 
-- ### Enables block type templates to work properly with blocks added using either Layout Builder or Block Layout
-  Resolves CuBoulder/tiamat-theme#225
----
+* * *
 
-- ### Hidden Terms: Categories and Tags recieve form option to toggle display for admin-only taxonomies
-  Category and Tag taxonomies receive the form option for them to be hidden from public view, but the terms are still available for administration.
-  
-  - Articles tagged with a private term can still be used to group those articles within Article Lists.
-  - Private terms are NOT used in the Related Articles block - private taxonomies do not affect an Articles 'related-ness' scores
-  - Private terms will not display in the Category/Tag link section on Articles
-  
-  Resolves #217 
-  
-  Change Includes:
-  - `tiamat-theme` => `issue/217`
-  - `tiamat-custom-entities` => `issue/217`
-  
----
+-   ### Adds "Advanced" appearance settings and custom site logos; modifies contact info settings
+
+    This update:
+
+    -   Adds an _Advanced_ view at the bottom of the _Appearance_ settings, collapsed by default and visible only to those with the _Edit advanced site settings_ permission.
+    -   Moves all theme settings previously restricted to Drupal's default theme settings into the _Advanced_ view.
+    -   Adds site-specific custom logos (resolves CuBoulder/tiamat-theme#264) and places the settings for custom logos into the _Advanced_ view:
+        -   Custom logo requires _white text on dark header_ and _dark text on white header_ variants.
+        -   An image can be uploaded or a path can be manually specified for each.
+        -   ~~A scale can be specified, which defaults to _2x_ (Retina) but also allows _1x_ (standard) or _3x_ (enhanced Retina)~~.
+    -   Assigns the _Architect_ and _Developer_ user roles the _Edit advanced site settings_ permission.
+    -   Replaces address fields with general field and WYSIWYG editor in site contact info; removes colons from site contact info footer (resolves CuBoulder/tiamat-theme#269)
+
+    Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/19), [tiamat-profile](https://github.com/CuBoulder/tiamat-profile/pull/34)
+
+* * *
+
+-   ### Enables block type templates to work properly with blocks added using either Layout Builder or Block Layout
+    Resolves CuBoulder/tiamat-theme#225
+
+* * *
+
+-   ### Hidden Terms: Categories and Tags recieve form option to toggle display for admin-only taxonomies
+
+    Category and Tag taxonomies receive the form option for them to be hidden from public view, but the terms are still available for administration.
+
+    -   Articles tagged with a private term can still be used to group those articles within Article Lists.
+    -   Private terms are NOT used in the Related Articles block - private taxonomies do not affect an Articles 'related-ness' scores
+    -   Private terms will not display in the Category/Tag link section on Articles
+
+    Resolves #217 
+
+    Change Includes:
+
+    -   `tiamat-theme` => `issue/217`
+    -   `tiamat-custom-entities` => `issue/217`
+
+* * *
 
 ## [20230209] - 2023-02-09
 
@@ -117,7 +126,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20230209...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20230307...HEAD
+
+[20230307]: https://github.com/CuBoulder/tiamat-theme/compare/20230209...20230307
 
 [20230209]: https://github.com/CuBoulder/tiamat-theme/compare/0.20230110...20230209
 
