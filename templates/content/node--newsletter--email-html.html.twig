@@ -25,6 +25,10 @@
         <head>
             <style>
 
+                img{
+        max-width:100%;
+        height:auto
+    }
                 
                 a, a:visited, a:hover, a:active {
     text-decoration: none;
@@ -133,6 +137,15 @@ td>h3>a{
         {% set base_url = url('<front>')|render|split('/', -1)|join('/') %}
 
     <div id="email" style="width:600px;margin: auto;background:white;" data-url="{{base_url}}">
+        <table role='presentation' width="100%">
+            <tbody>
+                <tr>
+                    <td style="padding-right:10px;text-align:right;">
+                        <a href="{{base_url}}{{ path('entity.node.canonical', {'node': node.id}) }}">View on website</a>
+                    </td>
+                    </tr>
+            </tbody>
+        </table>
         <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
             <!-- Header --> 
             {# TO DO: Header #}
