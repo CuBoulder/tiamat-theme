@@ -46,7 +46,7 @@
     text-align: center;
 };
 
-.button.button-blue,.buttons-color-blue a,.buttons-color-blue a.button {
+.button.button-blue,.button-blue,.buttons-color-blue a,.buttons-color-blue a.button, td> .button {
     background-color: #0277BD;
     color: #fff !important;
     display: inline-block;
@@ -155,7 +155,7 @@ td>h3>a{
                     <tbody>
                         <tr>
                             <td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
-                                <a href="{{base_url}}{{ content.field_newsletter_promo_link_one|render|striptags|trim }}">
+                                <a href="{{ content.field_newsletter_promo_link_one|render|striptags|trim }}">
                                     <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                 </a>
                             </td>
@@ -228,7 +228,7 @@ td>h3>a{
             <tbody>
                 <tr>
                     <td width="500px" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px"> 
-                        <a href="{{base_url}}{{ content.field_newsletter_promo_link_two|render|striptags|trim }}">
+                        <a href="{{ content.field_newsletter_promo_link_two|render|striptags|trim }}">
                             <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                         </a>
                     </td>
