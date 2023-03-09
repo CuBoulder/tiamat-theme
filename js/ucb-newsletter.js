@@ -1,11 +1,13 @@
 (function ($, Drupal) {
 //     // Create the admin button for copying HTML and the admin messages
     var codeContainer = document.createElement('div')
+    codeContainer.classList = 'container email-button-container'
+    codeContainer.style.cssText = 'display: flex; justify-content: center; padding-top:10px;padding-top: 10px;flex-wrap: wrap;'
 //     codeContainer.classList = 'container admin-html-button'
 
     // Create copy button and functionality
     var button = document.createElement('button')
-    button.style.backgroundColor = "gold"
+    button.style.cssText = 'background-color:gold;width: 100%;max-width: 60%;padding: 10px;margin: 10px;'
 
     button.onclick = function(){
 
@@ -75,6 +77,7 @@
 
         // Add to clipboard, change text
         navigator.clipboard.writeText(emailTemplate+email.innerHTML+emailEnd)
+        textArea.innerText = emailTemplate+email.innerHTML+emailEnd
         button.innerText = 'Your email-ready HTML has been copied to clipboard!'
         button.style.backgroundColor = 'grey'
     }
@@ -83,6 +86,11 @@
     var main = document.getElementById('block-boulderd9-base-content')
     button.innerText = 'Click to copy your newsletter HTML'
     codeContainer.appendChild(button)
+    
+    // Append TextArea
+    var textArea = document.createElement('textarea')
+    textArea.style.cssText = 'display: block;width: 100%;height: 241px;'
+    codeContainer.appendChild(textArea)
     main.appendChild(codeContainer)
 
 })(jQuery, Drupal);
