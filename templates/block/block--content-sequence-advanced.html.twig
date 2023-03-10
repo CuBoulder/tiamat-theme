@@ -16,13 +16,31 @@
 ] %}{% set timelineEvents = [] %}{% set timelineOptions = {
 	'hash_bookmark': true,
 	'scale_factor': entity.field_content_sequence_scale.0.value
-} %}{% set embedId = 'timelinejs-embed-' ~ entity.uuid.0.value %}
-{% for item in entity.field_content_sequence_items %}{% set itemData = {
+} %}{% set embedId = 'timeline-embed-' ~ entity.uuid.0.value %}
+{% for item in entity.field_content_sequence_items %}
+{% set startDate = item.entity.field_sequence_item_start_date.0.value ?? 'now' %}{% set endDate = item.entity.field_sequence_item_end_date.0.value ?? 'now' %}
+{% if item.entity.field_sequence_item_media.0 %}{% set imageEntity = item.entity.field_sequence_item_media.0.entity.field_media_image.entity %}{% set itemMedia = {
+	'url': imageEntity.fileuri|image_style('focal_image_wide')
+} %}{% else %}{% set itemMedia = null %}{% endif %}
+{% set itemData = {
 	'text': {
 		'headline': item.entity.field_sequence_item_title.0.value,
 		'text': item.entity.field_sequence_item_descr.0.value
-	}
-} %}{% set timelineEvents = timelineEvents|merge([itemData]) %}{% endfor %}{% set timelineData = {'events': timelineEvents} %}
+	},
+	'start_date': {
+		'month': startDate|date('m'),
+		'day': startDate|date('d'),
+		'year': startDate|date('Y')
+	},
+	'end_date': {
+		'month': endDate|date('m'),
+		'day': endDate|date('d'),
+		'year': endDate|date('Y')
+	},
+	'group': item.entity.field_sequence_item_group.0.value,
+	'media': itemMedia
+} %}{% set timelineEvents = timelineEvents|merge([itemData]) %}
+{% endfor %}{% set timelineData = {'events': timelineEvents} %}
 {% block content %}<div{{ attributes.addClass(classes) }}>
 	{{ title_prefix }}
 	{% if label %}<h2{{ title_attributes }}>{{ label }}</h2>{% endif %}
