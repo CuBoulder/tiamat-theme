@@ -15,10 +15,10 @@
 	bundle ? 'block--type-' ~ bundle|clean_class,
 	view_mode ? 'block--view-mode-' ~ view_mode|clean_class
 ] %}
-<div{{ attributes.addClass(classes) }}>
+{% block content %}<div{{ attributes.addClass(classes) }}>
 	{{ title_prefix }}
 	{% if label %}<h2{{ title_attributes }}>{{ label }}</h2>{% endif %}
 	{{ title_suffix }}
 	{# TODO: Work for the horizontal and vertical display modes goes here #}
-</div>
+</div>{% endblock %}
 {% endif %}
