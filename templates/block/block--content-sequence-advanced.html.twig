@@ -1,0 +1,36 @@
+{#
+/**
+ * @file
+ * Implements the advanced "Content Sequence" block.
+ * @author Tim Tripp
+ */
+#}
+{{ attach_library('boulderD9_base/timelinejs') }}
+{% set entity = content['#block_content'] %}{% set classes = [
+	'container',
+	'block',
+	'block-' ~ configuration.provider|clean_class,
+	'block-' ~ plugin_id|clean_class,
+	bundle ? 'block--type-' ~ bundle|clean_class,
+	view_mode ? 'block--view-mode-' ~ view_mode|clean_class
+] %}{% set timelineEvents = [] %}{% set timelineOptions = {
+	'hash_bookmark': true,
+	'scale_factor': entity.field_content_sequence_scale.0.value
+} %}{% set embedId = 'timelinejs-embed-' ~ entity.uuid.0.value %}
+{% for item in entity.field_content_sequence_items %}{% set itemData = {
+	'text': {
+		'headline': item.entity.field_sequence_item_title.0.value,
+		'text': item.entity.field_sequence_item_descr.0.value
+	}
+} %}{% set timelineEvents = timelineEvents|merge([itemData]) %}{% endfor %}{% set timelineData = {'events': timelineEvents} %}
+{% block content %}<div{{ attributes.addClass(classes) }}>
+	{{ title_prefix }}
+	{% if label %}<h2{{ title_attributes }}>{{ label }}</h2>{% endif %}
+	{{ title_suffix }}
+	<div id="{{ embedId }}" style="width: 100%; height: 600px" aria-hidden="true" role="presentation" tabindex="-1"></div>
+	<script type="text/javascript">
+		document.addEventListener('DOMContentLoaded', function() {
+			new TL.Timeline('{{ embedId }}', {{ timelineData | json_encode | raw }}, {{ timelineOptions | json_encode | raw }});
+		});
+	</script>
+</div>{% endblock %}
