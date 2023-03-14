@@ -14,6 +14,7 @@ ucb_header_color: '3'
 ucb_sidebar_position: '0'
 ucb_be_boulder: '1'
 ucb_rave_alerts: 1
+ucb_sticky_menu: 0
 ucb_gtm_account: ''
 ucb_secondary_menu_default_links: 0
 ucb_secondary_menu_position: inline
