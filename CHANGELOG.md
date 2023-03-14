@@ -9,6 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter Refactor
+  Partially resolves #222 - Enhances the Newsletter for more consistency with final email html generation via Twig templating engine instead of JavaScript. Should resolve issues with inconsistent displays and partial/error renders from unexpected user inputs.
+  
+  TO DO - Will address `Newsletter Type` taxonomy and Theme selection in #273 
+  
+  ### New Workflow for Newsletters
+  
+  1.  After creating your Newsletter, go to `Edit -> Preview`. 
+  2.  In the top dropdown menu to select your View Mode, select `Email HTML` as your View Mode. The page will now render the Email HTML version.
+  3.  Scroll to the bottom of your Email View Mode Preview for a button to automatically copy your html code to the clipboard ready to paste, as well as populate a text field with your email html.
+  4. You can now paste into your email client / Salesforce client and send.
+  
+  
+  Includes:
+  - `tiamat-theme` => issue/222
+  - `tiamat-custom-entities` => issue/222
+---
+
 - ### Adds sticky menu
   This update adds an optional "sticky menu" component to all pages on a site, enabled by visiting CU Boulder site settings → Appearance and toggling on _Show sticky menu_. The menu appears automatically when a user scrolls down passed the main website header, and only on large screen devices (at least 960 pixels wide).
   

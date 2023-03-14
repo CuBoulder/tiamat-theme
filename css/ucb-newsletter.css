@@ -4,6 +4,12 @@
 }
 
 .article-teaser-meta {
+  text-transform: uppercase;
+  font-size: 75%;
+}
+
+.article-teaser-meta a {
+  color: #666;
   background-color: #e7e7e7;
   padding: 3px;
   line-height: 100%;
@@ -11,12 +17,6 @@
   font-weight: 600;
   text-decoration: none;
   display: inline-block;
-  font-size: 75%;
-  text-transform: uppercase;
-}
-
-.article-teaser-meta a {
-  color: #666;
 }
 
 .admin-html-button{
@@ -29,4 +29,19 @@
   box-shadow: rgb(0 0 0 / 20%) 0px 1px 2px 0px;
   border-radius: 3px;
   background-color: goldenrod;
+}
+
+/* Allows for full-width Feature style Article Thumbnails */
+.feature-article-img{
+  width: 100%;
+}
+
+.feature-article-img > div > div > .imageMediaStyle > img{
+  width: 100%;
+}
+
+.teaser-article-img{
+  float: right;
+  width: 160px;
+  height: 160px;
 }

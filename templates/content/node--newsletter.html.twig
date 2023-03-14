@@ -32,8 +32,7 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 		data-loggedin="{{isLoggedIn}}"
 		>
 		{# Newsletter Title #}
-		<h1 class="ucb-newsletter-title" itemprop="name">{{ content.field_newsletter_type }}</h1>
-
+		<h1 class="ucb-newsletter-title" itemprop="name">{{ label }}</h1>
 		{# Newsletter Intro #}
 		{% if content.field_newsletter_intro_image|render %}
 			<div id="newsletter-intro-img">{{ content.field_newsletter_intro_image }}</div>
@@ -46,7 +45,7 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 		<div class="ucb-newsletter-section-content">
 			{% if content.field_newsletter_section_block|render %}
 				<div class="ucb-article-body">
-					{{ content.field_newsletter_section_block }}
+					{{ content.field_newsletter_section_block|render }}
 				</div>
 			{% endif %}
 		</div>
@@ -100,36 +99,3 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 		</div>
 	</div>
 </article>
-
-{% if isLoggedIn == 'true' %}
-<div class="container" id="email-preview" style="background-color: grey">
-
-	<div id="email" style="width:600px;margin: auto;background:white;">		
-		<!-- Header --> 
-		<table role="presentation" border="0" width="100%" cellspacing="0">
-		<tr>
-			<h1 id="newsletter-email-title" style="padding: 30px 30px 15px 60px;font-size: 52px; margin:0 0 20px 0; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"> Header</h1>
-		  <td align="center" style="color: white;">
-			<img id="newsletter-email-intro-img" src="" width="100%">
-		  </tr>
-		  {% if content.field_newsletter_intro_body|render %}
-		  <tr>
-			<td align='left' style="padding:35px 30px 15px 60px;font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;">{{ content.field_newsletter_intro_body.0 }}</td>
-		  </tr>
-	  {% endif %}
-			</td>
-		</table>
-		<!-- Articles --> 
-
-		<div id="email-newsletter-article-section"></div>
- 
-		<div id="email-newsletter-promo-one-section"></div>
-
-	  <!-- Blocks-->
-	  <div id="email-newsletter-blocks-section"></div>
-	  <!--Promo 2-->
-	  <div id="email-newsletter-promo-two-section"></div>
-
-	  </div>
-</div>
-{% endif %}
