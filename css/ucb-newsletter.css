@@ -30,3 +30,18 @@
   border-radius: 3px;
   background-color: goldenrod;
 }
+
+/* Allows for full-width Feature style Article Thumbnails */
+.feature-article-img{
+  width: 100%;
+}
+
+.feature-article-img > div > div > .imageMediaStyle > img{
+  width: 100%;
+}
+
+.teaser-article-img{
+  float: right;
+  width: 160px;
+  height: 160px;
+}
