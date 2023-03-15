@@ -353,8 +353,10 @@ class PeopleListElement extends HTMLElement {
 		return taxonomyTerm && this._groupedPeople ? this._groupedPeople.get(taxonomyTerm.id) : people;
 	}
 
-	displayPeople(format, people, urlObj, idObj, containerElement) {
-		// maps over data
+	displayPeople(format, people, urlObj, idObj, containerElement) {		
+		// If grid render and no thumbnail, use a default image for the person. Else no image.
+		const defaultThumbnail = format == 'grid' ? 'themes/custom/boulder_d9_base/images/avatar320.jpeg' : '';
+
 		people.forEach((person) => {
 			const personRelationshipData = person['relationships'],
 				departmentsData = personRelationshipData['field_ucb_person_department']['data'],
@@ -368,7 +370,7 @@ class PeopleListElement extends HTMLElement {
 					departments: departments,
 					jobTypes: jobTypes,
 					photoId: photoId,
-					photoURI: photoId ? urlObj[idObj[photoId]] : '',
+					photoURI: photoId ? urlObj[idObj[photoId]] : defaultThumbnail,
 					body: '',
 					email: personAttributeData['field_ucb_person_email'],
 					phone: personAttributeData['field_ucb_person_phone']
