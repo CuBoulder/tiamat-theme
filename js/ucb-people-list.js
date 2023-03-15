@@ -233,7 +233,7 @@ class PeopleListElement extends HTMLElement {
 									personAJobTypeDataLength = personAJobTypeData.length,
 									personBJobTypeDataLength = personBJobTypeData.length;
 								if (!personAJobTypeDataLength || !personBJobTypeDataLength) // Someone doesn't have a job type (length 0), push them to the bottom
-									return !personAJobTypeDataLength && personBJobTypeDataLength ? 1 : !personAJobTypeDataLength && personBJobTypeDataLength ? -1 : 0;
+									return !personAJobTypeDataLength && personBJobTypeDataLength ? 1 : personAJobTypeDataLength && !personBJobTypeDataLength ? -1 : 0;
 								const
 									personAJobTypeName = PeopleListElement.getTaxonomyName(jobTypeTaxonomy, personAJobTypeData[0]['meta']['drupal_internal__target_id']),
 									personBJobTypeName = PeopleListElement.getTaxonomyName(jobTypeTaxonomy, personBJobTypeData[0]['meta']['drupal_internal__target_id']);
