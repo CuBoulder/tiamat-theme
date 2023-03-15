@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Removes the ability to turn off "Restrict choices to those selected" in People List
+  The option is no longer present when creating or editing a People List page.
+  
+  Resolves CuBoulder/tiamat-theme#281
+  
+  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/40)
+---
+
 - ### Newsletter Refactor
   Partially resolves #222 - Enhances the Newsletter for more consistency with final email html generation via Twig templating engine instead of JavaScript. Should resolve issues with inconsistent displays and partial/error renders from unexpected user inputs.
   
