@@ -95,7 +95,8 @@ class PeopleListElement extends HTMLElement {
 		const taxonomyIds = this._taxonomyIds = config['taxonomies'], 
 			filters = this._filters = config['filters'] || {},
 			groupBy = this._groupBy = config['groupby'] || 'none',
-			syncTaxonomies = this._syncTaxonomies = new Set(),
+			orderBy = this._orderBy = config['orderby'] || 'last',
+			syncTaxonomies = this._syncTaxonomies = new Set(orderBy == 'type' ? ['job_type'] : []),
 			asyncTaxonomies = this._asyncTaxonomies = new Set(['department']),
 			userAccessibleFilters = this._userAccessibleFilters = {};
 		if (groupBy != 'none' && taxonomyIds[groupBy]) { // The taxonomy used for groups must be fetched sync
@@ -159,10 +160,10 @@ class PeopleListElement extends HTMLElement {
 			config = this._config,
 			baseURI = this._baseURI,
 			filters = this._filters,
+			orderBy = this._orderBy,
 			userFilters = userConfig['filters'] || {},
 			peopleListProvider = this._peopleListProvider = new PeopleListProvider(baseURI, filters, userFilters),
-			format = this._format = userConfig['format'] || config['format'] || 'list',
-			orderBy = this._orderBy = userConfig['orderby'] || config['orderby'] || 'last';
+			format = this._format = userConfig['format'] || config['format'] || 'list';
 		this.toggleMessageDisplay(this._messageElement, 'none', null, null);
 		this.toggleMessageDisplay(this._loadingElement, 'block', null, null);
 
@@ -224,8 +225,20 @@ class PeopleListElement extends HTMLElement {
 					if(!peopleInGroup) return;
 					const groupContainerElement = this.buildGroup(format, taxonomyTerm);
 					if(orderBy == 'type') {
-						this.displayPeople(format, peopleInGroup.filter(person => person['relationships']['field_ucb_person_job_type']['data'].length > 0), urlObj, idObj, groupContainerElement);
-						this.displayPeople(format, peopleInGroup.filter(person => person['relationships']['field_ucb_person_job_type']['data'].length == 0), urlObj, idObj, groupContainerElement);
+						this.displayPeople(format, peopleInGroup.sort((personA, personB) => {
+								const
+									jobTypeTaxonomy = this.getTaxonomy('job_type'),
+									personAJobTypeData = personA['relationships']['field_ucb_person_job_type']['data'],
+									personBJobTypeData = personB['relationships']['field_ucb_person_job_type']['data'],
+									personAJobTypeDataLength = personAJobTypeData.length,
+									personBJobTypeDataLength = personBJobTypeData.length;
+								if (!personAJobTypeDataLength || !personBJobTypeDataLength) // Someone doesn't have a job type (length 0), push them to the bottom
+									return !personAJobTypeDataLength && personBJobTypeDataLength ? 1 : !personAJobTypeDataLength && personBJobTypeDataLength ? -1 : 0;
+								const
+									personAJobTypeName = PeopleListElement.getTaxonomyName(jobTypeTaxonomy, personAJobTypeData[0]['meta']['drupal_internal__target_id']),
+									personBJobTypeName = PeopleListElement.getTaxonomyName(jobTypeTaxonomy, personBJobTypeData[0]['meta']['drupal_internal__target_id']);
+								return personAJobTypeName > personBJobTypeName ? 1 : personAJobTypeName < personBJobTypeName ? -1 : 0; // Sorts by job types alphabetically
+							}), urlObj, idObj, groupContainerElement);
 					} else this.displayPeople(format, peopleInGroup, urlObj, idObj, groupContainerElement);
 				});
 			}
@@ -353,8 +366,10 @@ class PeopleListElement extends HTMLElement {
 		return taxonomyTerm && this._groupedPeople ? this._groupedPeople.get(taxonomyTerm.id) : people;
 	}
 
-	displayPeople(format, people, urlObj, idObj, containerElement) {
-		// maps over data
+	displayPeople(format, people, urlObj, idObj, containerElement) {		
+		// If grid render and no thumbnail, use a default image for the person. Else no image.
+		const defaultThumbnail = format == 'grid' ? 'themes/custom/boulder_d9_base/images/avatar320.jpeg' : '';
+
 		people.forEach((person) => {
 			const personRelationshipData = person['relationships'],
 				departmentsData = personRelationshipData['field_ucb_person_department']['data'],
@@ -368,7 +383,7 @@ class PeopleListElement extends HTMLElement {
 					departments: departments,
 					jobTypes: jobTypes,
 					photoId: photoId,
-					photoURI: photoId ? urlObj[idObj[photoId]] : '',
+					photoURI: photoId ? urlObj[idObj[photoId]] : defaultThumbnail,
 					body: '',
 					email: personAttributeData['field_ucb_person_email'],
 					phone: personAttributeData['field_ucb_person_phone']
