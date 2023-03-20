@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Person List aligns content to the left with and without image
+  Closes #277.
+  Quick css change to align all items to the left, regardless of whether there is an image there or not.
+---
+
 - ### Footer aligns vertically
   Closes #268.
   Quick fix to align all footers to be at the top
