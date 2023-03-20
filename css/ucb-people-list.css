@@ -26,6 +26,7 @@
 .ucb-person-card-details {
   display: flex;
   flex-direction: column;
+  padding-left: 0px;
 }
 
 .ucb-person-card-name h2 {
@@ -137,9 +138,9 @@ tbody.ucb-people-list-table-tablebody {
 }
 
 .ucb-person-card-img {
-  padding: 0 10px 10px 0;
+  padding: 0 20px 10px 0;
   height: 110px;
-  width: 110px;
+  width: 120px;
 }
 
 .ucb-person-card-email {
@@ -157,4 +158,8 @@ tbody.ucb-people-list-table-tablebody {
 
 .ucb-person-card-body {
   padding-bottom: .5rem;
+}
+
+.ucb-person-card-img-grid > a > img {
+  width: 100%;
 }
