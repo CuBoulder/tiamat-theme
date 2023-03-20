@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Footer aligns vertically
+  Closes #268.
+  Quick fix to align all footers to be at the top
+---
+
 - ### Adds default Person image for People List Page grid renders, if no Person Image provided
   Resolves #278 -- Will use a default Person image in Grid-style renders of the People List page, if no image is provided on an included Person page.
   
