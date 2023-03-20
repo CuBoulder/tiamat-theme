@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Changes "Order by" for Person List page
+  The option "Has Job Type, Last Name" has become "Job Type, Last Name". Rather than simply checking for the existence of the _job type_, sorting is performed alphabetically by a person's first _job type_.
+  
+  Resolves CuBoulder/tiamat-theme#280; Author @TeddyBearX 
+  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/41)
+  
+  Up to date with CuBoulder/tiamat-theme#286 – merge that one first!
+---
+
 - ### Person List aligns content to the left with and without image
   Closes #277.
   Quick css change to align all items to the left, regardless of whether there is an image there or not.
