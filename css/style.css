@@ -411,7 +411,7 @@
   
   .be-boulder-container {
     display: flex;
-    align-items: center;
+    align-items: top;
     justify-content: space-between;
     padding-bottom: 2em;
     flex-wrap: wrap;
