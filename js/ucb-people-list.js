@@ -358,6 +358,7 @@ class PeopleListElement extends HTMLElement {
 		const defaultThumbnail = format == 'grid' ? 'themes/custom/boulder_d9_base/images/avatar320.jpeg' : '';
 
 		people.forEach((person) => {
+			console.log(person);
 			const personRelationshipData = person['relationships'],
 				departmentsData = personRelationshipData['field_ucb_person_department']['data'],
 				jobTypesData = personRelationshipData['field_ucb_person_department']['data'],
@@ -385,6 +386,27 @@ class PeopleListElement extends HTMLElement {
 				// use summary if available
 				if (personAttributeData['body']['summary'])
 					thisPerson.body = personAttributeData['body']['summary'].replace(/(\r\n|\n|\r)/gm, ''); // strip out line breaks
+				else  {
+					let htmlStrip = personAttributeData['body']['value'].replace(
+						/<\/?[^>]+(>|$)/g,
+						""
+					  )
+					  // Remove any line breaks if media is embedded in the body
+					  let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
+					  // take only the first 100 words ~ 500 chars
+					  let trimmedString = lineBreakStrip.substr(0, 400);
+					  // if in the middle of the string, take the whole word
+					  if(trimmedString.length > 70){
+						trimmedString = trimmedString.substr(
+						  0,
+						  Math.min(
+							trimmedString.length,
+							trimmedString.lastIndexOf(" ")
+						  )
+						)
+						thisPerson.body = `${trimmedString}...`;
+					  }
+					}
 			}
 			
 			this.appendPerson(format, thisPerson, containerElement);
