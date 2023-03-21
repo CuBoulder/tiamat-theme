@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds body field to people list
+  Closes #279.
+  Adds a summary of the body, if there is no summary field.
+---
+
 - ### Changes "Order by" for Person List page
   The option "Has Job Type, Last Name" has become "Job Type, Last Name". Rather than simply checking for the existence of the _job type_, sorting is performed alphabetically by a person's first _job type_.
   
