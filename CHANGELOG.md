@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Change justify-content
+  Closes #155.
+  Removes justify-content from both image gallery and grid content
+---
+
 - ### Adds body field to people list
   Closes #279.
   Adds a summary of the body, if there is no summary field.
