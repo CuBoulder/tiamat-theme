@@ -9,65 +9,96 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Changes "Order by" for Person List page
-  The option "Has Job Type, Last Name" has become "Job Type, Last Name". Rather than simply checking for the existence of the _job type_, sorting is performed alphabetically by a person's first _job type_.
-  
-  Resolves CuBoulder/tiamat-theme#280; Author @TeddyBearX 
-  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/41)
-  
-  Up to date with CuBoulder/tiamat-theme#286 – merge that one first!
+- ### Image Style additions
+  Closes #152.
+  Adds new image styles to both WYSIWYG and full html fields.
 ---
 
-- ### Person List aligns content to the left with and without image
-  Closes #277.
-  Quick css change to align all items to the left, regardless of whether there is an image there or not.
----
+## [20230323] - 2023-03-23
 
-- ### Footer aligns vertically
-  Closes #268.
-  Quick fix to align all footers to be at the top
----
+-   ### Change justify-content
+    Closes #155.
+    Removes justify-content from both image gallery and grid content
 
-- ### Adds default Person image for People List Page grid renders, if no Person Image provided
-  Resolves #278 -- Will use a default Person image in Grid-style renders of the People List page, if no image is provided on an included Person page.
-  
-  Includes:
-  `tiamat-theme` => `change/278`
----
+* * *
 
-- ### Removes the ability to turn off "Restrict choices to those selected" in People List
-  The option is no longer present when creating or editing a People List page.
-  
-  Resolves CuBoulder/tiamat-theme#281
-  
-  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/40)
----
+-   ### Adds body field to people list
+    Closes #279.
+    Adds a summary of the body, if there is no summary field.
 
-- ### Newsletter Refactor
-  Partially resolves #222 - Enhances the Newsletter for more consistency with final email html generation via Twig templating engine instead of JavaScript. Should resolve issues with inconsistent displays and partial/error renders from unexpected user inputs.
-  
-  TO DO - Will address `Newsletter Type` taxonomy and Theme selection in #273 
-  
-  ### New Workflow for Newsletters
-  
-  1.  After creating your Newsletter, go to `Edit -> Preview`. 
-  2.  In the top dropdown menu to select your View Mode, select `Email HTML` as your View Mode. The page will now render the Email HTML version.
-  3.  Scroll to the bottom of your Email View Mode Preview for a button to automatically copy your html code to the clipboard ready to paste, as well as populate a text field with your email html.
-  4. You can now paste into your email client / Salesforce client and send.
-  
-  
-  Includes:
-  - `tiamat-theme` => issue/222
-  - `tiamat-custom-entities` => issue/222
----
+* * *
 
-- ### Adds sticky menu
-  This update adds an optional "sticky menu" component to all pages on a site, enabled by visiting CU Boulder site settings → Appearance and toggling on _Show sticky menu_. The menu appears automatically when a user scrolls down passed the main website header, and only on large screen devices (at least 960 pixels wide).
-  
-  Resolves CuBoulder/tiamat-theme#247
-  
-  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/20)
----
+-   ### Changes "Order by" for Person List page
+
+    The option "Has Job Type, Last Name" has become "Job Type, Last Name". Rather than simply checking for the existence of the _job type_, sorting is performed alphabetically by a person's first _job type_.
+
+    Resolves CuBoulder/tiamat-theme#280; Author @TeddyBearX 
+    Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/41)
+
+    Up to date with CuBoulder/tiamat-theme#286 – merge that one first!
+
+* * *
+
+-   ### Person List aligns content to the left with and without image
+    Closes #277.
+    Quick css change to align all items to the left, regardless of whether there is an image there or not.
+
+* * *
+
+-   ### Footer aligns vertically
+    Closes #268.
+    Quick fix to align all footers to be at the top
+
+* * *
+
+-   ### Adds default Person image for People List Page grid renders, if no Person Image provided
+
+    Resolves #278 -- Will use a default Person image in Grid-style renders of the People List page, if no image is provided on an included Person page.
+
+    Includes:
+    `tiamat-theme` => `change/278`
+
+* * *
+
+-   ### Removes the ability to turn off "Restrict choices to those selected" in People List
+
+    The option is no longer present when creating or editing a People List page.
+
+    Resolves CuBoulder/tiamat-theme#281
+
+    Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/40)
+
+* * *
+
+-   ### Newsletter Refactor
+
+    Partially resolves #222 - Enhances the Newsletter for more consistency with final email html generation via Twig templating engine instead of JavaScript. Should resolve issues with inconsistent displays and partial/error renders from unexpected user inputs.
+
+    TO DO - Will address `Newsletter Type` taxonomy and Theme selection in #273 
+
+    ### New Workflow for Newsletters
+
+    1.  After creating your Newsletter, go to `Edit -> Preview`. 
+    2.  In the top dropdown menu to select your View Mode, select `Email HTML` as your View Mode. The page will now render the Email HTML version.
+    3.  Scroll to the bottom of your Email View Mode Preview for a button to automatically copy your html code to the clipboard ready to paste, as well as populate a text field with your email html.
+    4.  You can now paste into your email client / Salesforce client and send.
+
+    Includes:
+
+    -   `tiamat-theme` => issue/222
+    -   `tiamat-custom-entities` => issue/222
+
+* * *
+
+-   ### Adds sticky menu
+
+    This update adds an optional "sticky menu" component to all pages on a site, enabled by visiting CU Boulder site settings → Appearance and toggling on _Show sticky menu_. The menu appears automatically when a user scrolls down passed the main website header, and only on large screen devices (at least 960 pixels wide).
+
+    Resolves CuBoulder/tiamat-theme#247
+
+    Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/20)
+
+* * *
 
 ## [20230307] - 2023-03-07
 
@@ -186,7 +217,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20230307...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20230323...HEAD
+
+[20230323]: https://github.com/CuBoulder/tiamat-theme/compare/20230307...20230323
 
 [20230307]: https://github.com/CuBoulder/tiamat-theme/compare/20230209...20230307
 
