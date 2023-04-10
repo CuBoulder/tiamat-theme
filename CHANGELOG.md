@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Image Style additions
+  Closes #152.
+  Adds new image styles to both WYSIWYG and full html fields.
+---
+
 ## [20230323] - 2023-03-23
 
 -   ### Change justify-content

@@ -12,7 +12,7 @@
 #}
 
 {% for item in items %}
-<div class = "imageMediaStyle">
+<div class = "imageMediaStyle {{item.content['#image_style']}}">
   {{ item.content }}
 </div>
 {% endfor %}
