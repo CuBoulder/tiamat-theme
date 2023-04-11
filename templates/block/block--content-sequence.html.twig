@@ -6,8 +6,13 @@
  */
 #}
 {% set entity = content['#block_content'] %}
-{% if entity.field_content_sequence_display.0.value == 'advanced' %}{% include '@boulderD9_base/block/block--content-sequence-advanced.html.twig' %}{% else %}
-{% set classes = [
+{% if entity.field_content_sequence_display.0.value == 'advanced' %}
+	{% include '@boulderD9_base/block/block--content-sequence-advanced.html.twig' %}
+{% else %}
+
+	{{ attach_library('boulderD9_base/ucb-content-sequence') }}
+
+	{% set classes = [
 	'container',
 	'block',
 	'block-' ~ configuration.provider|clean_class,
@@ -15,10 +20,33 @@
 	bundle ? 'block--type-' ~ bundle|clean_class,
 	view_mode ? 'block--view-mode-' ~ view_mode|clean_class
 ] %}
-{% block content %}<div{{ attributes.addClass(classes) }}>
-	{{ title_prefix }}
-	{% if label %}<h2{{ title_attributes }}>{{ label }}</h2>{% endif %}
-	{{ title_suffix }}
-	{# TODO: Work for the horizontal and vertical display modes goes here #}
-</div>{% endblock %}
+	{% block content %}
+		<div{{attributes.addClass(classes)}}>
+			{{ title_prefix }}
+			{% if label %}
+				<h2{{title_attributes}}>{{ label }}</h2>
+			{% endif %}
+			{{ title_suffix }}
+			{% if entity.field_content_sequence_display.0.value == 'horizontal' %}{% endif %}
+
+			{% if entity.field_content_sequence_display.0.value == 'vertical' %}
+				<ol class="vertical-timeline-container">
+					{% for key, item in content['#block_content'].field_content_sequence_items if key|first != '#' %}
+						<li class="vertical-timeline-card">
+							<div class="vertical-timeline-card-wrapper">
+								{{item.entity.field_sequence_item_media.entity.field_media_image|view}}
+								<div class="vertical-timeline-card-header">
+								<h3 class= "vertical-timeline-card-date">DATE THING INPUT REAL DATA </h3>
+									<h4 class = "vertical-timeline-card-title">{{item.entity.field_sequence_item_title.value|render|striptags|trim}} </h4>
+								</div>
+								<div class="vertical-timeline-card-body">
+									{{item.entity.field_sequence_item_descr.value|render|striptags|trim}}
+								</div>
+							</div>
+						</li>
+					{% endfor %}
+				</ol>
+			{% endif %}
+		</div>
+	{% endblock %}
 {% endif %}
