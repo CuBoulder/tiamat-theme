@@ -17,27 +17,31 @@
 	'ucb-content-sequence-advanced'
 ] %}{% set timelineEvents = [] %}{% set timelineOptions = {
 	'hash_bookmark': true,
-	'scale_factor': entity.field_content_sequence_scale.0.value,
+	'scale_factor': entity.field_content_sequence_scale.value,
 	'font': 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif'
-} %}{% set embedId = 'timeline-embed-' ~ entity.uuid.0.value %}
-{% if entity.field_sequence_title.0.value or entity.body.0.value %}{% set imageField = entity.field_content_sequence_media.0.entity.field_media_image %}{% if imageField %}{% set titleMedia = {
+} %}{% set embedId = 'timeline-embed-' ~ entity.uuid.value %}
+{% if entity.field_sequence_title.value or entity.body.value %}{% set imageField = entity.field_content_sequence_media.entity.field_media_image %}{% set videoField = entity.field_content_sequence_media.entity.field_media_oembed_video %}{% if imageField %}{% set titleMedia = {
 	'url': file_url(imageField.entity.fileuri),
-	'alt': imageField.0.alt
+	'alt': imageField.alt
+} %}{% elseif videoField %}{% set titleMedia = {
+	'url': videoField.value,
 } %}{% else %}{% set titleMedia = null %}{% endif %}
 {% set titleSlide = {
 	'text': {
-		'headline': entity.field_content_sequence_title.0.value,
+		'headline': entity.field_content_sequence_title.value,
 		'text': content.body|render
 	},
 	media: titleMedia
 } %}{% endif %}
 {% for item in entity.field_content_sequence_items %}
-{% set startDate = item.entity.field_sequence_item_start_date.0.value ?? 'now' %}{% set endDate = item.entity.field_sequence_item_end_date.0.value ?? 'now' %}{% set itemLink = item.entity.field_sequence_item_url.0.uri %}
-{% set imageField = item.entity.field_sequence_item_media.0.entity.field_media_image %}{% if imageField %}{% set itemMedia = {
+{% set startDate = item.entity.field_sequence_item_start_date.0.value ?? 'now' %}{% set endDate = item.entity.field_sequence_item_end_date.0.value ?? 'now' %}{% set itemLink = item.entity.field_sequence_item_url.uri %}
+{% set imageField = item.entity.field_sequence_item_media.entity.field_media_image %}{% set videoField = item.entity.field_sequence_item_media.entity.field_media_oembed_video %}{% if imageField %}{% set itemMedia = {
 	'url': file_url(imageField.entity.fileuri),
 	'link': itemLink,
-	'alt': imageField.0.alt
-} %}{% else %}{% set itemMedia = null %}{% endif %}{% set itemTitleText = item.entity.field_sequence_item_title.0.value %}{% if itemLink %}{% set itemTitle = '<a href="' ~ item.entity.field_sequence_item_url.0.uri ~ '">' ~ itemTitleText ~ '</a>' %}{% else %}{% set itemTitle = itemTitleText %}{% endif %}
+	'alt': imageField.alt
+} %}{% elseif videoField %}{% set itemMedia = {
+	'url': videoField.value,
+} %}{% else %}{% set itemMedia = null %}{% endif %}{% set itemTitleText = item.entity.field_sequence_item_title.value %}{% if itemLink %}{% set itemTitle = '<a href="' ~ item.entity.field_sequence_item_url.uri ~ '">' ~ itemTitleText ~ '</a>' %}{% else %}{% set itemTitle = itemTitleText %}{% endif %}
 {% set itemData = {
 	'text': {
 		'headline': itemTitle,
@@ -55,7 +59,7 @@
 		'year': endDate|date('Y'),
 		'display_date': item.entity.field_sequence_item_d_end_date.0.value
 	},
-	'group': item.entity.field_sequence_item_group.0.value,
+	'group': item.entity.field_sequence_item_group.value,
 	'media': itemMedia
 } %}{% set timelineEvents = timelineEvents|merge([itemData]) %}
 {% endfor %}{% set timelineData = {'title': titleSlide, 'events': timelineEvents} %}
