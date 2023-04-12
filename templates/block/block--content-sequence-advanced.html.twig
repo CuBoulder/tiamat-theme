@@ -17,14 +17,16 @@
 	'ucb-content-sequence-advanced'
 ] %}{% set timelineEvents = [] %}{% set timelineOptions = {
 	'hash_bookmark': true,
-	'scale_factor': entity.field_content_sequence_scale.0.value
+	'scale_factor': entity.field_content_sequence_scale.0.value,
+	'font': 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif'
 } %}{% set embedId = 'timeline-embed-' ~ entity.uuid.0.value %}
 {% if entity.field_sequence_title.0.value or entity.body.0.value %}{% if entity.field_content_sequence_media %}{% set imageEntity = entity.field_content_sequence_media.0.entity.field_media_image.entity %}{% set titleMedia = {
 	'url': file_url(imageEntity.fileuri)
-} %}{% else %}{% set titleMedia = null %}{% endif %}{% set titleSlide = {
+} %}{% else %}{% set titleMedia = null %}{% endif %}
+{% set titleSlide = {
 	'text': {
 		'headline': entity.field_content_sequence_title.0.value,
-		'text': entity.body.0.value
+		'text': content.body|render
 	},
 	media: titleMedia
 } %}{% endif %}
@@ -32,11 +34,11 @@
 {% set startDate = item.entity.field_sequence_item_start_date.0.value ?? 'now' %}{% set endDate = item.entity.field_sequence_item_end_date.0.value ?? 'now' %}
 {% if item.entity.field_sequence_item_media.0 %}{% set imageEntity = item.entity.field_sequence_item_media.0.entity.field_media_image.entity %}{% set itemMedia = {
 	'url': file_url(imageEntity.fileuri)
-} %}{% else %}{% set itemMedia = null %}{% endif %}
+} %}{% else %}{% set itemMedia = null %}{% endif %}{% set itemTitleText = item.entity.field_sequence_item_title.0.value %}{% if item.entity.field_sequence_item_url.0.uri %}{% set itemTitle = '<a href="' ~ item.entity.field_sequence_item_url.0.uri ~ '">' ~ itemTitleText ~ '</a>' %}{% else %}{% set itemTitle = itemTitleText %}{% endif %}
 {% set itemData = {
 	'text': {
-		'headline': item.entity.field_sequence_item_title.0.value,
-		'text': item.entity.field_sequence_item_descr.0.value
+		'headline': itemTitle,
+		'text': item.entity.field_sequence_item_descr|view|render
 	},
 	'start_date': {
 		'month': startDate|date('m'),
@@ -61,14 +63,10 @@
 	<div id="{{ embedId }}" aria-hidden="true" role="presentation" tabindex="-1"></div>
 	<script type="text/javascript">
 		(function(readyState) {
-			function loadTimeline() {
-				new TL.Timeline('{{ embedId }}', {{ timelineData | json_encode | raw }}, {{ timelineOptions | json_encode | raw }});
-			}
-			if (readyState === 'loading') {
-				document.addEventListener('DOMContentLoaded', function() {
-					loadTimeline();
-				});
-			} else loadTimeline();
+			function loadTimeline() { new TL.Timeline('{{ embedId }}', {{ timelineData | json_encode | raw }}, {{ timelineOptions | json_encode | raw }}); }
+			if (readyState === 'loading')
+				document.addEventListener('DOMContentLoaded', loadTimeline);
+			else loadTimeline();
 		})(document.readyState);
 	</script>
 </div>{% endblock %}
