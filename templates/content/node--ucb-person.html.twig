@@ -34,7 +34,7 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 		<div class="row ucb-person-personal">
 			<div class="col ucb-person-main">
 				{% if content.field_ucb_person_photo|render %}
-					<div itemprop="image">
+					<div class="ucb-person-img" itemprop="image">
 						{{ content.field_ucb_person_photo }}
 					</div>
 				{% endif %}

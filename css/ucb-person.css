@@ -78,3 +78,14 @@ ul.ucb-person-department li:not(:first-child):before {
   padding-left: 0;
   margin-bottom: 0;
 }
+
+.ucb-person-img{
+  float: right;
+  padding: 0 1em 1em;
+  clear: both;
+}
+
+.ucb-person-img > div > div .media-image-caption{
+  text-align: center;
+   
+}
