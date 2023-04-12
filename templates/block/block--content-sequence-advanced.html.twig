@@ -6,17 +6,28 @@
  */
 #}
 {{ attach_library('boulderD9_base/timelinejs') }}
+{{ attach_library('boulderD9_base/ucb-content-sequence-advanced') }}
 {% set entity = content['#block_content'] %}{% set classes = [
 	'container',
 	'block',
 	'block-' ~ configuration.provider|clean_class,
 	'block-' ~ plugin_id|clean_class,
 	bundle ? 'block--type-' ~ bundle|clean_class,
-	view_mode ? 'block--view-mode-' ~ view_mode|clean_class
+	view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
+	'ucb-content-sequence-advanced'
 ] %}{% set timelineEvents = [] %}{% set timelineOptions = {
 	'hash_bookmark': true,
 	'scale_factor': entity.field_content_sequence_scale.0.value
 } %}{% set embedId = 'timeline-embed-' ~ entity.uuid.0.value %}
+{% if entity.field_sequence_title.0.value or entity.body.0.value %}{% if entity.field_content_sequence_media %}{% set imageEntity = entity.field_content_sequence_media.0.entity.field_media_image.entity %}{% set titleMedia = {
+	'url': file_url(imageEntity.fileuri)
+} %}{% else %}{% set titleMedia = null %}{% endif %}{% set titleSlide = {
+	'text': {
+		'headline': entity.field_content_sequence_title.0.value,
+		'text': entity.body.0.value
+	},
+	media: titleMedia
+} %}{% endif %}
 {% for item in entity.field_content_sequence_items %}
 {% set startDate = item.entity.field_sequence_item_start_date.0.value ?? 'now' %}{% set endDate = item.entity.field_sequence_item_end_date.0.value ?? 'now' %}
 {% if item.entity.field_sequence_item_media.0 %}{% set imageEntity = item.entity.field_sequence_item_media.0.entity.field_media_image.entity %}{% set itemMedia = {
@@ -42,12 +53,12 @@
 	'group': item.entity.field_sequence_item_group.0.value,
 	'media': itemMedia
 } %}{% set timelineEvents = timelineEvents|merge([itemData]) %}
-{% endfor %}{% set timelineData = {'events': timelineEvents} %}
+{% endfor %}{% set timelineData = {'title': titleSlide, 'events': timelineEvents} %}
 {% block content %}<div{{ attributes.addClass(classes) }}>
 	{{ title_prefix }}
 	{% if label %}<h2{{ title_attributes }}>{{ label }}</h2>{% endif %}
 	{{ title_suffix }}
-	<div id="{{ embedId }}" style="width: 100%; height: 600px" aria-hidden="true" role="presentation" tabindex="-1"></div>
+	<div id="{{ embedId }}" aria-hidden="true" role="presentation" tabindex="-1"></div>
 	<script type="text/javascript">
 		(function(readyState) {
 			function loadTimeline() {

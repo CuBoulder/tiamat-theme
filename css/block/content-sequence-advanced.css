@@ -1,0 +1,9 @@
+.ucb-content-sequence-advanced .tl-timeline {
+	width: 100%;
+	height: 600px;
+}
+
+.ucb-content-sequence-advanced .tl-timeline img {
+	width: auto;
+	height: auto;
+}

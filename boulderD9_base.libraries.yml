@@ -150,6 +150,12 @@ ucb-content-row:
     theme:
       css/block/content-row.css: {}
 
+ucb-content-sequence-advanced:
+  version: 1.x
+  css:
+    theme:
+      css/block/content-sequence-advanced.css: {}
+
 ucb-video-reveal:
   version: 1.x
   js:
