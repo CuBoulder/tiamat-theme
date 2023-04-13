@@ -1,91 +1,93 @@
-h1.ucb-person-name {
-  display: flex;
-  flex-direction: row;
+.ucb-person-header {
+	margin-bottom: 10px;
 }
 
-h1.ucb-person-name span {
-  margin-right: 0.25em;
+.ucb-person-name {
+	margin-bottom: 0;
+}
+
+.ucb-person-pronouns {
+	font-size: 1.1em;
 }
 
 .ucb-person-section {
-  margin-bottom: 10px;
+	margin-bottom: 10px;
 }
 
 .ucb-person-main img {
-  max-width: 300px;
-  height: auto;
-  border-radius: 2px;
+	max-width: 300px;
+	height: auto;
+	border-radius: 2px;
 }
 
 ul.ucb-person-email-address,
 ul.ucb-person-links,
 ul.ucb-person-phone-numbers {
-  list-style: none;
-  padding: 0;
-  color: #aaa;
-  margin: 0;
+	list-style: none;
+	padding: 0;
+	color: #aaa;
+	margin: 0;
 }
 
 a.ucb-person-social-link i.fa,
 a.ucb-person-social-link i.fab {
-  color: #aaa;
+	color: #aaa;
 }
 
 .ucb-person-contact-section {
-  margin-top: 0.5em;
+	margin-top: 0.5em;
 }
 
 .ucb-person-contact p {
-  margin: 0;
+	margin: 0;
 }
 
 @media screen and (min-width: 768px) {
-  .ucb-person-main img {
-    float: right;
-    padding: 0 1em 1em;
-  }
+	.ucb-person-main img {
+		float: right;
+		padding: 0 1em 1em;
+	}
 }
 
 .ucb-person-section-header {
-  display: block;
-  font-weight: bold;
+	display: block;
+	font-weight: bold;
 }
 
 .ucb-person-section.ucb-person-links,
 .ucb-person-section.ucb-person-address,
 .ucb-person-section.ucb-person-office-hours,
 .ucb-person-section.ucb-person-body {
-  margin-top: 20px;
+	margin-top: 20px;
 }
 
 ul.ucb-person-title li:not(:first-child):before,
 ul.ucb-person-department li:not(:first-child):before {
-  font-family: "Font Awesome 5 Free";
-  font-weight: 900;
- font-size: 0.25em;
-  content: "\f111";
-  vertical-align: middle;
-  padding: 0 0.25em;
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	font-size: 0.25em;
+	content: "\f111";
+	vertical-align: middle;
+	padding: 0 0.25em;
 }
 
 .ucb-person-title li,
-.ucb-person-department li{
-  display: inline-block;
+.ucb-person-department li {
+	display: inline-block;
 }
 
 .ucb-person-title,
 .ucb-person-department {
-  padding-left: 0;
-  margin-bottom: 0;
+	padding-left: 0;
+	margin-bottom: 0;
 }
 
-.ucb-person-img{
-  float: right;
-  padding: 0 1em 1em;
-  clear: both;
+.ucb-person-img {
+	float: right;
+	padding: 0 1em 1em;
+	clear: both;
 }
 
-.ucb-person-img > div > div .media-image-caption{
-  text-align: center;
-   
+.ucb-person-img>div>div .media-image-caption {
+	text-align: center;
 }
