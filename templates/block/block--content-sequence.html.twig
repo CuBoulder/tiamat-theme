@@ -35,7 +35,8 @@
 						<li class="vertical-timeline-card">
 							<div class="vertical-timeline-card-wrapper">
 								<div class="vertical-timeline-card-media">
-									{{item.entity.field_sequence_item_media.entity.field_media_image|view}}
+									{% set imageField = item.entity.field_sequence_item_media.entity.field_media_image %}{% set videoField = item.entity.field_sequence_item_media.entity.field_media_oembed_video %}
+									{% if imageField %}{{ imageField|view }}{% elseif videoField %}{{ videoField|view }}{% endif %}
 								</div>
 								<div class="vertical-timeline-card-header">
 
@@ -51,7 +52,7 @@
 									</h4>
 								</div>
 								<div class="vertical-timeline-card-body">
-									{{item.entity.field_sequence_item_descr|view|render}}
+									{{ item.entity.field_sequence_item_descr|view }}
 								</div>
 							</div>
 						</li>
