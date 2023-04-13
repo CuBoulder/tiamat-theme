@@ -317,7 +317,7 @@ class PeopleListElement extends HTMLElement {
 		if(taxonomyTerm) {
 			const groupTitleContainer = document.createElement('div');
 			groupTitleContainer.className = 'col-12';
-			groupTitleContainer.appendChild(this.attachElementToTaxonomyTerm(document.createElement('div'), taxonomyTerm));
+			groupTitleContainer.appendChild(this.attachElementToTaxonomyTerm(document.createElement('h2'), taxonomyTerm));
 			wrapper.appendChild(groupTitleContainer);
 		}
 		this._contentElement.appendChild(wrapper);
