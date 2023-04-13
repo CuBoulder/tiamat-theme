@@ -34,7 +34,7 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 		<div class="row ucb-person-personal">
 			<div class="col ucb-person-main">
 				{% if content.field_ucb_person_photo|render %}
-					<div itemprop="image">
+					<div class="ucb-person-img" itemprop="image">
 						{{ content.field_ucb_person_photo }}
 					</div>
 				{% endif %}
@@ -71,6 +71,7 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 				{% endif %}
 				{% if content.field_ucb_person_address|render %}
 					<div class="ucb-person-section ucb-person-address" itemprop="address">
+						<span class="ucb-person-section-header" id="headerAddress">Address</span>
 						{{ content.field_ucb_person_address }}
 					</div>
 				{% endif %}
