@@ -317,7 +317,7 @@ class PeopleListElement extends HTMLElement {
 		if(taxonomyTerm) {
 			const groupTitleContainer = document.createElement('div');
 			groupTitleContainer.className = 'col-12';
-			groupTitleContainer.appendChild(this.attachElementToTaxonomyTerm(document.createElement('h2'), taxonomyTerm));
+			groupTitleContainer.appendChild(this.attachElementToTaxonomyTerm(document.createElement('div'), taxonomyTerm));
 			wrapper.appendChild(groupTitleContainer);
 		}
 		this._contentElement.appendChild(wrapper);
@@ -509,10 +509,10 @@ class PeopleListElement extends HTMLElement {
 						<div>
 							<a href="${personLink}">
 								<span class="ucb-person-card-name">
-									<h2>${personName ? personName : ''}<h2>
+									<h2>${personName ? personName : ''}</h2>
 								</span>
 							</a>
-							<span class="ucb-person-card-title departments-grid">
+							<span class="ucb-person-card-title title-grid">
 								${personTitleList}
 							</span>
 							<span class="ucb-person-card-dept departments-grid">
@@ -534,10 +534,10 @@ class PeopleListElement extends HTMLElement {
 								${personName}
 							</span>
 						</a>
-						<span class="ucb-person-card-title departments-grid">
+						<span class="ucb-person-card-title person-title-table">
 							${personTitleList}
 						</span>
-						<span class="ucb-person-card-dept departments-grid">
+						<span class="ucb-person-card-dept person-dept-table">
 							${personDepartmentList}
 						</span>
 					</td>
