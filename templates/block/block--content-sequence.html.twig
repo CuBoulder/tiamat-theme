@@ -34,10 +34,14 @@
 					{% for key, item in content['#block_content'].field_content_sequence_items if key|first != '#' %}
 						<li class="vertical-timeline-card">
 							<div class="vertical-timeline-card-wrapper">
-								{{item.entity.field_sequence_item_media.entity.field_media_image|view}}
+								<div class="vertical-timeline-card-media">
+									{{item.entity.field_sequence_item_media.entity.field_media_image|view}}
+								</div>
 								<div class="vertical-timeline-card-header">
-								<h3 class= "vertical-timeline-card-date">DATE THING INPUT REAL DATA </h3>
-									<h4 class = "vertical-timeline-card-title">{{item.entity.field_sequence_item_title.value|render|striptags|trim}} </h4>
+									<h3 class="vertical-timeline-card-date">DATE THING INPUT REAL DATA
+									</h3>
+									<h4 class="vertical-timeline-card-title">{{item.entity.field_sequence_item_title.value|render|striptags|trim}}
+									</h4>
 								</div>
 								<div class="vertical-timeline-card-body">
 									{{item.entity.field_sequence_item_descr.value|render|striptags|trim}}
