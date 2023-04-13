@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Change: Moves Person Photo caption on Person Page
+  Closes #314 
+  
+  Moves Person's Photo caption underneath Person Photo on Person Page types. 
+  Also contains : https://github.com/CuBoulder/tiamat-theme/pull/325
+---
+
 - ### Change: Adds Address Header to Person Page
   Resolves #309 
   
