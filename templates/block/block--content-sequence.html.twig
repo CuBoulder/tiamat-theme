@@ -38,7 +38,14 @@
 									{{item.entity.field_sequence_item_media.entity.field_media_image|view}}
 								</div>
 								<div class="vertical-timeline-card-header">
-									<h3 class="vertical-timeline-card-date">DATE THING INPUT REAL DATA
+
+									<h3 class="vertical-timeline-card-date">
+										{% if item.entity.field_sequence_item_d_start_date.value|render %}
+											{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
+										{% else %}
+										{% set stepNo = key + 1 %}
+											STEP {{stepNo}}
+										{% endif %}
 									</h3>
 									<h4 class="vertical-timeline-card-title">{{item.entity.field_sequence_item_title.value|render|striptags|trim}}
 									</h4>

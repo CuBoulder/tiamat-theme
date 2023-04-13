@@ -301,4 +301,4 @@ ucb-content-sequence:
   version: 1.x
   css:
     theme:
-      css/ucb-content-sequence.css: {}
+      css/block/ucb-content-sequence.css: {}
