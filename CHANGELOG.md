@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Change: Adds Address Header to Person Page
+  Resolves #309 
+  
+  Add heading for Address field on Person Page, similar to the Office Hours field heading
+---
+
 - ### Image Style additions
   Closes #152.
   Adds new image styles to both WYSIWYG and full html fields.
