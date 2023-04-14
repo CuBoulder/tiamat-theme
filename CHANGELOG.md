@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds pronouns field to the Person page
+  A pronouns text field has been added to the Person page, allowing a person's pronouns to be displayed below their name.
+  
+  Resolves CuBoulder/tiamat-theme#315
+  
+  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/49)
+---
+
 - ### Change: Uniform Display of Title & Department fields on the different People List Page display options
   Resolves #313
 ---
