@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Change: Uniform Display of Title & Department fields on the different People List Page display options
+  Resolves #313
+---
+
 - ### Change: Moves Person Photo caption on Person Page
   Closes #314 
   
