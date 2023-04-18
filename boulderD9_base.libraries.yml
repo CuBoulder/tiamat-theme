@@ -297,8 +297,11 @@ ucb-newsletter-email:
   css:
     theme:
       css/ucb-newsletter.css: {}
+
 ucb-content-sequence:
   version: 1.x
+  js:
+    js/ucb-content-sequence.js: {}
   css:
     theme:
       css/block/ucb-content-sequence.css: {}
