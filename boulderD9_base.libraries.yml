@@ -283,3 +283,10 @@ ucb-newsletter-email:
   css:
     theme:
       css/ucb-newsletter.css: {}
+ucb-article-list-block:
+  version: 1.x
+  js:
+    js/ucb-article-list-block.js: {}
+  css:
+    theme:
+      css/ucb-article-list-block.css: {}
