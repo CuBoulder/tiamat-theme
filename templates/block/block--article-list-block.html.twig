@@ -170,18 +170,22 @@
     {{ label }}
   </h2>
   {{ title_suffix }}
-    <h2>url : {{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}</h2>
-    <ul>
-        <li>Display Mode	: {{content.field_art_list_block_display}}</li>
-        <li> ex cats : {{ excludeCategories }}</li>
-        <li>ex tag : {{ excludeTags }}</li>
-        <li> catst : {{content.field_art_list_block_filter_cat}}</li>
-        <li>tag : {{content.field_art_list_block_filter_tag}}</li>
-        <li>count : {{content.field_art_list_block_item_count}}</li>
-        <li>just url : {{content.field_art_list_block_more_url.0['#url']}}</li>
-        <li>just url text : {{content.field_art_list_block_more_url.0['#title']}}</li>
-    </ul>
-
-<article-list-block></article-list-block>
+{# Article List Main Block#}
+<article-list-block
+  jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}"
+  exCats="{{ excludeCategories }}"
+  exTags="{{ excludeTags }}"
+  display="{{content.field_art_list_block_display}}"
+  count="{{content.field_art_list_block_item_count}}"
+  ></article-list-block>
+{# More Link #}
+  {% if content.field_art_list_block_more_url|render %}
+  <div class="ucb-article-list-block-button-container">
+    <a class="ucb-article-list-block-button"href="{{content.field_art_list_block_more_url.0['#url']}}">
+      {{content.field_art_list_block_more_url.0['#title']}}
+    </a>
+  </div>
+  {% endif %}
 </div>
+
 
