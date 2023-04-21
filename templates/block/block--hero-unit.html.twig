@@ -19,7 +19,8 @@
     bundle ? 'block--type-' ~ bundle|clean_class,
     view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
     content['#block_content'].field_text_align.value,
-    content['#block_content'].field_text_color.value
+    content['#block_content'].field_text_color.value,
+	'block-hero-unit'
   ]
 %}
 {% set blockId = content['#block_content'].id() %}
