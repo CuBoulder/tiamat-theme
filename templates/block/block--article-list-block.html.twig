@@ -175,8 +175,8 @@
   jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}"
   exCats="{{ excludeCategories }}"
   exTags="{{ excludeTags }}"
-  display="{{content.field_art_list_block_display}}"
-  count="{{content.field_art_list_block_item_count}}"
+  display="{{content.field_art_list_block_display|render|striptags|trim}}"
+  count="{{content.field_art_list_block_item_count|render|striptags|trim}}"
   ></article-list-block>
 {# More Link #}
   {% if content.field_art_list_block_more_url|render %}
