@@ -1,3 +1,9 @@
+/**
+ * The absolute URL of the default avatar image.
+ * @type string
+ */
+const defaultAvatarURL = drupalSettings.path.baseUrl + drupalSettings.themePath + '/images/avatar320.jpeg';
+
 class PeopleListProvider {
 	static get noResultsMessage() { return 'No results matching your filters.'; }
 	static get errorMessage() { return 'Error retrieving people from the API endpoint. Please try again later.'; }
@@ -368,7 +374,7 @@ class PeopleListElement extends HTMLElement {
 
 	displayPeople(format, people, urlObj, idObj, containerElement) {		
 		// If grid render and no thumbnail, use a default image for the person. Else no image.
-		const defaultThumbnail = format == 'grid' ? 'themes/custom/boulder_d9_base/images/avatar320.jpeg' : '';
+		const defaultThumbnail = format == 'grid' ? defaultAvatarURL : '';
 
 		people.forEach((person) => {
 			const personRelationshipData = person['relationships'],
