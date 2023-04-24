@@ -29,8 +29,8 @@
   padding-left: 0px;
 }
 
-.ucb-person-card-name h2 {
-  margin-bottom: 10px;
+.ucb-person-card-name > h2 {
+  margin-bottom: 0px;
   font-size: 120%;
   font-weight: 600;
 }
@@ -46,12 +46,15 @@
   flex-direction: row;
 }
 
-.departments-grid {
+.departments-grid, .person-dept-table {
   text-transform: uppercase;
-  font-size: 65%;
-  line-height: 120%;
   display: block;
   margin-bottom: 5px;
+}
+
+.person-title-table{
+  display: block;
+  margin-top: 5px;
 }
 
 .ucb-person-card-img-grid {

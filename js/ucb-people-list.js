@@ -509,10 +509,10 @@ class PeopleListElement extends HTMLElement {
 						<div>
 							<a href="${personLink}">
 								<span class="ucb-person-card-name">
-									<h2>${personName ? personName : ''}<h2>
+									<h2>${personName ? personName : ''}</h2>
 								</span>
 							</a>
-							<span class="ucb-person-card-title departments-grid">
+							<span class="ucb-person-card-title title-grid">
 								${personTitleList}
 							</span>
 							<span class="ucb-person-card-dept departments-grid">
@@ -534,10 +534,10 @@ class PeopleListElement extends HTMLElement {
 								${personName}
 							</span>
 						</a>
-						<span class="ucb-person-card-title departments-grid">
+						<span class="ucb-person-card-title person-title-table">
 							${personTitleList}
 						</span>
-						<span class="ucb-person-card-dept departments-grid">
+						<span class="ucb-person-card-dept person-dept-table">
 							${personDepartmentList}
 						</span>
 					</td>

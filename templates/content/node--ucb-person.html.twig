@@ -22,12 +22,13 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 {% set content_render = content|render %}
 
 <article{{attributes.addClass(classes)}}>
-	<div class="container-fluid ucb-person-name">
+	<div class="container-fluid ucb-person-header">
 		<div class="container">
-			<h1 class="ucb-person-name ">
-				<span itemprop="givenName">{{ content.field_ucb_person_first_name }}</span>
-				<span itemprop="familyName">{{ content.field_ucb_person_last_name }}</span>
+			<h1 class="ucb-person-name">
+				<span itemprop="givenName">{{ content.field_ucb_person_first_name['#items'].value|trim }}</span>
+				<span itemprop="familyName">{{ content.field_ucb_person_last_name['#items'].value|trim }}</span>
 			</h1>
+			{% set pronouns = content.field_ucb_person_pronouns['#items'].value|trim %}{% if pronouns %}<div class="ucb-person-pronouns">(<span itemprop="pronouns">{{ pronouns }}</span>)</div>{% endif %}
 		</div>
 	</div>
 	<div class="container ucb-person" itemscope itemtype="https://schema.org/Person">
