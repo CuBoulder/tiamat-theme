@@ -371,7 +371,6 @@ class PeopleListElement extends HTMLElement {
 		const defaultThumbnail = format == 'grid' ? 'themes/custom/boulder_d9_base/images/avatar320.jpeg' : '';
 
 		people.forEach((person) => {
-			console.log(person);
 			const personRelationshipData = person['relationships'],
 				departmentsData = personRelationshipData['field_ucb_person_department']['data'],
 				jobTypesData = personRelationshipData['field_ucb_person_department']['data'],
@@ -590,17 +589,31 @@ class PeopleListElement extends HTMLElement {
 	generateForm(){
 		const userAccessibleFilters = this._userAccessibleFilters;
 		// Create Elements
-		const form = document.createElement('form'), formDiv = document.createElement('div'), onChange = event => {
-			const form = event.target.form, formItemsData = new FormData(form),
-				userSettings = {};
-			// Create a dataObject with ids for second render
-			for (const formItemData of formItemsData) {
-				const filterName = formItemData[0], filterInclude = formItemData[1];
-				if(filterInclude != '-1')
-					userSettings[filterName] = {'includes': [filterInclude]};
-			} 
-			this.setAttribute('user-config', JSON.stringify({'filters': userSettings}));
-		};
+		const form = document.createElement('form'), formDiv = document.createElement('div'), 
+			resetButtonContainerElement = document.createElement('div'), resetButtonElement = document.createElement('button'), // Creates the reset button (see https://github.com/CuBoulder/tiamat-theme/issues/312)
+			onChange = form => {
+				const formItemsData = new FormData(form),
+					userSettings = {};
+				// Create a dataObject with ids for second render
+				for (const formItemData of formItemsData) {
+					const filterName = formItemData[0], filterInclude = formItemData[1];
+					if(filterInclude != '-1')
+						userSettings[filterName] = {'includes': [filterInclude]};
+				}
+				this.setAttribute('user-config', JSON.stringify({'filters': userSettings}));
+				// Shows or hides the reset button when a non-default is selected anywhere
+				let showReset = false;
+				const selectElements = form.getElementsByTagName('select');
+				for (let index = 0; index < selectElements.length; index++) {
+					const selectElement = selectElements[index], options = selectElement.options;
+					if (options.length > 1 && !options[selectElement.selectedIndex].classList.contains('taxonomy-option-default')) {
+						showReset = true;
+						break;
+					}
+				}
+				if (showReset) resetButtonContainerElement.removeAttribute('hidden');
+				else resetButtonContainerElement.setAttribute('hidden', '');
+			};
 		form.className = 'people-list-filter';
 		formDiv.className = 'd-flex align-items-center';
 	
@@ -618,14 +631,14 @@ class PeopleListElement extends HTMLElement {
 			const selectFilter = document.createElement('select');
 			selectFilter.name = key;
 			selectFilter.className = 'taxonomy-select-' + key + ' taxonomy-select';
-			selectFilter.onchange = onChange;
+			selectFilter.onchange = event => onChange(event.target.form);
 
 			if(filter['includes'].length != 1) {
 				// All option as first entry
 				const defaultOption = document.createElement('option');
 				defaultOption.value = '-1';
 				defaultOption.innerText = 'All';
-				defaultOption.className = 'taxonomy-option-all';
+				defaultOption.className = 'taxonomy-option-all taxonomy-option-default';
 				if(!filter['restrict'] && filter['includes'].length > 1){
 					defaultOption.innerText = 'Default';
 					defaultOption.className = 'taxonomy-option-default';
@@ -643,8 +656,31 @@ class PeopleListElement extends HTMLElement {
 			container.appendChild(itemLabel);
 			formDiv.appendChild(container);
 		}
+
+		// Enables the reset button
+		resetButtonContainerElement.className = 'form-item reset-button-form-item';
+		resetButtonContainerElement.setAttribute('hidden', ''); // Hides the reset button by default
+		resetButtonElement.className = 'reset-button';
+		resetButtonElement.innerText = 'Reset';
+		resetButtonElement.onclick = event => { // Resets all <select> elements to the default option, if there is one
+			event.preventDefault();
+			const selectElements = form.getElementsByTagName('select');
+			for (let index = 0; index < selectElements.length; index++) {
+				const selectElement = selectElements[index],
+					defaultOption = selectElement.querySelector('.taxonomy-option-default');
+				if (defaultOption)
+					defaultOption.selected = true;
+			}
+			onChange(form);
+		};
+		resetButtonContainerElement.appendChild(resetButtonElement);
+		formDiv.appendChild(resetButtonContainerElement);
+
+		// Appends child elements to match the schema:
+		// <form class="people-list-filter">
+		//  <div> { items } </div>
+		// </form>
 		form.appendChild(formDiv);
-		// Append final container
 		this._userFormElement.appendChild(form);   
 	}
 
@@ -664,10 +700,12 @@ class PeopleListElement extends HTMLElement {
 			selectElement.appendChild(option);
 		});
 		if(!restrict && taxonomy.length > 1 && taxonomy.length === taxonomiesIncluded.length) { // Removes the "Default" option if all the taxonomy terms are included
-			const defaultOption = selectElement.querySelector('.taxonomy-option-default');
+			const defaultOption = selectElement.querySelector('.taxonomy-option-default'),
+				allOption = selectElement.querySelector('.taxonomy-option-all');
 			if(selectElement.options[selectElement.selectedIndex] == defaultOption)
-				selectElement.querySelector('.taxonomy-option-all').selected = true;
+				allOption.selected = true;
 			selectElement.removeChild(defaultOption);
+			allOption.classList.add('taxonomy-option-default');
 		}
 	}
 }
