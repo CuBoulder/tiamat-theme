@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds "Reset" button to People List page user filters
+  - Adds a "Reset" button which automatically appears when a non-default user filter is selected on a People List page
+  - Fixes a bug which caused broken default avatar images while previewing a People List page
+  
+  Resolves CuBoulder/tiamat-theme#312; Author @TeddyBearX
+---
+
+- ### Fix hero unit and image sizing
+  Added extra css class to attributes for hero unit (will need to assess for other inline blocks and blocks) Added `img` to the style.css with the `article img` because images in block layout aren't given the `article` wrapping tag which caused problems with responsive images.
+  
+  Closes #298 
+---
+
 - ### Adds pronouns field to the Person page
   A pronouns text field has been added to the Person page, allowing a person's pronouns to be displayed below their name.
   

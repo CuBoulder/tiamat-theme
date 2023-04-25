@@ -36,6 +36,7 @@ function boulderD9_base_page_attachments_alter(array &$page) {
       $page['#attached']['html_head_link'][$k][0]['href'] = base_path() . \Drupal::service('extension.list.theme')->getPath('boulderD9_base') . '/favicon.png';
     }
   }
+  $page['#attached']['drupalSettings']['themePath'] = \Drupal::theme()->getActiveTheme()->getPath(); // Exposes a relative theme path in drupalSettings
 }
 
 /***

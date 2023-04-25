@@ -184,7 +184,7 @@
 	min-height: 33px;
 }
   
-  article img {
+  img, article img {
     max-width: 100%;
     height: auto;
   }
