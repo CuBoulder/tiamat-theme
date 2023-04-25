@@ -1,8 +1,3 @@
-
 <ul class="ucb-person-department">
-    {% for item in items %}
-        <li itemprop="department">
-            {{ item.content|render|striptags|trim }}
-        </li>
-    {% endfor %}
+	{% for item in items %}<li itemprop="department">{{ item.content|render|striptags|trim|raw }}</li> {% endfor %}
 </ul>

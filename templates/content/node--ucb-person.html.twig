@@ -38,53 +38,39 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 					<div class="ucb-person-img" itemprop="image">
 						{{ content.field_ucb_person_photo }}
 					</div>
-				{% endif %}
-				{% if content.field_ucb_person_title|render or content.field_ucb_person_department|render %}
+				{% endif %}{% set personTitle = content.field_ucb_person_title['#items'].value|trim %}{% set personDepartment = content.field_ucb_person_department|render %}
+				{% if personTitle or personDepartment %}
 					<div class="ucb-person-section ucb-person-job">
-						{% if content.field_ucb_person_title|render %}
-							<span class="d-block">
-								{{ content.field_ucb_person_title}}
-							</span>
-						{% endif %}
-						{% if content.field_ucb_person_department|render %}
-							<span class="d-block">{{ content.field_ucb_person_department}}</span>
-						{% endif %}
+						{% if personTitle %}<span class="d-block">{{ personTitle }}</span>{% endif %}
+						{% if personDepartment %}<span class="d-block">{{ personDepartment }}</span>{% endif %}
 					</div>
-				{% endif %}
-				{% if content.field_ucb_person_email|render or content.field_ucb_person_phone|render %}
+				{% endif %}{% set personEmail = content.field_ucb_person_email['#items'].value|trim %}{% set personPhone = content.field_ucb_person_phone['#items'].value|trim %}
+				{% if personEmail or personPhone %}
 					<div class="ucb-person-section ucb-person-contact">
-						{% if content.field_ucb_person_email|render %}
-							<div itemprop="email">
-								{{ content.field_ucb_person_email }}
-							</div>
-						{% endif %}
-						{% if content.field_ucb_person_phone|render %}
-							<div itemprop="telephone">
-								{{ content.field_ucb_person_phone }}
-							</div>
-						{% endif %}
+						{% if personEmail %}<div itemprop="email">{{ personEmail }}</div>{% endif %}
+						{% if personPhone %}<div itemprop="telephone">{{ personPhone }}</div>{% endif %}
 					</div>
-				{% endif %}
-				{% if content.field_ucb_person_links|render %}
+				{% endif %}{% set personLinks = content.field_ucb_person_links|render %}
+				{% if personLinks %}
 					<div class="ucb-person-section ucb-person-links">
-						{{ content.field_ucb_person_links }}
+						{{ personLinks }}
 					</div>
-				{% endif %}
-				{% if content.field_ucb_person_address|render %}
+				{% endif %}{% set personAddress = content.field_ucb_person_address|render %}
+				{% if personAddress %}
 					<div class="ucb-person-section ucb-person-address" itemprop="address">
 						<span class="ucb-person-section-header" id="headerAddress">Address</span>
-						{{ content.field_ucb_person_address }}
+						{{ personAddress }}
 					</div>
-				{% endif %}
-				{% if content.field_ucb_person_office_hours|render %}
+				{% endif %}{% set personOfficeHours = content.field_ucb_person_office_hours|render %}
+				{% if personOfficeHours %}
 					<div class="ucb-person-section ucb-person-office-hours" aria-labelledby="headerOfficeHours">
 						<span class="ucb-person-section-header" id="headerOfficeHours">Office Hours</span>
-						{{ content.field_ucb_person_office_hours }}
+						{{ personOfficeHours }}
 					</div>
-				{% endif %}
-				{% if content.body|render %}
+				{% endif %}{% set body = content.body|render %}
+				{% if body %}
 					<div class="ucb-person-section ucb-person-body">
-						{{ content.body }}
+						{{ body }}
 					</div>
 				{% endif %}
 			</div>
