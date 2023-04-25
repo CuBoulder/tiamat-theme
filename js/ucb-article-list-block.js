@@ -226,17 +226,102 @@ class ArticleListBlockElement extends HTMLElement {
                 console.log('I am rendering Feature - wide')
                 this.renderFeatureWide(articleArray)
                 break;
-        
+            case 'feature-large':
+                console.log('I am rendering Feature - full')
+                this.renderFeatureFull(articleArray)
+                break;
+            case 'teaser':
+                console.log('I am rendering teaser')
+                this.renderTeaser(articleArray)
+                break;
+            case 'title-thumbnail':
+                console.log('I am rendering title thumbnail')
+                this.renderTitleThumb(articleArray)
+                break;
+            case 'title-only':
+                console.log('I am rendering title ONLY')
+                this.renderTitleOnly(articleArray)
+                break;
             default:
-                console.log('I am the default')
-                this.renderFeatureWide(articleArray)
+                console.log('I am the default (teaser')
+                this.renderTeaser(articleArray)
                 break;
         }
 
     }
 
+    renderFeatureFull(articleArray){
+        console.log(articleArray)
+    }
     renderFeatureWide(articleArray){
         console.log(articleArray)
+    }
+    renderTitleThumb(articleArray){
+        console.log(articleArray)
+    }
+    renderTitleOnly(articleArray){
+        console.log(articleArray)
+    }
+    renderTeaser(articleArray){
+        var container = document.createElement('div')
+        container.classList = 'ucb-article-list-block'
+
+        articleArray.forEach(article=>{
+            // Article Data
+            var articleDate = article.date;
+            var articleLink = article.link;
+            var articleImgSrc = article.image;
+            var articleTitle = article.title;
+            var articleSumm = article.body;
+
+            // Create and Append Elements
+            var article = document.createElement('article');
+            article.classList = 'ucb-article-card row';
+            var imgDiv = document.createElement('div');
+            imgDiv.classList = 'col-sm-12 col-md-2 ucb-article-card-img';
+
+            var imgLink = document.createElement('a');
+            imgLink.href = articleLink;
+            
+            var articleImg = document.createElement('img')
+            articleImg.src = articleImgSrc;
+
+            imgLink.appendChild(articleImg);
+            imgDiv.appendChild(imgLink);
+
+            article.appendChild(imgDiv);
+
+            var articleBody = document.createElement('div');
+            articleBody.classList = 'col-sm-12 col-md-10 ucb-article-card-data';
+
+            var headerLink = document.createElement('a');
+            headerLink.href = articleLink;
+
+            var articleHeader = document.createElement('h2');
+            articleHeader.innerText = articleTitle;
+
+            headerLink.appendChild(articleHeader);
+
+            var date = document.createElement('span');
+            date.innerText = articleDate;
+
+            var articleSummary = document.createElement('p');
+            articleSummary.innerText = articleSumm;
+
+            var readMore = document.createElement('a');
+            readMore.href = articleLink;
+            readMore.innerHTML = `Read More <i class="fal fa-chevron-double-right"></i>`;
+
+            articleBody.appendChild(headerLink)
+            articleBody.appendChild(date)
+            articleBody.appendChild(articleSummary)
+            articleBody.appendChild(readMore)
+
+            article.appendChild(articleBody)
+
+            container.appendChild(article)
+        })
+        this.appendChild(container)
     }
 }
 
