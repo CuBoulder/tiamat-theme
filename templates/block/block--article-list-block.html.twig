@@ -177,7 +177,10 @@
   exTags="{{ excludeTags }}"
   display="{{content.field_art_list_block_display|render|striptags|trim}}"
   count="{{content.field_art_list_block_item_count|render|striptags|trim}}"
-  ></article-list-block>
+  >
+  <div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
+    <i class="fas fa-spinner fa-3x fa-pulse"></i>
+  </div></article-list-block>
 {# More Link #}
   {% if content.field_art_list_block_more_url|render %}
   <div class="ucb-article-list-block-button-container">

@@ -9,13 +9,6 @@ class ArticleListBlockElement extends HTMLElement {
         var excludeCatArray = this.getAttribute('exCats').split(",").map(Number);
         var excludeTagArray = this.getAttribute('exTags').split(",").map(Number);
 
-        if(excludeCatArray.length == 1 && excludeCatArray[0] === 0){
-            excludeCatArray = []
-        }
-        if(excludeTagArray.length == 1 && excludeTagArray[0] === 0){
-            excludeTagArray = []
-        }
-
         const handleError = response => {
             if (!response.ok) { 
                throw new Error;
@@ -322,11 +315,24 @@ class ArticleListBlockElement extends HTMLElement {
             articleBody.appendChild(readMore)
 
             article.appendChild(articleBody)
-
+            this.toggleMessage('ucb-al-loading')
             container.appendChild(article)
         })
         this.appendChild(container)
     }
+
+    toggleMessage(id, display = "none") {
+        if (id) {
+          var toggle = document.getElementById(id);
+          if (toggle) {
+            if (display === "block") {
+              toggle.style.display = "block";
+            } else {
+              toggle.style.display = "none";
+            }
+          }
+        }
+      }
 }
 
 customElements.define('article-list-block', ArticleListBlockElement);
