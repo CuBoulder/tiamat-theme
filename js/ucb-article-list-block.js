@@ -264,7 +264,7 @@ class ArticleListBlockElement extends HTMLElement {
     }
     renderTeaser(articleArray){
         var container = document.createElement('div')
-        container.classList = 'ucb-article-list-block'
+        container.classList = 'ucb-article-list-block container'
 
         articleArray.forEach(article=>{
             // Article Data
@@ -298,18 +298,22 @@ class ArticleListBlockElement extends HTMLElement {
             headerLink.href = articleLink;
 
             var articleHeader = document.createElement('h2');
+            articleHeader.classList = 'ucb-article-card-title'
             articleHeader.innerText = articleTitle;
 
             headerLink.appendChild(articleHeader);
 
             var date = document.createElement('span');
+            date.classList = 'ucb-article-card-date'
             date.innerText = articleDate;
 
             var articleSummary = document.createElement('p');
             articleSummary.innerText = articleSumm;
+            articleSummary.classList = 'ucb-article-card-summary'
 
             var readMore = document.createElement('a');
             readMore.href = articleLink;
+            readMore.classList = 'ucb-article-card-read-more'
             readMore.innerHTML = `Read More <i class="fal fa-chevron-double-right"></i>`;
 
             articleBody.appendChild(headerLink)

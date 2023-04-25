@@ -20,3 +20,39 @@
     background-color: #0277BD;
     color: white !important;
 }
+
+.ucb-article-card{
+    margin-bottom: 20px;
+    border-bottom: solid rgba(128, 128, 128, 0.333);
+    padding-bottom: 20px;
+}
+
+.ucb-article-card-img{
+    width: 110px;
+    height: 110px;
+    padding: 0 10px 10px 0;
+}
+
+.ucb-article-card-date {
+    font-size: 85%;
+    line-height: 85%;
+    margin-bottom: 10px;
+}
+
+.ucb-article-card-read-more{
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 75%;
+    padding-bottom: 20px;
+}
+
+.ucb-article-card-summary{
+    margin-bottom: 0px;
+}
+
+.ucb-article-card-title{
+    font-size: 120%;
+    font-weight: normal;
+    margin: 0;
+    line-height: 1.3;
+}
