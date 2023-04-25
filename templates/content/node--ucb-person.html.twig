@@ -38,11 +38,11 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 					<div class="ucb-person-img" itemprop="image">
 						{{ content.field_ucb_person_photo }}
 					</div>
-				{% endif %}{% set personTitle = content.field_ucb_person_title['#items'].value|trim %}{% set personDepartment = content.field_ucb_person_department|render %}
+				{% endif %}{% set personTitle = content.field_ucb_person_title|render %}{% set personDepartment = content.field_ucb_person_department|render %}
 				{% if personTitle or personDepartment %}
 					<div class="ucb-person-section ucb-person-job">
-						{% if personTitle %}<span class="d-block">{{ personTitle }}</span>{% endif %}
-						{% if personDepartment %}<span class="d-block">{{ personDepartment }}</span>{% endif %}
+						{% if personTitle %}<div>{{ personTitle }}</div>{% endif %}
+						{% if personDepartment %}<div>{{ personDepartment }}</div>{% endif %}
 					</div>
 				{% endif %}{% set personEmail = content.field_ucb_person_email['#items'].value|trim %}{% set personPhone = content.field_ucb_person_phone['#items'].value|trim %}
 				{% if personEmail or personPhone %}
