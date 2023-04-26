@@ -9,8 +9,6 @@ class ArticleListBlockElement extends HTMLElement {
         var excludeCatArray = this.getAttribute('exCats').split(",").map(Number);
         var excludeTagArray = this.getAttribute('exTags').split(",").map(Number);
 
-        
-
         fetch(API)
             .then(this.handleError)
             .then((data) => this.build(data, count, display, excludeCatArray,excludeTagArray))
@@ -203,7 +201,7 @@ class ArticleListBlockElement extends HTMLElement {
     //         console.error(Error)
         
     // }
-
+    
     async getArticleParagraph(id) {
         if(id) {
           const response = await fetch(
@@ -322,12 +320,13 @@ class ArticleListBlockElement extends HTMLElement {
             container.appendChild(article)
         })
         this.appendChild(container)
+
     }
 
     // Used to toggle error messages and loader
     toggleMessage(id, display = "none") {
         if (id) {
-          var toggle = document.getElementById(id);
+          var toggle = this.querySelector(`#${id}`);
           if (toggle) {
             if (display === "block") {
               toggle.style.display = "block";
