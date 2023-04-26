@@ -251,6 +251,54 @@ class ArticleListBlockElement extends HTMLElement {
     }
     renderTitleThumb(articleArray){
         console.log(articleArray)
+        var container = document.createElement('div')
+        container.classList = 'ucb-article-list-block container'
+
+        articleArray.forEach(article=>{
+            // Article Data
+            var articleDate = article.date;
+            var articleLink = article.link;
+            var articleImgSrc = article.image;
+            var articleTitle = article.title;
+            var articleSumm = article.body;
+
+            // Create and Append Elements
+            var article = document.createElement('article');
+            article.classList = 'ucb-article-card row';
+            var imgDiv = document.createElement('div');
+            imgDiv.classList = 'col-sm-12 col-md-2 ucb-article-card-img';
+
+            var imgLink = document.createElement('a');
+            imgLink.href = articleLink;
+            
+            var articleImg = document.createElement('img')
+            articleImg.src = articleImgSrc;
+
+            imgLink.appendChild(articleImg);
+            imgDiv.appendChild(imgLink);
+
+            article.appendChild(imgDiv);
+
+            var articleBody = document.createElement('div');
+            articleBody.classList = 'col-sm-12 col-md-10 ucb-article-card-data';
+
+            var headerLink = document.createElement('a');
+            headerLink.href = articleLink;
+
+            var articleHeader = document.createElement('h2');
+            articleHeader.classList = 'ucb-article-card-title'
+            articleHeader.innerText = articleTitle;
+
+            headerLink.appendChild(articleHeader);
+
+            articleBody.appendChild(headerLink)
+
+            article.appendChild(articleBody)
+
+            this.toggleMessage('ucb-al-loading')
+            container.appendChild(article)
+        })
+        this.appendChild(container)
     }
     renderTitleOnly(articleArray){
         console.log(articleArray)
