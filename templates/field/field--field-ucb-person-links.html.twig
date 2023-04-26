@@ -18,7 +18,7 @@
 			%}
 			<li{{item.attributes.addClass(classes)}}>
 				{% set linkTitle = item.content['#title'] %}
-				{% set linkUrl = item.content['#url'].uri|trim %}
+				{% set linkUrl = item.content['#url'].uri %}
 				{% set linkUrlUpper = linkUrl|upper %}
 
 				{% if 'FACEBOOK' in linkUrlUpper %}

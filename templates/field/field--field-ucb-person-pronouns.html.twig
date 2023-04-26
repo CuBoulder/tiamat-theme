@@ -7,7 +7,7 @@
 <div>
 	<ul class="ucb-person-pronouns">
 		{% for item in items %}
-		<li>(<span>{{ item.content|render|trim }}</span>)</li>
+		<li>(<span>{{ item.content['#context'].value|trim }}</span>)</li>
 		{% endfor %}
 	</ul>
 </div>

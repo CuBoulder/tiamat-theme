@@ -7,7 +7,7 @@
 <div>
 	<ul class="ucb-person-title">
 		{% for item in items %}
-		<li itemprop="jobTitle">{{ item.content|render|trim }}</li>
+		<li itemprop="jobTitle">{{ item.content['#context'].value|trim }}</li>
 		{% endfor %}
 	</ul>
 </div>

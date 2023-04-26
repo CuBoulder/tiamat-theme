@@ -3,4 +3,4 @@
  * @file Contains the template to display the Person node's Last name field.
  */
 #}
-{% if items.0 %}<span itemprop="familyName">{{ items.0.content|render|trim }}</span>{% endif %}
+{% if items.0 %}<span itemprop="familyName">{{ items.0.content['#context'].value|trim }}</span>{% endif %}
