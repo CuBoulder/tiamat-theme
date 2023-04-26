@@ -250,17 +250,14 @@ class ArticleListBlockElement extends HTMLElement {
         console.log(articleArray)
     }
     renderTitleThumb(articleArray){
-        console.log(articleArray)
         var container = document.createElement('div')
         container.classList = 'ucb-article-list-block container'
 
         articleArray.forEach(article=>{
             // Article Data
-            var articleDate = article.date;
             var articleLink = article.link;
             var articleImgSrc = article.image;
             var articleTitle = article.title;
-            var articleSumm = article.body;
 
             // Create and Append Elements
             var article = document.createElement('article');
@@ -301,7 +298,38 @@ class ArticleListBlockElement extends HTMLElement {
         this.appendChild(container)
     }
     renderTitleOnly(articleArray){
-        console.log(articleArray)
+      var container = document.createElement('div')
+      container.classList = 'ucb-article-list-block'
+
+      articleArray.forEach(article=>{
+          // Article Data
+          var articleLink = article.link;
+          var articleTitle = article.title;
+
+          // Create and Append Elements
+          var article = document.createElement('article');
+          article.classList = 'ucb-article-card-title-only row';
+    
+          var articleBody = document.createElement('div');
+          articleBody.classList = 'col-sm-12 ucb-article-card-data';
+
+          var headerLink = document.createElement('a');
+          headerLink.href = articleLink;
+
+          var articleHeader = document.createElement('h2');
+          articleHeader.classList = 'ucb-article-card-title'
+          articleHeader.innerText = articleTitle;
+
+          headerLink.appendChild(articleHeader);
+
+          articleBody.appendChild(headerLink)
+
+          article.appendChild(articleBody)
+
+          this.toggleMessage('ucb-al-loading')
+          container.appendChild(article)
+      })
+      this.appendChild(container)
     }
     renderTeaser(articleArray){
         var container = document.createElement('div')
