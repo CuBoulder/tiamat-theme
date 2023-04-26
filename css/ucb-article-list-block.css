@@ -37,6 +37,18 @@
     padding: 0 10px 10px 0;
 }
 
+.ucb-article-card-img-wide{
+    height: 500px !important;
+    object-fit: cover !important;
+    margin-bottom: 20px;
+}
+
+.ucb-article-card-img-full{
+    width: 100% !important;
+    margin-bottom: 20px;
+
+}
+
 .ucb-article-card-date {
     font-size: 85%;
     line-height: 85%;
