@@ -21,56 +21,54 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 {#Dummy variable to ensure that all content tags are set for caching purposes#}
 {% set content_render = content|render %}
 
-<article{{attributes.addClass(classes)}}>
-	<div class="container-fluid ucb-person-header">
-		<div class="container">
-			<h1 class="ucb-person-name">
-				<span itemprop="givenName">{{ content.field_ucb_person_first_name['#items'].value|trim }}</span>
-				<span itemprop="familyName">{{ content.field_ucb_person_last_name['#items'].value|trim }}</span>
-			</h1>
-			{% set pronouns = content.field_ucb_person_pronouns['#items'].value|trim %}{% if pronouns %}<div class="ucb-person-pronouns">(<span itemprop="pronouns">{{ pronouns }}</span>)</div>{% endif %}
-		</div>
+<article{{attributes.addClass(classes)}} itemscope itemtype="https://schema.org/Person">
+	<div class="container ucb-person-header">
+		<h1 class="ucb-person-name">
+			{{ content.field_ucb_person_first_name }}
+			{{ content.field_ucb_person_last_name }}
+		</h1>
+		{{ content.field_ucb_person_pronouns }}
 	</div>
-	<div class="container ucb-person" itemscope itemtype="https://schema.org/Person">
+	<div class="container ucb-person">
 		<div class="row ucb-person-personal">
 			<div class="col ucb-person-main">
-				{% if content.field_ucb_person_photo|render %}
+				{% if content.field_ucb_person_photo.0 %}
 					<div class="ucb-person-img" itemprop="image">
 						{{ content.field_ucb_person_photo }}
 					</div>
-				{% endif %}{% set personTitle = content.field_ucb_person_title|render %}{% set personDepartment = content.field_ucb_person_department|render %}
-				{% if personTitle or personDepartment %}
+				{% endif %}
+				{% if content.field_ucb_person_title.0 or content.field_ucb_person_department.0 %}
 					<div class="ucb-person-section ucb-person-job">
-						{% if personTitle %}<div>{{ personTitle }}</div>{% endif %}
-						{% if personDepartment %}<div>{{ personDepartment }}</div>{% endif %}
+						{{ content.field_ucb_person_title }}
+						{{ content.field_ucb_person_department }}
 					</div>
-				{% endif %}{% set personEmail = content.field_ucb_person_email['#items'].value|trim %}{% set personPhone = content.field_ucb_person_phone['#items'].value|trim %}
-				{% if personEmail or personPhone %}
+				{% endif %}
+				{% if content.field_ucb_person_email.0 or content.field_ucb_person_phone.0 %}
 					<div class="ucb-person-section ucb-person-contact">
-						{% if personEmail %}<div itemprop="email">{{ personEmail }}</div>{% endif %}
-						{% if personPhone %}<div itemprop="telephone">{{ personPhone }}</div>{% endif %}
+						{{ content.field_ucb_person_email }}
+						{{ content.field_ucb_person_phone }}
 					</div>
-				{% endif %}{% set personLinks = content.field_ucb_person_links|render %}
-				{% if personLinks %}
+				{% endif %}
+				{% if content.field_ucb_person_links.0 %}
 					<div class="ucb-person-section ucb-person-links">
-						{{ personLinks }}
+						{{ content.field_ucb_person_links }}
 					</div>
-				{% endif %}{% set personAddress = content.field_ucb_person_address|render %}
-				{% if personAddress %}
-					<div class="ucb-person-section ucb-person-address" itemprop="address">
+				{% endif %}
+				{% if content.field_ucb_person_address.0 %}
+					<div class="ucb-person-section" itemprop="address" aria-labelledby="headerAddress">
 						<span class="ucb-person-section-header" id="headerAddress">Address</span>
-						{{ personAddress }}
+						{{ content.field_ucb_person_address }}
 					</div>
-				{% endif %}{% set personOfficeHours = content.field_ucb_person_office_hours|render %}
-				{% if personOfficeHours %}
+				{% endif %}
+				{% if content.field_ucb_person_office_hours.0 %}
 					<div class="ucb-person-section ucb-person-office-hours" aria-labelledby="headerOfficeHours">
 						<span class="ucb-person-section-header" id="headerOfficeHours">Office Hours</span>
-						{{ personOfficeHours }}
+						{{ content.field_ucb_person_office_hours }}
 					</div>
-				{% endif %}{% set body = content.body|render %}
-				{% if body %}
+				{% endif %}
+				{% if content.body.0 %}
 					<div class="ucb-person-section ucb-person-body">
-						{{ body }}
+						{{ content.body }}
 					</div>
 				{% endif %}
 			</div>

@@ -1,3 +1,14 @@
-<ul class="ucb-person-department">
-	{% for item in items %}<li itemprop="department">{{ item.content|render|striptags|trim|raw }}</li> {% endfor %}
-</ul>
+{#
+/**
+ * @file Contains the template to display the Person node's Department field.
+ */
+#}
+{% if items %}
+<div>
+	<ul class="ucb-person-department">
+		{% for item in items %}
+		<li itemprop="department">{{ item.content['#title'] }}</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endif %}

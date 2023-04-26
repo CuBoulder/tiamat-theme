@@ -1,10 +1,10 @@
 {#
 /**
-* Theme layout to display a UCB Person Link Field.
-*/
+ * @file Contains the template to display the Person node's Links field.
+ */
 #}
-
 {% if items %}
+<div>
 	<ul class="ucb-person-links">
 		{% for item in items %}
 			{%
@@ -17,9 +17,8 @@
 				]
 			%}
 			<li{{item.attributes.addClass(classes)}}>
-
 				{% set linkTitle = item.content['#title'] %}
-				{% set linkUrl = item.content['#url']|render|striptags|trim %}
+				{% set linkUrl = item.content['#url'].uri|trim %}
 				{% set linkUrlUpper = linkUrl|upper %}
 
 				{% if 'FACEBOOK' in linkUrlUpper %}
@@ -132,4 +131,5 @@
 			</li>
 		{% endfor %}
 	</ul>
+</div>
 {% endif %}
