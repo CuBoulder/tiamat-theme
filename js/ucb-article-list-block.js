@@ -9,27 +9,30 @@ class ArticleListBlockElement extends HTMLElement {
         var excludeCatArray = this.getAttribute('exCats').split(",").map(Number);
         var excludeTagArray = this.getAttribute('exTags').split(",").map(Number);
 
-        const handleError = response => {
-            if (!response.ok) { 
-               throw new Error;
-            } else {
-               return response.json();
-            }
-        };
+        
 
         fetch(API)
-            .then(handleError)
+            .then(this.handleError)
             .then((data) => this.build(data, count, display, excludeCatArray,excludeTagArray))
             .catch(Error=> {
-                // this.handleError(Error)
+                // this.toggleMessage(Error)
                 console.log(Error)
             });
     }
 
-    build(data, count, display, excludeCatArray, excludeTagArray){
+    build(data, count, display, excludeCatArray, excludeTagArray, finalArticles = []){
+        let NEXTJSONURL = "";
+
+        if(data.links.next) {
+            let nextURL = data.links.next.href.split("/jsonapi/");
+            NEXTJSONURL = `/jsonapi/${nextURL[1]}`;
+          } else {
+            NEXTJSONURL = "";
+          }
+
         if(data.data.length == 0){
             // TO DO -- add in error message for no data
-            // this.handleError({name : "No Tags Retrieved", message : "There are no Tags created"} , 'No Tags Found')
+            // this.toggleMessage({name : "No Tags Retrieved", message : "There are no Tags created"} , 'No Tags Found')
         } else {
         // Below objects are needed to match images with their corresponding articles. There are two endpoints => data.data (article) and data.included (incl. media), both needed to associate a media library image with its respective article
         let idObj = {};
@@ -59,9 +62,6 @@ class ArticleListBlockElement extends HTMLElement {
             idObj[pair.id] = pair.relationships.thumbnail.data.id;
           })
         }
-
-
-        let finalArticles = [];
 
         // Iterate over each Article
         data.data.map(item=>{
@@ -162,11 +162,22 @@ class ArticleListBlockElement extends HTMLElement {
                   finalArticles.push(article)
             }
         })
+
+        // Case for not enough articles selected and extra articles available
+        if(finalArticles.length < count && NEXTJSONURL){
+            fetch(NEXTJSONURL).then(this.handleError)
+            .then((data) => this.build(data, count, display, excludeCatArray, excludeTagArray, finalArticles))
+            .catch(Error=> {
+                // this.toggleMessage(Error)
+                console.log(Error)
+            });
+        }
+
+        // Case for Too many articles
+        if(finalArticles.length > count){
+            finalArticles.length = count
+        }
         this.renderDisplay(display, finalArticles)
-
-        // See if articles retrieved are included in Exclusions
-
-
     }
 }
 
@@ -192,15 +203,6 @@ class ArticleListBlockElement extends HTMLElement {
     //         console.error(Error)
         
     // }
-
-
-    // Function to parse data and assemble articles
-    // Choose render method
-    // Teaser Design
-    // Feature Wide
-    // Feature Full
-    // Title & Thumb
-    // Title Only
 
     async getArticleParagraph(id) {
         if(id) {
@@ -315,12 +317,14 @@ class ArticleListBlockElement extends HTMLElement {
             articleBody.appendChild(readMore)
 
             article.appendChild(articleBody)
+
             this.toggleMessage('ucb-al-loading')
             container.appendChild(article)
         })
         this.appendChild(container)
     }
 
+    // Used to toggle error messages and loader
     toggleMessage(id, display = "none") {
         if (id) {
           var toggle = document.getElementById(id);
@@ -333,6 +337,14 @@ class ArticleListBlockElement extends HTMLElement {
           }
         }
       }
+
+      handleError = response => {
+        if (!response.ok) { 
+           throw new Error;
+        } else {
+           return response.json();
+        }
+    };
 }
 
 customElements.define('article-list-block', ArticleListBlockElement);
