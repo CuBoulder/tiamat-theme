@@ -127,13 +127,27 @@
 
     <div class="layout-content">
       {% if page.below_content|render %}
-        <div class="ucb-above-content-region container">
+        <div class="ucb-above-content-region">
           {{ page.above_content }}
         </div>
       {% endif %}
       {% if page.left_sidebar|render or page.right_sidebar|render %}
-        {% if page.left_sidebar|render %}
-          <div class="ucb-layout-container container">
+        {% if page.left_sidebar|render and page.right_sidebar|render %}
+          <div class="ucb-layout-container container g-0">
+            <div class="layout-row row">
+              <div class="ucb-left-sidebar ucb-sidebar col-sm-12 col-md-4 col-lg-3">
+                {{ page.left_sidebar }}
+              </div>
+              <div class="ucb-layout-main col-sm-12 col-md-4 col-lg-6 ucb-has-sidebar">
+                {{ page.content }}
+              </div>
+               <div class="ucb-left-right ucb-sidebar col-sm-12 col-md-4 col-lg-3">
+                {{ page.right_sidebar }}
+              </div>
+            </div>
+          </div>
+        {% elseif page.left_sidebar|render %}
+          <div class="ucb-layout-container container  g-0">
             <div class="layout-row row">
               <div class="ucb-left-sidebar ucb-sidebar col-sm-12 col-md-4 col-lg-3">
                 {{ page.left_sidebar }}
@@ -144,7 +158,7 @@
             </div>
           </div>
         {% elseif page.right_sidebar|render %}
-          <div class="ucb-layout-container container">
+          <div class="ucb-layout-container container  g-0">
             <div class="layout-row row">
               <div class="ucb-layout-main col-sm-12 col-md-8 col-lg-9 ucb-has-sidebar">
                 {{ page.content }}
@@ -160,7 +174,7 @@
       {% endif %}
 
       {% if page.below_content|render %}
-        <div class="ucb-below-content-region container">
+        <div class="ucb-below-content-region">
           {{ page.below_content }}
         </div>
       {% endif %}
