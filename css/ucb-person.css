@@ -46,9 +46,11 @@ a.ucb-person-social-link i.fab {
 }
 
 @media screen and (min-width: 768px) {
-	.ucb-person-main img {
+	.ucb-person-img {
 		float: right;
-		padding: 0 1em 1em;
+	}
+	.ucb-person-img .media-image-caption {
+		text-align: center;
 	}
 }
 
@@ -87,11 +89,10 @@ ul.ucb-person-department li:not(:first-child):before {
 }
 
 .ucb-person-img {
-	float: right;
-	padding: 0 1em 1em;
 	clear: both;
+	margin-bottom: 20px;
 }
 
-.ucb-person-img .media-image-caption {
-	text-align: center;
+.ucb-person-img img {
+	padding-bottom: 10px;
 }
