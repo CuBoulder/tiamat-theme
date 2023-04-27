@@ -92,6 +92,6 @@ ul.ucb-person-department li:not(:first-child):before {
 	clear: both;
 }
 
-.ucb-person-img>div>div .media-image-caption {
+.ucb-person-img .media-image-caption {
 	text-align: center;
 }
