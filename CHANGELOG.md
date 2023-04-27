@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Tweaks Person page image alignment and padding
+  Resolves CuBoulder/tiamat-theme#354
+---
+
+- ### Fixes a bug which caused improper display of special characters like ampersands on Person pages
+  - Some special characters such as `&` in _Job Title_ and _Department_ fields displayed as `&amp;` on Person pages. These characters now display properly. Resolves CuBoulder/tiamat-theme#275
+  - An error resulted from the added `core/drupalSettings` dependency. This dependency is removed.
+  - Person page schema changes: `itemprop` attributes have been move into field templates; `itemscope` moved to the higher-level `<article>` tag.
+  - Additional cleanup of the Person page template
+---
+
 - ### Adds "Reset" button to People List page user filters
   - Adds a "Reset" button which automatically appears when a non-default user filter is selected on a People List page
   - Fixes a bug which caused broken default avatar images while previewing a People List page

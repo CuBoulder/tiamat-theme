@@ -1,0 +1,10 @@
+{#
+/**
+ * @file Contains the template to display the Person node's Photo field.
+ */
+#}
+{% if items.0 %}
+<div class="ucb-person-img" itemprop="image">
+	{{ items.0.content }}
+</div>
+{% endif %}
