@@ -27,11 +27,7 @@
 	<div class="container ucb-person">
 		<div class="row ucb-person-personal">
 			<div class="col ucb-person-main">
-				{% if content.field_ucb_person_photo.0 %}
-					<div class="ucb-person-img" itemprop="image">
-						{{ content.field_ucb_person_photo }}
-					</div>
-				{% endif %}
+				{{ content.field_ucb_person_photo }}
 				{% if content.field_ucb_person_title.0 or content.field_ucb_person_department.0 %}
 					<div class="ucb-person-section ucb-person-job">
 						{{ content.field_ucb_person_title }}
