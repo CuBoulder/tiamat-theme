@@ -48,6 +48,7 @@ a.ucb-person-social-link i.fab {
 @media screen and (min-width: 768px) {
 	.ucb-person-img {
 		float: right;
+		margin-left: 20px;
 	}
 	.ucb-person-img .media-image-caption {
 		text-align: center;
