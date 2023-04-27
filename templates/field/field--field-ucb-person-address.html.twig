@@ -1,0 +1,10 @@
+{#
+/**
+ * @file Contains the template to display the Person node's Address field.
+ */
+#}
+{% if items.0 %}
+<div class="ucb-person-address" itemprop="address">
+	{{ items.0.content }}
+</div>
+{% endif %}

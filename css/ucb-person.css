@@ -7,7 +7,10 @@
 }
 
 .ucb-person-pronouns {
+	list-style: none;
 	font-size: 1.1em;
+	margin: 0;
+	padding: 0;
 }
 
 .ucb-person-section {
@@ -65,10 +68,11 @@ ul.ucb-person-title li:not(:first-child):before,
 ul.ucb-person-department li:not(:first-child):before {
 	font-family: "Font Awesome 5 Free";
 	font-weight: 900;
-	font-size: 0.25em;
+	font-size: .25em;
 	content: "\f111";
 	vertical-align: middle;
-	padding: 0 0.25em;
+	padding-left: .25em;
+	padding-right: 1em;
 }
 
 .ucb-person-title li,
@@ -88,6 +92,6 @@ ul.ucb-person-department li:not(:first-child):before {
 	clear: both;
 }
 
-.ucb-person-img>div>div .media-image-caption {
+.ucb-person-img .media-image-caption {
 	text-align: center;
 }

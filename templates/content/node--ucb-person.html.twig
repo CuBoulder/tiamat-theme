@@ -9,80 +9,55 @@
 {{ attach_library('boulderD9_base/ucb-page') }}
 {{ attach_library('boulderD9_base/ucb-person') }}
 
-{%
-set classes = [
-'node',
-'node--type-' ~ node.bundle|clean_class,
-not node.isPublished() ? 'node--unpublished',
-view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-]
-%}
+{% set classes = [
+	'node',
+	'node--type-' ~ node.bundle|clean_class,
+	not node.isPublished() ? 'node--unpublished',
+	view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+] %}
 
-{#Dummy variable to ensure that all content tags are set for caching purposes#}
-{% set content_render = content|render %}
-
-<article{{attributes.addClass(classes)}}>
-	<div class="container-fluid ucb-person-header">
-		<div class="container">
-			<h1 class="ucb-person-name">
-				<span itemprop="givenName">{{ content.field_ucb_person_first_name['#items'].value|trim }}</span>
-				<span itemprop="familyName">{{ content.field_ucb_person_last_name['#items'].value|trim }}</span>
-			</h1>
-			{% set pronouns = content.field_ucb_person_pronouns['#items'].value|trim %}{% if pronouns %}<div class="ucb-person-pronouns">(<span itemprop="pronouns">{{ pronouns }}</span>)</div>{% endif %}
-		</div>
+<article{{attributes.addClass(classes)}} itemscope itemtype="https://schema.org/Person">
+	<div class="container ucb-person-header">
+		<h1 class="ucb-person-name">
+			{{ content.field_ucb_person_first_name }}
+			{{ content.field_ucb_person_last_name }}
+		</h1>
+		{{ content.field_ucb_person_pronouns }}
 	</div>
-	<div class="container ucb-person" itemscope itemtype="https://schema.org/Person">
+	<div class="container ucb-person">
 		<div class="row ucb-person-personal">
 			<div class="col ucb-person-main">
-				{% if content.field_ucb_person_photo|render %}
-					<div class="ucb-person-img" itemprop="image">
-						{{ content.field_ucb_person_photo }}
-					</div>
-				{% endif %}
-				{% if content.field_ucb_person_title|render or content.field_ucb_person_department|render %}
+				{{ content.field_ucb_person_photo }}
+				{% if content.field_ucb_person_title.0 or content.field_ucb_person_department.0 %}
 					<div class="ucb-person-section ucb-person-job">
-						{% if content.field_ucb_person_title|render %}
-							<span class="d-block">
-								{{ content.field_ucb_person_title}}
-							</span>
-						{% endif %}
-						{% if content.field_ucb_person_department|render %}
-							<span class="d-block">{{ content.field_ucb_person_department}}</span>
-						{% endif %}
+						{{ content.field_ucb_person_title }}
+						{{ content.field_ucb_person_department }}
 					</div>
 				{% endif %}
-				{% if content.field_ucb_person_email|render or content.field_ucb_person_phone|render %}
+				{% if content.field_ucb_person_email.0 or content.field_ucb_person_phone.0 %}
 					<div class="ucb-person-section ucb-person-contact">
-						{% if content.field_ucb_person_email|render %}
-							<div itemprop="email">
-								{{ content.field_ucb_person_email }}
-							</div>
-						{% endif %}
-						{% if content.field_ucb_person_phone|render %}
-							<div itemprop="telephone">
-								{{ content.field_ucb_person_phone }}
-							</div>
-						{% endif %}
+						{{ content.field_ucb_person_email }}
+						{{ content.field_ucb_person_phone }}
 					</div>
 				{% endif %}
-				{% if content.field_ucb_person_links|render %}
+				{% if content.field_ucb_person_links.0 %}
 					<div class="ucb-person-section ucb-person-links">
 						{{ content.field_ucb_person_links }}
 					</div>
 				{% endif %}
-				{% if content.field_ucb_person_address|render %}
-					<div class="ucb-person-section ucb-person-address" itemprop="address">
+				{% if content.field_ucb_person_address.0 %}
+					<div class="ucb-person-section" aria-labelledby="headerAddress">
 						<span class="ucb-person-section-header" id="headerAddress">Address</span>
 						{{ content.field_ucb_person_address }}
 					</div>
 				{% endif %}
-				{% if content.field_ucb_person_office_hours|render %}
+				{% if content.field_ucb_person_office_hours.0 %}
 					<div class="ucb-person-section ucb-person-office-hours" aria-labelledby="headerOfficeHours">
 						<span class="ucb-person-section-header" id="headerOfficeHours">Office Hours</span>
 						{{ content.field_ucb_person_office_hours }}
 					</div>
 				{% endif %}
-				{% if content.body|render %}
+				{% if content.body.0 %}
 					<div class="ucb-person-section ucb-person-body">
 						{{ content.body }}
 					</div>

@@ -1,13 +1,16 @@
 {#
 /**
-* Theme layout to display a UCB Person Phone Field.
-*/
+ * @file Contains the template to display the Person node's Phone field.
+ */
 #}
-
-<ul class="ucb-person-phone-numbers">
-    {% for item in items %}
-    <li>
-        <i class="fa fal fa-phone"></i>{{ item.attributes }} {{ item.content }}
-    </li>
-    {% endfor %}
-</ul>
+{% if items %}
+<div>
+	<ul class="ucb-person-phone-numbers">
+		{% for item in items %}
+		<li>
+			<i class="fa fal fa-phone"></i>&nbsp;<span itemprop="phone">{{ item.content }}</span>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endif %}

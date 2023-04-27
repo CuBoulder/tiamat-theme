@@ -1,0 +1,14 @@
+{#
+/**
+ * @file Contains the template to display the Person node's Pronouns field.
+ */
+#}
+{% if items %}
+<div>
+	<ul class="ucb-person-pronouns">
+		{% for item in items %}
+		<li>(<span>{{ item.content['#context'].value|trim }}</span>)</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endif %}
