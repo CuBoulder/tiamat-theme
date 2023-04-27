@@ -180,7 +180,14 @@
   >
   <div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
     <i class="fas fa-spinner fa-3x fa-pulse"></i>
-  </div></article-list-block>
+  </div>
+  <div id="ucb-al-error" style="display:none" class="ucb-list-msg">
+    <h3>An error has occured - please check your filters and try again</h3>
+  </div>
+  <div id="ucb-al-api-error" style="display:none" class="ucb-list-msg">
+    <h3>An error has occured with the API - please try again later</h3>
+  </div>
+</article-list-block>
 {# More Link #}
   {% if content.field_art_list_block_more_url|render %}
   <div class="ucb-article-list-block-button-container">

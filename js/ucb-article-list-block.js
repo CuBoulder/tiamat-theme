@@ -13,14 +13,16 @@ class ArticleListBlockElement extends HTMLElement {
             .then(this.handleError)
             .then((data) => this.build(data, count, display, excludeCatArray,excludeTagArray))
             .catch(Error=> {
-                // this.toggleMessage(Error)
-                console.log(Error)
+              console.error('There was an error fetching data from the API - Please try again later.')
+              console.error(Error)
+              this.toggleMessage('ucb-al-loading')
+              this.toggleMessage('ucb-al-api-error', "block")
             });
     }
 
     build(data, count, display, excludeCatArray, excludeTagArray, finalArticles = []){
+      // More than 10 articles? This sets up the next call if there's more articles to be retrieved but not enough post-filters
         let NEXTJSONURL = "";
-
         if(data.links.next) {
             let nextURL = data.links.next.href.split("/jsonapi/");
             NEXTJSONURL = `/jsonapi/${nextURL[1]}`;
@@ -28,9 +30,11 @@ class ArticleListBlockElement extends HTMLElement {
             NEXTJSONURL = "";
           }
 
+          // If no Articles retrieved...
         if(data.data.length == 0){
-            // TO DO -- add in error message for no data
-            // this.toggleMessage({name : "No Tags Retrieved", message : "There are no Tags created"} , 'No Tags Found')
+            this.toggleMessage('ucb-al-loading')
+            this.toggleMessage('ucb-al-error',"block")
+            console.warn('No Articles retrieved - please check your inclusion filters and try again')
         } else {
         // Below objects are needed to match images with their corresponding articles. There are two endpoints => data.data (article) and data.included (incl. media), both needed to associate a media library image with its respective article
         let idObj = {};
@@ -150,6 +154,7 @@ class ArticleListBlockElement extends HTMLElement {
                   let title = item.attributes.title;
                   let link = item.attributes.path.alias;
 
+                  // Create an Article Object for programatic rendering
                   const article = {
                     title,
                     link,
@@ -157,50 +162,40 @@ class ArticleListBlockElement extends HTMLElement {
                     date,
                     body,
                   }
+                  // Adds the article object to the final array of articles chosen
                   finalArticles.push(article)
             }
         })
-
         // Case for not enough articles selected and extra articles available
         if(finalArticles.length < count && NEXTJSONURL){
             fetch(NEXTJSONURL).then(this.handleError)
             .then((data) => this.build(data, count, display, excludeCatArray, excludeTagArray, finalArticles))
             .catch(Error=> {
-                // this.toggleMessage(Error)
-                console.log(Error)
+              console.error('There was an error fetching data from the API - Please try again later.')
+              console.error(Error)
+              this.toggleMessage('ucb-al-loading')
+              this.toggleMessage('ucb-al-api-error', "block")
             });
+        }
+
+        // If no chosen articles and no other options, provide error
+        if(finalArticles.length === 0 && !NEXTJSONURL){
+          console.error('There are no available Articles that match the selected filters. Please adjust your filters and try again.')
+          this.toggleMessage('ucb-al-loading')
+          this.toggleMessage('ucb-al-error', "block")
         }
 
         // Case for Too many articles
         if(finalArticles.length > count){
             finalArticles.length = count
         }
-        this.renderDisplay(display, finalArticles)
+
+        // Have articles and want to proceed
+        if(finalArticles.length > 0 && !NEXTJSONURL){
+          this.renderDisplay(display, finalArticles)
+        }
     }
 }
-
-    // TO DO -- Create Error handling for Article Block
-    // handleError(Error, ErrorMsg = 'Error Fetching Tags - Check the console'){
-    //     const container = document.createElement('div');
-    //     container.className = 'ucb-tag-cloud-container';
-    //     const span = document.createElement('span')
-    //     span.className = 'ucb-tag-cloud-span'
-    //     container.appendChild(span)
-
-    //     const icon = document.createElement('i');
-    //     icon.className = 'fas fa-exclamation-triangle'
-    //     span.appendChild(icon)
-
-    //     const message = document.createElement('p');
-    //     message.className = 'ucb-category-cloud-message'
-    //     message.innerText = ErrorMsg
-    //     span.appendChild(message)
-
-    //     this.appendChild(container)
-    //     // Log error
-    //         console.error(Error)
-        
-    // }
     
     async getArticleParagraph(id) {
         if(id) {
@@ -211,38 +206,34 @@ class ArticleListBlockElement extends HTMLElement {
         } else {
             return "";
         }
-      }
+    }
 
+    // Responsible for calling the render function of the appropriate display
     renderDisplay(display, articleArray){
         switch (display) {
             case 'feature-wide':
-                console.log('I am rendering Feature - wide')
                 this.renderFeatureWide(articleArray)
                 break;
             case 'feature-large':
-                console.log('I am rendering Feature - full')
                 this.renderFeatureFull(articleArray)
                 break;
             case 'teaser':
-                console.log('I am rendering teaser')
                 this.renderTeaser(articleArray)
                 break;
             case 'title-thumbnail':
-                console.log('I am rendering title thumbnail')
                 this.renderTitleThumb(articleArray)
                 break;
             case 'title-only':
-                console.log('I am rendering title ONLY')
                 this.renderTitleOnly(articleArray)
                 break;
             default:
-                console.log('I am the default (teaser')
                 this.renderTeaser(articleArray)
                 break;
         }
 
     }
 
+    // renderX functions are responsible for taking the final array of Articles and displaying them appropriately
     renderFeatureFull(articleArray){
       var container = document.createElement('div')
       container.classList = 'ucb-article-list-block container'
@@ -258,20 +249,22 @@ class ArticleListBlockElement extends HTMLElement {
           // Create and Append Elements
           var article = document.createElement('article');
           article.classList = 'ucb-article-card row';
-          var imgDiv = document.createElement('div');
-          // imgDiv.classList = 'col-sm-12 col-md-2 ucb-article-card-img';
 
-          var imgLink = document.createElement('a');
-          imgLink.href = articleLink;
-          
-          var articleImg = document.createElement('img')
-          articleImg.src = articleImgSrc;
-          articleImg.classList = 'ucb-article-card-img-full'
 
-          imgLink.appendChild(articleImg);
-          imgDiv.appendChild(imgLink);
-
-          article.appendChild(imgDiv);
+          if(articleImgSrc){
+            var imgDiv = document.createElement('div');
+            var imgLink = document.createElement('a');
+            imgLink.href = articleLink;
+            
+            var articleImg = document.createElement('img')
+            articleImg.classList = 'ucb-article-card-img-full'
+            articleImg.src = articleImgSrc;
+  
+            imgLink.appendChild(articleImg);
+            imgDiv.appendChild(imgLink);
+  
+            article.appendChild(imgDiv);
+          }
 
           var articleBody = document.createElement('div');
           articleBody.classList = 'col-sm-12 col-md-10 ucb-article-card-data';
@@ -325,20 +318,21 @@ class ArticleListBlockElement extends HTMLElement {
           // Create and Append Elements
           var article = document.createElement('article');
           article.classList = 'ucb-article-card row';
-          var imgDiv = document.createElement('div');
-          // imgDiv.classList = 'ucb-article-card-img-wide';
-
-          var imgLink = document.createElement('a');
-          imgLink.href = articleLink;
           
-          var articleImg = document.createElement('img')
-          articleImg.classList = 'ucb-article-card-img-wide'
-          articleImg.src = articleImgSrc;
-
-          imgLink.appendChild(articleImg);
-          imgDiv.appendChild(imgLink);
-
-          article.appendChild(imgDiv);
+          if(articleImgSrc){
+            var imgDiv = document.createElement('div');
+            var imgLink = document.createElement('a');
+            imgLink.href = articleLink;
+            
+            var articleImg = document.createElement('img')
+            articleImg.classList = 'ucb-article-card-img-wide'
+            articleImg.src = articleImgSrc;
+  
+            imgLink.appendChild(articleImg);
+            imgDiv.appendChild(imgLink);
+  
+            article.appendChild(imgDiv);
+          }
 
           var articleBody = document.createElement('div');
           articleBody.classList = 'col-sm-12 col-md-10 ucb-article-card-data';
@@ -539,9 +533,10 @@ class ArticleListBlockElement extends HTMLElement {
             }
           }
         }
-      }
+    }
 
-      handleError = response => {
+    // Used for error handling within the API response
+    handleError = response => {
         if (!response.ok) { 
            throw new Error;
         } else {
