@@ -95,5 +95,10 @@ ul.ucb-person-department li:not(:first-child):before {
 }
 
 .ucb-person-img img {
-	padding-bottom: 10px;
+	padding-bottom: 0;
+}
+
+.ucb-person-img .media-image-caption {
+	display: block;
+	padding-top: .2em;
 }
