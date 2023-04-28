@@ -1,15 +1,16 @@
 {#
 /**
-* Theme layout to display a UCB Person Email Field.
-*/
+ * @file Contains the template to display the Person node's Email field.
+ */
 #}
-
-<ul class="ucb-person-email-address">
-    {% for item in items %}
-    <li>
-        <i class="fa fal fa-envelope"></i>&nbsp;<a href="mailto:{{ item.content|render|striptags|trim }}">{{
-            item.attributes
-            }}{{ item.content }}</a>
-    </li>
-    {% endfor %}
-</ul>
+{% if items %}
+<div>
+	<ul class="ucb-person-email-address">
+		{% for item in items %}{% set value = item.content['#context'].value|trim %}
+		<li>
+			<i class="fa fal fa-envelope"></i>&nbsp;<a itemprop="email" href="mailto:{{ value|url_encode }}">{{ value }}</a>
+		</li>
+		{% endfor %}
+	</ul>
+</div>
+{% endif %}

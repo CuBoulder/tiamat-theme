@@ -1,0 +1,6 @@
+{#
+/**
+ * @file Contains the template to display the Person node's First name field.
+ */
+#}
+{% if items.0 %}<span itemprop="givenName">{{ items.0.content['#context'].value|trim }}</span>{% endif %}
