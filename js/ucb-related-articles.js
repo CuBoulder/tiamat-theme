@@ -1,20 +1,10 @@
 (function(relatedArticlesBlock) {
 	if (!relatedArticlesBlock) return;
-	const excludeTagEl = document.querySelector("#ucb-related-articles-exclude-tags")
-	const excludeCatEl = document.querySelector("#ucb-related-articles-exclude-categories")
 	const loggedIn = relatedArticlesBlock.getAttribute('data-loggedin') == 'true' ? true : false;
 	let childCount = 0;
 
-	// Get the tax ids for excluded Cats and Tags
-	let excludeCatArr = [];
-	if (excludeCatEl){
-		excludeCatArr = excludeCatEl.getAttribute('data-excludecategories').split(',').filter(Number)
-	}
-
-	let excludeTagArr = [];
-	if (excludeTagEl){
-		excludeTagArr = excludeTagEl.getAttribute('data-excludetags').split(',').filter(Number)
-	}
+	const excludeCatArr = relatedArticlesBlock.getAttribute('data-catexclude')
+	const excludeTagArr = relatedArticlesBlock.getAttribute('data-tagexclude')
 
 	// Global variable to store articles that are good matches. Danger!
 	let articleArrayWithScores = []
