@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update page.html.twig
+  Fixes container sizing issues for hero units
+  Fixes above content not displaying blocks if put in the section 
+  Fixes left and right side bars both not showing up if both are being used
+  
+  Closes #301 
+  Closes #303
+  Closes #340 
+---
+
 - ### Tweaks Person page image alignment and padding
   Resolves CuBoulder/tiamat-theme#354
 ---
