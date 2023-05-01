@@ -3,8 +3,8 @@
 	const loggedIn = relatedArticlesBlock.getAttribute('data-loggedin') == 'true' ? true : false;
 	let childCount = 0;
 
-	const excludeCatArr = relatedArticlesBlock.getAttribute('data-catexclude')
-	const excludeTagArr = relatedArticlesBlock.getAttribute('data-tagexclude')
+	const excludeCatArr = JSON.parse(relatedArticlesBlock.getAttribute('data-catexclude'))
+	const excludeTagArr = JSON.parse(relatedArticlesBlock.getAttribute('data-tagexclude'))
 
 	// Global variable to store articles that are good matches. Danger!
 	let articleArrayWithScores = []
@@ -52,8 +52,8 @@
 					//remove excluded category & tagss
 					if(thisArticleTags.length){ // if there are categories
 						thisArticleTags.forEach((tag)=>{
-							let id = tag.meta.drupal_internal__target_id.toString();
-							// console.log(id)
+							let id = tag.meta.drupal_internal__target_id;
+							// console.log(id)x
 							if(excludeTagArr.includes(id)){
 								toInclude = false;
 								return
@@ -68,7 +68,7 @@
 
 					if(thisArticleCats.length){ // if there are categories
 						thisArticleCats.forEach((category)=>{ // check each category
-							let id = category.meta.drupal_internal__target_id.toString();
+							let id = category.meta.drupal_internal__target_id;
 							// console.log('cat id', id)                        
 							if(excludeCatArr.includes(id)){ // if excluded, do not proceed
 								// console.log('i have an included id')
@@ -310,7 +310,7 @@
 					//remove excluded category & tagss
 					if(thisArticleTags.length){ // if there are tags
 						thisArticleTags.forEach((tag)=>{
-							let id = tag.meta.drupal_internal__target_id.toString();
+							let id = tag.meta.drupal_internal__target_id;
 							// console.log(id)
 							if(excludeTagArr.includes(id)){
 								toInclude = false;
@@ -321,7 +321,7 @@
 
 					if(thisArticleCats.length){ // if there are categories
 						thisArticleCats.forEach((category)=>{ // check each category
-							let id = category.meta.drupal_internal__target_id.toString();
+							let id = category.meta.drupal_internal__target_id;
 							// console.log('exclude cat arr' , excludeCatArr)
 							// console.log('cat id', id)                        
 							if(excludeCatArr.includes(id)){ // if excluded, do not proceed
