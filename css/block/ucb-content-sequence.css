@@ -178,7 +178,7 @@
 
 .horizontal-timeline-slider-header {
   width: 650px;
-  box-shadow: -15px 0 15px -15px #ccc inset, 15px 0 15px -15px #ccc inset;
+  box-shadow: -15px 0 15px 0px #ccc inset, 15px 0 15px 0px #ccc inset;
   padding: 15px 0px 10px 0px;
   overflow: hidden;
 }
