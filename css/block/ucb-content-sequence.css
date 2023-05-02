@@ -1,3 +1,8 @@
+.vertical-timeline-container-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+
 .horizontal-timeline-card {
   list-style: none;
   list-style-image: none;
@@ -6,6 +11,7 @@
 }
 .vertical-timeline-card {
   max-width: 50%;
+  width: 50%;
   list-style: none;
   list-style-image: none;
   margin: 0;
@@ -67,8 +73,8 @@
 .vertical-timeline-container::before {
   content: " ";
   position: absolute;
-  top: 100px;
-  bottom: 20px;
+  top: 10px;
+  bottom: 0px;
   left: calc(50% + 9px);
   width: 2px;
   background-color: #dfdfdf;
@@ -80,7 +86,7 @@
   width: 10px;
   height: 2px;
   background-color: #dfdfdf;
-  bottom: 20px;
+  bottom: 0px;
   left: calc(50% + 5px);
 }
 
@@ -103,6 +109,16 @@
   transition: background-color 0.6s ease;
   vertical-align: middle;
   padding: 5px;
+}
+.dotFirst::before {
+  position: absolute;
+  content: " ";
+  display: block;
+  height: 2px;
+  top: 50%;
+  left: -200px;
+  width: 200px;
+
 }
 
 .dotPrevious::before,
@@ -131,7 +147,8 @@
 
 .dotPrevious:before,
 .dotPrevious::after,
-.dotActive::before {
+.dotActive::before,
+.dotFirst::before {
   background-color: #cfb87c;
 }
 
@@ -167,6 +184,17 @@
   box-shadow: -15px 0 15px -15px #333 inset, 15px 0 15px -15px #333 inset;
   padding: 15px 0px 10px 0px;
   overflow: hidden;
+}
+
+.horizontal-timeline-slider-header::before {
+  position: absolute;
+  content: " ";
+  display: block;
+  height: 2px;
+  top: 27px;
+  left: 0px;
+  width: 480px;
+  background-color: grey;
 }
 
 .horizontal-timeline-slider-header-wrapper {
@@ -231,7 +259,7 @@
 
 .button-timeline-click {
   font-size: 48px;
-  padding:  0 20px;
+  padding: 0 20px;
 }
 
 .button-timeline-click-div {
@@ -240,8 +268,60 @@
 }
 
 .noImage {
-  padding-top:10px;
+  padding-top: 10px;
 }
+
 .noImage:empty:before {
   content: "\00a0";
+}
+
+.horizontal-timeline-slider-header-container {
+  position: relative;
+}
+
+@media (max-width: 767px) {
+  .horizontal-timeline-slider-header {
+    width: 320px;
+  }
+
+  .vertical-timeline-card:nth-child(odd) {
+    clear: right;
+    float: right;
+  }
+
+  .vertical-timeline-card:nth-child(even) {
+    clear: right;
+    float: right;
+  }
+
+  .vertical-timeline-container::before {
+    left: 20px;
+  }
+
+  .vertical-timeline-container::after {
+    left: 5px;
+  }
+
+  .vertical-timeline-card {
+    max-width: 100%;
+    width: 100%;
+  }
+
+  .vertical-timeline-card-wrapper::before {
+    left: 10px;
+  }
+
+  .horizontal-timeline-slider-header::before {
+    width: 320px;
+  }
+}
+
+@media (max-width: 480px) {
+  .horizontal-timeline-slider-header {
+    width: 160px;
+  }
+
+  .horizontal-timeline-slider-header::before {
+    width: 160px;
+  }
 }

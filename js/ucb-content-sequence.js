@@ -13,7 +13,8 @@ function currentSlide(n) {
 function scrollSlides(n) {
   let i = 0;
   let dots = document.getElementsByClassName("dot-wrapper");
-  for (i = 0; i < n + 1; i++) {
+  dots[i].className = "dot-wrapper dotPrevious dotFirst";
+  for (i = 1; i < n + 1; i++) {
     dots[i].className = "dot-wrapper dotPrevious";
   }
   for (i = n + 1; i < dots.length; i++) {
@@ -23,7 +24,6 @@ function scrollSlides(n) {
 }
 
 function scrollNext() {
-  alert("hello");
   let dots = document.getElementsByClassName("dot-wrapper");
   let parentSlider = document.getElementsByClassName(
     "horizontal-timeline-slider-header"
@@ -32,13 +32,7 @@ function scrollNext() {
   let childSlider = document.getElementsByClassName(
     "horizontal-timeline-slider-header-wrapper"
   );
-  const childRect = childSlider[0].getBoundingClientRect();
-  if (
-    (dots.length - 3) * ((parentRect.right - parentRect.left) / 3) -
-      (parentRect.right - childRect.right) +
-      1 >
-    0
-  ) {
+  const childRect = childSlider[0].getBoundingClientRect();  if ( (dots.length - Math.round((parentRect.right-parentRect.left)/160)) * ((parentRect.right - parentRect.left) / Math.round((parentRect.right-parentRect.left)/160)) - (parentRect.right - childRect.right) + 1 > -20) {
     const newX = childRect.left - parentRect.left - 161;
     childSlider[0].style.transition = "translate .5s";
     childSlider[0].style.translate = newX + "px";
@@ -46,7 +40,6 @@ function scrollNext() {
 }
 
 function scrollPrevious() {
-  alert("hello");
   let parentSlider = document.getElementsByClassName(
     "horizontal-timeline-slider-header"
   );
