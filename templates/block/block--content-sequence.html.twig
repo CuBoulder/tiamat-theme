@@ -92,6 +92,8 @@
 												{{ imageField|view }}
 											{% elseif videoField %}
 												{{ videoField|view }}
+											{% else %}
+												<span class = "noImage"></span>
 											{% endif %}
 										</div>
 										<div class="horizontal-timeline-card-header">
@@ -116,8 +118,16 @@
 							{% else %}
 								<div class="horizontal-cards carousel-item">
 									<div class="horizontal-timeline-card-wrapper horizontal-timeline-card">
-										<div class="horizontal-timeline-card-media">
-											{{item.entity.field_sequence_item_media.entity.field_media_image|view}}
+										<div class="horizontal-timeline-card-media"><div class="horizontal-timeline-card-media">{% set imageField = item.entity.field_sequence_item_media.entity.field_media_image %}{% set videoField = item.entity.field_sequence_item_media.entity.field_media_oembed_video %}
+											{% if imageField %}
+												{{ imageField|view }}
+											{% elseif videoField %}
+												{{ videoField|view }}
+												<span class = "noImage"></span>
+											{% else %}
+												<span class = "noImage"></span>
+											{% endif %}
+										</div>
 										</div>
 										<div class="horizontal-timeline-card-header">
 

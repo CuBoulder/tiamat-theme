@@ -94,10 +94,6 @@
   margin: auto;
 }
 
-.cardsHidden div {
-  display: none;
-}
-
 .dot {
   cursor: pointer;
   height: 10px;
@@ -136,7 +132,7 @@
 .dotPrevious:before,
 .dotPrevious::after,
 .dotActive::before {
-  background-color: brown;
+  background-color: #cfb87c;
 }
 
 .dotNext::before,
@@ -149,7 +145,7 @@
   background-color: black;
 }
 .dotPrevious .dot {
-  background-color: brown;
+  background-color: #cfb87c;
 }
 .dotNext .dot {
   background-color: white;
@@ -241,4 +237,11 @@
 .button-timeline-click-div {
   display: flex;
   flex-direction: row;
+}
+
+.noImage {
+  padding-top:10px;
+}
+.noImage:empty:before {
+  content: "\00a0";
 }
