@@ -166,3 +166,29 @@ tbody.ucb-people-list-table-tablebody {
 .ucb-person-card-img-grid > a > img {
   width: 100%;
 }
+
+.people-list-filter .form-item.reset-button-form-item {
+	margin-bottom: 0;
+}
+
+.people-list-filter .reset-button {
+	background-color: #FFF;
+	font-size: .8em;
+	font-weight: bold;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+	transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+	padding: 0 1em;
+	box-sizing: border-box;
+	margin-top: 1em;
+}
+
+.people-list-filter .reset-button:hover {
+	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+}
+
+.people-list-filter .reset-button:active {
+    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.35);
+}
