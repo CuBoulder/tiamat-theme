@@ -20,7 +20,28 @@ function scrollSlides(n) {
   for (i = n + 1; i < dots.length; i++) {
     dots[i].className = "dot-wrapper dotNext";
   }
+
   dots[n].className = "dot-wrapper dotActive";
+}
+
+function centerSlide(n) {
+  let dots = document.getElementsByClassName("dot-wrapper");
+  let parentSlider = document.getElementsByClassName(
+    "horizontal-timeline-slider-header"
+  );
+  const parentRect = parentSlider[0].getBoundingClientRect();
+  let childSlider = document.getElementsByClassName(
+    "horizontal-timeline-slider-header-wrapper"
+  );
+  const childRect = childSlider[0].getBoundingClientRect(); 
+  let position = 0;
+  if(n > 1) {
+   position = -130 * (n-1);
+  } 
+    childSlider[0].style.transition = "translate .5s";
+    childSlider[0].style.translate = position + "px";
+  
+
 }
 
 function scrollNext() {
@@ -32,8 +53,9 @@ function scrollNext() {
   let childSlider = document.getElementsByClassName(
     "horizontal-timeline-slider-header-wrapper"
   );
-  const childRect = childSlider[0].getBoundingClientRect();  if ( (dots.length - Math.round((parentRect.right-parentRect.left)/160)) * ((parentRect.right - parentRect.left) / Math.round((parentRect.right-parentRect.left)/160)) - (parentRect.right - childRect.right) + 1 > -20) {
-    const newX = childRect.left - parentRect.left - 161;
+  const childRect = childSlider[0].getBoundingClientRect();  
+  if ( (dots.length - Math.round((parentRect.right-parentRect.left)/130)) * ((parentRect.right - parentRect.left) / Math.round((parentRect.right-parentRect.left)/130)) - (parentRect.right - childRect.right) + 1 > -20) {
+    const newX = childRect.left - parentRect.left - 130;
     childSlider[0].style.transition = "translate .5s";
     childSlider[0].style.translate = newX + "px";
   }
@@ -49,7 +71,7 @@ function scrollPrevious() {
   );
   const childRect = childSlider[0].getBoundingClientRect();
   if (parentRect.left - childRect.left > 0) {
-    const newX = childRect.left - parentRect.left + 159;
+    const newX = childRect.left - parentRect.left + 130;
     childSlider[0].style.transition = "translate .5s";
     childSlider[0].style.translate = newX + "px";
   }
@@ -68,6 +90,7 @@ function clickNext() {
       }
     }
   }
+  centerSlide(n);
   scrollSlides(n);
 }
 
@@ -84,5 +107,6 @@ function clickPrevious() {
       }
     }
   }
+  centerSlide(n);
   scrollSlides(n);
 }
