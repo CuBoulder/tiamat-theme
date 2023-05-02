@@ -23,6 +23,7 @@ function scrollSlides(n) {
 }
 
 function scrollNext() {
+  alert("hello");
   let dots = document.getElementsByClassName("dot-wrapper");
   let parentSlider = document.getElementsByClassName(
     "horizontal-timeline-slider-header"
@@ -45,6 +46,7 @@ function scrollNext() {
 }
 
 function scrollPrevious() {
+  alert("hello");
   let parentSlider = document.getElementsByClassName(
     "horizontal-timeline-slider-header"
   );
