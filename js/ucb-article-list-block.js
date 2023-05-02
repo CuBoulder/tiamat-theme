@@ -135,7 +135,7 @@ class ArticleListBlockElement extends HTMLElement {
                         }
                         // set the contentBody of Article Summary card to the minified body instead
                         body = `${trimmedString}`;
-                        document.getElementById(`body-${bodyAndImageId}`).innerHTML = body;
+                        document.getElementById(`body-${bodyAndImageId}`).innerText = body;
                       })
                   }
       
@@ -289,7 +289,7 @@ class ArticleListBlockElement extends HTMLElement {
           var readMore = document.createElement('a');
           readMore.href = articleLink;
           readMore.classList = 'ucb-article-card-read-more'
-          readMore.innerHTML = `Read More <i class="fal fa-chevron-double-right"></i>`;
+          readMore.innerText = `Read More`;
 
           articleBody.appendChild(headerLink)
           articleBody.appendChild(date)
@@ -357,7 +357,7 @@ class ArticleListBlockElement extends HTMLElement {
           var readMore = document.createElement('a');
           readMore.href = articleLink;
           readMore.classList = 'ucb-article-card-read-more'
-          readMore.innerHTML = `Read More <i class="fal fa-chevron-double-right"></i>`;
+          readMore.innerText = `Read More`;
 
           articleBody.appendChild(headerLink)
           articleBody.appendChild(date)
@@ -505,7 +505,7 @@ class ArticleListBlockElement extends HTMLElement {
             var readMore = document.createElement('a');
             readMore.href = articleLink;
             readMore.classList = 'ucb-article-card-read-more'
-            readMore.innerHTML = `Read More <i class="fal fa-chevron-double-right"></i>`;
+            readMore.innerText = `Read More`;
 
             articleBody.appendChild(headerLink)
             articleBody.appendChild(date)
