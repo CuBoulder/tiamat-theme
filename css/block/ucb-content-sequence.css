@@ -1,4 +1,9 @@
-.horizontal-timeline-card,
+.horizontal-timeline-card {
+  list-style: none;
+  list-style-image: none;
+  margin: 0;
+  padding: 0;
+}
 .vertical-timeline-card {
   max-width: 50%;
   list-style: none;
@@ -6,7 +11,6 @@
   margin: 0;
   padding: 0;
 }
-
 .vertical-timeline-card:nth-child(even) {
   float: right;
   clear: left;
@@ -20,6 +24,7 @@
 .vertical-timeline-card-wrapper {
   margin: 10px 20px 40px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  text-align: left;
 }
 
 .horizontal-timeline-card-header,
@@ -85,7 +90,6 @@
 }
 
 .horizontal-timeline-container {
-  max-width: 50%;
   position: relative;
   margin: auto;
 }
@@ -101,6 +105,8 @@
   border-radius: 50%;
   display: inline-block;
   transition: background-color 0.6s ease;
+  vertical-align: middle;
+  padding: 5px;
 }
 
 .dotPrevious::before,
@@ -148,20 +154,7 @@
 .dotNext .dot {
   background-color: white;
   border: 1px grey solid;
-}
-
-.fade {
-  animation-name: fade;
-  animation-duration: 1.5s;
-}
-
-@keyframes fade {
-  from {
-    opacity: 0.4;
-  }
-  to {
-    opacity: 1;
-  }
+  padding: 4px;
 }
 
 .horizontal-timeline-slider {
@@ -216,4 +209,36 @@
 
 .dot-wrapper {
   position: relative;
+}
+
+.prevButton,
+.nextButton {
+  background-color: red;
+}
+
+.horizontal-timeline-inner {
+  max-width: 50%;
+}
+
+.horizontal-carousel {
+  text-align: center;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.horizontal-timeline-header {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.button-timeline-click {
+  font-size: 48px;
+  padding:  0 20px;
+}
+
+.button-timeline-click-div {
+  display: flex;
+  flex-direction: row;
 }
