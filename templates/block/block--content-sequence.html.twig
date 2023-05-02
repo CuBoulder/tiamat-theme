@@ -92,8 +92,9 @@
 												{{ imageField|view }}
 											{% elseif videoField %}
 												{{ videoField|view }}
+												<span class="noImage"></span>
 											{% else %}
-												<span class = "noImage"></span>
+												<span class="noImage"></span>
 											{% endif %}
 										</div>
 										<div class="horizontal-timeline-card-header">
@@ -118,16 +119,17 @@
 							{% else %}
 								<div class="horizontal-cards carousel-item">
 									<div class="horizontal-timeline-card-wrapper horizontal-timeline-card">
-										<div class="horizontal-timeline-card-media"><div class="horizontal-timeline-card-media">{% set imageField = item.entity.field_sequence_item_media.entity.field_media_image %}{% set videoField = item.entity.field_sequence_item_media.entity.field_media_oembed_video %}
-											{% if imageField %}
-												{{ imageField|view }}
-											{% elseif videoField %}
-												{{ videoField|view }}
-												<span class = "noImage"></span>
-											{% else %}
-												<span class = "noImage"></span>
-											{% endif %}
-										</div>
+										<div class="horizontal-timeline-card-media">
+											<div class="horizontal-timeline-card-media">{% set imageField = item.entity.field_sequence_item_media.entity.field_media_image %}{% set videoField = item.entity.field_sequence_item_media.entity.field_media_oembed_video %}
+												{% if imageField %}
+													{{ imageField|view }}
+												{% elseif videoField %}
+													{{ videoField|view }}
+													<span class="noImage"></span>
+												{% else %}
+													<span class="noImage"></span>
+												{% endif %}
+											</div>
 										</div>
 										<div class="horizontal-timeline-card-header">
 
@@ -153,7 +155,7 @@
 
 						{% endfor %}
 					</div>
-					<div class = "button-timeline-click-div">
+					<div class="button-timeline-click-div">
 						<div>
 							<a class="button-timeline-click" data-bs-target="#horizontalSequence" data-bs-slide="prev" onclick="clickPrevious()">
 								<i class="fa fa-chevron-left"></i>
@@ -181,6 +183,9 @@
 									{{ imageField|view }}
 								{% elseif videoField %}
 									{{ videoField|view }}
+									<span class="noImage"></span>
+								{% else %}
+									<span class="noImage"></span>
 								{% endif %}
 							</div>
 							<div class="vertical-timeline-card-header">
