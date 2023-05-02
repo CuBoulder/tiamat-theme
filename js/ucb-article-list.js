@@ -257,7 +257,7 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
 
               // Read more & link
               var articleSummaryReadMore = document.createElement('span')
-              articleSummaryReadMore.class = 'ucb-article-card-more'
+              articleSummaryReadMore.classList = 'ucb-article-card-more'
               
               var readMoreLink = document.createElement('a')
               readMoreLink.href = link;
