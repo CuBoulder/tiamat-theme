@@ -182,7 +182,7 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
                   }
                   // set the contentBody of Article Summary card to the minified body instead
                   body = `${trimmedString}`;
-                  document.getElementById(`body-${bodyAndImageId}`).innerHTML = body;
+                  document.getElementById(`body-${bodyAndImageId}`).innerText = body;
                 })
             }
 
@@ -202,38 +202,87 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
             let link = item.attributes.path.alias;
             let image = "";
             let articleSummarySize = "col-md-12";
+
+            var articleRow = document.createElement('div')
+            articleRow.classList = 'ucb-article-card row'
+
             if(link && imageSrc) {
-                image = `<div id='img-${bodyAndImageId}' class='col-sm-12 col-md-2 ucb-article-card-img'><a href="${link}"><img src="${imageSrc}" /></a></div>`;
                 articleSummarySize = "col-md-10"
+
+                var imgContainer = document.createElement('div')
+                imgContainer.id = `img-${bodyAndImageId}`
+                imgContainer.classList = 'col-md-2 ucb-article-card-img'
+
+                var imgLink = document.createElement('a')
+                imgLink.href = link;
+
+                var articleImg = document.createElement('img')
+                articleImg.src = imageSrc;
+
+                imgLink.appendChild(articleImg)
+                imgContainer.appendChild(imgLink)
+
+                // add to article row
+                articleRow.appendChild(imgContainer)
               }
 
-            let outputHTML = `
-                            <div class='ucb-article-card row'>
-                                ${image}
-                                <div class='col-sm-12 ${articleSummarySize} ucb-article-card-data'>
-                                    <a href="${link}"><h2 class='ucb-article-card-title'>${title}</h2></a>
-                                    <span class='ucb-article-card-date'>${date}</span>
-                                    <p id='body-${bodyAndImageId}' class='ucb-article-card-body'>${body}</p>
-                                    <span class='ucb-article-card-more'>
-                                        <a href="${link}">Read more <i class="fal fa-chevron-double-right"></i></a></span>
-                                </div>
-                            </div>
-                        `;
+
+              // Container
+              var articleDataContainer = document.createElement('div')
+              articleDataContainer.classList = `col-sm-12 ${articleSummarySize} ucb-article-card-data`
+              
+
+              // Header
+              var articleDataLink = document.createElement('a')
+              articleDataLink.href = link;
+
+              var articleDataHead = document.createElement('h2')
+              articleDataHead.classList = "ucb-article-card-title"
+              articleDataHead.innerText = title;
+
+              articleDataLink.appendChild(articleDataHead)
+
+
+              // Date
+              var articleCardDate = document.createElement('span')
+              articleCardDate.classList = 'ucb-article-card-date'
+              articleCardDate.innerText = date;
+
+              // Summary
+
+              var articleSummaryBody = document.createElement('p')
+              articleSummaryBody.classList = 'ucb-article-card-body'
+              articleSummaryBody.id = `body-${bodyAndImageId}`
+              articleSummaryBody.innerText = body;
+
+              // Read more & link
+              var articleSummaryReadMore = document.createElement('span')
+              articleSummaryReadMore.class = 'ucb-article-card-more'
+              
+              var readMoreLink = document.createElement('a')
+              readMoreLink.href = link;
+              readMoreLink.innerText = `Read more`
+
+              articleSummaryReadMore.appendChild(readMoreLink)
+
+              //Appends
+
+              articleDataContainer.appendChild(articleDataLink)
+              articleDataContainer.appendChild(articleCardDate)
+              articleDataContainer.appendChild(articleSummaryBody)
+              articleDataContainer.appendChild(articleSummaryReadMore)
+              
+              articleRow.appendChild(articleDataContainer)
+
+
 
             let dataOutput = document.getElementById("ucb-al-data");
             let thisArticle = document.createElement("article");
-            thisArticle.innerHTML = outputHTML;
+            thisArticle.appendChild(articleRow);
 
             dataOutput.append(thisArticle);
           }
         })
-
-        // check if anything was returned, if nothing, prompt user to adjust filters, else remove loading text/error msg
-        // if(el.children.length===1){
-        //     el.innerHTML = "<h5>No articles currently match your selected included/excluded filters. Please adjust your filters and try again</h5>"
-        // } else {
-        // el.innerText = "";
-        // }
 
         // done loading -- hide the loading spinner graphic
         toggleMessage("ucb-al-loading", "none");
