@@ -30,8 +30,6 @@
 		.then(response => response.json())
 		.then(data=>{
 			let relatedArticlesDiv = document.querySelector('.related-articles-section')
-
-			// console.log("TAG DATA", data)
 			let returnedArticles = data.data
 			let existingIds = [];
 			// create an array of existing ids
@@ -53,7 +51,6 @@
 					if(thisArticleTags.length){ // if there are categories
 						thisArticleTags.forEach((tag)=>{
 							let id = tag.meta.drupal_internal__target_id;
-							// console.log(id)x
 							if(excludeTagArr.includes(id)){
 								toInclude = false;
 								return
@@ -69,14 +66,11 @@
 					if(thisArticleCats.length){ // if there are categories
 						thisArticleCats.forEach((category)=>{ // check each category
 							let id = category.meta.drupal_internal__target_id;
-							// console.log('cat id', id)                        
 							if(excludeCatArr.includes(id)){ // if excluded, do not proceed
-								// console.log('i have an included id')
 								toInclude = false;
 								return
 							} 
 							if( urlCheck == window.location.pathname) { // if same article, do not proceed
-								//  console.log("im the current article! ignore me!")
 								toInclude = false
 								return;
 							}  // proceed
@@ -86,7 +80,6 @@
 						}) 
 					}
 
-				// console.log(article.id, existingIds.includes(article.id))
 				if(existingIds.includes(article.id) || article.attributes.path.alias == window.location.pathname ){
 					toInclude = false
 				// filter on categories
@@ -103,8 +96,6 @@
 				}
 			})
 
-			// console.log(returnedArticles)
-
 			let urlObj = {};
 			let idObj = {};
 
@@ -114,7 +105,6 @@
 				})
 				// creates the urlObj, key: data id, value: url
 				filteredData.map((pair) => {
-					// console.log('my pair', pair)
 				urlObj[pair.id] = pair.links.focal_image_square.href;
 				})
 	
@@ -159,21 +149,47 @@
 					let thumbId = article.article.relationships.field_ucb_article_thumbnail.data.id;
 					imageSrc = urlObj[idObj[thumbId]];
 				}
-		
+
+				var artcardImgContainer = document.createElement('div');
+				artcardImgContainer.classList = 'ucb-article-card-img';
+	
+				var artCardImgLink = document.createElement('a');
+				artCardImgLink.href = link;
+	
+				var artCardImg = document.createElement('img');
+				artCardImg.src = imageSrc;
+	
+				var artCardDataContainer = document.createElement('div')
+				artCardDataContainer.classList = 'ucb-article-card-data'
+	
+				var artCardDataTitle = document.createElement('span')
+				artCardDataTitle.classList= 'ucb-article-card-title'
+	
+				var artCardTitleLink = document.createElement('a')
+				artCardTitleLink.href = link;
+				artCardTitleLink.innerText = title;
+	
+				var artCardDataBody = document.createElement('span')
+				artCardDataBody.classList = 'ucb-related-article-card-body'
+				artCardDataBody.innerText = body;
+	
+	
 				if(link && imageSrc) {
-					image = `<a href="${link}"><img src="${imageSrc}" /></a>`;
+					// image = `<a href="${link}"><img src="${imageSrc}" /></a>`;
+	
+					artCardImgLink.appendChild(artCardImg)
+					artcardImgContainer.appendChild(artCardImgLink)
+	
 				}
-				let outputHTML = `
-					<div id='img' class='ucb-article-card-img'>${image}</div>
-					<div class='ucb-article-card-data'>
-						<span class='ucb-article-card-title'><a href="${link}">${title}</a></span>
-						<span id='body' class='ucb-related-article-card-body'>${body}</span>
-					</div>
-			`;
+	
+			artCardDataTitle.appendChild(artCardTitleLink)
+			artCardDataContainer.appendChild(artCardDataTitle)
+			artCardDataContainer.appendChild(artCardDataBody)
 		
-			articleCard.innerHTML = outputHTML
+			articleCard.appendChild(artcardImgContainer)
+			articleCard.appendChild(artCardDataContainer)
 			relatedArticlesDiv.appendChild(articleCard)
-				})
+			})
 
 			// Check to see what was rendered
 			// sets global counter of children
@@ -187,7 +203,6 @@
 		} else if (relatedArticlesDiv.childElementCount == 0 && loggedIn == false){
 			let header = relatedArticlesBlock.children[0]
 			header.innerText = ''
-			// console.log('am i available', relatedArticlesBlock.children[0])
 			
 		} else if(childCount > 1 && loggedIn==true){
 			var message = document.getElementById('admin-notif-message')
@@ -216,8 +231,6 @@
 		}
 		var myTags = myTagIDs.map((id)=> id.replace(/\D/g,'')) // remove blanks, get only the tag ID#s
 
-		// console.log("my tags", myTags)
-
 		// Cat array - iterate through and store taxonomy ID's for fetch
 		var catsJSON = JSON.parse(relatedArticlesBlock.getAttribute('data-catsjson'));
 		var myCatsID= [];
@@ -242,7 +255,6 @@
 				let tagFilterString = `&filter[filter-tag${value}][condition][path]=field_ucb_article_tags.meta.drupal_internal__target_id&filter[filter-tag${value}][condition][value]=${value}&filter[filter-tag${value}][condition][memberOf]=tag-include`;
 				string += tagFilterString
 			});
-			// console.log(string)
 			return string
 			// let tagFilterString = ``
 		}
@@ -279,7 +291,6 @@
 
 			// creates the urlObj, key: data id, value: url
 			filteredData.map((pair) => {
-				// console.log(pair)
 				urlObj[pair.id] = pair.links.focal_image_square.href;
 			})
 
@@ -293,7 +304,6 @@
 			})
 			}
 				let returnedArticles = data.data
-				// console.log("my returned articles from categories", returnedArticles)
 				// Create an array of options to render with additional checks
 				returnedArticles.map((article)=> {
 					let thisArticleCats = article.relationships.field_ucb_article_categories.data
@@ -311,7 +321,6 @@
 					if(thisArticleTags.length){ // if there are tags
 						thisArticleTags.forEach((tag)=>{
 							let id = tag.meta.drupal_internal__target_id;
-							// console.log(id)
 							if(excludeTagArr.includes(id)){
 								toInclude = false;
 								return
@@ -321,16 +330,12 @@
 
 					if(thisArticleCats.length){ // if there are categories
 						thisArticleCats.forEach((category)=>{ // check each category
-							let id = category.meta.drupal_internal__target_id;
-							// console.log('exclude cat arr' , excludeCatArr)
-							// console.log('cat id', id)                        
+							let id = category.meta.drupal_internal__target_id;                  
 							if(excludeCatArr.includes(id)){ // if excluded, do not proceed
-								// console.log('i have an included id')
 								toInclude = false;
 								return
 							} 
 							if( urlCheck == window.location.pathname) { // if same article, do not proceed
-								//  console.log("im the current article! ignore me!")
 								toInclude = false
 								return;
 							}  // proceed
@@ -362,17 +367,13 @@
 
 				//Remove articles without matches from those availabile in the block
 				var finalArr = articleArrayWithScores.filter(article=> article.catMatches > 0)
-
-				// console.log("LASST PASS ARTICLES WITH SCORES", finalArr)
 				// if more than 3 articles, take the top 3
 				if(finalArr.length>3){
 					finalArr.length = 3
 				} else if(finalArr.length<3){
 					let howManyLeft = 3 - finalArr.length
 					// if less than 3, grab the most tags
-				getArticlesWithTags(tagQuery,finalArr, myTags, howManyLeft, privateTags);
-				// console.log(howManyLeft)
-				
+				getArticlesWithTags(tagQuery,finalArr, myTags, howManyLeft, privateTags);				
 				}
 
 
@@ -413,18 +414,51 @@
 				imageSrc = urlObj[idObj[thumbId]];
 			}
 
+			var artcardImgContainer = document.createElement('div');
+			artcardImgContainer.classList = 'ucb-article-card-img';
+
+			var artCardImgLink = document.createElement('a');
+			artCardImgLink.href = link;
+
+			var artCardImg = document.createElement('img');
+			artCardImg.src = imageSrc;
+
+			var artCardDataContainer = document.createElement('div')
+			artCardDataContainer.classList = 'ucb-article-card-data'
+
+			var artCardDataTitle = document.createElement('span')
+			artCardDataTitle.classList= 'ucb-article-card-title'
+
+			var artCardTitleLink = document.createElement('a')
+			artCardTitleLink.href = link;
+			artCardTitleLink.innerText = title;
+
+			var artCardDataBody = document.createElement('span')
+			artCardDataBody.classList = 'ucb-related-article-card-body'
+			artCardDataBody.innerText = body;
+
+
 			if(link && imageSrc) {
-				image = `<a href="${link}"><img src="${imageSrc}" /></a>`;
+				// image = `<a href="${link}"><img src="${imageSrc}" /></a>`;
+
+				artCardImgLink.appendChild(artCardImg)
+				artcardImgContainer.appendChild(artCardImgLink)
+
 			}
-			let outputHTML = `
-				<div id='img' class='ucb-article-card-img'>${image}</div>
-				<div class='ucb-article-card-data'>
-					<span class='ucb-article-card-title'><a href="${link}">${title}</a></span>
-					<span id='body' class='ucb-related-article-card-body'>${body}</span>
-				</div>
-		`;
+
+			artCardDataTitle.appendChild(artCardTitleLink)
+			artCardDataContainer.appendChild(artCardDataTitle)
+			artCardDataContainer.appendChild(artCardDataBody)
+		// 	let outputHTML = `
+		// 		<div id='img' class='ucb-article-card-img'>${image}</div>
+		// 		<div class='ucb-article-card-data'>
+		// 			<span class='ucb-article-card-title'><a href="${link}">${title}</a></span>
+		// 			<span id='body' class='ucb-related-article-card-body'>${body}</span>
+		// 		</div>
+		// `;
 		// Append
-		articleCard.innerHTML = outputHTML
+		articleCard.appendChild(artcardImgContainer)
+		articleCard.appendChild(artCardDataContainer)
 		relatedArticlesDiv.appendChild(articleCard)
 			}) 
 
@@ -441,7 +475,6 @@
 			} else if (relatedArticlesDiv.childElementCount == 0 && loggedIn == false){
 				let header = relatedArticlesBlock.children[0]
 				header.innerText = ''
-				// console.log('am i available', relatedArticlesBlock.children[0])
 				
 			} else {
 				//do nothing and proceed
