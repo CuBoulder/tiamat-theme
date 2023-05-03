@@ -150,6 +150,12 @@ ucb-content-row:
     theme:
       css/block/content-row.css: {}
 
+ucb-content-sequence-advanced:
+  version: 1.x
+  css:
+    theme:
+      css/block/content-sequence-advanced.css: {}
+
 ucb-video-reveal:
   version: 1.x
   js:
@@ -220,6 +226,14 @@ mainstay:
   version: 1.x
   js:
     js/mainstay.js: {}
+
+timelinejs:
+  version: 3.x
+  js:
+    js/timelinejs/timeline-min.js: {}
+  css:
+    theme:
+      css/timelinejs/timeline.css: {}
       
 ucb-slate-form:
   version: 1.x
@@ -290,3 +304,10 @@ ucb-article-grid-block:
   css:
     theme:
       css/ucb-article-grid-block.css: {}  
+ucb-content-sequence:
+  version: 1.x
+  js:
+    js/ucb-content-sequence.js: {}
+  css:
+    theme:
+      css/block/ucb-content-sequence.css: {}
