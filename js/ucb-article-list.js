@@ -204,14 +204,14 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
             let articleSummarySize = "col-md-12";
 
             var articleRow = document.createElement('div')
-            articleRow.classList = 'ucb-article-card row'
+            articleRow.className = 'ucb-article-card row'
 
             if(link && imageSrc) {
                 articleSummarySize = "col-md-10"
 
                 var imgContainer = document.createElement('div')
                 imgContainer.id = `img-${bodyAndImageId}`
-                imgContainer.classList = 'col-md-2 ucb-article-card-img'
+                imgContainer.className = 'col-md-2 ucb-article-card-img'
 
                 var imgLink = document.createElement('a')
                 imgLink.href = link;
@@ -229,7 +229,7 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
 
               // Container
               var articleDataContainer = document.createElement('div')
-              articleDataContainer.classList = `col-sm-12 ${articleSummarySize} ucb-article-card-data`
+              articleDataContainer.className = `col-sm-12 ${articleSummarySize} ucb-article-card-data`
               
 
               // Header
@@ -237,7 +237,7 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
               articleDataLink.href = link;
 
               var articleDataHead = document.createElement('h2')
-              articleDataHead.classList = "ucb-article-card-title"
+              articleDataHead.className = "ucb-article-card-title"
               articleDataHead.innerText = title;
 
               articleDataLink.appendChild(articleDataHead)
@@ -245,19 +245,19 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
 
               // Date
               var articleCardDate = document.createElement('span')
-              articleCardDate.classList = 'ucb-article-card-date'
+              articleCardDate.className = 'ucb-article-card-date'
               articleCardDate.innerText = date;
 
               // Summary
 
               var articleSummaryBody = document.createElement('p')
-              articleSummaryBody.classList = 'ucb-article-card-body'
+              articleSummaryBody.className = 'ucb-article-card-body'
               articleSummaryBody.id = `body-${bodyAndImageId}`
               articleSummaryBody.innerText = body;
 
               // Read more & link
               var articleSummaryReadMore = document.createElement('span')
-              articleSummaryReadMore.classList = 'ucb-article-card-more'
+              articleSummaryReadMore.className = 'ucb-article-card-more'
               
               var readMoreLink = document.createElement('a')
               readMoreLink.href = link;
@@ -278,6 +278,7 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
 
             let dataOutput = document.getElementById("ucb-al-data");
             let thisArticle = document.createElement("article");
+            thisArticle.className = 'ucb-article-card-container';
             thisArticle.appendChild(articleRow);
 
             dataOutput.append(thisArticle);
