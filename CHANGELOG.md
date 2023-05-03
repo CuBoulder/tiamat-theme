@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Tweaks style of Article List; fixes image padding on mobile
+  Resolves CuBoulder/tiamat-theme#363
+---
+
 - ### Content Sequence Block
   Closes #265.
   Add the horizontal, vertical, and advanced content sequences.
