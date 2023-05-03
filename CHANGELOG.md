@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Content Sequence Block
+  Closes #265.
+  Add the horizontal, vertical, and advanced content sequences.
+---
+
 - ### Refactor to escape HTML from Article user input on Article List
   Resolves #361 -- Refactors render to use `innerText` instead of `innerHTML` to assemble list render, protecting from malicious user input
 ---
