@@ -322,3 +322,7 @@
     width: 260px;
   }
 }
+
+.horizontal-header-text {
+  cursor: pointer;
+}

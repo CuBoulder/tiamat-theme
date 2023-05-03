@@ -28,8 +28,8 @@
 			{% endif %}
 			{{ title_suffix }}
 			{% if entity.field_content_sequence_display.0.value == 'horizontal' %}
-
-				<div id="horizontalSequence" class="carousel slide horizontal-carousel" data-bs-ride="false">
+				{% set sequenceID = 'horizontal-sequence-' ~ entity.uuid.value %}
+				<div id="{{sequenceID}}" class="carousel slide horizontal-carousel" data-bs-ride="false" data-bs-touch="false">
 
 					<div class="horizontal-timeline-header">
 						<div>
@@ -42,13 +42,13 @@
 
 								<div class="horizontal-timeline-slider-header-wrapper">
 									{% for key, item in content['#block_content'].field_content_sequence_items if key|first != '#' %}
-										{% if key == "0" %}
-
 											{% set stepNo = key + 1 %}
+										{% if key == "0" %}
 											<div class="horizontal-timeline-slider-header-col">
 												<div class="dot-wrapper dotActive">
-													<button class="dot" type="button" data-bs-target="#horizontalSequence" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" onclick="scrollSlides({{key}})"></button>
+													<span class="dot" type="button" data-bs-target="#{{sequenceID}}" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" onclick="scrollSlides({{key}})"></span>
 												</div>
+												<span class = "horizontal-header-text" data-bs-target="#{{sequenceID}}" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" onclick="scrollSlides({{key}})">
 												{% if item.entity.field_sequence_item_d_start_date.value|render %}
 													{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
 												{% else %}
@@ -56,14 +56,15 @@
 													STEP
 													{{stepNo}}
 												{% endif %}
+												</span>
 											</div>
 										{% else %}
 
-											{% set stepNo = key + 1 %}
 											<div class="horizontal-timeline-slider-header-col">
 												<div class="dot-wrapper dotNext">
-													<button class="dot" type="button" data-bs-target="#horizontalSequence" data-bs-slide-to="{{key}}" aria-current="true" aria-label="Slide {{stepNo}}" onclick="scrollSlides({{key}})"></button>
+													<span class="dot" type="button" data-bs-target="#{{sequenceID}}" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" onclick="scrollSlides({{key}})"></span>
 												</div>
+												<span class = "horizontal-header-text" data-bs-target="#{{sequenceID}}" data-bs-slide-to="{{key}}" aria-current="true" aria-label="Slide {{stepNo}}" onclick="scrollSlides({{key}})">
 												{% if item.entity.field_sequence_item_d_start_date.value|render %}
 													{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
 												{% else %}
@@ -71,6 +72,7 @@
 													STEP
 													{{stepNo}}
 												{% endif %}
+												</span>
 											</div>
 										{% endif %}
 									{% endfor %}
@@ -159,13 +161,13 @@
 					</div>
 					<div class="button-timeline-click-div">
 						<div>
-							<a class="button-timeline-click" data-bs-target="#horizontalSequence" data-bs-slide="prev" onclick="clickPrevious()">
+							<a class="button-timeline-click" data-bs-target="#{{sequenceID}}" data-bs-slide="prev" onclick="clickPrevious()">
 								<i class="fa fa-chevron-left"></i>
 								<span class="visually-hidden">Previous</span>
 							</a>
 						</div>
 						<div>
-							<a class="button-timeline-click" data-bs-target="#horizontalSequence" data-bs-slide="next" onclick="clickNext()">
+							<a class="button-timeline-click" data-bs-target="#{{sequenceID}}" data-bs-slide="next" onclick="clickNext()">
 								<i class="fa fa-chevron-right"></i>
 								<span class="visually-hidden">Next</span>
 							</a>
