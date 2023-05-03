@@ -1,4 +1,8 @@
-.ucb-article-list-header{
+#ucb-article-listing {
+	margin-bottom: 20px;
+}
+
+.ucb-article-list-header {
 	font-weight: normal;
 	font-size: 220%;
 }
@@ -39,13 +43,12 @@
 	margin-bottom: 10px;
 }
 
-.ucb-article-card-body{
+.ucb-article-card-body {
 	margin-bottom: 0;
 }
 
-
 .ucb-article-card-img {
-	width: 110px;
+	width: calc(100px + var(--bs-gutter-x));
 	height: auto;
 	margin-bottom: 20px;
 }

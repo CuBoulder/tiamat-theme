@@ -210,7 +210,6 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
                 articleSummarySize = "col-md-10"
 
                 var imgContainer = document.createElement('div')
-                imgContainer.id = `img-${bodyAndImageId}`
                 imgContainer.className = 'col-md-2 ucb-article-card-img'
 
                 var imgLink = document.createElement('a')
