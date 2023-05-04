@@ -264,7 +264,7 @@ class ArticleGridBlockElement extends HTMLElement {
           // Summary - optional
           if(includeSummary === 'True'){
             var articleCardSummary = document.createElement('p')
-            articleCardSummary.classList = 'ucb-article-grid-summary'
+            articleCardSummary.className = 'ucb-article-grid-summary'
             articleCardSummary.innerText = article.body;
             articleCard.appendChild(articleCardSummary)
           }
