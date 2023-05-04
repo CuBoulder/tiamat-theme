@@ -1,58 +1,60 @@
-.ucb-article-list-header{
-  font-weight: normal;
-  font-size: 220%;
+#ucb-article-listing {
+	margin-bottom: 20px;
+}
+
+.ucb-article-list-header {
+	font-weight: normal;
+	font-size: 220%;
 }
 
 .ucb-list-msg {
-  font-size: 1.25em;
-  font-weight: bolder;
-  text-align: center;
-  display: none;
+	font-size: 1.25em;
+	font-weight: bolder;
+	text-align: center;
+	display: none;
 }
 
 .ucb-loading-data {
-  color: #01579b;
+	color: #01579b;
+}
+
+.ucb-article-card-container {
+	border-bottom: 2px solid rgba(128, 128, 128, 0.333);
+	margin-bottom: 20px;
 }
 
 .ucb-article-card-data {
-  display: flex;
-  flex-direction: column;
-}
-
-.ucb-article-card {
-  margin-bottom: 20px;
-  border-bottom: solid rgba(128, 128, 128, 0.333);
-  padding-bottom: 20px;
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 20px;
 }
 
 .ucb-article-card-title {
-  font-size: 120%;
-  font-weight: normal;
-  margin-bottom: 10px;
-  line-height: 1.3;
-    margin: 0 0 10px 0;
+	font-size: 120%;
+	font-weight: normal;
+	margin-bottom: 10px;
+	line-height: 1.3;
+	margin: 0 0 10px 0;
 }
 
 .ucb-article-card-date {
-  font-size: 85%;
-  line-height: 85%;
-  margin-bottom: 10px;
+	font-size: 85%;
+	line-height: 85%;
+	margin-bottom: 10px;
 }
 
-.ucb-article-card-body{
-  margin-bottom: 0;
+.ucb-article-card-body {
+	margin-bottom: 0;
 }
-
 
 .ucb-article-card-img {
-  width: 110px;
-  height: 110px;
-  padding: 0 10px 10px 0;
+	width: calc(100px + var(--bs-gutter-x));
+	height: auto;
+	margin-bottom: 20px;
 }
 
 .ucb-article-card-more {
-  text-transform: uppercase;
-  font-weight: 600;
-  font-size: 75%;
-  padding-bottom: 20px;
+	text-transform: uppercase;
+	font-weight: 600;
+	font-size: 75%;
 }

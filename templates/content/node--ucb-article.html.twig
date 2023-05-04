@@ -11,6 +11,8 @@
 {{ attach_library('boulderD9_base/ucb-related-articles') }}
 {# Added class to article class 'pageStyleCSS' to control page style #}
 
+{% set excludeCats = related_articles_exclude_categories %}
+{% set excludeTags = drupal_config('ucb_site_configuration.settings', 'related_articles_exclude_tags') %}
 
 {# DATE FORMATTER - use global setting for all, unless override in article provided #}
 {% set global_date_format = drupal_config('boulderD9_base.settings', 'ucb_date_format') %}
@@ -225,8 +227,8 @@ pageStyleCSS
 				</div>
 			{% endif %}
 			
-			{# TO DO -- Related Articles Block #}
-			<div class="container ucb-related-articles-block" data-loggedin="{{isLoggedIn}}" data-catsjson="{{content.field_ucb_article_categories| json_encode(constant('JSON_PRETTY_PRINT'))}}" data-tagsjson="{{ content.field_ucb_article_tags| json_encode(constant('JSON_PRETTY_PRINT')) }}" data-relatedshown="{{showRelated|striptags|trim}}" data-tags="{{myTags|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}" data-cats="{{myCats|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}">
+			{# Related Articles Block #}
+			<div class="container ucb-related-articles-block" data-loggedin="{{isLoggedIn}}" data-catsjson="{{content.field_ucb_article_categories| json_encode(constant('JSON_PRETTY_PRINT'))}}" data-tagsjson="{{ content.field_ucb_article_tags| json_encode(constant('JSON_PRETTY_PRINT')) }}" data-relatedshown="{{showRelated|striptags|trim}}" data-tags="{{myTags|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}" data-cats="{{myCats|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}" data-tagExclude="{{ related_articles_exclude_tags|json_encode() }}" data-catExclude="{{ related_articles_exclude_categories|json_encode() }}">
 				{{content.field_ucb_related_articles_parag}}
 			</div>
 		</div>

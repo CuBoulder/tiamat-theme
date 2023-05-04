@@ -9,6 +9,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Change: Related Articles set via Global Settings
+  Resolves #246 -- Related Articles paragraph now uses the Global Settings (Admin => Configuration / CU Boulder site settings / Related Articles) for Taxonomy Exclusions
+  
+  Includes:
+  
+  - tiamat-theme `issue/246`
+  - tiamat-custom-entities `issue/tiamat-theme/246`
+---
+
+- ### New Block Type: Article List Block
+  Adds Article List Block - a block version of the Article List page functionality with some added display style customizations.
+  
+  Resolves #316 
+  
+  Includes:
+  -tiamat-theme => `issue/tiamat-theme-316`
+  -custom-entities => `issue/tiamat-theme-316`
+---
+
+- ### Tweaks style of Article List; fixes image padding on mobile
+  Resolves CuBoulder/tiamat-theme#363
+---
+
 - ### Content Sequence Block
   Closes #265.
   Add the horizontal, vertical, and advanced content sequences.
