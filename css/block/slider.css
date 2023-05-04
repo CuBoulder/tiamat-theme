@@ -46,7 +46,6 @@ img {
 
 .bottom-overlay .carousel-inner .carousel-caption {
   top: auto;
-  bottom: 0;
   background-color: rgba(0, 0, 0, 0.7);
   right: 0;
   left: 0;
@@ -56,7 +55,6 @@ img {
 .right-overlay .carousel-inner .carousel-caption {
   top: 0;
   right: 0;
-  bottom: 0;
   left: 70%;
   background-color: rgba(0, 0, 0, 0.7);
   text-align: left;
@@ -65,7 +63,6 @@ img {
 
 .center-overlay .carousel-inner .carousel-caption {
   top: 0;
-  bottom: 0;
   left: 0;
   right: 0;
   margin: auto;
@@ -73,13 +70,11 @@ img {
 }
 
 .right-content .carousel-inner .carousel-caption {
-  top: 0;
   right: 0;
-  bottom: 0;
   left: 0;
   background-color: var(--ucb-darker);
   text-align: left;
-  padding: 1rem;
+  padding: 2rem 1rem;
   position: relative;
   max-width: 400px;
 }
@@ -106,8 +101,6 @@ img {
 }
 
 .bottom-content .carousel-inner .carousel-caption {
-  top: auto;
-  bottom: 0;
   background-color: var(--ucb-darker);
   right: 0;
   left: 0;
