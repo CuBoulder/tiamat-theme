@@ -297,7 +297,6 @@ ucb-newsletter-email:
   css:
     theme:
       css/ucb-newsletter.css: {}
-<<<<<<< HEAD
 ucb-article-grid-block:
   version: 1.x
   js:
@@ -305,7 +304,6 @@ ucb-article-grid-block:
   css:
     theme:
       css/ucb-article-grid-block.css: {}  
-=======
 ucb-article-list-block:
   version: 1.x
   js:
@@ -313,7 +311,6 @@ ucb-article-list-block:
   css:
     theme:
       css/ucb-article-list-block.css: {}
->>>>>>> main
 ucb-content-sequence:
   version: 1.x
   js:
