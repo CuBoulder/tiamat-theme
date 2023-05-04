@@ -15,8 +15,25 @@
     background-color: transparent;
 }
 
+.ucb-article-grid-header-link h3 {
+    margin: 5px 0;
+    padding: 0;
+    font-size: 100%;
+}
+
+.ucb-article-grid-summary{
+    font-size: 85%;
+}
+
 .ucb-article-grid-block-button:hover{
     transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
     background-color: #0277BD;
     color: white !important;
 }
+
+.ucb-article-grid-card-img{
+    height: 225px !important;
+    object-fit: cover !important;
+    width: 450px !important;
+}
+

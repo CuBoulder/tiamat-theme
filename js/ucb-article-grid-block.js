@@ -224,7 +224,58 @@ class ArticleGridBlockElement extends HTMLElement {
         // TO DO -- construct article grid
         console.log('Here are my final articles ', articleArray)
         console.log('here is my count', count)
-        console.log('do i include summary?', includeSummary)
+        console.log('do i include summary?', typeof includeSummary)
+
+        var articleGridContainer = document.createElement('div')
+        articleGridContainer.className = 'row ucb-article-grid-container';
+
+        articleArray.forEach(article => {
+          var articleCard = document.createElement('div')
+          articleCard.className = 'ucb-article-grid-card col-sm-12 col-md-6 col-lg-4'
+
+          // Image
+          var articleImgContainer = document.createElement('div')
+          articleImgContainer.className = 'ucb-article-grid-card-img-container'
+
+          var articleImg = document.createElement('img')
+          articleImg.className = 'ucb-article-grid-card-img'
+          articleImg.src = article.image;
+
+          var articleImgLink = document.createElement('a')
+          articleImgLink.className = 'ucb-article-grid-card-img-link'
+          articleImgLink.href = article.link;
+
+          // Image append
+          articleImgLink.appendChild(articleImg)
+          articleImgContainer.appendChild(articleImgLink)
+          articleCard.appendChild(articleImgContainer)
+
+          // Header
+          var articleCardTitle = document.createElement('h3')
+          articleCardTitle.className = 'ucb-article-grid-header'
+          articleCardTitle.innerText = article.title
+          var articleCardTitleLink = document.createElement('a')
+          articleCardTitleLink.className = 'ucb-article-grid-header-link'
+          articleCardTitleLink.href = article.link;
+
+          articleCardTitleLink.appendChild(articleCardTitle)
+          articleCard.appendChild(articleCardTitleLink)
+
+          // Summary - optional
+          if(includeSummary === 'True'){
+            var articleCardSummary = document.createElement('p')
+            articleCardSummary.classList = 'ucb-article-grid-summary'
+            articleCardSummary.innerText = article.body;
+            articleCard.appendChild(articleCardSummary)
+          }
+
+          // Append final article card to div
+          articleGridContainer.appendChild(articleCard)
+        });
+
+        // Hide loader, append final container
+        this.toggleMessage('ucb-al-loading')
+        this.appendChild(articleGridContainer)
 
     }
 
