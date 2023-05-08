@@ -9,14 +9,6 @@ class ArticleGridBlockElement extends HTMLElement {
         var excludeCatArray = this.getAttribute('exCats').split(",").map(Number);
         var excludeTagArray = this.getAttribute('exTags').split(",").map(Number);
 
-        console.log('my count :', count)
-        console.log('do i include summary :', includeSummary)
-        console.log('what is my url :', API)
-
-        console.log('my excluded tags are, ' , excludeTagArray)
-        console.log('my exclude cats are :', excludeCatArray)
-
-
         fetch(API)
             .then(this.handleError)
             .then((data) => this.build(data, count, includeSummary, excludeCatArray, excludeTagArray))
@@ -203,7 +195,7 @@ class ArticleGridBlockElement extends HTMLElement {
 
         // Have articles and want to proceed
         if(finalArticles.length > 0 && !NEXTJSONURL){
-          this.renderDisplay(finalArticles, count, includeSummary)
+          this.renderDisplay(finalArticles, includeSummary)
         }
     }
 }
@@ -220,12 +212,7 @@ class ArticleGridBlockElement extends HTMLElement {
     }
 
     // Responsible for calling the render function of the appropriate display
-    renderDisplay(articleArray, count, includeSummary){
-        // TO DO -- construct article grid
-        console.log('Here are my final articles ', articleArray)
-        console.log('here is my count', count)
-        console.log('do i include summary?', typeof includeSummary)
-
+    renderDisplay(articleArray, includeSummary){
         var articleGridContainer = document.createElement('div')
         articleGridContainer.className = 'row ucb-article-grid-container';
 
