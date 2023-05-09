@@ -311,3 +311,10 @@ ucb-content-sequence:
   css:
     theme:
       css/block/ucb-content-sequence.css: {}
+ucb-article-feature-block:
+  version: 1.x
+  js:
+    js/ucb-article-feature-block.js: {}
+  css:
+    theme:
+      css/block/ucb-article-feature-block.css: {}
