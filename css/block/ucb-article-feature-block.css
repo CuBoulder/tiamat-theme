@@ -20,3 +20,21 @@
     background-color: #0277BD;
     color: white !important;
 }
+
+.ucb-article-img-link {
+    width: 80px !important;
+    height: 80px !important;
+    padding: 0;
+}
+
+.ucb-article-card{
+    flex-direction: row;
+    flex-wrap: nowrap;
+}
+
+.ucb-inline-large-feature-container, .ucb-inline-half-feature-container{
+    padding-right: 20px;
+}
+.ucb-inline-large-secondary-container, .ucb-inline-half-secondary-container{
+    padding-left: 20px;
+}

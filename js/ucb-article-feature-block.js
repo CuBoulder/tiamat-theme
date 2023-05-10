@@ -5,7 +5,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
         var display = this.getAttribute('display');
         var imgSize = this.getAttribute('imgSize');
         var API = this.getAttribute('jsonapi');
-        var count = display==="stacked" ? 5 : 4;
+        var count = display === "stacked" ? 4 : 5;
         // Exclusions are done on the JS side, get into arrays. Blank if no exclusions
         var excludeCatArray = this.getAttribute('exCats').split(",").map(Number);
         var excludeTagArray = this.getAttribute('exTags').split(",").map(Number);
@@ -21,11 +21,8 @@ class ArticleFeatureBlockElement extends HTMLElement {
             });
     }
 
+    // This is the article list filtering function that assembles the article javascript object array from the JSON response. Handles exclusions of categories and tags.
     build(data, display, count, imgSize, excludeCatArray, excludeTagArray, finalArticles = []){
-        console.log('my display type is : ', display)
-        console.log('my img size is :', imgSize)
-        console.log('my data', data)
-        console.log('how many articles do I need , count=',count )
       // More than 10 articles? This sets up the next call if there's more articles to be retrieved but not enough post-filters
         let NEXTJSONURL = "";
         if(data.links.next) {
@@ -60,6 +57,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
             // checks if consumer is working, else default to standard image instead of focal image
             if(item.links.focal_image_square != undefined && item.links.focal_image_wide != undefined){
               altObj[item.id] = item.links.focal_image_square.href
+              // This is used if a user selects the "Wide" image style
               wideObj[item.id] = item.links.focal_image_wide.href
             } else {
               altObj[item.id] = item.attributes.uri.url
@@ -148,17 +146,10 @@ class ArticleFeatureBlockElement extends HTMLElement {
                             document.getElementById(`body-${bodyAndImageId}`).innerText = body;
                         })
                     }
-
-                    // if no thumbnail, show no image
-                    if (!item.relationships.field_ucb_article_thumbnail.data) {
-                        imageSrc = "";
-                        imageSrcWide = "";
-                    } else {
-                        //Use the idObj as a memo to add the corresponding image url
-                        let thumbId = item.relationships.field_ucb_article_thumbnail.data.id;
+                    //Use the idObj as a memo to add the corresponding image url
+                    let thumbId = item.relationships.field_ucb_article_thumbnail.data.id;
                         imageSrc = altObj[idObj[thumbId]];
-                        imageSrcWide = wideObj[idObj[thumbId]]
-                    }
+                    imageSrcWide = wideObj[idObj[thumbId]]
 
                     //Date - make human readable
                     const options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -206,11 +197,11 @@ class ArticleFeatureBlockElement extends HTMLElement {
 
         // Have articles and want to proceed
         if(finalArticles.length > 0 && !NEXTJSONURL){
-          this.renderDisplay(finalArticles)
+          this.renderDisplay(finalArticles, display, imgSize)
         }
     }
 }
-
+    // Gets the body if no summary
     async getArticleParagraph(id) {
         if(id) {
           const response = await fetch(
@@ -223,12 +214,226 @@ class ArticleFeatureBlockElement extends HTMLElement {
     }
 
     // Responsible for calling the render function of the appropriate display
-    renderDisplay(articleArray){
-        console.log("Final article array", articleArray)
+    renderDisplay(articleArray, display, imgSize){        
+        switch (display) {
+            case 'inline-large':
+                this.renderInlineLarge(articleArray, imgSize)
+                break;
+            case 'inline-half':
+                this.renderInlineHalf(articleArray, imgSize)
+                break;
+            case 'stacked':
+                this.renderStacked(articleArray, imgSize)
+                break;
+            default:
+                this.renderStacked(articleArray, imgSize)
+                break;
+        }
+    }
+    // The below functions are used to render the appropriate display
+    // Render Inline 50/50
+    renderInlineHalf(articleArray, imgSize){
+        console.log('I am rendering inline 50-50')
+        console.log('This is my final array', articleArray)
+        console.log('This is my img size', imgSize)
+                // Container
+                var articleFeatureContainer = document.createElement('div')
+                articleFeatureContainer.className = 'ucb-article-feature-container row'
+        
+                // This is the list of 'secondary' articles
+                var secondaryContainer = document.createElement('div')
+                secondaryContainer.className = 'ucb-inline-half-secondary-container col-lg-6 col-md-6 col-sm-12 col-sm-12'
+        
+                articleArray.map(article =>{
+                    console.log(article)
+                    // First article (feature)
+                    if(articleFeatureContainer.children.length == 0){
+                        // This is the large feature article
+                        var featureContainer = document.createElement('article')
+                        featureContainer.className = 'ucb-inline-half-feature-container col-lg-6 col-md-6 col-sm-12 col-xs-12'
+        
+                        // Image
+                        var featureImg = document.createElement('img')
+                        featureImg.className = 'ucb-feature-article-img'
+                        if(imgSize === 'wide'){
+                            featureImg.src = article.imageWide
+                        } else {
+                            featureImg.src =article.imageSquare
+                        }
+                        // Image Link
+                        var featureImgLink = document.createElement('a')
+                        featureImgLink.href = article.link;
+                        featureImgLink.appendChild(featureImg)
+        
+                        // Title
+                        var featureTitle = document.createElement('h2')
+                        featureTitle.className = 'ucb-feature-article-header'
+                        // Title Link
+                        var featureTitleLink = document.createElement('a')
+                        featureTitleLink.href = article.link;
+                        featureTitleLink.innerText = article.title;
+                        featureTitle.appendChild(featureTitleLink)
+        
+                        // Body
+                        var featureSummary = document.createElement('p')
+                        featureSummary.className = 'ucb-feature-article-summary'
+                        featureSummary.innerText = article.body;
+        
+                        // Read More
+                        var featureReadMore = document.createElement('a')
+                        featureReadMore.classname = 'ucb-article-read-more'
+                        featureReadMore.href = article.link;
+                        featureReadMore.innerText = 'Read More'
+        
+                        // Append
+                        featureContainer.appendChild(featureImgLink)
+                        featureContainer.appendChild(featureTitle)
+                        featureContainer.appendChild(featureSummary)
+                        featureContainer.appendChild(featureReadMore)
+        
+                        articleFeatureContainer.appendChild(featureContainer)
+                    } else {
+                    // The non features
+        
+                    // Row
+                    var articleContainer = document.createElement('article')
+                    articleContainer.className = 'ucb-article-card row'
+        
+                    //Img
+                    var articleImg = document.createElement('img')
+                    articleImg.className = 'ucb-article-feature-secondary-img'
+                    articleImg.src = article.imageSquare;
+        
+                    // Img Link
+                    var articleImgLink = document.createElement('a')
+                    articleImgLink.className = 'ucb-article-img-link'
+                    articleImgLink.href = article.link;
+                    articleImgLink.appendChild(articleImg)
+        
+                    // Title
+                    var articleTitle = document.createElement('h3')
+                    articleTitle.className = 'ucb-article-feature-secondary-title'
+                    //Title Link 
+                    var articleTitleLink = document.createElement('a')
+                    articleTitleLink.href = article.link;
+                    articleTitleLink.innerText = article.title;
+                    articleTitle.appendChild(articleTitleLink)
+        
+                    articleContainer.appendChild(articleImgLink)
+                    articleContainer.appendChild(articleTitle)
+                    secondaryContainer.appendChild(articleContainer)
+                    }
+                })
+                // Hide loader, append final container
+                this.toggleMessage('ucb-al-loading')
+                articleFeatureContainer.appendChild(secondaryContainer)
+                this.appendChild(articleFeatureContainer)
+    }
+    // Render Inline 66/33
+    renderInlineLarge(articleArray, imgSize){
+        console.log('i am rendering inline 66/33')
+        console.log('This is my final array', articleArray)
+        console.log('This is my img size', imgSize)
+        // Container
+        var articleFeatureContainer = document.createElement('div')
+        articleFeatureContainer.className = 'ucb-article-feature-container row'
 
+        // This is the list of 'secondary' articles
+        var secondaryContainer = document.createElement('div')
+        secondaryContainer.className = 'ucb-inline-large-secondary-container col-lg-4 col-md-4 col-sm-4 col-sm-12'
+
+        articleArray.map(article =>{
+            console.log(article)
+            // First article (feature)
+            if(articleFeatureContainer.children.length == 0){
+                // This is the large feature article
+                var featureContainer = document.createElement('article')
+                featureContainer.className = 'ucb-inline-large-feature-container col-lg-8 col-md-8 col-sm-8 col-xs-12'
+
+                // Image
+                var featureImg = document.createElement('img')
+                featureImg.className = 'ucb-feature-article-img'
+                if(imgSize === 'wide'){
+                    featureImg.src = article.imageWide
+                } else {
+                    featureImg.src =article.imageSquare
+                }
+                // Image Link
+                var featureImgLink = document.createElement('a')
+                featureImgLink.href = article.link;
+                featureImgLink.appendChild(featureImg)
+
+                // Title
+                var featureTitle = document.createElement('h2')
+                featureTitle.className = 'ucb-feature-article-header'
+                // Title Link
+                var featureTitleLink = document.createElement('a')
+                featureTitleLink.href = article.link;
+                featureTitleLink.innerText = article.title;
+                featureTitle.appendChild(featureTitleLink)
+
+                // Body
+                var featureSummary = document.createElement('p')
+                featureSummary.className = 'ucb-feature-article-summary'
+                featureSummary.innerText = article.body;
+
+                // Read More
+                var featureReadMore = document.createElement('a')
+                featureReadMore.classname = 'ucb-article-read-more'
+                featureReadMore.href = article.link;
+                featureReadMore.innerText = 'Read More'
+
+                // Append
+                featureContainer.appendChild(featureImgLink)
+                featureContainer.appendChild(featureTitle)
+                featureContainer.appendChild(featureSummary)
+                featureContainer.appendChild(featureReadMore)
+
+                articleFeatureContainer.appendChild(featureContainer)
+            } else {
+            // The non features
+
+            // Row
+            var articleContainer = document.createElement('article')
+            articleContainer.className = 'ucb-article-card row'
+
+            //Img
+            var articleImg = document.createElement('img')
+            articleImg.className = 'ucb-article-feature-secondary-img'
+            articleImg.src = article.imageSquare;
+
+            // Img Link
+            var articleImgLink = document.createElement('a')
+            articleImgLink.className = 'ucb-article-img-link'
+            articleImgLink.href = article.link;
+            articleImgLink.appendChild(articleImg)
+
+            // Title
+            var articleTitle = document.createElement('h3')
+            articleTitle.className = 'ucb-article-feature-secondary-title'
+            //Title Link 
+            var articleTitleLink = document.createElement('a')
+            articleTitleLink.href = article.link;
+            articleTitleLink.innerText = article.title;
+            articleTitle.appendChild(articleTitleLink)
+
+            articleContainer.appendChild(articleImgLink)
+            articleContainer.appendChild(articleTitle)
+            secondaryContainer.appendChild(articleContainer)
+            }
+        })
         // Hide loader, append final container
         this.toggleMessage('ucb-al-loading')
-
+        articleFeatureContainer.appendChild(secondaryContainer)
+        this.appendChild(articleFeatureContainer)
+    }
+    // Render Stacked
+    renderStacked(articleArray, imgSize){
+        console.log('i am rendering stacked')
+        console.log('This is my final array', articleArray)
+        console.log('This is my img size', imgSize)
+        // Hide loader, append final container
+        this.toggleMessage('ucb-al-loading')
     }
 
     // Used to toggle error messages and loader
