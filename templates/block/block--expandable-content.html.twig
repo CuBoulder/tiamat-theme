@@ -21,6 +21,12 @@
 
 {% set layoutSelection = content['#block_content'].field_expandable_content_type.value %}
 
+{% if content['#block_content'].field_expandable_content_open.value %}
+	{% set startingState = "show" %}
+{% else %}
+	{% set startingState = "unshown" %}
+{% endif %}
+
 
 {% block content %}
 	<div{{attributes.addClass(classes)}}>
@@ -40,7 +46,11 @@
 									{{ item.entity.field_expandable_content_title|view }}
 								</button>
 							</h2>
-							<div id="ucb-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="ucb-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}" data-bs-parent="#ucb-accordion{{ content['#block_content'].id() }}">
+							{% if key == 0 %}
+								<div id="ucb-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" class="accordion-collapse collapse {{ startingState }}" aria-labelledby="ucb-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}" data-bs-parent="#ucb-accordion{{ content['#block_content'].id() }}">
+							{% else %}
+								<div id="ucb-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="ucb-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}" data-bs-parent="#ucb-accordion{{ content['#block_content'].id() }}">
+							{% endif %}
 								<div class="accordion-body">
 									{{ item.entity.field_expandable_content_body|view }}
 								</div>
