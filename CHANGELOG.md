@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### New Block Type: Article Grid
+  Adds a new block type - Article Grid. Allows for Articles with thumbnails to be displayed in an Article List-style grid display.
+  
+  Includes:
+  
+  - `tiamat-theme` => `issue/tiamat-theme/317`
+  -  `tiamat-custom-entities` => `issue/tiamat-theme/317`
+  
+  Resolves #317 
+---
+
 - ### Update slider.css
   Updated css to remove slide content misalignment
   Fixed 3:2 sizes to be 3:2 instead of 3:1
