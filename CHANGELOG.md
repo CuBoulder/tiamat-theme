@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update events-calendar.css
+  Add link to event calendar widget generator into help text of builder
+  Remove max-height from events calendar widget
+  
+  Closes #333 
+  Closes #334 
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/56
+---
+
 - ### Change: Related Articles set via Global Settings
   Resolves #246 -- Related Articles paragraph now uses the Global Settings (Admin => Configuration / CU Boulder site settings / Related Articles) for Taxonomy Exclusions
   
