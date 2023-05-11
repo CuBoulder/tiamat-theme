@@ -233,9 +233,6 @@ class ArticleFeatureBlockElement extends HTMLElement {
     // The below functions are used to render the appropriate display
     // Render Inline 50/50
     renderInlineHalf(articleArray, imgSize){
-        console.log('I am rendering inline 50-50')
-        console.log('This is my final array', articleArray)
-        console.log('This is my img size', imgSize)
                 // Container
                 var articleFeatureContainer = document.createElement('div')
                 articleFeatureContainer.className = 'ucb-article-feature-container row'
@@ -245,7 +242,6 @@ class ArticleFeatureBlockElement extends HTMLElement {
                 secondaryContainer.className = 'ucb-inline-half-secondary-container col-lg-6 col-md-6 col-sm-12 col-sm-12'
         
                 articleArray.map(article =>{
-                    console.log(article)
                     // First article (feature)
                     if(articleFeatureContainer.children.length == 0){
                         // This is the large feature article
@@ -333,9 +329,6 @@ class ArticleFeatureBlockElement extends HTMLElement {
     }
     // Render Inline 66/33
     renderInlineLarge(articleArray, imgSize){
-        console.log('i am rendering inline 66/33')
-        console.log('This is my final array', articleArray)
-        console.log('This is my img size', imgSize)
         // Container
         var articleFeatureContainer = document.createElement('div')
         articleFeatureContainer.className = 'ucb-article-feature-container row'
@@ -345,7 +338,6 @@ class ArticleFeatureBlockElement extends HTMLElement {
         secondaryContainer.className = 'ucb-inline-large-secondary-container col-lg-4 col-md-4 col-sm-4 col-sm-12'
 
         articleArray.map(article =>{
-            console.log(article)
             // First article (feature)
             if(articleFeatureContainer.children.length == 0){
                 // This is the large feature article
@@ -436,8 +428,100 @@ class ArticleFeatureBlockElement extends HTMLElement {
         console.log('i am rendering stacked')
         console.log('This is my final array', articleArray)
         console.log('This is my img size', imgSize)
-        // Hide loader, append final container
-        this.toggleMessage('ucb-al-loading')
+                // Container
+                var articleFeatureContainer = document.createElement('div')
+                articleFeatureContainer.className = 'ucb-article-feature-container row'
+        
+                // This is the list of 'secondary' articles
+                var secondaryContainer = document.createElement('div')
+                secondaryContainer.className = 'ucb-stacked-secondary-container row col-sm-12'
+        
+                articleArray.map(article =>{
+                    console.log(article)
+                    // First article (feature)
+                    if(articleFeatureContainer.children.length == 0){
+                        // This is the large feature article
+                        var featureContainer = document.createElement('article')
+                        featureContainer.className = 'ucb-stacked-primary-container col-xs-12'
+        
+                        // Image
+                        var featureImg = document.createElement('img')
+                        if(imgSize === 'wide'){
+                            featureImg.src = article.imageWide
+                            featureImg.className = 'ucb-feature-article-img feature-img-wide'
+                        } else {
+                            featureImg.src =article.imageSquare
+                            featureImg.className = 'ucb-feature-article-img feature-img-square'
+                        }
+                        // Image Link
+                        var featureImgLink = document.createElement('a')
+                        featureImgLink.className = 'ucb-feature-article-img-link'
+                        featureImgLink.href = article.link;
+                        featureImgLink.appendChild(featureImg)
+        
+                        // Title
+                        var featureTitle = document.createElement('h2')
+                        featureTitle.className = 'ucb-feature-article-header'
+                        // Title Link
+                        var featureTitleLink = document.createElement('a')
+                        featureTitleLink.href = article.link;
+                        featureTitleLink.innerText = article.title;
+                        featureTitle.appendChild(featureTitleLink)
+        
+                        // Body
+                        var featureSummary = document.createElement('p')
+                        featureSummary.className = 'ucb-feature-article-summary'
+                        featureSummary.innerText = article.body;
+        
+                        // Read More
+                        var featureReadMore = document.createElement('a')
+                        featureReadMore.className = 'ucb-article-read-more'
+                        featureReadMore.href = article.link;
+                        featureReadMore.innerText = 'Read More'
+        
+                        // Append
+                        featureContainer.appendChild(featureImgLink)
+                        featureContainer.appendChild(featureTitle)
+                        featureContainer.appendChild(featureSummary)
+                        featureContainer.appendChild(featureReadMore)
+        
+                        articleFeatureContainer.appendChild(featureContainer)
+                    } else {
+                    // The non features
+        
+                    // Row
+                    var articleContainer = document.createElement('article')
+                    articleContainer.className = 'ucb-article-card col-sm-4 row'
+        
+                    //Img
+                    var articleImg = document.createElement('img')
+                    articleImg.className = 'ucb-article-feature-secondary-img'
+                    articleImg.src = article.imageSquare;
+        
+                    // Img Link
+                    var articleImgLink = document.createElement('a')
+                    articleImgLink.className = 'ucb-article-img-link'
+                    articleImgLink.href = article.link;
+                    articleImgLink.appendChild(articleImg)
+        
+                    // Title
+                    var articleTitle = document.createElement('h3')
+                    articleTitle.className = 'ucb-article-feature-secondary-title'
+                    //Title Link 
+                    var articleTitleLink = document.createElement('a')
+                    articleTitleLink.href = article.link;
+                    articleTitleLink.innerText = article.title;
+                    articleTitle.appendChild(articleTitleLink)
+        
+                    articleContainer.appendChild(articleImgLink)
+                    articleContainer.appendChild(articleTitle)
+                    secondaryContainer.appendChild(articleContainer)
+                    }
+                })
+                // Hide loader, append final container
+                this.toggleMessage('ucb-al-loading')
+                articleFeatureContainer.appendChild(secondaryContainer)
+                this.appendChild(articleFeatureContainer)
     }
 
     // Used to toggle error messages and loader

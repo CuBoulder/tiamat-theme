@@ -52,6 +52,21 @@
     padding-bottom: 10px;
 }
 
+.ucb-stacked-secondary-container{
+    margin-top: 10px;
+    padding-top: 20px;
+    border-top: solid rgba(128, 128, 128, 0.333);
+    margin-bottom: 10px;
+    border-bottom: solid rgba(128, 128, 128, 0.333);
+    padding-bottom: 10px;
+    margin-left: 10px;
+    margin-right: 30px;
+}
+
+.ucb-stacked-primary-container{
+    margin-bottom: 20px;
+}
+
 
 .ucb-article-feature-secondary-title{
     font-size: 110%;
@@ -72,4 +87,10 @@
     object-fit: cover !important;
     height: 500px !important;
     width: 100% !important;
+}
+
+.ucb-stacked-secondary-container > .ucb-article-card{
+    margin-bottom: 0px;
+    border-bottom: none;
+    padding-bottom: 0px;
 }
