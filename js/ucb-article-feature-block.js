@@ -254,14 +254,16 @@ class ArticleFeatureBlockElement extends HTMLElement {
         
                         // Image
                         var featureImg = document.createElement('img')
-                        featureImg.className = 'ucb-feature-article-img'
                         if(imgSize === 'wide'){
                             featureImg.src = article.imageWide
+                            featureImg.className = 'ucb-feature-article-img feature-img-wide'
                         } else {
-                            featureImg.src =article.imageSquare
+                            featureImg.src = article.imageSquare
+                            featureImg.className = 'ucb-feature-article-img feature-img-square'
                         }
                         // Image Link
                         var featureImgLink = document.createElement('a')
+                        featureImgLink.className = 'ucb-feature-article-img-link'
                         featureImgLink.href = article.link;
                         featureImgLink.appendChild(featureImg)
         
@@ -281,7 +283,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
         
                         // Read More
                         var featureReadMore = document.createElement('a')
-                        featureReadMore.classname = 'ucb-article-read-more'
+                        featureReadMore.className = 'ucb-article-read-more'
                         featureReadMore.href = article.link;
                         featureReadMore.innerText = 'Read More'
         
@@ -352,14 +354,16 @@ class ArticleFeatureBlockElement extends HTMLElement {
 
                 // Image
                 var featureImg = document.createElement('img')
-                featureImg.className = 'ucb-feature-article-img'
                 if(imgSize === 'wide'){
                     featureImg.src = article.imageWide
+                    featureImg.className = 'ucb-feature-article-img feature-img-wide'
                 } else {
                     featureImg.src =article.imageSquare
+                    featureImg.className = 'ucb-feature-article-img feature-img-square'
                 }
                 // Image Link
                 var featureImgLink = document.createElement('a')
+                featureImgLink.className = 'ucb-feature-article-img-link'
                 featureImgLink.href = article.link;
                 featureImgLink.appendChild(featureImg)
 
@@ -379,7 +383,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
 
                 // Read More
                 var featureReadMore = document.createElement('a')
-                featureReadMore.classname = 'ucb-article-read-more'
+                featureReadMore.className = 'ucb-article-read-more'
                 featureReadMore.href = article.link;
                 featureReadMore.innerText = 'Read More'
 

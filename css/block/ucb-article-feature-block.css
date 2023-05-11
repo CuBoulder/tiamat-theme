@@ -38,3 +38,38 @@
 .ucb-inline-large-secondary-container, .ucb-inline-half-secondary-container{
     padding-left: 20px;
 }
+
+.ucb-article-read-more{
+    text-transform: uppercase;
+    font-weight: 600;
+    font-size: 75%;
+    padding-bottom: 20px;
+}
+
+.ucb-article-card{
+    margin-bottom: 10px;
+    border-bottom: solid rgba(128, 128, 128, 0.333);
+    padding-bottom: 10px;
+}
+
+
+.ucb-article-feature-secondary-title{
+    font-size: 110%;
+    font-weight: normal;
+    margin: 0;
+    line-height: 1.3;
+}
+
+.ucb-feature-article-summary{
+    margin-bottom: 0;
+}
+
+.ucb-feature-article-img{
+    margin-bottom: 10px;
+}
+
+.feature-img-square {
+    object-fit: cover !important;
+    height: 500px !important;
+    width: 100% !important;
+}
