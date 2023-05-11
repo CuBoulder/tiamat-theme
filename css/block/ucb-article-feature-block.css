@@ -85,8 +85,10 @@
 
 .feature-img-square {
     object-fit: cover !important;
-    height: 500px !important;
-    width: 100% !important;
+    max-height: 500px !important;
+    height: auto;
+    aspect-ratio: 3/2;
+    max-width: 100%;
 }
 
 .ucb-stacked-secondary-container > .ucb-article-card{
@@ -100,13 +102,22 @@
         margin-bottom: 10px;
         border-bottom: solid rgba(128, 128, 128, 0.333);
         padding-bottom: 10px;
+        padding-top: 10px;
+    }
+    .ucb-stacked-secondary-container > .ucb-article-card:first-child {
+        border-top: solid rgba(128, 128, 128, 0.333);
+        padding-top: 10px;
     }
 
     .ucb-stacked-secondary-container{
         margin-top: 10px;
-        border-top: solid rgba(128, 128, 128, 0.333);
+        border-top: none;
         border-bottom: none;
         padding-bottom: 10px;
     }
 
+    .ucb-inline-half-feature-container, .ucb-inline-large-feature-container{
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+    }
 }
