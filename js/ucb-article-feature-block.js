@@ -491,7 +491,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
         
                     // Row
                     var articleContainer = document.createElement('article')
-                    articleContainer.className = 'ucb-article-card col-sm-4 row'
+                    articleContainer.className = 'ucb-article-card col-md-4 col-sm-12 row'
         
                     //Img
                     var articleImg = document.createElement('img')
