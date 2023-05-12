@@ -342,7 +342,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
             if(articleFeatureContainer.children.length == 0){
                 // This is the large feature article
                 var featureContainer = document.createElement('article')
-                featureContainer.className = 'ucb-inline-large-feature-container col-lg-8 col-md-8 col-sm-8 col-xs-12'
+                featureContainer.className = 'ucb-inline-large-feature-container col-lg-8 col-md-8 col-sm-12 col-xs-12'
 
                 // Image
                 var featureImg = document.createElement('img')
@@ -425,9 +425,6 @@ class ArticleFeatureBlockElement extends HTMLElement {
     }
     // Render Stacked
     renderStacked(articleArray, imgSize){
-        console.log('i am rendering stacked')
-        console.log('This is my final array', articleArray)
-        console.log('This is my img size', imgSize)
                 // Container
                 var articleFeatureContainer = document.createElement('div')
                 articleFeatureContainer.className = 'ucb-article-feature-container row'
@@ -437,7 +434,6 @@ class ArticleFeatureBlockElement extends HTMLElement {
                 secondaryContainer.className = 'ucb-stacked-secondary-container row col-sm-12'
         
                 articleArray.map(article =>{
-                    console.log(article)
                     // First article (feature)
                     if(articleFeatureContainer.children.length == 0){
                         // This is the large feature article
