@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### New Block Type: Article Feature
+  Adds a new block type: Article Feature. The Article Feature block displays the latest Articles, with Category & Tag filters set by the user much like the Article List page. The first Article displays a large image and summary and the remaining articles displays titles and thumbnails. 
+  
+  Resolves #318 
+  
+  Includes:
+  
+  - `tiamat-theme` => `issue/tiamat-theme/318`
+  - `tiamat-custom-entities` => `issue/tiamat-theme/318`
+  
+  
+---
+
 - ### New Block Type: Article Grid
   Adds a new block type - Article Grid. Allows for Articles with thumbnails to be displayed in an Article List-style grid display.
   
