@@ -1,4 +1,4 @@
-{{ attach_library('boulderD9_base/ucb-article-list-block') }}
+{{ attach_library('boulderD9_base/ucb-article-grid-block') }}
 
 {%
     set classes = [
@@ -19,44 +19,44 @@
     ~ '&include=field_ucb_article_thumbnail.field_media_image'
     ~ '&fields[file--file]=uri,url'
   %}
-  
+
   {# Filter on only published (status = true) content #}
   {% set PublishedFilter = '&filter[publish-check][condition][path]=status'
     ~ '&filter[publish-check][condition][value]=1'
     ~ '&filter[publish-check][condition][memberOf]=published'
   %}
-  
+
   {# include and exclude options set by the user #}
   {% set includeCategories = [] %}
   {% set myCategories =
-    content.field_art_list_block_filter_cat|render|striptags|trim|split(' ')
+    content.field_ucb_article_grid_cat_inc|render|striptags|trim|split(' ')
   %}
   {% set includeTags = [] %}
   {% set myTags =
-    content.field_art_list_block_filter_tag|render|striptags|trim|split(' ')
+    content.field_ucb_article_grid_tag_inclu|render|striptags|trim|split(' ')
   %}
   {% set excludeCategories = '' %}
   {% set myExCategories =
-    content.field_art_list_block_cat_exclude|render|striptags|trim|split(' ')
+    content.field_ucb_article_grid_cat_exc|render|striptags|trim|split(' ')
   %}
   {% set excludeTags = '' %}
   {% set myExTags =
-    content.field_art_list_block_tag_exclude|render|striptags|trim|split(' ')
+    content.field_ucb_article_grid_tag_exclu|render|striptags|trim|split(' ')
   %}
-  
+
   {# two passes to clear out the blank entries that are mysteriously added by default #}
   {% for item in myCategories %}
     {% if item %}
       {% set includeCategories = includeCategories|merge([item]) %}
     {% endif %}
   {% endfor %}
-  
+
   {% for item in myTags %}
     {% if item %}
       {% set includeTags = includeTags|merge([item]) %}
     {% endif %}
   {% endfor %}
-  
+
   {% for item in myExCategories %}
     {% if item %}
       {% if loop.last %}
@@ -66,7 +66,7 @@
       {% endif %}
     {% endif %}
   {% endfor %}
-  
+
   {% for item in myExTags %}
     {% if item %}
       {% if loop.last %}
@@ -76,14 +76,14 @@
       {% endif %}
     {% endif %}
   {% endfor %}
-  
+
   {# placeholder variables for our include and exclude filters, default to blank strings #}
   {% set IncludeFilter = '' %}
   {% set IncludeCategoryFilter = '' %}
   {% set IncludeTagsFilter = '' %}
   {% set ExcludeCategoryFilter = '' %}
   {% set ExcludeTagsFilter = '' %}
-  
+
   {# Setup Include Category Filter using a logical OR between included category IDs #}
   {% if includeCategories|length %}
     {% set includeGroupMembers = '' %}
@@ -104,7 +104,7 @@
       ~ includeGroupMembers
     %}
   {% endif %}
-  
+
   {# Setup Include Tags Filter using a logical OR between included tag IDs #}
   {% if includeTags|length %}
     {% set includeGroupMembers = '' %}
@@ -125,7 +125,7 @@
       ~ includeGroupMembers
     %}
   {% endif %}
-  
+
   {# check to see if we have both Categories and Tags to filter on #}
   {# if so... setup a logicial AND Between both include filters #}
   {% if IncludeCategoryFilter and IncludeTagsFilter %}
@@ -151,16 +151,16 @@
       ~ PublishedFilter
       ~ IncludeTagsFilter
     %}
-  
+
   {# no includeded Categories or Tags ... still need to filter on published articles #}
   {% else %}
     {% set IncludeFilter = '&filter[status][value]=1' %}
   {% endif %}
-  
+
   {# pagination filter #}
   {% set pageCount = 10 %}
   {% set pageCountFilter = '&page[limit]=' ~ pageCount %}
-  
+
   {# sorting filter #}
   {% set sortFilter = '&sort[sort-created][path]=created&sort[sort-created][direction]=DESC' %}
 
@@ -171,13 +171,13 @@
   </h2>
   {{ title_suffix }}
   {{ content.body }}
-{# Article List Main Block#}
-<article-list-block
+{# Article Grid Main Block#}
+<article-grid-block
   jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}"
   exCats="{{ excludeCategories }}"
   exTags="{{ excludeTags }}"
-  display="{{content.field_art_list_block_display|render|striptags|trim}}"
-  count="{{content.field_art_list_block_item_count|render|striptags|trim}}"
+  includeSummary="{{content.field_ucb_article_grid_summary|render|striptags|trim}}"
+  count="{{content.field_ucb_article_grid_count|render|striptags|trim}}"
   >
   <div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
     <i class="fas fa-spinner fa-3x fa-pulse"></i>
@@ -188,15 +188,13 @@
   <div id="ucb-al-api-error" style="display:none" class="ucb-list-msg">
     <h3>An error has occured with the API - please try again later</h3>
   </div>
-</article-list-block>
+</article-grid-block>
 {# More Link #}
-  {% if content.field_art_list_block_more_url|render %}
-  <div class="ucb-article-list-block-button-container">
-    <a class="ucb-article-list-block-button"href="{{content.field_art_list_block_more_url.0['#url']}}">
-      {{content.field_art_list_block_more_url.0['#title']}}
+  {% if content.field_ucb_article_grid_more_link|render %}
+  <div class="ucb-article-grid-block-button-container">
+    <a class="ucb-article-grid-block-button"href="{{content.field_ucb_article_grid_more_link.0['#url']}}">
+      {{content.field_ucb_article_grid_more_link.0['#title']}}
     </a>
   </div>
   {% endif %}
 </div>
-
-
