@@ -171,7 +171,7 @@
   </h2>
   {{ title_suffix }}
   {{ content.body }}
-{# Article List Main Block#}
+{# Article Slider Main Block#}
 <article-slider-block
   jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}"
   exCats="{{ excludeCategories }}"
@@ -186,6 +186,7 @@
   <div id="ucb-al-api-error" style="display:none" class="ucb-list-msg">
     <h3>An error has occured with the API - please try again later</h3>
   </div>
+  <div id='ucb-el-flick' style="display:none" class="ucb-article-slider"></div>
 </article-slider-block>
 </div>
 

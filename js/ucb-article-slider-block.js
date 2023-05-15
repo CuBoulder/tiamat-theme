@@ -192,7 +192,8 @@ class ArticleSliderBlockElement extends HTMLElement {
 
         // Have articles and want to proceed
         if(finalArticles.length > 0 && !NEXTJSONURL){
-          this.renderDisplay( finalArticles)
+          // this.renderDisplay( finalArticles)
+          this.renderDisp(finalArticles)
         }
     }
 }
@@ -210,8 +211,66 @@ class ArticleSliderBlockElement extends HTMLElement {
 
     // Responsible for calling the render function of the appropriate display
     renderDisplay(articleArray){
-        console.log('Here is my final array', articleArray)
-        console.log('i am rendering display')
+        // Create Elements
+        for(var i = 0; i < articleArray.length; i++){
+          console.log('what is i', i)
+          var article = articleArray[i]
+          console.log('my article', article)
+          var sliderContainer = this.getElementsByClassName('carousel-cell')[i]
+          console.log(sliderContainer)
+          // Container
+          var articleContainer = document.createElement('div')
+          articleContainer.className = 'ucb-article-slider-container'
+          // Link
+          var articleImgLink = document.createElement('a')
+          articleImgLink.className = 'ucb-article-img-link'
+          articleImgLink.href = article.link
+          // Img
+          var articleImg = document.createElement('img')
+          articleImg.className = 'ucb-article-slider-article-img'
+          articleImg.src = article.image;
+          //Title
+          var articleTitle = document.createElement('h3')
+          articleTitle.className = 'ucb-article-img-title'
+          articleTitle.innerText = article.title;
+
+          //Append
+          articleImgLink.appendChild(articleImg)
+          articleImgLink.appendChild(articleTitle)
+          articleContainer.appendChild(articleImgLink)
+
+          sliderContainer.append(articleContainer)
+        }
+    }
+
+    renderDisp(articleArray){
+
+      var flkty = new Flickity('.ucb-article-slider');
+      articleArray.map(article=>{
+        var articleContainer = document.createElement('div')
+        articleContainer.className = 'ucb-article-slider-container carousel-cell'
+                  // Link
+                  var articleImgLink = document.createElement('a')
+                  articleImgLink.className = 'ucb-article-img-link'
+                  articleImgLink.href = article.link
+                  // Img
+                  var articleImg = document.createElement('img')
+                  articleImg.className = 'ucb-article-slider-article-img'
+                  articleImg.src = article.image;
+                  //Title
+                  var articleTitle = document.createElement('h3')
+                  articleTitle.className = 'ucb-article-img-title'
+                  articleTitle.innerText = article.title;
+        
+                  //Append
+                  articleImgLink.appendChild(articleImg)
+                  articleImgLink.appendChild(articleTitle)
+                  articleContainer.appendChild(articleImgLink)
+                  flkty.insert(articleContainer)
+      })
+      flkty.resize()
+      this.toggleMessage('ucb-al-loading')
+      this.toggleMessage('ucb-el-flick','block')
     }
     // Used to toggle error messages and loader
     toggleMessage(id, display = "none") {
