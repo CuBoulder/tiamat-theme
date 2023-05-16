@@ -35,6 +35,10 @@ img {
 }
 
 /* text position */
+a.slide-link {
+  color: white;
+}
+
 .carousel-caption {
   padding: 1em;
 }
