@@ -327,11 +327,6 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
   let NEXTJSONURL = ""; // next link for pagination 
   let CategoryExclude = ""; // categories to exclude
   let TagsExclude = ""; // tags to exclude 
-  let lastKnownScrollPosition = 0; // scroll position to determine if we need to load more articles
-  /* Note that event tracking on scroll is expensive and noisy -- these two flag will help to make sure
-      that we're not overwhelming the system by tracking scroll events when we don't need to */
-  let ticking = false; // flag to know if we're currently scrolling 
-  let loadingData = false; // flag to know if we're currently getting additional articles
 
   // check to see if we have the data we need to work with.  
   if (el) {
