@@ -31,8 +31,8 @@ function toggleMessage(id, display = "none") {
           toggle.style.display = "inline-block";
           break;
         case "none":
-        toggle.style.display = "none";
-        break;
+          toggle.style.display = "none";
+          break;
         default:
           toggle.style.display = "none";
           break;
