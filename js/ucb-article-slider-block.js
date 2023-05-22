@@ -20,7 +20,6 @@ class ArticleSliderBlockElement extends HTMLElement {
     }
 
     build(data, count, excludeCatArray, excludeTagArray, finalArticles = []){
-        console.log(data)
       // More than 10 articles? This sets up the next call if there's more articles to be retrieved but not enough post-filters
         let NEXTJSONURL = "";
         if(data.links.next) {
@@ -193,7 +192,7 @@ class ArticleSliderBlockElement extends HTMLElement {
         // Have articles and want to proceed
         if(finalArticles.length > 0 && !NEXTJSONURL){
           // this.renderDisplay( finalArticles)
-          this.renderDisp(finalArticles)
+          this.renderDisplay(finalArticles)
         }
     }
 }
@@ -208,70 +207,44 @@ class ArticleSliderBlockElement extends HTMLElement {
             return "";
         }
     }
-
-    // Responsible for calling the render function of the appropriate display
     renderDisplay(articleArray){
-        // Create Elements
-        for(var i = 0; i < articleArray.length; i++){
-          console.log('what is i', i)
-          var article = articleArray[i]
-          console.log('my article', article)
-          var sliderContainer = this.getElementsByClassName('carousel-cell')[i]
-          console.log(sliderContainer)
-          // Container
-          var articleContainer = document.createElement('div')
-          articleContainer.className = 'ucb-article-slider-container'
-          // Link
-          var articleImgLink = document.createElement('a')
-          articleImgLink.className = 'ucb-article-img-link'
-          articleImgLink.href = article.link
-          // Img
-          var articleImg = document.createElement('img')
-          articleImg.className = 'ucb-article-slider-article-img'
-          articleImg.src = article.image;
-          //Title
-          var articleTitle = document.createElement('h3')
-          articleTitle.className = 'ucb-article-img-title'
-          articleTitle.innerText = article.title;
-
-          //Append
-          articleImgLink.appendChild(articleImg)
-          articleImgLink.appendChild(articleTitle)
-          articleContainer.appendChild(articleImgLink)
-
-          sliderContainer.append(articleContainer)
-        }
-    }
-
-    renderDisp(articleArray){
-      // var flkty =;
       var fliktyInit = document.getElementsByClassName('ucb-article-slider')[0]
       articleArray.map(article=>{
         var articleContainer = document.createElement('div')
         articleContainer.className = 'ucb-article-slider-container carousel-cell'
-                  // Link
-                  var articleImgLink = document.createElement('a')
-                  articleImgLink.className = 'ucb-article-img-link'
-                  articleImgLink.href = article.link
-                  // Img
-                  var articleImg = document.createElement('img')
-                  articleImg.className = 'ucb-article-slider-article-img'
-                  articleImg.src = article.image;
-                  //Title
-                  var articleTitle = document.createElement('h3')
-                  articleTitle.className = 'ucb-article-img-title'
-                  articleTitle.innerText = article.title;
+        //  Container
+        var articleInnerContainer = document.createElement('div')
+        articleInnerContainer.className = 'ucb-article-slider-container-inner'
+        //  Link
+        var articleImgLink = document.createElement('a')
+            articleImgLink.className = 'ucb-article-img-link'
+            articleImgLink.href = article.link
+        //  Img
+        var articleImg = document.createElement('img')
+            articleImg.className = 'ucb-article-slider-article-img'
+            articleImg.src = article.image;
+        //  Title
+        var articleTitle = document.createElement('h3')
+            articleTitle.className = 'ucb-article-img-title'
+            articleTitle.innerText = article.title;
         
-                  //Append
-                  articleImgLink.appendChild(articleImg)
-                  articleImgLink.appendChild(articleTitle)
-                  articleContainer.appendChild(articleImgLink)
-                  fliktyInit.append(articleContainer)
+        //  Append
+        articleImgLink.appendChild(articleImg)
+        articleImgLink.appendChild(articleTitle)
+        articleInnerContainer.appendChild(articleImgLink)
+        articleContainer.appendChild(articleInnerContainer)
+        fliktyInit.append(articleContainer)
       })
       this.toggleMessage('ucb-al-loading')
       this.toggleMessage('ucb-el-flick','block')
       // Make this a Flickity container -- this line appears to need to be here, creating the container before
-      new Flickity('.ucb-article-slider')
+      new Flickity('.ucb-article-slider',{      'wrapAround': true,
+      'adaptiveHeight': true,
+      'draggable': false,
+      'cellAlign': 'left',
+      'groupCells': true,
+      'contain': true,
+      'lazyLoad': true})
     }
     // Used to toggle error messages and loader
     toggleMessage(id, display = "none") {

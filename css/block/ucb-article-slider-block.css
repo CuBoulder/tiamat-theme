@@ -1,7 +1,4 @@
 .carousel-cell {
-    /* height: 700px;
-    margin-right: 10px;
-    border-radius: 5px; */
     counter-increment: carousel-cell;
   }
   
@@ -12,8 +9,7 @@
 
 .ucb-article-slider {
   position: relative;
-  /* arrow color */
-  /* fill-in selected dot */
+  margin-bottom: 50px;
 }
 
 .ucb-article-slider .flickity-prev-next-button.previous {
@@ -82,11 +78,11 @@
   }
 }
 
-/* .ucb-article-slider .ucb-article-slider-container .article-slider-node-inner {
+.ucb-article-slider .ucb-article-slider-container .ucb-article-slider-container-inner {
   position: relative;
   margin: 0 20px;
   overflow: hidden;
-} */
+}
 
 .ucb-article-slider .ucb-article-slider-container img {
   display: block;
