@@ -270,6 +270,7 @@ class ArticleSliderBlockElement extends HTMLElement {
       })
       this.toggleMessage('ucb-al-loading')
       this.toggleMessage('ucb-el-flick','block')
+      // Make this a Flickity container -- this line appears to need to be here, creating the container before
       new Flickity('.ucb-article-slider')
     }
     // Used to toggle error messages and loader

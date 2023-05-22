@@ -1,7 +1,119 @@
 .carousel-cell {
-    height: 700px;
+    /* height: 700px;
     margin-right: 10px;
-    background: #8C8;
-    border-radius: 5px;
+    border-radius: 5px; */
     counter-increment: carousel-cell;
   }
+  
+  /* SLIDER */
+.article-slider-wrapper {
+  padding: 10px 0 35px;
+}
+
+.ucb-article-slider {
+  position: relative;
+  /* arrow color */
+  /* fill-in selected dot */
+}
+
+.ucb-article-slider .flickity-prev-next-button.previous {
+  left: 5px;
+  z-index: 10;
+}
+
+.ucb-article-slider .flickity-prev-next-button.next {
+  right: 5px;
+  z-index: 10;
+
+}
+
+.ucb-article-slider .flickity-prev-next-button {
+  width: 25px;
+  height: 25px;
+  background: #333;
+  border: 3px solid #fff;
+}
+
+.ucb-article-slider .flickity-prev-next-button:hover {
+  background: #000;
+}
+
+.ucb-article-slider .flickity-prev-next-button .arrow {
+  fill: white;
+}
+
+.ucb-article-slider .flickity-prev-next-button.no-svg {
+  color: white;
+}
+
+.ucb-article-slider .flickity-viewport {
+  transition: height 0.5s;
+}
+
+.ucb-article-slider .flickity-page-dots {
+  bottom: -30px;
+}
+
+.ucb-article-slider .flickity-page-dots .dot {
+  width: 12px;
+  height: 12px;
+  opacity: 1;
+  background: transparent;
+  border: 2px solid #757575;
+}
+
+.ucb-article-slider .flickity-page-dots .dot.is-selected {
+  background: #757575;
+}
+
+.ucb-article-slider .ucb-article-slider-container {
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .ucb-article-slider .ucb-article-slider-container {
+      width: 50%;
+  }
+}
+
+@media screen and (min-width: 960px) {
+  .ucb-article-slider .ucb-article-slider-container {
+      width: 33.3333%;
+  }
+}
+
+/* .ucb-article-slider .ucb-article-slider-container .article-slider-node-inner {
+  position: relative;
+  margin: 0 20px;
+  overflow: hidden;
+} */
+
+.ucb-article-slider .ucb-article-slider-container img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ucb-article-slider .ucb-article-slider-container h3 {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: 0;
+  font-size: 100%;
+  color: #fff;
+  display: block;
+  padding: 10px;
+  padding-top: 50px;
+  font-weight: bold;
+  background-color: transparent;
+  background: linear-gradient(to bottom, transparent 0%, rgba(0, 0, 0, 0.85) 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+}
+
+.ucb-article-slider .ucb-article-slider-container a.ucb-article-img-link:hover h3 {
+  background-color: transparent;
+  background: linear-gradient(to bottom, transparent 0%, black 100%);
+  /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+  color: #cfb87c;
+}
