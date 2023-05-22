@@ -244,8 +244,8 @@ class ArticleSliderBlockElement extends HTMLElement {
     }
 
     renderDisp(articleArray){
-
-      var flkty = new Flickity('.ucb-article-slider');
+      // var flkty =;
+      var fliktyInit = document.getElementsByClassName('ucb-article-slider')[0]
       articleArray.map(article=>{
         var articleContainer = document.createElement('div')
         articleContainer.className = 'ucb-article-slider-container carousel-cell'
@@ -266,11 +266,11 @@ class ArticleSliderBlockElement extends HTMLElement {
                   articleImgLink.appendChild(articleImg)
                   articleImgLink.appendChild(articleTitle)
                   articleContainer.appendChild(articleImgLink)
-                  flkty.insert(articleContainer)
+                  fliktyInit.append(articleContainer)
       })
-      flkty.resize()
       this.toggleMessage('ucb-al-loading')
       this.toggleMessage('ucb-el-flick','block')
+      new Flickity('.ucb-article-slider')
     }
     // Used to toggle error messages and loader
     toggleMessage(id, display = "none") {
