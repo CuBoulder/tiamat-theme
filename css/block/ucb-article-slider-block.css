@@ -9,7 +9,7 @@
 
 .ucb-article-slider {
   position: relative;
-  margin-bottom: 50px;
+  margin-bottom: 25px;
 }
 
 .ucb-article-slider .flickity-prev-next-button.previous {
@@ -88,6 +88,8 @@
   display: block;
   width: 100%;
   height: auto;
+  aspect-ratio: 16/9;
+  object-fit: cover;
 }
 
 .ucb-article-slider .ucb-article-slider-container h3 {
