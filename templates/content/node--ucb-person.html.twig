@@ -34,10 +34,11 @@
 						{{ content.field_ucb_person_department }}
 					</div>
 				{% endif %}
-				{% if content.field_ucb_person_email.0 or content.field_ucb_person_phone.0 %}
+				{% if content.field_ucb_person_email.0 or content.field_ucb_person_phone.0 or content.field_ucb_person_primary_link.0 %}
 					<div class="ucb-person-section ucb-person-contact">
 						{{ content.field_ucb_person_email }}
 						{{ content.field_ucb_person_phone }}
+						{{ content.field_ucb_person_primary_link }}
 					</div>
 				{% endif %}
 				{% if content.field_ucb_person_links.0 %}
