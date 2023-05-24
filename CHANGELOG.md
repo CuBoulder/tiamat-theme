@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Change: Article List adds button to load more Articles for improved accessibility 
+  The Article List page now uses a button to address accessibility concerns when loading more Articles, instead of a scroll-based 'infinite loader'. The button only appears if additional Articles are available via JSON API
+  
+  Resolves #370 , also resolves #238
+---
+
 - ### Update slider.css
   Added css to make link icon white rather than blue.
   

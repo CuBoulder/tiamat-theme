@@ -23,10 +23,19 @@ function toggleMessage(id, display = "none") {
     var toggle = document.getElementById(id);
 
     if (toggle) {
-      if (display === "block") {
-        toggle.style.display = "block";
-      } else {
-        toggle.style.display = "none";
+      switch (display) {
+        case "block":
+          toggle.style.display = "block";
+          break;
+        case "inline-block":
+          toggle.style.display = "inline-block";
+          break;
+        case "none":
+          toggle.style.display = "none";
+          break;
+        default:
+          toggle.style.display = "none";
+          break;
       }
     }
   }
@@ -279,8 +288,11 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
             let thisArticle = document.createElement("article");
             thisArticle.className = 'ucb-article-card-container';
             thisArticle.appendChild(articleRow);
-
             dataOutput.append(thisArticle);
+
+            if(NEXTJSONURL){
+              toggleMessage('ucb-el-load-more', 'inline-block')
+            }
           }
         })
 
@@ -315,11 +327,6 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
   let NEXTJSONURL = ""; // next link for pagination 
   let CategoryExclude = ""; // categories to exclude
   let TagsExclude = ""; // tags to exclude 
-  let lastKnownScrollPosition = 0; // scroll position to determine if we need to load more articles
-  /* Note that event tracking on scroll is expensive and noisy -- these two flag will help to make sure
-      that we're not overwhelming the system by tracking scroll events when we don't need to */
-  let ticking = false; // flag to know if we're currently scrolling 
-  let loadingData = false; // flag to know if we're currently getting additional articles
 
   // check to see if we have the data we need to work with.  
   if (el) {
@@ -335,17 +342,9 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
     }
   });
 
-  // watch for scrolling and determine if we're at the bottom of the content and need to request more 
-  document.addEventListener("scroll", function () {
-    lastKnownScrollPosition = window.scrollY;
-
-    if (!ticking && !loadingData) {
-      window.requestAnimationFrame(function () {
-        // check to see if we've scrolled through our content and need to attempt to load more
-        if ( lastKnownScrollPosition + window.innerHeight >= document.documentElement.scrollHeight) {
-          // grab the next link from our JSON data object and call the loader
-          loadingData = true;
-          // if we have another set of data to load, get the next batch.
+  // watch for scrolling and determine if we're at the bottom of the content and need to request more
+  const button = document.getElementById('ucb-el-load-more')
+  button.addEventListener("click", function () {
           if(NEXTJSONURL) {
             renderArticleList( NEXTJSONURL, CategoryExclude, TagsExclude,).then((response) => {
               if(response) {
@@ -354,13 +353,9 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
               } else {
                 NEXTJSONURL = "";
                 toggleMessage("ucb-al-end-of-data", "block");
+                toggleMessage('ucb-el-load-more')
               }
             });
           }
-        }
-        ticking = false;
-      })
-      ticking = true;
-    }
   })
 })()
