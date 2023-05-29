@@ -1,19 +1,21 @@
 .ucb-list-msg {
-	font-size: 1.25em;
-	font-weight: bolder;
-	text-align: center;
+  font-size: 1.25em;
+  font-weight: bolder;
+  text-align: center;
 }
 
 .ucb-loading-data {
-	color: #01579b;
-	text-align: center;
-}  
-
-.ucb-list-msg, .ucb-loading-data {
-	display: block;
+  color: #01579b;
+  text-align: center;
 }
-.ucb-list-msg[hidden], .ucb-loading-data[hidden] {
-	display: none;
+
+.ucb-list-msg,
+.ucb-loading-data {
+  display: block;
+}
+.ucb-list-msg[hidden],
+.ucb-loading-data[hidden] {
+  display: none;
 }
 
 .ucb-person-card-list {
@@ -46,13 +48,14 @@
   flex-direction: row;
 }
 
-.departments-grid, .person-dept-table {
+.departments-grid,
+.person-dept-table {
   text-transform: uppercase;
   display: block;
   margin-bottom: 5px;
 }
 
-.person-title-table{
+.person-title-table {
   display: block;
   margin-top: 5px;
 }
@@ -105,7 +108,7 @@ tbody.ucb-people-list-table-tablebody {
   background: #fafafa;
 }
 
-.form-item{
+.form-item {
   margin: 0;
   margin-right: 15px;
   margin-bottom: 10px;
@@ -117,27 +120,27 @@ tbody.ucb-people-list-table-tablebody {
   font-weight: 500;
 }
 
-.people-list-filter{
-    padding: 10px 10px 0;
-    margin-bottom: 20px;
-    overflow: hidden;
-    background-color: #e7e7e7;
+.people-list-filter {
+  padding: 10px 10px 0;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background-color: #e7e7e7;
 }
 
-.form-item >.form-submit-btn{
+.form-item > .form-submit-btn {
   margin-top: 21px;
   font-size: 11px;
   font-weight: 500;
   box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
-    border: 1px solid #ddd;
-    border-radius: 3px;
-    padding: 5px 10px;
-    color: #222;
-    background: #EEEEEE;
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 5px 10px;
+  color: #222;
+  background: #eeeeee;
 }
 
 .people-list-filter .taxonomy-select {
-	max-width: 150px;
+  max-width: 150px;
 }
 
 .ucb-person-card-img {
@@ -146,7 +149,7 @@ tbody.ucb-people-list-table-tablebody {
   width: 120px;
 }
 
-.ucb-person-card-email {
+.ucb-person-card-links {
   padding-right: 20px;
 }
 
@@ -155,12 +158,12 @@ tbody.ucb-people-list-table-tablebody {
   flex-direction: column;
 }
 
-.iconColor{
-  color: #565A5C;
+.iconColor {
+  color: #565a5c;
 }
 
 .ucb-person-card-body {
-  padding-bottom: .5rem;
+  padding-bottom: 0.5rem;
 }
 
 .ucb-person-card-img-grid > a > img {
@@ -168,27 +171,33 @@ tbody.ucb-people-list-table-tablebody {
 }
 
 .people-list-filter .form-item.reset-button-form-item {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .people-list-filter .reset-button {
-	background-color: #FFF;
-	font-size: .8em;
-	font-weight: bold;
-	-webkit-border-radius: 3px;
-	-moz-border-radius: 3px;
-	border-radius: 3px;
-	transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
-	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-	padding: 0 1em;
-	box-sizing: border-box;
-	margin-top: 1em;
+  background-color: #fff;
+  font-size: 0.8em;
+  font-weight: bold;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  padding: 0 1em;
+  box-sizing: border-box;
+  margin-top: 1em;
 }
 
 .people-list-filter .reset-button:hover {
-	box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
 }
 
 .people-list-filter .reset-button:active {
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 3px 15px rgba(0, 0, 0, 0.35);
+}
+
+@media (max-width: 767px) {
+  .ucb-person-card-contact {
+    flex-direction: column;
+  }
 }
