@@ -212,7 +212,13 @@ a.slide-link i.fab {
   }
 }
 
-.carousel-item-structure {
+.right-content .carousel-item-structure {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.bottom-content .carousel-item-structure {
   display: flex;
   flex-direction: column;
   width: 100%;
