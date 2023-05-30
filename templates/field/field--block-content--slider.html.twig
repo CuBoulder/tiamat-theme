@@ -7,7 +7,9 @@
 #}
 
 {% for item in items %}
-  <div class="carousel-item {% if loop.first %}active{% endif %}">
-    {{ item.content }}
-  </div>
+	<div class="carousel-item {% if loop.first %}active{% endif %}">
+		<div class="carousel-item-structure">
+			{{ item.content }}
+		</div>
+	</div>
 {% endfor %}

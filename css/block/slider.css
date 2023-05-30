@@ -211,3 +211,18 @@ a.slide-link i.fab {
     text-align: left;
   }
 }
+
+.right-content .carousel-item-structure {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+}
+
+.center-overlay .carousel-item-structure,
+.right-overlay .carousel-item-structure,
+.bottom-overlay .carousel-item-structure,
+.bottom-content .carousel-item-structure {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}

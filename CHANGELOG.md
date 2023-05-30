@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### slider bottom content fix
+  Closes #385.
+  Fixes issue where bottom-content sliders were having issues with animation.
+---
+
 - ### Fixes Content List and Text block stale cache issues
   A Content List block may have failed to update properly after updating a referenced node. A Content List or Text block placed using Block Layout may have also failed to reflect changes made to the block's fields. This update includes a fix to prevent stale cache issues.
   
