@@ -6,7 +6,7 @@
 }
 
 .gallery-div .gallery-item {
-  margin-bottom: calc(var(--bs-gutter-x));
+  margin-bottom: 4px;
 }
 
 .gallery-div .gallery-item img {

@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### fix spacing in image gallery
+  Closes #382. 
+  Removes unneeded spacing between images.
+---
+
 - ### New Block Type: Article Slider
   Adds the Article Slider block. Much like the Article List page and other Article blocks, this will display a maximum of 6 articles in an interactive slider using user-provided inclusion and exclusion filters.
   
