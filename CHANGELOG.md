@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### New Block Type: Article Slider
+  Adds the Article Slider block. Much like the Article List page and other Article blocks, this will display a maximum of 6 articles in an interactive slider using user-provided inclusion and exclusion filters.
+  
+  Resolves #319 
+  
+  Includes:
+  `tiamat-theme` => `issue/tiamat-theme/319`
+  `tiamat-custom-entities` => `issue/tiamat-theme/319`
+---
+
 - ### Change: Article List adds button to load more Articles for improved accessibility 
   The Article List page now uses a button to address accessibility concerns when loading more Articles, instead of a scroll-based 'infinite loader'. The button only appears if additional Articles are available via JSON API
   
