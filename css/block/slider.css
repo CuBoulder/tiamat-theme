@@ -218,6 +218,9 @@ a.slide-link i.fab {
   width: 100%;
 }
 
+.center-overlay .carousel-item-structure,
+.right-overlay .carousel-item-structure,
+.bottom-overlay .carousel-item-structure,
 .bottom-content .carousel-item-structure {
   display: flex;
   flex-direction: column;
