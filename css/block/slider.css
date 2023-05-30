@@ -211,3 +211,9 @@ a.slide-link i.fab {
     text-align: left;
   }
 }
+
+.carousel-item-structure {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
