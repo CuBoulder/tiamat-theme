@@ -166,7 +166,7 @@
 						{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
 						{% set smallFeatureBGValue = "background-image:url(#{ file_url( item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri ) });background-repeat:no-repeat;background-position:center;background-size:cover;" %}
 						{% if (loop.index0 % 3 == 0) or (loop.index0 == 0) %}
-							<div class="col">
+							<div class="col-lg-7">
 								<div class="feature-row-image-container feature-row-fill">
 									{% if item.entity.field_row_layout_content_link.0.url|render %}
 										<a href=" {{ rowLink }} ">
@@ -187,7 +187,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="row small-feature-row">
+							<div class="col-lg-5 row small-feature-row">
 							{% elseif loop.index0 is odd %}
 								<div class="col-lg-12 small-feature">
 									<div class="small-feature-row-image-container" style={{ smallFeatureBGValue }}>
@@ -199,7 +199,6 @@
 											{% else %}
 												<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 											{% endif %}
-											{{ item.entity.field_row_layout_content_text|view }}
 										</div>
 									</div>
 								</div>
@@ -214,7 +213,6 @@
 											{% else %}
 												<h3>{{item.entity.field_row_layout_content_title.value|render|striptags|trim}}</h3>
 											{% endif %}
-											{{ item.entity.field_row_layout_content_text|view }}
 										</div>
 									</div>
 								</div>

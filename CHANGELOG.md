@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updated feature settings
+  Updated the feature option of the content rows block. Features are now a 60/40 split, width and sizing works properly. Removed the 20px bottom padding from the newer image styles update.
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/61
+  
+  Closes #380 
+---
+
 - ### fix spacing in image gallery
   Closes #382. 
   Removes unneeded spacing between images.
