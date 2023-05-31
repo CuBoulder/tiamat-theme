@@ -21,7 +21,7 @@
 					{% set linkTitle = item.content['#title'] %}
 					{% if item.content['#url']|render|first == '/' %}
 						<span class="sr-only">Primary Link</span>
-						<i class="fa fa-external-link-alt"></i>
+						<i class="fas fa-link primaryLinkIcon"></i>
 						<a href="{{ item.content['#url']|render }}" class="ucb-person-social-link ucb-person-other-link" title="Social Media" alt="Social Media">
 							{% if linkTitle|render %}
 								<span>{{ linkTitle }}</span>
