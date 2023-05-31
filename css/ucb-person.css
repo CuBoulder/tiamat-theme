@@ -102,3 +102,7 @@ ul.ucb-person-department li:not(:first-child):before {
 	display: block;
 	padding-top: .2em;
 }
+
+.primaryLinkIcon {
+	color: gray;
+}

@@ -1,0 +1,131 @@
+{#
+/**
+ * @file Contains the template to display the Person node's Primary Link field.
+ */
+#}
+{% if items %}
+	<div>
+		{% for item in items %}
+			{% set linkTitle = item.content['#title'] %}
+			{% if item.content['#url']|render|first == '/' %}
+				<span class="sr-only">Primary Link</span>
+				<i class="fas fa-link primaryLinkIcon"></i>
+				<a href="{{ item.content['#url']|render }}" class="ucb-person-social-link ucb-person-other-link" title="Social Media" alt="Social Media">
+					{% if linkTitle|render %}
+						<span>{{ linkTitle }}</span>
+					{% else %}
+						<span>{{ item.content['#url'] }}</span>
+					{% endif %}
+				</a>
+			{% else %}
+				{% set linkUrl = item.content['#url'].uri %}
+				{% set linkUrlUpper = linkUrl|upper %}
+
+				{% if 'FACEBOOK' in linkUrlUpper %}
+					<span class="sr-only">Facebook</span>
+					<i class="fab fa-facebook primaryLinkIcon"></i>
+					<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-facebook-link" title="Facebook" alt="Facebook">
+						<span>{{ linkTitle }}</span>
+					</a>
+
+				{% elseif 'TWITTER' in linkUrlUpper %}
+					<span class="sr-only">Twitter</span>
+					<i class="fab fa-twitter primaryLinkIcon"></i>
+					<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-twitter-link" title="Twitter" alt="Twitter">
+						<span>{{ linkTitle }}</span>
+					</a>
+
+				{% elseif 'FLICKR' in linkUrlUpper %}
+					<span class="sr-only">Flickr</span>
+					<i class="fab fa-flickr primaryLinkIcon"></i>
+					<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-flickr-link" title="Flickr" alt="Flickr">
+						<span>{{ linkTitle }}</span>
+					</a>
+
+				{% elseif 'LINKEDIN' in linkUrlUpper %}
+					<span class="sr-only">LinkedIn</span>
+					<i class="fab fa-linkedin primaryLinkIcon"></i>
+					<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-linkedin-link" title="LinkedIn" alt="LinkedIn">
+						<span>{{ linkTitle }}</span>
+					</a>
+
+				{% elseif 'YOUTUBE' in linkUrlUpper %}
+					<span class="sr-only">YouTube</span>
+					<i class="fab fa-youtube primaryLinkIcon"></i>
+					<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-youtube-link" title="YouTube" alt="YouTube">
+						<span>{{ linkTitle }}</span>
+					</a>
+
+				{% elseif 'INSTAGRAM' in linkUrlUpper %}
+					<span class="sr-only">Instagram</span>
+					<i class="fab fa-instagram primaryLinkIcon"></i>
+					<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-instagram-link" title="Instagram" alt="Instagram">
+						<span>{{ linkTitle }}</span>
+					</a>
+
+				{% elseif 'DISCORD' in linkUrlUpper %}
+					<span class="sr-only">Discord</span>
+					<i class="fab fa-discord primaryLinkIcon"></i>
+					<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-discord-link" title="Discord" alt="Discord">
+						<span>{{ linkTitle }}</span>
+					</a>
+
+				{% elseif 'PINTREST' in linkUrlUpper %}
+					<span class="sr-only">Pintrest</span>
+					<i class="fab fa-pinterest-p primaryLinkIcon"></i>
+					<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-pintrest-link" title="Pintrest" alt="Pintrest">
+						<span>{{ linkTitle }}</span>
+					</a>
+
+				{% elseif 'VIMEO' in linkUrlUpper %}
+					<span class="sr-only">Vimeo</span>
+					<i class="fab fa-vimeo-v primaryLinkIcon"></i>
+					<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-vimeo-link" title="Vimeo" alt="Vimeo">
+						<span>{{ linkTitle }}</span>
+					</a>
+
+				{% elseif 'WORDPRESS' in linkUrlUpper %}
+					<span class="sr-only">Wordpress</span>
+					<i class="fab fa-wordpress-simple primaryLinkIcon"></i>
+					<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-wordpress-link" title="Wordpress" alt="Wordpress">
+						<span>{{ linkTitle }}</span>
+					</a>
+
+				{% elseif 'TIKTOK' in linkUrlUpper %}
+					<span class="sr-only">TikTok</span>
+					<i class="fab fa-tiktok primaryLinkIcon"></i>
+					<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-tiktok-link" title="TikTok" alt="TikTok">
+						<span>{{ linkTitle }}</span>
+					</a>
+
+				{% elseif 'REDDIT' in linkUrlUpper %}
+					<span class="sr-only">Reddit</span>
+					<i class="fab fa-reddit-alien primaryLinkIcon"></i>
+					<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-reddit-link" title="Reddit" alt="Reddit">
+						<span>{{ linkTitle }}</span>
+					</a>
+
+				{% elseif 'PATREON' in linkUrlUpper %}
+					<span class="sr-only">Patreon</span>
+					<i class="fab fa-patreon primaryLinkIcon"></i>
+					<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-patreon-link" title="Patreon" alt="Patreon">
+						<span>{{ linkTitle }}</span>
+					</a>
+
+				{% else %}
+					<span class="sr-only">Link</span>
+					<i class="fas fa-link primaryLinkIcon"></i>
+					<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-other-link" title="Social Media" alt="Social Media">
+						{% if linkTitle|render %}
+							<span>{{ linkTitle }}</span>
+						{% else %}
+							<span>{{ linkUrl }}</span>
+						{% endif %}
+					</a>
+
+				{% endif %}
+
+			{% endif %}
+		{% endfor %}
+	</div>
+{% endif %}

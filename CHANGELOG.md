@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Issue/320
+  Closes #320.
+  Adds a primary link to the person page which is displayed in the person lists. The icons can vary between multiple different icons based on the hostname of the url.
+---
+
 - ### slider bottom content fix
   Closes #385.
   Fixes issue where bottom-content sliders were having issues with animation.
