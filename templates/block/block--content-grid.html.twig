@@ -28,6 +28,10 @@
 	{% set columnNumbers = "3" %}
 {% elseif content['#block_content'].field_grid_column_count.value is same as("2") %}
 	{% set columnNumbers = "4" %}
+{% elseif content['#block_content'].field_grid_column_count.value is same as("3") %}
+	{% set columnNumbers = "5" %}
+{% else %}
+	{% set columnNumbers = "6" %}
 {% endif %}
 {% set imgStyle = "square-img" %}
 {% if content['#block_content'].field_grid_image_style.value is same as ("1") %}

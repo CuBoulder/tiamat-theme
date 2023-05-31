@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update block--content-grid.html.twig
+  Added options for 5 and 6 columns
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/63
+  
+  Closes #374 
+---
+
 - ### Issue/320
   Closes #320.
   Adds a primary link to the person page which is displayed in the person lists. The icons can vary between multiple different icons based on the hostname of the url.
