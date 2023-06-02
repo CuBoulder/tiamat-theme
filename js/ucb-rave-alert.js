@@ -23,22 +23,22 @@ class RaveAlertElement extends HTMLElement {
 	build(descriptionText, linkText) {
 		linkText = linkText || this.getAttribute('link') || 'https://alerts.colorado.edu';
 		const
-			alertElement = document.createElement('div'),
-			alertTextElement = document.createElement('span'),
-			alertLinkElement = document.createElement('a');
-		alertElement.className = 'alert alert-danger alert-dismissible fade show ucb-alert ucb-rave-alert';
-		alertElement.setAttribute('role', 'alert');
-		alertTextElement.className = 'ucb-alert-text ucb-rave-alert-text';
-		alertLinkElement.className = 'alert-link ucb-alert-link ucb-rave-alert-link';
-		alertTextElement.innerText = descriptionText;
-		alertLinkElement.target = '_blank';
-		alertLinkElement.href = linkText;
-		alertLinkElement.innerText = 'Learn more';
-		alertElement.appendChild(alertTextElement);
-		alertElement.innerHTML += ' ';
-		alertElement.appendChild(alertLinkElement);
-		alertElement.innerHTML += '<button type="button" class="btn-close ucb-alert-close ucb-rave-alert-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-		this.appendChild(alertElement);
+		alertElement = document.createElement('div'),
+		alertTextElement = document.createElement('span'),
+		alertLinkElement = document.createElement('a');
+	alertElement.className = 'alert alert-danger alert-dismissible fade show ucb-alert ucb-rave-alert';
+	alertElement.setAttribute('role', 'alert');
+	alertTextElement.className = 'ucb-alert-text ucb-rave-alert-text';
+	alertLinkElement.className = 'alert-link ucb-alert-link ucb-rave-alert-link';
+	alertTextElement.innerText = descriptionText;
+	alertLinkElement.target = '_blank';
+	alertLinkElement.href = linkText;
+	alertLinkElement.innerHTML = `Read More <i class="fas fa-angle-double-right"></i>`;
+	alertElement.appendChild(alertTextElement);
+	alertElement.innerHTML += ' ';
+	alertElement.appendChild(alertLinkElement);
+	alertElement.innerHTML += '<button type="button" class="btn-close ucb-alert-close ucb-rave-alert-close" data-bs-dismiss="alert" aria-label="Close"></button>';
+	this.appendChild(alertElement);
 	}
 }
 
