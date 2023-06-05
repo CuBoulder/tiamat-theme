@@ -100,8 +100,7 @@
 						{# Render links here #}
 							{% for item in content['#block_content'].field_links.value %}
 								{{ link(item.title, item.uri, {'class': ['button', linkColor]} ) }}
-							</a>
-						{% endfor %}
+							{% endfor %}
 					</div>
 					{% if content['#block_content'].field_text_align.value == "text-lefthalf" %}
 						<div class="col-12 col-md-6"></div>
