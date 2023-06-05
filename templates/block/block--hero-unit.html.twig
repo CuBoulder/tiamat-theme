@@ -64,13 +64,11 @@
 {% endif %}
 
 <div{{attributes.addClass(classes)}}>
-	<div class="container">
 	{{ title_prefix }}
 	{% if label %}
 		<h2{{title_attributes}}>{{ label }}</h2>
 	{% endif %}
 	{{ title_suffix }}
-	</div>
 	{% block content %}
 		<div{{attributes.addClass(classes).setAttribute("style","#{bgValue}").addClass(size,overlayClass)}}>
 			{% if videoURL is defined %}
