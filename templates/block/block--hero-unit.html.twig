@@ -64,11 +64,13 @@
 {% endif %}
 
 <div{{attributes.addClass(classes)}}>
+	<div class="container">
 	{{ title_prefix }}
 	{% if label %}
 		<h2{{title_attributes}}>{{ label }}</h2>
 	{% endif %}
 	{{ title_suffix }}
+	</div>
 	{% block content %}
 		<div{{attributes.addClass(classes).setAttribute("style","#{bgValue}").addClass(size,overlayClass)}}>
 			{% if videoURL is defined %}
@@ -96,9 +98,8 @@
 					<div class="col">
 						{{ content|without('field_links') }}
 						{# Render links here #}
-						{# <p> {{ dump(content['#block_content'].field_links.value) }} </p> #}
 							{% for item in content['#block_content'].field_links.value %}
-								<a href="{{ item.uri }}" class="button {{ linkColor }}"> {{ item.title }}
+								{{ link(item.title, item.uri, {'class': ['button', linkColor]} ) }}
 							</a>
 						{% endfor %}
 					</div>
