@@ -70,13 +70,12 @@ a.slide-link {
   left: 0;
   right: 0;
   margin: auto;
-  background-color: rgba(0, 0, 0, 0.7);
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 .right-content .carousel-inner .carousel-caption {
   right: 0;
   left: 0;
-  background-color: var(--ucb-darker);
   text-align: left;
   padding: 2rem 1rem;
   position: relative;
@@ -102,6 +101,7 @@ a.slide-link {
 
 .slide-image-container {
   flex-grow: 1;
+  padding-bottom: 20px;
 }
 
 .bottom-content .carousel-inner .carousel-caption {
@@ -184,6 +184,12 @@ a.slide-link i.fab {
     display: block;
     flex-direction: row;
   }
+  .slide-image-container {
+    padding-bottom: 0px;
+  }
+  .carousel-caption {
+    width: 100%;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -210,12 +216,16 @@ a.slide-link i.fab {
     left: 0;
     text-align: left;
   }
+  .carousel-caption {
+    width: 100%;
+  }
 }
 
 .right-content .carousel-item-structure {
   display: flex;
   flex-direction: row;
   width: 100%;
+  background-color: var(--ucb-darker);
 }
 
 .center-overlay .carousel-item-structure,
@@ -225,4 +235,8 @@ a.slide-link i.fab {
   display: flex;
   flex-direction: column;
   width: 100%;
+}
+
+.slide-image-container img{
+  padding-bottom: 0px;
 }
