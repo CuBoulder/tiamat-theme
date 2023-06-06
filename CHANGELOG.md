@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Hero Unit Buttons fixed for Internal Links
+  Hero Unit buttons correctly link when provided internal links either by direct internal url or selected by page title within the form. 
+  
+  Resolves #407 
+---
+
 - ### Change Alerts Design
   Changes the design of the CU Alert to mirror the D7 version.
   Resolves #292 
