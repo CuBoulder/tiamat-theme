@@ -150,6 +150,7 @@
 .alert-danger{
   --bs-alert-color: white !important;
     --bs-alert-bg: #E41B23 !important;
+    --bs-alert-border-color: #E41B23;
     font-weight: 600;
 }
 
