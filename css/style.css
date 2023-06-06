@@ -147,13 +147,26 @@
 	margin: 0;
 }
 
+.alert-danger{
+  --bs-alert-color: white !important;
+    --bs-alert-bg: #E41B23 !important;
+    --bs-alert-border-color: #E41B23;
+    font-weight: 600;
+}
+
 .ucb-alert-link:link, .ucb-alert-link:visited {
-	text-decoration: underline;
-	text-decoration-color: #6a1a21;
-	-webkit-text-decoration-color: #6a1a21;
-	white-space: nowrap;
+	background-color: white;
+  padding: 2px 5px;
+  color:#222 ;
+  font-size: 85%;
+  display: inline-flex;
+  align-items: center;
+  margin-left: 5px;
 }
   
+.ucb-alert-link > svg{
+  margin-left: 2px;
+}
   header#ucb-header-block {
     background: black;
     padding: 1em 0;

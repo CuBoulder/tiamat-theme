@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Change Alerts Design
+  Changes the design of the CU Alert to mirror the D7 version.
+  Resolves #292 
+  
+---
+
 - ### Update block--content-grid.html.twig
   Added options for 5 and 6 columns
   
