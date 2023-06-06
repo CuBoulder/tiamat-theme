@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds right formatting, remove padding and opacity
+  Closes #383 and #384.
+  Adds formatting for right overlay captions, removes bottom padding for mobile design, and reduces opacity for the slider.
+---
+
 - ### Hero Unit Buttons fixed for Internal Links
   Hero Unit buttons correctly link when provided internal links either by direct internal url or selected by page title within the form. 
   
