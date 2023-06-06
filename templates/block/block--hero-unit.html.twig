@@ -93,7 +93,7 @@
 					{% if content['#block_content'].field_text_align.value == "text-righthalf" %}
 						<div class="col-12 col-md-6"></div>
 					{% endif %}
-					<div class="col">
+					<div class="col ucb-hero-unit-links">
 						{{ content|without('field_links') }}
 						{# Render links here #}
 							{% for item in content['#block_content'].field_links.value %}

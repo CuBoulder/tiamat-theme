@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Change: Adjusts Hero Unit button spacing to 10px
+  Resolves #400 
+---
+
 - ### Adds right formatting, remove padding and opacity
   Closes #383 and #384.
   Adds formatting for right overlay captions, removes bottom padding for mobile design, and reduces opacity for the slider.

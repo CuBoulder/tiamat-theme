@@ -3,6 +3,23 @@
  *
  */
 
+
+
+ .ucb-hero-unit-links .button:first-of-type{
+  margin-right: 5px !important;
+  margin-left: 0px !important;
+ }
+
+ .ucb-hero-unit-links .button:last-child{
+  margin-left: 5px;
+  margin-right: 0px;
+ }
+
+ .ucb-hero-unit-links .button{
+  margin-right: 5px;
+  margin-left: 5px;
+ }
+
 .block-hero-unit {
   font-size: 120%;
 }
