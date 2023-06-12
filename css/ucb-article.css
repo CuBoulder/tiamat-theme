@@ -32,13 +32,23 @@ i.far.fa-calendar {
   line-height: 1em;
 }
 
+.ucb-article-category-icon, .ucb-article-tag-icon{
+  background-color: #555555;
+  color: #e7e7e7;
+  height: 16px;
+  width: 16px;
+}
+.ucb-article-category-icon > svg, .ucb-article-tag-icon > svg{
+ padding: 2px;
+}
+
 .ucb-article-categories div,
 .ucb-article-tags div,
 .ucb-article-issue div {
   display: flex;
   flex-direction: row;
-  margin-right: 1em;
   line-height: 1.5em;
+  padding: 2px;
 }
 
 .ucb-article-categories a:link,
@@ -51,7 +61,6 @@ i.far.fa-calendar {
   color: #555;
   padding: 2px 6px;
   display: inline-block;
-  text-transform: uppercase;
   margin: 0 5px 5px 0;
 }
 
