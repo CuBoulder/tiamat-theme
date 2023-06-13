@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Change: Article Taxonomy term display style
+  Resolves #348  - Changes Article Taxonomy term display style. Terms are no longer be all uppercase and icon flush with first term. Color changes to icons. 
+  
+  
+---
+
 - ### Adds Link field to Events Block
   Resolves #381 - Adds a Link field to the Events Calendar Block to allow for links to additional events. 
   
