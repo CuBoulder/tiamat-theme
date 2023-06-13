@@ -27,6 +27,12 @@
 			<h2{{title_attributes}}>{{ label }}</h2>
 		{% endif %}
 		{{ title_suffix }}
-		{{ content }}
+		{{ content|without('field_additional_events_link') }}
+		{# Events Link #}
+		<div class="ucb-calendar-block-link-container">
+		{% for item in content['#block_content'].field_additional_events_link.value %}
+			{{ link(item.title, item.uri, {'class': ['ucb-calendar-button']} ) }}
+		{% endfor %}
+		</div>
 	</div>
 {% endblock %}

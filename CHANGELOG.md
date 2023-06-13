@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds Link field to Events Block
+  Resolves #381 - Adds a Link field to the Events Calendar Block to allow for links to additional events. 
+  
+  Includes:
+  [tiamat-theme](https://github.com/CuBoulder/tiamat-theme) => [issue/tiamat-theme/381 ](https://github.com/CuBoulder/tiamat-theme/pull/411)
+  [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities) => [issue/tiamat-theme/381](https://github.com/CuBoulder/tiamat-custom-entities/pull/65)
+---
+
 - ### Change: Adjusts Hero Unit button spacing to 10px
   Resolves #400 
 ---
