@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update block--content-grid.html.twig
+  Removed justify evenly class so that content will align left as it should.
+---
+
 - ### Change: Article Taxonomy term display style
   Resolves #348  - Changes Article Taxonomy term display style. Terms are no longer be all uppercase and icon flush with first term. Color changes to icons. 
   
