@@ -91,7 +91,7 @@
 			</div>
 			{# Card Grid Layout #}
 		{% elseif layoutSelection == 1 %}
-			<div class="row row-cols-lg-{{ columnNumbers }} row-cols-md-2 row-cols-1 justify-content-evenly">
+			<div class="row row-cols-lg-{{ columnNumbers }} row-cols-md-2 row-cols-1">
 				{% for key, item in content['#block_content'].field_grid_layout_content %}
 					{%  if key|first != '#' %}
 						{% if imgStyle == "square-img" %}
@@ -134,7 +134,7 @@
 			</div>
 			{# Overlay Grid Layout #}
 		{% elseif layoutSelection == 2 %}
-			<div class="row row-cols-lg-{{ columnNumbers }} row-cols-md-2 row-cols-1 justify-content-evenly">
+			<div class="row row-cols-lg-{{ columnNumbers }} row-cols-md-2 row-cols-1">
 				{% for key, item in content['#block_content'].field_grid_layout_content %}
 					{%  if key|first != '#' %}
 						{% if imgStyle == "square-img" %}
