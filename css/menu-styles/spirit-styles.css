@@ -5,7 +5,9 @@ body {
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .ucb-menu {
   gap: 0rem;
 }
-
+.ucb-page-container {
+  background-color: #fff;
+}
 .ucb-page-content {
  background: #fff;
 }
@@ -59,13 +61,8 @@ a:hover {
 .ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-menu {
   background-color: #fff;
 }
-
-
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline {
-  background: #fff;
-  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+.page-header {
+  margin-bottom: 3px;
 }
 li.main-menu-item a.nav-link:link,
 li.main-menu-item a.nav-link:visited {
@@ -128,6 +125,13 @@ ul#action-menu a {
 }
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
   background-color: #333;
+}
+section.ucb-main-nav-section {
+  background: #fff;
+  -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+
 }
 /* TITLE NEEDS TO BE IMPLEMENTED
 #page-title-image-section {
