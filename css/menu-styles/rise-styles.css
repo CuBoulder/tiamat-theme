@@ -16,7 +16,8 @@ body {
 }
 
 .ucb-secondary-menu-position-inline .ucb-main-menu,
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline {
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-main-menu {
   margin-bottom: -20px;
   background-color: #f7f7f7;
 }
