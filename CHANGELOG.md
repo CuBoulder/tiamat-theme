@@ -9,6 +9,96 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update block--content-grid.html.twig
+  Removed justify evenly class so that content will align left as it should.
+---
+
+- ### Change: Article Taxonomy term display style
+  Resolves #348  - Changes Article Taxonomy term display style. Terms are no longer be all uppercase and icon flush with first term. Color changes to icons. 
+  
+  
+---
+
+- ### Adds Link field to Events Block
+  Resolves #381 - Adds a Link field to the Events Calendar Block to allow for links to additional events. 
+  
+  Includes:
+  [tiamat-theme](https://github.com/CuBoulder/tiamat-theme) => [issue/tiamat-theme/381 ](https://github.com/CuBoulder/tiamat-theme/pull/411)
+  [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities) => [issue/tiamat-theme/381](https://github.com/CuBoulder/tiamat-custom-entities/pull/65)
+---
+
+- ### Change: Adjusts Hero Unit button spacing to 10px
+  Resolves #400 
+---
+
+- ### Adds right formatting, remove padding and opacity
+  Closes #383 and #384.
+  Adds formatting for right overlay captions, removes bottom padding for mobile design, and reduces opacity for the slider.
+---
+
+- ### Hero Unit Buttons fixed for Internal Links
+  Hero Unit buttons correctly link when provided internal links either by direct internal url or selected by page title within the form. 
+  
+  Resolves #407 
+---
+
+- ### Change Alerts Design
+  Changes the design of the CU Alert to mirror the D7 version.
+  Resolves #292 
+  
+---
+
+- ### Update block--content-grid.html.twig
+  Added options for 5 and 6 columns
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/63
+  
+  Closes #374 
+---
+
+- ### Issue/320
+  Closes #320.
+  Adds a primary link to the person page which is displayed in the person lists. The icons can vary between multiple different icons based on the hostname of the url.
+---
+
+- ### slider bottom content fix
+  Closes #385.
+  Fixes issue where bottom-content sliders were having issues with animation.
+---
+
+- ### Fixes Content List and Text block stale cache issues
+  A Content List block may have failed to update properly after updating a referenced node. A Content List or Text block placed using Block Layout may have also failed to reflect changes made to the block's fields. This update includes a fix to prevent stale cache issues.
+  
+  Resolves CuBoulder/tiamat-theme#377
+  
+  Resolves CuBoulder/tiamat-theme#378
+  
+  Resolves CuBoulder/tiamat-theme#387
+---
+
+- ### Updated feature settings
+  Updated the feature option of the content rows block. Features are now a 60/40 split, width and sizing works properly. Removed the 20px bottom padding from the newer image styles update.
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/61
+  
+  Closes #380 
+---
+
+- ### fix spacing in image gallery
+  Closes #382. 
+  Removes unneeded spacing between images.
+---
+
+- ### New Block Type: Article Slider
+  Adds the Article Slider block. Much like the Article List page and other Article blocks, this will display a maximum of 6 articles in an interactive slider using user-provided inclusion and exclusion filters.
+  
+  Resolves #319 
+  
+  Includes:
+  `tiamat-theme` => `issue/tiamat-theme/319`
+  `tiamat-custom-entities` => `issue/tiamat-theme/319`
+---
+
 - ### Change: Article List adds button to load more Articles for improved accessibility 
   The Article List page now uses a button to address accessibility concerns when loading more Articles, instead of a scroll-based 'infinite loader'. The button only appears if additional Articles are available via JSON API
   

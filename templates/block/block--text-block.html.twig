@@ -10,31 +10,31 @@
 {{ attach_library('boulderD9_base/ucb-text-block') }}
 
 
-{%
-  set classes = [
+{% set classes = [
 	'container',
 	'block',
-    'block-' ~ configuration.provider|clean_class,
-    'block-' ~ plugin_id|clean_class,
-    bundle ? 'block--type-' ~ bundle|clean_class,
-    view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
-    ''
-  ]
-%}
+	'block-' ~ configuration.provider|clean_class,
+	'block-' ~ plugin_id|clean_class,
+	bundle ? 'block--type-' ~ bundle|clean_class,
+	view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
+	''
+] %}
 
-{% if content['#block_content'].field_text_block_background.value == '1' %}
+{% set blockContent = content['#block_content'] %}
+{% set _rendered = blockContent|view|render %}{# Easiest way to ensure the cache is updated when the block or a referenced node is. Resolves #387. #}
+{% if blockContent.field_text_block_background.value == '1' %}
 	{% set blockBackground = 'text-block-light-gray' %}
-{% elseif content['#block_content'].field_text_block_background.value == '2' %}
+{% elseif blockContent.field_text_block_background.value == '2' %}
 	{% set blockBackground = 'text-block-dark-gray' %}
-{% elseif content['#block_content'].field_text_block_background.value == '3' %}
+{% elseif blockContent.field_text_block_background.value == '3' %}
 	{% set blockBackground = 'text-block-black' %}
-{% elseif content['#block_content'].field_text_block_background.value == '4' %}
+{% elseif blockContent.field_text_block_background.value == '4' %}
 	{% set blockBackground = 'text-block-gold' %}
 {% else %}
 	{% set blockBackground = 'text-block-white' %}
 {% endif %}
 
-{% if content['#block_content'].field_text_block_style.value  == '1' %}
+{% if blockContent.field_text_block_style.value  == '1' %}
 	{% set blockStyle = 'text-block-card' %}
 {% else %}
 	{% set blockStyle = 'text-block-default' %}

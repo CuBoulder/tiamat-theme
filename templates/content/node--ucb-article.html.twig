@@ -202,7 +202,7 @@ pageStyleCSS
 			{% if content.field_ucb_article_categories|render %}
 				<div role="contentinfo" class="container ucb-article-categories" itemprop="about">
 					<span class="sr-only">Categories:</span>
-					<div>
+					<div class="ucb-article-category-icon">
 						<i class="fas fa-folder-open"></i>
 					</div>
 					{{ content.field_ucb_article_categories }}
@@ -210,7 +210,7 @@ pageStyleCSS
 			{% endif %}
 			{% if content.field_ucb_article_tags|render %}
 				<div role="contentinfo" class="container ucb-article-tags" itemprop="keywords">
-					<div>
+					<div class="ucb-article-tag-icon">
 						<span class="sr-only">Tags:</span>
 						<i class="fas fa-tags"></i>
 					</div>

@@ -392,7 +392,9 @@ class PeopleListElement extends HTMLElement {
 					photoURI: photoId ? urlObj[idObj[photoId]] : defaultThumbnail,
 					body: '',
 					email: personAttributeData['field_ucb_person_email'],
-					phone: personAttributeData['field_ucb_person_phone']
+					phone: personAttributeData['field_ucb_person_phone'],
+					primaryLinkURI: personAttributeData['field_ucb_person_primary_link']['uri'],
+					primaryLinkTitle: personAttributeData['field_ucb_person_primary_link']['title']
 				};
 
 			// Builds arrays of department and job type ids
@@ -440,6 +442,8 @@ class PeopleListElement extends HTMLElement {
 			personBody = PeopleListElement.escapeHTML(person.body),
 			personEmail = PeopleListElement.escapeHTML(person.email),
 			personPhone = PeopleListElement.escapeHTML(person.phone),
+			personPrimaryLinkURI = PeopleListElement.escapeHTML(person.primaryLinkURI),
+			personPrimaryLinkTitle = PeopleListElement.escapeHTML(person.primaryLinkTitle),
 			departmentTaxonomy = this.getTaxonomy('department');
 		person.titles.forEach(title => {
 			personTitleList += (personTitleList ? ' &bull; ' : '') + PeopleListElement.escapeHTML(title);
@@ -479,26 +483,37 @@ class PeopleListElement extends HTMLElement {
 								${personBody}
 							</span>
 							<div class="ucb-person-card-contact">
-								<span class="ucb-person-card-email">
 									${
 										personEmail ?
-											`<i class="fa fa-envelope iconColor"></i>
-											<a href="mailto:${personEmail}">
-												<span class="ucb-people-list-contact">  ${personEmail}</span>
-											</a>`
+											`<span class="ucb-person-card-links ucb-person-card-email">
+												<i class="fa fa-envelope iconColor"></i>
+												<a href="mailto:${personEmail}">
+													<span class="ucb-people-list-contact">  ${personEmail}</span>
+												</a>
+											</span>`
 										: ''
 									}
-								</span>
-								<span class="ucb-person-card-phone">
 									${
 										personPhone ?
-											`<i class="fa fa-phone iconColor"></i>
-											<a href="tel:${personPhone.replace(/[^+\d]+/g, '',)}">
-												<span class="ucb-people-list-contact">  ${personPhone}</span>
-											</a>`
+											`<span class="ucb-person-card-links ucb-person-card-phone">
+												<i class="fa fa-phone iconColor"></i>
+												<a href="tel:${personPhone.replace(/[^+\d]+/g, '',)}">
+													<span class="ucb-people-list-contact">  ${personPhone}</span>
+												</a>
+											</span>`
 										: ''
 									}
-								</span>
+									${
+										personPrimaryLinkURI ?
+											`<span class="ucb-person-card-links ucb-person-card-primary-link">
+											<i class="` + this.generateLinkIcon(personPrimaryLinkURI) + `"></i>
+											<a href="${personPrimaryLinkURI}">
+												<span class="ucb-people-list-contact">  ${personPrimaryLinkTitle}</span>
+											</a>
+											</span>
+											`
+										: ''
+									}
 							</div>
 						</div>
 					</div>`;
@@ -548,26 +563,37 @@ class PeopleListElement extends HTMLElement {
 					</td>
 					<td>
 						<div class="ucb-person-card-contact-table">
-							<span class="ucb-person-card-email">
-								${
-									personEmail ?
-										`<i class="fa fa-envelope iconColor"></i>
-										<a href="mailto:${personEmail}">
-											<span class="ucb-people-list-contact"> ${personEmail}</span>
-										</a>`
-									: ''
-								}
-							</span>
-							<span class="ucb-person-card-phone">
-									${
-										personPhone ?
-											`<i class="fa fa-phone iconColor"></i>
-											<a href="tel:${personPhone.replace(/[^+\d]+/g, '',)}">
-												<span class="ucb-people-list-contact">${personPhone}</span>
-											</a>`
-										: ''
-									}
-							</span>
+						${
+							personEmail ?
+								`<span class="ucb-person-card-links ucb-person-card-email">
+									<i class="fa fa-envelope iconColor"></i>
+									<a href="mailto:${personEmail}">
+										<span class="ucb-people-list-contact">  ${personEmail}</span>
+									</a>
+								</span>`
+							: ''
+						}
+						${
+							personPhone ?
+								`<span class="ucb-person-card-links ucb-person-card-phone">
+									<i class="fa fa-phone iconColor"></i>
+									<a href="tel:${personPhone.replace(/[^+\d]+/g, '',)}">
+										<span class="ucb-people-list-contact">  ${personPhone}</span>
+									</a>
+								</span>`
+							: ''
+						}
+						${
+							personPrimaryLinkURI ?
+								`<span class="ucb-person-card-links ucb-person-card-primary-link">
+								<i class="` + this.generateLinkIcon(personPrimaryLinkURI) + `"></i>
+								<a href="${personPrimaryLinkURI}">
+									<span class="ucb-people-list-contact">  ${personPrimaryLinkTitle}</span>
+								</a>
+								</span>
+								`
+							: ''
+						}
 						</div>
 					</td>`;
 		}
@@ -713,6 +739,70 @@ class PeopleListElement extends HTMLElement {
 			selectElement.removeChild(defaultOption);
 			allOption.classList.add('taxonomy-option-default');
 		}
+	}
+	generateLinkIcon(linkURI) {
+		var linkIcon = "fas fa-link primaryLinkIcon";
+		if (linkURI.indexOf("internal:/") == 0) {
+			return linkIcon;
+		} else {
+			const linkData = new URL(linkURI).hostname.split(".")[1].toUpperCase();
+			switch (linkData) {
+				case 'FACEBOOK' :
+					linkIcon =  "fab fa-facebook primaryLinkIcon";
+					break;
+				
+				case 'TWITTER' :
+					linkIcon =  "fab fa-twitter primaryLinkIcon";
+					break;
+				
+				case 'FLICKR' :
+					linkIcon =  "fab fa-flickr primaryLinkIcon";
+					break;
+				
+				case 'LINKEDIN' :
+					linkIcon =  "fab fa-linkedin primaryLinkIcon";
+					break;
+				
+				case 'YOUTUBE' :
+					linkIcon =  "fab fa-youtube primaryLinkIcon";
+					break;
+				
+				case 'INSTAGRAM' :
+					linkIcon =  "fab fa-instagram primaryLinkIcon";
+					break;
+				
+				case 'DISCORD' :
+					linkIcon =  "fab fa-discord primaryLinkIcon";
+					break;
+				
+				case 'PINTREST' :
+					linkIcon =  "fab fa-pinterest-p primaryLinkIcon";
+					break;
+					
+				case 'VIMEO' :
+					linkIcon =  "fab fa-vimeo-v primaryLinkIcon";
+					break;
+				
+				case 'WORDPRESS' :
+					linkIcon =  "fab fa-wordpress-simple primaryLinkIcon";
+					break;
+				
+				case 'TIKTOK' :
+					linkIcon =  "fab fa-tiktok primaryLinkIcon";
+					break;
+				
+				case 'REDDIT' :
+					linkIcon =  "fab fa--reddit-alien primaryLinkIcon";
+					break;
+				
+				case 'PATREON' :
+					linkIcon =  "fab fa-patreon primaryLinkIcon";
+					break;
+				default :
+					linkIcon =  "fas fa-link primaryLinkIcon";																																																					
+			}
+		}
+	return linkIcon;
 	}
 }
 

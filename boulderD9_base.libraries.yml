@@ -391,3 +391,12 @@ ucb-menu-style-tradition:
   css:
     theme:
       css/menu-styles/tradition-styles.css: {}
+ucb-article-slider-block:
+  version: 1.x
+  js:
+    js/flickity/flickity.pkgd.min.js: {}
+    js/ucb-article-slider-block.js: {}
+  css:
+    theme:
+      css/flickity/flickity.min.css: {}
+      css/block/ucb-article-slider-block.css: {}
