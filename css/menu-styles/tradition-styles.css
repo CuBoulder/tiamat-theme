@@ -132,6 +132,7 @@ li.main-menu-item a.nav-link.active-trail,
 li.main-menu-item a.nav-link:hover {
   border-bottom: none;
 }
+/* HOME LINK IMPLEMENTATION
 #main-menu-wrapper #navigation #main-menu > li > a#home-link,
 #main-menu-wrapper #navigation #main-menu > li > a#home-link.active {
   color: #363636;
@@ -144,7 +145,7 @@ li.main-menu-item a.nav-link:hover {
 #main-menu-wrapper #navigation #main-menu a.home-link {
   margin-left: -12px;
 }
-
+*/
 .ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item {
 
   padding: 10px 0;
@@ -167,7 +168,7 @@ li.main-menu-item a.nav-link:hover {
 .content-wrapper {
   padding-bottom: 20px;
 }
-
+/* TITLE AND SLIDER IMPLEMENTATION NEEDED
 #post-title-wide-wrapper,
 #post-title-wrapper {
   padding-bottom: 0;
@@ -231,6 +232,7 @@ li.main-menu-item a.nav-link:hover {
     position: relative;
   }
 }
+*/
 .after-content-wrapper,
 .after-content2-wrapper,
 .footer-wrapper,
