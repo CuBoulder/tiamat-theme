@@ -113,18 +113,21 @@ ul#action-menu a {
   color: #ccc;
   background-color: #333;
 }
-.ucb-secondary-menu-region-container #secondary-navigation {
-  padding: 5px 0;
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a{
+  padding: 5px;
 }
-.ucb-secondary-menu-region-container a:link,
-.ucb-secondary-menu-region-container a:visited {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:link,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:visited {
   color: #fff;
   font-weight: 600;
 }
-.ucb-secondary-menu-region-container a:hover,
-.ucb-secondary-menu-region-container a.active,
-.ucb-secondary-menu-region-container a.active-trail {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active-trail {
   color: #cfb87c;
+}
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
+  background-color: #333;
 }
 /* TITLE NEEDS TO BE IMPLEMENTED
 #page-title-image-section {
