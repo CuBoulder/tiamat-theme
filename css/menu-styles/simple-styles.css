@@ -62,7 +62,8 @@ body {
 }
 
 .ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-menu .menu-item a {
-	margin: .25rem .25rem;
+	margin-left: .25em;
+	margin-right: .25em;
 }
 
 .after-content-wrapper,
@@ -130,7 +131,6 @@ body {
 
 #main-menu-wrapper {
   background-color: #fff;
-  font-size: 90%;
   color: #fff;
 }
 
@@ -152,10 +152,14 @@ body {
 }
 
 li.main-menu-item a.nav-link {
-  font-weight: 600;
-  color: #fff;
-  border-bottom: none;
-  margin-top: 0;
+	font-weight: 600;
+	color: #fff;
+	border-bottom: none;
+	margin-top: 0;
+}
+
+li.main-menu-item a.nav-link, .ucb-secondary-menu-region .menu-item {
+	font-size: .9em;
 }
 
 li.main-menu-item a.nav-link:hover {
