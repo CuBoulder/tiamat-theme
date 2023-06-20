@@ -36,9 +36,6 @@ body {
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
   background-color: #fff;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline {
-border-top: 20px solid #fff;
-}
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-primary-menu-region-container,
 .ucb-main-nav-continer.ucb-secondary-menu-position-inline {
     background-color: #363636;
@@ -60,8 +57,12 @@ border-top: 20px solid #fff;
   background: transparent;
 }
 
-.ucb-footer-menu-region {
-  padding: 10px 0px;
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-menu {
+	gap: 0;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-menu .menu-item a {
+	margin: .25rem .25rem;
 }
 
 .after-content-wrapper,
