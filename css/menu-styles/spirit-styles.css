@@ -64,14 +64,18 @@ a:hover {
 .page-header {
   margin-bottom: 3px;
 }
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-primary-menu-region {
+  margin-top: -2px;
+}
 li.main-menu-item a.nav-link:link,
 li.main-menu-item a.nav-link:visited {
   color: #333;
   line-height: 64px;
   font-weight: 600;
   border-right: 1px solid #d7d7d7;
-  padding: 0 12px;
+  padding: 4px 12px;
   border-bottom: none;
+  margin-top: 0px;
 }
 li.main-menu-item a.nav-link:hover,
 li.main-menu-item a.nav-link:focus {
@@ -175,12 +179,12 @@ section.ucb-main-nav-section {
   padding: 40px 0 20px;
 }
 
+/* BLOCK MENU AND NESTED MENU NEEDED
 .sidebars .block-title-wrapper1 {
   color: #fff;
   background-color: #333;
   padding: 10px;
 }
-/* BLOCK MENU AND NESTED MENU NEEDED
 #block-cu-site-info-site-info h2.block-title {
   text-transform: none;
 }

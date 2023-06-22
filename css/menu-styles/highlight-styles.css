@@ -79,12 +79,31 @@ li.main-menu-item a.nav-link {
   font-weight: 600;
   padding:0 12px;
   border-bottom: 0px;
+  border-top: 1px solid #f2f2f2;
 }
+li.main-menu-item a.nav-link {
+  margin-top: 0;
+  color:#666;
+  font-weight: 600;
+  padding:0 12px;
+  border-bottom: 0px;
+  border-top:1px solid #e7e7e7;
+}
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline li.main-menu-item {
+  margin-top: -6px;
+}
+
 li.main-menu-item a.nav-link:hover,
-li.main-menu-item a.nav-link:active,
-li.main-menu-item a.nav-link:active-trail {
-  border-top:1px solid #333;
+li.main-menu-item a.nav-link.active,
+li.main-menu-item a.nav-link.active-trail {
   color:#222;
+  border-bottom: none;
+}
+
+li.main-menu-item a:hover,
+li.main-menu-item a.active,
+li.main-menu-item a.active-trail {
+  border-top: 1px solid #333;
 }
 
 li.main-menu-item a.nav-link:hover.home-link,
