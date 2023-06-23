@@ -1,18 +1,5 @@
-body {
-  background: none;
-  background-color: #000;
-  background-color: #f2f2f2;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-attachment: fixed;
-}
-
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .ucb-menu {
   gap: 0rem;
-}
-
-.ucb-page-content {
- background: #fff;
 }
 
 .ucb-header-dark .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {

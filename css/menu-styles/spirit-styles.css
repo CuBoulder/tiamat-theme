@@ -1,16 +1,7 @@
-body {
-  background: #000;
-}
-
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .ucb-menu {
   gap: 0rem;
 }
-.ucb-page-container {
-  background-color: #fff;
-}
-.ucb-page-content {
- background: #fff;
-}
+
 /* LAYOUT IMPLEMENTATION NEEDED 
 .layout-boxed {
   background-color: #f7f7f7;

@@ -2,17 +2,8 @@
   margin-top: 40px;
 }
 
-body {
-  background-color: #424242;
-}
-
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .ucb-menu {
   gap: 0rem;
-}
-
-.ucb-page-content {
- background: #fff;
- padding-top: 20px;
 }
 
 .ucb-header-dark .ucb-secondary-menu-position-inline .ucb-main-menu,
