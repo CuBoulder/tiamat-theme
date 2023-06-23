@@ -182,7 +182,7 @@
 		{% if entity.field_content_sequence_display.0.value == 'vertical' %}
 			<div class="vertical-timeline-container-wrapper">
 				<ol class="vertical-timeline-container">
-					{% for key, item in content['#block_content'].field_content_sequence_items if key|first != '#' %}
+					{% for key, item in content['#block_content'].field_content_sequence_items %}
 						{% if key|first != '#' %}
 							<li class="vertical-timeline-card">
 								<div class="vertical-timeline-card-wrapper">
