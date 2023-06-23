@@ -41,25 +41,21 @@ body {
 }
 
 .ucb-header-dark .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region,
-.ucb-header-dark .ucb-main-nav-continer,
-section.ucb-main-nav-section.ucb-header-dark {
+section.ucb-main-nav-section.ucb-header-dark{
   background-color: #424242;
 }
 
 .ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region,
-.ucb-header-light .ucb-main-nav-section,
 section.ucb-main-nav-section.ucb-header-light{
   background-color: #eee;
 }
 
 .ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region,
-.ucb-header-white .ucb-main-nav-continer,
 section.ucb-main-nav-section.ucb-header-white{
   background-color: #fff;
 }
 
 .ucb-header-black .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region,
-.ucb-header-black .ucb-main-nav-continer,
 section.ucb-main-nav-section.ucb-header-black{
   background-color: #000;
 }
