@@ -40,7 +40,8 @@ body {
   font-weight: 400;
   padding: 0 10px;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline {
+.ucb-main-nav-continer .ucb-primary-menu-region-container,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item {
   -webkit-box-shadow: 0 3px 1px rgba(0, 0, 0, 0.08);
   -moz-box-shadow: 0 3px 1px rgba(0, 0, 0, 0.08);
   box-shadow: 0 3px 1px rgba(0, 0, 0, 0.08);
@@ -162,9 +163,9 @@ section.ucb-main-nav-section.ucb-header-black {
   color: #333;
   border-bottom: none;
 }
-.ucb-header-darkli.main-menu-item a.nav-link,
+.ucb-header-dark li.main-menu-item a.nav-link,
 .ucb-header-black li.main-menu-item a.nav-link {
-  color: #757575;
+  color: #333;
   border-bottom: none;
 }
 .ucb-header-dark li.main-menu-item a.nav-link:hover,
