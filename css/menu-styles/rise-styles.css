@@ -40,6 +40,11 @@ body {
   font-weight: 400;
   padding: 0 10px;
 }
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline {
+  -webkit-box-shadow: 0 3px 1px rgba(0, 0, 0, 0.08);
+  -moz-box-shadow: 0 3px 1px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 3px 1px rgba(0, 0, 0, 0.08);
+}
 
 .ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover,
 .ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover {
