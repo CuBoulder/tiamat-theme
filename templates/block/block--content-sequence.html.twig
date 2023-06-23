@@ -41,39 +41,41 @@
 							<div class="horizontal-timeline-slider-header">
 
 								<div class="horizontal-timeline-slider-header-wrapper">
-									{% for key, item in content['#block_content'].field_content_sequence_items if key|first != '#' %}
+									{% for key, item in content['#block_content'].field_content_sequence_items %}
+										{% if key|first != '#' %}
 											{% set stepNo = key + 1 %}
-										{% if key == "0" %}
-											<div class="horizontal-timeline-slider-header-col">
-												<div class="dot-wrapper dotActive">
-													<span class="dot" type="button" data-bs-target="#{{sequenceID}}" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" onclick="scrollSlides({{key}})"></span>
+											{% if key == "0" %}
+												<div class="horizontal-timeline-slider-header-col">
+													<div class="dot-wrapper dotActive">
+														<span class="dot" type="button" data-bs-target="#{{sequenceID}}" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" onclick="scrollSlides({{key}})"></span>
+													</div>
+													<span class="horizontal-header-text" data-bs-target="#{{sequenceID}}" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" onclick="scrollSlides({{key}})">
+														{% if item.entity.field_sequence_item_d_start_date.value|render %}
+															{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
+														{% else %}
+															{% set stepNo = key + 1 %}
+															STEP
+															{{stepNo}}
+														{% endif %}
+													</span>
 												</div>
-												<span class = "horizontal-header-text" data-bs-target="#{{sequenceID}}" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" onclick="scrollSlides({{key}})">
-												{% if item.entity.field_sequence_item_d_start_date.value|render %}
-													{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
-												{% else %}
-													{% set stepNo = key + 1 %}
-													STEP
-													{{stepNo}}
-												{% endif %}
-												</span>
-											</div>
-										{% else %}
+											{% else %}
 
-											<div class="horizontal-timeline-slider-header-col">
-												<div class="dot-wrapper dotNext">
-													<span class="dot" type="button" data-bs-target="#{{sequenceID}}" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" onclick="scrollSlides({{key}})"></span>
+												<div class="horizontal-timeline-slider-header-col">
+													<div class="dot-wrapper dotNext">
+														<span class="dot" type="button" data-bs-target="#{{sequenceID}}" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" onclick="scrollSlides({{key}})"></span>
+													</div>
+													<span class="horizontal-header-text" data-bs-target="#{{sequenceID}}" data-bs-slide-to="{{key}}" aria-current="true" aria-label="Slide {{stepNo}}" onclick="scrollSlides({{key}})">
+														{% if item.entity.field_sequence_item_d_start_date.value|render %}
+															{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
+														{% else %}
+															{% set stepNo = key + 1 %}
+															STEP
+															{{stepNo}}
+														{% endif %}
+													</span>
 												</div>
-												<span class = "horizontal-header-text" data-bs-target="#{{sequenceID}}" data-bs-slide-to="{{key}}" aria-current="true" aria-label="Slide {{stepNo}}" onclick="scrollSlides({{key}})">
-												{% if item.entity.field_sequence_item_d_start_date.value|render %}
-													{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
-												{% else %}
-													{% set stepNo = key + 1 %}
-													STEP
-													{{stepNo}}
-												{% endif %}
-												</span>
-											</div>
+											{% endif %}
 										{% endif %}
 									{% endfor %}
 								</div>
@@ -86,44 +88,12 @@
 						</div>
 					</div>
 					<div class="carousel-inner horizontal-timeline-inner">
-						{% for key, item in content['#block_content'].field_content_sequence_items if key|first != '#' %}
-							<!-- Full-width images with number and caption text -->
-							{% if key == "0" %}
-								<div class="horizontal-cards carousel-item active">
-									<div class="horizontal-timeline-card-wrapper horizontal-timeline-card">
-										<div class="horizontal-timeline-card-media">{% set imageField = item.entity.field_sequence_item_media.entity.field_media_image %}{% set videoField = item.entity.field_sequence_item_media.entity.field_media_oembed_video %}
-											{% if imageField %}
-												{{ imageField|view }}
-											{% elseif videoField %}
-												{{ videoField|view }}
-												<span class="noImage"></span>
-											{% else %}
-												<span class="noImage"></span>
-											{% endif %}
-										</div>
-										<div class="horizontal-timeline-card-header">
-											<h3 class="horizontal-timeline-card-date">
-												{% if item.entity.field_sequence_item_d_start_date.value|render %}
-													{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
-												{% else %}
-													{% set stepNo = key + 1 %}
-													STEP
-													{{stepNo}}
-												{% endif %}
-											</h3>
-											<h4 class="horizontal-timeline-card-title">
-												<a href="{{item.entity.field_sequence_item_url.uri}}">{{item.entity.field_sequence_item_title.value|render|striptags|trim}}</a>
-											</h4>
-										</div>
-										<div class="horizontal-timeline-card-body">
-											{{item.entity.field_sequence_item_descr|view|render}}
-										</div>
-									</div>
-								</div>
-							{% else %}
-								<div class="horizontal-cards carousel-item">
-									<div class="horizontal-timeline-card-wrapper horizontal-timeline-card">
-										<div class="horizontal-timeline-card-media">
+						{% for key, item in content['#block_content'].field_content_sequence_items %}
+							{% if key|first != '#' %}
+								<!-- Full-width images with number and caption text -->
+								{% if key == "0" %}
+									<div class="horizontal-cards carousel-item active">
+										<div class="horizontal-timeline-card-wrapper horizontal-timeline-card">
 											<div class="horizontal-timeline-card-media">{% set imageField = item.entity.field_sequence_item_media.entity.field_media_image %}{% set videoField = item.entity.field_sequence_item_media.entity.field_media_oembed_video %}
 												{% if imageField %}
 													{{ imageField|view }}
@@ -134,29 +104,62 @@
 													<span class="noImage"></span>
 												{% endif %}
 											</div>
-										</div>
-										<div class="horizontal-timeline-card-header">
-
-											<h3 class="horizontal-timeline-card-date">
-												{% if item.entity.field_sequence_item_d_start_date.value|render %}
-													{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
-												{% else %}
-													{% set stepNo = key + 1 %}
-													STEP
-													{{stepNo}}
-												{% endif %}
-											</h3>
-											<h4 class="horizontal-timeline-card-title">
-												<a href="{{item.entity.field_sequence_item_url.uri}}">{{item.entity.field_sequence_item_title.value|render|striptags|trim}}</a>
-											</h4>
-										</div>
-										<div class="horizontal-timeline-card-body">
-											{{item.entity.field_sequence_item_descr|view|render}}
+											<div class="horizontal-timeline-card-header">
+												<h3 class="horizontal-timeline-card-date">
+													{% if item.entity.field_sequence_item_d_start_date.value|render %}
+														{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
+													{% else %}
+														{% set stepNo = key + 1 %}
+														STEP
+														{{stepNo}}
+													{% endif %}
+												</h3>
+												<h4 class="horizontal-timeline-card-title">
+													<a href="{{item.entity.field_sequence_item_url.uri}}">{{item.entity.field_sequence_item_title.value|render|striptags|trim}}</a>
+												</h4>
+											</div>
+											<div class="horizontal-timeline-card-body">
+												{{item.entity.field_sequence_item_descr|view|render}}
+											</div>
 										</div>
 									</div>
-								</div>
-							{% endif %}
+								{% else %}
+									<div class="horizontal-cards carousel-item">
+										<div class="horizontal-timeline-card-wrapper horizontal-timeline-card">
+											<div class="horizontal-timeline-card-media">
+												<div class="horizontal-timeline-card-media">{% set imageField = item.entity.field_sequence_item_media.entity.field_media_image %}{% set videoField = item.entity.field_sequence_item_media.entity.field_media_oembed_video %}
+													{% if imageField %}
+														{{ imageField|view }}
+													{% elseif videoField %}
+														{{ videoField|view }}
+														<span class="noImage"></span>
+													{% else %}
+														<span class="noImage"></span>
+													{% endif %}
+												</div>
+											</div>
+											<div class="horizontal-timeline-card-header">
 
+												<h3 class="horizontal-timeline-card-date">
+													{% if item.entity.field_sequence_item_d_start_date.value|render %}
+														{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
+													{% else %}
+														{% set stepNo = key + 1 %}
+														STEP
+														{{stepNo}}
+													{% endif %}
+												</h3>
+												<h4 class="horizontal-timeline-card-title">
+													<a href="{{item.entity.field_sequence_item_url.uri}}">{{item.entity.field_sequence_item_title.value|render|striptags|trim}}</a>
+												</h4>
+											</div>
+											<div class="horizontal-timeline-card-body">
+												{{item.entity.field_sequence_item_descr|view|render}}
+											</div>
+										</div>
+									</div>
+								{% endif %}
+							{% endif %}
 						{% endfor %}
 					</div>
 					<div class="button-timeline-click-div">
@@ -180,39 +183,41 @@
 			<div class="vertical-timeline-container-wrapper">
 				<ol class="vertical-timeline-container">
 					{% for key, item in content['#block_content'].field_content_sequence_items if key|first != '#' %}
-						<li class="vertical-timeline-card">
-							<div class="vertical-timeline-card-wrapper">
-								<div class="vertical-timeline-card-media">
-									{% set imageField = item.entity.field_sequence_item_media.entity.field_media_image %}{% set videoField = item.entity.field_sequence_item_media.entity.field_media_oembed_video %}
-									{% if imageField %}
-										{{ imageField|view }}
-									{% elseif videoField %}
-										{{ videoField|view }}
-										<span class="noImage"></span>
-									{% else %}
-										<span class="noImage"></span>
-									{% endif %}
-								</div>
-								<div class="vertical-timeline-card-header">
-
-									<h3 class="vertical-timeline-card-date">
-										{% if item.entity.field_sequence_item_d_start_date.value|render %}
-											{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
+						{% if key|first != '#' %}
+							<li class="vertical-timeline-card">
+								<div class="vertical-timeline-card-wrapper">
+									<div class="vertical-timeline-card-media">
+										{% set imageField = item.entity.field_sequence_item_media.entity.field_media_image %}{% set videoField = item.entity.field_sequence_item_media.entity.field_media_oembed_video %}
+										{% if imageField %}
+											{{ imageField|view }}
+										{% elseif videoField %}
+											{{ videoField|view }}
+											<span class="noImage"></span>
 										{% else %}
-											{% set stepNo = key + 1 %}
-											STEP
-											{{stepNo}}
+											<span class="noImage"></span>
 										{% endif %}
-									</h3>
-									<h4 class="vertical-timeline-card-title">
-										<a href="{{item.entity.field_sequence_item_url.uri}}">{{item.entity.field_sequence_item_title.value|render|striptags|trim}}</a>
-									</h4>
+									</div>
+									<div class="vertical-timeline-card-header">
+
+										<h3 class="vertical-timeline-card-date">
+											{% if item.entity.field_sequence_item_d_start_date.value|render %}
+												{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
+											{% else %}
+												{% set stepNo = key + 1 %}
+												STEP
+												{{stepNo}}
+											{% endif %}
+										</h3>
+										<h4 class="vertical-timeline-card-title">
+											<a href="{{item.entity.field_sequence_item_url.uri}}">{{item.entity.field_sequence_item_title.value|render|striptags|trim}}</a>
+										</h4>
+									</div>
+									<div class="vertical-timeline-card-body">
+										{{ item.entity.field_sequence_item_descr|view }}
+									</div>
 								</div>
-								<div class="vertical-timeline-card-body">
-									{{ item.entity.field_sequence_item_descr|view }}
-								</div>
-							</div>
-						</li>
+							</li>
+						{% endif %}
 					{% endfor %}
 				</ol>
 			</div>
