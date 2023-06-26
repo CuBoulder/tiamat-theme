@@ -1,9 +1,8 @@
 {#
 /**
  * @file
- * Theme to implement the expandable content (accordion, horizontal/vertical tabs)
- *
- * Created by Joshua Nicholson on 08/09/22
+ * Implements the "Expandable Content" block type (accordion, horizontal/vertical tabs).
+ */
 #}
 
 {{ attach_library('boulderD9_base/ucb-expandable-content') }}
@@ -17,9 +16,10 @@
 	view_mode ? 'block--view-mode-' ~ view_mode|clean_class
 ] %}
 
-{% set layoutSelection = content['#block_content'].field_expandable_content_type.value %}
+{% set entity = content['#block_content'] %}{% set id = entity.uuid.value %}
+{% set layoutSelection = entity.field_expandable_content_type.value %}
 
-{% if content['#block_content'].field_expandable_content_open.value %}
+{% if entity.field_expandable_content_open.value %}
 	{% set startingState = "show" %}
 {% else %}
 	{% set startingState = "unshown" %}
@@ -33,20 +33,20 @@
 			<h2{{title_attributes}}>{{ label }}</h2>
 		{% endif %}
 		{{ title_suffix }}
-		<!-- Accordion -->
+		{# Accordion #}
 		{% if layoutSelection == 0 %}
-			<div class="accordion accordion-flush ucb-accordion-content" id="ucb-accordion{{ content['#block_content'].id() }}">
-				{% for key, item in content['#block_content'].field_expandable_content_copy %}{% set itemExpanded = loop.first %}
+			<div class="accordion accordion-flush ucb-accordion-content" id="ucb-accordion{{ id }}">
+				{% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first %}
 					<div class="accordion-item">
-						<h2 class="accordion-header" id="ucb-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}">
-							<button class="accordion-button{% if not itemExpanded %} collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#ucb-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" aria-expanded="{% if itemExpanded %}true{% else %}false{% endif %}" aria-controls="ucb-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}">
+						<h2 class="accordion-header" id="ucb-accordion{{ id }}-title{{ loop.index }}">
+							<button class="accordion-button{% if not itemExpanded %} collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" aria-expanded="{% if itemExpanded %}true{% else %}false{% endif %}" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}">
 								{{ item.entity.field_expandable_content_title|view }}
 							</button>
 						</h2>
 						{% if itemExpanded %}
-							<div id="ucb-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" class="accordion-collapse collapse {{ startingState }}" aria-labelledby="ucb-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}" data-bs-parent="#ucb-accordion{{ content['#block_content'].id() }}">
+							<div id="ucb-accordion{{ id }}-content{{ loop.index }}" class="accordion-collapse collapse {{ startingState }}" aria-labelledby="ucb-accordion{{ id }}-title{{ loop.index }}" data-bs-parent="#ucb-accordion{{ id }}">
 						{% else %}
-							<div id="ucb-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="ucb-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}" data-bs-parent="#ucb-accordion{{ content['#block_content'].id() }}">
+							<div id="ucb-accordion{{ id }}-content{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="ucb-accordion{{ id }}-title{{ loop.index }}" data-bs-parent="#ucb-accordion{{ id }}">
 						{% endif %}
 							<div class="accordion-body">
 								{{ item.entity.field_expandable_content_body|view }}
@@ -55,113 +55,69 @@
 					</div>
 				{% endfor %}
 			</div>
-			<!-- Accordion ends -->
-			<!-- horizontal tab/accordion -->
+			{# Accordion ends #}
+			{# horizontal tab/accordion #}
 		{% elseif layoutSelection == 1 %}
-			<!-- horizontal tab/accordion tabs -->
-			<ul class="nav nav-tabs justify-content-center" id="ucb-horizontal-tabs{{ content['#block_content'].id() }}" role="tablist">
-				{% for key, item in content['#block_content'].field_expandable_content_copy %}
-					{% if loop.first %}
-						<li class="nav-item" role="presentation">
-							<button class="nav-link horizontal-tab-link active" id="ucb-horizontal-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}-tab" data-bs-toggle="tab" data-bs-target="#ucb-horizontal-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}" type="button" role="tab" aria-controls="ucb-horizontal-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}" aria-selected="true">{{ item.entity.field_expandable_content_title|view }}</button>
-						</li>
-					{% else %}
-						<li class="nav-item" role="presentation">
-							<button class="nav-link horizontal-tab-link" id="ucb-horizontal-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}-tab" data-bs-toggle="tab" data-bs-target="#ucb-horizontal-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}" type="button" role="tab" aria-controls="ucb-horizontal-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}" aria-selected="true">{{ item.entity.field_expandable_content_title|view }}</button>
-						</li>
-					{% endif %}
+			{# horizontal tab/accordion tabs #}
+			<ul class="nav nav-tabs justify-content-center" id="ucb-horizontal-tabs{{ id }}" role="tablist">
+				{% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first %}
+					<li class="nav-item" role="presentation">
+						<button class="nav-link horizontal-tab-link{% if itemExpanded %} active{% endif %}" id="ucb-horizontal-tabs{{ id }}-title{{ loop.index }}-tab" data-bs-toggle="tab" data-bs-target="#ucb-horizontal-tabs{{ id }}-title{{ loop.index }}" type="button" role="tab" aria-controls="ucb-horizontal-tabs{{ id }}-title{{ loop.index }}" aria-selected="{% if itemExpanded %}true{% else %}false{% endif %}">{{ item.entity.field_expandable_content_title|view }}</button>
+					</li>
 				{% endfor %}
 			</ul>
-			<!-- horizontal tab/accordion tabs ends -->
-			<!-- horizontal tab/accordion content -->
-			<div id="ucb-tab-accordion{{ content['#block_content'].id() }}" class="tab-content accordion-flush horizontal-tab-content" role="tablist">
-				{% for key, item in content['#block_content'].field_expandable_content_copy %}
-					{% if loop.first %}
-						<div class="tab-pane fade show active accordion-item" id="ucb-horizontal-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}" role="tabpanel" aria-labelledby="ucb-horizontal-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}-tab">
-							<div class="horizontal-accordion-tab" role="tab" id="ucb-tab-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}">
-								<h5 class="mb-0">
-									<button class="accordion-button collapsed" data-bs-toggle="collapse" href="#ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" aria-expanded="true" aria-controls="ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}">
-										{{ item.entity.field_expandable_content_title|view }}
-									</a>
-								</h5>
-							</div>
-							<div id="ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" class="collapse" data-bs-parent="#ucb-tab-accordion{{ content['#block_content'].id() }}" role="tabpanel" aria-labelledby="ucb-tab-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}">
-								<div class="card-body">
-									{{ item.entity.field_expandable_content_body|view }}
-								</div>
+			{# horizontal tab/accordion tabs ends #}
+			{# horizontal tab/accordion content #}
+			<div id="ucb-tab-accordion{{ id }}" class="tab-content accordion-flush horizontal-tab-content" role="tablist">
+				{% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first %}
+					<div class="tab-pane fade{% if itemExpanded %} show active{% endif %} accordion-item" id="ucb-horizontal-tabs{{ id }}-title{{ loop.index }}" role="tabpanel" aria-labelledby="ucb-horizontal-tabs{{ id }}-title{{ loop.index }}-tab">
+						<div class="horizontal-accordion-tab" role="tab" id="ucb-tab-accordion{{ id }}-title{{ loop.index }}">
+							<h5 class="mb-0">
+								<button class="accordion-button collapsed" data-bs-toggle="collapse" href="#ucb-tab-accordion{{ id }}-content{{ loop.index }}" aria-expanded="true" aria-controls="ucb-tab-accordion{{ id }}-content{{ loop.index }}">
+									{{ item.entity.field_expandable_content_title|view }}
+								</a>
+							</h5>
+						</div>
+						<div id="ucb-tab-accordion{{ id }}-content{{ loop.index }}" class="collapse" data-bs-parent="#ucb-tab-accordion{{ id }}" role="tabpanel" aria-labelledby="ucb-tab-accordion{{ id }}-title{{ loop.index }}">
+							<div class="card-body">
+								{{ item.entity.field_expandable_content_body|view }}
 							</div>
 						</div>
-					{% else %}
-						<div class="tab-pane fade accordion-item" id="ucb-horizontal-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}" role="tabpanel" aria-labelledby="ucb-horizontal-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}-tab">
-							<div class="horizontal-accordion-tab" role="tab" id="ucb-tab-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}">
-								<h5 class="mb-0">
-									<button class="accordion-button collapsed" data-bs-toggle="collapse" href="#ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" aria-expanded="false" aria-controls="ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}">
-										{{ item.entity.field_expandable_content_title|view }}
-									</a>
-								</h5>
-							</div>
-							<div id="ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" class="collapse" data-bs-parent="#ucb-tab-accordion{{ content['#block_content'].id() }}" role="tabpanel" aria-labelledby="ucb-tab-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}">
-								<div class="card-body">
-									{{ item.entity.field_expandable_content_body|view }}
-								</div>
-							</div>
-						</div>
-						<!-- horizontal tab/accordion content ends -->
-					{% endif %}
+					</div>
+					{# horizontal tab/accordion content ends #}
 				{% endfor %}
 			</div>
-			<!-- horizontal tab/accordion ends -->
-			<!-- vertical tab/accordion -->
+			{# horizontal tab/accordion ends #}
+			{# vertical tab/accordion #}
 		{% else %}
 			<div class="vertical-tab-accordion d-flex align-items-stretch">
-				<!-- vertical tab/accordion tabs -->
-				<div class="vertical-tabs nav flex-column nav-pills" id="ucb-vertical-tabs{{ content['#block_content'].id() }}" role="tablist" aria-orientation="vertical">
-					{% for key, item in content['#block_content'].field_expandable_content_copy %}
-						{% if loop.first %}
-							<button class="nav-link vertical-tab-link active" id="ucb-vertical-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}-tab" data-bs-toggle="pill" data-bs-target="#ucb-vertical-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}" type="button" role="tab" aria-controls="ucb-vertical-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}" aria-selected="true">{{ item.entity.field_expandable_content_title|view }}</button>
-						{% else %}
-							<button class="nav-link vertical-tab-link" id="ucb-vertical-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}-tab" data-bs-toggle="pill" data-bs-target="#ucb-vertical-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}" type="button" role="tab" aria-controls="ucb-vertical-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}" aria-selected="true">{{ item.entity.field_expandable_content_title|view }}</button>
-						{% endif %}
+				{# vertical tab/accordion tabs #}
+				<div class="vertical-tabs nav flex-column nav-pills" id="ucb-vertical-tabs{{ id }}" role="tablist" aria-orientation="vertical">
+					{% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first %}
+						<button class="nav-link vertical-tab-link{% if itemExpanded %} active{% endif %}" id="ucb-vertical-tabs{{ id }}-title{{ loop.index }}-tab" data-bs-toggle="pill" data-bs-target="#ucb-vertical-tabs{{ id }}-title{{ loop.index }}" type="button" role="tab" aria-controls="ucb-vertical-tabs{{ id }}-title{{ loop.index }}" aria-selected="{% if itemExpanded %}true{% else %}false{% endif %}">{{ item.entity.field_expandable_content_title|view }}</button>
 					{% endfor %}
 				</div>
-				<!-- vertical tab/accordion tabs ends -->
-				<!-- vertical tab/accordion content -->
-				<div id="ucb-tab-accordion{{ content['#block_content'].id() }}" class="tab-content vertical-tab-content accordion-flush" role="tablist">
-					{% for key, item in content['#block_content'].field_expandable_content_copy %}
-						{% if loop.first %}
-							<div class="accordion-item tab-pane fade show active" id="ucb-vertical-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}" role="tabpanel" aria-labelledby="ucb-vertical-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}-tab">
-								<div class="vertical-accordion-tab" role="tab" id="ucb-tab-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}">
-									<h5 class="mb-0">
-										<button class="accordion-button collapsed" data-bs-toggle="collapse" href="#ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" aria-expanded="true" aria-controls="ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}">
-											{{ item.entity.field_expandable_content_title|view }}
-										</a>
-									</h5>
-								</div>
-								<div id="ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" class="collapse" data-bs-parent="#ucb-tab-accordion{{ content['#block_content'].id() }}" role="tabpanel" aria-labelledby="ucb-tab-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}">
-									<div class="card-body">
-										{{ item.entity.field_expandable_content_body|view }}
-									</div>
+				{# vertical tab/accordion tabs ends #}
+				{# vertical tab/accordion content #}
+				<div id="ucb-tab-accordion{{ id }}" class="tab-content vertical-tab-content accordion-flush" role="tablist">
+					{% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first %}
+						<div class="accordion-item tab-pane fade{% if itemExpanded %} show active{% endif %}" id="ucb-vertical-tabs{{ id }}-title{{ loop.index }}" role="tabpanel" aria-labelledby="ucb-vertical-tabs{{ id }}-title{{ loop.index }}-tab">
+							<div class="vertical-accordion-tab" role="tab" id="ucb-tab-accordion{{ id }}-title{{ loop.index }}">
+								<h5 class="mb-0">
+									<button class="accordion-button collapsed" data-bs-toggle="collapse" href="#ucb-tab-accordion{{ id }}-content{{ loop.index }}" aria-expanded="false" aria-controls="ucb-tab-accordion{{ id }}-content{{ loop.index }}">
+										{{ item.entity.field_expandable_content_title|view }}
+									</a>
+								</h5>
+							</div>
+							<div id="ucb-tab-accordion{{ id }}-content{{ loop.index }}" class="collapse" data-bs-parent="#ucb-tab-accordion{{ id }}" role="tabpanel" aria-labelledby="ucb-tab-accordion{{ id }}-title{{ loop.index }}">
+								<div class="card-body">
+									{{ item.entity.field_expandable_content_body|view }}
 								</div>
 							</div>
-						{% else %}
-							<div class="accordion-item tab-pane fade" id="ucb-vertical-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}" role="tabpanel" aria-labelledby="ucb-vertical-tabs{{ content['#block_content'].id() }}-title{{ loop.index }}-tab">
-								<div class="vertical-accordion-tab" role="tab" id="ucb-tab-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}">
-									<h5 class="mb-0">
-										<button class="accordion-button collapsed" data-bs-toggle="collapse" href="#ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" aria-expanded="false" aria-controls="ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}">
-											{{ item.entity.field_expandable_content_title|view }}
-										</a>
-									</h5>
-								</div>
-								<div id="ucb-tab-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" class="collapse" data-bs-parent="#ucb-tab-accordion{{ content['#block_content'].id() }}" role="tabpanel" aria-labelledby="ucb-tab-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}">
-									<div class="card-body">
-										{{ item.entity.field_expandable_content_body|view }}
-									</div>
-								</div>
-							</div>
-						{% endif %}
+						</div>
 					{% endfor %}
 				</div>
-				<!-- vertical tab/accordion content ends -->
+				{# vertical tab/accordion content ends #}
 			</div>
 		{% endif %}
 	</div>
