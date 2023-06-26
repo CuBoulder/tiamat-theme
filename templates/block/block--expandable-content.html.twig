@@ -121,8 +121,7 @@
 			<!-- horizontal tab/accordion ends -->
 			<!-- vertical tab/accordion -->
 		{% else %}
-			<div
-				class="vertical-tab-accordion d-flex align-items-start">
+			<div class="vertical-tab-accordion d-flex align-items-stretch">
 				<!-- vertical tab/accordion tabs -->
 				<div class="vertical-tabs nav flex-column nav-pills" id="ucb-vertical-tabs{{ content['#block_content'].id() }}" role="tablist" aria-orientation="vertical">
 					{% for key, item in content['#block_content'].field_expandable_content_copy %}
