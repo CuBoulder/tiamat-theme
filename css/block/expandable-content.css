@@ -22,19 +22,12 @@
 	font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-.accordion-button:not(.collapsed) {
+.accordion-button:not(.collapsed), .accordion-button:focus {
 	background-color: transparent;
-}
-
-.accordion-button:focus {
 	box-shadow: none;
 }
 
-.accordion-button::after {
-	background: none;
-}
-
-.accordion-button:not(.collapsed)::after {
+.accordion-button:not(.collapsed)::after, .accordion-button::after {
 	background: none;
 }
 
@@ -58,6 +51,11 @@
 
 .accordion-button:hover::before {
 	color: #b71c1c;
+}
+
+.accordion-button, .accordion-body {
+	padding-left: 0;
+	padding-right: 0;
 }
 
 .ucb-bootstrap-layout-section-overlay-dark .accordion-button {

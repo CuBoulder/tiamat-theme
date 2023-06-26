@@ -38,25 +38,23 @@
 		<!-- Accordion -->
 		{% if layoutSelection == 0 %}
 			<div class="accordion accordion-flush ucb-accordion-content" id="ucb-accordion{{ content['#block_content'].id() }}">
-				{% for key, item in content['#block_content'].field_expandable_content_copy %}
-					{%  if key|first != '#' %}
-						<div class="accordion-item">
-							<h2 class="accordion-header" id="ucb-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}">
-								<button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#ucb-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" aria-expanded="false" aria-controls="ucb-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}">
-									{{ item.entity.field_expandable_content_title|view }}
-								</button>
-							</h2>
-							{% if key == 0 %}
-								<div id="ucb-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" class="accordion-collapse collapse {{ startingState }}" aria-labelledby="ucb-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}" data-bs-parent="#ucb-accordion{{ content['#block_content'].id() }}">
-							{% else %}
-								<div id="ucb-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="ucb-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}" data-bs-parent="#ucb-accordion{{ content['#block_content'].id() }}">
-							{% endif %}
-								<div class="accordion-body">
-									{{ item.entity.field_expandable_content_body|view }}
-								</div>
+				{% for key, item in content['#block_content'].field_expandable_content_copy %}{% set itemExpanded = key == 0 %}
+					<div class="accordion-item">
+						<h2 class="accordion-header" id="ucb-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}">
+							<button class="accordion-button{% if not itemExpanded %} collapsed{% endif %}" type="button" data-bs-toggle="collapse" data-bs-target="#ucb-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" aria-expanded="{% if itemExpanded %}true{% else %}false{% endif %}" aria-controls="ucb-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}">
+								{{ item.entity.field_expandable_content_title|view }}
+							</button>
+						</h2>
+						{% if itemExpanded %}
+							<div id="ucb-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" class="accordion-collapse collapse {{ startingState }}" aria-labelledby="ucb-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}" data-bs-parent="#ucb-accordion{{ content['#block_content'].id() }}">
+						{% else %}
+							<div id="ucb-accordion{{ content['#block_content'].id() }}-content{{ loop.index }}" class="accordion-collapse collapse" aria-labelledby="ucb-accordion{{ content['#block_content'].id() }}-title{{ loop.index }}" data-bs-parent="#ucb-accordion{{ content['#block_content'].id() }}">
+						{% endif %}
+							<div class="accordion-body">
+								{{ item.entity.field_expandable_content_body|view }}
 							</div>
 						</div>
-					{% endif %}
+					</div>
 				{% endfor %}
 			</div>
 			<!-- Accordion ends -->
