@@ -103,10 +103,17 @@
   border-radius: 0;
 }
 
+.horizontal-tab-link.nav-link {
+	font-weight: bold;
+	line-height: 1.2em;
+	padding: 8px 15px;
+}
+
 .horizontal-tab-link.nav-link,
 .horizontal-tab-link.nav-link:hover,
 .horizontal-tab-link.nav-link:focus {
-  border-radius: 0;
+	border: none;
+	border-radius: 0;
 }
 
 .horizontal-tab-content {
@@ -134,6 +141,10 @@
   .nav-tabs,
   .vertical-tabs {
     display: flex;
+  }
+
+  .nav-tabs {
+	border-bottom: 2px solid var(--ucb-black);
   }
 
   .tab-pane .border {
