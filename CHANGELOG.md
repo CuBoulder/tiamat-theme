@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Improves styling of the "Expandable Content" block type
+  This update includes bug fixes and stylistic changes to the "Expandable Content" block type to address recent feedback.
+  
+  Resolves CuBoulder/tiamat-theme#401
+  
+  Resolves CuBoulder/tiamat-theme#402
+  
+  Resolves CuBoulder/tiamat-theme#404
+  
+  Resolves CuBoulder/tiamat-theme#405
+  
+  Resolves CuBoulder/tiamat-theme#422
+---
+
 - ### bugfix when no primary link
   Closes #419 
   Quick, easy fix to the situation in which there is no primary link.
