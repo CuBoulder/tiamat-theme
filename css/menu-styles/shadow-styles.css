@@ -1,0 +1,79 @@
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .ucb-menu {
+  gap: 0rem;
+}
+
+.ucb-header-dark .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
+  background-color: #424242;
+}
+
+.ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
+  background-color: #eee;
+}
+
+.ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
+  background-color: #fff;
+}
+
+.ucb-header-black .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
+  background-color: #000;
+}
+
+.ucb-secondary-menu-region-container {
+  background-color: #000;
+}
+
+section.ucb-main-nav-section {
+  background-color: #444;
+}
+
+li.main-menu-item a.nav-link {
+  color: #fff;
+  font-size: 90%;
+  font-weight: 600;
+  border-bottom: none;
+  margin-top: 0;
+}
+li.main-menu-item a.nav-link:hover,
+li.main-menu-item a.nav-link:focus,
+li.main-menu-item a.nav-link.active,
+li.main-menu-item a.nav-link.active-trail {
+  background-color: #fff;
+  color: #363839;
+  border-bottom: none;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a {
+  background-color: #444;
+  color: #bbb;
+  font-weight: 400;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.active-trail {
+  background-color: #444;
+  color: #fff;
+  font-weight: 400;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a {
+  color: #bbb;
+  font-weight: 400;
+  padding: 0 0.25rem;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-menu {
+  background-color: #444;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item.active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item.active-trail {
+  background-color: #444;
+  color: #fff;
+}
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active-trail {
+  color: #fff;
+}

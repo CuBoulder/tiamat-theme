@@ -1,0 +1,60 @@
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .ucb-menu {
+  gap: 0rem;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
+  background-color: #fff;
+}
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a {
+    color: #757575;
+    display: inline-block;
+    border-bottom: 4px solid #fff;
+    padding-left: 10px;
+}
+li.main-menu-item a.nav-link {
+  margin: 0;
+  border-bottom: none;
+  color: #757575;
+  font-weight: 600;
+  border-top: 4px solid #fff;
+  line-height: 60px;
+}
+
+.ucb-primary-menu-region {
+  background-repeat: repeat-x;
+  background-position: bottom;
+  color: #757575;
+}
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link {
+  color: #757575;
+}
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link:focus,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link.active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link.active-trail {
+  color: #000;
+  border-bottom: 0;
+  background: transparent;
+}
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-primary-menu-region-container,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline {
+  border-top: 1px solid rgba(128, 128, 128, 0.333);
+}
+
+
+li.main-menu-item a.nav-link:hover,
+li.main-menu-item a.nav-link:focus,
+li.main-menu-item a.nav-link.active,
+li.main-menu-item a.nav-link.active-trail {
+  border-top: 4px solid rgba(128, 128, 128, 0.333);
+  color: #363636;
+  border-bottom: none;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:focus,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active-trail {
+  border-bottom: 4px solid rgba(128, 128, 128, 0.333);
+  color: #363636;
+}

@@ -1,0 +1,118 @@
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .ucb-menu {
+  gap: 0rem;
+}
+
+.ucb-header-dark .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
+  background-color: #424242;
+}
+
+.ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
+  background-color: #eee;
+}
+
+.ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
+  background-color: #fff;
+}
+
+.ucb-header-black .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
+  background-color: #000;
+}
+
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a {
+  color:#fff;
+  padding: 0.5rem 10px 0 10px;
+}
+
+.ucb-main-nav-section {
+  border-bottom: 5px solid #cfb87c;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a{
+  margin-left: 4px;
+  margin-right: 4px;
+  padding: 0 5px;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item:hover{
+  background-color: #666;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item:hover a{
+  color: #fff;
+}
+
+.ucb-secondary-menu-region-container a {
+  color: #fff;
+  display: inline-block;
+}
+
+.ucb-secondary-menu-region-container a:hover,
+.ucb-secondary-menu-region-container a:focus {
+  color: #fff;
+  background-color: #666;
+}
+
+.ucb-secondary-menu-region-container a.active,
+.ucb-secondary-menu-region-container a.active-trail {
+  color: #000;
+  background-color: #cfb87c;
+}
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a{
+    line-height: 24px;
+    margin: 8px 5px;
+    padding: 0 5px;
+    display: inline-block;
+    color: #fff;
+    font-weight: 400;
+}
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a:hover {
+  color: #cfb87c;
+  background: transparent;
+}
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-menu {
+  background-color: #444;
+  color: #fff;
+}
+
+.ucb-primary-menu-region,
+section.ucb-main-nav-section {
+  background-color: #222;
+  color: #fff;
+}
+
+li.main-menu-item a.nav-link {
+  font-weight: 600;
+  color: #fff;
+  border-bottom: none;
+}
+
+li.main-menu-item a.nav-link:hover {
+  background-color: #444;
+  border-bottom: none;
+  color: #fff;
+}
+li.main-menu-item a.nav-link.active,
+li.main-menu-item a.nav-link.active-trail {
+  background-color: #cfb87c;
+  color: #000;
+}
+li.main-menu-item a.nav-link.home-link,
+li.main-menu-item a.nav-link.home-link.active {
+  background-color: transparent;
+  color: #fff;
+}
+li.main-menu-item a.nav-link.home-link {
+  margin-left: -12px;
+}
+
+.ucb-footer-menu-region {
+  border-top: 5px solid #cfb87c;
+}
+
+.after-content-wrapper,
+.after-content2-wrapper,
+.footer-wrapper,
+.ucb-footer-bottom {
+  padding: 40px 0px 20px;
+}

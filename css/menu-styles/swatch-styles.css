@@ -1,0 +1,105 @@
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .ucb-menu {
+  gap: 0rem;
+}
+
+.ucb-header-dark .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region,
+.ucb-header-dark .ucb-secondary-menu-region .ucb-secondary-menu-region-container {
+  background-color: #424242;
+}
+
+.ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region,
+.ucb-header-light .ucb-secondary-menu-region .ucb-secondary-menu-region-container {
+  background-color: #eee;
+}
+
+.ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region,
+.ucb-header-white .ucb-secondary-menu-region .ucb-secondary-menu-region-container {
+  background-color: #fff;
+}
+
+.ucb-header-black .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region,
+.ucb-header-black .ucb-secondary-menu-region .ucb-secondary-menu-region-container {
+  background-color: #000;
+}
+
+.ucb-secondary-menu-region-container {
+  background-color: #000;
+  color: white;
+}
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .ucb-menu {
+  background-color: #333;
+}
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a{
+  padding: 0 5px;
+  display: inline-block;
+  color: #fff;
+}
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item:focus,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item.active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item.active-trail {
+  background-color: #757575;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:focus,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active-trail {
+  color: #fff;
+}
+section.ucb-main-nav-section {
+  background-color: #222;
+}
+li.main-menu-item a.nav-link {
+  color: #ccc;
+  font-size: 90%;
+  font-weight: 600;
+  line-height: 60px;
+  border-bottom: none;
+  margin-top: 0px;
+}
+li.main-menu-item a.nav-link:hover {
+  background-color: #444;
+  color: #fff;
+  border-bottom: none;
+}
+li.main-menu-item a.nav-link.active,
+li.main-menu-item a.nav-link.active-trail {
+  background-color: #333;
+  color: #fff;
+  border-bottom: none;
+}
+li.main-menu-item a.nav-link.active:hover,
+li.main-menu-item a.nav-link.active-trail:hover {
+  color: #fff;
+  border-bottom: none;
+}
+li.main-menu-item a.nav-link.home-link,
+li.main-menu-item a.nav-link.home-link.active {
+  color: #ccc;
+  background-color: transparent;
+  border-bottom: none;
+}
+#main-menu-wrapper ul#main-menu a.home-link {
+  margin-left: -12px;
+}
+
+ul#action-menu a {
+  line-height: 20px;
+  margin: 20px 0 20px 10px;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-secondary-menu-region-container {
+  background: #222;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a {
+  margin: 18px 5px;
+  color: #aaa;
+  background: #222;
+  font-weight: 400;
+}
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a:hover {
+  color: #fff;
+  background: #222;
+}

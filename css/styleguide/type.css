@@ -15,7 +15,7 @@ a:active { color: #B71C1C; text-decoration-color: rgba(183, 28, 28, 0.65); -webk
 /** Headings */
 h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 { line-height: 1.3; margin: 0 0 10px 0; }
 
-.footer-section h1, .footer-section h2, .footer-section h3, .footer-section h4, .footer-section h5, .footer-section h6, .footer-section .h1, .footer-section .h2, .footer-section .h3, .footer-section .h4, .footer-section .h5, .footer-section .h6 { margin: 0 0 10px 0; }
+.ucb-footer-menu-region h1, .ucb-footer-menu-region h2, .ucb-footer-menu-region h3, .ucb-footer-menu-region h4, .ucb-footer-menu-region h5, .ucb-footer-menu-region h6, .ucb-footer-menu-region .h1, .ucb-footer-menu-region .h2, .ucb-footer-menu-region .h3, .ucb-footer-menu-region .h4, .ucb-footer-menu-region .h5, .ucb-footer-menu-region .h6 { margin: 0 0 10px 0; }
 
 h2, .h2 { font-size: 140%; }
 

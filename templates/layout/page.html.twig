@@ -44,7 +44,33 @@
  */
 #}
 
-<div class="layout-container ucb-page-container">
+
+{% set menu_style = drupal_config('boulderD9_base.settings', 'ucb_menu_style') %}
+{% if menu_style == 'highlight'  %}
+  {{ attach_library('boulderD9_base/ucb-menu-style-highlight') }}
+{% elseif menu_style == 'ivory'  %}
+  {{ attach_library('boulderD9_base/ucb-menu-style-ivory') }}
+{% elseif menu_style == 'layers'  %}
+  {{ attach_library('boulderD9_base/ucb-menu-style-layers') }}
+{% elseif menu_style == 'minimal'  %}
+  {{ attach_library('boulderD9_base/ucb-menu-style-minimal') }}
+{% elseif menu_style == 'modern'  %}
+  {{ attach_library('boulderD9_base/ucb-menu-style-modern') }}
+{% elseif menu_style == 'rise'  %}
+  {{ attach_library('boulderD9_base/ucb-menu-style-rise') }}
+{% elseif menu_style == 'shadow'  %}
+  {{ attach_library('boulderD9_base/ucb-menu-style-shadow') }}
+{% elseif menu_style == 'simple'  %}
+  {{ attach_library('boulderD9_base/ucb-menu-style-simple') }}
+{% elseif menu_style == 'spirit'  %}
+  {{ attach_library('boulderD9_base/ucb-menu-style-spirit') }}
+{% elseif menu_style == 'swatch'  %}
+  {{ attach_library('boulderD9_base/ucb-menu-style-swatch') }}
+{% elseif menu_style == 'tradition'  %}
+  {{ attach_library('boulderD9_base/ucb-menu-style-tradition') }}
+{% endif %}
+
+<div class="layout-container ucb-page-container highlight-style">
   {# HEADER CONTENT #}
   {% block page_header %}
     {{ attach_library('boulderD9_base/ucb-social-media') }}
@@ -101,7 +127,7 @@
         </div>
       </div>
     </header>
-    <section class="ucb-main-nav-section mobile" role="navigation">
+    <section class="ucb-main-nav-section mobile  ucb-header-{{ header_color }}" role="navigation">
       <div class="ucb-main-nav-continer ucb-secondary-menu-position-{{ ucb_secondary_menu_position == 'above' ? 'above' : 'inline container'}}">
         {{ page.primary_menu }}
         {{ page.secondary_menu }}
@@ -124,7 +150,6 @@
 
   <main role="main">
     <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
-
     <div class="layout-content">
       {% if page.above_content|render %}
         <div class="ucb-above-content-region">

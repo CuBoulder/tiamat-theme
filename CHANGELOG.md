@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Menu Sub-Theme Styles
+  Closes #330.
+  Work in collaboration with siteconfiguration/#24.
+  Adds 11 new menu styles to the base theme of the boulder theme.
+---
+
 - ### Change: Adds 'White' background to card-styled Text Block
   Adds a White background option to card-style Text Block for the case where sections have a different colored background
   

@@ -325,6 +325,72 @@ ucb-article-feature-block:
   css:
     theme:
       css/block/ucb-article-feature-block.css: {}
+
+ucb-menu-style-highlight:
+  version: 1.x
+  css:
+    theme:
+      css/menu-styles/highlight-styles.css: {}
+
+ucb-menu-style-ivory:
+  version: 1.x
+  css:
+    theme:
+      css/menu-styles/ivory-styles.css: {}
+
+ucb-menu-style-layers:
+  version: 1.x
+  css:
+    theme:
+      css/menu-styles/layers-styles.css: {}
+
+ucb-menu-style-minimal:
+  version: 1.x
+  css:
+    theme:
+      css/menu-styles/minimal-styles.css: {}
+
+ucb-menu-style-modern:
+  version: 1.x
+  css:
+    theme:
+      css/menu-styles/modern-styles.css: {}
+
+ucb-menu-style-rise:
+  version: 1.x
+  css:
+    theme:
+      css/menu-styles/rise-styles.css: {}
+
+ucb-menu-style-shadow:
+  version: 1.x
+  css:
+    theme:
+      css/menu-styles/shadow-styles.css: {}
+
+ucb-menu-style-simple:
+  version: 1.x
+  css:
+    theme:
+      css/menu-styles/simple-styles.css: {}
+
+ucb-menu-style-spirit:
+  version: 1.x
+  css:
+    theme:
+      css/menu-styles/spirit-styles.css: {}
+
+ucb-menu-style-swatch:
+  version: 1.x
+  css:
+    theme:
+      css/menu-styles/swatch-styles.css: {}
+
+ucb-menu-style-tradition:
+  version: 1.x
+  css:
+    theme:
+      css/menu-styles/tradition-styles.css: {}
 ucb-article-slider-block:
   version: 1.x
   js:

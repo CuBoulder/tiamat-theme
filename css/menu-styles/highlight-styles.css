@@ -1,0 +1,79 @@
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .ucb-menu {
+   gap: 0rem;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
+  background:#f2f2f2;
+  color:#666;
+}
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a {
+    color:#656565;
+    padding: 0.5rem 10px 0 10px;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:active {
+  color: #000;
+  position: relative;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover::after,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:active::after {
+    border-top:1px solid #333;
+    left:10px;
+    right:10px;
+    content:" ";
+    position: absolute;
+  }
+
+section.ucb-main-nav-section {
+  background: #f2f2f2;
+  border-top: 1px solid #e7e7e7;
+  z-index: 9;
+}
+/*MAIN MENU IN LINE*/
+li.main-menu-item a.nav-link:hover,
+li.main-menu-item a.nav-link:active,
+li.main-menu-item a.nav-link:active-trail {
+  border-top:1px solid #333;
+  color:#222;
+}
+li.main-menu-item a.nav-link {
+  margin-top: 0;
+  color: #666;
+  font-weight: 600;
+  border-bottom: 0px;
+  border-top: 1px solid transparent;
+  margin-top: -1px;
+}
+
+li.main-menu-item a.nav-link:hover,
+li.main-menu-item a.nav-link.active,
+li.main-menu-item a.nav-link.active-trail {
+  color:#222;
+  border-bottom: none;
+}
+
+li.main-menu-item a:hover,
+li.main-menu-item a.active,
+li.main-menu-item a.active-trail {
+  border-top: 1px solid #333;
+}
+
+li.main-menu-item a.nav-link:hover.home-link,
+li.main-menu-item a.nav-link:active.home-link,
+li.main-menu-item a.nav-link:active-trail.home-link {
+  border-top:1px solid #e7e7e7;
+}
+/*END MAIN MENU */
+
+/* SECONDARY MENU IN LINE */
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a {
+  color: #656565;
+}
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a:hover {
+  color: #222;
+  background: #f2f2f2;
+}
