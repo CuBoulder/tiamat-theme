@@ -393,14 +393,18 @@ class PeopleListElement extends HTMLElement {
 					body: '',
 					email: personAttributeData['field_ucb_person_email'],
 					phone: personAttributeData['field_ucb_person_phone'],
-					primaryLinkURI: personAttributeData['field_ucb_person_primary_link']['uri'],
-					primaryLinkTitle: personAttributeData['field_ucb_person_primary_link']['title']
+					primaryLinkURI: '',
+					primaryLinkTitle: ''
 				};
 
 			// Builds arrays of department and job type ids
 			departmentsData.forEach(departmentData => departments.push(departmentData['meta']['drupal_internal__target_id']));
 			jobTypesData.forEach(jobTypeData => jobTypes.push(jobTypeData['meta']['drupal_internal__target_id']));	
-							
+			// needed to verify if primary link exists on page
+				if (personAttributeData['field_ucb_person_primary_link']) {
+					thisPerson.primaryLinkURI =  personAttributeData['field_ucb_person_primary_link']['uri'];
+					thisPerson.primaryLinkTitle = personAttributeData['field_ucb_person_primary_link']['title'];
+				}				
 			// needed to verify body exists on the Person page, if so, use that
 			if (personAttributeData['body']) {
 				// use summary if available
