@@ -30,8 +30,10 @@
 	{% set blockBackground = 'text-block-black' %}
 {% elseif blockContent.field_text_block_background.value == '4' %}
 	{% set blockBackground = 'text-block-gold' %}
-{% else %}
+{% elseif blockContent.field_text_block_background.value == '5' %}
 	{% set blockBackground = 'text-block-white' %}
+{% else %}
+	{% set blockBackground = 'text-block-none' %}
 {% endif %}
 
 {% if blockContent.field_text_block_style.value  == '1' %}

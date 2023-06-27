@@ -72,6 +72,11 @@
   color: var(--ucb-black);
   border: 1px solid var(--ucb-black);
 }
+.text-block-white.text-block-card {
+  background: var(--ucb-white);
+  color: var(--ucb-black);
+  border: 1px solid var(--ucb-black);
+}
 
 .ucb-bootstrap-layout__background-color--gold .text-block-card {
   border: 1px solid var(--ucb-black);

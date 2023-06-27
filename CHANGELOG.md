@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Change: Adds 'White' background to card-styled Text Block
+  Adds a White background option to card-style Text Block for the case where sections have a different colored background
+  
+  Includes:
+  
+  - `tiamat-theme` => `issue/tiamat-theme/413`
+  - `tiamat-custom-entities` => `issue/tiamat-theme/413`
+  
+  Resolves #413 
+---
+
 - ### Improves styling of the "Expandable Content" block type
   This update includes bug fixes and stylistic changes to the "Expandable Content" block type to address recent feedback.
   
