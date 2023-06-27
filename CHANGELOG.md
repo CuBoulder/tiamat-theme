@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### bugfix when no primary link
+  Closes #419 
+  Quick, easy fix to the situation in which there is no primary link.
+---
+
+- ### loop bug fix
+  Closes #418.
+  Solves an issue with looping with first != '#'.
+---
+
 - ### Update block--content-grid.html.twig
   Removed justify evenly class so that content will align left as it should.
 ---
