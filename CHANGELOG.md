@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Hero unit vid fix
+  Fixed the padding issues for the video background
+  
+  Closes #428 
+---
+
 - ### Menu Sub-Theme Styles
   Closes #330.
   Work in collaboration with siteconfiguration/#24.
