@@ -76,18 +76,18 @@
 }
 
 .block-hero-unit.size-large .ucb-hero-unit-video-wrapper {
-  margin-top: -300px;
   margin-left: -2rem;
+  margin-top: -1em;
 }
 
 .block-hero-unit.size-medium .ucb-hero-unit-video-wrapper {
-  margin-top: -2rem;
   margin-left: -2rem;
+  margin-top: -1em;
 }
 
 .block-hero-unit.size-small .ucb-hero-unit-video-wrapper {
-  margin-top: -1rem;
   margin-left: -1rem;
+  margin-top: -1em;
 }
 
 .ucb-hero-unit-video-controls-wrapper {

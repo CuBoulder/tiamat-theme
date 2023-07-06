@@ -42,6 +42,13 @@
 	{% set videoURL = content['#block_content'].field_background_media.entity.field_media_oembed_video.value %}
 {% endif %}
 
+{% if videoURL is defined %}
+	{% set videoClass = "ucb-hero-vid-background" %}
+{% else %}
+	{% set videoClass = "" %}
+{% endif %}
+
+
 {# set classes for the size of the component #}
 {% if content['#block_content'].field_size.value is same as("0") %}
 	{% set size = "size-large" %}
@@ -70,7 +77,7 @@
 	{% endif %}
 	{{ title_suffix }}
 	{% block content %}
-		<div{{attributes.addClass(classes).setAttribute("style","#{bgValue}").addClass(size,overlayClass)}}>
+		<div{{attributes.addClass(classes).setAttribute("style","#{bgValue}").addClass(size,overlayClass,videoClass)}}>
 			{% if videoURL is defined %}
 				<div hidden class="ucb-hero-unit-video-wrapper">
 					<div class="ucb-hero-unit-video-player-wrapper" id="ucb_hero_unit_video_player_{{ blockId }}"></div>
