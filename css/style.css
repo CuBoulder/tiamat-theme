@@ -472,6 +472,24 @@
 	opacity: initial;
 }
 
+/* Layout Builder Pre-Block Add Styles */
+div#drupal-off-canvas-wrapper {
+    background: white;
+}
+
+#drupal-off-canvas .inline-block-create-button, #drupal-off-canvas .inline-block-list__item {
+    background: white;
+    border: none;
+}
+
+#drupal-off-canvas .inline-block-create-button:hover, #drupal-off-canvas .inline-block-list__item:hover {
+    background: #00000026;
+}
+
+#drupal-off-canvas-wrapper .inline-block-create-button::before {
+    display: none;
+}
+
 /* Image Styles */ 
 .imageMediaStyle img{
   padding-bottom: 20px;
