@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update for LB D10.1 style.css
+  Update default layout builder styles so that things are readable and useable. These are temporary fixes until gin_lb gets an update.
+---
+
 - ### Hero unit vid fix
   Fixed the padding issues for the video background
   
