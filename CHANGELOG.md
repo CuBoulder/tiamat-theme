@@ -9,296 +9,358 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Update for LB D10.1 style.css
-  Update default layout builder styles so that things are readable and useable. These are temporary fixes until gin_lb gets an update.
----
+## [20230707] - 2023-07-07
 
-- ### Hero unit vid fix
-  Fixed the padding issues for the video background
-  
-  Closes #428 
----
+-   ### Update for LB D10.1 style.css
+    Update default layout builder styles so that things are readable and useable. These are temporary fixes until gin_lb gets an update.
 
-- ### Menu Sub-Theme Styles
-  Closes #330.
-  Work in collaboration with siteconfiguration/#24.
-  Adds 11 new menu styles to the base theme of the boulder theme.
----
+* * *
 
-- ### Change: Adds 'White' background to card-styled Text Block
-  Adds a White background option to card-style Text Block for the case where sections have a different colored background
-  
-  Includes:
-  
-  - `tiamat-theme` => `issue/tiamat-theme/413`
-  - `tiamat-custom-entities` => `issue/tiamat-theme/413`
-  
-  Resolves #413 
----
+-   ### Hero unit vid fix
 
-- ### Improves styling of the "Expandable Content" block type
-  This update includes bug fixes and stylistic changes to the "Expandable Content" block type to address recent feedback.
-  
-  Resolves CuBoulder/tiamat-theme#401
-  
-  Resolves CuBoulder/tiamat-theme#402
-  
-  Resolves CuBoulder/tiamat-theme#404
-  
-  Resolves CuBoulder/tiamat-theme#405
-  
-  Resolves CuBoulder/tiamat-theme#422
----
+    Fixed the padding issues for the video background
 
-- ### bugfix when no primary link
-  Closes #419 
-  Quick, easy fix to the situation in which there is no primary link.
----
+    Closes #428 
 
-- ### loop bug fix
-  Closes #418.
-  Solves an issue with looping with first != '#'.
----
+* * *
 
-- ### Update block--content-grid.html.twig
-  Removed justify evenly class so that content will align left as it should.
----
+-   ### Menu Sub-Theme Styles
+    Closes #330.
+    Work in collaboration with siteconfiguration/#24.
+    Adds 11 new menu styles to the base theme of the boulder theme.
 
-- ### Change: Article Taxonomy term display style
-  Resolves #348  - Changes Article Taxonomy term display style. Terms are no longer be all uppercase and icon flush with first term. Color changes to icons. 
-  
-  
----
+* * *
 
-- ### Adds Link field to Events Block
-  Resolves #381 - Adds a Link field to the Events Calendar Block to allow for links to additional events. 
-  
-  Includes:
-  [tiamat-theme](https://github.com/CuBoulder/tiamat-theme) => [issue/tiamat-theme/381 ](https://github.com/CuBoulder/tiamat-theme/pull/411)
-  [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities) => [issue/tiamat-theme/381](https://github.com/CuBoulder/tiamat-custom-entities/pull/65)
----
+-   ### Change: Adds 'White' background to card-styled Text Block
 
-- ### Change: Adjusts Hero Unit button spacing to 10px
-  Resolves #400 
----
+    Adds a White background option to card-style Text Block for the case where sections have a different colored background
 
-- ### Adds right formatting, remove padding and opacity
-  Closes #383 and #384.
-  Adds formatting for right overlay captions, removes bottom padding for mobile design, and reduces opacity for the slider.
----
+    Includes:
 
-- ### Hero Unit Buttons fixed for Internal Links
-  Hero Unit buttons correctly link when provided internal links either by direct internal url or selected by page title within the form. 
-  
-  Resolves #407 
----
+    -   `tiamat-theme` => `issue/tiamat-theme/413`
+    -   `tiamat-custom-entities` => `issue/tiamat-theme/413`
 
-- ### Change Alerts Design
-  Changes the design of the CU Alert to mirror the D7 version.
-  Resolves #292 
-  
----
+    Resolves #413 
 
-- ### Update block--content-grid.html.twig
-  Added options for 5 and 6 columns
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/63
-  
-  Closes #374 
----
+* * *
 
-- ### Issue/320
-  Closes #320.
-  Adds a primary link to the person page which is displayed in the person lists. The icons can vary between multiple different icons based on the hostname of the url.
----
+-   ### Improves styling of the "Expandable Content" block type
 
-- ### slider bottom content fix
-  Closes #385.
-  Fixes issue where bottom-content sliders were having issues with animation.
----
+    This update includes bug fixes and stylistic changes to the "Expandable Content" block type to address recent feedback.
 
-- ### Fixes Content List and Text block stale cache issues
-  A Content List block may have failed to update properly after updating a referenced node. A Content List or Text block placed using Block Layout may have also failed to reflect changes made to the block's fields. This update includes a fix to prevent stale cache issues.
-  
-  Resolves CuBoulder/tiamat-theme#377
-  
-  Resolves CuBoulder/tiamat-theme#378
-  
-  Resolves CuBoulder/tiamat-theme#387
----
+    Resolves CuBoulder/tiamat-theme#401
 
-- ### Updated feature settings
-  Updated the feature option of the content rows block. Features are now a 60/40 split, width and sizing works properly. Removed the 20px bottom padding from the newer image styles update.
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/61
-  
-  Closes #380 
----
+    Resolves CuBoulder/tiamat-theme#402
 
-- ### fix spacing in image gallery
-  Closes #382. 
-  Removes unneeded spacing between images.
----
+    Resolves CuBoulder/tiamat-theme#404
 
-- ### New Block Type: Article Slider
-  Adds the Article Slider block. Much like the Article List page and other Article blocks, this will display a maximum of 6 articles in an interactive slider using user-provided inclusion and exclusion filters.
-  
-  Resolves #319 
-  
-  Includes:
-  `tiamat-theme` => `issue/tiamat-theme/319`
-  `tiamat-custom-entities` => `issue/tiamat-theme/319`
----
+    Resolves CuBoulder/tiamat-theme#405
 
-- ### Change: Article List adds button to load more Articles for improved accessibility 
-  The Article List page now uses a button to address accessibility concerns when loading more Articles, instead of a scroll-based 'infinite loader'. The button only appears if additional Articles are available via JSON API
-  
-  Resolves #370 , also resolves #238
----
+    Resolves CuBoulder/tiamat-theme#422
 
-- ### Update slider.css
-  Added css to make link icon white rather than blue.
-  
-  Closes #339 
----
+* * *
 
-- ### New Block Type: Article Feature
-  Adds a new block type: Article Feature. The Article Feature block displays the latest Articles, with Category & Tag filters set by the user much like the Article List page. The first Article displays a large image and summary and the remaining articles displays titles and thumbnails. 
-  
-  Resolves #318 
-  
-  Includes:
-  
-  - `tiamat-theme` => `issue/tiamat-theme/318`
-  - `tiamat-custom-entities` => `issue/tiamat-theme/318`
-  
-  
----
+-   ### bugfix when no primary link
+    Closes #419 
+    Quick, easy fix to the situation in which there is no primary link.
 
-- ### New Block Type: Article Grid
-  Adds a new block type - Article Grid. Allows for Articles with thumbnails to be displayed in an Article List-style grid display.
-  
-  Includes:
-  
-  - `tiamat-theme` => `issue/tiamat-theme/317`
-  -  `tiamat-custom-entities` => `issue/tiamat-theme/317`
-  
-  Resolves #317 
----
+* * *
 
-- ### Update slider.css
-  Updated css to remove slide content misalignment
-  Fixed 3:2 sizes to be 3:2 instead of 3:1
-  
-  Closes #337 
-  Closes #338 
----
+-   ### loop bug fix
+    Closes #418.
+    Solves an issue with looping with first != '#'.
 
-- ### Update events-calendar.css
-  Add link to event calendar widget generator into help text of builder
-  Remove max-height from events calendar widget
-  
-  Closes #333 
-  Closes #334 
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/56
----
+* * *
 
-- ### Change: Related Articles set via Global Settings
-  Resolves #246 -- Related Articles paragraph now uses the Global Settings (Admin => Configuration / CU Boulder site settings / Related Articles) for Taxonomy Exclusions
-  
-  Includes:
-  
-  - tiamat-theme `issue/246`
-  - tiamat-custom-entities `issue/tiamat-theme/246`
----
+-   ### Update block--content-grid.html.twig
+    Removed justify evenly class so that content will align left as it should.
 
-- ### New Block Type: Article List Block
-  Adds Article List Block - a block version of the Article List page functionality with some added display style customizations.
-  
-  Resolves #316 
-  
-  Includes:
-  -tiamat-theme => `issue/tiamat-theme-316`
-  -custom-entities => `issue/tiamat-theme-316`
----
+* * *
 
-- ### Tweaks style of Article List; fixes image padding on mobile
-  Resolves CuBoulder/tiamat-theme#363
----
+-   ### Change: Article Taxonomy term display style
+    Resolves #348  - Changes Article Taxonomy term display style. Terms are no longer be all uppercase and icon flush with first term. Color changes to icons. 
 
-- ### Content Sequence Block
-  Closes #265.
-  Add the horizontal, vertical, and advanced content sequences.
----
+* * *
 
-- ### Refactor to escape HTML from Article user input on Article List
-  Resolves #361 -- Refactors render to use `innerText` instead of `innerHTML` to assemble list render, protecting from malicious user input
----
+-   ### Adds Link field to Events Block
 
-- ### Update page.html.twig
-  Fixes container sizing issues for hero units
-  Fixes above content not displaying blocks if put in the section 
-  Fixes left and right side bars both not showing up if both are being used
-  
-  Closes #301 
-  Closes #303
-  Closes #340 
----
+    Resolves #381 - Adds a Link field to the Events Calendar Block to allow for links to additional events. 
 
-- ### Tweaks Person page image alignment and padding
-  Resolves CuBoulder/tiamat-theme#354
----
+    Includes:
+    [tiamat-theme](https://github.com/CuBoulder/tiamat-theme) => [issue/tiamat-theme/381 ](https://github.com/CuBoulder/tiamat-theme/pull/411)
+    [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities) => [issue/tiamat-theme/381](https://github.com/CuBoulder/tiamat-custom-entities/pull/65)
 
-- ### Fixes a bug which caused improper display of special characters like ampersands on Person pages
-  - Some special characters such as `&` in _Job Title_ and _Department_ fields displayed as `&amp;` on Person pages. These characters now display properly. Resolves CuBoulder/tiamat-theme#275
-  - An error resulted from the added `core/drupalSettings` dependency. This dependency is removed.
-  - Person page schema changes: `itemprop` attributes have been move into field templates; `itemscope` moved to the higher-level `<article>` tag.
-  - Additional cleanup of the Person page template
----
+* * *
 
-- ### Adds "Reset" button to People List page user filters
-  - Adds a "Reset" button which automatically appears when a non-default user filter is selected on a People List page
-  - Fixes a bug which caused broken default avatar images while previewing a People List page
-  
-  Resolves CuBoulder/tiamat-theme#312; Author @TeddyBearX
----
+-   ### Change: Adjusts Hero Unit button spacing to 10px
+    Resolves #400 
 
-- ### Fix hero unit and image sizing
-  Added extra css class to attributes for hero unit (will need to assess for other inline blocks and blocks) Added `img` to the style.css with the `article img` because images in block layout aren't given the `article` wrapping tag which caused problems with responsive images.
-  
-  Closes #298 
----
+* * *
 
-- ### Adds pronouns field to the Person page
-  A pronouns text field has been added to the Person page, allowing a person's pronouns to be displayed below their name.
-  
-  Resolves CuBoulder/tiamat-theme#315
-  
-  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/49)
----
+-   ### Adds right formatting, remove padding and opacity
+    Closes #383 and #384.
+    Adds formatting for right overlay captions, removes bottom padding for mobile design, and reduces opacity for the slider.
 
-- ### Change: Uniform Display of Title & Department fields on the different People List Page display options
-  Resolves #313
----
+* * *
 
-- ### Change: Moves Person Photo caption on Person Page
-  Closes #314 
-  
-  Moves Person's Photo caption underneath Person Photo on Person Page types. 
-  Also contains : https://github.com/CuBoulder/tiamat-theme/pull/325
----
+-   ### Hero Unit Buttons fixed for Internal Links
 
-- ### Change: Adds Address Header to Person Page
-  Resolves #309 
-  
-  Add heading for Address field on Person Page, similar to the Office Hours field heading
----
+    Hero Unit buttons correctly link when provided internal links either by direct internal url or selected by page title within the form. 
 
-- ### Image Style additions
-  Closes #152.
-  Adds new image styles to both WYSIWYG and full html fields.
----
+    Resolves #407 
+
+* * *
+
+-   ### Change Alerts Design
+    Changes the design of the CU Alert to mirror the D7 version.
+    Resolves #292 
+
+* * *
+
+-   ### Update block--content-grid.html.twig
+
+    Added options for 5 and 6 columns
+
+    Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/63>
+
+    Closes #374 
+
+* * *
+
+-   ### Issue/320
+    Closes #320.
+    Adds a primary link to the person page which is displayed in the person lists. The icons can vary between multiple different icons based on the hostname of the url.
+
+* * *
+
+-   ### slider bottom content fix
+    Closes #385.
+    Fixes issue where bottom-content sliders were having issues with animation.
+
+* * *
+
+-   ### Fixes Content List and Text block stale cache issues
+
+    A Content List block may have failed to update properly after updating a referenced node. A Content List or Text block placed using Block Layout may have also failed to reflect changes made to the block's fields. This update includes a fix to prevent stale cache issues.
+
+    Resolves CuBoulder/tiamat-theme#377
+
+    Resolves CuBoulder/tiamat-theme#378
+
+    Resolves CuBoulder/tiamat-theme#387
+
+* * *
+
+-   ### Updated feature settings
+
+    Updated the feature option of the content rows block. Features are now a 60/40 split, width and sizing works properly. Removed the 20px bottom padding from the newer image styles update.
+
+    Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/61>
+
+    Closes #380 
+
+* * *
+
+-   ### fix spacing in image gallery
+    Closes #382. 
+    Removes unneeded spacing between images.
+
+* * *
+
+-   ### New Block Type: Article Slider
+
+    Adds the Article Slider block. Much like the Article List page and other Article blocks, this will display a maximum of 6 articles in an interactive slider using user-provided inclusion and exclusion filters.
+
+    Resolves #319 
+
+    Includes:
+    `tiamat-theme` => `issue/tiamat-theme/319`
+    `tiamat-custom-entities` => `issue/tiamat-theme/319`
+
+* * *
+
+-   ### Change: Article List adds button to load more Articles for improved accessibility
+
+    The Article List page now uses a button to address accessibility concerns when loading more Articles, instead of a scroll-based 'infinite loader'. The button only appears if additional Articles are available via JSON API
+
+    Resolves #370 , also resolves #238
+
+* * *
+
+-   ### Update slider.css
+
+    Added css to make link icon white rather than blue.
+
+    Closes #339 
+
+* * *
+
+-   ### New Block Type: Article Feature
+
+    Adds a new block type: Article Feature. The Article Feature block displays the latest Articles, with Category & Tag filters set by the user much like the Article List page. The first Article displays a large image and summary and the remaining articles displays titles and thumbnails. 
+
+    Resolves #318 
+
+    Includes:
+
+    -   `tiamat-theme` => `issue/tiamat-theme/318`
+    -   `tiamat-custom-entities` => `issue/tiamat-theme/318`
+
+* * *
+
+-   ### New Block Type: Article Grid
+
+    Adds a new block type - Article Grid. Allows for Articles with thumbnails to be displayed in an Article List-style grid display.
+
+    Includes:
+
+    -   `tiamat-theme` => `issue/tiamat-theme/317`
+    -   `tiamat-custom-entities` => `issue/tiamat-theme/317`
+
+    Resolves #317 
+
+* * *
+
+-   ### Update slider.css
+
+    Updated css to remove slide content misalignment
+    Fixed 3:2 sizes to be 3:2 instead of 3:1
+
+    Closes #337 
+    Closes #338 
+
+* * *
+
+-   ### Update events-calendar.css
+
+    Add link to event calendar widget generator into help text of builder
+    Remove max-height from events calendar widget
+
+    Closes #333 
+    Closes #334 
+
+    Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/56>
+
+* * *
+
+-   ### Change: Related Articles set via Global Settings
+
+    Resolves #246 -- Related Articles paragraph now uses the Global Settings (Admin => Configuration / CU Boulder site settings / Related Articles) for Taxonomy Exclusions
+
+    Includes:
+
+    -   tiamat-theme `issue/246`
+    -   tiamat-custom-entities `issue/tiamat-theme/246`
+
+* * *
+
+-   ### New Block Type: Article List Block
+
+    Adds Article List Block - a block version of the Article List page functionality with some added display style customizations.
+
+    Resolves #316 
+
+    Includes:
+    \-tiamat-theme => `issue/tiamat-theme-316`
+    \-custom-entities => `issue/tiamat-theme-316`
+
+* * *
+
+-   ### Tweaks style of Article List; fixes image padding on mobile
+    Resolves CuBoulder/tiamat-theme#363
+
+* * *
+
+-   ### Content Sequence Block
+    Closes #265.
+    Add the horizontal, vertical, and advanced content sequences.
+
+* * *
+
+-   ### Refactor to escape HTML from Article user input on Article List
+    Resolves #361 -- Refactors render to use `innerText` instead of `innerHTML` to assemble list render, protecting from malicious user input
+
+* * *
+
+-   ### Update page.html.twig
+
+    Fixes container sizing issues for hero units
+    Fixes above content not displaying blocks if put in the section 
+    Fixes left and right side bars both not showing up if both are being used
+
+    Closes #301 
+    Closes #303
+    Closes #340 
+
+* * *
+
+-   ### Tweaks Person page image alignment and padding
+    Resolves CuBoulder/tiamat-theme#354
+
+* * *
+
+-   ### Fixes a bug which caused improper display of special characters like ampersands on Person pages
+    -   Some special characters such as `&` in _Job Title_ and _Department_ fields displayed as `&amp;` on Person pages. These characters now display properly. Resolves CuBoulder/tiamat-theme#275
+    -   An error resulted from the added `core/drupalSettings` dependency. This dependency is removed.
+    -   Person page schema changes: `itemprop` attributes have been move into field templates; `itemscope` moved to the higher-level `<article>` tag.
+    -   Additional cleanup of the Person page template
+
+* * *
+
+-   ### Adds "Reset" button to People List page user filters
+
+    -   Adds a "Reset" button which automatically appears when a non-default user filter is selected on a People List page
+    -   Fixes a bug which caused broken default avatar images while previewing a People List page
+
+    Resolves CuBoulder/tiamat-theme#312; Author @TeddyBearX
+
+* * *
+
+-   ### Fix hero unit and image sizing
+
+    Added extra css class to attributes for hero unit (will need to assess for other inline blocks and blocks) Added `img` to the style.css with the `article img` because images in block layout aren't given the `article` wrapping tag which caused problems with responsive images.
+
+    Closes #298 
+
+* * *
+
+-   ### Adds pronouns field to the Person page
+
+    A pronouns text field has been added to the Person page, allowing a person's pronouns to be displayed below their name.
+
+    Resolves CuBoulder/tiamat-theme#315
+
+    Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/49)
+
+* * *
+
+-   ### Change: Uniform Display of Title & Department fields on the different People List Page display options
+    Resolves #313
+
+* * *
+
+-   ### Change: Moves Person Photo caption on Person Page
+
+    Closes #314 
+
+    Moves Person's Photo caption underneath Person Photo on Person Page types. 
+    Also contains : <https://github.com/CuBoulder/tiamat-theme/pull/325>
+
+* * *
+
+-   ### Change: Adds Address Header to Person Page
+
+    Resolves #309 
+
+    Add heading for Address field on Person Page, similar to the Office Hours field heading
+
+* * *
+
+-   ### Image Style additions
+    Closes #152.
+    Adds new image styles to both WYSIWYG and full html fields.
+
+* * *
 
 ## [20230323] - 2023-03-23
 
@@ -503,7 +565,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20230323...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20230707...HEAD
+
+[20230707]: https://github.com/CuBoulder/tiamat-theme/compare/20230323...20230707
 
 [20230323]: https://github.com/CuBoulder/tiamat-theme/compare/20230307...20230323
 
