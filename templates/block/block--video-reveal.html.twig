@@ -22,6 +22,9 @@
 %}
 
 {% set myId = content['#block_content'].id() %}
+{% if content['#block_content'].field_video_reveal_video.entity.field_media_oembed_video is defined %}
+	{% set videoURL = content['#block_content'].field_video_reveal_video.entity.field_media_oembed_video.value %}
+{% endif %}
 
 
 {% block content %}
@@ -44,7 +47,8 @@
 			<div class="ucb-video-reveal-close">
 				<i class="fas fa-times-circle ucb-video-reveal-close-button"></i>
 			</div>
-			{{ content.field_video_reveal_video|render }}
+			{# TO DO -- render the final video here, passing the video URL #}
+			{{ videoURL}}
 		</div>
 	</div>
 {% endblock content %}
