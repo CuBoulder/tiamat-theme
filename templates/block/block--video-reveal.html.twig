@@ -21,7 +21,7 @@
   ]
 %}
 
-{% set myId = content['#block_content'].id() %}
+{% set blockId = content['#block_content'].id() %}
 {% if content['#block_content'].field_video_reveal_video.entity.field_media_oembed_video is defined %}
 	{% set videoURL = content['#block_content'].field_video_reveal_video.entity.field_media_oembed_video.value %}
 {% endif %}
@@ -34,21 +34,27 @@
 			<h2{{title_attributes}}>{{ label }}</h2>
 		{% endif %}
 		{{ title_suffix }}
-		<div id="ucb-video-block-{{ myId }}" class="ucb-video-text-div">
-			<div class="ucb-video-reveal-controls">
-				<span class="ucb-video-reveal-icon">
-					<i class="fas fa-play-circle"></i>
-				</span>
-				<span class="ucb-video-reveal-text">{{ content.field_video_reveal_text}}</span>
+		<div id="ucb-video-block-{{ blockId }}" class="ucb-video-text-div">
+			<div hidden class="ucb-hero-unit-video-wrapper">
+				<div class="ucb-hero-unit-video-player-wrapper" id="ucb_hero_unit_video_player_{{ blockId }}"></div>
+				<div class="ucb-hero-unit-video-controls-wrapper">
+					<div class="ucb-hero-unit-video-controls">
+						<div class="ucb-video-reveal-controls">
+							<span class="ucb-video-reveal-text">{{ content.field_video_reveal_text}}</span>
+						</div>
+						<div class="ucb-video-reveal-image">
+							{{ content.field_video_reveal_image|render }}
+						</div>
+						<span class="ucb-hero-unit-video-control-button ucb-hero-unit-video-play-pause" title="Play/Pause video">
+							<i class="fa fa-play"></i>
+						</span>
+					</div>
+				</div>
 			</div>
-			<div class="ucb-video-reveal-image">
-				{{ content.field_video_reveal_image|render }}
 			</div>
-			<div class="ucb-video-reveal-close">
-				<i class="fas fa-times-circle ucb-video-reveal-close-button"></i>
-			</div>
-			{# TO DO -- render the final video here, passing the video URL #}
-			{{ videoURL}}
+			<script type="text/javascript">
+				window.addEventListener('load', () => enableVideoHero('{{ videoURL }}', 'ucb_hero_unit_video_player_{{ blockId }}'));
+			</script>
 		</div>
 	</div>
 {% endblock content %}
