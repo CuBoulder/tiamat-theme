@@ -19,29 +19,28 @@
   background-color: #000;
   color: #000;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item {
   background-color: #cfb87c;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a {
   padding: 0 5px;
   color: #000;
   font-weight: 400;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a{
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a{
   display: inline-block;
 }
 
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:focus,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.is-active,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active-trail {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:focus,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link.is-active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item.active a.nav-link:first-of-type {
   color:#fff;
 }
 
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item:hover,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item:focus,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item.active,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item.active-trail {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item:focus,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item.active {
   background-color: #444;
   color:#fff;
 }
@@ -86,16 +85,16 @@ li.main-menu-item a.nav-link:hover {
   border-bottom: none;
 }
 
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item {
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item {
   padding: 10px 0;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a {
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link {
   font-weight: 400;
   color: #757575;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.is-active,
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.active-trail,
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a:hover {
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link.is-active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item.active a.nav-link:first-of-type,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
   color: #111;
   background: transparent;
 }

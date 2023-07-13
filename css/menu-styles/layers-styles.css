@@ -7,8 +7,8 @@
   background-color: #272727;
 }
 
-.ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a,
-.ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a  {
+.ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link,
+.ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
   color: #000;
 }
 
@@ -33,43 +33,43 @@ section.ucb-main-nav-section.ucb-header-black{
 }
 
 
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item {
   color: #ccc;
   font-weight: 600;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
   display: inline-block;
   color: #ccc;
   padding: 0;
   margin-left: 15px;
 }
 
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link:hover,
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link:focus,
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link.is-active,
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link.active-trail {
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:focus,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link.is-active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item.active a.nav-link:first-of-type {
   color: #cfb87c;
   border-bottom: 0;
   background: transparent;
 }
 
 li.main-menu-item a.nav-link,
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a {
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link {
   color: #ccc;
   font-weight: 600;
   border-bottom: 0;
 }
 
-.ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.nav-link.is-active,
-.ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.nav-link.is-active, 
-.ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.nav-link.active-trail,
-.ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.nav-link.active-trail, 
-.ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.nav-link:hover,
-.ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.nav-link:hover, 
-.ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.nav-link:focus,
-.ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.nav-link:focus, 
+.ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link.is-active,
+.ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item.active a.nav-link:first-of-type,
+.ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
+.ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:focus,
+.ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link.is-active,
+.ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item.active a.nav-link:first-of-type,
+.ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
+.ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:focus,
 li.main-menu-item a.nav-link.is-active,
-li.main-menu-item a.nav-link.active-trail,
+li.main-menu-item.active a.nav-link:first-of-type,
 li.main-menu-item a.nav-link:hover,
 li.main-menu-item a.nav-link:focus {
   color: #cfb87c;

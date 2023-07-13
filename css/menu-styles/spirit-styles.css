@@ -28,7 +28,7 @@ li.main-menu-item a.nav-link:focus {
   border-bottom: none;
 }
 li.main-menu-item a.nav-link.is-active,
-li.main-menu-item a.nav-link.active-trail {
+li.main-menu-item.active a.nav-link:first-of-type {
   background-color: #cfb87c;
   color: #000;
   border-bottom: none;
@@ -37,12 +37,12 @@ li.main-menu-item a.nav-link.home-link.active {
   background: transparent;
 }
 
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a {
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
   margin: 20px 5px;
   color: #000;
 }
 
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a:hover {
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a:hover {
   background: transparent;
 }
 
@@ -58,17 +58,17 @@ ul#action-menu a {
   color: #ccc;
   background-color: #333;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a{
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
   padding: 5px;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:link,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:visited {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:link,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:visited {
   color: #fff;
   font-weight: 600;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.is-active,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active-trail {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link.is-active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item.active a.nav-link:first-of-type {
   color: #cfb87c;
 }
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {

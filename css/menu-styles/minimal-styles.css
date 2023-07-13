@@ -5,7 +5,7 @@
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
   background-color: #fff;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a {
     color: #757575;
     display: inline-block;
     border-bottom: 4px solid #fff;
@@ -25,13 +25,13 @@ li.main-menu-item a.nav-link {
   background-position: bottom;
   color: #757575;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link {
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link {
   color: #757575;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link:hover,
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link:focus,
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link.is-active,
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link.active-trail {
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:focus,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link.is-active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item.active a.nav-link:first-of-type {
   color: #000;
   border-bottom: 0;
   background: transparent;
@@ -45,16 +45,16 @@ li.main-menu-item a.nav-link {
 li.main-menu-item a.nav-link:hover,
 li.main-menu-item a.nav-link:focus,
 li.main-menu-item a.nav-link.is-active,
-li.main-menu-item a.nav-link.active-trail {
+li.main-menu-item.active a.nav-link:first-of-type {
   border-top: 4px solid rgba(128, 128, 128, 0.333);
   color: #363636;
   border-bottom: none;
 }
 
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:focus,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.is-active,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active-trail {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:focus,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link.is-active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item.active a.nav-link:first-of-type {
   border-bottom: 4px solid rgba(128, 128, 128, 0.333);
   color: #363636;
 }

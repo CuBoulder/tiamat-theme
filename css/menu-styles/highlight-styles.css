@@ -6,19 +6,19 @@
   background:#f2f2f2;
   color:#666;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
     color:#656565;
     padding: 0.5rem 10px 0 10px;
 }
 
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:active {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:active {
   color: #000;
   position: relative;
 }
 
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover::after,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:active::after {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:hover::after,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:active::after {
     border-top:1px solid #333;
     left:10px;
     right:10px;
@@ -48,31 +48,30 @@ li.main-menu-item a.nav-link {
 
 li.main-menu-item a.nav-link:hover,
 li.main-menu-item a.nav-link.is-active,
-li.main-menu-item a.nav-link.active-trail {
+li.main-menu-item.active a.nav-link:first-of-type {
   color:#222;
   border-bottom: none;
 }
 
-li.main-menu-item a:hover,
-li.main-menu-item a.is-active,
-li.main-menu-item a.active-trail {
+li.main-menu-item a.nav-link:hover,
+li.main-menu-item a.nav-link.is-active,
+li.main-menu-item.active a.nav-link:first-of-type {
   border-top: 1px solid #333;
 }
 
 li.main-menu-item a.nav-link:hover.home-link,
-li.main-menu-item a.nav-link:active.home-link,
-li.main-menu-item a.nav-link:active-trail.home-link {
+li.main-menu-item a.nav-link:active.home-link {
   border-top:1px solid #e7e7e7;
 }
 /*END MAIN MENU */
 
 /* SECONDARY MENU IN LINE */
 
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a {
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link {
   color: #656565;
 }
 
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a:hover {
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
   color: #222;
   background: #f2f2f2;
 }
