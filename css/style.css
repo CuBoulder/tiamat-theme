@@ -297,16 +297,11 @@
     margin: 0.5rem 0;
   }
   
-  li.main-menu-item a.nav-link:hover {
+  li.main-menu-item a.nav-link:hover, li.main-menu-item.active a.nav-link.is-active {
     border-bottom: 2px solid black;
     color: black;
   }
   
-  li.main-menu-item a.nav-link.active {
-    background: var(--ucb-gold);
-    color: var(--ucb-black);
-  }
-    
   /****** Local Tasks ********/
   .ucb-local-tasks {
     position: fixed;
