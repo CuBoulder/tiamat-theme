@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds visual indication of active navigation menu items
+  Resolves CuBoulder/tiamat-theme#437
+---
+
 ## [20230707] - 2023-07-07
 
 -   ### Update for LB D10.1 style.css
