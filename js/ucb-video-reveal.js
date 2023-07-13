@@ -84,7 +84,6 @@
  * Contains video background functionality for the hero unit.
  */
 (function() {
-  console.log('hi')
   // Object that defines supported video sites and their corresponding handlers
   const videoHeroSupportedSites = {
       youtube: {
@@ -105,7 +104,7 @@
                   // Create a new YouTube player instance
                   const videoPlayer = new YT.Player(videoPlayerElementId, {
                       videoId: videoURL.searchParams.get('v'),
-                      playerVars: { autoplay: 1, controls: 0, mute: 1, disablekb: 1, rel: 0, playsinline: 1 },
+                      playerVars: { autoplay: 0, controls: 0, mute: 1, disablekb: 1, rel: 0, playsinline: 1 },
                       events: {
                           onReady: function(event) {
                               // When the player is ready, enable auto-resize, show the video wrapper, and remove the "hidden" attribute
@@ -117,11 +116,13 @@
                               switch(playerState) {
                                   case YT.PlayerState.PLAYING:
                                       // If the player state is "PLAYING", show the pause icon
-                                      showVideoHeroPauseIcon(playPauseButtonElement);
+                                      toggleImage(videoPlayerWrapperElement)
+                                      showVideoHeroPauseIcon(playPauseButtonElement,videoPlayerWrapperElement);
                                       break;
                                   case YT.PlayerState.PAUSED:
                                       // If the player state is "PAUSED", show the play icon
-                                      showVideoHeroPlayIcon(playPauseButtonElement);
+                                      toggleImage(videoPlayerWrapperElement)
+                                      showVideoHeroPlayIcon(playPauseButtonElement,videoPlayerWrapperElement);
                                       break;
                                   case YT.PlayerState.ENDED:
                                       // If the player state is "ENDED", seek to the beginning and play the video to create a loop
@@ -210,6 +211,7 @@
 
               // When the video is loaded, remove the "hidden" attribute from the video wrapper
               videoPlayer.on('loaded', function() {
+                  videoPlayer.pause()
                   videoWrapperElement.removeAttribute('hidden');
               });
 
@@ -222,7 +224,7 @@
               // When the video is paused, set the playing flag to false and show the play icon
               videoPlayer.on('pause', function() {
                   videoPlaying = false;
-                  showVideoHeroPlayIcon(playPauseButtonElement);
+                  showVideoHeroPlayIcon(playPauseButtonElement, videoPlayerWrapperElement);
               });
 
               // Handle errors encountered during video playback
@@ -232,10 +234,15 @@
 
               // Toggle play/pause functionality when the play/pause button is clicked
               playPauseButtonElement.onclick = function() {
-                  if(videoPlaying)
-                      videoPlayer.pause();
-                  else
-                      videoPlayer.play();
+                  if(videoPlaying){
+                    videoPlayer.pause();
+                    toggleImage(videoPlayerWrapperElement)
+                  }
+                  else {
+                    toggleImage(videoPlayerWrapperElement)
+                    videoPlayer.play();
+                    
+                  }
               };
           }
       }
@@ -313,12 +320,15 @@
   }
 
   // Displays the pause icon on the play/pause button
-  function showVideoHeroPauseIcon(playPauseButtonElement) {
+  function showVideoHeroPauseIcon(playPauseButtonElement,videoPlayerWrapperElement) {
+      toggleImage(videoPlayerWrapperElement)
       playPauseButtonElement.innerHTML = '<i class="fa fa-pause"></i>';
   }
 
   // Displays the play icon on the play/pause button
-  function showVideoHeroPlayIcon(playPauseButtonElement) {
+  function showVideoHeroPlayIcon(playPauseButtonElement, videoPlayerWrapperElement) {
+    toggleImage(videoPlayerWrapperElement)
+
       playPauseButtonElement.innerHTML = '<i class="fa fa-play"></i>';
   }
 
@@ -327,6 +337,20 @@
       videoWrapperElement.setAttribute('hidden', '');
       videoPlayerWrapperElement.innerHTML = '';
       throw new Error('Background video in hero unit encountered an error!');
+  }
+
+  // Handles toggling the image on/off when pause/play is clicked
+  function toggleImage(videoPlayerWrapperElement){
+    console.log('clicked')
+    const image = videoPlayerWrapperElement.parentElement.children[1]
+    if(image.style.display == 'inline' || image.style.display == ''){
+      image.style.display = 'none'
+    } else if(image.style.display == 'none') {
+      image.style.display == 'inline'
+    } else {
+      image.style.display == ''
+    }
+    console.log('my display is now', image.style.display)
   }
 
   // Exposes the enableVideoHero function to the global scope
