@@ -82,7 +82,7 @@
   background-image: linear-gradient(top, #555, #333);
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#FF555555', EndColorStr='#FF333333');
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.is-active,
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active-trail {
   background-color: #cfb87c;
   background-image: -webkit-gradient(
@@ -153,7 +153,7 @@ li.main-menu-item a.nav-link:hover {
   border-bottom: none;
 }
 
-li.main-menu-item a.nav-link.active,
+li.main-menu-item a.nav-link.is-active,
 li.main-menu-item a.nav-link.active-trail {
   background-color: #cfb87c;
   background-image: -webkit-gradient(
@@ -173,7 +173,7 @@ li.main-menu-item a.nav-link.active-trail {
 }
 
 li.main-menu-item a.nav-link:hover,
-li.main-menu-item a.nav-link.active,
+li.main-menu-item a.nav-link.is-active,
 li.main-menu-item a.nav-link.active-trail {
   color: #000;
 }

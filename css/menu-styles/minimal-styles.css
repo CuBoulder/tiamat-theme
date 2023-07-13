@@ -30,7 +30,7 @@ li.main-menu-item a.nav-link {
 }
 .ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link:hover,
 .ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link:focus,
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link.active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link.is-active,
 .ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.nav-link.active-trail {
   color: #000;
   border-bottom: 0;
@@ -44,7 +44,7 @@ li.main-menu-item a.nav-link {
 
 li.main-menu-item a.nav-link:hover,
 li.main-menu-item a.nav-link:focus,
-li.main-menu-item a.nav-link.active,
+li.main-menu-item a.nav-link.is-active,
 li.main-menu-item a.nav-link.active-trail {
   border-top: 4px solid rgba(128, 128, 128, 0.333);
   color: #363636;
@@ -53,7 +53,7 @@ li.main-menu-item a.nav-link.active-trail {
 
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover,
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:focus,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.is-active,
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active-trail {
   border-bottom: 4px solid rgba(128, 128, 128, 0.333);
   color: #363636;

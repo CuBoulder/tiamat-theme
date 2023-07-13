@@ -43,7 +43,7 @@
 
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover,
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:focus,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.is-active,
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active-trail {
   color: #fff;
 }
@@ -63,13 +63,13 @@ li.main-menu-item a.nav-link:hover {
   color: #fff;
   border-bottom: none;
 }
-li.main-menu-item a.nav-link.active,
+li.main-menu-item a.nav-link.is-active,
 li.main-menu-item a.nav-link.active-trail {
   background-color: #333;
   color: #fff;
   border-bottom: none;
 }
-li.main-menu-item a.nav-link.active:hover,
+li.main-menu-item a.nav-link.is-active:hover,
 li.main-menu-item a.nav-link.active-trail:hover {
   color: #fff;
   border-bottom: none;

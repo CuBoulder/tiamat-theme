@@ -33,7 +33,7 @@
 
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover,
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:focus,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.is-active,
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.active-trail {
   color:#fff;
 }
@@ -75,12 +75,12 @@ li.main-menu-item a.nav-link:before {
   background: transparent;
   height: 3px !important;
 }
-li.main-menu-item a.nav-link.active:before,
+li.main-menu-item a.nav-link.is-active:before,
 li.main-menu-item a.nav-link.active-trail:before,
 li.main-menu-item a.nav-link:hover:before {
   background-color: #cfb87c !important;
 }
-li.main-menu-item a.nav-link.active,
+li.main-menu-item a.nav-link.is-active,
 li.main-menu-item a.nav-link.active-trail,
 li.main-menu-item a.nav-link:hover {
   border-bottom: none;
@@ -93,7 +93,7 @@ li.main-menu-item a.nav-link:hover {
   font-weight: 400;
   color: #757575;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.active,
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.is-active,
 .ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a.active-trail,
 .ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a:hover {
   color: #111;

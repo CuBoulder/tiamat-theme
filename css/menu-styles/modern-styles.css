@@ -53,7 +53,7 @@
   background-color: #666;
 }
 
-.ucb-secondary-menu-region-container a.active,
+.ucb-secondary-menu-region-container a.is-active,
 .ucb-secondary-menu-region-container a.active-trail {
   color: #000;
   background-color: #cfb87c;
@@ -92,7 +92,7 @@ li.main-menu-item a.nav-link:hover {
   border-bottom: none;
   color: #fff;
 }
-li.main-menu-item a.nav-link.active,
+li.main-menu-item a.nav-link.is-active,
 li.main-menu-item a.nav-link.active-trail {
   background-color: #cfb87c;
   color: #000;

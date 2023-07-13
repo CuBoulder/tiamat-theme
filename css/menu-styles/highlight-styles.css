@@ -33,8 +33,7 @@ section.ucb-main-nav-section {
 }
 /*MAIN MENU IN LINE*/
 li.main-menu-item a.nav-link:hover,
-li.main-menu-item a.nav-link:active,
-li.main-menu-item a.nav-link:active-trail {
+li.main-menu-item a.nav-link:active {
   border-top:1px solid #333;
   color:#222;
 }
@@ -48,14 +47,14 @@ li.main-menu-item a.nav-link {
 }
 
 li.main-menu-item a.nav-link:hover,
-li.main-menu-item a.nav-link.active,
+li.main-menu-item a.nav-link.is-active,
 li.main-menu-item a.nav-link.active-trail {
   color:#222;
   border-bottom: none;
 }
 
 li.main-menu-item a:hover,
-li.main-menu-item a.active,
+li.main-menu-item a.is-active,
 li.main-menu-item a.active-trail {
   border-top: 1px solid #333;
 }
