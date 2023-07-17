@@ -20,6 +20,15 @@
     filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#FF363636', EndColorStr='#FF161616');
 }
 
+section.ucb-main-nav-section {
+  box-shadow: none;
+  margin-bottom: 1px;
+}
+.ucb-main-nav-continer.ucb-secondary-menu-position-inline {
+  margin-top: 20px;
+  box-shadow: 0 2px 5px rgba(0 0 0 /10%);
+}
+
 .ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
   color: #aaa;
 }
