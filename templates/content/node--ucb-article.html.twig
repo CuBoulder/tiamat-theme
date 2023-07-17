@@ -6,16 +6,16 @@
 */
 #}
 
-{{ attach_library('boulderD9_base/ucb-page') }}
-{{ attach_library('boulderD9_base/ucb-article') }}
-{{ attach_library('boulderD9_base/ucb-related-articles') }}
+{{ attach_library('boulder_base/ucb-page') }}
+{{ attach_library('boulder_base/ucb-article') }}
+{{ attach_library('boulder_base/ucb-related-articles') }}
 {# Added class to article class 'pageStyleCSS' to control page style #}
 
 {% set excludeCats = related_articles_exclude_categories %}
 {% set excludeTags = drupal_config('ucb_site_configuration.settings', 'related_articles_exclude_tags') %}
 
 {# DATE FORMATTER - use global setting for all, unless override in article provided #}
-{% set global_date_format = drupal_config('boulderD9_base.settings', 'ucb_date_format') %}
+{% set global_date_format = drupal_config('boulder_base.settings', 'ucb_date_format') %}
 {% set showDate = true %}
 {% set localDateOverride = content.field_ucb_article_date_override|render|striptags|trim %}
 
@@ -75,7 +75,7 @@
 	{% set pageStyleCSS = "ucb-page-style-traditional" %}
 {% elseif pageStyleInt =="Dark Mode"%}
 	{% set pageStyleCSS = "ucb-page-style-dark" %}
-	{{ attach_library('boulderD9_base/ucb-article-dark') }}
+	{{ attach_library('boulder_base/ucb-article-dark') }}
 {% elseif pageStyleInt =="Zebra Striped"%}
 	{% set pageStyleCSS = "ucb-page-style-striped" %}
 {% endif %}

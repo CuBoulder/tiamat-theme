@@ -7,10 +7,10 @@
 #}
 {% set entity = content['#block_content'] %}
 {% if entity.field_content_sequence_display.0.value == 'advanced' %}
-	{% include '@boulderD9_base/block/block--content-sequence-advanced.html.twig' %}
+	{% include '@boulder_base/block/block--content-sequence-advanced.html.twig' %}
 {% else %}
 
-	{{ attach_library('boulderD9_base/ucb-content-sequence') }}
+	{{ attach_library('boulder_base/ucb-content-sequence') }}
 
 	{% set classes = [
 	'container',
