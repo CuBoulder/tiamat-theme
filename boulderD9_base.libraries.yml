@@ -58,6 +58,8 @@ ucb-user-login:
 
 ucb-person:
   version: 1.x
+  js:
+    js/ucb-person-article-list.js: {}
   css:
     theme:
       css/ucb-person.css: {}
