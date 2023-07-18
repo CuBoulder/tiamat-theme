@@ -65,42 +65,41 @@ class PersonArticleList extends HTMLElement {
 
         // Iterate over each Article
         data.data.map(item=>{
-            let thisArticleCats = [];
-            let thisArticleTags = [];
-            // // loop through and grab all of the categories
-            if (item.relationships.field_ucb_article_categories) {
-              for (let i = 0; i < item.relationships.field_ucb_article_categories.data.length; i++) {
-                thisArticleCats.push(
-                  item.relationships.field_ucb_article_categories.data[i].meta
-                    .drupal_internal__target_id
-                )
-              }
-            }  
-            // // loop through and grab all of the tags
-            if (item.relationships.field_ucb_article_tags) {
-              for (var i = 0; i < item.relationships.field_ucb_article_tags.data.length; i++) {
-                thisArticleTags.push(item.relationships.field_ucb_article_tags.data[i].meta.drupal_internal__target_id)
-              }
-            }
+            // let thisArticleCats = [];
+            // let thisArticleTags = [];
+            // // // loop through and grab all of the categories
+            // if (item.relationships.field_ucb_article_categories) {
+            //   for (let i = 0; i < item.relationships.field_ucb_article_categories.data.length; i++) {
+            //     thisArticleCats.push(
+            //       item.relationships.field_ucb_article_categories.data[i].meta
+            //         .drupal_internal__target_id
+            //     )
+            //   }
+            // }  
+            // // // loop through and grab all of the tags
+            // if (item.relationships.field_ucb_article_tags) {
+            //   for (var i = 0; i < item.relationships.field_ucb_article_tags.data.length; i++) {
+            //     thisArticleTags.push(item.relationships.field_ucb_article_tags.data[i].meta.drupal_internal__target_id)
+            //   }
+            // }
 
-            let doesIncludeCat = thisArticleCats;
-            let doesIncludeTag = thisArticleTags;
+            // let doesIncludeCat = thisArticleCats;
+            // let doesIncludeTag = thisArticleTags;
   
-            // check to see if we need to filter on categories
-            if (excludeCatArray.length && thisArticleCats.length) {
-              doesIncludeCat = thisArticleCats.filter((element) =>
-                excludeCatArray.includes(element)
-              )
-            }
-            // check to see if we need to filter on tags
-            if (excludeTagArray.length && thisArticleTags.length) {
-              doesIncludeTag = thisArticleTags.filter((element) =>
-                excludeTagArray.includes(element)
-              )
-            }
+            // // check to see if we need to filter on categories
+            // if (excludeCatArray.length && thisArticleCats.length) {
+            //   doesIncludeCat = thisArticleCats.filter((element) =>
+            //     excludeCatArray.includes(element)
+            //   )
+            // }
+            // // check to see if we need to filter on tags
+            // if (excludeTagArray.length && thisArticleTags.length) {
+            //   doesIncludeTag = thisArticleTags.filter((element) =>
+            //     excludeTagArray.includes(element)
+            //   )
+            // }
 
             // If there's no categories or tags that are in the exclusions, proceed
-            if (doesIncludeCat.length == 0 && doesIncludeTag.length == 0) {
                 // okay to render
                 let bodyAndImageId = item.relationships.field_ucb_article_content.data.length ? item.relationships.field_ucb_article_content.data[0].id : "";
                 let body = item.attributes.field_ucb_article_summary ? item.attributes.field_ucb_article_summary : "";
@@ -162,7 +161,7 @@ class PersonArticleList extends HTMLElement {
                   }
                   // Adds the article object to the final array of articles chosen
                   finalArticles.push(article)
-            }
+            
         })
         // Case for not enough articles selected and extra articles available
         if(finalArticles.length < count && NEXTJSONURL){
