@@ -1,4 +1,4 @@
-{% for item in items %}
+{% for item in items|sort %}
     {# Only shows Taxonomy terms with display = true #}
     {% if item.content['#options'].entity.field_ucb_tag_display.value == 1 %}
         {{ item.content|render }}
