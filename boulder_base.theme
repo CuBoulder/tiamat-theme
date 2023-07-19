@@ -10,7 +10,7 @@ use Drupal\Core\Entity\ContentEntityBase;
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
-function boulderD9_base_theme_suggestions_page_alter(array &$suggestions, array $variables) {
+function boulder_base_theme_suggestions_page_alter(array &$suggestions, array $variables) {
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
     $content_type = $node->bundle();
     $suggestions[] = 'page__'.$content_type;
@@ -20,7 +20,7 @@ function boulderD9_base_theme_suggestions_page_alter(array &$suggestions, array 
 /**
  * Implements hook_theme_suggestions_HOOK_alter().
  */
-function boulderD9_base_theme_suggestions_block_alter(array &$suggestions, array $variables) {
+function boulder_base_theme_suggestions_block_alter(array &$suggestions, array $variables) {
 	if (isset($variables['elements']['content']['#block_content'])) {
 		$bundle = $variables['elements']['content']['#block_content']->bundle();
 		array_splice($suggestions, 1, 0, 'block__' . $bundle);
@@ -30,10 +30,10 @@ function boulderD9_base_theme_suggestions_block_alter(array &$suggestions, array
 /***
  * This a helper function to set the favicon appropriately
  */
-function boulderD9_base_page_attachments_alter(array &$page) {
+function boulder_base_page_attachments_alter(array &$page) {
   foreach($page['#attached']['html_head_link'] as $k => $v) {
     if (array_key_exists('rel', $v[0]) && $v[0]['rel'] == 'shortcut icon') {
-      $page['#attached']['html_head_link'][$k][0]['href'] = base_path() . \Drupal::service('extension.list.theme')->getPath('boulderD9_base') . '/favicon.png';
+      $page['#attached']['html_head_link'][$k][0]['href'] = base_path() . \Drupal::service('extension.list.theme')->getPath('boulder_base') . '/favicon.png';
     }
   }
   $page['#attached']['drupalSettings']['themePath'] = \Drupal::theme()->getActiveTheme()->getPath(); // Exposes a relative theme path in drupalSettings
@@ -42,7 +42,7 @@ function boulderD9_base_page_attachments_alter(array &$page) {
 /***
  * Preprocess function to get the variables we'll need on the html template
  */
-function boulderD9_base_preprocess_html(array &$variables) {
+function boulder_base_preprocess_html(array &$variables) {
   $variables['ucb_gtm_account'] = theme_get_setting('ucb_gtm_account');
   $variables['theme_path'] = base_path() . $variables['directory'];
 }
@@ -50,7 +50,7 @@ function boulderD9_base_preprocess_html(array &$variables) {
 /***
  * Preprocess function to get the variables we'll need on the block template
  */
-function boulderD9_base_preprocess_block(array &$variables) {
+function boulder_base_preprocess_block(array &$variables) {
   $config = \Drupal::config('system.site');
   $variables['site_name'] = $config->get('name');
 }
@@ -58,7 +58,7 @@ function boulderD9_base_preprocess_block(array &$variables) {
 /***
  * Preprocess function to get the variables we'll need on the page template
  */
-function boulderD9_base_preprocess_page(array &$variables) {
+function boulder_base_preprocess_page(array &$variables) {
   $config = \Drupal::config('system.site');
   $variables['site_name'] = $config->get('name');
   $variables['site_slogan'] = $config->get('slogan');
@@ -99,7 +99,7 @@ function boulderD9_base_preprocess_page(array &$variables) {
 /***
  * Preprocess function to get the variables we'll need on the page user template
  */
-function boulderD9_base_preprocess_page__user(array &$variables) {
+function boulder_base_preprocess_page__user(array &$variables) {
   $config = \Drupal::config('system.site');
   $variables['site_name'] = $config->get('name');
   $variables['site_slogan'] = $config->get('slogan');
@@ -114,7 +114,7 @@ function boulderD9_base_preprocess_page__user(array &$variables) {
 /***
  * Preprocess function to get the variables we'll need on the page user login template
  */
-function boulderD9_base_preprocess_page__user__login(array &$variables) {
+function boulder_base_preprocess_page__user__login(array &$variables) {
   $config = \Drupal::config('system.site');
   $variables['site_name'] = $config->get('name');
   $variables['site_slogan'] = $config->get('slogan');
@@ -129,14 +129,14 @@ function boulderD9_base_preprocess_page__user__login(array &$variables) {
 /**
  * Exposes theme variables to the primary menu region.
  */
-function boulderD9_base_preprocess_region__primary_menu(array &$variables) {
+function boulder_base_preprocess_region__primary_menu(array &$variables) {
 	$variables['ucb_secondary_menu_position'] = theme_get_setting('ucb_secondary_menu_position');
 }
 
 /**
  * Exposes theme variables to the secondary menu region.
  */
-function boulderD9_base_preprocess_region__secondary_menu(array &$variables) {
+function boulder_base_preprocess_region__secondary_menu(array &$variables) {
 	$variables['ucb_secondary_menu_default_links'] = theme_get_setting('ucb_secondary_menu_default_links');
 	$variables['ucb_secondary_menu_position'] = theme_get_setting('ucb_secondary_menu_position');
 	$variables['ucb_secondary_menu_button_display'] = theme_get_setting('ucb_secondary_menu_button_display');
@@ -145,14 +145,14 @@ function boulderD9_base_preprocess_region__secondary_menu(array &$variables) {
 /**
  * Preprocess function to show or hide the breadcrumb nav based on the selected setting
  */
-function boulderD9_base_preprocess_region__breadcrumb(array &$variables) {
+function boulder_base_preprocess_region__breadcrumb(array &$variables) {
 	$variables['show_breadcrumb'] = theme_get_setting('ucb_breadcrumb_nav');
 }
 
 /**
  * Preprocess function to enable the current page title to show up in the breadcrumb nav
  */
-function boulderD9_base_preprocess_breadcrumb(array &$variables) {
+function boulder_base_preprocess_breadcrumb(array &$variables) {
 	$variables['current_page_title'] = \Drupal::service('title_resolver')->getTitle(\Drupal::request(), \Drupal::routeMatch()->getRouteObject());
 	$variables['#cache']['contexts'][] = 'url';
 	$node = \Drupal::routeMatch()->getParameter('node');
@@ -163,7 +163,7 @@ function boulderD9_base_preprocess_breadcrumb(array &$variables) {
 /***
  * Preprocess function to get the variables we'll need on the header region template
  */
-function boulderD9_base_preprocess_region__header(array &$variables) {
+function boulder_base_preprocess_region__header(array &$variables) {
   $variables['theme_path'] = base_path() . $variables['directory'];
   $variables['ucb_be_boulder'] = theme_get_setting('ucb_be_boulder');
 }
@@ -171,7 +171,7 @@ function boulderD9_base_preprocess_region__header(array &$variables) {
 /***
  * Preprocess function to get the variables we'll need on the footer region template
  */
-function boulderD9_base_preprocess_region__footer(array &$variables) {
+function boulder_base_preprocess_region__footer(array &$variables) {
   $variables['theme_path'] = base_path() . $variables['directory'];
   $variables['ucb_be_boulder'] = theme_get_setting('ucb_be_boulder');
 }
@@ -179,14 +179,14 @@ function boulderD9_base_preprocess_region__footer(array &$variables) {
 /***
  * preprocess function to get the variables we'll need on the Organization node template
  */
-function boulderD9_base_preprocess_node__organization(array &$variables) {
+function boulder_base_preprocess_node__organization(array &$variables) {
   $variables['uuid'] = $variables['node']->uuid();
 }
 
 /**
  * Exposes a variable to indicate if a user can edit a node.
  */
-function boulderD9_base_preprocess_node__ucb_article(array &$variables) {
+function boulder_base_preprocess_node__ucb_article(array &$variables) {
 	if ($node = \Drupal::routeMatch()->getParameter('node')) {
 		$user = \Drupal\user\Entity\User::load(\Drupal::currentUser()->id());
 		$userCanEdit = $node->access('update', $user);
@@ -197,7 +197,7 @@ function boulderD9_base_preprocess_node__ucb_article(array &$variables) {
 /***
  *  Custom theme settings worker function
  ***/
-function boulderD9_base_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface &$form_state, $form_id = NULL)
+function boulder_base_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface &$form_state, $form_id = NULL)
 {
   // Work-around for a core bug affecting admin themes. See issue #943212.
   if (isset($form_id)) {
