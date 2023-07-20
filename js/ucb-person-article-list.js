@@ -1,5 +1,14 @@
-console.log('Attached')
+// Taxonomy API 
+// http://localhost:61658/jsonapi/taxonomy_term/byline
 
+// Byline Name
+// => data.attributes.name
+
+// Compare byline name to person page name
+
+// API Call Article by byline taxonomy
+
+// Render
 class PersonArticleList extends HTMLElement {
 	constructor() {
 		super();
@@ -167,6 +176,13 @@ class PersonArticleList extends HTMLElement {
         } else {
             return "";
         }
+    }
+
+    async getBylines(){
+        const response = await fetch(
+          `/jsonapi/taxonomy_term/byline/`
+        );
+        return response;
     }
 
     // Responsible for calling the render function of the appropriate display
