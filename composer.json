@@ -1,6 +1,6 @@
 {
-    "name": "cu-boulder/boulder_d9_base",
-    "description": "CU Boulder Drupal 9 base theme",
+    "name": "cu-boulder/boulder_base",
+    "description": "University of Colorado Boulder base theme",
     "license": "GPL-2.0-or-later",
     "type": "drupal-custom-theme"
 }

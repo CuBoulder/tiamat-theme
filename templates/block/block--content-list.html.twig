@@ -5,7 +5,7 @@
 */
 #}
 
-{{ attach_library('boulderD9_base/ucb-content-list') }}
+{{ attach_library('boulder_base/ucb-content-list') }}
 
 {% set blockContent = content['#block_content'] %}
 {% set _rendered = blockContent|view|render %}{# Easiest way to ensure the cache is updated when the block or a referenced node is. Resolves #377, 378. #}

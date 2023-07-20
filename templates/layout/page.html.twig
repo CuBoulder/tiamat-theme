@@ -45,35 +45,35 @@
 #}
 
 
-{% set menu_style = drupal_config('boulderD9_base.settings', 'ucb_menu_style') %}
+{% set menu_style = drupal_config('boulder_base.settings', 'ucb_menu_style') %}
 {% if menu_style == 'highlight'  %}
-  {{ attach_library('boulderD9_base/ucb-menu-style-highlight') }}
+  {{ attach_library('boulder_base/ucb-menu-style-highlight') }}
 {% elseif menu_style == 'ivory'  %}
-  {{ attach_library('boulderD9_base/ucb-menu-style-ivory') }}
+  {{ attach_library('boulder_base/ucb-menu-style-ivory') }}
 {% elseif menu_style == 'layers'  %}
-  {{ attach_library('boulderD9_base/ucb-menu-style-layers') }}
+  {{ attach_library('boulder_base/ucb-menu-style-layers') }}
 {% elseif menu_style == 'minimal'  %}
-  {{ attach_library('boulderD9_base/ucb-menu-style-minimal') }}
+  {{ attach_library('boulder_base/ucb-menu-style-minimal') }}
 {% elseif menu_style == 'modern'  %}
-  {{ attach_library('boulderD9_base/ucb-menu-style-modern') }}
+  {{ attach_library('boulder_base/ucb-menu-style-modern') }}
 {% elseif menu_style == 'rise'  %}
-  {{ attach_library('boulderD9_base/ucb-menu-style-rise') }}
+  {{ attach_library('boulder_base/ucb-menu-style-rise') }}
 {% elseif menu_style == 'shadow'  %}
-  {{ attach_library('boulderD9_base/ucb-menu-style-shadow') }}
+  {{ attach_library('boulder_base/ucb-menu-style-shadow') }}
 {% elseif menu_style == 'simple'  %}
-  {{ attach_library('boulderD9_base/ucb-menu-style-simple') }}
+  {{ attach_library('boulder_base/ucb-menu-style-simple') }}
 {% elseif menu_style == 'spirit'  %}
-  {{ attach_library('boulderD9_base/ucb-menu-style-spirit') }}
+  {{ attach_library('boulder_base/ucb-menu-style-spirit') }}
 {% elseif menu_style == 'swatch'  %}
-  {{ attach_library('boulderD9_base/ucb-menu-style-swatch') }}
+  {{ attach_library('boulder_base/ucb-menu-style-swatch') }}
 {% elseif menu_style == 'tradition'  %}
-  {{ attach_library('boulderD9_base/ucb-menu-style-tradition') }}
+  {{ attach_library('boulder_base/ucb-menu-style-tradition') }}
 {% endif %}
 
 <div class="layout-container ucb-page-container highlight-style">
   {# HEADER CONTENT #}
   {% block page_header %}
-    {{ attach_library('boulderD9_base/ucb-social-media') }}
+    {{ attach_library('boulder_base/ucb-social-media') }}
 
     {% set header_color = 'black' %}
     {% set campus_header_color = 'black' %}
@@ -95,7 +95,7 @@
 	{% endif %}
 
 	{% if ucb_sticky_menu %}
-		{% include '@boulderD9_base/includes/ucb-sticky-menu.html.twig' %}
+		{% include '@boulder_base/includes/ucb-sticky-menu.html.twig' %}
 	{% endif %}
 
     {{ page.header }}
@@ -218,7 +218,7 @@
           </div>
         {% endif %}
         {% if ucb_footer_menu_default_links %}
-          {% include "@boulderD9_base/includes/ucb-footer-menus.html.twig" %}
+          {% include "@boulder_base/includes/ucb-footer-menus.html.twig" %}
         {% elseif page.footer_nav_one|render %}
           <div class="ucb-footer-nav-container container">
             <div class="ucb-footer-nav-block">
@@ -265,7 +265,7 @@
   {# Services -- see ucb_site_config #}
   {# LiveChat #}
   {% if service_livechat_includes|length > 0%}
-  {{ attach_library('boulderD9_base/livechat') }}
+  {{ attach_library('boulder_base/livechat') }}
   {% for service in service_livechat_includes %}
   <livechat-service license-id="{{service.service_settings.license_id}}"></livechat-service>
   {% endfor %}
@@ -273,7 +273,7 @@
 
   {# statuspage #}
   {% if service_statuspage_includes|length > 0%}
-  {{ attach_library('boulderD9_base/statuspage') }}
+  {{ attach_library('boulder_base/statuspage') }}
   {% for service in service_statuspage_includes %}
   <statuspage-service page-id="{{service.service_settings.page_id}}"></statuspage-service>
   {% endfor %}
@@ -281,7 +281,7 @@
  
   {# mainstay #}
   {% if service_mainstay_includes|length > 0%}
-  {{ attach_library('boulderD9_base/mainstay') }}
+  {{ attach_library('boulder_base/mainstay') }}
   {% for service in service_mainstay_includes %}
   <mainstay-service bot-token="{{service.service_settings.bot_token}}" college-id="{{service.service_settings.college_id}}"></mainstay-service>
   {% endfor %}
