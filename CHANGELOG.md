@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### sort alphabetically
+  Closes #449.
+  Small change to change the tags and categories to be sorted alphabetically.
+---
+
 - ### Removes "D9" from theme name and the theme, custom entities Composer package names 
   Resolves CuBoulder/tiamat-theme#435
   
