@@ -75,6 +75,12 @@
 
 {{ attach_library('boulder_base/ucb-article-list') }}
 
+{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
+{% set isFrontPage = '' %}
+{% if is_front %}
+	{% set isFrontPage = 'sr-only' %}
+{% endif %}
+
 {# NEW #}
 {# JSON API Endpoint information #}
 {% set articlesJSON = (url('<front>')|render|trim('/'))
@@ -260,7 +266,7 @@
 
 {# JSON API Filter logic #}
 <article {{ attributes.addClass('container') }}>
-  <h1 class="ucb-article-list-header">
+  <h1 class="ucb-article-list-header {{isFrontPage}}">
     {{ label }}
   </h1>
 

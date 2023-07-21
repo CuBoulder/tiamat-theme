@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Page Title on user-set default Front Page set to screen-read only
+  Resolves #448 
+  
+  Sets the title of pages chosen to be the site's default front page to 'sr-only' class. Will hide the title visually but still accessible to screen readers. Currently this works only if the page is set to explicitly the default '/homepage'. 
+---
+
 - ### sort alphabetically
   Closes #449.
   Small change to change the tags and categories to be sorted alphabetically.

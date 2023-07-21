@@ -16,10 +16,17 @@
   view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 ]
 %}
+
+{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
+{% set isFrontPage = '' %}
+{% if is_front %}
+	{% set isFrontPage = 'sr-only' %}
+{% endif %}
+
 {% set jsonLD2 =  ' "@context": "https://schema.org", "@type": "HowTo",' %}
 <article{{attributes.addClass(classes)}}>
 	<div class="container">
-		<h1{{title_attributes}}>
+		<h1{{title_attributes}} class="{{isFrontPage}}">
 			<span id="titleValue">{{ label }}</span>
 			{% set jsonLD2 = jsonLD2 ~ '"name": ' ~ label|render|striptags|json_encode ~ ','%}
 		</div>
