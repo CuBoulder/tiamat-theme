@@ -39,6 +39,20 @@ function boulder_base_page_attachments_alter(array &$page) {
   $page['#attached']['drupalSettings']['themePath'] = \Drupal::theme()->getActiveTheme()->getPath(); // Exposes a relative theme path in drupalSettings
 }
 
+/**
+ * Preprocess function to check if this page is set as front page, available to all nodes
+ */
+function boulder_base_preprocess(&$variables, $hook) {
+  try {
+    $variables['is_front'] = \Drupal::service('path.matcher')->isFrontPage();
+  }
+  catch (Exception $e) {
+    $variables['is_front'] = FALSE;
+  }
+  // Ensure the cache varies correctly (new in Drupal 8.3).
+  $variables['#cache']['contexts'][] = 'url.path.is_front';
+}
+
 /***
  * Preprocess function to get the variables we'll need on the html template
  */
@@ -192,16 +206,6 @@ function boulder_base_preprocess_node__ucb_article(array &$variables) {
 		$userCanEdit = $node->access('update', $user);
 		$variables['user_can_edit'] = $userCanEdit;
 	}
-}
-
-/*
-* Exposes front page variables to determine if title is shown on basic page
-*/
-function boulder_base_preprocess_node__basic_page(array &$variables) {
-    $front_uri = Drupal::config('system.site')->get('page.front');
-    $variables['current_path'] = \Drupal::service('path.current')->getPath();
-    $variables['front_uri'] = Drupal::config('system.site')->get('page.front');
-    $variables['front_alias'] = \Drupal::service('path_alias.manager')->getAliasByPath($front_uri);
 }
 
 /***
