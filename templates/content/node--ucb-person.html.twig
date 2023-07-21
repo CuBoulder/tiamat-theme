@@ -16,15 +16,10 @@
 	view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 ] %}
 
-{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
-{% set isFrontPage = '' %}
-{% if is_front %}
-	{% set isFrontPage = 'sr-only' %}
-{% endif %}
 
 <article{{attributes.addClass(classes)}} itemscope itemtype="https://schema.org/Person">
 	<div class="container ucb-person-header">
-		<h1 class="ucb-person-name {{isFrontPage}}">
+		<h1 class="ucb-person-name">
 			{{ content.field_ucb_person_first_name }}
 			{{ content.field_ucb_person_last_name }}
 		</h1>
