@@ -194,6 +194,16 @@ function boulder_base_preprocess_node__ucb_article(array &$variables) {
 	}
 }
 
+/*
+* Exposes front page variables to determine if title is shown on basic page
+*/
+function boulder_base_preprocess_node__basic_page(array &$variables) {
+    $front_uri = Drupal::config('system.site')->get('page.front');
+    $variables['current_path'] = \Drupal::service('path.current')->getPath();
+    $variables['front_uri'] = Drupal::config('system.site')->get('page.front');
+    $variables['front_alias'] = \Drupal::service('path_alias.manager')->getAliasByPath($front_uri);
+}
+
 /***
  *  Custom theme settings worker function
  ***/

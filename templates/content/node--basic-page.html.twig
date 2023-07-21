@@ -76,7 +76,7 @@
 {# Used for hiding site title visibly using sr-only bootstrap class #}
 {% set site_url = path("<current>") %} 
 {% set srOnly = '' %}
-{% if site_url is same as '/homepage' %}
+{% if site_url is same as front_alias %}
 	{% set srOnly = 'sr-only' %}
 {% endif %}
 
