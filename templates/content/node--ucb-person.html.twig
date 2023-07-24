@@ -16,6 +16,7 @@
 	view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 ] %}
 
+<<<<<<< HEAD
 {% set articlesJSON = (url('<front>')|render|trim('/'))
     ~ '/jsonapi/node/ucb_article'
     ~ '?include[node--ucb_article]=uid,title,ucb_article_content,created,field_ucb_article_summary,field_ucb_article_byline,field_ucb_article_categories,field_ucb_article_tags,field_ucb_article_thumbnail'
@@ -37,6 +38,8 @@
 	{% set sortFilter = '&sort[sort-created][path]=created&sort[sort-created][direction]=DESC' %}
 
 
+=======
+>>>>>>> main
 
 <article{{attributes.addClass(classes)}} itemscope itemtype="https://schema.org/Person">
 	<div class="container ucb-person-header">

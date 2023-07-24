@@ -11,6 +11,12 @@
 {{ attach_library('boulder_base/ucb-related-articles') }}
 {# Added class to article class 'pageStyleCSS' to control page style #}
 
+{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
+{% set isFrontPage = '' %}
+{% if is_front %}
+	{% set isFrontPage = 'sr-only' %}
+{% endif %}
+
 {% set excludeCats = related_articles_exclude_categories %}
 {% set excludeTags = drupal_config('ucb_site_configuration.settings', 'related_articles_exclude_tags') %}
 
@@ -152,7 +158,7 @@ pageStyleCSS
 				<div class="backgroundTitleDiv {{overlayClass}}">
 					{{ content.field_article_title_background }}
 					<div class="container">
-						<h1 class="centeredTitle article-header-{{textColor}}">{{label}}</h1>
+						<h1 class="centeredTitle article-header-{{textColor}} {{isFrontPage}}">{{label}}</h1>
 					</div>
 				</div>
 			{% endif %}
@@ -160,7 +166,7 @@ pageStyleCSS
 				{# If NO Title Background img, render the regular title #}
 				{% if not content.field_article_title_background|render %}
 				<header role="banner" class="ucb-article-banner">
-					<h1 class="ucb-article-heading">{{ label }}</h1>
+					<h1 class="ucb-article-heading {{isFrontPage}}">{{ label }}</h1>
 				</header>
 				{% endif %}
 				{% if social_share_button_position == "4" or social_share_button_position == "1"%}
