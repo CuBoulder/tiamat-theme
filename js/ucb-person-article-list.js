@@ -89,7 +89,7 @@ class PersonArticleList extends HTMLElement {
 
           // Create and Append Elements
           var article = document.createElement('article');
-          article.classList = 'ucb-article-card-title-only';
+          article.classList = 'ucb-article-card-title-only col-sm-6';
     
           var articleBody = document.createElement('div');
           articleBody.classList = 'ucb-article-card-data';
@@ -97,7 +97,7 @@ class PersonArticleList extends HTMLElement {
           var headerLink = document.createElement('a');
           headerLink.href = articleLink;
 
-          var articleHeader = document.createElement('h2');
+          var articleHeader = document.createElement('p');
           articleHeader.classList = 'ucb-article-card-title'
           articleHeader.innerText = articleTitle;
 
