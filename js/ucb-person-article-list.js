@@ -4,7 +4,7 @@ class PersonArticleList extends HTMLElement {
         // Article Endpoint
         var nodeID = this.getAttribute('nodeId');
         console.log('node id', nodeID)
-        var API = `http://localhost:61658/jsonapi/node/ucb_article?include=field_ucb_article_byline.field_author_person_page&filter[field_ucb_article_byline.field_author_person_page.meta.drupal_internal__target_id]=${nodeID}`
+        var API = `http://localhost:61658/jsonapi/node/ucb_article?include=field_ucb_article_byline.field_author_person_page&filter[field_ucb_article_byline.field_author_person_page.meta.drupal_internal__target_id]=${nodeID}&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published&page[limit]=10&sort[sort-created][path]=created&sort[sort-created][direction]=DESC`
 
         fetch(API)
             .then(this.handleError)
