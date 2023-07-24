@@ -2,15 +2,14 @@ class PersonArticleList extends HTMLElement {
 	constructor() {
 		super();
         // Article Endpoint
-        var nodeID = this.getAttribute('nodeId');
-        console.log('node id', nodeID)
-        var API = `http://localhost:61658/jsonapi/node/ucb_article?include=field_ucb_article_byline.field_author_person_page&filter[field_ucb_article_byline.field_author_person_page.meta.drupal_internal__target_id]=${nodeID}&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published&page[limit]=10&sort[sort-created][path]=created&sort[sort-created][direction]=DESC`
+        const nodeID = this.getAttribute('nodeId');
+        const API = `http://localhost:61658/jsonapi/node/ucb_article?include=field_ucb_article_byline.field_author_person_page&filter[field_ucb_article_byline.field_author_person_page.meta.drupal_internal__target_id]=${nodeID}&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published&page[limit]=10&sort[sort-created][path]=created&sort[sort-created][direction]=DESC`
 
         fetch(API)
             .then(this.handleError)
             .then((data) => this.build(data, 5))
             .catch(Error=> {
-              console.error('There was an error fetching data from the API - Please try again later.')
+              console.error('Articles by Person Block Error: There was an error fetching data from the API - Please try again later.')
               console.error(Error)
               this.toggleMessage('ucb-al-loading')
               this.toggleMessage('ucb-al-api-error', "block")
@@ -31,7 +30,7 @@ class PersonArticleList extends HTMLElement {
         if(data.data.length == 0){
             this.toggleMessage('ucb-al-loading')
             this.toggleMessage('ucb-al-error',"block")
-            console.warn('No Articles retrieved - please check your inclusion filters and try again')
+            console.warn('Articles by Person Block Error: There are no available Articles authored by this person')
         } else {
        
         // Iterate over each Article
@@ -61,7 +60,7 @@ class PersonArticleList extends HTMLElement {
 
         // If no chosen articles and no other options, provide error
         if(finalArticles.length === 0 && !NEXTJSONURL){
-          console.error('There are no available Articles that match the selected filters. Please adjust your filters and try again.')
+          console.error('There are no available Articles authored by this person.')
           this.toggleMessage('ucb-al-loading')
           this.toggleMessage('ucb-al-error', "block")
         }
@@ -69,6 +68,7 @@ class PersonArticleList extends HTMLElement {
         // Case for Too many articles
         if(finalArticles.length > count){
             finalArticles.length = count
+            // TO DO -- create read more link
         }
 
         // Have articles and want to proceed
