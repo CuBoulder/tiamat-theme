@@ -28,11 +28,9 @@ class PersonArticleList extends HTMLElement {
 
           // If no Articles retrieved...
         if(data.data.length == 0){
-            this.toggleMessage('ucb-al-loading')
-            this.toggleMessage('ucb-al-error',"block")
             console.warn('Articles by Person Block Error: There are no available Articles authored by this person')
         } else {
-       
+        this.toggleMessage('ucb-al-loading','block');
         // Iterate over each Article
         data.data.map(item=>{
           let title = item.attributes.title;
@@ -89,7 +87,7 @@ class PersonArticleList extends HTMLElement {
 
           // Create and Append Elements
           var article = document.createElement('article');
-          article.classList = 'ucb-article-card-title-only col-sm-6';
+          article.classList = 'ucb-article-card-title-only col-sm-12 col-md-6';
     
           var articleBody = document.createElement('div');
           articleBody.classList = 'ucb-article-card-data';
@@ -118,6 +116,7 @@ class PersonArticleList extends HTMLElement {
           var toggle = this.querySelector(`#${id}`);
           if (toggle) {
             if (display === "block") {
+              console.log('i am toggling block')
               toggle.style.display = "block";
             } else {
               toggle.style.display = "none";

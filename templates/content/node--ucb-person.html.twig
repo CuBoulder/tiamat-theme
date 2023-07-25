@@ -66,13 +66,12 @@
 			</div>
 			<div class="ucb-articles-by-person-block container">
 				<person-article-list
-					jsonapi="{{ articlesJSON }}{{ PublishFilter }}{{ pageCountFilter }}{{ sortFilter }}"
 					nodeId="{{node.id}}"
 				>
 					<div id="ucb-person-article-block-title" style="display:none">
 						<h3>Articles by {{ content.field_ucb_person_first_name }} {{ content.field_ucb_person_last_name }}</h3>
 					</div>
-					<div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
+					<div id="ucb-al-loading" style="display:none" class="ucb-list-msg ucb-loading-data">
 						<i class="fas fa-spinner fa-3x fa-pulse"></i>
 					</div>
 					<div id="ucb-al-error" style="display:none" class="ucb-list-msg">
