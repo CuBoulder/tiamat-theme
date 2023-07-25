@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Removes image requirement from Content Row "Teaser" layouts
+  This update enables the creation of Content Row blocks with image-less content and displays it correctly in the "Teasers" and "Teasers Alternate" layouts.
+  
+  Resolves CuBoulder/tiamat-theme#453
+  
+  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/71)
+---
+
 - ### Page Title on user-set default Front Page set to screen-read only
   Resolves #448 
   
