@@ -30,7 +30,8 @@ class PersonArticleList extends HTMLElement {
         if(data.data.length == 0){
             console.warn('Articles by Person Block Error: There are no available Articles authored by this person')
         } else {
-        this.toggleMessage('ucb-al-loading','block');
+        this.toggleMessage('ucb-person-article-block-title', "block")
+        this.toggleMessage('ucb-al-loading',"block");
         // Iterate over each Article
         data.data.map(item=>{
           let title = item.attributes.title;
@@ -56,17 +57,10 @@ class PersonArticleList extends HTMLElement {
             });
         }
 
-        // If no chosen articles and no other options, provide error
-        if(finalArticles.length === 0 && !NEXTJSONURL){
-          console.error('There are no available Articles authored by this person.')
-          this.toggleMessage('ucb-al-loading')
-          this.toggleMessage('ucb-al-error', "block")
-        }
-
         // Case for Too many articles
         if(finalArticles.length > count){
             finalArticles.length = count
-            // TO DO -- create read more link
+            // TO DO -- create read more link, lead to Article List by Person filtered (needed)
         }
 
         // Have articles and want to proceed
@@ -104,9 +98,9 @@ class PersonArticleList extends HTMLElement {
           articleBody.appendChild(headerLink)
 
           article.appendChild(articleBody)
-          this.toggleMessage('ucb-person-article-block-title', "block")
-          this.toggleMessage('ucb-al-loading')
           container.appendChild(article)
+          this.toggleMessage('ucb-al-loading')
+
       })
       this.appendChild(container)
     }
@@ -116,7 +110,6 @@ class PersonArticleList extends HTMLElement {
           var toggle = this.querySelector(`#${id}`);
           if (toggle) {
             if (display === "block") {
-              console.log('i am toggling block')
               toggle.style.display = "block";
             } else {
               toggle.style.display = "none";
