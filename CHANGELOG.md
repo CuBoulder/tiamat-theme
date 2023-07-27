@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds Articles by Person Block to a Person Page
+  Adds an Articles by Person block to the Person page, displaying the most recent 5 articles associated.
+  
+  To reveal this block, you must have a byline taxonomy term created with a reference to the Person page in the `field_author_person_page` on the term, and then use that byline term on the article's byline. If a Person does not have any articles, this block will not display.
+  
+  Resolves #345 ,  Resolves #427 
+---
+
 - ### Removes image requirement from Content Row "Teaser" layouts
   This update enables the creation of Content Row blocks with image-less content and displays it correctly in the "Teasers" and "Teasers Alternate" layouts.
   
