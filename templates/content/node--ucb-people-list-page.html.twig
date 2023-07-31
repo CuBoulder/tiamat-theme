@@ -7,8 +7,15 @@
  *  - Display filters on rendered page 
  */
 #}
-{{ attach_library('boulderD9_base/ucb-page') }}
-{{ attach_library('boulderD9_base/ucb-people-list-page') }}
+{{ attach_library('boulder_base/ucb-page') }}
+{{ attach_library('boulder_base/ucb-people-list-page') }}
+
+{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
+{% set isFrontPage = '' %}
+{% if is_front %}
+	{% set isFrontPage = 'sr-only' %}
+{% endif %}
+
 {%
 	set classes = [
 		'node',
@@ -67,7 +74,7 @@
 %}
 <article id="ucb-people-list-page"{{attributes.addClass(classes)}}>
 	<div class="ucb-people-list-title">
-		<h1{{title_attributes}}>
+		<h1{{title_attributes}} class="{{isFrontPage}}">
 			{{ label }}
 		</h1>
 	</div>

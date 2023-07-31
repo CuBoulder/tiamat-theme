@@ -5,13 +5,19 @@
  */
 #}
 
-{{ attach_library('boulderD9_base/ucb-form-page') }}
+{{ attach_library('boulder_base/ucb-form-page') }}
 
-{% set sidebar_position = drupal_config('boulderD9_base.settings', 'ucb_sidebar_position') %}
+{% set sidebar_position = drupal_config('boulder_base.settings', 'ucb_sidebar_position') %}
+
+{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
+{% set isFrontPage = '' %}
+{% if is_front %}
+	{% set isFrontPage = 'sr-only' %}
+{% endif %}
 
 <article{{attributes.addClass(classes)}}>
 	<div class="container">
-		<h1{{title_attributes}}>
+		<h1{{title_attributes}} class="{{isFrontPage}}">
 			{{ label }}
 		</h1>
 	</div>

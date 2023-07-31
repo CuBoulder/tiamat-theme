@@ -6,8 +6,8 @@
 */
 #}
 
-{{ attach_library('boulderD9_base/ucb-page') }}
-{{ attach_library('boulderD9_base/ucb-person') }}
+{{ attach_library('boulder_base/ucb-page') }}
+{{ attach_library('boulder_base/ucb-person') }}
 
 {% set classes = [
 	'node',
@@ -63,6 +63,24 @@
 						{{ content.body }}
 					</div>
 				{% endif %}
+			</div>
+			<div class="ucb-articles-by-person-block container">
+				<person-article-list
+					nodeId="{{node.id}}"
+				>
+					<div id="ucb-person-article-block-title" style="display:none">
+						<h3>Articles by {{ content.field_ucb_person_first_name }} {{ content.field_ucb_person_last_name }}</h3>
+					</div>
+					<div id="ucb-al-loading" style="display:none" class="ucb-list-msg ucb-loading-data">
+						<i class="fas fa-spinner fa-3x fa-pulse"></i>
+					</div>
+					<div id="ucb-al-error" style="display:none" class="ucb-list-msg">
+						<h3>An error has occured - please check the console. </h3>
+					</div>
+					<div id="ucb-al-api-error" style="display:none" class="ucb-list-msg">
+						<h3>An error has occured with the API - please try again later</h3>
+					</div>
+				</person-article-list>
 			</div>
 		</div>
 	</div>

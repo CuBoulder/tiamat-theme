@@ -68,16 +68,15 @@
  */
 #}
 
-{{ attach_library('boulderD9_base/ucb-page') }}
+{{ attach_library('boulder_base/ucb-page') }}
 
 {#Dummy variable to ensure that all content tags are set for caching purposes#}
 {% set content_render = content|render %}
 
-{# Used for hiding site title visibly using sr-only bootstrap class #}
-{% set site_url = path("<current>") %} 
-{% set srOnly = '' %}
-{% if site_url is same as '/homepage' %}
-	{% set srOnly = 'sr-only' %}
+{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
+{% set isFrontPage = '' %}
+{% if is_front %}
+	{% set isFrontPage = 'sr-only' %}
 {% endif %}
 
 {%
@@ -90,7 +89,7 @@
 <article{{attributes.addClass(classes)}}>
 	{% if label %}
 		<div class="container">
-			<h1{{title_attributes}} class="{{srOnly}}">
+			<h1{{title_attributes}} class="{{isFrontPage}}">
 				{{ label }}
 			</h1>
 		</div>

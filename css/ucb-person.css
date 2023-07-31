@@ -42,8 +42,22 @@ a.ucb-person-social-link i.fab {
 }
 
 .ucb-person-contact p {
-	margin: 0;
+	margin: 5px;
+	padding-top:10px;
+	padding-bottom:10px;
 }
+
+.ucb-articles-by-person-block{
+	display: block;
+	margin-bottom: 20px;
+}
+
+.ucb-article-card-title{
+	margin: 0;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
 
 @media screen and (min-width: 768px) {
 	.ucb-person-img {
@@ -105,4 +119,8 @@ ul.ucb-person-department li:not(:first-child):before {
 
 .primaryLinkIcon {
 	color: gray;
+}
+
+.ucb-article-card-title-only{
+	border-bottom: solid rgba(128, 128, 128, 0.333);
 }

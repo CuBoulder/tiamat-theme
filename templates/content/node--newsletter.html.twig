@@ -6,8 +6,8 @@
 */
 #}
 
-{{ attach_library('boulderD9_base/ucb-page') }}
-{{ attach_library('boulderD9_base/ucb-newsletter') }}
+{{ attach_library('boulder_base/ucb-page') }}
+{{ attach_library('boulder_base/ucb-newsletter') }}
 
 {%
 set classes = [
@@ -17,6 +17,12 @@ not node.isPublished() ? 'node--unpublished',
 view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 ]
 %}
+
+{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
+{% set isFrontPage = '' %}
+{% if is_front %}
+	{% set isFrontPage = 'sr-only' %}
+{% endif %}
 
 {#Dummy variable to ensure that all content tags are set for caching purposes#}
 {% set content_render = content|render %}
@@ -32,7 +38,7 @@ view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 		data-loggedin="{{isLoggedIn}}"
 		>
 		{# Newsletter Title #}
-		<h1 class="ucb-newsletter-title" itemprop="name">{{ label }}</h1>
+		<h1 class="ucb-newsletter-title {{isFrontPage}}" itemprop="name">{{ label }}</h1>
 		{# Newsletter Intro #}
 		{% if content.field_newsletter_intro_image|render %}
 			<div id="newsletter-intro-img">{{ content.field_newsletter_intro_image }}</div>

@@ -9,6 +9,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds Articles by Person Block to a Person Page
+  Adds an Articles by Person block to the Person page, displaying the most recent 5 articles associated.
+  
+  To reveal this block, you must have a byline taxonomy term created with a reference to the Person page in the `field_author_person_page` on the term, and then use that byline term on the article's byline. If a Person does not have any articles, this block will not display.
+  
+  Resolves #345 ,  Resolves #427 
+---
+
+- ### Removes image requirement from Content Row "Teaser" layouts
+  This update enables the creation of Content Row blocks with image-less content and displays it correctly in the "Teasers" and "Teasers Alternate" layouts.
+  
+  Resolves CuBoulder/tiamat-theme#453
+  
+  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/71)
+---
+
+- ### Page Title on user-set default Front Page set to screen-read only
+  Resolves #448 
+  
+  Sets the title of pages chosen to be the site's default front page to 'sr-only' class. Will hide the title visually but still accessible to screen readers. Currently this works only if the page is set to explicitly the default '/homepage'. 
+---
+
+- ### sort alphabetically
+  Closes #449.
+  Small change to change the tags and categories to be sorted alphabetically.
+---
+
+- ### Removes "D9" from theme name and the theme, custom entities Composer package names 
+  Resolves CuBoulder/tiamat-theme#435
+  
+  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/70), [tiamat-profile](https://github.com/CuBoulder/tiamat-profile/pull/52), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/13), [tiamat-project-template](https://github.com/CuBoulder/tiamat-project-template/pull/28), [tiamat10-project-template](https://github.com/CuBoulder/tiamat10-project-template/pull/8), [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/26)
+---
+
+- ### fix for simple style menu issues
+  Closes #438.
+  Fixes drop shadow and margin issue in the simple menu style.
+---
+
+- ### Adds visual indication of active navigation menu items
+  Resolves CuBoulder/tiamat-theme#437
+---
+
 ## [20230707] - 2023-07-07
 
 -   ### Update for LB D10.1 style.css

@@ -1,6 +1,6 @@
 
-{{ attach_library('boulderD9_base/ucb-page') }}
-{{ attach_library('boulderD9_base/ucb-issue') }}
+{{ attach_library('boulder_base/ucb-page') }}
+{{ attach_library('boulder_base/ucb-issue') }}
 
 {%
     set classes = [
@@ -11,10 +11,16 @@
     ]
     %}
 
+{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
+{% set isFrontPage = '' %}
+{% if is_front %}
+	{% set isFrontPage = 'sr-only' %}
+{% endif %}
+
 <div class="container">
     <div class="row">
         <header role="banner" class="ucb-article-banner">
-			<h1 class="ucb-article-heading">{{ label }}</h1>
+			<h1 class="ucb-article-heading {{isFrontPage}}">{{ label }}</h1>
 		</header>
     </div>
 
