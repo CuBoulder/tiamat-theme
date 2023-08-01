@@ -49,8 +49,13 @@
 					<i class="fas fa-times-circle ucb-video-reveal-close-button"></i>
 				</div>
 				{# TO DO - this is where video wrapper will go #}
-				<div class="ucb-video-reveal-video-wrapper-{{blockId}}"></div>
-				{{ content.field_video_reveal_video|render }}
+				<div class="container" id="ucb-video-reveal-video-wrapper-{{blockId}}">
+					<script src="https://www.youtube.com/player_api"></script>
+					<script type="text/javascript">
+					window.addEventListener('load', () => enableVideoHero('{{ videoURL }}', 'ucb-video-reveal-video-wrapper-{{blockId}}'));
+					</script>
+				</div>
+				{# {{ content.field_video_reveal_video|render }} #}
 		</div>
 	</div>
 {% endblock content %}

@@ -118,12 +118,13 @@ const videoHeroSupportedSites = {
         name: 'youtube',
         api: 'https://www.youtube.com/iframe_api',
         waitForLoad: false,
-        handler: function(videoURL, videoWrapperElement, videoPlayerWrapperElement, playPauseButtonElement) {
+        handler: function(videoURL, videoWrapperElement, videoPlayerWrapperElement) {
             // YouTube video handler
             // Create a div element to hold the YouTube video player
             const videoPlayerElementId = videoPlayerWrapperElement.id + '_frame';
             const videoPlayerElement = document.createElement('div');
             videoPlayerElement.id = videoPlayerElementId;
+            // videoPlayerElement.style.display = 'none'
             videoPlayerWrapperElement.appendChild(videoPlayerElement);
 
             // Create the YouTube video player using the YouTube API
@@ -141,10 +142,10 @@ const videoHeroSupportedSites = {
                         const playerState = event.data;
                         switch (playerState) {
                             case YT.PlayerState.PLAYING:
-                                showVideoHeroPauseIcon(playPauseButtonElement);
+                                // showVideoHeroPauseIcon(playPauseButtonElement);
                                 break;
                             case YT.PlayerState.PAUSED:
-                                showVideoHeroPlayIcon(playPauseButtonElement);
+                                // showVideoHeroPlayIcon(playPauseButtonElement);
                                 break;
                             case YT.PlayerState.ENDED: // This will loop the video
                                 videoPlayer.seekTo(0);
@@ -170,7 +171,7 @@ const videoHeroSupportedSites = {
         name: 'youtube',
         api: 'https://www.youtube.com/iframe_api',
         waitForLoad: false,
-        handler: function(videoURL, videoWrapperElement, videoPlayerWrapperElement, playPauseButtonElement) {
+        handler: function(videoURL, videoWrapperElement, videoPlayerWrapperElement) {
             // Handler for youtu.be URLs
             // Redirect to the YouTube handler by converting youtu.be URL to the standard YouTube URL format
             videoHeroSupportedSites.youtube.handler(new URL('https://www.youtube.com/watch?v=' + videoURL.pathname.substr(1)), videoWrapperElement, videoPlayerWrapperElement, playPauseButtonElement);
@@ -180,7 +181,7 @@ const videoHeroSupportedSites = {
         name: 'vimeo',
         api: 'https://player.vimeo.com/api/player.js',
         waitForLoad: true,
-        handler: function(videoURL, videoWrapperElement, videoPlayerWrapperElement, playPauseButtonElement) {
+        handler: function(videoURL, videoWrapperElement, videoPlayerWrapperElement) {
             // Vimeo video handler
             let videoWidth = -1, videoHeight = -1, videoPlaying = false;
 
@@ -190,6 +191,8 @@ const videoHeroSupportedSites = {
                 background: true,
                 muted: true
             });
+
+            // videoPlayer.setAttribute('display', 'none')
 
             // Retrieve the video width and height using the Vimeo API (returned as Promises)
             // In case of error, default to 800x450, which is fine for 16:9 videos
@@ -208,23 +211,23 @@ const videoHeroSupportedSites = {
             });
             videoPlayer.on('play', function() {
                 videoPlaying = true;
-                showVideoHeroPauseIcon(playPauseButtonElement);
+                // showVideoHeroPauseIcon(playPauseButtonElement);
             });
             videoPlayer.on('pause', function() {
                 videoPlaying = false;
-                showVideoHeroPlayIcon(playPauseButtonElement);
+                // showVideoHeroPlayIcon(playPauseButtonElement);
             });
             videoPlayer.on('error', function() {
                 videoHeroErrorHandler(videoWrapperElement, videoPlayerWrapperElement);
             });
 
-            // Add an event listener to the play/pause button
-            playPauseButtonElement.onclick = function() {
-                if (videoPlaying)
-                    videoPlayer.pause();
-                else
-                    videoPlayer.play();
-            };
+            // // Add an event listener to the play/pause button
+            // playPauseButtonElement.onclick = function() {
+            //     if (videoPlaying)
+            //         videoPlayer.pause();
+            //     else
+            //         videoPlayer.play();
+            // };
         }
     }
 };
@@ -239,4 +242,44 @@ function appendVideoPlayerScript(scriptId, scriptURL) {
     scriptElement.src = scriptURL;
     headElement.appendChild(scriptElement);
     return scriptElement;
+}
+
+
+function videoHeroErrorHandler(videoWrapperElement, videoPlayerWrapperElement) {
+    videoWrapperElement.setAttribute('hidden', '');
+    videoPlayerWrapperElement.innerHTML = '';
+    throw new Error('Video in video reveal unit encountered an error.');
+}
+
+function createVideoHeroPlayer(videoSite, videoURL, videoPlayerWrapperElementId) {
+    const videoPlayerWrapperElement = document.getElementById(videoPlayerWrapperElementId);
+    const videoWrapperElement = videoPlayerWrapperElement.parentElement;
+
+    videoSite.handler(videoURL, videoWrapperElement, videoPlayerWrapperElement);
+}
+
+function enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayerElement, videoWidth, videoHeight) {
+    if(videoWidth > -1 && videoHeight > -1) {
+        resizeVideoHero(videoWrapperElement, videoPlayerWrapperElement, videoPlayerElement, videoWidth, videoHeight);
+        window.addEventListener('resize', () => resizeVideoHero(videoWrapperElement, videoPlayerWrapperElement, videoPlayerElement, videoWidth, videoHeight));    
+    }
+}
+
+function resizeVideoHero(videoWrapperElement, videoPlayerWrapperElement, videoPlayerElement, videoWidth, videoHeight) {
+    const 
+        heroElement = videoWrapperElement.parentElement,
+        heroWidth = heroElement.offsetWidth,
+        heroHeight = heroElement.offsetHeight,
+        dimensions = calculateAspectRatioFit(videoWidth, videoHeight, heroWidth, heroHeight);
+    videoPlayerElement.width = dimensions.width;
+    videoPlayerWrapperElement.style.width = heroWidth + 'px';
+    videoPlayerElement.height = dimensions.height;
+    videoPlayerWrapperElement.style.height = heroHeight + 'px';
+    videoPlayerElement.style.marginTop = ((heroHeight - dimensions.height) / 2) + 'px';
+    videoPlayerElement.style.marginLeft = ((heroWidth - dimensions.width) / 2) + 'px';
+}
+
+function calculateAspectRatioFit(srcWidth, srcHeight, maxWidth, maxHeight) {
+    const ratio = Math.max(maxWidth / srcWidth, maxHeight / srcHeight);
+    return { width: srcWidth * ratio, height: srcHeight * ratio };
 }
