@@ -34,29 +34,23 @@
 			<h2{{title_attributes}}>{{ label }}</h2>
 		{% endif %}
 		{{ title_suffix }}
+		<h2>video url: {{videoURL}}</h2>
 		<div id="ucb-video-block-{{ blockId }}" class="ucb-video-text-div">
-			<div hidden class="ucb-hero-unit-video-wrapper">
-				<div class="ucb-hero-unit-video-player-wrapper" id="ucb_hero_unit_video_player_{{ blockId }}"></div>
-				<div class="ucb-hero-unit-video-controls-wrapper">
-					<div class="ucb-hero-unit-video-controls">
-						<div class="ucb-video-reveal-controls">
-							<span class="ucb-video-reveal-text">{{ content.field_video_reveal_text}}</span>
-						</div>
-						<div>
-							<div class="ucb-video-reveal-image">
-								{{ content.field_video_reveal_image|render }}
-							</div>
-						<span class="ucb-hero-unit-video-control-button ucb-hero-unit-video-play-pause" title="Play/Pause video">
-							<i class="fa fa-play"></i>
-						</span>
-						</div>
-					</div>
+				<div class="ucb-video-reveal-controls">
+					<span class="ucb-video-reveal-icon">
+						<i class="fas fa-play-circle"></i>
+					</span>
+					<span class="ucb-video-reveal-text">{{ content.field_video_reveal_text}}</span>
 				</div>
-			</div>
-			</div>
-			<script type="text/javascript">
-				window.addEventListener('load', () => enableVideoHero('{{ videoURL }}', 'ucb_hero_unit_video_player_{{ blockId }}'));
-			</script>
+				<div class="ucb-video-reveal-image">
+					{{ content.field_video_reveal_image|render }}
+				</div>
+				<div class="ucb-video-reveal-close">
+					<i class="fas fa-times-circle ucb-video-reveal-close-button"></i>
+				</div>
+				{# TO DO - this is where video wrapper will go #}
+				<div class="ucb-video-reveal-video-wrapper-{{blockId}}"></div>
+				{{ content.field_video_reveal_video|render }}
 		</div>
 	</div>
 {% endblock content %}
