@@ -130,7 +130,7 @@ const videoHeroSupportedSites = {
             // Create the YouTube video player using the YouTube API
             const videoPlayer = new YT.Player(videoPlayerElementId, {
                 videoId: videoURL.searchParams.get('v'),
-                playerVars: { autoplay: 1, controls: 0, mute: 1, disablekb: 1, rel: 0, playsinline: 1 },
+                playerVars: { autoplay: 0, controls: 0, mute: 1, disablekb: 1, rel: 0, playsinline: 1 },
                 events: {
                     // Called when the YouTube player is ready to play
                     onReady: function(event) {

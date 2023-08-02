@@ -72,13 +72,21 @@ span.ucb-vid-reveal-icon {
   display: none;
 }
 
-.ucb-video-reveal-video iframe {
+/* .ucb-video-reveal-video iframe {
   max-width: 100%;
   width: 100%;
   min-height: 600px;
   height: 100%;
-}
+} */
 
+.ucb-video-reveal-video-wrapper{
+  width: 100% !important;
+  height: auto !important;
+}
+.ucb-video-reveal-video-wrapper > iframe {
+  width: 100%;
+  margin: 0 !important;
+}
 @media screen and (max-width: 768px) {
   .ucb-video-reveal-controls {
     font-size: 1.25em;
