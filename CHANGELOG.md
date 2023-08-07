@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates bootstrap version
+  Resolves CuBoulder/tiamat-theme#463
+---
+
 - ### Hides breadcrumbs on top-level pages
   Resolves CuBoulder/tiamat-theme#460
 ---
