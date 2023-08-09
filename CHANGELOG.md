@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates bootstrap version
+  Resolves CuBoulder/tiamat-theme#463
+---
+
+- ### Hides breadcrumbs on top-level pages
+  Resolves CuBoulder/tiamat-theme#460
+---
+
 - ### Adds Articles by Person Block to a Person Page
   Adds an Articles by Person block to the Person page, displaying the most recent 5 articles associated.
   
