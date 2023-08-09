@@ -26,13 +26,15 @@ for (let i = 0, x = els.length; i < x; i++) {
 
     // get the parent element
     let myParentEl = this.parentElement;
-
+    console.log('parentEl', myParentEl)
     if(myParentEl) {
       // find the text controls and hide them
       myParentEl.querySelector(".ucb-video-reveal-controls").style.display = "none";
 
       // find the image and hide it
       myParentEl.querySelector(".ucb-video-reveal-image").style.display = "none";
+      // unhide video
+      myParentEl.querySelector(".ucb-video-reveal-video-wrapper").style.display = 'block';
 
       // find the video and video control block and show them
       let vidControlEl = myParentEl.querySelector(".ucb-video-reveal-close");
@@ -63,7 +65,7 @@ for (let i = 0, x = closeEls.length; i < x; i++) {
       let vidControlEl = myParentEl.querySelector(".ucb-video-reveal-close");
       vidControlEl.style.display = "none";
 
-      let videoEl = myParentEl.querySelector(".ucb-video-reveal-video");
+      let videoEl = myParentEl.querySelector(".ucb-video-reveal-video-wrapper");
       videoEl.style.display = "none";
       var iframe = videoEl.getElementsByTagName("iframe")[0].contentWindow;
 

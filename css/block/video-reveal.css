@@ -51,6 +51,10 @@ span.ucb-vid-reveal-icon {
   padding-bottom: 0px;
 }
 
+.ucb-video-reveal-video-wrapper{
+  display: none;
+}
+
 .ucb-video-reveal-close {
   width: 100%;
   display: none;
