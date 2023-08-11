@@ -438,6 +438,7 @@ class PeopleListBlockElement extends HTMLElement {
 	}
 
 	appendPerson(format, person, containerElement) {
+        console.log('my format', format)
 		let cardElement, cardHTML = '', personTitleList = '', personDepartmentList = '';
 		const
 			personLink = person.link,
