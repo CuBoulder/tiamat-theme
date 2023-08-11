@@ -11,6 +11,51 @@
   ]
   %}
 
+  {% 
+	set config = {
+		'taxonomies' : {
+			'department': 'department',
+			'job_type': 'ucb_person_job_type',
+			'filter_1': 'filter_1',
+			'filter_2': 'filter_2',
+			'filter_3': 'filter_3'
+		},
+		'filters': {
+			'department': {
+				'includes': content.field_people_block_department|render|striptags|trim|split(' '),
+				'userAccessible': false,
+				'label': 'Department',
+				'restrict': true
+			},
+			'job_type': {
+				'includes': content.field_people_block_job_type|render|striptags|trim|split(' '),
+				'userAccessible': false,
+				'label': 'Job Type',
+				'restrict': true
+			},
+			'filter_1': {
+				'includes': content.field_people_block_filter_1|render|striptags|trim|split(' '),
+				'userAccessible': false,
+				'label': content.field_ucb_people_filter_1_label|render|striptags|trim,
+				'restrict': true
+			},
+			'filter_2': {
+				'includes': content.field_people_block_filter_2|render|striptags|trim|split(' '),
+				'userAccessible': false,
+				'label': content.field_ucb_people_filter_2_label|render|striptags|trim,
+				'restrict': true
+			},
+			'filter_3': {
+				'includes': content.field_people_block_filter_3|render|striptags|trim|split(' '),
+				'userAccessible': false,
+				'label': content.field_ucb_people_filter_3_label|render|striptags|trim,
+				'restrict': true
+			}
+		},
+		'format': content.field_people_block_display|render|striptags|trim,
+	}
+%}
+
 <div{{attributes.addClass(classes)}}>
     {{ title_prefix }}
   <h2{{title_attributes}}>
@@ -19,7 +64,11 @@
   {{ title_suffix }}
   {{ content.body }}
 {# People List Block - Main Block#}
-<people-list-block>
+<people-list-block
+    base-uri="{{ url('<front>')|render|trim('/') }}/jsonapi"
+    config="{{ config|json_encode }}"
+    user-config="{}"
+>
   <div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
     <i class="fas fa-spinner fa-3x fa-pulse"></i>
   </div>
