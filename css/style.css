@@ -24,7 +24,6 @@
   }
   
   .ucb-page-content {
-    flex: 1;
   }
 
   .ucb-breadcrumb-region {
@@ -343,6 +342,7 @@
   /********* Footer ***********/
   .ucb-homepage-footer {
     display: block;
+    flex: 1;
   }
   
   .ucb-footer-top {
