@@ -1,0 +1,35 @@
+{{ attach_library('boulder_base/ucb-people-list-block') }}
+
+{%
+    set classes = [
+      'block',
+      'container',
+      'block-' ~ configuration.provider|clean_class,
+      'block-' ~ plugin_id|clean_class,
+      bundle ? 'block--type-' ~ bundle|clean_class,
+      view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
+  ]
+  %}
+
+<div{{attributes.addClass(classes)}}>
+    {{ title_prefix }}
+  <h2{{title_attributes}}>
+    {{ label }}
+  </h2>
+  {{ title_suffix }}
+  {{ content.body }}
+{# People List Block - Main Block#}
+<people-list-block>
+  <div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
+    <i class="fas fa-spinner fa-3x fa-pulse"></i>
+  </div>
+  <div id="ucb-al-error" style="display:none" class="ucb-list-msg">
+    <h3>An error has occured - please check your filters and try again</h3>
+  </div>
+  <div id="ucb-al-api-error" style="display:none" class="ucb-list-msg">
+    <h3>An error has occured with the API - please try again later</h3>
+  </div>
+</people-list-block>
+</div>
+
+
