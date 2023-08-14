@@ -316,6 +316,16 @@ class PeopleListBlockElement extends HTMLElement {
 		this._contentElement.appendChild(wrapper);
 		return wrapper;
 	}
+	buildNameGroup(taxonomyTerm) {
+		const wrapper = document.createElement('section');
+		if(taxonomyTerm) {
+			const groupTitleContainer = document.createElement('div');
+			groupTitleContainer.appendChild(this.attachElementToTaxonomyTerm(document.createElement('h2'), taxonomyTerm));
+			wrapper.appendChild(groupTitleContainer);
+		}
+		this._contentElement.appendChild(wrapper);
+		return wrapper;
+	}
 
 	buildThumbnailGroup(taxonomyTerm) {
 		const wrapper = document.createElement('section');
@@ -378,6 +388,7 @@ class PeopleListBlockElement extends HTMLElement {
 			case 'grid': return this.buildGridGroup(taxonomyTerm);
 			case 'table': return this.buildTableGroup(taxonomyTerm);
 			case 'name-thumbnail': return this.buildThumbnailGroup(taxonomyTerm)
+			case 'name-only': return this.buildNameGroup(taxonomyTerm);
 		}
 	}
 
@@ -629,6 +640,20 @@ class PeopleListBlockElement extends HTMLElement {
 							</div>`
 						: ''
 					}
+						<div class="col-sm-12 col-md-9 ucb-person-card-details">
+							<a href="${personLink}">
+								<span class="ucb-person-card-name">
+									<h2>${personName}</h2>
+								</span>
+							</a>
+							</div>
+						</div>
+					</div>`;
+			break;
+			case 'name-only':
+				cardElement = document.createElement('div');
+				cardHTML = `
+					<div class="ucb-person-card-list row">
 						<div class="col-sm-12 col-md-9 ucb-person-card-details">
 							<a href="${personLink}">
 								<span class="ucb-person-card-name">
