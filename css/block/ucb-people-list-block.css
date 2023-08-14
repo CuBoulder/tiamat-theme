@@ -1,3 +1,143 @@
-/* *{
-    color: red;
-} */
+.ucb-list-msg {
+    font-size: 1.25em;
+    font-weight: bolder;
+    text-align: center;
+  }
+  
+  .ucb-loading-data {
+    color: #01579b;
+    text-align: center;
+  }
+  
+  .ucb-list-msg,
+  .ucb-loading-data {
+    display: block;
+  }
+  .ucb-list-msg[hidden],
+  .ucb-loading-data[hidden] {
+    display: none;
+  }
+  
+  .ucb-person-card-list {
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid rgba(20 20 20 / 20%);
+    margin-left: 0px;
+  }
+  
+  .ucb-person-card-details {
+    display: flex;
+    flex-direction: column;
+    padding-left: 0px;
+  }
+  
+  .ucb-person-card-name > h2 {
+    margin-bottom: 0px;
+    font-size: 120%;
+    font-weight: 600;
+  }
+  
+  .ucb-person-card-dept {
+    text-transform: uppercase;
+    font-size: 0.8rem;
+    margin-bottom: 0.25rem;
+  }
+  
+  .ucb-person-card-contact {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .departments-grid,
+  .person-dept-table {
+    text-transform: uppercase;
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .person-title-table {
+    display: block;
+    margin-top: 5px;
+  }
+  
+  .ucb-person-card-img-grid {
+    margin-bottom: 10px;
+  }
+  
+  .ucb-people-list-table-head {
+    width: 100%;
+  }
+  
+  .ucb-people-list-table-photo {
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .people-list-icon {
+    color: #aaa;
+  }
+  
+  .ucb-people-list-contact {
+    color: #0277bd;
+    font-family: Roboto, Helvetica, sans-serif;
+    font-weight: 400;
+  }
+  
+  .ucb-person-card-dept-ul {
+    display: flex;
+    flex-direction: row;
+    padding-left: 0;
+  }
+  
+  .ucb-person-card-dept-ul li {
+    margin-right: 2em;
+  }
+  
+  .ucb-person-card-dept-ul li:first-of-type {
+    list-style: none;
+  }
+  
+  thead.ucb-people-list-table-head {
+    background: #ccc;
+  }
+  
+  tbody.ucb-people-list-table-tablebody {
+    background: #fafafa;
+  }
+    
+  .ucb-person-card-img {
+    padding: 0 20px 10px 0;
+    height: 110px;
+    width: 120px;
+  }
+  
+  .ucb-person-card-links {
+    padding-right: 20px;
+  }
+  
+  .ucb-person-card-contact-table {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .iconColor {
+    color: #565a5c;
+  }
+  
+  .ucb-person-card-body {
+    padding-bottom: 0.5rem;
+  }
+  
+  .ucb-person-card-img-grid > a > img {
+    width: 100%;
+  }
+  
+  @media (max-width: 767px) {
+    .ucb-person-card-contact {
+      flex-direction: column;
+    }
+  }
+  
