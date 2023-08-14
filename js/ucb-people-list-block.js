@@ -317,6 +317,17 @@ class PeopleListBlockElement extends HTMLElement {
 		return wrapper;
 	}
 
+	buildThumbnailGroup(taxonomyTerm) {
+		const wrapper = document.createElement('section');
+		if(taxonomyTerm) {
+			const groupTitleContainer = document.createElement('div');
+			groupTitleContainer.appendChild(this.attachElementToTaxonomyTerm(document.createElement('h2'), taxonomyTerm));
+			wrapper.appendChild(groupTitleContainer);
+		}
+		this._contentElement.appendChild(wrapper);
+		return wrapper;
+	}
+
 	buildGridGroup(taxonomyTerm) {
 		const wrapper = document.createElement('section');
 		wrapper.className = 'row ucb-people-list-content';
@@ -361,10 +372,12 @@ class PeopleListBlockElement extends HTMLElement {
 	}
 
 	buildGroup(format, taxonomyTerm) {
+		console.log('format', format)
 		switch (format) {
 			case 'list': default: return this.buildListGroup(taxonomyTerm);
 			case 'grid': return this.buildGridGroup(taxonomyTerm);
 			case 'table': return this.buildTableGroup(taxonomyTerm);
+			case 'name-thumbnail': return this.buildThumbnailGroup(taxonomyTerm)
 		}
 	}
 
@@ -459,6 +472,8 @@ class PeopleListBlockElement extends HTMLElement {
 		});
 		if(personDepartmentList)
 			personDepartmentList = '<span' + (departmentTaxonomy ? '' : ' hidden') + ' class="taxonomy-visible-department">' + personDepartmentList + '</span>';
+			console.log('format me', format)
+
 		switch (format) {
 			case 'list': default:
 				cardElement = document.createElement('div');
@@ -601,6 +616,30 @@ class PeopleListBlockElement extends HTMLElement {
 						}
 						</div>
 					</td>`;
+			break;
+			case 'name-thumbnail':
+			cardElement = document.createElement('div');
+				cardHTML = `
+					<div class="ucb-person-card-list row">
+					${
+						personPhoto ?
+							`
+							<div class="col-sm-12 col-md-3 ucb-person-card-img">
+								<a href="${personLink}">${personPhoto}</a>
+							</div>`
+						: ''
+					}
+						<div class="col-sm-12 col-md-9 ucb-person-card-details">
+							<a href="${personLink}">
+								<span class="ucb-person-card-name">
+									<h2>${personName}</h2>
+								</span>
+							</a>
+							</div>
+						</div>
+					</div>`;
+			break;
+
 		}
 		cardElement.innerHTML = cardHTML;
 		containerElement.appendChild(cardElement);
