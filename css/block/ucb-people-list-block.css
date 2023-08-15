@@ -48,34 +48,16 @@
     flex-direction: row;
   }
   
-  .departments-grid,
-  .person-dept-table {
+  .departments-grid {
     text-transform: uppercase;
     display: block;
     margin-bottom: 5px;
   }
   
-  .person-title-table {
-    display: block;
-    margin-top: 5px;
-  }
-  
   .ucb-person-card-img-grid {
     margin-bottom: 10px;
   }
-  
-  .ucb-people-list-table-head {
-    width: 100%;
-  }
-  
-  .ucb-people-list-table-photo {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-    text-align: center;
-    vertical-align: middle;
-  }
-  
+    
   .people-list-icon {
     color: #aaa;
   }
@@ -100,14 +82,6 @@
     list-style: none;
   }
   
-  thead.ucb-people-list-table-head {
-    background: #ccc;
-  }
-  
-  tbody.ucb-people-list-table-tablebody {
-    background: #fafafa;
-  }
-    
   .ucb-person-card-img {
     padding: 0 20px 10px 0;
     height: 110px;
@@ -116,11 +90,6 @@
   
   .ucb-person-card-links {
     padding-right: 20px;
-  }
-  
-  .ucb-person-card-contact-table {
-    display: flex;
-    flex-direction: column;
   }
   
   .iconColor {
