@@ -109,20 +109,6 @@ class PeopleListBlockElement extends HTMLElement {
 			syncTaxonomies.add(groupBy);
 			asyncTaxonomies.delete(groupBy);
 		} else this._groupBy = 'none';
-		// If no filters are visitor accessible, skip the form entirely
-		let formRenderBool = false; // running check
-		for(const filterName in filters) { // If user filter dropdowns are necessary, they can be generated async
-			const filter = filters[filterName];
-			filter['includes'] = filter['includes'].filter(include => !!include);
-			if(filter['userAccessible']) {
-				userAccessibleFilters[filterName] = filter;
-				if(!syncTaxonomies.has(filterName))
-					asyncTaxonomies.add(filterName);
-				formRenderBool = true;
-			}
-		}
-		// call generateForm method if there's atleast one vistor accessible field
-		if (formRenderBool) this.generateForm();
 		this._loadedTaxonomies = {};
 		this._syncTaxonomiesLoaded = 0;
 		this.loadSyncTaxonomies();
@@ -351,42 +337,10 @@ class PeopleListBlockElement extends HTMLElement {
 		return wrapper;
 	}
 
-	buildTableGroup(taxonomyTerm) {
-		let table = this._contentElement.querySelector('table'), tableBody;
-		// we only need to render the table header the first time
-		// this function will be called multiple times so check to 
-		// see if we've already rendered the table header HTML
-		if(!table) {
-			table = document.createElement('table');
-			table.classList = 'table table-bordered table-striped';
-			const tableHead = document.createElement('thead');
-			tableHead.classList = 'ucb-people-list-table-head';
-			const tableRow = document.createElement('tr');
-			tableRow.innerHTML = '<th><span class="sr-only">Photo</span></th><th>Name</th><th>Contact Information</th>';
-			tableBody = document.createElement('tbody');
-			tableBody.className = 'ucb-people-list-table-tablebody';
-			tableHead.appendChild(tableRow);
-			table.appendChild(tableHead);
-			table.appendChild(tableBody);
-			this._contentElement.appendChild(table);
-		}
-		tableBody = tableBody || table.querySelector('tbody.ucb-people-list-table-tablebody');
-		if(taxonomyTerm) {
-			const groupTitleContainer = document.createElement('tr'), groupTitleTh = document.createElement('th');
-			groupTitleTh.className = 'ucb-people-list-group-title-th';
-			groupTitleTh.setAttribute('colspan', '3');
-			groupTitleContainer.appendChild(this.attachElementToTaxonomyTerm(groupTitleTh, taxonomyTerm));
-			tableBody.appendChild(groupTitleContainer);
-		}
-		return tableBody;
-	}
-
 	buildGroup(format, taxonomyTerm) {
-		console.log('format', format)
 		switch (format) {
 			case 'list': default: return this.buildListGroup(taxonomyTerm);
 			case 'grid': return this.buildGridGroup(taxonomyTerm);
-			case 'table': return this.buildTableGroup(taxonomyTerm);
 			case 'name-thumbnail': return this.buildThumbnailGroup(taxonomyTerm)
 			case 'name-only': return this.buildNameGroup(taxonomyTerm);
 		}
@@ -462,7 +416,6 @@ class PeopleListBlockElement extends HTMLElement {
 	}
 
 	appendPerson(format, person, containerElement) {
-        console.log('my format', format)
 		let cardElement, cardHTML = '', personTitleList = '', personDepartmentList = '';
 		const
 			personLink = person.link,
@@ -483,7 +436,6 @@ class PeopleListBlockElement extends HTMLElement {
 		});
 		if(personDepartmentList)
 			personDepartmentList = '<span' + (departmentTaxonomy ? '' : ' hidden') + ' class="taxonomy-visible-department">' + personDepartmentList + '</span>';
-			console.log('format me', format)
 
 		switch (format) {
 			case 'list': default:
@@ -572,62 +524,6 @@ class PeopleListBlockElement extends HTMLElement {
 						</div>
 					</div>`;
 			break;
-			case 'table':
-				cardElement = document.createElement('tr');
-				cardHTML = `
-				
-					<td class="ucb-people-list-table-photo">
-						<a href="${personLink}">${personPhoto}</a>  
-					</td>
-					<td>
-						<a href="${personLink}">
-							<span class="ucb-person-card-name">
-								${personName}
-							</span>
-						</a>
-						<span class="ucb-person-card-title person-title-table">
-							${personTitleList}
-						</span>
-						<span class="ucb-person-card-dept person-dept-table">
-							${personDepartmentList}
-						</span>
-					</td>
-					<td>
-						<div class="ucb-person-card-contact-table">
-						${
-							personEmail ?
-								`<span class="ucb-person-card-links ucb-person-card-email">
-									<i class="fa fa-envelope iconColor"></i>
-									<a href="mailto:${personEmail}">
-										<span class="ucb-people-list-contact">  ${personEmail}</span>
-									</a>
-								</span>`
-							: ''
-						}
-						${
-							personPhone ?
-								`<span class="ucb-person-card-links ucb-person-card-phone">
-									<i class="fa fa-phone iconColor"></i>
-									<a href="tel:${personPhone.replace(/[^+\d]+/g, '',)}">
-										<span class="ucb-people-list-contact">  ${personPhone}</span>
-									</a>
-								</span>`
-							: ''
-						}
-						${
-							personPrimaryLinkURI ?
-								`<span class="ucb-person-card-links ucb-person-card-primary-link">
-								<i class="` + this.generateLinkIcon(personPrimaryLinkURI) + `"></i>
-								<a href="${personPrimaryLinkURI}">
-									<span class="ucb-people-list-contact">  ${personPrimaryLinkTitle}</span>
-								</a>
-								</span>
-								`
-							: ''
-						}
-						</div>
-					</td>`;
-			break;
 			case 'name-thumbnail':
 			cardElement = document.createElement('div');
 				cardHTML = `
@@ -664,7 +560,6 @@ class PeopleListBlockElement extends HTMLElement {
 						</div>
 					</div>`;
 			break;
-
 		}
 		cardElement.innerHTML = cardHTML;
 		containerElement.appendChild(cardElement);
@@ -685,129 +580,6 @@ class PeopleListBlockElement extends HTMLElement {
 		if(display === 'none')
 			element.setAttribute('hidden', '');
 		else element.removeAttribute('hidden');
-	}
-
-	generateForm(){
-		const userAccessibleFilters = this._userAccessibleFilters;
-		// Create Elements
-		const form = document.createElement('form'), formDiv = document.createElement('div'), 
-			resetButtonContainerElement = document.createElement('div'), resetButtonElement = document.createElement('button'), // Creates the reset button (see https://github.com/CuBoulder/tiamat-theme/issues/312)
-			onChange = form => {
-				const formItemsData = new FormData(form),
-					userSettings = {};
-				// Create a dataObject with ids for second render
-				for (const formItemData of formItemsData) {
-					const filterName = formItemData[0], filterInclude = formItemData[1];
-					if(filterInclude != '-1')
-						userSettings[filterName] = {'includes': [filterInclude]};
-				}
-				this.setAttribute('user-config', JSON.stringify({'filters': userSettings}));
-				// Shows or hides the reset button when a non-default is selected anywhere
-				let showReset = false;
-				const selectElements = form.getElementsByTagName('select');
-				for (let index = 0; index < selectElements.length; index++) {
-					const selectElement = selectElements[index], options = selectElement.options;
-					if (options.length > 1 && !options[selectElement.selectedIndex].classList.contains('taxonomy-option-default')) {
-						showReset = true;
-						break;
-					}
-				}
-				if (showReset) resetButtonContainerElement.removeAttribute('hidden');
-				else resetButtonContainerElement.setAttribute('hidden', '');
-			};
-		form.className = 'people-list-filter';
-		formDiv.className = 'd-flex align-items-center';
-	
-		// If User-Filterable...Create Dropdowns
-		for(const key in userAccessibleFilters){
-			const filter = userAccessibleFilters[key];
-			// Create container
-			const container = document.createElement('div');
-			container.className = `form-item-${key} form-item`;
-			// Create label el
-			const itemLabel = document.createElement('label'), itemLabelSpan = document.createElement('span');
-			itemLabelSpan.innerText = filter['label'];
-			itemLabel.appendChild(itemLabelSpan);
-			// Create select el
-			const selectFilter = document.createElement('select');
-			selectFilter.name = key;
-			selectFilter.className = 'taxonomy-select-' + key + ' taxonomy-select';
-			selectFilter.onchange = event => onChange(event.target.form);
-
-			if(filter['includes'].length != 1) {
-				// All option as first entry
-				const defaultOption = document.createElement('option');
-				defaultOption.value = '-1';
-				defaultOption.innerText = 'All';
-				defaultOption.className = 'taxonomy-option-all taxonomy-option-default';
-				if(!filter['restrict'] && filter['includes'].length > 1){
-					defaultOption.innerText = 'Default';
-					defaultOption.className = 'taxonomy-option-default';
-					const allOptions = document.createElement('option');
-					allOptions.innerText = 'All';
-					allOptions.value = '';
-					allOptions.className = 'taxonomy-option-all';
-					selectFilter.appendChild(allOptions);
-				}
-				defaultOption.selected = true;
-				// Append
-				selectFilter.appendChild(defaultOption);
-			}
-			itemLabel.appendChild(selectFilter);
-			container.appendChild(itemLabel);
-			formDiv.appendChild(container);
-		}
-
-		// Enables the reset button
-		resetButtonContainerElement.className = 'form-item reset-button-form-item';
-		resetButtonContainerElement.setAttribute('hidden', ''); // Hides the reset button by default
-		resetButtonElement.className = 'reset-button';
-		resetButtonElement.innerText = 'Reset';
-		resetButtonElement.onclick = event => { // Resets all <select> elements to the default option, if there is one
-			event.preventDefault();
-			const selectElements = form.getElementsByTagName('select');
-			for (let index = 0; index < selectElements.length; index++) {
-				const selectElement = selectElements[index],
-					defaultOption = selectElement.querySelector('.taxonomy-option-default');
-				if (defaultOption)
-					defaultOption.selected = true;
-			}
-			onChange(form);
-		};
-		resetButtonContainerElement.appendChild(resetButtonElement);
-		formDiv.appendChild(resetButtonContainerElement);
-
-		// Appends child elements to match the schema:
-		// <form class="people-list-filter">
-		//  <div> { items } </div>
-		// </form>
-		form.appendChild(formDiv);
-		this._userFormElement.appendChild(form);   
-	}
-
-	generateDropdown(taxonomy, taxonomyFieldName, selectElement){
-		if(taxonomy.length === 0) return;
-		const
-			filters = this._filters,
-			taxonomyConfig = filters[taxonomyFieldName],
-			taxonomiesIncluded = taxonomyConfig['includes'].map(Number), // The data type for taxonomyTerm.id is Number, the includes may be strings
-			restrict = taxonomyConfig['restrict'] && taxonomiesIncluded.length > 0;
-		taxonomy.forEach(taxonomyTerm => {
-			if(restrict && taxonomiesIncluded.indexOf(taxonomyTerm.id) === -1) return; // Rejects a restricted option
-			const option = document.createElement('option');
-			option.value = taxonomyTerm.id;
-			option.innerText = taxonomyTerm.name;
-			option.selected = taxonomiesIncluded.length === 1 && taxonomiesIncluded[0] == taxonomyTerm.id;
-			selectElement.appendChild(option);
-		});
-		if(!restrict && taxonomy.length > 1 && taxonomy.length === taxonomiesIncluded.length) { // Removes the "Default" option if all the taxonomy terms are included
-			const defaultOption = selectElement.querySelector('.taxonomy-option-default'),
-				allOption = selectElement.querySelector('.taxonomy-option-all');
-			if(selectElement.options[selectElement.selectedIndex] == defaultOption)
-				allOption.selected = true;
-			selectElement.removeChild(defaultOption);
-			allOption.classList.add('taxonomy-option-default');
-		}
 	}
 	generateLinkIcon(linkURI) {
 		var linkIcon = "fas fa-link primaryLinkIcon";
