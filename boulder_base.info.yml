@@ -14,16 +14,16 @@ regions:
   secondary_menu: "Secondary Menu"
   alerts: "Alerts"
   breadcrumb: "Breadcrumb Navigation"
+  post_wide_title: "Post Wide Title"
   above_content: "Above Content"
-  left_sidebar: "Left Sidebar"
-  content: "Main Content"
-  right_sidebar: "Right Sidebar"
-  below_content: "Below Content"
+  left_sidebar: "Sidebar First"
+  content: "Content"
+  right_sidebar: "Sidebar Second"
+  wide_post: "Wide Post"
+  below_content: "After Content"
+  second_below_content: "After Content 2"
   social: "Social Media Menu"
-  footer_cta: "Footer Call-To-Action"
-  footer_nav_one: "Footer Navigation One"
-  footer_nav_two: "Footer Navigation Two"
-  footer_nav_three: "Footer Navigation Three"
-  footer_nav_four: "Footer Navigation Four"
-  footer_menu: 'Footer Menu'
   footer: "Footer"
+  site_information: 'Site Information'
+  footer_menu: 'Footer Menu'
+
