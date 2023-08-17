@@ -6,77 +6,77 @@
  *          : have image fade-out and video fade-in?
 */
 // controls to show the video 
-var els = document.getElementsByClassName("ucb-video-reveal-controls");
+// var els = document.getElementsByClassName("ucb-video-reveal-controls");
 
-// controls to close the video 
-var closeEls = document.getElementsByClassName("ucb-video-reveal-close");
+// // controls to close the video 
+// var closeEls = document.getElementsByClassName("ucb-video-reveal-close");
 
-// Adding a handler for each instance of the video reveal ...
-// this should allow multiple instances of the video reveal block
-// to all work independantly on the page.
-for (let i = 0, x = els.length; i < x; i++) {
-  els[i].onclick = function() {
-    // sanity checker
-    // alert("Coming Soon!");
+// // Adding a handler for each instance of the video reveal ...
+// // this should allow multiple instances of the video reveal block
+// // to all work independantly on the page.
+// for (let i = 0, x = els.length; i < x; i++) {
+//   els[i].onclick = function() {
+//     // sanity checker
+//     // alert("Coming Soon!");
 
-    // We have 3 sibling elements that we're dealing with.  One was clicked on
-    // the text control element which needs to be hidden
-    // we then have a sibling elements of the image (hide)
-    // and the video (show)
+//     // We have 3 sibling elements that we're dealing with.  One was clicked on
+//     // the text control element which needs to be hidden
+//     // we then have a sibling elements of the image (hide)
+//     // and the video (show)
 
-    // get the parent element
-    let myParentEl = this.parentElement;
-    console.log('parentEl', myParentEl)
-    if(myParentEl) {
-      // find the text controls and hide them
-      myParentEl.querySelector(".ucb-video-reveal-controls").style.display = "none";
+//     // get the parent element
+//     let myParentEl = this.parentElement;
+//     console.log('parentEl', myParentEl)
+//     if(myParentEl) {
+//       // find the text controls and hide them
+//       myParentEl.querySelector(".ucb-video-reveal-controls").style.display = "none";
 
-      // find the image and hide it
-      myParentEl.querySelector(".ucb-video-reveal-image").style.display = "none";
-      // unhide video
-      myParentEl.querySelector(".ucb-video-reveal-video-wrapper").style.display = 'block';
+//       // find the image and hide it
+//       myParentEl.querySelector(".ucb-video-reveal-image").style.display = "none";
+//       // unhide video
+//       myParentEl.querySelector(".ucb-video-reveal-video-wrapper").style.display = 'block';
 
-      // find the video and video control block and show them
-      let vidControlEl = myParentEl.querySelector(".ucb-video-reveal-close");
-      vidControlEl.style.display = "inline-block";
+//       // find the video and video control block and show them
+//       let vidControlEl = myParentEl.querySelector(".ucb-video-reveal-close");
+//       vidControlEl.style.display = "inline-block";
 
-      let videoEl = myParentEl.querySelector(".ucb-video-reveal-video");
-      var iframe = videoEl.getElementsByTagName("iframe")[0].contentWindow;
-    //   console.log('my iframe', iframe)
-      videoEl.style.display = "block";
-    }
-  };
-}
+//       let videoEl = myParentEl.querySelector(".ucb-video-reveal-video");
+//     //   var iframe = videoEl.getElementsByTagName("iframe")[0].contentWindow;
+//     //   console.log('my iframe', iframe)
+//     //   videoEl.style.display = "block";
+//     }
+//   };
+// }
 
 
-// Adding a handler for each instance of the video close button ...
-// this should allow multiple instances of the video reveal block 
-// to all work independantly on the page.  
-for (let i = 0, x = closeEls.length; i < x; i++) {
-  closeEls[i].onclick = function() {
-    // Sanity checker
-    //alert("Coming Soon!");
+// // Adding a handler for each instance of the video close button ...
+// // this should allow multiple instances of the video reveal block 
+// // to all work independantly on the page.  
+// for (let i = 0, x = closeEls.length; i < x; i++) {
+//   closeEls[i].onclick = function() {
+//     // Sanity checker
+//     //alert("Coming Soon!");
 
-    // get the parent element
-    let myParentEl = this.parentElement;
+//     // get the parent element
+//     let myParentEl = this.parentElement;
 
-    if(myParentEl) {
-      // find the video and video control block and hide them
-      let vidControlEl = myParentEl.querySelector(".ucb-video-reveal-close");
-      vidControlEl.style.display = "none";
+//     if(myParentEl) {
+//       // find the video and video control block and hide them
+//       let vidControlEl = myParentEl.querySelector(".ucb-video-reveal-close");
+//       vidControlEl.style.display = "none";
 
-      let videoEl = myParentEl.querySelector(".ucb-video-reveal-video-wrapper");
-      videoEl.style.display = "none";
-      var iframe = videoEl.getElementsByTagName("iframe")[0].contentWindow;
+//       let videoEl = myParentEl.querySelector(".ucb-video-reveal-video-wrapper");
+//       videoEl.style.display = "none";
+//     //   var iframe = videoEl.getElementsByTagName("iframe")[0].contentWindow;
 
-      // find the text controls and show them
-      myParentEl.querySelector(".ucb-video-reveal-controls").style.display = "flex";
+//       // find the text controls and show them
+//       myParentEl.querySelector(".ucb-video-reveal-controls").style.display = "flex";
 
-      // find the image and hide it
-      myParentEl.querySelector(".ucb-video-reveal-image").style.display = "block";
-    }
-  };
-}
+//       // find the image and hide it
+//       myParentEl.querySelector(".ucb-video-reveal-image").style.display = "block";
+//     }
+//   };
+// }
 
 
 /**
@@ -191,10 +191,9 @@ const videoHeroSupportedSites = {
             const videoPlayer = new Vimeo.Player(videoPlayerWrapperElement.id, {
                 url: videoURL + '',
                 background: true,
-                muted: true
+                muted: true,
+                autoplay: false  
             });
-
-            // videoPlayer.setAttribute('display', 'none')
 
             // Retrieve the video width and height using the Vimeo API (returned as Promises)
             // In case of error, default to 800x450, which is fine for 16:9 videos
@@ -210,6 +209,7 @@ const videoHeroSupportedSites = {
             // Register event handlers for Vimeo player events
             videoPlayer.on('loaded', function() {
                 videoWrapperElement.removeAttribute('hidden');
+                videoPlaying = false;
             });
             videoPlayer.on('play', function() {
                 videoPlaying = true;
@@ -223,13 +223,27 @@ const videoHeroSupportedSites = {
                 videoHeroErrorHandler(videoWrapperElement, videoPlayerWrapperElement);
             });
 
-            // // Add an event listener to the play/pause button
-            // playPauseButtonElement.onclick = function() {
-            //     if (videoPlaying)
-            //         videoPlayer.pause();
-            //     else
-            //         videoPlayer.play();
-            // };
+            const videoEl = videoPlayer.element.parentElement.getElementsByClassName('ucb-video-reveal-video-wrapper')[0]
+            const closeBtn = videoPlayer.element.parentElement.getElementsByClassName('ucb-video-reveal-close')[0]
+            const imgWrapper = videoPlayer.element.parentElement.getElementsByClassName('ucb-video-reveal-controls')[0]
+            const imgEl = videoPlayer.element.parentElement.getElementsByClassName('ucb-video-reveal-image')[0]
+            
+            closeBtn.onclick = function() {
+                videoPlayer.pause();
+                videoEl.style.display = "none"
+                closeBtn.style.display = "none"
+                imgEl.style.display = "block"
+                imgWrapper.style.display = "flex"
+            };
+
+            const playBtn = videoPlayer.element.parentElement.getElementsByClassName('ucb-video-reveal-controls')[0]
+            playBtn.onclick = function() {
+                videoPlayer.play();
+                videoEl.style.display = "block"
+                closeBtn.style.display = "block"
+                imgEl.style.display = "none"
+                imgWrapper.style.display = "none"
+            };
         }
     }
 };
