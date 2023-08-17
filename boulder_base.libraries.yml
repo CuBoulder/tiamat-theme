@@ -402,3 +402,10 @@ ucb-article-slider-block:
     theme:
       css/flickity/flickity.min.css: {}
       css/block/ucb-article-slider-block.css: {}
+ucb-people-list-block:
+  version: 1.x
+  js:
+    js/ucb-people-list-block.js: {}
+  css:
+    theme:
+      css/block/ucb-people-list-block.css: {}

@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### New: Adds 'People List Block'
+  ### People List Block
+  A configurable and placeable block that displays a list of People, similar to the Person List Page with simpler options. Block contains options for how your block will display to users (Teaser, Grid, Name & Thumbnail, Name Only) and selectable filters by taxonomies on a Person (Department, Job Type, Filter 1, 2, 3) to curate a specific list of People ordered by Last Name.
+  
+  Includes:
+  - `tiamat-custom-entities` => `issue/tiamat-theme/466`
+  - `tiamat-theme` => `issue/tiamat-theme/466`
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/466
+---
+
+- ### Footer change
+  Closes #461.
+  Changes the footer to fill up whitespace.
+---
+
 - ### Updates bootstrap version
   Resolves CuBoulder/tiamat-theme#463
 ---
