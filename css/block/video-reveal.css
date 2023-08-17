@@ -76,12 +76,9 @@ span.ucb-vid-reveal-icon {
   display: none;
 }
 
-/* .ucb-video-reveal-video iframe {
-  max-width: 100%;
-  width: 100%;
-  min-height: 600px;
-  height: 100%;
-} */
+iframe{
+  background-color: black;
+}
 
 .ucb-video-reveal-video-wrapper{
   width: 100% !important;
