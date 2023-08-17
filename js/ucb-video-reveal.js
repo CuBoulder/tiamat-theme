@@ -51,7 +51,7 @@ const videoHeroSupportedSites = {
             // Create the YouTube video player using the YouTube API
             const videoPlayer = new YT.Player(videoPlayerElementId, {
                 videoId: videoURL.searchParams.get('v'),
-                playerVars: { autoplay: 0, controls: 0, mute: 1, disablekb: 1, rel: 0, playsinline: 1 },
+                playerVars: { autoplay: 0, controls: 1, mute: 1, disablekb: 1, rel: 0, playsinline: 1 },
                 events: {
                     // Called when the YouTube player is ready to play
                     onReady: function(event) {
@@ -72,13 +72,6 @@ const videoHeroSupportedSites = {
                                 videoPlayer.seekTo(0);
                                 videoPlayer.playVideo();
                         }
-                        // Add an event listener to the play/pause button
-                        playPauseButtonElement.onclick = function() {
-                            if (videoPlayer.getPlayerState() == YT.PlayerState.PAUSED)
-                                videoPlayer.playVideo();
-                            else
-                                videoPlayer.pauseVideo();
-                        };
                     },
                     // Called when an error occurs with the YouTube player
                     onError: function(event) {
@@ -86,6 +79,29 @@ const videoHeroSupportedSites = {
                     }
                 }
             });
+
+            const videoEl = videoWrapperElement.getElementsByClassName('ucb-video-reveal-video-wrapper')[0]
+            const closeBtn = videoWrapperElement.getElementsByClassName('ucb-video-reveal-close')[0]
+            const imgWrapper = videoWrapperElement.getElementsByClassName('ucb-video-reveal-controls')[0]
+            const imgEl = videoWrapperElement.getElementsByClassName('ucb-video-reveal-image')[0]
+            
+            closeBtn.onclick = function() {
+                videoPlayer.pauseVideo();
+                videoEl.style.display = "none"
+                closeBtn.style.display = "none"
+                imgEl.style.display = "block"
+                imgWrapper.style.display = "flex"
+            };
+
+            const playBtn = videoWrapperElement.getElementsByClassName('ucb-video-reveal-controls')[0]
+            playBtn.onclick = function() {
+                videoPlayer.playVideo();
+                videoEl.style.display = "block"
+                closeBtn.style.display = "block"
+                imgEl.style.display = "none"
+                imgWrapper.style.display = "none"
+            };
+            console.log(videoWrapperElement)
         }
     },
     youtu: { // For youtu.be URLs (redirects to YouTube handler)
