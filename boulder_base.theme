@@ -185,7 +185,7 @@ function boulder_base_preprocess_region__header(array &$variables) {
 /***
  * Preprocess function to get the variables we'll need on the footer region template
  */
-function boulder_base_preprocess_region__footer(array &$variables) {
+function boulder_base_preprocess_region__site_information(array &$variables) {
   $variables['theme_path'] = base_path() . $variables['directory'];
   $variables['ucb_be_boulder'] = theme_get_setting('ucb_be_boulder');
 }
