@@ -107,7 +107,7 @@ const videoRevealSupportedSites = {
         handler: function(videoURL, videoWrapperElement, videoPlayerWrapperElement) {
             // Handler for youtu.be URLs
             // Redirect to the YouTube handler by converting youtu.be URL to the standard YouTube URL format
-            videoRevealSupportedSites.youtube.handler(new URL('https://www.youtube.com/watch?v=' + videoURL.pathname.substr(1)), videoWrapperElement, videoPlayerWrapperElement, playPauseButtonElement);
+            videoRevealSupportedSites.youtube.handler(new URL('https://www.youtube.com/watch?v=' + videoURL.pathname.substr(1)), videoWrapperElement, videoPlayerWrapperElement);
         }
     },
     vimeo: {
