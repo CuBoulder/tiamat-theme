@@ -149,6 +149,11 @@
   <main role="main">
     <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
     <div class="layout-content">
+     {% if page.post_wide_title|render %}
+        <div class="ucb-post-wide-title-region">
+          {{ page.post_wide_title }}
+        </div>
+      {% endif %}
       {% if page.above_content|render %}
         <div class="ucb-above-content-region">
           {{ page.above_content }}
@@ -196,47 +201,40 @@
         {{ page.content }}
       {% endif %}
 
+      {% if page.wide_post|render %}
+        <div class="ucb-below-content-region">
+          {{ page.wide_post }}
+        </div>
+      {% endif %}
       {% if page.below_content|render %}
         <div class="ucb-below-content-region">
           {{ page.below_content }}
+        </div>
+      {% endif %}
+      {% if page.second_below_content|render %}
+        <div class="ucb-below-content-region">
+          {{ page.second_below_content }}
         </div>
       {% endif %}
     </div>{# /.layout-content #}
   </main>
   </div>
 
-  {# FOOTER BLOCK #}
+{# FOOTER BLOCK #}
   {% block page_footer %}
   <footer class="ucb-homepage-footer background-black">
-    {% if page.footer_cta|render or page.footer_nav_one|render or ucb_footer_menu_default_links %}
+    {% if page.footer|render or ucb_footer_menu_default_links %}
       <div class="ucb-footer-top">
-        {% if page.footer_cta|render %}
+        {# {% if page.footer_cta|render %}
           <div class="ucb-footer-container footer-cta-block container">
             {{ page.footer_cta }}
           </div>
-        {% endif %}
+        {% endif %} #}
         {% if ucb_footer_menu_default_links %}
           {% include "@boulder_base/includes/ucb-footer-menus.html.twig" %}
-        {% elseif page.footer_nav_one|render %}
-          <div class="ucb-footer-nav-container container">
-            <div class="ucb-footer-nav-block">
-              {{ page.footer_nav_one }}
-            </div>
-            {% if page.footer_nav_two|render %}
-              <div class="ucb-footer-nav-block">
-                {{ page.footer_nav_two }}
-              </div>
-            {% endif %}
-            {% if page.footer_nav_three|render %}
-              <div class="ucb-footer-nav-block">
-                {{ page.footer_nav_three }}
-              </div>
-            {% endif %}
-            {% if page.footer_nav_four|render %}
-              <div class="ucb-footer-nav-block">
-                {{ page.footer_nav_four }}
-              </div>
-            {% endif %}
+        {% elseif page.footer|render %}
+          <div class="container ucb-footer-columns">
+            {{ page.footer }}
           </div>
         {% endif %}
       </div>
@@ -248,14 +246,15 @@
         {{ page.social }}
       </div>
     {% endif %}
-    {% if page.footer|render %}
+    {% if page.site_information|render %}
       <div class="container">
-        {{ page.footer }}
+        {{ page.site_information }}
       </div>
     {% endif %}
     </div>
   </footer>
   {% endblock %}
+
 
 
 </div>{# /.layout-container #}
