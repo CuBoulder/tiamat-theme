@@ -117,14 +117,12 @@ const videoRevealSupportedSites = {
         handler: function(videoURL, videoWrapperElement, videoPlayerWrapperElement) {
             // Vimeo video handler
             let videoWidth = -1, videoHeight = -1, videoPlaying = false;
-
             // Create the Vimeo video player using the Vimeo API
             const videoPlayer = new Vimeo.Player(videoPlayerWrapperElement.id, {
                 url: videoURL + '',
-                background: true,
-                muted: false,
+                background: false,
                 autoplay: false,
-                controls: true
+                muted: true
             });
 
             // Retrieve the video width and height using the Vimeo API (returned as Promises)
