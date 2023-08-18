@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Re-factor of Drupal Regions to more closely match D7 Express
+  Added new regions to to .info
+  Added new region rendering to page
+  Changed where the slogan is displayed in .theme
+  Added new `site-information.html.twig` for new region where slogan is displayed
+  Updated `footer.html.twig` to iterate through content so that it automatically adds columns (up to 4 per row)
+  
+  I left our current machine names for items like `left_sidebar` the same but changed their display names to match the ones given by Kevin to `Sidebar First`
+  
+  We also have logic written in the page.html.twig in case two sidebars are made through the block layout. Currently the settings only allow for one though.
+  
+  I have left social media menu and footer menu as regions for the time being because I think those need to be separate for menuing purposes at the moment. 
+  
+  Sister PR: https://github.com/CuBoulder/tiamat10-profile/pull/18
+---
+
 - ### New: Adds 'People List Block'
   ### People List Block
   A configurable and placeable block that displays a list of People, similar to the Person List Page with simpler options. Block contains options for how your block will display to users (Teaser, Grid, Name & Thumbnail, Name Only) and selectable filters by taxonomies on a Person (Department, Job Type, Filter 1, 2, 3) to curate a specific list of People ordered by Last Name.

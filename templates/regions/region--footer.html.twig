@@ -1,26 +1,20 @@
 {#
 /**
- * Theme layout to display a UCB Breadcrumb Region page.
+ * Theme layout to display a UCB Footer Region page.
  *
- * Created by jsparks on 6/18/19
+ * Created by jnichol4 on 8/17/23
  */
 #}
 
 
-{% if content|render and ucb_be_boulder|number_format == 1 %}
-  <div class="be-boulder-container">
-    <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-      {{ content }}
-    </div>
-    <div class="col-log-4 col-md-4 col-sm-6 col-xs-12 offset-lg-4 offset-md-4">
-      <div class="ucb-footer">
-        <p><a href="https://www.colorado.edu"><img alt="Be Boulder." class="ucb-footer-be-boulder" src="https://cdn.colorado.edu/static/brand-assets/live/images/be-boulder-white.svg" style="max-width:240px; height:auto;" /></a></p>
-        <p><a class="ucb-home-link" href="https://www.colorado.edu">University of Colorado Boulder</a></p>
-        <p>© Regents of the University of Colorado</p>
-        <p class="ucb-footer-links"><a href="http://www.colorado.edu/about/privacy-statement">Privacy</a> • <a href="http://www.colorado.edu/about/legal-trademarks">Legal &amp; Trademarks</a> • <a href="http://www.colorado.edu/map">Campus Map</a></p>
-      </div>
-    </div>
-  </div>
-{% else %}
-  {{ content }}
+{% if content|render %}
+	<div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 footer-columns">
+		{% for item in elements %}
+			{% if item.content|render|striptags|trim is not empty %}
+				<div class="col flex-fill">
+					{{ item.content }}
+				</div>
+			{% endif %}
+		{% endfor %}
+	</div>
 {% endif %}
