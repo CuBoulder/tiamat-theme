@@ -122,7 +122,8 @@ const videoRevealSupportedSites = {
                 url: videoURL + '',
                 background: false,
                 autoplay: false,
-                muted: true
+                muted: true,
+                responsive: true
             });
 
             // Retrieve the video width and height using the Vimeo API (returned as Promises)

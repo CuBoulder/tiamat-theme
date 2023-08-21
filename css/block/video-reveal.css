@@ -78,6 +78,7 @@ span.ucb-vid-reveal-icon {
 
 iframe{
   background-color: black;
+  margin-left: 0 !important; 
 }
 
 .ucb-video-reveal-video-wrapper{
