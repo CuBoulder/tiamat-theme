@@ -49,6 +49,9 @@ span.ucb-vid-reveal-icon {
 /* Needed to overwrite the imageMedia Style that adds extra padding to images sitewide */
 .ucb-video-reveal-image > div > .contextual-region > .imageMediaStyle > img {
   padding-bottom: 0px;
+  max-height: 600px;
+  object-fit: cover;
+  aspect-ratio: 16/9;
 }
 
 .ucb-video-reveal-video-wrapper{
@@ -79,6 +82,11 @@ span.ucb-vid-reveal-icon {
 iframe{
   background-color: black;
   margin-left: 0 !important; 
+}
+
+.ucb-video-reveal-icon > svg {
+  height: 2em;
+  width: 2em !important;
 }
 
 .ucb-video-reveal-video-wrapper{
