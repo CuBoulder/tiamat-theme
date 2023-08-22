@@ -21,7 +21,10 @@
   ]
 %}
 
-{% set myId = content['#block_content'].id() %}
+{% set blockId = content['#block_content'].id() %}
+{% if content['#block_content'].field_video_reveal_video.entity.field_media_oembed_video is defined %}
+	{% set videoURL = content['#block_content'].field_video_reveal_video.entity.field_media_oembed_video.value %}
+{% endif %}
 
 
 {% block content %}
@@ -31,20 +34,27 @@
 			<h2{{title_attributes}}>{{ label }}</h2>
 		{% endif %}
 		{{ title_suffix }}
-		<div id="ucb-video-block-{{ myId }}" class="ucb-video-text-div">
-			<div class="ucb-video-reveal-controls">
-				<span class="ucb-video-reveal-icon">
-					<i class="fas fa-play-circle"></i>
-				</span>
-				<span class="ucb-video-reveal-text">{{ content.field_video_reveal_text}}</span>
-			</div>
-			<div class="ucb-video-reveal-image">
-				{{ content.field_video_reveal_image|render }}
-			</div>
-			<div class="ucb-video-reveal-close">
-				<i class="fas fa-times-circle ucb-video-reveal-close-button"></i>
-			</div>
-			{{ content.field_video_reveal_video|render }}
+		<div id="ucb-video-block-{{ blockId }}" class="ucb-video-text-div">
+				<div class="ucb-video-reveal-controls">
+					<span class="ucb-video-reveal-icon">
+						<i class="fas fa-play-circle"></i>
+					</span>
+					<span class="ucb-video-reveal-text">{{ content.field_video_reveal_text}}</span>
+				</div>
+				<div class="ucb-video-reveal-image">
+					{{ content.field_video_reveal_image|render }}
+				</div>
+				<div class="ucb-video-reveal-close">
+					<i class="fas fa-times-circle ucb-video-reveal-close-button"></i>
+				</div>
+				{# TO DO - this is where video wrapper will go #}
+				<div class="ucb-video-reveal-video-wrapper" id="ucb-video-reveal-video-wrapper-{{blockId}}">
+					<script src="https://www.youtube.com/player_api"></script>
+					<script type="text/javascript">
+					window.addEventListener('load', () => enableVideoReveal('{{ videoURL }}', 'ucb-video-reveal-video-wrapper-{{blockId}}'));
+					</script>
+				</div>
+				{# {{ content.field_video_reveal_video|render }} #}
 		</div>
 	</div>
 {% endblock content %}
