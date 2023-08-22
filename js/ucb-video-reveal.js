@@ -93,7 +93,7 @@ const videoRevealSupportedSites = {
             const playBtn = videoWrapperElement.getElementsByClassName('ucb-video-reveal-controls')[0]
             playBtn.onclick = function() {
                 videoPlayer.playVideo();
-                videoEl.style.display = "block"
+                videoEl.style.display = "flex"
                 closeBtn.style.display = "block"
                 imgEl.style.display = "none"
                 imgWrapper.style.display = "none"
