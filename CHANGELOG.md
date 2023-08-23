@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Styling for taxonomy term views
+  Closes #27 and #350 .
+  Adds the css needed for the profile installations changes for the taxonomy views.
+---
+
 - ### Change: Video Reveal Display & Autoplay
   ### Changes to Video Reveal: 
   Adds play/pause functionality to video reveal block videos, automatically toggling on click when image hides/shows. Fixes overlay to fit image.
