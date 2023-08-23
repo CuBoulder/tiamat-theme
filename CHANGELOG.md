@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Page title changes
+  Removed page title from the basic page theme
+  Created a field file for the page title so that it has the proper tags and attributes
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/73
+  
+  Closes #470
+---
+
+- ### Styling for taxonomy term views
+  Closes #27 and #350 .
+  Adds the css needed for the profile installations changes for the taxonomy views.
+---
+
 - ### Change: Video Reveal Display & Autoplay
   ### Changes to Video Reveal: 
   Adds play/pause functionality to video reveal block videos, automatically toggling on click when image hides/shows. Fixes overlay to fit image.
