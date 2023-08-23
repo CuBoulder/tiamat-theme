@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Edge-to-edge update
+  Updated the templates and some css to accommodate the new edge-to-edge option
+  
+  Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/16
+  
+  Closes #471 
+---
+
 - ### Page title changes
   Removed page title from the basic page theme
   Created a field file for the page title so that it has the proper tags and attributes

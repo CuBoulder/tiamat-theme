@@ -70,48 +70,50 @@
 	{% endif %}
 {% endif %}
 
-<div{{attributes.addClass(classes)}}>
-	{{ title_prefix }}
-	{% if label %}
-		<h2{{title_attributes}}>{{ label }}</h2>
-	{% endif %}
-	{{ title_suffix }}
-	{% block content %}
-		<div{{attributes.addClass(classes).setAttribute("style","#{bgValue}").addClass(size,overlayClass,videoClass)}}>
-			{% if videoURL is defined %}
-				<div hidden class="ucb-hero-unit-video-wrapper">
-					<div class="ucb-hero-unit-video-player-wrapper" id="ucb_hero_unit_video_player_{{ blockId }}"></div>
-					<div class="ucb-hero-unit-video-controls-wrapper">
-						<div class="ucb-hero-unit-video-controls">
-							<span class="ucb-hero-unit-video-control-button ucb-hero-unit-video-play-pause" title="Play/Pause video">
-								<i class="fa fa-play"></i>
-							</span>
+<div class="ucb-hero-outer-wrapper">
+	<div{{attributes.addClass(classes)}}>
+		{{ title_prefix }}
+		{% if label %}
+			<h2{{title_attributes}}>{{ label }}</h2>
+		{% endif %}
+		{{ title_suffix }}
+		{% block content %}
+			<div{{attributes.addClass(classes,size,overlayClass,videoClass).setAttribute("style","#{bgValue}")}}>
+				{% if videoURL is defined %}
+					<div hidden class="ucb-hero-unit-video-wrapper">
+						<div class="ucb-hero-unit-video-player-wrapper" id="ucb_hero_unit_video_player_{{ blockId }}"></div>
+						<div class="ucb-hero-unit-video-controls-wrapper">
+							<div class="ucb-hero-unit-video-controls">
+								<span class="ucb-hero-unit-video-control-button ucb-hero-unit-video-play-pause" title="Play/Pause video">
+									<i class="fa fa-play"></i>
+								</span>
+							</div>
 						</div>
 					</div>
-				</div>
-				<script type="text/javascript">
-					window.addEventListener('load', () => enableVideoHero('{{ videoURL }}', 'ucb_hero_unit_video_player_{{ blockId }}'));
-				</script>
-			{% endif %}
-			{% set linkColor = content['#block_content'].field_link_color.value %}
-			{# Dont let twig render the links #}
-			<div class="ucb-hero-unit-content container">
-				<div class="row">
-					{% if content['#block_content'].field_text_align.value == "text-righthalf" %}
-						<div class="col-12 col-md-6"></div>
-					{% endif %}
-					<div class="col ucb-hero-unit-links">
-						{{ content|without('field_links') }}
-						{# Render links here #}
+					<script type="text/javascript">
+						window.addEventListener('load', () => enableVideoHero('{{ videoURL }}', 'ucb_hero_unit_video_player_ {{ blockId }}'));
+					</script>
+				{% endif %}
+				{% set linkColor = content['#block_content'].field_link_color.value %}
+				{# Dont let twig render the links #}
+				<div class="ucb-hero-unit-content container">
+					<div class="row">
+						{% if content['#block_content'].field_text_align.value == "text-righthalf" %}
+							<div class="col-12 col-md-6"></div>
+						{% endif %}
+						<div class="col ucb-hero-unit-links">
+							{{ content|without('field_links') }}
+							{# Render links here #}
 							{% for item in content['#block_content'].field_links.value %}
 								{{ link(item.title, item.uri, {'class': ['button', linkColor]} ) }}
 							{% endfor %}
+						</div>
+						{% if content['#block_content'].field_text_align.value == "text-lefthalf" %}
+							<div class="col-12 col-md-6"></div>
+						{% endif %}
 					</div>
-					{% if content['#block_content'].field_text_align.value == "text-lefthalf" %}
-						<div class="col-12 col-md-6"></div>
-					{% endif %}
 				</div>
 			</div>
-		</div>
-	{% endblock %}
+		{% endblock %}
+	</div>
 </div>
