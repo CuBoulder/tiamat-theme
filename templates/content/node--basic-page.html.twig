@@ -87,13 +87,7 @@
 %}
 
 <article{{attributes.addClass(classes)}}>
-	{% if label %}
-		<div class="container">
-			<h1{{title_attributes}} class="{{isFrontPage}}">
-				{{ label }}
-			</h1>
-		</div>
-	{% endif %}
+
 
 	{% if content %}
 		<div{{content_attributes}}>
