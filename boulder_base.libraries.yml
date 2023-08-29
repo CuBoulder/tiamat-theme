@@ -128,6 +128,8 @@ ucb-image-gallery:
 
 ucb-expandable-content:
   version: 1.x
+  js:
+    js/expandable-content.js: {}
   css:
     theme:
       css/block/expandable-content.css: {}

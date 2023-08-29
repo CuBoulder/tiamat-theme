@@ -23,11 +23,14 @@
 {% set accordianContent %}
 <div class="accordion accordion-flush" id="ucb-accordion{{ id }}">
 	{% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first and (layoutSelection != 0 or entity.field_expandable_content_open.value) %}
+		
+		{% set accordianTitle = item.entity.field_expandable_content_title.value %}
+		
 		<div class="accordion-item tab-content">
 			<h2 class="accordion-header" id="ucb-accordion{{ id }}-title{{ loop.index }}">
-				<button class="accordion-button{{ not itemExpanded ? ' collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" aria-expanded="{{ itemExpanded ? 'true' : 'false' }}" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}">
+				<a id = "{{ accordianTitle }}" class="accordion-button{{ not itemExpanded ? ' collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" aria-expanded="{{ itemExpanded ? 'true' : 'false' }}" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}">
 					{{ item.entity.field_expandable_content_title|view }}
-				</button>
+				</a>
 			</h2>
 			<div id="ucb-accordion{{ id }}-content{{ loop.index }}" class="accordion-collapse collapse tab-pane fade{{ itemExpanded ? ' show active' }}" aria-labelledby="ucb-accordion{{ id }}-title{{ loop.index }}" data-bs-parent="#ucb-accordion{{ id }}">
 				<div class="accordion-body">
