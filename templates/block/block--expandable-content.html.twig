@@ -28,7 +28,7 @@
 		
 		<div class="accordion-item tab-content">
 			<h2 class="accordion-header" id="ucb-accordion{{ id }}-title{{ loop.index }}">
-				<a id = "{{ accordianTitle }}" class="accordion-button{{ not itemExpanded ? ' collapsed' }}" type="button" data-bs-toggle="collapse" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" aria-expanded="{{ itemExpanded ? 'true' : 'false' }}" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}">
+				<a id = "{{ accordianTitle }}" class="accordion-button{{ not itemExpanded ? ' collapsed' }} expandableHeaders" type="button" data-bs-toggle="collapse" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" aria-expanded="{{ itemExpanded ? 'true' : 'false' }}" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}">
 					{{ item.entity.field_expandable_content_title|view }}
 				</a>
 			</h2>
@@ -54,11 +54,11 @@
 				<ul class="nav nav-tabs justify-content-center" id="ucb-horizontal-tabs{{ id }}" role="tablist">
 					{% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first %}
 						<li class="nav-item" role="presentation">
-							<button class="nav-link horizontal-tab-link{{ itemExpanded ? ' active' }}" data-bs-toggle="tab" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" type="button" role="tab" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}" aria-selected="{{ itemExpanded ? 'true' : 'false' }}">{{ item.entity.field_expandable_content_title|view }}</button>
+							<a id = "{{ item.entity.field_expandable_content_title.value }}" class="nav-link horizontal-tab-link{{ itemExpanded ? ' active' }} expandableHeaders" data-bs-toggle="tab" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" type="button" role="tab" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}" aria-selected="{{ itemExpanded ? 'true' : 'false' }}">{{ item.entity.field_expandable_content_title|view }}</a>
 						</li>
 					{% endfor %}
 				</ul>
-				<div class="horizontal-tab-content">
+				<div class="horizontal-tab-content ">
 					{{ accordianContent }}
 				</div>
 			</div>
@@ -66,10 +66,10 @@
 			<div class="vertical-tab-accordion d-flex align-items-stretch">
 				<div class="vertical-tabs nav flex-column nav-pills" id="ucb-vertical-tabs{{ id }}" role="tablist" aria-orientation="vertical">
 					{% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first %}
-						<button class="nav-link vertical-tab-link{{ itemExpanded ? ' active' }}" data-bs-toggle="pill" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" type="button" role="tab" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}" aria-selected="{{ itemExpanded ? 'true' : 'false' }}">{{ item.entity.field_expandable_content_title|view }}</button>
+						<a id = "{{ item.entity.field_expandable_content_title.value }}" class="nav-link vertical-tab-link{{ itemExpanded ? ' active' }} expandableHeaders" data-bs-toggle="pill" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" type="button" role="tab" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}" aria-selected="{{ itemExpanded ? 'true' : 'false' }}">{{ item.entity.field_expandable_content_title|view }}</a>
 					{% endfor %}
 				</div>
-				<div class="vertical-tab-content">
+				<div class="vertical-tab-content ">
 					{{ accordianContent }}
 				</div>
 			</div>
