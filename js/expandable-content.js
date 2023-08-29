@@ -5,7 +5,7 @@
     if (accordionSection.length) {
         const expandableHeaders = expandableLocation.parentNode.parentNode.parentNode.getElementsByClassName("expandableHeaders");
         const accordionTexts = expandableLocation.parentNode.parentNode.parentNode.getElementsByClassName("accordion-collapse");
-        for (let i = 0; i < accordionHeaders.length; i++) {
+        for (let i = 0; i < expandableHeaders.length; i++) {
             expandableHeaders[i].setAttribute("aria-expanded", "false")
             expandableHeaders[i].setAttribute("aria-selected", "false")
             expandableHeaders[i].classList.add('collapsed');
@@ -18,7 +18,6 @@
        expandableLocation.classList.add('active');
        expandableLocation.setAttribute("aria-expanded", "true");
        expandableLocation.setAttribute("aria-selected", "true");
-       expandableLocation.parentNode.parentNode.parentNode.classList.add('hello');
        const accordionDiv = expandableLocation.parentNode.parentNode.getElementsByClassName("accordion-collapse");
           if(accordionDiv.length) {
        accordionDiv[0].classList.add("show");
