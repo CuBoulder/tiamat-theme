@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Linking to Expandable content
+  Closes #403.
+  Enables linking to expandable content based on title of the content.
+---
+
 - ### Edge-to-edge update
   Updated the templates and some css to accommodate the new edge-to-edge option
   
