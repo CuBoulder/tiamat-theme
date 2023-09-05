@@ -240,3 +240,10 @@ a.slide-link i.fab {
 .slide-image-container img{
   padding-bottom: 0px;
 }
+
+.ucb-edge-to-edge .carousel-item img {
+  max-width: 100%;
+  width: 100%;
+  min-width: 100%;
+  height: auto;
+}

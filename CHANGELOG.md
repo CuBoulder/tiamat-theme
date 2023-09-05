@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Slider goes e2e in e2e sections
+  Closes #476.
+  Makes sliders in e2e sections to fully extend the width of the section.
+---
+
 - ### Linking to Expandable content
   Closes #403.
   Enables linking to expandable content based on title of the content.

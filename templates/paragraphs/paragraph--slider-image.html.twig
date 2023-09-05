@@ -24,10 +24,10 @@
         {{ content.field_slide_image|render }}
       {% endif %}
     </div>
-		{% if paragraph.field_slide_image_text.value is not empty or paragraph.field_slide_image_text is not empty %}
+		{% if paragraph.field_slide_title.value is not empty or paragraph.field_slide_image_text is not empty %}
 			<div class="carousel-caption d-md-block">
       <div class="slide-text-container">
-				{% if paragraph.field_slide_image_text is not empty %}
+				{% if paragraph.field_slide_title is not empty %}
 					<span>
 						<h3>{{ content.field_slide_title|render|striptags|trim }}
 							{% if paragraph.field_slide_link.0.url is not empty %}
