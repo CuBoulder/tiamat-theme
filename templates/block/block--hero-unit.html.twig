@@ -51,8 +51,6 @@
 {# set classes for the size of the component if using background media #}
 {% if videoURL is defined %}
 	{% set containerSize = "ucb-hero-unit-video" %}
-{% elseif content['#block_content'].field_size_priority.value is same as("1") %}
-	{% set containerSize = "ucb-hero-unit-image" %}
 {% else %}
 	{% set containerSize = "ucb-hero-unit-text" %}
 {% endif %}
@@ -61,8 +59,6 @@
 {# set classes for the size of the component #}
 {% if content['#block_content'].field_size.value is same as("0") %}
 	{% set size = "size-large" %}
-{% elseif content['#block_content'].field_size.value is same as("1") %}
-	{% set size = "size-medium" %}
 {% else %}
 	{% set size = "size-small" %}
 {% endif %}
