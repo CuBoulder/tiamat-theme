@@ -20,6 +20,10 @@
   margin-left: 5px;
  }
 
+ .block-hero-unit h2 {
+  font-size: 200%;
+}
+
 .block-hero-unit {
   font-size: 120%;
 }
@@ -31,21 +35,16 @@
   padding-bottom: 0;
 }
 
-.block-hero-unit.size-large {
+.block-hero-unit.size-large .ucb-hero-unit-content {
   padding: 100px 2rem;
 }
 
-.block-hero-unit.size-large h2 {
-  font-size: 200%;
-}
-
-.block-hero-unit.size-medium {
+.block-hero-unit.size-medium .ucb-hero-unit-content {
   padding: 2rem;
 }
 
-.block-hero-unit.size-small {
+.block-hero-unit.size-small .ucb-hero-unit-content {
   padding: 1rem;
-  font-size: initial;
 }
 
 .ucb-overlay-dark {
