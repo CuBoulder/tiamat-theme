@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Hero unit work
+  Fixed the hero unit videos to work/fit properly in the new layout builder settings. Added "Size Priority" as an option to hero units so that we can have 100vh sections. Video now uses the 100vh by default because otherwise it's crazy ugly (can be easily changed now that I've refactored some of the css)
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/74
+  
+  Closes #481
+---
+
 - ### Slider goes e2e in e2e sections
   Closes #476.
   Makes sliders in e2e sections to fully extend the width of the section.
