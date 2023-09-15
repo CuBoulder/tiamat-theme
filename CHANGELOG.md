@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Remove FontAwesome Libraries
+  Remove all Font Awesome files in preparation for global styles
+  
+  Sister PR: https://github.com/CuBoulder/ucb_migration_shortcodes/pull/9
+  Sister PR: https://github.com/CuBoulder/tiamat10-profile/pull/22
+  Sister PR: https://github.com/CuBoulder/tiamat10-project-template/pull/12
+---
+
 - ### Hero unit work
   Fixed the hero unit videos to work/fit properly in the new layout builder settings. Added "Size Priority" as an option to hero units so that we can have 100vh sections. Video now uses the 100vh by default because otherwise it's crazy ugly (can be easily changed now that I've refactored some of the css)
   
