@@ -9,142 +9,178 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Remove FontAwesome Libraries
-  Remove all Font Awesome files in preparation for global styles
-  
-  Sister PR: https://github.com/CuBoulder/ucb_migration_shortcodes/pull/9
-  Sister PR: https://github.com/CuBoulder/tiamat10-profile/pull/22
-  Sister PR: https://github.com/CuBoulder/tiamat10-project-template/pull/12
----
+## [20230718] - 2023-09-18
 
-- ### Hero unit work
-  Fixed the hero unit videos to work/fit properly in the new layout builder settings. Added "Size Priority" as an option to hero units so that we can have 100vh sections. Video now uses the 100vh by default because otherwise it's crazy ugly (can be easily changed now that I've refactored some of the css)
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/74
-  
-  Closes #481
----
+-   ### Remove FontAwesome Libraries
 
-- ### Slider goes e2e in e2e sections
-  Closes #476.
-  Makes sliders in e2e sections to fully extend the width of the section.
----
+    Remove all Font Awesome files in preparation for global styles
 
-- ### Linking to Expandable content
-  Closes #403.
-  Enables linking to expandable content based on title of the content.
----
+    Sister PR: <https://github.com/CuBoulder/ucb_migration_shortcodes/pull/9>
+    Sister PR: <https://github.com/CuBoulder/tiamat10-profile/pull/22>
+    Sister PR: <https://github.com/CuBoulder/tiamat10-project-template/pull/12>
 
-- ### Edge-to-edge update
-  Updated the templates and some css to accommodate the new edge-to-edge option
-  
-  Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/16
-  
-  Closes #471 
----
+* * *
 
-- ### Page title changes
-  Removed page title from the basic page theme
-  Created a field file for the page title so that it has the proper tags and attributes
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/73
-  
-  Closes #470
----
+-   ### Hero unit work
 
-- ### Styling for taxonomy term views
-  Closes #27 and #350 .
-  Adds the css needed for the profile installations changes for the taxonomy views.
----
+    Fixed the hero unit videos to work/fit properly in the new layout builder settings. Added "Size Priority" as an option to hero units so that we can have 100vh sections. Video now uses the 100vh by default because otherwise it's crazy ugly (can be easily changed now that I've refactored some of the css)
 
-- ### Change: Video Reveal Display & Autoplay
-  ### Changes to Video Reveal: 
-  Adds play/pause functionality to video reveal block videos, automatically toggling on click when image hides/shows. Fixes overlay to fit image.
-  
-  Resolves #388 
----
+    Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/74>
 
-- ### Re-factor of Drupal Regions to more closely match D7 Express
-  Added new regions to to .info
-  Added new region rendering to page
-  Changed where the slogan is displayed in .theme
-  Added new `site-information.html.twig` for new region where slogan is displayed
-  Updated `footer.html.twig` to iterate through content so that it automatically adds columns (up to 4 per row)
-  
-  I left our current machine names for items like `left_sidebar` the same but changed their display names to match the ones given by Kevin to `Sidebar First`
-  
-  We also have logic written in the page.html.twig in case two sidebars are made through the block layout. Currently the settings only allow for one though.
-  
-  I have left social media menu and footer menu as regions for the time being because I think those need to be separate for menuing purposes at the moment. 
-  
-  Sister PR: https://github.com/CuBoulder/tiamat10-profile/pull/18
----
+    Closes #481
 
-- ### New: Adds 'People List Block'
-  ### People List Block
-  A configurable and placeable block that displays a list of People, similar to the Person List Page with simpler options. Block contains options for how your block will display to users (Teaser, Grid, Name & Thumbnail, Name Only) and selectable filters by taxonomies on a Person (Department, Job Type, Filter 1, 2, 3) to curate a specific list of People ordered by Last Name.
-  
-  Includes:
-  - `tiamat-custom-entities` => `issue/tiamat-theme/466`
-  - `tiamat-theme` => `issue/tiamat-theme/466`
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/466
----
+* * *
 
-- ### Footer change
-  Closes #461.
-  Changes the footer to fill up whitespace.
----
+-   ### Slider goes e2e in e2e sections
+    Closes #476.
+    Makes sliders in e2e sections to fully extend the width of the section.
 
-- ### Updates bootstrap version
-  Resolves CuBoulder/tiamat-theme#463
----
+* * *
 
-- ### Hides breadcrumbs on top-level pages
-  Resolves CuBoulder/tiamat-theme#460
----
+-   ### Linking to Expandable content
+    Closes #403.
+    Enables linking to expandable content based on title of the content.
 
-- ### Adds Articles by Person Block to a Person Page
-  Adds an Articles by Person block to the Person page, displaying the most recent 5 articles associated.
-  
-  To reveal this block, you must have a byline taxonomy term created with a reference to the Person page in the `field_author_person_page` on the term, and then use that byline term on the article's byline. If a Person does not have any articles, this block will not display.
-  
-  Resolves #345 ,  Resolves #427 
----
+* * *
 
-- ### Removes image requirement from Content Row "Teaser" layouts
-  This update enables the creation of Content Row blocks with image-less content and displays it correctly in the "Teasers" and "Teasers Alternate" layouts.
-  
-  Resolves CuBoulder/tiamat-theme#453
-  
-  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/71)
----
+-   ### Edge-to-edge update
 
-- ### Page Title on user-set default Front Page set to screen-read only
-  Resolves #448 
-  
-  Sets the title of pages chosen to be the site's default front page to 'sr-only' class. Will hide the title visually but still accessible to screen readers. Currently this works only if the page is set to explicitly the default '/homepage'. 
----
+    Updated the templates and some css to accommodate the new edge-to-edge option
 
-- ### sort alphabetically
-  Closes #449.
-  Small change to change the tags and categories to be sorted alphabetically.
----
+    Sister PR: <https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/16>
 
-- ### Removes "D9" from theme name and the theme, custom entities Composer package names 
-  Resolves CuBoulder/tiamat-theme#435
-  
-  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/70), [tiamat-profile](https://github.com/CuBoulder/tiamat-profile/pull/52), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/13), [tiamat-project-template](https://github.com/CuBoulder/tiamat-project-template/pull/28), [tiamat10-project-template](https://github.com/CuBoulder/tiamat10-project-template/pull/8), [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/26)
----
+    Closes #471 
 
-- ### fix for simple style menu issues
-  Closes #438.
-  Fixes drop shadow and margin issue in the simple menu style.
----
+* * *
 
-- ### Adds visual indication of active navigation menu items
-  Resolves CuBoulder/tiamat-theme#437
----
+-   ### Page title changes
+
+    Removed page title from the basic page theme
+    Created a field file for the page title so that it has the proper tags and attributes
+
+    Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/73>
+
+    Closes #470
+
+* * *
+
+-   ### Styling for taxonomy term views
+    Closes #27 and #350 .
+    Adds the css needed for the profile installations changes for the taxonomy views.
+
+* * *
+
+-   ### Change: Video Reveal Display & Autoplay
+
+    ### Changes to Video Reveal:
+
+    Adds play/pause functionality to video reveal block videos, automatically toggling on click when image hides/shows. Fixes overlay to fit image.
+
+    Resolves #388 
+
+* * *
+
+-   ### Re-factor of Drupal Regions to more closely match D7 Express
+
+    Added new regions to to .info
+    Added new region rendering to page
+    Changed where the slogan is displayed in .theme
+    Added new `site-information.html.twig` for new region where slogan is displayed
+    Updated `footer.html.twig` to iterate through content so that it automatically adds columns (up to 4 per row)
+
+    I left our current machine names for items like `left_sidebar` the same but changed their display names to match the ones given by Kevin to `Sidebar First`
+
+    We also have logic written in the page.html.twig in case two sidebars are made through the block layout. Currently the settings only allow for one though.
+
+    I have left social media menu and footer menu as regions for the time being because I think those need to be separate for menuing purposes at the moment. 
+
+    Sister PR: <https://github.com/CuBoulder/tiamat10-profile/pull/18>
+
+* * *
+
+-   ### New: Adds 'People List Block'
+
+    ### People List Block
+
+    A configurable and placeable block that displays a list of People, similar to the Person List Page with simpler options. Block contains options for how your block will display to users (Teaser, Grid, Name & Thumbnail, Name Only) and selectable filters by taxonomies on a Person (Department, Job Type, Filter 1, 2, 3) to curate a specific list of People ordered by Last Name.
+
+    Includes:
+
+    -   `tiamat-custom-entities` => `issue/tiamat-theme/466`
+    -   `tiamat-theme` => `issue/tiamat-theme/466`
+
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/466>
+
+* * *
+
+-   ### Footer change
+    Closes #461.
+    Changes the footer to fill up whitespace.
+
+* * *
+
+-   ### Updates bootstrap version
+    Resolves CuBoulder/tiamat-theme#463
+
+* * *
+
+-   ### Hides breadcrumbs on top-level pages
+    Resolves CuBoulder/tiamat-theme#460
+
+* * *
+
+-   ### Adds Articles by Person Block to a Person Page
+
+    Adds an Articles by Person block to the Person page, displaying the most recent 5 articles associated.
+
+    To reveal this block, you must have a byline taxonomy term created with a reference to the Person page in the `field_author_person_page` on the term, and then use that byline term on the article's byline. If a Person does not have any articles, this block will not display.
+
+    Resolves #345 ,  Resolves #427 
+
+* * *
+
+-   ### Removes image requirement from Content Row "Teaser" layouts
+
+    This update enables the creation of Content Row blocks with image-less content and displays it correctly in the "Teasers" and "Teasers Alternate" layouts.
+
+    Resolves CuBoulder/tiamat-theme#453
+
+    Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/71)
+
+* * *
+
+-   ### Page Title on user-set default Front Page set to screen-read only
+
+    Resolves #448 
+
+    Sets the title of pages chosen to be the site's default front page to 'sr-only' class. Will hide the title visually but still accessible to screen readers. Currently this works only if the page is set to explicitly the default '/homepage'. 
+
+* * *
+
+-   ### sort alphabetically
+    Closes #449.
+    Small change to change the tags and categories to be sorted alphabetically.
+
+* * *
+
+-   ### Removes "D9" from theme name and the theme, custom entities Composer package names
+
+    Resolves CuBoulder/tiamat-theme#435
+
+    Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/70), [tiamat-profile](https://github.com/CuBoulder/tiamat-profile/pull/52), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/13), [tiamat-project-template](https://github.com/CuBoulder/tiamat-project-template/pull/28), [tiamat10-project-template](https://github.com/CuBoulder/tiamat10-project-template/pull/8), [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/26)
+
+* * *
+
+-   ### fix for simple style menu issues
+    Closes #438.
+    Fixes drop shadow and margin issue in the simple menu style.
+
+* * *
+
+-   ### Adds visual indication of active navigation menu items
+    Resolves CuBoulder/tiamat-theme#437
+
+* * *
 
 ## [20230707] - 2023-07-07
 
@@ -702,7 +738,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20230707...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20230718...HEAD
+
+[20230718]: https://github.com/CuBoulder/tiamat-theme/compare/20230707...20230718
 
 [20230707]: https://github.com/CuBoulder/tiamat-theme/compare/20230323...20230707
 
