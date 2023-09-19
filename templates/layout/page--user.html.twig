@@ -49,6 +49,7 @@
 {#{% endif %}#}
 
 
+{{ attach_library('boulder_base/ucb-user-profile') }}
 <div class="layout-container ucb-page-container">
 	{{ block("page_header", "page.html.twig") }}
 	<div class="ucb-page-content">
@@ -62,8 +63,16 @@
 			<div class="layout-content container">
 				<div class="ucb-user-profile-container">
 					{{ page.content }}
+					<div class="ucb-user-profile-documentation">
+					<h2>Documentation and Status </h2>
+						<a class = "ucb-user-profile-doc-link" href = "https://www.google.com"> Help Documentation </a>
+						<a class = "ucb-user-profile-doc-link" href = "https://www.youtube.com"> Pantheon Status </a>
+					</div>
 				</div>
 			</div>{# /.layout-content #}
+
+			<div class="layout-content container">
+			</div>
 		</main>
 	</div>
 	{{ block("page_footer", "page.html.twig") }}

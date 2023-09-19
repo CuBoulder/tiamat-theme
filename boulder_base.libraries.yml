@@ -409,3 +409,9 @@ ucb-people-list-block:
   css:
     theme:
       css/block/ucb-people-list-block.css: {}
+
+ucb-user-profile:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-user-profile.css: {}

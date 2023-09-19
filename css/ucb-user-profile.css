@@ -1,0 +1,5 @@
+.ucb-user-profile-documentation {
+    display: flex;
+    flex-direction: column;
+    padding-top: 10px;
+}
