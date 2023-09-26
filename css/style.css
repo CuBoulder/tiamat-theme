@@ -424,6 +424,10 @@
     padding-bottom: 2em;
     flex-wrap: wrap;
   }
+
+  .ucb-footer-be-boulder {
+    padding-bottom: 2em;
+}
   
   /**** Styles for media types inserted with the media text editor embed button ****/
   
