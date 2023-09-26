@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update region--site-information.html.twig
+  Changed class name to fix styling error.
+  
+  Closes #490 
+---
+
 ## [20230718] - 2023-09-18
 
 -   ### Remove FontAwesome Libraries

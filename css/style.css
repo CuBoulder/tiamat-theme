@@ -400,7 +400,7 @@
   
   .ucb-footer-bottom {
     color: white;
-    padding: 1em 0;
+    padding: 40px 0;
     text-align: left;
     font-size: 0.9rem;
   }
@@ -424,6 +424,10 @@
     padding-bottom: 2em;
     flex-wrap: wrap;
   }
+
+  .ucb-footer-be-boulder {
+    padding-bottom: 2em;
+}
   
   /**** Styles for media types inserted with the media text editor embed button ****/
   
