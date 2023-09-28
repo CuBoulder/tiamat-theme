@@ -1,6 +1,7 @@
 .user-profile-wrapper {
     display: flex;
     flex-direction: row;
+    padding-top: 10px;
 }
 .user-profile-wrapper div{
    flex-grow: 1;
