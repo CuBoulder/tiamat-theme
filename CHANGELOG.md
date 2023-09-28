@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### favicon fix
+  Closes #494.
+  Quick fix to the favicon path
+---
+
 - ### Update region--site-information.html.twig
   Changed class name to fix styling error.
   
