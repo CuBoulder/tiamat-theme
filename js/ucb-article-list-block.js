@@ -103,6 +103,8 @@ class ArticleListBlockElement extends HTMLElement {
 
             // If there's no categories or tags that are in the exclusions, proceed
             if (doesIncludeCat.length == 0 && doesIncludeTag.length == 0) {
+              console.log('item', item)
+
                 // okay to render
                 let bodyAndImageId = item.relationships.field_ucb_article_content.data.length ? item.relationships.field_ucb_article_content.data[0].id : "";
                 let body = item.attributes.field_ucb_article_summary ? item.attributes.field_ucb_article_summary : "";
@@ -161,6 +163,7 @@ class ArticleListBlockElement extends HTMLElement {
                     image: imageSrc,
                     date,
                     body,
+                    id: bodyAndImageId
                   }
                   // Adds the article object to the final array of articles chosen
                   finalArticles.push(article)
@@ -464,6 +467,7 @@ class ArticleListBlockElement extends HTMLElement {
             var articleImgSrc = article.image;
             var articleTitle = article.title;
             var articleSumm = article.body;
+            var articleId = article.id;
 
             // Create and Append Elements
             var article = document.createElement('article');
@@ -501,6 +505,8 @@ class ArticleListBlockElement extends HTMLElement {
             var articleSummary = document.createElement('p');
             articleSummary.innerText = articleSumm;
             articleSummary.classList = 'ucb-article-card-summary'
+            articleSummary.id = `body-${articleId}`
+
 
             var readMore = document.createElement('a');
             readMore.href = articleLink;
