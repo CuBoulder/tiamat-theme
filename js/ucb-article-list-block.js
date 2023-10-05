@@ -51,6 +51,7 @@ class ArticleListBlockElement extends HTMLElement {
           });
           // finds the focial point version of the thumbnail
           altFilterData.map((item)=>{
+            console.log(item.links)
             // checks if consumer is working, else default to standard image instead of focal image
             if(item.links.focal_image_square != undefined){
               altObj[item.id] = item.links.focal_image_square.href
@@ -382,7 +383,7 @@ class ArticleListBlockElement extends HTMLElement {
             var article = document.createElement('article');
             article.classList = 'ucb-article-card row';
             var imgDiv = document.createElement('div');
-            imgDiv.classList = 'col-sm-12 col-md-2 ucb-article-card-img';
+            imgDiv.classList = 'ucb-article-card-img title-thumbnail-img';
 
             var imgLink = document.createElement('a');
             imgLink.href = articleLink;
@@ -396,7 +397,7 @@ class ArticleListBlockElement extends HTMLElement {
             article.appendChild(imgDiv);
 
             var articleBody = document.createElement('div');
-            articleBody.classList = 'col-sm-12 col-md-10 ucb-article-card-data';
+            articleBody.classList = 'col px-2 ucb-article-card-data';
 
             var headerLink = document.createElement('a');
             headerLink.href = articleLink;

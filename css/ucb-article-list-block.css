@@ -15,7 +15,7 @@
 
 .ucb-article-card{
     margin-bottom: 20px;
-    border-bottom: solid rgba(128, 128, 128, 0.333);
+    border-bottom: solid 1px rgba(128, 128, 128, 0.333);
     padding-bottom: 20px;
 }
 
@@ -24,9 +24,15 @@
 }
 
 .ucb-article-card-img{
-    width: 110px;
-    height: 110px;
-    padding: 0 10px 10px 0;
+    width: 100px;
+    height: 100px;
+    padding: 0px;
+}
+
+.ucb-article-card-img.title-thumbnail-img{
+    width: 65px;
+    height: 65px;
+    padding: 0px;
 }
 
 .ucb-article-card-img-wide{
