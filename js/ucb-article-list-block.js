@@ -20,7 +20,7 @@ class ArticleListBlockElement extends HTMLElement {
             });
     }
 
-    build(data, count, display, excludeCatArray, excludeTagArray, finalArticles = []){
+   async build(data, count, display, excludeCatArray, excludeTagArray, finalArticles = []){
       // More than 10 articles? This sets up the next call if there's more articles to be retrieved but not enough post-filters
         let NEXTJSONURL = "";
         if(data.links.next) {
@@ -66,8 +66,8 @@ class ArticleListBlockElement extends HTMLElement {
         }
 
         // Iterate over each Article
-        data.data.map(item=>{
-            let thisArticleCats = [];
+        await Promise.all(data.data.map(async (item) => {
+          let thisArticleCats = [];
             let thisArticleTags = [];
             // // loop through and grab all of the categories
             if (item.relationships.field_ucb_article_categories) {
@@ -110,34 +110,8 @@ class ArticleListBlockElement extends HTMLElement {
                 let imageSrc = "";
 
                 if (!body.length && bodyAndImageId != "") {
-                    this.getArticleParagraph(bodyAndImageId)
-                      .then((response) => response.json())
-                      .then((data) => {
-                        // Remove any html tags within the article
-                        let htmlStrip = data.data.attributes.field_article_text.processed.replace(
-                          /<\/?[^>]+(>|$)/g,
-                          ""
-                        )
-                        // Remove any line breaks if media is embedded in the body
-                        let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
-                        // take only the first 100 words ~ 500 chars
-                        let trimmedString = lineBreakStrip.substr(0, 250);
-                        // if in the middle of the string, take the whole word
-                        if(trimmedString.length > 100){
-                          trimmedString = trimmedString.substr(
-                            0,
-                            Math.min(
-                              trimmedString.length,
-                              trimmedString.lastIndexOf(" ")
-                            )
-                          )
-                          body = `${trimmedString}...`;
-                        }
-                        // set the contentBody of Article Summary card to the minified body instead
-                        body = `${trimmedString}`;
-                        document.getElementById(`body-${bodyAndImageId}`).innerText = body;
-                      })
-                  }
+                  body = await this.getArticleParagraph(bodyAndImageId);
+                }
       
                   // if no thumbnail, show no image
                   if (!item.relationships.field_ucb_article_thumbnail.data) {
@@ -166,7 +140,7 @@ class ArticleListBlockElement extends HTMLElement {
                   // Adds the article object to the final array of articles chosen
                   finalArticles.push(article)
             }
-        })
+        }));
         // Case for not enough articles selected and extra articles available
         if(finalArticles.length < count && NEXTJSONURL){
             fetch(NEXTJSONURL).then(this.handleError)
@@ -197,40 +171,62 @@ class ArticleListBlockElement extends HTMLElement {
         }
     }
 }
-    
+    // Responsible for fetching & processing the body of the Article if no summary provided
     async getArticleParagraph(id) {
-        if(id) {
-          const response = await fetch(
-            `/jsonapi/paragraph/article_content/${id}`
+      if (!id) {
+          return "";
+      }
+      
+      const response = await fetch(`/jsonapi/paragraph/article_content/${id}`);
+      if (!response.ok) {
+          throw new Error('Failed to fetch article paragraph');
+      }
+
+      const data = await response.json();
+      
+      let htmlStrip = data.data.attributes.field_article_text.processed.replace(
+          /<\/?[^>]+(>|$)/g,
+          ""
+      );
+      let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
+      let trimmedString = lineBreakStrip.substr(0, 250);
+      
+      if (trimmedString.length > 100) {
+          trimmedString = trimmedString.substr(
+              0,
+              Math.min(
+                  trimmedString.length,
+                  trimmedString.lastIndexOf(" ")
+              )
           );
-          return response;
-        } else {
-            return "";
-        }
+      }
+
+      return trimmedString + "...";
     }
+
 
     // Responsible for calling the render function of the appropriate display
     renderDisplay(display, articleArray){
-        switch (display) {
-            case 'feature-wide':
-                this.renderFeatureWide(articleArray)
-                break;
-            case 'feature-large':
-                this.renderFeatureFull(articleArray)
-                break;
-            case 'teaser':
-                this.renderTeaser(articleArray)
-                break;
-            case 'title-thumbnail':
-                this.renderTitleThumb(articleArray)
-                break;
-            case 'title-only':
-                this.renderTitleOnly(articleArray)
-                break;
-            default:
-                this.renderTeaser(articleArray)
-                break;
-        }
+          switch (display) {
+              case 'feature-wide':
+                  this.renderFeatureWide(articleArray)
+                  break;
+              case 'feature-large':
+                  this.renderFeatureFull(articleArray)
+                  break;
+              case 'teaser':
+                  this.renderTeaser(articleArray)
+                  break;
+              case 'title-thumbnail':
+                  this.renderTitleThumb(articleArray)
+                  break;
+              case 'title-only':
+                  this.renderTitleOnly(articleArray)
+                  break;
+              default:
+                  this.renderTeaser(articleArray)
+                  break;
+          }
 
     }
 
