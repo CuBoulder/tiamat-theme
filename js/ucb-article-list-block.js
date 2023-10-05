@@ -136,7 +136,6 @@ class ArticleListBlockElement extends HTMLElement {
                     image: imageSrc,
                     date,
                     body,
-                    id: bodyAndImageId
                   }
                   // Adds the article object to the final array of articles chosen
                   finalArticles.push(article)
@@ -397,7 +396,7 @@ class ArticleListBlockElement extends HTMLElement {
             article.appendChild(imgDiv);
 
             var articleBody = document.createElement('div');
-            articleBody.classList = 'col px-2 ucb-article-card-data';
+            articleBody.classList = 'col px-3 ucb-article-card-data';
 
             var headerLink = document.createElement('a');
             headerLink.href = articleLink;
@@ -462,7 +461,6 @@ class ArticleListBlockElement extends HTMLElement {
             var articleImgSrc = article.image;
             var articleTitle = article.title;
             var articleSumm = article.body;
-            var articleId = article.id;
 
             // Create and Append Elements
             var article = document.createElement('article');
@@ -482,7 +480,7 @@ class ArticleListBlockElement extends HTMLElement {
             article.appendChild(imgDiv);
 
             var articleBody = document.createElement('div');
-            articleBody.classList = 'col px-2 ucb-article-card-data';
+            articleBody.classList = 'col px-3 ucb-article-card-data';
 
             var headerLink = document.createElement('a');
             headerLink.href = articleLink;
@@ -500,8 +498,6 @@ class ArticleListBlockElement extends HTMLElement {
             var articleSummary = document.createElement('p');
             articleSummary.innerText = articleSumm;
             articleSummary.classList = 'ucb-article-card-summary'
-            articleSummary.id = `body-${articleId}`
-
 
             var readMore = document.createElement('a');
             readMore.href = articleLink;
