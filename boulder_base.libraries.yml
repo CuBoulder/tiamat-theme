@@ -305,14 +305,14 @@ ucb-article-grid-block:
     js/ucb-article-grid-block.js: {}
   css:
     theme:
-      css/ucb-article-grid-block.css: {}  
+      css/block/ucb-article-grid-block.css: {}  
 ucb-article-list-block:
   version: 1.x
   js:
     js/ucb-article-list-block.js: {}
   css:
     theme:
-      css/ucb-article-list-block.css: {}
+      css/block/ucb-article-list-block.css: {}
 ucb-content-sequence:
   version: 1.x
   js:

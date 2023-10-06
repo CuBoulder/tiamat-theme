@@ -39,6 +39,7 @@ class ArticleListBlockElement extends HTMLElement {
         // Below objects are needed to match images with their corresponding articles. There are two endpoints => data.data (article) and data.included (incl. media), both needed to associate a media library image with its respective article
         let idObj = {};
         let altObj = {};
+        let wideObj = {};
         // Remove any blanks from our articles before map
         if (data.included) {
           // removes all other included data besides images in our included media
@@ -51,10 +52,11 @@ class ArticleListBlockElement extends HTMLElement {
           });
           // finds the focial point version of the thumbnail
           altFilterData.map((item)=>{
-            console.log(item.links)
             // checks if consumer is working, else default to standard image instead of focal image
             if(item.links.focal_image_square != undefined){
               altObj[item.id] = item.links.focal_image_square.href
+              // This is used if a user selects the "Wide" image style
+              wideObj[item.id] = item.links.focal_image_wide.href
             } else {
               altObj[item.id] = item.attributes.uri.url
             }
@@ -109,6 +111,7 @@ class ArticleListBlockElement extends HTMLElement {
                 let body = item.attributes.field_ucb_article_summary ? item.attributes.field_ucb_article_summary : "";
                 body = body.trim();
                 let imageSrc = "";
+                let imageSrcWide = "";
 
                 if (!body.length && bodyAndImageId != "") {
                   body = await this.getArticleParagraph(bodyAndImageId);
@@ -121,6 +124,7 @@ class ArticleListBlockElement extends HTMLElement {
                     //Use the idObj as a memo to add the corresponding image url
                     let thumbId = item.relationships.field_ucb_article_thumbnail.data.id;
                     imageSrc = altObj[idObj[thumbId]];
+                    imageSrcWide = wideObj[idObj[thumbId]]
                   }
       
                   //Date - make human readable
@@ -134,6 +138,7 @@ class ArticleListBlockElement extends HTMLElement {
                     title,
                     link,
                     image: imageSrc,
+                    imageWide: imageSrcWide,
                     date,
                     body,
                   }
@@ -233,7 +238,7 @@ class ArticleListBlockElement extends HTMLElement {
     // renderX functions are responsible for taking the final array of Articles and displaying them appropriately
     renderFeatureFull(articleArray){
       var container = document.createElement('div')
-      container.classList = 'ucb-article-list-block container'
+      container.classList = 'ucb-article-list-block'
 
       articleArray.forEach(article=>{
           // Article Data
@@ -245,7 +250,7 @@ class ArticleListBlockElement extends HTMLElement {
 
           // Create and Append Elements
           var article = document.createElement('article');
-          article.classList = 'ucb-article-card row';
+          article.classList = 'ucb-article-card';
 
 
           if(articleImgSrc){
@@ -254,7 +259,7 @@ class ArticleListBlockElement extends HTMLElement {
             imgLink.href = articleLink;
             
             var articleImg = document.createElement('img')
-            articleImg.classList = 'ucb-article-card-img-full'
+            articleImg.classList = 'col-sm-12 ucb-article-card-img-full'
             articleImg.src = articleImgSrc;
   
             imgLink.appendChild(articleImg);
@@ -264,7 +269,7 @@ class ArticleListBlockElement extends HTMLElement {
           }
 
           var articleBody = document.createElement('div');
-          articleBody.classList = 'col-sm-12 col-md-10 ucb-article-card-data';
+          articleBody.classList = 'col-sm-12 ucb-article-card-data';
 
           var headerLink = document.createElement('a');
           headerLink.href = articleLink;
@@ -302,19 +307,19 @@ class ArticleListBlockElement extends HTMLElement {
     }
     renderFeatureWide(articleArray){
       var container = document.createElement('div')
-      container.classList = 'ucb-article-list-block container'
+      container.classList = 'ucb-article-list-block'
 
       articleArray.forEach(article=>{
           // Article Data
           var articleDate = article.date;
           var articleLink = article.link;
-          var articleImgSrc = article.image;
+          var articleImgSrc = article.imageWide;
           var articleTitle = article.title;
           var articleSumm = article.body;
 
           // Create and Append Elements
           var article = document.createElement('article');
-          article.classList = 'ucb-article-card row';
+          article.classList = 'ucb-article-card';
           
           if(articleImgSrc){
             var imgDiv = document.createElement('div');
@@ -332,7 +337,7 @@ class ArticleListBlockElement extends HTMLElement {
           }
 
           var articleBody = document.createElement('div');
-          articleBody.classList = 'col-sm-12 col-md-10 ucb-article-card-data';
+          articleBody.classList = 'col-sm-12 ucb-article-card-data';
 
           var headerLink = document.createElement('a');
           headerLink.href = articleLink;
