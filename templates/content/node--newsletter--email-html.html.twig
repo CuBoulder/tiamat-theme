@@ -138,8 +138,13 @@ td>h3>a{
 
     <div><p>design:  {{node.field_newsletter_type.entity.field_newsletter_design.value}}</p></div>
     <div>footer:  {{node.field_newsletter_type.entity.field_newsletter_footer.value}}</div>
-    <img id="newsletter-email-intro-img" src="{{base_url}}{{file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.field_media_image.entity.fileuri)}}" width="100%" style="margin-bottom: 20px;">
+    <div>
+        {# HEADER NEWSLETTER IMG #}
+        <img src="{{base_url}}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}">
+        </p>
+    </div>
     <div><p>path:  {{node.field_newsletter_type.entity.field_newsletter_path.value}}</p></div>
+    {# END VARIABLE TESTS #}
     <div id="email" style="width:600px;margin: auto;background:white;" data-url="{{base_url}}">
         <table role='presentation' width="100%">
             <tbody>
