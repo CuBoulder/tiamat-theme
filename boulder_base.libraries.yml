@@ -409,3 +409,12 @@ ucb-people-list-block:
   css:
     theme:
       css/block/ucb-people-list-block.css: {}
+
+ucb-user-page:
+  version: 1.x
+  js:
+    js/ucb-status-page-block.js: {}
+  css:
+    theme:
+      css/ucb-status-page-block.css: {}
+      css/ucb-user-page.css: {}
