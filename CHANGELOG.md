@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### User and 404 page changes
+  Closes #484.
+  Adds the new implementation of the user page and stores the image for the 404 page.
+---
+
 - ### Article List Block - Style Adjustments & Summary Bug Fix
   ## Article Block Bug Fix
    - Fixes bug with article summaries not displaying if they are derived from the body content, in lieu of the `Summary` field. This bug was present across `Article List Block`, `Article Grid Block`, `Article Feature Block` and has been corrected.
