@@ -1,5 +1,6 @@
 (function ($, Drupal) {
 //     // Create the admin button for copying HTML and the admin messages
+console.log('hi')
     var codeContainer = document.createElement('div')
     codeContainer.classList = 'container email-button-container'
     codeContainer.style.cssText = 'display: flex; justify-content: center; padding-top:10px;padding-top: 10px;flex-wrap: wrap;'
@@ -18,7 +19,7 @@
         // Tags -  make absolute
         var tags = document.getElementsByClassName('tags')
         // Iterate through all tags and create an absolute url
-        for(tag of tags){
+        for(let tag of tags){
             for(child of tag.children){
                 var endurl = child.getAttribute('href')
                 child.href = `${baseURL}${endurl}`
@@ -83,7 +84,8 @@
     }
 
     // Append Button
-    var main = document.getElementById('block-boulderd9-base-content')
+    var main = document.getElementById('block-boulder-base-content')
+    console.log('main')
     button.innerText = 'Click to copy your newsletter HTML'
     codeContainer.appendChild(button)
     
@@ -94,4 +96,3 @@
     main.appendChild(codeContainer)
 
 })(jQuery, Drupal);
-
