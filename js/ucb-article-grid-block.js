@@ -20,7 +20,7 @@ class ArticleGridBlockElement extends HTMLElement {
             });
     }
 
-    build(data, count, includeSummary, excludeCatArray, excludeTagArray, finalArticles = []){
+    async build(data, count, includeSummary, excludeCatArray, excludeTagArray, finalArticles = []){
       // More than 10 articles? This sets up the next call if there's more articles to be retrieved but not enough post-filters
         let NEXTJSONURL = "";
         if(data.links.next) {
@@ -65,7 +65,7 @@ class ArticleGridBlockElement extends HTMLElement {
           })
         }
     // Iterate over each Article
-    data.data.map(item=>{
+    await Promise.all(data.data.map(async (item)=>{
             // Article must have a thumbnail
             if(item.relationships.field_ucb_article_thumbnail.data){
                 let thisArticleCats = [];
@@ -112,33 +112,7 @@ class ArticleGridBlockElement extends HTMLElement {
                     let imageSrc = "";
 
                     if (!body.length && bodyAndImageId != "") {
-                        this.getArticleParagraph(bodyAndImageId)
-                        .then((response) => response.json())
-                        .then((data) => {
-                            // Remove any html tags within the article
-                            let htmlStrip = data.data.attributes.field_article_text.processed.replace(
-                            /<\/?[^>]+(>|$)/g,
-                            ""
-                            )
-                            // Remove any line breaks if media is embedded in the body
-                            let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
-                            // take only the first 100 words ~ 500 chars
-                            let trimmedString = lineBreakStrip.substr(0, 250);
-                            // if in the middle of the string, take the whole word
-                            if(trimmedString.length > 100){
-                            trimmedString = trimmedString.substr(
-                                0,
-                                Math.min(
-                                trimmedString.length,
-                                trimmedString.lastIndexOf(" ")
-                                )
-                            )
-                            body = `${trimmedString}...`;
-                            }
-                            // set the contentBody of Article Summary card to the minified body instead
-                            body = `${trimmedString}`;
-                            document.getElementById(`body-${bodyAndImageId}`).innerText = body;
-                        })
+                      body = await this.getArticleParagraph(bodyAndImageId);
                     }
 
                     // if no thumbnail, show no image
@@ -168,7 +142,7 @@ class ArticleGridBlockElement extends HTMLElement {
                     finalArticles.push(article)
                 }
         }
-    })
+    }));
         // Case for not enough articles selected and extra articles available
         if(finalArticles.length < count && NEXTJSONURL){
             fetch(NEXTJSONURL).then(this.handleError)
@@ -200,15 +174,37 @@ class ArticleGridBlockElement extends HTMLElement {
     }
 }
 
+    // Responsible for fetching & processing the body of the Article if no summary provided
     async getArticleParagraph(id) {
-        if(id) {
-          const response = await fetch(
-            `/jsonapi/paragraph/article_content/${id}`
+          if (!id) {
+              return "";
+          }
+          
+          const response = await fetch(`/jsonapi/paragraph/article_content/${id}`);
+          if (!response.ok) {
+              throw new Error('Failed to fetch article paragraph');
+          }
+    
+          const data = await response.json();
+          
+          let htmlStrip = data.data.attributes.field_article_text.processed.replace(
+              /<\/?[^>]+(>|$)/g,
+              ""
           );
-          return response;
-        } else {
-            return "";
-        }
+          let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
+          let trimmedString = lineBreakStrip.substr(0, 250);
+          
+          if (trimmedString.length > 100) {
+              trimmedString = trimmedString.substr(
+                  0,
+                  Math.min(
+                      trimmedString.length,
+                      trimmedString.lastIndexOf(" ")
+                  )
+              );
+          }
+    
+          return trimmedString + "...";
     }
 
     // Responsible for calling the render function of the appropriate display

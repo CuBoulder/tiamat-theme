@@ -20,7 +20,7 @@ class ArticleListBlockElement extends HTMLElement {
             });
     }
 
-    build(data, count, display, excludeCatArray, excludeTagArray, finalArticles = []){
+   async build(data, count, display, excludeCatArray, excludeTagArray, finalArticles = []){
       // More than 10 articles? This sets up the next call if there's more articles to be retrieved but not enough post-filters
         let NEXTJSONURL = "";
         if(data.links.next) {
@@ -39,6 +39,7 @@ class ArticleListBlockElement extends HTMLElement {
         // Below objects are needed to match images with their corresponding articles. There are two endpoints => data.data (article) and data.included (incl. media), both needed to associate a media library image with its respective article
         let idObj = {};
         let altObj = {};
+        let wideObj = {};
         // Remove any blanks from our articles before map
         if (data.included) {
           // removes all other included data besides images in our included media
@@ -54,6 +55,8 @@ class ArticleListBlockElement extends HTMLElement {
             // checks if consumer is working, else default to standard image instead of focal image
             if(item.links.focal_image_square != undefined){
               altObj[item.id] = item.links.focal_image_square.href
+              // This is used if a user selects the "Wide" image style
+              wideObj[item.id] = item.links.focal_image_wide.href
             } else {
               altObj[item.id] = item.attributes.uri.url
             }
@@ -66,8 +69,8 @@ class ArticleListBlockElement extends HTMLElement {
         }
 
         // Iterate over each Article
-        data.data.map(item=>{
-            let thisArticleCats = [];
+        await Promise.all(data.data.map(async (item) => {
+          let thisArticleCats = [];
             let thisArticleTags = [];
             // // loop through and grab all of the categories
             if (item.relationships.field_ucb_article_categories) {
@@ -108,36 +111,11 @@ class ArticleListBlockElement extends HTMLElement {
                 let body = item.attributes.field_ucb_article_summary ? item.attributes.field_ucb_article_summary : "";
                 body = body.trim();
                 let imageSrc = "";
+                let imageSrcWide = "";
 
                 if (!body.length && bodyAndImageId != "") {
-                    this.getArticleParagraph(bodyAndImageId)
-                      .then((response) => response.json())
-                      .then((data) => {
-                        // Remove any html tags within the article
-                        let htmlStrip = data.data.attributes.field_article_text.processed.replace(
-                          /<\/?[^>]+(>|$)/g,
-                          ""
-                        )
-                        // Remove any line breaks if media is embedded in the body
-                        let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
-                        // take only the first 100 words ~ 500 chars
-                        let trimmedString = lineBreakStrip.substr(0, 250);
-                        // if in the middle of the string, take the whole word
-                        if(trimmedString.length > 100){
-                          trimmedString = trimmedString.substr(
-                            0,
-                            Math.min(
-                              trimmedString.length,
-                              trimmedString.lastIndexOf(" ")
-                            )
-                          )
-                          body = `${trimmedString}...`;
-                        }
-                        // set the contentBody of Article Summary card to the minified body instead
-                        body = `${trimmedString}`;
-                        document.getElementById(`body-${bodyAndImageId}`).innerText = body;
-                      })
-                  }
+                  body = await this.getArticleParagraph(bodyAndImageId);
+                }
       
                   // if no thumbnail, show no image
                   if (!item.relationships.field_ucb_article_thumbnail.data) {
@@ -146,6 +124,7 @@ class ArticleListBlockElement extends HTMLElement {
                     //Use the idObj as a memo to add the corresponding image url
                     let thumbId = item.relationships.field_ucb_article_thumbnail.data.id;
                     imageSrc = altObj[idObj[thumbId]];
+                    imageSrcWide = wideObj[idObj[thumbId]]
                   }
       
                   //Date - make human readable
@@ -159,13 +138,14 @@ class ArticleListBlockElement extends HTMLElement {
                     title,
                     link,
                     image: imageSrc,
+                    imageWide: imageSrcWide,
                     date,
                     body,
                   }
                   // Adds the article object to the final array of articles chosen
                   finalArticles.push(article)
             }
-        })
+        }));
         // Case for not enough articles selected and extra articles available
         if(finalArticles.length < count && NEXTJSONURL){
             fetch(NEXTJSONURL).then(this.handleError)
@@ -196,47 +176,69 @@ class ArticleListBlockElement extends HTMLElement {
         }
     }
 }
-    
+    // Responsible for fetching & processing the body of the Article if no summary provided
     async getArticleParagraph(id) {
-        if(id) {
-          const response = await fetch(
-            `/jsonapi/paragraph/article_content/${id}`
+      if (!id) {
+          return "";
+      }
+      
+      const response = await fetch(`/jsonapi/paragraph/article_content/${id}`);
+      if (!response.ok) {
+          throw new Error('Failed to fetch article paragraph');
+      }
+
+      const data = await response.json();
+      
+      let htmlStrip = data.data.attributes.field_article_text.processed.replace(
+          /<\/?[^>]+(>|$)/g,
+          ""
+      );
+      let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
+      let trimmedString = lineBreakStrip.substr(0, 250);
+      
+      if (trimmedString.length > 100) {
+          trimmedString = trimmedString.substr(
+              0,
+              Math.min(
+                  trimmedString.length,
+                  trimmedString.lastIndexOf(" ")
+              )
           );
-          return response;
-        } else {
-            return "";
-        }
+      }
+
+      return trimmedString + "...";
     }
+
 
     // Responsible for calling the render function of the appropriate display
     renderDisplay(display, articleArray){
-        switch (display) {
-            case 'feature-wide':
-                this.renderFeatureWide(articleArray)
-                break;
-            case 'feature-large':
-                this.renderFeatureFull(articleArray)
-                break;
-            case 'teaser':
-                this.renderTeaser(articleArray)
-                break;
-            case 'title-thumbnail':
-                this.renderTitleThumb(articleArray)
-                break;
-            case 'title-only':
-                this.renderTitleOnly(articleArray)
-                break;
-            default:
-                this.renderTeaser(articleArray)
-                break;
-        }
+          switch (display) {
+              case 'feature-wide':
+                  this.renderFeatureWide(articleArray)
+                  break;
+              case 'feature-large':
+                  this.renderFeatureFull(articleArray)
+                  break;
+              case 'teaser':
+                  this.renderTeaser(articleArray)
+                  break;
+              case 'title-thumbnail':
+                  this.renderTitleThumb(articleArray)
+                  break;
+              case 'title-only':
+                  this.renderTitleOnly(articleArray)
+                  break;
+              default:
+                  this.renderTeaser(articleArray)
+                  break;
+          }
 
     }
 
     // renderX functions are responsible for taking the final array of Articles and displaying them appropriately
     renderFeatureFull(articleArray){
       var container = document.createElement('div')
-      container.classList = 'ucb-article-list-block container'
+      container.classList = 'ucb-article-list-block'
 
       articleArray.forEach(article=>{
           // Article Data
@@ -248,7 +250,7 @@ class ArticleListBlockElement extends HTMLElement {
 
           // Create and Append Elements
           var article = document.createElement('article');
-          article.classList = 'ucb-article-card row';
+          article.classList = 'ucb-article-card';
 
 
           if(articleImgSrc){
@@ -257,7 +259,7 @@ class ArticleListBlockElement extends HTMLElement {
             imgLink.href = articleLink;
             
             var articleImg = document.createElement('img')
-            articleImg.classList = 'ucb-article-card-img-full'
+            articleImg.classList = 'col-sm-12 ucb-article-card-img-full'
             articleImg.src = articleImgSrc;
   
             imgLink.appendChild(articleImg);
@@ -267,7 +269,7 @@ class ArticleListBlockElement extends HTMLElement {
           }
 
           var articleBody = document.createElement('div');
-          articleBody.classList = 'col-sm-12 col-md-10 ucb-article-card-data';
+          articleBody.classList = 'col-sm-12 ucb-article-card-data';
 
           var headerLink = document.createElement('a');
           headerLink.href = articleLink;
@@ -305,19 +307,19 @@ class ArticleListBlockElement extends HTMLElement {
     }
     renderFeatureWide(articleArray){
       var container = document.createElement('div')
-      container.classList = 'ucb-article-list-block container'
+      container.classList = 'ucb-article-list-block'
 
       articleArray.forEach(article=>{
           // Article Data
           var articleDate = article.date;
           var articleLink = article.link;
-          var articleImgSrc = article.image;
+          var articleImgSrc = article.imageWide;
           var articleTitle = article.title;
           var articleSumm = article.body;
 
           // Create and Append Elements
           var article = document.createElement('article');
-          article.classList = 'ucb-article-card row';
+          article.classList = 'ucb-article-card';
           
           if(articleImgSrc){
             var imgDiv = document.createElement('div');
@@ -335,7 +337,7 @@ class ArticleListBlockElement extends HTMLElement {
           }
 
           var articleBody = document.createElement('div');
-          articleBody.classList = 'col-sm-12 col-md-10 ucb-article-card-data';
+          articleBody.classList = 'col-sm-12 ucb-article-card-data';
 
           var headerLink = document.createElement('a');
           headerLink.href = articleLink;
@@ -385,7 +387,7 @@ class ArticleListBlockElement extends HTMLElement {
             var article = document.createElement('article');
             article.classList = 'ucb-article-card row';
             var imgDiv = document.createElement('div');
-            imgDiv.classList = 'col-sm-12 col-md-2 ucb-article-card-img';
+            imgDiv.classList = 'ucb-article-card-img title-thumbnail-img';
 
             var imgLink = document.createElement('a');
             imgLink.href = articleLink;
@@ -399,7 +401,7 @@ class ArticleListBlockElement extends HTMLElement {
             article.appendChild(imgDiv);
 
             var articleBody = document.createElement('div');
-            articleBody.classList = 'col-sm-12 col-md-10 ucb-article-card-data';
+            articleBody.classList = 'col px-3 ucb-article-card-data';
 
             var headerLink = document.createElement('a');
             headerLink.href = articleLink;
@@ -469,7 +471,7 @@ class ArticleListBlockElement extends HTMLElement {
             var article = document.createElement('article');
             article.classList = 'ucb-article-card row';
             var imgDiv = document.createElement('div');
-            imgDiv.classList = 'col-sm-12 col-md-2 ucb-article-card-img';
+            imgDiv.classList = 'ucb-article-card-img';
 
             var imgLink = document.createElement('a');
             imgLink.href = articleLink;
@@ -483,7 +485,7 @@ class ArticleListBlockElement extends HTMLElement {
             article.appendChild(imgDiv);
 
             var articleBody = document.createElement('div');
-            articleBody.classList = 'col-sm-12 col-md-10 ucb-article-card-data';
+            articleBody.classList = 'col px-3 ucb-article-card-data';
 
             var headerLink = document.createElement('a');
             headerLink.href = articleLink;
