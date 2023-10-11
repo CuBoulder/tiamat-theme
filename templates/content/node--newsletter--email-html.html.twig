@@ -278,7 +278,18 @@ td>h3>a{
         {% endif %}
     {% endif %}
         <!--Footer-->
-        {# TO DO: Footer #}
+        {# TO DO: Style Footer #}
+        {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
+        <table>
+            <tbody>
+                <tr>
+                    <td>
+                        {{node.field_newsletter_type.entity.field_newsletter_footer.0.processed}}
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        {% endif %}
     </div>
     </html>
 </div>
