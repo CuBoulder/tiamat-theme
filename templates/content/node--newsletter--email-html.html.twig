@@ -280,10 +280,10 @@ td>h3>a{
         <!--Footer-->
         {# TO DO: Style Footer #}
         {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
-        <table>
+        <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
             <tbody>
                 <tr>
-                    <td>
+                    <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
                         {{node.field_newsletter_type.entity.field_newsletter_footer.0.processed}}
                     </td>
                 </tr>
