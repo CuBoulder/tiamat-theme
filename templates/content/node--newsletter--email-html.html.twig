@@ -16,9 +16,11 @@
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
     ]
 %}
-{{ attach_library('boulder_base/ucb-page') }}
+    
+    {{ attach_library('boulder_base/ucb-page') }}
+    {{ attach_library('boulder_base/ucb-newsletter-email') }}
 
-{{ attach_library('boulder_base/ucb-newsletter-email') }}
+    {% set base_url = url('<front>')|render|split('/', -1)|join('/') %}
 
 <div class="container" id="email-preview" style="background-color: grey">
     <html>
@@ -134,31 +136,41 @@ td>h3>a{
             </style>
         </head>
 
-        {% set base_url = url('<front>')|render|split('/', -1)|join('/') %}
 
     <div><p>design:  {{node.field_newsletter_type.entity.field_newsletter_design.value}}</p></div>
-    <div>footer:  {{node.field_newsletter_type.entity.field_newsletter_footer.value}}</div>
-    <div>
-        {# HEADER NEWSLETTER IMG #}
-        <img src="{{base_url}}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}">
-        </p>
-    </div>
     <div><p>path:  {{node.field_newsletter_type.entity.field_newsletter_path.value}}</p></div>
+
     {# END VARIABLE TESTS #}
     <div id="email" style="width:600px;margin: auto;background:white;" data-url="{{base_url}}">
+        {# HEADER -- to do: might need to be different tables for styling purposes #}
+        <!-- Header --> 
         <table role='presentation' width="100%">
             <tbody>
+                {# CU LOGO #}
+                <tr>
+                    <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 10px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+                        <a href="http://www.colorado.edu">
+                            {# TO DO -- need to swap between this and the white one depending on the color #}
+                            <img src="{{base_url}}/{{ base_path ~ directory }}/images/cu-boulder-logo-text-black.gif">
+                        </a>
+                    </td>
+                </tr>
+                {# Newsletter Taxonomy Image -- might need to be a separate table #}
+                <tr>
+                    <td>
+                        <img style="-ms-interpolation-mode: bicubic; clear: both; display: block; float: left; height: 167px !important; max-width: 100% !important; outline: none; text-decoration: none; width: 250px !important; max-height: auto !important;"src="{{base_url}}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}">
+                    </td>
+                </tr>
+                {# Date & View on Website Link #}
                 <tr>
                     <td style="padding-left:10px; text-align:left">{{ node.changed.value|date("M. j, Y") }}</td>
                     <td style="padding-right:10px;text-align:right;">
-                        <a href="{{base_url}}{{ path('entity.node.canonical', {'node': node.id}) }}">View on website</a>
+                        <a style="text-wrap:nowrap" href="{{base_url}}{{ path('entity.node.canonical', {'node': node.id}) }}">View on website</a>
                     </td>
-                    </tr>
+                </tr>
             </tbody>
         </table>
         <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
-            <!-- Header --> 
-            {# TO DO: Header #}
             <tr>
                 <h1 id="newsletter-email-title" style="padding: 30px 30px 15px 60px;font-size: 52px; margin:0 0 20px 0; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"> {{ label }}</h1>
               <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
