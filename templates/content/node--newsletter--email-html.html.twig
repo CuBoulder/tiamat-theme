@@ -22,6 +22,64 @@
 
     {% set base_url = url('<front>')|render|split('/', -1)|join('/') %}
 
+{# Inline Style Switch #}
+{% set divStyles = '' %}
+{% set aStyles = '' %}
+{% set pStyles = '' %}
+{% set headerStyles = '' %}
+{% set footerStyles = '' %}
+{% set cuLogoSrc = '' %}
+
+{# CU LOGO #}
+{% set cuLogoDark = base_url ~ '/' ~  base_path ~ directory ~ '/images/cu-boulder-logo-text-black.gif' %}
+{% set cuLogoLight = base_url ~ '/' ~ base_path ~ directory ~ '/images/cu-boulder-logo-text-white.gif' %}
+
+{% set designType = node.field_newsletter_type.entity.field_newsletter_design.value %}
+{# Classic #}
+{% if designType == 'classic' %}
+    {% set divStyles = 'background-color: #333; color: #fff;' %}
+    {% set aStyles = 'color: #ff9900;' %}
+    {% set pStyles = 'color:red;' %}
+    {% set headerStyles = '' %}
+    {% set footerStyles = '' %}
+    {% set cuLogoSrc = cuLogoDark %}
+{# Minimal #}
+{% elseif designType == 'minimal' %}
+    {% set divStyles = 'background-color: #333; color: #fff;' %}
+    {% set aStyles = 'color: #ff9900;' %}
+    {% set pStyles = 'color:red;' %}
+    {% set headerStyles = '' %}
+    {% set footerStyles = '' %}
+    {% set cuLogoSrc = cuLogoDark %}
+{# Darkbox #}
+{% elseif designType == 'darkbox' %}
+    {% set divStyles = 'background-color: #333; color: #fff;' %}
+    {% set aStyles = 'color: #ff9900;' %}
+    {% set pStyles = 'color:red;' %}
+    {% set headerStyles = '' %}
+    {% set footerStyles = '' %}
+    {% set cuLogoSrc = cuLogoLight %}
+{# Lightbox #}
+{% elseif designType == 'lightbox' %}
+    {% set divStyles = 'background-color: #333; color: #fff;' %}
+    {% set aStyles = 'color: #ff9900;' %}
+    {% set pStyles = 'color:red;' %}
+    {% set headerStyles = '' %}
+    {% set footerStyles = '' %}
+    {% set cuLogoSrc = cuLogoDark %}
+{# Simple #}
+{% else %}
+    {% set divStyles = 'background-color: #333; color: #fff;' %}
+    {% set aStyles = 'color: #ff9900;' %}
+    {% set pStyles = 'color:red;' %}
+    {% set headerStyles = '' %}
+    {% set footerStyles = '' %}
+    {% set cuLogoSrc = cuLogoDark %}
+{% endif %}
+
+<p style='{{ pStyles }}'>I AM BLUE path: {{node.field_newsletter_type.entity.field_newsletter_path.value}}</p>
+
+
 <div class="container" id="email-preview" style="background-color: grey">
     <html>
         <head>
@@ -136,9 +194,8 @@ td>h3>a{
             </style>
         </head>
 
-
     <div><p>design:  {{node.field_newsletter_type.entity.field_newsletter_design.value}}</p></div>
-    <div><p>path:  {{node.field_newsletter_type.entity.field_newsletter_path.value}}</p></div>
+    <div><p style="height: auto;"> I AM BLUE path:  {{node.field_newsletter_type.entity.field_newsletter_path.value}}</p></div>
 
     {# END VARIABLE TESTS #}
     <div id="email" style="width:600px;margin: auto;background:white;" data-url="{{base_url}}">
@@ -151,7 +208,7 @@ td>h3>a{
                     <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 10px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
                         <a href="http://www.colorado.edu">
                             {# TO DO -- need to swap between this and the white one depending on the color #}
-                            <img src="{{base_url}}/{{ base_path ~ directory }}/images/cu-boulder-logo-text-black.gif">
+                            <img src="{{cuLogoSrc}}">
                         </a>
                     </td>
                 </tr>
