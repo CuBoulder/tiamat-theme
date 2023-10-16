@@ -55,15 +55,15 @@
 {% elseif designType == 'darkbox' %}
     {% set divStyles = 'background-color: #333; color: #fff;' %}
     {% set aStyles = 'color: #ff9900;' %}
-    {% set pStyles = 'color:red;' %}
-    {% set headerStyles = '' %}
+    {% set pStyles = 'color:#222330;' %}
+    {% set headerStyles = 'color:#222330;' %}
     {% set footerStyles = '' %}
     {% set cuLogoSrc = cuLogoLight %}
 {# Lightbox #}
 {% elseif designType == 'lightbox' %}
-    {% set divStyles = 'background-color: #333; color: #fff;' %}
+    {% set divStyles = 'background-color: #333;' %}
     {% set aStyles = 'color: #ff9900;' %}
-    {% set pStyles = 'color:red;' %}
+    {% set pStyles = ' color: #fff;' %}
     {% set headerStyles = '' %}
     {% set footerStyles = '' %}
     {% set cuLogoSrc = cuLogoDark %}
@@ -72,15 +72,12 @@
     {% set divStyles = 'background-color: #333; color: #fff;' %}
     {% set aStyles = 'color: #ff9900;' %}
     {% set pStyles = 'color:red;' %}
-    {% set headerStyles = '' %}
+    {% set headerStyles = 'color:black;' %}
     {% set footerStyles = '' %}
     {% set cuLogoSrc = cuLogoDark %}
 {% endif %}
 
-<p style='{{ pStyles }}'>I AM BLUE path: {{node.field_newsletter_type.entity.field_newsletter_path.value}}</p>
-
-
-<div class="container" id="email-preview" style="background-color: grey">
+<div class="container" id="email-preview" style="background-color: grey; display: flex; justify-content:center">
     <html>
         <head>
             <style>
@@ -193,28 +190,26 @@ td>h3>a{
 
             </style>
         </head>
-
-    <div><p>design:  {{node.field_newsletter_type.entity.field_newsletter_design.value}}</p></div>
-    <div><p style="height: auto;"> I AM BLUE path:  {{node.field_newsletter_type.entity.field_newsletter_path.value}}</p></div>
-
     {# END VARIABLE TESTS #}
+    {# BIG Wrapper #}
+    <div style="width:700px; margin:auto;align-items:center;{{divStyles}}">
     <div id="email" style="width:600px;margin: auto;background:white;" data-url="{{base_url}}">
         {# HEADER -- to do: might need to be different tables for styling purposes #}
         <!-- Header --> 
-        <table role='presentation' width="100%">
+        <table style='{{divStyles}}'role='presentation' width="100%">
             <tbody>
                 {# CU LOGO #}
                 <tr>
                     <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 10px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
                         <a href="http://www.colorado.edu">
                             {# TO DO -- need to swap between this and the white one depending on the color #}
-                            <img src="{{cuLogoSrc}}">
+                            <img style="max-width:35%" src="{{cuLogoSrc}}">
                         </a>
                     </td>
                 </tr>
                 {# Newsletter Taxonomy Image -- might need to be a separate table #}
                 <tr>
-                    <td>
+                    <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 10px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
                         <img style="-ms-interpolation-mode: bicubic; clear: both; display: block; float: left; height: 167px !important; max-width: 100% !important; outline: none; text-decoration: none; width: 250px !important; max-height: auto !important;"src="{{base_url}}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}">
                     </td>
                 </tr>
@@ -229,7 +224,7 @@ td>h3>a{
         </table>
         <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
             <tr>
-                <h1 id="newsletter-email-title" style="padding: 30px 30px 15px 60px;font-size: 52px; margin:0 0 20px 0; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"> {{ label }}</h1>
+                <h1 id="newsletter-email-title" style="{{headerStyles}}padding: 30px 30px 15px 60px;font-size: 52px; margin:0 0 20px 0; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"> {{ label }}</h1>
               <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
             <!-- Intro Img --> 
                 {% if content.field_newsletter_intro_image|render %}
@@ -245,7 +240,9 @@ td>h3>a{
         <!--Second table-->
         {% if content.field_newsletter_section_block|render %}
         <!--Newsletter Section-->
+        <div style="{{pStyles}}">
         {{content.field_newsletter_section_block|render}}
+        </div>
             {% endif %}
         <!--Ad One-->
 			{% if content.field_newsletter_promo_image_one|render %}
@@ -349,7 +346,7 @@ td>h3>a{
         <!--Footer-->
         {# TO DO: Style Footer #}
         {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
-        <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
+        <table role="presentation" border="0" width="100%" cellspacing="0" style="{{divStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
             <tbody>
                 <tr>
                     <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
@@ -359,6 +356,7 @@ td>h3>a{
             </tbody>
         </table>
         {% endif %}
+    </div>
     </div>
     </html>
 </div>
