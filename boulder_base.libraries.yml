@@ -305,14 +305,14 @@ ucb-article-grid-block:
     js/ucb-article-grid-block.js: {}
   css:
     theme:
-      css/ucb-article-grid-block.css: {}  
+      css/block/ucb-article-grid-block.css: {}  
 ucb-article-list-block:
   version: 1.x
   js:
     js/ucb-article-list-block.js: {}
   css:
     theme:
-      css/ucb-article-list-block.css: {}
+      css/block/ucb-article-list-block.css: {}
 ucb-content-sequence:
   version: 1.x
   js:
@@ -418,3 +418,11 @@ ucb-menu:
   css:
     theme:
       css/ucb-menu.css: {}
+ucb-user-page:
+  version: 1.x
+  js:
+    js/ucb-status-page-block.js: {}
+  css:
+    theme:
+      css/ucb-status-page-block.css: {}
+      css/ucb-user-page.css: {}

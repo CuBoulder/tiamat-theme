@@ -9,6 +9,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### User and 404 page changes
+  Closes #484.
+  Adds the new implementation of the user page and stores the image for the 404 page.
+---
+
+- ### Article List Block - Style Adjustments & Summary Bug Fix
+  ## Article Block Bug Fix
+   - Fixes bug with article summaries not displaying if they are derived from the body content, in lieu of the `Summary` field. This bug was present across `Article List Block`, `Article Grid Block`, `Article Feature Block` and has been corrected.
+  
+  --------
+  
+  ## Style Adjustments
+  Adjusts the following styles of the `Article List Block`:
+  
+  ### All `Article List Block` Styles
+   - Thumbnail images set to 50px on mobile.
+   - Article borders set to 1px.
+   -  `Link URL` is no longer a button-style link and is now a right-aligned basic link on the `Article List Block` specifically.
+  
+  ### Teaser Display
+  
+  - Sets thumbnails to 100px, 50px on mobile.
+  - Adjusts layout to not force image above article card summary and details on single and multi column widths.
+  
+  ### Feature with Wide Photo
+  - Uses the `Focal Image Wide` thumbnail for the images in `Article List Blocks` rendered in `Feature with Wide Photo` style. This image style was not previously available via JSON API when the block was initially created.
+  
+  ### Thumbnail & Title Displays
+  
+  - Thumbnail image 65px, 50px on mobile.
+  - Equalizes padding above and below each article card, removing padding from images.
+  
+  --------
+  Resolves #497 
+---
+
 - ### favicon fix
   Closes #494.
   Quick fix to the favicon path
