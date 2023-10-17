@@ -1,6 +1,6 @@
 .ucb-secondary-menu-region {
 	display: flex;
-	flex-direction: row;
+	flex-direction: column;
 }
 
 .ucb-secondary-menu-region .ucb-menu {

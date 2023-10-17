@@ -17,3 +17,12 @@
 	color: var(--ucb-gold);
 	background-color: transparent;
 }
+
+
+@media only screen and (max-width: 600px) {
+	.ucb-footer-menu-region {
+		display: none;
+	}
+	
+  }
+  

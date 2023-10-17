@@ -235,6 +235,12 @@
     align-items: center;
   }
   
+@media only screen and (max-width: 600px) {
+  .ucb-main-nav-continer {
+    flex-direction: column;
+  }
+}
+
   /*********** Main Menu **************/
   ul.ucb-main-menu.nav {
     flex-grow: 1;
