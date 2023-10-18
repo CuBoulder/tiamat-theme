@@ -39,7 +39,9 @@
     {% import _self as menus %}
     {% if items %} 
     <nav id = "ucb-main-menu-nav">
-    <button id="example-toggle" aria-label="Toggle example menu">☰</button>
+        <div class = "ucb-mobile-menu-button-div">
+            <button id="example-toggle" aria-label="Toggle example menu">☰</button>
+        </div>
         <ul id= "ucb-main-menu" {{ attributes.addClass('ucb-main-menu nav') }}>
             {% for item in items %}
                 {%
