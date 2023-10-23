@@ -56,7 +56,7 @@
                     {% if item.title|upper == "HOME" %}
                         <a href="{{ item.url }}" id="ucb-home-button" class="ucb-home-button nav-link" title="Home">
                             <span class="sr-only">Home</span>
-                            <i class="fas fas fa-home"></i>
+                            <i class="fa-solid fa-home"></i>
                         </a>
                     {% elseif item.below %}
                         {{ link(item.title, item.url, { 'class':['nav-link', 'dropdown-toggle']}) }}

@@ -33,7 +33,7 @@ class RaveAlertElement extends HTMLElement {
 	alertTextElement.innerText = descriptionText;
 	alertLinkElement.target = '_blank';
 	alertLinkElement.href = linkText;
-	alertLinkElement.innerHTML = `Read More <i class="fas fa-angle-double-right"></i>`;
+	alertLinkElement.innerHTML = `Read More <i class="fa-solid fa-angles-right"></i>`;
 	alertElement.appendChild(alertTextElement);
 	alertElement.innerHTML += ' ';
 	alertElement.appendChild(alertLinkElement);
