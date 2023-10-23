@@ -45,7 +45,7 @@ class CategoryCloudElement extends HTMLElement {
         container.appendChild(span)
 
         const icon = document.createElement('i');
-        icon.className = 'fas fa-exclamation-triangle'
+        icon.className = 'fa-solid fa-triangle-exclamation'
         span.appendChild(icon)
 
         const message = document.createElement('p');

@@ -32,8 +32,8 @@ ul.ucb-person-phone-numbers {
 	margin: 0;
 }
 
-a.ucb-person-social-link i.fa,
-a.ucb-person-social-link i.fab {
+a.ucb-person-social-link i.fa-solid,
+a.ucb-person-social-link i.fa-brands {
 	color: #aaa;
 }
 
