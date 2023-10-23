@@ -83,7 +83,7 @@ a.ucb-person-social-link i.fa-brands {
 
 ul.ucb-person-title li:not(:first-child):before,
 ul.ucb-person-department li:not(:first-child):before {
-	font-family: "Font Awesome 5 Free";
+	font-family: "Font Awesome 6 Free";
 	font-weight: 900;
 	font-size: .25em;
 	content: "\f111";
