@@ -8,13 +8,13 @@
 {{ attach_library('boulder_base/ucb-expandable-content') }}
 
 {% set classes = [
-	'container',
-	'block',
-	'block-' ~ configuration.provider|clean_class,
-	'block-' ~ plugin_id|clean_class,
-	bundle ? 'block--type-' ~ bundle|clean_class,
-	view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
-	'ucb-expandable-content'
+  'container',
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
+  'ucb-expandable-content'
 ] %}
 
 {% set entity = content['#block_content'] %}{% set id = entity.uuid.value %}
@@ -22,60 +22,60 @@
 
 {% set accordianContent %}
 <div class="accordion accordion-flush" id="ucb-accordion{{ id }}">
-	{% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first and (layoutSelection != 0 or entity.field_expandable_content_open.value) %}
-		
-		<div class="accordion-item tab-content">
-			<h2 class="accordion-header" id="ucb-accordion{{ id }}-title{{ loop.index }}">
-			{% set expandableHeaderID = item.entity.field_expandable_content_title|view %}
-				<a id = "{{ item.entity.field_expandable_content_title.value|render|lower|replace({' ': "-"}) }}" class="accordion-button{{ not itemExpanded ? ' collapsed' }} expandableHeaders" type="button" data-bs-toggle="collapse" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" aria-expanded="{{ itemExpanded ? 'true' : 'false' }}" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}">
-					{{ item.entity.field_expandable_content_title|view }}
-				</a>
-			</h2>
-			<div id="ucb-accordion{{ id }}-content{{ loop.index }}" class="accordion-collapse collapse tab-pane fade{{ itemExpanded ? ' show active' }}" aria-labelledby="ucb-accordion{{ id }}-title{{ loop.index }}" data-bs-parent="#ucb-accordion{{ id }}">
-				<div class="accordion-body">
-					{{ item.entity.field_expandable_content_body|view }}
-				</div>
-			</div>
-		</div>
-	{% endfor %}
+  {% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first and (layoutSelection != 0 or entity.field_expandable_content_open.value) %}
+    <div class="accordion-item tab-content">
+      <h2 class="accordion-header" id="ucb-accordion{{ id }}-title{{ loop.index }}">
+        {% set expandableHeaderID = item.entity.field_expandable_content_title|view %}
+        <a id = "{{ item.entity.field_expandable_content_title.value|render|lower|replace({' ': "-"}) }}" class="accordion-button{{ not itemExpanded ? ' collapsed' }} expandableHeaders" type="button" data-bs-toggle="collapse" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" aria-expanded="{{ itemExpanded ? 'true' : 'false' }}" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}">
+          <i class="fa-solid fa-square-plus ucb-accordion-button-content-icon-expand"></i><i class="fa-solid fa-square-minus ucb-accordion-button-content-icon-collapse"></i>
+          {{ item.entity.field_expandable_content_title|view }}
+        </a>
+      </h2>
+      <div id="ucb-accordion{{ id }}-content{{ loop.index }}" class="accordion-collapse collapse tab-pane fade{{ itemExpanded ? ' show active' }}" aria-labelledby="ucb-accordion{{ id }}-title{{ loop.index }}" data-bs-parent="#ucb-accordion{{ id }}">
+        <div class="accordion-body">
+          {{ item.entity.field_expandable_content_body|view }}
+        </div>
+      </div>
+    </div>
+  {% endfor %}
 </div>
 {% endset %}
 
 {% block content %}
-	<div{{attributes.addClass(classes)}}>
-		{{ title_prefix }}
-		{% if label %}
-			<h2{{title_attributes}}>{{ label }}</h2>
-		{% endif %}
-		{{ title_suffix }}
-		{% if layoutSelection == 1 %}
-			<div class="horizontal-tab-accordion">
-				<ul class="nav nav-tabs justify-content-center" id="ucb-horizontal-tabs{{ id }}" role="tablist">
-					{% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first %}
-						<li class="nav-item" role="presentation">
-							<a id = "{{ item.entity.field_expandable_content_title.value|render|lower|replace({' ': "-"}) }}" class="nav-link horizontal-tab-link{{ itemExpanded ? ' active' }} expandableHeaders" data-bs-toggle="tab" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" type="button" role="tab" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}" aria-selected="{{ itemExpanded ? 'true' : 'false' }}">{{ item.entity.field_expandable_content_title|view }}</a>
-						</li>
-					{% endfor %}
-				</ul>
-				<div class="horizontal-tab-content ">
-					{{ accordianContent }}
-				</div>
-			</div>
-		{% elseif layoutSelection == 2 %}
-			<div class="vertical-tab-accordion d-flex align-items-stretch">
-				<div class="vertical-tabs nav flex-column nav-pills" id="ucb-vertical-tabs{{ id }}" role="tablist" aria-orientation="vertical">
-					{% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first %}
-						<a id = "{{ item.entity.field_expandable_content_title.value|render|lower|replace({' ': "-"}) }}" class="nav-link vertical-tab-link{{ itemExpanded ? ' active' }} expandableHeaders" data-bs-toggle="pill" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" type="button" role="tab" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}" aria-selected="{{ itemExpanded ? 'true' : 'false' }}">{{ item.entity.field_expandable_content_title|view }}</a>
-					{% endfor %}
-				</div>
-				<div class="vertical-tab-content ">
-					{{ accordianContent }}
-				</div>
-			</div>
-		{% else %}
-			<div class="accordian-content">
-				{{ accordianContent }}
-			</div>
-		{% endif %}
-	</div>
+  <div{{attributes.addClass(classes)}}>
+    {{ title_prefix }}
+    {% if label %}
+      <h2{{title_attributes}}>{{ label }}</h2>
+    {% endif %}
+    {{ title_suffix }}
+    {% if layoutSelection == 1 %}
+      <div class="horizontal-tab-accordion">
+        <ul class="nav nav-tabs justify-content-center" id="ucb-horizontal-tabs{{ id }}" role="tablist">
+          {% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first %}
+            <li class="nav-item" role="presentation">
+              <a id = "{{ item.entity.field_expandable_content_title.value|render|lower|replace({' ': "-"}) }}" class="nav-link horizontal-tab-link{{ itemExpanded ? ' active' }} expandableHeaders" data-bs-toggle="tab" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" type="button" role="tab" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}" aria-selected="{{ itemExpanded ? 'true' : 'false' }}">{{ item.entity.field_expandable_content_title|view }}</a>
+            </li>
+          {% endfor %}
+        </ul>
+        <div class="horizontal-tab-content ">
+          {{ accordianContent }}
+        </div>
+      </div>
+    {% elseif layoutSelection == 2 %}
+      <div class="vertical-tab-accordion d-flex align-items-stretch">
+        <div class="vertical-tabs nav flex-column nav-pills" id="ucb-vertical-tabs{{ id }}" role="tablist" aria-orientation="vertical">
+          {% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first %}
+            <a id = "{{ item.entity.field_expandable_content_title.value|render|lower|replace({' ': "-"}) }}" class="nav-link vertical-tab-link{{ itemExpanded ? ' active' }} expandableHeaders" data-bs-toggle="pill" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" type="button" role="tab" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}" aria-selected="{{ itemExpanded ? 'true' : 'false' }}">{{ item.entity.field_expandable_content_title|view }}</a>
+          {% endfor %}
+        </div>
+        <div class="vertical-tab-content ">
+          {{ accordianContent }}
+        </div>
+      </div>
+    {% else %}
+      <div class="accordian-content">
+        {{ accordianContent }}
+      </div>
+    {% endif %}
+  </div>
 {% endblock content %}
