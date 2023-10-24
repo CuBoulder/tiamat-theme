@@ -92,7 +92,7 @@ class PeopleListElement extends HTMLElement {
 		messageElement.className = 'ucb-list-msg';
 		messageElement.setAttribute('hidden', '');
 		loadingElement.className = 'ucb-loading-data';
-		loadingElement.innerHTML = '<i class="fas fa-spinner fa-3x fa-pulse"></i>';
+		loadingElement.innerHTML = '<i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>';
 		chromeElement.appendChild(userFormElement);
 		chromeElement.appendChild(messageElement);
 		chromeElement.appendChild(loadingElement);
@@ -490,7 +490,7 @@ class PeopleListElement extends HTMLElement {
 									${
 										personEmail ?
 											`<span class="ucb-person-card-links ucb-person-card-email">
-												<i class="fa fa-envelope iconColor"></i>
+												<i class="fa-solid fa-envelope iconColor"></i>
 												<a href="mailto:${personEmail}">
 													<span class="ucb-people-list-contact">  ${personEmail}</span>
 												</a>
@@ -500,7 +500,7 @@ class PeopleListElement extends HTMLElement {
 									${
 										personPhone ?
 											`<span class="ucb-person-card-links ucb-person-card-phone">
-												<i class="fa fa-phone iconColor"></i>
+												<i class="fa-solid fa-phone iconColor"></i>
 												<a href="tel:${personPhone.replace(/[^+\d]+/g, '',)}">
 													<span class="ucb-people-list-contact">  ${personPhone}</span>
 												</a>
@@ -570,7 +570,7 @@ class PeopleListElement extends HTMLElement {
 						${
 							personEmail ?
 								`<span class="ucb-person-card-links ucb-person-card-email">
-									<i class="fa fa-envelope iconColor"></i>
+									<i class="fa-solid fa-envelope iconColor"></i>
 									<a href="mailto:${personEmail}">
 										<span class="ucb-people-list-contact">  ${personEmail}</span>
 									</a>
@@ -580,7 +580,7 @@ class PeopleListElement extends HTMLElement {
 						${
 							personPhone ?
 								`<span class="ucb-person-card-links ucb-person-card-phone">
-									<i class="fa fa-phone iconColor"></i>
+									<i class="fa-solid fa-phone iconColor"></i>
 									<a href="tel:${personPhone.replace(/[^+\d]+/g, '',)}">
 										<span class="ucb-people-list-contact">  ${personPhone}</span>
 									</a>
@@ -745,65 +745,65 @@ class PeopleListElement extends HTMLElement {
 		}
 	}
 	generateLinkIcon(linkURI) {
-		var linkIcon = "fas fa-link primaryLinkIcon";
+		var linkIcon = "fa-solid fa-link primaryLinkIcon";
 		if (linkURI.indexOf("internal:/") == 0) {
 			return linkIcon;
 		} else {
 			const linkData = new URL(linkURI).hostname.split(".")[1].toUpperCase();
 			switch (linkData) {
 				case 'FACEBOOK' :
-					linkIcon =  "fab fa-facebook primaryLinkIcon";
+					linkIcon =  "fa-brands fa-facebook primaryLinkIcon";
 					break;
 				
 				case 'TWITTER' :
-					linkIcon =  "fab fa-twitter primaryLinkIcon";
+					linkIcon =  "fa-brands fa-twitter primaryLinkIcon";
 					break;
 				
 				case 'FLICKR' :
-					linkIcon =  "fab fa-flickr primaryLinkIcon";
+					linkIcon =  "fa-brands fa-flickr primaryLinkIcon";
 					break;
 				
 				case 'LINKEDIN' :
-					linkIcon =  "fab fa-linkedin primaryLinkIcon";
+					linkIcon =  "fa-brands fa-linkedin primaryLinkIcon";
 					break;
 				
 				case 'YOUTUBE' :
-					linkIcon =  "fab fa-youtube primaryLinkIcon";
+					linkIcon =  "fa-brands fa-youtube primaryLinkIcon";
 					break;
 				
 				case 'INSTAGRAM' :
-					linkIcon =  "fab fa-instagram primaryLinkIcon";
+					linkIcon =  "fa-brands fa-instagram primaryLinkIcon";
 					break;
 				
 				case 'DISCORD' :
-					linkIcon =  "fab fa-discord primaryLinkIcon";
+					linkIcon =  "fa-brands fa-discord primaryLinkIcon";
 					break;
 				
 				case 'PINTREST' :
-					linkIcon =  "fab fa-pinterest-p primaryLinkIcon";
+					linkIcon =  "fa-brands fa-pinterest-p primaryLinkIcon";
 					break;
 					
 				case 'VIMEO' :
-					linkIcon =  "fab fa-vimeo-v primaryLinkIcon";
+					linkIcon =  "fa-brands fa-vimeo-v primaryLinkIcon";
 					break;
 				
 				case 'WORDPRESS' :
-					linkIcon =  "fab fa-wordpress-simple primaryLinkIcon";
+					linkIcon =  "fa-brands fa-wordpress-simple primaryLinkIcon";
 					break;
 				
 				case 'TIKTOK' :
-					linkIcon =  "fab fa-tiktok primaryLinkIcon";
+					linkIcon =  "fa-brands fa-tiktok primaryLinkIcon";
 					break;
 				
 				case 'REDDIT' :
-					linkIcon =  "fab fa--reddit-alien primaryLinkIcon";
+					linkIcon =  "fa-brands fa--reddit-alien primaryLinkIcon";
 					break;
 				
 				case 'PATREON' :
-					linkIcon =  "fab fa-patreon primaryLinkIcon";
+					linkIcon =  "fa-brands fa-patreon primaryLinkIcon";
 					break;
 				default :
-					linkIcon =  "fas fa-link primaryLinkIcon";																																																					
+					linkIcon =  "fa-solid fa-link primaryLinkIcon";																																																					
 			}
 		}
 	return linkIcon;

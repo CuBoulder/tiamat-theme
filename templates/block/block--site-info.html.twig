@@ -56,9 +56,9 @@
             {% if email.visible == '1' %}
               <div class="ucb-site-contact-info-footer-email">
               {% if email.label %}
-                <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-email-label">{% if icons_visible %}<i class="fas fa-envelope-open"></i> {% endif %}{{ email.label }}</span>
+                <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-email-label">{% if icons_visible %}<i class="fa-solid fa-envelope-open"></i> {% endif %}{{ email.label }}</span>
               {% endif %}
-              <a class="ucb-site-contact-info-footer-content ucb-site-contact-info-footer-email-content" href="mailto:{{ email.value }}">{% if not email.label and icons_visible %}<i class="fas fa-envelope-open"></i> {% endif %}{{ email.value }}</a></div>
+              <a class="ucb-site-contact-info-footer-content ucb-site-contact-info-footer-email-content" href="mailto:{{ email.value }}">{% if not email.label and icons_visible %}<i class="fa-solid fa-envelope-open"></i> {% endif %}{{ email.value }}</a></div>
             {% endif %}
           {% endfor %}
         </div>
@@ -69,9 +69,9 @@
             {% if phone.visible == '1' %}
               <div class="ucb-site-contact-info-footer-phone">
               {% if phone.label %}
-                <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-phone-label">{% if icons_visible %}<i class="fas fa-phone-alt"></i> {% endif %}{{ phone.label }}</span>
+                <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-phone-label">{% if icons_visible %}<i class="fa-solid fa-phone"></i> {% endif %}{{ phone.label }}</span>
               {% endif %}
-              <a class="ucb-site-contact-info-footer-content ucb-site-contact-info-footer-phone-content" href="tel:{{ phone.value }}">{% if not phone.label and icons_visible %}<i class="fas fa-phone-alt"></i> {% endif %}{{ phone.value }}</a></div>
+              <a class="ucb-site-contact-info-footer-content ucb-site-contact-info-footer-phone-content" href="tel:{{ phone.value }}">{% if not phone.label and icons_visible %}<i class="fa-solid fa-phone"></i> {% endif %}{{ phone.value }}</a></div>
             {% endif %}
           {% endfor %}
         </div>

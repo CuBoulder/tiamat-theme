@@ -174,11 +174,11 @@
     }
 
     function showVideoHeroPauseIcon(playPauseButtonElement) {
-        playPauseButtonElement.innerHTML = '<i class="fa fa-pause"></i>';
+        playPauseButtonElement.innerHTML = '<i class="fa-solid fa-pause"></i>';
     }
 
     function showVideoHeroPlayIcon(playPauseButtonElement) {
-        playPauseButtonElement.innerHTML = '<i class="fa fa-play"></i>';
+        playPauseButtonElement.innerHTML = '<i class="fa-solid fa-play"></i>';
     }
 
     function videoHeroErrorHandler(videoWrapperElement, videoPlayerWrapperElement) {

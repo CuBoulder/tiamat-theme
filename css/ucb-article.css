@@ -13,7 +13,7 @@
   font-weight: 700;
 }
 
-i.far.fa-calendar {
+i.fa-regular.fa-calendar {
   color: #999;
 }
 
@@ -32,7 +32,7 @@ i.far.fa-calendar {
   line-height: 1em;
 }
 
-.ucb-article-category-icon, .ucb-article-tag-icon{
+.ucb-article-category-icon, .ucb-article-tag-icon {
   background-color: #555555;
   color: #e7e7e7;
   height: 16px;
@@ -71,9 +71,9 @@ i.far.fa-calendar {
   color: #fff;
 }
 
-.ucb-article-tags i.fas,
-.ucb-article-categories i.fas
-.ucb-article-issue i.fas {
+.ucb-article-tags i.fa-solid,
+.ucb-article-categories i.fa-solid,
+.ucb-article-issue i.fa-solid {
   padding: 0.5em;
   background: #555;
   color: #fff;

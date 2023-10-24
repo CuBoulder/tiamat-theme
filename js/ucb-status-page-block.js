@@ -41,19 +41,19 @@ class StatusPageElement extends HTMLElement {
         switch (response.status.indicator) {
             case 'none':
                 container.classList.add('ucb-status-none');
-                link.firstChild.classList = 'far fa-smile'
+                link.firstChild.classList = 'fa-regular fa-face-smile'
                 break;
             case 'minor':
                 container.classList.add('ucb-status-minor')
-                link.firstChild.classList = 'far fa-question-circle'
+                link.firstChild.classList = 'fa-regular fa-circle-question'
                 break;
             case 'major':
                 container.classList.add('ucb-status-major')
-                link.firstChild.classList = 'fas fa-exclamation-triangle'
+                link.firstChild.classList = 'fa-solid fa-triangle-exclamation'
                 break;
             case 'critical':
                 container.classList.add('ucb-status-crtical')
-                link.firstChild.classList = 'fas fa-exclamation-triangle'
+                link.firstChild.classList = 'fa-solid fa-triangle-exclamation'
                 break;
         
             default:
@@ -73,7 +73,7 @@ class StatusPageElement extends HTMLElement {
         container.appendChild(span)
 
         const icon = document.createElement('i');
-        icon.className = 'ucb-status-block-icon fas fa-exclamation-triangle'
+        icon.className = 'ucb-status-block-icon fa-solid fa-triangle-exclamation'
         span.appendChild(icon)
 
         const message = document.createElement('p');

@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates tiamat-theme to Font Awesome 6 compatibility
+  Resolves CuBoulder/tiamat-theme#511
+---
+
+- ### initial mobile menu commit
+  Initial Mobile Menu commit before styling is decided
+---
+
 - ### User and 404 page changes
   Closes #484.
   Adds the new implementation of the user page and stores the image for the 404 page.
