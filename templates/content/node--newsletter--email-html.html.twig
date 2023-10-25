@@ -39,41 +39,41 @@
 {% if designType == 'classic' %}
     {% set divStyles = 'background-color: #fff; color: #fff;' %}
     {% set aStyles = 'color: #ff9900;' %}
-    {% set pStyles = 'color:red;' %}
+    {% set pStyles = 'color:black;' %}
     {% set headerStyles = 'background-color:#222330;' %}
     {% set footerStyles = 'background-color:#222330;' %}
     {% set cuLogoSrc = cuLogoLight %}
 {# Minimal #}
 {% elseif designType == 'minimal' %}
-    {% set divStyles = 'background-color: #FFFFFF;' %}
+    {% set divStyles = 'background-color: #FFFFFF;margin:auto;' %}
     {% set aStyles = 'color: #ff9900;' %}
-    {% set pStyles = 'color:red;' %}
-    {% set headerStyles = '' %}
-    {% set footerStyles = '' %}
+    {% set pStyles = 'color:black;' %}
+    {% set headerStyles = 'color:black;' %}
+    {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
 {# Darkbox #}
 {% elseif designType == 'darkbox' %}
-    {% set divStyles = 'background-color: #333; color: #fff;' %}
+    {% set divStyles = 'background-color: #333; color: #fff;margin:auto;' %}
     {% set aStyles = 'color: #ff9900;' %}
     {% set pStyles = 'color:#222330;' %}
-    {% set headerStyles = 'color:#222330;' %}
-    {% set footerStyles = '' %}
-    {% set cuLogoSrc = cuLogoLight %}
+    {% set headerStyles = 'color:black;' %}
+    {% set footerStyles = 'color:black;' %}
+    {% set cuLogoSrc = cuLogoDark %}
 {# Lightbox #}
 {% elseif designType == 'lightbox' %}
-    {% set divStyles = 'background-color: #E9E9E9;' %}
+    {% set divStyles = 'background-color: #E9E9E9;margin:auto;' %}
     {% set aStyles = 'color: #ff9900;' %}
     {% set pStyles = ' color: #222330;' %}
-    {% set headerStyles = '' %}
-    {% set footerStyles = '' %}
+    {% set headerStyles = 'color:black;' %}
+    {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
 {# Simple #}
 {% else %}
-    {% set divStyles = 'background-color: #FFFFFF; color: #fff;' %}
+    {% set divStyles = 'background-color: #FFFFFF; color: #fff; margin:auto;' %}
     {% set aStyles = 'color: #ff9900;' %}
-    {% set pStyles = 'color:red;' %}
+    {% set pStyles = 'color:black;' %}
     {% set headerStyles = 'color:black;' %}
-    {% set footerStyles = '' %}
+    {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
 {% endif %}
 
@@ -192,7 +192,7 @@ td>h3>a{
         </head>
     {# END VARIABLE TESTS #}
     {# BIG Wrapper #}
-    <div id="email" style="width:700px; margin:auto;align-items:center;{{divStyles}}">
+    <div id="email" style="width:700px; align-items:center;{{divStyles}}">
     <div style="width:600px;margin: auto;background:white;" data-url="{{base_url}}">
         {# HEADER -- to do: might need to be different tables for styling purposes #}
         <!-- Header --> 
