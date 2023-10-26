@@ -328,6 +328,28 @@ ucb-article-feature-block:
     theme:
       css/block/ucb-article-feature-block.css: {}
 
+ucb-brand-bar:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-brand-bar.css: {}
+
+ucb-search-box:
+  version: 1.x
+  js:
+    js/ucb-search-box.js: {}
+  css:
+    theme:
+      css/ucb-search-box.css: {}
+
+ucb-search-modal:
+  version: 1.x
+  js:
+    js/ucb-search-modal.js: {}
+  css:
+    theme:
+      css/ucb-search-modal.css: {}
+
 ucb-menu-style-highlight:
   version: 1.x
   css:

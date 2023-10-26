@@ -1,0 +1,27 @@
+{{ attach_library('boulder_base/ucb-search-box') }}
+<div class="ucb-search-box" role="search">
+  <form action="{{ site_search.0.url }}" method="get">
+    <div class="ucb-search-box-inputs">
+    <div class="ucb-search-input-text">
+      <label class="element-invisible">Enter the terms you wish to search for.</label>
+      <input placeholder="{{ site_search.0.placeholder }}" type="search" name="cse" value="" size="15" maxlength="1024">
+    </div>
+    <div class="ucb-search-input-submit">
+      <input type="submit" name="op" value="Search">
+    </div>
+    </div>
+    {% if site_search|length > 1 %}
+      <div class="ucb-search-box-options">
+        {% for index, search in site_search %}
+          <div>
+            <input type="radio"{{ index == 0 ? ' checked="checked"' }}value="{{ search.label }}" data-placeholder="{{ search.placeholder }}" data-action="{{ search.url }}" id="search-{{ search.name }}"> <label for="search-{{ search.name }}">{{ search.label }}</label>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    <div class="ucb-search-box-links">
+    <h3 class="d-inline">Other ways to search:</h3>
+    <ul class="d-inline list-inline"><li class="list-inline-item"><a href="https://calendar.colorado.edu">Events Calendar</a></li><li class="list-inline-item"><a href="https://www.colorado.edu/map">Campus Map</a></li></ul>
+    </div>
+  </form>
+</div>
