@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Add editor style options
+  Closes #515.
+  Adds initial styling.
+---
+
 - ### Updates tiamat-theme to Font Awesome 6 compatibility
   Resolves CuBoulder/tiamat-theme#511
 ---
