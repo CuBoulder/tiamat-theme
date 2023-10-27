@@ -688,3 +688,174 @@ div.align-center {
   font-weight: normal;
   font-size: 220%;
 }
+
+small, .small-text {
+  font-size: 80%;
+  font-family: Arial, Helvetica, sans-serif !important;
+}
+
+p.lead {
+  font-size: 130%;
+  line-height: 1.4;
+}
+
+p.lead strong {
+  font-weight: bold;
+}
+
+
+p.hero {
+  font-size: 200%;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+p.hero strong {
+  font-weight: 700;
+  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+
+p.supersize {
+  font-size: 320%;
+  line-height: 1.3;
+  font-weight: normal;
+}
+
+p.supersize strong {
+  font-weight: 700;
+  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+
+ul.list-style-underline > li {
+  list-style: none;
+}
+
+ul.list-style-underline {
+  list-style: none;
+  list-style-image: none;
+  padding-left: 0;
+}
+
+
+ul.list-style-nobullet {
+  list-style: none;
+  list-style-image: none;
+  padding-left: 0;
+}
+
+ul.list-style-nobullet > li {
+  list-style: none;
+  list-style-image: none;
+}
+
+
+ul.list-style-border {
+  list-style: none;
+  list-style-image: none;
+  padding-left: 0;
+  border-top: 1px solid rgba(128, 128, 128, 0.333);
+}
+
+ul.list-style-border > li {
+  list-style: none;
+  border: 1px solid rgba(128, 128, 128, 0.333);
+  border-top: none;
+  padding: 10px;
+  margin-bottom: 0;
+}
+/* UNORDERED LIST STYLES */
+
+ul.list-style-icon-1, ul.list-style-icon-2, ul.list-style-icon-3, ul.list-style-icon-4, ul.list-style-icon-5, ul.list-style-icon-6 {
+  list-style: none;
+  list-style-image: none;
+  overflow: hidden;
+}
+
+ul.list-style-icon-1 > li, ul.list-style-icon-2 > li, ul.list-style-icon-3 > li, ul.list-style-icon-4 > li, ul.list-style-icon-5 > li, ul.list-style-icon-6 > li {
+  list-style: none !important;
+  list-style-image: none !important;
+  position: relative;
+}
+
+ul.list-style-icon-1 li:before, ul.list-style-icon-2 li:before, ul.list-style-icon-3 li:before, ul.list-style-icon-4 li:before, ul.list-style-icon-5 li:before, ul.list-style-icon-6 li:before {
+  font-family: "Font Awesome 5 Free", "FontAwesome";
+  position: absolute;
+  top: 0;
+  left: -20px;
+  color: #cfb87c;
+}
+
+ul.list-style-icon-1 > li:before, ul.list-style-icon-check > li:before {
+  content: '\f00c';
+  font-weight: 900;
+}
+
+ul.list-style-icon-2 > li:before, ul.list-style-icon-checkbox > li:before {
+  content: '\f14a';
+  font-weight: 900;
+}
+
+ul.list-style-icon-3 > li:before, ul.list-style-icon-angle-double > li:before {
+  content: '\f101';
+  font-weight: 900;
+}
+
+ul.list-style-icon-4 > li:before, ul.list-style-icon-circle-arrow > li:before {
+  content: '\f0a9';
+  font-weight: 900;
+}
+
+ul.list-style-icon-5 > li:before, ul.list-style-icon-star > li:before {
+  content: '\f005';
+  font-weight: 900;
+}
+
+ul.list-style-icon-6 > li:before, ul.list-style-icon-finger > li:before {
+  content: '\f0a4';
+  font-weight: 900;
+}
+
+/* ORDERED LIST STYLES */
+ol.list-style-alpha-upper, ol.list-style-alpha-upper > li {
+  list-style: upper-alpha;
+}
+
+ol.list-style-alpha-lower, ol.list-style-alpha-lower > li {
+  list-style: lower-alpha;
+}
+
+ol.list-style-roman-upper, ol.list-style-roman-upper > li {
+  list-style: upper-roman;
+}
+
+ol.list-style-roman-lower, ol.list-style-roman-lower > li {
+  list-style: lower-roman;
+}
+
+/* TABLE STYLES */
+table.table-zebra tr:nth-child(odd) td {
+  background: #f3f3f3;
+}
+
+table.table-condensed td, table.table-condensed th, div.table-condensed table td, div.table-condensed table th {
+  padding: 4px;
+}
+
+table.table-small, div.table-small table {
+    font-size: 80%;
+}
+
+table.table-small td, table.table-small th, div.table-small table td, div.table-small table th {
+    padding: 4px;
+}
+
+table.table-horizontal td, div.table-horizontal table td {
+  border-left: none;
+  border-right: none;
+}
+
+table.table-vertical td, div.table-vertical table td {
+  border-top: none;
+  border-bottom: none;
+}
