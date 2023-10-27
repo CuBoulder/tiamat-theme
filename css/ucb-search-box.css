@@ -1,7 +1,6 @@
 .ucb-search-box .ucb-search-box-links {
   padding: 20px 0;
-  border-top: 3px solid rgba(128, 128, 128, 0.333);
-  font-size: 85%;
+  font-size: .85em;
   font-weight: bold;
 }
 
@@ -9,12 +8,12 @@
   font-size: 1em;
 }
 
-.ucb-search-box .ucb-search-box-links ul li.list-inline-item:not(:last-child) {
+.ucb-search-box .ucb-search-box-links ul li:not(:last-child) {
   margin-right: .25rem;
 }
 
 
-.ucb-search-box .ucb-search-box-links ul li.list-inline-item:not(:first-child):before {
+.ucb-search-box .ucb-search-box-links ul li:not(:first-child):before {
   display: inline-block;
   content: '\2022';
   margin-right: .25rem;
@@ -23,13 +22,14 @@
 .ucb-search-box .ucb-search-box-options {
   display: flex;
   flex-direction: row;
-  gap: 1em;
-  padding: 10px 0;
+  gap: 1.25rem;
+  border-bottom: 3px solid rgba(128, 128, 128, 0.333);
+  padding: 10px 5px;
 }
 
 .ucb-search-box .ucb-search-box-options label,
 .ucb-search-box .ucb-search-input-submit input {
-  font-size: 1em;
+  font-size: .9em;
   font-weight: bold;
 }
 
@@ -56,6 +56,13 @@
   background-color: #fff;
   color: #000;
   border: none;
+  outline-offset: 0px;
+  transition: outline-offset .1s ease-in-out;
+}
+
+.ucb-search-box .ucb-search-input-text input:focus {
+  outline: #0277BD solid 2px;
+  outline-offset: 3px;
 }
 
 .ucb-search-box .ucb-search-input-submit input {

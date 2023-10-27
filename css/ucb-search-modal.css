@@ -8,6 +8,7 @@
   z-index: 300;
   background: rgba(0, 0, 0, 0.85);
   color: #fff;
+  transition: opacity .2s ease-in-out;
 }
 
 .ucb-search-modal[hidden] {
@@ -22,21 +23,20 @@
 
 .ucb-search-modal .ucb-search-modal-content {
   position: relative;
+  box-sizing: border-box;
   width: 100%;
-  max-width: 680px;
+  max-width: 720px;
   margin: 0 auto;
-  padding: 20px 0;
+  padding: 20px;
 }
 
+.ucb-search-modal .ucb-search-modal-header,
 .ucb-search-modal .ucb-search-modal-close {
-  position: absolute;
-  top: 0;
-  right: 0;
-  z-index: 11;
-  font-size: 24px;
+  font-size: 1.6em;
   background: none;
   border: none;
   color: #fff;
+  margin: 0 0 10px 0;
 }
 
 .ucb-search-modal a:link,

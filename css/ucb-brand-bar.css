@@ -1,50 +1,36 @@
-/* CU Boulder Brand Bar */
 .ucb-brand-bar {
-  display:flex;
+  display: flex;
   flex-direction: row;
   justify-content: space-between;
-  align-items:center;
-}
-.ucb-brand-bar.ucb-brand-bar-white {
-  background-color:#fff; 
-}
-.ucb-brand-bar.ucb-brand-bar-black {
-  background-color:#000; 
-}
-.ucb-brand-bar img.ucb-logo {
-  width:100%;
-  max-width: 200px;
-  min-width:160px;
-  height:auto;
-  margin-right:20px;
-  display:block;
-}
-@media screen and (min-width:768px) {
-  .ucb-brand-bar img.ucb-logo {
-    max-width:240px;
-  }
-}
-.ucb-brand-bar img.ucb-search {
-  width:18px;
-  height:18px;
-  margin-left:20px;
-  display:block;
+  align-items: center;
 }
 
-/* CU Boulder Footer */
-.ucb-footer p {
-  margin:0;
-  padding:0;
+.ucb-brand-bar.ucb-brand-bar-white {
+  background-color: #fff;
 }
-.ucb-footer a.ucb-home-link {
-  font-weight:bold; 
+
+.ucb-brand-bar.ucb-brand-bar-black {
+  background-color: #000;
 }
-.ucb-footer img.ucb-footer-be-boulder {
-  max-width:240px;
-  width:100%;
-  height:auto;
-  display:inline-block;
+
+.ucb-brand-bar img.ucb-logo {
+  width: 100%;
+  max-width: 200px;
+  min-width: 160px;
+  height: auto;
+  margin-right: 20px;
+  display: block;
 }
-.ucb-footer .ucb-footer-links {
- font-size:85%; 
+
+@media screen and (min-width: 768px) {
+  .ucb-brand-bar img.ucb-logo {
+    max-width: 240px;
+  }
+}
+
+.ucb-brand-bar img.ucb-search {
+  width: 18px;
+  height: 18px;
+  margin-left: 20px;
+  display: block;
 }
