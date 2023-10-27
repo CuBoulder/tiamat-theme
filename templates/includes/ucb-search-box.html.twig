@@ -3,8 +3,8 @@
   <form action="{{ site_search.0.url }}" method="get">
     <div class="ucb-search-box-inputs">
       <div class="ucb-search-input-text">
-        <label class="element-invisible">Enter the terms you wish to search for.</label>
-        <input placeholder="{{ site_search.0.placeholder }}" type="search" name="cse" value="" size="15" maxlength="1024">
+        <label for="ucb-search-text-field" class="sr-only">Enter the terms you wish to search for.</label>
+        <input id="ucb-search-text-field" placeholder="{{ site_search.0.placeholder }}" type="search" name="cse" value="" size="15" maxlength="1024">
       </div>
       <div class="ucb-search-input-submit">
         <input type="submit" name="op" value="Search">
@@ -14,7 +14,7 @@
       <div class="ucb-search-box-options">
         {% for index, search in site_search %}
           <div>
-            <input name="search-box-option" type="radio"{{ index == 0 ? ' checked="checked"' }}value="{{ search.label }}" data-placeholder="{{ search.placeholder }}" data-action="{{ search.url }}" class="me-1" id="search-{{ search.name }}"> <label class="align-middle" for="search-{{ search.name }}">{{ search.label }}</label>
+            <input {{ index == 0 ? 'checked ' }}id="search-{{ search.name }}" class="me-1" name="search-box-option" type="radio" value="{{ search.name }}" data-placeholder="{{ search.placeholder }}" data-action="{{ search.url }}"> <label for="search-{{ search.name }}">{{ search.label }}</label>
           </div>
         {% endfor %}
       </div>
