@@ -831,8 +831,3 @@ table.table-vertical td, div.table-vertical table td {
   border-top: none;
   border-bottom: none;
 }
-
-figure:has(div:has(div:has(div:has(.wide_image_style)))){
-  margin-left: 0px !important;
-  margin-right: 0px !important;
-}
