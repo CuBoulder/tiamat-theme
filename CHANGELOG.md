@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Remove Extra Markup from inserted Images
+  Conditionally removes extra `<div>` elements added through Twig when there's no attributes to justify an additional `<div>` wrap of the rendered content. 
+  
+  Changes default div styling of the imageMediaStyle class to not be `display:block`, both of which caused issues with wrapping an image in an anchor tag making the entire row clickable rather than just the image.
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/522
+---
+
 - ### Add editor style options
   Closes #515.
   Adds initial styling.
