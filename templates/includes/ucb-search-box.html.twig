@@ -4,17 +4,17 @@
     <div class="ucb-search-box-inputs">
       <div class="ucb-search-input-text">
         <label for="ucb-search-text-field" class="sr-only">Enter the terms you wish to search for.</label>
-        <input id="ucb-search-text-field" placeholder="{{ site_search.0.placeholder }}" type="search" name="cse" value="" size="15" maxlength="1024">
+        <input id="ucb-search-text-field" placeholder="{{ site_search.0.placeholder }}" type="search" name="{{ site_search.0.parameter ?? 'keys' }}" value="" size="15" maxlength="1024">
       </div>
       <div class="ucb-search-input-submit">
-        <input type="submit" name="op" value="Search">
+        <input type="submit" value="Search">
       </div>
     </div>
     {% if site_search|length > 1 %}
       <div class="ucb-search-box-options">
         {% for index, search in site_search %}
           <div>
-            <input {{ index == 0 ? 'checked ' }}id="search-{{ search.name }}" class="me-1" name="search-box-option" type="radio" value="{{ search.name }}" data-placeholder="{{ search.placeholder }}" data-action="{{ search.url }}"> <label for="search-{{ search.name }}">{{ search.label }}</label>
+            <input {{ index == 0 ? 'checked ' }}id="search-{{ search.name }}" class="me-1" name="search-box-option" type="radio" value="{{ search.name }}" data-placeholder="{{ search.placeholder }}" data-parameter="{{ search.parameter ?? 'keys' }}" data-action="{{ search.url }}"> <label for="search-{{ search.name }}">{{ search.label }}</label>
           </div>
         {% endfor %}
       </div>

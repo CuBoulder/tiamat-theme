@@ -2,7 +2,9 @@
 
   function selectSearchOption(radio) {
     const searchForm = radio.parentElement.parentElement.parentElement;
-    searchForm.querySelector('.ucb-search-input-text input').setAttribute('placeholder', radio.dataset['placeholder']);
+    const input = searchForm.querySelector('.ucb-search-input-text input');
+    input.setAttribute('placeholder', radio.dataset['placeholder']);
+    input.setAttribute('name', radio.dataset['parameter']);
     searchForm.setAttribute('action', radio.dataset['action']);
   }
 
