@@ -1,0 +1,11 @@
+{{ attach_library('boulder_base/ucb-search-modal') }}
+<div hidden tabindex="-1" class="ucb-search-modal opacity-0">
+  <div class="ucb-search-modal-backdrop"></div>
+  <div class="ucb-search-modal-content">
+    <div class="d-flex justify-content-between">
+      <h2 class="ucb-search-modal-header"><i class="fa-solid fa-magnifying-glass me-1" aria-hidden="true"></i>Search</h2>
+      <button class="ucb-search-modal-close" aria-label="Close search"><i class="fa-solid fa-times" aria-hidden="true"></i></button>
+    </div>
+    {% include '@boulder_base/includes/ucb-search-box.html.twig' %}
+  </div>
+</div>

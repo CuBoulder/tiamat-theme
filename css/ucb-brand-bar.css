@@ -1,0 +1,36 @@
+.ucb-brand-bar {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.ucb-brand-bar.ucb-brand-bar-white {
+  background-color: #fff;
+}
+
+.ucb-brand-bar.ucb-brand-bar-black {
+  background-color: #000;
+}
+
+.ucb-brand-bar img.ucb-logo {
+  width: 100%;
+  max-width: 200px;
+  min-width: 160px;
+  height: auto;
+  margin-right: 20px;
+  display: block;
+}
+
+@media screen and (min-width: 768px) {
+  .ucb-brand-bar img.ucb-logo {
+    max-width: 240px;
+  }
+}
+
+.ucb-brand-bar img.ucb-search {
+  width: 18px;
+  height: 18px;
+  margin-left: 20px;
+  display: block;
+}
