@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes List Indicator Alignment with Left Align Images
+  This change aligns the list indicators on a list element with other text elements next to a left-aligned image. 
+  
+  Previously, the float css for aligning an element left would cause visual issues with list indicators specifically, the bullet-point or numbering becoming hard to see or lost within the image. There is now condtionally applied left-spacing to rendered Ordered and Unordered list elements, when directly next to a Left Align (.align-left) image. 
+  
+  Resolves #523 
+---
+
+- ### Remove Extra Markup from inserted Images
+  Conditionally removes extra `<div>` elements added through Twig when there's no attributes to justify an additional `<div>` wrap of the rendered content. 
+  
+  Changes default div styling of the imageMediaStyle class to not be `display:block`, both of which caused issues with wrapping an image in an anchor tag making the entire row clickable rather than just the image.
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/522
+---
+
 - ### Add editor style options
   Closes #515.
   Adds initial styling.

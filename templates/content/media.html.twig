@@ -1,0 +1,10 @@
+{# This condition prevents wrapping in an unnecessary <div> #}
+{% if attributes != "" %}
+<div{{ attributes }}>
+  {{ title_suffix.contextual_links }}
+  {{ content }}
+</div>
+{% else %}
+  {{ title_suffix.contextual_links }}
+  {{ content }}
+{% endif %}

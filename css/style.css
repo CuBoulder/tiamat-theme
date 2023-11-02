@@ -491,6 +491,12 @@ article .align-left .media-image-caption p {
   padding-right: 1em;
 }
 
+/* Adjusts list elements when a left-floated image (.align-left) is a preceeding sibling, aligns list indicators with other elements  */
+.align-left + ol, .align-left + ul {
+  right: -1em;
+  position: relative;
+}
+
 /* Resets Bootstrap's `placeholder` class styles */
 .placeholder {
   display: initial;
@@ -521,8 +527,11 @@ div#drupal-off-canvas-wrapper {
   display: none;
 }
 
-/* Image Styles */
-.imageMediaStyle img {
+/* Image Styles */ 
+.imageMediaStyle{
+  display: inline;
+}
+.imageMediaStyle img{
   padding-bottom: 20px;
 }
 
