@@ -468,12 +468,7 @@
   }
 
 /* Adjusts list elements when a left-floated image (.align-left) is a preceeding sibling, aligns list indicators with other elements  */
-.align-left + ol {
-  right: -1em;
-  position: relative;
-}
-
-.align-left + ul {
+.align-left + ol, .align-left + ul {
   right: -1em;
   position: relative;
 }
