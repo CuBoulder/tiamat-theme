@@ -78,6 +78,7 @@ function boulder_base_preprocess_page(array &$variables) {
   $variables['site_slogan'] = $config->get('slogan');
   $variables['ucb_secondary_menu_position'] = theme_get_setting('ucb_secondary_menu_position');
   $variables['ucb_footer_menu_default_links'] = theme_get_setting('ucb_footer_menu_default_links');
+  $variables['show_breadcrumb'] = theme_get_setting('ucb_breadcrumb_nav');
   $variables['theme_path'] = base_path() . $variables['directory'];
   $variables['ucb_campus_header_color'] = theme_get_setting('ucb_campus_header_color');
   $variables['ucb_header_color'] = $headerColor = theme_get_setting('ucb_header_color');
