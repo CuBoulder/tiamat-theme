@@ -467,6 +467,17 @@
     padding-right: 1em;
   }
 
+/* Adjusts list elements when a left-floated image (.align-left) is a preceeding sibling, aligns list indicators with other elements  */
+.align-left + ol {
+  right: -1em;
+  position: relative;
+}
+
+.align-left + ul {
+  right: -1em;
+  position: relative;
+}
+
 /* Resets Bootstrap's `placeholder` class styles */
 .placeholder {
 	display: initial;
