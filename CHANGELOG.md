@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Issue/529
+  CSS edits for the changes needed after the CAAAS hand migration
+  
+  Closes #529 
+---
+
 - ### Adds search frontend and settings
   This update:
   - Adds a search modal which appears when clicking on the search icon in the top bar.

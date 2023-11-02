@@ -1,10 +1,14 @@
 .ucb-video-reveal {
   margin-top: 20px;
-  aspect-ratio: 16/9;
 }
 
 .ucb-video-text-div {
   position: relative;
+}
+
+.ucb-edge-to-edge .ucb-video-reveal-text {
+  padding-left: 50px;
+  padding-right: 50px;
 }
 
 .ucb-video-reveal-controls {
@@ -41,6 +45,7 @@ span.ucb-vid-reveal-icon {
 
 .ucb-video-reveal-image img {
   width: 100%;
+  padding-bottom: 20px;
 }
 
 .ucb-video-reveal-image .media-image-caption {
@@ -52,7 +57,6 @@ span.ucb-vid-reveal-icon {
   padding-bottom: 0px;
   max-height: 600px;
   object-fit: cover;
-  aspect-ratio: 16/9; 
 }
 
 .ucb-video-reveal-video-wrapper{

@@ -152,9 +152,11 @@
 
   {# MAIN PAGE CONTENT #}
   <div class="ucb-page-content">
+  {% if show_breadcrumb %}
   <div class="ucb-breadcrumb-region">
     {{ page.breadcrumb }}
   </div>
+  {% endif %}
 
   {{ page.highlighted }}
 
