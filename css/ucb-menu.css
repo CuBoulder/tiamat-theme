@@ -1,4 +1,4 @@
-#example-toggle {
+#ucb-mobile-menu-toggle {
   display: none;
 }
 
@@ -35,7 +35,7 @@
   .ucb-secondary-menu-region {
     width: 100%;
   }
-  #example-toggle {
+  #ucb-mobile-menu-toggle {
     display: block;
     max-width: 100px;
     font-size: 2em;
