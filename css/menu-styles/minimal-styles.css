@@ -11,7 +11,7 @@
     border-bottom: 4px solid #fff;
     padding-left: 10px;
 }
-li.main-menu-item a.nav-link {
+.ucb-main-menu li.menu-item a.nav-link {
   margin: 0;
   border-bottom: none;
   color: #757575;
@@ -42,10 +42,10 @@ li.main-menu-item a.nav-link {
 }
 
 
-li.main-menu-item a.nav-link:hover,
-li.main-menu-item a.nav-link:focus,
-li.main-menu-item a.nav-link.is-active,
-li.main-menu-item.active a.nav-link:first-of-type {
+.ucb-main-menu li.menu-item a.nav-link:hover,
+.ucb-main-menu li.menu-item a.nav-link:focus,
+.ucb-main-menu li.menu-item a.nav-link.is-active,
+.ucb-main-menu li.menu-item.active a.nav-link:first-of-type {
   border-top: 4px solid rgba(128, 128, 128, 0.333);
   color: #363636;
   border-bottom: none;

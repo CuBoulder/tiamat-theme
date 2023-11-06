@@ -11,8 +11,8 @@
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-primary-menu-region {
   margin-top: -2px;
 }
-li.main-menu-item a.nav-link:link,
-li.main-menu-item a.nav-link:visited {
+.ucb-main-menu li.menu-item a.nav-link:link,
+.ucb-main-menu li.menu-item a.nav-link:visited {
   color: #333;
   line-height: 64px;
   font-weight: 600;
@@ -21,19 +21,19 @@ li.main-menu-item a.nav-link:visited {
   border-bottom: none;
   margin-top: 0px;
 }
-li.main-menu-item a.nav-link:hover,
-li.main-menu-item a.nav-link:focus {
+.ucb-main-menu li.menu-item a.nav-link:hover,
+.ucb-main-menu li.menu-item a.nav-link:focus {
   background-color: #eee;
   color: #333;
   border-bottom: none;
 }
-li.main-menu-item a.nav-link.is-active,
-li.main-menu-item.active a.nav-link:first-of-type {
+.ucb-main-menu li.menu-item a.nav-link.is-active,
+.ucb-main-menu li.menu-item.active a.nav-link:first-of-type {
   background-color: #cfb87c;
   color: #000;
   border-bottom: none;
 }
-li.main-menu-item a.nav-link.home-link.active {
+.ucb-main-menu li.menu-item a.nav-link.home-link.active {
   background: transparent;
 }
 

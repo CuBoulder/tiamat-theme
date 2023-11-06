@@ -151,16 +151,16 @@ section.ucb-main-nav-section {
   background: none;
 }
 
-li.main-menu-item a.nav-link {
+.ucb-main-menu li.menu-item a.nav-link {
   color: #656565;
   border-left: 1px solid rgba(128, 128, 128, 0.333);
   border-bottom: none;
   margin-top: 0px;
 }
-li.main-menu-item a.nav-link:hover,
-li.main-menu-item a.nav-link:focus,
-li.main-menu-item a.nav-link.is-active,
-li.main-menu-item.active a.nav-link:first-of-type{
+.ucb-main-menu li.menu-item a.nav-link:hover,
+.ucb-main-menu li.menu-item a.nav-link:focus,
+.ucb-main-menu li.menu-item a.nav-link.is-active,
+.ucb-main-menu li.menu-item.active a.nav-link:first-of-type{
   color: #fff;
   background-color: #4d4d4d;
   background-image: -webkit-gradient(

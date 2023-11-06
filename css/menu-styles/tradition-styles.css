@@ -54,14 +54,14 @@
   background-color: #fff;
 }
 
-li.main-menu-item a.nav-link {
+.ucb-main-menu li.menu-item a.nav-link {
   color: #333;
   font-weight: 600;
   line-height: 60px;
   position: relative;
   border-bottom: none;
 }
-li.main-menu-item a.nav-link:before {
+.ucb-main-menu li.menu-item a.nav-link:before {
   position: absolute;
   bottom: 10px;
   left: 0;
@@ -74,14 +74,14 @@ li.main-menu-item a.nav-link:before {
   background: transparent;
   height: 3px !important;
 }
-li.main-menu-item a.nav-link.is-active:before,
-li.main-menu-item a.nav-link.active-trail:before,
-li.main-menu-item a.nav-link:hover:before {
+.ucb-main-menu li.menu-item a.nav-link.is-active:before,
+.ucb-main-menu li.menu-item a.nav-link.active-trail:before,
+.ucb-main-menu li.menu-item a.nav-link:hover:before {
   background-color: #cfb87c !important;
 }
-li.main-menu-item a.nav-link.is-active,
-li.main-menu-item a.nav-link.active-trail,
-li.main-menu-item a.nav-link:hover {
+.ucb-main-menu li.menu-item a.nav-link.is-active,
+.ucb-main-menu li.menu-item a.nav-link.active-trail,
+.ucb-main-menu li.menu-item a.nav-link:hover {
   border-bottom: none;
 }
 
