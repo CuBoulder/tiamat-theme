@@ -47,31 +47,6 @@
 {#{% if ucb_alerts %}#}
 {#  {{ attach_library('ucb2021_base/ucb-alerts') }}#}
 {#{% endif %}#}
-{# Adds Menu Styles #}
-{% set menu_style = drupal_config('boulder_base.settings', 'ucb_menu_style') %}
-{% if menu_style == 'highlight'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-highlight') }}
-{% elseif menu_style == 'ivory'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-ivory') }}
-{% elseif menu_style == 'layers'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-layers') }}
-{% elseif menu_style == 'minimal'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-minimal') }}
-{% elseif menu_style == 'modern'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-modern') }}
-{% elseif menu_style == 'rise'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-rise') }}
-{% elseif menu_style == 'shadow'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-shadow') }}
-{% elseif menu_style == 'simple'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-simple') }}
-{% elseif menu_style == 'spirit'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-spirit') }}
-{% elseif menu_style == 'swatch'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-swatch') }}
-{% elseif menu_style == 'tradition'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-tradition') }}
-{% endif %}
 {# Adds js file necessary for status bar #}
 {{ attach_library('boulder_base/ucb-user-page') }}
 
