@@ -45,7 +45,7 @@
   .ucb-primary-menu-region {
     width: 100%;
   }
-  .ucb-menu.hide {
+  .ucb-menu.nav.hide {
     display: none;
   }
   .ucb-menu.open {
