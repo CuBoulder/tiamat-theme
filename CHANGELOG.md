@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds menu styles to the user page
+  Closes #525.
+  Adds the menu styles to the user page.
+---
+
 - ### Issue/529
   CSS edits for the changes needed after the CAAAS hand migration
   
