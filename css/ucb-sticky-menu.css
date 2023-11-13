@@ -57,12 +57,13 @@
 	color: #FFFFFF;
 }
 
-.sticky-menu-inner li.main-menu-item a.nav-link {
+.sticky-menu-inner .ucb-menu li.menu-item a.nav-link {
 	color: #FFFFFF;
-	border-bottom: none;
+	font-size: 1em;
+	background-color: inherit;
 	padding: 0 .5rem;
 }
 
-.sticky-menu-inner li.main-menu-item a.nav-link:hover {
+.sticky-menu-inner .ucb-menu li.menu-item a.nav-link:hover {
 	color: var(--ucb-gold);
 }

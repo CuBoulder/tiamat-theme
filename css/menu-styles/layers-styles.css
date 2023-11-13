@@ -53,7 +53,7 @@ section.ucb-main-nav-section.ucb-header-black{
   background: transparent;
 }
 
-li.main-menu-item a.nav-link,
+.ucb-main-menu li.menu-item a.nav-link,
 .ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link {
   color: #ccc;
   font-weight: 600;
@@ -68,10 +68,10 @@ li.main-menu-item a.nav-link,
 .ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item.active a.nav-link:first-of-type,
 .ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
 .ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:focus,
-li.main-menu-item a.nav-link.is-active,
-li.main-menu-item.active a.nav-link:first-of-type,
-li.main-menu-item a.nav-link:hover,
-li.main-menu-item a.nav-link:focus {
+.ucb-main-menu li.menu-item a.nav-link.is-active,
+.ucb-main-menu li.menu-item.active a.nav-link:first-of-type,
+.ucb-main-menu li.menu-item a.nav-link:hover,
+.ucb-main-menu li.menu-item a.nav-link:focus {
   color: #cfb87c;
   border-bottom: 0;
 }

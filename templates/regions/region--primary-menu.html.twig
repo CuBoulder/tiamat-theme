@@ -12,6 +12,13 @@
  * @see template_preprocess_region()
  */
 #}
-<div class="ucb-primary-menu-region">
-	<div class="ucb-primary-menu-region-container{{ ucb_secondary_menu_position == 'above' ? ' container' : ''}}">{{ content }}</div>
+<div class="ucb-primary-menu-region-container{{ ucb_secondary_menu_position == 'above' ? ' container' : '' }}">
+  <nav class="ucb-main-menu">
+    <div class="ucb-mobile-menu-button-div">
+      <button id="ucb-mobile-menu-toggle" aria-label="Toggle menu">☰</button>
+    </div>
+    <div class="ucb-primary-menu-region">
+      {{ content }}
+    </div>
+  </nav>
 </div>

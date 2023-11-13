@@ -32,12 +32,12 @@ section.ucb-main-nav-section {
   z-index: 9;
 }
 /*MAIN MENU IN LINE*/
-li.main-menu-item a.nav-link:hover,
-li.main-menu-item a.nav-link:active {
+.ucb-main-menu li.menu-item a.nav-link:hover,
+.ucb-main-menu li.menu-item a.nav-link:active {
   border-top:1px solid #333;
   color:#222;
 }
-li.main-menu-item a.nav-link {
+.ucb-main-menu li.menu-item a.nav-link {
   margin-top: 0;
   color: #666;
   font-weight: 600;
@@ -46,21 +46,21 @@ li.main-menu-item a.nav-link {
   margin-top: -1px;
 }
 
-li.main-menu-item a.nav-link:hover,
-li.main-menu-item a.nav-link.is-active,
-li.main-menu-item.active a.nav-link:first-of-type {
+.ucb-main-menu li.menu-item a.nav-link:hover,
+.ucb-main-menu li.menu-item a.nav-link.is-active,
+.ucb-main-menu li.menu-item.active a.nav-link:first-of-type {
   color:#222;
   border-bottom: none;
 }
 
-li.main-menu-item a.nav-link:hover,
-li.main-menu-item a.nav-link.is-active,
-li.main-menu-item.active a.nav-link:first-of-type {
+.ucb-main-menu li.menu-item a.nav-link:hover,
+.ucb-main-menu li.menu-item a.nav-link.is-active,
+.ucb-main-menu li.menu-item.active a.nav-link:first-of-type {
   border-top: 1px solid #333;
 }
 
-li.main-menu-item a.nav-link:hover.home-link,
-li.main-menu-item a.nav-link:active.home-link {
+.ucb-main-menu li.menu-item a.nav-link:hover.home-link,
+.ucb-main-menu li.menu-item a.nav-link:active.home-link {
   border-top:1px solid #e7e7e7;
 }
 /*END MAIN MENU */

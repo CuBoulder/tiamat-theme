@@ -257,7 +257,7 @@ ul.ucb-main-menu.nav {
   padding: 0.5rem;
 }
 
-li.main-menu-item a.nav-link {
+.ucb-main-menu li.menu-item a.nav-link {
   color: var(--ucb-darker);
   border-bottom: 2px solid #fff;
   font-weight: 600;
@@ -302,9 +302,15 @@ li.main-menu-item a.nav-link {
   margin: 0.5rem 0;
 }
 
-li.main-menu-item a.nav-link:hover,
-li.main-menu-item a.nav-link.is-active,
-li.main-menu-item.active a.nav-link:first-of-type {
+.ucb-main-menu li.menu-item a.nav-link {
+  font-size: 1em;
+  background-color: inherit;
+  border-radius: 0;
+}
+
+.ucb-main-menu li.menu-item a.nav-link:hover,
+.ucb-main-menu li.menu-item a.nav-link.is-active,
+.ucb-main-menu li.menu-item.active a.nav-link:first-of-type {
   border-bottom: 2px solid black;
   color: black;
 }

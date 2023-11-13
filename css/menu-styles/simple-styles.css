@@ -132,20 +132,20 @@ section.ucb-main-nav-section {
   filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr='#FF363636', EndColorStr='#FF161616');
 }
 
-li.main-menu-item a.nav-link {
+.ucb-main-menu li.menu-item a.nav-link {
 	font-weight: 600;
 	color: #fff;
 	border-bottom: none;
 	margin-top: 0;
 }
 
-li.main-menu-item a.nav-link, .ucb-secondary-menu-region li.menu-item {
+.ucb-main-menu li.menu-item a.nav-link, .ucb-secondary-menu-region li.menu-item {
 	font-size: .9em;
 }
 
-li.main-menu-item a.nav-link:hover,
-li.main-menu-item a.nav-link.is-active,
-li.main-menu-item.active a.nav-link:first-of-type {
+.ucb-main-menu li.menu-item a.nav-link:hover,
+.ucb-main-menu li.menu-item a.nav-link.is-active,
+.ucb-main-menu li.menu-item.active a.nav-link:first-of-type {
   background-color: #cfb87c;
   background-image: -webkit-gradient(
     linear,
@@ -165,8 +165,8 @@ li.main-menu-item.active a.nav-link:first-of-type {
 }
 
 
-li.main-menu-item a.nav-link:hover,
-li.main-menu-item a.nav-link.is-active,
-li.main-menu-item.active a.nav-link:first-of-type{
+.ucb-main-menu li.menu-item a.nav-link:hover,
+.ucb-main-menu li.menu-item a.nav-link.is-active,
+.ucb-main-menu li.menu-item.active a.nav-link:first-of-type{
   color: #000;
 }

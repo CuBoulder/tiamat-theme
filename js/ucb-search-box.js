@@ -11,6 +11,7 @@
   const searchBoxes = document.getElementsByClassName('ucb-search-box');
   for (let i = 0; i < searchBoxes.length; i++) {
     const searchBoxOptions = searchBoxes[i].querySelector('.ucb-search-box-options');
+    if (!searchBoxOptions) continue;
     const radios = searchBoxOptions.getElementsByTagName('input');
     searchBoxes[i].querySelector('form').onsubmit = function (event) {
       for (let j = 0; j < radios.length; j++)
