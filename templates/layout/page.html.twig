@@ -50,7 +50,7 @@
   {# HEADER CONTENT #}
   {% block page_header %}
     {{ attach_library('boulder_base/ucb-social-media') }}
-
+    {{ attach_library('boulder_base/ucb-menu') }}
     {% set menu_style = drupal_config('boulder_base.settings', 'ucb_menu_style') %}
     {% if menu_style == 'highlight'  %}
       {{ attach_library('boulder_base/ucb-menu-style-highlight') }}
