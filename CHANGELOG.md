@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Cleans up accessible menus errors
+  Resolves CuBoulder/tiamat-theme#538
+---
+
 - ### Adds menu styles to the user page
   Closes #525.
   Adds the menu styles to the user page.
