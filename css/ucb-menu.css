@@ -144,7 +144,7 @@
 
 .ucb-page-content .ucb-menu li.menu-item a.nav-link:hover {
   color: #000;
-  background-color: rgb(0, 0, 0, .09);
+  background-color: rgba(0, 0, 0, .09);
 }
 
 .ucb-page-content .ucb-menu li.menu-item a.nav-link.is-active {
