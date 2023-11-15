@@ -1,22 +1,27 @@
 {#
 /**
- * Theme layout to display a CU Boulder System Menu Block.
- *
- * Created by jsparks on 6/6/19
+ * @file Contains the template to implement a system menu block.
+ * @author Timur Tripp
  */
 #}
 
-{% if label|render %}
-<div class="ucb-system-menu-block">
-    <span class="ucb-menu-title">
-        {{ label|render|striptags|trim }}
-    </span>
+{% set classes = [
+  'container',
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    bundle ? 'block--type-' ~ bundle|clean_class,
+    view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
+    'ucb-system-menu-block'
+] %}
 
-    {% if content|render %}
-        {{ content }}
+{% block content %}
+  <div{{attributes.addClass(classes)}}>
+    {{ title_prefix }}
+    {% if label %}
+      <h2{{title_attributes}}>{{ label }}</h2>
     {% endif %}
-</div>
-{% else %}
+    {{ title_suffix }}
     {{ content }}
-{% endif %}
-
+  </div>
+{% endblock content %}

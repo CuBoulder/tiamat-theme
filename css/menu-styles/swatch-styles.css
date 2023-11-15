@@ -49,7 +49,7 @@
 section.ucb-main-nav-section {
   background-color: #222;
 }
-li.main-menu-item a.nav-link {
+.ucb-main-menu li.menu-item a.nav-link {
   color: #ccc;
   font-size: 90%;
   font-weight: 600;
@@ -57,24 +57,24 @@ li.main-menu-item a.nav-link {
   border-bottom: none;
   margin-top: 0px;
 }
-li.main-menu-item a.nav-link:hover {
+.ucb-main-menu li.menu-item a.nav-link:hover {
   background-color: #444;
   color: #fff;
   border-bottom: none;
 }
-li.main-menu-item a.nav-link.is-active,
-li.main-menu-item.active a.nav-link:first-of-type{
+.ucb-main-menu li.menu-item a.nav-link.is-active,
+.ucb-main-menu li.menu-item.active a.nav-link:first-of-type{
   background-color: #333;
   color: #fff;
   border-bottom: none;
 }
-li.main-menu-item a.nav-link.is-active:hover,
-li.main-menu-item.active a.nav-link:first-of-type:hover {
+.ucb-main-menu li.menu-item a.nav-link.is-active:hover,
+.ucb-main-menu li.menu-item.active a.nav-link:first-of-type:hover {
   color: #fff;
   border-bottom: none;
 }
-li.main-menu-item a.nav-link.home-link,
-li.main-menu-item a.nav-link.home-link.active {
+.ucb-main-menu li.menu-item a.nav-link.home-link,
+.ucb-main-menu li.menu-item a.nav-link.home-link.active {
   color: #ccc;
   background-color: transparent;
   border-bottom: none;

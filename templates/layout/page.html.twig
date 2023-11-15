@@ -45,41 +45,43 @@
 #}
 
 
-{% set menu_style = drupal_config('boulder_base.settings', 'ucb_menu_style') %}
-{% if menu_style == 'highlight'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-highlight') }}
-{% elseif menu_style == 'ivory'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-ivory') }}
-{% elseif menu_style == 'layers'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-layers') }}
-{% elseif menu_style == 'minimal'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-minimal') }}
-{% elseif menu_style == 'modern'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-modern') }}
-{% elseif menu_style == 'rise'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-rise') }}
-{% elseif menu_style == 'shadow'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-shadow') }}
-{% elseif menu_style == 'simple'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-simple') }}
-{% elseif menu_style == 'spirit'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-spirit') }}
-{% elseif menu_style == 'swatch'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-swatch') }}
-{% elseif menu_style == 'tradition'  %}
-  {{ attach_library('boulder_base/ucb-menu-style-tradition') }}
-{% endif %}
 
 <div class="layout-container ucb-page-container highlight-style">
   {# HEADER CONTENT #}
   {% block page_header %}
     {{ attach_library('boulder_base/ucb-social-media') }}
 
+    {% set menu_style = drupal_config('boulder_base.settings', 'ucb_menu_style') %}
+    {% if menu_style == 'highlight'  %}
+      {{ attach_library('boulder_base/ucb-menu-style-highlight') }}
+    {% elseif menu_style == 'ivory'  %}
+      {{ attach_library('boulder_base/ucb-menu-style-ivory') }}
+    {% elseif menu_style == 'layers'  %}
+      {{ attach_library('boulder_base/ucb-menu-style-layers') }}
+    {% elseif menu_style == 'minimal'  %}
+      {{ attach_library('boulder_base/ucb-menu-style-minimal') }}
+    {% elseif menu_style == 'modern'  %}
+      {{ attach_library('boulder_base/ucb-menu-style-modern') }}
+    {% elseif menu_style == 'rise'  %}
+      {{ attach_library('boulder_base/ucb-menu-style-rise') }}
+    {% elseif menu_style == 'shadow'  %}
+      {{ attach_library('boulder_base/ucb-menu-style-shadow') }}
+    {% elseif menu_style == 'simple'  %}
+      {{ attach_library('boulder_base/ucb-menu-style-simple') }}
+    {% elseif menu_style == 'spirit'  %}
+      {{ attach_library('boulder_base/ucb-menu-style-spirit') }}
+    {% elseif menu_style == 'swatch'  %}
+      {{ attach_library('boulder_base/ucb-menu-style-swatch') }}
+    {% elseif menu_style == 'tradition'  %}
+      {{ attach_library('boulder_base/ucb-menu-style-tradition') }}
+    {% endif %}
     {% set header_color = 'black' %}
     {% set campus_header_color = 'black' %}
+    {% set campus_header_text_color = 'white' %}
 
     {% if ucb_campus_header_color == 1  %}
       {% set campus_header_color = 'white' %}
+      {% set campus_header_text_color = 'black' %}
     {% endif %}
 
     {% if ucb_header_color == 1  %}
@@ -106,10 +108,22 @@
       </div>
     {% endif %}
     <div class="background-{{ campus_header_color }} brand-bar brand-bar-{{ campus_header_color }} padding-vertical-small">
-      <div class="container">
-        <script type="text/javascript" src="https://cdn.colorado.edu/static/brand-assets/live/js/brand-bar.js" id="ucb-brand-bar-embed" data-color="{{ campus_header_color }}"></script>
+      <div class="container">{{ attach_library('boulder_base/ucb-brand-bar') }}
+        <div class="ucb-brand-bar ucb-brand-bar-{{ campus_header_color }}">
+          <a href="https://www.colorado.edu" class="ucb-home-link">
+            <img class="ucb-logo" src="https://cdn.colorado.edu/static/brand-assets/live/images/cu-boulder-logo-text-{{ campus_header_text_color }}.svg" alt="University of Colorado Boulder">
+          </a>
+          {% if site_search.0 %}
+            <a class="ucb-search-link" href="{{ site_search.0.url }}">
+              <img class="ucb-search" alt="Search" src="https://cdn.colorado.edu/static/brand-assets/live/images/search-{{ campus_header_text_color }}.svg">
+            </a>
+          {% endif %}
+        </div>
       </div>
     </div>
+    {% if site_search.0 %}
+      {% include '@boulder_base/includes/ucb-search-modal.html.twig' %}
+    {% endif %}
     <header class="ucb {{ header_color }}{% if site_affiliation.id %} ucb-site-affiliation-{{ site_affiliation.id }}{% endif %}" role="banner">
       <div class="container ucb-menu-wrapper">
         <div class="ucb-site-name-wrapper">
@@ -138,9 +152,11 @@
 
   {# MAIN PAGE CONTENT #}
   <div class="ucb-page-content">
+  {% if show_breadcrumb %}
   <div class="ucb-breadcrumb-region">
     {{ page.breadcrumb }}
   </div>
+  {% endif %}
 
   {{ page.highlighted }}
 
@@ -259,27 +275,27 @@
 
 </div>{# /.layout-container #}
 
-  {# Services -- see ucb_site_config #}
-  {# LiveChat #}
-  {% if service_livechat_includes|length > 0%}
-  {{ attach_library('boulder_base/livechat') }}
-  {% for service in service_livechat_includes %}
-  <livechat-service license-id="{{service.service_settings.license_id}}"></livechat-service>
-  {% endfor %}
-  {% endif %}
+{# Services -- see ucb_site_config #}
+{# LiveChat #}
+{% if service_livechat_includes|length > 0%}
+{{ attach_library('boulder_base/livechat') }}
+{% for service in service_livechat_includes %}
+<livechat-service license-id="{{service.service_settings.license_id}}"></livechat-service>
+{% endfor %}
+{% endif %}
 
-  {# statuspage #}
-  {% if service_statuspage_includes|length > 0%}
-  {{ attach_library('boulder_base/statuspage') }}
-  {% for service in service_statuspage_includes %}
-  <statuspage-service page-id="{{service.service_settings.page_id}}"></statuspage-service>
-  {% endfor %}
-  {% endif %} 
- 
-  {# mainstay #}
-  {% if service_mainstay_includes|length > 0%}
-  {{ attach_library('boulder_base/mainstay') }}
-  {% for service in service_mainstay_includes %}
-  <mainstay-service bot-token="{{service.service_settings.bot_token}}" college-id="{{service.service_settings.college_id}}"></mainstay-service>
-  {% endfor %}
-  {% endif %} 
+{# statuspage #}
+{% if service_statuspage_includes|length > 0%}
+{{ attach_library('boulder_base/statuspage') }}
+{% for service in service_statuspage_includes %}
+<statuspage-service page-id="{{service.service_settings.page_id}}"></statuspage-service>
+{% endfor %}
+{% endif %} 
+
+{# mainstay #}
+{% if service_mainstay_includes|length > 0%}
+{{ attach_library('boulder_base/mainstay') }}
+{% for service in service_mainstay_includes %}
+<mainstay-service bot-token="{{service.service_settings.bot_token}}" college-id="{{service.service_settings.college_id}}"></mainstay-service>
+{% endfor %}
+{% endif %} 

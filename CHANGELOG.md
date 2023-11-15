@@ -9,6 +9,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Cleans up accessible menus errors
+  Resolves CuBoulder/tiamat-theme#538
+---
+
+- ### Adds menu styles to the user page
+  Closes #525.
+  Adds the menu styles to the user page.
+---
+
+- ### Issue/529
+  CSS edits for the changes needed after the CAAAS hand migration
+  
+  Closes #529 
+---
+
+- ### Adds search frontend and settings
+  This update:
+  - Adds a search modal which appears when clicking on the search icon in the top bar.
+  - Adds a new "Pages and search" tab to CU Boulder site settings (`/admin/config/cu-boulder/pages`). This tab contains settings accessible to Architect, Developer, and Site Manager:
+    - The home page setting (moved from "General").
+    - Options to enable site search, all of Colorado.edu search (default), both, or neither.
+    - Configuration for the site search label, placeholder, and URL.
+  - Renames "Appearance" to "Appearance and layout" and alters the descriptions of menu items.
+  - Adds the [Google Programmable Search Engine](https://www.drupal.org/project/google_cse) module, which allows creating custom search pages to use with site search.
+  
+  Resolves CuBoulder/tiamat-theme#266
+  
+  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/29), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/43), [tiamat10-project-template](https://github.com/CuBoulder/tiamat10-project-template/pull/17)
+---
+
+- ### Fixes List Indicator Alignment with Left Align Images
+  This change aligns the list indicators on a list element with other text elements next to a left-aligned image. 
+  
+  Previously, the float css for aligning an element left would cause visual issues with list indicators specifically, the bullet-point or numbering becoming hard to see or lost within the image. There is now condtionally applied left-spacing to rendered Ordered and Unordered list elements, when directly next to a Left Align (.align-left) image. 
+  
+  Resolves #523 
+---
+
+- ### Remove Extra Markup from inserted Images
+  Conditionally removes extra `<div>` elements added through Twig when there's no attributes to justify an additional `<div>` wrap of the rendered content. 
+  
+  Changes default div styling of the imageMediaStyle class to not be `display:block`, both of which caused issues with wrapping an image in an anchor tag making the entire row clickable rather than just the image.
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/522
+---
+
 - ### Add editor style options
   Closes #515.
   Adds initial styling.

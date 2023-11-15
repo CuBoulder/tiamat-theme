@@ -1,4 +1,4 @@
-#example-toggle {
+#ucb-mobile-menu-toggle {
   display: none;
 }
 
@@ -35,7 +35,7 @@
   .ucb-secondary-menu-region {
     width: 100%;
   }
-  #example-toggle {
+  #ucb-mobile-menu-toggle {
     display: block;
     max-width: 100px;
     font-size: 2em;
@@ -45,35 +45,29 @@
   .ucb-primary-menu-region {
     width: 100%;
   }
-  .ucb-menu.hide,
-  .ucb-main-menu.hide {
+  .ucb-menu.nav.hide {
     display: none;
   }
-  .ucb-menu.open,
-  .ucb-main-menu.open {
+  .ucb-menu.open {
     display: flex;
     flex-direction: column;
   }
-  .ucb-menu .menu-item,
-  .main-menu-item {
+  .ucb-menu .menu-item {
     border-bottom: 1px solid lightgrey;
   }
-  .ucb-menu.open .menu-item a,
-  .ucb-main-menu.open .main-menu-item a {
+  .ucb-menu.open .menu-item a {
     font-weight: 300;
     font-size: 16px;
     padding-left: 16px;
     border-bottom: 2px solid transparent;
   }
-  .ucb-menu .menu-item.active,
-  .main-menu-item.active {
+  .ucb-menu .menu-item.active {
     font-weight: 600;
     color: #000;
     background-color: #cfb87c;
     border-bottom: 1px solid #cfb87c;
   }
-  .ucb-menu.open .menu-item.active a,
-  .ucb-main-menu.open li.main-menu-item.active a {
+  .ucb-menu.open .menu-item.active a {
     border-bottom: 2px solid transparent;
   }
 

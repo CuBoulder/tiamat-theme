@@ -1,0 +1,98 @@
+.ucb-search-box .ucb-search-box-links {
+  padding: 10px 0;
+  font-size: .85em;
+  font-weight: bold;
+}
+
+.ucb-search-box .ucb-search-box-links h3 {
+  font-size: 1em;
+}
+
+.ucb-search-box .ucb-search-box-links ul li:not(:last-child) {
+  margin-right: .25rem;
+}
+
+
+.ucb-search-box .ucb-search-box-links ul li:not(:first-child):before {
+  display: inline-block;
+  content: '\2022';
+  margin-right: .25rem;
+}
+
+.ucb-search-box .ucb-search-box-options {
+  display: flex;
+  flex-direction: row;
+  gap: 1.25rem;
+  border-bottom: 3px solid rgba(128, 128, 128, 0.333);
+  padding: 10px 5px;
+}
+
+.ucb-search-box .ucb-search-box-options label {
+  vertical-align: middle;
+}
+
+.ucb-search-box .ucb-search-box-options label,
+.ucb-search-box .ucb-search-input-submit input {
+  font-size: .9em;
+  font-weight: bold;
+}
+
+.ucb-search-box .ucb-search-box-inputs {
+  display: flex;
+  flex-direction: row;
+  border: 5px solid rgba(255, 255, 255, 0.333);
+}
+
+.ucb-search-box .ucb-search-input-text {
+  flex: 1;
+}
+
+.ucb-search-box .ucb-search-input-submit {
+  flex: 0;
+}
+
+.ucb-search-box .ucb-search-input-text input {
+  width: 100%;
+  font-size: 1em;
+  line-height: 40px;
+  height: 40px;
+  padding: 0 8px;
+  background-color: #fff;
+  color: #000;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border: none;
+  -webkit-appearance: none;
+  outline-offset: 0px;
+  transition: outline-offset .1s ease-in-out;
+}
+
+.ucb-search-box .ucb-search-input-text input:focus {
+  outline: #0277BD solid 2px;
+  outline-offset: 3px;
+}
+
+.ucb-search-box .ucb-search-input-submit input {
+  display: block;
+  line-height: 40px;
+  height: 40px;
+  background: var(--ucb-gold);
+  color: #000;
+  padding: 0 8px;
+  -webkit-box-shadow: none;
+  -moz-box-shadow: none;
+  box-shadow: none;
+  -webkit-border-radius: 0;
+  -moz-border-radius: 0;
+  border-radius: 0;
+  border: none;
+  -webkit-appearance: none;
+  margin: 0;
+  transition: background-color 0.5s ease;
+}
+
+.ucb-search-box .ucb-search-input-submit input:hover,
+.ucb-search-box .ucb-search-input-submit input:focus {
+    background-color: #a6a6a6;
+}

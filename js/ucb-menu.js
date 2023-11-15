@@ -1,23 +1,30 @@
-
 document.addEventListener("DOMContentLoaded", () => {
-  const mainMenu = new AccessibleMenu.DisclosureMenu({
-    menuElement: document.querySelector("#ucb-main-menu"),
-    controllerElement: document.querySelector("#example-toggle"),
-    containerElement: document.querySelector("#ucb-main-menu-nav"),
+  
+  const mainMenuCheck = document.getElementsByClassName("ucb-primary-menu-region-container")[0].getElementsByClassName("ucb-menu")[0];
+  if (mainMenuCheck != null) {
+    const mainMenu = new AccessibleMenu.DisclosureMenu({
+    menuElement: mainMenuCheck,
+    controllerElement: document.querySelector("#ucb-mobile-menu-toggle"),
+    containerElement: document.getElementsByClassName("ucb-primary-menu-region-container")[0],
     openClass: "open",
   });
-  const secondaryWrapper = document.querySelector(".ucb-secondary-menu-region-container")
-  const secondaryMenu = new AccessibleMenu.DisclosureMenu({
-    menuElement: document.getElementById("ucb-secondary-menu-region-container").getElementsByClassName("ucb-menu")[0],
-    controllerElement: document.querySelector("#example-toggle"),
-    containerElement: secondaryWrapper,
-    openClass: "open",
-  });
-
-  const footerMenu = new AccessibleMenu.DisclosureMenu({
-    menuElement: document.getElementById("ucb-mobile-footer-menu").getElementsByClassName("ucb-menu")[0],
-    controllerElement: document.querySelector("#example-toggle"),
-    containerElement: secondaryWrapper,
-    openClass: "open",
-  });
+}
+  const secondaryCheck = document.getElementsByClassName("ucb-secondary-menu-region-container")[0].getElementsByClassName("ucb-menu")[0];
+  if (secondaryCheck != null) {
+    const secondaryMenu = new AccessibleMenu.DisclosureMenu({
+      menuElement: secondaryCheck,
+      controllerElement: document.querySelector("#ucb-mobile-menu-toggle"),
+      containerElement: document.getElementsByClassName("ucb-secondary-menu-region-container")[0],
+      openClass: "open",
+    });
+  }
+  const footerCheck = document.getElementsByClassName("ucb-mobile-footer-menu")[0].getElementsByClassName("ucb-menu")[0];
+  if (footerCheck != null) {
+    const footerMenu = new AccessibleMenu.DisclosureMenu({
+      menuElement: footerCheck,
+      controllerElement: document.querySelector("#ucb-mobile-menu-toggle"),
+      containerElement: document.getElementsByClassName("ucb-mobile-footer-menu")[0],
+      openClass: "open",
+    });
+  }
 });

@@ -328,6 +328,37 @@ ucb-article-feature-block:
     theme:
       css/block/ucb-article-feature-block.css: {}
 
+ucb-brand-bar:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-brand-bar.css: {}
+
+ucb-search-box:
+  version: 1.x
+  js:
+    js/ucb-search-box.js: {}
+  css:
+    theme:
+      css/ucb-search-box.css: {}
+
+ucb-search-modal:
+  version: 1.x
+  js:
+    js/ucb-search-modal.js: {}
+  css:
+    theme:
+      css/ucb-search-modal.css: {}
+
+ucb-menu:
+  version: 1.x
+  js:
+    js/ucb-menu.js: {}
+    js/ucb-access-menu.min.js: {}
+  css:
+    theme:
+      css/ucb-menu.css: {}
+
 ucb-menu-style-highlight:
   version: 1.x
   css:
@@ -393,6 +424,7 @@ ucb-menu-style-tradition:
   css:
     theme:
       css/menu-styles/tradition-styles.css: {}
+
 ucb-article-slider-block:
   version: 1.x
   js:
@@ -402,6 +434,7 @@ ucb-article-slider-block:
     theme:
       css/flickity/flickity.min.css: {}
       css/block/ucb-article-slider-block.css: {}
+
 ucb-people-list-block:
   version: 1.x
   js:
@@ -410,14 +443,6 @@ ucb-people-list-block:
     theme:
       css/block/ucb-people-list-block.css: {}
 
-ucb-menu:
-  version: 1.x
-  js:
-    js/ucb-menu.js: {}
-    js/ucb-access-menu.min.js: {}
-  css:
-    theme:
-      css/ucb-menu.css: {}
 ucb-user-page:
   version: 1.x
   js:

@@ -26,17 +26,17 @@ section.ucb-main-nav-section {
   background-color: #444;
 }
 
-li.main-menu-item a.nav-link {
+.ucb-main-menu li.menu-item a.nav-link {
   color: #fff;
   font-size: 90%;
   font-weight: 600;
   border-bottom: none;
   margin-top: 0;
 }
-li.main-menu-item a.nav-link:hover,
-li.main-menu-item a.nav-link:focus,
-li.main-menu-item a.nav-link.is-active,
-li.main-menu-item.active a.nav-link:first-of-type{
+.ucb-main-menu li.menu-item a.nav-link:hover,
+.ucb-main-menu li.menu-item a.nav-link:focus,
+.ucb-main-menu li.menu-item a.nav-link.is-active,
+.ucb-main-menu li.menu-item.active a.nav-link:first-of-type{
   background-color: #fff;
   color: #363839;
   border-bottom: none;
