@@ -50,7 +50,7 @@
   {# HEADER CONTENT #}
   {% block page_header %}
     {{ attach_library('boulder_base/ucb-social-media') }}
-
+    {{ attach_library('boulder_base/ucb-menu') }}
     {% set menu_style = drupal_config('boulder_base.settings', 'ucb_menu_style') %}
     {% if menu_style == 'highlight'  %}
       {{ attach_library('boulder_base/ucb-menu-style-highlight') }}
@@ -191,7 +191,7 @@
             </div>
           </div>
         {% elseif page.left_sidebar|render %}
-          <div class="ucb-layout-container container  g-0">
+          <div class="ucb-layout-container container g-0">
             <div class="layout-row row">
               <div class="ucb-left-sidebar ucb-sidebar col-sm-12 col-md-4 col-lg-3">
                 {{ page.left_sidebar }}
@@ -202,7 +202,7 @@
             </div>
           </div>
         {% elseif page.right_sidebar|render %}
-          <div class="ucb-layout-container container  g-0">
+          <div class="ucb-layout-container container g-0">
             <div class="layout-row row">
               <div class="ucb-layout-main col-sm-12 col-md-8 col-lg-9 ucb-has-sidebar">
                 {{ page.content }}
