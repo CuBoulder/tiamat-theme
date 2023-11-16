@@ -1,0 +1,429 @@
+<body>
+  <table class="body" role="presentation">
+    <tbody>
+      <tr>
+        <td align="center" class="center" valign="top">
+          <table class="row title" role="presentation">
+            <tbody>
+              <tr>
+                <!--Email Header-->
+                <td class="email-top">
+                  <center>
+                    <table class="container" role="presentation">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <table class="full" role="presentation">
+                              <tbody>
+                                <tr>
+                                  <td class="campus-logo">
+                                    <a href="https://www.colorado.edu"
+                                      ><img
+                                        alt="University of Colorado Boulder "
+                                        height="27"
+                                        id="campus-logo"
+                                        src="{{cuLogoSrc}}"
+                                        width="180"
+                                    /></a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="newsletter-name">
+                                    <h1>
+                                      <img
+                                        alt="TEST"
+                                        height="167"
+                                        id="newsletter-logo"
+                                        src="https://live-ucbdev-sandbox-express.pantheonsite.io/sites/default/files/styles/medium/public/newsletter-name-image/brooke-cagle-LnT_OqSf6Bs-unsplash.jpg?itok=kRPsnkxx"
+                                        width="250"
+                                      />
+                                    </h1>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <table class="issue full" role="presentation">
+                              <tbody>
+                                <tr>
+                                  <td class="issue-date">
+                                    <strong
+                                      >{{ node.changed.value|date("M. j, Y")
+                                      }}</strong
+                                    >
+                                  </td>
+                                  <td class="web-link">
+                                    <a
+                                      href="{{base_url}}{{ path('entity.node.canonical', {'node': node.id}) }}"
+                                      >View on website</a
+                                    >
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </center>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="title-bottom"></div>
+          <center>
+            <!-- Intro -->
+            <table class="container content-top" role="presentation">
+              <tbody>
+                <tr>
+                  <td class="hero-image">
+                    <table class="row article-intro" role="presentation">
+                      <tbody>
+                        <tr>
+                          <td class="wrapper last">
+                            <table class="twelve columns" role="presentation">
+                              <tbody>
+                                <tr>
+                                  <td
+                                    class="text-pad padding-top padding-bottom"
+                                  >
+                                    <div class="content-padding">
+                                      <div class="intro-image">
+                                        <table role="presentation">
+                                          <tbody>
+                                            <tr>
+                                              <td class="padding-bottom">
+                                                <div
+                                                  class="field field-name-field-newsletter-intro-image field-type-image field-label-hidden"
+                                                >
+                                                  <div class="field-items">
+                                                    <div
+                                                      class="field-item even"
+                                                    >
+                                                      {% if
+                                                      content.field_newsletter_intro_image|render
+                                                      %}
+                                                      <img
+                                                        alt="asd"
+                                                        class="image-email_medium"
+                                                        height=""
+                                                        src="{{base_url}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}"
+                                                        width="560"
+                                                      />
+                                                      {% endif %}
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                      <div class="intro-text">
+                                        <div
+                                          class="field field-name-body field-type-text-with-summary field-label-hidden"
+                                        >
+                                          <div class="field-items">
+                                            <div class="field-item even">
+                                              <p>
+                                                This is a giant intro. This is a
+                                                giant intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant intro. 
+                                              </p>
+                                              <p>
+                                                This is a giant intro. This is a
+                                                giant intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant intro. 
+                                              </p>
+                                              <p>
+                                                This is a giant intro. This is a
+                                                giant intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant intro. 
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td class="expander"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- start issue contents -->
+            <table class="container" role="presentation">
+              <tbody>
+                <tr>
+                  <td class="newsletter-sections">
+                    <div
+                      class="field field-name-field-newsletter-articles field-type-entityreference field-label-hidden"
+                    >
+                      <div class="field-items">
+                        <div class="field-item even">2</div>
+                      </div>
+                    </div>
+                    <div
+                      class="field field-name-field-newsletter-articles field-type-entityreference field-label-hidden"
+                    >
+                      <div class="field-items">
+                        <div class="field-item even">10</div>
+                      </div>
+                    </div>
+                    <div
+                      class="field field-name-field-newsletter-articles field-type-entityreference field-label-hidden"
+                    >
+                      <div class="field-items">
+                        <div class="field-item even">9</div>
+                      </div>
+                    </div>
+                    <div
+                      class="field field-name-field-newsletter-articles field-type-entityreference field-label-hidden"
+                    >
+                      <div class="field-items">
+                        <div class="field-item even">2</div>
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- START AD 1 -->
+            <table class="container" role="presentation">
+              <tbody>
+                <tr>
+                  <td>
+                    <table
+                      class="row newsletter-ad newsletter-ad-1"
+                      role="presentation"
+                    >
+                      <tbody>
+                        <tr>
+                          <td class="wrapper last">
+                            <table class="twelve columns" role="presentation">
+                              <tbody>
+                                <tr>
+                                  <td class="newsletter-ad-content">
+                                    <a href="http://www.neopets.com">
+                                      <img
+                                        alt="asd"
+                                        class="image-email_ad"
+                                        height=""
+                                        src="https://live-ucbdev-sandbox-express.pantheonsite.io/sites/default/files/styles/email_ad/public/bruno-emmanuelle-azsk_6IMT3I-unsplash.jpg?itok=8Hazqun7"
+                                        width="560"
+                                    /></a>
+                                  </td>
+                                  <td class="expander"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- END AD 1 -->
+            <!-- START BLOCKS -->
+            <table class="container email-blocks" role="presentation">
+              <tbody>
+                <tr>
+                  <td>
+                    <table class="row blocks" role="presentation">
+                      <tbody>
+                        <tr>
+                          <td class="wrapper">
+                            <table class="six columns" role="presentation">
+                              <tbody>
+                                <tr>
+                                  <td class="text-pad padding-bottom">
+                                    <h2
+                                      class="field field-name-field-newsletter-block-title field-type-text field-label-hidden"
+                                    >
+                                      Block 1
+                                    </h2>
+                                    <div
+                                      class="field field-name-field-newsletter-block-body field-type-text-long field-label-hidden"
+                                    >
+                                      <div class="field-items">
+                                        <div class="field-item even">
+                                          <p>This is my block 1 body</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td class="expander"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                          <td class="wrapper last">
+                            <table class="six columns" role="presentation">
+                              <tbody>
+                                <tr>
+                                  <td class="text-pad padding-bottom">
+                                    <h2
+                                      class="field field-name-field-newsletter-block-title field-type-text field-label-hidden"
+                                    >
+                                      Block 2
+                                    </h2>
+                                    <div
+                                      class="field field-name-field-newsletter-block-body field-type-text-long field-label-hidden"
+                                    >
+                                      <div class="field-items">
+                                        <div class="field-item even">
+                                          <p>This is my block 2 body</p>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td class="expander"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- END BLOCKS -->
+            <!-- START AD 2 -->
+            <table class="container" role="presentation">
+              <tbody>
+                <tr>
+                  <td>
+                    <table
+                      class="row newsletter-ad newsletter-ad-2"
+                      role="presentation"
+                    >
+                      <tbody>
+                        <tr>
+                          <td class="wrapper last">
+                            <table class="twelve columns" role="presentation">
+                              <tbody>
+                                <tr>
+                                  <td class="newsletter-ad-content">
+                                    <a href="http://www.ebay.com">
+                                      <img
+                                        alt="asd"
+                                        class="image-email_ad"
+                                        height=""
+                                        src="https://live-ucbdev-sandbox-express.pantheonsite.io/sites/default/files/styles/email_ad/public/christian-buehner-DItYlc26zVI-unsplash.jpg?itok=baNA1bBp"
+                                        width="560"
+                                    /></a>
+                                  </td>
+                                  <td class="expander"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- END AD 2 -->
+            <table class="container email-footer" role="presentation">
+              <tbody>
+                <tr>
+                  <td>
+                    <table class="row footer">
+                      <tbody>
+                        <tr>
+                          <td class="wrapper last">
+                            <table class="twelve columns" role="presentation">
+                              <tbody>
+                                <tr>
+                                  <td
+                                    class="footer-content text-pad padding-bottom"
+                                  >
+                                    <p>
+                                      <strong
+                                        ><a
+                                          href="https://live-ucbdev-sandbox-express.pantheonsite.io"
+                                          >Developer Sandbox</a
+                                        ></strong
+                                      >
+                                    </p>
+                                    <!--                            <p class="copyright">&copy; Regents of the University of Colorado</p>                          -->
+                                    <div class="newsletter-footer">
+                                      <blockquote>
+                                        <p>This is a block quote! Wow!</p>
+                                      </blockquote>
+                                    </div>
+                                    <div class="open-counter">
+                                      <custom
+                                        name="opencounter"
+                                        type="tracking"
+                                      >
+                                      </custom>
+                                    </div>
+                                    <!-- don't ask... -->
+                                                                                
+                                                                                
+                                  </td>
+                                  <td class="expander"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </center>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</body>

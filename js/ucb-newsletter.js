@@ -1,6 +1,5 @@
 (function ($, Drupal) {
 //     // Create the admin button for copying HTML and the admin messages
-console.log('hi')
     var codeContainer = document.createElement('div')
     codeContainer.classList = 'container email-button-container'
     codeContainer.style.cssText = 'display: flex; justify-content: center; padding-top:10px;padding-top: 10px;flex-wrap: wrap;'
