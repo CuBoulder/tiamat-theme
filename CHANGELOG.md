@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Completes in-content menu blocks
+  This update completes in-content menu blocks (menu blocks placed outside of a navigation bar, e.g. in a sidebar) by styling them and adding the [Menu Block](https://www.drupal.org/project/menu_block) contrib module for additional options.
+  
+  Sister PR in: [tiamat10-project-template](https://github.com/CuBoulder/tiamat10-project-template/pull/25), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/50), [ucb_admin_menus](https://github.com/CuBoulder/ucb_admin_menus/pull/13)
+  
+  Resolves CuBoulder/tiamat-theme#267
+  Resolves CuBoulder/tiamat-theme#528 
+---
+
 - ### Cleans up accessible menus errors
   Resolves CuBoulder/tiamat-theme#538
 ---
