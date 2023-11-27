@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Breadcrumbs updates
+  Updates to breadcrumbs to not display breadcrumb div when there are no items in the div
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/86
+  
+  Closes #549 
+---
+
 - ### Completes in-content menu blocks
   This update completes in-content menu blocks (menu blocks placed outside of a navigation bar, e.g. in a sidebar) by styling them and adding the [Menu Block](https://www.drupal.org/project/menu_block) contrib module for additional options.
   
