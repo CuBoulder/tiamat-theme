@@ -152,7 +152,7 @@
 
   {# MAIN PAGE CONTENT #}
   <div class="ucb-page-content">
-  {% if show_breadcrumb %}
+  {% if (show_breadcrumb) and (page.breadcrumb|render|striptags|trim) %}
   <div class="ucb-breadcrumb-region">
     {{ page.breadcrumb }}
   </div>
