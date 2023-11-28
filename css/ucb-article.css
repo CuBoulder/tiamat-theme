@@ -194,7 +194,11 @@ i.fa-regular.fa-calendar {
   display: none;
 }
 
-/* Fixes display issues on Article Header Image caused by .imageMediaStyle display */
+/* These fixes display issues on Article Header Image caused by .imageMediaStyle defaults */
 .backgroundTitleDiv .imageMediaStyle {
   display: block;
+}
+
+.backgroundTitleDiv .imageMediaStyle img{
+  padding-bottom: 0px;
 }
