@@ -270,6 +270,11 @@ function renderArticleList( JSONURL, ExcludeCategories = "", ExcludeTags = "") {
               var readMoreLink = document.createElement('a')
               readMoreLink.href = link;
               readMoreLink.innerText = `Read more`
+              //Screen Reader text
+              var srOnly = document.createElement('span')
+              srOnly.className = 'sr-only'
+              srOnly.innerText = ` about ${title}`
+              readMoreLink.appendChild(srOnly)
 
               articleSummaryReadMore.appendChild(readMoreLink)
 
