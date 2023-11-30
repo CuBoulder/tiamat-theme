@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes padding on tag and category icons in articles
+  Resolves CuBoulder/tiamat-theme#569
+---
+
 - ### Fixes secondary menu alignment
   Fixes a bug which caused the secondary menu to be improperly aligned to the left when placed above the main navigation. Resolves CuBoulder/tiamat-theme#558
 ---
