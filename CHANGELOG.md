@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Corrects Article Title Background Image display issues
+  Corrects styles for `Article Title Background` with Overlays (under Advanced Style Options on Article Nodes)
+  
+  Resolves #566 
+---
+
 - ### Update page.html.twig
   Update for the sidebar menu hide/show.
   

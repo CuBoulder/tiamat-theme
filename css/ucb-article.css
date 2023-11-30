@@ -188,3 +188,12 @@ i.fa-regular.fa-calendar {
 .backgroundTitleDiv > div > div > .media-image-caption{
   display: none;
 }
+
+/* These fixes display issues on Article Header Image caused by .imageMediaStyle defaults */
+.backgroundTitleDiv .imageMediaStyle {
+  display: block;
+}
+
+.backgroundTitleDiv .imageMediaStyle img{
+  padding-bottom: 0px;
+}
