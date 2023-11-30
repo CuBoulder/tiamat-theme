@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update page.html.twig
+  Update for the sidebar menu hide/show.
+  
+  Closes #553 
+---
+
 - ### Fixes padding on tag and category icons in articles
   Resolves CuBoulder/tiamat-theme#569
 ---
