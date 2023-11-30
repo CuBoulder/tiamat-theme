@@ -24,7 +24,7 @@
   font-size: 200%;
 }
 
-.block-hero-unit {
+.block-hero-unit, .ucb-hero-unit-wrapper {
   font-size: 120%;
 }
 
@@ -115,7 +115,7 @@
   margin: .5em
 }
 
-.ucb-hero-outer-wrapper {
+.block-hero-unit {
   --bs-gutter-x: 1.5rem;
   padding-right: calc(var(--bs-gutter-x) * .5);
   padding-left: calc(var(--bs-gutter-x) * .5);
