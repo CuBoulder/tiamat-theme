@@ -16,6 +16,11 @@
 	{% set isFrontPage = 'sr-only' %}
 {% endif %}
 
+{# Global Labels for Filters 1-3, set in site config#}
+{% set ucb_filter_1_label = drupal_config('boulder_base.settings', 'ucb_filter_1_label') %}
+{% set ucb_filter_2_label = drupal_config('boulder_base.settings', 'ucb_filter_2_label') %}
+{% set ucb_filter_3_label = drupal_config('boulder_base.settings', 'ucb_filter_3_label') %}
+
 {%
 	set classes = [
 		'node',
@@ -51,19 +56,19 @@
 			'filter_1': {
 				'includes': content.field_ucb_people_filter_1|render|striptags|trim|split(' '),
 				'userAccessible': content.field_ucb_people_filter_1_s|render|striptags|trim == 'On',
-				'label': content.field_ucb_people_filter_1_label|render|striptags|trim,
+				'label': ucb_filter_1_label|render|striptags|trim,
 				'restrict': true
 			},
 			'filter_2': {
 				'includes': content.field_ucb_people_filter_2|render|striptags|trim|split(' '),
 				'userAccessible': content.field_ucb_people_filter_2_s|render|striptags|trim == 'On',
-				'label': content.field_ucb_people_filter_2_label|render|striptags|trim,
+				'label': ucb_filter_2_label|render|striptags|trim,
 				'restrict': true
 			},
 			'filter_3': {
 				'includes': content.field_ucb_people_filter_3|render|striptags|trim|split(' '),
 				'userAccessible': content.field_ucb_people_filter_3_s|render|striptags|trim == 'On',
-				'label': content.field_ucb_people_filter_3_label|render|striptags|trim,
+				'label': ucb_filter_3_label|render|striptags|trim,
 				'restrict': true
 			}
 		},

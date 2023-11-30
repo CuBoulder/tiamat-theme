@@ -24,3 +24,8 @@ ucb_social_share_position: '0'
 ucb_breadcrumb_nav: 1
 ucb_date_format:  '0'
 ucb_use_custom_logo: false
+ucb_filter_1_label: 'Filter 1'
+ucb_filter_2_label: 'Filter 2'
+ucb_filter_3_label: 'Filter 3'
+
+
