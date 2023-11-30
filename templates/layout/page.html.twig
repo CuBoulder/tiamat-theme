@@ -175,7 +175,8 @@
           {{ page.above_content }}
         </div>
       {% endif %}
-      {% if page.left_sidebar|render or page.right_sidebar|render %}
+      {# We are checking for length below to make sure that the sidebars have any content. This is so that sidebar menus don't render the sidebars if the menu is empty #}
+      {% if (page.left_sidebar|render|striptags|trim|length > 0) or (page.right_sidebar|render|striptags|trim|length > 0) %}
         {% if page.left_sidebar|render and page.right_sidebar|render %}
           <div class="ucb-layout-container container g-0">
             <div class="layout-row row">

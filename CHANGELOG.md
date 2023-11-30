@@ -9,6 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Corrects Article Title Background Image display issues
+  Corrects styles for `Article Title Background` with Overlays (under Advanced Style Options on Article Nodes)
+  
+  Resolves #566 
+---
+
+- ### Update page.html.twig
+  Update for the sidebar menu hide/show.
+  
+  Closes #553 
+---
+
+- ### Fixes padding on tag and category icons in articles
+  Resolves CuBoulder/tiamat-theme#569
+---
+
+- ### Fixes secondary menu alignment
+  Fixes a bug which caused the secondary menu to be improperly aligned to the left when placed above the main navigation. Resolves CuBoulder/tiamat-theme#558
+---
+
 - ### People List Filter Labels as a Global Setting
   Changes the People List `Filter 1`, `Filter 2`, and `Filter 3` custom labels to a Global Setting in Site Configuration, rather than being set per-page. These labels will be set under Configuration => Cu Boulder Site Settings => Appearance and Layout.
   

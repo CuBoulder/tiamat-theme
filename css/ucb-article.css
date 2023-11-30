@@ -35,11 +35,7 @@ i.fa-regular.fa-calendar {
 .ucb-article-category-icon, .ucb-article-tag-icon {
   background-color: #555555;
   color: #e7e7e7;
-  height: 16px;
-  width: 16px;
-}
-.ucb-article-category-icon > svg, .ucb-article-tag-icon > svg{
- padding: 2px;
+  padding: 6px;
 }
 
 .ucb-article-categories div,
@@ -48,7 +44,6 @@ i.fa-regular.fa-calendar {
   display: flex;
   flex-direction: row;
   line-height: 1.5em;
-  padding: 2px;
 }
 
 .ucb-article-categories a:link,
@@ -59,9 +54,9 @@ i.fa-regular.fa-calendar {
 .ucb-article-issue a:visited {
   background: #e7e7e7;
   color: #555;
-  padding: 2px 6px;
+  padding: 6px;
   display: inline-block;
-  margin: 0 5px 5px 0;
+  margin-right: 8px;
 }
 
 .ucb-article-categories a:hover,
@@ -192,4 +187,13 @@ i.fa-regular.fa-calendar {
 /* Removes caption on header img */
 .backgroundTitleDiv > div > div > .media-image-caption{
   display: none;
+}
+
+/* These fixes display issues on Article Header Image caused by .imageMediaStyle defaults */
+.backgroundTitleDiv .imageMediaStyle {
+  display: block;
+}
+
+.backgroundTitleDiv .imageMediaStyle img{
+  padding-bottom: 0px;
 }

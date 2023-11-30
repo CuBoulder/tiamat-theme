@@ -14,7 +14,7 @@
 #}
 {{ attach_library('boulder_base/ucb-secondary-menu-region') }}
 <div id = "ucb-secondary-menu-region" class="ucb-secondary-menu-region{{ ucb_secondary_menu_button_display ? ' ucb-secondary-menu-button-display' : ''}}">
-  <div  class="ucb-secondary-menu-region-container{{ ucb_secondary_menu_position == 'above' ? ' container' : ''}}">
+  <div class="ucb-secondary-menu-region-container{{ ucb_secondary_menu_position == 'above' ? ' container' : ''}}">
     {% if ucb_secondary_menu_default_links %}{% include "@boulder_base/includes/ucb-header-secondary-menu.html.twig" %}{% endif %}
     {{ content }}
   </div>
