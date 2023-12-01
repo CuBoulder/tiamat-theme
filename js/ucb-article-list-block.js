@@ -293,6 +293,12 @@ class ArticleListBlockElement extends HTMLElement {
           readMore.classList = 'ucb-article-card-read-more'
           readMore.innerText = `Read More`;
 
+          // Sr-only text
+          var srOnly = document.createElement('span')
+          srOnly.className = 'sr-only'
+          srOnly.innerText = ` about ${articleTitle}`
+          readMore.appendChild(srOnly)
+
           articleBody.appendChild(headerLink)
           articleBody.appendChild(date)
           articleBody.appendChild(articleSummary)
@@ -360,6 +366,11 @@ class ArticleListBlockElement extends HTMLElement {
           readMore.href = articleLink;
           readMore.classList = 'ucb-article-card-read-more'
           readMore.innerText = `Read More`;
+          // Sr-only text
+          var srOnly = document.createElement('span')
+          srOnly.className = 'sr-only'
+          srOnly.innerText = ` about ${articleTitle}`
+          readMore.appendChild(srOnly)
 
           articleBody.appendChild(headerLink)
           articleBody.appendChild(date)
@@ -508,6 +519,11 @@ class ArticleListBlockElement extends HTMLElement {
             readMore.href = articleLink;
             readMore.classList = 'ucb-article-card-read-more'
             readMore.innerText = `Read More`;
+            // Sr-only text
+            var srOnly = document.createElement('span')
+            srOnly.className = 'sr-only'
+            srOnly.innerText = ` about ${articleTitle}`
+            readMore.appendChild(srOnly)
 
             articleBody.appendChild(headerLink)
             articleBody.appendChild(date)

@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Enhanced Screen-Reader Text on 'Read More' links for Articles served by Article List Pages + Article Blocks
+  Enhances accessibility text on the `Article List` Page and variations of `Article List Blocks` , where links to Articles were previously only 'Read More'. Screen readers will now state "Read more about <Article's Title>" in these cases, providing more context to users using a screen reader.
+  
+  Resolves #570 
+---
+
 - ### Corrects Article Title Background Image display issues
   Corrects styles for `Article Title Background` with Overlays (under Advanced Style Options on Article Nodes)
   
