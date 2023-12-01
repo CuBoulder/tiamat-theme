@@ -277,6 +277,11 @@ class ArticleFeatureBlockElement extends HTMLElement {
                         featureReadMore.className = 'ucb-article-read-more'
                         featureReadMore.href = article.link;
                         featureReadMore.innerText = 'Read More'
+                        //Screen Reader text
+                        var srOnly = document.createElement('span')
+                        srOnly.className = 'sr-only'
+                        srOnly.innerText = ` about ${article.title}`
+                        featureReadMore.appendChild(srOnly)
         
                         // Append
                         featureContainer.appendChild(featureImgLink)
@@ -373,6 +378,11 @@ class ArticleFeatureBlockElement extends HTMLElement {
                 featureReadMore.className = 'ucb-article-read-more'
                 featureReadMore.href = article.link;
                 featureReadMore.innerText = 'Read More'
+                //Screen Reader text
+                var srOnly = document.createElement('span')
+                srOnly.className = 'sr-only'
+                srOnly.innerText = ` about ${article.title}`
+                featureReadMore.appendChild(srOnly)
 
                 // Append
                 featureContainer.appendChild(featureImgLink)
@@ -469,7 +479,12 @@ class ArticleFeatureBlockElement extends HTMLElement {
                         featureReadMore.className = 'ucb-article-read-more'
                         featureReadMore.href = article.link;
                         featureReadMore.innerText = 'Read More'
-        
+                        //Screen Reader text
+                        var srOnly = document.createElement('span')
+                        srOnly.className = 'sr-only'
+                        srOnly.innerText = ` about ${article.title}`
+                        featureReadMore.appendChild(srOnly)
+
                         // Append
                         featureContainer.appendChild(featureImgLink)
                         featureContainer.appendChild(featureTitle)
