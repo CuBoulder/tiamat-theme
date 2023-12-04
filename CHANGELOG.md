@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Styles search results page
+  Resolves CuBoulder/tiamat-theme#535 – A site's search page created using the [Google Programmable Search Engine](https://www.drupal.org/project/google_cse) module is now styled properly. Correct settings for the search page (may already be defaults):
+  
+  - Display Drupal-provided search input: **✓**
+  - Display search results: **On this site (requires JavaScript)**
+  - Layout of Search Engine: **Results only**
+  
+  "Display Google watermark" is on for D7 Express and works fine here too, whether to enable it is a possible future topic of discussion.
+---
+
 - ### CU Boulder Site Configuration 2.6
   This update:
   - Moves all settings from "Pages and Search" into "General". Search settings are now advanced settings.
