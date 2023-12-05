@@ -22,3 +22,4 @@ ucb_footer_menu_default_links: 0
 ucb_social_share_position: '0'
 ucb_breadcrumb_nav: 1
 ucb_use_custom_logo: false
+ucb_heading_font: 'bold'

@@ -912,3 +912,18 @@ div.table-vertical table td {
   border-top: none;
   border-bottom: none;
 }
+
+.ucb-heading-font-normal h1,
+.ucb-heading-font-normal h2,
+.ucb-heading-font-normal h3,
+.ucb-heading-font-normal h4,
+.ucb-heading-font-normal h5,
+.ucb-heading-font-normal h6,
+.ucb-heading-font-normal .h1,
+.ucb-heading-font-normal .h2,
+.ucb-heading-font-normal .h3,
+.ucb-heading-font-normal .h4,
+.ucb-heading-font-normal .h5,
+.ucb-heading-font-normal .h6 {
+  font-weight: 400;
+}

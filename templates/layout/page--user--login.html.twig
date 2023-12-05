@@ -49,7 +49,7 @@
 
 <div class="layout-container ucb-page-container">
 	{{ block("page_header", "page.html.twig") }}
-	<div class="ucb-page-content">
+	<div class="ucb-page-content{% if ucb_heading_font == 'normal' %} ucb-heading-font-normal{% endif %}">
 		{{ page.highlighted }}
 		{{ page.help }}
 		<main role="main">
