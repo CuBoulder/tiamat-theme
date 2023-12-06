@@ -51,29 +51,29 @@
 {{ attach_library('boulder_base/ucb-user-page') }}
 
 <div class="layout-container ucb-page-container">
-	{{ block("page_header", "page.html.twig") }}
-	<div class="ucb-page-content">
-		{{ page.highlighted }}
-		{{ page.help }}
-		<main role="main">
-			<a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
-			<div class="ucb-above-content-region container">
-				{{ page.above_content }}
-			</div>
-			<div class="layout-content container user-profile-wrapper">
-				<div class="ucb-user-profile-container">
-					{{ page.content }}
-				</div>
-				<div class = "ucb-user-web-status-div">
-					<h2>System Status</h2>
-    				<status-page-block page-id='9sm03v9xr9m6'></status-page-block>
-					<div class = "ucb-user-documentation">
-						<h2> Documentation </h2>
-						<a href = "https://www.colorado.edu/webcentral/">User Documentation </a>
-					</div>
-				</div>
-			</div>
-		</main>
-	</div>
-	{{ block("page_footer", "page.html.twig") }}
+  {{ block("page_header", "page.html.twig") }}
+  <div class="ucb-page-content{% if ucb_heading_font == 'normal' %} ucb-heading-font-normal{% endif %}">
+    {{ page.highlighted }}
+    {{ page.help }}
+    <main role="main">
+      <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+      <div class="ucb-above-content-region container">
+        {{ page.above_content }}
+      </div>
+      <div class="layout-content container user-profile-wrapper">
+        <div class="ucb-user-profile-container">
+          {{ page.content }}
+        </div>
+        <div class="ucb-user-web-status-div">
+          <h2>System Status</h2>
+            <status-page-block page-id="9sm03v9xr9m6"></status-page-block>
+          <div class="ucb-user-documentation">
+            <h2>Documentation</h2>
+            <a href="https://www.colorado.edu/webcentral/">User Documentation </a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+  {{ block("page_footer", "page.html.twig") }}
 </div>{# /.layout-container #}

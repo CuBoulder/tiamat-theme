@@ -86,7 +86,7 @@ function boulder_base_preprocess_page(array &$variables) {
   $variables['ucb_social_share_position'] = theme_get_setting('ucb_social_share_position');
   $variables['ucb_rave_alerts'] = theme_get_setting('ucb_rave_alerts');
   $variables['ucb_sticky_menu'] = theme_get_setting('ucb_sticky_menu');
-  $variables['ucb_date_format'] = theme_get_setting('ucb_date_format');
+  $variables['ucb_heading_font'] = theme_get_setting('ucb_heading_font');
   $useCustomLogo = theme_get_setting('ucb_use_custom_logo');
   if ($useCustomLogo) {
 	$logoDarkURL = file_create_url(theme_get_setting('ucb_custom_logo_dark_path'));
