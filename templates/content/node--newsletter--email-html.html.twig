@@ -360,3 +360,364 @@ td>h3>a{
     </div>
     </html>
 </div>
+
+<table class="body" role="presentation">
+    <tbody>
+      <tr>
+        <td align="center" class="center" valign="top">
+          <table class="row title" role="presentation">
+            <tbody>
+              <tr>
+                <!--Email Header-->
+                <td class="email-top">
+                  <center>
+                    <table class="container" role="presentation">
+                      <tbody>
+                        <tr>
+                          <td>
+                            <table class="full" role="presentation">
+                              <tbody>
+                                <tr>
+                                  <td class="campus-logo">
+                                    <a href="https://www.colorado.edu"
+                                      ><img
+                                        alt="University of Colorado Boulder "
+                                        height="27"
+                                        id="campus-logo"
+                                        src="{{cuLogoSrc}}"
+                                        width="180"
+                                    /></a>
+                                  </td>
+                                </tr>
+                                <tr>
+                                  <td class="newsletter-name">
+                                    <h1>
+                                      <img
+                                        alt="TEST"
+                                        height="167"
+                                        id="newsletter-logo"
+                                        src="https://live-ucbdev-sandbox-express.pantheonsite.io/sites/default/files/styles/medium/public/newsletter-name-image/brooke-cagle-LnT_OqSf6Bs-unsplash.jpg?itok=kRPsnkxx"
+                                        width="250"
+                                      />
+                                    </h1>
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                            <table class="issue full" role="presentation">
+                              <tbody>
+                                <tr>
+                                  <td class="issue-date">
+                                    <strong
+                                      >{{ node.changed.value|date("M. j, Y")
+                                      }}</strong
+                                    >
+                                  </td>
+                                  <td class="web-link">
+                                    <a
+                                      href="{{base_url}}{{ path('entity.node.canonical', {'node': node.id}) }}"
+                                      >View on website</a
+                                    >
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </center>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="title-bottom"></div>
+          <center>
+            <!-- Intro -->
+            <table class="container content-top" role="presentation">
+              <tbody>
+                <tr>
+                  <td class="hero-image">
+                    <table class="row article-intro" role="presentation">
+                      <tbody>
+                        <tr>
+                          <td class="wrapper last">
+                            <table class="twelve columns" role="presentation">
+                              <tbody>
+                                <tr>
+                                  <td
+                                    class="text-pad padding-top padding-bottom"
+                                  >
+                                    <div class="content-padding">
+                                      <div class="intro-image">
+                                        <table role="presentation">
+                                          <tbody>
+                                            <tr>
+                                              <td class="padding-bottom">
+                                                <div
+                                                  class="field field-name-field-newsletter-intro-image field-type-image field-label-hidden"
+                                                >
+                                                  <div class="field-items">
+                                                    <div
+                                                      class="field-item even"
+                                                    >
+                                                      {% if
+                                                      content.field_newsletter_intro_image|render
+                                                      %}
+                                                      <img
+                                                        alt="asd"
+                                                        class="image-email_medium"
+                                                        height=""
+                                                        src="{{base_url}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}"
+                                                        width="560"
+                                                      />
+                                                      {% endif %}
+                                                    </div>
+                                                  </div>
+                                                </div>
+                                              </td>
+                                            </tr>
+                                          </tbody>
+                                        </table>
+                                      </div>
+                                      <div class="intro-text">
+                                        <div
+                                          class="field field-name-body field-type-text-with-summary field-label-hidden"
+                                        >
+                                          <div class="field-items">
+                                            <div class="field-item even">
+                                              <p>
+                                                This is a giant intro. This is a
+                                                giant intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant intro. 
+                                              </p>
+                                              <p>
+                                                This is a giant intro. This is a
+                                                giant intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant intro. 
+                                              </p>
+                                              <p>
+                                                This is a giant intro. This is a
+                                                giant intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant
+                                                intro. This is a giant intro. 
+                                              </p>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </td>
+                                  <td class="expander"></td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- start issue contents -->
+            <table class="container" role="presentation">
+              <tbody>
+                <tr>
+                  <td class="newsletter-sections">
+                    {% if content.field_newsletter_section_block|render %}
+                    <!--Newsletter Sections-->
+                    <div class="newsletter-section">
+                        {{content.field_newsletter_section_block|render}}
+                    </div>
+                    {% endif %}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- START AD 1 -->
+            <table class="container" role="presentation">
+              <tbody>
+                <tr>
+                  <td>
+                    <!--Ad One-->
+                    {% if content.field_newsletter_promo_image_one|render %}
+                        {% if content.field_newsletter_promo_link_one|render %}
+                        <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
+                            <tbody>
+                                <tr>
+                                    <td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
+                                        <a href="{{ content.field_newsletter_promo_link_one|render|striptags|trim }}">
+                                            <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        {% else %}
+                        <table role="presentation">
+                            <tbody>
+                                <tr>
+                                    <td align="center"style="text-align: left; padding-right:10px; padding-left:10px; padding-bottom:20px">
+                                        <img width="100%"src="{{base_url}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        {% endif %}
+                    {% endif %}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- END AD 1 -->
+            <!-- START BLOCKS -->
+            <!--Promo Blocks-->
+            <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white">
+                <tbody>
+                    <tr>
+                        <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
+                            <!--Promo Block 1-->
+                            <table role="presentation">
+                                <tbody>
+                            {% if content.field_newsletter_block_title_one|render %}
+                                    <tr>
+                                        <td style="text-align: left; padding-right:10px; padding-left:10px">
+                                            <h3>{{ content.field_newsletter_block_title_one|render }}</h3>
+                                        </td>
+                                    </tr>
+                            {% endif %}
+
+                            {% if content.field_newsletter_block_text_one|render %}
+                                <tr style="text-align: left; padding-right:10px; padding-left:10px"> 
+                                    <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">{{ content.field_newsletter_block_text_one|render }}</td>
+                                </tr>
+                            {% endif %}
+                                </tbody>
+                            </table>
+                        </td>
+                        <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
+                        <!--Promo Block 2-->
+                            <table role="presentation">
+                                <tbody>
+                        {% if content.field_newsletter_block_title_two|render %}
+                                    <tr>
+                                        <td style="text-align: left; padding-right:10px; padding-left:10px"> 
+                                            <h3>{{ content.field_newsletter_block_title_two|render }}</h3>
+                                        </td>
+                                    </tr>
+                        {% endif %}
+                        {% if content.field_newsletter_block_text_two|render %}
+                        <tr>
+                            <td style="text-align: left; padding-right:10px; padding-left:10px">    {{ content.field_newsletter_block_text_two|render }}</td>
+                        
+                        </tr>
+                        {% endif %}
+                                </tbody>
+                                </table>
+                                </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!-- END BLOCKS -->
+            <!-- START AD 2 -->
+            <table class="container" role="presentation">
+              <tbody>
+                <tr>
+                  <td>
+                    {% if content.field_newsletter_promo_image_two|render %}
+                    {% if content.field_newsletter_promo_link_two|render %}
+                    <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
+                        <tbody>
+                            <tr>
+                                <td width="500px" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px"> 
+                                    <a href="{{ content.field_newsletter_promo_link_two|render|striptags|trim }}">
+                                        <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                    </a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {% else %}
+                    <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
+                        <tbody>
+                            <tr>
+                                <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px"> 
+                                    <img src="{{base_url}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>	
+                    {% endif %}
+                {% endif %}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <!-- END AD 2 -->
+            <table class="container email-footer" role="presentation">
+              <tbody>
+                <tr>
+                  <td>
+                    <table class="row footer">
+                      <tbody>
+                        <tr>
+                          <td class="wrapper last">
+                            <!--FOOTER-->
+                            {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
+                            <table role="presentation" border="0" width="100%" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+                                <tbody>
+                                    <tr>
+                                        <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
+                                            {{node.field_newsletter_type.entity.field_newsletter_footer.0.processed}}
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                            {% endif %}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </center>
+        </td>
+      </tr>
+    </tbody>
+  </table>
