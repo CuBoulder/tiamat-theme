@@ -13,82 +13,73 @@
 {# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
 {% set isFrontPage = '' %}
 {% if is_front %}
-	{% set isFrontPage = 'sr-only' %}
+  {% set isFrontPage = 'sr-only' %}
 {% endif %}
-
-{# Global Labels for Filters 1-3, set in site config#}
-{% set ucb_filter_1_label = drupal_config('boulder_base.settings', 'ucb_filter_1_label') %}
-{% set ucb_filter_2_label = drupal_config('boulder_base.settings', 'ucb_filter_2_label') %}
-{% set ucb_filter_3_label = drupal_config('boulder_base.settings', 'ucb_filter_3_label') %}
-
-{%
-	set classes = [
-		'node',
-		'container',
-		'node--type-' ~ node.bundle|clean_class,
-		node.isPromoted() ? 'node--promoted',
-		node.isSticky() ? 'node--sticky',
-		not node.isPublished() ? 'node--unpublished',
-		view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-	]
-%}{% 
-	set config = {
-		'taxonomies' : {
-			'department': 'department',
-			'job_type': 'ucb_person_job_type',
-			'filter_1': 'filter_1',
-			'filter_2': 'filter_2',
-			'filter_3': 'filter_3'
-		},
-		'filters': {
-			'department': {
-				'includes': content.field_ucb_people_department|render|striptags|trim|split(' '),
-				'userAccessible': content.field_ucb_people_department_s|render|striptags|trim == 'On',
-				'label': 'Department',
-				'restrict': true
-			},
-			'job_type': {
-				'includes': content.field_ucb_people_job_type|render|striptags|trim|split(' '),
-				'userAccessible': content.field_ucb_people_job_type_s|render|striptags|trim == 'On',
-				'label': 'Job Type',
-				'restrict': true
-			},
-			'filter_1': {
-				'includes': content.field_ucb_people_filter_1|render|striptags|trim|split(' '),
-				'userAccessible': content.field_ucb_people_filter_1_s|render|striptags|trim == 'On',
-				'label': ucb_filter_1_label|render|striptags|trim,
-				'restrict': true
-			},
-			'filter_2': {
-				'includes': content.field_ucb_people_filter_2|render|striptags|trim|split(' '),
-				'userAccessible': content.field_ucb_people_filter_2_s|render|striptags|trim == 'On',
-				'label': ucb_filter_2_label|render|striptags|trim,
-				'restrict': true
-			},
-			'filter_3': {
-				'includes': content.field_ucb_people_filter_3|render|striptags|trim|split(' '),
-				'userAccessible': content.field_ucb_people_filter_3_s|render|striptags|trim == 'On',
-				'label': ucb_filter_3_label|render|striptags|trim,
-				'restrict': true
-			}
-		},
-		'format': content.field_ucb_people_display|render|striptags|trim,
-		'groupby': content.field_ucb_people_group_by|render|striptags|trim,
-		'orderby': content.field_ucb_people_order_by|render|striptags|trim
-	}
-%}
+{% set classes = [
+    'node',
+    'container',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+ ] %}
+ {% set config = {
+  'taxonomies' : {
+    'department': 'department',
+    'job_type': 'ucb_person_job_type',
+    'filter_1': 'filter_1',
+    'filter_2': 'filter_2',
+    'filter_3': 'filter_3'
+  },
+  'filters': {
+    'department': {
+      'includes': content.field_ucb_people_department|render|striptags|trim|split(' '),
+      'userAccessible': content.field_ucb_people_department_s|render|striptags|trim == 'On',
+      'label': 'Department',
+      'restrict': true
+    },
+    'job_type': {
+      'includes': content.field_ucb_people_job_type|render|striptags|trim|split(' '),
+      'userAccessible': content.field_ucb_people_job_type_s|render|striptags|trim == 'On',
+      'label': 'Job Type',
+      'restrict': true
+    },
+    'filter_1': {
+      'includes': content.field_ucb_people_filter_1|render|striptags|trim|split(' '),
+      'userAccessible': content.field_ucb_people_filter_1_s|render|striptags|trim == 'On',
+      'label': people_list_filter_1_label,
+      'restrict': true
+    },
+    'filter_2': {
+      'includes': content.field_ucb_people_filter_2|render|striptags|trim|split(' '),
+      'userAccessible': content.field_ucb_people_filter_2_s|render|striptags|trim == 'On',
+      'label': people_list_filter_2_label,
+      'restrict': true
+    },
+    'filter_3': {
+      'includes': content.field_ucb_people_filter_3|render|striptags|trim|split(' '),
+      'userAccessible': content.field_ucb_people_filter_3_s|render|striptags|trim == 'On',
+      'label': people_list_filter_3_label,
+      'restrict': true
+    }
+  },
+  'format': content.field_ucb_people_display|render|striptags|trim,
+  'groupby': content.field_ucb_people_group_by|render|striptags|trim,
+  'orderby': content.field_ucb_people_order_by|render|striptags|trim
+} %}
 <article id="ucb-people-list-page"{{attributes.addClass(classes)}}>
-	<div class="ucb-people-list-title">
-		<h1{{title_attributes}} class="{{isFrontPage}}">
-			{{ label }}
-		</h1>
-	</div>
-	{% if content.body|render %}
-	<div class="ucb-person-section ucb-person-body">
-		{{ content.body }}
-	</div>
-	{% endif %}
-	<ucb-people-list base-uri="{{ url('<front>')|render|trim('/') }}/jsonapi" config="{{ config|json_encode }}" user-config="{}">
-		<noscript><div class="ucb-list-msg ucb-error">Please enable JavaScript to see this page.</div></noscript>
-	</ucb-people-list>
+  <div class="ucb-people-list-title">
+    <h1{{title_attributes}} class="{{isFrontPage}}">
+      {{ label }}
+    </h1>
+  </div>
+  {% if content.body|render %}
+  <div class="ucb-person-section ucb-person-body">
+    {{ content.body }}
+  </div>
+  {% endif %}
+  <ucb-people-list base-uri="{{ url('<front>')|render|trim('/') }}/jsonapi" config="{{ config|json_encode }}" user-config="{}">
+    <noscript><div class="ucb-list-msg ucb-error">Please enable JavaScript to see this page.</div></noscript>
+  </ucb-people-list>
 </article>

@@ -9,6 +9,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Styles search results page
+  Resolves CuBoulder/tiamat-theme#535 – A site's search page created using the [Google Programmable Search Engine](https://www.drupal.org/project/google_cse) module is now styled properly. Correct settings for the search page (may already be defaults):
+  
+  - Display Drupal-provided search input: **✓**
+  - Display search results: **On this site (requires JavaScript)**
+  - Layout of Search Engine: **Results only**
+  
+  "Display Google watermark" is on for D7 Express and works fine here too, whether to enable it is a possible future topic of discussion.
+---
+
+- ### CU Boulder Site Configuration 2.6
+  This update:
+  - Moves all settings from "Pages and Search" into "General". Search settings are now advanced settings.
+  - Replaces the "Pages and search" and "Related articles" tabs with a brand new "Content types" tab. All "Related articles" settings have been moved into "Content types".
+  - Replaces the `edit ucb pages` and `configure ucb related articles` permissions with a new `edit ucb content types` permission.
+  - Moves the People List filter labels and Article date format into "Content types".
+  - Moves the GTM account setting into "General" as an advanced setting.
+  
+  CuBoulder/ucb_site_configuration#36
+  
+  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/38), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/53)
+---
+
 - ### Enhanced Screen-Reader Text on 'Read More' links for Articles served by Article List Pages + Article Blocks
   Enhances accessibility text on the `Article List` Page and variations of `Article List Blocks` , where links to Articles were previously only 'Read More'. Screen readers will now state "Read more about <Article's Title>" in these cases, providing more context to users using a screen reader.
   

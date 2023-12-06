@@ -350,6 +350,12 @@ ucb-search-modal:
     theme:
       css/ucb-search-modal.css: {}
 
+ucb-search-page:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-search-page.css: {}
+
 ucb-menu:
   version: 1.x
   js:
