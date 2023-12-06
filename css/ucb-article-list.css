@@ -1,84 +1,83 @@
 #ucb-article-listing {
-	margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .ucb-article-list-header {
-	font-weight: normal;
-	font-size: 220%;
+  font-size: 220%;
 }
 
 .ucb-list-msg {
-	font-size: 1.25em;
-	font-weight: bolder;
-	text-align: center;
-	display: none;
+  font-size: 1.25em;
+  font-weight: bolder;
+  text-align: center;
+  display: none;
 }
 
 .ucb-loading-data {
-	color: #01579b;
+  color: #01579b;
 }
 
 .ucb-article-card-container {
-	border-bottom: 2px solid rgba(128, 128, 128, 0.333);
-	margin-bottom: 20px;
+  border-bottom: 2px solid rgba(128, 128, 128, 0.333);
+  margin-bottom: 20px;
 }
 
 .ucb-article-card-data {
-	display: flex;
-	flex-direction: column;
-	margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
 
 .ucb-article-card-title {
-	font-size: 120%;
-	font-weight: normal;
-	margin-bottom: 10px;
-	line-height: 1.3;
-	margin: 0 0 10px 0;
+  font-size: 120%;
+  font-weight: normal;
+  margin-bottom: 10px;
+  line-height: 1.3;
+  margin: 0 0 10px 0;
 }
 
 .ucb-article-card-date {
-	font-size: 85%;
-	line-height: 85%;
-	margin-bottom: 10px;
+  font-size: 85%;
+  line-height: 85%;
+  margin-bottom: 10px;
 }
 
 .ucb-article-card-body {
-	margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 .ucb-article-card-img {
-	width: calc(100px + var(--bs-gutter-x));
-	height: auto;
-	margin-bottom: 20px;
+  width: calc(100px + var(--bs-gutter-x));
+  height: auto;
+  margin-bottom: 20px;
 }
 
 .ucb-article-card-more {
-	text-transform: uppercase;
-	font-weight: 600;
-	font-size: 75%;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 75%;
 }
 
-.ucb-article-list-button-container{
-    text-align: center;
+.ucb-article-list-button-container {
+  text-align: center;
 }
 
-.ucb-article-list-button{
-    display: none;
-    padding: 5px 10px;
-    font-weight: bold;
-    font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
-    margin-bottom: 5px;
-    background-clip: padding-box;
-    color: #0277BD !important;
-    border: 1px solid #0277BD;
-    border-radius: 0px;
-    background-color: transparent;
-	text-decoration: none;
+.ucb-article-list-button {
+  display: none;
+  padding: 5px 10px;
+  font-weight: bold;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin-bottom: 5px;
+  background-clip: padding-box;
+  color: #0277BD !important;
+  border: 1px solid #0277BD;
+  border-radius: 0px;
+  background-color: transparent;
+  text-decoration: none;
 }
 
-.ucb-article-list-button:hover{
-    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-    background-color: #0277BD;
-    color: white !important;
+.ucb-article-list-button:hover {
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  background-color: #0277BD;
+  color: white !important;
 }
