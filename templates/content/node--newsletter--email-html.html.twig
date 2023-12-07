@@ -29,6 +29,8 @@
 {% set headerStyles = '' %}
 {% set footerStyles = '' %}
 {% set cuLogoSrc = '' %}
+{% set classicImgOffset = ''%}
+{% set emailBackground = '' %}
 
 {# CU LOGO #}
 {% set cuLogoDark = base_url ~ '/' ~  base_path ~ directory ~ '/images/cu-boulder-logo-text-black.gif' %}
@@ -38,12 +40,14 @@
 {# Classic #}
 {% if designType == 'classic' %}
 {# TO DO -- fix classic #}
-{% set divStyles = 'background-color: #FFFFFF;margin:auto;' %}
+{% set divStyles = 'background-color: #fff; color: #fff;' %}
 {% set aStyles = 'color: #ff9900;' %}
 {% set pStyles = 'color:black;' %}
-{% set headerStyles = 'color:black;' %}
-{% set footerStyles = 'color:black;' %}
-{% set cuLogoSrc = cuLogoDark %}
+{% set headerStyles = 'background-color: black; padding-bottom:50px' %}
+{% set footerStyles = 'background-color: black' %}
+{% set cuLogoSrc = cuLogoLight %}
+{% set classicImgOffset = 'padding: 10px; background: white; margin-top: -50px;'%}
+{% set emailBackground = 'background-color:black;' %}
 {# Minimal #}
 {% elseif designType == 'minimal' %}
     {% set divStyles = 'background-color: #FFFFFF;margin:auto;' %}
@@ -52,6 +56,8 @@
     {% set headerStyles = 'color:black;' %}
     {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
+    {% set emailBackground = 'background-color:white;' %}
+
 {# Darkbox #}
 {% elseif designType == 'darkbox' %}
     {% set divStyles = 'background-color: #333; color: #fff;margin:auto;' %}
@@ -60,6 +66,8 @@
     {% set headerStyles = 'color:black;' %}
     {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
+    {% set emailBackground = 'background-color:white;' %}
+
 {# Lightbox #}
 {% elseif designType == 'lightbox' %}
     {% set divStyles = 'background-color: #E9E9E9;margin:auto;' %}
@@ -68,6 +76,8 @@
     {% set headerStyles = 'color:black;' %}
     {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
+    {% set emailBackground = 'background-color:white;' %}
+
 {# Simple #}
 {% else %}
     {% set divStyles = 'background-color: #FFFFFF; color: #fff; margin:auto;' %}
@@ -76,6 +86,8 @@
     {% set headerStyles = 'color:black;' %}
     {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
+    {% set emailBackground = 'background-color:white;' %}
+
 {% endif %}
 
 <div class="container" id="email-preview" style="background-color: grey; display: flex; justify-content:center">
@@ -189,55 +201,74 @@ td>h3>a{
     color: #0277BD;
 }
 
+
+
             </style>
         </head>
     {# END VARIABLE TESTS #}
     {# BIG Wrapper #}
-    <div id="email" style="width:700px; align-items:center;{{divStyles}}">
-    <div style="width:600px;margin: auto;background:white;" data-url="{{base_url}}">
+    <div id="email" style="width:700px; align-items:center;{{emailBackground}}">
+    <div style="width:600px;margin: auto;{{divStyles}}" data-url="{{base_url}}">
         {# HEADER -- to do: might need to be different tables for styling purposes #}
         <!-- Header --> 
-        <table style='{{headerStyles}}'role='presentation' width="100%">
+        <table>
             <tbody>
-                {# CU LOGO #}
                 <tr>
-                    <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 10px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
-                        <a href="http://www.colorado.edu">
-                            {# TO DO -- need to swap between this and the white one depending on the color #}
-                            <img style="max-width:35%" src="{{cuLogoSrc}}">
-                        </a>
-                    </td>
-                </tr>
-                {# Newsletter Taxonomy Image -- might need to be a separate table #}
-                <tr>
-                    <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 10px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
-                        <img style="object-fit:cover;-ms-interpolation-mode: bicubic; clear: both; display: block; float: left; height: 167px !important; max-width: 100% !important; outline: none; text-decoration: none; width: 250px !important; max-height: auto !important;"src="{{base_url}}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}">
-                    </td>
-                </tr>
-                {# Date & View on Website Link #}
-                <tr>
-                    <td style="padding-left:10px; text-align:left">{{ node.changed.value|date("M. j, Y") }}</td>
-                    <td style="padding-right:10px;text-align:right;">
-                        <a style="text-wrap:nowrap" href="{{base_url}}{{ path('entity.node.canonical', {'node': node.id}) }}">View on website</a>
+                    <td style='{{headerStyles}}'>
+                        <table role='presentation' width="100%">
+                            <tbody>
+                                {# CU LOGO #}
+                                <tr>
+                                    <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 10px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+                                        <a href="http://www.colorado.edu">
+                                            {# TO DO -- need to swap between this and the white one depending on the color #}
+                                            <img style="max-width:35%" src="{{cuLogoSrc}}">
+                                        </a>
+                                    </td>
+                                </tr>
+                                {# Newsletter Taxonomy Image -- might need to be a separate table #}
+                                <tr>
+                                    <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 10px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+                                        <img style="object-fit:cover;-ms-interpolation-mode: bicubic; clear: both; display: block; float: left; height: 167px !important; max-width: 100% !important; outline: none; text-decoration: none; width: 250px !important; max-height: auto !important;"src="{{base_url}}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}">
+                                    </td>
+                                </tr>
+                                {# Date & View on Website Link #}
+                                <tr>
+                                    <td style="padding-left:10px; text-align:left">{{ node.changed.value|date("M. j, Y") }}</td>
+                                    <td style="padding-right:10px;text-align:right;">
+                                        <a style="text-wrap:nowrap" href="{{base_url}}{{ path('entity.node.canonical', {'node': node.id}) }}">View on website</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </td>
                 </tr>
             </tbody>
         </table>
-        <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
-            <tr>
-                <h1 id="newsletter-email-title" style="{{headerStyles}}padding: 30px 30px 15px 60px;font-size: 52px; margin:0 0 20px 0; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"> {{ label }}</h1>
-              <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
-            <!-- Intro Img --> 
-                {% if content.field_newsletter_intro_image|render %}
-                <img id="newsletter-email-intro-img" src="{{base_url}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" width="100%" style="margin-bottom: 20px;">
-                {% endif %}
-            <!-- Intro Text-->
-                {% if content.field_newsletter_intro_body|render %}
-                <div id="newsletter-intro-body">{{ content.field_newsletter_intro_body }}</div>
-                {% endif %}
-                </td>
-            </tr>
-        </table>
+        <center style="background-color: white;">
+            <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
+                <tr>
+                  <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
+                <!-- Intro Img --> 
+                    {% if content.field_newsletter_intro_image|render %}
+                    <img id="newsletter-email-intro-img" src="{{base_url}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" width="100%" style="{{classicImgOffset}};margin-bottom: 20px;">
+                    {% endif %}
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <h1 id="newsletter-email-title" style="padding: 30px 30px 15px 60px;font-size: 52px; margin:0 0 20px 0; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"> {{ label }}</h1>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                    <!-- Intro Text-->
+                    {% if content.field_newsletter_intro_body|render %}
+                    <div id="newsletter-intro-body">{{ content.field_newsletter_intro_body }}</div>
+                    {% endif %}
+                    </td>
+                </tr>
+            </table>
         <!--Second table-->
         {% if content.field_newsletter_section_block|render %}
         <!--Newsletter Section-->
@@ -346,7 +377,7 @@ td>h3>a{
     {% endif %}
         <!--Footer-->
         {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
-        <table role="presentation" border="0" width="100%" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+        <table role="presentation" border="0" width="100%" cellspacing="0" style="{{headerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
             <tbody>
                 <tr>
                     <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
@@ -356,6 +387,7 @@ td>h3>a{
             </tbody>
         </table>
         {% endif %}
+        </center>
     </div>
     </div>
     </html>
