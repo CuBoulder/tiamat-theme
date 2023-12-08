@@ -51,8 +51,8 @@ class ArticleSliderBlockElement extends HTMLElement {
           // finds the focial point version of the thumbnail
           altFilterData.map((item)=>{
             // checks if consumer is working, else default to standard image instead of focal image
-            if(item.links.focal_image_square != undefined){
-              altObj[item.id] = item.links.focal_image_square.href
+            if(item.links.focal_image_wide != undefined){
+              altObj[item.id] = item.links.focal_image_wide.href
             } else {
               altObj[item.id] = item.attributes.uri.url
             }
@@ -103,40 +103,7 @@ class ArticleSliderBlockElement extends HTMLElement {
             // If there's no categories or tags that are in the exclusions, proceed
             if (doesIncludeCat.length == 0 && doesIncludeTag.length == 0) {
                 // okay to render
-                let bodyAndImageId = item.relationships.field_ucb_article_content.data.length ? item.relationships.field_ucb_article_content.data[0].id : "";
-                let body = item.attributes.field_ucb_article_summary ? item.attributes.field_ucb_article_summary : "";
-                body = body.trim();
                 let imageSrc = "";
-
-                if (!body.length && bodyAndImageId != "") {
-                    this.getArticleParagraph(bodyAndImageId)
-                      .then((response) => response.json())
-                      .then((data) => {
-                        // Remove any html tags within the article
-                        let htmlStrip = data.data.attributes.field_article_text.processed.replace(
-                          /<\/?[^>]+(>|$)/g,
-                          ""
-                        )
-                        // Remove any line breaks if media is embedded in the body
-                        let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
-                        // take only the first 100 words ~ 500 chars
-                        let trimmedString = lineBreakStrip.substr(0, 250);
-                        // if in the middle of the string, take the whole word
-                        if(trimmedString.length > 100){
-                          trimmedString = trimmedString.substr(
-                            0,
-                            Math.min(
-                              trimmedString.length,
-                              trimmedString.lastIndexOf(" ")
-                            )
-                          )
-                          body = `${trimmedString}...`;
-                        }
-                        // set the contentBody of Article Summary card to the minified body instead
-                        body = `${trimmedString}`;
-                        document.getElementById(`body-${bodyAndImageId}`).innerText = body;
-                      })
-                  }
       
                   // if no thumbnail, show no image
                   if (!item.relationships.field_ucb_article_thumbnail.data) {
@@ -146,10 +113,7 @@ class ArticleSliderBlockElement extends HTMLElement {
                     let thumbId = item.relationships.field_ucb_article_thumbnail.data.id;
                     imageSrc = altObj[idObj[thumbId]];
                   }
-      
-                  //Date - make human readable
-                  const options = { year: 'numeric', month: 'short', day: 'numeric' };
-                  let date = new Date(item.attributes.created).toLocaleDateString('en-us', options);
+
                   let title = item.attributes.title;
                   let link = item.attributes.path.alias;
 
@@ -158,8 +122,6 @@ class ArticleSliderBlockElement extends HTMLElement {
                     title,
                     link,
                     image: imageSrc,
-                    date,
-                    body,
                   }
                   // Adds the article object to the final array of articles chosen
                   finalArticles.push(article)
@@ -185,8 +147,9 @@ class ArticleSliderBlockElement extends HTMLElement {
         }
 
         // Case for Too many articles
-        if(finalArticles.length > count){
+        if(finalArticles.length >= count || (finalArticles.length >= count && NEXTJSONURL)){
             finalArticles.length = count
+            this.renderDisplay(finalArticles)
         }
 
         // Have articles and want to proceed
