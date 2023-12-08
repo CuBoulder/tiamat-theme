@@ -43,8 +43,8 @@
 {% set divStyles = 'background-color: #fff; color: #fff;' %}
 {% set aStyles = 'color: #ff9900;' %}
 {% set pStyles = 'color:black;' %}
-{% set headerStyles = 'background-color: black; padding-bottom:50px' %}
-{% set footerStyles = 'background-color: black' %}
+{% set headerStyles = 'width:100%;background-color: black; padding-bottom:50px' %}
+{% set footerStyles = 'background-color: black; padding-top:20px' %}
 {% set cuLogoSrc = cuLogoLight %}
 {% set classicImgOffset = 'padding: 10px; background: white; margin-top: -50px;'%}
 {% set emailBackground = 'background-color:black;' %}
@@ -207,15 +207,15 @@ td>h3>a{
         </head>
     {# END VARIABLE TESTS #}
     {# BIG Wrapper #}
-    <div id="email" style="width:700px; align-items:center;{{emailBackground}}">
-    <div style="width:600px;margin: auto;{{divStyles}}" data-url="{{base_url}}">
+    <div id="email" style="align-items:center;{{emailBackground}}">
+    <div style="margin: auto;{{divStyles}}" data-url="{{base_url}}">
         {# HEADER -- to do: might need to be different tables for styling purposes #}
         <!-- Header --> 
-        <table>
+        <table style="{{headerStyles}}">
             <tbody>
                 <tr>
                     <td style='{{headerStyles}}'>
-                        <table role='presentation' width="100%">
+                        <table role='presentation' align="center" width="700px">
                             <tbody>
                                 {# CU LOGO #}
                                 <tr>
@@ -245,148 +245,157 @@ td>h3>a{
                 </tr>
             </tbody>
         </table>
-        <center style="background-color: white;">
-            <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
-                <tr>
-                  <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
-                <!-- Intro Img --> 
-                    {% if content.field_newsletter_intro_image|render %}
-                    <img id="newsletter-email-intro-img" src="{{base_url}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" width="100%" style="{{classicImgOffset}};margin-bottom: 20px;">
-                    {% endif %}
-                    </td>
-                </tr>
-                <tr>
+        <center align="center" style="background-color: white;">
+            <table width="700px" align="center">
+                <tbody>
                     <td>
-                        <h1 id="newsletter-email-title" style="padding: 30px 30px 15px 60px;font-size: 52px; margin:0 0 20px 0; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"> {{ label }}</h1>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                    <!-- Intro Text-->
-                    {% if content.field_newsletter_intro_body|render %}
-                    <div id="newsletter-intro-body">{{ content.field_newsletter_intro_body }}</div>
-                    {% endif %}
-                    </td>
-                </tr>
-            </table>
-        <!--Second table-->
-        {% if content.field_newsletter_section_block|render %}
-        <!--Newsletter Section-->
-        <div style="{{pStyles}}">
-        {{content.field_newsletter_section_block|render}}
-        </div>
-            {% endif %}
-        <!--Ad One-->
-			{% if content.field_newsletter_promo_image_one|render %}
-				{% if content.field_newsletter_promo_link_one|render %}
-                <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
-                    <tbody>
-                        <tr>
-                            <td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
-                                <a href="{{ content.field_newsletter_promo_link_one|render|striptags|trim }}">
-                                    <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
-                                </a>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-				{% else %}
-                <table role="presentation">
-                    <tbody>
-                        <tr>
-                            <td align="center"style="text-align: left; padding-right:10px; padding-left:10px; padding-bottom:20px">
-                                <img width="100%"src="{{base_url}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-				{% endif %}
-			{% endif %}
-        <!--Promo Blocks-->
-        <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white">
-			<tbody>
-                <tr>
-                    <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
-                        <!--Promo Block 1-->
-                        <table role="presentation">
-                            <tbody>
-                        {% if content.field_newsletter_block_title_one|render %}
+                        <td>
+                            <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
                                 <tr>
-                                    <td style="text-align: left; padding-right:10px; padding-left:10px">
-                                        <h3>{{ content.field_newsletter_block_title_one|render }}</h3>
+                                  <td align="center" style="padding-right:10px; padding-left:10px">
+                                <!-- Intro Img --> 
+                                    {% if content.field_newsletter_intro_image|render %}
+                                    <img id="newsletter-email-intro-img" src="{{base_url}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" width="100%" style="{{classicImgOffset}};margin-bottom: 20px;">
+                                    {% endif %}
                                     </td>
                                 </tr>
-                        {% endif %}
-
-                        {% if content.field_newsletter_block_text_one|render %}
-                            <tr style="text-align: left; padding-right:10px; padding-left:10px"> 
-                                <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">{{ content.field_newsletter_block_text_one|render }}</td>
-                            </tr>
-                        {% endif %}
+                                <tr>
+                                    <td>
+                                        <h1 id="newsletter-email-title" style="padding: 30px 30px 15px 60px;font-size: 52px; margin:0 0 20px 0; font-family:Roboto, Helvetica Neue, Helvetica, Arial, sans-serif;"> {{ label }}</h1>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                    <!-- Intro Text-->
+                                    {% if content.field_newsletter_intro_body|render %}
+                                    <div style="padding:10px;"id="newsletter-intro-body">{{ content.field_newsletter_intro_body }}</div>
+                                    {% endif %}
+                                    </td>
+                                </tr>
+                            </table>
+                        <!--Second table-->
+                        {% if content.field_newsletter_section_block|render %}
+                        <!--Newsletter Section-->
+                        <div style="{{pStyles}}">
+                        {{content.field_newsletter_section_block|render}}
+                        </div>
+                            {% endif %}
+                        <!--Ad One-->
+                            {% if content.field_newsletter_promo_image_one|render %}
+                                {% if content.field_newsletter_promo_link_one|render %}
+                                <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
+                                    <tbody>
+                                        <tr>
+                                            <td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
+                                                <a href="{{ content.field_newsletter_promo_link_one|render|striptags|trim }}">
+                                                    <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                {% else %}
+                                <table role="presentation">
+                                    <tbody>
+                                        <tr>
+                                            <td align="center"style="text-align: left; padding-right:10px; padding-left:10px; padding-bottom:20px">
+                                                <img width="100%"src="{{base_url}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                                {% endif %}
+                            {% endif %}
+                        <!--Promo Blocks-->
+                        <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white">
+                            <tbody>
+                                <tr>
+                                    <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
+                                        <!--Promo Block 1-->
+                                        <table role="presentation">
+                                            <tbody>
+                                        {% if content.field_newsletter_block_title_one|render %}
+                                                <tr>
+                                                    <td style="text-align: left; padding-right:10px; padding-left:10px">
+                                                        <h3>{{ content.field_newsletter_block_title_one|render }}</h3>
+                                                    </td>
+                                                </tr>
+                                        {% endif %}
+                
+                                        {% if content.field_newsletter_block_text_one|render %}
+                                            <tr style="text-align: left; padding-right:10px; padding-left:10px"> 
+                                                <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">{{ content.field_newsletter_block_text_one|render }}</td>
+                                            </tr>
+                                        {% endif %}
+                                            </tbody>
+                                        </table>
+                                    </td>
+                                    <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
+                                     <!--Promo Block 2-->
+                                        <table role="presentation">
+                                            <tbody>
+                                    {% if content.field_newsletter_block_title_two|render %}
+                                                <tr>
+                                                    <td style="text-align: left; padding-right:10px; padding-left:10px"> 
+                                                        <h3>{{ content.field_newsletter_block_title_two|render }}</h3>
+                                                    </td>
+                                                </tr>
+                                    {% endif %}
+                                    {% if content.field_newsletter_block_text_two|render %}
+                                    <tr>
+                                        <td style="text-align: left; padding-right:10px; padding-left:10px">    {{ content.field_newsletter_block_text_two|render }}</td>
+                                    
+                                    </tr>
+                                    {% endif %}
+                                            </tbody>
+                                            </table>
+                                            </td>
+                                </tr>
                             </tbody>
                         </table>
-                    </td>
-                    <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
-                     <!--Promo Block 2-->
-                        <table role="presentation">
+                        <!--Ad Two-->
+                        {% if content.field_newsletter_promo_image_two|render %}
+                        {% if content.field_newsletter_promo_link_two|render %}
+                        <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
                             <tbody>
-                    {% if content.field_newsletter_block_title_two|render %}
                                 <tr>
-                                    <td style="text-align: left; padding-right:10px; padding-left:10px"> 
-                                        <h3>{{ content.field_newsletter_block_title_two|render }}</h3>
+                                    <td width="500px" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px"> 
+                                        <a href="{{ content.field_newsletter_promo_link_two|render|striptags|trim }}">
+                                            <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                        </a>
                                     </td>
                                 </tr>
-                    {% endif %}
-                    {% if content.field_newsletter_block_text_two|render %}
-                    <tr>
-                        <td style="text-align: left; padding-right:10px; padding-left:10px">    {{ content.field_newsletter_block_text_two|render }}</td>
-                    
-                    </tr>
-                    {% endif %}
                             </tbody>
-                            </table>
-                            </td>
-                </tr>
-            </tbody>
-        </table>
-        <!--Ad Two-->
-        {% if content.field_newsletter_promo_image_two|render %}
-        {% if content.field_newsletter_promo_link_two|render %}
-        <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
-            <tbody>
-                <tr>
-                    <td width="500px" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px"> 
-                        <a href="{{ content.field_newsletter_promo_link_two|render|striptags|trim }}">
-                            <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
-                        </a>
+                        </table>
+                        {% else %}
+                        <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px"> 
+                                        <img src="{{base_url}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>	
+                        {% endif %}
+                    {% endif %}
+                        <!--Footer-->
+                        {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
+                        <table role="presentation" border="0" width="100%" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+                            <tbody>
+                                <tr>
+                                    <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px; padding-top:20px">
+                                        {{node.field_newsletter_type.entity.field_newsletter_footer.0.processed}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        {% endif %}
+
+                        </td>
                     </td>
-                </tr>
-            </tbody>
-        </table>
-        {% else %}
-        <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
-            <tbody>
-                <tr>
-                    <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px"> 
-                        <img src="{{base_url}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
-                    </td>
-                </tr>
-            </tbody>
-        </table>	
-        {% endif %}
-    {% endif %}
-        <!--Footer-->
-        {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
-        <table role="presentation" border="0" width="100%" cellspacing="0" style="{{headerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
-            <tbody>
-                <tr>
-                    <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
-                        {{node.field_newsletter_type.entity.field_newsletter_footer.0.processed}}
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-        {% endif %}
+                </tbody>
+            </table>
         </center>
     </div>
     </div>
