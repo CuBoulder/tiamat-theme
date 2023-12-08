@@ -43,7 +43,7 @@
 {% set divStyles = 'background-color: #fff; color: #fff;' %}
 {% set aStyles = 'color: #ff9900;' %}
 {% set pStyles = 'color:black;' %}
-{% set headerStyles = 'width:100%;background-color: black; padding-bottom:50px' %}
+{% set headerStyles = 'width:100%;background-color: black; padding-bottom:50px;' %}
 {% set footerStyles = 'background-color: black; padding-top:20px' %}
 {% set cuLogoSrc = cuLogoLight %}
 {% set classicImgOffset = 'padding: 10px; background: white; margin-top: -50px;'%}
@@ -53,7 +53,7 @@
     {% set divStyles = 'background-color: #FFFFFF;margin:auto;' %}
     {% set aStyles = 'color: #ff9900;' %}
     {% set pStyles = 'color:black;' %}
-    {% set headerStyles = 'color:black;' %}
+    {% set headerStyles = 'width:100%; color:black;padding-bottom:50px;' %}
     {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
     {% set emailBackground = 'background-color:white;' %}
@@ -63,7 +63,7 @@
     {% set divStyles = 'background-color: #333; color: #fff;margin:auto;' %}
     {% set aStyles = 'color: #ff9900;' %}
     {% set pStyles = 'color:#222330;' %}
-    {% set headerStyles = 'color:black;' %}
+    {% set headerStyles = 'width:100%; color:black;margin-bottom:50px;' %}
     {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
     {% set emailBackground = 'background-color:white;' %}
@@ -73,7 +73,7 @@
     {% set divStyles = 'background-color: #E9E9E9;margin:auto;' %}
     {% set aStyles = 'color: #ff9900;' %}
     {% set pStyles = ' color: #222330;' %}
-    {% set headerStyles = 'color:black;' %}
+    {% set headerStyles = 'width:100%; color:black;margin-bottom:50px;' %}
     {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
     {% set emailBackground = 'background-color:white;' %}
@@ -83,7 +83,7 @@
     {% set divStyles = 'background-color: #FFFFFF; color: #fff; margin:auto;' %}
     {% set aStyles = 'color: #ff9900;' %}
     {% set pStyles = 'color:black;' %}
-    {% set headerStyles = 'color:black;' %}
+    {% set headerStyles = 'width: 100%; color:black;padding-bottom:50px;' %}
     {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
     {% set emailBackground = 'background-color:white;' %}
@@ -380,23 +380,33 @@ td>h3>a{
                         {% endif %}
                     {% endif %}
                         <!--Footer-->
-                        {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
-                        <table role="presentation" border="0" width="100%" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
-                            <tbody>
-                                <tr>
-                                    <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px; padding-top:20px">
-                                        {{node.field_newsletter_type.entity.field_newsletter_footer.0.processed}}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                        {% endif %}
-
                         </td>
                     </td>
                 </tbody>
             </table>
         </center>
+         <!--Footer-->
+         {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
+         <center>
+            <table role="presentation" border="0" width="100%" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+                <tbody>
+                    <tr>
+                        <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px; padding-top:20px">
+                            <table align="center" width="700px">
+                                <tbody>
+                                    <tr>
+                                    <td>
+                                        {{node.field_newsletter_type.entity.field_newsletter_footer.0.processed}}
+                                    </td>
+                                </tr>
+                            </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </center>
+        {% endif %}
     </div>
     </div>
     </html>
