@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Issue/567
+  Changes to the teaser alternate so that the image divs are displayed empty if they have no image in them.
+  This is so that the teasers actually alternate properly for staggered text.
+  
+  Closes #567 
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/88
+---
+
 - ### Fixes Article Slider Bugs + Style Refinements
   ### Article Slider Changes
   
