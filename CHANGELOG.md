@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes Article Slider Bugs + Style Refinements
+  ### Article Slider Changes
+  
+  #### Bug Fixes:
+  - Adds condition where 6 articles filtered 'good' but additional articles available (10+ which triggers JSON API pagentation), this previously failed to render.
+  - Fixes console error related to innerText (Removed old code for generating a Date and Body)
+  
+  #### Style Refinements:
+  - The thumbnail image now uses `Focal Image Wide` rather than `Focal Image Square`
+  - Spinning Loader is centered on the block
+  
+  
+  Resolves #580 
+  
+---
+
 - ### Adds a theme setting for heading font
   The setting defaults to _Bold_ but can also be set to _Normal_. Resolves CuBoulder/tiamat-theme#516.
   

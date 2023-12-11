@@ -114,3 +114,9 @@
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
   color: #cfb87c;
 }
+
+article-slider-block .ucb-loading-data{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
