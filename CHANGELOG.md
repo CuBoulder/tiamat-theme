@@ -9,219 +9,272 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Issue/567
-  Changes to the teaser alternate so that the image divs are displayed empty if they have no image in them.
-  This is so that the teasers actually alternate properly for staggered text.
-  
-  Closes #567 
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/88
----
+## [20231212] - 2023-12-12
 
-- ### Fixes Article Slider Bugs + Style Refinements
-  ### Article Slider Changes
-  
-  #### Bug Fixes:
-  - Adds condition where 6 articles filtered 'good' but additional articles available (10+ which triggers JSON API pagentation), this previously failed to render.
-  - Fixes console error related to innerText (Removed old code for generating a Date and Body)
-  
-  #### Style Refinements:
-  - The thumbnail image now uses `Focal Image Wide` rather than `Focal Image Square`
-  - Spinning Loader is centered on the block
-  
-  
-  Resolves #580 
-  
----
+-   ### Issue/567
 
-- ### Adds a theme setting for heading font
-  The setting defaults to _Bold_ but can also be set to _Normal_. Resolves CuBoulder/tiamat-theme#516.
-  
-  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/39)
----
+    Changes to the teaser alternate so that the image divs are displayed empty if they have no image in them.
+    This is so that the teasers actually alternate properly for staggered text.
 
-- ### Styles search results page
-  Resolves CuBoulder/tiamat-theme#535 – A site's search page created using the [Google Programmable Search Engine](https://www.drupal.org/project/google_cse) module is now styled properly. Correct settings for the search page (may already be defaults):
-  
-  - Display Drupal-provided search input: **✓**
-  - Display search results: **On this site (requires JavaScript)**
-  - Layout of Search Engine: **Results only**
-  
-  "Display Google watermark" is on for D7 Express and works fine here too, whether to enable it is a possible future topic of discussion.
----
+    Closes #567 
 
-- ### CU Boulder Site Configuration 2.6
-  This update:
-  - Moves all settings from "Pages and Search" into "General". Search settings are now advanced settings.
-  - Replaces the "Pages and search" and "Related articles" tabs with a brand new "Content types" tab. All "Related articles" settings have been moved into "Content types".
-  - Replaces the `edit ucb pages` and `configure ucb related articles` permissions with a new `edit ucb content types` permission.
-  - Moves the People List filter labels and Article date format into "Content types".
-  - Moves the GTM account setting into "General" as an advanced setting.
-  
-  CuBoulder/ucb_site_configuration#36
-  
-  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/38), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/53)
----
+    Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/88>
 
-- ### Enhanced Screen-Reader Text on 'Read More' links for Articles served by Article List Pages + Article Blocks
-  Enhances accessibility text on the `Article List` Page and variations of `Article List Blocks` , where links to Articles were previously only 'Read More'. Screen readers will now state "Read more about <Article's Title>" in these cases, providing more context to users using a screen reader.
-  
-  Resolves #570 
----
+* * *
 
-- ### Corrects Article Title Background Image display issues
-  Corrects styles for `Article Title Background` with Overlays (under Advanced Style Options on Article Nodes)
-  
-  Resolves #566 
----
+-   ### Fixes Article Slider Bugs + Style Refinements
 
-- ### Update page.html.twig
-  Update for the sidebar menu hide/show.
-  
-  Closes #553 
----
+    ### Article Slider Changes
 
-- ### Fixes padding on tag and category icons in articles
-  Resolves CuBoulder/tiamat-theme#569
----
+    #### Bug Fixes:
 
-- ### Fixes secondary menu alignment
-  Fixes a bug which caused the secondary menu to be improperly aligned to the left when placed above the main navigation. Resolves CuBoulder/tiamat-theme#558
----
+    -   Adds condition where 6 articles filtered 'good' but additional articles available (10+ which triggers JSON API pagentation), this previously failed to render.
+    -   Fixes console error related to innerText (Removed old code for generating a Date and Body)
 
-- ### People List Filter Labels as a Global Setting
-  Changes the People List `Filter 1`, `Filter 2`, and `Filter 3` custom labels to a Global Setting in Site Configuration, rather than being set per-page. These labels will be set under Configuration => Cu Boulder Site Settings => Appearance and Layout.
-  
-  Resolves #543 
-  
-  Includes:
-  - `ucb_site_configuarion` => https://github.com/CuBoulder/ucb_site_configuration/pull/35
-  -  `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/560
-  -  `ucb_custom_entities` => 
----
+    #### Style Refinements:
 
-- ### Breadcrumbs updates
-  Updates to breadcrumbs to not display breadcrumb div when there are no items in the div
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/86
-  
-  Closes #549 
----
+    -   The thumbnail image now uses `Focal Image Wide` rather than `Focal Image Square`
+    -   Spinning Loader is centered on the block
 
-- ### Completes in-content menu blocks
-  This update completes in-content menu blocks (menu blocks placed outside of a navigation bar, e.g. in a sidebar) by styling them and adding the [Menu Block](https://www.drupal.org/project/menu_block) contrib module for additional options.
-  
-  Sister PR in: [tiamat10-project-template](https://github.com/CuBoulder/tiamat10-project-template/pull/25), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/50), [ucb_admin_menus](https://github.com/CuBoulder/ucb_admin_menus/pull/13)
-  
-  Resolves CuBoulder/tiamat-theme#267
-  Resolves CuBoulder/tiamat-theme#528 
----
+    Resolves #580 
 
-- ### Cleans up accessible menus errors
-  Resolves CuBoulder/tiamat-theme#538
----
+* * *
 
-- ### Adds menu styles to the user page
-  Closes #525.
-  Adds the menu styles to the user page.
----
+-   ### Adds a theme setting for heading font
 
-- ### Issue/529
-  CSS edits for the changes needed after the CAAAS hand migration
-  
-  Closes #529 
----
+    The setting defaults to _Bold_ but can also be set to _Normal_. Resolves CuBoulder/tiamat-theme#516.
 
-- ### Adds search frontend and settings
-  This update:
-  - Adds a search modal which appears when clicking on the search icon in the top bar.
-  - Adds a new "Pages and search" tab to CU Boulder site settings (`/admin/config/cu-boulder/pages`). This tab contains settings accessible to Architect, Developer, and Site Manager:
-    - The home page setting (moved from "General").
-    - Options to enable site search, all of Colorado.edu search (default), both, or neither.
-    - Configuration for the site search label, placeholder, and URL.
-  - Renames "Appearance" to "Appearance and layout" and alters the descriptions of menu items.
-  - Adds the [Google Programmable Search Engine](https://www.drupal.org/project/google_cse) module, which allows creating custom search pages to use with site search.
-  
-  Resolves CuBoulder/tiamat-theme#266
-  
-  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/29), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/43), [tiamat10-project-template](https://github.com/CuBoulder/tiamat10-project-template/pull/17)
----
+    Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/39)
 
-- ### Fixes List Indicator Alignment with Left Align Images
-  This change aligns the list indicators on a list element with other text elements next to a left-aligned image. 
-  
-  Previously, the float css for aligning an element left would cause visual issues with list indicators specifically, the bullet-point or numbering becoming hard to see or lost within the image. There is now condtionally applied left-spacing to rendered Ordered and Unordered list elements, when directly next to a Left Align (.align-left) image. 
-  
-  Resolves #523 
----
+* * *
 
-- ### Remove Extra Markup from inserted Images
-  Conditionally removes extra `<div>` elements added through Twig when there's no attributes to justify an additional `<div>` wrap of the rendered content. 
-  
-  Changes default div styling of the imageMediaStyle class to not be `display:block`, both of which caused issues with wrapping an image in an anchor tag making the entire row clickable rather than just the image.
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/522
----
+-   ### Styles search results page
 
-- ### Add editor style options
-  Closes #515.
-  Adds initial styling.
----
+    Resolves CuBoulder/tiamat-theme#535 – A site's search page created using the [Google Programmable Search Engine](https://www.drupal.org/project/google_cse) module is now styled properly. Correct settings for the search page (may already be defaults):
 
-- ### Updates tiamat-theme to Font Awesome 6 compatibility
-  Resolves CuBoulder/tiamat-theme#511
----
+    -   Display Drupal-provided search input: **✓**
+    -   Display search results: **On this site (requires JavaScript)**
+    -   Layout of Search Engine: **Results only**
 
-- ### initial mobile menu commit
-  Initial Mobile Menu commit before styling is decided
----
+    "Display Google watermark" is on for D7 Express and works fine here too, whether to enable it is a possible future topic of discussion.
 
-- ### User and 404 page changes
-  Closes #484.
-  Adds the new implementation of the user page and stores the image for the 404 page.
----
+* * *
 
-- ### Article List Block - Style Adjustments & Summary Bug Fix
-  ## Article Block Bug Fix
-   - Fixes bug with article summaries not displaying if they are derived from the body content, in lieu of the `Summary` field. This bug was present across `Article List Block`, `Article Grid Block`, `Article Feature Block` and has been corrected.
-  
-  --------
-  
-  ## Style Adjustments
-  Adjusts the following styles of the `Article List Block`:
-  
-  ### All `Article List Block` Styles
-   - Thumbnail images set to 50px on mobile.
-   - Article borders set to 1px.
-   -  `Link URL` is no longer a button-style link and is now a right-aligned basic link on the `Article List Block` specifically.
-  
-  ### Teaser Display
-  
-  - Sets thumbnails to 100px, 50px on mobile.
-  - Adjusts layout to not force image above article card summary and details on single and multi column widths.
-  
-  ### Feature with Wide Photo
-  - Uses the `Focal Image Wide` thumbnail for the images in `Article List Blocks` rendered in `Feature with Wide Photo` style. This image style was not previously available via JSON API when the block was initially created.
-  
-  ### Thumbnail & Title Displays
-  
-  - Thumbnail image 65px, 50px on mobile.
-  - Equalizes padding above and below each article card, removing padding from images.
-  
-  --------
-  Resolves #497 
----
+-   ### CU Boulder Site Configuration 2.6
 
-- ### favicon fix
-  Closes #494.
-  Quick fix to the favicon path
----
+    This update:
 
-- ### Update region--site-information.html.twig
-  Changed class name to fix styling error.
-  
-  Closes #490 
----
+    -   Moves all settings from "Pages and Search" into "General". Search settings are now advanced settings.
+    -   Replaces the "Pages and search" and "Related articles" tabs with a brand new "Content types" tab. All "Related articles" settings have been moved into "Content types".
+    -   Replaces the `edit ucb pages` and `configure ucb related articles` permissions with a new `edit ucb content types` permission.
+    -   Moves the People List filter labels and Article date format into "Content types".
+    -   Moves the GTM account setting into "General" as an advanced setting.
+
+    CuBoulder/ucb_site_configuration#36
+
+    Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/38), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/53)
+
+* * *
+
+-   ### Enhanced Screen-Reader Text on 'Read More' links for Articles served by Article List Pages + Article Blocks
+
+    Enhances accessibility text on the `Article List` Page and variations of `Article List Blocks` , where links to Articles were previously only 'Read More'. Screen readers will now state "Read more about &lt;Article's Title>" in these cases, providing more context to users using a screen reader.
+
+    Resolves #570 
+
+* * *
+
+-   ### Corrects Article Title Background Image display issues
+
+    Corrects styles for `Article Title Background` with Overlays (under Advanced Style Options on Article Nodes)
+
+    Resolves #566 
+
+* * *
+
+-   ### Update page.html.twig
+
+    Update for the sidebar menu hide/show.
+
+    Closes #553 
+
+* * *
+
+-   ### Fixes padding on tag and category icons in articles
+    Resolves CuBoulder/tiamat-theme#569
+
+* * *
+
+-   ### Fixes secondary menu alignment
+    Fixes a bug which caused the secondary menu to be improperly aligned to the left when placed above the main navigation. Resolves CuBoulder/tiamat-theme#558
+
+* * *
+
+-   ### People List Filter Labels as a Global Setting
+
+    Changes the People List `Filter 1`, `Filter 2`, and `Filter 3` custom labels to a Global Setting in Site Configuration, rather than being set per-page. These labels will be set under Configuration => Cu Boulder Site Settings => Appearance and Layout.
+
+    Resolves #543 
+
+    Includes:
+
+    -   `ucb_site_configuarion` => <https://github.com/CuBoulder/ucb_site_configuration/pull/35>
+    -   `tiamat-theme` => <https://github.com/CuBoulder/tiamat-theme/pull/560>
+    -   `ucb_custom_entities` => 
+
+* * *
+
+-   ### Breadcrumbs updates
+
+    Updates to breadcrumbs to not display breadcrumb div when there are no items in the div
+
+    Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/86>
+
+    Closes #549 
+
+* * *
+
+-   ### Completes in-content menu blocks
+
+    This update completes in-content menu blocks (menu blocks placed outside of a navigation bar, e.g. in a sidebar) by styling them and adding the [Menu Block](https://www.drupal.org/project/menu_block) contrib module for additional options.
+
+    Sister PR in: [tiamat10-project-template](https://github.com/CuBoulder/tiamat10-project-template/pull/25), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/50), [ucb_admin_menus](https://github.com/CuBoulder/ucb_admin_menus/pull/13)
+
+    Resolves CuBoulder/tiamat-theme#267
+    Resolves CuBoulder/tiamat-theme#528 
+
+* * *
+
+-   ### Cleans up accessible menus errors
+    Resolves CuBoulder/tiamat-theme#538
+
+* * *
+
+-   ### Adds menu styles to the user page
+    Closes #525.
+    Adds the menu styles to the user page.
+
+* * *
+
+-   ### Issue/529
+
+    CSS edits for the changes needed after the CAAAS hand migration
+
+    Closes #529 
+
+* * *
+
+-   ### Adds search frontend and settings
+
+    This update:
+
+    -   Adds a search modal which appears when clicking on the search icon in the top bar.
+    -   Adds a new "Pages and search" tab to CU Boulder site settings (`/admin/config/cu-boulder/pages`). This tab contains settings accessible to Architect, Developer, and Site Manager:
+        -   The home page setting (moved from "General").
+        -   Options to enable site search, all of Colorado.edu search (default), both, or neither.
+        -   Configuration for the site search label, placeholder, and URL.
+    -   Renames "Appearance" to "Appearance and layout" and alters the descriptions of menu items.
+    -   Adds the [Google Programmable Search Engine](https://www.drupal.org/project/google_cse) module, which allows creating custom search pages to use with site search.
+
+    Resolves CuBoulder/tiamat-theme#266
+
+    Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/29), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/43), [tiamat10-project-template](https://github.com/CuBoulder/tiamat10-project-template/pull/17)
+
+* * *
+
+-   ### Fixes List Indicator Alignment with Left Align Images
+
+    This change aligns the list indicators on a list element with other text elements next to a left-aligned image. 
+
+    Previously, the float css for aligning an element left would cause visual issues with list indicators specifically, the bullet-point or numbering becoming hard to see or lost within the image. There is now condtionally applied left-spacing to rendered Ordered and Unordered list elements, when directly next to a Left Align (.align-left) image. 
+
+    Resolves #523 
+
+* * *
+
+-   ### Remove Extra Markup from inserted Images
+
+    Conditionally removes extra `<div>` elements added through Twig when there's no attributes to justify an additional `<div>` wrap of the rendered content. 
+
+    Changes default div styling of the imageMediaStyle class to not be `display:block`, both of which caused issues with wrapping an image in an anchor tag making the entire row clickable rather than just the image.
+
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/522>
+
+* * *
+
+-   ### Add editor style options
+    Closes #515.
+    Adds initial styling.
+
+* * *
+
+-   ### Updates tiamat-theme to Font Awesome 6 compatibility
+    Resolves CuBoulder/tiamat-theme#511
+
+* * *
+
+-   ### initial mobile menu commit
+    Initial Mobile Menu commit before styling is decided
+
+* * *
+
+-   ### User and 404 page changes
+    Closes #484.
+    Adds the new implementation of the user page and stores the image for the 404 page.
+
+* * *
+
+-   ### Article List Block - Style Adjustments & Summary Bug Fix
+
+    ## Article Block Bug Fix
+
+    -   Fixes bug with article summaries not displaying if they are derived from the body content, in lieu of the `Summary` field. This bug was present across `Article List Block`, `Article Grid Block`, `Article Feature Block` and has been corrected.
+
+    * * *
+
+    ## Style Adjustments
+
+    Adjusts the following styles of the `Article List Block`:
+
+    ### All `Article List Block` Styles
+
+    -   Thumbnail images set to 50px on mobile.
+    -   Article borders set to 1px.
+    -   `Link URL` is no longer a button-style link and is now a right-aligned basic link on the `Article List Block` specifically.
+
+    ### Teaser Display
+
+    -   Sets thumbnails to 100px, 50px on mobile.
+    -   Adjusts layout to not force image above article card summary and details on single and multi column widths.
+
+    ### Feature with Wide Photo
+
+    -   Uses the `Focal Image Wide` thumbnail for the images in `Article List Blocks` rendered in `Feature with Wide Photo` style. This image style was not previously available via JSON API when the block was initially created.
+
+    ### Thumbnail & Title Displays
+
+    -   Thumbnail image 65px, 50px on mobile.
+    -   Equalizes padding above and below each article card, removing padding from images.
+
+    * * *
+
+    Resolves #497 
+
+* * *
+
+-   ### favicon fix
+    Closes #494.
+    Quick fix to the favicon path
+
+* * *
+
+-   ### Update region--site-information.html.twig
+
+    Changed class name to fix styling error.
+
+    Closes #490 
+
+* * *
 
 ## [20230718] - 2023-09-18
 
@@ -952,7 +1005,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20230718...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20231212...HEAD
+
+[20231212]: https://github.com/CuBoulder/tiamat-theme/compare/20230718...20231212
 
 [20230718]: https://github.com/CuBoulder/tiamat-theme/compare/20230707...20230718
 
