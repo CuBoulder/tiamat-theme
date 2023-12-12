@@ -31,6 +31,8 @@
 {% set cuLogoSrc = '' %}
 {% set classicImgOffset = ''%}
 {% set emailBackground = '' %}
+{% set boxBackground = ''%}
+
 
 {# CU LOGO #}
 {% set cuLogoDark = base_url ~ '/' ~  base_path ~ directory ~ '/images/cu-boulder-logo-text-black.gif' %}
@@ -67,16 +69,18 @@
     {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
     {% set emailBackground = 'background-color:white;' %}
+    {% set boxBackground = 'background-color:black;'%}
 
 {# Lightbox #}
 {% elseif designType == 'lightbox' %}
     {% set divStyles = 'background-color: #E9E9E9;margin:auto;' %}
     {% set aStyles = 'color: #ff9900;' %}
     {% set pStyles = ' color: #222330;' %}
-    {% set headerStyles = 'width:100%; color:black;margin-bottom:50px;' %}
+    {% set headerStyles = 'width:100%; color:black;' %}
     {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
     {% set emailBackground = 'background-color:white;' %}
+    {% set boxBackground = 'background-color:white;'%}
 
 {# Simple #}
 {% else %}
@@ -211,6 +215,13 @@ td>h3>a{
     <div style="margin: auto;{{divStyles}}" data-url="{{base_url}}">
         {# HEADER -- to do: might need to be different tables for styling purposes #}
         <!-- Header --> 
+        {% if designType == 'lightbox' or designType == 'darbox' %}
+        <table style="{{boxBackground}}" align="center">
+            <tbody>
+                <tr>
+                    <td>
+        {% endif %}
+        <center>
         <table style="{{headerStyles}}">
             <tbody>
                 <tr>
@@ -407,6 +418,15 @@ td>h3>a{
             </table>
         </center>
         {% endif %}
+    </center>
+    {% if designType == 'lightbox' or designType == 'darbox' %}
+
+                    </td>
+    </tr>
+    </tbody>
+</table>
+{% endif %}
+
     </div>
     </div>
     </html>
