@@ -183,3 +183,43 @@
 .ucb-page-content .ucb-menu .expanded.active>a.nav-link {
   padding-left: calc(var(--ucb-menu-indent-start) - var(--ucb-menu-indent-border-width));
 }
+
+.ucb-menu {
+  padding-right: 10px;
+}
+
+.ucb-button-gold.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
+  background-color: #CFB87C;
+  color: #000;
+  transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+}
+
+.ucb-button-blue.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
+  background-color: #0277BD;
+  color: #FFF;
+  transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+}
+
+.ucb-button-gray.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
+  background-color: #444;
+  color: #fff;
+  transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+}
+
+.ucb-button-none.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a {
+  background-color: transparent;
+  border-radius: 0;
+  border: 0;
+  box-shadow: none;
+}
+
+.ucb-button-gray.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
+  background-color: #5e5e5e;
+}
+.ucb-button-gold.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
+  background-color: #d3be87;
+}
+.ucb-button-blue.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
+  background-color: #026dae;
+}

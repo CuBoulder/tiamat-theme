@@ -51,6 +51,7 @@
   {% block page_header %}
     {{ attach_library('boulder_base/ucb-social-media') }}
     {{ attach_library('boulder_base/ucb-menu') }}
+    {% set menu_button_color = drupal_config('boulder_base.settings', 'ucb_secondary_menu_button_display') %}
     {% set menu_style = drupal_config('boulder_base.settings', 'ucb_menu_style') %}
     {% if menu_style == 'highlight'  %}
       {{ attach_library('boulder_base/ucb-menu-style-highlight') }}
@@ -142,7 +143,7 @@
       </div>
     </header>
     <section class="ucb-main-nav-section mobile  ucb-header-{{ header_color }}" role="navigation">
-      <div class="ucb-main-nav-continer ucb-secondary-menu-position-{{ ucb_secondary_menu_position == 'above' ? 'above' : 'inline container'}}">
+      <div class="ucb-main-nav-continer ucb-secondary-menu-position-{{ ucb_secondary_menu_position == 'above' ? 'above' : 'inline container'}} ucb-button-{{menu_button_color}}">
         {{ page.primary_menu }}
         {{ page.secondary_menu }}
       </div>

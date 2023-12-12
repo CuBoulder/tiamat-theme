@@ -63,15 +63,10 @@
     margin: 8px 5px;
     padding: 0 5px;
     display: inline-block;
-    color: #fff;
     font-weight: 400;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
-  color: #cfb87c;
-  background: transparent;
-}
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-menu {
-  background-color: #444;
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-menu a {
   color: #fff;
 }
 
