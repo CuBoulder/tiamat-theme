@@ -32,6 +32,8 @@
 {% set classicImgOffset = ''%}
 {% set emailBackground = '' %}
 {% set boxBackground = ''%}
+{# Additional Padding used for box styles #}
+{% set addtlPad = '' %}
 
 
 {# CU LOGO #}
@@ -62,14 +64,15 @@
 
 {# Darkbox #}
 {% elseif designType == 'darkbox' %}
-    {% set divStyles = 'background-color: #333; color: #fff;margin:auto;' %}
+    {% set divStyles = 'background-color: black; color: #fff;margin:auto;' %}
     {% set aStyles = 'color: #ff9900;' %}
     {% set pStyles = 'color:#222330;' %}
-    {% set headerStyles = 'width:100%; color:black;margin-bottom:50px;' %}
-    {% set footerStyles = 'color:black;' %}
-    {% set cuLogoSrc = cuLogoDark %}
+    {% set headerStyles = 'width:100%; color:white;margin-bottom:50px;' %}
+    {% set footerStyles = 'color:white;' %}
+    {% set cuLogoSrc = cuLogoLight %}
     {% set emailBackground = 'background-color:white;' %}
     {% set boxBackground = 'background-color:black;'%}
+    {% set addtlPad = 'padding-top:20px;' %}
 
 {# Lightbox #}
 {% elseif designType == 'lightbox' %}
@@ -81,6 +84,7 @@
     {% set cuLogoSrc = cuLogoDark %}
     {% set emailBackground = 'background-color:white;' %}
     {% set boxBackground = 'background-color:white;'%}
+    {% set addtlPad = 'padding-top:20px;' %}
 
 {# Simple #}
 {% else %}
@@ -215,7 +219,7 @@ td>h3>a{
     <div style="margin: auto;{{divStyles}}" data-url="{{base_url}}">
         {# HEADER -- to do: might need to be different tables for styling purposes #}
         <!-- Header --> 
-        {% if designType == 'lightbox' or designType == 'darbox' %}
+        {% if designType == 'lightbox' or designType == 'darkbox' %}
         <table style="{{boxBackground}}" align="center">
             <tbody>
                 <tr>
@@ -226,7 +230,7 @@ td>h3>a{
             <tbody>
                 <tr>
                     <td style='{{headerStyles}}'>
-                        <table role='presentation' align="center" width="700px">
+                        <table role='presentation' align="center" width="600px">
                             <tbody>
                                 {# CU LOGO #}
                                 <tr>
@@ -256,8 +260,8 @@ td>h3>a{
                 </tr>
             </tbody>
         </table>
-        <center align="center" style="background-color: white;">
-            <table width="700px" align="center">
+        <center align="center" style="background-color: white;{{addtlPad}}">
+            <table width="600px" align="center">
                 <tbody>
                     <td>
                         <td>
@@ -403,7 +407,7 @@ td>h3>a{
                 <tbody>
                     <tr>
                         <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px; padding-top:20px">
-                            <table align="center" width="700px">
+                            <table align="center" width="600px">
                                 <tbody>
                                     <tr>
                                     <td>
@@ -419,7 +423,7 @@ td>h3>a{
         </center>
         {% endif %}
     </center>
-    {% if designType == 'lightbox' or designType == 'darbox' %}
+    {% if designType == 'lightbox' or designType == 'darkbox' %}
 
                     </td>
     </tr>
