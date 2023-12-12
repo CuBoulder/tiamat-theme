@@ -72,8 +72,10 @@ section.ucb-main-nav-section.ucb-header-black{
 .ucb-main-menu li.menu-item.active a.nav-link:first-of-type,
 .ucb-main-menu li.menu-item a.nav-link:hover,
 .ucb-main-menu li.menu-item a.nav-link:focus {
+  background: transparent;
   color: #cfb87c;
   border-bottom: 0;
+  box-shadow: none;
 }
 
 .after-content-wrapper,
