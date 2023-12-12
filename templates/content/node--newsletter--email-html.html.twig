@@ -43,7 +43,6 @@
 {% set designType = node.field_newsletter_type.entity.field_newsletter_design.value %}
 {# Classic #}
 {% if designType == 'classic' %}
-{# TO DO -- fix classic #}
 {% set divStyles = 'background-color: #fff; color: #fff;' %}
 {% set aStyles = 'color: #ff9900;' %}
 {% set pStyles = 'color:black;' %}
@@ -88,13 +87,14 @@
 
 {# Simple #}
 {% else %}
-    {% set divStyles = 'background-color: #FFFFFF; color: #fff; margin:auto;' %}
-    {% set aStyles = 'color: #ff9900;' %}
-    {% set pStyles = 'color:black;' %}
-    {% set headerStyles = 'width: 100%; color:black;padding-bottom:50px;' %}
-    {% set footerStyles = 'color:black;' %}
-    {% set cuLogoSrc = cuLogoDark %}
-    {% set emailBackground = 'background-color:white;' %}
+{% set divStyles = 'background-color: #fff; color: #fff;' %}
+{% set aStyles = 'color: #ff9900;' %}
+{% set pStyles = 'color:black;' %}
+{% set headerStyles = 'width:100%;background-color: black;padding-bottom:20px;' %}
+{% set footerStyles = 'background-color: black; padding-top:20px;' %}
+{% set cuLogoSrc = cuLogoLight %}
+{% set classicImgOffset = 'padding: 10px; background: white;'%}
+{% set emailBackground = 'background-color:black;' %}
 
 {% endif %}
 
