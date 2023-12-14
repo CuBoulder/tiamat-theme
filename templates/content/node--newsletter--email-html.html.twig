@@ -209,7 +209,11 @@ td>h3>a{
 }
 
 
-
+@media only screen and (max-width: 500px) {
+  .promo-block-row {
+    display: block;
+  }
+}
             </style>
         </head>
     {# END VARIABLE TESTS #}
@@ -229,7 +233,7 @@ td>h3>a{
             <tbody>
                 <tr>
                     <td style='{{headerStyles}}'>
-                        <table role='presentation' align="center" width="600px">
+                        <table role='presentation' align="center" style="max-width:600px;">
                             <tbody>
                                 {# CU LOGO #}
                                 <tr>
@@ -260,7 +264,7 @@ td>h3>a{
             </tbody>
         </table>
         <center align="center" style="background-color: white;{{addtlPad}}">
-            <table width="600px" align="center">
+            <table style="max-width:600px;" align="center">
                 <tbody>
                     <td>
                         <td>
@@ -269,7 +273,7 @@ td>h3>a{
                                   <td align="center" style="padding-right:10px; padding-left:10px">
                                 <!-- Intro Img --> 
                                     {% if content.field_newsletter_intro_image|render %}
-                                    <img id="newsletter-email-intro-img" src="{{base_url}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" width="100%" style="{{classicImgOffset}};margin-bottom: 20px;">
+                                    <img id="newsletter-email-intro-img" src="{{base_url}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" width="95%" style="{{classicImgOffset}};margin-bottom: 20px;">
                                     {% endif %}
                                     </td>
                                 </tr>
@@ -324,7 +328,7 @@ td>h3>a{
                         <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white">
                             <tbody>
                                 <tr>
-                                    <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
+                                    <td class="promo-block-row" align="center" style="text-align: left; padding-right:10px; padding-left:10px">
                                         <!--Promo Block 1-->
                                         <table role="presentation">
                                             <tbody>
@@ -344,12 +348,12 @@ td>h3>a{
                                             </tbody>
                                         </table>
                                     </td>
-                                    <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
+                                    <td class="promo-block-row" align="center" style="text-align: left; padding-right:10px; padding-left:10px">
                                      <!--Promo Block 2-->
                                         <table role="presentation">
                                             <tbody>
                                     {% if content.field_newsletter_block_title_two|render %}
-                                                <tr>
+                                                <tr class="">
                                                     <td style="text-align: left; padding-right:10px; padding-left:10px"> 
                                                         <h3>{{ content.field_newsletter_block_title_two|render }}</h3>
                                                     </td>
@@ -406,7 +410,7 @@ td>h3>a{
                 <tbody>
                     <tr>
                         <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px; padding-top:20px">
-                            <table align="center" width="600px">
+                            <table align="center" style="max-width:600px;">
                                 <tbody>
                                     <tr>
                                     <td>
