@@ -84,7 +84,6 @@
 
     // Append Button
     var main = document.getElementById('block-boulder-base-content')
-    console.log('main')
     button.innerText = 'Click to copy your newsletter HTML'
     codeContainer.appendChild(button)
     
