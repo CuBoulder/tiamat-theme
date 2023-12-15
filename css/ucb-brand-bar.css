@@ -28,9 +28,39 @@
   }
 }
 
+.ucb-brand-bar .ucb-brand-bar-controls {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  margin-left: 20px;
+}
+
 .ucb-brand-bar img.ucb-search {
+  display: block;
   width: 18px;
   height: 18px;
-  margin-left: 20px;
-  display: block;
+}
+
+.ucb-brand-bar .responsive-menu-toggle-icon {
+  width: 20px;
+  height: 18px;
+}
+
+.ucb-brand-bar.ucb-brand-bar-white .responsive-menu-toggle-icon::before,
+.ucb-brand-bar.ucb-brand-bar-white .responsive-menu-toggle-icon::after,
+.ucb-brand-bar.ucb-brand-bar-white .responsive-menu-toggle-icon span.icon {
+  margin-top: -6px;
+  margin-left: -13px;
+}
+
+.ucb-brand-bar.ucb-brand-bar-white .responsive-menu-toggle-icon::before,
+.ucb-brand-bar.ucb-brand-bar-white .responsive-menu-toggle-icon::after,
+.ucb-brand-bar.ucb-brand-bar-white .responsive-menu-toggle-icon span.icon {
+  background-color: #000;
+}
+
+.ucb-brand-bar.ucb-brand-bar-black .responsive-menu-toggle-icon::before,
+.ucb-brand-bar.ucb-brand-bar-black .responsive-menu-toggle-icon::after,
+.ucb-brand-bar.ucb-brand-bar-black .responsive-menu-toggle-icon span.icon {
+  background-color: #FFF;
 }
