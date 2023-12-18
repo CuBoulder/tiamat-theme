@@ -9,6 +9,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Secondary Menu Updates
+  Closes #551.
+  Adds button functionality to secondary menu and fixes other small misalignments.
+---
+
+- ### Adds Styling to Newsletters
+  Adds the following switchable styles to the email version of the Newsletter: Classic, Minimal, Light-Boxed, Dark-Boxed, Simple. 
+  
+  This change also applies the selected `Newsletter` taxonomy's custom header image and footer into your email HTML. 
+  
+  For testing:
+  - Create a taxonomy for `Newsletter`-- choose a custom header image, create a footer, and select a style. 
+  - Select this taxonomy when creating a Newsletter page.
+  - After creating your page go to `Edit` and `Preview`. After selecting preview, on the right hand side change the `View Mode` dropdown to `Email: HTML`
+  - If you click the `Click to copy your Newsletter HTML` button, your email HTML will automatically be copied to clipboard, or you can select the HTML from the input. You can demo this by creating an HTML file and doing a Live Preview, or using a program like Email on Acid to test display ( although this will not show images served by localhost)
+  
+  I recommend two tabs when testing styles, one with the Email:HTML preview and one with `Edit taxonomy` term to change styles or other fields, then just refresh the Email:HTML preview. 
+  
+  Resolves #273 , Resolves #137 , Resolves #305 
+---
+
 ## [20231212] - 2023-12-12
 
 -   ### Issue/567

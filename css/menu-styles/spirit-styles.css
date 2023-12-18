@@ -1,14 +1,14 @@
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .ucb-menu {
+.ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .ucb-menu {
   gap: 0rem;
 }
 
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-menu {
+.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-menu {
   background-color: #fff;
 }
 .page-header {
   margin-bottom: 3px;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-primary-menu-region {
+.ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-primary-menu-region {
   margin-top: -2px;
 }
 .ucb-main-menu li.menu-item a.nav-link:link,
@@ -37,12 +37,12 @@
   background: transparent;
 }
 
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
+.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
   margin: 20px 5px;
   color: #000;
 }
 
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a:hover {
+.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a:hover {
   background: transparent;
 }
 
@@ -58,20 +58,20 @@ ul#action-menu a {
   color: #ccc;
   background-color: #333;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
+.ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
   padding: 5px;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:link,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:visited {
+.ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:link,
+.ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:visited {
   color: #fff;
   font-weight: 600;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link.is-active,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item.active a.nav-link:first-of-type {
+.ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
+.ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link.is-active,
+.ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item.active a.nav-link:first-of-type {
   color: #cfb87c;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
+.ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
   background-color: #333;
 }
 section.ucb-main-nav-section {

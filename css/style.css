@@ -226,7 +226,7 @@ section.ucb-main-nav-section {
   background: white;
 }
 
-.ucb-main-nav-continer {
+.ucb-main-nav-container {
   display: flex;
   flex-grow: 0;
   flex-shrink: 0;
@@ -236,7 +236,7 @@ section.ucb-main-nav-section {
 }
 
 @media only screen and (max-width: 600px) {
-  .ucb-main-nav-continer {
+  .ucb-main-nav-container {
     flex-direction: column;
   }
 }
