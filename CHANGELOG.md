@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Secondary Menu Updates
+  Closes #551.
+  Adds button functionality to secondary menu and fixes other small misalignments.
+---
+
 - ### Adds Styling to Newsletters
   Adds the following switchable styles to the email version of the Newsletter: Classic, Minimal, Light-Boxed, Dark-Boxed, Simple. 
   
