@@ -6,7 +6,7 @@
 }
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item {
  background-color: #333;
- transition: color .5s ease;
+ transition: background-color .5 ease, color .5s ease;
 }
 
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a {
@@ -44,16 +44,20 @@
   padding: 0 5px;
   display: inline-block;
   color: #fff;
+  font-weight: 400;
 }
-
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:focus,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link.is-active,
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item.active a.nav-link:first-of-type,
 .ucb-secondary-menu-region.ucb-secondary-menu-button-display .ucb-secondary-menu-region-container .menu-item a:hover {
   color: #cfb87c;
   background-color: transparent;
   box-shadow: none;
+}
+
+
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item:hover,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item:focus,
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item.is-active {
+  color: #fff;
+    background-color: #757575;
 }
 section.ucb-main-nav-section {
   background-color: #222;

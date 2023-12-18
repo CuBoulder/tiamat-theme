@@ -215,11 +215,14 @@
 }
 
 .ucb-button-gray.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
+  border-radius: 4px;
   background-color: #5e5e5e;
 }
 .ucb-button-gold.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
+  border-radius: 4px;
   background-color: #d3be87;
 }
 .ucb-button-blue.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
+  border-radius: 4px;
   background-color: #026dae;
 }

@@ -1,7 +1,7 @@
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .ucb-menu {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region.ucb-secondary-menu-button-display .ucb-secondary-menu-region-container .ucb-menu {
   gap: 0rem;
+  margin-bottom: -4px;
 }
-
 .ucb-main-nav-continer.ucb-secondary-menu-position-above {
   padding: 20px 0;
 }
@@ -36,10 +36,6 @@ section.ucb-main-nav-section {
 .ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a:hover {
   color: #fff;
   background: transparent;
-}
-
-.ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-menu {
-	gap: 0;
 }
 
 .ucb-main-nav-continer.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-menu li.menu-item a {

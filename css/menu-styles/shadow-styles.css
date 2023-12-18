@@ -2,25 +2,10 @@
   gap: 0rem;
 }
 
-.ucb-header-dark .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
-  background-color: #424242;
-}
-
-.ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
-  background-color: #eee;
-}
-
-.ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
-  background-color: #fff;
-}
-
-.ucb-header-black .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
   background-color: #000;
 }
 
-.ucb-secondary-menu-region-container {
-  background-color: #000;
-}
 
 section.ucb-main-nav-section {
   background-color: #444;

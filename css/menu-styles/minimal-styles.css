@@ -5,7 +5,7 @@
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
   background-color: #fff;
 }
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a {
+.ucb-main-nav-section .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a {
     color: #757575;
     display: inline-block;
     border-bottom: 4px solid #fff;

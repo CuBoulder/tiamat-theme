@@ -2,10 +2,11 @@
   gap: 0rem;
   background: transparent;
 }
-
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region.ucb-secondary-menu-button-display .ucb-secondary-menu-region-container .ucb-menu {
+  gap: 0;
+}
 .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region .ucb-menu a{
   margin: 0px;
-  background-color: #4d4d4d;
 }
 
 .ucb-header-dark .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
@@ -24,13 +25,23 @@
   background-color: #000;
 }
 
+.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region.ucb-secondary-menu-button-display .ucb-secondary-menu-region-container .menu-item a  {
+  box-shadow: 0 0 2px rgba(0, 0, 0, .2);
+}
 
-.ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
+.ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link,
+.ucb-header-light .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
   color:#656565;
   padding: 1px 10px;
   font-weight: 400;
 }
 
+.ucb-header-dark .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link,
+.ucb-header-black .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
+  color:#d7d7d7;
+  padding: 1px 10px;
+  font-weight: 400;
+}
 .ucb-header-white .ucb-main-nav-continer.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
   border: 1px solid #d7d7d7;
 }

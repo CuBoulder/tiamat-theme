@@ -36,6 +36,10 @@
 
 section.ucb-main-nav-section {
   background: #f2f2f2;
+  z-index: 9;
+}
+section.ucb-main-nav-section:has(.ucb-secondarymenu-position-inline) {
+  background: #f2f2f2;
   border-top: 1px solid #e7e7e7;
   z-index: 9;
 }
