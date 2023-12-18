@@ -6,102 +6,87 @@
 */
 #}
 
-{{ attach_library('boulder_base/ucb-page') }}
 {{ attach_library('boulder_base/ucb-newsletter') }}
 
-{%
-set classes = [
-'node',
-'node--type-' ~ node.bundle|clean_class,
-not node.isPublished() ? 'node--unpublished',
-view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-]
-%}
+{% set classes = [
+  'node',
+  'node--type-' ~ node.bundle|clean_class,
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+]% }
 
-{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
-{% set isFrontPage = '' %}
-{% if is_front %}
-	{% set isFrontPage = 'sr-only' %}
-{% endif %}
-
-{#Dummy variable to ensure that all content tags are set for caching purposes#}
+{# Dummy variable to ensure that all content tags are set for caching purposes #}
 {% set content_render = content|render %}
 
-{% set isLoggedIn = "false" %}
-{% if logged_in %}
-    {% set isLoggedIn = "true" %}
-{% endif %}
+<article{{ attributes.addClass(classes) }}>
+  <div{{ create_attribute({
+	'class': ['container', 'ucb-newsletter'],
+	'data-loggedin': logged_in ? 'true' : 'false' }) }}>
+    {# Newsletter Title #}
+    <h1 class="ucb-newsletter-title {{isFrontPage}}" itemprop="name">{{ label }}</h1>
+    {# Newsletter Intro #}
+    {% if content.field_newsletter_intro_image|render %}
+      <div id="newsletter-intro-img">{{ content.field_newsletter_intro_image }}</div>
+    {% endif %}
+    {% if content.field_newsletter_intro_body|render %}
+      <div id="newsletter-intro-body">{{ content.field_newsletter_intro_body }}</div>
+    {% endif %}
 
-<article{{attributes.addClass(classes)}}>
-	<div
-		class="container ucb-newsletter"
-		data-loggedin="{{isLoggedIn}}"
-		>
-		{# Newsletter Title #}
-		<h1 class="ucb-newsletter-title {{isFrontPage}}" itemprop="name">{{ label }}</h1>
-		{# Newsletter Intro #}
-		{% if content.field_newsletter_intro_image|render %}
-			<div id="newsletter-intro-img">{{ content.field_newsletter_intro_image }}</div>
-		{% endif %}
-		{% if content.field_newsletter_intro_body|render %}
-			<div id="newsletter-intro-body">{{ content.field_newsletter_intro_body }}</div>
-		{% endif %}
+    {# Newsletter Sections Content #}
+    <div class="ucb-newsletter-section-content">
+      {% if content.field_newsletter_section_block|render %}
+        <div class="ucb-article-body">
+          {{ content.field_newsletter_section_block|render }}
+        </div>
+      {% endif %}
+    </div>
 
-		{# Newsletter Sections Content #}
-		<div class="ucb-newsletter-section-content">
-			{% if content.field_newsletter_section_block|render %}
-				<div class="ucb-article-body">
-					{{ content.field_newsletter_section_block|render }}
-				</div>
-			{% endif %}
-		</div>
+    {# Newsletter Promo/Ad One #}
+    <div class="row row-content ucb-newsletter-promo-one">
+      {% if content.field_newsletter_promo_image_one|render %}
+        {% if content.field_newsletter_promo_link_one|render %}
+          <a href="{{ content.field_newsletter_promo_link_one|render|striptags|trim }}">
+          {{ content.field_newsletter_promo_image_one|render  }}
+        </a>
+        {% else %}  
+          {{ content.field_newsletter_promo_image_one|render  }}
+        {% endif %}
+      {% endif %}
+    </div>
 
-		{# Newsletter Promo/Ad One #}
-		<div class="row row-content ucb-newsletter-promo-one">
-			{% if content.field_newsletter_promo_image_one|render %}
-				{% if content.field_newsletter_promo_link_one|render %}
-					<a href="{{ content.field_newsletter_promo_link_one|render|striptags|trim }}">
-					{{ content.field_newsletter_promo_image_one|render	}}
-				</a>
-				{% else %}	
-					{{ content.field_newsletter_promo_image_one|render	}}
-				{% endif %}
-			{% endif %}
-		</div>
+    {# Newsletter Blocks #}
+    <div class="row row-content ucb-newsletter-blocks">
+      <div class="col-lg-6 col-12">
+        {% if content.field_newsletter_block_title_one|render %}
+          <h3>{{ content.field_newsletter_block_title_one|render }}</h3>
+        {% endif %}
 
-		{# Newsletter Blocks #}
-		<div class="row row-content ucb-newsletter-blocks">
-			<div class="col-lg-6 col-12">
-				{% if content.field_newsletter_block_title_one|render %}
-					<h3>{{ content.field_newsletter_block_title_one|render }}</h3>
-				{% endif %}
+        {% if content.field_newsletter_block_text_one|render %}
+          {{ content.field_newsletter_block_text_one|render }}
+        {% endif %}
+      </div>
+      <div class="col-lg-6 col-12">
+        {% if content.field_newsletter_block_title_two|render %}
+          <h3>{{ content.field_newsletter_block_title_two|render }}</h3>
+        {% endif %}
 
-				{% if content.field_newsletter_block_text_one|render %}
-					{{ content.field_newsletter_block_text_one|render }}
-				{% endif %}
-			</div>
-			<div class="col-lg-6 col-12">
-				{% if content.field_newsletter_block_title_two|render %}
-					<h3>{{ content.field_newsletter_block_title_two|render }}</h3>
-				{% endif %}
+        {% if content.field_newsletter_block_text_two|render %}
+          {{ content.field_newsletter_block_text_two|render }}
+        {% endif %}
+      </div>
+    </div>
 
-				{% if content.field_newsletter_block_text_two|render %}
-					{{ content.field_newsletter_block_text_two|render }}
-				{% endif %}
-			</div>
-		</div>
-
-		{# Newsletter Promo/Ad Two #}
-		<div class="row row-content ucb-newsletter-promo-one">
-			{% if content.field_newsletter_promo_image_two|render %}
-				{% if content.field_newsletter_promo_link_two|render %}
-					<a href="{{ content.field_newsletter_promo_link_two|render|striptags|trim }}">
-					{{ content.field_newsletter_promo_image_two|render	}}
-				</a>
-				{% else %}	
-					{{ content.field_newsletter_promo_image_two|render	}}
-				{% endif %}
-			{% endif %}
-		</div>
-	</div>
+    {# Newsletter Promo/Ad Two #}
+    <div class="row row-content ucb-newsletter-promo-one">
+      {% if content.field_newsletter_promo_image_two|render %}
+        {% if content.field_newsletter_promo_link_two|render %}
+          <a href="{{ content.field_newsletter_promo_link_two|render|striptags|trim }}">
+          {{ content.field_newsletter_promo_image_two|render  }}
+        </a>
+        {% else %}  
+          {{ content.field_newsletter_promo_image_two|render  }}
+        {% endif %}
+      {% endif %}
+    </div>
+  </div>
 </article>

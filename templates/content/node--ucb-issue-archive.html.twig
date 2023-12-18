@@ -1,33 +1,26 @@
 {{ attach_library('boulder_base/ucb-issue-archive') }}
 
-{%
-	set classes = [
-		'node',
-		'container',
-		'node--type-' ~ node.bundle|clean_class,
-		node.isPromoted() ? 'node--promoted',
-		node.isSticky() ? 'node--sticky',
-		not node.isPublished() ? 'node--unpublished',
-		view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-	]
-%}
+{% set classes = [
+  'node',
+  'container',
+  'node--type-' ~ node.bundle|clean_class,
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  'ucb-content-wrapper'
+] %}
 
-{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
-{% set isFrontPage = '' %}
-{% if is_front %}
-	{% set isFrontPage = 'sr-only' %}
-{% endif %}
-
-<div id="ucb-issue-archive"{{attributes.addClass(classes)}}>
-	<div class="ucb-issue-archive-title">
-		<h1{{title_attributes}} class="{{isFrontPage}}">
-			{{ label }}
-		</h1>
-	</div>
-	{% if content.body|render %}
-	<div class="ucb-issue-archive-section ucb-issue-archive-body">
-		{{ content.body }}
-	</div>
-	{% endif %}
-	<ucb-issue-archive></ucb-issue-archive>
+<div{{ attributes.addClass(classes) }}>
+  <div class="ucb-issue-archive-title">
+    <h1{{ title_attributes.addClass(is_front ? 'sr-only') }}>
+      {{ label }}
+    </h1>
+  </div>
+  {% if content.body|render %}
+  <div class="ucb-issue-archive-section ucb-issue-archive-body">
+    {{ content.body }}
+  </div>
+  {% endif %}
+  <ucb-issue-archive></ucb-issue-archive>
 </div>

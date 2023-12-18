@@ -1,104 +1,110 @@
-.secondary-issue-image{
-    margin-top: 20px;
+.secondary-issue-image {
+  margin-top: 20px;
 }
 
-.issue-section-content{
-    display: flex;
-    flex-direction: row;
-    margin-bottom: 20px;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.333);
-    padding-bottom: 20px;
+.issue-section-content {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.333);
+  padding-bottom: 20px;
 }
 
-.issue-section-content-feature{
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 20px;
-    border-bottom: 1px solid rgba(128, 128, 128, 0.333);
-    padding-bottom: 20px;
+.issue-section-content-feature {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.333);
+  padding-bottom: 20px;
 }
 
 img {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
 
-.teaser-article-thumbnail, .title-thumb-article-thumbnail{
-    margin-right: 20px;
-    margin-bottom: 20px;
+.teaser-article-thumbnail,
+.title-thumb-article-thumbnail {
+  margin-right: 20px;
+  margin-bottom: 20px;
 }
 
-.issue-article-categories, .issue-article-tags{
-    display: block;
-    padding-bottom: 5px;
-    margin: 0 5px 5px 0;
+.issue-article-categories,
+.issue-article-tags {
+  display: block;
+  padding-bottom: 5px;
+  margin: 0 5px 5px 0;
 }
 
-.issue-section-teaser-summary{
-    margin: 0;
+.issue-section-teaser-summary {
+  margin: 0;
 }
 
-.issue-section-teaser-read, .issue-section-feature-read{
-    color: #0277BD;
-    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-    text-decoration: none;
-    text-decoration-color: rgba(2, 119, 189, 0.65);
-    font-size: 75%;
-    text-transform: uppercase;
-    font-weight: 600;
+.issue-section-teaser-read,
+.issue-section-feature-read {
+  color: #0277BD;
+  transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
+  text-decoration: none;
+  text-decoration-color: rgba(2, 119, 189, 0.65);
+  font-size: 75%;
+  text-transform: uppercase;
+  font-weight: 600;
 }
 
-.issue-article-categories > a, .issue-article-tags > a{
-    margin:3px;
-    padding:3px;
-    color: #666 !important;
-    background-color: #e7e7e7;
-    font-weight: 600;
-    text-decoration: none;
-    padding: 3px;
-    font-size: 75%;
+.issue-article-categories>a,
+.issue-article-tags>a {
+  margin: 3px;
+  padding: 3px;
+  color: #666 !important;
+  background-color: #e7e7e7;
+  font-weight: 600;
+  text-decoration: none;
+  padding: 3px;
+  font-size: 75%;
 }
 
-.feature-article-thumbnail > div > div > div > img{
-    max-width: 700px;
-    max-height: 275px;
-    object-fit: cover;
-    margin-bottom: 10px;
+.feature-article-thumbnail>div>div>div>img {
+  max-width: 700px;
+  max-height: 275px;
+  object-fit: cover;
+  margin-bottom: 10px;
 }
 
-.teaser-article-thumbnail > div > div > div > img, .title-thumb-article-thumbnail > div > div > div > img{
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
+.teaser-article-thumbnail>div>div>div>img,
+.title-thumb-article-thumbnail>div>div>div>img {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
 }
 
-.issue-content > .issue-section-content:last-child, .issue-content > .issue-section-content-feature:last-child{
-    border-bottom: none;
-    padding-bottom: 0;
+.issue-content>.issue-section-content:last-child,
+.issue-content>.issue-section-content-feature:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
 }
 
-.issue-section-title-only{
-    padding-bottom: 10px;
+.issue-section-title-only {
+  padding-bottom: 10px;
 }
 
-.issue-content-box{
-    margin-bottom: 20px;
-    margin-top:20px;
+.issue-content-box {
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
-.issue-title-box{
-    padding: 20px;
-    background-color: #4B4B4B;
-    color: #fff;
-    font-weight: bold
+.issue-title-box {
+  padding: 20px;
+  background-color: #4B4B4B;
+  color: #fff;
+  font-weight: bold
 }
 
-.issue-body-box{
-    background-color: #424242;
-    color: #fff;
-    padding: 20px;
+.issue-body-box {
+  background-color: #424242;
+  color: #fff;
+  padding: 20px;
 }
 
-.title-thumb-article-thumbnail{
-    height: 100px;
+.title-thumb-article-thumbnail {
+  height: 100px;
 }

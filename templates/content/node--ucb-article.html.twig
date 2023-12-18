@@ -6,16 +6,9 @@
 */
 #}
 
-{{ attach_library('boulder_base/ucb-page') }}
 {{ attach_library('boulder_base/ucb-article') }}
 {{ attach_library('boulder_base/ucb-related-articles') }}
 {# Added class to article class 'pageStyleCSS' to control page style #}
-
-{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
-{% set isFrontPage = '' %}
-{% if is_front %}
-  {% set isFrontPage = 'sr-only' %}
-{% endif %}
 
 {% set excludeCats = related_articles_exclude_categories %}
 {% set excludeTags = related_articles_exclude_tags %}
@@ -27,50 +20,50 @@
 
 {# Local Date/Time Overrides, else use Global Settings #}
   {% if localDateOverride != 0 %}
-    {% if localDateOverride == 1 %}
-    {% set date_formatted = node.created.value|date("n/j/Y") %}
+  {% if localDateOverride == 1 %}
+  {% set date_formatted = node.created.value|date("n/j/Y") %}
   {% elseif localDateOverride == 2 %}
-    {% set date_formatted = node.created.value|date("M. j, Y") %}
+  {% set date_formatted = node.created.value|date("M. j, Y") %}
   {% elseif localDateOverride == 3 %}
-    {% set date_formatted = node.created.value|date("l, M. j, Y") %}
+  {% set date_formatted = node.created.value|date("l, M. j, Y") %}
   {% elseif localDateOverride == 4 %}
-    {% set date_formatted = node.created.value|date("m/j/y  - g:i a", "America/Denver") %}
+  {% set date_formatted = node.created.value|date("m/j/y  - g:i a", "America/Denver") %}
   {% elseif localDateOverride == 5 %}
-    {% set date_formatted = node.created.value|date("M. d, Y  - g:i a", "America/Denver") %}
+  {% set date_formatted = node.created.value|date("M. d, Y  - g:i a", "America/Denver") %}
   {% elseif localDateOverride == 6 %}
-    {% set date_formatted = node.created.value|date("l, M. j, Y  - g:i a", "America/Denver") %}
+  {% set date_formatted = node.created.value|date("l, M. j, Y  - g:i a", "America/Denver") %}
   {% elseif localDateOverride == 7 %}
-    {% set date_formatted = "hidden" %}
-    {% set showDate = false %}
+  {% set date_formatted = "hidden" %}
+  {% set showDate = false %}
   {% else %}
-    {% set date_formatted = node.created.value|date('F d, Y') %}
+  {% set date_formatted = node.created.value|date('F d, Y') %}
   {% endif %}
 {% else %}
   {# Global Settings #}
   {# short date #}
-    {% if global_date_format == "0" %}
-    {% set date_formatted = node.created.value|date("n/j/Y") %}
-    {# medium date #}
+  {% if global_date_format == "0" %}
+  {% set date_formatted = node.created.value|date("n/j/Y") %}
+  {# medium date #}
   {% elseif global_date_format == "1"%}
-    {% set date_formatted = node.created.value|date("M. j, Y") %}
-    {# long date #}
+  {% set date_formatted = node.created.value|date("M. j, Y") %}
+  {# long date #}
   {% elseif global_date_format == "2"%}
-    {% set date_formatted = node.created.value|date("l, M. j, Y") %}
-    {# short date w time #}
+  {% set date_formatted = node.created.value|date("l, M. j, Y") %}
+  {# short date w time #}
   {% elseif global_date_format == "3" %}
-    {% set date_formatted = node.created.value|date("m/j/y  - g:i a", "America/Denver") %}
-    {# medium date w time #}
+  {% set date_formatted = node.created.value|date("m/j/y  - g:i a", "America/Denver") %}
+  {# medium date w time #}
   {% elseif global_date_format == "4" %}
-    {% set date_formatted = node.created.value|date("M. d, Y  - g:i a", "America/Denver") %}
-    {# long date with time #}
+  {% set date_formatted = node.created.value|date("M. d, Y  - g:i a", "America/Denver") %}
+  {# long date with time #}
   {% elseif global_date_format == "5" %}
-    {% set date_formatted = node.created.value|date("l, M. j, Y  - g:i a", "America/Denver") %}
-    {# none - hide #}
+  {% set date_formatted = node.created.value|date("l, M. j, Y  - g:i a", "America/Denver") %}
+  {# none - hide #}
   {% elseif global_date_format == "6" %}
-    {% set date_formatted = "hidden" %}
-    {% set showDate = false %}
+  {% set date_formatted = "hidden" %}
+  {% set showDate = false %}
   {% else %}
-    {% set date_formatted = node.created.value|date('F d, Y') %}
+  {% set date_formatted = node.created.value|date('F d, Y') %}
   {% endif %}
 {% endif %}
 
@@ -87,27 +80,25 @@
 {% endif %}
 
 
-{%
-set classes = [
-'node',
-'node--type-' ~ node.bundle|clean_class,
-not node.isPublished() ? 'node--unpublished',
-view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-pageStyleCSS
-]
-%}
+{% set classes = [
+  'node',
+  'node--type-' ~ node.bundle|clean_class,
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  pageStyleCSS
+] %}
 
 
-{% set social_share_button_position = drupal_config('ucb2021_base.settings', 'ucb_social_share_position')%}
+{% set social_share_button_position = drupal_config('ucb2021_base.settings', 'ucb_social_share_position') %}
 {% set social_share_class = "" %}
-{% if social_share_button_position == "0"%}
+{% if social_share_button_position == "0" %}
   {% set social_share_class = "social-share-none" %}
-{% elseif social_share_button_position=="1"%}
+{% elseif social_share_button_position=="1" %}
   {% set social_share_class = "social-share-left-side-below-title" %}
-{% elseif social_share_button_position=="2"%}
+{% elseif social_share_button_position=="2" %}
   {% set social_share_class = "social-share-left-side-below-content" %}
 {% elseif social_share_button_position == "3" %}
-  {% set social_share_class = "social-share-below-content"%}
+  {% set social_share_class = "social-share-below-content" %}
 {% elseif social_share_button_position == "4" %}
   {% set social_share_class = "social-share-below-title" %}
 {% else %}
@@ -121,13 +112,8 @@ pageStyleCSS
 {{ content.field_ucb_article_categories }}
 {% endset %}
 {% set showRelated %}
-{{content.field_ucb_related_articles_parag.0}}
+{{ content.field_ucb_related_articles_parag.0 }}
 {% endset %}
-
-{% set isLoggedIn = "false" %}
-{% if logged_in %}
-  {% set isLoggedIn = "true" %}
-{% endif %}
 
 
 {# {% set publishedDate = node.created.value|date('F d, Y') %} #}
@@ -142,117 +128,128 @@ pageStyleCSS
 {% if content.field_ucb_article_header_overlay|render|striptags|trim == 'On' %}
   {% if textColor is same as 'White' %}
   {# overlay requested set to dark #}
-    {% set overlayClass = 'ucb-overlay-dark' %}
+  {% set overlayClass = 'ucb-overlay-dark' %}
   {% else %}
   {# dark text, so switch to the light overlay instead #}
-    {% set overlayClass = 'ucb-overlay-light' %}
+  {% set overlayClass = 'ucb-overlay-light' %}
   {% endif %}
 {% endif %}
 
 {% if not content.field_ucb_article_external_url|render %}
-  <article{{attributes.addClass(classes)}}>
-    <div class="ucb-article" itemscope itemtype="https://schema.org/Article">
-      {# If using a Title Background img, render that #}
-      {% if content.field_article_title_background|render %}
-      <header><h1 class="sr-only">{{ label }}</h1></header>
-        <div class="backgroundTitleDiv {{overlayClass}}">
-          {{ content.field_article_title_background }}
-          <div class="container">
-            <h1 class="centeredTitle article-header-{{textColor}} {{isFrontPage}}">{{label}}</h1>
-          </div>
-        </div>
-      {% endif %}
+  <article{{ attributes.addClass('ucb-content-wrapper') }}>
+  <div class="ucb-article" itemscope itemtype="https://schema.org/Article">
+    {# If using a Title Background img, render that #}
+    {% if content.field_article_title_background|render %}
+    <header><h1 class="sr-only">{{ label }}</h1></header>
+    <div class="backgroundTitleDiv {{ overlayClass }}">
+      {{ content.field_article_title_background }}
       <div class="container">
-        {# If NO Title Background img, render the regular title #}
-        {% if not content.field_article_title_background|render %}
-        <header role="banner" class="ucb-article-banner">
-          <h1 class="ucb-article-heading {{isFrontPage}}">{{ label }}</h1>
-        </header>
-        {% endif %}
-        {% if social_share_button_position == "4" or social_share_button_position == "1"%}
-          <div id={{social_share_class}} class="ucb-social-share-container">
-            {{ drupal_block("social_sharing_buttons_block") }}
-          </div>
-        {% endif %}
-        {% if showDate %}
-          <div role="contentinfo" class="ucb-article-meta">
-            <div class="ucb-article-date">
-              <i class="fa-regular fa-calendar"></i>
-              <span class="sr-only">Published:{{date_formatted}}</span>
-              <span itemprop="datePublished">
-                {{ date_formatted }}
-              </span>
-            </div>
-          {% endif %}
-          {% if content.field_ucb_article_byline|render %}
-            <div class="ucb-article-byline">
-              {% if showDate %}
-                &bull;
-              {% endif %}
-
-              By
-              <span class="ucb-article-author-name" itemprop="author">
-                {{ content.field_ucb_article_byline}}
-              </span>
-            </div>
-          {% endif %}
-
-        </div>
-        {% if content.field_article_header_image_text|render %}
-        <p class="ucb-article-supplemental-text">{{content.field_article_header_image_text|render|striptags|trim}}</p>
-        {% endif %}
-      </div>
-      {% if content.field_ucb_article_content|render %}
-        <div role="main" class="ucb-article-body">{{ content.field_ucb_article_content }}</div>
-      {% endif %}
-      {% if content.field_ucb_article_categories|render %}
-        <div role="contentinfo" class="container ucb-article-categories" itemprop="about">
-          <span class="sr-only">Categories:</span>
-          <div class="ucb-article-category-icon">
-            <i class="fa-solid fa-folder-open"></i>
-          </div>
-          {{ content.field_ucb_article_categories }}
-        </div>
-      {% endif %}
-      {% if content.field_ucb_article_tags|render %}
-        <div role="contentinfo" class="container ucb-article-tags" itemprop="keywords">
-          <div class="ucb-article-tag-icon">
-            <span class="sr-only">Tags:</span>
-            <i class="fa-solid fa-tags"></i>
-          </div>
-          {{ content.field_ucb_article_tags }}
-        </div>
-      {% endif %}
-      {% if content.field_appears_in_issue|render %}
-        <div role="contentinfo" class="container ucb-article-issue" itemprop="keywords">
-          <div>
-            <span class="sr-only">Issues:</span>
-            <i class="fa-solid fa-book"></i>
-          </div>
-          {{ content.field_appears_in_issue }}
-        </div>
-      {% endif %}
-      
-      {# Related Articles Block #}
-      <div class="container ucb-related-articles-block" data-loggedin="{{isLoggedIn}}" data-catsjson="{{content.field_ucb_article_categories| json_encode(constant('JSON_PRETTY_PRINT'))}}" data-tagsjson="{{ content.field_ucb_article_tags| json_encode(constant('JSON_PRETTY_PRINT')) }}" data-relatedshown="{{showRelated|striptags|trim}}" data-tags="{{myTags|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}" data-cats="{{myCats|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""})}}" data-tagExclude="{{ related_articles_exclude_tags|json_encode() }}" data-catExclude="{{ related_articles_exclude_categories|json_encode() }}">
-        {{content.field_ucb_related_articles_parag}}
+        <h1{{ title_attributes.addClass('centeredTitle', 'article-header-' ~ textColor, is_front ? 'sr-only') }}>
+          {{ label }}
+        </h1>
       </div>
     </div>
+    {% endif %}
+    <div class="container">
+      {# If NO Title Background img, render the regular title #}
+      {% if not content.field_article_title_background|render %}
+      <h1{{ title_attributes.addClass('ucb-article-heading', is_front ? 'sr-only') }}>
+        {{ label }}
+      </h1>
+      {% endif %}
+      {% if social_share_button_position == "4" or social_share_button_position == "1" %}
+        <div id={{social_share_class}} class="ucb-social-share-container">
+        {{ drupal_block("social_sharing_buttons_block") }}
+        </div>
+      {% endif %}
+      {% if showDate %}
+      <div role="contentinfo" class="ucb-article-meta">
+      <div class="ucb-article-date">
+        <i class="fa-regular fa-calendar"></i>
+        <span class="sr-only">Published:{{ date_formatted }}</span>
+        <span itemprop="datePublished">
+        {{ date_formatted }}
+        </span>
+      </div>
+      {% endif %}
+      {% if content.field_ucb_article_byline|render %}
+      <div class="ucb-article-byline">
+        {% if showDate %}
+        &bull;
+        {% endif %}
+
+        By
+        <span class="ucb-article-author-name" itemprop="author">
+        {{ content.field_ucb_article_byline }}
+        </span>
+      </div>
+      {% endif %}
+
+    </div>
+    {% if content.field_article_header_image_text|render %}
+    <p class="ucb-article-supplemental-text">{{ content.field_article_header_image_text|render|striptags|trim }}</p>
+    {% endif %}
+    </div>
+    {% if content.field_ucb_article_content|render %}
+    <div role="main" class="ucb-article-body">{{ content.field_ucb_article_content }}</div>
+    {% endif %}
+    {% if content.field_ucb_article_categories|render %}
+    <div role="contentinfo" class="container ucb-article-categories" itemprop="about">
+      <span class="sr-only">Categories:</span>
+      <div class="ucb-article-category-icon">
+      <i class="fa-solid fa-folder-open"></i>
+      </div>
+      {{ content.field_ucb_article_categories }}
+    </div>
+    {% endif %}
+    {% if content.field_ucb_article_tags|render %}
+    <div role="contentinfo" class="container ucb-article-tags" itemprop="keywords">
+      <div class="ucb-article-tag-icon">
+      <span class="sr-only">Tags:</span>
+      <i class="fa-solid fa-tags"></i>
+      </div>
+      {{ content.field_ucb_article_tags }}
+    </div>
+    {% endif %}
+    {% if content.field_appears_in_issue|render %}
+    <div role="contentinfo" class="container ucb-article-issue" itemprop="keywords">
+      <div>
+      <span class="sr-only">Issues:</span>
+      <i class="fa-solid fa-book"></i>
+      </div>
+      {{ content.field_appears_in_issue }}
+    </div>
+    {% endif %}
+
+    {# Related Articles Block #}
+    <div{{ create_attribute({
+      class: ['container', 'ucb-related-articles-block'],
+      'data-loggedin': logged_in ? 'true' : 'false',
+      'data-catsjson': content.field_ucb_article_categories|json_encode(constant('JSON_PRETTY_PRINT')),
+      'data-tagsjson': content.field_ucb_article_tags|json_encode(constant('JSON_PRETTY_PRINT')),
+      'data-relatedshown': showRelated|striptags|trim,
+      'data-tags': myTags|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""}),
+      'data-cats': myCats|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""}),
+      'data-tagExclude': related_articles_exclude_tags|json_encode(),
+      'data-catExclude': related_articles_exclude_categories|json_encode() }) }}>
+      {{ content.field_ucb_related_articles_parag }}
+    </div>
+  </div>
   </article>
 {% else %}
   <article{{attributes.addClass(classes)}}>
-    <div class="container ucb-article">
-      <h1 class="ucb-article-heading">{{ label }}</h1>
-      {% set externalURL = content.field_ucb_article_external_url[0]['#url']|render|striptags|trim %}
-      <p class="fw-bold">Redirecting to:
-        <a href="{{ externalURL }}">{{ externalURL }}</a>
-      </p>
-      {% if user_can_edit %}
-        <p>(Most visitors without editing permissions will be redirected from this page automatically)</p>
-      {% else %}
-        {# redirect non-authenticated users to the specified URL #}
-        {{ content.field_ucb_article_external_url }}
-      {% endif %}
-    </div>
+  <div class="container ucb-article">
+    <h1 class="ucb-article-heading">{{ label }}</h1>
+    {% set externalURL = content.field_ucb_article_external_url[0]['#url']|render|striptags|trim %}
+    <p class="fw-bold">Redirecting to:
+    <a href="{{ externalURL }}">{{ externalURL }}</a>
+    </p>
+    {% if user_can_edit %}
+    <p>(Most visitors without editing permissions will be redirected from this page automatically)</p>
+    {% else %}
+    {# redirect non-authenticated users to the specified URL #}
+    {{ content.field_ucb_article_external_url }}
+    {% endif %}
+  </div>
   </article>
 {% endif %}

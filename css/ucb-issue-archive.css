@@ -1,28 +1,28 @@
-.ucb-issue-archive-container{
-    overflow: hidden;
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    margin: 0 -20px;
+.ucb-issue-archive-container {
+  overflow: hidden;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  margin: 0 -20px;
 }
 
-.ucb-issue-archive-card{
-    padding-bottom: 20px;
-    width: 25%;
+.ucb-issue-archive-card {
+  padding-bottom: 20px;
+  width: 25%;
 }
 
-.ucb-archive-card-link{
-    text-align: center;
+.ucb-archive-card-link {
+  text-align: center;
 }
 
-.ucb-archive-card-title{
-    font-size: 100%;
+.ucb-archive-card-title {
+  font-size: 100%;
 
 }
 
-.ucb-archive-card-img{
-    display: block;
-    margin-bottom: 10px;
-    width: 100%;
-    height: auto;
+.ucb-archive-card-img {
+  display: block;
+  margin-bottom: 10px;
+  width: 100%;
+  height: auto;
 }
