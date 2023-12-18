@@ -44,15 +44,11 @@
  */
 #}
 
-{#{% if ucb_alerts %}#}
-{#  {{ attach_library('ucb2021_base/ucb-alerts') }}#}
-{#{% endif %}#}
-{# Adds js file necessary for status bar #}
 {{ attach_library('boulder_base/ucb-user-page') }}
 
 <div class="layout-container ucb-page-container">
   {{ block("page_header", "page.html.twig") }}
-  <div class="ucb-page-content{% if ucb_heading_font == 'normal' %} ucb-heading-font-normal{% endif %}">
+  <div{{ create_attribute({ class: ['ucb-page-content', ucb_heading_font == 'normal' ? 'ucb-heading-font-normal'] }) }}>
     {{ page.highlighted }}
     {{ page.help }}
     <main role="main">
