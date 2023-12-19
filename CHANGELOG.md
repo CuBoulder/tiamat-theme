@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Standardizes padding at the top of pages
+  This theme update:
+  - Corrects padding at the top of pages to a standard `20px`. Resolves CuBoulder/tiamat-theme#579
+  - Cleans up some code in multiple content type templates and stylesheets.
+  
+  It may take longer to test due to the number of files changed.
+---
+
 - ### Secondary Menu Updates
   Closes #551.
   Adds button functionality to secondary menu and fixes other small misalignments.

@@ -70,29 +70,18 @@
 
 {{ attach_library('boulder_base/ucb-page') }}
 
-{#Dummy variable to ensure that all content tags are set for caching purposes#}
+{# Dummy variable to ensure that all content tags are set for caching purposes #}
 {% set content_render = content|render %}
 
-{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
-{% set isFrontPage = '' %}
-{% if is_front %}
-	{% set isFrontPage = 'sr-only' %}
-{% endif %}
+{% set classes = [
+  'node',
+  'ucb-basic-page'
+] %}
 
-{%
-    set classes = [
-        'node',
-        'ucb-basic-page'
-    ]
-%}
-
-<article{{attributes.addClass(classes)}}>
-
-
-	{% if content %}
-		<div{{content_attributes}}>
-			{{ content }}
-		</div>
-	{% endif %}
-
+<article{{ attributes.addClass(classes) }}>
+  {% if content %}
+    <div{{ content_attributes }}>
+      {{ content }}
+    </div>
+  {% endif %}
 </article>

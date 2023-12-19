@@ -152,7 +152,7 @@
   {% endblock %}
 
   {# MAIN PAGE CONTENT #}
-  <div class="ucb-page-content{% if ucb_heading_font == 'normal' %} ucb-heading-font-normal{% endif %}">
+  <div{{ create_attribute({ class: ['ucb-page-content', ucb_heading_font == 'normal' ? 'ucb-heading-font-normal'] }) }}>
   {% if (show_breadcrumb) and (page.breadcrumb|render|striptags|trim) %}
   <div class="ucb-breadcrumb-region">
     {{ page.breadcrumb }}

@@ -97,6 +97,10 @@
   }
 }
 
+.ucb-page-content .ucb-system-menu-block {
+  margin-top: 20px;
+}
+
 .ucb-page-content .ucb-menu {
   flex-direction: column;
   margin-bottom: 20px;

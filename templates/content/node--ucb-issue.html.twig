@@ -1,51 +1,38 @@
-
-{{ attach_library('boulder_base/ucb-page') }}
 {{ attach_library('boulder_base/ucb-issue') }}
 
-{%
-    set classes = [
-    'node',
-    'node--type-' ~ node.bundle|clean_class,
-    not node.isPublished() ? 'node--unpublished',
-    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-    ]
-    %}
-
-{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
-{% set isFrontPage = '' %}
-{% if is_front %}
-	{% set isFrontPage = 'sr-only' %}
-{% endif %}
+{% set classes = [
+  'node',
+  'node--type-' ~ node.bundle|clean_class,
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+] %}
 
 <div class="container">
-    <div class="row">
-        <header role="banner" class="ucb-article-banner">
-			<h1 class="ucb-article-heading {{isFrontPage}}">{{ label }}</h1>
-		</header>
-    </div>
+  <div class="row">
+    <header role="banner" class="ucb-article-banner">
+      <h1{{ title_attributes.addClass(is_front ? 'sr-only') }}>
+        {{ label }}
+      </h1>
+    </header>
+  </div>
 
-    <div class="row">
-        <div class="col-sm-4 issue-sidebar-banner">
-            {{content.field_ucb_issue_image|render}}
-            <div class="secondary-issue-image">
-                {{content.field_ucb_issue_secondary_image}}
-            </div>
-            <div class="issue-content-box">
-                <div class="issue-title-box">
-                    {{label}}
-                </div>
-                <div class="issue-body-box"> 
-                {{ content.body }}
-            </div>
-            </div>
+  <div class="row">
+    <div class="col-sm-4 issue-sidebar-banner">
+      {{ content.field_ucb_issue_image|render }}
+      <div class="secondary-issue-image">
+        {{ content.field_ucb_issue_secondary_image }}
+      </div>
+      <div class="issue-content-box">
+        <div class="issue-title-box">
+          {{ label }}
         </div>
+        <div class="issue-body-box"> 
+          {{ content.body }}
+        </div>
+      </div>
+    </div>
     <div class="col-sm-8">
-        {{content.field_ucb_issue_section}}
+      {{ content.field_ucb_issue_section }}
     </div>
-
-    </div>
-
+  </div>
 </div>
-
-
-
