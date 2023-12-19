@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes Embedded Video not displaying, if also Aligned
+  Adds a custom CSS override to Embedded Videos, if also aligned via CKeditor5, in order to prevent a visual bug where they becoming hidden if floated left/right or centered on a rendered page. This bug was caused by our customized embedded video style and the default alignments (left,right,center) conflicting. 
+  
+  Resolves #561
+---
+
 - ### Standardizes padding at the top of pages
   This theme update:
   - Corrects padding at the top of pages to a standard `20px`. Resolves CuBoulder/tiamat-theme#579

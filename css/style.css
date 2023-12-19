@@ -475,7 +475,7 @@ li.social-media-item.menu-item {
 .field_media_oembed_video {
   position: relative;
   overflow: hidden;
-  width: 100%;
+  width: 100%; 
   padding-top: 56.25%;
   /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
 }
@@ -488,6 +488,88 @@ li.social-media-item.menu-item {
   right: 0;
   width: 100%;
   height: 100%;
+}
+
+/* Overriding styles for inserted video media .field_media_oembed_video, if aligned/floated */
+div.align-center .field_media_oembed_video,
+div.align-left .field_media_oembed_video,
+div.align-right .field_media_oembed_video {
+  position: static; /* Reset position */
+  width: 800px; /* Reset width to default */
+  height: 450px;
+  padding-top: 0; /* Remove padding-top */
+  object-fit: cover;
+}
+div.align-right .field_media_oembed_video{
+  margin-left: 20px;
+  margin-bottom: 20px;
+}
+div.align-left .field_media_oembed_video{
+  margin-right: 20px;
+  margin-bottom: 20px;
+}
+div.align-center .field_media_oembed_video iframe, 
+div.align-right .field_media_oembed_video iframe, 
+div.align-left .field_media_oembed_video iframe {
+  position: static; /* Reset position */
+  top: auto; /* Reset top position */
+  left: auto; /* Reset left position */
+  bottom: auto; /* Reset bottom position */
+  right: auto; /* Reset right position */
+  width: 800px;
+  height: 450px;
+}
+/* Responsive sizing for overriding inserted video media if aligned/floated */
+@media only screen and (max-width:980px) {
+  div.align-center .field_media_oembed_video,
+  div.align-left .field_media_oembed_video,
+  div.align-right .field_media_oembed_video {
+    width: 400px;
+    height: 275px;
+  }
+  
+  div.align-center .field_media_oembed_video iframe, 
+  div.align-right .field_media_oembed_video iframe, 
+  div.align-left .field_media_oembed_video iframe {
+    width: 400px;
+    height: 275px;
+  }
+
+  div.align-center:has(.field_media_oembed_video){
+    width: fit-content;
+  }
+
+  div.align-right .field_media_oembed_video{
+    margin-left: 10px;
+    margin-bottom: 10px;
+  }
+  div.align-left .field_media_oembed_video{
+    margin-right: 10px;
+    margin-bottom:10px;
+  }
+}
+@media only screen and (max-width:530px) {
+  /* div.align-center .field_media_oembed_video, */
+  div.align-left .field_media_oembed_video,
+  div.align-right .field_media_oembed_video {
+    width: 100%
+  }
+  
+  /* div.align-center .field_media_oembed_video iframe,  */
+  div.align-right .field_media_oembed_video iframe, 
+  div.align-left .field_media_oembed_video iframe {
+    width: 100%;
+    display:block
+  }
+
+  div.align-right, div.align-left{
+    float: none;
+  }
+  div.align-right .field_media_oembed_video,
+  div.align-left .field_media_oembed_video{
+    margin-left: 0px;
+    margin-right:0px;
+  }
 }
 
 /**** Responsive Images ******/
