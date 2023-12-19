@@ -13,17 +13,19 @@
   'node--type-' ~ node.bundle|clean_class,
   not node.isPublished() ? 'node--unpublished',
   view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-]% }
+] %}
 
 {# Dummy variable to ensure that all content tags are set for caching purposes #}
 {% set content_render = content|render %}
 
 <article{{ attributes.addClass(classes) }}>
   <div{{ create_attribute({
-	'class': ['container', 'ucb-newsletter'],
-	'data-loggedin': logged_in ? 'true' : 'false' }) }}>
+    'class': ['container', 'ucb-newsletter'],
+    'data-loggedin': logged_in ? 'true' : 'false' }) }}>
     {# Newsletter Title #}
-    <h1 class="ucb-newsletter-title {{isFrontPage}}" itemprop="name">{{ label }}</h1>
+    <h1{{ title_attributes.addClass('ucb-newsletter-title', is_front ? 'sr-only').setAttribute('itemprop', 'name') }}>
+      {{ label }}
+    </h1>
     {# Newsletter Intro #}
     {% if content.field_newsletter_intro_image|render %}
       <div id="newsletter-intro-img">{{ content.field_newsletter_intro_image }}</div>
