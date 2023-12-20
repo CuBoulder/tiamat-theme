@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Form Page - Adds Body Field
+  The Form Page node's body displays above the attached form.
+  
+  Resolves #599 
+  
+  
+---
+
 - ### Events Calendar Background matches Section background color
   Adjusts the `Events Calendar` so it matches the background color of the section it is placed in, rather than being always white. Text color adjusted to white for black and dark gray section backgrounds. 
   
