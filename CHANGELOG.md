@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Social Media Menu - Now Icons Only
+  Social Media Menu is now icons only, fixes bug where the site name would display. Fixes spelling of 'Facebook'.
+  
+  There was a: `<span class="vertical-icon-span"> * _siteNameHere_ * </span>`  on the template that was causing the site names to appear next to the respective logo on each link in the social media menu. These spans did not appear to be used anywhere else in d10, so they were removed to resolve the issue.
+  
+  Resolves #586 
+  
+---
+
 - ### Fixes error on Newsletter pages
   Resolves CuBoulder/tiamat-theme#596
 ---
