@@ -309,6 +309,18 @@ table.localist_minicalendar_minicalendar caption {
   text-decoration: underline;
   color: #D3D3D3;
 }
+.ucb-bootstrap-layout__background-color--gold .localist_widget_container li a {
+  color: black
+}
+
+.ucb-bootstrap-layout__background-color--gold .localist_widget_container li a:hover {
+  text-decoration: underline;
+  color: #444;
+}
+
+.ucb-bootstrap-layout__background-color--gold .ucb-events-calendar .localist_widget_container .action_button a:link{
+  color: black
+}
 
 @media screen and (min-width: 600px) {
   .template-5 .le-date-wrapper .le-date-month {
