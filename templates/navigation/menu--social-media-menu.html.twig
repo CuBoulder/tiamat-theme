@@ -51,12 +51,12 @@
                 <li{{ item.attributes.addClass(classes) }}>
 {% set formattedContent = item.url |render|striptags|trim|upper %}
 
-			{% if 'TWITTER' in formattedContent %}
+			{% if ('TWITTER' in formattedContent) or ('WWW.X.COM' in formattedContent)  %}
 				<a href="{{ item.url }}" class="icon-a" title="Twitter" alt="Twitter">
 					<span class="icon-div">
 						<span class="sr-only">Twitter</span>
 						<span class="icon-bg icon-bg-twitter">
-							<i class="fa-brands fa-twitter icon-foreground"></i>
+							<i class="fa-brands fa-x-twitter icon-foreground"></i>
 						</span>
 					</span>
 				</a>
