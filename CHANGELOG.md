@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Events Calendar Background matches Section background color
+  Adjusts the `Events Calendar` so it matches the background color of the section it is placed in, rather than being always white. Text color adjusted to white for black and dark gray section backgrounds. 
+  
+  @jcsparks - Let me know if gold section background needs some text color adjustments, I could make an override for that that makes the text a darker gray / black than the default. 
+  
+  Resolves #564 
+---
+
 - ### Social Media Menu - Now Icons Only
   Social Media Menu is now icons only, fixes bug where the site name would display. Fixes spelling of 'Facebook'.
   

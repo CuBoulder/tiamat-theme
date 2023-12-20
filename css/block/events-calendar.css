@@ -1,7 +1,5 @@
 .ucb-events-calendar {
   overflow: auto;
-  background: white;
-  color: black;
 }
 
 .ucb-events-calendar .localist_minicalendar_events {
@@ -298,6 +296,30 @@ table.localist_minicalendar_minicalendar caption {
   transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
   background-color: #0277BD;
   color: white !important;
+}
+
+/* Section Background Color Overrides for Dark Backgrounds */
+.ucb-bootstrap-layout__background-color--dark-gray .localist_widget_container li a,
+.ucb-bootstrap-layout__background-color--black .localist_widget_container li a {
+  color: #fff
+}
+
+.ucb-bootstrap-layout__background-color--dark-gray .localist_widget_container li a:hover,
+.ucb-bootstrap-layout__background-color--black .localist_widget_container li a:hover {
+  text-decoration: underline;
+  color: #D3D3D3;
+}
+.ucb-bootstrap-layout__background-color--gold .localist_widget_container li a {
+  color: black
+}
+
+.ucb-bootstrap-layout__background-color--gold .localist_widget_container li a:hover {
+  text-decoration: underline;
+  color: #444;
+}
+
+.ucb-bootstrap-layout__background-color--gold .ucb-events-calendar .localist_widget_container .action_button a:link{
+  color: black
 }
 
 @media screen and (min-width: 600px) {
