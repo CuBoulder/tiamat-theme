@@ -51,16 +51,7 @@
                 <li{{ item.attributes.addClass(classes) }}>
 {% set formattedContent = item.url |render|striptags|trim|upper %}
 
-			{% if ('TWITTER' in formattedContent) or ('WWW.X.COM' in formattedContent)  %}
-				<a href="{{ item.url }}" class="icon-a" title="Twitter" alt="Twitter">
-					<span class="icon-div">
-						<span class="sr-only">Twitter</span>
-						<span class="icon-bg icon-bg-twitter">
-							<i class="fa-brands fa-x-twitter icon-foreground"></i>
-						</span>
-					</span>
-				</a>
-			{% elseif 'FACEBOOK' in formattedContent %}
+			{% if 'FACEBOOK' in formattedContent %}
 				<a href="{{ item.url }}" class="icon-a" title="Facebook" alt="Facebook">
 					<span class="icon-div">
 						<span class="sr-only">Facebook</span>
@@ -173,6 +164,17 @@
 							</span>
 						</span>
 					</a>
+
+			{% elseif ('TWITTER' in formattedContent) or ('X.COM' in formattedContent)  %}
+				<a href="{{ item.url }}" class="icon-a" title="Twitter" alt="Twitter">
+					<span class="icon-div">
+						<span class="sr-only">Twitter</span>
+						<span class="icon-bg icon-bg-twitter">
+							<i class="fa-brands fa-x-twitter icon-foreground"></i>
+						</span>
+					</span>
+				</a>
+
 			{% else %}
 				<a href="{{ item.url }}" class="icon-a" title="Social Media" alt="Social Media">
 					<span class="icon-div">
