@@ -33,12 +33,27 @@
 {% endif %}
 
 {# A background image will be used over a solid color #}
-{% if content['#block_content'].field_hero_background_image.entity.field_media_image.entity is defined %}
-	{% set bgValue = "background-image:url(#{ file_url(content['#block_content'].field_hero_background_image.entity.field_media_image.entity.fileuri) });background-repeat:no-repeat;background-position:center;background-size:cover;" %}
+{% if content['#block_content'].field_hero_background_video.entity.field_media_image.entity is defined %}
+	{% set bgValue = "background-image:url(#{ file_url(content['#block_content'].field_hero_background_video.entity.field_media_image.entity.fileuri) });background-repeat:no-repeat;background-position:center;background-size:cover;" %}
+{% endif %}
+
+{# URL if a video is used instead of an image #}
+{% if content['#block_content'].field_hero_background_video.entity.field_media_oembed_video is defined %}
+	{% set videoURL = content['#block_content'].field_hero_background_video.entity.field_media_oembed_video.value %}
+{% endif %}
+
+{% if videoURL is defined %}
+	{% set videoClass = "ucb-hero-vid-background" %}
+{% else %}
+	{% set videoClass = "" %}
 {% endif %}
 
 {# set classes for the size of the component if using background media #}
+{% if videoURL is defined %}
+	{% set containerSize = "ucb-hero-unit-video" %}
+{% else %}
 	{% set containerSize = "ucb-hero-unit-text" %}
+{% endif %}
 
 
 {# set classes for the size of the component #}
@@ -62,13 +77,29 @@
 
 <div class="ucb-hero-outer-wrapper">
 	<div{{attributes.addClass(classes)}}>
-		{{ title_prefix }}
-		{% if label %}
-			<h2{{title_attributes}}>{{ label }}</h2>
-		{% endif %}
-		{{ title_suffix }}
 		{% block content %}
-			<div{{attributes.addClass(classes,size,overlayClass,containerSize).setAttribute("style","#{bgValue}")}}>
+			{{ title_prefix }}
+			{% if label %}
+				<h2{{title_attributes}}>{{ label }}</h2>
+			{% endif %}
+			{{ title_suffix }}
+			<div{{attributes.addClass(classes,size,overlayClass,videoClass,containerSize).setAttribute("style","#{bgValue}")}}>
+				{% if videoURL is defined %}
+					<div hidden class="ucb-hero-unit-video-wrapper">
+						<div class="hero-unit-video-overlay"></div>
+						<div class="ucb-hero-unit-video-player-wrapper" id="ucb_hero_unit_video_player_{{ blockId }}"></div>
+						<div class="ucb-hero-unit-video-controls-wrapper">
+							<div class="ucb-hero-unit-video-controls">
+								<span class="ucb-hero-unit-video-control-button ucb-hero-unit-video-play-pause" title="Play/Pause video">
+									<i class="fa-solid fa-play"></i>
+								</span>
+							</div>
+						</div>
+					</div>
+					<script type="text/javascript">
+						window.addEventListener('load', () => enableVideoHero('{{ videoURL }}', 'ucb_hero_unit_video_player_ {{ blockId }}'));
+					</script>
+				{% endif %}
 				{% set linkColor = content['#block_content'].field_link_color.value %}
 				{# Dont let twig render the links #}
 				<div class="ucb-hero-unit-content container">
