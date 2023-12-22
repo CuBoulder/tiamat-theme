@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Hero unit separation
+  Hero Unit Separation
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/90
+  
+  Closes #605
+---
+
 - ### Form Page - Adds Body Field
   The Form Page node's body displays above the attached form.
   
