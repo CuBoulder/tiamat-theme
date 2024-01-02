@@ -59,7 +59,6 @@ function boulder_base_preprocess(&$variables, $hook) {
 function boulder_base_preprocess_html(array &$variables) {
   $variables['ucb_gtm_account'] = theme_get_setting('ucb_gtm_account');
   $variables['theme_path'] = base_path() . $variables['directory'];
-
 }
 
 /***
@@ -99,7 +98,8 @@ function boulder_base_preprocess_page(array &$variables) {
 		'scale' => theme_get_setting('ucb_custom_logo_scale') ?? '2x'
 	];
   }
-}
+};
+
 
 /***
  * Preprocess function to enable the current page title to display as 'sr-only', if set as site homepage
