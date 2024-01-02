@@ -98,7 +98,7 @@ function boulder_base_preprocess_page(array &$variables) {
 		'scale' => theme_get_setting('ucb_custom_logo_scale') ?? '2x'
 	];
   }
-};
+}
 
 
 /***
