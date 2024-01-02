@@ -59,6 +59,7 @@ function boulder_base_preprocess(&$variables, $hook) {
 function boulder_base_preprocess_html(array &$variables) {
   $variables['ucb_gtm_account'] = theme_get_setting('ucb_gtm_account');
   $variables['theme_path'] = base_path() . $variables['directory'];
+
 }
 
 /***
@@ -98,17 +99,19 @@ function boulder_base_preprocess_page(array &$variables) {
 		'scale' => theme_get_setting('ucb_custom_logo_scale') ?? '2x'
 	];
   }
+}
 
-  // check to see if we're on the homepage or not
-  try {
-	$current_path = \Drupal::service('path.current')->getPath();
-	$front_uri = Drupal::config('system.site')->get('page.front');
-	$front_alias = \Drupal::service('path_alias.manager')->getAliasByPath($front_uri);
-	$current_alias = \Drupal::service('path_alias.manager')->getAliasByPath($current_path);
-	$variables['is_front']  = \Drupal::service('path.matcher')->isFrontPage() || $front_alias === $current_alias;
-  } catch (Exception $e) {
-	$variables['is_front'] = FALSE;
-  }
+/***
+ * Preprocess function to enable the current page title to display as 'sr-only', if set as site homepage
+ */
+function boulder_base_preprocess_field(&$variables, $hook) {
+  $current_path = \Drupal::service('path.current')->getPath();
+  $front_page_path = \Drupal::config('system.site')->get('page.front');
+  $path_alias_manager = \Drupal::service('path_alias.manager');
+  $current_path_alias = $path_alias_manager->getAliasByPath($current_path);
+  $front_page_alias = $path_alias_manager->getAliasByPath($front_page_path);
+  $is_front_page = $current_path_alias === $front_page_alias;
+  $variables['is_front'] = $is_front_page;
 }
 
 /***
