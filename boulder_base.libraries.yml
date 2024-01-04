@@ -463,3 +463,11 @@ ucb-class-notes:
   css:
     theme:
       css/ucb-class-notes.css: {}
+
+ucb-class-notes-list-page:
+  version: 1.x
+  js:
+    js/ucb-class-notes-list.js: {}
+  css:
+    theme:
+      css/ucb-class-notes-list.css: {}
