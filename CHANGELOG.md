@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Title on Homepage no longer visible
+  This fixes the functionality where a title is hidden when set as the site's homepage. This was previously working before a moveable title refactor and has been corrected.
+  
+  Resolves #607 
+---
+
 - ### Hero unit separation
   Hero Unit Separation
   
