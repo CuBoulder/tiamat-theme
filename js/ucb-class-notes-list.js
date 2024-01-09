@@ -8,16 +8,29 @@ class ClassNotesListElement extends HTMLElement {
 		const JSONURL = this.getAttribute('base-uri');
         // Build user filters
         // Insert year filter, make call
-        const year  = ""
+        const year  = "1901"
         // TO DO -- need to add year here
         console.log(JSONURL)
-        this.build(JSONURL, year )
+        this.getData(JSONURL, year)
 	}
 //  Gets info
-	build(JSONURL, year) {
-        console.log("url", JSONURL)
-        console.log('year', year)
+	getData(JSONURL, year) {
         const publishFilter = '&filter[status]=1'
+		const API = JSONURL + year + publishFilter
+		fetch(API)
+            .then(this.handleError)
+            .then((data) => {console.log(data)})
+            .catch(Error=> {
+              console.error('There was an error fetching data from the API - Please try again later.')
+              console.error(Error)
+              this.toggleMessage('ucb-al-loading')
+              this.toggleMessage('ucb-al-api-error', "block")
+            });
+	}
+
+	build(data){
+		console.log(data)
+
 	}
 
 	toggleMessageDisplay(element, display, className, innerText) {
@@ -38,44 +51,44 @@ class ClassNotesListElement extends HTMLElement {
 		formDiv.className = 'd-flex align-items-center';
 	
 		// If User-Filterable...Create Dropdowns
-		for(const key in ){
-			const filter = userAccessibleFilters[key];
-			// Create container
-			const container = document.createElement('div');
-			container.className = `form-item-${key} form-item`;
-			// Create label el
-			const itemLabel = document.createElement('label'), itemLabelSpan = document.createElement('span');
-			itemLabelSpan.innerText = filter['label'];
-			itemLabel.appendChild(itemLabelSpan);
-			// Create select el
-			const selectFilter = document.createElement('select');
-			selectFilter.name = key;
-			selectFilter.className = 'taxonomy-select-' + key + ' taxonomy-select';
-			selectFilter.onchange = event => onChange(event.target.form);
+		// for(const key in ){
+		// 	const filter = userAccessibleFilters[key];
+		// 	// Create container
+		// 	const container = document.createElement('div');
+		// 	container.className = `form-item-${key} form-item`;
+		// 	// Create label el
+		// 	const itemLabel = document.createElement('label'), itemLabelSpan = document.createElement('span');
+		// 	itemLabelSpan.innerText = filter['label'];
+		// 	itemLabel.appendChild(itemLabelSpan);
+		// 	// Create select el
+		// 	const selectFilter = document.createElement('select');
+		// 	selectFilter.name = key;
+		// 	selectFilter.className = 'taxonomy-select-' + key + ' taxonomy-select';
+		// 	selectFilter.onchange = event => onChange(event.target.form);
 
-			if(filter['includes'].length != 1) {
-				// All option as first entry
-				const defaultOption = document.createElement('option');
-				defaultOption.value = '-1';
-				defaultOption.innerText = 'All';
-				defaultOption.className = 'taxonomy-option-all taxonomy-option-default';
-				if(!filter['restrict'] && filter['includes'].length > 1){
-					defaultOption.innerText = 'Default';
-					defaultOption.className = 'taxonomy-option-default';
-					const allOptions = document.createElement('option');
-					allOptions.innerText = 'All';
-					allOptions.value = '';
-					allOptions.className = 'taxonomy-option-all';
-					selectFilter.appendChild(allOptions);
-				}
-				defaultOption.selected = true;
-				// Append
-				selectFilter.appendChild(defaultOption);
-			}
-			itemLabel.appendChild(selectFilter);
-			container.appendChild(itemLabel);
-			formDiv.appendChild(container);
-		}
+		// 	if(filter['includes'].length != 1) {
+		// 		// All option as first entry
+		// 		const defaultOption = document.createElement('option');
+		// 		defaultOption.value = '-1';
+		// 		defaultOption.innerText = 'All';
+		// 		defaultOption.className = 'taxonomy-option-all taxonomy-option-default';
+		// 		if(!filter['restrict'] && filter['includes'].length > 1){
+		// 			defaultOption.innerText = 'Default';
+		// 			defaultOption.className = 'taxonomy-option-default';
+		// 			const allOptions = document.createElement('option');
+		// 			allOptions.innerText = 'All';
+		// 			allOptions.value = '';
+		// 			allOptions.className = 'taxonomy-option-all';
+		// 			selectFilter.appendChild(allOptions);
+		// 		}
+		// 		defaultOption.selected = true;
+		// 		// Append
+		// 		selectFilter.appendChild(defaultOption);
+		// 	}
+		// 	itemLabel.appendChild(selectFilter);
+		// 	container.appendChild(itemLabel);
+		// 	formDiv.appendChild(container);
+		// }
 
 		form.appendChild(formDiv);
 		this._userFormElement.appendChild(form);   
@@ -83,6 +96,14 @@ class ClassNotesListElement extends HTMLElement {
 
 	generateDropdown(){
 	}
+
+	handleError = response => {
+        if (!response.ok) { 
+           throw new Error;
+        } else {
+           return response.json();
+        }
+    };
 }
 
 customElements.define('ucb-class-notes-list', ClassNotesListElement);
