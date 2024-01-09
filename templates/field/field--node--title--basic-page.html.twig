@@ -1,9 +1,19 @@
 <div class="container ucb-page-title">
-	<h1>
-		<span>
-			{% for item in items %}
-				{{ item.content }}
-			{% endfor %}
-		</span>
-	</h1>
+    {% if is_front %}
+        <h1 class="sr-only">
+            <span>
+                {% for item in items %}
+                    {{ item.content }}
+                {% endfor %}
+            </span>
+        </h1>
+    {% else %}
+        <h1>
+            <span>
+                {% for item in items %}
+                    {{ item.content }}
+                {% endfor %}
+            </span>
+        </h1>
+    {% endif %}
 </div>
