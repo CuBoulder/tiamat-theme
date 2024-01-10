@@ -12,8 +12,6 @@ class ClassNotesListElement extends HTMLElement {
 		this.generateForm(dates)
         // Insert year filter, make call
         const year  = "1901"
-        // TO DO -- need to add year here -- make function
-        console.log(JSONURL)
         this.getData(JSONURL, year)
 	}
 //  Gets info
@@ -22,7 +20,7 @@ class ClassNotesListElement extends HTMLElement {
 		const API = JSONURL + year + publishFilter
 		fetch(API)
             .then(this.handleError)
-            .then((data) => {console.log(data)})
+            .then((data) => this.build(data))
             .catch(Error=> {
               console.error('There was an error fetching data from the API - Please try again later.')
               console.error(Error)
@@ -49,16 +47,14 @@ class ClassNotesListElement extends HTMLElement {
         formDiv = document.createElement('div');
 		form.className = 'class-notes-list-filter';
 		formDiv.className = 'd-flex align-items-center';
-	
-		// If User-Filterable...Create Dropdowns
-		// 	// Create container
+		// Create container
 			const container = document.createElement('div');
 			container.className = `form-item`;
-		// 	// Create label el
+		// Create label el
 			const itemLabel = document.createElement('label'), itemLabelSpan = document.createElement('span');
-			// itemLabelSpan.innerText = filter['label'];
+			itemLabelSpan.innerText = "Filter by Year:";
 			itemLabel.appendChild(itemLabelSpan);
-		// 	// Create select el
+		// Create select el
 			const selectFilter = document.createElement('select');
 			selectFilter.name = "Year"
 			selectFilter.className = 'Year Select';
@@ -66,15 +62,29 @@ class ClassNotesListElement extends HTMLElement {
 			itemLabel.appendChild(selectFilter);
 			container.appendChild(itemLabel);
 			formDiv.appendChild(container);
-
+		// Appends
 		this.generateDropdown(dates, selectFilter)
 		form.appendChild(formDiv);
-		console.log("what is this", this._userFormElement)
 		this._userFormElement.appendChild(form);   
+
+		// Sort By : Create container
+		const sortContainer = document.createElement('div');
+		sortContainer.classList.add('form-item', "sort-form-item");
+		// Create label el
+		const sortItemLabel = document.createElement('label'), sortItemLabelSpan = document.createElement('span');
+			sortItemLabelSpan.innerText = "Sort By:";
+			sortItemLabel.appendChild(sortItemLabelSpan);
+		const sortSelectFilter = document.createElement('select');
+			sortSelectFilter.name = "Sort"
+			sortSelectFilter.className = 'Sort Select';
+			sortSelectFilter.onchange = this.onYearChange.bind(this); // Bind the event handler
+			sortItemLabel.appendChild(sortSelectFilter);
+			container.appendChild(sortItemLabel);
+			formDiv.appendChild(container);
+			this.generateDropdown(["Class Year", "Date Posted"],sortSelectFilter)
 	}
 
 	generateDropdown(dates, selectElement){
-		console.log("dates", dates)
 		dates.map(date => {
 			const option = document.createElement('option');
 				option.value = date;
