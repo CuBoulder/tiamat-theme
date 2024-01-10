@@ -28,6 +28,7 @@ class ClassNotesListElement extends HTMLElement {
               this.toggleMessage('ucb-al-api-error', "block")
             });
 	}
+	// TO DO : construct
 	build(data){
 		console.log(data)
 	}
@@ -51,7 +52,8 @@ class ClassNotesListElement extends HTMLElement {
 			const container = document.createElement('div');
 			container.className = `form-item`;
 		// Create label el
-			const itemLabel = document.createElement('label'), itemLabelSpan = document.createElement('span');
+			const itemLabel = document.createElement('label'), 
+			itemLabelSpan = document.createElement('span');
 			itemLabelSpan.innerText = "Filter by Year:";
 			itemLabel.appendChild(itemLabelSpan);
 		// Create select el
@@ -82,6 +84,15 @@ class ClassNotesListElement extends HTMLElement {
 			container.appendChild(sortItemLabel);
 			formDiv.appendChild(container);
 			this.generateDropdown(["Class Year", "Date Posted"],sortSelectFilter)
+
+	
+		// Add 'View All Notes' Link
+		const viewAllLink = document.createElement('a');
+			viewAllLink.href = '#';
+			viewAllLink.innerText = 'View All Notes';
+			viewAllLink.addEventListener('click', this.viewAllNotes.bind(this));
+			form.appendChild(viewAllLink);
+			this._userFormElement.appendChild(form);  
 	}
 
 	generateDropdown(dates, selectElement){
@@ -99,6 +110,12 @@ class ClassNotesListElement extends HTMLElement {
         const JSONURL = this.getAttribute('base-uri');
         this.getData(JSONURL, year);
     }
+
+	// Event handler for View All -- no year specified
+	viewAllNotes(event){
+		event.preventDefault();
+		console.log('View all notes pressed')
+	}
 
 	handleError = response => {
         if (!response.ok) { 
