@@ -33,7 +33,7 @@
   </div>
   {% endif %}
   <ucb-class-notes-list{{ create_attribute({
-    'base-uri': url('<front>')|render|trim('/') ~ '/jsonapi/node/ucb_class_notes?filter[field_ucb_class_year]=',
+    'base-uri': url('<front>')|render|trim('/') ~ '/jsonapi/node/ucb_class_notes',
 })}}>
     <noscript><div class="ucb-list-msg ucb-error">Please enable JavaScript to see this page.</div></noscript>
   </ucb-class-notes-list>

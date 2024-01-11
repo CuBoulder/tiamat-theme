@@ -11,16 +11,37 @@ class ClassNotesListElement extends HTMLElement {
         // Build user filters
 		this.generateForm(dates)
         // Insert year filter, make call
-        const year  = "1901"
-        this.getData(JSONURL, year)
+        this.getData(JSONURL, "")
 	}
 //  Gets info
-	getData(JSONURL, year, data = []) {
-        const publishFilter = '&filter[status]=1'
-		const API = JSONURL + year + publishFilter
+	getData(JSONURL, year = '', notes = [], next = false) {
+		let yearFilter = '';
+		let publishFilter = ''
+		// If its not a next link, build the JSON API URL
+		if(!next){
+			if (year) {
+				yearFilter = `?filter[field_ucb_class_year]=${year}`
+				publishFilter = '&filter[status]=1'
+			} else {
+				yearFilter = ''
+				publishFilter = '?filter[status]=1'
+			}
+		}
+		const API = JSONURL + yearFilter + publishFilter
 		fetch(API)
             .then(this.handleError)
-            .then((data) => this.build(data))
+            .then((data) => {
+				if (data.links.next){
+					data.data.forEach(note=>{
+						notes.push(note)
+					})
+					this.getData(data.links.next.href,'',notes,true)
+				}
+
+				if(!data.links.next){
+					this.build(notes)
+				}
+			})
             .catch(Error=> {
               console.error('There was an error fetching data from the API - Please try again later.')
               console.error(Error)
