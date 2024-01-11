@@ -39,7 +39,7 @@ class ClassNotesListElement extends HTMLElement {
 				}
 
 				if(!data.links.next){
-					this.build(notes)
+					this.build(notes, year)
 				}
 			})
             .catch(Error=> {
@@ -50,8 +50,37 @@ class ClassNotesListElement extends HTMLElement {
             });
 	}
 	// TO DO : construct
-	build(data){
-		console.log(data)
+	build(data, year){
+		// Build container
+		const classNotesContainer = document.createElement('div')
+			classNotesContainer.classList.add('ucb-class-notes-list-container')
+		// Build Notes
+		data.forEach(note => {
+			const classNote = document.createElement('article')
+				classNote.classList.add('ucb-class-notes-list-note-item')
+			// Date
+			if(!year){
+				const classNoteYearContainer = document.createElement('div')
+					classNoteYearContainer.classList.add('class-note-year')
+				const classNoteYearLink = document.createElement('a')
+					classNoteYearLink.href = '#';
+					classNoteYearLink.innerText = note.attributes.field_ucb_class_year;
+					classNoteYearLink.addEventListener('click', this.onYearSelect.bind(this));
+				classNoteYearContainer.appendChild(classNoteYearLink)
+				classNote.appendChild(classNoteYearContainer)
+			}
+			// Class Note Text
+			const classNoteParagraph = document.createElement('p')
+				classNoteParagraph.innerHTML = this.escapeHTML(note.attributes.body.processed)
+				classNote.appendChild(classNoteParagraph)
+			// Date posted
+			const classNotePosted = document.createElement('p')
+				classNotePosted.classList.add('class-note-posted-date')
+				classNotePosted.innerText = `Posted ${this.formatDateString(note.attributes.created)}`
+				classNote.appendChild(classNotePosted)
+			classNotesContainer.appendChild(classNote)				
+		})
+			this.appendChild(classNotesContainer)
 	}
 	toggleMessageDisplay(element, display, className, innerText) {
 		if(className)
@@ -102,7 +131,7 @@ class ClassNotesListElement extends HTMLElement {
 		const sortSelectFilter = document.createElement('select');
 			sortSelectFilter.name = "Sort"
 			sortSelectFilter.className = 'Sort Select';
-			sortSelectFilter.onchange = this.onYearChange.bind(this); // Bind the event handler
+			sortSelectFilter.onchange = this.onSortChange.bind(this); // Bind the event handler
 			sortItemLabel.appendChild(sortSelectFilter);
 			container.appendChild(sortItemLabel);
 			formDiv.appendChild(container);
@@ -110,11 +139,14 @@ class ClassNotesListElement extends HTMLElement {
 
 	
 		// Add 'View All Notes' Link
+		const viewAllLinkContainer = document.createElement('div')
+			viewAllLinkContainer.classList.add('ucb-class-notes-view-all-container')
 		const viewAllLink = document.createElement('a');
 			viewAllLink.href = '#';
 			viewAllLink.innerText = 'View All Notes';
 			viewAllLink.addEventListener('click', this.viewAllNotes.bind(this));
-			form.appendChild(viewAllLink);
+			viewAllLinkContainer.appendChild(viewAllLink)
+			form.appendChild(viewAllLinkContainer);
 			this._userFormElement.appendChild(form);  
 	}
 
@@ -134,14 +166,44 @@ class ClassNotesListElement extends HTMLElement {
 	// Event handler for the dropdown change
     onYearChange(event) {
         const year = event.target.value;
-        const JSONURL = this.getAttribute('base-uri');
-        this.getData(JSONURL, year);
+        const JSONURL = this.getAttribute('base-uri');		
+		this.getData(JSONURL, year);
     }
 
+	onYearSelect(year){
+		const JSONURL = this.getAttribute('base-uri')
+		this.getData(JSONURL, year)
+	}
+
+	onSortChange(event){
+		const sort = event.target.value
+		console.log(sort)
+	}
 	// Event handler for View All -- no year specified
 	viewAllNotes(event){
 		event.preventDefault();
 		console.log('View all notes pressed')
+	}
+
+	escapeHTML(raw) {
+		if (!raw) return '';
+	
+		// First, escape all HTML to prevent execution of unwanted tags or JavaScript.
+		let escapedHTML = raw.replace(/\&/g, '&amp;').replace(/"/g, '&quot;')
+							 .replace(/</g, '&lt;').replace(/>/g, '&gt;');
+	
+		// Unescape the allowed tags (p, strong, em)
+		escapedHTML = escapedHTML.replace(/&lt;(\/?p)&gt;/g, '<$1>')
+								 .replace(/&lt;(\/?strong)&gt;/g, '<$1>')
+								 .replace(/&lt;(\/?em)&gt;/g, '<$1>');
+	
+		return escapedHTML;
+	}
+
+	formatDateString(dateString) {
+		const options = { year: 'numeric', month: 'short', day: 'numeric' };
+		const date = new Date(dateString);
+		return date.toLocaleDateString('en-US', options);
 	}
 
 	handleError = response => {
