@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Breadcrumb fix
+  This render didn't need to be added to the if statement. 
+  Fixed formatting as well.
+  
+  Closes #585 
+---
+
 - ### Title on Homepage no longer visible
   This fixes the functionality where a title is hidden when set as the site's homepage. This was previously working before a moveable title refactor and has been corrected.
   
