@@ -9,6 +9,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Title on Homepage no longer visible
+  This fixes the functionality where a title is hidden when set as the site's homepage. This was previously working before a moveable title refactor and has been corrected.
+  
+  Resolves #607 
+---
+
+- ### Hero unit separation
+  Hero Unit Separation
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/90
+  
+  Closes #605
+---
+
+- ### Form Page - Adds Body Field
+  The Form Page node's body displays above the attached form.
+  
+  Resolves #599 
+  
+  
+---
+
+- ### Events Calendar Background matches Section background color
+  Adjusts the `Events Calendar` so it matches the background color of the section it is placed in, rather than being always white. Text color adjusted to white for black and dark gray section backgrounds. 
+  
+  @jcsparks - Let me know if gold section background needs some text color adjustments, I could make an override for that that makes the text a darker gray / black than the default. 
+  
+  Resolves #564 
+---
+
+- ### Social Media Menu - Now Icons Only
+  Social Media Menu is now icons only, fixes bug where the site name would display. Fixes spelling of 'Facebook'.
+  
+  There was a: `<span class="vertical-icon-span"> * _siteNameHere_ * </span>`  on the template that was causing the site names to appear next to the respective logo on each link in the social media menu. These spans did not appear to be used anywhere else in d10, so they were removed to resolve the issue.
+  
+  Resolves #586 
+  
+---
+
 - ### Fixes error on Newsletter pages
   Resolves CuBoulder/tiamat-theme#596
 ---
