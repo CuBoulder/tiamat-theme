@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates theme-provided 403 page; removes 404 image
+  - Updates the theme-provided 403 page. This won't be visible often, as an anonymous user is redirected to the login page instead of being shown this page (CuBoulder/ucb_admin_menus#14).
+  - Removes 404 image. CuBoulder/ucb_default_content#6
+  
+  Sister PR in: [ucb_default_content](https://github.com/CuBoulder/ucb_default_content/pull/8)
+---
+
 - ### Breadcrumb fix
   This render didn't need to be added to the if statement. 
   Fixed formatting as well.
