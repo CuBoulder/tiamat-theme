@@ -14,12 +14,18 @@ class ClassNotesListElement extends HTMLElement {
         // Build user filters
 		this.generateForm(dates)
         // Insert year filter, make call
-        this.getData(JSONURL, "")
+        this.getData(JSONURL, "", 'Class Year')
 	}
 //  Gets info
-	getData(JSONURL, year = '', notes = [], next = false) {
+	getData(JSONURL, year = '', sort, notes = []) {
 		let yearFilter = '';
 		let publishFilter = ''
+		let sortFilter = ''
+		if(sort == 'Class Year'){
+			sortFilter = '&sort=field_ucb_class_year'
+		} else {
+			sortFilter = '&sort=-created'
+		}
 		// If its not a next link, build the JSON API URL
 			if (year) {
 				yearFilter = `?filter[field_ucb_class_year]=${year}`
@@ -28,10 +34,12 @@ class ClassNotesListElement extends HTMLElement {
 				yearFilter = ''
 				publishFilter = '?filter[status]=1'
 			}
-		const API = JSONURL + yearFilter + publishFilter
+		const API = JSONURL + yearFilter + publishFilter + sortFilter 
+		console.log(API)
 		fetch(API)
             .then(this.handleError)
             .then((data) => {
+				console.log('my data', data)
 				const classNotesContainer = this._notesListElement
 				// if (data.links.next){
 					data.data.forEach(note=>{
@@ -59,8 +67,6 @@ class ClassNotesListElement extends HTMLElement {
 			const classNote = document.createElement('article')
 				classNote.classList.add('ucb-class-notes-list-note-item')
 			// Date
-			console.log('my year', year)
-
 				const classNoteYearContainer = document.createElement('div')
 					classNoteYearContainer.classList.add('class-note-year')
 					const classNoteYearLink = document.createElement('a');
@@ -193,7 +199,15 @@ class ClassNotesListElement extends HTMLElement {
 
 	onSortChange(event){
 		const sort = event.target.value
-		console.log(sort)
+		const JSONURL = this.getAttribute('base-uri');
+		const notesListElement = this._notesListElement;
+	
+		while (notesListElement.firstChild) {
+			notesListElement.removeChild(notesListElement.firstChild);
+		}
+		this.getData(JSONURL, "", sort);
+
+
 	}
 	// Event handler for View All -- no year specified
 	viewAllNotes(event){
