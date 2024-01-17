@@ -49,16 +49,12 @@ class ClassNotesListElement extends HTMLElement {
             .then(this.handleError)
             .then((data) => {
 				const nextURL = data.links.next ? data.links.next.href : "";
-				// if (data.links.next){
+					// Iterate over all notes
 					data.data.forEach(note=>{
 						notes.push(note)
 					})
-				// 	this.getData(data.links.next.href,'',notes,true)
-				// }
-
-				// if(!data.links.next){
 					this.build(notes, nextURL)
-				// }
+
 			})
             .catch(Error=> {
               console.error('There was an error fetching data from the API - Please try again later.')
@@ -67,6 +63,7 @@ class ClassNotesListElement extends HTMLElement {
 			  this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-api-error', 'Error retrieving data from the API endpoint. Please try again later.');
             });
 	}
+	// Render handler
 	build(data, nextURL){
 		const classNotesContainer = this._notesListElement
 		// Build Notes
@@ -77,14 +74,13 @@ class ClassNotesListElement extends HTMLElement {
 			data.forEach(note => {
 				const classNote = document.createElement('article')
 					classNote.classList.add('ucb-class-notes-list-note-item')
-				// Date
+				// Date (Class Note Link)
 					const classNoteYearContainer = document.createElement('div')
 						classNoteYearContainer.classList.add('class-note-year')
 						const classNoteYearLink = document.createElement('a');
 						classNoteYearLink.href = '#';
 						classNoteYearLink.innerText = note.attributes.field_ucb_class_year;
-						
-						// Use an arrow function to pass the correct argument
+						// Class Note Link Event Listener
 						classNoteYearLink.addEventListener('click', (event) => {
 							event.preventDefault(); // Prevent default anchor behavior
 							this.onYearSelect(note.attributes.field_ucb_class_year);
@@ -108,7 +104,7 @@ class ClassNotesListElement extends HTMLElement {
 		}
 		// Makes the next button
 		if(nextURL != ""){
-			const nextButton = document.createElement('button'); // Changed to button for better semantics
+			const nextButton = document.createElement('button');
 			nextButton.classList.add('ucb-class-notes-read-more');
 			nextButton.innerText = 'Load More Notes';
 			nextButton.addEventListener('click', () => {
@@ -118,11 +114,9 @@ class ClassNotesListElement extends HTMLElement {
 	
 			// Append the button to the container or a specific element
 			this._notesListElement.appendChild(nextButton);
-		} else {
-			this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-end-of-results', 'End of results');
-		}
-			// this.appendChild(classNotesContainer)
+		} 
 	}
+	// Used for toggling the error messages/loader on/off
 	toggleMessageDisplay(element, display, className, innerText) {
 		if(className)
 			element.className = className;
@@ -132,7 +126,7 @@ class ClassNotesListElement extends HTMLElement {
 			element.setAttribute('hidden', '');
 		else element.removeAttribute('hidden');
 	}
-
+	// Builds the user forms
     generateForm(dates){
 		// Create Elements
 		const form = document.createElement('form'), 
@@ -190,7 +184,7 @@ class ClassNotesListElement extends HTMLElement {
 			form.appendChild(viewAllLinkContainer);
 			this._userFormElement.appendChild(form);  
 	}
-
+	// Generates the Dropdowns, on the user form
 	generateDropdown(dates, selectElement){
 		dates.map(date => {
 			const option = document.createElement('option');
@@ -203,7 +197,6 @@ class ClassNotesListElement extends HTMLElement {
 				selectElement.appendChild(option);
 		})
 	}
-
 	// Event handler for the dropdown change
     onYearChange(event) {
         const year = event.target.value;
@@ -214,7 +207,7 @@ class ClassNotesListElement extends HTMLElement {
 		}
 		this.getData(JSONURL, year);
     }
-
+	// If a Class Note Year is selected...
 	onYearSelect(year){
 		const JSONURL = this.getAttribute('base-uri');
 		const notesListElement = this._notesListElement;
@@ -225,7 +218,7 @@ class ClassNotesListElement extends HTMLElement {
 	
 		this.getData(JSONURL, year);
 	}
-
+	// Event handler for Sort filter dropdown change
 	onSortChange(event){
 		const sort = event.target.value
 		const JSONURL = this.getAttribute('base-uri');
@@ -249,7 +242,7 @@ class ClassNotesListElement extends HTMLElement {
 		}
 		this.getData(JSONURL, "" )
 	}
-
+	// Prevents malicious user input
 	escapeHTML(raw) {
 		if (!raw) return '';
 	
@@ -264,13 +257,13 @@ class ClassNotesListElement extends HTMLElement {
 	
 		return escapedHTML;
 	}
-
+	// Date formatter
 	formatDateString(dateString) {
 		const options = { year: 'numeric', month: 'short', day: 'numeric' };
 		const date = new Date(dateString);
 		return date.toLocaleDateString('en-US', options);
 	}
-
+	// Used for loading articles beyond 50, sets up next API calls
 	getNextSet(nextURL){
 		// Remove existing 'Load More Notes' button
 		const loadMoreButton = this.querySelector('.ucb-class-notes-read-more');
@@ -281,7 +274,7 @@ class ClassNotesListElement extends HTMLElement {
 		// Call API and update data
 		this.getData(nextURL);
 	}
-
+	// Error handler
 	handleError = response => {
         if (!response.ok) { 
            throw new Error;
