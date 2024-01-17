@@ -200,46 +200,40 @@ class ClassNotesListElement extends HTMLElement {
 	// Event handler for the dropdown change
     onYearChange(event) {
         const year = event.target.value;
-        const JSONURL = this.getAttribute('base-uri');	
+        const JSONURL = this.getAttribute('base-uri');
+		const sort = this.getSortValue();
 		const notesListElement = this._notesListElement
 		while (notesListElement.firstChild) {
 			notesListElement.removeChild(notesListElement.firstChild);
 		}
-		this.getData(JSONURL, year);
+		this.getData(JSONURL, year, sort);
     }
 	// If a Class Note Year is selected...
 	onYearSelect(year){
 		const JSONURL = this.getAttribute('base-uri');
-		const notesListElement = this._notesListElement;
-	
-		while (notesListElement.firstChild) {
-			notesListElement.removeChild(notesListElement.firstChild);
-		}
-	
+		this.clearNotesList()
 		this.getData(JSONURL, year);
 	}
 	// Event handler for Sort filter dropdown change
 	onSortChange(event){
 		const sort = event.target.value
 		const JSONURL = this.getAttribute('base-uri');
+		const year = this.getYearValue();
+		this.clearNotesList()
+		this.getData(JSONURL, year, sort);
+	}
+	// Helper method to clear the notes list
+	clearNotesList() {
 		const notesListElement = this._notesListElement;
-	
 		while (notesListElement.firstChild) {
 			notesListElement.removeChild(notesListElement.firstChild);
 		}
-		this.getData(JSONURL, "", sort);
-
-
 	}
 	// Event handler for View All -- no year specified
 	viewAllNotes(event){
 		event.preventDefault();
 		const JSONURL = this.getAttribute('base-uri');
-		const notesListElement = this._notesListElement;
-	
-		while (notesListElement.firstChild) {
-			notesListElement.removeChild(notesListElement.firstChild);
-		}
+		this.clearNotesList()
 		this.getData(JSONURL, "" )
 	}
 	// Prevents malicious user input
@@ -273,6 +267,15 @@ class ClassNotesListElement extends HTMLElement {
 	
 		// Call API and update data
 		this.getData(nextURL);
+	}
+	// Helper method to get the current year value from the dropdown
+	getYearValue() {
+		return this.querySelector('.Year.Select').value;
+	}
+
+	// Helper method to get the current sort value from the dropdown
+	getSortValue() {
+    	return this.querySelector('.Sort.Select').value;
 	}
 	// Error handler
 	handleError = response => {
