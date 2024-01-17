@@ -232,6 +232,7 @@ class ClassNotesListElement extends HTMLElement {
 	// Event handler for View All -- no year specified
 	viewAllNotes(event){
 		event.preventDefault();
+		this.resetDropdowns();
 		const JSONURL = this.getAttribute('base-uri');
 		this.clearNotesList()
 		this.getData(JSONURL, "" )
@@ -276,6 +277,16 @@ class ClassNotesListElement extends HTMLElement {
 	// Helper method to get the current sort value from the dropdown
 	getSortValue() {
     	return this.querySelector('.Sort.Select').value;
+	}
+	// Dropdown resetter
+	resetDropdowns() {
+		const yearDropdown = this.querySelector('.Year.Select');
+		const sortDropdown = this.querySelector('.Sort.Select');
+	
+		if (yearDropdown && sortDropdown) {
+			yearDropdown.value = '';
+			sortDropdown.value = 'Class Year';
+		}
 	}
 	// Error handler
 	handleError = response => {
