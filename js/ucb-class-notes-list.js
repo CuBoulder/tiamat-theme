@@ -25,7 +25,7 @@ class ClassNotesListElement extends HTMLElement {
         this.getData(JSONURL, "", 'Class Year')
 	}
 //  Gets info
-	getData(JSONURL, year = '', sort, notes = []) {
+	getData(JSONURL, year = '', sort, notes = [], nextURL = "") {
 		this.toggleMessageDisplay(this._loadingElement, 'block', null, null);
 		this.toggleMessageDisplay(this._messageElement, 'none', null, null);
 		let yearFilter = '';
@@ -44,12 +44,11 @@ class ClassNotesListElement extends HTMLElement {
 				yearFilter = ''
 				publishFilter = '?filter[status]=1'
 			}
-		const API = JSONURL + yearFilter + publishFilter + sortFilter 
+		const API = nextURL != "" ? nextURL : JSONURL + yearFilter + publishFilter + sortFilter 
 		fetch(API)
             .then(this.handleError)
             .then((data) => {
-				console.log('my data', data)
-				const classNotesContainer = this._notesListElement
+				const nextURL = data.links.next ? data.links.next.href : "";
 				// if (data.links.next){
 					data.data.forEach(note=>{
 						notes.push(note)
@@ -58,7 +57,7 @@ class ClassNotesListElement extends HTMLElement {
 				// }
 
 				// if(!data.links.next){
-					this.build(notes)
+					this.build(notes, nextURL)
 				// }
 			})
             .catch(Error=> {
@@ -68,16 +67,12 @@ class ClassNotesListElement extends HTMLElement {
 			  this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-api-error', 'Error retrieving data from the API endpoint. Please try again later.');
             });
 	}
-	// TO DO : construct
-	build(data){
+	build(data, nextURL){
 		const classNotesContainer = this._notesListElement
 		// Build Notes
-		console.log('i am building', data)
 		if(data.length == 0){
-			// TO DO -- add no results errors
 			this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
 			this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-end-of-results', 'No results matching your filters.');
-			console.log('No results')
 		} else {
 			data.forEach(note => {
 				const classNote = document.createElement('article')
@@ -110,6 +105,21 @@ class ClassNotesListElement extends HTMLElement {
 
 				classNotesContainer.appendChild(classNote)				
 			})
+		}
+		// Makes the next button
+		if(nextURL != ""){
+			const nextButton = document.createElement('button'); // Changed to button for better semantics
+			nextButton.classList.add('ucb-class-notes-read-more');
+			nextButton.innerText = 'Load More Notes';
+			nextButton.addEventListener('click', () => {
+				this.getNextSet(nextURL);
+				nextButton.remove(); // Remove the button after it's clicked
+			});
+	
+			// Append the button to the container or a specific element
+			this._notesListElement.appendChild(nextButton);
+		} else {
+			this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-end-of-results', 'End of results');
 		}
 			// this.appendChild(classNotesContainer)
 	}
@@ -231,7 +241,6 @@ class ClassNotesListElement extends HTMLElement {
 	// Event handler for View All -- no year specified
 	viewAllNotes(event){
 		event.preventDefault();
-		console.log('View all notes pressed')
 		const JSONURL = this.getAttribute('base-uri');
 		const notesListElement = this._notesListElement;
 	
@@ -260,6 +269,17 @@ class ClassNotesListElement extends HTMLElement {
 		const options = { year: 'numeric', month: 'short', day: 'numeric' };
 		const date = new Date(dateString);
 		return date.toLocaleDateString('en-US', options);
+	}
+
+	getNextSet(nextURL){
+		// Remove existing 'Load More Notes' button
+		const loadMoreButton = this.querySelector('.ucb-class-notes-read-more');
+		if (loadMoreButton) {
+			loadMoreButton.remove();
+		}
+	
+		// Call API and update data
+		this.getData(nextURL);
 	}
 
 	handleError = response => {
