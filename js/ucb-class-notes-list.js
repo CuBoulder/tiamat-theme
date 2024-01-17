@@ -4,10 +4,18 @@ class ClassNotesListElement extends HTMLElement {
 		const 			
 			chromeElement = this._chromeElement = document.createElement('div'),
 			userFormElement = this._userFormElement = document.createElement('div'),
-			notesListElement = this._notesListElement = document.createElement('div');
+			notesListElement = this._notesListElement = document.createElement('div'),
+			messageElement = this._messageElement = document.createElement('div'),
+			loadingElement = this._loadingElement = document.createElement('div');
+		messageElement.className = 'ucb-list-msg';
+		messageElement.setAttribute('hidden', '');
+		loadingElement.className = 'ucb-loading-data';
+		loadingElement.innerHTML = '<i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>';
 			this._notesListElement.classList.add('ucb-class-notes-list-container')
 			chromeElement.appendChild(userFormElement);
 			chromeElement.appendChild(notesListElement)
+			chromeElement.appendChild(messageElement);
+			chromeElement.appendChild(loadingElement);
 		this.appendChild(chromeElement);
         const dates = ['--Select date--', 1900, 1901, 1902, 1903, 1904, 1905, 1906, 1907, 1908, 1909, 1910, 1911, 1912, 1913, 1914, 1915, 1916, 1917, 1918, 1919, 1920, 1921, 1922, 1923, 1924, 1925, 1926, 1927, 1928, 1929, 1930, 1931, 1932, 1933, 1934, 1935, 1936, 1937, 1938, 1939, 1940, 1941, 1942, 1943, 1944, 1945, 1946, 1947, 1948, 1949, 1950, 1951, 1952, 1953, 1954, 1955, 1956, 1957, 1958, 1959, 1960, 1961, 1962, 1963, 1964, 1965, 1966, 1967, 1968, 1969, 1970, 1971, 1972, 1973, 1974, 1975, 1976, 1977, 1978, 1979, 1980, 1981, 1982, 1983, 1984, 1985, 1986, 1987, 1988, 1989, 1990, 1991, 1992, 1993, 1994, 1995, 1996, 1997, 1998, 1999, 2000, 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030, 2031, 2032, 2033, 2034, 2035, 2036, 2037, 2038, 2039, 2040, 2041, 2042, 2043, 2044, 2045, 2046, 2047, 2048, 2049, 2050]
 		const JSONURL = this.getAttribute('base-uri');
@@ -18,6 +26,7 @@ class ClassNotesListElement extends HTMLElement {
 	}
 //  Gets info
 	getData(JSONURL, year = '', sort, notes = []) {
+		this.toggleMessageDisplay(this._loadingElement, 'block', null, null);
 		let yearFilter = '';
 		let publishFilter = ''
 		let sortFilter = ''
@@ -49,49 +58,59 @@ class ClassNotesListElement extends HTMLElement {
 				// }
 
 				// if(!data.links.next){
-					this.build(notes, year)
+					this.build(notes)
 				// }
 			})
             .catch(Error=> {
               console.error('There was an error fetching data from the API - Please try again later.')
               console.error(Error)
-              this.toggleMessage('ucb-al-loading')
-              this.toggleMessage('ucb-al-api-error', "block")
+			  this.toggleMessageDisplay(this._loadingElement, 'none');
+			  this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-api-error', 'Error retrieving data from the API endpoint. Please try again later.');
             });
 	}
 	// TO DO : construct
-	build(data, year){
+	build(data){
 		const classNotesContainer = this._notesListElement
 		// Build Notes
-		data.forEach(note => {
-			const classNote = document.createElement('article')
-				classNote.classList.add('ucb-class-notes-list-note-item')
-			// Date
-				const classNoteYearContainer = document.createElement('div')
-					classNoteYearContainer.classList.add('class-note-year')
-					const classNoteYearLink = document.createElement('a');
-					classNoteYearLink.href = '#';
-					classNoteYearLink.innerText = note.attributes.field_ucb_class_year;
-					
-					// Use an arrow function to pass the correct argument
-					classNoteYearLink.addEventListener('click', (event) => {
-						event.preventDefault(); // Prevent default anchor behavior
-						this.onYearSelect(note.attributes.field_ucb_class_year);
-					});
-				classNoteYearContainer.appendChild(classNoteYearLink)
-				classNote.appendChild(classNoteYearContainer)
+		console.log('i am building', data)
+		if(data.length == 0){
+			// TO DO -- add no results errors
+			this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
+			this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-end-of-results', 'No results matching your filters.');
+			console.log('No results')
+		} else {
+			data.forEach(note => {
+				const classNote = document.createElement('article')
+					classNote.classList.add('ucb-class-notes-list-note-item')
+				// Date
+					const classNoteYearContainer = document.createElement('div')
+						classNoteYearContainer.classList.add('class-note-year')
+						const classNoteYearLink = document.createElement('a');
+						classNoteYearLink.href = '#';
+						classNoteYearLink.innerText = note.attributes.field_ucb_class_year;
+						
+						// Use an arrow function to pass the correct argument
+						classNoteYearLink.addEventListener('click', (event) => {
+							event.preventDefault(); // Prevent default anchor behavior
+							this.onYearSelect(note.attributes.field_ucb_class_year);
+						});
+					classNoteYearContainer.appendChild(classNoteYearLink)
+					classNote.appendChild(classNoteYearContainer)
+	
+				// Class Note Text
+				const classNoteParagraph = document.createElement('p')
+					classNoteParagraph.innerHTML = this.escapeHTML(note.attributes.body.processed)
+					classNote.appendChild(classNoteParagraph)
+				// Date posted
+				const classNotePosted = document.createElement('p')
+					classNotePosted.classList.add('class-note-posted-date')
+					classNotePosted.innerText = `Posted ${this.formatDateString(note.attributes.created)}`
+					classNote.appendChild(classNotePosted)
+					this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
 
-			// Class Note Text
-			const classNoteParagraph = document.createElement('p')
-				classNoteParagraph.innerHTML = this.escapeHTML(note.attributes.body.processed)
-				classNote.appendChild(classNoteParagraph)
-			// Date posted
-			const classNotePosted = document.createElement('p')
-				classNotePosted.classList.add('class-note-posted-date')
-				classNotePosted.innerText = `Posted ${this.formatDateString(note.attributes.created)}`
-				classNote.appendChild(classNotePosted)
-			classNotesContainer.appendChild(classNote)				
-		})
+				classNotesContainer.appendChild(classNote)				
+			})
+		}
 			// this.appendChild(classNotesContainer)
 	}
 	toggleMessageDisplay(element, display, className, innerText) {
