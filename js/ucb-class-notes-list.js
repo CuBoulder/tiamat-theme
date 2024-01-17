@@ -27,6 +27,7 @@ class ClassNotesListElement extends HTMLElement {
 //  Gets info
 	getData(JSONURL, year = '', sort, notes = []) {
 		this.toggleMessageDisplay(this._loadingElement, 'block', null, null);
+		this.toggleMessageDisplay(this._messageElement, 'none', null, null);
 		let yearFilter = '';
 		let publishFilter = ''
 		let sortFilter = ''
@@ -44,7 +45,6 @@ class ClassNotesListElement extends HTMLElement {
 				publishFilter = '?filter[status]=1'
 			}
 		const API = JSONURL + yearFilter + publishFilter + sortFilter 
-		console.log(API)
 		fetch(API)
             .then(this.handleError)
             .then((data) => {
@@ -232,6 +232,13 @@ class ClassNotesListElement extends HTMLElement {
 	viewAllNotes(event){
 		event.preventDefault();
 		console.log('View all notes pressed')
+		const JSONURL = this.getAttribute('base-uri');
+		const notesListElement = this._notesListElement;
+	
+		while (notesListElement.firstChild) {
+			notesListElement.removeChild(notesListElement.firstChild);
+		}
+		this.getData(JSONURL, "" )
 	}
 
 	escapeHTML(raw) {
