@@ -67,7 +67,7 @@ class ClassNotesListElement extends HTMLElement {
 	build(data, nextURL){
 		const classNotesContainer = this._notesListElement
 		// Build Notes
-		if(data.length == 0){
+		if(!data.length){
 			this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
 			this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-end-of-results', 'No results matching your filters.');
 		} else {
