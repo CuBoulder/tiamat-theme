@@ -105,6 +105,8 @@ class ClassNotesListElement extends HTMLElement {
 		}
 		// Makes the next button
 		if(nextURL != ""){
+			const nextButtonContainer = document.createElement('div')
+				nextButtonContainer.classList.add('ucb-class-notes-read-more-container')
 			const nextButton = document.createElement('button');
 			nextButton.classList.add('ucb-class-notes-read-more');
 			nextButton.innerText = 'Load More Notes';
@@ -112,9 +114,9 @@ class ClassNotesListElement extends HTMLElement {
 				this.getNextSet(nextURL);
 				nextButton.remove(); // Remove the button after it's clicked
 			});
-	
-			// Append the button to the container or a specific element
-			this._notesListElement.appendChild(nextButton);
+			// Append the button to the container, then the element
+			nextButtonContainer.appendChild(nextButton)
+			this._notesListElement.appendChild(nextButtonContainer);
 		} 
 	}
 	// Used for toggling the error messages/loader on/off
@@ -203,10 +205,7 @@ class ClassNotesListElement extends HTMLElement {
         const year = event.target.value;
         const JSONURL = this.getAttribute('base-uri');
 		const sort = this.getSortValue();
-		const notesListElement = this._notesListElement
-		while (notesListElement.firstChild) {
-			notesListElement.removeChild(notesListElement.firstChild);
-		}
+		this.clearNotesList();
 		this.getData(JSONURL, year, sort);
     }
 	// If a Class Note Year is selected...
