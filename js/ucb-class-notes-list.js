@@ -212,6 +212,9 @@ class ClassNotesListElement extends HTMLElement {
 	// If a Class Note Year is selected...
 	onYearSelect(year){
 		const JSONURL = this.getAttribute('base-uri');
+		const yearDropdown = this.querySelector('.class-note-year-select');
+		yearDropdown.value = year;
+
 		this.clearNotesList()
 		this.getData(JSONURL, year);
 	}
@@ -236,7 +239,7 @@ class ClassNotesListElement extends HTMLElement {
 		this.resetDropdowns();
 		const JSONURL = this.getAttribute('base-uri');
 		this.clearNotesList()
-		this.getData(JSONURL, "" )
+		this.getData(JSONURL, "", "Class Year")
 	}
 	// Prevents malicious user input
 	escapeHTML(raw) {
