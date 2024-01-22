@@ -1,0 +1,30 @@
+{% set classes = [
+    'node',
+    'container',
+    'node--type-' ~ node.bundle|clean_class,
+    node.isPromoted() ? 'node--promoted',
+    node.isSticky() ? 'node--sticky',
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    'ucb-content-wrapper'
+  ] %}
+  
+  <div{{ attributes.addClass(classes) }}>
+    <div class="ucb-faq-title">
+      <h1{{ title_attributes.addClass(is_front ? 'sr-only') }}>
+        {{ label }}
+      </h1>
+    </div>
+    {% if content.body|render %}
+    <div class="ucb-faq-page-section ucb-faq-page-body">
+      {{ content.body }}
+    </div>
+    {% endif %}
+    <div class="ucb-newsletter-section-content">
+        {% if content.field_ucb_faq_page_seciton|render %}
+          <div class="ucb-faq-page-section-body">
+            {{ content.field_ucb_faq_page_seciton|render }}
+          </div>
+        {% endif %}
+      </div>
+  </div>

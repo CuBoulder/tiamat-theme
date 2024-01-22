@@ -1,0 +1,15 @@
+{%
+    set classes = [
+      'paragraph',
+      'paragraph--type--' ~ paragraph.bundle|clean_class,
+      view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+      not paragraph.isPublished() ? 'paragraph--unpublished',
+    ]
+  %}
+
+{% block paragraph %}
+<div>
+    <h1>{{content.field_ucb_faq_question}}</h1>
+    <h2>{{content.field_ucb_faq_answer}}</h2>
+</div>
+{% endblock %}
