@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes expandable content `aria-expanded` errors
+  Resolves CuBoulder/tiamat-theme#614
+---
+
 - ### Updates theme-provided 403 page; removes 404 image
   - Updates the theme-provided 403 page. This won't be visible often, as an anonymous user is redirected to the login page instead of being shown this page (CuBoulder/ucb_admin_menus#14).
   - Removes 404 image. CuBoulder/ucb_default_content#6
