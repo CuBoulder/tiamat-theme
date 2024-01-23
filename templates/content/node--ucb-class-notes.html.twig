@@ -1,0 +1,19 @@
+{{ attach_library('boulder_base/ucb-class-notes') }}
+
+{% set classes = [
+    'node',
+    'ucb-class-notes',
+    'container',
+  ] %}
+  
+  <article{{ attributes.addClass(classes) }}>
+    <h1{{ title_attributes.addClass(is_front ? 'sr-only') }}>
+        {{ label }}
+      </h1>
+    {% if content %}
+      <div{{ content_attributes }}>
+        {{ content }}
+      </div>
+    {% endif %}
+  </article>
+  
