@@ -3,22 +3,29 @@
       'paragraph',
       'paragraph--type--' ~ paragraph.bundle|clean_class,
       view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-      not paragraph.isPublished() ? 'paragraph--unpublished'
+      not paragraph.isPublished() ? 'paragraph--unpublished',
+      'accordian'
     ]
   %}
 
 
-  <div{{attributes.addClass(classes)}}>
-    <h2>{{content.field_ucb_faq_section_title}}</h2>
-    {% for key, item in paragraph.field_ucb_faq_question_ans_para %}
-        <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-            <h2 itemprop="name">{{item.entity.field_ucb_faq_question.value}}</h2>
-            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-              <div itemprop="text">
-                {{item.entity.field_ucb_faq_answer.value}}
-              </div>
-            </div>
-          </div>
-
-    {% endfor %}
+<div{{ attributes.addClass(classes) }} id="accordion-{{ paragraph.id() }}">
+  <h2>{{ content.field_ucb_faq_section_title }}</h2>
+  {% for key, item in paragraph.field_ucb_faq_question_ans_para %}
+    {% set unique_id = 'collapse-' ~ paragraph.id() ~ '-' ~ key %}
+    <div class="accordion-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="accordion-header" id="heading-{{ unique_id }}">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ unique_id }}" aria-expanded="false" aria-controls="{{ unique_id }}">
+          <h2 itemprop="name">{{ item.entity.field_ucb_faq_question.value }}</h2>
+        </button>
     </div>
+      <div id="{{ unique_id }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ unique_id }}" data-bs-parent="#accordion-{{ paragraph.id() }}">
+        <div class="accordion-body" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <div itemprop="text">
+            {{ item.entity.field_ucb_faq_answer.value }}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>

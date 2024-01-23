@@ -457,3 +457,9 @@ ucb-user-page:
     theme:
       css/ucb-status-page-block.css: {}
       css/ucb-user-page.css: {}
+      
+ucb-faq-page:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-faq-page.css: {}

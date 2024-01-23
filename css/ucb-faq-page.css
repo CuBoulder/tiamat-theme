@@ -1,0 +1,6 @@
+.accordion .accordion-item button.accordion-button:first-child::after {
+    background: none;
+    font-family: "Font Awesome 5 Free";
+    content: '\f077';
+    text-align: center;
+}
