@@ -1,6 +1,7 @@
-.accordion .accordion-item button.accordion-button:first-child::after {
+/* .accordion .accordion-item button.accordion-button::after {
     background: none;
-    font-family: "Font Awesome 5 Free";
-    content: '\f077';
+    font-family: "Font Awesome 5 Free" !important;
+    content: '\f078';
+    font-weight: 900; 
     text-align: center;
-}
+} */
