@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes accessibility issues with Article and Article List
+  - Adds alt text to Article List images.
+  - Enhances readability and fixes bugs with article title backgrounds.
+  
+  Resolves CuBoulder/tiamat-theme#616
+---
+
 - ### Fixes expandable content `aria-expanded` errors
   Resolves CuBoulder/tiamat-theme#614
 ---
