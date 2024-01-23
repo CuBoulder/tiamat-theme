@@ -1,0 +1,24 @@
+{%
+    set classes = [
+      'paragraph',
+      'paragraph--type--' ~ paragraph.bundle|clean_class,
+      view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+      not paragraph.isPublished() ? 'paragraph--unpublished'
+    ]
+  %}
+
+
+  <div{{attributes.addClass(classes)}}>
+    <h2>{{content.field_ucb_faq_section_title}}</h2>
+    {% for key, item in paragraph.field_ucb_faq_question_ans_para %}
+        <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+            <h2 itemprop="name">{{item.entity.field_ucb_faq_question.value}}</h2>
+            <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+              <div itemprop="text">
+                {{item.entity.field_ucb_faq_answer.value}}
+              </div>
+            </div>
+          </div>
+
+    {% endfor %}
+    </div>

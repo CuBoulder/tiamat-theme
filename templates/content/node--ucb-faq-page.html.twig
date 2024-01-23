@@ -8,7 +8,8 @@
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
     'ucb-content-wrapper'
   ] %}
-  
+  <html itemscope itemtype="https://schema.org/FAQPage">
+
   <div{{ attributes.addClass(classes) }}>
     <div class="ucb-faq-title">
       <h1{{ title_attributes.addClass(is_front ? 'sr-only') }}>
