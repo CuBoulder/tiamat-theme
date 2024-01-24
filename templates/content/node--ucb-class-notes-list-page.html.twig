@@ -1,0 +1,41 @@
+{# 
+  
+  http://localhost:50282/jsonapi/node/ucb_class_notes
+  #}
+{{ attach_library('boulder_base/ucb-class-notes-list-page') }}
+
+{% set classes = [
+  'node',
+  'container',
+  'node--type-' ~ node.bundle|clean_class,
+  node.isPromoted() ? 'node--promoted',
+  node.isSticky() ? 'node--sticky',
+  not node.isPublished() ? 'node--unpublished',
+  view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+  'ucb-content-wrapper'
+ ] %}
+
+
+ {% set PublishedFilter = '&filter[publish-check][condition][path]=status'
+  ~ '&filter[publish-check][condition][value]=1'
+  ~ '&filter[publish-check][condition][memberOf]=published'
+%}
+ 
+<article{{ attributes.addClass(classes) }}>
+  <div class="ucb-class-notes-list-title">
+    <h1{{ title_attributes.addClass(is_front ? 'sr-only') }}>
+      {{ label }}
+    </h1>
+  </div>
+  {% if content.body|render %}
+  <div class="ucb-class-notes-section ucb-class-notes-body">
+    {{ content.body }}
+  </div>
+  {% endif %}
+  <ucb-class-notes-list{{ create_attribute({
+    'base-uri': url('<front>')|render|trim('/') ~ '/jsonapi/node/ucb_class_notes',
+})}}>
+    <noscript><div class="ucb-list-msg ucb-error">Please enable JavaScript to see this page.</div></noscript>
+    <div class="ucb-class-notes-list-container"></div>
+  </ucb-class-notes-list>
+</article>

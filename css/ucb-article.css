@@ -131,7 +131,7 @@ i.fa-regular.fa-calendar {
   margin-bottom: 20px;
 }
 
-.ucb-article-author-name span:not(:last-of-type):after{
+.ucb-article-author-name span:not(:last-of-type):after {
   content: ",";
 }
 
@@ -142,50 +142,58 @@ i.fa-regular.fa-calendar {
   object-fit: fill;
 }
 
-.centeredTitle {
+.backgroundTitleDiv .ucb-article-heading {
   position: absolute;
-  bottom: 0.5em;
+  display: block;
+  bottom: 0;
+  width: 100%;
+  background-color: transparent;
+  padding: 200px 20px 30px;
 }
 
-.article-header-White{
-  color: white;
+.backgroundTitleDiv.ucb-overlay-dark .ucb-article-heading {
+  background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.85));
+  background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.85));
+  background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.85));
+  background-image: -ms-linear-gradient(top, transparent, rgba(0, 0, 0, 0.85));
+  background-image: linear-gradient(top, transparent, rgba(0, 0, 0, 0.85));
 }
 
-.article-header-Black{
-  color:black
+.backgroundTitleDiv.ucb-overlay-light .ucb-article-heading {
+  background-image: -webkit-linear-gradient(top, transparent, rgba(255, 255, 255, 0.85));
+  background-image: -moz-linear-gradient(top, transparent, rgba(255, 255, 255, 0.85));
+  background-image: -o-linear-gradient(top, transparent, rgba(255, 255, 255, 0.85));
+  background-image: -ms-linear-gradient(top, transparent, rgba(255, 255, 255, 0.85));
+  background-image: linear-gradient(top, transparent, rgba(255, 255, 255, 0.85));
 }
 
-.backgroundTitleDiv > div > div > .imageMediaStyle > img {
+.ucb-article-heading.article-header-White, .ucb-article-heading.article-header-White h1 {
+  color: #FFF;
+}
+
+.ucb-article-heading.article-header-Black, .ucb-article-heading.article-header-Black h1 {
+  color: #000;
+}
+
+.backgroundTitleDiv .imageMediaStyle img {
   width: 100%;
   max-height: 600px;
   object-fit: cover;
 }
 
-.backgroundTitleDiv > div > div > .imageMediaStyle{
+.backgroundTitleDiv .imageMediaStyle {
   padding-bottom: 0;
   margin-bottom: 20px;
 }
 
-.ucb-overlay-dark > div > div > .imageMediaStyle > img, 
-.ucb-overlay-light > div > div > .imageMediaStyle > img{
-  opacity: 75%;
-}
-
-.ucb-overlay-light > div > div > .imageMediaStyle{
-  background: white;
-}
-.ucb-overlay-dark > div > div > .imageMediaStyle{
-  background: black;
-}
-
-.ucb-article-supplemental-text{
+.ucb-article-supplemental-text {
   margin-bottom: 1em;
   font-style: italic;
   font-size: 0.85em;
 }
 
 /* Removes caption on header img */
-.backgroundTitleDiv > div > div > .media-image-caption{
+.backgroundTitleDiv .media-image-caption {
   display: none;
 }
 
@@ -194,6 +202,6 @@ i.fa-regular.fa-calendar {
   display: block;
 }
 
-.backgroundTitleDiv .imageMediaStyle img{
+.backgroundTitleDiv .imageMediaStyle img {
   padding-bottom: 0px;
 }

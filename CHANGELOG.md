@@ -9,6 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds Class Note Page + Class Notes List Page
+  Adds the `Class Note` Node and `Class Note List` node. A Class Note List Page lists your Class Notes and has built in filters to allow visitors to filter by year or sort by class year or date posted.
+  
+  Includes:
+  `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/621
+  `tiamat-custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/91
+  
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/588
+---
+
+- ### Fixes accessibility issues with Article and Article List
+  - Adds alt text to Article List images.
+  - Enhances readability and fixes bugs with article title backgrounds.
+  
+  Resolves CuBoulder/tiamat-theme#616
+---
+
 - ### Fixes expandable content `aria-expanded` errors
   Resolves CuBoulder/tiamat-theme#614
 ---
