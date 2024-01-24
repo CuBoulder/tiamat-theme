@@ -143,10 +143,12 @@
     <header><h1 class="sr-only">{{ label }}</h1></header>
     <div class="backgroundTitleDiv {{ overlayClass }}">
       {{ content.field_article_title_background }}
-      <div class="container">
-        <h1{{ title_attributes.addClass('centeredTitle', 'article-header-' ~ textColor, is_front ? 'sr-only') }}>
-          {{ label }}
-        </h1>
+      <div{{ title_attributes.addClass('ucb-article-heading', 'article-header-' ~ textColor, is_front ? 'sr-only') }}>
+        <div class="container">
+          <h1>
+            {{ label }}
+          </h1>
+        </div>
       </div>
     </div>
     {% endif %}
