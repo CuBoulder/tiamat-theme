@@ -3,7 +3,7 @@ description: "Drupal 9+ theme for CU Boulder branded web properties"
 package: Custom
 core_version_requirement: ^9 || ^10
 type: theme
-base theme: claro
+base theme: stable9
 
 libraries: 
   - boulder_base/ucb-global
