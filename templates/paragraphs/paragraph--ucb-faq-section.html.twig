@@ -12,11 +12,13 @@
 <div{{ attributes.addClass(classes) }} id="accordion-{{ paragraph.id() }}">
   <h2>{{ content.field_ucb_faq_section_title }}</h2>
   {% for key, item in paragraph.field_ucb_faq_question_ans_para %}
+  {% set unsanitized_id = item.entity.field_ucb_faq_question.value %}
+  {% set hrefId = unsanitized_id | replace({' ': '-', '/': '', '\\': '', '?': '', '&': '', '%': '', '#': '', '$': '', '^': '', '*': '', '(': '', ')': '', '+': '', '=': '', '[': '', ']': '', '{': '', '}': '', '|': '', '\'': '', '\"': '', '<': '', '>': '', ',': '', '.': '', ':': '', ';': '', '!': '', '@': ''}) | lower %}
     {% set unique_id = 'collapse-' ~ paragraph.id() ~ '-' ~ key %}
     <div class="accordion-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
       <div class="accordion-header" id="heading-{{ unique_id }}">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ unique_id }}" aria-expanded="false" aria-controls="{{ unique_id }}">
-          <h2 itemprop="name">{{ item.entity.field_ucb_faq_question.value }}</h2>
+          <h2 id="{{hrefId}}" itemprop="name">{{ item.entity.field_ucb_faq_question.value }}</h2>
         </button>
     </div>
       <div id="{{ unique_id }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ unique_id }}" data-bs-parent="#accordion-{{ paragraph.id() }}">
@@ -29,5 +31,7 @@
     </div>
   {% endfor %}
 </div>
+
+
 
 

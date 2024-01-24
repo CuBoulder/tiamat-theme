@@ -460,6 +460,8 @@ ucb-user-page:
       
 ucb-faq-page:
   version: 1.x
+  js:
+    js/ucb-faq-page.js: {}
   css:
     theme:
       css/ucb-faq-page.css: {}
