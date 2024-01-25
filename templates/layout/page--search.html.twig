@@ -46,7 +46,7 @@
 
 {{ attach_library('boulder_base/ucb-search-page') }}
 
-<div class="layout-container ucb-page-container">
+<div class="ucb-page-container">
   {{ block("page_header", "page.html.twig") }}
   <div{{ create_attribute({ class: ['ucb-page-content', ucb_heading_font == 'normal' ? 'ucb-heading-font-normal'] }) }}>
     {{ page.highlighted }}
