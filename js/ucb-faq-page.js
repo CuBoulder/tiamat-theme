@@ -8,7 +8,7 @@ document.addEventListener('DOMContentLoaded', function() {
   var accordionItems = document.querySelectorAll('.accordion-item');
   accordionItems.forEach(function(item) {
     var collapseElement = item.querySelector('.accordion-collapse');
-    var hrefId = item.querySelector('h2').id;
+    var hrefId = item.querySelector('h3').id;
 
     // Event when an accordion item finishes opening
     collapseElement.addEventListener('shown.bs.collapse', function() {
@@ -37,3 +37,4 @@ function openAccordionItem(hash) {
     }
   }
 }
+

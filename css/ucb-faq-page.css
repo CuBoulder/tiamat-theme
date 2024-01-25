@@ -1,7 +1,7 @@
-/* .accordion .accordion-item button.accordion-button::after {
-    background: none;
-    font-family: "Font Awesome 5 Free" !important;
-    content: '\f078';
-    font-weight: 900; 
-    text-align: center;
-} */
+.ucb-faq-section{
+    padding-bottom: 20px;
+}
+
+.ucb-faq-section-header{
+    padding-bottom: 10px;
+}
