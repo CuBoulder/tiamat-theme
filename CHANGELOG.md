@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds label fields for "Department" and "Job Type" on People List Pages
+  Resolves CuBoulder/tiamat-theme#626
+  
+  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/44)
+---
+
 - ### Claro theme
   Updated theme files to accommodate the change to Claro.
 ---

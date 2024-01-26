@@ -32,13 +32,13 @@
     department: {
       includes: content.field_ucb_people_department|render|striptags|trim|split(' '),
       userAccessible: content.field_ucb_people_department_s|render|striptags|trim == 'On',
-      label: 'Department',
+      label: people_list_department_label,
       restrict: true
     },
     job_type: {
       includes: content.field_ucb_people_job_type|render|striptags|trim|split(' '),
       userAccessible: content.field_ucb_people_job_type_s|render|striptags|trim == 'On',
-      label: 'Job Type',
+      label: people_list_job_type_label,
       restrict: true
     },
     filter_1: {
