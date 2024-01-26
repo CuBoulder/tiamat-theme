@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Claro theme mini-update
+  Fixes for the `layout-container` and local-tasks css
+---
+
 - ### Adds label fields for "Department" and "Job Type" on People List Pages
   Resolves CuBoulder/tiamat-theme#626
   
