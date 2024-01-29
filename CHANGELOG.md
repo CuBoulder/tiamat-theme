@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update style.css
+  Removal of layout builder styles (lots of this was gin fixing)
+  Fix for Text Block title edit issue
+  
+  Sister PRs:
+  https://github.com/CuBoulder/tiamat10-profile/pull/69
+  https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/23
+  https://github.com/CuBoulder/tiamat10-project-template/pull/30
+  
+  
+  Closes #638 
+---
+
 - ### Claro theme mini-update
   Fixes for the `layout-container` and local-tasks css
 ---
