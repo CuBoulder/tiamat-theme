@@ -21,7 +21,8 @@
 ] %}
 
 {% set blockContent = content['#block_content'] %}
-{% set _rendered = blockContent|view|render %}{# Easiest way to ensure the cache is updated when the block or a referenced node is. Resolves #387. #}
+{% set _rendered = blockContent|view|render %}
+{# Easiest way to ensure the cache is updated when the block or a referenced node is. Resolves #387. #}
 {% if blockContent.field_text_block_background.value == '1' %}
 	{% set blockBackground = 'text-block-light-gray' %}
 {% elseif blockContent.field_text_block_background.value == '2' %}
@@ -44,12 +45,12 @@
 
 {% block content %}
 	<div{{attributes.addClass(classes)}}>
+		{{ title_prefix }}
+		{% if label %}
+			<h2{{title_attributes}}>{{ label }}</h2>
+		{% endif %}
+		{{ title_suffix }}
 		<div class="{{ blockBackground }} {{ blockStyle }}">
-			{{ title_prefix }}
-			{% if label %}
-				<h2{{title_attributes}}>{{ label }}</h2>
-			{% endif %}
-			{{ title_suffix }}
 			{{ content.field_text_block_body }}
 		</div>
 	</div>
