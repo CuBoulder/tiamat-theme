@@ -1,3 +1,8 @@
+/*
+This handles the updating hash functionality of an FAQ page's address bar so you can share a specific question.
+The page will open to that question's answer revealed if visited with a hashed address
+*/
+
 document.addEventListener('DOMContentLoaded', function() {
   // Handle page load with a specific hash
   if (window.location.hash) {
