@@ -2,15 +2,13 @@
    * Main function that will load the initial data from the given URL and start processing it for display
    * @param {string} JSONURL - URL for the JSON:API endpoint with filters, sort and pagination 
    * @param {string} id - target DOM element to add the content to 
-   * @param {string} IncludeCategories - array of categories to filter out when rendering 
+   * @param {string} IncludeCategories - array of categories to include when rendering 
    * @param {string} ExcludeTags - array of tags to filter out when rendering
    * @returns - Promise with resolve or reject
    */
 
-  function renderCollectionCategories( JSONURL, CategoryMap, CategoryInclude) {
+  function renderCollectionCategories( JSONURL) {
     return new Promise(function(resolve, reject) {
-        let includeCatArray = CategoryInclude.split(",");
-        console.log("XCAT", includeCatArray)
     // next URL if there is one, will be returned by this funtion
     let NEXTJSONURL = "";
   
@@ -30,68 +28,41 @@
           } else {
             NEXTJSONURL = "";
           }
-          console.log("Category Data Item: ", data);
-
-           // console.log("Inner Map", CategoryMap)
-          //console.log("data obj", data);
   
           // if no collections of returned, stop the loading spinner and let the user know we received no data that matches their query
           if (!data.data.length) {
-            //toggleMessage("ucb-al-loading", "none");
-            //toggleMessage("ucb-al-no-results", "block");
             reject;
           }
   
           data.data.map((item) => { 
             let currentDataID = item.attributes.drupal_internal__revision_id;
-            console.log("CurrentDataID: ", currentDataID)
-            console.log("includeCatArr: ", includeCatArray)
-            if(includeCatArray.includes(currentDataID.toString())) {
                 let currentClassName = "category-label-" + currentDataID;
                 let categoryLabels = document.getElementsByClassName(currentClassName);
                 for (let i = 0; i < categoryLabels.length; i++) {
                     categoryLabels[i].innerHTML = item.attributes.name;
                   }
-            CategoryMap.set(currentDataID, item.attributes.name);
 
-            }
+            
           })
-          // done loading -- hide the loading spinner graphic
-          //toggleMessage("ucb-al-loading", "none");
           resolve(NEXTJSONURL);
         }).catch(function(error) {
           // catch any fetch errors and let the user know so they're not endlessly watching the spinner
           console.log("Fetch Error in URL : " + JSONURL);
           console.log("Fetch Error is : " + error);
-          // turn off spinner
-          //toggleMessage("ucb-al-loading", "none");
-          // turn on default error message
-          if(error){
-            //toggleMessage("ucb-al-error", "block");
-  
-          }
   
       });
   
     }
     });
   }
-  function renderCollectionList( JSONURL, IncludeCategories = "", ExcludeTags = "", CategoryMap) {
+  function renderCollectionList( JSONURL, ExcludeTags = "", BodyDisplay) {
     return new Promise(function(resolve, reject) {
-    let includeCatArray = IncludeCategories.split(",").map(Number);
     let includeTypeArray = ExcludeTags.split(",").map(Number);
     // next URL if there is one, will be returned by this funtion
     let NEXTJSONURL = "";
-       console.log(CategoryMap);
-        console.log("CC2", CategoryMap.get("5"))
-        console.log("CC3", CategoryMap.get(5))
-
 
     if (JSONURL) {
       //let el = document.getElementById(id);
-  
-      // show the loading spinner while we load the data
-     // toggleMessage("ucb-al-loading", "block");
   
       fetch(JSONURL)
         .then((reponse) => reponse.json())
@@ -107,8 +78,6 @@
   
           // if no collections of returned, stop the loading spinner and let the user know we received no data that matches their query
           if (!data.data.length) {
-            //toggleMessage("ucb-al-loading", "none");
-            //toggleMessage("ucb-al-no-results", "block");
             reject;
           }
   
@@ -149,7 +118,6 @@
             let thisCollectionCats = [];
             let thisCollectionTypes = "";
             let typeInclusion = 0;
-            console.log("Data", item)
             // // loop through and grab all of the categories
             if (item.relationships.field_collection_item_category.data) {
               for (let i = 0; i < item.relationships.field_collection_item_category.data.length; i++) {
@@ -159,13 +127,11 @@
               }
             }
 
-            console.log("Current item categories: ", thisCollectionCats);
             // console.log("this collection cats",thisCollectionCats)
             // // loop through and grab all of the tags
             if (item.relationships.field_collection_item_page_type.data) {
                 thisCollectionTypes = item.relationships.field_collection_item_page_type.data.meta.drupal_internal__target_id;
             }
-            console.log("Current item types: ", thisCollectionTypes);
   
             // checks to see if the current collection (item) contains a category or tag scheduled for exclusion
             let doesIncludeCat = thisCollectionCats;
@@ -270,19 +236,19 @@
   
                 collectionDataLink.appendChild(collectionDataHead)
   
+                collectionDataContainer.appendChild(collectionDataLink)
   
   
                 // Summary
-  
+                if(BodyDisplay == "show") {                
                 var collectionSummaryBody = document.createElement('p')
                 collectionSummaryBody.className = 'ucb-collection-item-body'
                 //collectionSummaryBody.id = `body-${bodyAndImageId}`
                 collectionSummaryBody.innerText = body;
-  
-                //Appends
-  
-                collectionDataContainer.appendChild(collectionDataLink)
                 collectionDataContainer.appendChild(collectionSummaryBody)
+                }
+
+                //Appends 
                 collectionBlock.appendChild(collectionDataContainer)
   
   
@@ -292,14 +258,11 @@
               thisCollection.className = 'ucb-collection-card-container';
 
             thisCollectionCats.map((item) => {
-                console.log("TOI: ", typeof item)
-                if(CategoryMap.has(item)) {
                     thisCollection.classList.add('ucb-collection-category-' + item);
-                }
+                
             });
 
 
-            console.log("Check5Build", CategoryMap.get(5))
               thisCollection.appendChild(collectionBlock);
               dataOutput.append(thisCollection);
   
@@ -330,71 +293,7 @@
     });
   }
   
-  function renderFilterList(CategoryMap) {
-    return new Promise(function(resolve, reject) {
-      /*let collection = document.getElementsByClassName("category-label");
-        console.log("MAPISSUE", CategoryMap);
-        console.log("CC", CategoryMap.get(5));
-        console.log(typeof CategoryMap);
-    [].forEach.call(collection, function (item) {
-        if(CategoryMap.has(3)) {
-        console.log("CC2", CategoryMap.get("5"))
-        console.log("CC3", CategoryMap.get(5))
 
-        }
-        item.innerText = CategoryMap.get(Number(item.innerText));
-
-    });*/
-    });
-   
-    /*collection.map((item) => { 
-        console.log("Filter: ", item);
-      })*/
-  }
-
-  /**
-   * Initilization and start of code 
-   */
-  (function () {
-    // get the url from the data-jsonapi variable
-    let el = document.getElementById("collections-grid-block-data");
-    let JSONURL = ""; // JSON:API URL 
-    let JSONCATURL = ""; // JSON:API Category URL 
-    let NEXTJSONURL = ""; // next link for pagination 
-    let CategoryInclude = ""; // categories to exclude
-    let TagsExclude = ""; // tags to exclude 
-    let CategoryMap = new Map();
-  
-    // check to see if we have the data we need to work with.  
-    if (el) {
-      JSONURL = el.dataset.jsonapi;
-      JSONCATURL = el.dataset.jsoncats;
-      CategoryInclude = el.dataset.currentcats;
-      TagsExclude = el.dataset.extags;
-    }
-    console.log("\n JSONURL: " + JSONURL);
-    console.log("\n JSONCATURL: " + JSONCATURL);
-    console.log("\n CategoryInclude: " + CategoryInclude);
-    console.log("\n TagsExclude: " + TagsExclude);
-    // attempt to render the data requested 
-    renderCollectionCategories( JSONCATURL, CategoryMap, CategoryInclude).then((response) => {
-      if(response) {
-        NEXTJSONURL = "/jsonapi/" + response;
-      }
-    });
-
-    console.log("Outer Map", CategoryMap)
-    console.log("Check Map Values 3: ", CategoryMap.get(3));
-
-    // attempt to render the data requested 
-    renderCollectionList( JSONURL, CategoryInclude, TagsExclude, CategoryMap).then((response) => {
-      if(response) {
-        NEXTJSONURL = "/jsonapi/" + response;
-      }
-    });
-    
-    renderFilterList(CategoryMap);
-  })()
   
  function filterChecked() {
     let allCards = document.getElementsByClassName("ucb-collection-card-container");
@@ -425,6 +324,19 @@
     }
   }
 
+  function filterSingle(currentID) {
+
+    let allCards = document.getElementsByClassName("ucb-collection-card-container");
+    for (let i = 0; i < allCards.length; i++) {
+    allCards[i].classList.add("filtered");
+    }
+
+    let checkedCards = document.getElementsByClassName("ucb-collection-category-" + currentID);
+    for (let i = 0; i < checkedCards.length; i++) {
+    checkedCards[i].classList.remove("filtered");
+    }
+
+  }
 
  function resetFilters() {
     let allCards = document.getElementsByClassName("ucb-collection-card-container");
@@ -438,3 +350,52 @@
     }
 
   }
+
+  function resetSingleFilters() {
+    let allCards = document.getElementsByClassName("ucb-collection-card-container");
+    for (let i = 0; i < allCards.length; i++) {
+    allCards[i].classList.remove("filtered");
+    }
+
+  }
+
+  /**
+   * Initilization and start of code 
+   */
+  (function () {
+    // get the url from the data-jsonapi variable
+    let el = document.getElementById("collections-grid-block-data");
+    let JSONURL = ""; // JSON:API URL 
+    let JSONCATURL = ""; // JSON:API Category URL 
+    let NEXTJSONURL = ""; // next link for pagination 
+    let TagsExclude = ""; // tags to exclude 
+    let BodyDisplay = ""; // variable to display body text or not
+  
+    // check to see if we have the data we need to work with.  
+    if (el) {
+      JSONURL = el.dataset.jsonapi;
+      JSONCATURL = el.dataset.jsoncats;
+      TagsExclude = el.dataset.extags;
+      BodyDisplay = el.dataset.bodydisplay;
+    }
+    
+    console.log("\n JSONURL: " + JSONURL);
+    console.log("\n JSONCATURL: " + JSONCATURL);
+    console.log("\n TagsExclude: " + TagsExclude);
+    console.log("\n BodyDisplay: " + BodyDisplay);
+    // attempt to render the data requested 
+    renderCollectionCategories( JSONCATURL).then((response) => {
+      if(response) {
+        NEXTJSONURL = "/jsonapi/" + response;
+      }
+    });
+
+
+    // attempt to render the data requested 
+    renderCollectionList( JSONURL, TagsExclude, BodyDisplay).then((response) => {
+      if(response) {
+        NEXTJSONURL = "/jsonapi/" + response;
+      }
+    });
+    
+  })()

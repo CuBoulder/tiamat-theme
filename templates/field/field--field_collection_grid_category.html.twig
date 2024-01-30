@@ -1,10 +1,10 @@
 <div class="collection-category-container">
 
 	<div class="collection-filter-links">
-    <button class = "category-single-button" onclick = "resetFilters()">All</button>
+    <button class = "category-single-button" onclick = "resetSingleFilters()">All</button>
 
 		{% for item in items %}
-			<button class = "category-single-button category-label-{{ item.content|render|striptags|trim|replace({' ': '-'}) }}" data-category="{{ item.content|render|striptags|trim|replace({' ': '-'}) }}">{{ item.content|render|striptags|trim }}</button>
+			<button class = "category-single-button category-label-{{ item.content|render|striptags|trim|replace({' ': '-'}) }}" data-category="{{ item.content|render|striptags|trim|replace({' ': '-'}) }}" onclick="filterSingle({{ item.content|render|striptags|trim|replace({' ': '-'}) }})">{{ item.content|render|striptags|trim }}</button>
 
 		{% endfor %}
 
