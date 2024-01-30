@@ -1,0 +1,61 @@
+
+{%
+    set classes = [
+      'block',
+      'container',
+      'block-' ~ configuration.provider|clean_class,
+      'block-' ~ plugin_id|clean_class,
+      bundle ? 'block--type-' ~ bundle|clean_class,
+      view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
+  ]
+  %}
+
+{# This block mirrors the Article List Node - constructs a JSON endpoint in TWIG using include filters #}
+{% set collectionsCatsJSON = (url('<front>')|render|trim('/'))
+    ~ '/jsonapi/taxonomy_term/collection_category'
+    
+  %}
+{# JSON API Endpoint information #}
+{% set collectionsJSON = (url('<front>')|render|trim('/'))
+    ~ '/jsonapi/node/collection_item_page'
+    ~ '?include=field_collection_item_thumbnail.field_media_image'
+    ~ '&fields[file--file]=uri,url'
+  %}
+
+  {% set includeTags = "" %}
+  {% set myTypes = content.field_collection_grid_type %}
+
+
+  {% set filterItemsStyle = "collection-filter-hide" %}
+  {% if content.field_collections_filter|render|striptags|trim == "Fade Items" %}
+      {% set filterItemsStyle = "collection-filter-fade" %}
+  {% endif %}
+
+  {% set multiselectStyle = "collection-multiselect-single" %}
+  {% if content.field_collections_multiselect|render|striptags|trim == "Multi Select List" %}
+      {% set multiselectStyle = "collection-multiselect-multi" %}
+  {% endif %}
+
+
+{{ attach_library('boulder_base/ucb-collections-block') }}
+{% block content %}
+	<div{{attributes.addClass(classes)}}>
+  
+
+  <div class = "collection-grid-container {{filterItemsStyle}} {{mutliselectStyle}}">
+		<div class="collections-filter-list">
+			{{ content.field_collection_category_select}}
+			{#<input type="reset" value="Reset Filters" class="category-filter-reset" onclick = "resetFilters()" ></input>#}
+	</div>
+	<div id="collections-grid-block-data" 
+  data-jsonapi="{{ collectionsJSON }}"
+  data-jsonCats="{{ collectionsCatsJSON }}"
+  data-currentCats="1,3,5,6,7,8,9,11"
+  data-exTags= "2,4,10"
+  class = "collections-grid-block-data">
+	</div>
+  </div>
+<div class = "checkArea" >
+  {{ content.field_collection_grid_type }}
+</div>
+{% endblock content %}

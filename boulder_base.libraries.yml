@@ -451,3 +451,10 @@ ucb-user-page:
     theme:
       css/ucb-status-page-block.css: {}
       css/ucb-user-page.css: {}
+ucb-collections-block:
+  version: 1.x
+  js:
+    js/ucb-collections-block.js: {}
+  css:
+    theme:
+      css/block/ucb-collections-block.css: {}
