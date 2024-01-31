@@ -7,6 +7,7 @@ base theme: stable9
 
 libraries: 
   - boulder_base/ucb-global
+  - boulder_base/migrate_styles  # Add your custom library here
 
 regions:
   header: "Header"
