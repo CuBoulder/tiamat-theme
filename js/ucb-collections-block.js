@@ -297,7 +297,13 @@
   
  function filterChecked() {
     let allCards = document.getElementsByClassName("ucb-collection-card-container");
+    let addedSpanData = document.getElementsByClassName("collection-grid-filter-span");
     let noFilters = 0;
+    for (let i = 0; i < addedSpanData.length; i++) {
+      addedSpanData[i].innerHTML = "<strong>Selected Filters: </strong>" 
+    }
+
+    
     for (let i = 0; i < allCards.length; i++) {
     allCards[i].classList.add("filtered");
     }
@@ -311,16 +317,25 @@
             for (let i = 0; i < checkedCards.length; i++) {
             checkedCards[i].classList.remove("filtered");
             }
-
             
+            
+            let currentCategory = document.getElementsByClassName("category-label-"+currentID);
+            for (let i = 0; i < addedSpanData.length; i++) {
+              addedSpanData[i].innerHTML = addedSpanData[i].innerHTML + currentCategory[0].innerText + ", ";
+            }
         }
     }
 
+    for (let i = 0; i < addedSpanData.length; i++) {
+      addedSpanData[i].innerHTML = addedSpanData[i].innerHTML.slice(0, -2) + "<a href='#' data-collection='collection-28' class='collection-reset' style='display: inline;' onclick = 'resetFilters()'><i class='fa-solid fa-xmark'></i> Reset Filters</a>" 
+    }
     if(noFilters == 0) {
         for (let i = 0; i < allCards.length; i++) {
         allCards[i].classList.remove("filtered");
         }
-
+        for (let i = 0; i < addedSpanData.length; i++) {
+          addedSpanData[i].innerHTML = "";
+        }
     }
   }
 
@@ -336,6 +351,7 @@
     checkedCards[i].classList.remove("filtered");
     }
 
+
   }
 
  function resetFilters() {
@@ -347,6 +363,11 @@
     let allChecks = document.getElementsByClassName("category-checkbox");
     for (let i = 0; i < allChecks.length; i++) {
         allChecks[i].checked = false;
+    }
+
+    let clearSpanData = document.getElementsByClassName("collection-grid-filter-span");
+    for (let i = 0; i < clearSpanData.length; i++) {
+      clearSpanData[i].innerHTML = "";
     }
 
   }

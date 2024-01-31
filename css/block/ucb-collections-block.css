@@ -1,5 +1,6 @@
 .collection-category-line {
     display: flex;
+    min-width: max-content;
 }
 .category-label {
    white-space: normal;
@@ -26,6 +27,7 @@
     font-size: 85%;
     font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
     border: 1px solid #ddd;
+    margin-top: 10px;
 }
 .category-filter-reset:hover {   
     background-color: #d6d6d6;
@@ -50,10 +52,14 @@
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
+    justify-content: space-between;
+}
+.collection-multiselect-multi .collections-grid-block-data {
     margin-left: 20px;
 }
 .ucb-collection-card-container {
-    margin: 5px 10px;
+    transition: opacity .5s ease;
+    margin: 5px 0px;
 }
 .ucb-collection-card-img {
     padding-bottom: 10px;
@@ -67,13 +73,13 @@
 
 @media (min-width: 960px) and (max-width: 1199px) {
     .ucb-collection-card-container {
-        width: 40%;
+        width: 45%;
     }
 }
 
 @media (min-width: 768px) and (max-width: 959px) {
     .ucb-collection-card-container {
-        width: 40%;
+        width: 49%;
     }
 }
 
@@ -88,6 +94,7 @@
 }
 
 .collection-filter-fade .ucb-collection-card-container.filtered {
+    
     opacity: .25;
 }
 
@@ -105,7 +112,7 @@
     border: 1px solid #e7e7e7;
 }
 
-.category-filter-label {
+.collection-multiselect-single .category-filter-label {
     font-size: 100%;
     display: inline;
     font-weight: bold;
@@ -116,4 +123,12 @@
     border: 1px solid #181818;
     padding: 1px 6px;
     border-radius: 2px;
+}
+
+.collection-reset {
+    margin-left: 20px;
+}
+
+.collection-grid-filter-span {
+    margin-left: 20px;
 }

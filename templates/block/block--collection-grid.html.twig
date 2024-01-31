@@ -1,4 +1,3 @@
-
 {%
     set classes = [
       'block',
@@ -22,48 +21,91 @@
     ~ '&fields[file--file]=uri,url'
   %}
 
-  {% set includeTags = "" %}
-  {% set myTypes = content.field_collection_grid_type %}
+{% set includeTags = "" %}
+{% set myTypes = content.field_collection_grid_type %}
 
 
-  {% set filterItemsStyle = "collection-filter-hide" %}
-  {% if content.field_collections_filter|render|striptags|trim == "Fade Items" %}
-      {% set filterItemsStyle = "collection-filter-fade" %}
-  {% endif %}
+{% set filterItemsStyle = "collection-filter-hide" %}
+{% if content.field_collections_filter|render|striptags|trim == "Fade Items" %}
+	{% set filterItemsStyle = "collection-filter-fade" %}
+{% endif %}
 
-  {% set multiselectStyle = "collection-multiselect-single" %}
-  {% if content.field_collections_multiselect|render|striptags|trim == "Multi Select List" %}
-      {% set multiselectStyle = "collection-multiselect-multi" %}
-  {% endif %}
+{% set multiselectStyle = "collection-multiselect-single" %}
+{% if content.field_collections_multiselect|render|striptags|trim == "Multi Select List" %}
+	{% set multiselectStyle = "collection-multiselect-multi" %}
+{% endif %}
 
 
-  {% set displayStyle = "show" %}
-  {% if content.field_collections_display|render|striptags|trim == "Hide" %}
-      {% set displayStyle = "hide" %}
-  {% endif %}
+{% set displayStyle = "show" %}
+{% if content.field_collections_display|render|striptags|trim == "Hide" %}
+	{% set displayStyle = "hide" %}
+{% endif %}
 
 {{ attach_library('boulder_base/ucb-collections-block') }}
 {% block content %}
 	<div{{attributes.addClass(classes)}}>
-  
+		{{ title_prefix }}
+		{% if label %}
+			<h2{{title_attributes}}>{{ label }}</h2>
+		{% endif %}
+		{{ title_suffix }}
 
-  <div class = "collection-grid-container {{filterItemsStyle}} {{mutliselectStyle}}">
-		<div class="collections-filter-list">
+		<div class="collection-grid-container {{filterItemsStyle}} {{multiselectStyle}}">
+			<div
+				class="collection-filter-container">
+				{# Single Select List #}
+				{% if multiselectStyle == "collection-multiselect-single" %}
+					<div class="collections-filter-list">
+						{% for key, item in content['#block_content'].field_collection_category_select %}
+							{%  if key|first != '#' %}
+								<div class="collection-grid-filters">
+									<h3 class="category-filter-label">{{item.entity.field_collection_filter_label.value }}
+									</h3>
+									<div class="collection-category-container">
+										<div class="collection-filter-links">
+											<button class="category-single-button" onclick="resetSingleFilters()">All</button>
+											{% for key, cat in item.entity.field_collection_grid_category %}
+												{%  if key|first != '#' %}
+													<button class="category-single-button category-label-{{ cat|view }}" data-category="{{ cat|view }}" onclick="filterSingle({{ cat|view }})">{{ cat|view }}</button>
+												{% endif %}
+											{% endfor %}
+										</div>
+									</div>
+								</div>
 
-				{% for key, item in content['#block_content'].field_collection_category_select %}
-					{%  if key|first != '#' %}
-              {{item.entity.collection-grid-filter.entity.field_collection_grid_label.entity.content }}
-					{% endif %}
-				{% endfor %}
-			{{ content.field_collection_category_select}}
-			{#<input type="reset" value="Reset Filters" class="category-filter-reset" onclick = "resetFilters()" ></input>#}
-	  </div>
-    <div id="collections-grid-block-data" 
-    data-jsonapi="{{ collectionsJSON }}"
-    data-jsonCats="{{ collectionsCatsJSON }}"
-    data-exTags= "{{ content.field_collection_grid_type|render|striptags|trim}}"
-    data-bodyDisplay = {{ displayStyle }}
-    class = "collections-grid-block-data">
-    </div>
-  </div>
+							{% endif %}
+						{% endfor %}
+						{#<input type="reset" value="Reset Filters" class="category-filter-reset" onclick = "resetFilters()" ></input>#}
+					</div>
+				{% elseif multiselectStyle == "collection-multiselect-multi" %}
+
+					{% for key, item in content['#block_content'].field_collection_category_select %}
+						{%  if key|first != '#' %}
+							<div class="collection-filter-links">
+								<h3 class="category-filter-label">{{item.entity.field_collection_filter_label.value }}
+								</h3>
+								<div class="collection-category-container">
+									{% for key, cat in item.entity.field_collection_grid_category %}
+										{%  if key|first != '#' %}
+											<div class="collection-category-line">
+												<input class="category-checkbox" type="checkbox" data-category="{{ cat|view }}" onclick="filterChecked()">
+												<label class="category-label category-label-{{ cat|view }}" data-category="{{ cat|view }}-label">{{ cat|view }}</label>
+											</div>
+										{% endif %}
+									{% endfor %}
+								</div>
+							</div>
+
+						{% endif %}
+					{% endfor %}
+					<input type="reset" value="Reset Filters" class="category-filter-reset" onclick="resetFilters()"></input>
+			{% endif %}
+		</div>
+		<div class="collection-grid-card-wrapper">
+			<div class="collection-grid-filter-checks">
+			<span class = "collection-grid-filter-span"></span>
+			</div>
+			<div id="collections-grid-block-data" data-jsonapi="{{ collectionsJSON }}" data-jsoncats="{{ collectionsCatsJSON }}" data-extags="{{ content.field_collection_grid_type|render|striptags|trim}}" data-bodydisplay={{ displayStyle }} class="collections-grid-block-data"></div>
+		</div>
+	</div>
 {% endblock content %}
