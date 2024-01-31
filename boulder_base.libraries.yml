@@ -458,6 +458,14 @@ ucb-user-page:
       css/ucb-status-page-block.css: {}
       css/ucb-user-page.css: {}
       
+ucb-faq-page:
+  version: 1.x
+  js:
+    js/ucb-faq-page.js: {}
+  css:
+    theme:
+      css/ucb-faq-page.css: {}
+      
 ucb-class-notes:
   version: 1.x
   css:
