@@ -702,7 +702,7 @@ p.supersize strong {
   font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
-/* ul.list-style-underline>li {
+ul.list-style-underline>li {
   list-style: none;
 }
 
@@ -738,10 +738,10 @@ ul.list-style-border>li {
   border-top: none;
   padding: 10px;
   margin-bottom: 0;
-} */
+}
 
 /* UNORDERED LIST STYLES */
-/* 
+
 ul.list-style-icon-1,
 ul.list-style-icon-2,
 ul.list-style-icon-3,
@@ -811,10 +811,10 @@ ul.list-style-icon-6>li:before,
 ul.list-style-icon-finger>li:before {
   content: '\f0a4';
   font-weight: 900;
-} */
+}
 
 /* ORDERED LIST STYLES */
-/* ol.list-style-alpha-upper,
+ol.list-style-alpha-upper,
 ol.list-style-alpha-upper>li {
   list-style: upper-alpha;
 }
@@ -832,7 +832,7 @@ ol.list-style-roman-upper>li {
 ol.list-style-roman-lower,
 ol.list-style-roman-lower>li {
   list-style: lower-roman;
-} */
+}
 
 /* TABLE STYLES */
 table.table-zebra tr:nth-child(odd) td {

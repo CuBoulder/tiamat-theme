@@ -1,4 +1,8 @@
-
+/*
+* These List styles also appear in, previously added:
+*   - style.css (lines 705 - 835)
+*   - styleguide/type.css (lines 97 - 159)
+*/
 ol {
     list-style: decimal;
 }
