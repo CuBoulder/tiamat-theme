@@ -197,7 +197,13 @@
               }
   
               let title = item.attributes.title;
-              let link = item.attributes.path.alias;
+              let link = "";
+              if(item.attributes.path.alias) {
+                link = item.attributes.path.alias;
+              }
+              else {
+                link = "/node/" + item.attributes.drupal_internal__nid;
+              }
               let image = "";
               let collectionSummarySize = "col-md-12";
   
