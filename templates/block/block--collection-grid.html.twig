@@ -41,6 +41,8 @@
 	{% set displayStyle = "hide" %}
 {% endif %}
 
+{% set blockID =  elements.content['#block_content'].id() %}
+
 {{ attach_library('boulder_base/ucb-collections-block') }}
 {% block content %}
 	<div{{attributes.addClass(classes)}}>
@@ -50,7 +52,7 @@
 		{% endif %}
 		{{ title_suffix }}
 
-		<div class="collection-grid-container {{filterItemsStyle}} {{multiselectStyle}}">
+		<div class="collection-grid-container collection-grid-container-{{blockID}} {{filterItemsStyle}} {{multiselectStyle}}" data-blockid = {{blockID}}>
 			<div
 				class="collection-filter-container">
 				{# Single Select List #}
@@ -63,10 +65,10 @@
 									</h3>
 									<div class="collection-category-container">
 										<div class="collection-filter-links">
-											<button class="category-single-button" onclick="resetSingleFilters()">All</button>
+											<button class="category-single-button" onclick="resetSingleFilters({{ blockID }})">All</button>
 											{% for key, cat in item.entity.field_collection_grid_category %}
 												{%  if key|first != '#' %}
-													<button class="category-single-button category-label-{{ cat|view }}" data-category="{{ cat|view }}" onclick="filterSingle({{ cat|view }})">{{ cat|view }}</button>
+													<button class="category-single-button category-label-{{ cat|view }}-{{ blockID }}" data-category="{{ cat|view }}" onclick="filterSingle({{ cat|view }}, {{ blockID }})">{{ cat|view }}</button>
 												{% endif %}
 											{% endfor %}
 										</div>
@@ -88,8 +90,8 @@
 									{% for key, cat in item.entity.field_collection_grid_category %}
 										{%  if key|first != '#' %}
 											<div class="collection-category-line">
-												<input class="category-checkbox" type="checkbox" data-category="{{ cat|view }}" onclick="filterChecked()">
-												<label class="category-label category-label-{{ cat|view }}" data-category="{{ cat|view }}-label">{{ cat|view }}</label>
+												<input class="category-checkbox category-checkbox-{{ blockID }}" type="checkbox" data-category="{{ cat|view }}" onclick="filterChecked({{ blockID }})">
+												<label class="category-label category-label-{{ cat|view }}-{{ blockID }}" data-category="{{ cat|view }}-label">{{ cat|view }}</label>
 											</div>
 										{% endif %}
 									{% endfor %}
@@ -98,14 +100,14 @@
 
 						{% endif %}
 					{% endfor %}
-					<input type="reset" value="Reset Filters" class="category-filter-reset" onclick="resetFilters()"></input>
+					<input type="reset" value="Reset Filters" class="category-filter-reset category-filter-reset-{{ blockID }}" onclick="resetFilters({{ blockID }})"></input>
 			{% endif %}
 		</div>
 		<div class="collection-grid-card-wrapper">
 			<div class="collection-grid-filter-checks">
-			<span class = "collection-grid-filter-span"></span>
+			<span class = "collection-grid-filter-span-{{ blockID }}"></span>
 			</div>
-			<div id="collections-grid-block-data" data-jsonapi="{{ collectionsJSON }}" data-jsoncats="{{ collectionsCatsJSON }}" data-extags="{{ content.field_collection_grid_type|render|striptags|trim}}" data-bodydisplay={{ displayStyle }} class="collections-grid-block-data"></div>
+			<div id="collections-grid-block-data-{{blockID}}" data-jsonapi="{{ collectionsJSON }}" data-jsoncats="{{ collectionsCatsJSON }}" data-extags="{{ content.field_collection_grid_type|render|striptags|trim}}" data-bodydisplay="{{ displayStyle }}" class="collections-grid-block-data"></div>
 		</div>
 	</div>
 {% endblock content %}

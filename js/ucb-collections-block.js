@@ -7,11 +7,11 @@
    * @returns - Promise with resolve or reject
    */
 
-  function renderCollectionCategories( JSONURL) {
+  function renderCollectionCategories( JSONURL, blockID) {
     return new Promise(function(resolve, reject) {
     // next URL if there is one, will be returned by this funtion
     let NEXTJSONURL = "";
-  
+
     if (JSONURL) {
       //let el = document.getElementById(id);
   
@@ -36,9 +36,11 @@
   
           data.data.map((item) => { 
             let currentDataID = item.attributes.drupal_internal__revision_id;
-                let currentClassName = "category-label-" + currentDataID;
+                let currentClassName = "category-label-" + currentDataID + "-" + blockID;
                 let categoryLabels = document.getElementsByClassName(currentClassName);
+                console.log("currentClass: ", currentClassName)
                 for (let i = 0; i < categoryLabels.length; i++) {
+                  console.log("checkClass:")
                     categoryLabels[i].innerHTML = item.attributes.name;
                   }
 
@@ -55,11 +57,12 @@
     }
     });
   }
-  function renderCollectionList( JSONURL, ExcludeTags = "", BodyDisplay) {
+  function renderCollectionList( JSONURL, ExcludeTags = "", BodyDisplay, blockID) {
     return new Promise(function(resolve, reject) {
     let includeTypeArray = ExcludeTags.split(",").map(Number);
     // next URL if there is one, will be returned by this funtion
     let NEXTJSONURL = "";
+
 
     if (JSONURL) {
       //let el = document.getElementById(id);
@@ -253,12 +256,12 @@
   
   
   
-              let dataOutput = document.getElementById("collections-grid-block-data");
+              let dataOutput = document.getElementById("collections-grid-block-data-"+ blockID);
               let thisCollection = document.createElement("collection");
-              thisCollection.className = 'ucb-collection-card-container';
+              thisCollection.className = 'ucb-collection-card-container ucb-collection-card-container-' + blockID;
 
             thisCollectionCats.map((item) => {
-                    thisCollection.classList.add('ucb-collection-category-' + item);
+                    thisCollection.classList.add('ucb-collection-category-' + item + "-" + blockID);
                 
             });
 
@@ -295,9 +298,10 @@
   
 
   
- function filterChecked() {
-    let allCards = document.getElementsByClassName("ucb-collection-card-container");
-    let addedSpanData = document.getElementsByClassName("collection-grid-filter-span");
+ function filterChecked(blockID) {
+  console.log("BlockID: ", blockID)
+    let allCards = document.getElementsByClassName("ucb-collection-card-container-" + blockID);
+    let addedSpanData = document.getElementsByClassName("collection-grid-filter-span-" + blockID);
     let noFilters = 0;
     for (let i = 0; i < addedSpanData.length; i++) {
       addedSpanData[i].innerHTML = "<strong>Selected Filters: </strong>" 
@@ -308,18 +312,18 @@
     allCards[i].classList.add("filtered");
     }
 
-    let allChecks = document.getElementsByClassName("category-checkbox");
+    let allChecks = document.getElementsByClassName("category-checkbox-" + blockID);
     for (let i = 0; i < allChecks.length; i++) {
         let currentID = allChecks[i].dataset.category;
         if(allChecks[i].checked) {
             noFilters = 1;
-            let checkedCards = document.getElementsByClassName("ucb-collection-category-" + currentID);
+            let checkedCards = document.getElementsByClassName("ucb-collection-category-" + currentID + "-" + blockID);
             for (let i = 0; i < checkedCards.length; i++) {
             checkedCards[i].classList.remove("filtered");
             }
             
             
-            let currentCategory = document.getElementsByClassName("category-label-"+currentID);
+            let currentCategory = document.getElementsByClassName("category-label-"+currentID + "-" + blockID);
             for (let i = 0; i < addedSpanData.length; i++) {
               addedSpanData[i].innerHTML = addedSpanData[i].innerHTML + currentCategory[0].innerText + ", ";
             }
@@ -327,7 +331,7 @@
     }
 
     for (let i = 0; i < addedSpanData.length; i++) {
-      addedSpanData[i].innerHTML = addedSpanData[i].innerHTML.slice(0, -2) + "<a href='#' data-collection='collection-28' class='collection-reset' style='display: inline;' onclick = 'resetFilters()'><i class='fa-solid fa-xmark'></i> Reset Filters</a>" 
+      addedSpanData[i].innerHTML = addedSpanData[i].innerHTML.slice(0, -2) + "<a href='#' data-collection='collection-28' class='collection-reset' style='display: inline;' onclick = 'resetFilters(" + blockID + ")'><i class='fa-solid fa-xmark'></i> Reset Filters</a>" 
     }
     if(noFilters == 0) {
         for (let i = 0; i < allCards.length; i++) {
@@ -339,14 +343,17 @@
     }
   }
 
-  function filterSingle(currentID) {
+  function filterSingle(currentID, blockID) {
 
-    let allCards = document.getElementsByClassName("ucb-collection-card-container");
+    // Get correct collection grid instance
+    let collectionGridID = document.getElementById("collection-grid-container-" + blockID);
+
+    let allCards = document.getElementsByClassName("ucb-collection-card-container-" + blockID);
     for (let i = 0; i < allCards.length; i++) {
     allCards[i].classList.add("filtered");
     }
 
-    let checkedCards = document.getElementsByClassName("ucb-collection-category-" + currentID);
+    let checkedCards = document.getElementsByClassName("ucb-collection-category-" + currentID + "-" + blockID);
     for (let i = 0; i < checkedCards.length; i++) {
     checkedCards[i].classList.remove("filtered");
     }
@@ -354,26 +361,31 @@
 
   }
 
- function resetFilters() {
-    let allCards = document.getElementsByClassName("ucb-collection-card-container");
+ function resetFilters(blockID) {
+  // Get correct collection grid instance
+  let collectionGridID = document.getElementById("collection-grid-container-"+blockID);
+
+    let allCards = document.getElementsByClassName("ucb-collection-card-container-" + blockID);
     for (let i = 0; i < allCards.length; i++) {
     allCards[i].classList.remove("filtered");
     }
 
-    let allChecks = document.getElementsByClassName("category-checkbox");
+    let allChecks = document.getElementsByClassName("category-checkbox-" + blockID);
     for (let i = 0; i < allChecks.length; i++) {
         allChecks[i].checked = false;
     }
 
-    let clearSpanData = document.getElementsByClassName("collection-grid-filter-span");
+    let clearSpanData = collectionGridID.getElementsByClassName("collection-grid-filter-span-" + blockID);
     for (let i = 0; i < clearSpanData.length; i++) {
       clearSpanData[i].innerHTML = "";
     }
 
   }
 
-  function resetSingleFilters() {
-    let allCards = document.getElementsByClassName("ucb-collection-card-container");
+  function resetSingleFilters(blockID) {
+    // Get correct collection grid instance
+    let collectionGridID = document.getElementById("collection-grid-container-"+blockID);
+    let allCards = document.getElementsByClassName("ucb-collection-card-container-" + blockID);
     for (let i = 0; i < allCards.length; i++) {
     allCards[i].classList.remove("filtered");
     }
@@ -384,13 +396,18 @@
    * Initilization and start of code 
    */
   (function () {
+    // Get all instances of the collection grid
+    let collectionGridInstances = document.getElementsByClassName("collection-grid-container");
+    console.log(collectionGridInstances)
+    for (let i = 0; i < collectionGridInstances.length; i++) {
     // get the url from the data-jsonapi variable
-    let el = document.getElementById("collections-grid-block-data");
+    let el = document.getElementById("collections-grid-block-data-"+collectionGridInstances[i].dataset.blockid);
     let JSONURL = ""; // JSON:API URL 
     let JSONCATURL = ""; // JSON:API Category URL 
     let NEXTJSONURL = ""; // next link for pagination 
     let TagsExclude = ""; // tags to exclude 
     let BodyDisplay = ""; // variable to display body text or not
+    let blockID = collectionGridInstances[i].dataset.blockid;
   
     // check to see if we have the data we need to work with.  
     if (el) {
@@ -399,13 +416,13 @@
       TagsExclude = el.dataset.extags;
       BodyDisplay = el.dataset.bodydisplay;
     }
-    
+    /*
     console.log("\n JSONURL: " + JSONURL);
     console.log("\n JSONCATURL: " + JSONCATURL);
     console.log("\n TagsExclude: " + TagsExclude);
-    console.log("\n BodyDisplay: " + BodyDisplay);
+    console.log("\n BodyDisplay: " + BodyDisplay);*/
     // attempt to render the data requested 
-    renderCollectionCategories( JSONCATURL).then((response) => {
+    renderCollectionCategories( JSONCATURL, blockID).then((response) => {
       if(response) {
         NEXTJSONURL = "/jsonapi/" + response;
       }
@@ -413,10 +430,11 @@
 
 
     // attempt to render the data requested 
-    renderCollectionList( JSONURL, TagsExclude, BodyDisplay).then((response) => {
+    renderCollectionList( JSONURL, TagsExclude, BodyDisplay, blockID).then((response) => {
       if(response) {
         NEXTJSONURL = "/jsonapi/" + response;
       }
     });
-    
+
+  }
   })()
