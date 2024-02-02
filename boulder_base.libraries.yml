@@ -479,3 +479,10 @@ ucb-class-notes-list-page:
   css:
     theme:
       css/ucb-class-notes-list.css: {}
+ucb-collections-block:
+  version: 1.x
+  js:
+    js/ucb-collections-block.js: {}
+  css:
+    theme:
+      css/block/ucb-collections-block.css: {}

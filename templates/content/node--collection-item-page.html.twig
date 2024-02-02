@@ -1,0 +1,31 @@
+{{ attach_library('boulder_base/ucb-page') }}
+
+{#Dummy variable to ensure that all content tags are set for caching purposes#}
+{% set content_render = content|render %}
+
+{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
+{% set isFrontPage = '' %}
+{% if is_front %}
+	{% set isFrontPage = 'sr-only' %}
+{% endif %}
+
+{%
+    set classes = [
+        'node',
+        'ucb-basic-page'
+    ]
+%}
+
+<article{{attributes.addClass(classes)}}>
+	<div class="container">
+		<h1{{title_attributes}} class="{{isFrontPage}}">
+			{{ label }}
+		</h1>
+
+		{% if content %}
+			<div{{content_attributes}}>
+				{{ content.body }}
+			</div>
+		{% endif %}
+	</div>
+</article>
