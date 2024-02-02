@@ -390,6 +390,9 @@
     let currentCheck = document.getElementsByClassName("category-checkbox-" + blockID + "-" + labelCheckXID + "-" + labelCheckYID);
     
     for (let i = 0; i < currentCheck.length; i++) {
+      if(currentCheck[i].checked == true) {
+        currentCheck[i].checked = false;
+      }
       currentCheck[i].checked = true;
     }
     filterChecked(blockID);
