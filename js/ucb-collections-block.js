@@ -386,6 +386,15 @@
 
   }
 
+  function filterLabelChecked(blockID, labelCheckXID, labelCheckYID) {
+    let currentCheck = document.getElementsByClassName("category-checkbox-" + blockID + "-" + labelCheckXID + "-" + labelCheckYID);
+    
+    for (let i = 0; i < currentCheck.length; i++) {
+      currentCheck[i].checked = true;
+    }
+    filterChecked(blockID);
+  }
+
   /**
    * Initilization and start of code 
    */
