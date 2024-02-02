@@ -331,7 +331,7 @@
     }
 
     for (let i = 0; i < addedSpanData.length; i++) {
-      addedSpanData[i].innerHTML = addedSpanData[i].innerHTML.slice(0, -2) + "<a href='#' data-collection='collection-28' class='collection-reset' style='display: inline;' onclick = 'resetFilters(" + blockID + ")'><i class='fa-solid fa-xmark'></i> Reset Filters</a>" 
+      addedSpanData[i].innerHTML = addedSpanData[i].innerHTML.slice(0, -2) + "<a data-collection='collection-28' class='collection-reset' style='display: inline;' onclick = 'resetFilters(" + blockID + ")'><i class='fa-solid fa-xmark'></i> Reset Filters</a>" 
     }
     if(noFilters == 0) {
         for (let i = 0; i < allCards.length; i++) {
