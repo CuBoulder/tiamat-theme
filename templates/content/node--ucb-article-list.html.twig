@@ -75,12 +75,6 @@
 
 {{ attach_library('boulder_base/ucb-article-list') }}
 
-{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
-{% set isFrontPage = '' %}
-{% if is_front %}
-	{% set isFrontPage = 'sr-only' %}
-{% endif %}
-
 {# NEW #}
 {# JSON API Endpoint information #}
 {% set articlesJSON = (url('<front>')|render|trim('/'))
@@ -265,22 +259,21 @@
 {% endif %} #}
 
 {# JSON API Filter logic #}
-<article {{ attributes.addClass('container') }}>
-  <h1 class="ucb-article-list-header {{isFrontPage}}">
+<article{{ attributes.addClass('container', 'ucb-content-wrapper') }}>
+  <h1{{ title_attributes.addClass('ucb-article-list-header', is_front ? 'sr-only') }}>
     {{ label }}
   </h1>
 
   <div {{ content_attributes }}>
     <div class="ucb-article-list-body">
       {{ content.body }}
-      {# <h3> Full URL : {{ articlesJSON}}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}</h3>  #}
     </div>
-    {# <div id="ucb-article-listing" class="ucb-article-list-container" data-jsonapi="{{ articlesJSON }}{{ IncludeFilter }}"> #}
-    <div id="ucb-article-listing"
-      class="ucb-article-list-container"
-      data-jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}"
-      data-excats="{{ excludeCategories }}"
-      data-extags="{{ excludeTags }}">
+    <div{{ create_attribute({
+      id: 'ucb-article-listing',
+      class: 'ucb-article-list-container',
+      'data-jsonapi': articlesJSON ~ IncludeFilter ~ pageCountFilter ~ sortFilter,
+      'data-excats': excludeCategories,
+      'data-extags': excludeTags }) }}>
       {# No Data message #}
       <div id="ucb-al-no-results" class="ucb-list-msg ucb-no-data">
         No articles were returned, please check your filters and try again.

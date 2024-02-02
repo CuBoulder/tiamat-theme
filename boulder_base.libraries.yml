@@ -99,7 +99,7 @@ ucb-site-contact-info-footer:
   css:
     theme:
       css/ucb-site-contact-info-footer.css: {}
-      
+
 ucb-hero-unit:
   version: 1.x
   js:
@@ -350,6 +350,12 @@ ucb-search-modal:
     theme:
       css/ucb-search-modal.css: {}
 
+ucb-search-page:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-search-page.css: {}
+
 ucb-menu:
   version: 1.x
   js:
@@ -451,6 +457,28 @@ ucb-user-page:
     theme:
       css/ucb-status-page-block.css: {}
       css/ucb-user-page.css: {}
+      
+ucb-faq-page:
+  version: 1.x
+  js:
+    js/ucb-faq-page.js: {}
+  css:
+    theme:
+      css/ucb-faq-page.css: {}
+      
+ucb-class-notes:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-class-notes.css: {}
+
+ucb-class-notes-list-page:
+  version: 1.x
+  js:
+    js/ucb-class-notes-list.js: {}
+  css:
+    theme:
+      css/ucb-class-notes-list.css: {}
 ucb-collections-block:
   version: 1.x
   js:

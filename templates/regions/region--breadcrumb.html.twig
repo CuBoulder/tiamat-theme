@@ -20,7 +20,8 @@
   ]
 %}
 
-{% if show_breadcrumb and content %}
+
+{% if (show_breadcrumb) and (content|render|striptags|trim is not empty) %}
 	<div{{ attributes.addClass(classes) }}>
 		<div class="ucb-breadcrumb-row row">
 			{{ content }}

@@ -15,12 +15,11 @@ ucb_sidebar_position: '0'
 ucb_be_boulder: '1'
 ucb_rave_alerts: 1
 ucb_sticky_menu: 0
-ucb_gtm_account: ''
 ucb_secondary_menu_default_links: 0
-ucb_secondary_menu_position: inline
+ucb_secondary_menu_position: above
 ucb_secondary_menu_button_display: 0
 ucb_footer_menu_default_links: 0
 ucb_social_share_position: '0'
 ucb_breadcrumb_nav: 1
-ucb_date_format:  '0'
 ucb_use_custom_logo: false
+ucb_heading_font: 'bold'

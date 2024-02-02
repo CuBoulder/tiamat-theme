@@ -1,11 +1,12 @@
 .user-profile-wrapper {
-    display: flex;
-    flex-direction: row;
-    padding-top: 20px;
+  display: flex;
+  flex-direction: row;
 }
-.user-profile-wrapper div{
-   flex-grow: 1;
+
+.user-profile-wrapper div {
+  flex-grow: 1;
 }
+
 .ucb-user-documentation {
-    padding-bottom: 10px;
+  padding-bottom: 10px;
 }

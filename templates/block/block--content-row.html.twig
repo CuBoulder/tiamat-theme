@@ -74,8 +74,11 @@
 								{{ image|view }}
 							{% endif %}
 						</div>
+						{% else %}
+						<div class="col-4">
+						</div>
 						{% endif %}
-						<div class="{{ image ? 'col-8 ' }}row-text-container">
+						<div class="col-8 row-text-container">
 							{% if rowLink %}
 								<a href="{{ rowLink }} ">
 									<h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
@@ -86,7 +89,7 @@
 							{{item.entity.field_row_layout_content_text|view}}
 						</div>
 					{% else %}
-						<div class="{{ image ? 'col-8 ' }}row-text-container">
+						<div class="col-8 row-text-container">
 							{% if rowLink %}
 								<a href="{{ rowLink }} ">
 									<h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>

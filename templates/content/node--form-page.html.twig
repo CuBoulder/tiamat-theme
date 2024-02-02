@@ -7,29 +7,27 @@
 
 {{ attach_library('boulder_base/ucb-form-page') }}
 
-{% set sidebar_position = drupal_config('boulder_base.settings', 'ucb_sidebar_position') %}
+{% set classes = ['ucb-content-wrapper'] %}
 
-{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
-{% set isFrontPage = '' %}
-{% if is_front %}
-	{% set isFrontPage = 'sr-only' %}
-{% endif %}
-
-<article{{attributes.addClass(classes)}}>
-	<div class="container">
-		<h1{{title_attributes}} class="{{isFrontPage}}">
-			{{ label }}
-		</h1>
-	</div>
-
-	<div class="container mb-4">
-		<div class="row">
-			<div class="col-sm-8">
-				{{ content['#block_content'].body }}
-				<div class="form-page-webform">
-					{{ content.field_form_page_webform }}
-				</div>
-			</div>
-		</div>
-	</div>
+<article{{ attributes.addClass(classes) }}>
+  <div class="container">
+    <h1{{ title_attributes.addClass(is_front ? 'sr-only') }}>
+      {{ label }}
+    </h1>
+    {% if content.body|render %}
+    <div class="ucb-form-page-section ucb-form-page-body">
+      {{ content.body }}
+    </div>
+    {% endif %}
+  </div>
+  <div class="container mb-4">
+    <div class="row">
+      <div class="col-sm-8">
+        {{ content['#block_content'].body }}
+        <div class="form-page-webform">
+          {{ content.field_form_page_webform }}
+        </div>
+      </div>
+    </div>
+  </div>
 </article>

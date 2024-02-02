@@ -1,0 +1,56 @@
+.ucb-faq-section{
+    padding-bottom: 20px;
+}
+
+.ucb-faq-section-header{
+    padding-bottom: 10px;
+}
+
+.accordion-header .accordion-button h3 {
+    font-size: 100%;
+    margin: 0;
+}
+
+.accordion .accordion-item button.accordion-button {
+    color: inherit;
+    padding: 0;
+    background: none;
+    border: none;
+    font-weight: bold;
+    font-size: 100%;
+    position: relative;
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.accordion-header {
+    margin-bottom: 0;
+    padding: 10px 0;
+}
+
+.accordion .accordion-item {
+    background: none;
+    border: none;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.333);
+    padding: 10px 0;
+}
+.accordion .accordion-item button.accordion-button:not(.collapsed) {
+    color: inherit;
+    background: none;
+    box-shadow: none;
+}
+
+.accordion-item:last-of-type {
+    border-bottom-right-radius: 0px !important;
+    border-bottom-left-radius: 0px !important;
+}
+
+.accordion .accordion-item .accordion-body {
+    padding: 10px 0 0 20px;
+    border: none;
+}
+
+.accordion-body div p:last-child{
+    margin-bottom: 0px;
+}

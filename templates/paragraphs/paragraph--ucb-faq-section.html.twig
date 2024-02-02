@@ -1,0 +1,45 @@
+{# See https://developers.google.com/search/docs/appearance/structured-data/faqpage for Google FAQ Structured Data Examples #}
+
+{%
+    set classes = [
+      'paragraph',
+      'paragraph--type--' ~ paragraph.bundle|clean_class,
+      view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+      not paragraph.isPublished() ? 'paragraph--unpublished',
+      'accordion',
+      'ucb-faq-section'
+    ]
+%}
+{# Individual FAQ Sections #}
+<div{{ attributes.addClass(classes) }} id="accordion-{{ paragraph.id() }}">
+  <h2 class="ucb-faq-section-header">{{ content.field_ucb_faq_section_title }}</h2>
+  <div class="ucb-faq-section-body">{{ content.field_ucb_faq_section_body }}</div>
+  {# Question / Answer sections #}
+  {# These vars set up both the bootstrap expandable accordion collapse/show functionality#}
+  {# Also sets up the address bar FAQ page hash functionality, in order to share specific questions. See the JS #}
+  {% for key, item in paragraph.field_ucb_faq_question_ans_para %}
+  {% set unsanitized_id = item.entity.field_ucb_faq_question.value %}
+  {% set hrefId = unsanitized_id | replace({' ': '-', '/': '', '\\': '', '?': '', '&': '', '%': '', '#': '', '$': '', '^': '', '*': '', '(': '', ')': '', '+': '', '=': '', '[': '', ']': '', '{': '', '}': '', '|': '', '\'': '', '\"': '', '<': '', '>': '', ',': '', '.': '', ':': '', ';': '', '!': '', '@': ''}) | lower %}
+  {% set unique_id = 'collapse-' ~ paragraph.id() ~ '-' ~ key %}
+  {# Question #}
+    <div class="accordion-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+      <div class="accordion-header" id="heading-{{ unique_id }}">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#{{ unique_id }}" aria-expanded="false" aria-controls="{{ unique_id }}">
+          <h3 id="{{hrefId}}" itemprop="name">{{ item.entity.field_ucb_faq_question.value }}</h3>
+        </button>
+    </div>
+  {# Answer #}
+      <div id="{{ unique_id }}" class="accordion-collapse collapse" aria-labelledby="heading-{{ unique_id }}" data-bs-parent="#accordion-{{ paragraph.id() }}">
+        <div class="accordion-body" itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
+          <div itemprop="text">
+            {{ item.entity.field_ucb_faq_answer.processed }}
+          </div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+</div>
+
+
+
+

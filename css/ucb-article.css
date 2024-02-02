@@ -35,11 +35,7 @@ i.fa-regular.fa-calendar {
 .ucb-article-category-icon, .ucb-article-tag-icon {
   background-color: #555555;
   color: #e7e7e7;
-  height: 16px;
-  width: 16px;
-}
-.ucb-article-category-icon > svg, .ucb-article-tag-icon > svg{
- padding: 2px;
+  padding: 6px;
 }
 
 .ucb-article-categories div,
@@ -48,7 +44,6 @@ i.fa-regular.fa-calendar {
   display: flex;
   flex-direction: row;
   line-height: 1.5em;
-  padding: 2px;
 }
 
 .ucb-article-categories a:link,
@@ -59,9 +54,9 @@ i.fa-regular.fa-calendar {
 .ucb-article-issue a:visited {
   background: #e7e7e7;
   color: #555;
-  padding: 2px 6px;
+  padding: 6px;
   display: inline-block;
-  margin: 0 5px 5px 0;
+  margin-right: 8px;
 }
 
 .ucb-article-categories a:hover,
@@ -136,7 +131,7 @@ i.fa-regular.fa-calendar {
   margin-bottom: 20px;
 }
 
-.ucb-article-author-name span:not(:last-of-type):after{
+.ucb-article-author-name span:not(:last-of-type):after {
   content: ",";
 }
 
@@ -147,49 +142,66 @@ i.fa-regular.fa-calendar {
   object-fit: fill;
 }
 
-.centeredTitle {
+.backgroundTitleDiv .ucb-article-heading {
   position: absolute;
-  bottom: 0.5em;
+  display: block;
+  bottom: 0;
+  width: 100%;
+  background-color: transparent;
+  padding: 200px 20px 30px;
 }
 
-.article-header-White{
-  color: white;
+.backgroundTitleDiv.ucb-overlay-dark .ucb-article-heading {
+  background-image: -webkit-linear-gradient(top, transparent, rgba(0, 0, 0, 0.85));
+  background-image: -moz-linear-gradient(top, transparent, rgba(0, 0, 0, 0.85));
+  background-image: -o-linear-gradient(top, transparent, rgba(0, 0, 0, 0.85));
+  background-image: -ms-linear-gradient(top, transparent, rgba(0, 0, 0, 0.85));
+  background-image: linear-gradient(top, transparent, rgba(0, 0, 0, 0.85));
 }
 
-.article-header-Black{
-  color:black
+.backgroundTitleDiv.ucb-overlay-light .ucb-article-heading {
+  background-image: -webkit-linear-gradient(top, transparent, rgba(255, 255, 255, 0.85));
+  background-image: -moz-linear-gradient(top, transparent, rgba(255, 255, 255, 0.85));
+  background-image: -o-linear-gradient(top, transparent, rgba(255, 255, 255, 0.85));
+  background-image: -ms-linear-gradient(top, transparent, rgba(255, 255, 255, 0.85));
+  background-image: linear-gradient(top, transparent, rgba(255, 255, 255, 0.85));
 }
 
-.backgroundTitleDiv > div > div > .imageMediaStyle > img {
+.ucb-article-heading.article-header-White, .ucb-article-heading.article-header-White h1 {
+  color: #FFF;
+}
+
+.ucb-article-heading.article-header-Black, .ucb-article-heading.article-header-Black h1 {
+  color: #000;
+}
+
+.backgroundTitleDiv .imageMediaStyle img {
   width: 100%;
   max-height: 600px;
   object-fit: cover;
 }
 
-.backgroundTitleDiv > div > div > .imageMediaStyle{
+.backgroundTitleDiv .imageMediaStyle {
   padding-bottom: 0;
   margin-bottom: 20px;
 }
 
-.ucb-overlay-dark > div > div > .imageMediaStyle > img, 
-.ucb-overlay-light > div > div > .imageMediaStyle > img{
-  opacity: 75%;
-}
-
-.ucb-overlay-light > div > div > .imageMediaStyle{
-  background: white;
-}
-.ucb-overlay-dark > div > div > .imageMediaStyle{
-  background: black;
-}
-
-.ucb-article-supplemental-text{
+.ucb-article-supplemental-text {
   margin-bottom: 1em;
   font-style: italic;
   font-size: 0.85em;
 }
 
 /* Removes caption on header img */
-.backgroundTitleDiv > div > div > .media-image-caption{
+.backgroundTitleDiv .media-image-caption {
   display: none;
+}
+
+/* These fixes display issues on Article Header Image caused by .imageMediaStyle defaults */
+.backgroundTitleDiv .imageMediaStyle {
+  display: block;
+}
+
+.backgroundTitleDiv .imageMediaStyle img {
+  padding-bottom: 0px;
 }
