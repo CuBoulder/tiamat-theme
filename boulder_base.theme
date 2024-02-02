@@ -230,3 +230,10 @@ function boulder_base_form_system_theme_settings_alter(&$form, \Drupal\Core\Form
 	\Drupal::service('messenger')->addError('Module `CU Boulder Site Configuration`, required to display the CU Boulder theme settings form, isn\'t installed.');
   }
 }
+
+/*
+* This is for list styles during migration
+*/
+function boulder_base_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] = 'boulder_base/migrate_styles';
+}

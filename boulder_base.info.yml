@@ -7,6 +7,7 @@ base theme: stable9
 
 libraries: 
   - boulder_base/ucb-global
+  - boulder_base/migrate_styles # Needed for css polyfill during migration
 
 regions:
   header: "Header"

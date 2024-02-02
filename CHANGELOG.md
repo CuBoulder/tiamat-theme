@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Enables list styles in full HTML, Creates Migration Library
+  Using Full HTML you can create various list styles found here: https://styleguide.colorado.edu/content/lists
+  Also creates a temporary migration library for addtl styles needed for the migration process
+  
+  Resolves #624 
+---
+
 - ### FAQ Content Type
   Adds the FAQ Content Type. Resolves https://github.com/CuBoulder/tiamat-theme/issues/620
   

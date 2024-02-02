@@ -21,6 +21,12 @@ ucb-global:
   dependencies:
     - core/drupal
 
+migrate_styles: # just for migration
+  version: 1.x
+  css:
+    theme:
+      css/migrate-list-styles.css: {}
+
 ucb-page:
   version: 1.x
   css:
