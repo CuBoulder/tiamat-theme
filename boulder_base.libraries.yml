@@ -26,7 +26,6 @@ migrate_styles: # just for migration
   css:
     theme:
       css/migrate-list-styles.css: {}
-      https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css: { type: external, minified: true }
 
 ucb-page:
   version: 1.x

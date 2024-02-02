@@ -13,6 +13,24 @@
   --ucb-light-blue: #e1f5fe;
 }
 
+/* Needed for Font Awesome  */
+ @font-face {
+    font-family: 'Font Awesome 6 Free - Brands';
+    src: url('../css/webfonts/fa-brands-400.woff2') format('woff2'), 
+}
+ @font-face {
+    font-family: 'Font Awesome 6 Free - Solid';
+    src: url('../css/webfonts/fa-solid-900.woff2') format('woff2'), 
+}
+ @font-face {
+    font-family: 'Font Awesome 6 Free - Regular';
+    src: url('../css/webfonts/fa-regular-400.woff2') format('woff2'), 
+}
+ @font-face {
+    font-family: 'Font Awesome 6 Free - v4';
+    src: url('../css/webfonts/fa-v4compatibility.woff2')  format('woff2'), 
+}
+
 body {
   min-height: 100%;
   display: flex;
