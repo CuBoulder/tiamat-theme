@@ -38,9 +38,9 @@
             let currentDataID = item.attributes.drupal_internal__revision_id;
                 let currentClassName = "category-label-" + currentDataID + "-" + blockID;
                 let categoryLabels = document.getElementsByClassName(currentClassName);
-                console.log("currentClass: ", currentClassName)
+                //console.log("currentClass: ", currentClassName)
                 for (let i = 0; i < categoryLabels.length; i++) {
-                  console.log("checkClass:")
+                  //console.log("checkClass:")
                     categoryLabels[i].innerHTML = item.attributes.name;
                   }
 
@@ -299,7 +299,7 @@
 
   
  function filterChecked(blockID) {
-  console.log("BlockID: ", blockID)
+  //console.log("BlockID: ", blockID)
     let allCards = document.getElementsByClassName("ucb-collection-card-container-" + blockID);
     let addedSpanData = document.getElementsByClassName("collection-grid-filter-span-" + blockID);
     let noFilters = 0;
@@ -345,8 +345,6 @@
 
   function filterSingle(currentID, blockID) {
 
-    // Get correct collection grid instance
-    let collectionGridID = document.getElementById("collection-grid-container-" + blockID);
 
     let allCards = document.getElementsByClassName("ucb-collection-card-container-" + blockID);
     for (let i = 0; i < allCards.length; i++) {
@@ -362,8 +360,6 @@
   }
 
  function resetFilters(blockID) {
-  // Get correct collection grid instance
-  let collectionGridID = document.getElementById("collection-grid-container-"+blockID);
 
     let allCards = document.getElementsByClassName("ucb-collection-card-container-" + blockID);
     for (let i = 0; i < allCards.length; i++) {
@@ -375,7 +371,7 @@
         allChecks[i].checked = false;
     }
 
-    let clearSpanData = collectionGridID.getElementsByClassName("collection-grid-filter-span-" + blockID);
+    let clearSpanData = document.getElementsByClassName("collection-grid-filter-span-" + blockID);
     for (let i = 0; i < clearSpanData.length; i++) {
       clearSpanData[i].innerHTML = "";
     }
@@ -383,8 +379,6 @@
   }
 
   function resetSingleFilters(blockID) {
-    // Get correct collection grid instance
-    let collectionGridID = document.getElementById("collection-grid-container-"+blockID);
     let allCards = document.getElementsByClassName("ucb-collection-card-container-" + blockID);
     for (let i = 0; i < allCards.length; i++) {
     allCards[i].classList.remove("filtered");
@@ -398,7 +392,7 @@
   (function () {
     // Get all instances of the collection grid
     let collectionGridInstances = document.getElementsByClassName("collection-grid-container");
-    console.log(collectionGridInstances)
+    //console.log(collectionGridInstances)
     for (let i = 0; i < collectionGridInstances.length; i++) {
     // get the url from the data-jsonapi variable
     let el = document.getElementById("collections-grid-block-data-"+collectionGridInstances[i].dataset.blockid);
