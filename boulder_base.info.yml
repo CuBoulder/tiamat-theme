@@ -17,9 +17,8 @@ regions:
   breadcrumb: "Breadcrumb Navigation"
   post_wide_title: "Post Wide Title"
   above_content: "Above Content"
-  left_sidebar: "Sidebar First"
   content: "Content"
-  right_sidebar: "Sidebar Second"
+  sidebar: "Sidebar"
   wide_post: "Wide Post"
   below_content: "After Content"
   second_below_content: "After Content 2"
@@ -27,4 +26,3 @@ regions:
   footer: "Footer"
   site_information: 'Site Information'
   footer_menu: 'Footer Menu'
-
