@@ -90,8 +90,9 @@
 									{% for key2, cat in item.entity.field_collection_grid_category %}
 										{%  if key2|first != '#' %}
 											<div class="collection-category-line">
-												<input class="category-checkbox category-checkbox-{{blockID}}-{{key}}-{{key2}} category-checkbox-{{ blockID }}" type="checkbox" data-category="{{ cat|view }}" onclick="filterChecked({{ blockID }})">
-												<a onclick = "filterLabelChecked({{blockID}},{{key}}, {{key2}})"><label class="category-label category-label-{{ cat|view }}-{{ blockID }}" data-category="{{ cat|view }}-label">{{ cat|view }}</label></a>
+												<input id = "category-checkbox-{{blockID}}-{{key}}-{{key2}}" class="category-checkbox  category-checkbox-{{ blockID }}" type="checkbox" data-category="{{ cat|view }}" onclick="filterChecked({{ blockID }})">
+												
+												<label class="category-label category-label-{{ cat|view }}-{{ blockID }}" for ="category-checkbox-{{blockID}}-{{key}}-{{key2}}" data-category="{{ cat|view }}-label">{{ cat|view }}</label>
 											</div>
 										{% endif %}
 									{% endfor %}

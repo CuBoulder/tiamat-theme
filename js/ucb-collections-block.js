@@ -118,6 +118,7 @@
           // console.log('altObj', altObj)
           //iterate over each item in the array
           data.data.map((item) => {
+            console.log("item", item);
             let thisCollectionCats = [];
             let thisCollectionTypes = "";
             let typeInclusion = 0;
@@ -337,7 +338,7 @@
     }
 
     for (let i = 0; i < addedSpanData.length; i++) {
-      addedSpanData[i].innerHTML = addedSpanData[i].innerHTML.slice(0, -2) + "<a data-collection='collection-28' class='collection-reset' style='display: inline;' onclick = 'resetFilters(" + blockID + ")'><i class='fa-solid fa-xmark'></i> Reset Filters</a>" 
+      addedSpanData[i].innerHTML = addedSpanData[i].innerHTML.slice(0, -2) + "<a href='javascript:;' data-collection='collection-28' class='collection-reset' style='display: inline;' onclick = 'resetFilters(" + blockID + ")'><i class='fa-solid fa-xmark'></i> Reset Filters</a>" 
     }
     if(noFilters == 0) {
         for (let i = 0; i < allCards.length; i++) {
@@ -390,18 +391,6 @@
     allCards[i].classList.remove("filtered");
     }
 
-  }
-
-  function filterLabelChecked(blockID, labelCheckXID, labelCheckYID) {
-    let currentCheck = document.getElementsByClassName("category-checkbox-" + blockID + "-" + labelCheckXID + "-" + labelCheckYID);
-    
-    for (let i = 0; i < currentCheck.length; i++) {
-      if(currentCheck[i].checked == true) {
-        currentCheck[i].checked = false;
-      }
-      currentCheck[i].checked = true;
-    }
-    filterChecked(blockID);
   }
 
   /**
