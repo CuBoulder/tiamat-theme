@@ -86,6 +86,12 @@
     }
 }
 
+@media (max-width: 768px) {
+    .ucb-collection-card-container {
+        width: 100%;
+    }
+}
+
 .collection-grid-container.collection-multiselect-single {
     display: flex;
     flex-direction: column;

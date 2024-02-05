@@ -23,8 +23,7 @@
         .then((data) => {
           // get the next URL and return that if there is one
           if(data.links.next) {
-            let nextURL = data.links.next.href.split("/jsonapi/");
-            NEXTJSONURL = nextURL[1];
+            NEXTJSONURL = data.links.next.href;
           } else {
             NEXTJSONURL = "";
           }
@@ -57,7 +56,7 @@
     }
     });
   }
-  function renderCollectionList( JSONURL, ExcludeTags = "", BodyDisplay, blockID) {
+  function renderCollectionList( JSONURL, ExcludeTags = "", BodyDisplay, blockID, BaseURL) {
     return new Promise(function(resolve, reject) {
     let includeTypeArray = ExcludeTags.split(",").map(Number);
     // next URL if there is one, will be returned by this funtion
@@ -70,10 +69,11 @@
       fetch(JSONURL)
         .then((reponse) => reponse.json())
         .then((data) => {
+         // console.log("Data", data);
           // get the next URL and return that if there is one
           if(data.links.next) {
-            let nextURL = data.links.next.href.split("/jsonapi/");
-            NEXTJSONURL = nextURL[1];
+            NEXTJSONURL = data.links.next.href;
+            //console.log("NEXTJSONURL", NEXTJSONURL)
           } else {
             NEXTJSONURL = "";
           }
@@ -88,6 +88,7 @@
           let urlObj = {};
           let idObj = {};
           let altObj = {};
+          let altTagObj = {};
           // Remove any blanks from our collections before map
           if (data.included) {
             // removes all other included data besides images in our included media
@@ -111,6 +112,7 @@
             // using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
             idFilterData.map((pair) => {
               idObj[pair.id] = pair.relationships.thumbnail.data.id;
+              altTagObj[pair.id] = pair.relationships.thumbnail.data.meta.alt;
             })
           }
           // console.log("idObj", idObj);
@@ -118,7 +120,7 @@
           // console.log('altObj', altObj)
           //iterate over each item in the array
           data.data.map((item) => {
-            console.log("item", item);
+           // console.log("item", item);
             let thisCollectionCats = [];
             let thisCollectionTypes = "";
             let typeInclusion = 0;
@@ -151,14 +153,21 @@
               // **ADD DATA**
               // this is my id of the collection body paragraph type we need only if no thumbnail or summary provided
             //let bodyAndImageId = item.relationships.field_ucb_collection_content.data.length ? item.relationships.field_ucb_collection_content.data[0].id : "";
-              let body = item.attributes.field_collection_item_preview ? item.attributes.field_collection_item_preview.value.replace(
-                /<\/?[^>]+(>|$)/g,
-                ""
-              ) : "";
+             let body = "";
+            if(item.attributes.field_collection_item_preview ) {
+                body = item.attributes.field_collection_item_preview.value.replace(
+                  /<\/?[^>]+(>|$)/g,
+                  ""
+                )
+                var el = document.createElement("div");
+                el.innerHTML = body;
+                body = el.innerText;
+              }
+            
               body = body.trim();
 
               let imageSrc = "";
-  
+              let imageAlt = "";
               // if no collection summary, use a simplified collection body
               if (!body.length) {
                 let data = item.attributes.body;
@@ -181,9 +190,11 @@
                         )
                       )
                       body = `${trimmedString}...`;
-                    }
+                    } else {
                     // set the contentBody of Collection Summary card to the minified body instead
                     body = `${trimmedString}`;
+
+                    }
                     //document.getElementById(`body-${bodyAndImageId}`).innerText = body;
                   
               }
@@ -195,6 +206,8 @@
                 //Use the idObj as a memo to add the corresponding image url
                 let thumbId = item.relationships.field_collection_item_thumbnail.data.id;
                 imageSrc = altObj[idObj[thumbId]];
+                imageAlt = altTagObj[thumbId];
+                //console.log("Alt: ", imageAlt)
               }
   
               let title = item.attributes.title;
@@ -222,6 +235,7 @@
   
                   var collectionImg = document.createElement('img')
                   collectionImg.src = imageSrc;
+                  collectionImg.alt = imageAlt;
   
                   imgLink.appendChild(collectionImg)
                   imgContainer.appendChild(imgLink)
@@ -277,7 +291,7 @@
               dataOutput.append(thisCollection);
   
               if(NEXTJSONURL){
-                toggleMessage('ucb-el-load-more', 'inline-block')
+                //toggleMessage('ucb-el-load-more', 'inline-block')
               }
             }
           })
@@ -408,6 +422,7 @@
     let NEXTJSONURL = ""; // next link for pagination 
     let TagsExclude = ""; // tags to exclude 
     let BodyDisplay = ""; // variable to display body text or not
+    let BaseURL = "";
     let blockID = collectionGridInstances[i].dataset.blockid;
   
     // check to see if we have the data we need to work with.  
@@ -416,24 +431,28 @@
       JSONCATURL = el.dataset.jsoncats;
       TagsExclude = el.dataset.extags;
       BodyDisplay = el.dataset.bodydisplay;
+      BaseURL = el.dataset.baseurl;
     }
     /*
+    console.log("BASEURL: ", BaseURL)
+    
     console.log("\n JSONURL: " + JSONURL);
     console.log("\n JSONCATURL: " + JSONCATURL);
     console.log("\n TagsExclude: " + TagsExclude);
-    console.log("\n BodyDisplay: " + BodyDisplay);*/
+    console.log("\n BodyDisplay: " + BodyDisplay);
+    */
     // attempt to render the data requested 
     renderCollectionCategories( JSONCATURL, blockID).then((response) => {
       if(response) {
-        NEXTJSONURL = "/jsonapi/" + response;
+        NEXTJSONURL = BaseURL + "/jsonapi/" + response;
       }
     });
 
 
     // attempt to render the data requested 
-    renderCollectionList( JSONURL, TagsExclude, BodyDisplay, blockID).then((response) => {
+    renderCollectionList( JSONURL, TagsExclude, BodyDisplay, blockID, BaseURL).then((response) => {
       if(response) {
-        NEXTJSONURL = "/jsonapi/" + response;
+        NEXTJSONURL = BaseURL + "/jsonapi/" + response;
       }
     });
 
