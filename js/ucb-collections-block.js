@@ -178,6 +178,10 @@
                     )
                     // Remove any line breaks if media is embedded in the body
                     let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
+
+                    var el = document.createElement("div");
+                    el.innerHTML = lineBreakStrip;
+                    lineBreakStrip = el.innerText;
                     // take only the first 100 words ~ 500 chars
                     let trimmedString = lineBreakStrip.substr(0, 250);
                     // if in the middle of the string, take the whole word
