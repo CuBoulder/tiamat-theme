@@ -17,7 +17,8 @@
 {# JSON API Endpoint information #}
 {% set collectionsJSON = (url('<front>')|render|trim('/'))
     ~ '/jsonapi/node/collection_item_page'
-    ~ '?include=field_collection_item_thumbnail.field_media_image'
+	~ '?sort=title'
+    ~ '&include=field_collection_item_thumbnail.field_media_image'
     ~ '&fields[file--file]=uri,url,alt'
   %}
 

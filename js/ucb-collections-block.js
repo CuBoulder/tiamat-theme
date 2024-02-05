@@ -155,7 +155,7 @@
             //let bodyAndImageId = item.relationships.field_ucb_collection_content.data.length ? item.relationships.field_ucb_collection_content.data[0].id : "";
              let body = "";
             if(item.attributes.field_collection_item_preview ) {
-                body = item.attributes.field_collection_item_preview.value.replace(
+                body = item.attributes.field_collection_item_preview.replace(
                   /<\/?[^>]+(>|$)/g,
                   ""
                 )
