@@ -6,14 +6,25 @@
     'container',
   ] %}
   
-  <article{{ attributes.addClass(classes) }}>
-    <h1{{ title_attributes.addClass(is_front ? 'sr-only') }}>
-        {{ label }}
-      </h1>
-    {% if content %}
-      <div{{ content_attributes }}>
-        {{ content }}
+ 
+<article{{ attributes.addClass(classes) }}>
+  <h1{{ title_attributes.addClass(is_front ? 'sr-only') }}>
+    {{ label }}
+  </h1>
+  {% if content %}
+    <div{{ content_attributes }}>
+      <div class="ucb-class-notes-body">
+        {{ content.body }}
       </div>
-    {% endif %}
-  </article>
+      
+      <div class="ucb-class-notes-image">
+        {{ content.field_ucb_class_note_image }}
+      </div>
+
+      <div class="ucb-class-notes-year-container">
+        {{ content.field_ucb_class_year }}
+      </div>
+    </div>
+  {% endif %}
+</article>
   
