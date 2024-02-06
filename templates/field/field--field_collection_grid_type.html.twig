@@ -1,0 +1,6 @@
+{% set allTypes = "" %}
+{% for item in items %}
+	{% set allTypes = allTypes ~ item.content['#plain_text']|join('') ~ ',' %}
+{% endfor %}
+{% set allTypes = allTypes|slice(0,-1) %}
+{{ allTypes }}

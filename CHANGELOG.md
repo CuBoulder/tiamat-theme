@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds Collection Grid block and Collection Item content type
+  Closes #534.
+  Adds the collection grid block and collection item node page
+---
+
 - ### Enables list styles in full HTML, Creates Migration Library
   Using Full HTML you can create various list styles found here: https://styleguide.colorado.edu/content/lists
   Also creates a temporary migration library for addtl styles needed for the migration process
