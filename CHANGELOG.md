@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates sidebar regions
+  Resolves CuBoulder/tiamat-theme#633
+  
+  Sister PR in: [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/77), ~~[ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/45)~~
+---
+
 - ### Class Note Enhancements
   Adjusts permissions for Class Notes, adds optional image field. Resolves https://github.com/CuBoulder/tiamat-theme/issues/622
   

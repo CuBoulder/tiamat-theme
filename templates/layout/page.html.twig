@@ -177,40 +177,26 @@
         </div>
       {% endif %}
       {# We are checking for length below to make sure that the sidebars have any content. This is so that sidebar menus don't render the sidebars if the menu is empty #}
-      {% if (page.left_sidebar|render|striptags|trim|length > 0) or (page.right_sidebar|render|striptags|trim|length > 0) %}
-        {% if page.left_sidebar|render and page.right_sidebar|render %}
+      {% if page.sidebar|render|striptags|trim|length > 0 %}
+        {% if ucb_sidebar_position == 'left' %}
           <div class="ucb-layout-container container g-0">
             <div class="layout-row row">
               <div class="ucb-left-sidebar ucb-sidebar col-sm-12 col-md-4 col-lg-3">
-                {{ page.left_sidebar }}
-              </div>
-              <div class="ucb-layout-main col-sm-12 col-md-4 col-lg-6 ucb-has-sidebar">
-                {{ page.content }}
-              </div>
-               <div class="ucb-left-right ucb-sidebar col-sm-12 col-md-4 col-lg-3">
-                {{ page.right_sidebar }}
-              </div>
-            </div>
-          </div>
-        {% elseif page.left_sidebar|render %}
-          <div class="ucb-layout-container container g-0">
-            <div class="layout-row row">
-              <div class="ucb-left-sidebar ucb-sidebar col-sm-12 col-md-4 col-lg-3">
-                {{ page.left_sidebar }}
+                {{ page.sidebar }}
               </div>
               <div class="ucb-layout-main col-sm-12 col-md-8 col-lg-9 ucb-has-sidebar">
                 {{ page.content }}
               </div>
             </div>
           </div>
-        {% elseif page.right_sidebar|render %}
+        {% else %}
           <div class="ucb-layout-container container g-0">
             <div class="layout-row row">
               <div class="ucb-layout-main col-sm-12 col-md-8 col-lg-9 ucb-has-sidebar">
                 {{ page.content }}
               </div>
               <div class="ucb-left-right ucb-sidebar col-sm-12 col-md-4 col-lg-3">
-                {{ page.right_sidebar }}
+                {{ page.sidebar }}
               </div>
             </div>
           </div>

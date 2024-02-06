@@ -11,7 +11,7 @@ favicon:
   mimetype: image/png
 ucb_campus_header_color: '1'
 ucb_header_color: '3'
-ucb_sidebar_position: '0'
+ucb_sidebar_position: right
 ucb_be_boulder: '1'
 ucb_rave_alerts: 1
 ucb_sticky_menu: 0
