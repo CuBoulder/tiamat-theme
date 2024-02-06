@@ -170,4 +170,9 @@
   .collection-multiselect-multi .collections-grid-block-data {
     margin-left: 0;
   }
+
+  .collection-filter-fade .ucb-collection-card-container.filtered {
+
+    display: none;
+  }
 }

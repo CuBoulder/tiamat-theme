@@ -216,11 +216,12 @@
   
               let title = item.attributes.title;
               let link = "";
+             // console.log("Link: ", BaseURL + "/node" + item.attributes.drupal_internal__nid);
               if(item.attributes.path.alias) {
                 link = item.attributes.path.alias;
               }
               else {
-                link = "/node/" + item.attributes.drupal_internal__nid;
+                link = BaseURL + "/node/" + item.attributes.drupal_internal__nid;
               }
               let image = "";
               let collectionSummarySize = "col-md-12";
