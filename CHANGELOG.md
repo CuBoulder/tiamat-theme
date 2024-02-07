@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter: Minor Bug Fixes
+  Adjusts the following on the Newsletter:
+  - If user elects to omit the optional image on a _Newsletter Taxonomy_, it will no longer render that img element in the header
+  - **Article Sections ( _Feature Style_ )** - For the Feature Style Article Sections, Articles without a thumbnail will check the Article for an Image uploaded as Article Content, and use that in place of a thumbnail if available. This functionality worked in the Teaser display, but there was an error that would prevent the backup image to display in the Feature Style render.
+  
+  Icon linking has been resolved by https://github.com/CuBoulder/tiamat-theme/issues/604
+  
+  Resolves #595 
+---
+
 - ### Updates sidebar regions
   Resolves CuBoulder/tiamat-theme#633
   

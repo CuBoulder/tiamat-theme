@@ -41,7 +41,7 @@
 								{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render %}
 								<td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
 									<a href="{{base_url}}{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
-									<img width="100%" src="{{base_url}}{{file_url(item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.fileuri|image_style('focal_image_square'))}}"/>
+									<img width="100%" src="{{base_url}}{{file_url(item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
 									</a>
 								</td>
 									{# Code to render user made content #}
