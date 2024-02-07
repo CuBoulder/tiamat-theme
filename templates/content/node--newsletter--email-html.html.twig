@@ -247,7 +247,9 @@ td>h3>a{
                                 {# Newsletter Taxonomy Image -- might need to be a separate table #}
                                 <tr>
                                     <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 10px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+                                        {% if node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value %}
                                         <img style="object-fit:cover;-ms-interpolation-mode: bicubic; clear: both; display: block; float: left; height: 167px !important; max-width: 100% !important; outline: none; text-decoration: none; width: 250px !important; max-height: auto !important;"src="{{base_url}}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}">
+                                        {% endif %}
                                     </td>
                                 </tr>
                                 {# Date & View on Website Link #}
