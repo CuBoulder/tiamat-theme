@@ -14,14 +14,19 @@
   .ucb-mobile-menu-button-div {
     line-height: 2em;
   }
-  .ucb-primary-menu-region .ucb-primary-menu-region-container,
-  .ucb-secondary-menu-region .ucb-secondary-menu-region-container {
+
+  .ucb-main-nav-container .ucb-menu,
+  .ucb-main-nav-container .ucb-primary-menu-region-container,
+  .ucb-main-nav-container .ucb-secondary-menu-region-container {
+    width: 100%;
     padding-left: 0;
     padding-right: 0;
   }
+
   .ucb-main-nav-container.ucb-secondary-menu-position-above {
     flex-direction: column;
   }
+
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a {
     color: black;
     padding-top: 8px;
@@ -30,47 +35,58 @@
     line-height: 2rem;
     margin-left: 2px;
   }
-  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region, .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .ucb-menu {
+
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region.ucb-secondary-menu-button-display .ucb-secondary-menu-region-container,
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region.ucb-secondary-menu-button-display .ucb-secondary-menu-region-container .ucb-menu {
     gap: 0;
   }
+
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region {
     background-color: white;
   }
+
   .ucb-secondary-menu-region {
     width: 100%;
   }
+
   #ucb-mobile-menu-toggle {
     display: block;
     max-width: 100px;
     font-size: 2em;
     margin-left: auto;
   }
+
   .ucb-menu,
   .ucb-primary-menu-region {
     width: 100%;
   }
+
   .ucb-menu.nav.hide {
     display: none;
   }
+
   .ucb-menu.open {
     display: flex;
     flex-direction: column;
   }
+
   .ucb-menu .menu-item {
     border-bottom: 1px solid lightgrey;
   }
+
   .ucb-menu.open .menu-item a {
     font-weight: 300;
     font-size: 16px;
     padding-left: 16px;
     border-bottom: 2px solid transparent;
   }
+
   .ucb-menu .menu-item.active {
     font-weight: 600;
     color: #000;
     background-color: #cfb87c;
-    border-bottom: 1px solid #cfb87c;
   }
+
   .ucb-menu.open .menu-item.active a {
     border-bottom: 2px solid transparent;
   }
@@ -78,19 +94,27 @@
   .ucb-mobile-footer-menu {
     display: flex;
   }
+
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-menu {
     gap: 0;
   }
-  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a:hover,
-  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a:hover {
-    border-bottom: 2px solid black;
-    color: black;
+
+  .ucb-main-nav-container .ucb-primary-menu-region li.menu-item a.nav-link,
+  .ucb-main-nav-container .ucb-primary-menu-region li.menu-item.active a.nav-link.is-active,
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link,
+  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link {
+    color: #000;
+    line-height: 2rem;
+    font-weight: normal;
+    border-bottom: none;
+    padding: .25rem 1rem;
   }
 
-  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item:not(:active) a:hover,
-  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item:not(:active) a:hover {
-    background-color: white;
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item:not(.active) a.nav-link,
+  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item:not(.active) a.nav-link {
+    background-color: #FFF;
   }
+
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a {
     margin: 0;
     line-height: 2rem;
@@ -192,41 +216,38 @@
   padding-right: 10px;
 }
 
-.ucb-button-gold.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
-  background-color: #CFB87C;
-  color: #000;
-  transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
-}
+@media only screen and (min-width: 601px) {
+  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
+    border-radius: 4px;
+  }
 
-.ucb-button-blue.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
-  background-color: #0277BD;
-  color: #FFF;
-  transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
-}
+  .ucb-button-gold.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
+    background-color: #CFB87C;
+    color: #000;
+    transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+  }
 
-.ucb-button-gray.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
-  background-color: #444;
-  color: #fff;
-  transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
-}
+  .ucb-button-blue.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
+    background-color: #0277BD;
+    color: #FFF;
+    transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+  }
 
-.ucb-button-none.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a,
-.ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a {
-  background-color: transparent;
-  border-radius: 0;
-  border: 0;
-  box-shadow: none;
-}
+  .ucb-button-gray.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
+    background-color: #444;
+    color: #fff;
+    transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+  }
 
-.ucb-button-gray.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
-  border-radius: 4px;
-  background-color: #5e5e5e;
-}
-.ucb-button-gold.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
-  border-radius: 4px;
-  background-color: #d3be87;
-}
-.ucb-button-blue.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
-  border-radius: 4px;
-  background-color: #026dae;
+  .ucb-button-gray.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
+    background-color: #5e5e5e;
+  }
+
+  .ucb-button-gold.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
+    background-color: #d3be87;
+  }
+
+  .ucb-button-blue.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
+    background-color: #026dae;
+  }
 }
