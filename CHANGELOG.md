@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Removes background colors from Content List
+  Removes background colors from the Content List
+  
+  Resolves #651 
+---
+
 - ### Newsletter: Minor Bug Fixes
   Adjusts the following on the Newsletter:
   - If user elects to omit the optional image on a _Newsletter Taxonomy_, it will no longer render that img element in the header
