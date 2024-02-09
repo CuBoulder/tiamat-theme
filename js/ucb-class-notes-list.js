@@ -51,12 +51,13 @@ class ClassNotesListElement extends HTMLElement {
             .then(this.handleError)
             .then((data) => {
 				console.log(data)
+				const images = data.included
 				const nextURL = data.links.next ? data.links.next.href : "";
 					// Iterate over all notes
 					data.data.forEach(note=>{
 						notes.push(note)
 					})
-					this.build(notes, nextURL)
+					this.build(notes, nextURL, images)
 
 			})
             .catch(Error=> {
@@ -67,14 +68,20 @@ class ClassNotesListElement extends HTMLElement {
             });
 	}
 	// Render handler
-	build(data, nextURL){
+	build(data, nextURL, images){
 		const classNotesContainer = this._notesListElement
+		// Image mapping
+		const imgObj = {}
+		images.forEach(image =>{
+			imgObj[image.id] = image.links.focal_image_square.href
+		})
 		// Build Notes
 		if(!data.length){
 			this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
 			this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-end-of-results', 'No results matching your filters.');
 		} else {
 			data.forEach(note => {
+				console.log('note', note)
 				const classNote = document.createElement('article')
 					classNote.classList.add('ucb-class-notes-list-note-item')
 				// Date (Class Note Link)
@@ -91,16 +98,40 @@ class ClassNotesListElement extends HTMLElement {
 						});
 					classNoteYearContainer.appendChild(classNoteYearLink)
 					classNote.appendChild(classNoteYearContainer)
-	
+				// Div for Images and Text
+				const imgAndTextDiv = document.createElement('div')
+				// TO DO -- Add bootstrap classes for div here
+				imgAndTextDiv.classList.add('ucb-class-note-data', 'row')
+
+				// Images
+				const imgDiv = document.createElement('div')
+				imgDiv.classList.add('ucb-class-note-image-container','col-sm-2')
+				// TO DO -- Add bootstrap stuff for img here
+				if(note.relationships.field_ucb_class_note_image.data){
+					note.relationships.field_ucb_class_note_image.data.forEach(image=>{
+						// Create an img el
+						let imageEl = document.createElement('img')
+						imageEl.alt = image.meta.alt
+						imageEl.src = imgObj[image.id]
+						imgDiv.append(imageEl)
+					})
+				}
+				imgAndTextDiv.appendChild(imgDiv)
+				// Text
+				const textDiv = document.createElement('div')
+				textDiv.classList.add('ucb-class-note-data-p', 'col-sm-10')
+
 				// Class Note Text
 				const classNoteParagraph = document.createElement('p')
 					classNoteParagraph.innerHTML = this.escapeHTML(note.attributes.body.processed)
-					classNote.appendChild(classNoteParagraph)
+					textDiv.appendChild(classNoteParagraph)
 				// Date posted
 				const classNotePosted = document.createElement('p')
 					classNotePosted.classList.add('class-note-posted-date')
 					classNotePosted.innerText = `Posted ${this.formatDateString(note.attributes.created)}`
-					classNote.appendChild(classNotePosted)
+					textDiv.appendChild(classNotePosted)
+					imgAndTextDiv.appendChild(textDiv)
+				classNote.appendChild(imgAndTextDiv)
 					this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
 
 				classNotesContainer.appendChild(classNote)				
