@@ -44,10 +44,13 @@ class ClassNotesListElement extends HTMLElement {
 				yearFilter = ''
 				publishFilter = '?filter[status]=1'
 			}
-		const API = nextURL != "" ? nextURL : JSONURL + yearFilter + publishFilter + sortFilter 
+		const images = '&include=field_ucb_class_note_image&fields[media--image]=field_media_image&fields[file--file]=uri,url'
+		const API = nextURL != "" ? nextURL : JSONURL + yearFilter + publishFilter + images + sortFilter 
+		console.log(API)
 		fetch(API)
             .then(this.handleError)
             .then((data) => {
+				console.log(data)
 				const nextURL = data.links.next ? data.links.next.href : "";
 					// Iterate over all notes
 					data.data.forEach(note=>{
