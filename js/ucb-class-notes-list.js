@@ -84,9 +84,24 @@ class ClassNotesListElement extends HTMLElement {
 				console.log('note', note)
 				const classNote = document.createElement('article')
 					classNote.classList.add('ucb-class-notes-list-note-item')
+				// Title & Year Container
+				const classNoteHeader = document.createElement('div')
+				classNoteHeader.classList.add('ucb-class-note-header')
+				// Title
+				const classNoteTitle = document.createElement('h3')
+				classNoteTitle.classList.add('ucb-class-note-title')
+				classNoteTitle.innerText = note.attributes.title
+				classNoteHeader.append(classNoteTitle)
+
+				// Bullet Point
+				const classNoteTitleDateBullet = document.createElement('p')
+				classNoteTitleDateBullet.classList.add('ucb-class-note-header-bullet')
+				classNoteTitleDateBullet.innerText = '\u2022'
+				classNoteHeader.append(classNoteTitleDateBullet)
+
 				// Date (Class Note Link)
-					const classNoteYearContainer = document.createElement('div')
-						classNoteYearContainer.classList.add('ucb-class-note-year-container')
+					// const classNoteYearContainer = document.createElement('div')
+					// 	classNoteYearContainer.classList.add('ucb-class-note-year-container')
 						const classNoteYearLink = document.createElement('a');
 						classNoteYearLink.classList.add('ucb-class-note-link')
 						classNoteYearLink.href = '#';
@@ -96,8 +111,10 @@ class ClassNotesListElement extends HTMLElement {
 							event.preventDefault(); // Prevent default anchor behavior
 							this.onYearSelect(note.attributes.field_ucb_class_year);
 						});
-					classNoteYearContainer.appendChild(classNoteYearLink)
-					classNote.appendChild(classNoteYearContainer)
+
+					// classNoteYearContainer.appendChild(classNoteYearLink)
+					classNoteHeader.appendChild(classNoteYearLink)
+					// classNote.appendChild(classNoteHeader)
 				// Div for Images and Text
 				const imgAndTextDiv = document.createElement('div')
 				// TO DO -- Add bootstrap classes for div here
@@ -111,6 +128,7 @@ class ClassNotesListElement extends HTMLElement {
 					note.relationships.field_ucb_class_note_image.data.forEach(image=>{
 						// Create an img el
 						let imageEl = document.createElement('img')
+						imageEl.classList.add('ucb-class-note-image')
 						imageEl.alt = image.meta.alt
 						imageEl.src = imgObj[image.id]
 						imgDiv.append(imageEl)
@@ -119,8 +137,8 @@ class ClassNotesListElement extends HTMLElement {
 				imgAndTextDiv.appendChild(imgDiv)
 				// Text
 				const textDiv = document.createElement('div')
-				textDiv.classList.add('ucb-class-note-data-p', 'col-sm-10')
-
+				textDiv.classList.add('ucb-class-note-data', 'col-sm-10')
+				textDiv.append(classNoteHeader)
 				// Class Note Text
 				const classNoteParagraph = document.createElement('p')
 					classNoteParagraph.innerHTML = this.escapeHTML(note.attributes.body.processed)

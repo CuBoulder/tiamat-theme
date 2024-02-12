@@ -1,13 +1,30 @@
-.ucb-class-note-link{
+.ucb-class-note-link, .ucb-class-note-header-bullet{
   font-size: 200%;
-    font-weight: 700;
-    color: #959595 !important;
-    margin-bottom: 10px;
+  font-weight: 700;
+  color: #959595 !important;
+  margin: 0;
 }
 
-.ucb-class-note-year-container{
-  margin-bottom: 10px;
+.ucb-class-note-header-bullet{
+  margin: 0px 10px;
 }
+
+.ucb-class-note-header{
+  flex-direction: row;
+  display: flex;
+  margin-bottom: 10px;
+  align-items: center;
+  line-height: normal;
+}
+
+.ucb-class-note-title{
+  font-size: 200%;
+  font-weight: 700;
+  margin: 0;
+}
+
+.ucb-class-note-header-bullet
+
 
 .ucb-class-note-link:hover{
   color: #333 !important;
@@ -29,6 +46,10 @@
 
 .class-note-year-select, .ucb-class-notes-filter-label{
   margin-right: 10px;
+}
+
+.ucb-class-note-image{
+  padding-bottom: 10px;
 }
 
 .ucb-list-msg {
