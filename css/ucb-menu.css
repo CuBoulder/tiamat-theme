@@ -1,12 +1,11 @@
+.ucb-menu {
+  --ucb-menu-indent-start: 10px;
+  --ucb-menu-indent-inc: 5px;
+  --ucb-menu-indent-border-width: 2px;
+}
+
+.ucb-menu .ucb-menu,
 #ucb-mobile-menu-toggle {
-  display: none;
-}
-
-.ucb-mobile-footer-menu {
-  display: none;
-}
-
-.ucb-menu .ucb-menu {
   display: none;
 }
 
@@ -29,15 +28,6 @@
 
   .ucb-main-nav-container.ucb-secondary-menu-position-above {
     flex-direction: column;
-  }
-
-  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a {
-    color: black;
-    padding-top: 8px;
-    padding-bottom: 8px;
-    padding-left: 16px;
-    line-height: 2rem;
-    margin-left: 2px;
   }
 
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region.ucb-secondary-menu-button-display .ucb-secondary-menu-region-container,
@@ -91,17 +81,14 @@
     border-bottom: none;
   }
 
-  .ucb-main-nav-container .ucb-menu .menu-item .nav-link {
+  .ucb-main-nav-container .ucb-menu .menu-item a.nav-link,
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.nav-link {
     padding: 10px 10px 10px var(--ucb-menu-indent-start);
   }
 
   .ucb-main-nav-container .ucb-menu .menu-item.active a.nav-link.is-active {
     color: #000;
     background-color: var(--ucb-gold);
-  }
-
-  .ucb-mobile-footer-menu {
-    display: flex;
   }
 
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-menu {
@@ -171,12 +158,6 @@
 
 .ucb-page-content .ucb-system-menu-block {
   margin-top: 20px;
-}
-
-.ucb-menu {
-  --ucb-menu-indent-start: 10px;
-  --ucb-menu-indent-inc: 5px;
-  --ucb-menu-indent-border-width: 2px;
 }
 
 .ucb-page-content .ucb-menu {
@@ -261,44 +242,4 @@
 
 .ucb-page-content .ucb-menu .expanded.active>a.nav-link {
   padding-left: calc(var(--ucb-menu-indent-start) - var(--ucb-menu-indent-border-width));
-}
-
-.ucb-menu {
-  padding-right: 10px;
-}
-
-@media only screen and (min-width: 601px) {
-  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
-    border-radius: 4px;
-  }
-
-  .ucb-button-gold.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
-    background-color: #CFB87C;
-    color: #000;
-    transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
-  }
-
-  .ucb-button-blue.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
-    background-color: #0277BD;
-    color: #FFF;
-    transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
-  }
-
-  .ucb-button-gray.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
-    background-color: #444;
-    color: #fff;
-    transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
-  }
-
-  .ucb-button-gray.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
-    background-color: #5e5e5e;
-  }
-
-  .ucb-button-gold.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
-    background-color: #d3be87;
-  }
-
-  .ucb-button-blue.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
-    background-color: #026dae;
-  }
 }
