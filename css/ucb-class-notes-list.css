@@ -37,7 +37,6 @@
 .ucb-class-notes-list-note-item{
   margin-bottom: 20px;
     border-bottom: 1px solid rgba(128, 128, 128, 0.333);
-    /* padding-bottom: 20px; */
 }
 
 .class-note-year-select, .ucb-class-notes-filter-label{
