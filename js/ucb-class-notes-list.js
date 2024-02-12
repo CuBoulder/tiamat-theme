@@ -115,7 +115,7 @@ class ClassNotesListElement extends HTMLElement {
 				if(note.relationships.field_ucb_class_note_image.data.length){
 					// Images
 					const imgDiv = document.createElement('div')
-					imgDiv.classList.add('ucb-class-note-image-container','col-sm-2')
+					imgDiv.classList.add('ucb-class-note-image-container','col-md-2','col-sm-3')
 						note.relationships.field_ucb_class_note_image.data.forEach(image=>{
 							// Create an img el
 							let imageEl = document.createElement('img')
@@ -129,7 +129,7 @@ class ClassNotesListElement extends HTMLElement {
 				// Text
 				const textDiv = document.createElement('div')
 				if(note.relationships.field_ucb_class_note_image.data.length){
-					textDiv.classList.add('ucb-class-note-data', 'col-sm-10')
+					textDiv.classList.add('ucb-class-note-data', 'col-md-10','col-sm-9')
 				} else {
 					textDiv.classList.add('ucb-class-note-data', 'col-sm-12')
 				}
