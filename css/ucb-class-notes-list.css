@@ -13,18 +13,14 @@
   flex-direction: row;
   display: flex;
   margin-bottom: 10px;
-  align-items: center;
-  line-height: normal;
 }
 
 .ucb-class-note-title{
   font-size: 200%;
   font-weight: 700;
   margin: 0;
+  line-height: inherit;
 }
-
-.ucb-class-note-header-bullet
-
 
 .ucb-class-note-link:hover{
   color: #333 !important;
@@ -112,6 +108,12 @@
   transition: background-color 0.25s ease,border-color 0.25s ease,color 0.25s ease;
   background-color: #0277BD;
   color: white !important;
+}
+
+@media only screen and (max-width: 575px) {
+  .ucb-class-note-data{
+    flex-direction: column-reverse;
+  }
 }
 
 @media only screen and (max-width: 525px) {
