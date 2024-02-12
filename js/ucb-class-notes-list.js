@@ -111,27 +111,32 @@ class ClassNotesListElement extends HTMLElement {
 				// Div for Images and Text
 				const imgAndTextDiv = document.createElement('div')
 				imgAndTextDiv.classList.add('ucb-class-note-data', 'row')
-
-				// Images
-				const imgDiv = document.createElement('div')
-				imgDiv.classList.add('ucb-class-note-image-container','col-sm-2')
-				if(note.relationships.field_ucb_class_note_image.data){
-					note.relationships.field_ucb_class_note_image.data.forEach(image=>{
-						// Create an img el
-						let imageEl = document.createElement('img')
-						imageEl.classList.add('ucb-class-note-image')
-						imageEl.alt = image.meta.alt
-						imageEl.src = imgObj[image.id]
-						imgDiv.append(imageEl)
-					})
+				// Only add the image col if images exist, otherwise text pinned left
+				if(note.relationships.field_ucb_class_note_image.data.length){
+					// Images
+					const imgDiv = document.createElement('div')
+					imgDiv.classList.add('ucb-class-note-image-container','col-sm-2')
+						note.relationships.field_ucb_class_note_image.data.forEach(image=>{
+							// Create an img el
+							let imageEl = document.createElement('img')
+							imageEl.classList.add('ucb-class-note-image')
+							imageEl.alt = image.meta.alt
+							imageEl.src = imgObj[image.id]
+							imgDiv.append(imageEl)
+						})
+					imgAndTextDiv.appendChild(imgDiv)
 				}
-				imgAndTextDiv.appendChild(imgDiv)
 				// Text
 				const textDiv = document.createElement('div')
-				textDiv.classList.add('ucb-class-note-data', 'col-sm-10')
+				if(note.relationships.field_ucb_class_note_image.data.length){
+					textDiv.classList.add('ucb-class-note-data', 'col-sm-10')
+				} else {
+					textDiv.classList.add('ucb-class-note-data', 'col-sm-12')
+				}
 				textDiv.append(classNoteHeader)
 				// Class Note Text
 				const classNoteParagraph = document.createElement('p')
+					classNoteParagraph.classList.add('ucb-class-note-body')
 					classNoteParagraph.innerHTML = this.escapeHTML(note.attributes.body.processed)
 					textDiv.appendChild(classNoteParagraph)
 				// Date posted

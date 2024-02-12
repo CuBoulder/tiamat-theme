@@ -47,6 +47,11 @@
   padding-bottom: 10px;
 }
 
+.ucb-class-note-body{
+  text-wrap: wrap;
+  word-wrap: break-word;
+}
+
 .ucb-list-msg {
     font-size: 1.25em;
     font-weight: bolder;
