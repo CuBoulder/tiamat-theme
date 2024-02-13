@@ -599,7 +599,7 @@ class PeopleListBlockElement extends HTMLElement {
 					linkIcon = "fa-brands fa-facebook primaryLinkIcon";
 					break;
 				case 'TWITTER':
-					linkIcon = "fa-brands fa-twitter primaryLinkIcon";
+					linkIcon = "fa-brands fa-x-twitter primaryLinkIcon";
 					break;
 				case 'FLICKR':
 					linkIcon = "fa-brands fa-flickr primaryLinkIcon";
