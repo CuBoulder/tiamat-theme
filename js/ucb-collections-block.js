@@ -341,16 +341,11 @@
      * Initilization and start of code
      */
     constructor() {
-      // Get all instances of the collection grid
-      let collectionGridInstances = document.getElementsByClassName(
-        "collection-grid-container"
-      );
-      //console.log(collectionGridInstances)
-      for (let i = 0; i < collectionGridInstances.length; i++) {
+      super();
         // get the url from the data-jsonapi variable
         let el = document.getElementById(
           "collections-grid-block-data-" +
-          collectionGridInstances[i].dataset.blockid
+          this.dataset.blockid
         );
         let JSONURL = ""; // JSON:API URL
         let JSONCATURL = ""; // JSON:API Category URL
@@ -358,7 +353,7 @@
         let TagsExclude = ""; // tags to exclude
         let BodyDisplay = ""; // variable to display body text or not
         let BaseURL = "";
-        let blockID = collectionGridInstances[i].dataset.blockid;
+        let blockID = this.dataset.blockid;
 
         // check to see if we have the data we need to work with.
         if (el) {
@@ -395,7 +390,7 @@
             NEXTJSONURL = BaseURL + "/jsonapi/" + response;
           }
         });
-      }
+      
     }
   }
 

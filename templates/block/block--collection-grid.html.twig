@@ -55,8 +55,8 @@
       <h2{{title_attributes}}>{{ label }}</h2>
     {% endif %}
     {{ title_suffix }}
-    <collection-grid>
-      <div class="collection-grid-container collection-grid-container-{{blockID}} {{filterItemsStyle}} {{multiselectStyle}}" data-blockid = {{blockID}}>
+    <collection-grid data-blockid = "{{blockID}}">
+      <div class="collection-grid-container collection-grid-container-{{blockID}} {{filterItemsStyle}} {{multiselectStyle}}">
         <div
           class="collection-filter-container">
           {# Single Select List #}
