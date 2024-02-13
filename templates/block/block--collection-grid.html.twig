@@ -69,10 +69,10 @@
 									</h3>
 									<div class="collection-category-container">
 										<div class="collection-filter-links">
-											<button class="category-single-button" onclick="resetSingleFilters({{ blockID }})">All</button>
+											<button class="category-single-button category-single-button-all-{{ blockID }}" onclick="resetSingleFilters({{ blockID }})">All</button>
 											{% for key, cat in item.entity.field_collection_grid_category %}
 												{%  if key|first != '#' %}
-													<button class="category-single-button category-label-{{ cat|view }}-{{ blockID }}" data-category="{{ cat|view }}" onclick="filterSingle({{ cat|view }}, {{ blockID }})">{{ cat|view }}</button>
+													<button class="category-single-button collection-grid-no-display category-label-reset-{{ blockID }} category-label-{{ cat|view }}-{{ blockID }}" data-category="{{ cat|view }}" onclick="filterSingle({{ cat|view }}, {{ blockID }})"></button>
 												{% endif %}
 											{% endfor %}
 										</div>
@@ -94,9 +94,9 @@
 									{% for key2, cat in item.entity.field_collection_grid_category %}
 										{%  if key2|first != '#' %}
 											<div class="collection-category-line">
-												<input id = "category-checkbox-{{blockID}}-{{key}}-{{key2}}" class="category-checkbox  category-checkbox-{{ blockID }}" type="checkbox" data-category="{{ cat|view }}" onclick="filterChecked({{ blockID }})">
+												<input id = "category-checkbox-{{blockID}}-{{key}}-{{key2}}" class="category-checkbox collection-grid-no-display category-checkbox-{{ blockID }}" type="checkbox" data-category="{{ cat|view }}" onclick="filterChecked({{ blockID }})">
 												
-												<label class="category-label category-label-{{ cat|view }}-{{ blockID }}" for ="category-checkbox-{{blockID}}-{{key}}-{{key2}}" data-category="{{ cat|view }}-label">{{ cat|view }}</label>
+												<label class="category-label category-label-{{ cat|view }}-{{ blockID }}" for ="category-checkbox-{{blockID}}-{{key}}-{{key2}}" data-category="{{ cat|view }}-label"></label>
 											</div>
 										{% endif %}
 									{% endfor %}
