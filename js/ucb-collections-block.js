@@ -343,8 +343,8 @@
     constructor() {
       super();
         // get the url from the data-jsonapi variable
-        let el = document.getElementById(
-          "collections-grid-block-data-" +
+        let el = this.querySelector(
+          "#collections-grid-block-data-" +
           this.dataset.blockid
         );
         let JSONURL = ""; // JSON:API URL
