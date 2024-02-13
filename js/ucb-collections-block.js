@@ -336,155 +336,6 @@
     });
   }
 
-  function filterChecked(blockID) {
-    //console.log("BlockID: ", blockID)
-    let allCards = document.getElementsByClassName(
-      "ucb-collection-card-container-" + blockID
-    );
-    let addedSpanData = document.getElementsByClassName(
-      "collection-grid-filter-span-" + blockID
-    );
-    let noFilters = 0;
-    for (let i = 0; i < addedSpanData.length; i++) {
-      addedSpanData[i].innerHTML = "<strong>Selected Filters: </strong>";
-    }
-
-    for (let i = 0; i < allCards.length; i++) {
-      allCards[i].classList.add("filtered");
-    }
-
-    let allChecks = document.getElementsByClassName(
-      "category-checkbox-" + blockID
-    );
-    for (let i = 0; i < allChecks.length; i++) {
-      let currentID = allChecks[i].dataset.category;
-      if (allChecks[i].checked) {
-        noFilters = 1;
-        let checkedCards = document.getElementsByClassName(
-          "ucb-collection-category-" + currentID + "-" + blockID
-        );
-        for (let i = 0; i < checkedCards.length; i++) {
-          checkedCards[i].classList.remove("filtered");
-        }
-
-        let currentCategory = document.getElementsByClassName(
-          "category-label-" + currentID + "-" + blockID
-        );
-        for (let i = 0; i < addedSpanData.length; i++) {
-          addedSpanData[i].innerHTML =
-            addedSpanData[i].innerHTML + currentCategory[0].innerText + ", ";
-        }
-      }
-    }
-
-    for (let i = 0; i < addedSpanData.length; i++) {
-      addedSpanData[i].innerHTML =
-        addedSpanData[i].innerHTML.slice(0, -2) +
-        "<a href='javascript:;' data-collection='collection-28' class='collection-reset' style='display: inline;' onclick = 'resetFilters(" +
-        blockID +
-        ")'><i class='fa-solid fa-xmark'></i> Reset Filters</a>";
-    }
-    if (noFilters == 0) {
-      for (let i = 0; i < allCards.length; i++) {
-        allCards[i].classList.remove("filtered");
-      }
-      for (let i = 0; i < addedSpanData.length; i++) {
-        addedSpanData[i].innerHTML = "";
-      }
-    }
-  }
-
-  function filterSingle(currentID, blockID) {
-    //Reset and hide all cards to remove previous filters
-    let allCards = document.getElementsByClassName(
-      "ucb-collection-card-container-" + blockID
-    );
-    for (let i = 0; i < allCards.length; i++) {
-      allCards[i].classList.add("filtered");
-    }
-
-    //Unfilter the active cards to be shown
-    let checkedCards = document.getElementsByClassName(
-      "ucb-collection-category-" + currentID + "-" + blockID
-    );
-    for (let i = 0; i < checkedCards.length; i++) {
-      checkedCards[i].classList.remove("filtered");
-    }
-
-    //Reset all active buttons
-    let allFilterButtons = document.getElementsByClassName(
-      "category-label-reset-" + blockID
-    );
-    for (let i = 0; i < allFilterButtons.length; i++) {
-      allFilterButtons[i].classList.remove("collection-grid-single-active");
-    }
-
-    let resetButtons = document.getElementsByClassName(
-      "category-single-button-all-" + blockID
-    );
-    for (let i = 0; i < resetButtons.length; i++) {
-      resetButtons[i].classList.remove("collection-grid-single-active");
-    }
-
-    //Add css for currently active button
-    let filterCurrentButtons = document.getElementsByClassName(
-      "category-label-" + currentID + "-" + blockID
-    );
-    for (let i = 0; i < filterCurrentButtons.length; i++) {
-      filterCurrentButtons[i].classList.add("collection-grid-single-active");
-    }
-
-
-
-  }
-
-  function resetFilters(blockID) {
-    let allCards = document.getElementsByClassName(
-      "ucb-collection-card-container-" + blockID
-    );
-    for (let i = 0; i < allCards.length; i++) {
-      allCards[i].classList.remove("filtered");
-    }
-
-    let allChecks = document.getElementsByClassName(
-      "category-checkbox-" + blockID
-    );
-    for (let i = 0; i < allChecks.length; i++) {
-      allChecks[i].checked = false;
-    }
-
-    let clearSpanData = document.getElementsByClassName(
-      "collection-grid-filter-span-" + blockID
-    );
-    for (let i = 0; i < clearSpanData.length; i++) {
-      clearSpanData[i].innerHTML = "";
-    }
-  }
-
-  function resetSingleFilters(blockID) {
-    let allCards = document.getElementsByClassName(
-      "ucb-collection-card-container-" + blockID
-    );
-    let resetButtons = document.getElementsByClassName(
-      "category-single-button-all-" + blockID
-    );
-    let filterButtons = document.getElementsByClassName(
-      "category-label-reset-" + blockID
-    );
-    for (let i = 0; i < allCards.length; i++) {
-      allCards[i].classList.remove("filtered");
-    }
-
-    for (let i = 0; i < resetButtons.length; i++) {
-      resetButtons[i].classList.add("collection-grid-single-active");
-    }
-
-    for (let i = 0; i < filterButtons.length; i++) {
-      filterButtons[i].classList.remove("collection-grid-single-active");
-    }
-  }
-
-
   class CollectionGridElement extends HTMLElement {
     /**
      * Initilization and start of code
@@ -551,3 +402,151 @@
   customElements.define('collection-grid', CollectionGridElement);
 
 })(window.customElements);
+
+function filterChecked(blockID) {
+  //console.log("BlockID: ", blockID)
+  let allCards = document.getElementsByClassName(
+    "ucb-collection-card-container-" + blockID
+  );
+  let addedSpanData = document.getElementsByClassName(
+    "collection-grid-filter-span-" + blockID
+  );
+  let noFilters = 0;
+  for (let i = 0; i < addedSpanData.length; i++) {
+    addedSpanData[i].innerHTML = "<strong>Selected Filters: </strong>";
+  }
+
+  for (let i = 0; i < allCards.length; i++) {
+    allCards[i].classList.add("filtered");
+  }
+
+  let allChecks = document.getElementsByClassName(
+    "category-checkbox-" + blockID
+  );
+  for (let i = 0; i < allChecks.length; i++) {
+    let currentID = allChecks[i].dataset.category;
+    if (allChecks[i].checked) {
+      noFilters = 1;
+      let checkedCards = document.getElementsByClassName(
+        "ucb-collection-category-" + currentID + "-" + blockID
+      );
+      for (let i = 0; i < checkedCards.length; i++) {
+        checkedCards[i].classList.remove("filtered");
+      }
+
+      let currentCategory = document.getElementsByClassName(
+        "category-label-" + currentID + "-" + blockID
+      );
+      for (let i = 0; i < addedSpanData.length; i++) {
+        addedSpanData[i].innerHTML =
+          addedSpanData[i].innerHTML + currentCategory[0].innerText + ", ";
+      }
+    }
+  }
+
+  for (let i = 0; i < addedSpanData.length; i++) {
+    addedSpanData[i].innerHTML =
+      addedSpanData[i].innerHTML.slice(0, -2) +
+      "<a href='javascript:;' data-collection='collection-28' class='collection-reset' style='display: inline;' onclick = 'resetFilters(" +
+      blockID +
+      ")'><i class='fa-solid fa-xmark'></i> Reset Filters</a>";
+  }
+  if (noFilters == 0) {
+    for (let i = 0; i < allCards.length; i++) {
+      allCards[i].classList.remove("filtered");
+    }
+    for (let i = 0; i < addedSpanData.length; i++) {
+      addedSpanData[i].innerHTML = "";
+    }
+  }
+}
+
+function filterSingle(currentID, blockID) {
+  //Reset and hide all cards to remove previous filters
+  let allCards = document.getElementsByClassName(
+    "ucb-collection-card-container-" + blockID
+  );
+  for (let i = 0; i < allCards.length; i++) {
+    allCards[i].classList.add("filtered");
+  }
+
+  //Unfilter the active cards to be shown
+  let checkedCards = document.getElementsByClassName(
+    "ucb-collection-category-" + currentID + "-" + blockID
+  );
+  for (let i = 0; i < checkedCards.length; i++) {
+    checkedCards[i].classList.remove("filtered");
+  }
+
+  //Reset all active buttons
+  let allFilterButtons = document.getElementsByClassName(
+    "category-label-reset-" + blockID
+  );
+  for (let i = 0; i < allFilterButtons.length; i++) {
+    allFilterButtons[i].classList.remove("collection-grid-single-active");
+  }
+
+  let resetButtons = document.getElementsByClassName(
+    "category-single-button-all-" + blockID
+  );
+  for (let i = 0; i < resetButtons.length; i++) {
+    resetButtons[i].classList.remove("collection-grid-single-active");
+  }
+
+  //Add css for currently active button
+  let filterCurrentButtons = document.getElementsByClassName(
+    "category-label-" + currentID + "-" + blockID
+  );
+  for (let i = 0; i < filterCurrentButtons.length; i++) {
+    filterCurrentButtons[i].classList.add("collection-grid-single-active");
+  }
+
+
+
+}
+
+function resetFilters(blockID) {
+  let allCards = document.getElementsByClassName(
+    "ucb-collection-card-container-" + blockID
+  );
+  for (let i = 0; i < allCards.length; i++) {
+    allCards[i].classList.remove("filtered");
+  }
+
+  let allChecks = document.getElementsByClassName(
+    "category-checkbox-" + blockID
+  );
+  for (let i = 0; i < allChecks.length; i++) {
+    allChecks[i].checked = false;
+  }
+
+  let clearSpanData = document.getElementsByClassName(
+    "collection-grid-filter-span-" + blockID
+  );
+  for (let i = 0; i < clearSpanData.length; i++) {
+    clearSpanData[i].innerHTML = "";
+  }
+}
+
+function resetSingleFilters(blockID) {
+  let allCards = document.getElementsByClassName(
+    "ucb-collection-card-container-" + blockID
+  );
+  let resetButtons = document.getElementsByClassName(
+    "category-single-button-all-" + blockID
+  );
+  let filterButtons = document.getElementsByClassName(
+    "category-label-reset-" + blockID
+  );
+  for (let i = 0; i < allCards.length; i++) {
+    allCards[i].classList.remove("filtered");
+  }
+
+  for (let i = 0; i < resetButtons.length; i++) {
+    resetButtons[i].classList.add("collection-grid-single-active");
+  }
+
+  for (let i = 0; i < filterButtons.length; i++) {
+    filterButtons[i].classList.remove("collection-grid-single-active");
+  }
+}
