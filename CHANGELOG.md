@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds Collection Grid block fixes
+  Closes #649.
+  Adds the required fixes to add an indicator for single select list, fix id's showing, and make the block a web component.
+---
+
 - ### Removes background colors from Content List
   Removes background colors from the Content List
   
