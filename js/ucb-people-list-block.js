@@ -387,7 +387,6 @@ class PeopleListBlockElement extends HTMLElement {
 			if (thisPerson.primaryLinkURI.startsWith('internal:/')) {
 				thisPerson.primaryLinkURI = this.getAttribute('site-base') + thisPerson.primaryLinkURI.replace('internal:/', '/');
 			}
-			console.log(thisPerson.primaryLinkURI)				
 			// needed to verify body exists on the Person page, if so, use that
 			if (personAttributeData['body']) {
 				// use summary if available
