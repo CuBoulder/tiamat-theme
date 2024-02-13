@@ -342,55 +342,54 @@
      */
     constructor() {
       super();
-        // get the url from the data-jsonapi variable
-        let el = this.querySelector(
-          "#collections-grid-block-data-" +
-          this.dataset.blockid
-        );
-        let JSONURL = ""; // JSON:API URL
-        let JSONCATURL = ""; // JSON:API Category URL
-        let NEXTJSONURL = ""; // next link for pagination
-        let TagsExclude = ""; // tags to exclude
-        let BodyDisplay = ""; // variable to display body text or not
-        let BaseURL = "";
-        let blockID = this.dataset.blockid;
+      // get the url from the data-jsonapi variable
+      let el = this.querySelector(
+        "#collections-grid-block-data-" +
+        this.dataset.blockid
+      );
+      let JSONURL = ""; // JSON:API URL
+      let JSONCATURL = ""; // JSON:API Category URL
+      let NEXTJSONURL = ""; // next link for pagination
+      let TagsExclude = ""; // tags to exclude
+      let BodyDisplay = ""; // variable to display body text or not
+      let BaseURL = "";
+      let blockID = this.dataset.blockid;
 
-        // check to see if we have the data we need to work with.
-        if (el) {
-          JSONURL = el.dataset.jsonapi;
-          JSONCATURL = el.dataset.jsoncats;
-          TagsExclude = el.dataset.extags;
-          BodyDisplay = el.dataset.bodydisplay;
-          BaseURL = el.dataset.baseurl;
-        }
-        /*
-        console.log("BASEURL: ", BaseURL)
-        
-        console.log("\n JSONURL: " + JSONURL);
-        console.log("\n JSONCATURL: " + JSONCATURL);
-        console.log("\n TagsExclude: " + TagsExclude);
-        console.log("\n BodyDisplay: " + BodyDisplay);
-        */
-        // attempt to render the data requested
-        renderCollectionCategories(JSONCATURL, blockID).then((response) => {
-          if (response) {
-            NEXTJSONURL = BaseURL + "/jsonapi/" + response;
-          }
-        });
-
-        // attempt to render the data requested
-        renderCollectionList(
-          JSONURL,
-          TagsExclude,
-          BodyDisplay,
-          blockID,
-          BaseURL
-        ).then((response) => {
-          if (response) {
-            NEXTJSONURL = BaseURL + "/jsonapi/" + response;
-          }
-        });
+      // check to see if we have the data we need to work with.
+      if (el) {
+        JSONURL = el.dataset.jsonapi;
+        JSONCATURL = el.dataset.jsoncats;
+        TagsExclude = el.dataset.extags;
+        BodyDisplay = el.dataset.bodydisplay;
+        BaseURL = el.dataset.baseurl;
+      }
+      /*
+      console.log("BASEURL: ", BaseURL)
       
+      console.log("\n JSONURL: " + JSONURL);
+      console.log("\n JSONCATURL: " + JSONCATURL);
+      console.log("\n TagsExclude: " + TagsExclude);
+      console.log("\n BodyDisplay: " + BodyDisplay);
+      */
+      // attempt to render the data requested
+      renderCollectionCategories(JSONCATURL, blockID).then((response) => {
+        if (response) {
+          NEXTJSONURL = BaseURL + "/jsonapi/" + response;
+        }
+      });
+
+      // attempt to render the data requested
+      renderCollectionList(
+        JSONURL,
+        TagsExclude,
+        BodyDisplay,
+        blockID,
+        BaseURL
+      ).then((response) => {
+        if (response) {
+          NEXTJSONURL = BaseURL + "/jsonapi/" + response;
+        }
+      });
     }
   }
 
@@ -495,9 +494,6 @@ function filterSingle(currentID, blockID) {
   for (let i = 0; i < filterCurrentButtons.length; i++) {
     filterCurrentButtons[i].classList.add("collection-grid-single-active");
   }
-
-
-
 }
 
 function resetFilters(blockID) {
