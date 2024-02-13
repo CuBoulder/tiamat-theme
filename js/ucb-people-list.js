@@ -404,7 +404,11 @@ class PeopleListElement extends HTMLElement {
 				if (personAttributeData['field_ucb_person_primary_link']) {
 					thisPerson.primaryLinkURI =  personAttributeData['field_ucb_person_primary_link']['uri'];
 					thisPerson.primaryLinkTitle = personAttributeData['field_ucb_person_primary_link']['title'];
-				}				
+				}
+				// This makes relative internal urls absolute, needed for multisite with single domain
+				 if (thisPerson.primaryLinkURI.startsWith('internal:/')) {
+					thisPerson.primaryLinkURI = this.getAttribute('site-base') + thisPerson.primaryLinkURI.replace('internal:/', '/');
+				}
 			// needed to verify body exists on the Person page, if so, use that
 			if (personAttributeData['body']) {
 				// use summary if available
@@ -746,68 +750,62 @@ class PeopleListElement extends HTMLElement {
 	}
 	generateLinkIcon(linkURI) {
 		var linkIcon = "fa-solid fa-link primaryLinkIcon";
-		if (linkURI.indexOf("internal:/") == 0) {
-			return linkIcon;
-		} else {
-			const linkData = new URL(linkURI).hostname.split(".")[1].toUpperCase();
-			switch (linkData) {
-				case 'FACEBOOK' :
-					linkIcon =  "fa-brands fa-facebook primaryLinkIcon";
+
+		try {
+			const url = new URL(linkURI);
+			const domainParts = url.hostname.toLowerCase().split('.');
+			const domain = domainParts.length > 1 ? domainParts[domainParts.length - 2] : url.hostname;
+	
+			switch (domain.toUpperCase()) {
+				case 'FACEBOOK':
+					linkIcon = "fa-brands fa-facebook primaryLinkIcon";
 					break;
-				
-				case 'TWITTER' :
-					linkIcon =  "fa-brands fa-twitter primaryLinkIcon";
+				case 'TWITTER':
+					linkIcon = "fa-brands fa-twitter primaryLinkIcon";
 					break;
-				
-				case 'FLICKR' :
-					linkIcon =  "fa-brands fa-flickr primaryLinkIcon";
+				case 'FLICKR':
+					linkIcon = "fa-brands fa-flickr primaryLinkIcon";
 					break;
-				
-				case 'LINKEDIN' :
-					linkIcon =  "fa-brands fa-linkedin primaryLinkIcon";
+				case 'LINKEDIN':
+					linkIcon = "fa-brands fa-linkedin primaryLinkIcon";
 					break;
-				
-				case 'YOUTUBE' :
-					linkIcon =  "fa-brands fa-youtube primaryLinkIcon";
+				case 'YOUTUBE':
+					linkIcon = "fa-brands fa-youtube primaryLinkIcon";
 					break;
-				
-				case 'INSTAGRAM' :
-					linkIcon =  "fa-brands fa-instagram primaryLinkIcon";
+				case 'INSTAGRAM':
+					linkIcon = "fa-brands fa-instagram primaryLinkIcon";
 					break;
-				
-				case 'DISCORD' :
-					linkIcon =  "fa-brands fa-discord primaryLinkIcon";
+				case 'DISCORD':
+					linkIcon = "fa-brands fa-discord primaryLinkIcon";
 					break;
-				
-				case 'PINTREST' :
-					linkIcon =  "fa-brands fa-pinterest-p primaryLinkIcon";
+				case 'PINTEREST':
+					linkIcon = "fa-brands fa-pinterest-p primaryLinkIcon";
 					break;
-					
-				case 'VIMEO' :
-					linkIcon =  "fa-brands fa-vimeo-v primaryLinkIcon";
+				case 'VIMEO':
+					linkIcon = "fa-brands fa-vimeo-v primaryLinkIcon";
 					break;
-				
-				case 'WORDPRESS' :
-					linkIcon =  "fa-brands fa-wordpress-simple primaryLinkIcon";
+				case 'WORDPRESS':
+					linkIcon = "fa-brands fa-wordpress-simple primaryLinkIcon";
 					break;
-				
-				case 'TIKTOK' :
-					linkIcon =  "fa-brands fa-tiktok primaryLinkIcon";
+				case 'TIKTOK':
+					linkIcon = "fa-brands fa-tiktok primaryLinkIcon";
 					break;
-				
-				case 'REDDIT' :
-					linkIcon =  "fa-brands fa--reddit-alien primaryLinkIcon";
+				case 'REDDIT':
+					linkIcon = "fa-brands fa-reddit-alien primaryLinkIcon";
 					break;
-				
-				case 'PATREON' :
-					linkIcon =  "fa-brands fa-patreon primaryLinkIcon";
+				case 'PATREON':
+					linkIcon = "fa-brands fa-patreon primaryLinkIcon";
 					break;
-				default :
-					linkIcon =  "fa-solid fa-link primaryLinkIcon";																																																					
+				default:
+					linkIcon = "fa-solid fa-link primaryLinkIcon";
 			}
+		} catch (e) {
+			console.error(`Error processing URL ${linkURI}:`, e);
 		}
-	return linkIcon;
+		
+		return linkIcon;
 	}
+	
 }
 
 customElements.define('ucb-people-list', PeopleListElement);
