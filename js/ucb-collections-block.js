@@ -35,9 +35,9 @@ function renderCollectionCategories(JSONURL, blockID) {
 
           let hiddenCategories =
             document.getElementsByClassName("category-checkbox-" + blockID);
-            for (let i = 0; i < hiddenCategories.length; i++) {
-              hiddenCategories[i].classList.remove("collection-grid-no-display");
-            }
+          for (let i = 0; i < hiddenCategories.length; i++) {
+            hiddenCategories[i].classList.remove("collection-grid-no-display");
+          }
 
           data.data.map((item) => {
             let currentDataID = item.attributes.drupal_internal__revision_id;
@@ -411,7 +411,7 @@ function filterSingle(currentID, blockID) {
 
   //Reset all active buttons
   let allFilterButtons = document.getElementsByClassName(
-    "category-label-reset-"  + blockID
+    "category-label-reset-" + blockID
   );
   for (let i = 0; i < allFilterButtons.length; i++) {
     allFilterButtons[i].classList.remove("collection-grid-single-active");
@@ -482,63 +482,68 @@ function resetSingleFilters(blockID) {
   }
 }
 
-/**
- * Initilization and start of code
- */
-(function () {
-  // Get all instances of the collection grid
-  let collectionGridInstances = document.getElementsByClassName(
-    "collection-grid-container"
-  );
-  //console.log(collectionGridInstances)
-  for (let i = 0; i < collectionGridInstances.length; i++) {
-    // get the url from the data-jsonapi variable
-    let el = document.getElementById(
-      "collections-grid-block-data-" +
-        collectionGridInstances[i].dataset.blockid
+
+class CollectionGridElement extends HTMLElement {
+  /**
+   * Initilization and start of code
+   */
+  constructor() {
+    // Get all instances of the collection grid
+    let collectionGridInstances = document.getElementsByClassName(
+      "collection-grid-container"
     );
-    let JSONURL = ""; // JSON:API URL
-    let JSONCATURL = ""; // JSON:API Category URL
-    let NEXTJSONURL = ""; // next link for pagination
-    let TagsExclude = ""; // tags to exclude
-    let BodyDisplay = ""; // variable to display body text or not
-    let BaseURL = "";
-    let blockID = collectionGridInstances[i].dataset.blockid;
+    //console.log(collectionGridInstances)
+    for (let i = 0; i < collectionGridInstances.length; i++) {
+      // get the url from the data-jsonapi variable
+      let el = document.getElementById(
+        "collections-grid-block-data-" +
+        collectionGridInstances[i].dataset.blockid
+      );
+      let JSONURL = ""; // JSON:API URL
+      let JSONCATURL = ""; // JSON:API Category URL
+      let NEXTJSONURL = ""; // next link for pagination
+      let TagsExclude = ""; // tags to exclude
+      let BodyDisplay = ""; // variable to display body text or not
+      let BaseURL = "";
+      let blockID = collectionGridInstances[i].dataset.blockid;
 
-    // check to see if we have the data we need to work with.
-    if (el) {
-      JSONURL = el.dataset.jsonapi;
-      JSONCATURL = el.dataset.jsoncats;
-      TagsExclude = el.dataset.extags;
-      BodyDisplay = el.dataset.bodydisplay;
-      BaseURL = el.dataset.baseurl;
+      // check to see if we have the data we need to work with.
+      if (el) {
+        JSONURL = el.dataset.jsonapi;
+        JSONCATURL = el.dataset.jsoncats;
+        TagsExclude = el.dataset.extags;
+        BodyDisplay = el.dataset.bodydisplay;
+        BaseURL = el.dataset.baseurl;
+      }
+      /*
+      console.log("BASEURL: ", BaseURL)
+      
+      console.log("\n JSONURL: " + JSONURL);
+      console.log("\n JSONCATURL: " + JSONCATURL);
+      console.log("\n TagsExclude: " + TagsExclude);
+      console.log("\n BodyDisplay: " + BodyDisplay);
+      */
+      // attempt to render the data requested
+      renderCollectionCategories(JSONCATURL, blockID).then((response) => {
+        if (response) {
+          NEXTJSONURL = BaseURL + "/jsonapi/" + response;
+        }
+      });
+
+      // attempt to render the data requested
+      renderCollectionList(
+        JSONURL,
+        TagsExclude,
+        BodyDisplay,
+        blockID,
+        BaseURL
+      ).then((response) => {
+        if (response) {
+          NEXTJSONURL = BaseURL + "/jsonapi/" + response;
+        }
+      });
     }
-    /*
-    console.log("BASEURL: ", BaseURL)
-    
-    console.log("\n JSONURL: " + JSONURL);
-    console.log("\n JSONCATURL: " + JSONCATURL);
-    console.log("\n TagsExclude: " + TagsExclude);
-    console.log("\n BodyDisplay: " + BodyDisplay);
-    */
-    // attempt to render the data requested
-    renderCollectionCategories(JSONCATURL, blockID).then((response) => {
-      if (response) {
-        NEXTJSONURL = BaseURL + "/jsonapi/" + response;
-      }
-    });
-
-    // attempt to render the data requested
-    renderCollectionList(
-      JSONURL,
-      TagsExclude,
-      BodyDisplay,
-      blockID,
-      BaseURL
-    ).then((response) => {
-      if (response) {
-        NEXTJSONURL = BaseURL + "/jsonapi/" + response;
-      }
-    });
   }
-})();
+}
+
+customElements.define('collection-grid', CollectionGridElement);
