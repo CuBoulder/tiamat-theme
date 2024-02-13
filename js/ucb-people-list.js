@@ -174,6 +174,19 @@ class PeopleListElement extends HTMLElement {
 		this.toggleMessageDisplay(this._loadingElement, 'block', null, null);
 
 		let groupBy = userConfig['groupby'] || config['groupby'] || 'none';
+		
+		 // Check if grouping is requested and the taxonomy data is available to do this.
+		 if (groupBy != 'none') {
+			const taxonomyData = this.getTaxonomy(groupBy);
+			if (!taxonomyData || taxonomyData.length === 0) {
+				// Taxonomy data required for grouping is missing, can't group by!
+				console.error(`Grouping by ${groupBy} is requested, but taxonomy data is missing. Please adjust your page's 'Group By' setting or make sure taxonomy data exists for that term.`);
+				this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-error', `Cannot group by ${groupBy} because taxonomy data is missing.`);
+				this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
+				return;
+			}
+		}
+
 		if(groupBy != 'none' && !this._taxonomyIds[groupBy]) // Group by is invalid!
 			groupBy = 'none';
 		// User-specified grouping is working as a feature to add in the future
@@ -194,7 +207,12 @@ class PeopleListElement extends HTMLElement {
 			else {
 				if(groupBy != 'none') { // Build person -> term mapping
 					const groupedPeople = this._groupedPeople = new Map();
+					let hasGroupingTaxonomy = false;
 					results.forEach(person => {
+						const groupingData = (person['relationships']['field_ucb_person_' + groupBy] || {})['data'];
+							if (groupingData && groupingData.length) {
+								hasGroupingTaxonomy = true;
+							}
 						((person['relationships']['field_ucb_person_' + groupBy] || {})['data'] || []).forEach(
 							termData => {
 								const termId = termData['meta']['drupal_internal__target_id'];
@@ -206,6 +224,11 @@ class PeopleListElement extends HTMLElement {
 								termPeople.push(person);
 							});
 					});
+					if (!hasGroupingTaxonomy) {
+						this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg', `No results found for the '${groupBy}' grouping.`);
+						this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
+						return;
+					}
 				}	
 				// get all of the include images id => url
 				const urlObj = {}; // key from data.data to key from data.includes
