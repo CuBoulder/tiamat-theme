@@ -69,7 +69,7 @@
                     </h3>
                     <div class="collection-category-container">
                       <div class="collection-filter-links">
-                        <button class="category-single-button category-single-button-all-{{ blockID }}" onclick="resetSingleFilters({{ blockID }})">All</button>
+                        <button class="category-single-button collection-grid-single-active category-single-button-all-{{ blockID }}" onclick="resetSingleFilters({{ blockID }})">All</button>
                         {% for key, cat in item.entity.field_collection_grid_category %}
                           {%  if key|first != '#' %}
                             <button class="category-single-button collection-grid-no-display category-label-reset-{{ blockID }} category-label-{{ cat|view }}-{{ blockID }}" data-category="{{ cat|view }}" onclick="filterSingle({{ cat|view }}, {{ blockID }})"></button>
