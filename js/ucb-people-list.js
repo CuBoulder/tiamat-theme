@@ -174,6 +174,19 @@ class PeopleListElement extends HTMLElement {
 		this.toggleMessageDisplay(this._loadingElement, 'block', null, null);
 
 		let groupBy = userConfig['groupby'] || config['groupby'] || 'none';
+		
+		 // Check if grouping is requested and the taxonomy data is available to do this.
+		 if (groupBy != 'none') {
+			const taxonomyData = this.getTaxonomy(groupBy);
+			if (!taxonomyData || taxonomyData.length === 0) {
+				// Taxonomy data required for grouping is missing, can't group by!
+				console.error(`Grouping by ${groupBy} is requested, but taxonomy data is missing. Please adjust your page's 'Group By' setting or make sure taxonomy data exists for that term.`);
+				this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-error', `Cannot group by ${groupBy} because taxonomy data is missing.`);
+				this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
+				return;
+			}
+		}
+
 		if(groupBy != 'none' && !this._taxonomyIds[groupBy]) // Group by is invalid!
 			groupBy = 'none';
 		// User-specified grouping is working as a feature to add in the future
@@ -194,7 +207,12 @@ class PeopleListElement extends HTMLElement {
 			else {
 				if(groupBy != 'none') { // Build person -> term mapping
 					const groupedPeople = this._groupedPeople = new Map();
+					let hasGroupingTaxonomy = false;
 					results.forEach(person => {
+						const groupingData = (person['relationships']['field_ucb_person_' + groupBy] || {})['data'];
+							if (groupingData && groupingData.length) {
+								hasGroupingTaxonomy = true;
+							}
 						((person['relationships']['field_ucb_person_' + groupBy] || {})['data'] || []).forEach(
 							termData => {
 								const termId = termData['meta']['drupal_internal__target_id'];
@@ -206,6 +224,11 @@ class PeopleListElement extends HTMLElement {
 								termPeople.push(person);
 							});
 					});
+					if (!hasGroupingTaxonomy) {
+						this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg', `No results found for the '${groupBy}' grouping.`);
+						this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
+						return;
+					}
 				}	
 				// get all of the include images id => url
 				const urlObj = {}; // key from data.data to key from data.includes
@@ -267,6 +290,7 @@ class PeopleListElement extends HTMLElement {
 	}
 
 	static getTaxonomyName(taxonomy, termId) {
+		if(!termId) return
 		return taxonomy.find( ({ id }) => id === termId ).name;
 	}
 
@@ -404,7 +428,11 @@ class PeopleListElement extends HTMLElement {
 				if (personAttributeData['field_ucb_person_primary_link']) {
 					thisPerson.primaryLinkURI =  personAttributeData['field_ucb_person_primary_link']['uri'];
 					thisPerson.primaryLinkTitle = personAttributeData['field_ucb_person_primary_link']['title'];
-				}				
+				}
+				// This makes relative internal urls absolute, needed for multisite with single domain
+				 if (thisPerson.primaryLinkURI.startsWith('internal:/')) {
+					thisPerson.primaryLinkURI = this.getAttribute('site-base') + thisPerson.primaryLinkURI.replace('internal:/', '/');
+				}
 			// needed to verify body exists on the Person page, if so, use that
 			if (personAttributeData['body']) {
 				// use summary if available
@@ -746,68 +774,62 @@ class PeopleListElement extends HTMLElement {
 	}
 	generateLinkIcon(linkURI) {
 		var linkIcon = "fa-solid fa-link primaryLinkIcon";
-		if (linkURI.indexOf("internal:/") == 0) {
-			return linkIcon;
-		} else {
-			const linkData = new URL(linkURI).hostname.split(".")[1].toUpperCase();
-			switch (linkData) {
-				case 'FACEBOOK' :
-					linkIcon =  "fa-brands fa-facebook primaryLinkIcon";
+
+		try {
+			const url = new URL(linkURI);
+			const domainParts = url.hostname.toLowerCase().split('.');
+			const domain = domainParts.length > 1 ? domainParts[domainParts.length - 2] : url.hostname;
+	
+			switch (domain.toUpperCase()) {
+				case 'FACEBOOK':
+					linkIcon = "fa-brands fa-facebook primaryLinkIcon";
 					break;
-				
-				case 'TWITTER' :
-					linkIcon =  "fa-brands fa-twitter primaryLinkIcon";
+				case 'TWITTER':
+					linkIcon = "fa-brands fa-x-twitter primaryLinkIcon";
 					break;
-				
-				case 'FLICKR' :
-					linkIcon =  "fa-brands fa-flickr primaryLinkIcon";
+				case 'FLICKR':
+					linkIcon = "fa-brands fa-flickr primaryLinkIcon";
 					break;
-				
-				case 'LINKEDIN' :
-					linkIcon =  "fa-brands fa-linkedin primaryLinkIcon";
+				case 'LINKEDIN':
+					linkIcon = "fa-brands fa-linkedin primaryLinkIcon";
 					break;
-				
-				case 'YOUTUBE' :
-					linkIcon =  "fa-brands fa-youtube primaryLinkIcon";
+				case 'YOUTUBE':
+					linkIcon = "fa-brands fa-youtube primaryLinkIcon";
 					break;
-				
-				case 'INSTAGRAM' :
-					linkIcon =  "fa-brands fa-instagram primaryLinkIcon";
+				case 'INSTAGRAM':
+					linkIcon = "fa-brands fa-instagram primaryLinkIcon";
 					break;
-				
-				case 'DISCORD' :
-					linkIcon =  "fa-brands fa-discord primaryLinkIcon";
+				case 'DISCORD':
+					linkIcon = "fa-brands fa-discord primaryLinkIcon";
 					break;
-				
-				case 'PINTREST' :
-					linkIcon =  "fa-brands fa-pinterest-p primaryLinkIcon";
+				case 'PINTEREST':
+					linkIcon = "fa-brands fa-pinterest-p primaryLinkIcon";
 					break;
-					
-				case 'VIMEO' :
-					linkIcon =  "fa-brands fa-vimeo-v primaryLinkIcon";
+				case 'VIMEO':
+					linkIcon = "fa-brands fa-vimeo-v primaryLinkIcon";
 					break;
-				
-				case 'WORDPRESS' :
-					linkIcon =  "fa-brands fa-wordpress-simple primaryLinkIcon";
+				case 'WORDPRESS':
+					linkIcon = "fa-brands fa-wordpress-simple primaryLinkIcon";
 					break;
-				
-				case 'TIKTOK' :
-					linkIcon =  "fa-brands fa-tiktok primaryLinkIcon";
+				case 'TIKTOK':
+					linkIcon = "fa-brands fa-tiktok primaryLinkIcon";
 					break;
-				
-				case 'REDDIT' :
-					linkIcon =  "fa-brands fa--reddit-alien primaryLinkIcon";
+				case 'REDDIT':
+					linkIcon = "fa-brands fa-reddit-alien primaryLinkIcon";
 					break;
-				
-				case 'PATREON' :
-					linkIcon =  "fa-brands fa-patreon primaryLinkIcon";
+				case 'PATREON':
+					linkIcon = "fa-brands fa-patreon primaryLinkIcon";
 					break;
-				default :
-					linkIcon =  "fa-solid fa-link primaryLinkIcon";																																																					
+				default:
+					linkIcon = "fa-solid fa-link primaryLinkIcon";
 			}
+		} catch (e) {
+			console.error(`Error processing URL ${linkURI}:`, e);
 		}
-	return linkIcon;
+		
+		return linkIcon;
 	}
+	
 }
 
 customElements.define('ucb-people-list', PeopleListElement);

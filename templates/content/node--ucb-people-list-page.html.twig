@@ -76,6 +76,7 @@
   </div>
   {% endif %}
   <ucb-people-list{{ create_attribute({
+    'site-base': url('<front>')|render|trim('/'),
     'base-uri': url('<front>')|render|trim('/') ~ '/jsonapi',
     config: config|json_encode,
     'user-config': '{}' }) }}>

@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### People List Page & People List Block - Bug Fixes & Edge Case Handling
+  Provides the following bug fixes to the `People List Block` and the `People List Page`
+  ## People List Page & People List Block
+  - Fixes a bug with internal links throwing an error. Adjusts so internal links will convert to absolute pathing, which should allow for our multi-site, single domain sites to use internal links. 
+  - No termId present on a Person causing a JavaScript error preventing a full render. Was able to cause this error with multiple people and one without any terms attached. This error was present on both `People List Page` and `People List Block`.
+  - Swaps Twitter's bird to Twitter's X... ( X 's X?)...whatever you want to call it, the bird icon is now an X icon.
+  
+  ## People List Page Only
+  - No terms existing for a taxonomy, and the `People List Page` having that taxonomy selected for `Group By` caused a white screen and no errors. Adjusted this to show an error specifying the reason for a white screen: `Grouping by ${groupBy} is requested, but taxonomy data is missing. Please adjust your page's 'Group By' setting or make sure taxonomy data exists for that term.`
+  - Terms existing for a taxonomy and `Group By` for that taxonomy selected on a `Person List Page`... but no Person has terms on that taxonomy caused the same white screen. Adjusted this to show an error specifying this white screen case: `No results found for the '${groupBy}' grouping.`
+  
+  Resolves #659 
+  
+  
+---
+
 - ### Adds Collection Grid block fixes
   Closes #649.
   Adds the required fixes to add an indicator for single select list, fix id's showing, and make the block a web component.
