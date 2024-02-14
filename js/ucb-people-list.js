@@ -290,6 +290,7 @@ class PeopleListElement extends HTMLElement {
 	}
 
 	static getTaxonomyName(taxonomy, termId) {
+		if(!termId) return
 		return taxonomy.find( ({ id }) => id === termId ).name;
 	}
 
