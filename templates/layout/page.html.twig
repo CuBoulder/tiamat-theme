@@ -263,5 +263,7 @@
 
 </div>{# /.layout-container #}
 
-{# Services -- see ucb_site_config #}
-{% include '@ucb_site_configuration/includes/external-services.html.twig' %}
+{# Third-party services – see CU Boulder Site Configuration #}
+{% if external_service_enabled %}
+  {% include '@ucb_site_configuration/includes/external-services.html.twig' %}
+{% endif %}
