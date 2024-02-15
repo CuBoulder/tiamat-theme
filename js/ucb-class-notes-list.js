@@ -93,9 +93,12 @@ class ClassNotesListElement extends HTMLElement {
 
 		  // using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
 		  idFilterData.map((pair) => {
-			const thumbnailId = pair.relationships.thumbnail.data.id;
-			idObj[pair.id] = pair.relationships.thumbnail.data.id;
-			altObj[thumbnailId].alt = pair.relationships.thumbnail.data.meta.alt;
+			if (pair.relationships.thumbnail.data){
+				const thumbnailId = pair.relationships.thumbnail.data.id;
+				idObj[pair.id] = pair.relationships.thumbnail.data.id;
+				altObj[thumbnailId].alt = pair.relationships.thumbnail.data.meta.alt;
+			}
+			
 		  })
 		}
 		
@@ -139,16 +142,19 @@ class ClassNotesListElement extends HTMLElement {
 				imgAndTextDiv.classList.add('ucb-class-note-data', 'row')
 				// Only add the image col if images exist, otherwise text pinned left
 				if(note.relationships.field_ucb_class_note_image.data.length){
+					console.log('Note!', note)
 					// Images
 					const imgDiv = document.createElement('div')
 					imgDiv.classList.add('ucb-class-note-image-container','col-md-2','col-sm-3')
 						note.relationships.field_ucb_class_note_image.data.forEach(image=>{
 							// Create an img el
-							let imageEl = document.createElement('img')
-							imageEl.classList.add('ucb-class-note-image')
-							imageEl.alt =  altObj[idObj[image.id]].alt;
-							imageEl.src = altObj[idObj[image.id]].src
-							imgDiv.append(imageEl)
+							if(altObj[idObj[image.id]]){
+								let imageEl = document.createElement('img')
+								imageEl.classList.add('ucb-class-note-image')
+								imageEl.alt =  altObj[idObj[image.id]].alt;
+								imageEl.src = altObj[idObj[image.id]].src
+								imgDiv.append(imageEl)
+							}
 						})
 					imgAndTextDiv.appendChild(imgDiv)
 				}
