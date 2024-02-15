@@ -37,7 +37,7 @@
 					{% set photoDescription = "" %}
 				{% endif %}
 				<div class="col gallery-item">
-					<a href="{{ file_url(item.entity.field_media_image.entity.fileuri) }}" class="glightbox ucb-gallery-lightbox" data-gallery="gallery{{ content['#block_content'].id() }}" data-glightbox="description: yup ">
+					<a href="{{ file_url(item.entity.field_media_image.entity.fileuri) }}" class="glightbox ucb-gallery-lightbox" data-gallery="gallery{{ content['#block_content'].id() }}" data-glightbox="description: {{ photoDescription }} ">
 						{{ item|view }}
 					</a>
 				</div>
