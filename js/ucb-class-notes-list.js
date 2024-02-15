@@ -44,12 +44,14 @@ class ClassNotesListElement extends HTMLElement {
 				yearFilter = ''
 				publishFilter = '?filter[status]=1'
 			}
-		const images = '&include=field_ucb_class_note_image&fields[media--image]=field_media_image&fields[file--file]=uri,url'
+		const images = '&include=field_ucb_class_note_image.field_media_image&fields[file--file]=uri,url'
 		const API = nextURL != "" ? nextURL : JSONURL + yearFilter + publishFilter + images + sortFilter 
 		fetch(API)
             .then(this.handleError)
             .then((data) => {
+				console.log('data', data)
 				const images = data.included
+
 				const nextURL = data.links.next ? data.links.next.href : "";
 					// Iterate over all notes
 					data.data.forEach(note=>{
@@ -68,11 +70,37 @@ class ClassNotesListElement extends HTMLElement {
 	// Render handler
 	build(data, nextURL, images){
 		const classNotesContainer = this._notesListElement
-		// Image mapping
-		const imgObj = {}
-		images.forEach(image =>{
-			imgObj[image.id] = image.links.focal_image_square.href
-		})
+		// Classic Media Library image mapping
+		let idObj = {};
+		let altObj = {};
+		// Remove any blanks from our articles before map
+		if (images) {
+		  // removes all other included data besides images in our included media
+		  let idFilterData = images.filter((item) => {
+			return item.type == "media--image";
+		  })
+
+		  let altFilterData = images.filter((item) => {
+			return item.type == 'file--file';
+		  });
+		  // finds the focial point version of the thumbnail
+		  altFilterData.map((item) => {
+			// checks if consumer is working, else default to standard image instead of focal image
+			if (item.links.focal_image_square != undefined) {
+			  altObj[item.id] = { src: item.links.focal_image_square.href }
+			} else {
+			  altObj[item.id] = { src: item.attributes.uri.url }
+			}
+		  })
+
+		  // using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
+		  idFilterData.map((pair) => {
+			const thumbnailId = pair.relationships.thumbnail.data.id;
+			idObj[pair.id] = pair.relationships.thumbnail.data.id;
+			altObj[thumbnailId].alt = pair.relationships.thumbnail.data.meta.alt;
+		  })
+		}
+		
 		// Build Notes
 		if(!data.length){
 			this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
@@ -120,8 +148,8 @@ class ClassNotesListElement extends HTMLElement {
 							// Create an img el
 							let imageEl = document.createElement('img')
 							imageEl.classList.add('ucb-class-note-image')
-							imageEl.alt = image.meta.alt
-							imageEl.src = imgObj[image.id]
+							imageEl.alt =  altObj[idObj[image.id]].alt;
+							imageEl.src = altObj[idObj[image.id]].src
 							imgDiv.append(imageEl)
 						})
 					imgAndTextDiv.appendChild(imgDiv)
