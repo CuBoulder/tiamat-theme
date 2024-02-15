@@ -141,14 +141,15 @@ class ClassNotesListElement extends HTMLElement {
 				const imgAndTextDiv = document.createElement('div')
 				imgAndTextDiv.classList.add('ucb-class-note-data', 'row')
 				// Only add the image col if images exist, otherwise text pinned left
+				let hasImages = false; // If images exist, this flag will be set to apply Bootstrap classes appropriately, else take col-12
 				if(note.relationships.field_ucb_class_note_image.data.length){
-					console.log('Note!', note)
 					// Images
 					const imgDiv = document.createElement('div')
-					imgDiv.classList.add('ucb-class-note-image-container','col-md-2','col-sm-3')
 						note.relationships.field_ucb_class_note_image.data.forEach(image=>{
 							// Create an img el
 							if(altObj[idObj[image.id]]){
+								hasImages = true; // We have at least one image, sets flag for later
+								imgDiv.classList.add('ucb-class-note-image-container','col-md-2','col-sm-3')
 								let imageEl = document.createElement('img')
 								imageEl.classList.add('ucb-class-note-image')
 								imageEl.alt =  altObj[idObj[image.id]].alt;
@@ -160,7 +161,8 @@ class ClassNotesListElement extends HTMLElement {
 				}
 				// Text
 				const textDiv = document.createElement('div')
-				if(note.relationships.field_ucb_class_note_image.data.length){
+				// Sets Class Note body bootstrap style, dependent on having images (hasImages flag above)
+				if(note.relationships.field_ucb_class_note_image.data.length && hasImages){
 					textDiv.classList.add('ucb-class-note-data', 'col-md-10','col-sm-9')
 				} else {
 					textDiv.classList.add('ucb-class-note-data', 'col-sm-12')
