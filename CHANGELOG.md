@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Removes third-party services
+  Moves all associated code into the Site Configuration module.
+  
+  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/48)
+---
+
 - ### image gallery bug fix
   Closes #642.
   Quick fix to make image gallery work.
