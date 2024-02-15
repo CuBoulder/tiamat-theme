@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### image gallery bug fix
+  Closes #642.
+  Quick fix to make image gallery work.
+---
+
 - ### People List Page & People List Block - Bug Fixes & Edge Case Handling
   Provides the following bug fixes to the `People List Block` and the `People List Page`
   ## People List Page & People List Block
