@@ -49,9 +49,7 @@ class ClassNotesListElement extends HTMLElement {
 		fetch(API)
             .then(this.handleError)
             .then((data) => {
-				console.log('data', data)
 				const images = data.included
-
 				const nextURL = data.links.next ? data.links.next.href : "";
 					// Iterate over all notes
 					data.data.forEach(note=>{
