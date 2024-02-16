@@ -34,3 +34,34 @@
   margin-left: 20px;
   display: block;
 }
+
+.ucb-brand-bar-controls {
+  display: flex;
+  flex-direction: row;
+  gap: 9px;
+}
+
+.ucb-brand-bar #ucb-mobile-menu-toggle {
+  display: none;
+  color: currentColor;
+  background-color: transparent;
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  padding: 0;
+}
+
+.ucb-brand-bar #ucb-mobile-menu-toggle svg {
+  width: 100%;
+  height: 100%;
+}
+
+.ucb-brand-bar #ucb-mobile-menu-toggle .ucb-mobile-menu-close-icon,
+.ucb-brand-bar #ucb-mobile-menu-toggle[aria-expanded='true'] .ucb-mobile-menu-open-icon {
+  display: none;
+}
+
+.ucb-brand-bar #ucb-mobile-menu-toggle .ucb-mobile-menu-open-icon,
+.ucb-brand-bar #ucb-mobile-menu-toggle[aria-expanded='true'] .ucb-mobile-menu-close-icon {
+  display: inline-block;
+}
