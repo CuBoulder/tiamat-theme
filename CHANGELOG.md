@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Class Notes List Changes
+  - Adds images and adjusts the style of the `Class Notes List` page to mirror the Teaser-List display of other List-type nodes
+  - Allows for `Class Note` Content types to have multiple images (custom-entities)
+  
+  
+  Includes:
+  
+  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/657
+  - `tiamat-custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/95
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/206
+---
+
 - ### Removes third-party services
   Moves all associated code into the Site Configuration module.
   
