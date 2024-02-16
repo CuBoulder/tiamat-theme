@@ -52,25 +52,9 @@
 
 .ucb-brand-bar #ucb-mobile-menu-toggle {
   display: none;
-  color: currentColor;
-  background-color: transparent;
-  width: 20px;
-  height: 20px;
-  box-sizing: content-box;
-  margin: 0;
 }
 
 .ucb-brand-bar #ucb-mobile-menu-toggle svg {
   width: 20px;
   height: 20px;
-}
-
-.ucb-brand-bar #ucb-mobile-menu-toggle .ucb-mobile-menu-close-icon,
-.ucb-brand-bar #ucb-mobile-menu-toggle[aria-expanded='true'] .ucb-mobile-menu-open-icon {
-  display: none;
-}
-
-.ucb-brand-bar #ucb-mobile-menu-toggle .ucb-mobile-menu-open-icon,
-.ucb-brand-bar #ucb-mobile-menu-toggle[aria-expanded='true'] .ucb-mobile-menu-close-icon {
-  display: inline-block;
 }

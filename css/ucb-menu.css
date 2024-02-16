@@ -8,6 +8,24 @@
   display: none;
 }
 
+#ucb-mobile-menu-toggle {
+  display: none;
+  color: currentColor;
+  background-color: transparent;
+  box-sizing: content-box;
+  margin: 0;
+}
+
+#ucb-mobile-menu-toggle .ucb-mobile-menu-close-icon,
+#ucb-mobile-menu-toggle[aria-expanded='true'] .ucb-mobile-menu-open-icon {
+  display: none;
+}
+
+#ucb-mobile-menu-toggle .ucb-mobile-menu-open-icon,
+#ucb-mobile-menu-toggle[aria-expanded='true'] .ucb-mobile-menu-close-icon {
+  display: inline-block;
+}
+
 @media only screen and (max-width: 600px) {
   .ucb-menu .ucb-menu {
     display: block;

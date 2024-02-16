@@ -209,6 +209,25 @@ header#ucb-header-block {
   flex-shrink: 0;
 }
 
+.ucb-menu-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.ucb-menu-wrapper .ucb-site-name-wrapper {
+  flex: 1 auto;
+}
+
+.ucb-menu-wrapper #ucb-mobile-menu-toggle {
+  padding: 0;
+}
+
+.ucb-menu-wrapper #ucb-mobile-menu-toggle svg {
+  width: 1.2em;
+  height: 1.2em;
+}
+
 .ucb-site-affiliation-sport_club .ucb-menu-wrapper .ucb-site-name-wrapper {
   background-image: url(../images/cu-buffs-logo.png);
   background-repeat: no-repeat;
