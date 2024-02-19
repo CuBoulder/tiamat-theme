@@ -104,6 +104,7 @@
 
 .ucb-teaser-lg-row{
   align-items: center;
+  margin-bottom: 20px;
 }
 
 @media screen and (max-width: 975px) {

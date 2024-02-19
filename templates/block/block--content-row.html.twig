@@ -59,26 +59,26 @@
 				</div>
 			{% endfor %}
 			{# Teaser Large Alternate Row Layout #}
-		{% elseif layoutSelection == 1 %}
+			{% elseif layoutSelection == 1 %}
 			{% for key, item in content['#block_content'].field_row_layout_content %}
 				{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
-				<div class="row d-flex row-content">
-					{% if (loop.index is odd) %}{% set image = item.entity.field_row_layout_content_image.0 %}
+				<div class="row d-flex row-content ucb-teaser-lg-row">
+					{% set image = item.entity.field_row_layout_content_image.0 %}
+					{% if (loop.index is odd) %}
 						{% if image %}
-						<div class="col-4 row-image-container">
+						<div class="col-sm-5 col-xs-12 row-image-container">
 							{% if rowLink %}
 								<a href="{{ rowLink }} ">
-									{{ image|view }}
+									<img class="ucb-content-row-img-lg" src="{{item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide')}}"></img>
 								</a>
 							{% else %}
 								{{ image|view }}
 							{% endif %}
 						</div>
+						<div class="col-sm-7 col-xs-12 row-text-container">
 						{% else %}
-						<div class="col-4">
-						</div>
+						<div class="col-12 row-text-container">
 						{% endif %}
-						<div class="col-8 row-text-container">
 							{% if rowLink %}
 								<a href="{{ rowLink }} ">
 									<h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
@@ -89,7 +89,7 @@
 							{{item.entity.field_row_layout_content_text|view}}
 						</div>
 					{% else %}
-						<div class="col-8 row-text-container">
+						<div class="{{ image ? 'col-sm-7 col-xs-12' : 'col-12' }} row-text-container">
 							{% if rowLink %}
 								<a href="{{ rowLink }} ">
 									<h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
@@ -100,13 +100,13 @@
 							{{item.entity.field_row_layout_content_text|view}}
 						</div>
 						{% if image %}
-						<div class="col-4 row-image-container">
+						<div class="col-sm-5 col-xs-12 row-image-container">
 							{% if rowLink %}
 								<a href="{{ rowLink }} ">
-									{{ item.entity.field_row_layout_content_image|view }}
+									<img class="ucb-content-row-img-lg" src="{{item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide')}}"></img>
 								</a>
 							{% else %}
-								{{ item.entity.field_row_layout_content_image|view }}
+								<img class="ucb-content-row-img-lg" src="{{item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide')}}"></img>
 							{% endif %}
 						</div>
 						{% endif %}
