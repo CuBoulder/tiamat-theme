@@ -31,6 +31,7 @@
   margin: 10px 20px 40px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   text-align: left;
+  transition: box-shadow .5s ease;
 }
 
 .horizontal-timeline-card-header,
@@ -206,9 +207,11 @@
   width: 130px;
   min-width: 130px;
 }
-
+.vertical-timeline-card-wrapper:hover {
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
 .horizontal-timeline-card-wrapper:hover {
-  box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 }
 
 .horizontal-timeline-buttons-slide {
@@ -300,7 +303,7 @@
   }
 
   .vertical-timeline-container::after {
-    left: 5px;
+    left: 15px;
   }
 
   .vertical-timeline-card {
