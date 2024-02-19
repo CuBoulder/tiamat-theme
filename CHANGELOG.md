@@ -9,6 +9,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Standardizes Display of Accordion - style Elements
+  Standardizes style of Accordion elements. This modifies the style of the `FAQ Page` and `Expandable Content` block in the following ways:
+  - Adjusts the `FAQ Page` to mirror the Expandable Content's style (blue text, larger type, red hover, + / - icons on toggle instead of a chevron)
+  - Removes the underlined text-decoration on `Expandable Content`'s title links
+  
+  Resolves #672 
+---
+
+- ### Class Notes List Changes
+  - Adds images and adjusts the style of the `Class Notes List` page to mirror the Teaser-List display of other List-type nodes
+  - Allows for `Class Note` Content types to have multiple images (custom-entities)
+  
+  
+  Includes:
+  
+  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/657
+  - `tiamat-custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/95
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/206
+---
+
 - ### Removes third-party services
   Moves all associated code into the Site Configuration module.
   

@@ -1,12 +1,25 @@
-.ucb-class-note-link{
+.ucb-class-note-link, .ucb-class-note-header-bullet{
   font-size: 200%;
-    font-weight: 700;
-    color: #959595 !important;
-    margin-bottom: 10px;
+  font-weight: 700;
+  color: #959595 !important;
+  margin: 0;
 }
 
-.ucb-class-note-year-container{
+.ucb-class-note-header-bullet{
+  margin: 0px 10px;
+}
+
+.ucb-class-note-header{
+  flex-direction: row;
+  display: flex;
   margin-bottom: 10px;
+}
+
+.ucb-class-note-title{
+  font-size: 200%;
+  font-weight: 700;
+  margin: 0;
+  line-height: inherit;
 }
 
 .ucb-class-note-link:hover{
@@ -24,11 +37,19 @@
 .ucb-class-notes-list-note-item{
   margin-bottom: 20px;
     border-bottom: 1px solid rgba(128, 128, 128, 0.333);
-    /* padding-bottom: 20px; */
 }
 
 .class-note-year-select, .ucb-class-notes-filter-label{
   margin-right: 10px;
+}
+
+.ucb-class-note-image{
+  padding-bottom: 10px;
+}
+
+.ucb-class-note-body{
+  text-wrap: wrap;
+  word-wrap: break-word;
 }
 
 .ucb-list-msg {
@@ -91,6 +112,12 @@
   transition: background-color 0.25s ease,border-color 0.25s ease,color 0.25s ease;
   background-color: #0277BD;
   color: white !important;
+}
+
+@media only screen and (max-width: 575px) {
+  .ucb-class-note-data{
+    flex-direction: column-reverse;
+  }
 }
 
 @media only screen and (max-width: 525px) {

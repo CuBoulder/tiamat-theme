@@ -44,16 +44,18 @@ class ClassNotesListElement extends HTMLElement {
 				yearFilter = ''
 				publishFilter = '?filter[status]=1'
 			}
-		const API = nextURL != "" ? nextURL : JSONURL + yearFilter + publishFilter + sortFilter 
+		const images = '&include=field_ucb_class_note_image.field_media_image&fields[file--file]=uri,url'
+		const API = nextURL != "" ? nextURL : JSONURL + yearFilter + publishFilter + images + sortFilter 
 		fetch(API)
             .then(this.handleError)
             .then((data) => {
+				const images = data.included
 				const nextURL = data.links.next ? data.links.next.href : "";
 					// Iterate over all notes
 					data.data.forEach(note=>{
 						notes.push(note)
 					})
-					this.build(notes, nextURL)
+					this.build(notes, nextURL, images)
 
 			})
             .catch(Error=> {
@@ -64,8 +66,42 @@ class ClassNotesListElement extends HTMLElement {
             });
 	}
 	// Render handler
-	build(data, nextURL){
+	build(data, nextURL, images){
 		const classNotesContainer = this._notesListElement
+		// Classic Media Library image mapping
+		let idObj = {};
+		let altObj = {};
+		// Remove any blanks from our articles before map
+		if (images) {
+		  // removes all other included data besides images in our included media
+		  let idFilterData = images.filter((item) => {
+			return item.type == "media--image";
+		  })
+
+		  let altFilterData = images.filter((item) => {
+			return item.type == 'file--file';
+		  });
+		  // finds the focial point version of the thumbnail
+		  altFilterData.map((item) => {
+			// checks if consumer is working, else default to standard image instead of focal image
+			if (item.links.focal_image_square != undefined) {
+			  altObj[item.id] = { src: item.links.focal_image_square.href }
+			} else {
+			  altObj[item.id] = { src: item.attributes.uri.url }
+			}
+		  })
+
+		  // using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
+		  idFilterData.map((pair) => {
+			if (pair.relationships.thumbnail.data){
+				const thumbnailId = pair.relationships.thumbnail.data.id;
+				idObj[pair.id] = pair.relationships.thumbnail.data.id;
+				altObj[thumbnailId].alt = pair.relationships.thumbnail.data.meta.alt;
+			}
+			
+		  })
+		}
+		
 		// Build Notes
 		if(!data.length){
 			this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
@@ -74,30 +110,76 @@ class ClassNotesListElement extends HTMLElement {
 			data.forEach(note => {
 				const classNote = document.createElement('article')
 					classNote.classList.add('ucb-class-notes-list-note-item')
+				// Title & Year Container
+				const classNoteHeader = document.createElement('div')
+					classNoteHeader.classList.add('ucb-class-note-header')
+				// Title
+				const classNoteTitle = document.createElement('h3')
+					classNoteTitle.classList.add('ucb-class-note-title')
+					classNoteTitle.innerText = note.attributes.title
+					classNoteHeader.append(classNoteTitle)
+
+				// Bullet Point
+				const classNoteTitleDateBullet = document.createElement('p')
+					classNoteTitleDateBullet.classList.add('ucb-class-note-header-bullet')
+					classNoteTitleDateBullet.innerText = '\u2022'
+					classNoteHeader.append(classNoteTitleDateBullet)
+
 				// Date (Class Note Link)
-					const classNoteYearContainer = document.createElement('div')
-						classNoteYearContainer.classList.add('ucb-class-note-year-container')
-						const classNoteYearLink = document.createElement('a');
-						classNoteYearLink.classList.add('ucb-class-note-link')
-						classNoteYearLink.href = '#';
-						classNoteYearLink.innerText = note.attributes.field_ucb_class_year;
-						// Class Note Link Event Listener
-						classNoteYearLink.addEventListener('click', (event) => {
-							event.preventDefault(); // Prevent default anchor behavior
-							this.onYearSelect(note.attributes.field_ucb_class_year);
-						});
-					classNoteYearContainer.appendChild(classNoteYearLink)
-					classNote.appendChild(classNoteYearContainer)
-	
+				const classNoteYearLink = document.createElement('a');
+					classNoteYearLink.classList.add('ucb-class-note-link')
+					classNoteYearLink.href = '#';
+					classNoteYearLink.innerText = note.attributes.field_ucb_class_year;
+					// Class Note Link Event Listener
+					classNoteYearLink.addEventListener('click', (event) => {
+						event.preventDefault(); // Prevent default anchor behavior
+						this.onYearSelect(note.attributes.field_ucb_class_year);
+					});
+				classNoteHeader.appendChild(classNoteYearLink)
+
+				// Div for Images and Text
+				const imgAndTextDiv = document.createElement('div')
+				imgAndTextDiv.classList.add('ucb-class-note-data', 'row')
+				// Only add the image col if images exist, otherwise text pinned left
+				let hasImages = false; // If images exist, this flag will be set to apply Bootstrap classes appropriately, else take col-12
+				if(note.relationships.field_ucb_class_note_image.data.length){
+					// Images
+					const imgDiv = document.createElement('div')
+						note.relationships.field_ucb_class_note_image.data.forEach(image=>{
+							// Create an img el
+							if(altObj[idObj[image.id]]){
+								hasImages = true; // We have at least one image, sets flag for later
+								imgDiv.classList.add('ucb-class-note-image-container','col-md-2','col-sm-3')
+								let imageEl = document.createElement('img')
+								imageEl.classList.add('ucb-class-note-image')
+								imageEl.alt =  altObj[idObj[image.id]].alt;
+								imageEl.src = altObj[idObj[image.id]].src
+								imgDiv.append(imageEl)
+							}
+						})
+					imgAndTextDiv.appendChild(imgDiv)
+				}
+				// Text
+				const textDiv = document.createElement('div')
+				// Sets Class Note body bootstrap style, dependent on having images (hasImages flag above)
+				if(note.relationships.field_ucb_class_note_image.data.length && hasImages){
+					textDiv.classList.add('ucb-class-note-data', 'col-md-10','col-sm-9')
+				} else {
+					textDiv.classList.add('ucb-class-note-data', 'col-sm-12')
+				}
+				textDiv.append(classNoteHeader)
 				// Class Note Text
 				const classNoteParagraph = document.createElement('p')
+					classNoteParagraph.classList.add('ucb-class-note-body')
 					classNoteParagraph.innerHTML = this.escapeHTML(note.attributes.body.processed)
-					classNote.appendChild(classNoteParagraph)
+					textDiv.appendChild(classNoteParagraph)
 				// Date posted
 				const classNotePosted = document.createElement('p')
 					classNotePosted.classList.add('class-note-posted-date')
 					classNotePosted.innerText = `Posted ${this.formatDateString(note.attributes.created)}`
-					classNote.appendChild(classNotePosted)
+					textDiv.appendChild(classNotePosted)
+					imgAndTextDiv.appendChild(textDiv)
+				classNote.appendChild(imgAndTextDiv)
 					this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
 
 				classNotesContainer.appendChild(classNote)				
@@ -133,20 +215,20 @@ class ClassNotesListElement extends HTMLElement {
     generateForm(dates){
 		// Create Elements
 		const form = document.createElement('form'), 
-        formDiv = document.createElement('div');
-		form.className = 'class-notes-list-filter';
-		formDiv.className = 'd-flex align-items-center';
+        	formDiv = document.createElement('div');
+			form.className = 'class-notes-list-filter';
+			formDiv.className = 'd-flex align-items-center';
 		// Create container
-			const container = document.createElement('div');
+		const container = document.createElement('div');
 			container.className = `form-item`;
 		// Create label el
-			const itemLabel = document.createElement('label'), 
+		const itemLabel = document.createElement('label'), 
 			itemLabelSpan = document.createElement('span');
 			itemLabelSpan.classList.add('filter-by-label','ucb-class-notes-filter-label')
 			itemLabelSpan.innerText = "Filter by Year:";
 			itemLabel.appendChild(itemLabelSpan);
 		// Create select el
-			const selectFilter = document.createElement('select');
+		const selectFilter = document.createElement('select');
 			selectFilter.name = "Year"
 			selectFilter.classList.add('Year-Select', 'class-note-year-select');
 			selectFilter.onchange = this.onYearChange.bind(this); // Bind the event handler
@@ -160,7 +242,7 @@ class ClassNotesListElement extends HTMLElement {
 
 		// Sort By : Create container
 		const sortContainer = document.createElement('div');
-		sortContainer.classList.add('form-item', "sort-form-item");
+			sortContainer.classList.add('form-item', "sort-form-item");
 		// Create label el
 		const sortItemLabel = document.createElement('label'), sortItemLabelSpan = document.createElement('span');
 			sortItemLabelSpan.innerText = "Sort By:";
