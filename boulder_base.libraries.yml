@@ -477,3 +477,9 @@ ucb-collections-block:
   css:
     theme:
       css/block/ucb-collections-block.css: {}
+
+ucb-social-media-icons-block:
+  version: 1.x
+  css:
+    theme:
+      css/block/social-media-icons.css: {}
