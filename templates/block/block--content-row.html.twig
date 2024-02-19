@@ -229,7 +229,7 @@
 			<div class="row row-content ucb-teaser-lg-row">
 			{% set image = item.entity.field_row_layout_content_image.0 %}
 				{% if image %}
-				<div class="col-md-4 col-sm-6 row-image-container">
+				<div class="col-lg-4 col-md-6 col-sm-12 row-image-container">
 					{% if rowLink %}
 						<a href="{{ rowLink }} ">
 							<img class="ucb-content-row-img-lg" src="{{item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide')}}"></img>
@@ -239,7 +239,7 @@
 					{% endif %}
 				</div>
 				{% endif %}
-				<div class="{{ image ? 'col-md-8 col-sm-6' : 'col-sm-12' }} row-text-container">
+				<div class="{{ image ? 'col-lg-8 col-md-6 col-sm-12' : 'col-sm-12' }} row-text-container">
 					{% if rowLink %}
 						<a href="{{ rowLink }} ">
 							<h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
