@@ -22,7 +22,7 @@
 
 {% set layoutSelection = content['#block_content'].field_row_layout_selection.value %}
 
-
+<p> Layout Selection : {{layoutSelection}}</p>
 {% block content %}
 	<div{{attributes.addClass(classes)}}>
 		{{ title_prefix }}
@@ -58,7 +58,7 @@
 					</div>
 				</div>
 			{% endfor %}
-			{# Teaser Alternate Row Layout #}
+			{# Teaser Large Alternate Row Layout #}
 		{% elseif layoutSelection == 1 %}
 			{% for key, item in content['#block_content'].field_row_layout_content %}
 				{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
@@ -162,7 +162,7 @@
 				</div>
 			{% endfor %}
 			{# Features Row Layout #}
-		{% else %}
+		{% elseif layoutSelection == 3 %}
 			<div class="row row-col-lg-2 row-col-1 feature-row">
 				{% for key, item in content['#block_content'].field_row_layout_content %}
 					{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
@@ -222,6 +222,35 @@
 					{% endif %}
 				{% endfor %}
 			</div>
+		{% else %}
+		{# Teaser Large Layout #}
+		{% for key, item in content['#block_content'].field_row_layout_content %}
+			{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
+			<div class="row row-content ucb-teaser-lg-row">
+			{% set image = item.entity.field_row_layout_content_image.0 %}
+				{% if image %}
+				<div class="col-md-4 col-sm-6 row-image-container">
+					{% if rowLink %}
+						<a href="{{ rowLink }} ">
+							<img class="ucb-content-row-img-lg" src="{{item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide')}}"></img>
+						</a>
+					{% else %}
+						{{ image|view }}
+					{% endif %}
+				</div>
+				{% endif %}
+				<div class="{{ image ? 'col-md-8 col-sm-6' : 'col-sm-12' }} row-text-container">
+					{% if rowLink %}
+						<a href="{{ rowLink }} ">
+							<h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
+						</a>
+					{% else %}
+						<h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
+					{% endif %}
+					{{item.entity.field_row_layout_content_text|view}}
+				</div>
+			</div>
+		{% endfor %}
 		{% endif %}
 	</div>
 {% endblock content %}

@@ -102,6 +102,10 @@
   width: 100%;
 }
 
+.ucb-teaser-lg-row{
+  align-items: center;
+}
+
 @media screen and (max-width: 975px) {
   .small-feature-row {
     margin-top: 1em;
