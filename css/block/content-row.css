@@ -16,17 +16,14 @@
 }
 
 .row-content {
-  margin-bottom: 1em;
+  border-bottom: 2px solid rgba(128, 128, 128, 0.333);
+  margin-bottom: 20px;
 }
-
-.row-text-container {
-  padding: 0 1em;
+.ucb-content-row-teaser{
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 20px;
 }
-
-.row-card .row-text-container {
-  padding: 1em;
-}
-
 .row-fill {
   display: flex;
   overflow: hidden;
@@ -104,6 +101,12 @@
 
 .ucb-teaser-lg-row{
   align-items: center;
+  margin-bottom: 20px;
+}
+
+.row-image-container{
+  width: calc(100px + var(--bs-gutter-x));
+  height: auto;
   margin-bottom: 20px;
 }
 

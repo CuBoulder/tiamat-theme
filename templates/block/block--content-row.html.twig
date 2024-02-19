@@ -34,7 +34,8 @@
 		{% if layoutSelection == 0 %}
 			{% for key, item in content['#block_content'].field_row_layout_content %}
 				{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
-				<div class="row row-content">{% set image = item.entity.field_row_layout_content_image.0 %}
+				<div class="row-content ucb-content-row-teaser">{% set image = item.entity.field_row_layout_content_image.0 %}
+					<div class="row">
 					{% if image %}
 					<div class="col-sm-2 row-image-container">
 						{% if rowLink %}
@@ -55,6 +56,7 @@
 							<h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
 						{% endif %}
 						{{item.entity.field_row_layout_content_text|view}}
+					</div>
 					</div>
 				</div>
 			{% endfor %}
