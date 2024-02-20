@@ -3,6 +3,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  padding: 0;
 }
 
 .ucb-brand-bar.ucb-brand-bar-white {
@@ -11,6 +12,10 @@
 
 .ucb-brand-bar.ucb-brand-bar-black {
   background-color: #000;
+}
+
+.ucb-brand-bar .ucb-home-link {
+  padding: 1rem 0;
 }
 
 .ucb-brand-bar img.ucb-logo {
@@ -28,9 +33,28 @@
   }
 }
 
+.ucb-brand-bar .ucb-brand-bar-controls {
+  display: flex;
+  flex-direction: row;
+}
+
+.ucb-brand-bar #ucb-mobile-menu-toggle,
+.ucb-brand-bar .ucb-search-link {
+  padding: 1rem .5rem;
+  padding-right: 0;
+}
+
 .ucb-brand-bar img.ucb-search {
   width: 18px;
   height: 18px;
-  margin-left: 20px;
   display: block;
+}
+
+.ucb-brand-bar #ucb-mobile-menu-toggle {
+  display: none;
+}
+
+.ucb-brand-bar #ucb-mobile-menu-toggle svg {
+  width: 20px;
+  height: 20px;
 }

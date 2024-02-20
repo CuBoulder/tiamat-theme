@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds mobile menus! changes
+  - Forces menu styles off on mobile screen sizes.
+  - Adds CSS styling to the menu.
+  - Styles the "hamburger" icon.
+  - Expands all main menu child menu items. (Resolves CuBoulder/tiamat-theme#647)
+  
+  Resolves CuBoulder/tiamat-theme#653
+  
+  Sister PR in: [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/82)
+---
+
 - ### Content Row: Block Changes
   Adjusts the following on the `Content Row` blocks:
   - On the "Configure Block" modal, switched the order of the tabs so 'Row Content' is on the left and open by default and 'Row Design' is on the right and hidden

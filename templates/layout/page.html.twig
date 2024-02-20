@@ -114,11 +114,13 @@
           <a href="https://www.colorado.edu" class="ucb-home-link">
             <img class="ucb-logo" src="https://cdn.colorado.edu/static/brand-assets/live/images/cu-boulder-logo-text-{{ campus_header_text_color }}.svg" alt="University of Colorado Boulder">
           </a>
-          {% if site_search.0 %}
-            <a class="ucb-search-link" href="{{ site_search.0.url }}">
-              <img class="ucb-search" alt="Search" src="https://cdn.colorado.edu/static/brand-assets/live/images/search-{{ campus_header_text_color }}.svg">
-            </a>
-          {% endif %}
+          <div class="ucb-brand-bar-controls">
+            {% if site_search.0 %}
+              <a class="ucb-search-link" href="{{ site_search.0.url }}">
+                <img class="ucb-search" alt="Search" src="https://cdn.colorado.edu/static/brand-assets/live/images/search-{{ campus_header_text_color }}.svg">
+              </a>
+            {% endif %}
+          </div>
         </div>
       </div>
     </div>
@@ -135,14 +137,10 @@
             </div>
           {% endif %}
         </div>
-        <div class="mobile-menu-toggle">
-          <button id="mobile-toggle" aria-haspopup="true" aria-expanded="false" aria-controls="mobile-menu" aria-label="Navigation">
-            <i class="fa-solid fa-bars" aria-hidden="true"></i>
-          </button>
-        </div>
+        <button id="ucb-mobile-menu-toggle" aria-label="Toggle menu"><i class="ucb-mobile-menu-open-icon fa-solid fa-bars"></i><i class="ucb-mobile-menu-close-icon fa-solid fa-xmark"></i></button>
       </div>
     </header>
-    <section class="ucb-main-nav-section mobile  ucb-header-{{ header_color }}" role="navigation">
+    <section class="ucb-main-nav-section mobile ucb-header-{{ header_color }}" role="navigation">
       <div class="ucb-main-nav-container ucb-secondary-menu-position-{{ ucb_secondary_menu_position == 'above' ? 'above' : 'inline container'}} ucb-button-{{menu_button_color}}">
         {{ page.primary_menu }}
         {{ page.secondary_menu }}
