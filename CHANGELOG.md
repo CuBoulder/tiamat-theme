@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Primary Link Twitter Icon
+  Fixed pull request for #683.
+  Fixes twitter link icon for primary links on person page
+---
+
 - ### Updated Social Media Block
   Closes #12.
   Sister pull request in custom entities at https://github.com/CuBoulder/tiamat-custom-entities/pull/97.
