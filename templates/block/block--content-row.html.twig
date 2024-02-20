@@ -68,7 +68,7 @@
 					{% set image = item.entity.field_row_layout_content_image.0 %}
 					{% if (loop.index is odd) %}
 						{% if image %}
-						<div class="col-sm-5 col-xs-12 row-image-container">
+						<div class="col-sm-5 col-xs-12 row-image-container-lg">
 							{% if rowLink %}
 								<a href="{{ rowLink }} ">
 									<img class="ucb-content-row-img-lg" src="{{item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide')}}"></img>
@@ -102,7 +102,7 @@
 							{{item.entity.field_row_layout_content_text|view}}
 						</div>
 						{% if image %}
-						<div class="col-sm-5 col-xs-12 row-image-container">
+						<div class="col-sm-5 col-xs-12 row-image-container-lg">
 							{% if rowLink %}
 								<a href="{{ rowLink }} ">
 									<img class="ucb-content-row-img-lg" src="{{item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide')}}"></img>
@@ -231,7 +231,7 @@
 			<div class="row row-content ucb-teaser-lg-row">
 			{% set image = item.entity.field_row_layout_content_image.0 %}
 				{% if image %}
-				<div class="col-lg-4 col-md-6 col-sm-12 row-image-container">
+				<div class="col-lg-4 col-md-6 col-sm-12 row-image-container-lg">
 					{% if rowLink %}
 						<a href="{{ rowLink }} ">
 							<img class="ucb-content-row-img-lg" src="{{item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide')}}"></img>
