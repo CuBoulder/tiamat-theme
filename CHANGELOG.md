@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updated Social Media Block
+  Closes #12.
+  Sister pull request in custom entities at https://github.com/CuBoulder/tiamat-custom-entities/pull/97.
+---
+
+- ### default table styles
+  Adds default table styles. The issue brought up by kevin seems to be non-replicable and already solved, but should be kept as a note for future issues.
+---
+
 - ### Standardizes Display of Accordion - style Elements
   Standardizes style of Accordion elements. This modifies the style of the `FAQ Page` and `Expandable Content` block in the following ways:
   - Adjusts the `FAQ Page` to mirror the Expandable Content's style (blue text, larger type, red hover, + / - icons on toggle instead of a chevron)
