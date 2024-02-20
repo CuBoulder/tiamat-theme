@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Issue/665
+  Closes #665, #666, #668, #669, and #670. Adds the necessary bug fixes and code changes for content sequences.   
+---
+
 - ### Primary Link Twitter Icon
   Fixed pull request for #683.
   Fixes twitter link icon for primary links on person page

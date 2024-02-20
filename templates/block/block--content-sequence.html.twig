@@ -47,11 +47,13 @@
 											{% if key == "0" %}
 												<div class="horizontal-timeline-slider-header-col">
 													<div class="dot-wrapper dotActive">
-														<span class="dot" type="button" data-bs-target="#{{sequenceID}}" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" onclick="scrollSlides({{key}})"></span>
+														<span class="dot" type="button" data-bs-target="#{{sequenceID}}" data-bs-slide-to="{{key}}" aria-current="true" aria-label="Slide 1" onclick="scrollSlides({{key}})"></span>
 													</div>
-													<span class="horizontal-header-text" data-bs-target="#{{sequenceID}}" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" onclick="scrollSlides({{key}})">
+													<span class="horizontal-header-text" data-bs-target="#{{sequenceID}}" data-bs-slide-to="{{key}}" aria-current="true" aria-label="Slide 1" onclick="scrollSlides({{key}})">
 														{% if item.entity.field_sequence_item_d_start_date.value|render %}
 															{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
+														{% elseif item.entity.field_sequence_item_start_date.value|render %}
+															{{ item.entity.field_sequence_item_start_date.value|render|date('m/d/Y') }}		
 														{% else %}
 															{% set stepNo = key + 1 %}
 															STEP
@@ -63,11 +65,13 @@
 
 												<div class="horizontal-timeline-slider-header-col">
 													<div class="dot-wrapper dotNext">
-														<span class="dot" type="button" data-bs-target="#{{sequenceID}}" data-bs-slide-to="0" aria-current="true" aria-label="Slide 1" onclick="scrollSlides({{key}})"></span>
+														<span class="dot" type="button" data-bs-target="#{{sequenceID}}" data-bs-slide-to="{{key}}" aria-current="true" aria-label="Slide 1" onclick="scrollSlides({{key}})"></span>
 													</div>
 													<span class="horizontal-header-text" data-bs-target="#{{sequenceID}}" data-bs-slide-to="{{key}}" aria-current="true" aria-label="Slide {{stepNo}}" onclick="scrollSlides({{key}})">
 														{% if item.entity.field_sequence_item_d_start_date.value|render %}
 															{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
+														{% elseif item.entity.field_sequence_item_start_date.value|render %}
+															{{ item.entity.field_sequence_item_start_date.value|render|date('m/d/Y') }}		
 														{% else %}
 															{% set stepNo = key + 1 %}
 															STEP
@@ -108,6 +112,8 @@
 												<h3 class="horizontal-timeline-card-date">
 													{% if item.entity.field_sequence_item_d_start_date.value|render %}
 														{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
+													{% elseif item.entity.field_sequence_item_start_date.value|render %}
+														{{ item.entity.field_sequence_item_start_date.value|render|date('m/d/Y') }}		
 													{% else %}
 														{% set stepNo = key + 1 %}
 														STEP
@@ -115,7 +121,12 @@
 													{% endif %}
 												</h3>
 												<h4 class="horizontal-timeline-card-title">
-													<a href="{{item.entity.field_sequence_item_url.uri}}">{{item.entity.field_sequence_item_title.value|render|striptags|trim}}</a>
+
+													{% if item.entity.field_sequence_item_url.uri|render %}
+														<a href="{{item.entity.field_sequence_item_url.uri}}">{{item.entity.field_sequence_item_title.value|render|striptags|trim}}</a>
+													{% else %}
+														{{item.entity.field_sequence_item_title.value|render|striptags|trim}}
+													{% endif %}
 												</h4>
 											</div>
 											<div class="horizontal-timeline-card-body">
@@ -143,6 +154,8 @@
 												<h3 class="horizontal-timeline-card-date">
 													{% if item.entity.field_sequence_item_d_start_date.value|render %}
 														{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
+													{% elseif item.entity.field_sequence_item_start_date.value|render %}
+														{{ item.entity.field_sequence_item_start_date.value|render|date('m/d/Y') }}		
 													{% else %}
 														{% set stepNo = key + 1 %}
 														STEP
@@ -150,7 +163,12 @@
 													{% endif %}
 												</h3>
 												<h4 class="horizontal-timeline-card-title">
-													<a href="{{item.entity.field_sequence_item_url.uri}}">{{item.entity.field_sequence_item_title.value|render|striptags|trim}}</a>
+
+													{% if item.entity.field_sequence_item_url.uri|render %}
+														<a href="{{item.entity.field_sequence_item_url.uri}}">{{item.entity.field_sequence_item_title.value|render|striptags|trim}}</a>
+													{% else %}
+														{{item.entity.field_sequence_item_title.value|render|striptags|trim}}
+													{% endif %}
 												</h4>
 											</div>
 											<div class="horizontal-timeline-card-body">
@@ -202,6 +220,8 @@
 										<h3 class="vertical-timeline-card-date">
 											{% if item.entity.field_sequence_item_d_start_date.value|render %}
 												{{item.entity.field_sequence_item_d_start_date.value|render|striptags|trim}}
+											{% elseif item.entity.field_sequence_item_start_date.value|render %}
+												{{ item.entity.field_sequence_item_start_date.value|render|date('m/d/Y') }}		
 											{% else %}
 												{% set stepNo = key + 1 %}
 												STEP
@@ -209,7 +229,12 @@
 											{% endif %}
 										</h3>
 										<h4 class="vertical-timeline-card-title">
-											<a href="{{item.entity.field_sequence_item_url.uri}}">{{item.entity.field_sequence_item_title.value|render|striptags|trim}}</a>
+
+											{% if item.entity.field_sequence_item_url.uri|render %}
+												<a href="{{item.entity.field_sequence_item_url.uri}}">{{item.entity.field_sequence_item_title.value|render|striptags|trim}}</a>
+											{% else %}
+												{{item.entity.field_sequence_item_title.value|render|striptags|trim}}
+											{% endif %}
 										</h4>
 									</div>
 									<div class="vertical-timeline-card-body">
