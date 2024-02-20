@@ -9,6 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Content Row: Block Changes
+  Adjusts the following on the `Content Row` blocks:
+  - On the "Configure Block" modal, switched the order of the tabs so 'Row Content' is on the left and open by default and 'Row Design' is on the right and hidden
+  - Added three teaser displays: `Large Teaser`, `Large Teaser Alternate`, and `Teaser`. Previously the teaser displays available were Teaser and Teaser Alternate.
+  - The `Large Teaser` and `Large Teaser Alternate` displays use the focal image wide style images rather than square.
+  - Adjusts style of the `Teaser` display to mirror other teaser-list style elements, such as the Article List. 
+  - Adjusted style of the `Tile` style display to more closely mirror the D7 version, which achieved the tile effect with images and text alternating. 
+  - Fixes bug where internal links, such as `/homepage` would cause a WSOD when added to Row Layout Content
+  
+  Includes:
+  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/687
+  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/99
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/673
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/674
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/675
+---
+
 - ### Issue/665
   Closes #665, #666, #668, #669, and #670. Adds the necessary bug fixes and code changes for content sequences.   
 ---
