@@ -874,6 +874,28 @@ ol.list-style-roman-lower>li {
 }
 
 /* TABLE STYLES */
+table {
+  border-collapse: collapse;
+  border: 1px solid rgba(128, 128, 128, 0.333);
+}
+
+table th {
+  background: rgba(128, 128, 128, 0.333);
+  border: 1px solid rgba(128, 128, 128, 0.333);
+  border: none;
+  padding: 8px;
+  font-weight: bold;
+}
+
+table td {
+  padding: 8px;
+  vertical-align: top;
+  border: 1px solid rgba(128, 128, 128, 0.333);
+}
+
+table tbody {
+  border: none;
+}
 table.table-zebra tr:nth-child(odd) td {
   background: #f3f3f3;
 }

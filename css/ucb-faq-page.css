@@ -7,10 +7,38 @@
 }
 
 .accordion-header .accordion-button h3 {
-    font-size: 100%;
     margin: 0;
+    margin-left: 10px;
+    color: #0277bd;
+    font-size: 18px;
 }
 
+.accordion-button::after, .accordion-button:not(.collapsed)::after {
+    background-image: initial;
+}
+
+.accordion-button::before {
+    content: '\f0fe  ' !important;
+    font-weight: 900 !important;
+    font-family: "Font Awesome 6 Free - Solid" ;
+    color: #0277bd;
+    font-size: 18px;
+}
+  
+.accordion-button:not(.collapsed)::before {
+    content: '\f146  ' !important;
+    font-weight: 900 !important;
+    font-family: "Font Awesome 6 Free - Solid";
+    color: #0277bd;
+    font-size: 18px;
+}
+
+.accordion-header .accordion-button:hover h3,
+.accordion-header .accordion-button:hover::before,
+.accordion-header .accordion-button:not(.collapsed):hover::before {
+  color: #b71c1c !important;
+}
+  
 .accordion .accordion-item button.accordion-button {
     color: inherit;
     padding: 0;

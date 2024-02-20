@@ -142,6 +142,7 @@
   padding: 1px 6px;
   border-radius: 2px;
   margin: 0 5px 5px 0;
+  color: #000;
 }
 
 .collection-reset {
@@ -181,4 +182,14 @@
 .collection-multiselect-single .collection-filter-links {
   display: flex;
   flex-flow: row wrap;
+}
+
+.collection-grid-no-display {
+  display: none;
+}
+
+.collection-grid-single-active {
+  box-shadow: 0px 1px 2px rgba(0, 0, 0, 0.5);
+  background-color: #424242;
+  color: #fff;
 }

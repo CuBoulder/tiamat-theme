@@ -65,6 +65,7 @@
   {{ content.body }}
 {# People List Block - Main Block#}
 <people-list-block
+	site-base= "{{url('<front>')|render|trim('/')}}"
     base-uri="{{ url('<front>')|render|trim('/') }}/jsonapi"
     config="{{ config|json_encode }}"
     user-config="{}"

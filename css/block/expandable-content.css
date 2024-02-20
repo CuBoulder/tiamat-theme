@@ -17,6 +17,7 @@
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: transparent;
   box-shadow: none;
+  text-decoration: none;
 }
 
 .ucb-expandable-content .accordion-button:not(.collapsed)::after, .ucb-expandable-content .accordion-button::after {

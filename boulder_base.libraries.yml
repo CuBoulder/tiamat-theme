@@ -220,21 +220,6 @@ ucb-sticky-menu:
     theme:
       css/ucb-sticky-menu.css: {}
 
-livechat:
-  version: 1.x
-  js:
-    js/livechat.js: {}
-
-statuspage:
-  version: 1.x
-  js:
-    js/statuspage.js: {}
-    
-mainstay:
-  version: 1.x
-  js:
-    js/mainstay.js: {}
-
 timelinejs:
   version: 3.x
   js:
@@ -492,3 +477,9 @@ ucb-collections-block:
   css:
     theme:
       css/block/ucb-collections-block.css: {}
+
+ucb-social-media-icons-block:
+  version: 1.x
+  css:
+    theme:
+      css/block/social-media-icons.css: {}
