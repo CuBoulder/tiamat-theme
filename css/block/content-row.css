@@ -143,3 +143,9 @@
     padding-right: 0;
   }
 }
+@media screen and (max-width: 576px) {
+  .ucb-teaser-lg-row-even{
+    flex-direction: column-reverse;
+  }
+}
+

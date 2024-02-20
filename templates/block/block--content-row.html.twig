@@ -62,8 +62,9 @@
 			{# Teaser Large Alternate Row Layout #}
 			{% elseif layoutSelection == 1 %}
 			{% for key, item in content['#block_content'].field_row_layout_content %}
+				{% set oddOrEven = loop.index is odd ? 'odd' : 'even' %}
 				{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
-				<div class="row d-flex row-content ucb-teaser-lg-row">
+				<div class="row d-flex row-content ucb-teaser-lg-row ucb-teaser-lg-row-{{oddOrEven}}">
 					{% set image = item.entity.field_row_layout_content_image.0 %}
 					{% if (loop.index is odd) %}
 						{% if image %}
