@@ -9,302 +9,372 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Fixes bug with floated items in Expandable Content block
-  Resolves CuBoulder/tiamat-theme#682
----
+## [20240221] - 2024-02-21
 
-- ### Adds mobile menus! changes
-  - Forces menu styles off on mobile screen sizes.
-  - Adds CSS styling to the menu.
-  - Styles the "hamburger" icon.
-  - Expands all main menu child menu items. (Resolves CuBoulder/tiamat-theme#647)
-  
-  Resolves CuBoulder/tiamat-theme#653
-  
-  Sister PR in: [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/82)
----
+-   ### Fixes bug with floated items in Expandable Content block
+    Resolves CuBoulder/tiamat-theme#682
 
-- ### Content Row: Block Changes
-  Adjusts the following on the `Content Row` blocks:
-  - On the "Configure Block" modal, switched the order of the tabs so 'Row Content' is on the left and open by default and 'Row Design' is on the right and hidden
-  - Added three teaser displays: `Large Teaser`, `Large Teaser Alternate`, and `Teaser`. Previously the teaser displays available were Teaser and Teaser Alternate.
-  - The `Large Teaser` and `Large Teaser Alternate` displays use the focal image wide style images rather than square.
-  - Adjusts style of the `Teaser` display to mirror other teaser-list style elements, such as the Article List. 
-  - Adjusted style of the `Tile` style display to more closely mirror the D7 version, which achieved the tile effect with images and text alternating. 
-  - Fixes bug where internal links, such as `/homepage` would cause a WSOD when added to Row Layout Content
-  
-  Includes:
-  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/687
-  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/99
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/673
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/674
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/675
----
+* * *
 
-- ### Issue/665
-  Closes #665, #666, #668, #669, and #670. Adds the necessary bug fixes and code changes for content sequences.   
----
+-   ### Adds mobile menus! changes
 
-- ### Primary Link Twitter Icon
-  Fixed pull request for #683.
-  Fixes twitter link icon for primary links on person page
----
+    -   Forces menu styles off on mobile screen sizes.
+    -   Adds CSS styling to the menu.
+    -   Styles the "hamburger" icon.
+    -   Expands all main menu child menu items. (Resolves CuBoulder/tiamat-theme#647)
 
-- ### Updated Social Media Block
-  Closes #12.
-  Sister pull request in custom entities at https://github.com/CuBoulder/tiamat-custom-entities/pull/97.
----
+    Resolves CuBoulder/tiamat-theme#653
 
-- ### default table styles
-  Adds default table styles. The issue brought up by kevin seems to be non-replicable and already solved, but should be kept as a note for future issues.
----
+    Sister PR in: [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/82)
 
-- ### Standardizes Display of Accordion - style Elements
-  Standardizes style of Accordion elements. This modifies the style of the `FAQ Page` and `Expandable Content` block in the following ways:
-  - Adjusts the `FAQ Page` to mirror the Expandable Content's style (blue text, larger type, red hover, + / - icons on toggle instead of a chevron)
-  - Removes the underlined text-decoration on `Expandable Content`'s title links
-  
-  Resolves #672 
----
+* * *
 
-- ### Class Notes List Changes
-  - Adds images and adjusts the style of the `Class Notes List` page to mirror the Teaser-List display of other List-type nodes
-  - Allows for `Class Note` Content types to have multiple images (custom-entities)
-  
-  
-  Includes:
-  
-  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/657
-  - `tiamat-custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/95
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/206
----
+-   ### Content Row: Block Changes
 
-- ### Removes third-party services
-  Moves all associated code into the Site Configuration module.
-  
-  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/48)
----
+    Adjusts the following on the `Content Row` blocks:
 
-- ### image gallery bug fix
-  Closes #642.
-  Quick fix to make image gallery work.
----
+    -   On the "Configure Block" modal, switched the order of the tabs so 'Row Content' is on the left and open by default and 'Row Design' is on the right and hidden
+    -   Added three teaser displays: `Large Teaser`, `Large Teaser Alternate`, and `Teaser`. Previously the teaser displays available were Teaser and Teaser Alternate.
+    -   The `Large Teaser` and `Large Teaser Alternate` displays use the focal image wide style images rather than square.
+    -   Adjusts style of the `Teaser` display to mirror other teaser-list style elements, such as the Article List. 
+    -   Adjusted style of the `Tile` style display to more closely mirror the D7 version, which achieved the tile effect with images and text alternating. 
+    -   Fixes bug where internal links, such as `/homepage` would cause a WSOD when added to Row Layout Content
 
-- ### People List Page & People List Block - Bug Fixes & Edge Case Handling
-  Provides the following bug fixes to the `People List Block` and the `People List Page`
-  ## People List Page & People List Block
-  - Fixes a bug with internal links throwing an error. Adjusts so internal links will convert to absolute pathing, which should allow for our multi-site, single domain sites to use internal links. 
-  - No termId present on a Person causing a JavaScript error preventing a full render. Was able to cause this error with multiple people and one without any terms attached. This error was present on both `People List Page` and `People List Block`.
-  - Swaps Twitter's bird to Twitter's X... ( X 's X?)...whatever you want to call it, the bird icon is now an X icon.
-  
-  ## People List Page Only
-  - No terms existing for a taxonomy, and the `People List Page` having that taxonomy selected for `Group By` caused a white screen and no errors. Adjusted this to show an error specifying the reason for a white screen: `Grouping by ${groupBy} is requested, but taxonomy data is missing. Please adjust your page's 'Group By' setting or make sure taxonomy data exists for that term.`
-  - Terms existing for a taxonomy and `Group By` for that taxonomy selected on a `Person List Page`... but no Person has terms on that taxonomy caused the same white screen. Adjusted this to show an error specifying this white screen case: `No results found for the '${groupBy}' grouping.`
-  
-  Resolves #659 
-  
-  
----
+    Includes:
 
-- ### Adds Collection Grid block fixes
-  Closes #649.
-  Adds the required fixes to add an indicator for single select list, fix id's showing, and make the block a web component.
----
+    -   `tiamat-theme` => <https://github.com/CuBoulder/tiamat-theme/pull/687>
+    -   `custom-entities` => <https://github.com/CuBoulder/tiamat-custom-entities/pull/99>
 
-- ### Removes background colors from Content List
-  Removes background colors from the Content List
-  
-  Resolves #651 
----
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/673>
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/674>
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/675>
 
-- ### Newsletter: Minor Bug Fixes
-  Adjusts the following on the Newsletter:
-  - If user elects to omit the optional image on a _Newsletter Taxonomy_, it will no longer render that img element in the header
-  - **Article Sections ( _Feature Style_ )** - For the Feature Style Article Sections, Articles without a thumbnail will check the Article for an Image uploaded as Article Content, and use that in place of a thumbnail if available. This functionality worked in the Teaser display, but there was an error that would prevent the backup image to display in the Feature Style render.
-  
-  Icon linking has been resolved by https://github.com/CuBoulder/tiamat-theme/issues/604
-  
-  Resolves #595 
----
+* * *
 
-- ### Updates sidebar regions
-  Resolves CuBoulder/tiamat-theme#633
-  
-  Sister PR in: [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/77), ~~[ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/45)~~
----
+-   ### Issue/665
+    Closes #665, #666, #668, #669, and #670. Adds the necessary bug fixes and code changes for content sequences.   
 
-- ### Class Note Enhancements
-  Adjusts permissions for Class Notes, adds optional image field. Resolves https://github.com/CuBoulder/tiamat-theme/issues/622
-  
-  Includes:
-  - tiamat-theme => https://github.com/CuBoulder/tiamat-theme/pull/648
-  - tiamat-profile => https://github.com/CuBoulder/tiamat10-profile/pull/75
-  - custom-entities => https://github.com/CuBoulder/tiamat-custom-entities/pull/94
----
+* * *
 
-- ### Adds Collection Grid block and Collection Item content type
-  Closes #534.
-  Adds the collection grid block and collection item node page
----
+-   ### Primary Link Twitter Icon
+    Fixed pull request for #683.
+    Fixes twitter link icon for primary links on person page
 
-- ### Enables list styles in full HTML, Creates Migration Library
-  Using Full HTML you can create various list styles found here: https://styleguide.colorado.edu/content/lists
-  Also creates a temporary migration library for addtl styles needed for the migration process
-  
-  Resolves #624 
----
+* * *
 
-- ### FAQ Content Type
-  Adds the FAQ Content Type. Resolves https://github.com/CuBoulder/tiamat-theme/issues/620
-  
-  Includes:
-  - tiamat-theme (issue/tiamat-theme/620) => https://github.com/CuBoulder/tiamat-theme/pull/641
-  - custom-entities (issue/tiamat-theme/620) => https://github.com/CuBoulder/tiamat-custom-entities/pull/92
-  - ucb-admin-menus (issue/tiamat-theme/620) => https://github.com/CuBoulder/ucb_admin_menus/pull/20
----
+-   ### Updated Social Media Block
+    Closes #12.
+    Sister pull request in custom entities at <https://github.com/CuBoulder/tiamat-custom-entities/pull/97>.
 
-- ### Update style.css
-  Removal of layout builder styles (lots of this was gin fixing)
-  Fix for Text Block title edit issue
-  
-  Sister PRs:
-  https://github.com/CuBoulder/tiamat10-profile/pull/69
-  https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/23
-  https://github.com/CuBoulder/tiamat10-project-template/pull/30
-  
-  
-  Closes #638 
----
+* * *
 
-- ### Claro theme mini-update
-  Fixes for the `layout-container` and local-tasks css
----
+-   ### default table styles
+    Adds default table styles. The issue brought up by kevin seems to be non-replicable and already solved, but should be kept as a note for future issues.
 
-- ### Adds label fields for "Department" and "Job Type" on People List Pages
-  Resolves CuBoulder/tiamat-theme#626
-  
-  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/44)
----
+* * *
 
-- ### Claro theme
-  Updated theme files to accommodate the change to Claro.
----
+-   ### Standardizes Display of Accordion - style Elements
 
-- ### Adds Class Note Page + Class Notes List Page
-  Adds the `Class Note` Node and `Class Note List` node. A Class Note List Page lists your Class Notes and has built in filters to allow visitors to filter by year or sort by class year or date posted.
-  
-  Includes:
-  `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/621
-  `tiamat-custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/91
-  
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/588
----
+    Standardizes style of Accordion elements. This modifies the style of the `FAQ Page` and `Expandable Content` block in the following ways:
 
-- ### Fixes accessibility issues with Article and Article List
-  - Adds alt text to Article List images.
-  - Enhances readability and fixes bugs with article title backgrounds.
-  
-  Resolves CuBoulder/tiamat-theme#616
----
+    -   Adjusts the `FAQ Page` to mirror the Expandable Content's style (blue text, larger type, red hover, + / - icons on toggle instead of a chevron)
+    -   Removes the underlined text-decoration on `Expandable Content`'s title links
 
-- ### Fixes expandable content `aria-expanded` errors
-  Resolves CuBoulder/tiamat-theme#614
----
+    Resolves #672 
 
-- ### Updates theme-provided 403 page; removes 404 image
-  - Updates the theme-provided 403 page. This won't be visible often, as an anonymous user is redirected to the login page instead of being shown this page (CuBoulder/ucb_admin_menus#14).
-  - Removes 404 image. CuBoulder/ucb_default_content#6
-  
-  Sister PR in: [ucb_default_content](https://github.com/CuBoulder/ucb_default_content/pull/8)
----
+* * *
 
-- ### Breadcrumb fix
-  This render didn't need to be added to the if statement. 
-  Fixed formatting as well.
-  
-  Closes #585 
----
+-   ### Class Notes List Changes
 
-- ### Title on Homepage no longer visible
-  This fixes the functionality where a title is hidden when set as the site's homepage. This was previously working before a moveable title refactor and has been corrected.
-  
-  Resolves #607 
----
+    -   Adds images and adjusts the style of the `Class Notes List` page to mirror the Teaser-List display of other List-type nodes
+    -   Allows for `Class Note` Content types to have multiple images (custom-entities)
 
-- ### Hero unit separation
-  Hero Unit Separation
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/90
-  
-  Closes #605
----
+    Includes:
 
-- ### Form Page - Adds Body Field
-  The Form Page node's body displays above the attached form.
-  
-  Resolves #599 
-  
-  
----
+    -   `tiamat-theme` => <https://github.com/CuBoulder/tiamat-theme/pull/657>
+    -   `tiamat-custom-entities` => <https://github.com/CuBoulder/tiamat-custom-entities/pull/95>
 
-- ### Events Calendar Background matches Section background color
-  Adjusts the `Events Calendar` so it matches the background color of the section it is placed in, rather than being always white. Text color adjusted to white for black and dark gray section backgrounds. 
-  
-  @jcsparks - Let me know if gold section background needs some text color adjustments, I could make an override for that that makes the text a darker gray / black than the default. 
-  
-  Resolves #564 
----
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/206>
 
-- ### Social Media Menu - Now Icons Only
-  Social Media Menu is now icons only, fixes bug where the site name would display. Fixes spelling of 'Facebook'.
-  
-  There was a: `<span class="vertical-icon-span"> * _siteNameHere_ * </span>`  on the template that was causing the site names to appear next to the respective logo on each link in the social media menu. These spans did not appear to be used anywhere else in d10, so they were removed to resolve the issue.
-  
-  Resolves #586 
-  
----
+* * *
 
-- ### Fixes error on Newsletter pages
-  Resolves CuBoulder/tiamat-theme#596
----
+-   ### Removes third-party services
 
-- ### Fixes Embedded Video not displaying, if also Aligned
-  Adds a custom CSS override to Embedded Videos, if also aligned via CKeditor5, in order to prevent a visual bug where they becoming hidden if floated left/right or centered on a rendered page. This bug was caused by our customized embedded video style and the default alignments (left,right,center) conflicting. 
-  
-  Resolves #561
----
+    Moves all associated code into the Site Configuration module.
 
-- ### Standardizes padding at the top of pages
-  This theme update:
-  - Corrects padding at the top of pages to a standard `20px`. Resolves CuBoulder/tiamat-theme#579
-  - Cleans up some code in multiple content type templates and stylesheets.
-  
-  It may take longer to test due to the number of files changed.
----
+    Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/48)
 
-- ### Secondary Menu Updates
-  Closes #551.
-  Adds button functionality to secondary menu and fixes other small misalignments.
----
+* * *
 
-- ### Adds Styling to Newsletters
-  Adds the following switchable styles to the email version of the Newsletter: Classic, Minimal, Light-Boxed, Dark-Boxed, Simple. 
-  
-  This change also applies the selected `Newsletter` taxonomy's custom header image and footer into your email HTML. 
-  
-  For testing:
-  - Create a taxonomy for `Newsletter`-- choose a custom header image, create a footer, and select a style. 
-  - Select this taxonomy when creating a Newsletter page.
-  - After creating your page go to `Edit` and `Preview`. After selecting preview, on the right hand side change the `View Mode` dropdown to `Email: HTML`
-  - If you click the `Click to copy your Newsletter HTML` button, your email HTML will automatically be copied to clipboard, or you can select the HTML from the input. You can demo this by creating an HTML file and doing a Live Preview, or using a program like Email on Acid to test display ( although this will not show images served by localhost)
-  
-  I recommend two tabs when testing styles, one with the Email:HTML preview and one with `Edit taxonomy` term to change styles or other fields, then just refresh the Email:HTML preview. 
-  
-  Resolves #273 , Resolves #137 , Resolves #305 
----
+-   ### image gallery bug fix
+    Closes #642.
+    Quick fix to make image gallery work.
+
+* * *
+
+-   ### People List Page & People List Block - Bug Fixes & Edge Case Handling
+
+    Provides the following bug fixes to the `People List Block` and the `People List Page`
+
+    ## People List Page & People List Block
+
+    -   Fixes a bug with internal links throwing an error. Adjusts so internal links will convert to absolute pathing, which should allow for our multi-site, single domain sites to use internal links. 
+    -   No termId present on a Person causing a JavaScript error preventing a full render. Was able to cause this error with multiple people and one without any terms attached. This error was present on both `People List Page` and `People List Block`.
+    -   Swaps Twitter's bird to Twitter's X... ( X 's X?)...whatever you want to call it, the bird icon is now an X icon.
+
+    ## People List Page Only
+
+    -   No terms existing for a taxonomy, and the `People List Page` having that taxonomy selected for `Group By` caused a white screen and no errors. Adjusted this to show an error specifying the reason for a white screen: `Grouping by ${groupBy} is requested, but taxonomy data is missing. Please adjust your page's 'Group By' setting or make sure taxonomy data exists for that term.`
+    -   Terms existing for a taxonomy and `Group By` for that taxonomy selected on a `Person List Page`... but no Person has terms on that taxonomy caused the same white screen. Adjusted this to show an error specifying this white screen case: `No results found for the '${groupBy}' grouping.`
+
+    Resolves #659 
+
+* * *
+
+-   ### Adds Collection Grid block fixes
+    Closes #649.
+    Adds the required fixes to add an indicator for single select list, fix id's showing, and make the block a web component.
+
+* * *
+
+-   ### Removes background colors from Content List
+
+    Removes background colors from the Content List
+
+    Resolves #651 
+
+* * *
+
+-   ### Newsletter: Minor Bug Fixes
+
+    Adjusts the following on the Newsletter:
+
+    -   If user elects to omit the optional image on a _Newsletter Taxonomy_, it will no longer render that img element in the header
+    -   **Article Sections ( _Feature Style_ )** - For the Feature Style Article Sections, Articles without a thumbnail will check the Article for an Image uploaded as Article Content, and use that in place of a thumbnail if available. This functionality worked in the Teaser display, but there was an error that would prevent the backup image to display in the Feature Style render.
+
+    Icon linking has been resolved by <https://github.com/CuBoulder/tiamat-theme/issues/604>
+
+    Resolves #595 
+
+* * *
+
+-   ### Updates sidebar regions
+
+    Resolves CuBoulder/tiamat-theme#633
+
+    Sister PR in: [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/77), ~~[ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/45)~~
+
+* * *
+
+-   ### Class Note Enhancements
+
+    Adjusts permissions for Class Notes, adds optional image field. Resolves <https://github.com/CuBoulder/tiamat-theme/issues/622>
+
+    Includes:
+
+    -   tiamat-theme => <https://github.com/CuBoulder/tiamat-theme/pull/648>
+    -   tiamat-profile => <https://github.com/CuBoulder/tiamat10-profile/pull/75>
+    -   custom-entities => <https://github.com/CuBoulder/tiamat-custom-entities/pull/94>
+
+* * *
+
+-   ### Adds Collection Grid block and Collection Item content type
+    Closes #534.
+    Adds the collection grid block and collection item node page
+
+* * *
+
+-   ### Enables list styles in full HTML, Creates Migration Library
+
+    Using Full HTML you can create various list styles found here: <https://styleguide.colorado.edu/content/lists>
+    Also creates a temporary migration library for addtl styles needed for the migration process
+
+    Resolves #624 
+
+* * *
+
+-   ### FAQ Content Type
+
+    Adds the FAQ Content Type. Resolves <https://github.com/CuBoulder/tiamat-theme/issues/620>
+
+    Includes:
+
+    -   tiamat-theme (issue/tiamat-theme/620) => <https://github.com/CuBoulder/tiamat-theme/pull/641>
+    -   custom-entities (issue/tiamat-theme/620) => <https://github.com/CuBoulder/tiamat-custom-entities/pull/92>
+    -   ucb-admin-menus (issue/tiamat-theme/620) => <https://github.com/CuBoulder/ucb_admin_menus/pull/20>
+
+* * *
+
+-   ### Update style.css
+
+    Removal of layout builder styles (lots of this was gin fixing)
+    Fix for Text Block title edit issue
+
+    Sister PRs:
+    <https://github.com/CuBoulder/tiamat10-profile/pull/69>
+    <https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/23>
+    <https://github.com/CuBoulder/tiamat10-project-template/pull/30>
+
+    Closes #638 
+
+* * *
+
+-   ### Claro theme mini-update
+    Fixes for the `layout-container` and local-tasks css
+
+* * *
+
+-   ### Adds label fields for "Department" and "Job Type" on People List Pages
+
+    Resolves CuBoulder/tiamat-theme#626
+
+    Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/44)
+
+* * *
+
+-   ### Claro theme
+    Updated theme files to accommodate the change to Claro.
+
+* * *
+
+-   ### Adds Class Note Page + Class Notes List Page
+
+    Adds the `Class Note` Node and `Class Note List` node. A Class Note List Page lists your Class Notes and has built in filters to allow visitors to filter by year or sort by class year or date posted.
+
+    Includes:
+    `tiamat-theme` => <https://github.com/CuBoulder/tiamat-theme/pull/621>
+    `tiamat-custom-entities` => <https://github.com/CuBoulder/tiamat-custom-entities/pull/91>
+
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/588>
+
+* * *
+
+-   ### Fixes accessibility issues with Article and Article List
+
+    -   Adds alt text to Article List images.
+    -   Enhances readability and fixes bugs with article title backgrounds.
+
+    Resolves CuBoulder/tiamat-theme#616
+
+* * *
+
+-   ### Fixes expandable content `aria-expanded` errors
+    Resolves CuBoulder/tiamat-theme#614
+
+* * *
+
+-   ### Updates theme-provided 403 page; removes 404 image
+
+    -   Updates the theme-provided 403 page. This won't be visible often, as an anonymous user is redirected to the login page instead of being shown this page (CuBoulder/ucb_admin_menus#14).
+    -   Removes 404 image. CuBoulder/ucb_default_content#6
+
+    Sister PR in: [ucb_default_content](https://github.com/CuBoulder/ucb_default_content/pull/8)
+
+* * *
+
+-   ### Breadcrumb fix
+
+    This render didn't need to be added to the if statement. 
+    Fixed formatting as well.
+
+    Closes #585 
+
+* * *
+
+-   ### Title on Homepage no longer visible
+
+    This fixes the functionality where a title is hidden when set as the site's homepage. This was previously working before a moveable title refactor and has been corrected.
+
+    Resolves #607 
+
+* * *
+
+-   ### Hero unit separation
+
+    Hero Unit Separation
+
+    Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/90>
+
+    Closes #605
+
+* * *
+
+-   ### Form Page - Adds Body Field
+
+    The Form Page node's body displays above the attached form.
+
+    Resolves #599 
+
+* * *
+
+-   ### Events Calendar Background matches Section background color
+
+    Adjusts the `Events Calendar` so it matches the background color of the section it is placed in, rather than being always white. Text color adjusted to white for black and dark gray section backgrounds. 
+
+    @jcsparks - Let me know if gold section background needs some text color adjustments, I could make an override for that that makes the text a darker gray / black than the default. 
+
+    Resolves #564 
+
+* * *
+
+-   ### Social Media Menu - Now Icons Only
+
+    Social Media Menu is now icons only, fixes bug where the site name would display. Fixes spelling of 'Facebook'.
+
+    There was a: `<span class="vertical-icon-span"> * _siteNameHere_ * </span>`  on the template that was causing the site names to appear next to the respective logo on each link in the social media menu. These spans did not appear to be used anywhere else in d10, so they were removed to resolve the issue.
+
+    Resolves #586 
+
+* * *
+
+-   ### Fixes error on Newsletter pages
+    Resolves CuBoulder/tiamat-theme#596
+
+* * *
+
+-   ### Fixes Embedded Video not displaying, if also Aligned
+
+    Adds a custom CSS override to Embedded Videos, if also aligned via CKeditor5, in order to prevent a visual bug where they becoming hidden if floated left/right or centered on a rendered page. This bug was caused by our customized embedded video style and the default alignments (left,right,center) conflicting. 
+
+    Resolves #561
+
+* * *
+
+-   ### Standardizes padding at the top of pages
+
+    This theme update:
+
+    -   Corrects padding at the top of pages to a standard `20px`. Resolves CuBoulder/tiamat-theme#579
+    -   Cleans up some code in multiple content type templates and stylesheets.
+
+    It may take longer to test due to the number of files changed.
+
+* * *
+
+-   ### Secondary Menu Updates
+    Closes #551.
+    Adds button functionality to secondary menu and fixes other small misalignments.
+
+* * *
+
+-   ### Adds Styling to Newsletters
+
+    Adds the following switchable styles to the email version of the Newsletter: Classic, Minimal, Light-Boxed, Dark-Boxed, Simple. 
+
+    This change also applies the selected `Newsletter` taxonomy's custom header image and footer into your email HTML. 
+
+    For testing:
+
+    -   Create a taxonomy for `Newsletter`-- choose a custom header image, create a footer, and select a style. 
+    -   Select this taxonomy when creating a Newsletter page.
+    -   After creating your page go to `Edit` and `Preview`. After selecting preview, on the right hand side change the `View Mode` dropdown to `Email: HTML`
+    -   If you click the `Click to copy your Newsletter HTML` button, your email HTML will automatically be copied to clipboard, or you can select the HTML from the input. You can demo this by creating an HTML file and doing a Live Preview, or using a program like Email on Acid to test display ( although this will not show images served by localhost)
+
+    I recommend two tabs when testing styles, one with the Email:HTML preview and one with `Edit taxonomy` term to change styles or other fields, then just refresh the Email:HTML preview. 
+
+    Resolves #273 , Resolves #137 , Resolves #305 
+
+* * *
 
 ## [20231212] - 2023-12-12
 
@@ -1302,7 +1372,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20231212...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240221...HEAD
+
+[20240221]: https://github.com/CuBoulder/tiamat-theme/compare/20231212...20240221
 
 [20231212]: https://github.com/CuBoulder/tiamat-theme/compare/20230718...20231212
 
