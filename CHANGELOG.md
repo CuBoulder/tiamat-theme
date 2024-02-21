@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes bug with floated items in Expandable Content block
+  Resolves CuBoulder/tiamat-theme#682
+---
+
 - ### Adds mobile menus! changes
   - Forces menu styles off on mobile screen sizes.
   - Adds CSS styling to the menu.

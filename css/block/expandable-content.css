@@ -134,6 +134,10 @@
   border-bottom: 1px solid rgba(128, 128, 128, 0.333);
 }
 
+.ucb-expandable-content .accordion-body {
+  overflow: auto;
+}
+
 @media (min-width: 768px) {
   .ucb-expandable-content .horizontal-tab-accordion .nav-tabs,
   .ucb-expandable-content .vertical-tab-accordion .vertical-tabs {
