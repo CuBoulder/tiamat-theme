@@ -198,6 +198,12 @@ ucb-form-page:
     theme:
       css/ucb-form-page.css: {}
 
+ucb-taxonomy-page:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-taxonomy-page.css: {}
+
 ucb-related-articles:
   version: 1.x
   js:
@@ -470,6 +476,7 @@ ucb-class-notes-list-page:
   css:
     theme:
       css/ucb-class-notes-list.css: {}
+
 ucb-collections-block:
   version: 1.x
   js:
