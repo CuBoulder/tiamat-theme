@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Collection Grid preview change
+  Helps close https://github.com/CuBoulder/tiamat-custom-entities/issues/101.
+  Adds the necessary theme changes to allow for the html preview field.
+---
+
 ## [20240221] - 2024-02-21
 
 -   ### Fixes bug with floated items in Expandable Content block
