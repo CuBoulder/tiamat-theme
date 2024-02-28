@@ -195,7 +195,7 @@
     {% if content.field_ucb_article_content|render %}
     <div role="main" class="ucb-article-body">{{ content.field_ucb_article_content }}</div>
     {% endif %}
-    {% if content.field_ucb_article_categories|render %}
+    {% if content.field_ucb_article_categories|filter(item => item['#entity'] and item['#entity'].field_ucb_category_display.value != '0') %}
     <div role="contentinfo" class="container ucb-article-categories" itemprop="about">
       <span class="sr-only">Categories:</span>
       <div class="ucb-article-category-icon">
@@ -204,7 +204,7 @@
       {{ content.field_ucb_article_categories }}
     </div>
     {% endif %}
-    {% if content.field_ucb_article_tags|render %}
+    {% if content.field_ucb_article_tags|filter(item => item['#entity'] and item['#entity'].field_ucb_tag_display.value != '0') %}
     <div role="contentinfo" class="container ucb-article-tags" itemprop="keywords">
       <div class="ucb-article-tag-icon">
       <span class="sr-only">Tags:</span>
