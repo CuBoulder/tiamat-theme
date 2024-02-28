@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates Taxonomy page styles
+  - [Bug] Headers on Taxonomy pages are now consistent with the site setting.
+  - [Change] The "Subscribe to x" link has been hidden.
+  
+  Resolves CuBoulder/tiamat-theme#697
+---
+
 - ### video reveal html text
   Closes #662.
   Changes necessary files to enable an html text field.
