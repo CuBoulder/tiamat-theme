@@ -43,7 +43,7 @@
               {% if item.label %}
                 <span class="ucb-site-contact-info-footer-label ucb-site-contact-info-footer-general-label">{{ item.label }} </span>
               {% endif %}
-              <span class="ucb-site-contact-info-footer-content ucb-site-contact-info-footer-general-content">{% if item.value.format == 'wysiwyg' or item.value.format == 'full_html' %}{{ item.value.value | raw }}{% else %}{{ item.value.value | nl2br }}{% endif %}</span>
+              <span class="ucb-site-contact-info-footer-content ucb-site-contact-info-footer-general-content">{{ item.value }}</span>
             </div>
           {% endif %}
         {% endfor %}
@@ -80,4 +80,3 @@
     </div>
   {% endblock %}
 </div>
-
