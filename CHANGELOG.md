@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### video reveal html text
+  Closes #662.
+  Changes necessary files to enable an html text field.
+  Sister pull request in https://github.com/CuBoulder/tiamat-custom-entities/pull/100.
+---
+
 - ### Collection Grid preview change
   Helps close https://github.com/CuBoulder/tiamat-custom-entities/issues/101.
   Adds the necessary theme changes to allow for the html preview field.
