@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Resolves an issue causing the category or tag icon to appear if none are visible
+  Resolves CuBoulder/tiamat-theme#701 
+---
+
 - ### Updates `block--site-info.html.twig`
   CuBoulder/ucb_migration_shortcodes#15
   
