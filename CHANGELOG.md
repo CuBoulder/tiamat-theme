@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates `block--site-info.html.twig`
+  CuBoulder/ucb_migration_shortcodes#15
+  
+  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/49)
+---
+
 - ### Updates Taxonomy page styles
   - [Bug] Headers on Taxonomy pages are now consistent with the site setting.
   - [Change] The "Subscribe to x" link has been hidden.
