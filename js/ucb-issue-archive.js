@@ -11,7 +11,7 @@ class IssueArchiveElement extends HTMLElement {
         };
 
         // Pagination &page[limit]=5
-        fetch(`/jsonapi/node/ucb_issue?include=field_ucb_issue_image.field_media_image&fields[file--file]=uri,url&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published&sort=-created`)
+        fetch(`/jsonapi/node/ucb_issue?include=field_ucb_issue_cover_image.field_media_image&fields[file--file]=uri,url&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published&sort=-created`)
         .then(handleError)
             .then((data) => this.build(data))
             .catch(Error=> this.handleError(Error));
@@ -50,8 +50,8 @@ class IssueArchiveElement extends HTMLElement {
                 const issueUrl = issue.attributes.path.alias
                 const issueContainer = document.createElement('div')
                 issueContainer.classList = 'ucb-issue-archive-card px-3'
-                if(issue.relationships.field_ucb_issue_image.data){
-                    const issueId = issue.relationships.field_ucb_issue_image.data.id;
+                if(issue.relationships.field_ucb_issue_cover_image.data){
+                    const issueId = issue.relationships.field_ucb_issue_cover_image.data.id;
                     const imgUrl = urlObj[idObj[issueId]]
                     const issueImg = document.createElement('img')
                     issueImg.classList = 'ucb-archive-card-img'
