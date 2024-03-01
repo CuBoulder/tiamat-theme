@@ -165,7 +165,7 @@ class ArticleGridBlockElement extends HTMLElement {
         // Case for Too many articles
         if(finalArticles.length >= count || (finalArticles.length >= count && NEXTJSONURL)){
           finalArticles.length = count
-          this.renderDisplay(finalArticles)
+          this.renderDisplay(finalArticles, includeSummary)
       }
 
         // Have articles and want to proceed
