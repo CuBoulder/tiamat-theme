@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes Infinite Load Article List Blocks
+  Resolves #713 
+  
+  Should address the condition where too many Articles causing an issue with how JSON:API handles pagination and subsequent API calls in the Article List blocks
+---
+
 - ### Resolves an issue causing the category or tag icon to appear if none are visible
   Resolves CuBoulder/tiamat-theme#701 
 ---

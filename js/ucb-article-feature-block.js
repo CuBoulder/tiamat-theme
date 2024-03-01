@@ -164,9 +164,10 @@ class ArticleFeatureBlockElement extends HTMLElement {
           this.toggleMessage('ucb-al-error', "block")
         }
 
-        // Case for Too many articles
-        if(finalArticles.length > count){
+        // Case for Too many articles, proceed
+        if(finalArticles.length >= count || (finalArticles.length >= count && NEXTJSONURL)){
             finalArticles.length = count
+            this.renderDisplay(finalArticles, display, imgSize)
         }
 
         // Have articles and want to proceed
