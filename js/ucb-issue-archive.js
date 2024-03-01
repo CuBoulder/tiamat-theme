@@ -14,11 +14,15 @@ class IssueArchiveElement extends HTMLElement {
         fetch(`/jsonapi/node/ucb_issue?include=field_ucb_issue_cover_image.field_media_image&fields[file--file]=uri,url&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published&sort=-created`)
         .then(handleError)
             .then((data) => this.build(data))
-            .catch(Error=> this.handleError(Error));
+            .catch(Error=> {
+                this.toggleMessage('ucb-al-loading');
+                this.handleError(Error)
+            });
     }
 
     build(data){
         if(data.data.length == 0){
+            this.toggleMessage('ucb-al-loading')
             this.handleError({name : "No Issues Retrieved", message : "There are no Issues created"} , 'Create Issues for All Issues to appear here')
         } else {
             const archiveContainer = document.createElement('div')
@@ -79,9 +83,22 @@ class IssueArchiveElement extends HTMLElement {
                 issueContainer.appendChild(titleLink)
                 archiveContainer.appendChild(issueContainer)
             }
-
+            this.toggleMessage('ucb-al-loading')
             this.appendChild(archiveContainer)
 
+        }
+    }
+
+    toggleMessage(id, display = "none") {
+        if (id) {
+          var toggle = this.querySelector(`#${id}`);
+          if (toggle) {
+            if (display === "block") {
+              toggle.style.display = "block";
+            } else {
+              toggle.style.display = "none";
+            }
+          }
         }
     }
 
