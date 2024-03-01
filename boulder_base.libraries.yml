@@ -257,7 +257,7 @@ ucb-current-issue:
     js/ucb-current-issue-block.js: {}
   css:
     theme:
-      css/ucb-current-issue-block.css: {}
+      css/block/ucb-current-issue-block.css: {}
 
 ucb-category-cloud:
   version: 1.x
@@ -281,7 +281,7 @@ ucb-latest-issue:
     js/ucb-latest-issue-block.js: {}
   css:
     theme:
-      css/ucb-latest-issue-block.css: {}
+      css/block/ucb-latest-issue-block.css: {}
 ucb-issue-archive:
   version: 1.x
   js:
