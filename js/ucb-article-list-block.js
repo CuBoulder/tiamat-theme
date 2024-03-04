@@ -166,9 +166,10 @@ class ArticleListBlockElement extends HTMLElement {
         }
 
         // Case for Too many articles
-        if(finalArticles.length > count){
-            finalArticles.length = count
-        }
+        if(finalArticles.length >= count || (finalArticles.length >= count && NEXTJSONURL)){
+          finalArticles.length = count
+          this.renderDisplay(display, finalArticles)
+      }
 
         // Have articles and want to proceed
         if(finalArticles.length > 0 && !NEXTJSONURL){
