@@ -34,17 +34,25 @@ class ClassNotesListElement extends HTMLElement {
 
 		// Query Params
 		const queryParams = new URLSearchParams(window.location.search);
-    	const startDate = new Date(queryParams.get('startDate')).getTime() / 1000; // e.g., '2023-11-05'
-    	const endDate = new Date(queryParams.get('endDate')).getTime() / 1000; // e.g., '2023-11-06'
+		let startDate = queryParams.get('startDate') ? new Date(queryParams.get('startDate')).getTime() / 1000 : null; // e.g., '2023-11-05'
+		let endDate = queryParams.get('endDate') ? new Date(queryParams.get('endDate')).getTime() / 1000 : null; // e.g., '2023-11-06'
+
+		// If startDate is provided but endDate is not, set endDate to today
+		if (startDate && !endDate) {
+			console.log('end date not provided!')
+			endDate = new Date().setHours(23, 59, 59, 999) / 1000; // Sets endDate to the end of today
+			console.log(endDate)
+		}
+		console.log('start date', startDate)
+		console.log('end date', endDate)
 		// Date Published Range
 		let dateFilter = '';
-
-if (startDate && endDate) {
-    // Filter for nodes created between the start and end dates
-    dateFilter = `&filter[created-on][group][conjunction]=AND`;
-    dateFilter += `&filter[start-date][condition][path]=created&filter[start-date][condition][operator]=%3E%3D&filter[start-date][condition][value]=${startDate}&filter[start-date][condition][memberOf]=created-on`;
-    dateFilter += `&filter[end-date][condition][path]=created&filter[end-date][condition][operator]=%3C&filter[end-date][condition][value]=${endDate}&filter[end-date][condition][memberOf]=created-on`;
-}
+		if (startDate && endDate) {
+			// Filter for nodes created between the start and end dates
+			dateFilter = `&filter[created-on][group][conjunction]=AND`;
+			dateFilter += `&filter[start-date][condition][path]=created&filter[start-date][condition][operator]=%3E%3D&filter[start-date][condition][value]=${startDate}&filter[start-date][condition][memberOf]=created-on`;
+			dateFilter += `&filter[end-date][condition][path]=created&filter[end-date][condition][operator]=%3C&filter[end-date][condition][value]=${endDate}&filter[end-date][condition][memberOf]=created-on`;
+		}
 
 		if(sort == 'Class Year'){
 			sortFilter = '&sort=field_ucb_class_year'
