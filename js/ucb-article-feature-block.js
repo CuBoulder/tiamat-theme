@@ -308,14 +308,18 @@ class ArticleFeatureBlockElement extends HTMLElement {
                     articleImgLink.className = 'ucb-article-img-link'
                     articleImgLink.href = article.link;
                     articleImgLink.appendChild(articleImg)
-
+        
+                    // Title
+                    var articleTitle = document.createElement('h3')
+                    articleTitle.className = 'ucb-article-feature-secondary-title'
                     //Title Link 
                     var articleTitleLink = document.createElement('a')
                     articleTitleLink.href = article.link;
                     articleTitleLink.innerText = article.title;
+                    articleTitle.appendChild(articleTitleLink)
         
                     articleContainer.appendChild(articleImgLink)
-                    articleContainer.appendChild(articleTitleLink)
+                    articleContainer.appendChild(articleTitle)
                     secondaryContainer.appendChild(articleContainer)
                     }
                 })
@@ -357,7 +361,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
                 featureImgLink.appendChild(featureImg)
 
                 // Title
-                var featureTitle = document.createElement('h2')
+                var featureTitle = document.createElement('h3')
                 featureTitle.className = 'ucb-feature-article-header'
                 // Title Link
                 var featureTitleLink = document.createElement('a')
@@ -406,12 +410,17 @@ class ArticleFeatureBlockElement extends HTMLElement {
             articleImgLink.href = article.link;
             articleImgLink.appendChild(articleImg)
 
+            // Title
+            var articleTitle = document.createElement('h3')
+            articleTitle.className = 'ucb-article-feature-secondary-title'
+            //Title Link 
             var articleTitleLink = document.createElement('a')
             articleTitleLink.href = article.link;
             articleTitleLink.innerText = article.title;
+            articleTitle.appendChild(articleTitleLink)
 
             articleContainer.appendChild(articleImgLink)
-            articleContainer.appendChild(articleTitleLink)
+            articleContainer.appendChild(articleTitle)
             secondaryContainer.appendChild(articleContainer)
             }
         })
@@ -502,13 +511,17 @@ class ArticleFeatureBlockElement extends HTMLElement {
                     articleImgLink.href = article.link;
                     articleImgLink.appendChild(articleImg)
         
+                    // Title
+                    var articleTitle = document.createElement('h3')
+                    articleTitle.className = 'ucb-article-feature-secondary-title'
                     //Title Link 
                     var articleTitleLink = document.createElement('a')
                     articleTitleLink.href = article.link;
                     articleTitleLink.innerText = article.title;
+                    articleTitle.appendChild(articleTitleLink)
         
                     articleContainer.appendChild(articleImgLink)
-                    articleContainer.appendChild(articleTitleLink)
+                    articleContainer.appendChild(articleTitle)
                     secondaryContainer.appendChild(articleContainer)
                     }
                 })
