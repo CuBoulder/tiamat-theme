@@ -308,18 +308,14 @@ class ArticleFeatureBlockElement extends HTMLElement {
                     articleImgLink.className = 'ucb-article-img-link'
                     articleImgLink.href = article.link;
                     articleImgLink.appendChild(articleImg)
-        
-                    // Title
-                    var articleTitle = document.createElement('h3')
-                    articleTitle.className = 'ucb-article-feature-secondary-title'
+
                     //Title Link 
                     var articleTitleLink = document.createElement('a')
                     articleTitleLink.href = article.link;
                     articleTitleLink.innerText = article.title;
-                    articleTitle.appendChild(articleTitleLink)
         
                     articleContainer.appendChild(articleImgLink)
-                    articleContainer.appendChild(articleTitle)
+                    articleContainer.appendChild(articleTitleLink)
                     secondaryContainer.appendChild(articleContainer)
                     }
                 })
@@ -410,17 +406,12 @@ class ArticleFeatureBlockElement extends HTMLElement {
             articleImgLink.href = article.link;
             articleImgLink.appendChild(articleImg)
 
-            // Title
-            var articleTitle = document.createElement('h3')
-            articleTitle.className = 'ucb-article-feature-secondary-title'
-            //Title Link 
             var articleTitleLink = document.createElement('a')
             articleTitleLink.href = article.link;
             articleTitleLink.innerText = article.title;
-            articleTitle.appendChild(articleTitleLink)
 
             articleContainer.appendChild(articleImgLink)
-            articleContainer.appendChild(articleTitle)
+            articleContainer.appendChild(articleTitleLink)
             secondaryContainer.appendChild(articleContainer)
             }
         })
@@ -511,17 +502,13 @@ class ArticleFeatureBlockElement extends HTMLElement {
                     articleImgLink.href = article.link;
                     articleImgLink.appendChild(articleImg)
         
-                    // Title
-                    var articleTitle = document.createElement('h3')
-                    articleTitle.className = 'ucb-article-feature-secondary-title'
                     //Title Link 
                     var articleTitleLink = document.createElement('a')
                     articleTitleLink.href = article.link;
                     articleTitleLink.innerText = article.title;
-                    articleTitle.appendChild(articleTitleLink)
         
                     articleContainer.appendChild(articleImgLink)
-                    articleContainer.appendChild(articleTitle)
+                    articleContainer.appendChild(articleTitleLink)
                     secondaryContainer.appendChild(articleContainer)
                     }
                 })
