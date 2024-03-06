@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Mobile Footer Menu Changes
+  Closes #722.
+  Adds CSS changes for the footer menu to only show in the secondary menu when it is a mobile view.
+---
+
 - ### Article List Block Adjustments
   Modifies various Article List Nodes and Blocks in the following ways:
   
