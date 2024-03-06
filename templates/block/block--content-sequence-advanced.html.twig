@@ -20,29 +20,51 @@
 	'scale_factor': entity.field_content_sequence_scale.value,
 	'font': 'Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif'
 } %}{% set embedId = 'timeline-embed-' ~ entity.uuid.value %}
-{% if entity.field_sequence_title.value or entity.body.value %}{% set imageField = entity.field_content_sequence_media.entity.field_media_image %}{% set videoField = entity.field_content_sequence_media.entity.field_media_oembed_video %}{% if imageField %}{% set titleMedia = {
+{% if entity.field_sequence_title.value or entity.body.value %}
+	{% set imageField = entity.field_content_sequence_media.entity.field_media_image %}{% set videoField = entity.field_content_sequence_media.entity.field_media_oembed_video %}
+	{% if imageField %}
+		{% set titleMedia = {
 	'url': file_url(imageField.entity.fileuri),
 	'alt': imageField.alt
-} %}{% elseif videoField %}{% set titleMedia = {
+} %}
+	{% elseif videoField %}
+		{% set titleMedia = {
 	'url': videoField.value,
-} %}{% else %}{% set titleMedia = null %}{% endif %}
-{% set titleSlide = {
+} %}
+	{% else %}
+		{% set titleMedia = null %}
+	{% endif %}
+	{% set titleSlide = {
 	'text': {
 		'headline': entity.field_content_sequence_title.value,
 		'text': content.body|render
 	},
 	media: titleMedia
-} %}{% endif %}
+} %}
+{% endif %}
 {% for item in entity.field_content_sequence_items %}
-{% set startDate = item.entity.field_sequence_item_start_date.0.value ?? 'now' %}{% set endDate = item.entity.field_sequence_item_end_date.0.value ?? 'now' %}{% set itemLink = item.entity.field_sequence_item_url.uri %}
-{% set imageField = item.entity.field_sequence_item_media.entity.field_media_image %}{% set videoField = item.entity.field_sequence_item_media.entity.field_media_oembed_video %}{% if imageField %}{% set itemMedia = {
+	{% set startDate = item.entity.field_sequence_item_start_date.0.value ?? 'now' %}{% set endDate = item.entity.field_sequence_item_end_date.0.value ?? 'now' %}{% set itemLink = item.entity.field_sequence_item_url.uri %}
+	{% set imageField = item.entity.field_sequence_item_media.entity.field_media_image %}{% set videoField = item.entity.field_sequence_item_media.entity.field_media_oembed_video %}
+	{% if imageField %}
+		{% set itemMedia = {
 	'url': file_url(imageField.entity.fileuri),
 	'link': itemLink,
 	'alt': imageField.alt
-} %}{% elseif videoField %}{% set itemMedia = {
+} %}
+	{% elseif videoField %}
+		{% set itemMedia = {
 	'url': videoField.value,
-} %}{% else %}{% set itemMedia = null %}{% endif %}{% set itemTitleText = item.entity.field_sequence_item_title.value %}{% if itemLink %}{% set itemTitle = '<a href="' ~ item.entity.field_sequence_item_url.uri ~ '">' ~ itemTitleText ~ '</a>' %}{% else %}{% set itemTitle = itemTitleText %}{% endif %}
-{% set itemData = {
+} %}
+	{% else %}
+		{% set itemMedia = null %}
+	{% endif %}
+	{% set itemTitleText = item.entity.field_sequence_item_title.value %}
+	{% if itemLink %}
+		{% set itemTitle = '<a href="' ~ item.entity.field_sequence_item_url.uri ~ '">' ~ itemTitleText ~ '</a>' %}
+	{% else %}
+		{% set itemTitle = itemTitleText %}
+	{% endif %}
+	{% set itemData = {
 	'text': {
 		'headline': itemTitle,
 		'text': item.entity.field_sequence_item_descr|view|render
@@ -62,18 +84,52 @@
 	'group': item.entity.field_sequence_item_group.value,
 	'media': itemMedia
 } %}{% set timelineEvents = timelineEvents|merge([itemData]) %}
-{% endfor %}{% set timelineData = {'title': titleSlide, 'events': timelineEvents} %}
-{% block content %}<div{{ attributes.addClass(classes) }}>
-	{{ title_prefix }}
-	{% if label %}<h2{{ title_attributes }}>{{ label }}</h2>{% endif %}
-	{{ title_suffix }}
-	<div id="{{ embedId }}" aria-hidden="true" role="presentation" tabindex="-1"></div>
-	<script type="text/javascript">
-		(function(readyState) {
-			function loadTimeline() { new TL.Timeline('{{ embedId }}', {{ timelineData | json_encode | raw }}, {{ timelineOptions | json_encode | raw }}); }
-			if (readyState === 'loading')
-				document.addEventListener('DOMContentLoaded', loadTimeline);
-			else loadTimeline();
-		})(document.readyState);
-	</script>
-</div>{% endblock %}
+{% endfor %}
+{% set timelineData = {'title': titleSlide, 'events': timelineEvents} %}
+
+{# Block/Title/Icon Styles #}
+{% set blockStyles = [
+	content.field_bs_background_style|render|striptags|trim,
+	content.field_bs_content_font_scale|render|striptags|trim,
+	content.field_bs_icon_position|render|striptags|trim,
+	content.field_bs_heading_alignment|render|striptags|trim,
+	content.field_bs_title_font_scale|render|striptags|trim,
+	''
+] %}
+
+{% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
+{% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
+{% set headingTag = content.field_bs_heading|render|striptags|trim %}
+{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
+
+{% block content %}
+	<div{{attributes.addClass(classes,blockStyles)}}>
+		{{ title_prefix }}
+		{% if label %}
+			<div class="block-title {{ headingStyle }}">
+				<{{headingTag}}{{title_attributes}}>
+					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
+						{{ content.field_bs_icon }}
+					</span>
+					<span class="block-title-text">
+						{{ label }}
+					</span>
+				</{{headingTag}}>
+			</div>
+		{% endif %}
+		{{ title_suffix }}
+		<div id="{{ embedId }}" aria-hidden="true" role="presentation" tabindex="-1"></div>
+		<script type="text/javascript">
+			(function (readyState) {
+function loadTimeline() {
+new TL.Timeline('{{ embedId }}', {{ timelineData | json_encode | raw }}, {{ timelineOptions | json_encode | raw }});
+}
+if (readyState === 'loading') 
+document.addEventListener('DOMContentLoaded', loadTimeline);
+ else 
+loadTimeline();
+
+})(document.readyState);
+		</script>
+	</div>
+{% endblock %}

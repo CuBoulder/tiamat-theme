@@ -37,11 +37,35 @@
 {% set id = "carousel-" ~ content['#block_content'].id() %}
 
 
+{# Block/Title/Icon Styles #}
+{% set blockStyles = [
+	content.field_bs_background_style|render|striptags|trim,
+	content.field_bs_content_font_scale|render|striptags|trim,
+	content.field_bs_icon_position|render|striptags|trim,
+	content.field_bs_heading_alignment|render|striptags|trim,
+	content.field_bs_title_font_scale|render|striptags|trim,
+	''
+] %}
+
+{% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
+{% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
+{% set headingTag = content.field_bs_heading|render|striptags|trim %}
+{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
+
 {% block content %}
-	<div{{attributes.addClass(classes).addClass(size)}}>
+	<div{{attributes.addClass(classes,blockStyles,size)}}>
 		{{ title_prefix }}
 		{% if label %}
-			<h2{{title_attributes}}>{{ label }}</h2>
+			<div class="block-title {{ headingStyle }}">
+				<{{ headingTag }}{{title_attributes}}>
+					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
+						{{ content.field_bs_icon }}
+					</span>
+					<span class="block-title-text">
+						{{ label }}
+					</span>
+				</{{ headingTag }}>
+			</div>
 		{% endif %}
 		{{ title_suffix }}
 		{# <h1> {{ dump(content['#block_content'].field_slider_slide.value) }} </h1> #}

@@ -7,7 +7,7 @@
     font-size: 80%;
 }
 
-.bs-content-scale-decrease {
+.bs-content-scale-decrease p {
     font-size: 80%;
 }
 
@@ -27,18 +27,18 @@
     }
 }
 
-.bs-content-scale-increase {
+.bs-content-scale-increase p {
     font-size: 110%;
 }
 
 @media screen and (min-width: 768px) {
-    .bs-content-scale-increase {
+    .bs-content-scale-increase p {
         font-size: 125%;
     }
 }
 
 @media screen and (min-width: 960px) {
-    .bs-content-scale-increase {
+    .bs-content-scale-increase p {
         font-size: 150%;
     }
 }
