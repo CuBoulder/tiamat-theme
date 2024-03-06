@@ -1,8 +1,10 @@
 /**** GLOBAL STYLES ******/
 :root {
   --ucb-gold: #cfb87b;
+  --ucb-light-gold: #F1EBD9;
   --ucb-link: #0277bd;
   --ucb-link-visited: #e51c23;
+  --ucb-link-dark: #01579B;
   --ucb-white: #fff;
   --ucb-black: #222;
   --ucb-darker: #333;
@@ -11,6 +13,11 @@
   --ucb-dark-gray: #424242;
   --ucb-light-gray: #eee;
   --ucb-light-blue: #e1f5fe;
+  --ucb-medium-blue: #4FC3F7;
+  --ucb-dark-blue: #01579B; 
+  --ucb-light-green: #DCEDC8;
+  --ucb-brick: #AE5A39;
+  --ucb-amber: #FFF9C4;
 }
 
 /* Needed for Font Awesome  */

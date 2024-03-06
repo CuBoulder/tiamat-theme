@@ -1,0 +1,166 @@
+/*** Background Color Settings ***/
+.text-block-none {
+  background-color: transparent;
+  color: inherit;
+}
+
+.bs_background_white {
+  background-color: var(--ucb-white);
+  color: var(--ucb-black);
+  padding: 20px;
+}
+
+.bs_background_gray {
+  background-color: var(--ucb-light-gray);
+  color: var(--ucb-black);
+  padding: 20px;
+}
+
+.bs_background_dark_gray {
+  background-color: var(--ucb-dark-gray);
+  color: var(--ucb-white);
+  padding: 20px;
+}
+
+.bs_background_tan {
+  background-color: var(--ucb-light-gold);
+  color: var(--ucb-black);
+  padding: 20px;
+}
+
+.bs_background_light_blue {
+  background-color: var(--ucb-light-blue);
+  color: var(--ucb-black);
+  padding: 20px;
+}
+
+.bs_background_medium_blue {
+  background-color: var(--ucb-medium-blue);
+  color: var(--ucb-black);
+  padding: 20px;
+}
+
+.bs_background_dark_blue {
+  background-color: var(--ucb-dark-blue);
+  color: var(--ucb-white);
+  padding: 20px;
+}
+
+.bs_background_light_green {
+  background-color: var(--ucb-light-green);
+  color: var(--ucb-black);
+  padding: 20px;
+}
+
+.bs_background_brick {
+  background-color: var(--ucb-brick);
+  color: var(--ucb-white);
+  padding: 20px;
+}
+
+.bs_background_outline {
+  background-color: transparent;
+  color: inherit;
+  padding: 20px;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+}
+
+.bs_background_underline {
+  background-color: #ae5a39;
+  color: inherit;
+  padding: 0 0 20px 0;
+  border: 1px solid rgba(200, 200, 200, 0.5);
+}
+
+/*** Link Color Settings ***/
+.text-block-none a,
+.bs_background_outline a,
+.bs_background_underline a {
+  color: inherit;
+}
+
+.text-block-none a:hover,
+.bs_background_outline a:hover,
+.bs_background_underline a:hover {
+  color: inherit;
+}
+
+.bs_background_white a {
+  color: var(--ucb-link);
+}
+
+.bs_background_white a:hover {
+  color: var(--ucb-link-visited);
+}
+
+.bs_background_gray a {
+  color: var(--ucb-link-dark);
+}
+
+.bs_background_gray a:hover {
+  color: var(--ucb-link-visited);
+}
+
+.bs_background_dark_gray a {
+  color: var(--ucb-gold);
+}
+
+.bs_background_dark_gray a:hover {
+  color: var(--ucb-white);
+}
+
+.bs_background_tan a {
+  color: var(--ucb-link-dark);
+}
+
+.bs_background_tan a:hover {
+  color: var(--ucb-link-visited);
+}
+
+.bs_background_light_blue a {
+  color: var(--ucb-link-dark);
+}
+
+.bs_background_light_blue a:hover {
+  color: var(--ucb-link-visited);
+}
+
+.bs_background_medium_blue a {
+  color: var(--ucb-black);
+  text-decoration: underline;
+}
+
+.bs_background_medium_blue a:hover {
+  color: var(--ucb-black);
+  text-decoration: underline;
+}
+
+.bs_background_dark_blue a {
+  color: var(--ucb-white);
+  text-decoration: underline;
+}
+
+.bs_background_dark_blue a:hover {
+  color: var(--ucb-white);
+  text-decoration: underline;
+}
+
+.bs_background_light_green a {
+  color: var(--ucb-link-dark);
+}
+
+.bs_background_light_green a:hover {
+  color: var(--ucb-link-visited);
+}
+
+.bs_background_brick a {
+  color: var(--ucb-white);
+  text-decoration: underline;
+}
+
+.bs_background_brick a:hover {
+  color: var(--ucb-white);
+  text-decoration: underline;
+}
+
+/*** Icon Styles ***/

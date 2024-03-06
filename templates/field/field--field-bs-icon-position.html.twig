@@ -1,0 +1,12 @@
+{% for item in items %}
+
+{% if item|render|striptags|trim == 'Offset' %}
+	{% set blockIconPosition = 'bs_icon_position_offset' %}
+{% elseif item|render|striptags|trim == 'Top' %}
+	{% set blockIconPosition = 'bs_icon_position_top' %}
+{% else %}
+	{% set blockIconPosition = 'bs_icon_position_default' %}
+{% endif %}
+
+    {{ blockIconPosition }}
+{% endfor %}

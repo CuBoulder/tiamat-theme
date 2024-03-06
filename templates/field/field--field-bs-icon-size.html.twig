@@ -1,0 +1,10 @@
+{% for item in items %}
+
+	{% if item|render|striptags|trim == 'Increase' %}
+		{% set blockIconSize = 'bs_icon_size_increase' %}
+	{% else %}
+		{% set blockIconSize = 'bs_icon_size_default' %}
+	{% endif %}
+
+	{{ blockIconSize }}
+{% endfor %}

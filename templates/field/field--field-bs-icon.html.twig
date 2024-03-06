@@ -1,0 +1,11 @@
+{% for item in items %}
+	{% set attributeList = ['fa-xs', 'fa-sm', 'fa-lg', 'fa-2x', 'fa-3x', 'fa-4x', 'fa-5x', 'fa-6x', 'fa-7x', 'fa-8x', 'fa-9x', 'fa-10x', 'ucb-icon-color-black', 'ucb-icon-color-white', 'ucb-icon-color-lightgray', 'ucb-icon-color-darkgray', 'ucb-icon-color-gold', 'ucb-icon-style-square', 'ucb-icon-style-square-rounded', 'ucb-icon-style-circle'] %}
+	{% set iconList = item.content['#text']|striptags('<i>')|split('<i') %}
+	{% set firstIconHtml = '<i' ~ iconList[1]|split('</i>')[0] ~ '</i>' %}
+
+{% for attribute in attributeList %}
+    {% set firstIconHtml = firstIconHtml|replace({(attribute): ''}) %}
+{% endfor %}
+
+	{{ firstIconHtml|t }}
+{% endfor %}

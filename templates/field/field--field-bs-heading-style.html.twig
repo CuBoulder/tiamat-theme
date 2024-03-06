@@ -1,0 +1,16 @@
+{% for item in items %}
+
+{% if item|render|striptags|trim == 'Hero' %}
+	{% set blockHeadingStyle = 'bs_heading_style_hero' %}
+{% elseif item|render|striptags|trim == 'Hero Bold' %}
+	{% set blockHeadingStyle = 'bs_heading_style_hero_bold' %}
+{% elseif item|render|striptags|trim == 'Supersize' %}
+	{% set blockHeadingStyle = 'bs_heading_style_supersize' %}
+{% elseif item|render|striptags|trim == 'Supersize Bold' %}
+	{% set blockHeadingStyle = 'bs_heading_style_supersize_bold' %}
+{% else %}
+	{% set blockHeadingStyle = 'bs_heading_style_default' %}
+{% endif %}
+
+    {{ blockHeadingStyle }}
+{% endfor %}
