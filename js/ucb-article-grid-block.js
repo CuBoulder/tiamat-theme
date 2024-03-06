@@ -146,7 +146,7 @@ class ArticleGridBlockElement extends HTMLElement {
         // Case for not enough articles selected and extra articles available
         if(finalArticles.length < count && NEXTJSONURL){
             fetch(NEXTJSONURL).then(this.handleError)
-            .then((data) => this.build(data, count, display, excludeCatArray, excludeTagArray, finalArticles))
+            .then((data) => this.build(data, count, includeSummary, excludeCatArray, excludeTagArray, finalArticles))
             .catch(Error=> {
               console.error('There was an error fetching data from the API - Please try again later.')
               console.error(Error)
@@ -165,11 +165,11 @@ class ArticleGridBlockElement extends HTMLElement {
         // Case for Too many articles
         if(finalArticles.length >= count || (finalArticles.length >= count && NEXTJSONURL)){
           finalArticles.length = count
-          this.renderDisplay(finalArticles, includeSummary)
       }
 
         // Have articles and want to proceed
-        if(finalArticles.length > 0 && !NEXTJSONURL){
+        if((finalArticles.length >= 0 && !NEXTJSONURL) || (finalArticles.length == count && NEXTJSONURL)){
+          finalArticles.length = count
           this.renderDisplay(finalArticles, includeSummary)
         }
     }
