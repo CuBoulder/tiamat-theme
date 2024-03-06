@@ -9,6 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article List Block Adjustments
+  Modifies various Article List Nodes and Blocks in the following ways:
+  
+  ## Article List -- Page
+  - Adjusts row border from 2px to 1px
+  
+  ## Article Grid
+  - Thumbnails are now a 2/1 aspect ratio
+  - Resolved bug where having count 3 and 3 articles would result a duplicated row
+  
+  ## Article List Block
+  - Adjusts header markup to use strong `<a>` tags instead of `<h2>`'s
+  
+  ## Article Feature Block
+  - Adjusts header markup to use stylized `<h3>`'s across all article cards
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/718
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/719
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/724
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/714
+---
+
 - ### Issue and Issue Archive use Media Library images
   Changes the Issue cover image field to use the Media Library images rather than the default. This change requires creating an additional consumer in `Focal Image Enable` to use un-cropped image styles from JSON:API as well as modifying the Issue Archive, Current Issue Block, and Latest Issue Block build processes to use that un-cropped image.
   

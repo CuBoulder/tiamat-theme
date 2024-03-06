@@ -361,7 +361,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
                 featureImgLink.appendChild(featureImg)
 
                 // Title
-                var featureTitle = document.createElement('h2')
+                var featureTitle = document.createElement('h3')
                 featureTitle.className = 'ucb-feature-article-header'
                 // Title Link
                 var featureTitleLink = document.createElement('a')
