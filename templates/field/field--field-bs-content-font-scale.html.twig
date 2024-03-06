@@ -1,10 +1,10 @@
 {% for item in items %}
 	{% if item|render|striptags|trim == 'Increase' %}
-		{% set blockContentScale = 'bs_content_scale_increase' %}
+		{% set blockContentScale = 'bs-content-scale-increase' %}
 	{% elseif item|render|striptags|trim == 'Decrease' %}
-		{% set blockContentScale = 'bs_content_scale_decrease' %}
+		{% set blockContentScale = 'bs-content-scale-decrease' %}
 	{% else %}
-		{% set blockContentScale = 'bs_content_scale_default' %}
+		{% set blockContentScale = 'bs-content-scale-default' %}
 	{% endif %}
 
 	{{ blockContentScale }}

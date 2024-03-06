@@ -29,33 +29,34 @@
 {% set blockStyles = [
 	content.field_bs_background_style|render|striptags|trim,
 	content.field_bs_content_font_scale|render|striptags|trim,
+	content.field_bs_icon_position|render|striptags|trim,
+	content.field_bs_heading_alignment|render|striptags|trim,
+	content.field_bs_title_font_scale|render|striptags|trim,
 	''
 ] %}
 
 {% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
-{% set iconPosition = content.field_bs_icon_position|render|striptags|trim %}
 {% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
-{% set headingAlignment = content.field_bs_heading_alignment|render|striptags|trim %}
-{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
-{% set headingSize = content.field_bs_title_font_scale|render|striptags|trim %}
 {% set headingTag = content.field_bs_heading|render|striptags|trim %}
+{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
 
 {% block content %}
 	<div{{attributes.addClass(classes,blockStyles)}}>
 		{{ title_prefix }}
 		{% if label %}
-			<div class="block-title">
-			<h2>test: {{ headingTag }}</h2>
-					<span class='{{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
+			<div class="block-title {{ headingStyle }}">
+				<{{ headingTag }}{{title_attributes}}>
+					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
 						{{ content.field_bs_icon }}
 					</span>
-					<span class="{{ headingAlignment }} {{ headingStyle }} {{ headingSize }}">
+					<span class="block-title-text">
 						{{ label }}
 					</span>
+				</{{ headingTag }}>
 			</div>
 		{% endif %}
 		{{ title_suffix }}
-		<div class="text-block-body">
+		<div class="text-block-body block-content">
 			{{ content.field_text_block_body }}
 		</div>
 	</div>
