@@ -39,12 +39,8 @@ class ClassNotesListElement extends HTMLElement {
 
 		// If startDate is provided but endDate is not, set endDate to today
 		if (startDate && !endDate) {
-			console.log('end date not provided!')
 			endDate = new Date().setHours(23, 59, 59, 999) / 1000; // Sets endDate to the end of today
-			console.log(endDate)
 		}
-		console.log('start date', startDate)
-		console.log('end date', endDate)
 		// Date Published Range
 		let dateFilter = '';
 		if (startDate && endDate) {
@@ -72,8 +68,6 @@ class ClassNotesListElement extends HTMLElement {
 		fetch(API)
             .then(this.handleError)
             .then((data) => {
-				console.log("You got : " + data.data.length + " notes")
-				console.log(data.data)
 				const images = data.included
 				const nextURL = data.links.next ? data.links.next.href : "";
 					// Iterate over all notes
