@@ -8,6 +8,7 @@
   margin-bottom: 20px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.333);
   padding-bottom: 20px;
+  align-items: flex-start;
 }
 
 .issue-section-content-feature {
@@ -70,11 +71,18 @@ img {
   margin-bottom: 10px;
 }
 
-.teaser-article-thumbnail>div>div>div>img,
 .title-thumb-article-thumbnail>div>div>div>img {
   width: 100px;
   height: 100px;
   object-fit: cover;
+}
+
+.teaser-article-thumbnail img{
+  max-height: 100px;
+  max-width: 100px;
+  object-fit: contain;
+  min-height: 100px;
+  min-width: 100px;
 }
 
 .issue-content>.issue-section-content:last-child,
@@ -87,18 +95,69 @@ img {
   padding-bottom: 10px;
 }
 
-.issue-content {
-  margin-bottom: 20px;
-  margin-top: 20px;
-}
-
-.issue-title-box {
-  padding: 20px;
-  background-color: #4B4B4B;
-  color: #fff;
-  font-weight: bold
-}
-
 .title-thumb-article-thumbnail {
   height: 100px;
+}
+
+.issue-section-content-summary .ucb-article-category-icon{
+  display: none;
+}
+
+.issue-article-categories .ucb-article-categories{
+  padding-left: 0px;
+  padding-left: 0px;
+}
+
+
+
+.ucb-article-tags,
+.ucb-article-categories,
+.ucb-article-issue {
+  margin-bottom: 1em;
+  display: flex;
+  font-size: 12px;
+  line-height: 1em;
+}
+
+.ucb-article-category-icon, .ucb-article-tag-icon {
+  background-color: #555555;
+  color: #e7e7e7;
+  padding: 6px;
+}
+
+.ucb-article-categories div,
+.ucb-article-tags div,
+.ucb-article-issue div {
+  display: flex;
+  flex-direction: row;
+  line-height: 1.5em;
+}
+
+.ucb-article-categories a:link,
+.ucb-article-categories a:visited,
+.ucb-article-tags a:link,
+.ucb-article-tags a:visited,
+.ucb-article-issue a:link,
+.ucb-article-issue a:visited {
+  background: #e7e7e7;
+  color: #555;
+  padding: 6px;
+  display: inline-block;
+  margin-right: 8px;
+}
+
+.ucb-article-categories a:hover,
+.ucb-article-tags a:hover,
+.ucb-article-issue a:hover {
+  background: #555;
+  color: #fff;
+}
+
+.ucb-article-tags i.fa-solid,
+.ucb-article-categories i.fa-solid,
+.ucb-article-issue i.fa-solid {
+  padding: 0.5em;
+  background: #555;
+  color: #fff;
+  margin-right: -1em;
 }
