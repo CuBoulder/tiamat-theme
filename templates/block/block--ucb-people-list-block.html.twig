@@ -71,7 +71,6 @@
 {% set headingTag = content.field_bs_heading|render|striptags|trim %}
 {% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
 
-{% block content %}
 	<div{{attributes.addClass(classes,blockStyles)}}>
 		{{ title_prefix }}
 		{% if label %}
