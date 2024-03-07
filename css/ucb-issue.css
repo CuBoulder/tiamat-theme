@@ -87,7 +87,7 @@ img {
   padding-bottom: 10px;
 }
 
-.issue-content-box {
+.issue-content {
   margin-bottom: 20px;
   margin-top: 20px;
 }
@@ -97,12 +97,6 @@ img {
   background-color: #4B4B4B;
   color: #fff;
   font-weight: bold
-}
-
-.issue-body-box {
-  background-color: #424242;
-  color: #fff;
-  padding: 20px;
 }
 
 .title-thumb-article-thumbnail {
