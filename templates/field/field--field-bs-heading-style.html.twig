@@ -1,0 +1,16 @@
+{% for item in items %}
+
+{% if item|render|striptags|trim == 'Hero' %}
+	{% set blockHeadingStyle = 'hero' %}
+{% elseif item|render|striptags|trim == 'Hero Bold' %}
+	{% set blockHeadingStyle = 'hero strong' %}
+{% elseif item|render|striptags|trim == 'Supersize' %}
+	{% set blockHeadingStyle = 'supersize' %}
+{% elseif item|render|striptags|trim == 'Supersize Bold' %}
+	{% set blockHeadingStyle = 'supersize bold' %}
+{% else %}
+	{% set blockHeadingStyle = 'bs-heading-style-default' %}
+{% endif %}
+
+    {{ blockHeadingStyle }}
+{% endfor %}

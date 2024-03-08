@@ -1,0 +1,31 @@
+{% for item in items %}
+
+	{% if item|render|striptags|trim == 'White' %}
+		{% set blockBackground = 'bs-background-white' %}
+	{% elseif item|render|striptags|trim == 'Gray' %}
+		{% set blockBackground = 'bs-background-gray' %}
+	{% elseif item|render|striptags|trim == 'Dark Gray' %}
+		{% set blockBackground = 'bs-background-dark-gray' %}
+	{% elseif item|render|striptags|trim == 'Tan' %}
+		{% set blockBackground = 'bs-background-tan' %}
+	{% elseif item|render|striptags|trim == 'Light Blue' %}
+		{% set blockBackground = 'bs-background-light-blue' %}
+	{% elseif item|render|striptags|trim == 'Medium Blue' %}
+		{% set blockBackground = 'bs-background-medium-blue' %}
+	{% elseif item|render|striptags|trim == 'Dark Blue' %}
+		{% set blockBackground = 'bs-background-dark-blue' %}
+	{% elseif item|render|striptags|trim == 'Light Green' %}
+		{% set blockBackground = 'bs-background-light-green' %}
+	{% elseif item|render|striptags|trim == 'Brick' %}
+		{% set blockBackground = 'bs-background-brick' %}
+	{% elseif item|render|striptags|trim == 'Outline' %}
+		{% set blockBackground = 'bs-background-outline' %}
+	{% elseif item|render|striptags|trim == 'Underline' %}
+		{% set blockBackground = 'bs-background-underline' %}
+	{% else %}
+		{% set blockBackground = 'text-block-none' %}
+	{% endif %}
+
+	{{ blockBackground }}
+
+{% endfor %}

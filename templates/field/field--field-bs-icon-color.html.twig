@@ -1,0 +1,23 @@
+{% for item in items %}
+	{% if item|render|striptags|trim == 'Gray' %}
+		{% set blockIconColor = 'bs-icon-color-gray' %}
+	{% elseif item|render|striptags|trim == 'Gold' %}
+		{% set blockIconColor = 'bs-icon-color-gold' %}
+	{% elseif item|render|striptags|trim == 'Blue' %}
+		{% set blockIconColor = 'bs-icon-color-blue' %}
+	{% elseif item|render|striptags|trim == 'Green' %}
+		{% set blockIconColor = 'bs-icon-color-green' %}
+	{% elseif item|render|striptags|trim == 'Orange' %}
+		{% set blockIconColor = 'bs-icon-color-orange' %}
+	{% elseif item|render|striptags|trim == 'Purple' %}
+		{% set blockIconColor = 'bs-icon-color-purple' %}
+	{% elseif item|render|striptags|trim == 'Red' %}
+		{% set blockIconColor = 'bs-icon-color-red' %}
+	{% elseif item|render|striptags|trim == 'Yellow' %}
+		{% set blockIconColor = 'bs-icon-color-yellow' %}
+	{% else %}
+		{% set blockIconColor = 'bs-icon-color-default' %}
+	{% endif %}
+
+    {{ blockIconColor }}
+{% endfor %}

@@ -1,0 +1,10 @@
+{% for item in items %}
+
+	{% if item|render|striptags|trim == 'Centered' %}
+		{% set blockHeadingAlignment = 'bs-heading-align-centered' %}
+	{% else %}
+		{% set blockHeadingAlignment = 'bs-heading-align-default' %}
+	{% endif %}
+
+	{{ blockHeadingAlignment }}
+{% endfor %}

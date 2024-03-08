@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Block styles
+  Template updates for every inline block.
+  Addition of block styles (bs) fields 
+  
+  Closes #443 
+  Closes #111 
+  
+  Sister PR: https://github.com/CuBoulder/tiamat10-profile/pull/99
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/106
+  
+---
+
 - ### Issue Display Changes
   Fixes the following on Issue Content Types:
   
