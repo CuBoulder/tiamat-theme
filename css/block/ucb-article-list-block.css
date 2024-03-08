@@ -38,13 +38,13 @@
 .ucb-article-card-img-wide {
   height: 500px !important;
   object-fit: cover !important;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
   width: 100%;
 }
 
 .ucb-article-card-img-full {
   width: 100% !important;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 
 }
 
@@ -69,6 +69,16 @@
   font-weight: normal;
   margin: 0;
   line-height: 1.3;
+}
+.ucb-article-card-title-feature {
+    font-size: 130%;
+    font-weight: bolder;
+    margin: 0 0 10px 0;
+    line-height: 1.3;
+}
+
+.ucb-article-card-title-teaser{
+  display: block;
 }
 
 @media only screen and (max-width: 600px) {

@@ -175,14 +175,8 @@
                 // this is my id of the collection body paragraph type we need only if no thumbnail or summary provided
                 //let bodyAndImageId = item.relationships.field_ucb_collection_content.data.length ? item.relationships.field_ucb_collection_content.data[0].id : "";
                 let body = "";
-                if (item.attributes.field_collection_item_preview) {
-                  body = item.attributes.field_collection_item_preview.replace(
-                    /<\/?[^>]+(>|$)/g,
-                    ""
-                  );
-                  var el = document.createElement("div");
-                  el.innerHTML = body;
-                  body = el.innerText;
+                if (item.attributes.field_collection_item_summary) {
+                  body = item.attributes.field_collection_item_summary.value;
                 }
 
                 body = body.trim();
@@ -287,7 +281,7 @@
                   var collectionSummaryBody = document.createElement("p");
                   collectionSummaryBody.className = "ucb-collection-item-body";
                   //collectionSummaryBody.id = `body-${bodyAndImageId}`
-                  collectionSummaryBody.innerText = body;
+                  collectionSummaryBody.innerHTML = body;
                   collectionDataContainer.appendChild(collectionSummaryBody);
                 }
 

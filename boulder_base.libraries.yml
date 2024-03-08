@@ -199,6 +199,12 @@ ucb-form-page:
     theme:
       css/ucb-form-page.css: {}
 
+ucb-taxonomy-page:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-taxonomy-page.css: {}
+
 ucb-related-articles:
   version: 1.x
   js:
@@ -252,7 +258,7 @@ ucb-current-issue:
     js/ucb-current-issue-block.js: {}
   css:
     theme:
-      css/ucb-current-issue-block.css: {}
+      css/block/ucb-current-issue-block.css: {}
 
 ucb-category-cloud:
   version: 1.x
@@ -276,7 +282,7 @@ ucb-latest-issue:
     js/ucb-latest-issue-block.js: {}
   css:
     theme:
-      css/ucb-latest-issue-block.css: {}
+      css/block/ucb-latest-issue-block.css: {}
 ucb-issue-archive:
   version: 1.x
   js:
@@ -471,6 +477,7 @@ ucb-class-notes-list-page:
   css:
     theme:
       css/ucb-class-notes-list.css: {}
+
 ucb-collections-block:
   version: 1.x
   js:

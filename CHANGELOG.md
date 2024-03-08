@@ -9,6 +9,85 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fix spirit menu style
+  Closes #712.
+  Small change to fix padding issue for the spirit menu style
+---
+
+- ### Mobile Footer Menu Changes
+  Closes #722.
+  Adds CSS changes for the footer menu to only show in the secondary menu when it is a mobile view.
+---
+
+- ### Article List Block Adjustments
+  Modifies various Article List Nodes and Blocks in the following ways:
+  
+  ## Article List -- Page
+  - Adjusts row border from 2px to 1px
+  
+  ## Article Grid
+  - Thumbnails are now a 2/1 aspect ratio
+  - Resolved bug where having count 3 and 3 articles would result a duplicated row
+  
+  ## Article List Block
+  - Adjusts header markup to use strong `<a>` tags instead of `<h2>`'s
+  
+  ## Article Feature Block
+  - Adjusts header markup to use stylized `<h3>`'s across all article cards
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/718
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/719
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/724
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/714
+---
+
+- ### Issue and Issue Archive use Media Library images
+  Changes the Issue cover image field to use the Media Library images rather than the default. This change requires creating an additional consumer in `Focal Image Enable` to use un-cropped image styles from JSON:API as well as modifying the Issue Archive, Current Issue Block, and Latest Issue Block build processes to use that un-cropped image.
+  
+  A spinning loader was also added to the Issue Archive, and Issue Blocks prior to displaying results on page rather than flashing in. 
+  
+  Includes:
+  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/707
+  - `tiamat-custom-entities` =>  https://github.com/CuBoulder/tiamat-custom-entities/pull/105
+  - `ucb-focal-image-enable` => https://github.com/CuBoulder/ucb_focal_image_enable/pull/8
+  
+  Resolves [#104 ](https://github.com/CuBoulder/tiamat-custom-entities/issues/104)
+---
+
+- ### Fixes Infinite Load Article List Blocks
+  Resolves #713 
+  
+  Should address the condition where too many Articles causing an issue with how JSON:API handles pagination and subsequent API calls in the Article List blocks
+---
+
+- ### Resolves an issue causing the category or tag icon to appear if none are visible
+  Resolves CuBoulder/tiamat-theme#701 
+---
+
+- ### Updates `block--site-info.html.twig`
+  CuBoulder/ucb_migration_shortcodes#15
+  
+  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/49)
+---
+
+- ### Updates Taxonomy page styles
+  - [Bug] Headers on Taxonomy pages are now consistent with the site setting.
+  - [Change] The "Subscribe to x" link has been hidden.
+  
+  Resolves CuBoulder/tiamat-theme#697
+---
+
+- ### video reveal html text
+  Closes #662.
+  Changes necessary files to enable an html text field.
+  Sister pull request in https://github.com/CuBoulder/tiamat-custom-entities/pull/100.
+---
+
+- ### Collection Grid preview change
+  Helps close https://github.com/CuBoulder/tiamat-custom-entities/issues/101.
+  Adds the necessary theme changes to allow for the html preview field.
+---
+
 ## [20240221] - 2024-02-21
 
 -   ### Fixes bug with floated items in Expandable Content block

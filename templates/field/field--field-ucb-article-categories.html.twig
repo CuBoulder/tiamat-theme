@@ -1,13 +1,18 @@
 {#
 /**
- * Theme layout to display copy for grid layouts
- * Created by jnichol on 5/09/22
+ * @file Contains the template to display the category list on an article.
  */
 #}
-
-{% for item in items|sort %}
 {# Only shows Taxonomy terms with display = true #}
-    {% if item.content['#options'].entity.field_ucb_category_display.value == 1 %}
-        {{ item.content|render }}
-    {% endif %}
-{% endfor %}
+{% set items = items|filter(item => item.content['#options'].entity.field_ucb_category_display.value == '1') %}
+{% if items %}
+  <div role="contentinfo" class="container ucb-article-categories" itemprop="about">
+    <span class="sr-only">Categories:</span>
+    <div class="ucb-article-category-icon" aria-hidden="true">
+      <i class="fa-solid fa-folder-open"></i>
+    </div>
+    {% for item in items|sort %}
+      {{ item.content }}
+    {% endfor %}
+  </div>
+{% endif %}

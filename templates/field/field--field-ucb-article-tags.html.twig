@@ -1,6 +1,18 @@
-{% for item in items|sort %}
-    {# Only shows Taxonomy terms with display = true #}
-    {% if item.content['#options'].entity.field_ucb_tag_display.value == 1 %}
-        {{ item.content|render }}
-    {% endif %}
-{% endfor %}
+{#
+/**
+ * @file Contains the template to display the tag list on an article.
+ */
+#}
+{# Only shows Taxonomy terms with display = true #}
+{% set items = items|filter(item => item.content['#options'].entity.field_ucb_tag_display.value == '1') %}
+{% if items %}
+  <div role="contentinfo" class="container ucb-article-tags" itemprop="keywords">
+    <span class="sr-only">Tags:</span>
+    <div class="ucb-article-tag-icon" aria-hidden="true">
+      <i class="fa-solid fa-tags"></i>
+    </div>
+    {% for item in items|sort %}
+      {{ item.content }}
+    {% endfor %}
+  </div>
+{% endif %}
