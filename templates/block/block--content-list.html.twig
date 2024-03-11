@@ -53,12 +53,14 @@
 			{% set summary = item.entity.body.0.summary ?? item.entity.field_ucb_article_summary.0.value %}
 			{% if not summary %}
 				{% set body = (item.entity.body.0 ?? item.entity.field_ucb_article_content.0.entity.field_article_text.0).value|render %}
-				{% set bodyTrimmed = body|slice(0, 512) %}{% set summary = bodyTrimmed ~ (body|length > bodyTrimmed|length ? '...') %}
+				{% set bodyTrimmed = body|slice(0, 512) %}
+				{% set summary = bodyTrimmed ~ (body|length > bodyTrimmed|length ? '...') %}
+				
 			{% endif %}
 					
 			{% if display == 'full' %}
-				<div class="row ucb-content-list-row">
-					<div class="ucb-content-list-text-container container">
+				<div class="row ucb-content-list-row ">
+					<div class="ucb-content-list-text-container ">
 						<h4 class="ucb-content-list-title">
 							<a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a>
 						</h4>
@@ -133,7 +135,7 @@
 			</ul>
 			{% elseif display == 'sidebar' %}
 				<div class="row ucb-content-list-row">
-					<div class="ucb-content-list-text-container image ">
+					<div class="ucb-content-list-text-container ">
 						<span class="ucb-content-list-title"><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></span>
 					</div>
 					{% if image %}

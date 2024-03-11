@@ -22,10 +22,9 @@
 }
 
 .ucb-content-list-image {
-	width: calc(100px + var(--bs-gutter-x));
+	max-width: calc(100px + var(--bs-gutter-x));
 	height: auto;
 	margin-bottom: 20px;
-	max-width: 100%;
 }
 
 .ucb-content-list-display-full .ucb-content-list-title, .ucb-content-list-display-condensed .ucb-content-list-title, .ucb-content-list-display-teaser .ucb-content-list-title {
