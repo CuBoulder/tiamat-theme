@@ -19,76 +19,76 @@
     ~ '&include=field_ucb_article_thumbnail.field_media_image'
     ~ '&fields[file--file]=uri,url'
   %}
-  
-  {# Filter on only published (status = true) content #}
-  {% set PublishedFilter = '&filter[publish-check][condition][path]=status'
+
+{# Filter on only published (status = true) content #}
+{% set PublishedFilter = '&filter[publish-check][condition][path]=status'
     ~ '&filter[publish-check][condition][value]=1'
     ~ '&filter[publish-check][condition][memberOf]=published'
   %}
-  
-  {# include and exclude options set by the user #}
-  {% set includeCategories = [] %}
-  {% set myCategories =
+
+{# include and exclude options set by the user #}
+{% set includeCategories = [] %}
+{% set myCategories =
     content.field_article_slider_cat_include|render|striptags|trim|split(' ')
   %}
-  {% set includeTags = [] %}
-  {% set myTags =
+{% set includeTags = [] %}
+{% set myTags =
     content.field_article_slider_tag_include|render|striptags|trim|split(' ')
   %}
-  {% set excludeCategories = '' %}
-  {% set myExCategories =
+{% set excludeCategories = '' %}
+{% set myExCategories =
     content.field_article_slider_cat_exclude|render|striptags|trim|split(' ')
   %}
-  {% set excludeTags = '' %}
-  {% set myExTags =
+{% set excludeTags = '' %}
+{% set myExTags =
     content.field_article_slider_tag_exclude|render|striptags|trim|split(' ')
   %}
-  
-  {# two passes to clear out the blank entries that are mysteriously added by default #}
-  {% for item in myCategories %}
-    {% if item %}
-      {% set includeCategories = includeCategories|merge([item]) %}
-    {% endif %}
-  {% endfor %}
-  
-  {% for item in myTags %}
-    {% if item %}
-      {% set includeTags = includeTags|merge([item]) %}
-    {% endif %}
-  {% endfor %}
-  
-  {% for item in myExCategories %}
-    {% if item %}
-      {% if loop.last %}
-        {% set excludeCategories = excludeCategories ~ (item|trim) %}
-      {% else %}
-        {% set excludeCategories = excludeCategories ~ (item|trim) ~ ',' %}
-      {% endif %}
-    {% endif %}
-  {% endfor %}
-  
-  {% for item in myExTags %}
-    {% if item %}
-      {% if loop.last %}
-        {% set excludeTags = excludeTags ~ (item|trim) %}
-      {% else %}
-        {% set excludeTags = excludeTags ~ (item|trim) ~ ',' %}
-      {% endif %}
-    {% endif %}
-  {% endfor %}
-  
-  {# placeholder variables for our include and exclude filters, default to blank strings #}
-  {% set IncludeFilter = '' %}
-  {% set IncludeCategoryFilter = '' %}
-  {% set IncludeTagsFilter = '' %}
-  {% set ExcludeCategoryFilter = '' %}
-  {% set ExcludeTagsFilter = '' %}
-  
-  {# Setup Include Category Filter using a logical OR between included category IDs #}
-  {% if includeCategories|length %}
-    {% set includeGroupMembers = '' %}
-    {% for item in includeCategories %}
-      {% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-cat'
+
+{# two passes to clear out the blank entries that are mysteriously added by default #}
+	{% for item in myCategories %}
+		{% if item %}
+	{% set includeCategories = includeCategories|merge([item]) %}
+{% endif %}
+{% endfor %}
+
+	{% for item in myTags %}
+		{% if item %}
+	{% set includeTags = includeTags|merge([item]) %}
+{% endif %}
+{% endfor %}
+
+	{% for item in myExCategories %}
+		{% if item %}
+			{% if loop.last %}
+			{% set excludeCategories = excludeCategories ~ (item|trim) %}
+		{% else %}
+			{% set excludeCategories = excludeCategories ~ (item|trim) ~ ',' %}
+		{% endif %}
+	{% endif %}
+{% endfor %}
+
+{% for item in myExTags %}
+	{% if item %}
+		{% if loop.last %}
+			{% set excludeTags = excludeTags ~ (item|trim) %}
+		{% else %}
+			{% set excludeTags = excludeTags ~ (item|trim) ~ ',' %}
+		{% endif %}
+	{% endif %}
+{% endfor %}
+
+{# placeholder variables for our include and exclude filters, default to blank strings #}
+{% set IncludeFilter = '' %}
+{% set IncludeCategoryFilter = '' %}
+{% set IncludeTagsFilter = '' %}
+{% set ExcludeCategoryFilter = '' %}
+{% set ExcludeTagsFilter = '' %}
+
+{# Setup Include Category Filter using a logical OR between included category IDs #}
+{% if includeCategories|length %}
+	{% set includeGroupMembers = '' %}
+	{% for item in includeCategories %}
+		{% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-cat'
         ~ (item|trim)
         ~ '][condition][path]=field_ucb_article_categories.meta.drupal_internal__target_id'
         ~ '&filter[filter-cat'
@@ -99,17 +99,17 @@
         ~ (item|trim)
         ~ '][condition][memberOf]=cat-include'
       %}
-    {% endfor %}
-    {% set IncludeCategoryFilter = '&filter[cat-include][group][conjunction]=OR'
+	{% endfor %}
+	{% set IncludeCategoryFilter = '&filter[cat-include][group][conjunction]=OR'
       ~ includeGroupMembers
     %}
-  {% endif %}
-  
-  {# Setup Include Tags Filter using a logical OR between included tag IDs #}
-  {% if includeTags|length %}
-    {% set includeGroupMembers = '' %}
-    {% for item in includeTags %}
-      {% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-tag'
+{% endif %}
+
+{# Setup Include Tags Filter using a logical OR between included tag IDs #}
+{% if includeTags|length %}
+	{% set includeGroupMembers = '' %}
+	{% for item in includeTags %}
+		{% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-tag'
         ~ (item|trim)
         ~ '][condition][path]=field_ucb_article_tags.meta.drupal_internal__target_id'
         ~ '&filter[filter-tag'
@@ -120,16 +120,16 @@
         ~ (item|trim)
         ~ '][condition][memberOf]=tag-include'
       %}
-    {% endfor %}
-    {% set IncludeTagsFilter = '&filter[tag-include][group][conjunction]=OR'
+	{% endfor %}
+	{% set IncludeTagsFilter = '&filter[tag-include][group][conjunction]=OR'
       ~ includeGroupMembers
     %}
-  {% endif %}
-  
-  {# check to see if we have both Categories and Tags to filter on #}
-  {# if so... setup a logicial AND Between both include filters #}
-  {% if IncludeCategoryFilter and IncludeTagsFilter %}
-    {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
+{% endif %}
+
+{# check to see if we have both Categories and Tags to filter on #}
+{# if so... setup a logicial AND Between both include filters #}
+{% if IncludeCategoryFilter and IncludeTagsFilter %}
+	{% set IncludeFilter = '&filter[published][group][conjunction]=AND'
       ~ PublishedFilter
       ~ '&filter[include-group][group][conjunction]=AND'
       ~ '&filter[include-group][group][memberOf]=published'
@@ -138,56 +138,74 @@
       ~ IncludeTagsFilter
       ~ '&filter[tag-include][group][memberOf]=include-group'
     %}
-    {# Otherwise default to either the Category filter or the Tag filter as defined #}
-  {% elseif IncludeCategoryFilter %}
-    {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
+	{# Otherwise default to either the Category filter or the Tag filter as defined #}
+{% elseif IncludeCategoryFilter %}
+	{% set IncludeFilter = '&filter[published][group][conjunction]=AND'
       ~ '&filter[cat-include][group][memberOf]=published'
       ~ PublishedFilter
       ~ IncludeCategoryFilter
     %}
-  {% elseif IncludeTagsFilter %}
-    {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
+{% elseif IncludeTagsFilter %}
+	{% set IncludeFilter = '&filter[published][group][conjunction]=AND'
       ~ '&filter[tag-include][group][memberOf]=published'
       ~ PublishedFilter
       ~ IncludeTagsFilter
     %}
-  
-  {# no includeded Categories or Tags ... still need to filter on published articles #}
-  {% else %}
-    {% set IncludeFilter = '&filter[status][value]=1' %}
-  {% endif %}
-  
-  {# pagination filter #}
-  {% set pageCount = 10 %}
-  {% set pageCountFilter = '&page[limit]=' ~ pageCount %}
-  
-  {# sorting filter #}
-  {% set sortFilter = '&sort[sort-created][path]=created&sort[sort-created][direction]=DESC' %}
 
-<div{{attributes.addClass(classes)}}>
-    {{ title_prefix }}
-  <h2{{title_attributes}}>
-    {{ label }}
-  </h2>
-  {{ title_suffix }}
-  {{ content.body }}
-{# Article Slider Main Block#}
-<article-slider-block
-  jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}"
-  exCats="{{ excludeCategories }}"
-  exTags="{{ excludeTags }}"
-  >
-  <div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
-    <i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>
-  </div>
-  <div id="ucb-al-error" style="display:none" class="ucb-list-msg">
-    <h3>An error has occured - please check your filters and try again</h3>
-  </div>
-  <div id="ucb-al-api-error" style="display:none" class="ucb-list-msg">
-    <h3>An error has occured with the API - please try again later</h3>
-  </div>
-  <div id='ucb-el-flick' style="display:none" class="ucb-article-slider"></div>
-</article-slider-block>
+	{# no includeded Categories or Tags ... still need to filter on published articles #}
+{% else %}
+	{% set IncludeFilter = '&filter[status][value]=1' %}
+{% endif %}
+
+{# pagination filter #}
+{% set pageCount = 10 %}
+{% set pageCountFilter = '&page[limit]=' ~ pageCount %}
+
+{# sorting filter #}
+{% set sortFilter = '&sort[sort-created][path]=created&sort[sort-created][direction]=DESC' %}
+
+{# Block/Title/Icon Styles #}
+{% set blockStyles = [
+	content.field_bs_background_style|render|striptags|trim,
+	content.field_bs_content_font_scale|render|striptags|trim,
+	content.field_bs_icon_position|render|striptags|trim,
+	content.field_bs_heading_alignment|render|striptags|trim,
+	content.field_bs_title_font_scale|render|striptags|trim,
+	''
+] %}
+
+{% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
+{% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
+{% set headingTag = content.field_bs_heading|render|striptags|trim %}
+{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
+
+<div{{attributes.addClass(classes,blockStyles)}}>
+	{{ title_prefix }}
+	{% if label %}
+		<div class="block-title {{ headingStyle }}">
+			<{{headingTag}}{{title_attributes}}>
+				<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
+					{{ content.field_bs_icon }}
+				</span>
+				<span class="block-title-text">
+					{{ label }}
+				</span>
+			</{{headingTag}}>
+		</div>
+	{% endif %}
+	{{ title_suffix }}
+	{{ content.body }}
+	{# Article Slider Main Block#}
+	<article-slider-block jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}" excats="{{ excludeCategories }}" extags="{{ excludeTags }}">
+		<div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
+			<i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>
+		</div>
+		<div id="ucb-al-error" style="display:none" class="ucb-list-msg">
+			<h3>An error has occured - please check your filters and try again</h3>
+		</div>
+		<div id="ucb-al-api-error" style="display:none" class="ucb-list-msg">
+			<h3>An error has occured with the API - please try again later</h3>
+		</div>
+		<div id='ucb-el-flick' style="display:none" class="ucb-article-slider"></div>
+	</article-slider-block>
 </div>
-
-

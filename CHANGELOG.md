@@ -9,6 +9,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Block styles
+  Template updates for every inline block.
+  Addition of block styles (bs) fields 
+  
+  Closes #443 
+  Closes #111 
+  
+  Sister PR: https://github.com/CuBoulder/tiamat10-profile/pull/99
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/106
+  
+---
+
+- ### Issue Display Changes
+  Fixes the following on Issue Content Types:
+  
+  - Removes the Secondary Image field from the form and page display. Also removes the hard-coded dark gray box with the title and body in it, as users can use CKEditor5 plugins such as Box, Button, Icons, and Media Library to achieve a variety of left-side layouts. 
+  - Fixes bug with Teaser view of Categories displaying improperly
+  - "Read More" capitzalized via CSS instead of hard-coded
+  
+  Includes:
+  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/730
+  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/107
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/704
+---
+
 - ### Fix spirit menu style
   Closes #712.
   Small change to fix padding issue for the spirit menu style

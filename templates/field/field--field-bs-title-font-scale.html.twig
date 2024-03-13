@@ -1,0 +1,12 @@
+{% for item in items %}
+
+{% if item|render|striptags|trim == 'Increase' %}
+	{% set blockTitleScale = 'bs-title-scale-increase' %}
+{% elseif item|render|striptags|trim == 'Decrease' %}
+	{% set blockTitleScale = 'bs-title-scale-decrease' %}
+{% else %}
+	{% set blockTitleScale = 'bs-title-scale-default' %}
+{% endif %}
+
+    {{ blockTitleScale }}
+{% endfor %}
