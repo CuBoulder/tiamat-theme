@@ -52,7 +52,7 @@
 			{% endif %}
 			{% set summary = item.entity.body.0.summary ?? item.entity.field_ucb_article_summary.0.value %}
 			{% if not summary %}
-				{% set body = (item.entity.body.0 ?? item.entity.field_ucb_article_content.0.entity.field_article_text.0).value|render %}
+				{% set body = (item.entity.body.0 ?? item.entity.field_ucb_article_content.0.entity.field_article_text.0).value|render|replace({"&nbsp;": ""})|striptags|trim %}
 				{% set bodyTrimmed = body|slice(0, 512) %}
 				{% set summary = bodyTrimmed ~ (body|length > bodyTrimmed|length ? '...') %}
 				
