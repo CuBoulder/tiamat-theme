@@ -31,6 +31,25 @@ class ClassNotesListElement extends HTMLElement {
 		let yearFilter = '';
 		let publishFilter = ''
 		let sortFilter = ''
+
+		// Query Params
+		const queryParams = new URLSearchParams(window.location.search);
+		let startDate = queryParams.get('startDate') ? new Date(queryParams.get('startDate')).getTime() / 1000 : null; // e.g., '2023-11-05'
+		let endDate = queryParams.get('endDate') ? new Date(queryParams.get('endDate')).getTime() / 1000 : null; // e.g., '2023-11-06'
+
+		// If startDate is provided but endDate is not, set endDate to today
+		if (startDate && !endDate) {
+			endDate = new Date().setHours(23, 59, 59, 999) / 1000; // Sets endDate to the end of today
+		}
+		// Date Published Range
+		let dateFilter = '';
+		if (startDate && endDate) {
+			// Filter for nodes created between the start and end dates
+			dateFilter = `&filter[created-on][group][conjunction]=AND`;
+			dateFilter += `&filter[start-date][condition][path]=created&filter[start-date][condition][operator]=%3E%3D&filter[start-date][condition][value]=${startDate}&filter[start-date][condition][memberOf]=created-on`;
+			dateFilter += `&filter[end-date][condition][path]=created&filter[end-date][condition][operator]=%3C&filter[end-date][condition][value]=${endDate}&filter[end-date][condition][memberOf]=created-on`;
+		}
+
 		if(sort == 'Class Year'){
 			sortFilter = '&sort=field_ucb_class_year'
 		} else {
@@ -45,7 +64,7 @@ class ClassNotesListElement extends HTMLElement {
 				publishFilter = '?filter[status]=1'
 			}
 		const images = '&include=field_ucb_class_note_image.field_media_image&fields[file--file]=uri,url'
-		const API = nextURL != "" ? nextURL : JSONURL + yearFilter + publishFilter + images + sortFilter 
+		const API = nextURL != "" ? nextURL : JSONURL + yearFilter + publishFilter + images + sortFilter + dateFilter
 		fetch(API)
             .then(this.handleError)
             .then((data) => {
@@ -318,6 +337,9 @@ class ClassNotesListElement extends HTMLElement {
 	viewAllNotes(event){
 		event.preventDefault();
 		this.resetDropdowns();
+		// Update the URL to remove query parameters without reloading the page
+		const urlWithoutParams = window.location.protocol + "//" + window.location.host + window.location.pathname;
+		window.history.pushState({path:urlWithoutParams}, '', urlWithoutParams);
 		const JSONURL = this.getAttribute('base-uri');
 		this.clearNotesList()
 		this.getData(JSONURL, "", "Class Year")

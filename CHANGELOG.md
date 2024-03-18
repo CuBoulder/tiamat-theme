@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Class Notes: Adds URL Parameter Filtering
+  Adds URL Parameters to `Class Notes List` pages. Can pass dates via `startDate` and `endDate` parameters to automatically filter retrieved `Class Notes` by date published like so:
+  
+  
+  ```
+  ?startDate=2023-12-05&endDate=2024-02-06. 
+  ```
+  (*Would retrieve class notes published between 12/5/2023 and 2/6/2024*)
+  
+  - Parameters must be passed in the following formats: `YYYY-MM-DD` or `MM-DD-YYYY`
+  - If you pass only a `startDate` parameter, `endDate` will default to today's date
+  
+  Resolves #694 
+---
+
 - ### Block styles
   Template updates for every inline block.
   Addition of block styles (bs) fields 
