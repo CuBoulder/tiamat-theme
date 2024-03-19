@@ -51,7 +51,7 @@
 			</div>
 		{% endif %}
 		{{ title_suffix }}
-		{{ content|without('field_additional_events_link') }}
+		{{ content.field_calendar_code }}
 		{# Events Link #}
 		<div class="ucb-calendar-block-link-container">
 		{% for item in content['#block_content'].field_additional_events_link.value %}

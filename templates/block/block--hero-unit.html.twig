@@ -38,7 +38,7 @@
 {% endif %}
 
 {# set classes for the size of the component if using background media #}
-	{% set containerSize = "ucb-hero-unit-text" %}
+{% set containerSize = "ucb-hero-unit-text" %}
 
 
 {# set classes for the size of the component #}
@@ -60,9 +60,10 @@
 	{% endif %}
 {% endif %}
 
-<div class="ucb-hero-outer-wrapper">
-{# Block/Title/Icon Styles #}
-{% set blockStyles = [
+<div
+	class="ucb-hero-outer-wrapper">
+	{# Block/Title/Icon Styles #}
+	{% set blockStyles = [
 	content.field_bs_background_style|render|striptags|trim,
 	content.field_bs_content_font_scale|render|striptags|trim,
 	content.field_bs_icon_position|render|striptags|trim,
@@ -71,48 +72,47 @@
 	''
 ] %}
 
-{% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
-{% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
-{% set headingTag = content.field_bs_heading|render|striptags|trim %}
-{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
+	{% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
+	{% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
+	{% set headingTag = content.field_bs_heading|render|striptags|trim %}
+	{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
 
 	<div{{attributes.addClass(classes,blockStyles)}}>
 		{{ title_prefix }}
 		{% if label %}
 			<div class="block-title {{ headingStyle }}">
-				<{{ headingTag }}{{title_attributes}}>
+				<{{headingTag}}{{title_attributes}}>
 					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
 						{{ content.field_bs_icon }}
 					</span>
 					<span class="block-title-text">
 						{{ label }}
 					</span>
-				</{{ headingTag }}>
+				</{{headingTag}}>
 			</div>
 		{% endif %}
 		{{ title_suffix }}
-		{% block content %}
-			<div{{attributes.addClass(classes,size,overlayClass,containerSize).setAttribute("style","#{bgValue}")}}>
-				{% set linkColor = content['#block_content'].field_link_color.value %}
-				{# Dont let twig render the links #}
-				<div class="ucb-hero-unit-content container">
-					<div class="row">
-						{% if content['#block_content'].field_text_align.value == "text-righthalf" %}
-							<div class="col-12 col-md-6"></div>
-						{% endif %}
-						<div class="col ucb-hero-unit-links">
-							{{ content|without('field_links') }}
-							{# Render links here #}
-							{% for item in content['#block_content'].field_links.value %}
-								{{ link(item.title, item.uri, {'class': ['button', linkColor]} ) }}
-							{% endfor %}
-						</div>
-						{% if content['#block_content'].field_text_align.value == "text-lefthalf" %}
-							<div class="col-12 col-md-6"></div>
-						{% endif %}
+		<div{{attributes.addClass(classes,size,overlayClass,containerSize).setAttribute("style","#{bgValue}")}}>
+			{% set linkColor = content['#block_content'].field_link_color.value %}
+			{# Dont let twig render the links #}
+			<div class="ucb-hero-unit-content container">
+				<div class="row">
+					{% if content['#block_content'].field_text_align.value == "text-righthalf" %}
+						<div class="col-12 col-md-6"></div>
+					{% endif %}
+					<div class="col ucb-hero-unit-links">
+						{{ content.field_headline }}
+						{{ content.field_text }}
+						{# Render links here #}
+						{% for item in content['#block_content'].field_links.value %}
+							{{ link(item.title, item.uri, {'class': ['button', linkColor]} ) }}
+						{% endfor %}
 					</div>
+					{% if content['#block_content'].field_text_align.value == "text-lefthalf" %}
+						<div class="col-12 col-md-6"></div>
+					{% endif %}
 				</div>
 			</div>
-		{% endblock %}
+		</div>
 	</div>
 </div>
