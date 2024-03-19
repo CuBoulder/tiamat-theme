@@ -9,8 +9,9 @@
     font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
     margin-bottom: 5px;
     background-clip: padding-box;
-    color: #0277BD !important;
-    border: 1px solid #0277BD;
+    color: inherit;
+    border: 1px solid currentColor;
+    text-decoration: none;
     border-radius: 0px;
     background-color: transparent;
 }
@@ -23,12 +24,6 @@
 
 .ucb-article-grid-summary{
     font-size: 85%;
-}
-
-.ucb-article-grid-block-button:hover{
-    transition: background-color 0.25s ease, border-color 0.25s ease, color 0.25s ease;
-    background-color: #0277BD;
-    color: white !important;
 }
 
 .ucb-article-grid-card-img{
