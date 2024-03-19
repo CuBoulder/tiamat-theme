@@ -144,7 +144,7 @@
 .content-frame-dark-gray .ucb-expandable-content .accordion-item {
   color: inherit;
   background-color: inherit;
-  border-bottom: 1px solid rgb(255 255 255 / 58%)
+  border-bottom: 1px solid rgb(255 255 255 / 58%);
 }
 
 .column .block.bs-background-white.ucb-expandable-content .accordion-item, 
@@ -157,13 +157,13 @@
   border-bottom: 1px solid rgba(128, 128, 128, 33%);
 }
 
-.column .block.bs-background-dark-gray.ucb-expandable-content .accordion-item 
-.column .block.bs-background-medium-blue.ucb-expandable-content .accordion-item 
-.column .block.bs-background-dark-blue.ucb-expandable-content .accordion-item 
+.column .block.bs-background-dark-gray.ucb-expandable-content .accordion-item,
+.column .block.bs-background-medium-blue.ucb-expandable-content .accordion-item,
+.column .block.bs-background-dark-blue.ucb-expandable-content .accordion-item,
 .column .block.bs-background-brick.ucb-expandable-content .accordion-item {
   color: inherit;
   background-color: inherit;
-  border-bottom: 1px solid rgb(255 255 255 / 58%)
+  border-bottom: 1px solid rgb(255 255 255 / 58%);
 }
 
 .ucb-bootstrap-layout__background-color--light-gray .block.bs-background-none.ucb-expandable-content .accordion-item,
@@ -212,7 +212,7 @@
 .content-frame-dark-gray .block.bs-background-underline.ucb-expandable-content .accordion-item {
   color: inherit;
   background-color: inherit;
-  border-bottom: 1px solid rgb(255 255 255 / 58%)
+  border-bottom: 1px solid rgb(255 255 255 / 58%);
 }
 
 
