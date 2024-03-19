@@ -44,12 +44,12 @@
   padding-bottom: 20px;
 }
 
-.ucb-overlay-dark {
+.ucb-boostrap-layout-section .column .block.ucb-overlay-dark {
   background-color: rgba(20, 20, 20, 0.5);
   background-blend-mode: overlay;
 }
 
-.ucb-overlay-light {
+.ucb-boostrap-layout-section .column .block.ucb-overlay-light {
   background-color: rgba(200, 200, 200, 0.7);
   background-blend-mode: overlay;
 }
