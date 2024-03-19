@@ -320,3 +320,9 @@
   height: 100%;
   z-index: -1;
 }
+
+
+/*** Admin Editor Styles ***/
+.contextual-region .contextual .contextual-links a {
+  color: #333 !important;
+}
