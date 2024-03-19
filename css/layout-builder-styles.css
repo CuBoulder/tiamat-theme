@@ -326,3 +326,9 @@
 .contextual-region .contextual .contextual-links a {
   color: #333 !important;
 }
+
+[data-layout-content-preview-placeholder-label*="Links"],
+[data-layout-content-preview-placeholder-label*="Title"],
+[data-layout-content-preview-placeholder-label*="Body"] {
+    background-color: transparent;
+}
