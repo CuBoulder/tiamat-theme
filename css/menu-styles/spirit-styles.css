@@ -11,9 +11,6 @@
     margin-bottom: 3px;
   }
 
-  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-primary-menu-region {
-    margin-top: -2px;
-  }
 
   .ucb-main-menu li.menu-item a.nav-link:link,
   .ucb-main-menu li.menu-item a.nav-link:visited {

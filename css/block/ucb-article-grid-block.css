@@ -32,8 +32,7 @@
 }
 
 .ucb-article-grid-card-img{
-    height: 225px !important;
     object-fit: cover !important;
-    width: 450px !important;
+    aspect-ratio: 2/1;
 }
 

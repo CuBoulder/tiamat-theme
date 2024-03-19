@@ -6,13 +6,14 @@ ucb-global:
       css/layout.css: {}
     theme:
       https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700&family=Roboto:wght@400;500;700&display=swap: { type: external }
-      css/style.css: {}
       css/style-responsive.css: {}
       css/styleguide/branding.css: {}
       css/styleguide/buttons.css: {}
       css/styleguide/colors.css: {}
       css/styleguide/type.css: {}
       css/styleguide/icons.css: {}
+      css/style.css: {}
+      css/block/block-styles.css: {}
   ckeditor5-stylesheets:
     - css/base-ckeditor5.css
   js:
@@ -257,7 +258,7 @@ ucb-current-issue:
     js/ucb-current-issue-block.js: {}
   css:
     theme:
-      css/ucb-current-issue-block.css: {}
+      css/block/ucb-current-issue-block.css: {}
 
 ucb-category-cloud:
   version: 1.x
@@ -281,7 +282,7 @@ ucb-latest-issue:
     js/ucb-latest-issue-block.js: {}
   css:
     theme:
-      css/ucb-latest-issue-block.css: {}
+      css/block/ucb-latest-issue-block.css: {}
 ucb-issue-archive:
   version: 1.x
   js:

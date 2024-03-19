@@ -166,9 +166,10 @@ class ArticleListBlockElement extends HTMLElement {
         }
 
         // Case for Too many articles
-        if(finalArticles.length > count){
-            finalArticles.length = count
-        }
+        if(finalArticles.length >= count || (finalArticles.length >= count && NEXTJSONURL)){
+          finalArticles.length = count
+          this.renderDisplay(display, finalArticles)
+      }
 
         // Have articles and want to proceed
         if(finalArticles.length > 0 && !NEXTJSONURL){
@@ -274,8 +275,8 @@ class ArticleListBlockElement extends HTMLElement {
           var headerLink = document.createElement('a');
           headerLink.href = articleLink;
 
-          var articleHeader = document.createElement('h2');
-          articleHeader.classList = 'ucb-article-card-title'
+          var articleHeader = document.createElement('h3');
+          articleHeader.classList = 'ucb-article-card-title-feature'
           articleHeader.innerText = articleTitle;
 
           headerLink.appendChild(articleHeader);
@@ -348,8 +349,8 @@ class ArticleListBlockElement extends HTMLElement {
           var headerLink = document.createElement('a');
           headerLink.href = articleLink;
 
-          var articleHeader = document.createElement('h2');
-          articleHeader.classList = 'ucb-article-card-title'
+          var articleHeader = document.createElement('h3');
+          articleHeader.classList = 'ucb-article-card-title-feature'
           articleHeader.innerText = articleTitle;
 
           headerLink.appendChild(articleHeader);
@@ -416,12 +417,7 @@ class ArticleListBlockElement extends HTMLElement {
 
             var headerLink = document.createElement('a');
             headerLink.href = articleLink;
-
-            var articleHeader = document.createElement('h2');
-            articleHeader.classList = 'ucb-article-card-title'
-            articleHeader.innerText = articleTitle;
-
-            headerLink.appendChild(articleHeader);
+            headerLink.innerText = articleTitle
 
             articleBody.appendChild(headerLink)
 
@@ -450,12 +446,7 @@ class ArticleListBlockElement extends HTMLElement {
 
           var headerLink = document.createElement('a');
           headerLink.href = articleLink;
-
-          var articleHeader = document.createElement('h2');
-          articleHeader.classList = 'ucb-article-card-title'
-          articleHeader.innerText = articleTitle;
-
-          headerLink.appendChild(articleHeader);
+          headerLink.innerText = articleTitle
 
           articleBody.appendChild(headerLink)
 
@@ -498,14 +489,14 @@ class ArticleListBlockElement extends HTMLElement {
             var articleBody = document.createElement('div');
             articleBody.classList = 'col px-3 ucb-article-card-data';
 
-            var headerLink = document.createElement('a');
-            headerLink.href = articleLink;
+            var headerStrong = document.createElement('strong');
 
-            var articleHeader = document.createElement('h2');
-            articleHeader.classList = 'ucb-article-card-title'
+            var articleHeader = document.createElement('a');
+            articleHeader.classList = 'ucb-article-card-title-teaser'
+            articleHeader.href = articleLink;
             articleHeader.innerText = articleTitle;
 
-            headerLink.appendChild(articleHeader);
+            headerStrong.appendChild(articleHeader);
 
             var date = document.createElement('span');
             date.classList = 'ucb-article-card-date'
@@ -525,7 +516,7 @@ class ArticleListBlockElement extends HTMLElement {
             srOnly.innerText = ` about ${articleTitle}`
             readMore.appendChild(srOnly)
 
-            articleBody.appendChild(headerLink)
+            articleBody.appendChild(headerStrong)
             articleBody.appendChild(date)
             articleBody.appendChild(articleSummary)
             articleBody.appendChild(readMore)

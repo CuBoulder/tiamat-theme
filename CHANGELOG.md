@@ -9,6 +9,98 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Class Notes: Adds URL Parameter Filtering
+  Adds URL Parameters to `Class Notes List` pages. Can pass dates via `startDate` and `endDate` parameters to automatically filter retrieved `Class Notes` by date published like so:
+  
+  
+  ```
+  ?startDate=2023-12-05&endDate=2024-02-06. 
+  ```
+  (*Would retrieve class notes published between 12/5/2023 and 2/6/2024*)
+  
+  - Parameters must be passed in the following formats: `YYYY-MM-DD` or `MM-DD-YYYY`
+  - If you pass only a `startDate` parameter, `endDate` will default to today's date
+  
+  Resolves #694 
+---
+
+- ### Block styles
+  Template updates for every inline block.
+  Addition of block styles (bs) fields 
+  
+  Closes #443 
+  Closes #111 
+  
+  Sister PR: https://github.com/CuBoulder/tiamat10-profile/pull/99
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/106
+  
+---
+
+- ### Issue Display Changes
+  Fixes the following on Issue Content Types:
+  
+  - Removes the Secondary Image field from the form and page display. Also removes the hard-coded dark gray box with the title and body in it, as users can use CKEditor5 plugins such as Box, Button, Icons, and Media Library to achieve a variety of left-side layouts. 
+  - Fixes bug with Teaser view of Categories displaying improperly
+  - "Read More" capitzalized via CSS instead of hard-coded
+  
+  Includes:
+  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/730
+  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/107
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/704
+---
+
+- ### Fix spirit menu style
+  Closes #712.
+  Small change to fix padding issue for the spirit menu style
+---
+
+- ### Mobile Footer Menu Changes
+  Closes #722.
+  Adds CSS changes for the footer menu to only show in the secondary menu when it is a mobile view.
+---
+
+- ### Article List Block Adjustments
+  Modifies various Article List Nodes and Blocks in the following ways:
+  
+  ## Article List -- Page
+  - Adjusts row border from 2px to 1px
+  
+  ## Article Grid
+  - Thumbnails are now a 2/1 aspect ratio
+  - Resolved bug where having count 3 and 3 articles would result a duplicated row
+  
+  ## Article List Block
+  - Adjusts header markup to use strong `<a>` tags instead of `<h2>`'s
+  
+  ## Article Feature Block
+  - Adjusts header markup to use stylized `<h3>`'s across all article cards
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/718
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/719
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/724
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/714
+---
+
+- ### Issue and Issue Archive use Media Library images
+  Changes the Issue cover image field to use the Media Library images rather than the default. This change requires creating an additional consumer in `Focal Image Enable` to use un-cropped image styles from JSON:API as well as modifying the Issue Archive, Current Issue Block, and Latest Issue Block build processes to use that un-cropped image.
+  
+  A spinning loader was also added to the Issue Archive, and Issue Blocks prior to displaying results on page rather than flashing in. 
+  
+  Includes:
+  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/707
+  - `tiamat-custom-entities` =>  https://github.com/CuBoulder/tiamat-custom-entities/pull/105
+  - `ucb-focal-image-enable` => https://github.com/CuBoulder/ucb_focal_image_enable/pull/8
+  
+  Resolves [#104 ](https://github.com/CuBoulder/tiamat-custom-entities/issues/104)
+---
+
+- ### Fixes Infinite Load Article List Blocks
+  Resolves #713 
+  
+  Should address the condition where too many Articles causing an issue with how JSON:API handles pagination and subsequent API calls in the Article List blocks
+---
+
 - ### Resolves an issue causing the category or tag icon to appear if none are visible
   Resolves CuBoulder/tiamat-theme#701 
 ---

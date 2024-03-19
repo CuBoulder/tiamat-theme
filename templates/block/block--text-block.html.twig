@@ -21,36 +21,42 @@
 ] %}
 
 {% set blockContent = content['#block_content'] %}
+
 {% set _rendered = blockContent|view|render %}
 {# Easiest way to ensure the cache is updated when the block or a referenced node is. Resolves #387. #}
-{% if blockContent.field_text_block_background.value == '1' %}
-	{% set blockBackground = 'text-block-light-gray' %}
-{% elseif blockContent.field_text_block_background.value == '2' %}
-	{% set blockBackground = 'text-block-dark-gray' %}
-{% elseif blockContent.field_text_block_background.value == '3' %}
-	{% set blockBackground = 'text-block-black' %}
-{% elseif blockContent.field_text_block_background.value == '4' %}
-	{% set blockBackground = 'text-block-gold' %}
-{% elseif blockContent.field_text_block_background.value == '5' %}
-	{% set blockBackground = 'text-block-white' %}
-{% else %}
-	{% set blockBackground = 'text-block-none' %}
-{% endif %}
 
-{% if blockContent.field_text_block_style.value  == '1' %}
-	{% set blockStyle = 'text-block-card' %}
-{% else %}
-	{% set blockStyle = 'text-block-default' %}
-{% endif %}
+{# Block/Title/Icon Styles #}
+{% set blockStyles = [
+	content.field_bs_background_style|render|striptags|trim,
+	content.field_bs_content_font_scale|render|striptags|trim,
+	content.field_bs_icon_position|render|striptags|trim,
+	content.field_bs_heading_alignment|render|striptags|trim,
+	content.field_bs_title_font_scale|render|striptags|trim,
+	''
+] %}
+
+{% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
+{% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
+{% set headingTag = content.field_bs_heading|render|striptags|trim %}
+{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
 
 {% block content %}
-	<div{{attributes.addClass(classes)}}>
+	<div{{attributes.addClass(classes,blockStyles)}}>
 		{{ title_prefix }}
 		{% if label %}
-			<h2{{title_attributes}}>{{ label }}</h2>
+			<div class="block-title {{ headingStyle }}">
+				<{{ headingTag }}{{title_attributes}}>
+					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
+						{{ content.field_bs_icon }}
+					</span>
+					<span class="block-title-text">
+						{{ label }}
+					</span>
+				</{{ headingTag }}>
+			</div>
 		{% endif %}
 		{{ title_suffix }}
-		<div class="{{ blockBackground }} {{ blockStyle }}">
+		<div class="text-block-body block-content">
 			{{ content.field_text_block_body }}
 		</div>
 	</div>

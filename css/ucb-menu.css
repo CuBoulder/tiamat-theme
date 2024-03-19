@@ -25,6 +25,9 @@
 #ucb-mobile-menu-toggle[aria-expanded='true'] .ucb-mobile-menu-close-icon {
   display: inline-block;
 }
+.ucb-mobile-footer-menu {
+  display: none;
+}
 
 @media only screen and (max-width: 600px) {
   section.ucb-main-nav-section.ucb-header-black {
@@ -189,6 +192,9 @@
 
   .ucb-main-nav-container .ucb-menu .expanded.active>a.nav-link {
     padding-left: calc(var(--ucb-menu-indent-start) - var(--ucb-menu-indent-border-width));
+  }
+  .ucb-mobile-footer-menu {
+    display: block;
   }
 }
 

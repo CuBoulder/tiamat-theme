@@ -10,10 +10,13 @@ class CurrentIssueElement extends HTMLElement {
             }
         };
 
-        fetch(`/jsonapi/node/ucb_issue?include=field_ucb_issue_image&fields[file--file]=uri,url&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published&sort=-created`)
+        fetch(`/jsonapi/node/ucb_issue?include=field_ucb_issue_cover_image.field_media_image&fields[file--file]=uri,url&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published&sort=-created`)
             .then(handleError)
             .then((data) => this.build(data))
-            .catch(Error=> this.handleError(Error));
+            .catch(Error=> {
+                this.toggleMessage('ucb-al-loading');
+                this.handleError(Error)
+            });
     }
 
     build(data){
@@ -21,7 +24,7 @@ class CurrentIssueElement extends HTMLElement {
             this.handleError({name : "No Issues Retrieved", message : "There are no Issues created"} , 'No Issues Found')
         } else {
             const title = data.data[0].attributes.title
-            const imgURL = data.included[0].attributes.uri.url
+            let imgURL
             const issueURL = data.data[0].attributes.path.alias
     
             const imgLinkEL = document.createElement('a')
@@ -40,24 +43,50 @@ class CurrentIssueElement extends HTMLElement {
             const titleEl = document.createElement('h3')
             titleEl.classList = "ucb-current-issue-block-title"
             titleEl.innerText = title
-    
-            const imgEL = document.createElement('img')
-            imgEL.classList = 'ucb-current-issue-block-img'
-            imgEL.src = imgURL
-    
+
+            // Image
+            const urlObj = {}; // key from data.data to key from data.includes
+            const idObj = {}; // key from data.includes to URL
+            // Remove any blanks from our articles before map
+            if (data['included']) {
+                const filteredData = data['included'].filter(url => !!url['attributes']['uri']);
+                // creates the urlObj, key: data id, value: url
+                filteredData.map((pair) => {
+                    // checks if consumer is working, else default to standard image instead of focal image
+                    if(pair['links']['large_image_style'])
+                        urlObj[pair['id']] = pair['links']['large_image_style']['href'];
+                    else
+                        urlObj[pair['id']] = pair['attributes']['uri']['url'];
+                });
+                // removes all other included data besides images in our included media
+                const idFilterData = data['included'].filter(item => item['type'] == 'media--image');
+                // using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
+                idFilterData.map(pair => idObj[pair['id']] = pair['relationships']['thumbnail']['data']['id']);
+            }
+
+            const issue = data.data[0] ? data.data[0] : null
             const linkEl = document.createElement('a')
             linkEl.href = issueURL
     
     
             linkEl.appendChild(titleEl)
             titleDiv.appendChild(linkEl)
+
+            if(issue.relationships.field_ucb_issue_cover_image.data){
+                const issueId = issue.relationships.field_ucb_issue_cover_image.data.id;
+                imgURL = urlObj[idObj[issueId]]
+                const imgEL = document.createElement('img')
+                imgEL.classList = 'ucb-current-issue-block-img'
+                imgEL.src = imgURL
+                imgEL.alt = `${title} cover image`
+                imgLinkEL.appendChild(imgEL)
+                imgDiv.appendChild(imgLinkEL)
+            }
     
-            imgLinkEL.appendChild(imgEL)
-            imgDiv.appendChild(imgLinkEL)
             
             blockDiv.appendChild(imgDiv)
             blockDiv.appendChild(titleDiv)
-    
+            this.toggleMessage('ucb-al-loading');
             this.appendChild(blockDiv)
         }
     }
@@ -79,9 +108,21 @@ class CurrentIssueElement extends HTMLElement {
         span.appendChild(message)
 
         this.appendChild(container)
-       
-            console.error(Error)
+        console.error(Error)
         
+    }
+
+    toggleMessage(id, display = "none") {
+        if (id) {
+          var toggle = this.querySelector(`#${id}`);
+          if (toggle) {
+            if (display === "block") {
+              toggle.style.display = "block";
+            } else {
+              toggle.style.display = "none";
+            }
+          }
+        }
     }
 }
 

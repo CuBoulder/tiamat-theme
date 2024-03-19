@@ -17,16 +17,20 @@
     {# If teaser #}
         {% if paragraph.field_ucb_issue_section_style.value is same as("0") %}
         <div class="issue-section-content">
+            <div class="teaser-article-thumbnail" id='teaser-article-thumbnail-{{key}}'> 
             <a href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
-                <div class="teaser-article-thumbnail" id='teaser-article-thumbnail-{{key}}'> {{ item.entity.field_ucb_article_thumbnail|view }} </div>
+                <img src="{{ base_url }}{{ file_url(item.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri | image_style('focal_image_square')) }}" 
+                alt="{{ item.entity.field_ucb_article_thumbnail.entity.field_media_image.alt }}"
+                >
             </a>
+            </div>
             <div class="issue-section-content-summary">
                 <a class="issue-article-title-link" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
                     <h3 class="issue-section-teaser-title">{{item.entity.title.value}}</h3>
                 </a>
                 <div class="issue-article-categories">{{item.entity.field_ucb_article_categories|view}}</div>
                 <p class="issue-section-teaser-summary">{{item.entity.field_ucb_article_summary.value}}</p>
-                <a class="issue-section-teaser-read" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">READ MORE</a>
+                <a class="issue-section-teaser-read" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">Read More</a>
             </div>
         </div>
                         
@@ -42,7 +46,7 @@
                     </a>
                     <div class="issue-article-categories">{{item.entity.field_ucb_article_categories|view}}</div>
                     <p class="issue-section-feature-summary">{{item.entity.field_ucb_article_summary.value}}</p>
-                    <a class="issue-section-feature-read" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">READ MORE</a>
+                    <a class="issue-section-feature-read" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">Read More</a>
                 </div>
             </div>
 
