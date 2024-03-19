@@ -12,7 +12,6 @@
 }
 
 .ucb-expandable-content .accordion-button, .ucb-expandable-content .accordion-button:not(.collapsed), .ucb-expandable-content .accordion-button:focus {
-  color: #0277bd;
   font-size: 18px;
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: transparent;
@@ -35,13 +34,7 @@
   display: none;
 }
 
-.ucb-expandable-content .accordion-button:hover {
-  color: #b71c1c;
-}
 
-.ucb-expandable-content .accordion-button:hover::before {
-  color: #b71c1c;
-}
 
 .ucb-expandable-content .accordion-button, .ucb-expandable-content .accordion-body {
   padding-left: 0;

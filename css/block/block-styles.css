@@ -49,7 +49,7 @@
 }
 
 /*** Background Color Settings ***/
-.text-block-none {
+.column .block.bs-background-none {
   background-color: transparent;
   color: inherit;
 }
@@ -123,13 +123,13 @@
 }
 
 /*** Link Color Settings ***/
-.text-block-none a,
+.column .block.bs-background-none a,
 .column .block.bs-background-outline a,
 .column .block.bs-background-underline a {
   color: inherit;
 }
 
-.text-block-none a:hover,
+.column .block.bs-background-none a:hover,
 .column .block.bs-background-outline a:hover,
 .column .block.bs-background-underline a:hover {
   color: inherit;
