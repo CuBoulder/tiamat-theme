@@ -75,6 +75,7 @@
 
 .ucb-bootstrap-layout__background-color--black {
   background-color: var(--ucb-black);
+  color: var(--ucb-white);
 }
 
 .ucb-bootstrap-layout__background-color--tan {
