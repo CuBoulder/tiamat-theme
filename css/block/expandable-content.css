@@ -121,11 +121,58 @@
   display: block;
 }
 
-.ucb-expandable-content .accordion-item {
+
+
+.ucb-bootstrap-layout__background-color--light-gray .ucb-expandable-content .accordion-item,
+.ucb-bootstrap-layout__background-color--light-gray .ucb-expandable-content .accordion-item,
+.ucb-bootstrap-layout__background-color--tan .ucb-expandable-content .accordion-item,
+.ucb-bootstrap-layout__background-color--light-blue .ucb-expandable-content .accordion-item,
+.ucb-bootstrap-layout__background-color--light-green .ucb-expandable-content .accordion-item {
   color: inherit;
   background-color: inherit;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.333);
+  border-bottom: 1px solid rgba(128, 128, 128, 33%);
 }
+
+
+.ucb-bootstrap-layout__background-color--gold .ucb-expandable-content .accordion-item,
+.ucb-bootstrap-layout__background-color--dark-gray .ucb-expandable-content .accordion-item,
+.ucb-bootstrap-layout__background-color--black .ucb-expandable-content .accordion-item,
+.ucb-bootstrap-layout__background-color--medium-blue .ucb-expandable-content .accordion-item,
+.ucb-bootstrap-layout__background-color--dark-blue .ucb-expandable-content .accordion-item,
+.ucb-bootstrap-layout__background-color--brick .ucb-expandable-content .accordion-item {
+  color: inherit;
+  background-color: inherit;
+  border-bottom: 1px solid rgb(255 255 255 / 58%)
+}
+
+.column .block.bs-background-white.ucb-expandable-content .accordion-item, 
+.column .block.bs-background-gray.ucb-expandable-content .accordion-item,
+.column .block.bs-background-tan.ucb-expandable-content .accordion-item,
+.column .block.bs-background-light-blue.ucb-expandable-content .accordion-item,
+.column .block.bs-background-light-green.ucb-expandable-content .accordion-item {
+  color: inherit;
+  background-color: inherit;
+  border-bottom: 1px solid rgba(128, 128, 128, 33%);
+}
+
+.column .block.bs-background-dark-gray.ucb-expandable-content .accordion-item 
+.column .block.bs-background-medium-blue.ucb-expandable-content .accordion-item 
+.column .block.bs-background-dark-blue.ucb-expandable-content .accordion-item 
+.column .block.bs-background-brick.ucb-expandable-content .accordion-item {
+  color: inherit;
+  background-color: inherit;
+  border-bottom: 1px solid rgb(255 255 255 / 58%)
+}
+
+.column .block.bs-background-none.ucb-expandable-content .accordion-item,
+.column .block.bs-background-outline.ucb-expandable-content .accordion-item,
+.column .block.bs-background-underline.ucb-expandable-content .accordion-item {
+  color: inherit;
+  background-color: inherit;
+  border-bottom: 1px solid;
+  border-color: inherit;
+}
+
 
 .ucb-expandable-content .accordion-body {
   overflow: auto;
