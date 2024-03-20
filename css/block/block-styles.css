@@ -123,17 +123,7 @@
 }
 
 /*** Link Color Settings ***/
-.block.bs-background-none a,
-.block.bs-background-outline a,
-.block.bs-background-underline a {
-  color: inherit;
-}
 
-.block.bs-background-none a:hover,
-.block.bs-background-outline a:hover,
-.block.bs-background-underline a:hover {
-  color: inherit;
-}
 
 .block.bs-background-white a {
   color: var(--ucb-link);
