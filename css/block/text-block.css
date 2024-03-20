@@ -7,6 +7,10 @@
   margin-bottom: 1em;
 }
 
+.text-block-body>div {
+  width: 100%;
+}
+
 .text-block-light-gray {
   background: var(--ucb-light-gray);
   color: var(--ucb-black);
@@ -81,4 +85,3 @@
 .ucb-bootstrap-layout__background-color--gold .text-block-card {
   border: 1px solid var(--ucb-black);
 }
-

@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes missing video in otherwise empty text block
+  Fixes a CSS bug which caused a video in an otherwise empty text block to go missing.
+  
+  Resolves CuBoulder/tiamat-theme#741
+---
+
 - ### Class Notes: Adds URL Parameter Filtering
   Adds URL Parameters to `Class Notes List` pages. Can pass dates via `startDate` and `endDate` parameters to automatically filter retrieved `Class Notes` by date published like so:
   
