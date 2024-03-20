@@ -1,7 +1,7 @@
 {% for item in items %}
-	{% if item|render|striptags|trim == 'Increase' %}
+	{% if item.content|render|striptags|trim == 'Increase' %}
 		{% set blockContentScale = 'bs-content-scale-increase' %}
-	{% elseif item|render|striptags|trim == 'Decrease' %}
+	{% elseif item.content|render|striptags|trim == 'Decrease' %}
 		{% set blockContentScale = 'bs-content-scale-decrease' %}
 	{% else %}
 		{% set blockContentScale = 'bs-content-scale-default' %}
