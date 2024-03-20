@@ -54,10 +54,6 @@
 
 /*** LAYOUT STYLES ***/
 
-.ucb-boostrap-layout-section .column .block:first-child {
-  margin-top: 1em;
-}
-
 .ucb-bootstrap-layout__background-color--gold {
   background-color: var(--ucb-gold);
   color: var(--ucb-black);
@@ -235,18 +231,15 @@
   text-decoration: none;
 }
 
-.ucb-boostrap-layout-section .column .block:last-child {
-  margin-bottom: 1em;
-}
-
 .ucb-boostrap-layout-section .column .block {
   padding-bottom: 1em;
-  margin-bottom: 0;
+  margin-bottom: 40px;
 }
 
 .ucb-boostrap-layout-section .column .block:first-child {
   padding-top: 1em;
   padding-bottom: 1em;
+  margin-top: 40px;
 }
 
 /*** Content Frame ***/
