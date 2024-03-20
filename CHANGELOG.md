@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update layout-builder-styles.css
+  Add margin replacement for content frames with background colors
+  
+  Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/28
+---
+
 - ### Block Style Updates
   Fixed hero and event calendar classes showing in content 
   Fixed color layering and cascading
