@@ -2,7 +2,7 @@
     text-align: center;
 }
 
-.ucb-article-grid-block-button{
+.ucb-article-grid-block-button-container a.ucb-article-grid-block-button{
     display: inline-block;
     padding: 5px 10px;
     font-weight: bold;
