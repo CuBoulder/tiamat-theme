@@ -3,8 +3,6 @@
  *
  */
 
-
-
  .ucb-hero-unit-links .button:first-of-type{
   margin-right: 5px !important;
   margin-left: 0px !important;
@@ -33,6 +31,7 @@
   margin-bottom: 0;
   padding-top: 0;
   padding-bottom: 0;
+  width: 100%;
 }
 
 .block-hero-unit.size-large .ucb-hero-unit-content {
@@ -45,12 +44,12 @@
   padding-bottom: 20px;
 }
 
-.ucb-overlay-dark {
+.ucb-boostrap-layout-section .column .block.ucb-overlay-dark {
   background-color: rgba(20, 20, 20, 0.5);
   background-blend-mode: overlay;
 }
 
-.ucb-overlay-light {
+.ucb-boostrap-layout-section .column .block.ucb-overlay-light {
   background-color: rgba(200, 200, 200, 0.7);
   background-blend-mode: overlay;
 }

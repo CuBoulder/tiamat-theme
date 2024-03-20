@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Block Style Updates
+  Fixed hero and event calendar classes showing in content 
+  Fixed color layering and cascading
+  Added `None` as an option for `Block Style` background color
+  
+  Closes #615 
+  Closes #711 
+  Closes #737 
+  Closes #740 
+  Closes #743 
+  
+  Related PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/26
+  Related PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/109
+---
+
 - ### Fixes missing video in otherwise empty text block
   Fixes a CSS bug which caused a video in an otherwise empty text block to go missing.
   
