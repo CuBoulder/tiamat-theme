@@ -10,11 +10,10 @@
 
 
 {% set base_url = url('<front>')|render|split('/', -1)|join('/') %}
-
 <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
 	<tbody>
   		<tr>
-			<td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-top:20px; padding-bottom:20px;">
+			<td align="center" style="font-size:20px;text-align: left; padding-right:10px; padding-left:10px;padding-top:20px; padding-bottom:20px;">
       			<h2>{{ content.field_newsletter_section_title|render|striptags|trim }}</h2>
 	  		</td>
  		</tr>
@@ -56,7 +55,7 @@
 				{# Code to render selected article title/url #}
 					{% if item.entity.field_newsletter_article_select.entity.title.value|render %}
 					<tr id="feature-article-title-email-{{key}}">
-						<td align="center" style="text-align: left; padding-right:10px; padding-left:10px"align="center" style="text-align: left; padding-right:10px; padding-left:10px">
+						<td align="center" style="font-size:18px;text-align: left; padding-right:10px; padding-left:10px"align="center" style="text-align: left; padding-right:10px; padding-left:10px">
 							<h3>
 								<a href="{{base_url}}{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
 									{{ item.entity.field_newsletter_article_select.entity.title.value|render|striptags|trim }}
@@ -95,13 +94,23 @@
 						{# Code to render selected article content (article text) #}
 					{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|render %}
 						<tr id="feature-article-summary-text-email-{{key}}">
-							<td align="center" style="text-align: left; padding-right:10px; padding-left:10px">{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text|view }}</td>
+							{% set textContent = item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|striptags %}
+							{% set maxLength = 300 %}
+							{% if textContent|length > maxLength %}
+								{% set trimmedText = textContent|slice(0, maxLength)|trim ~ '...' %}
+							{% else %}
+								{% set trimmedText = textContent %}
+							{% endif %}
+							{# {{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|striptags|raw }} #}
+							<td align="center" style="text-align: left; padding-right:10px; padding-left:10px">{{ trimmedText }}</td>
 						</tr>
 
 						{# Code to render user made content (content text) #}
 					{% elseif item.entity.field_newsletter_content_text.value|render %}
 						<tr id="feature-article-summary-user-text-email-{{key}}">
-							<td align="center" style="text-align: left; padding-right:10px; padding-left:10px">{{ item.entity.field_newsletter_content_text|view }}</td>
+							<td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
+								{{ item.entity.field_newsletter_content_text|view }}
+							</td>
 						</tr>
 					{% endif %}
 						</tbody>
@@ -150,7 +159,7 @@
 													{# Code to render selected article title/url #}
 													{% if item.entity.field_newsletter_article_select.entity.title.value|render %}
 													<td>
-														<h3>
+														<h3 style="font-size: 18px;">
 														<a href="{{base_url}}{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
 															{{ item.entity.field_newsletter_article_select.entity.title.value|render|striptags|trim }}
 														</a>
@@ -160,7 +169,7 @@
 													{# Code to render user made content (title) #}
 												{% elseif item.entity.field_newsletter_content_title.value|render %}
 												<td>
-													<h3>
+													<h3 style="font-size: 18px;">
 														{{ item.entity.field_newsletter_content_title|view }}
 													</h3>
 												</td>
@@ -186,22 +195,29 @@
 							{% endif %}
 								{# Code to render selected article content (summary) #}
 							{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_summary.value|render %}
-														<tr>
-															<td>{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_summary|view }}</td>
-														</tr>
+								<tr>
+									<td>{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_summary|view }}</td>
+								</tr>
 						
-														{# Code to render selected article content (article text) #}
-													{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|render %}
-														<tr>
-															<td>{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text|view }}</td>
-														</tr>
-						
-														{# Code to render user made content (content text) #}
-													{% elseif item.entity.field_newsletter_content_text.value|render %}
-														<tr>
-															<td>{{ item.entity.field_newsletter_content_text|view }}</td>
-														</tr>
-													{% endif %}
+								{# Code to render selected article content (article text) #}
+							{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|render %}
+								<tr>
+									{% set textContent = item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|striptags %}
+									{% set maxLength = 300 %}
+									{% if textContent|length > maxLength %}
+										{% set trimmedText = textContent|slice(0, maxLength)|trim ~ '...' %}
+									{% else %}
+										{% set trimmedText = textContent %}
+									{% endif %}
+									<td>{{ trimmedText }}</td>
+								</tr>
+
+								{# Code to render user made content (content text) #}
+							{% elseif item.entity.field_newsletter_content_text.value|render %}
+								<tr>
+									<td>{{ item.entity.field_newsletter_content_text|view }}</td>
+								</tr>
+							{% endif %}
 											</tbody>
 										</table>
 									</td>
