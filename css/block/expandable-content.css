@@ -41,6 +41,10 @@
   padding-right: 0;
 }
 
+.accordion .accordion-header a {
+  color: inherit;
+}
+
 .ucb-bootstrap-layout-section-dark .ucb-expandable-content .accordion-button {
   color: var(--ucb-gold);
 }
