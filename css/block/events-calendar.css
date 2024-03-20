@@ -279,15 +279,15 @@ table.localist_minicalendar_minicalendar caption {
   line-height: 1;
 }
 
-.ucb-calendar-block-link-container{
+.ucb-calendar-block-link-container {
   text-align: center;
 }
 
-.ucb-calendar-block-link-container a.ucb-calendar-button{
+.ucb-calendar-block-link-container a.ucb-calendar-button {
   display: inline-block;
   padding: 5px 10px;
   font-weight: bold;
-  font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   margin-bottom: 5px;
   background-clip: padding-box;
   color: inherit;
@@ -297,28 +297,48 @@ table.localist_minicalendar_minicalendar caption {
   background-color: transparent;
 }
 
-/* Section Background Color Overrides for Dark Backgrounds */
-.ucb-bootstrap-layout__background-color--dark-gray .localist_widget_container li a,
-.ucb-bootstrap-layout__background-color--black .localist_widget_container li a {
-  color: #fff
+.ucb-calendar-block-link-container a.ucb-calendar-button:hover {
+  text-decoration: none;
 }
 
-.ucb-bootstrap-layout__background-color--dark-gray .localist_widget_container li a:hover,
-.ucb-bootstrap-layout__background-color--black .localist_widget_container li a:hover {
+/* Section Background Color Overrides for Dark Backgrounds */
+.ucb-bootstrap-layout__background-color--dark-gray
+  .localist_widget_container
+  li
+  a,
+.ucb-bootstrap-layout__background-color--black .localist_widget_container li a {
+  color: #fff;
+}
+
+.ucb-bootstrap-layout__background-color--dark-gray
+  .localist_widget_container
+  li
+  a:hover,
+.ucb-bootstrap-layout__background-color--black
+  .localist_widget_container
+  li
+  a:hover {
   text-decoration: underline;
-  color: #D3D3D3;
+  color: #d3d3d3;
 }
 .ucb-bootstrap-layout__background-color--gold .localist_widget_container li a {
-  color: black
+  color: black;
 }
 
-.ucb-bootstrap-layout__background-color--gold .localist_widget_container li a:hover {
+.ucb-bootstrap-layout__background-color--gold
+  .localist_widget_container
+  li
+  a:hover {
   text-decoration: underline;
   color: #444;
 }
 
-.ucb-bootstrap-layout__background-color--gold .ucb-events-calendar .localist_widget_container .action_button a:link{
-  color: black
+.ucb-bootstrap-layout__background-color--gold
+  .ucb-events-calendar
+  .localist_widget_container
+  .action_button
+  a:link {
+  color: black;
 }
 
 @media screen and (min-width: 600px) {

@@ -250,33 +250,33 @@
 }
 
 /*** Content Frame ***/
-.ucb-content-frame.content-frame-light-gray .column {
+.content-frame-light-gray .column {
   background: rgba(255, 255, 255, 0.85);
   color: var(--ucb-black);
   padding: 0 20px;
   margin: 20px 0;
 }
 
-.ucb-content-frame.content-frame-light-gray a {
+.content-frame-light-gray a {
   color: var(--ucb-link);
 }
 
-.ucb-content-frame.content-frame-light-gray a:hover {
+.content-frame-light-gray a:hover {
   color: var(--ucb-link-visited);
 }
 
-.ucb-content-frame.content-frame-dark-gray .column {
+.content-frame-dark-gray .column {
   background: rgba(0, 0, 0, 0.75);
   color: var(--ucb-white);
   padding: 0 20px;
   margin: 20px 0;
 }
 
-.ucb-content-frame.content-frame-dark-gray a {
+.content-frame-dark-gray a {
   color: var(--ucb-gold);
 }
 
-.ucb-content-frame.content-frame-dark-gray a:hover {
+.content-frame-dark-gray a:hover {
   color: var(--ucb-white);
 }
 
