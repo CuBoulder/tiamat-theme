@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### item render fix
+  Needed to add `.content` to the item renders otherwise we get hit with lots of php errors because the attributes are trying to render for each item.
+  
+  Closes #752 
+---
+
 - ### Update layout-builder-styles.css
   Add margin replacement for content frames with background colors
   

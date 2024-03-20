@@ -1,14 +1,14 @@
 {% for item in items %}
 
-{% if item|render|striptags|trim == 'H3' %}
+{% if item.content|render|striptags|trim == 'H3' %}
 	{% set blockHeading = 'h3' %}
-{% elseif item|render|striptags|trim == 'H4' %}
+{% elseif item.content|render|striptags|trim == 'H4' %}
 	{% set blockHeading = 'h4' %}
-{% elseif item|render|striptags|trim == 'H5' %}
+{% elseif item.content|render|striptags|trim == 'H5' %}
 	{% set blockHeading = 'h5' %}
-{% elseif item|render|striptags|trim == 'H6' %}
+{% elseif item.content|render|striptags|trim == 'H6' %}
 	{% set blockHeading = 'h6' %}
-{% elseif item|render|striptags|trim == 'Strong' %}
+{% elseif item.content|render|striptags|trim == 'Strong' %}
 	{% set blockHeading = 'strong' %}
 {% else %}
 	{% set blockHeading = 'h2' %}
