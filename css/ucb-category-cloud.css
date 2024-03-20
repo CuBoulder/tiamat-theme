@@ -2,8 +2,9 @@
     font-size: 85%;
     padding: 1px 6px;
     background-clip: padding-box;
-    color: #0277BD !important;
-    border: 1px solid #0277BD;
+    color: inherit;
+    border: 1px solid currentColor;
+    text-decoration: none;
     border-radius: 0px;
     background-color: transparent;
     font-weight: bold;
@@ -17,10 +18,6 @@
     margin-left: 0;
 }
 
-.ucb-category-cloud-link:hover{
-    background: #0277BD;
-    color: #fff !important;
-}
 
 .ucb-category-cloud-container{
     padding-bottom: 20px;
