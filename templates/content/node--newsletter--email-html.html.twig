@@ -226,7 +226,7 @@ td>h3>a{
     text-decoration: none;
     display: inline-block;
     text-transform: uppercase;
-    font-size: 75%;
+    font-size: 10px;
 }
 
 
@@ -271,6 +271,12 @@ td>h3>a{
                                         {% if node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value %}
                                         <img style="object-fit:cover;-ms-interpolation-mode: bicubic; clear: both; display: block; float: left; height: 167px !important; max-width: 100% !important; outline: none; text-decoration: none; width: 250px !important; max-height: auto !important;"src="{{base_url}}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}">
                                         {% endif %}
+                                    </td>
+                                </tr>
+                                {# Newsletter title #}
+                                <tr>
+                                    <td style="padding-left:10px; text-align:left">
+                                        <span>{{node.field_newsletter_type.entity.label}}</span>
                                     </td>
                                 </tr>
                                 {# Date & View on Website Link #}
