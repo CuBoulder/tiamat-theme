@@ -22,8 +22,12 @@
 }
 
 .ucb-content-list-image {
+	max-width: calc(100px + var(--bs-gutter-x));
+	height: auto;
 	margin-bottom: 20px;
-	max-width: 100%;
+}
+.ucb-content-list-teaser .ucb-content-list-image {
+	max-width: 50px;
 }
 
 .ucb-content-list-display-full .ucb-content-list-title, .ucb-content-list-display-condensed .ucb-content-list-title, .ucb-content-list-display-teaser .ucb-content-list-title {
@@ -74,6 +78,10 @@
 	padding-right: 0;
 }
 
+.ucb-content-list-image-container {
+	width: fit-content;
+}
+
 .ucb-content-list-display-title .ucb-content-list-list {
 	margin-bottom: 0;
 }
@@ -96,3 +104,35 @@
 .ucb-content-list-person-titles .ucb-content-list-person-title:last-child::after, .ucb-content-list-person-departments .ucb-content-list-person-department:last-child::after, .ucb-content-list-person-contact .ucb-content-list-person-contact-item:last-child::after {
 	content: '';
 }
+
+
+.ucb-content-list-sidebar .ucb-content-list-row,
+.ucb-content-list-teaser .ucb-content-list-row,
+.ucb-content-list-condensed .ucb-content-list-row, 
+.ucb-content-list-full .ucb-content-list-row {
+	display: flex;
+	flex-direction: row;
+}
+
+.ucb-content-list-sidebar .ucb-content-list-text-container {
+	width: fit-content;
+	flex-grow: 1;
+}
+
+.ucb-content-list-full .ucb-content-list-text-container,
+.ucb-content-list-condensed .ucb-content-list-text-container,
+.ucb-content-list-teaser .ucb-content-list-text-container {
+	flex: 1;
+}
+
+
+@media only screen and (max-width: 600px) {
+	.ucb-content-list-full .ucb-content-list-row {
+		flex-direction: column-reverse;
+	}
+
+	.ucb-content-list-condensed .ucb-content-list-row,
+	.ucb-content-list-teaser .ucb-content-list-row {
+		flex-direction: column;
+	}
+  }
