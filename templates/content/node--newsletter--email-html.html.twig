@@ -330,11 +330,22 @@ td>h3>a{
                         <!--Ad One-->
                             {% if content.field_newsletter_promo_image_one|render %}
                                 {% if content.field_newsletter_promo_link_one|render %}
+                            {# Extract the link URL and trim it #}
+                            {% set link_url_one = content.field_newsletter_promo_link_one|render|striptags|trim %}
+
+                            {# Check if the link is external or internal #}
+                            {% if link_url_one starts with 'http' or link_url_one starts with 'www' %}
+                                {# It's an external link; use it as is #}
+                                {% set final_url_one = link_url_one %}
+                            {% else %}
+                                {# It's an internal link; prepend the base URL #}
+                                {% set final_url_one = base_url ~ link_url_one %}
+                            {% endif %}
                                 <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
                                     <tbody>
                                         <tr>
                                             <td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
-                                                <a href="{{ content.field_newsletter_promo_link_one|render|striptags|trim }}">
+                                                <a href="{{ final_url_one}}">
                                                     <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                                 </a>
                                             </td>
@@ -403,11 +414,22 @@ td>h3>a{
                         <!--Ad Two-->
                         {% if content.field_newsletter_promo_image_two|render %}
                         {% if content.field_newsletter_promo_link_two|render %}
+                        {# Extract the link URL and trim it #}
+                            {% set link_url = content.field_newsletter_promo_link_two|render|striptags|trim %}
+
+                            {# Check if the link is external or internal #}
+                            {% if link_url starts with 'http://' or link_url starts with 'https://' %}
+                                {# It's an external link; use it as is #}
+                                {% set final_url = link_url %}
+                            {% else %}
+                                {# It's an internal link; prepend the base URL #}
+                                {% set final_url = base_url ~ link_url %}
+                            {% endif %}
                         <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
                             <tbody>
                                 <tr>
                                     <td width="500px" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px"> 
-                                        <a href="{{ content.field_newsletter_promo_link_two|render|striptags|trim }}">
+                                        <a href="{{ final_url }}">
                                             <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                         </a>
                                     </td>
