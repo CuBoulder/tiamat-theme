@@ -16,12 +16,24 @@
   ]
 %}
 
+
 {% block paragraph %}
 	<div{{attributes.addClass(classes)}}>
 		<h2>{{ content.field_newsletter_section_title }}</h2>
+		{# Unpublished Content Warning #}
+		{% if logged_in == 'true' %}
+				{% for key, item in paragraph.field_newsletter_section_select %}
+				{%  if key|first != '#' %}
+					{% if not item.entity.field_newsletter_article_select.entity.isPublished() %}
+						<p class="ucb-article-unpublished"> Section Content Warning: {{ item.entity.field_newsletter_article_select.entity.title.value|render|striptags|trim }} is unpublished. </p>
+					{% endif %}
+				{% endif %}
+			{% endfor %}
+		{% endif %}
 		{% if paragraph.field_newsletter_section_style.value is same as("0") %}
 			{% for key, item in paragraph.field_newsletter_section_select %}
 				{%  if key|first != '#' %}
+					<div class="ucb-newsletter-section-article {{unpublishedClass}}">
 					{# Code to render selected article content (thumbnail) #}
 					{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render %}
 						<div id='feature-article-thumbnail-{{key}}' class="feature-article-img"> {{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail|view }} </div>
@@ -38,6 +50,7 @@
 					{# Code to render selected article title/url #}
 					{% if item.entity.field_newsletter_article_select.entity.title.value|render %}
 					<div id="feature-article-title-{{key}}">
+						{# Warning for unpublished Article #}
 						<h3>
 							<a href="{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
 								{{ item.entity.field_newsletter_article_select.entity.title.value|render|striptags|trim }}
@@ -86,6 +99,7 @@
 							{{ item.entity.field_newsletter_content_text|view }}
 						</div>
 					{% endif %}
+					</div>
 				{% endif %}
 			{% endfor %}
 		{% else %}
@@ -153,7 +167,14 @@
 								{# Code to render selected article content (article text) #}
 							{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|render %}
 								<div class="article-summary">
-									{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text|view }}
+									{% set textContent = item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|striptags %}
+									{% set maxLength = 300 %}
+									{% if textContent|length > maxLength %}
+										{% set trimmedText = textContent|slice(0, maxLength)|trim ~ '...' %}
+									{% else %}
+										{% set trimmedText = textContent %}
+									{% endif %}
+									{{ trimmedText }}
 								</div>
 
 								{# Code to render user made content (content text) #}

@@ -25,6 +25,8 @@
 		<!--Feature Style Section-->
 			{% for key, item in paragraph.field_newsletter_section_select %}
 				{%  if key|first != '#' %}
+				{# Unpublished check #}
+ 					{% if item.entity.field_newsletter_article_select.entity.isPublished() %}
 					{# Code to render selected article content (thumbnail) #}
 					<!--Feature Article-->
 					<table role="presentation" style="padding-bottom: 20px;">
@@ -116,11 +118,14 @@
 						</tbody>
 					</table>
 				{% endif %}
+				{% endif %}
 			{% endfor %}
 		{% else %}
 		<!--Teaser Section-->
 				{% for key, item in paragraph.field_newsletter_section_select %}
 					{%  if key|first != '#' %}
+					{# Unpublished check #}
+ 					{% if item.entity.field_newsletter_article_select.entity.isPublished() %}
 					<!--Teaser Article-->
 					<center align="left">
 						<table role="presentation" width="100%" style="padding-bottom: 20px;">
@@ -131,22 +136,19 @@
 											{# Code to render selected article content (thumbnail) #}
 											{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render %}
 												<img
-												width="100px"
-												height="100px"
+												width="130" style="max-width:100%; height:auto;"
 												src="{{base_url}}{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render }}"/>
 				
 												{# Code to render selected article content (!thumbnail) #}
 											{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render %}
 												<img
-												width="100px"
-												height="100px"
+												width="130" style="max-width:100%; height:auto;"
 												src="{{base_url}}{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render }}"/>
 				
 												{# Code to render user made content #}
 											{% elseif item.entity.field_newsletter_content_image.entity.field_media_image.alt|render %}
 												<img
-												width="100px"
-												height="100px"
+												width="130" style="max-width:100%; height:auto;"
 												 src="{{base_url}}{{ item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ item.entity.field_newsletter_content_image.entity.field_media_image.alt|render }}"/>
 											{% endif %}
 									</td>
@@ -225,6 +227,7 @@
 							</tbody>
 						</table>
 					</center>
+					{% endif %}
 				{% endif %}
 			{% endfor %}
 		{% endif %}

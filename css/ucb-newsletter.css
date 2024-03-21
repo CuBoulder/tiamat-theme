@@ -45,3 +45,10 @@
   width: 160px;
   height: 160px;
 }
+
+.ucb-article-unpublished{
+  background-color: yellow;
+  text-align: center;
+  padding:10px 0px;
+  font-weight: bold;
+}
