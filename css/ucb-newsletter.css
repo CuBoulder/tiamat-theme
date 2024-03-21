@@ -52,3 +52,12 @@
   padding:10px 0px;
   font-weight: bold;
 }
+
+/* Hides icon */
+.ucb-newsletter-section-content .ucb-article-category-icon{
+  display: none;
+}
+
+.ucb-newsletter-section-content .ucb-article-categories{
+  padding: 0;
+}
