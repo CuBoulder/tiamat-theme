@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### content list updates
+  Closes #680. 
+  Reformats the content list to be readable and adds QoL changes.
+---
+
 - ### item render fix
   Needed to add `.content` to the item renders otherwise we get hit with lots of php errors because the attributes are trying to render for each item.
   
