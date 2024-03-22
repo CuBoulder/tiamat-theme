@@ -80,13 +80,6 @@
 				<tr>
 					<td class="tags" align="center" style="text-align: left; padding-right:10px; padding-left:10px; padding-bottom:10px">{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}</td>
 				</tr>
-
-				{# Code to render user made content (categories) #}
-				{% elseif item.entity.field_news_content_categories is not empty %}
-				<tr>
-					<td class="tags" align="center" style="text-align: left; padding-right:10px; padding-left:10px; padding-bottom:10px">{{ item.entity.field_news_content_categories|view }}</td>
-				</tr>
-				{% endif %}
 					{# Code to render selected article content (summary) #}
 					{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_summary.value|render %}
 						<tr id="feature-article-summary-email-{{key}}">
@@ -186,15 +179,6 @@
 										{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}
 									</td>
 								</tr>
-								{# Code to render user made content (categories) #}
-							{% elseif item.entity.field_news_content_categories is not empty %}
-							<tr>
-								<td class="tags" style="padding-bottom: 10px;">
-														{# TO DO - Fix categories #}
-									{{ item.entity.field_news_content_categories|view }}
-								</td>
-							</tr>
-							{% endif %}
 								{# Code to render selected article content (summary) #}
 							{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_summary.value|render %}
 								<tr>
