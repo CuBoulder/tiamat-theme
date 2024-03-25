@@ -72,7 +72,7 @@
 						<div class="article-teaser-meta">
 							{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}
 						</div>
-
+					{% endif %}
 					{# Code to render selected article content (summary) #}
 					{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_summary.value|render %}
 						<div class="article-summary" id="feature-article-summary-{{key}}">
@@ -138,6 +138,7 @@
 								<div class="article-teaser-meta">
 									{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}
 								</div>
+							{% endif %}
 
 							{# Code to render selected article content (summary) #}
 							{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_summary.value|render %}

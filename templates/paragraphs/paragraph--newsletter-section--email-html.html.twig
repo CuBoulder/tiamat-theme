@@ -80,6 +80,8 @@
 				<tr>
 					<td class="tags" align="center" style="text-align: left; padding-right:10px; padding-left:10px; padding-bottom:10px">{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}</td>
 				</tr>
+				{% endif %}
+
 					{# Code to render selected article content (summary) #}
 					{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_summary.value|render %}
 						<tr id="feature-article-summary-email-{{key}}">
@@ -179,6 +181,8 @@
 										{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_categories|view }}
 									</td>
 								</tr>
+								{% endif %}
+
 								{# Code to render selected article content (summary) #}
 							{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_summary.value|render %}
 								<tr>
