@@ -24,8 +24,11 @@
 		{% if logged_in == 'true' %}
 				{% for key, item in paragraph.field_newsletter_section_select %}
 				{%  if key|first != '#' %}
+				{# TO DO : need to fix for user made content #}
 					{% if not item.entity.field_newsletter_article_select.entity.isPublished() %}
+						{% if item.entity.field_newsletter_article_select.entity.bundle() == 'ucb_article' %}
 						<p class="ucb-article-unpublished"> Section Content Warning: {{ item.entity.field_newsletter_article_select.entity.title.value|render|striptags|trim }} is unpublished. </p>
+						{% endif %}
 					{% endif %}
 				{% endif %}
 			{% endfor %}
