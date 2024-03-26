@@ -469,7 +469,7 @@ td>h3>a{
                     {# Social share #}
                     {% if node.field_newsletter_social_links.value == 1 %}
                         {% if social_media_menu and social_media_menu|length > 1 %}
-                        <tr>
+                        <tr class="newsletter-social-{{designType}}">
                             <td>
                                 <center style="margin-bottom: 1em;font-size: 1.25rem; line-height: 1.25;" class="social-media-menu newsletter-social-media-menu">
                                     {{ social_media_menu }}

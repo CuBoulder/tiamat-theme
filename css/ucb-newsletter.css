@@ -61,3 +61,14 @@
 .ucb-newsletter-section-content .ucb-article-categories{
   padding: 0;
 }
+
+/* Social Colors for Preview display */
+.newsletter-social-classic a,
+.newsletter-social-darkbox a,
+.newsletter-social-simple a {
+  color: #fff;
+}
+.newsletter-social-minimal a, 
+.newsletter-social-lightbox a{
+  color: black;
+}
