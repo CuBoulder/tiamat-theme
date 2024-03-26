@@ -58,7 +58,9 @@
 
     {# Newsletter Blocks #}
     <div class="row row-content ucb-newsletter-blocks">
-      <div class="col-lg-6 col-12">
+        {{ content.field_newsletter_content_blocks|render }}
+
+      {# <div class="col-lg-6 col-12">
         {% if content.field_newsletter_block_title_one|render %}
           <h3>{{ content.field_newsletter_block_title_one|render }}</h3>
         {% endif %}
@@ -75,7 +77,7 @@
         {% if content.field_newsletter_block_text_two|render %}
           {{ content.field_newsletter_block_text_two|render }}
         {% endif %}
-      </div>
+      </div> #}
     </div>
 
     {# Newsletter Promo/Ad Two #}
