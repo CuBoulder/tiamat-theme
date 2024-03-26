@@ -3,10 +3,12 @@
  */
 
 .form-page-webform form {
-  padding: 10px;
-  background-color: transparent;
-  border: 1px solid rgba(200, 200, 200, 0.5);
-  width: fit-content;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.form-page-webform div:not(:last-child)>form {
+  border-bottom: 1px solid rgba(200, 200, 200, 0.5);
 }
 
 input.form-text,
@@ -15,12 +17,13 @@ input[type="text"],
 input[type="email"],
 input[type="tel"],
 textarea {
-  padding: 10px;
-  border: 1px solid rgba(128, 128, 128, 0.333);
-  background-color: #f2f2f2;
   color: #111;
-  line-height: 150%;
   font-size: inherit;
+  line-height: 150%;
+  background-color: #f2f2f2;
+  border: 1px solid rgba(128, 128, 128, 0.333);
+  width: 100%;
+  padding: 10px;
 }
 
 form label {
@@ -39,7 +42,7 @@ form label {
   display: inline;
 }
 
-form input[type="checkbox"] + label,
-form input[type="radio"] + label {
+form input[type="checkbox"]+label,
+form input[type="radio"]+label {
   display: inline-block;
 }
