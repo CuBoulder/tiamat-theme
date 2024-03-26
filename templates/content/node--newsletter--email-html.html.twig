@@ -364,53 +364,42 @@ td>h3>a{
                                 </table>
                                 {% endif %}
                             {% endif %}
-                        <!--Promo Blocks-->
-                        <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white">
-                            <tbody>
-                                <tr>
-                                    <td class="promo-block-row" align="center" style="text-align: left; padding-right:10px; padding-left:10px">
-                                        <!--Promo Block 1-->
-                                        <table role="presentation">
-                                            <tbody>
-                                        {% if content.field_newsletter_block_title_one|render %}
-                                                <tr>
-                                                    <td style="text-align: left; padding-right:10px; padding-left:10px">
-                                                        <h3>{{ content.field_newsletter_block_title_one|render }}</h3>
-                                                    </td>
-                                                </tr>
-                                        {% endif %}
-                
-                                        {% if content.field_newsletter_block_text_one|render %}
-                                            <tr style="text-align: left; padding-right:10px; padding-left:10px"> 
-                                                <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">{{ content.field_newsletter_block_text_one|render }}</td>
-                                            </tr>
-                                        {% endif %}
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                    <td class="promo-block-row" align="center" style="text-align: left; padding-right:10px; padding-left:10px">
-                                     <!--Promo Block 2-->
-                                        <table role="presentation">
-                                            <tbody>
-                                    {% if content.field_newsletter_block_title_two|render %}
-                                                <tr class="">
-                                                    <td style="text-align: left; padding-right:10px; padding-left:10px"> 
-                                                        <h3>{{ content.field_newsletter_block_title_two|render }}</h3>
-                                                    </td>
-                                                </tr>
-                                    {% endif %}
-                                    {% if content.field_newsletter_block_text_two|render %}
-                                    <tr>
-                                        <td style="text-align: left; padding-right:10px; padding-left:10px">    {{ content.field_newsletter_block_text_two|render }}</td>
+                            
+                            <!--Promo Blocks-->
+                            {% set blocksToRender = [] %}
+
+                            {# Preprocess blocks to filter out ones with empty or single-space values #}
+                            {% for key, block in content.field_newsletter_content_blocks %}
+                                {% if key|first != '#' %}
+                                    {% set paragraphItem = block['#paragraph'] %}
+                                    {% set title = paragraphItem.field_newsletter_block_title.value|default('') %}
+                                    {% set text = paragraphItem.field_newsletter_block_text.value|default('') %}
                                     
-                                    </tr>
+                                    {# Check if title or text is not just a space and not empty #}
+                                    {% if title|trim is not empty or text|trim is not empty %}
+                                        {% set blocksToRender = blocksToRender|merge([block]) %}
                                     {% endif %}
-                                            </tbody>
-                                            </table>
-                                            </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                {% endif %}
+                            {% endfor %}
+
+                            {# Render the blocks side by side #}
+                            {% if blocksToRender %}
+                                <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white" class="row row-content ucb-newsletter-blocks">
+                                    <tbody>
+                                        {% for i in 0..(blocksToRender|length - 1) %}
+                                            {% if loop.index is odd %}
+                                                <tr>
+                                            {% endif %}
+                                                    <td class="promo-block-row" align="center" style=" width:50%;align-content:baseline;text-align: left; padding-right:10px; padding-left:10px">
+                                                        {{ blocksToRender[i] }}
+                                                    </td>
+                                            {% if loop.index is even or loop.last %}
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% endif %}
                         <!--Ad Two-->
                         {% if content.field_newsletter_promo_image_two|render %}
                         {% if content.field_newsletter_promo_link_two|render %}
