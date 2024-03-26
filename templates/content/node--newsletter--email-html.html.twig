@@ -468,15 +468,15 @@ td>h3>a{
                     </tr>
                     {# Social share #}
                     {% if node.field_newsletter_social_links.value == 1 %}
-                    <tr>
-                        <td>
-                            {% if social_media_menu %}
-                            <center style="margin-bottom: 1em;font-size: 1.25rem; line-height: 1.25;" class="social-media-menu newsletter-social-media-menu">
-                                {{ social_media_menu }}
-                            </center>
-                            {% endif %}
-                        </td>
-                    </tr>
+                        {% if social_media_menu and social_media_menu|length > 1 %}
+                        <tr>
+                            <td>
+                                <center style="margin-bottom: 1em;font-size: 1.25rem; line-height: 1.25;" class="social-media-menu newsletter-social-media-menu">
+                                    {{ social_media_menu }}
+                                </center>
+                            </td>
+                        </tr>
+                        {% endif %}
                     {% endif %}
                 </tbody>
             </table>
