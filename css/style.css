@@ -876,6 +876,11 @@ div.table-vertical table td {
   border-bottom: none;
 }
 
+/* Needed for the Newsletter */
+#email-preview table, #email-preview tr, #email-preview td{
+  border: none;
+}
+
 .ucb-heading-font-normal h1,
 .ucb-heading-font-normal h2,
 .ucb-heading-font-normal h3,

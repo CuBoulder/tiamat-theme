@@ -208,6 +208,32 @@ td>h3>a{
     color: #0277BD;
 }
 
+.ucb-article-categories{
+    padding: 0;
+}
+
+.ucb-article-categories .ucb-article-category-icon{
+    display: none;
+}
+
+.ucb-article-categories a{
+    color: #666;
+    background-color: #e7e7e7;
+    padding: 3px;
+    line-height: 100%;
+    margin: 0 5px 5px 0;
+    font-weight: 600;
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    font-size: 10px;
+}
+
+.newsletter-social-media-menu .social-media-item{
+    display: inline-block;
+    padding: 10px;
+}
+
 
 @media only screen and (max-width: 500px) {
   .promo-block-row {
@@ -250,6 +276,12 @@ td>h3>a{
                                         {% if node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value %}
                                         <img style="object-fit:cover;-ms-interpolation-mode: bicubic; clear: both; display: block; float: left; height: 167px !important; max-width: 100% !important; outline: none; text-decoration: none; width: 250px !important; max-height: auto !important;"src="{{base_url}}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}">
                                         {% endif %}
+                                    </td>
+                                </tr>
+                                {# Newsletter title #}
+                                <tr>
+                                    <td style="padding-left:10px; text-align:left">
+                                        <span>{{node.field_newsletter_type.entity.label}}</span>
                                     </td>
                                 </tr>
                                 {# Date & View on Website Link #}
@@ -303,11 +335,22 @@ td>h3>a{
                         <!--Ad One-->
                             {% if content.field_newsletter_promo_image_one|render %}
                                 {% if content.field_newsletter_promo_link_one|render %}
+                            {# Extract the link URL and trim it #}
+                            {% set link_url_one = content.field_newsletter_promo_link_one|render|striptags|trim %}
+
+                            {# Check if the link is external or internal #}
+                            {% if link_url_one starts with 'http' or link_url_one starts with 'www' %}
+                                {# It's an external link; use it as is #}
+                                {% set final_url_one = link_url_one %}
+                            {% else %}
+                                {# It's an internal link; prepend the base URL #}
+                                {% set final_url_one = base_url ~ link_url_one %}
+                            {% endif %}
                                 <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
                                     <tbody>
                                         <tr>
                                             <td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
-                                                <a href="{{ content.field_newsletter_promo_link_one|render|striptags|trim }}">
+                                                <a href="{{ final_url_one}}">
                                                     <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                                 </a>
                                             </td>
@@ -326,61 +369,61 @@ td>h3>a{
                                 </table>
                                 {% endif %}
                             {% endif %}
-                        <!--Promo Blocks-->
-                        <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white">
-                            <tbody>
-                                <tr>
-                                    <td class="promo-block-row" align="center" style="text-align: left; padding-right:10px; padding-left:10px">
-                                        <!--Promo Block 1-->
-                                        <table role="presentation">
-                                            <tbody>
-                                        {% if content.field_newsletter_block_title_one|render %}
-                                                <tr>
-                                                    <td style="text-align: left; padding-right:10px; padding-left:10px">
-                                                        <h3>{{ content.field_newsletter_block_title_one|render }}</h3>
-                                                    </td>
-                                                </tr>
-                                        {% endif %}
-                
-                                        {% if content.field_newsletter_block_text_one|render %}
-                                            <tr style="text-align: left; padding-right:10px; padding-left:10px"> 
-                                                <td align="center" style="text-align: left; padding-right:10px; padding-left:10px">{{ content.field_newsletter_block_text_one|render }}</td>
-                                            </tr>
-                                        {% endif %}
-                                            </tbody>
-                                        </table>
-                                    </td>
-                                    <td class="promo-block-row" align="center" style="text-align: left; padding-right:10px; padding-left:10px">
-                                     <!--Promo Block 2-->
-                                        <table role="presentation">
-                                            <tbody>
-                                    {% if content.field_newsletter_block_title_two|render %}
-                                                <tr class="">
-                                                    <td style="text-align: left; padding-right:10px; padding-left:10px"> 
-                                                        <h3>{{ content.field_newsletter_block_title_two|render }}</h3>
-                                                    </td>
-                                                </tr>
-                                    {% endif %}
-                                    {% if content.field_newsletter_block_text_two|render %}
-                                    <tr>
-                                        <td style="text-align: left; padding-right:10px; padding-left:10px">    {{ content.field_newsletter_block_text_two|render }}</td>
+                            
+                            <!--Promo Blocks-->
+                            {% set blocksToRender = [] %}
+
+                            {# Preprocess blocks to filter out ones with empty or single-space values #}
+                            {% for key, block in content.field_newsletter_content_blocks %}
+                                {% if key|first != '#' %}
+                                    {% set paragraphItem = block['#paragraph'] %}
+                                    {% set title = paragraphItem.field_newsletter_block_title.value|default('') %}
+                                    {% set text = paragraphItem.field_newsletter_block_text.value|default('') %}
                                     
-                                    </tr>
+                                    {# Check if title or text is not just a space and not empty #}
+                                    {% if title|trim is not empty or text|trim is not empty %}
+                                        {% set blocksToRender = blocksToRender|merge([block]) %}
                                     {% endif %}
-                                            </tbody>
-                                            </table>
-                                            </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                {% endif %}
+                            {% endfor %}
+
+                            {# Render the blocks side by side #}
+                            {% if blocksToRender %}
+                                <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white" class="row row-content ucb-newsletter-blocks">
+                                    <tbody>
+                                        {% for i in 0..(blocksToRender|length - 1) %}
+                                            {% if loop.index is odd %}
+                                                <tr>
+                                            {% endif %}
+                                                    <td class="promo-block-row" align="center" style=" width:50%;align-content:baseline;text-align: left; padding-right:10px; padding-left:10px">
+                                                        {{ blocksToRender[i] }}
+                                                    </td>
+                                            {% if loop.index is even or loop.last %}
+                                                </tr>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            {% endif %}
                         <!--Ad Two-->
                         {% if content.field_newsletter_promo_image_two|render %}
                         {% if content.field_newsletter_promo_link_two|render %}
+                        {# Extract the link URL and trim it #}
+                            {% set link_url = content.field_newsletter_promo_link_two|render|striptags|trim %}
+
+                            {# Check if the link is external or internal #}
+                            {% if link_url starts with 'http://' or link_url starts with 'https://' %}
+                                {# It's an external link; use it as is #}
+                                {% set final_url = link_url %}
+                            {% else %}
+                                {# It's an internal link; prepend the base URL #}
+                                {% set final_url = base_url ~ link_url %}
+                            {% endif %}
                         <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
                             <tbody>
                                 <tr>
                                     <td width="500px" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px"> 
-                                        <a href="{{ content.field_newsletter_promo_link_two|render|striptags|trim }}">
+                                        <a href="{{ final_url }}">
                                             <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                         </a>
                                     </td>
@@ -423,13 +466,24 @@ td>h3>a{
                             </table>
                         </td>
                     </tr>
+                    {# Social share #}
+                    {% if node.field_newsletter_social_links.value == 1 %}
+                        {% if social_media_menu and social_media_menu|length > 1 %}
+                        <tr class="newsletter-social-{{designType}}">
+                            <td>
+                                <center style="margin-bottom: 1em;font-size: 1.25rem; line-height: 1.25;" class="social-media-menu newsletter-social-media-menu">
+                                    {{ social_media_menu }}
+                                </center>
+                            </td>
+                        </tr>
+                        {% endif %}
+                    {% endif %}
                 </tbody>
             </table>
         </center>
         {% endif %}
     </center>
     {% if designType == 'lightbox' or designType == 'darkbox' %}
-
                     </td>
     </tr>
     </tbody>
