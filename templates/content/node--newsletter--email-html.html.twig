@@ -229,6 +229,11 @@ td>h3>a{
     font-size: 10px;
 }
 
+.newsletter-social-media-menu .social-media-item{
+    display: inline-block;
+    padding: 10px;
+}
+
 
 @media only screen and (max-width: 500px) {
   .promo-block-row {
@@ -461,13 +466,22 @@ td>h3>a{
                             </table>
                         </td>
                     </tr>
+                    {# Social share #}
+                    <tr>
+                        <td>
+                            {% if social_media_menu %}
+                            <center style="margin-bottom: 1em;font-size: 1.25rem; line-height: 1.25;" class="social-media-menu newsletter-social-media-menu">
+                                {{ social_media_menu }}
+                            </center>
+                            {% endif %}
+                        </td>
+                    </tr>
                 </tbody>
             </table>
         </center>
         {% endif %}
     </center>
     {% if designType == 'lightbox' or designType == 'darkbox' %}
-
                     </td>
     </tr>
     </tbody>
