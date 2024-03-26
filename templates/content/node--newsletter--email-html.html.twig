@@ -467,6 +467,7 @@ td>h3>a{
                         </td>
                     </tr>
                     {# Social share #}
+                    {% if node.field_newsletter_social_links.value == 1 %}
                     <tr>
                         <td>
                             {% if social_media_menu %}
@@ -476,6 +477,7 @@ td>h3>a{
                             {% endif %}
                         </td>
                     </tr>
+                    {% endif %}
                 </tbody>
             </table>
         </center>
