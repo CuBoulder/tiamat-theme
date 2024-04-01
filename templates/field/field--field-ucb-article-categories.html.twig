@@ -1,6 +1,7 @@
 {#
 /**
  * @file Contains the template to display the category list on an article.
+ * Also used on pages such as the Newsletter and Issues
  */
 #}
 {# Only shows Taxonomy terms with display = true #}
@@ -12,7 +13,12 @@
       <i class="fa-solid fa-folder-open"></i>
     </div>
     {% for item in items|sort %}
-      {{ item.content }}
+      {# This canonical URL setting is needed for the Newsletter HTML, otherwise the links get rendered as relative such as `file:///taxonomy/term/1` #}
+      {% set term_id = item.content['#options'].entity.id %}
+      {% set term_url = url('entity.taxonomy_term.canonical', {'taxonomy_term': term_id}) %}
+      <a href="{{ term_url }}">
+        {{ item.content['#title'] }}
+      </a>
     {% endfor %}
   </div>
 {% endif %}

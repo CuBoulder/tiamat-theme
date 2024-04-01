@@ -45,3 +45,30 @@
   width: 160px;
   height: 160px;
 }
+
+.ucb-article-unpublished{
+  background-color: yellow;
+  text-align: center;
+  padding:10px 0px;
+  font-weight: bold;
+}
+
+/* Hides icon */
+.ucb-newsletter-section-content .ucb-article-category-icon{
+  display: none;
+}
+
+.ucb-newsletter-section-content .ucb-article-categories{
+  padding: 0;
+}
+
+/* Social Colors for Preview display */
+.newsletter-social-classic a,
+.newsletter-social-darkbox a,
+.newsletter-social-simple a {
+  color: #fff;
+}
+.newsletter-social-minimal a, 
+.newsletter-social-lightbox a{
+  color: black;
+}
