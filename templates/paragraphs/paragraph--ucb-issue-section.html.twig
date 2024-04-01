@@ -17,13 +17,15 @@
     {# If teaser #}
         {% if paragraph.field_ucb_issue_section_style.value is same as("0") %}
         <div class="issue-section-content">
-            <div class="teaser-article-thumbnail" id='teaser-article-thumbnail-{{key}}'> 
-            <a href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
-                <img src="{{ base_url }}{{ file_url(item.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri | image_style('focal_image_square')) }}" 
-                alt="{{ item.entity.field_ucb_article_thumbnail.entity.field_media_image.alt }}"
-                >
-            </a>
-            </div>
+            {% if item.entity.field_ucb_article_thumbnail.entity.field_media_image %}
+                <div class="teaser-article-thumbnail" id='teaser-article-thumbnail-{{key}}'> 
+                    <a href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
+                        <img src="{{ base_url }}{{ file_url(item.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri | image_style('focal_image_square')) }}" 
+                        alt="{{ item.entity.field_ucb_article_thumbnail.entity.field_media_image.alt }}"
+                        >
+                    </a>
+                </div>
+            {% endif %}
             <div class="issue-section-content-summary">
                 <a class="issue-article-title-link" href="{{ path('entity.node.canonical', {'node': content.field_ucb_issue_article_select['#items'].entity.id}) }}">
                     <h3 class="issue-section-teaser-title">{{item.entity.title.value}}</h3>
