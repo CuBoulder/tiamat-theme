@@ -55,9 +55,15 @@
     {# title & thumbnail #}
         {% elseif paragraph.field_ucb_issue_section_style.value is same as ("2") %}
         <div class="issue-section-content">
-            <a href="{{ path('entity.node.canonical', {'node': item.entity.id}) }}">
-                <div class="title-thumb-article-thumbnail" id='title-thumb-article-thumbnail-{{key}}'> {{ item.entity.field_ucb_article_thumbnail|view }} </div>
-            </a>
+            {% if item.entity.field_ucb_article_thumbnail.entity.field_media_image %}
+            <div class="teaser-article-thumbnail" id='teaser-article-thumbnail-{{key}}'>
+                <a href="{{ path('entity.node.canonical', {'node': item.entity.id}) }}">
+                    <img src="{{ base_url }}{{ file_url(item.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri | image_style('focal_image_square')) }}" 
+                            alt="{{ item.entity.field_ucb_article_thumbnail.entity.field_media_image.alt }}"
+                            >
+                </a>
+            </div>
+            {% endif %}
             <div class="issue-section-content-summary">
                 <a class="issue-article-title-link" href="{{ path('entity.node.canonical', {'node': item.entity.id}) }}">
                     {{item.entity.title.value}}
