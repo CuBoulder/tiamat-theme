@@ -890,3 +890,61 @@ div.table-vertical table td {
 .ucb-heading-font-normal .h6 {
   font-weight: 400;
 }
+
+/* === Form styling === */
+
+legend {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 1em;
+}
+
+fieldset:not(.fieldgroup) {
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  padding: 10px;
+}
+
+fieldset:not(.fieldgroup) legend {
+  display: inline-block;
+  float: none;
+  width: auto;
+  margin: 0;
+  padding: 0 .5em 0 .5em;
+}
+
+input.form-text,
+textarea.form-textarea,
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+textarea {
+  color: #111;
+  font-size: inherit;
+  line-height: 150%;
+  background-color: #f2f2f2;
+  border: 1px solid rgba(128, 128, 128, 0.333);
+  width: 100%;
+  padding: 10px;
+}
+
+form label {
+  font-weight: bold;
+  display: block;
+}
+
+.form-item,
+.form-actions {
+  margin-top: 1em;
+  margin-bottom: 1em;
+}
+
+.webform-container-inline div,
+.webform-container-inline div.form-item {
+  display: inline;
+}
+
+form input[type="checkbox"]+label,
+form input[type="radio"]+label {
+  display: inline-block;
+  font-weight: normal;
+}
