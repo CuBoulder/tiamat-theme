@@ -11,6 +11,25 @@
   border-bottom: 1px solid rgba(200, 200, 200, 0.5);
 }
 
+legend {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+fieldset:not(.fieldgroup) {
+  border: 1px solid rgba(200, 200, 200, 0.5);
+  padding: 10px;
+}
+
+fieldset:not(.fieldgroup) legend {
+  display: inline-block;
+  float: none;
+  width: auto;
+  margin: 0;
+  padding: 0 .5em 0 .5em;
+}
+
 input.form-text,
 textarea.form-textarea,
 input[type="text"],
@@ -45,4 +64,5 @@ form label {
 form input[type="checkbox"]+label,
 form input[type="radio"]+label {
   display: inline-block;
+  font-weight: normal;
 }
