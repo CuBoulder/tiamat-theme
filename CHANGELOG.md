@@ -9,6 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Issue Content: Bug Fixes for "Issue" (Node), Latest Issues Block
+  Fixes the following bugs related to the "Issue" content type and associated blocks.
+  
+  ## Issue Node
+  On the Issue Node - fixed visual bug for display on "Teaser" Articles with no thumbnail from displaying a broken `<img>`
+  
+  ## Latest Issues Block
+  - Fixed bug where the "Latest Issue Block" (up to 4 Issues displayed with a button to see more)  would display a "Current Issue block" (one Issue). The template was pointed at the incorrect web component.
+  - The "Latest Issue Block" adds an "Issue Archive" button below if more than 4 Issues exist on the site. Added conditional rendering to only show if an Issue Archive exists on the site.
+  
+  ## Issue Archive
+  Needs a pathauto so the button on the Latest Issues Block works by default (only one expected per site so a similar pathauto to the Class Notes will be implemented)
+  
+  Includes:
+  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/773
+  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/113
+  
+  Resolves #765 
+---
+
 - ### Newsletter: Display Changes + New Features
   A rather large update to the Newsletter Node, includes the following:
   

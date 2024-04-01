@@ -11,6 +11,8 @@
 ]
 %}
 
+{% set baseurlJSON = (url('<front>')|render|trim('/'))%}
+
 {# Block/Title/Icon Styles #}
 {% set blockStyles = [
 	content.field_bs_background_style|render|striptags|trim,
@@ -41,9 +43,9 @@
 		</div>
 	{% endif %}
 	{{ title_suffix }}
-	<current-issue-block>
+	<latest-issue-block baseURL="{{baseurlJSON}}" siteName="{{ site_name|lower|replace({' ': '-', '_': '-'}) }}">
 		<div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
 			<i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>
 		</div>
-	</current-issue-block>
+	</latest-issue-block>
 </div>

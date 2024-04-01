@@ -19,7 +19,7 @@ class LatestIssueElement extends HTMLElement {
             });
     }
 
-    build(data){
+   async build(data){
         if(data.data.length == 0){
             this.handleError({name : "No Issues Retrieved", message : "There are no Issues created"} , 'No Issues Found')
         } else {
@@ -83,9 +83,19 @@ class LatestIssueElement extends HTMLElement {
             }
             this.toggleMessage('ucb-al-loading');
             this.appendChild(latestIssueContainer)
-
+            const siteTitle = this.getAttribute('siteName');
+            const baseURL = this.getAttribute('baseURL');
+            // Check if Archive Exists:
+            let archiveExists
+            const response = await fetch(`${baseURL}/${siteTitle}/issue/archive`)
+                    .then((data) => {
+                       archiveExists = data.status == 200 ? true : false
+                    })
+                    .catch(Error=> {
+                        console.error(Error)
+                    });
             // Add Archive link if articles >=4
-            if (issues.length >= 4){
+            if (issues.length >= 4 && archiveExists){
                 const archiveContainer = document.createElement('div')
                 archiveContainer.classList = 'ucb-latest-issue-archive-container'
                 const archiveLink = document.createElement('a')
