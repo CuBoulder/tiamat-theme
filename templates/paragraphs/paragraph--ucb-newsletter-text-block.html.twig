@@ -1,0 +1,19 @@
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished'
+  ]
+%}
+
+{% block paragraph %}
+   <div class="col-lg-6 col-12">
+        {% if content.field_newsletter_block_title|render %}
+          <h3>{{ content.field_newsletter_block_title|render }}</h3>
+        {% endif %}
+        {% if content.field_newsletter_block_text|render %}
+          {{ content.field_newsletter_block_text|render }}
+        {% endif %}
+      </div>
+{% endblock paragraph %}

@@ -213,6 +213,25 @@ function boulder_base_preprocess_node__ucb_article(array &$variables) {
 	}
 }
 
+/**
+ * Implements hook_preprocess_HOOK() for node templates.
+ */
+function boulder_base_preprocess_node(&$variables) {
+  if ($variables['node']->getType() == 'newsletter') {
+    $menu_name = 'social-media-menu';
+    $menu_tree = \Drupal::menuTree();
+    $parameters = $menu_tree->getCurrentRouteMenuTreeParameters($menu_name);
+    $tree = $menu_tree->load($menu_name, $parameters);
+    $manipulators = [
+      ['callable' => 'menu.default_tree_manipulators:checkAccess'],
+      ['callable' => 'menu.default_tree_manipulators:generateIndexAndSort'],
+    ];
+    $tree = $menu_tree->transform($tree, $manipulators);
+    $variables['social_media_menu'] = $menu_tree->build($tree);
+  }
+}
+
+
 /***
  *  Custom theme settings worker function
  ***/

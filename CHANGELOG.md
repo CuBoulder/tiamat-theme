@@ -9,6 +9,31 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter: Display Changes + New Features
+  A rather large update to the Newsletter Node, includes the following:
+  
+  ### New Features
+  - Unpublished articles should not display in a Newsletter, and provide a yellow content warning for users in the section they are included in on the web version.
+  - Newsletter Text Blocks previously had two fixed Text Blocks. This has been updated to a paragraph type with no limit.
+  - Custom content no longer includes a category field.
+  - Ability to add Social Media Links to the Footer area. This will use the Social Media Menu links from the site and has a simple on/off checkbox to apply.
+  
+  ### Display Changes
+  - Adds Newsletter type title in header. This is set on the Newsletter Taxonomy.
+  - 'Feature' thumbnails fixed to a 2:1 aspect ratio
+  - Section headers fixed to 20px
+  - Article titles fixed to 18px
+  - Category links fixed to 10px, and a dark gray that is accessible with the light gray background
+  - Article text should be trimmed to ~50 words plus "..." unless a summary is used
+  - Teaser - style thumbnails are max of 130px but allowed to scale downwards if viewed on a smaller device
+  
+  Includes:
+  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/770
+  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/112
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/706
+---
+
 - ### content list updates
   Closes #680. 
   Reformats the content list to be readable and adds QoL changes.
