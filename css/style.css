@@ -545,6 +545,7 @@ div.align-right .field_media_oembed_video {
   height: 450px;
   padding-top: 0; /* Remove padding-top */
   object-fit: cover;
+  max-width: 100%; /* Stop embed from spanning across columns */
 }
 div.align-right .field_media_oembed_video{
   margin-left: 20px;
@@ -553,6 +554,10 @@ div.align-right .field_media_oembed_video{
 div.align-left .field_media_oembed_video{
   margin-right: 20px;
   margin-bottom: 20px;
+}
+div.align-center .field_media_oembed_video{
+  margin-right: auto;
+  margin-left: auto;
 }
 div.align-center .field_media_oembed_video iframe, 
 div.align-right .field_media_oembed_video iframe, 
