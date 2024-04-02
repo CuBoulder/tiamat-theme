@@ -30,7 +30,9 @@
                 <a class="issue-article-title-link" href="{{ path('entity.node.canonical', {'node': item.entity.id}) }}">
                     <h3 class="issue-section-teaser-title">{{item.entity.title.value}}</h3>
                 </a>
-                <div class="issue-article-categories">{{item.entity.field_ucb_article_categories|view}}</div>
+                    {% if item.entity.field_ucb_article_thumbnail.entity.field_media_image or item.entity.field_ucb_article_summary.value%}
+                        <div class="issue-article-categories">{{item.entity.field_ucb_article_categories|view}}</div>
+                    {% endif %}
                 <p class="issue-section-teaser-summary">{{item.entity.field_ucb_article_summary.value}}</p>
                 <a class="issue-section-teaser-read" href="{{ path('entity.node.canonical', {'node': item.entity.id}) }}">Read More</a>
             </div>
@@ -46,7 +48,9 @@
                     <a class="issue-article-title-link" href="{{ path('entity.node.canonical', {'node': item.entity.id}) }}">
                         <h3 class="issue-section-feature-title">{{item.entity.title.value}}</h3>
                     </a>
-                    <div class="issue-article-categories">{{item.entity.field_ucb_article_categories|view}}</div>
+                        {% if item.entity.field_ucb_article_thumbnail.entity.field_media_image or item.entity.field_ucb_article_summary.value%}
+                            <div class="issue-article-categories">{{item.entity.field_ucb_article_categories|view}}</div>
+                        {% endif %}
                     <p class="issue-section-feature-summary">{{item.entity.field_ucb_article_summary.value}}</p>
                     <a class="issue-section-feature-read" href="{{ path('entity.node.canonical', {'node': item.entity.id}) }}">Read More</a>
                 </div>
