@@ -536,13 +536,19 @@ li.social-media-item.menu-item {
   height: 100%;
 }
 
-/* Overriding styles for inserted video media .field_media_oembed_video, if aligned/floated */
-div.align-center .field_media_oembed_video,
+/* Overriding styles for inserted video media .field_media_oembed_video, if floated */
 div.align-left .field_media_oembed_video,
 div.align-right .field_media_oembed_video {
   position: static; /* Reset position */
+  padding-top: 0; /* Remove padding-top */
+  object-fit: cover;
+  max-width: 100%; /* Stop embed from spanning across columns */
+  display: inline; /* Fixes overflow error tied to floating an iframe */
+}
+/* Overriding styles for inserted video media .field_media_oembed_video, if aligned */
+div.align-center .field_media_oembed_video {
+  position: static; /* Reset position */
   width: 800px; /* Reset width to default */
-  height: 450px;
   padding-top: 0; /* Remove padding-top */
   object-fit: cover;
   max-width: 100%; /* Stop embed from spanning across columns */
@@ -568,7 +574,8 @@ div.align-left .field_media_oembed_video iframe {
   bottom: auto; /* Reset bottom position */
   right: auto; /* Reset right position */
   width: 800px;
-  height: 450px;
+  aspect-ratio: 16/9;
+  max-width: 100%;
 }
 /* Responsive sizing for overriding inserted video media if aligned/floated */
 @media only screen and (max-width:980px) {
