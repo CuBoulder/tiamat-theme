@@ -654,7 +654,9 @@ article .align-left .media-image-caption p {
 .align-right.image_style-focal_image_wide,
 .align-left.image_style-focal_image_wide,
 .align-right.image_style-focal_image_square,
-.align-left.image_style-focal_image_square {
+.align-left.image_style-focal_image_square,
+.align-right.image_style-default,
+.align-left.image_style-default {
   max-width: 50%;
 }
 
