@@ -7,8 +7,8 @@ a.button:visited,
 .button,
 a.button-ghost,
 .button-ghost {
-  color: var(--ucb-button-textcolor-default) !important;
-  background-color: var(--ucb-button-bgcolor-default);
+  color: var(--button-text-color-default) !important;
+  background-color: var(--button-background-color-default);
   display: inline-block;
   padding: 5px 10px;
   font-weight: bold;
@@ -65,40 +65,40 @@ a.button-ghost,
     text-align: center; }
 
 .button,
-.ucb-button-colors {
-  --ucb-button-textcolor-default: #fff;
-  --ucb-button-bgcolor-default: #0277BD;
-  --ucb-button-textcolor-blue: #fff;
-  --ucb-button-bgcolor-blue: #0277BD;
-  --ucb-button-textcolor-white: #111111;
-  --ucb-button-bgcolor-white: #fff;
-  --ucb-button-textcolor-gray-dark: #fff;
-  --ucb-button-bgcolor-gray-dark: #424242;
-  --ucb-button-textcolor-gray-light: #111111;
-  --ucb-button-bgcolor-gray-light: #EEEEEE;
-  --ucb-button-textcolor-gray: #111111;
-  --ucb-button-bgcolor-gray: #EEEEEE;
-  --ucb-button-textcolor-black: #fff;
-  --ucb-button-bgcolor-black: #000;
-  --ucb-button-textcolor-gold: #111111;
-  --ucb-button-bgcolor-gold: #cfb87c; }
+.button-colors {
+  --button-text-color-default: #fff;
+  --button-background-color-default: #0277BD;
+  --button-text-color-blue: #fff;
+  --button-background-color-blue: #0277BD;
+  --button-text-color-white: #111111;
+  --button-background-color-white: #fff;
+  --button-text-color-gray-dark: #fff;
+  --button-background-color-gray-dark: #424242;
+  --button-text-color-gray-light: #111111;
+  --button-background-color-gray-light: #EEEEEE;
+  --button-text-color-gray: #111111;
+  --button-background-color-gray: #EEEEEE;
+  --button-text-color-black: #fff;
+  --button-background-color-black: #000;
+  --button-text-color-gold: #111111;
+  --button-background-color-gold: #cfb87c; }
   .button:hover, .button:focus,
-  .ucb-button-colors:hover,
-  .ucb-button-colors:focus {
-    --ucb-button-bgcolor-default: #026baa;
-    --ucb-button-bgcolor-blue: #026baa;
-    --ucb-button-bgcolor-white: #e6e6e6;
-    --ucb-button-bgcolor-gray-dark: #3b3b3b;
-    --ucb-button-bgcolor-gray-light: #d6d6d6;
-    --ucb-button-bgcolor-gray: #d6d6d6;
-    --ucb-button-bgcolor-black: #333333;
-    --ucb-button-bgcolor-gold: #a6a6a6; }
+  .button-colors:hover,
+  .button-colors:focus {
+    --button-background-color-default: #026baa;
+    --button-background-color-blue: #026baa;
+    --button-background-color-white: #e6e6e6;
+    --button-background-color-gray-dark: #3b3b3b;
+    --button-background-color-gray-light: #d6d6d6;
+    --button-background-color-gray: #d6d6d6;
+    --button-background-color-black: #333333;
+    --button-background-color-gold: #a6a6a6; }
 
 .button.button-blue,
 .buttons-color-blue a,
 .buttons-color-blue a.button {
-  color: var(--ucb-button-textcolor-blue) !important;
-  background-color: var(--ucb-button-bgcolor-blue); }
+  color: var(--button-text-color-blue) !important;
+  background-color: var(--button-background-color-blue); }
   .button.button-blue:hover, .button.button-blue:focus,
   .buttons-color-blue a:hover,
   .buttons-color-blue a:focus,
@@ -109,8 +109,8 @@ a.button-ghost,
 .button.button-white,
 .buttons-color-white a,
 .buttons-color-white a.button {
-  color: var(--ucb-button-textcolor-white) !important;
-  background-color: var(--ucb-button-bgcolor-white);
+  color: var(--button-text-color-white) !important;
+  background-color: var(--button-background-color-white);
   border: 1px solid #e0e0e0; }
   .button.button-white:hover, .button.button-white:focus,
   .buttons-color-white a:hover,
@@ -122,8 +122,8 @@ a.button-ghost,
 .button.button-gray-dark,
 .buttons-color-gray-dark a,
 .buttons-color-gray-dark a.button {
-  color: var(--ucb-button-textcolor-gray-dark) !important;
-  background-color: var(--ucb-button-bgcolor-gray-dark); }
+  color: var(--button-text-color-gray-dark) !important;
+  background-color: var(--button-background-color-gray-dark); }
   .button.button-gray-dark:hover, .button.button-gray-dark:focus,
   .buttons-color-gray-dark a:hover,
   .buttons-color-gray-dark a:focus,
@@ -134,8 +134,8 @@ a.button-ghost,
 .button.button-gray-light,
 .buttons-color-gray-light a,
 .buttons-color-gray-light a.button {
-  color: var(--ucb-button-textcolor-gray-light) !important;
-  background-color: var(--ucb-button-bgcolor-gray-light); }
+  color: var(--button-text-color-gray-light) !important;
+  background-color: var(--button-background-color-gray-light); }
   .button.button-gray-light:hover, .button.button-gray-light:focus,
   .buttons-color-gray-light a:hover,
   .buttons-color-gray-light a:focus,
@@ -146,8 +146,8 @@ a.button-ghost,
 .button.button-gray,
 .buttons-color-gray a,
 .buttons-color-gray a.button {
-  color: var(--ucb-button-textcolor-gray) !important;
-  background-color: var(--ucb-button-bgcolor-gray); }
+  color: var(--button-text-color-gray) !important;
+  background-color: var(--button-background-color-gray); }
   .button.button-gray:hover, .button.button-gray:focus,
   .buttons-color-gray a:hover,
   .buttons-color-gray a:focus,
@@ -158,8 +158,8 @@ a.button-ghost,
 .button.button-black,
 .buttons-color-black a,
 .buttons-color-black a.button {
-  color: var(--ucb-button-textcolor-black) !important;
-  background-color: var(--ucb-button-bgcolor-black); }
+  color: var(--button-text-color-black) !important;
+  background-color: var(--button-background-color-black); }
   .button.button-black:hover, .button.button-black:focus,
   .buttons-color-black a:hover,
   .buttons-color-black a:focus,
@@ -171,8 +171,8 @@ a.button-ghost,
 .button.button-gold,
 .buttons-color-gold a,
 .buttons-color-gold a.button {
-  color: var(--ucb-button-textcolor-gold) !important;
-  background-color: var(--ucb-button-bgcolor-gold); }
+  color: var(--button-text-color-gold) !important;
+  background-color: var(--button-background-color-gold); }
   .button.button-gold:hover, .button.button-gold:focus,
   .buttons-color-gold a:hover,
   .buttons-color-gold a:focus,
@@ -251,16 +251,16 @@ a.button-ghost,
 .buttongroup-color-blue {
   background-color: #01578b; }
   .buttongroup-color-blue a.button {
-    color: var(--ucb-button-textcolor-blue) !important;
-    background-color: var(--ucb-button-bgcolor-blue); }
+    color: var(--button-text-color-blue) !important;
+    background-color: var(--button-background-color-blue); }
     .buttongroup-color-blue a.button:hover, .buttongroup-color-blue a.button:focus {
       background-color: #026baa; }
 
 .buttongroup-color-white {
   background-color: #e6e6e6; }
   .buttongroup-color-white a.button {
-    color: var(--ucb-button-textcolor-white) !important;
-    background-color: var(--ucb-button-bgcolor-white);
+    color: var(--button-text-color-white) !important;
+    background-color: var(--button-background-color-white);
     border: 1px solid #e0e0e0; }
     .buttongroup-color-white a.button:hover, .buttongroup-color-white a.button:focus {
       background-color: #e6e6e6; }
@@ -268,32 +268,32 @@ a.button-ghost,
 .buttongroup-color-gray-dark {
   background-color: #292929; }
   .buttongroup-color-gray-dark a.button {
-    color: var(--ucb-button-textcolor-gray-dark) !important;
-    background-color: var(--ucb-button-bgcolor-gray-dark); }
+    color: var(--button-text-color-gray-dark) !important;
+    background-color: var(--button-background-color-gray-dark); }
     .buttongroup-color-gray-dark a.button:hover, .buttongroup-color-gray-dark a.button:focus {
       background-color: #3b3b3b; }
 
 .buttongroup-color-gray-light {
   background-color: #d5d5d5; }
   .buttongroup-color-gray-light a.button {
-    color: var(--ucb-button-textcolor-gray-light) !important;
-    background-color: var(--ucb-button-bgcolor-gray-light); }
+    color: var(--button-text-color-gray-light) !important;
+    background-color: var(--button-background-color-gray-light); }
     .buttongroup-color-gray-light a.button:hover, .buttongroup-color-gray-light a.button:focus {
       background-color: #d6d6d6; }
 
 .buttongroup-color-gray {
   background-color: #d5d5d5; }
   .buttongroup-color-gray a.button {
-    color: var(--ucb-button-textcolor-gray) !important;
-    background-color: var(--ucb-button-bgcolor-gray); }
+    color: var(--button-text-color-gray) !important;
+    background-color: var(--button-background-color-gray); }
     .buttongroup-color-gray a.button:hover, .buttongroup-color-gray a.button:focus {
       background-color: #d6d6d6; }
 
 .buttongroup-color-black {
   background-color: black; }
   .buttongroup-color-black a.button {
-    color: var(--ucb-button-textcolor-black) !important;
-    background-color: var(--ucb-button-bgcolor-black); }
+    color: var(--button-text-color-black) !important;
+    background-color: var(--button-background-color-black); }
     .buttongroup-color-black a.button:hover, .buttongroup-color-black a.button:focus {
       background-color: black;
       background-color: #333333; }
@@ -301,15 +301,15 @@ a.button-ghost,
 .buttongroup-color-gold {
   background-color: #c1a457; }
   .buttongroup-color-gold a.button {
-    color: var(--ucb-button-textcolor-gold) !important;
-    background-color: var(--ucb-button-bgcolor-gold); }
+    color: var(--button-text-color-gold) !important;
+    background-color: var(--button-background-color-gold); }
     .buttongroup-color-gold a.button:hover, .buttongroup-color-gold a.button:focus {
       background-color: #c6ab64;
       background-color: #a6a6a6; }
 
 .cu-give-button-dark {
-  color: var(--ucb-button-textcolor-default) !important;
-  background-color: var(--ucb-button-bgcolor-default);
+  color: var(--button-text-color-default) !important;
+  background-color: var(--button-background-color-default);
   display: inline-block;
   padding: 5px 10px;
   font-weight: bold;
@@ -328,8 +328,8 @@ a.button-ghost,
   transition: -webkit-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
   transition: -moz-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
   transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
-  color: var(--ucb-button-textcolor-gray-dark) !important;
-  background-color: var(--ucb-button-bgcolor-gray-dark); }
+  color: var(--button-text-color-gray-dark) !important;
+  background-color: var(--button-background-color-gray-dark); }
   .cu-give-button-dark:hover, .cu-give-button-dark:focus {
     -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -342,8 +342,8 @@ a.button-ghost,
     background-color: #3b3b3b; }
 
 .cu-give-button-light {
-  color: var(--ucb-button-textcolor-default) !important;
-  background-color: var(--ucb-button-bgcolor-default);
+  color: var(--button-text-color-default) !important;
+  background-color: var(--button-background-color-default);
   display: inline-block;
   padding: 5px 10px;
   font-weight: bold;
@@ -362,8 +362,8 @@ a.button-ghost,
   transition: -webkit-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
   transition: -moz-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
   transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
-  color: var(--ucb-button-textcolor-gray-light) !important;
-  background-color: var(--ucb-button-bgcolor-gray-light); }
+  color: var(--button-text-color-gray-light) !important;
+  background-color: var(--button-background-color-gray-light); }
   .cu-give-button-light:hover, .cu-give-button-light:focus {
     -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -376,8 +376,8 @@ a.button-ghost,
     background-color: #d6d6d6; }
 
 .cu-give-button-gold {
-  color: var(--ucb-button-textcolor-default) !important;
-  background-color: var(--ucb-button-bgcolor-default);
+  color: var(--button-text-color-default) !important;
+  background-color: var(--button-background-color-default);
   display: inline-block;
   padding: 5px 10px;
   font-weight: bold;
@@ -396,8 +396,8 @@ a.button-ghost,
   transition: -webkit-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
   transition: -moz-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
   transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
-  color: var(--ucb-button-textcolor-gold) !important;
-  background-color: var(--ucb-button-bgcolor-gold); }
+  color: var(--button-text-color-gold) !important;
+  background-color: var(--button-background-color-gold); }
   .cu-give-button-gold:hover, .cu-give-button-gold:focus {
     -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);

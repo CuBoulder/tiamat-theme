@@ -9,8 +9,8 @@
 // Base button styles
 
 @mixin button_default {
-  color: var(--ucb-button-textcolor-default) !important;
-  background-color: var(--ucb-button-bgcolor-default);
+  color: var(--button-text-color-default) !important;
+  background-color: var(--button-background-color-default);
   display: inline-block;
   padding:5px 10px;
   font-weight:bold;
@@ -44,8 +44,8 @@ a.button-ghost,
 }
 
 @mixin button($name, $color) {
-  color: var(--ucb-button-textcolor-#{$name}) !important;
-  background-color: var(--ucb-button-bgcolor-#{$name});
+  color: var(--button-text-color-#{$name}) !important;
+  background-color: var(--button-background-color-#{$name});
   @if ($color == #fff) {
     border:1px solid #e0e0e0;
   }
@@ -84,18 +84,18 @@ $colors: (
 
 // Create buttons from colors
 .button,
-.ucb-button-colors {
-  --ucb-button-textcolor-default: #{set-text-color($blue)};
-  --ucb-button-bgcolor-default: #{$blue};
+.button-colors {
+  --button-text-color-default: #{set-text-color($blue)};
+  --button-background-color-default: #{$blue};
   @each $name, $color in $colors {
-    --ucb-button-textcolor-#{$name}: #{set-text-color($color)};
-    --ucb-button-bgcolor-#{$name}: #{$color};
+    --button-text-color-#{$name}: #{set-text-color($color)};
+    --button-background-color-#{$name}: #{$color};
   }
   &:hover,
   &:focus {
-    --ucb-button-bgcolor-default: #{button-hover-color($blue)};
+    --button-background-color-default: #{button-hover-color($blue)};
     @each $name, $color in $colors {
-      --ucb-button-bgcolor-#{$name}: #{button-hover-color($color)};
+      --button-background-color-#{$name}: #{button-hover-color($color)};
     }
   }
 }

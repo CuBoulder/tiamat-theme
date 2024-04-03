@@ -967,12 +967,12 @@ form input[type="radio"]+label {
 }
 
 .button.form-submit {
-  color: var(--ucb-button-textcolor-gray-light) !important;
-  background-color: var(--ucb-button-bgcolor-gray-light);
+  color: var(--button-text-color-gray-light) !important;
+  background-color: var(--button-background-color-gray-light);
 }
 
 .button.form-submit.button--primary,
 .button.form-submit.webform-button--next {
-  color: var(--ucb-button-textcolor-blue) !important;
-  background-color: var(--ucb-button-bgcolor-blue);
+  color: var(--button-text-color-blue) !important;
+  background-color: var(--button-background-color-blue);
 }
