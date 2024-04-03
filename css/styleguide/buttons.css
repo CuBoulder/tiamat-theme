@@ -2,6 +2,8 @@
  * Button styles
  */
 a.button,
+a.button:link,
+a.button:visited,
 .button,
 a.button-ghost,
 .button-ghost {
@@ -26,6 +28,10 @@ a.button-ghost,
   transition: -moz-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
   transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease; }
   a.button:hover, a.button:focus,
+  a.button:link:hover,
+  a.button:link:focus,
+  a.button:visited:hover,
+  a.button:visited:focus,
   .button:hover,
   .button:focus,
   a.button-ghost:hover,
@@ -36,6 +42,8 @@ a.button-ghost,
     -moz-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); }
   a.button:active,
+  a.button:link:active,
+  a.button:visited:active,
   .button:active,
   a.button-ghost:active,
   .button-ghost:active {
@@ -43,6 +51,10 @@ a.button-ghost,
     -moz-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.35);
     box-shadow: 0 3px 15px rgba(0, 0, 0, 0.35); }
   a.button.button-full, a.button.button-block,
+  a.button:link.button-full,
+  a.button:link.button-block,
+  a.button:visited.button-full,
+  a.button:visited.button-block,
   .button.button-full,
   .button.button-block,
   a.button-ghost.button-full,
