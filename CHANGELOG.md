@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article Slider: Fix with 6+ Articles
+  Fixes a bug where 6+ Articles would cause the `Article Slider` to additionally repeat Articles in a long column
+  
+  ![image](https://github.com/CuBoulder/tiamat-theme/assets/85851903/b1a1e9f3-1ea7-484b-a11b-cd9205b3db60)
+  
+  Resolves #781 
+---
+
 - ### Additional Issue Fixes
   ## "Issue" Content Type Changes
   -  Fixed a bug where all Articles in a section would link to the first Article in the section
