@@ -1,6 +1,6 @@
 {# This condition prevents wrapping in an unnecessary <div> #}
 {% if attributes != "" %}
-<div{{ attributes }}>
+<div{{ attributes.addClass('image_style-' ~ content.field_media_image.0['#image_style']|render) }} >
   {{ title_suffix.contextual_links }}
   {{ content }}
 </div>
