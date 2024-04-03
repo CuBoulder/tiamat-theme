@@ -965,3 +965,14 @@ form input[type="radio"]+label {
   display: inline-block;
   font-weight: normal;
 }
+
+.button.form-submit {
+  color: var(--ucb-button-textcolor-gray-light);
+  background-color: var(--ucb-button-bgcolor-gray-light);
+}
+
+.button.form-submit.button--primary,
+.button.form-submit.webform-button--next {
+  color: var(--ucb-button-textcolor-blue);
+  background-color: var(--ucb-button-bgcolor-blue);
+}

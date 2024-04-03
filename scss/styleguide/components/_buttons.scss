@@ -9,8 +9,8 @@
 // Base button styles
 
 @mixin button_default {
-  background-color: $blue;
-  color: #fff !important;
+  color: var(--ucb-button-textcolor-default);
+  background-color: var(--ucb-button-bgcolor-default);
   display: inline-block;
   padding:5px 10px;
   font-weight:bold;
@@ -20,6 +20,13 @@
   @include rounded($radius: $radius_small);
   @include rgbashadow(0, 1px, 2px, #000000, .20);
   @include shadowtransition;
+  &:hover,
+  &:focus {
+    @include rgbashadow(0, 2px, 5px, #000000, .30);
+  }
+  &:active {
+    @include rgbashadow(0, 3px, 15px, #000000, .35);
+  } 
 }
 
 a.button,
@@ -34,28 +41,32 @@ a.button-ghost,
   }
 }
 
+@mixin button($name, $color) {
+  color: var(--ucb-button-textcolor-#{$name});
+  background-color: var(--ucb-button-bgcolor-#{$name});
+  @if ($color == #fff) {
+    border:1px solid #e0e0e0;
+  }
+  &:hover,
+  &:focus {
+    background-color: scale-color($color, $lightness: -10%);
+    @if ($color == $gold) {
+      background-color:$gold-gray;
+    }
+    @else if ($color == #000) {
+      background-color: scale-color($color, $lightness: 20%);
+    }
+  }
+}
 
-@mixin button($color) {
- background-color: $color;
- color: set-text-color($color) !important;
- @if ($color == #fff) {
-   border:1px solid #e0e0e0;
- }
- &:hover,
- &:focus {
-   background-color:darken($color, 3%);
-   background-color: scale-color($color, $lightness: -10%);
-   @if ($color == $gold) {
-     background-color:$gold-gray;
-   }
-   @elseif ($color == #000) {
-     background-color: scale-color($color, $lightness: 20%);
-   }
-   @include rgbashadow(0, 2px, 5px, #000000, .30);
- }
- &:active {
-   @include rgbashadow(0, 3px, 15px, #000000, .35);
- }
+@function button-hover-color($color) {
+  @if ($color == $gold) {
+    @return $gold-gray;
+  }
+  @else if ($color == #000) {
+   @return scale-color($color, $lightness: 20%);
+  }
+  @return scale-color($color, $lightness: -10%);
 }
 
 // Button colors
@@ -68,13 +79,32 @@ $colors: (
   "black":$black,
   "gold": $gold,
 );
+
 // Create buttons from colors
+.button,
+.ucb-button-colors {
+  --ucb-button-textcolor-default: #{set-text-color($blue)};
+  --ucb-button-bgcolor-default: #{$blue};
+  @each $name, $color in $colors {
+    --ucb-button-textcolor-#{$name}: #{set-text-color($color)};
+    --ucb-button-bgcolor-#{$name}: #{$color};
+  }
+  &:hover,
+  &:focus {
+    --ucb-button-bgcolor-default: #{button-hover-color($blue)};
+    @each $name, $color in $colors {
+      --ucb-button-bgcolor-#{$name}: #{button-hover-color($color)};
+    }
+  }
+  &:active {
+    @include rgbashadow(0, 3px, 15px, #000000, .35);
+  }
+}
 @each $name, $color in $colors {
   .button.button-#{$name},
   .buttons-color-#{$name} a,
   .buttons-color-#{$name} a.button {
-    @include button_default;
-    @include button($color);
+    @include button($name, $color);
   }
 }
 
@@ -154,7 +184,7 @@ $colors: (
   .buttongroup-color-#{$name} {
     background-color: darken($color, 10%);
     a.button {
-      @include button($color);
+      @include button($name, $color);
     }
   }
 }
@@ -162,15 +192,15 @@ $colors: (
 // Give buttons
 .cu-give-button-dark {
   @include button_default;
-  @include button($gray_dark);
+  @include button('gray-dark', $gray_dark);
 }
 .cu-give-button-light {
   @include button_default;
-  @include button($gray_light);
+  @include button('gray-light', $gray_light);
 }
 .cu-give-button-gold {
   @include button_default;
-  @include button($gold);
+  @include button('gold', $gold);
 }
 
 // Ghost buttons
