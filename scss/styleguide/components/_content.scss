@@ -1,0 +1,15 @@
+@import "modules/global";
+@import "modules/colors";
+@import "modules/functions";
+
+/**
+ * Content styles
+ */
+.teaser {
+  border-bottom: 1px solid $border;
+  margin-bottom: $spacing;
+  padding-bottom: $spacing;
+  .teaser-content {
+    overflow: hidden;
+  }
+}

@@ -1,0 +1,275 @@
+@import "modules/global";
+@import "modules/colors";
+@import "modules/functions";
+
+/**
+ * Element/other styles
+ */
+
+hr {
+  margin: 0 0 20px 0;
+  padding: 0;
+  border: none;
+  height: 1px;
+  background: $border;
+}
+
+/* ACCORDION & Expand shortcode*/
+
+.ui-accordion h3.ui-accordion-header,
+.ui-accordion .ui-accordion-header,
+.expand-set {
+  background-image: none;
+  background-color: transparent;
+  border-bottom:1px solid $border;
+}
+.expand-set {
+  margin-bottom: 20px;
+  overflow: auto;
+}
+.ui-accordion h3.ui-accordion-header.ui-state-active,
+.ui-accordion .ui-accordion-header.ui-state-active {
+  border:none;
+}
+.ui-accordion .ui-accordion-header .ui-icon {
+  display: none;
+}
+.ui-accordion .ui-accordion-header .ui-icon:before {
+ content:"\f002 "; /* this is the Unicode for the icon */
+ font-family: FontAwesome; /* font family is included in Canvas Framework */
+ margin-right: .5em;
+
+
+}
+.ui-accordion h3.ui-accordion-header a,
+.ui-accordion .ui-accordion-header a,
+.expand-set a.expand-title {
+  display: flex;
+  flex-direction: row;
+  background-image: none;
+  background-color: transparent;
+  padding:10px 10px 10px 0px;
+  //background-image: url(../images/plus-blue.png);
+  //background-repeat: no-repeat;
+  //background-position: left center;
+  border: none;
+  text-decoration: none;
+  &:before {
+    content: "\f0fe";
+    font-family: FontAwesome;
+    margin-right:5px;
+    margin-left: 1px;
+    //font-size: 110%;
+    //color: rgba(128,128,128,.75);
+    font-weight: normal !important;
+  }
+}
+.expand-set a.expand-title {
+  //color:$text-black;
+  font-size: 110%;
+}
+.ui-accordion h3.ui-accordion-header.ui-state-active a,
+.ui-accordion .ui-accordion-header.ui-state-active a,
+.expand-set a.expand-active {
+  //background-image: url(../images/minus-blue.png);
+  //background-repeat: no-repeat;
+  //background-position: left center;
+  &:before {
+    content: "\f146";
+  }
+}
+.expand-set a.expand-active {
+  font-weight: bold;
+}
+.ui-accordion .ui-accordion-content,
+.expand-set .expand-content {
+  border:1px solid $border;
+  padding:10px;
+}
+.expand-set .expand-content {
+  border-bottom: none;
+}
+
+.anchors {
+  @include rounded($radius: $radius_small);
+  background-color: $gray-light;
+  @include clearfloats;
+
+  .anchors-label {
+    font-weight: bold;
+    background-color: $gray-dark;
+    color:#fff;
+    padding:10px;
+  }
+  .anchors-links {
+    padding: 0 10px 10px 10px;
+  }
+}
+
+.simple-hero {
+  // Background image.
+  background-position: center center;
+  background-size: cover;
+  // Padding.
+  padding: $spacing*2;
+  @media (min-width: $breakpoint_medium) {
+    padding-top: $spacing*4;
+    padding-bottom: $spacing*4;
+    padding-left: $spacing*2;
+    padding-right: $spacing*2;
+  }
+  @media (min-width: $breakpoint_large) {
+    padding-top: $spacing*6;
+    padding-bottom: $spacing*6;
+    padding-left: $spacing*3;
+    padding-right: $spacing*3;
+  }
+  &.simple-hero-small {
+    padding: $spacing;
+    .simple-hero-content {
+      font-size:100%;
+    }
+  }
+  .simple-hero-content {
+    @media (min-width: $breakpoint_medium) {
+      font-size: 120%;
+    }
+    h1,h2, h3, h4 {
+      font-size: 150%;
+      @media (min-width: $breakpoint_medium) {
+        font-size: 180%;
+      }
+      font-weight:bold;
+    }
+
+    // Alignment.
+    &.align-left {
+      float: none;
+      text-align: left;
+      @media (min-width: $breakpoint_medium) {
+        padding-right:35%;
+      }
+    }
+    &.align-right {
+      float: none;
+      text-align: right;
+      @media (min-width: $breakpoint_medium) {
+        padding-left:35%;
+      }
+    }
+    &.align-center {
+      float: none;
+      text-align: center;
+      @media (min-width: $breakpoint_medium) {
+        padding:0 20%;
+      }
+    }
+  }
+}
+
+// Content Section
+.content-section {
+  // Background image.
+  background-position: center center;
+  background-size: cover;
+  // Padding.
+  padding: $spacing*2 0;
+  @media (min-width: $breakpoint_medium) {
+    padding-top: $spacing*4;
+    padding-bottom: $spacing*4;
+    //padding-left: $spacing*2;
+    //padding-right: $spacing*2;
+  }
+  @media (min-width: $breakpoint_large) {
+    padding-top: $spacing*6;
+    padding-bottom: $spacing*6;
+    //padding-left: $spacing*3;
+    //padding-right: $spacing*3;
+  }
+}
+
+// Accordions.
+.accordion {
+  background:none;
+  border:none;
+  .accordion-item {
+    background:none;
+    border:none;
+    border-bottom: 1px solid $border;
+    padding: 10px 0;
+    & > h2, & > h3, & > h4 {
+      font-size: 100%;
+      margin:0;
+    }
+
+    button.accordion-button {
+      color: inherit;
+      padding:0;
+      background:none;
+      border:none;
+      font-weight: bold;
+      font-size:100%;
+      position: relative;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      &:after {
+        background: none;
+        font-family: "Font Awesome 5 Free";
+        content: '\f077';
+        text-align: center;
+      }
+    }
+    button.accordion-button:not(.collapsed) {
+      color: inherit;
+      background: none;
+      box-shadow: none;
+      &:after {
+        //content: '\f078';
+      }
+    }
+    .accordion-body {
+      padding: 10px 0 0 20px;
+      border:none;
+    }
+  }
+}
+// Tabs.
+.nav-tabs {
+  border-bottom:2px solid #000;
+  color: inherit;
+  button.nav-link {
+    color: inherit;
+    border-radius: 0;
+    border:none;
+    //background-color: rgba(0,0,0,.25);
+
+  }
+  button.nav-link.active {
+    background-color: #000;
+    border:none;
+    color:#fff;
+  }
+  &.nav-tabs-light {
+    border-bottom:2px solid #fff;
+    button.nav-link.active {
+      background-color: #fff;
+      color:#000;
+    }
+  }
+}
+// Cards.
+
+.card, .card-img, .card-img-top {
+  border-radius: 0;
+}
+.card {
+  border:1px solid $border;
+  &.border-none {
+    border: none;
+  }
+  .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+}
