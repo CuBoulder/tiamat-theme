@@ -3,11 +3,13 @@
 {% set classes = [
   'node',
   'node--type-' ~ node.bundle|clean_class,
+  'container',
+  'ucb-content-wrapper',
   not node.isPublished() ? 'node--unpublished',
   view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
 ] %}
 
-<div class="container">
+<div {{attributes.addClass(classes)}}>
   <div class="row">
     <header role="banner" class="ucb-article-banner">
       <h1{{ title_attributes.addClass(is_front ? 'sr-only') }}>

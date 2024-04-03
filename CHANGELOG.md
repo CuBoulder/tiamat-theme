@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Additional Issue Fixes
+  ## "Issue" Content Type Changes
+  -  Fixed a bug where all Articles in a section would link to the first Article in the section
+  -  Articles that do NOT have a thumbnail or a summary will no longer show the Categories
+  -  Fixed bug that would sometimes cause images to break display in Title + Thumbnail renders
+  -  Changed "Feature" style images to take up 100% of the available space and keep an aspect ratio consistent with other Feature images
+  -  Added spacing between Cover Image and Body, as well as between the Main Menu of the site and the Node Title of "Issue" pages
+  
+  Resolves #772 
+  
+  
+  
+  
+---
+
 - ### Updates styling of Form page content type and Webform block
   Form fields now extend full width. Fieldset labels have also been updated to be closer to the D7 Express version. Styles moved to the global scope to also apply correctly to the Webform block placed on a basic page.
   
