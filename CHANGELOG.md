@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update style.css
+  Fix to oembed video alignment
+  Other styles were user error.
+  Hero Unit fixes are coming in a separate Hero Unit PR
+  
+  Test by adding a video media embed to a text block in multi-column sections (then float in any direction)
+  
+  Closes #769 
+---
+
 - ### Issue Content: Bug Fixes for "Issue" (Node), Latest Issues Block
   Fixes the following bugs related to the "Issue" content type and associated blocks.
   
