@@ -7,7 +7,7 @@ a.button:visited,
 .button,
 a.button-ghost,
 .button-ghost {
-  color: var(--ucb-button-textcolor-default);
+  color: var(--ucb-button-textcolor-default) !important;
   background-color: var(--ucb-button-bgcolor-default);
   display: inline-block;
   padding: 5px 10px;
@@ -97,7 +97,7 @@ a.button-ghost,
 .button.button-blue,
 .buttons-color-blue a,
 .buttons-color-blue a.button {
-  color: var(--ucb-button-textcolor-blue);
+  color: var(--ucb-button-textcolor-blue) !important;
   background-color: var(--ucb-button-bgcolor-blue); }
   .button.button-blue:hover, .button.button-blue:focus,
   .buttons-color-blue a:hover,
@@ -109,7 +109,7 @@ a.button-ghost,
 .button.button-white,
 .buttons-color-white a,
 .buttons-color-white a.button {
-  color: var(--ucb-button-textcolor-white);
+  color: var(--ucb-button-textcolor-white) !important;
   background-color: var(--ucb-button-bgcolor-white);
   border: 1px solid #e0e0e0; }
   .button.button-white:hover, .button.button-white:focus,
@@ -122,7 +122,7 @@ a.button-ghost,
 .button.button-gray-dark,
 .buttons-color-gray-dark a,
 .buttons-color-gray-dark a.button {
-  color: var(--ucb-button-textcolor-gray-dark);
+  color: var(--ucb-button-textcolor-gray-dark) !important;
   background-color: var(--ucb-button-bgcolor-gray-dark); }
   .button.button-gray-dark:hover, .button.button-gray-dark:focus,
   .buttons-color-gray-dark a:hover,
@@ -134,7 +134,7 @@ a.button-ghost,
 .button.button-gray-light,
 .buttons-color-gray-light a,
 .buttons-color-gray-light a.button {
-  color: var(--ucb-button-textcolor-gray-light);
+  color: var(--ucb-button-textcolor-gray-light) !important;
   background-color: var(--ucb-button-bgcolor-gray-light); }
   .button.button-gray-light:hover, .button.button-gray-light:focus,
   .buttons-color-gray-light a:hover,
@@ -146,7 +146,7 @@ a.button-ghost,
 .button.button-gray,
 .buttons-color-gray a,
 .buttons-color-gray a.button {
-  color: var(--ucb-button-textcolor-gray);
+  color: var(--ucb-button-textcolor-gray) !important;
   background-color: var(--ucb-button-bgcolor-gray); }
   .button.button-gray:hover, .button.button-gray:focus,
   .buttons-color-gray a:hover,
@@ -158,7 +158,7 @@ a.button-ghost,
 .button.button-black,
 .buttons-color-black a,
 .buttons-color-black a.button {
-  color: var(--ucb-button-textcolor-black);
+  color: var(--ucb-button-textcolor-black) !important;
   background-color: var(--ucb-button-bgcolor-black); }
   .button.button-black:hover, .button.button-black:focus,
   .buttons-color-black a:hover,
@@ -171,7 +171,7 @@ a.button-ghost,
 .button.button-gold,
 .buttons-color-gold a,
 .buttons-color-gold a.button {
-  color: var(--ucb-button-textcolor-gold);
+  color: var(--ucb-button-textcolor-gold) !important;
   background-color: var(--ucb-button-bgcolor-gold); }
   .button.button-gold:hover, .button.button-gold:focus,
   .buttons-color-gold a:hover,
@@ -251,7 +251,7 @@ a.button-ghost,
 .buttongroup-color-blue {
   background-color: #01578b; }
   .buttongroup-color-blue a.button {
-    color: var(--ucb-button-textcolor-blue);
+    color: var(--ucb-button-textcolor-blue) !important;
     background-color: var(--ucb-button-bgcolor-blue); }
     .buttongroup-color-blue a.button:hover, .buttongroup-color-blue a.button:focus {
       background-color: #026baa; }
@@ -259,7 +259,7 @@ a.button-ghost,
 .buttongroup-color-white {
   background-color: #e6e6e6; }
   .buttongroup-color-white a.button {
-    color: var(--ucb-button-textcolor-white);
+    color: var(--ucb-button-textcolor-white) !important;
     background-color: var(--ucb-button-bgcolor-white);
     border: 1px solid #e0e0e0; }
     .buttongroup-color-white a.button:hover, .buttongroup-color-white a.button:focus {
@@ -268,7 +268,7 @@ a.button-ghost,
 .buttongroup-color-gray-dark {
   background-color: #292929; }
   .buttongroup-color-gray-dark a.button {
-    color: var(--ucb-button-textcolor-gray-dark);
+    color: var(--ucb-button-textcolor-gray-dark) !important;
     background-color: var(--ucb-button-bgcolor-gray-dark); }
     .buttongroup-color-gray-dark a.button:hover, .buttongroup-color-gray-dark a.button:focus {
       background-color: #3b3b3b; }
@@ -276,7 +276,7 @@ a.button-ghost,
 .buttongroup-color-gray-light {
   background-color: #d5d5d5; }
   .buttongroup-color-gray-light a.button {
-    color: var(--ucb-button-textcolor-gray-light);
+    color: var(--ucb-button-textcolor-gray-light) !important;
     background-color: var(--ucb-button-bgcolor-gray-light); }
     .buttongroup-color-gray-light a.button:hover, .buttongroup-color-gray-light a.button:focus {
       background-color: #d6d6d6; }
@@ -284,7 +284,7 @@ a.button-ghost,
 .buttongroup-color-gray {
   background-color: #d5d5d5; }
   .buttongroup-color-gray a.button {
-    color: var(--ucb-button-textcolor-gray);
+    color: var(--ucb-button-textcolor-gray) !important;
     background-color: var(--ucb-button-bgcolor-gray); }
     .buttongroup-color-gray a.button:hover, .buttongroup-color-gray a.button:focus {
       background-color: #d6d6d6; }
@@ -292,7 +292,7 @@ a.button-ghost,
 .buttongroup-color-black {
   background-color: black; }
   .buttongroup-color-black a.button {
-    color: var(--ucb-button-textcolor-black);
+    color: var(--ucb-button-textcolor-black) !important;
     background-color: var(--ucb-button-bgcolor-black); }
     .buttongroup-color-black a.button:hover, .buttongroup-color-black a.button:focus {
       background-color: black;
@@ -301,14 +301,14 @@ a.button-ghost,
 .buttongroup-color-gold {
   background-color: #c1a457; }
   .buttongroup-color-gold a.button {
-    color: var(--ucb-button-textcolor-gold);
+    color: var(--ucb-button-textcolor-gold) !important;
     background-color: var(--ucb-button-bgcolor-gold); }
     .buttongroup-color-gold a.button:hover, .buttongroup-color-gold a.button:focus {
       background-color: #c6ab64;
       background-color: #a6a6a6; }
 
 .cu-give-button-dark {
-  color: var(--ucb-button-textcolor-default);
+  color: var(--ucb-button-textcolor-default) !important;
   background-color: var(--ucb-button-bgcolor-default);
   display: inline-block;
   padding: 5px 10px;
@@ -328,7 +328,7 @@ a.button-ghost,
   transition: -webkit-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
   transition: -moz-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
   transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
-  color: var(--ucb-button-textcolor-gray-dark);
+  color: var(--ucb-button-textcolor-gray-dark) !important;
   background-color: var(--ucb-button-bgcolor-gray-dark); }
   .cu-give-button-dark:hover, .cu-give-button-dark:focus {
     -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -342,7 +342,7 @@ a.button-ghost,
     background-color: #3b3b3b; }
 
 .cu-give-button-light {
-  color: var(--ucb-button-textcolor-default);
+  color: var(--ucb-button-textcolor-default) !important;
   background-color: var(--ucb-button-bgcolor-default);
   display: inline-block;
   padding: 5px 10px;
@@ -362,7 +362,7 @@ a.button-ghost,
   transition: -webkit-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
   transition: -moz-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
   transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
-  color: var(--ucb-button-textcolor-gray-light);
+  color: var(--ucb-button-textcolor-gray-light) !important;
   background-color: var(--ucb-button-bgcolor-gray-light); }
   .cu-give-button-light:hover, .cu-give-button-light:focus {
     -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
@@ -376,7 +376,7 @@ a.button-ghost,
     background-color: #d6d6d6; }
 
 .cu-give-button-gold {
-  color: var(--ucb-button-textcolor-default);
+  color: var(--ucb-button-textcolor-default) !important;
   background-color: var(--ucb-button-bgcolor-default);
   display: inline-block;
   padding: 5px 10px;
@@ -396,7 +396,7 @@ a.button-ghost,
   transition: -webkit-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
   transition: -moz-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
   transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
-  color: var(--ucb-button-textcolor-gold);
+  color: var(--ucb-button-textcolor-gold) !important;
   background-color: var(--ucb-button-bgcolor-gold); }
   .cu-give-button-gold:hover, .cu-give-button-gold:focus {
     -webkit-box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);

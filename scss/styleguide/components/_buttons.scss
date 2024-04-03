@@ -9,7 +9,7 @@
 // Base button styles
 
 @mixin button_default {
-  color: var(--ucb-button-textcolor-default);
+  color: var(--ucb-button-textcolor-default) !important;
   background-color: var(--ucb-button-bgcolor-default);
   display: inline-block;
   padding:5px 10px;
@@ -44,7 +44,7 @@ a.button-ghost,
 }
 
 @mixin button($name, $color) {
-  color: var(--ucb-button-textcolor-#{$name});
+  color: var(--ucb-button-textcolor-#{$name}) !important;
   background-color: var(--ucb-button-bgcolor-#{$name});
   @if ($color == #fff) {
     border:1px solid #e0e0e0;
