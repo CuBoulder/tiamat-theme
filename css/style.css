@@ -648,7 +648,34 @@ article .align-left .media-image-caption p {
   right: -1em;
   position: relative;
 }
+/* Adds dynamic sizing when images are aligned right or left */
+.align-right.image_style-small_500px_25_display_size_,
+.align-left.image_style-small_500px_25_display_size_,
+.align-right.image_style-square_thumbnail_image_style,
+.align-left.image_style-square_thumbnail_image_style,
+.align-right.image_style-small_square_image_style,
+.align-left.image_style-small_square_image_style
+{
+  max-width: 25%;
+}
 
+.align-right.image_style-wide_image_style,
+.align-left.image_style-wide_image_style,
+.align-right.image_style-medium_750px_50_display_size_,
+.align-left.image_style-medium_750px_50_display_size_,
+.align-right.image_style-focal_image_wide,
+.align-left.image_style-focal_image_wide,
+.align-right.image_style-focal_image_square,
+.align-left.image_style-focal_image_square,
+.align-right.image_style-default,
+.align-left.image_style-default {
+  max-width: 50%;
+}
+
+.align-right.image_style-large_image_style,
+.align-left.image_style-large_image_style {
+  max-width: 100%;
+}
 /* Resets Bootstrap's `placeholder` class styles */
 .placeholder {
   display: initial;

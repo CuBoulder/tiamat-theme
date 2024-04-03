@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Image caption fix for long captions
+  Closes #716.
+  Adds styling for dynamic sizing for images are aligned right or left.
+---
+
 - ### Article Slider: Fix with 6+ Articles
   Fixes a bug where 6+ Articles would cause the `Article Slider` to additionally repeat Articles in a long column
   
