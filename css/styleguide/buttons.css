@@ -81,11 +81,6 @@ a.button-ghost,
     --ucb-button-bgcolor-gray: #d6d6d6;
     --ucb-button-bgcolor-black: #333333;
     --ucb-button-bgcolor-gold: #a6a6a6; }
-  .button:active,
-  .ucb-button-colors:active {
-    -webkit-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.35);
-    -moz-box-shadow: 0 3px 15px rgba(0, 0, 0, 0.35);
-    box-shadow: 0 3px 15px rgba(0, 0, 0, 0.35); }
 
 .button.button-blue,
 .buttons-color-blue a,

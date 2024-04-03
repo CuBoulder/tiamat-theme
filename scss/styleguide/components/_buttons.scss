@@ -96,9 +96,6 @@ $colors: (
       --ucb-button-bgcolor-#{$name}: #{button-hover-color($color)};
     }
   }
-  &:active {
-    @include rgbashadow(0, 3px, 15px, #000000, .35);
-  }
 }
 @each $name, $color in $colors {
   .button.button-#{$name},
