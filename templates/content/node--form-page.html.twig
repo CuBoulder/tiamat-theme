@@ -21,13 +21,9 @@
     {% endif %}
   </div>
   <div class="container mb-4">
-    <div class="row">
-      <div class="col-sm-8">
-        {{ content['#block_content'].body }}
-        <div class="form-page-webform">
-          {{ content.field_form_page_webform }}
-        </div>
-      </div>
+    {{ content['#block_content'].body }}
+    <div class="form-page-webform">
+      {{ content.field_form_page_webform }}
     </div>
   </div>
 </article>

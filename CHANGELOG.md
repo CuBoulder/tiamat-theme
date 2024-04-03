@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates styling of Form page content type and Webform block
+  Form fields now extend full width. Fieldset labels have also been updated to be closer to the D7 Express version. Styles moved to the global scope to also apply correctly to the Webform block placed on a basic page.
+  
+  Resolves CuBoulder/tiamat-theme#755
+  Resolves CuBoulder/tiamat-theme#762
+  Resolves CuBoulder/tiamat-theme#768
+---
+
 - ### Update style.css
   Fix to oembed video alignment
   Other styles were user error.
