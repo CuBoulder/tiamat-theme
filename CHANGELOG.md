@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Removed stray character typo on the video reveal block
+  Removed the "A" hard-coded in the render of the text of the video reveal block.  
+---
+
 - ### Image caption fix for long captions
   Closes #716.
   Adds styling for dynamic sizing for images are aligned right or left.
