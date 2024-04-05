@@ -992,3 +992,56 @@ form input[type="radio"]+label {
   display: inline-block;
   font-weight: normal;
 }
+
+/* Needed to override basic button styles */
+.form-actions#edit-actions{
+  background-color: #0277BD;
+}
+.node-basic-page-layout-builder-form > #edit-actions{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 0px;
+  margin-bottom: 0px;
+}
+.node-basic-page-layout-builder-form > #edit-actions .button.button-gold,
+.node-basic-page-layout-builder-form > #edit-actions .button{
+  color: white !important;
+  display: inline-block;
+    padding: 10px 20px;
+    font-weight: normal;
+    transition: background-color 0.5s ease;
+    margin-bottom: 5px;
+    text-decoration: none !important;
+    -webkit-border-radius: none !important;
+    -moz-border-radius: none !important;
+    border-radius: 0px !important;
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    transition: -webkit-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+    transition: -moz-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+    transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+    background-color: inherit !important;
+}
+
+.node-basic-page-layout-builder-form > #edit-actions div.form-type-checkbox{
+  background-color: white;
+}
+.node-basic-page-layout-builder-form > #edit-actions .button.button-gold:hover,
+.node-basic-page-layout-builder-form > #edit-actions .button:hover{
+   background-color: #fff;
+}
+.node-basic-page-layout-builder-form > #edit-actions .form-item{
+  margin-top: 0;
+    margin-bottom: 0;
+    padding: 15px 15px;
+}
+
+.node-basic-page-layout-builder-form > #edit-actions div#edit-preview-toggle{
+  width: 100%;
+}
