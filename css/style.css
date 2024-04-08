@@ -1051,11 +1051,6 @@ form input[type="radio"]+label {
 .node-basic-page-layout-builder-form > #edit-actions .button.button-gold#edit-submit{
   font-weight: bold;
 }
-
-@media only screen and (max-width: 626px) {
-.node-basic-page-layout-builder-form > #edit-actions .button.button-gold,
-.node-basic-page-layout-builder-form > #edit-actions .button{
-  width: 23%;
-  text-align: center;
-}
+.node-basic-page-layout-builder-form > #edit-actions .button.button-gold#edit-revert{
+  display: none;
 }
