@@ -85,7 +85,8 @@
   'node--type-' ~ node.bundle|clean_class,
   not node.isPublished() ? 'node--unpublished',
   view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
-  pageStyleCSS
+  pageStyleCSS,
+  'ucb-content-wrapper'
 ] %}
 
 
@@ -136,10 +137,10 @@
 {% endif %}
 
 {% if not content.field_ucb_article_external_url|render %}
-  <article{{ attributes.addClass('ucb-content-wrapper') }}>
+  <article{{ attributes.addClass(classes, content.field_article_title_background.0 ? 'mt-0') }}>
     <div class="ucb-article" itemscope itemtype="https://schema.org/Article">
       {# If using a Title Background img, render that #}
-      {% if content.field_article_title_background|render %}
+      {% if content.field_article_title_background.0 %}
         <header><h1 class="sr-only">{{ label }}</h1></header>
         <div class="backgroundTitleDiv {{ overlayClass }}">
           {{ content.field_article_title_background }}
@@ -152,7 +153,7 @@
       {% endif %}
       <div class="container">
         {# If NO Title Background img, render the regular title #}
-        {% if not content.field_article_title_background|render %}
+        {% if not content.field_article_title_background.0 %}
           <h1{{ title_attributes.addClass('ucb-article-heading', is_front ? 'sr-only') }}>
             {{ label }}
           </h1>
@@ -171,7 +172,7 @@
               <i class="fa-regular fa-calendar"></i>
               <span class="sr-only">Published:{{ date_formatted }}</span>
               <span itemprop="datePublished">
-              {{ date_formatted }}
+                {{ date_formatted }}
               </span>
             </div>
           {% endif %}
@@ -193,8 +194,8 @@
       {% if content.field_appears_in_issue|render %}
         <div role="contentinfo" class="container ucb-article-issue" itemprop="keywords">
           <div>
-          <span class="sr-only">Issues:</span>
-          <i class="fa-solid fa-book"></i>
+            <span class="sr-only">Issues:</span>
+            <i class="fa-solid fa-book"></i>
           </div>
           {{ content.field_appears_in_issue }}
         </div>
