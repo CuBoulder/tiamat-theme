@@ -995,7 +995,7 @@ form input[type="radio"]+label {
 
 /* Needed to override basic button styles */
 .form-actions#edit-actions{
-  background-color: #0277BD;
+  background-color: var(--ucb-link)
 }
 .node-basic-page-layout-builder-form > #edit-actions{
   display: flex;
@@ -1012,7 +1012,7 @@ form input[type="radio"]+label {
     padding: 10px 20px;
     font-weight: normal;
     transition: background-color 0.5s ease;
-    margin-bottom: 5px;
+    margin: 10px 5px;
     text-decoration: none !important;
     -webkit-border-radius: none !important;
     -moz-border-radius: none !important;
@@ -1026,7 +1026,8 @@ form input[type="radio"]+label {
     transition: -webkit-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
     transition: -moz-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
     transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
-    background-color: inherit !important;
+    background-color: inherit;
+    text-wrap: wrap;
 }
 
 .node-basic-page-layout-builder-form > #edit-actions div.form-type-checkbox{
@@ -1034,7 +1035,8 @@ form input[type="radio"]+label {
 }
 .node-basic-page-layout-builder-form > #edit-actions .button.button-gold:hover,
 .node-basic-page-layout-builder-form > #edit-actions .button:hover{
-   background-color: #fff;
+  background-color: rgba(255 255 255 / 15%);
+  transition: background-color 200ms;
 }
 .node-basic-page-layout-builder-form > #edit-actions .form-item{
   margin-top: 0;
@@ -1044,4 +1046,16 @@ form input[type="radio"]+label {
 
 .node-basic-page-layout-builder-form > #edit-actions div#edit-preview-toggle{
   width: 100%;
+}
+
+.node-basic-page-layout-builder-form > #edit-actions .button.button-gold#edit-submit{
+  font-weight: bold;
+}
+
+@media only screen and (max-width: 626px) {
+.node-basic-page-layout-builder-form > #edit-actions .button.button-gold,
+.node-basic-page-layout-builder-form > #edit-actions .button{
+  width: 23%;
+  text-align: center;
+}
 }
