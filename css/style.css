@@ -1048,6 +1048,10 @@ form input[type="radio"]+label {
   width: 100%;
 }
 
+.node-basic-page-layout-builder-form > #edit-actions #layout-builder-content-preview{
+  margin-left: 10px;
+}
+
 .node-basic-page-layout-builder-form > #edit-actions .button.button-gold#edit-submit{
   font-weight: bold;
 }
