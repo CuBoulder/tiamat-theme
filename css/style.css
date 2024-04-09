@@ -98,6 +98,9 @@ input[type="submit"] {
 
 .ucb-local-tasks li>a {
   color: var(--ucb-light-contrast);
+  display:inline-block;
+  width:100%;
+  height:100%;
 }
 
 .ucb-homepage-footer a:hover {
