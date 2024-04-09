@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Styles Layout UI Buttons
+  Changes the style of the Layout UI buttons to mirror the appearance of the local tasks menu, to further differentiate these from buttons placed in site content and avoid confusion
+  
+  Resolves #763 
+---
+
 - ### Corrects Webform button colors
   Regular buttons are light gray, while the next and submit buttons are blue.
   
