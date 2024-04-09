@@ -1058,3 +1058,13 @@ form input[type="radio"]+label {
 .node-basic-page-layout-builder-form > #edit-actions .button.button-gold#edit-revert{
   display: none;
 }
+.button.form-submit {
+  color: var(--button-text-color-gray-light) !important;
+  background-color: var(--button-background-color-gray-light);
+}
+
+.button.form-submit.button--primary,
+.button.form-submit.webform-button--next {
+  color: var(--button-text-color-blue) !important;
+  background-color: var(--button-background-color-blue);
+}

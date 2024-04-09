@@ -1,0 +1,102 @@
+/**
+ * Form styles
+ */
+button, textarea, select, input[type="date"], input[type="datetime"], input[type="datetime-local"], input[type="email"], input[type="month"], input[type="number"], input[type="password"], input[type="search"], input[type="tel"], input[type="text"], input[type="time"], input[type="url"], input[type="week"] {
+  height: auto; }
+
+button, input[type="reset"], input[type="submit"], input[type="button"] {
+  font-size: 100%; }
+
+input.form-text,
+textarea.form-textarea,
+input[type=text],
+input[type=email],
+input[type=tel],
+textarea {
+  padding: 10px;
+  border: 1px solid rgba(128, 128, 128, 0.333);
+  background-color: #f2f2f2;
+  color: #111111 !important;
+  color: inherit;
+  line-height: 150%;
+  font-size: inherit; }
+
+textarea {
+  display: block;
+  width: 100%; }
+
+input.form-text,
+input[type=text],
+input[type=email],
+input[type=tel] {
+  max-width: 100%;
+  -webkit-box-sizing: border-box;
+  /* Safari/Chrome, other WebKit */
+  -moz-box-sizing: border-box;
+  /* Firefox, other Gecko */
+  box-sizing: border-box; }
+
+input.form-text:focus,
+textarea.form-textarea:focus,
+textarea:focus,
+input[type=text]:focus,
+input[type=email]:focus,
+input[type=tel]:focus {
+  background-color: #e7e7e7;
+  color: #111111 !important;
+  outline: #0277BD solid 2px; }
+
+select:focus {
+  outline: #0277BD solid 2px; }
+
+select[multiple=multiple] {
+  padding: 5px; }
+
+input[type=submit],
+form button {
+  color: #222;
+  background: #EEEEEE;
+  font-size: 85%;
+  border: none;
+  padding: 5px 10px;
+  font-weight: bold;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
+  background-clip: padding-box;
+  transition: background-color 0.5s ease;
+  transition: -webkit-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+  transition: -moz-box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+  transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+  border: 1px solid #ddd; }
+
+input[type=submit]:focus,
+form button:focus {
+  outline: #2E7D32 solid 2px; }
+
+input[type=reset]:focus {
+  outline: #B71C1C solid 2px; }
+
+fieldset {
+  padding: 10px;
+  border: 1px solid rgba(128, 128, 128, 0.333);
+  min-width: auto; }
+  fieldset legend {
+    font-weight: bold;
+    font-size: 120%;
+    padding: 0 10px; }
+
+form label {
+  font-weight: bold;
+  display: block; }
+
+form input[type=checkbox] + label, form input[type=radio] + label {
+  display: inline-block; }
+
+/*# sourceMappingURL=forms.css.map */
