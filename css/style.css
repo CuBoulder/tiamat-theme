@@ -1040,8 +1040,8 @@ form input[type="radio"]+label {
 }
 .node-basic-page-layout-builder-form > #edit-actions .form-item{
   margin-top: 0;
-    margin-bottom: 0;
-    padding: 15px 15px;
+  margin-bottom: 0;
+  padding: 15px 15px;
 }
 
 .node-basic-page-layout-builder-form > #edit-actions div#edit-preview-toggle{
