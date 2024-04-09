@@ -992,3 +992,14 @@ form input[type="radio"]+label {
   display: inline-block;
   font-weight: normal;
 }
+
+.button.form-submit {
+  color: var(--button-text-color-gray-light) !important;
+  background-color: var(--button-background-color-gray-light);
+}
+
+.button.form-submit.button--primary,
+.button.form-submit.webform-button--next {
+  color: var(--button-text-color-blue) !important;
+  background-color: var(--button-background-color-blue);
+}

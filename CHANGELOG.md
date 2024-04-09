@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Corrects Webform button colors
+  Regular buttons are light gray, while the next and submit buttons are blue.
+  
+  Resolves CuBoulder/tiamat-theme#757
+---
+
 - ### Updates Articles
   This update:
   - Removes margin at the top of articles with header image.
