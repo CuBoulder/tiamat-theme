@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes Video Reveal block video size bug
+  Resolves CuBoulder/tiamat-theme#766
+---
+
 - ### Block Styles update
   Added block styles to video hero
   Fix styling errors for full width
