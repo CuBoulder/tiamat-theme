@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates Articles
+  This update:
+  - Removes margin at the top of articles with header image.
+  - Moves header image caption to immediately below header image.
+  - Removes options for black text or hiding the overlay on the header image, setting the white text on dark overlay as the default.
+  - Updates description of the article header image text field.
+  
+  Resolves CuBoulder/tiamat-theme#791
+  Resolves CuBoulder/tiamat-theme#790
+  
+  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/117)
+---
+
 - ### Removed stray character typo on the video reveal block
   Removed the "A" hard-coded in the render of the text of the video reveal block.  
 ---
