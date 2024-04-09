@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article List Block - Display Fixes
+  - Fixes bug where more Articles would display than count specifies
+  - Articles without thumbnails aren't indented (Teaser and Title & Thumbnail styles)
+  - Adjusts alignment of thumbnails and borders to align to container (Teaser and Title & Thumbnail)
+  
+  Resolves #799 
+---
+
 - ### Fixes Video Reveal block video size bug
   Resolves CuBoulder/tiamat-theme#766
 ---

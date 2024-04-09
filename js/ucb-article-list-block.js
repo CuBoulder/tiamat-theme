@@ -168,11 +168,10 @@ class ArticleListBlockElement extends HTMLElement {
         // Case for Too many articles
         if(finalArticles.length >= count || (finalArticles.length >= count && NEXTJSONURL)){
           finalArticles.length = count
-          this.renderDisplay(display, finalArticles)
       }
 
         // Have articles and want to proceed
-        if(finalArticles.length > 0 && !NEXTJSONURL){
+        if((finalArticles.length >= 0 && !NEXTJSONURL) || (finalArticles.length == count && NEXTJSONURL)){
           this.renderDisplay(display, finalArticles)
         }
     }
@@ -398,22 +397,28 @@ class ArticleListBlockElement extends HTMLElement {
             // Create and Append Elements
             var article = document.createElement('article');
             article.classList = 'ucb-article-card row';
-            var imgDiv = document.createElement('div');
-            imgDiv.classList = 'ucb-article-card-img title-thumbnail-img';
-
-            var imgLink = document.createElement('a');
-            imgLink.href = articleLink;
-            
-            var articleImg = document.createElement('img')
-            articleImg.src = articleImgSrc;
-
-            imgLink.appendChild(articleImg);
-            imgDiv.appendChild(imgLink);
-
-            article.appendChild(imgDiv);
+            if(articleImgSrc){
+              var imgDiv = document.createElement('div');
+              imgDiv.classList = 'ucb-article-card-img title-thumbnail-img';
+  
+              var imgLink = document.createElement('a');
+              imgLink.href = articleLink;
+              
+              var articleImg = document.createElement('img')
+              articleImg.src = articleImgSrc;
+  
+              imgLink.appendChild(articleImg);
+              imgDiv.appendChild(imgLink);
+  
+              article.appendChild(imgDiv);
+            }
 
             var articleBody = document.createElement('div');
-            articleBody.classList = 'col px-3 ucb-article-card-data';
+            if(articleImgSrc){
+              articleBody.classList = 'col px-3 ucb-article-card-data';
+            } else {
+              articleBody.classList = 'col ucb-article-card-data';
+            }
 
             var headerLink = document.createElement('a');
             headerLink.href = articleLink;
@@ -472,22 +477,29 @@ class ArticleListBlockElement extends HTMLElement {
             // Create and Append Elements
             var article = document.createElement('article');
             article.classList = 'ucb-article-card row';
-            var imgDiv = document.createElement('div');
-            imgDiv.classList = 'ucb-article-card-img';
 
-            var imgLink = document.createElement('a');
-            imgLink.href = articleLink;
-            
-            var articleImg = document.createElement('img')
-            articleImg.src = articleImgSrc;
-
-            imgLink.appendChild(articleImg);
-            imgDiv.appendChild(imgLink);
-
-            article.appendChild(imgDiv);
+            if(articleImgSrc){
+              var imgDiv = document.createElement('div');
+              imgDiv.classList = 'ucb-article-card-img';
+  
+              var imgLink = document.createElement('a');
+              imgLink.href = articleLink;
+              
+              var articleImg = document.createElement('img')
+              articleImg.src = articleImgSrc;
+  
+              imgLink.appendChild(articleImg);
+              imgDiv.appendChild(imgLink);
+  
+              article.appendChild(imgDiv);
+            } 
 
             var articleBody = document.createElement('div');
-            articleBody.classList = 'col px-3 ucb-article-card-data';
+            if(articleImgSrc){
+              articleBody.classList = 'col px-3 ucb-article-card-data';
+            } else {
+              articleBody.classList = 'col ucb-article-card-data';
+            }
 
             var headerStrong = document.createElement('strong');
 
