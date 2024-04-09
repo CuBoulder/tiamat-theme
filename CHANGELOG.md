@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Block Styles update
+  Added block styles to video hero
+  Fix styling errors for full width
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/118
+  
+  Closes #744 
+---
+
 - ### Styles Layout UI Buttons
   Changes the style of the Layout UI buttons to mirror the appearance of the local tasks menu, to further differentiate these from buttons placed in site content and avoid confusion
   
