@@ -9,6 +9,52 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article List Block - Display Fixes
+  - Fixes bug where more Articles would display than count specifies
+  - Articles without thumbnails aren't indented (Teaser and Title & Thumbnail styles)
+  - Adjusts alignment of thumbnails and borders to align to container (Teaser and Title & Thumbnail)
+  
+  Resolves #799 
+---
+
+- ### Fixes Video Reveal block video size bug
+  Resolves CuBoulder/tiamat-theme#766
+---
+
+- ### Block Styles update
+  Added block styles to video hero
+  Fix styling errors for full width
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/118
+  
+  Closes #744 
+---
+
+- ### Styles Layout UI Buttons
+  Changes the style of the Layout UI buttons to mirror the appearance of the local tasks menu, to further differentiate these from buttons placed in site content and avoid confusion
+  
+  Resolves #763 
+---
+
+- ### Corrects Webform button colors
+  Regular buttons are light gray, while the next and submit buttons are blue.
+  
+  Resolves CuBoulder/tiamat-theme#757
+---
+
+- ### Updates Articles
+  This update:
+  - Removes margin at the top of articles with header image.
+  - Moves header image caption to immediately below header image.
+  - Removes options for black text or hiding the overlay on the header image, setting the white text on dark overlay as the default.
+  - Updates description of the article header image text field.
+  
+  Resolves CuBoulder/tiamat-theme#791
+  Resolves CuBoulder/tiamat-theme#790
+  
+  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/117)
+---
+
 - ### Removed stray character typo on the video reveal block
   Removed the "A" hard-coded in the render of the text of the video reveal block.  
 ---
