@@ -994,7 +994,7 @@ form input[type="radio"]+label {
 }
 
 /* Needed to override basic button styles */
-.form-actions#edit-actions{
+.node-basic-page-layout-builder-form > .form-actions#edit-actions{
   background-color: var(--ucb-link)
 }
 .node-basic-page-layout-builder-form > #edit-actions{
