@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Local task buttons more buttony
+  Closes #749.
+  Makes the anchor tags within the local tasks block larger to cover the whole button as a clickable link.
+---
+
 - ### Remove 'Rebuild Layout' Button, Bold 'Save Layout' button on Layout UI
   Resolves #811 
   
