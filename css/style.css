@@ -994,7 +994,7 @@ form input[type="radio"]+label {
 }
 
 /* Needed to override basic button styles */
-.form-actions#edit-actions{
+.node-basic-page-layout-builder-form > .form-actions#edit-actions{
   background-color: var(--ucb-link)
 }
 .node-basic-page-layout-builder-form > #edit-actions{
@@ -1052,12 +1052,13 @@ form input[type="radio"]+label {
   margin-left: 10px;
 }
 
-.node-basic-page-layout-builder-form > #edit-actions .button.button-gold#edit-submit{
-  font-weight: bold;
+.node-basic-page-layout-builder-form > #edit-actions .button#edit-submit{
+  font-weight: bold !important;
 }
-.node-basic-page-layout-builder-form > #edit-actions .button.button-gold#edit-revert{
-  display: none;
+.node-basic-page-layout-builder-form > #edit-actions .button#edit-rebuild-layout{
+  display: none !important;
 }
+
 .button.form-submit {
   color: var(--button-text-color-gray-light) !important;
   background-color: var(--button-background-color-gray-light);

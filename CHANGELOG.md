@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Remove 'Rebuild Layout' Button, Bold 'Save Layout' button on Layout UI
+  Resolves #811 
+  
+  Removes 'Rebuild Layout' button, adds bold effect to 'Save Layout' button
+---
+
 - ### Form Block: Fixes bug preventing editing in Layout Builder
   Form block was missing template markup required to allow editing in Layout Builder. This has been corrected.
   
