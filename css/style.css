@@ -1055,7 +1055,7 @@ form input[type="radio"]+label {
 .node-basic-page-layout-builder-form > #edit-actions .button#edit-submit{
   font-weight: bold !important;
 }
-.node-basic-page-layout-builder-form > #edit-actions .button#edit-revert{
+.node-basic-page-layout-builder-form > #edit-actions .button#edit-rebuild-layout{
   display: none !important;
 }
 
