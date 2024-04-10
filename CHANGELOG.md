@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Form Block: Fixes bug preventing editing in Layout Builder
+  Form block was missing template markup required to allow editing in Layout Builder. This has been corrected.
+  
+  Resolves #789 
+---
+
 - ### Article List Block - Display Fixes
   - Fixes bug where more Articles would display than count specifies
   - Articles without thumbnails aren't indented (Teaser and Title & Thumbnail styles)
