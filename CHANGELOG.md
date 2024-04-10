@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adjusts style of Links in Content Grid - Cards
+  Since Content Grids with a "Cards" layout selection always have a white background, the link colors are a consistent blue following the established white background link style, rather than adopting whatever the block background's link styles are.
+  
+  Resolves #776 
+---
+
 - ### Local task buttons more buttony
   Closes #749.
   Makes the anchor tags within the local tasks block larger to cover the whole button as a clickable link.

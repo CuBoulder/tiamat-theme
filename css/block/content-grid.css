@@ -49,6 +49,16 @@
   width: 100%;
 }
 
+/* Override for Card links color to maintain accessibility (white on blue) */
+.grid-card .grid-text-container a {
+  color: var(--ucb-link);
+  text-decoration: none;
+}
+.grid-card .grid-text-container a:hover{
+  color: var(--ucb-link-visited);
+  text-decoration: none;
+}
+
 /* Card Layout CSS */
 .grid-card {
   -webkit-box-shadow: 0 0 10px rgb(0, 0, 0, 10%);
@@ -85,7 +95,6 @@
   width: 100%;
   font-size: 100%
 }
-
 
 /*** Offest Grid Layout ***/
 .grid-image-container-large .grid-fill {
