@@ -14,6 +14,7 @@
 .social-media-icons-block.horizontal-orientation,
 .social-media-icons-block.horizontal-orientation ul {
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .social-media-icons-block.horizontal-orientation .icon-label {
@@ -178,12 +179,4 @@
   padding: 0 10px;
   color: #fff;
   font-weight: bold;
-}
-
-@media (max-width: 767px) {
-  .social-media-icons-block.vertical-orientation,
-  .social-media-icons-block.vertical-orientation li {
-    display: inline;
-    padding-left: 0;
-  }
 }
