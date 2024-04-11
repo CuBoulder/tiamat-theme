@@ -495,15 +495,17 @@ ul.ucb-main-menu.nav {
 }
 
 .menu.social-media {
+  display: flex;
   flex-direction: row;
   justify-content: center;
+  gap: 0.5rem;
   margin-bottom: 1em;
   font-size: 1.25rem;
   line-height: 1.25;
 }
 
-li.social-media-item.menu-item {
-  padding-right: 0.5rem;
+.menu.social-media .icon-label {
+  display: none;
 }
 
 .be-boulder-container {
