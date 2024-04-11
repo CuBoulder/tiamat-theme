@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Forms: Required Fields indicated by a red asterisk
+  Resolves #825 
+---
+
 - ### Adjusts style of Links in Content Grid - Cards
   Since Content Grids with a "Cards" layout selection always have a white background, the link colors are a consistent blue following the established white background link style, rather than adopting whatever the block background's link styles are.
   
