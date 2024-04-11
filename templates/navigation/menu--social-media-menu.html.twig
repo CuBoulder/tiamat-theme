@@ -27,12 +27,10 @@
 
 {% macro link(name, uri, icon, className) %}
   <a{{ create_attribute({ 'aria-label': name, href: uri, title: name }) }}>
-    <span class="icon-div">
-      <span{{ create_attribute({ class: ['icon-bg', 'icon-bg-' ~ className] }) }}>
-        <i{{ create_attribute({ class: [icon, 'icon-foreground'] }) }}></i>
-      </span>
-      <span class="icon-label">{{ name }}</span>
+    <span{{ create_attribute({ class: ['icon-bg', 'icon-bg-' ~ className] }) }}>
+      <i{{ create_attribute({ class: [icon, 'icon-foreground'] }) }}></i>
     </span>
+    <span class="icon-label">{{ name }}</span>
   </a>
 {% endmacro %}
 

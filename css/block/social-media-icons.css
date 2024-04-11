@@ -149,7 +149,7 @@
   background-color: #3b5998;
 }
 
-.social-media-icons-block .icon-div {
+.social-media-icons-block a {
   display: flex;
   background-color: black;
   align-items: center;
@@ -162,11 +162,15 @@
   padding: 3px;
 }
 
-.social-media-icons-block .icon-div:hover,
-.social-media-icons-block .icon-div:hover .icon-bg {
-  background-color: grey;
+.social-media-icons-block a,
+.social-media-icons-block .icon-bg {
   transition-property: background-color;
   transition-duration: 0.25s;
+}
+
+.social-media-icons-block a:hover,
+.social-media-icons-block a:hover .icon-bg {
+  background-color: grey;
 }
 
 .social-media-icons-block .icon-label {
