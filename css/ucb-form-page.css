@@ -10,3 +10,11 @@
 .form-page-webform div:not(:last-child)>form {
   border-bottom: 1px solid rgba(200, 200, 200, 0.5);
 }
+
+form .form-required::after {
+  display: inline-block; 
+  margin-inline: 0.15em; 
+  content: "*"; 
+  color: #f00; 
+  font-size: 0.875rem; 
+} 
