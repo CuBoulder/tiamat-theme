@@ -6,14 +6,6 @@
 
 {{ attach_library('boulder_base/ucb-social-media-icons-block') }}
 
-{% set classes = [
-  'block',
-  'block-' ~ configuration.provider|clean_class,
-  'block-' ~ plugin_id|clean_class,
-  bundle ? 'block--type-' ~ bundle|clean_class,
-  view_mode ? 'block--view-mode-' ~ view_mode|clean_class
-] %}
-
 {# layoutSelection gathers the orientation value from the orientation field, 
     0 -> Horizontal
     1 -> Vertical #}
@@ -39,16 +31,24 @@
   {% set imageSize = 'imgLarge' %}
 {% endif %}
 
+{% set classes = [
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
+  'social-media-icons-block',
+  layoutSelection ~ '-orientation',
+  imageSize
+] %}
+
 {# Block/Title/Icon Styles #}
 {% set blockStyles = [
   content.field_bs_background_style|render|striptags|trim,
   content.field_bs_content_font_scale|render|striptags|trim,
   content.field_bs_icon_position|render|striptags|trim,
   content.field_bs_heading_alignment|render|striptags|trim,
-  content.field_bs_title_font_scale|render|striptags|trim,
-  'social-media-icons-block',
-  layoutSelection ~ '-orientation',
-  imageSize
+  content.field_bs_title_font_scale|render|striptags|trim
 ] %}
 
 {% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
