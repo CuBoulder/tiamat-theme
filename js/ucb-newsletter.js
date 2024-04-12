@@ -1,4 +1,37 @@
 (function ($, Drupal) {
+    document.addEventListener('DOMContentLoaded', function() {
+    // Select the center element with the specific class
+    const centerElement = document.querySelector('center.social-media-menu.newsletter-social-media-menu');
+    // Check if the center element exists
+    if (centerElement) {
+        // Get the style:
+        const styleType = centerElement.dataset.style;
+        const absURL = centerElement.dataset.url;
+
+        const color = (styleType == 'darkbox' || styleType == 'simple' || styleType == 'classic') ? "white" : "black";
+        // Find all <a> tags with the class 'icon-a' within the center element
+        const links = centerElement.querySelectorAll('a.icon-a');
+
+        // Iterate over each link to replace its contents
+        links.forEach(function(link) {
+            // Create an image element
+            const img = document.createElement('img');
+            const service = link.getAttribute('title').toLowerCase() == 'social media' ? 'link' : link.getAttribute('title').toLowerCase()
+            // Set the src attribute of the image
+            img.src = `${absURL}${drupalSettings.path.baseUrl + drupalSettings.themePath}/images/social_icons/${color}-${service}.png`; // Modify this as needed
+            img.alt = link.getAttribute('title');
+
+            img.style.width = '30px';
+            img.style.height = '30px'; 
+
+            // Clear the content of the link and append the new image
+            link.innerHTML = ''; // Remove existing content
+            link.appendChild(img);
+        });
+    }
+});
+
+
 //     // Create the admin button for copying HTML and the admin messages
     var codeContainer = document.createElement('div')
     codeContainer.classList = 'container email-button-container'

@@ -471,7 +471,7 @@ td>h3>a{
                         {% if social_media_menu and social_media_menu|length > 1 %}
                         <tr class="newsletter-social-{{designType}}">
                             <td>
-                                <center style="margin-bottom: 1em;font-size: 1.25rem; line-height: 1.25;" class="social-media-menu newsletter-social-media-menu">
+                                <center style="margin-bottom: 1em;font-size: 1.25rem; line-height: 1.25;" class="social-media-menu newsletter-social-media-menu" data-style="{{designType}}" data-url="{{base_url}}">
                                     {{ social_media_menu }}
                                 </center>
                             </td>
