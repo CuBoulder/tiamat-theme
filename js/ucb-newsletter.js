@@ -4,6 +4,9 @@
     const centerElement = document.querySelector('center.social-media-menu.newsletter-social-media-menu');
     // Check if the center element exists
     if (centerElement) {
+        // Create div to replace ul
+        const socialDiv = document.createElement('div')
+        socialDiv.classList.add('ucb-social-menu-email-version')
         // Get the style:
         const styleType = centerElement.dataset.style;
         const absURL = centerElement.dataset.url;
@@ -11,6 +14,7 @@
         const color = (styleType == 'darkbox' || styleType == 'simple' || styleType == 'classic') ? "white" : "black";
         // Find all <a> tags with the class 'icon-a' within the center element
         const links = centerElement.querySelectorAll('a.icon-a');
+        const ul = centerElement.querySelector('ul.navbar-social');
 
         // Iterate over each link to replace its contents
         links.forEach(function(link) {
@@ -20,14 +24,17 @@
             // Set the src attribute of the image
             img.src = `${absURL}${drupalSettings.path.baseUrl + drupalSettings.themePath}/images/social_icons/${color}-${service}.png`; // Modify this as needed
             img.alt = link.getAttribute('title');
-
-            img.style.width = '30px';
-            img.style.height = '30px'; 
+            img.style.width = '20px';
+            img.style.height = '20px'; 
 
             // Clear the content of the link and append the new image
             link.innerHTML = ''; // Remove existing content
             link.appendChild(img);
+            link.classList.add('ucb-email-social-icon')
+            socialDiv.append(link)
         });
+        ul.style.display = 'none'
+        centerElement.append(socialDiv)
     }
 });
 
@@ -43,7 +50,11 @@
     button.style.cssText = 'background-color:gold;width: 100%;max-width: 60%;padding: 10px;margin: 10px;'
 
     button.onclick = function(){
-
+        var centerElement = document.querySelector('center.social-media-menu.newsletter-social-media-menu');
+        var ul = centerElement.querySelector('ul.navbar-social');
+        if (centerElement){
+            centerElement.removeChild(ul)
+        }
         // Get baseURL
         var emailContainer = document.getElementById('email')
         var baseURL = emailContainer.dataset.url
