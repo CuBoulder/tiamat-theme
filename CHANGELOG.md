@@ -9,6 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes button color bug; Reverts Hero Unit padding
+  Resolves CuBoulder/tiamat-theme#836
+---
+
+- ### Updates Social Media Icons block and Social Media menu
+  This update:
+  - Refactors the Social Media Icons block and Social Media menu to both use the same macros. Un-spaghetties the template code to make it a bit more readable.
+  - Improves the robustness of social media link platform detection. Only root domains are used for detection.
+  - Resolves an issue causing the email link to be pushed down to a new line in the inline view.
+  - Fixes a typo in Pinterest causing it to not be detected properly and show up as a generic link.
+  
+  Resolves CuBoulder/tiamat-theme#795
+  
+  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/120)
+---
+
+- ### Forms: Required Fields indicated by a red asterisk
+  Resolves #825 
+---
+
 - ### Adjusts style of Links in Content Grid - Cards
   Since Content Grids with a "Cards" layout selection always have a white background, the link colors are a consistent blue following the established white background link style, rather than adopting whatever the block background's link styles are.
   
