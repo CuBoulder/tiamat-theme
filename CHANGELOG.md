@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes button color bug; Reverts Hero Unit padding
+  Resolves CuBoulder/tiamat-theme#836
+---
+
 - ### Updates Social Media Icons block and Social Media menu
   This update:
   - Refactors the Social Media Icons block and Social Media menu to both use the same macros. Un-spaghetties the template code to make it a bit more readable.
