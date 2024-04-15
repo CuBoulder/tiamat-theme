@@ -1,15 +1,6 @@
 {#
 /**
- * Theme layout to display a Social Media Menu.
- *
- * Created by jsparks on 6/10/19
- */
-#}
-
-{#
-/**
- * @file
- * Theme override to display a menu.
+ * @file Contains the template to display a Social Media menu.
  *
  * Available variables:
  * - menu_name: The machine name of the menu.
@@ -26,168 +17,66 @@
  *   - in_active_trail: TRUE if the link is in the active trail.
  */
 #}
-{% import _self as menus %}
 
-{#
-  We call a macro which calls itself to render the full tree.
-  @see http://twig.sensiolabs.org/doc/tags/macro.html
-#}
-{{ menus.menu_links(items, attributes, 0) }}
-
-{% macro menu_links(items, attributes, menu_level) %}
-    {% import _self as menus %}
-    {% if items %}
-        <ul class="menu social-media navbar-nav navbar-social">
-            {% for item in items %}
-                {%
-                    set classes = [
-                    'social-media-item',
-                    'menu-item',
-                    item.is_expanded ? 'menu-item--expanded',
-                    item.is_collapsed ? 'menu-item--collapsed',
-                    item.in_active_trail ? 'menu-item--active-trail',
-                ]
-                %}
-                <li{{ item.attributes.addClass(classes) }}>
-{% set formattedContent = item.url |render|striptags|trim|upper %}
-
-			{% if 'FACEBOOK' in formattedContent %}
-				<a href="{{ item.url }}" class="icon-a" title="Facebook" alt="Facebook">
-					<span class="icon-div">
-						<span class="sr-only">Facebook</span>
-						<span class="icon-bg icon-bg-facebook">
-							<i class="fa-brands fa-facebook-f icon-foreground"></i>
-						</span>
-					</span>
-				</a>
-
-			{% elseif 'INSTAGRAM' in formattedContent %}
-				<a href="{{ item.url }}" class="icon-a" title="Instagram" alt="Instagram">
-					<span class="icon-div">
-						<span class="sr-only">Instagram</span>
-						<span class="icon-bg icon-bg-instagram">
-							<i class="fa-brands fa-instagram icon-foreground"></i>
-						</span>
-					</span>
-				</a>
-
-			{% elseif 'LINKEDIN' in formattedContent %}
-				<a href="{{ item.url }}" class="icon-a" title="LinkedIn" alt="LinkedIn">
-					<span class="icon-div">
-						<span class="sr-only">LinkedIn</span>
-						<span class="icon-bg icon-bg-linkedin">
-							<i class="fa-brands fa-linkedin-in icon-foreground"></i>
-						</span>
-					</span>
-				</a>
-
-			{% elseif 'YOUTUBE' in formattedContent %}
-				<a href="{{ item.url }}" class="icon-a" title="YouTube" alt="YouTube">
-					<span class="icon-div">
-						<span class="sr-only">YouTube</span>
-						<span class="icon-bg icon-bg-youtube">
-							<i class="fa-brands fa-youtube icon-foreground"></i>
-						</span>
-					</span>
-				</a>
-			{% elseif 'PINTREST' in formattedContent %}
-					<a href="{{ item.url }}" class="icon-a" title="Pintrest" alt="Pintrest">
-						<span class="icon-div">
-							<span class="sr-only">Pintrest</span>
-							<span class="icon-bg icon-bg-pintrest">
-								<i class="fa-brands fa-pinterest-p icon-foreground"></i>
-							</span>
-						</span>
-					</a>
-			{% elseif 'FLICKR' in formattedContent %}
-					<a href="{{ item.url }}" class="icon-a" title="Flickr" alt="Flickr">
-						<span class="icon-div">
-							<span class="sr-only">Flickr</span>
-							<span class="icon-bg icon-bg-flickr">
-								<i class="fa-brands fa-flickr icon-foreground"></i>
-							</span>
-						</span>
-					</a>
-			{% elseif 'VIMEO' in formattedContent %}
-					<a href="{{ item.url }}" class="icon-a" title="Vimeo" alt="Vimeo">
-						<span class="icon-div">
-							<span class="sr-only">Vimeo</span>
-							<span class="icon-bg icon-bg-vimeo">
-								<i class="fa-brands fa-vimeo-v icon-foreground"></i>
-							</span>
-						</span>
-					</a>
-			{% elseif 'WORDPRESS' in formattedContent %}
-					<a href="{{ item.url }}" class="icon-a" title="Wordpress" alt="Wordpress">
-						<span class="icon-div">
-							<span class="sr-only">WordPress</span>
-							<span class="icon-bg icon-bg-wordpress">
-								<i class="fa-brands fa-wordpress-simple icon-foreground"></i>
-							</span>
-						</span>
-					</a>
-			{% elseif 'TIKTOK' in formattedContent %}
-					<a href="{{ item.url }}" class="icon-a" title="Tiktok" alt="Tiktok">
-						<span class="icon-div">
-							<span class="sr-only">TikTok</span>
-							<span class="icon-bg icon-bg-pintrest">
-								<i class="fa-brands fa-tiktok icon-foreground"></i>
-							</span>
-						</span>
-					</a>
-			{% elseif 'REDDIT' in formattedContent %}
-					<a href="{{ item.url }}" class="icon-a" title="Reddit" alt="Reddit">
-						<span class="icon-div">
-							<span class="sr-only">Reddit</span>
-							<span class="icon-bg icon-bg-pintrest">
-								<i class="fa-brands fa-reddit-alien icon-foreground"></i>
-							</span>
-						</span>
-					</a>
-
-			{% elseif 'PATREON' in formattedContent %}
-					<a href="{{ item.url }}" class="icon-a" title="Patreon" alt="Patreon">
-						<span class="icon-div">
-							<span class="sr-only">Patreon</span>
-							<span class="icon-bg icon-bg-patreon">
-								<i class="fa-brands fa-patreon icon-foreground"></i>
-							</span>
-						</span>
-					</a>
-
-			{% elseif 'DISCORD' in formattedContent %}
-					<a href="{{ item.url }}" class="icon-a" title="Discord" alt="Discord">
-						<span class="icon-div">
-							<span class="sr-only">Discord</span>
-							<span class="icon-bg icon-bg-discord">
-								<i class="fa-brands fa-discord icon-foreground"></i>
-							</span>
-						</span>
-					</a>
-
-			{% elseif ('TWITTER' in formattedContent) or ('X.COM' in formattedContent)  %}
-				<a href="{{ item.url }}" class="icon-a" title="Twitter" alt="Twitter">
-					<span class="icon-div">
-						<span class="sr-only">Twitter</span>
-						<span class="icon-bg icon-bg-twitter">
-							<i class="fa-brands fa-x-twitter icon-foreground"></i>
-						</span>
-					</span>
-				</a>
-
-			{% else %}
-				<a href="{{ item.url }}" class="icon-a" title="Social Media" alt="Social Media">
-					<span class="icon-div">
-						<span class="sr-only">Link</span>
-						<span class="icon-bg icon-bg-link">
-							<i class="fa-solid fa-up-right-from-square icon-foreground"></i>
-						</span>
-					</span>
-				</a>
-
-			{% endif %}
-            </li>
-            {% endfor %}
-        </ul>
-    {% endif %}
+{% macro link(name, uri, icon, className) %}
+  <a{{ create_attribute({ 'aria-label': name, href: uri, title: name }) }}>
+    <span{{ create_attribute({ class: ['icon-bg', 'icon-bg-' ~ className] }) }}>
+      <i{{ create_attribute({ class: [icon, 'icon-foreground'] }) }}></i>
+    </span>
+    <span class="icon-label">{{ name }}</span>
+  </a>
 {% endmacro %}
+
+{% macro links(items) %}
+  {% for item in items %}
+    <li>
+      {% set uri = (item.content ? item.content['#url'].uri : item.url.uri)|trim %}
+      {% set hostname = '' %}
+      {% if uri matches '/^(http(s)?:)?\\/\\//i' %}
+        {% set hostname = uri|split('/').2 %}
+      {% endif %}
+      {% if hostname matches '/facebook\\.com$/i' %}
+        {{ _self.link('Facebook', uri, 'fa-brands fa-facebook-f', 'facebook') }}
+      {% elseif hostname matches '/instagram\\.com$/i' %}
+        {{ _self.link('Instagram', uri, 'fa-brands fa-instagram', 'instagram') }}
+      {% elseif hostname matches '/linkedin\\.com$/i' %}
+        {{ _self.link('LinkedIn', uri, 'fa-brands fa-linkedin-in', 'linkedin') }}
+      {% elseif hostname matches '/youtube\\.com$/i' %}
+        {{ _self.link('YouTube', uri, 'fa-brands fa-youtube', 'youtube') }}
+      {% elseif hostname matches '/(pinterest\\.com|pin\\.it)$/i' %}
+        {{ _self.link('Pinterest', uri, 'fa-brands fa-pinterest-p', 'pinterest') }}
+      {% elseif hostname matches '/(flickr\\.com|flic\\.kr)$/i' %}
+        {{ _self.link('Flickr', uri, 'fa-brands fa-flickr', 'flickr') }}
+      {% elseif hostname matches '/vimeo\\.com$/i' %}
+        {{ _self.link('Vimeo', uri, 'fa-brands fa-vimeo-v', 'vimeo') }}
+      {% elseif hostname matches '/wordpress\\.com$/i' %}
+        {{ _self.link('WordPress', uri, 'fa-brands fa-wordpress-simple', 'wordpress') }}
+      {% elseif hostname matches '/tiktok\\.com$/i' %}
+        {{ _self.link('TikTok', uri, 'fa-brands fa-tiktok', 'tiktok') }}
+      {% elseif hostname matches '/reddit\\.com$/i' %}
+        {{ _self.link('Reddit', uri, 'fa-brands fa-reddit-alien', 'reddit') }}
+      {% elseif hostname matches '/patreon\\.com$/i' %}
+        {{ _self.link('Patreon', uri, 'fa-brands fa-patreon', 'patreon') }}
+      {% elseif hostname matches '/discord\\.(com|gg)$/i' %}
+        {{ _self.link('Discord', uri, 'fa-brands fa-discord', 'discord') }}
+      {% elseif hostname matches '/(twitter|x)\\.com$/i'  %}
+        {{ _self.link('X', uri, 'fa-brands fa-x-twitter', 'twitter') }}
+      {% else %}
+        {{ _self.link('Link', uri, 'fa-solid fa-up-right-from-square', 'link') }}
+      {% endif %}
+    </li>
+  {% endfor %}
+{% endmacro %}
+
+{% set classes = [
+  'menu',
+  'social-media',
+  'navbar-nav',
+  'navbar-social'
+] %}
+
+{% if items %}
+  <ul{{ attributes.addClass(classes) }}>
+    {{ _self.links(items) }}
+  </ul>
+{% endif %}
