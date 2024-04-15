@@ -6,8 +6,8 @@
 #}
 
 {% for item in items %}
-       {% if ('text/javascript' in item.content['#context'].value|raw) and ('src="https://calendar.colorado.edu/widget' in item.content['#context'].value|raw) %}
-        <div class="ucb-events-calendar">{{ item.content['#context'].value|raw }}</div>
+       {% if ('text/javascript' in item.content['#context'].value|render) and ('src="https://calendar.colorado.edu/widget' in item.content['#context'].value|render) %}
+        <div class="ucb-events-calendar">{{ item.content['#context'].value|t }}</div>
     {% else %}
     <strong>Error: Only calendar.colorado.edu events embed code is allowed.</strong>
     {% endif %}
