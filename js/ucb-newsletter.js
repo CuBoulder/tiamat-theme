@@ -1,6 +1,5 @@
 (function ($, Drupal) {
     document.addEventListener('DOMContentLoaded', function() {
-    // Select the center element with the specific class
     const centerElement = document.querySelector('center.newsletter-social-media-menu');
     
     // Check if the center element exists
@@ -22,9 +21,9 @@
 
         // Iterate over each link to replace its contents with an image
         links.forEach(function(link) {
-            const service = link.getAttribute('title').toLowerCase(); // Assumes the title is properly set to the service name
+            const service = link.getAttribute('title').toLowerCase();
             const img = document.createElement('img');
-            img.src = `${absURL}${drupalSettings.path.baseUrl + drupalSettings.themePath}/images/social_icons/${color}-${service}.png`; // Adjust as necessary for your path setup
+            img.src = `${absURL}${drupalSettings.path.baseUrl + drupalSettings.themePath}/images/social_icons/${color}-${service}.png`;
             img.alt = link.getAttribute('title');
             img.style.width = '20px';
             img.style.height = '20px';
@@ -32,12 +31,13 @@
             // Clear the existing content of the link and append the new image
             link.innerHTML = ''; // Remove existing content
             link.appendChild(img);
-            link.classList.add('ucb-email-social-icon'); // Add the new class
-            socialDiv.appendChild(link); // Append the link to the new div
+            link.classList.add('ucb-email-social-icon');
+            socialDiv.appendChild(link);
         });
 
         // Hide the original ul and append the new div with links
-        ul.style.display = 'none'; // Alternatively, ul.remove(); if you want to completely remove the ul from the DOM
+        ul.style.display = 'none'; 
+        ul.remove();
         centerElement.appendChild(socialDiv);
     }
 });
@@ -54,11 +54,6 @@
     button.style.cssText = 'background-color:gold;width: 100%;max-width: 60%;padding: 10px;margin: 10px;'
 
     button.onclick = function(){
-        var centerElement = document.querySelector('center.social-media-menu.newsletter-social-media-menu');
-        var ul = centerElement.querySelector('ul.navbar-social');
-        if (centerElement){
-            centerElement.removeChild(ul)
-        }
         // Get baseURL
         var emailContainer = document.getElementById('email')
         var baseURL = emailContainer.dataset.url
