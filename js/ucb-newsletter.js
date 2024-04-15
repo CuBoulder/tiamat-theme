@@ -1,40 +1,44 @@
 (function ($, Drupal) {
     document.addEventListener('DOMContentLoaded', function() {
     // Select the center element with the specific class
-    const centerElement = document.querySelector('center.social-media-menu.newsletter-social-media-menu');
+    const centerElement = document.querySelector('center.newsletter-social-media-menu');
+    
     // Check if the center element exists
     if (centerElement) {
         // Create div to replace ul
-        const socialDiv = document.createElement('div')
-        socialDiv.classList.add('ucb-social-menu-email-version')
-        // Get the style:
+        const socialDiv = document.createElement('div');
+        socialDiv.classList.add('ucb-social-menu-email-version');
+
+        // Get the style and URL from data attributes
         const styleType = centerElement.dataset.style;
         const absURL = centerElement.dataset.url;
 
-        const color = (styleType == 'darkbox' || styleType == 'simple' || styleType == 'classic') ? "white" : "black";
-        // Find all <a> tags with the class 'icon-a' within the center element
-        const links = centerElement.querySelectorAll('a.icon-a');
+        // Determine color based on the style type
+        const color = (styleType === 'darkbox' || styleType === 'simple' || styleType === 'classic') ? "white" : "black";
+        
+        // Find all <a> tags within the ul element inside the center element
         const ul = centerElement.querySelector('ul.navbar-social');
+        const links = ul.querySelectorAll('a');
 
-        // Iterate over each link to replace its contents
+        // Iterate over each link to replace its contents with an image
         links.forEach(function(link) {
-            // Create an image element
+            const service = link.getAttribute('title').toLowerCase(); // Assumes the title is properly set to the service name
             const img = document.createElement('img');
-            const service = link.getAttribute('title').toLowerCase() == 'social media' ? 'link' : link.getAttribute('title').toLowerCase()
-            // Set the src attribute of the image
-            img.src = `${absURL}${drupalSettings.path.baseUrl + drupalSettings.themePath}/images/social_icons/${color}-${service}.png`; // Modify this as needed
+            img.src = `${absURL}${drupalSettings.path.baseUrl + drupalSettings.themePath}/images/social_icons/${color}-${service}.png`; // Adjust as necessary for your path setup
             img.alt = link.getAttribute('title');
             img.style.width = '20px';
-            img.style.height = '20px'; 
+            img.style.height = '20px';
 
-            // Clear the content of the link and append the new image
+            // Clear the existing content of the link and append the new image
             link.innerHTML = ''; // Remove existing content
             link.appendChild(img);
-            link.classList.add('ucb-email-social-icon')
-            socialDiv.append(link)
+            link.classList.add('ucb-email-social-icon'); // Add the new class
+            socialDiv.appendChild(link); // Append the link to the new div
         });
-        ul.style.display = 'none'
-        centerElement.append(socialDiv)
+
+        // Hide the original ul and append the new div with links
+        ul.style.display = 'none'; // Alternatively, ul.remove(); if you want to completely remove the ul from the DOM
+        centerElement.appendChild(socialDiv);
     }
 });
 
