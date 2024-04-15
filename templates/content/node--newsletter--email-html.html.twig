@@ -476,9 +476,15 @@ td>h3>a{
                             </table>
                         </td>
                     </tr>
-                    {# Social share #}
-                    {% if node.field_newsletter_social_links.value == 1 %}
-                        {% if social_media_menu and social_media_menu|length > 1 %}
+                </tbody>
+            </table>
+        </center>
+        {% endif %}
+        {# Social share #}
+            {% if node.field_newsletter_social_links.value == 1 %}
+                {% if social_media_menu and social_media_menu|length > 1 %}
+                <table role="presentation" border="0" width="100%" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+                <tbody>
                         <tr class="newsletter-social-{{designType}}">
                             <td>
                                 <center style="margin-bottom: 1em;font-size: 1.25rem; line-height: 1.25;" class="social-media-menu newsletter-social-media-menu" data-style="{{designType}}" data-url="{{base_url}}">
@@ -486,12 +492,10 @@ td>h3>a{
                                 </center>
                             </td>
                         </tr>
+                        </tbody>
+                        </table>
                         {% endif %}
                     {% endif %}
-                </tbody>
-            </table>
-        </center>
-        {% endif %}
     </center>
     {% if designType == 'lightbox' or designType == 'darkbox' %}
                     </td>
