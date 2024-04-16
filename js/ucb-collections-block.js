@@ -398,11 +398,9 @@ function filterChecked(blockID) {
   );
   let addedSpanData = document.getElementsByClassName(
     "collection-grid-filter-span-" + blockID
-  );
+  )[0];
   let noFilters = 0;
-  for (let i = 0; i < addedSpanData.length; i++) {
-    addedSpanData[i].innerHTML = "<strong>Selected Filters: </strong>";
-  }
+  addedSpanData.innerHTML = '';
 
   for (let i = 0; i < allCards.length; i++) {
     allCards[i].classList.add("filtered");
@@ -425,27 +423,23 @@ function filterChecked(blockID) {
       let currentCategory = document.getElementsByClassName(
         "category-label-" + currentID + "-" + blockID
       );
-      for (let i = 0; i < addedSpanData.length; i++) {
-        addedSpanData[i].innerHTML =
-          addedSpanData[i].innerHTML + currentCategory[0].innerText + ", ";
-      }
+      addedSpanData.innerHTML =
+        addedSpanData.innerHTML + currentCategory[0].innerText + ", ";
     }
   }
 
-  for (let i = 0; i < addedSpanData.length; i++) {
-    addedSpanData[i].innerHTML =
-      addedSpanData[i].innerHTML.slice(0, -2) +
-      "<a href='javascript:;' data-collection='collection-28' class='collection-reset' style='display: inline;' onclick = 'resetFilters(" +
-      blockID +
-      ")'><i class='fa-solid fa-xmark'></i> Reset Filters</a>";
-  }
   if (noFilters == 0) {
     for (let i = 0; i < allCards.length; i++) {
       allCards[i].classList.remove("filtered");
     }
-    for (let i = 0; i < addedSpanData.length; i++) {
-      addedSpanData[i].innerHTML = "";
-    }
+    addedSpanData.setAttribute('hidden', '');
+  } else {
+    addedSpanData.innerHTML =
+      "<strong>Selected Filters: </strong>" + addedSpanData.innerHTML.slice(0, -2) +
+      "<a href='javascript:;' data-collection='collection-28' class='collection-reset' style='display: inline;' onclick = 'resetFilters(" +
+      blockID +
+      ")'><i class='fa-solid fa-xmark'></i> Reset Filters</a>";
+    addedSpanData.removeAttribute('hidden');
   }
 }
 
@@ -507,10 +501,9 @@ function resetFilters(blockID) {
 
   let clearSpanData = document.getElementsByClassName(
     "collection-grid-filter-span-" + blockID
-  );
-  for (let i = 0; i < clearSpanData.length; i++) {
-    clearSpanData[i].innerHTML = "";
-  }
+  )[0];
+
+  clearSpanData.setAttribute('hidden', '');
 }
 
 function resetSingleFilters(blockID) {

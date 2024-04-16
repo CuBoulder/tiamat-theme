@@ -57,9 +57,8 @@
 }
 
 .collections-grid-block-data {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
 }
 
@@ -70,7 +69,6 @@
 
 .ucb-collection-card-container {
   transition: opacity .5s ease;
-  min-width: min-content;
 }
 
 .ucb-collection-card-container .ucb-collection-card-img {
@@ -88,21 +86,15 @@
   margin: 0;
 }
 
-@media (min-width: 1200px) {
-  .ucb-collection-card-container {
-    flex: 0 0 32%;
-  }
-}
-
 @media (min-width: 768px) and (max-width: 1199px) {
-  .ucb-collection-card-container {
-    flex: 0 0 49%;
+  .collections-grid-block-data {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
 @media (max-width: 991px) {
-  .ucb-collection-card-container {
-    flex: 0 0 100%;
+  .collections-grid-block-data {
+    grid-template-columns: repeat(1, 1fr);
   }
 }
 
@@ -136,7 +128,8 @@
   border: 1px solid #e7e7e7;
 }
 
-.collection-grid-filters .category-filter-label {
+.collection-multiselect-single .category-filter-label,
+.collection-multiselect-multi .category-filter-label {
   font-size: 1em;
   font-weight: bold;
 }
@@ -201,10 +194,11 @@
 }
 
 .collection-multiselect-multi .collection-filter-links {
-  margin-bottom: 10px;
+  margin-bottom: 20px;
 }
 
-.collection-grid-filter-checks {
+.collection-grid-filter-checks > span {
+  display: block;
   margin-bottom: 10px;
 }
 
