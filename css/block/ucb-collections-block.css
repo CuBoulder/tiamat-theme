@@ -1,6 +1,5 @@
 .collection-category-line {
   display: flex;
-  min-width: max-content;
   align-items: center;
   margin-bottom: 2px;
 }
@@ -64,8 +63,9 @@
   gap: 10px;
 }
 
-.collection-multiselect-multi .collections-grid-block-data {
-  margin-left: 20px;
+.collection-multiselect-multi .collection-grid-card-wrapper {
+  width: 100%;
+  padding-left: 20px;
 }
 
 .ucb-collection-card-container {
@@ -79,29 +79,29 @@
 
 @media (min-width: 1200px) {
   .ucb-collection-card-container {
-    width: 32%;
+    flex: 0 0 32%;
   }
 }
 
 @media (min-width: 768px) and (max-width: 1199px) {
   .ucb-collection-card-container {
-    width: 49%;
+    flex: 0 0 49%;
   }
 }
 
 @media (max-width: 991px) {
   .ucb-collection-card-container {
-    width: 100%;
+    flex: 0 0 100%;
   }
 }
 
 .collection-grid-container {
   display: flex;
-  gap: 10px;
 }
 
 .collection-grid-container.collection-multiselect-single {
   flex-direction: column;
+  gap: 10px;
 }
 
 .collection-grid-container.collection-multiselect-multi {
@@ -109,7 +109,6 @@
 }
 
 .collection-filter-fade .ucb-collection-card-container.filtered {
-
   opacity: .25;
 }
 
@@ -149,6 +148,9 @@
   margin-left: 20px;
 }
 
+.collection-multiselect-multi .collection-filter-container {
+  width: 25%;
+}
 
 @media (max-width: 1199px) {
   .collection-multiselect-multi .collection-category-container {
@@ -169,8 +171,16 @@
     margin-left: 0;
   }
 
-  .collection-filter-fade .ucb-collection-card-container.filtered {
+  .collection-multiselect-multi .collection-grid-card-wrapper {
+    padding-top: 10px;
+    padding-left: 0;
+  }
 
+  .collection-multiselect-multi .collection-filter-container {
+    width: 100%;
+  }
+
+  .collection-filter-fade .ucb-collection-card-container.filtered {
     display: none;
   }
 }
@@ -178,6 +188,14 @@
 .collection-multiselect-single .collection-filter-links {
   display: flex;
   flex-flow: row wrap;
+}
+
+.collection-multiselect-multi .collection-filter-links {
+  margin-bottom: 10px;
+}
+
+.collection-grid-filter-checks {
+  margin-bottom: 10px;
 }
 
 .collection-grid-no-display {
