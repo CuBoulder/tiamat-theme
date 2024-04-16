@@ -1,23 +1,13 @@
-{#
-/**
- * Theme layout to display copy for grid layouts
- * Created by jnichol on 4/07/22
- */
-#}
 
 {% for item in items %}
-	{% if ('text/javascript' in item.content['#context'].value|render) and ('src="https://calendar.colorado.edu/widget' in item.content['#context'].value|render) %}
-		
-        {% set calendarCode = item.content['#context'].value|render|split('</script>') %}
-        {% set calendarCode = calendarCode.0 ~ '</script>' %}
-        
-        {% set calendarCode = {
-            '#type': 'processed_text',
-            '#text':  calendarCode,
-            '#format': 'full_html',
-        } %}
+	{% if ('text/javascript' in item.content['#context'].value|striptags('<script>')|render) and ('src="https://calendar.colorado.edu/widget' in item.content['#context'].value|striptags('<script>')|render) %}
 
-        {{ calendarCode }}
+        {% set calendarID = 'localist-widget-' ~ random() %}
+        {% set calendarCode = item.content['#context'].value|striptags('<script>')|trim('<script> defer type="text/javascript"') %}
+        {% set calendarCode = calendarCode|preg_replace('/src\s*=\s*/', '')|preg_replace('/"/', '')|preg_replace('/localist-widget-[0-9]*/', calendarID) %}
+
+		<div id="{{ calendarID }}" class="localist-widget"></div>
+		<script defer type="text/javascript" src="{{ calendarCode }}"></script>
 
 	{% else %}
 		<strong>Error: Only calendar.colorado.edu events embed code is allowed.</strong>
