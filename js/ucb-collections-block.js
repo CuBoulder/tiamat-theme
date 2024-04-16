@@ -187,7 +187,7 @@
                 if (!body.length) {
                   let data = item.attributes.body;
                   // Remove any html tags within the collection
-                  let htmlStrip = data.value.replace(/<\/?[^>]+(>|$)/g, "");
+                  let htmlStrip = data ? data.value.replace(/<\/?[^>]+(>|$)/g, "") : '';
                   // Remove any line breaks if media is embedded in the body
                   let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
 
@@ -317,8 +317,8 @@
           })
           .catch(function (error) {
             // catch any fetch errors and let the user know so they're not endlessly watching the spinner
-            console.log("Fetch Error in URL : " + JSONURL);
-            console.log("Fetch Error is : " + error);
+            console.warn("Fetch Error in URL : " + JSONURL);
+            console.error(error);
             // turn off spinner
             //toggleMessage("ucb-al-loading", "none");
             // turn on default error message
