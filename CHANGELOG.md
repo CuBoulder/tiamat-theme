@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter: Social Links in Footer now PNGs
+  Modifies the Social Menu in the Newsletter - Email HTML version footer to use fixed PNGs rather than SVG, ensuring compatibility across all email clients. 
+  
+  Resolves #828 
+---
+
 - ### Fixes button color bug; Reverts Hero Unit padding
   Resolves CuBoulder/tiamat-theme#836
 ---

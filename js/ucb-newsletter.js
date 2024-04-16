@@ -1,4 +1,48 @@
 (function ($, Drupal) {
+    document.addEventListener('DOMContentLoaded', function() {
+    const centerElement = document.querySelector('center.newsletter-social-media-menu');
+    
+    // Check if the center element exists
+    if (centerElement) {
+        // Create div to replace ul
+        const socialDiv = document.createElement('div');
+        socialDiv.classList.add('ucb-social-menu-email-version');
+
+        // Get the style and URL from data attributes
+        const styleType = centerElement.dataset.style;
+        const absURL = centerElement.dataset.url;
+
+        // Determine color based on the style type
+        const color = (styleType === 'darkbox' || styleType === 'simple' || styleType === 'classic') ? "white" : "black";
+        
+        // Find all <a> tags within the ul element inside the center element
+        const ul = centerElement.querySelector('ul.navbar-social');
+        const links = ul.querySelectorAll('a');
+
+        // Iterate over each link to replace its contents with an image
+        links.forEach(function(link) {
+            const service = link.getAttribute('title').toLowerCase();
+            const img = document.createElement('img');
+            img.src = `${absURL}${drupalSettings.path.baseUrl + drupalSettings.themePath}/images/social_icons/${color}-${service}.png`;
+            img.alt = link.getAttribute('title');
+            img.style.width = '20px';
+            img.style.height = '20px';
+
+            // Clear the existing content of the link and append the new image
+            link.innerHTML = ''; // Remove existing content
+            link.appendChild(img);
+            link.classList.add('ucb-email-social-icon');
+            socialDiv.appendChild(link);
+        });
+
+        // Hide the original ul and append the new div with links
+        ul.style.display = 'none'; 
+        ul.remove();
+        centerElement.appendChild(socialDiv);
+    }
+});
+
+
 //     // Create the admin button for copying HTML and the admin messages
     var codeContainer = document.createElement('div')
     codeContainer.classList = 'container email-button-container'
@@ -10,7 +54,6 @@
     button.style.cssText = 'background-color:gold;width: 100%;max-width: 60%;padding: 10px;margin: 10px;'
 
     button.onclick = function(){
-
         // Get baseURL
         var emailContainer = document.getElementById('email')
         var baseURL = emailContainer.dataset.url
