@@ -51,21 +51,6 @@ class PeopleListProvider {
 				+ params
 		return endpoint + '?' + baseParams + publishedParams + params + sortParams;
 	}
-	// Gets person data
-	// async fetchPeople() {
-	// 	try {
-	// 		const
-	// 			response = await fetch(this.baseURI + this.nextPath),
-	// 			data = await response.json(),
-	// 			results = data['data'];
-	// 		if (results.length === 0)
-	// 			console.warn('PeopleListProvider: ' + PeopleListProvider.noResultsMessage);
-	// 		return data;
-	// 	} catch (reason) {
-	// 		console.error('PeopleListProvider: ' + PeopleListProvider.errorMessage);
-	// 		throw reason;
-	// 	}
-	// }
 	async fetchAllPeople(url, aggregatedData = [], aggregatedIncluded = []) {
 		try {
 			const response = await fetch(url);
@@ -228,7 +213,6 @@ class PeopleListElement extends HTMLElement {
 
 		// Get our people
 		peopleListProvider.fetchAllPeople(baseURI + peopleListProvider.nextPath).then(response => {
-			console.log('do i get all my people', response)
 			this._contentElement.innerText = '';
 			const results = response['data'];
 			if(!results.length)
