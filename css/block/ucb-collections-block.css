@@ -5,7 +5,7 @@
 }
 
 .category-label {
-  white-space: normal;
+  font-size: .85em;
   font-weight: normal;
   padding: 3px 2px 3px 0;
 }
@@ -73,8 +73,19 @@
   min-width: min-content;
 }
 
-.ucb-collection-card-img {
+.ucb-collection-card-container .ucb-collection-card-img {
   padding-bottom: 10px;
+}
+
+.ucb-collection-card-container .ucb-collection-card-title {
+  font-size: 1em;
+  font-weight: bold;
+}
+
+.ucb-collection-card-container .ucb-collection-item-body {
+  font-size: .85em;
+  line-height: 1.5em;
+  margin: 0;
 }
 
 @media (min-width: 1200px) {
@@ -125,9 +136,8 @@
   border: 1px solid #e7e7e7;
 }
 
-.collection-multiselect-single .category-filter-label {
-  font-size: 100%;
-  display: inline;
+.collection-grid-filters .category-filter-label {
+  font-size: 1em;
   font-weight: bold;
 }
 
