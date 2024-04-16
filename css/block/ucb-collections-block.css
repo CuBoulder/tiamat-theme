@@ -61,7 +61,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
-  justify-content: space-between;
+  gap: 10px;
 }
 
 .collection-multiselect-multi .collections-grid-block-data {
@@ -70,7 +70,6 @@
 
 .ucb-collection-card-container {
   transition: opacity .5s ease;
-  margin: 5px 0px;
   min-width: min-content;
 }
 
@@ -80,35 +79,32 @@
 
 @media (min-width: 1200px) {
   .ucb-collection-card-container {
-    width: 30%;
+    width: 32%;
   }
 }
 
-@media (min-width: 960px) and (max-width: 1199px) {
-  .ucb-collection-card-container {
-    width: 45%;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 959px) {
+@media (min-width: 768px) and (max-width: 1199px) {
   .ucb-collection-card-container {
     width: 49%;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 991px) {
   .ucb-collection-card-container {
     width: 100%;
   }
 }
 
-.collection-grid-container.collection-multiselect-single {
+.collection-grid-container {
   display: flex;
+  gap: 10px;
+}
+
+.collection-grid-container.collection-multiselect-single {
   flex-direction: column;
 }
 
 .collection-grid-container.collection-multiselect-multi {
-  display: flex;
   flex-direction: row;
 }
 
