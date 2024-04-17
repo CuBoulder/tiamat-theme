@@ -329,3 +329,13 @@
 [data-layout-content-preview-placeholder-label*="Body"] {
   background-color: transparent;
 }
+
+
+/* Tighten up spacing between blocks in a column */
+.ucb-boostrap-layout-section .column .block:not(:last-child) {
+    margin-bottom: 0px !important;
+}
+
+.ucb-boostrap-layout-section .column .block + .block{
+      margin-top: 0px !important;
+}

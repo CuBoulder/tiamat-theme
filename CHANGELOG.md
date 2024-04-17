@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adjusts spacing between sibling blocks within a column
+  Resolves #820 
+---
+
 - ### Issue Page: Section Title is now optional
   Resolves https://github.com/CuBoulder/tiamat-theme/issues/852
   
