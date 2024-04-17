@@ -25,8 +25,9 @@
   {% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first and (layoutSelection != 0 or entity.field_expandable_content_open.value) %}
     <div class="accordion-item tab-content">
       <h2 class="accordion-header" id="ucb-accordion{{ id }}-title{{ loop.index }}">
+        {% set target = 'ucb-accordion' ~ id ~ '-content' ~ loop.index %}
         {% set expandableHeaderID = item.entity.field_expandable_content_title|view %}
-        <a id="{{ item.entity.field_expandable_content_title.value|render|lower|replace({' ': "-"}) }}" class="accordion-button{{ not itemExpanded ? ' collapsed' }} expandableHeaders" role="button" data-bs-toggle="collapse" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" aria-expanded="{{ itemExpanded ? 'true' : 'false' }}" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}">
+        <a href="#{{ target }}" id="{{ item.entity.field_expandable_content_title.value|render|lower|replace({' ': "-"}) }}" class="accordion-button{{ not itemExpanded ? ' collapsed' }} expandableHeaders" role="button" data-bs-toggle="collapse" data-bs-target="#{{ target }}" aria-expanded="{{ itemExpanded ? 'true' : 'false' }}" aria-controls="{{ target }}">
           <i class="fa-solid fa-square-plus ucb-accordion-button-content-icon-expand"></i><i class="fa-solid fa-square-minus ucb-accordion-button-content-icon-collapse"></i>
           {{ item.entity.field_expandable_content_title|view }}
         </a>
@@ -75,9 +76,11 @@
     {% if layoutSelection == 1 %}
       <div class="horizontal-tab-accordion">
         <ul class="nav nav-tabs justify-content-center" id="ucb-horizontal-tabs{{ id }}" role="tablist">
-          {% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first %}
+          {% for key, item in entity.field_expandable_content_copy %}
+            {% set itemExpanded = loop.first %}
+            {% set target = 'ucb-accordion' ~ id ~ '-content' ~ loop.index %}
             <li class="nav-item" role="presentation">
-              <a id="{{ item.entity.field_expandable_content_title.value|render|lower|replace({' ': "-"}) }}" class="nav-link horizontal-tab-link{{ itemExpanded ? ' active' }} expandableHeaders" role="tab" data-bs-toggle="tab" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}" aria-selected="{{ itemExpanded ? 'true' : 'false' }}">{{ item.entity.field_expandable_content_title|view }}</a>
+              <a href="#{{ target }}" id="{{ item.entity.field_expandable_content_title.value|render|lower|replace({' ': "-"}) }}" class="nav-link horizontal-tab-link{{ itemExpanded ? ' active' }} expandableHeaders" role="tab" data-bs-toggle="tab" data-bs-target="#{{ target }}" aria-controls="{{ target }}" aria-selected="{{ itemExpanded ? 'true' : 'false' }}">{{ item.entity.field_expandable_content_title|view }}</a>
             </li>
           {% endfor %}
         </ul>
@@ -88,8 +91,10 @@
     {% elseif layoutSelection == 2 %}
       <div class="vertical-tab-accordion d-flex align-items-stretch">
         <div class="vertical-tabs nav flex-column nav-pills" id="ucb-vertical-tabs{{ id }}" role="tablist" aria-orientation="vertical">
-          {% for key, item in entity.field_expandable_content_copy %}{% set itemExpanded = loop.first %}
-            <a id="{{ item.entity.field_expandable_content_title.value|render|lower|replace({' ': "-"}) }}" class="nav-link vertical-tab-link{{ itemExpanded ? ' active' }} expandableHeaders" role="tab" data-bs-toggle="pill" data-bs-target="#ucb-accordion{{ id }}-content{{ loop.index }}" aria-controls="ucb-accordion{{ id }}-content{{ loop.index }}" aria-selected="{{ itemExpanded ? 'true' : 'false' }}">{{ item.entity.field_expandable_content_title|view }}</a>
+          {% for key, item in entity.field_expandable_content_copy %}
+            {% set itemExpanded = loop.first %}
+            {% set target = 'ucb-accordion' ~ id ~ '-content' ~ loop.index %}
+            <a href="#{{ target }}" id="{{ item.entity.field_expandable_content_title.value|render|lower|replace({' ': "-"}) }}" class="nav-link vertical-tab-link{{ itemExpanded ? ' active' }} expandableHeaders" role="tab" data-bs-toggle="pill" data-bs-target="#{{ target }}" aria-controls="{{ target }}" aria-selected="{{ itemExpanded ? 'true' : 'false' }}">{{ item.entity.field_expandable_content_title|view }}</a>
           {% endfor %}
         </div>
         <div class="vertical-tab-content ">
