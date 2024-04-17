@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates Collection Grid block
+  This update:
+  - [Bug] Addresses item positioning for rows with two items. Resolves CuBoulder/tiamat-theme#833
+  - [Bug] Addresses longer filter labels not wrapping properly. Resolves CuBoulder/tiamat-theme#822
+  - [Change] Changes font sizes to match D7 Express. Resolves CuBoulder/tiamat-theme#823
+  - [Bug] Removes JavaScript error for items with no body.
+  
+  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/126)
+---
+
 - ### Newsletter: Social Links in Footer now PNGs
   Modifies the Social Menu in the Newsletter - Email HTML version footer to use fixed PNGs rather than SVG, ensuring compatibility across all email clients. 
   
