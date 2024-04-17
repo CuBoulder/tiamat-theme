@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds two minor style changes
+  This update:
+  - [Bug] Adds missing `href` attribute to links in Expandable blocks. Resolves CuBoulder/tiamat-theme#853
+  - [Change] Resets styles targeting `<abbr>` tag in Events Calendar blocks. Resolves CuBoulder/tiamat-theme#837
+---
+
 - ### Adjusts spacing between sibling blocks within a column
   Resolves #820 
 ---

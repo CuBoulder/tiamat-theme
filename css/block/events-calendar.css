@@ -2,6 +2,12 @@
   overflow: auto;
 }
 
+.ucb-events-calendar abbr {
+  text-decoration: none;
+  -webkit-text-decoration: none;
+  cursor: inherit;
+}
+
 .ucb-events-calendar .localist_minicalendar_events {
   flex-grow: 1;
 }
