@@ -31,14 +31,6 @@
     font-size: 110%;
 }
 
-/* Tighten up spacing between blocks in a column */
-.column .block:first-child:not(:last-child) {
-    margin-bottom: 0px !important;
-}
-.ucb-boostrap-layout-section .column .block + .block{
-      margin-top: 0px !important;
-}
-
 @media screen and (min-width: 768px) {
     .bs-content-scale-increase p {
         font-size: 125%;
