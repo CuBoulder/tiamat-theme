@@ -4,10 +4,10 @@
 
         {% set calendarID = 'localist-widget-' ~ random() %}
         {% set calendarCode = item.content['#context'].value|striptags('<script>')|trim('<script> defer type="text/javascript"') %}
-        {% set calendarCode = calendarCode|preg_replace('/src\s*=\s*/', '')|preg_replace('/"/', '')|preg_replace('/localist-widget-[0-9]*/', calendarID) %}
+        {% set calendarCode = calendarCode|preg_replace('/src\s*=\s*/', '')|preg_replace('/(^.*)?\?/', '')|preg_replace('/localist-widget-[0-9]*/', calendarID) %}
 
 		<div id="{{ calendarID }}" class="localist-widget"></div>
-		<script defer type="text/javascript" src="{{ calendarCode }}"></script>
+		<script defer type="text/javascript" src="https://calendar.colorado.edu/widget/view?{{ calendarCode }}"></script>
 
 	{% else %}
 		<strong>Error: Only calendar.colorado.edu events embed code is allowed.</strong>
