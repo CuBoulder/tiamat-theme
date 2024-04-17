@@ -10,7 +10,9 @@
 
 {% block paragraph %}
     <div{{attributes.addClass(classes)}}>
-        <h2>{{content.field_ucb_issue_section_title}}</h2>
+        {% if content.field_ucb_issue_section_title|render %}
+            <h2 class="issue-title">{{content.field_ucb_issue_section_title}}</h2>
+        {% endif %}
         <div class="issue-content">
 
     {% for key, item in paragraph.field_ucb_issue_article_select %}						
