@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update block--content-grid.html.twig
+  Check to see if there is an image url available in `if` statements Edited the `else` to be an `elseif` for the same checks for second image_style option.
+  
+  These fix the missing image notice
+  
+  Test by creating a content grid without an image chosen, result should have no user notice in the dlog
+  
+  Closes #866 
+  
+  
+---
+
 - ### Updates Image Gallery block
   This update:
   - Changes Image Gallery block image spacing to be consistent.
