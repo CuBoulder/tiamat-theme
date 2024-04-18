@@ -17,7 +17,7 @@
         
         // Find all <a> tags within the ul element inside the center element
         const ul = centerElement.querySelector('ul.navbar-social');
-        const links = ul.querySelectorAll('a');
+        const links = centerElement.querySelectorAll('a');
 
         // Iterate over each link to replace its contents with an image
         links.forEach(function(link) {
@@ -32,13 +32,7 @@
             link.innerHTML = ''; // Remove existing content
             link.appendChild(img);
             link.classList.add('ucb-email-social-icon');
-            socialDiv.appendChild(link);
         });
-
-        // Hide the original ul and append the new div with links
-        ul.style.display = 'none'; 
-        ul.remove();
-        centerElement.appendChild(socialDiv);
     }
 });
 
