@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes error thrown by Social Media Icons block email field
+  It throws a console error despite working just fine. This update removes the error.
+  
+  Resolves CuBoulder/tiamat-theme#862
+---
+
 - ### Adds two minor style changes
   This update:
   - [Bug] Adds missing `href` attribute to links in Expandable blocks. Resolves CuBoulder/tiamat-theme#853
