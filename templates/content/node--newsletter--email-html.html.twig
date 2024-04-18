@@ -481,20 +481,62 @@ td>h3>a{
         </center>
         {% endif %}
         {# Social share #}
-            {% if node.field_newsletter_social_links.value == 1 %}
-                {% if social_media_menu and social_media_menu|length > 1 %}
+            {% if node.field_newsletter_type.entity.field_newsletter_social_link is defined and node.field_newsletter_type.entity.field_newsletter_social_link is not empty %}
                 <table role="presentation" border="0" width="100%" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
                 <tbody>
                         <tr class="newsletter-social-{{designType}}">
                             <td>
                                 <center style="margin-bottom: 1em;font-size: 1.25rem; line-height: 1.25;" class="social-media-menu newsletter-social-media-menu" data-style="{{designType}}" data-url="{{base_url}}">
-                                    {{ social_media_menu }}
+                                {% for link in node.field_newsletter_type.entity.field_newsletter_social_link %}
+                                    {% set uri = link.url.toString() %}
+                                    {% set hostname = '' %}
+                                    {% if uri matches '/^(http(s)?:)?\\/\\//i' %}
+                                        {% set hostname = uri|split('/')[2] %}
+                                    {% endif %}
+                                    
+                                    {% set service = 'link' %}  {# Default image if no service matches #}
+                                    {% if hostname matches '/facebook\\.com$/i' %}
+                                        {% set service = 'Facebook' %}
+                                    {% elseif hostname matches '/instagram\\.com$/i' %}
+                                        {% set service = 'Instagram' %}
+                                    {% elseif hostname matches '/linkedin\\.com$/i' %}
+                                        {% set service = 'LinkedIn' %}
+                                    {% elseif hostname matches '/youtube\\.com$/i' %}
+                                        {% set service = 'YouTube' %}
+                                    {% elseif hostname matches '/(pinterest\\.com|pin\\.it)$/i' %}
+                                        {% set service = 'Pinterest' %}
+                                    {% elseif hostname matches '/(flickr\\.com|flic\\.kr)$/i' %}
+                                        {% set service = 'Flickr' %}
+                                    {% elseif hostname matches '/vimeo\\.com$/i' %}
+                                        {% set service = 'Vimeo' %}
+                                    {% elseif hostname matches '/wordpress\\.com$/i' %}
+                                        {% set service = 'Wordpress' %}
+                                    {% elseif hostname matches '/tiktok\\.com$/i' %}
+                                        {% set service = 'TikTok' %}
+                                    {% elseif hostname matches '/reddit\\.com$/i' %}
+                                        {% set service = 'Reddit' %}
+                                    {% elseif hostname matches '/patreon\\.com$/i' %}
+                                        {% set service = 'Patreon' %}
+                                    {% elseif hostname matches '/discord\\.(com|gg)$/i' %}
+                                        {% set service = 'Discord' %}
+                                    {% elseif hostname matches '/(twitter\\.com|x\\.com)$/i' %}
+                                        {% set service = 'X' %}
+                                    {% endif %}
+
+                                    {% set alt = service == 'link' ? 'Social link' : service %}
+                                    {% set color = designType == 'darkbox' or designType == 'simple' or designType == 'classic' ? 'white' : 'black' %}
+                                    <a{{ create_attribute({ class: 'ucb-email-social-icon', href: uri }) }}>
+                                        <img{{ create_attribute({
+                                            src: base_url ~ '/' ~  base_path ~ directory ~ '/images/social_icons/' ~ color ~ '-' ~ service|lower ~ '.png',
+                                            alt: alt,
+                                            style: 'width:20px;height:20px' }) }}/>
+                                    </a>
+                                {% endfor %}
                                 </center>
                             </td>
                         </tr>
                         </tbody>
                         </table>
-                        {% endif %}
                     {% endif %}
     </center>
     {% if designType == 'lightbox' or designType == 'darkbox' %}

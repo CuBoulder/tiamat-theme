@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter: Moves social links from Node to Newsletter term
+  Resolves #867 
+  
+  Includes:
+  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/871
+  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/130
+---
+
 - ### Update block--content-grid.html.twig
   Check to see if there is an image url available in `if` statements Edited the `else` to be an `elseif` for the same checks for second image_style option.
   
