@@ -153,3 +153,10 @@
   padding-top: 0;
   padding-bottom: 0;
 }
+
+/* Block Styles CSS */
+
+/* Fix for icon breaking hero */
+.block-hero-unit .bs-icon-position-default {
+  display: block;
+}
