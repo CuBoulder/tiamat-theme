@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates Image Gallery block
+  This update:
+  - Changes Image Gallery block image spacing to be consistent.
+  - Removes some styles that were redundant to the ones Bootstrap provides.
+  
+  Resolves CuBoulder/tiamat-theme#854
+---
+
 - ### Fixes error thrown by Social Media Icons block email field
   It throws a console error despite working just fine. This update removes the error.
   
