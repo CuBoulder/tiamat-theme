@@ -496,34 +496,34 @@ td>h3>a{
                                     
                                     {% set service = 'link' %}  {# Default image if no service matches #}
                                     {% if hostname matches '/facebook\\.com$/i' %}
-                                        {% set service = 'facebook' %}
+                                        {% set service = 'Facebook' %}
                                     {% elseif hostname matches '/instagram\\.com$/i' %}
-                                        {% set service = 'instagram' %}
+                                        {% set service = 'Instagram' %}
                                     {% elseif hostname matches '/linkedin\\.com$/i' %}
-                                        {% set service = 'linkedin' %}
+                                        {% set service = 'LinkedIn' %}
                                     {% elseif hostname matches '/youtube\\.com$/i' %}
-                                        {% set service = 'youtube' %}
+                                        {% set service = 'YouTube' %}
                                     {% elseif hostname matches '/(pinterest\\.com|pin\\.it)$/i' %}
-                                        {% set service = 'pinterest' %}
+                                        {% set service = 'Pinterest' %}
                                     {% elseif hostname matches '/(flickr\\.com|flic\\.kr)$/i' %}
-                                        {% set service = 'flickr' %}
+                                        {% set service = 'Flickr' %}
                                     {% elseif hostname matches '/vimeo\\.com$/i' %}
-                                        {% set service = 'vimeo' %}
+                                        {% set service = 'Vimeo' %}
                                     {% elseif hostname matches '/wordpress\\.com$/i' %}
-                                        {% set service = 'wordpress' %}
+                                        {% set service = 'Wordpress' %}
                                     {% elseif hostname matches '/tiktok\\.com$/i' %}
-                                        {% set service = 'tiktok' %}
+                                        {% set service = 'TikTok' %}
                                     {% elseif hostname matches '/reddit\\.com$/i' %}
-                                        {% set service = 'reddit' %}
+                                        {% set service = 'Reddit' %}
                                     {% elseif hostname matches '/patreon\\.com$/i' %}
-                                        {% set service = 'patreon' %}
+                                        {% set service = 'Patreon' %}
                                     {% elseif hostname matches '/discord\\.(com|gg)$/i' %}
-                                        {% set service = 'discord' %}
-                                    {% elseif hostname matches '/(twitter\\.com|tweet\\.com|x\\.com)$/i' %}
-                                        {% set service = 'x' %}
+                                        {% set service = 'Discord' %}
+                                    {% elseif hostname matches '/(twitter\\.com|x\\.com)$/i' %}
+                                        {% set service = 'X' %}
                                     {% endif %}
 
-                                    <a href="{{ uri }}" title="{{ service|default('link') }}">
+                                    <a href="{{ uri }}" title="{{ service|default('Social link') }}">
                                     </a>
                                 {% endfor %}
                                 </center>
