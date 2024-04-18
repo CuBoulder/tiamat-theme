@@ -523,7 +523,7 @@ td>h3>a{
                                         {% set service = 'X' %}
                                     {% endif %}
 
-                                    {% set alt = service|default('Social link') %}
+                                    {% set alt = service == 'link' ? 'Social link' : service %}
                                     {% set color = designType == 'darkbox' or designType == 'simple' or designType == 'classic' ? 'white' : 'black' %}
                                     <a{{ create_attribute({ class: 'ucb-email-social-icon', href: uri }) }}>
                                         <img{{ create_attribute({
