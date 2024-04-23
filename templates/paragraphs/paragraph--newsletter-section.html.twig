@@ -63,9 +63,17 @@
 						{# Code to render user made content (title) #}
 					{% elseif item.entity.field_newsletter_content_title.value|render %}
 					<div id="feature-article-user-title-{{key}}">
+						{% if item.entity.field_newsletter_content_url.0.url %}
+						<a href="{{item.entity.field_newsletter_content_url.0.url}}">
+							<h3>
+								{{ item.entity.field_newsletter_content_title|view }}
+							</h3>
+						</a>
+						{% else %}
 						<h3>
 							{{ item.entity.field_newsletter_content_title|view }}
 						</h3>
+						{% endif %}
 					</div>
 					{% endif %}
 
@@ -131,9 +139,17 @@
 
 								{# Code to render user made content (title) #}
 							{% elseif item.entity.field_newsletter_content_title.value|render %}
+								{% if item.entity.field_newsletter_content_url.0.url %}
+								<a href="{{item.entity.field_newsletter_content_url.0.url}}">
+									<h3>
+										{{ item.entity.field_newsletter_content_title|view }}
+									</h3>
+								</a>
+								{% else %}
 								<h3>
 									{{ item.entity.field_newsletter_content_title|view }}
 								</h3>
+								{% endif %}
 							{% endif %}
 
 							{# Code to render selected article content (categories) #}
