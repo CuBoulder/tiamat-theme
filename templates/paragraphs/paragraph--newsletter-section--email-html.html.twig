@@ -26,7 +26,10 @@
 			{% for key, item in paragraph.field_newsletter_section_select %}
 				{%  if key|first != '#' %}
 				{# Unpublished check #}
- 					{% if item.entity.field_newsletter_article_select.entity.isPublished() %}
+				{% if (item.entity.field_newsletter_article_select.entity and 
+					item.entity.field_newsletter_article_select.entity.isPublished()) or 
+					(item.entity.field_newsletter_content_title and 
+					item.entity.field_newsletter_content_title.value|render) %}					
 					{# Code to render selected article content (thumbnail) #}
 					<!--Feature Article-->
 					<table role="presentation" style="padding-bottom: 20px;">
@@ -48,9 +51,7 @@
 									{# Code to render user made content #}
 								{% elseif item.entity.field_newsletter_content_image.entity.field_media_image.alt|render %}
 								<td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px;">
-									<a href="{{base_url}}{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
 									<img width="100%" style="aspect-ratio:2/1;object-fit:cover;" src="{{base_url}}{{file_url(item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide'))}}"/>
-									</a>
 								</td>
 								{% endif %}
 							</tr>
@@ -120,8 +121,11 @@
 				{% for key, item in paragraph.field_newsletter_section_select %}
 					{%  if key|first != '#' %}
 					{# Unpublished check #}
- 					{% if item.entity.field_newsletter_article_select.entity.isPublished() %}
-					<!--Teaser Article-->
+					{% if (item.entity.field_newsletter_article_select.entity and 
+						item.entity.field_newsletter_article_select.entity.isPublished()) or 
+						(item.entity.field_newsletter_content_title and 
+						item.entity.field_newsletter_content_title.value|render) %}
+	  					<!--Teaser Article-->
 					<center align="left">
 						<table role="presentation" width="100%" style="padding-bottom: 20px;">
 							<tbody>
