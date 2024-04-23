@@ -26,7 +26,10 @@
 			{% for key, item in paragraph.field_newsletter_section_select %}
 				{%  if key|first != '#' %}
 				{# Unpublished check #}
- 					{% if item.entity.field_newsletter_article_select.entity.isPublished() %}
+				{% if (item.entity.field_newsletter_article_select.entity and 
+					item.entity.field_newsletter_article_select.entity.isPublished()) or 
+					(item.entity.field_newsletter_content_title and 
+					item.entity.field_newsletter_content_title.value|render) %}					
 					{# Code to render selected article content (thumbnail) #}
 					<!--Feature Article-->
 					<table role="presentation" style="padding-bottom: 20px;">
@@ -48,9 +51,7 @@
 									{# Code to render user made content #}
 								{% elseif item.entity.field_newsletter_content_image.entity.field_media_image.alt|render %}
 								<td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px;">
-									<a href="{{base_url}}{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
 									<img width="100%" style="aspect-ratio:2/1;object-fit:cover;" src="{{base_url}}{{file_url(item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide'))}}"/>
-									</a>
 								</td>
 								{% endif %}
 							</tr>
@@ -67,13 +68,29 @@
 					</tr>
 						{# Code to render user made content (title) #}
 					{% elseif item.entity.field_newsletter_content_title.value|render %}
-					<tr id="feature-article-user-title-email-{{key}}">
-						<td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
-							<h3>
-								{{ item.entity.field_newsletter_content_title|view }}
-							</h3>
-						</td>
-					</tr>
+						{% if item.entity.field_newsletter_content_url.0.url %}
+							{% set actual_url = item.entity.field_newsletter_content_url.0.url.toString() %}
+							{% set is_absolute = (actual_url starts with 'http://' or actual_url starts with 'https://') %}
+							{% set final_url = is_absolute ? actual_url : (base_url ~ actual_url) %}
+
+							<tr id="feature-article-user-title-email-{{ key }}">
+								<td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
+									<h3>
+										<a class="ucb-newsletter-content-title" href="{{ final_url }}">
+											{{ item.entity.field_newsletter_content_title|view }}
+										</a>
+									</h3>
+								</td>
+							</tr>
+						{% else %}
+							<tr id="feature-article-user-title-email-{{ key }}">
+								<td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
+									<h3>
+										{{ item.entity.field_newsletter_content_title|view }}
+									</h3>
+								</td>
+							</tr>
+						{% endif %}
 					{% endif %}
 				{# Code to render selected article content (categories) #}
 				{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_categories is not empty %}
@@ -120,8 +137,11 @@
 				{% for key, item in paragraph.field_newsletter_section_select %}
 					{%  if key|first != '#' %}
 					{# Unpublished check #}
- 					{% if item.entity.field_newsletter_article_select.entity.isPublished() %}
-					<!--Teaser Article-->
+					{% if (item.entity.field_newsletter_article_select.entity and 
+						item.entity.field_newsletter_article_select.entity.isPublished()) or 
+						(item.entity.field_newsletter_content_title and 
+						item.entity.field_newsletter_content_title.value|render) %}
+	  					<!--Teaser Article-->
 					<center align="left">
 						<table role="presentation" width="100%" style="padding-bottom: 20px;">
 							<tbody>
@@ -165,11 +185,22 @@
 	
 													{# Code to render user made content (title) #}
 												{% elseif item.entity.field_newsletter_content_title.value|render %}
+													{% if item.entity.field_newsletter_content_url.0.url %}
+														{% set actual_url = item.entity.field_newsletter_content_url.0.url.toString() %}
+														{% set is_absolute = (actual_url starts with 'http://' or actual_url starts with 'https://') %}
+														{% set final_url = is_absolute ? actual_url : (base_url ~ actual_url) %}
+														<h3 style="font-size: 18px;">
+															<a class="ucb-newsletter-content-title" href="{{ final_url }}">
+																{{ item.entity.field_newsletter_content_title|view }}
+															</a>
+														</h3>
+													{% else %}
 												<td>
 													<h3 style="font-size: 18px;">
 														{{ item.entity.field_newsletter_content_title|view }}
 													</h3>
 												</td>
+													{% endif %}
 												{% endif %}
 												</tr>											
 												{# Categories #}
@@ -204,7 +235,7 @@
 								{# Code to render user made content (content text) #}
 							{% elseif item.entity.field_newsletter_content_text.value|render %}
 								<tr>
-									<td>{{ item.entity.field_newsletter_content_text|view }}</td>
+									<td style="padding-left: 0px;">{{ item.entity.field_newsletter_content_text|view }}</td>
 								</tr>
 							{% endif %}
 											</tbody>
