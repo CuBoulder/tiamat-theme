@@ -75,11 +75,11 @@
 
 							<tr id="feature-article-user-title-email-{{ key }}">
 								<td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
-									<a href="{{ final_url }}">
-										<h3>
+									<h3>
+										<a class="ucb-newsletter-content-title" href="{{ final_url }}">
 											{{ item.entity.field_newsletter_content_title|view }}
-										</h3>
-									</a>
+										</a>
+									</h3>
 								</td>
 							</tr>
 						{% else %}
@@ -189,11 +189,11 @@
 														{% set actual_url = item.entity.field_newsletter_content_url.0.url.toString() %}
 														{% set is_absolute = (actual_url starts with 'http://' or actual_url starts with 'https://') %}
 														{% set final_url = is_absolute ? actual_url : (base_url ~ actual_url) %}
-														<a href="{{ final_url }}">
-															<h3 style="font-size: 18px;">
-															{{ item.entity.field_newsletter_content_title|view }}
-															</h3>
-														</a>
+														<h3 style="font-size: 18px;">
+															<a class="ucb-newsletter-content-title" href="{{ final_url }}">
+																{{ item.entity.field_newsletter_content_title|view }}
+															</a>
+														</h3>
 													{% else %}
 												<td>
 													<h3 style="font-size: 18px;">

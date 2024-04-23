@@ -72,3 +72,8 @@
 .newsletter-social-lightbox a{
   color: black;
 }
+
+a.ucb-newsletter-content-title{
+  color:inherit;
+  text-decoration: none;
+}
