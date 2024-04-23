@@ -41,7 +41,6 @@ ucb-article:
   css:
     theme:
       css/ucb-article.css: {}
-      css/hero-unit.css: {}
 
 ucb-article-dark:
   version: 1.x
