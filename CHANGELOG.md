@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### People Lists: Allows for more than 50 People
+  Previously a maximum of 50 People were being displayed on the People List Page and the People List Block. This has been fixed to allow all People existing on a site to be pulled into these Content Types. 
+  
+  Resolves #830 
+---
+
 - ### Newsletter: Moves social links from Node to Newsletter term
   Resolves #867 
   

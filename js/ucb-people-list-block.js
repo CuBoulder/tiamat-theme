@@ -51,19 +51,33 @@ class PeopleListProvider {
 				+ params
 		return endpoint + '?' + baseParams + publishedParams + params + sortParams;
 	}
-	// Gets person data
-	async fetchPeople() {
+	// Gets all person data
+	async fetchAllPeople(url, aggregatedData = [], aggregatedIncluded = []) {
 		try {
-			const
-				response = await fetch(this.baseURI + this.nextPath),
-				data = await response.json(),
-				results = data['data'];
-			if (results.length === 0)
+			const response = await fetch(url);
+			const data = await response.json();
+
+			// Warn if no results are returned in the 'data' section
+			if (!data['data'] || data['data'].length === 0) {
 				console.warn('PeopleListProvider: ' + PeopleListProvider.noResultsMessage);
-			return data;
-		} catch (reason) {
-			console.error('PeopleListProvider: ' + PeopleListProvider.errorMessage);
-			throw reason;
+			} else {
+				aggregatedData.push(...data['data']);
+			}
+
+			// Aggregate 'included' data if present
+			if (data['included']) {
+				aggregatedIncluded.push(...data['included']);
+			}
+
+			// Check if there is a 'next' link and make a recursive call
+			if (data['links'] && data['links']['next'] && data['links']['next']['href']) {
+				return this.fetchAllPeople(data['links']['next']['href'], aggregatedData, aggregatedIncluded);
+			}
+
+			return { data: aggregatedData, included: aggregatedIncluded };
+		} catch (error) {
+			console.error('PeopleListProvider: ' + PeopleListProvider.errorMessage)
+			throw error;
 		}
 	}
 }
@@ -172,7 +186,7 @@ class PeopleListBlockElement extends HTMLElement {
 		this._groupBy = groupBy;
 
 		// Get our people
-		peopleListProvider.fetchPeople().then(response => {
+		peopleListProvider.fetchAllPeople(baseURI + peopleListProvider.nextPath).then(response => {
 			this._contentElement.innerText = '';
 			const results = response['data'];
 			if(!results.length)
