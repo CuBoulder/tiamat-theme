@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update hero-unit.css
+  The main part of this is found in PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/35
+  
+  Added css for fixing default block style icon display It would cause the hero units to shrink like the contextual links would. This is mainly a fix for the layout builder view.
+  
+  Closes #840 
+  Closes #777 
+  Closes #745
+---
+
 - ### Delete Article Hero Unit CSS
   Removes the unused article hero unit code.
 ---
