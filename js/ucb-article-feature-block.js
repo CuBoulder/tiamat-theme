@@ -167,7 +167,6 @@ class ArticleFeatureBlockElement extends HTMLElement {
         // Case for Too many articles, proceed
         if(finalArticles.length >= count || (finalArticles.length >= count && NEXTJSONURL)){
             finalArticles.length = count
-            this.renderDisplay(finalArticles, display, imgSize)
         }
 
         // Have articles and want to proceed
