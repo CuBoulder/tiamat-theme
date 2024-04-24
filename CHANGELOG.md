@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article Feature: Adjusts spacing
+  Adjusts spacing on Article Feature blocks between thumbnail and title. Fixes the secondary Article row so titles don't overlap into the next Article's thumbnail
+  
+  Resolves #859 
+---
+
 - ### Update hero-unit.css
   The main part of this is found in PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/35
   
