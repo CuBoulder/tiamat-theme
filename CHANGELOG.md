@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Delete Article Hero Unit CSS
+  Removes the unused article hero unit code.
+---
+
 - ### Newsletter: Adds Optional URL to Newsletter Custom Content
   Adds the optional URL field for Newsletter Section's Custom Content.
   
