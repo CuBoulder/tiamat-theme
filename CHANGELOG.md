@@ -9,6 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds sortable table style changes
+  This update resolves two style issues with sortable tables in Webforms. It:
+  - [Bug] Corrects the display of drag icons. Resolves CuBoulder/tiamat-theme#786
+  - [Change] Decreases the font size of the "Show row weights" button. Resolves CuBoulder/tiamat-theme#787
+---
+
+- ### Articles Slider: Articles without thumbnails are omitted from display
+  Article Feature: Previously, Articles without thumbnails would still show up in the slider but with a broken image. This has been adjusted so these incomplete Articles are completely omitted from display and only Articles with thumbnails are shown.
+  
+  Resolves #881 
+---
+
+- ### Removal of all how-to files
+  Sister request to https://github.com/CuBoulder/tiamat-custom-entities/pull/134.
+  Removes all necessary how-to files.
+---
+
 - ### Article Feature: Adjusts spacing
   Adjusts spacing on Article Feature blocks between thumbnail and title. Fixes the secondary Article row so titles don't overlap into the next Article's thumbnail
   
