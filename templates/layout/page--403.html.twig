@@ -33,7 +33,11 @@
  * - page.secondary_menu: Items for the secondary menu region.
  * - page.highlighted: Items for the highlighted content region.
  * - page.help: Dynamic help text, mostly for admin pages.
+ * - page.post_wide_title: Full width content above the above content.
+ * - page.above_content: Contained content above the main content.
  * - page.content: The main content of the current page.
+ * - page.below_content: Containted content below the main content
+ * - page.wide_post: Full width content below the below content..
  * - page.sidebar_first: Items for the first sidebar.
  * - page.sidebar_second: Items for the second sidebar.
  * - page.footer: Items for the footer region.
@@ -44,15 +48,16 @@
  */
 #}
 
+	{% if ucb_rave_alerts %}
+		<rave-alert feed="https://www.getrave.com/rss/cuboulder/channel1" link="https://alerts.colorado.edu"></rave-alert>
+	{% endif %}
+
 <div class="layout-container ucb-page-container">
   {{ block("page_header", "page.html.twig") }}
   <div{{ create_attribute({ class: ['ucb-page-content', ucb_heading_font == 'normal' ? 'ucb-heading-font-normal'] }) }}>
     {{ page.highlighted }}
     {{ page.help }}
     <main role="main">
-      <div class="ucb-above-content-region container">
-        {{ page.above_content }}
-      </div>
       <div class="ucb-content-wrapper ucb-4xx-page-content container">
         <h1>{{ page['#title'] }}</h1>
         {{ page.content }}
