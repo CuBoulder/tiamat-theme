@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Removal of all how-to files
+  Sister request to https://github.com/CuBoulder/tiamat-custom-entities/pull/134.
+  Removes all necessary how-to files.
+---
+
 - ### Article Feature: Adjusts spacing
   Adjusts spacing on Article Feature blocks between thumbnail and title. Fixes the secondary Article row so titles don't overlap into the next Article's thumbnail
   
