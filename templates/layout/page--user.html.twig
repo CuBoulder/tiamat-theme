@@ -50,10 +50,6 @@
 
 {{ attach_library('boulder_base/ucb-user-page') }}
 
-	{% if ucb_rave_alerts %}
-		<rave-alert feed="https://www.getrave.com/rss/cuboulder/channel1" link="https://alerts.colorado.edu"></rave-alert>
-	{% endif %}
-
 <div class="layout-container ucb-page-container">
   {{ block("page_header", "page.html.twig") }}
   <div{{ create_attribute({ class: ['ucb-page-content', ucb_heading_font == 'normal' ? 'ucb-heading-font-normal'] }) }}>
