@@ -84,7 +84,7 @@
   margin-bottom: 1em;
 }
 
-.overlay-grid-image-container h2, .overlay-grid-image-container h3 {
+.overlay-grid-image-container strong {
   padding: 0.75rem;
   position: absolute;
   bottom: 0;
@@ -93,7 +93,8 @@
   margin-bottom: 0;
   color: white;
   width: 100%;
-  font-size: 100%
+  font-size: 1em;
+  font-weight: bold;
 }
 
 /*** Offest Grid Layout ***/

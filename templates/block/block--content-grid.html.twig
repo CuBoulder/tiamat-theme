@@ -67,119 +67,61 @@
       </div>
     {% endif %}
     {{ title_suffix }}
-    {# Column Grid Layout #}
-    {% if layoutSelection == 0 %}
+    {# Column or Card Grid Layout #}
+    {% if layoutSelection == 0 or layoutSelection == 1 %}
       <div class="row row-cols-lg-{{ columnNumbers }} row-cols-md-2 row-cols-1">
         {% for key, item in content['#block_content'].field_grid_layout_content %}
-          {% if key|first != '#' %}
-            {% if (item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri is not null) and (imgStyle == "square-img") %}
-              {% set imgUrl = item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square') %}
-              {% set imgAlt = item.entity.field_grid_layout_content_image.entity.field_media_image.alt|render %}
-            {% elseif (item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri is not null) and (imgStyle == "wide-img") %}
-              {% set imgUrl = item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide') %}
-              {% set imgAlt = item.entity.field_grid_layout_content_image.entity.field_media_image.alt|render %}
-            {% endif %}
-            {% set gridLink = item.entity.field_grid_layout_content_link.0.url|render %}
+          {% set title = item.entity.field_grid_layout_content_title.value %}
+          {% if title or item.entity.field_grid_layout_content_text|view %}
             <div class="col">
-              <div class="grid-column">
-                {% if item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri is not null %}
-                  <div class="grid-image-container grid-fill {{ imgStyle }}">
-                    {% if item.entity.field_grid_layout_content_link.0.url|render %}
-                      <a href="{{ gridLink }}">
-                        <img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
-                      </a>
-                    {% else %}
-                      <img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
-                    {% endif %}
-                  </div>
+              <div{{ create_attribute({ class: layoutSelection == 0 ? 'grid-column' : 'grid-card' }) }}>
+                {% if (item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri is not null) and (imgStyle == "square-img") %}
+                  {% set imgUrl = item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square') %}
+                  {% set imgAlt = item.entity.field_grid_layout_content_image.entity.field_media_image.alt %}
+                {% elseif (item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri is not null) and (imgStyle == "wide-img") %}
+                  {% set imgUrl = item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide') %}
+                  {% set imgAlt = item.entity.field_grid_layout_content_image.entity.field_media_image.alt %}
                 {% endif %}
-                {% if (item.entity.field_grid_layout_content_title.value) or (item.entity.field_grid_layout_content_text|view) %}
-                  <div class="grid-text-container">
-                    {% if item.entity.field_grid_layout_content_link.0.url|render %}
-                      <a href="{{ gridLink }}">
-                        <strong class="h3">{{ item.entity.field_grid_layout_content_title.value }}</strong>
-                      </a>
-                    {% else %}
-                      <strong class="h3">{{ item.entity.field_grid_layout_content_title.value }}</strong>
+                {% set link = item.entity.field_grid_layout_content_link.0.url.uri %}
+                {% set containerTag = link ? 'a' : 'div' %}
+                <div class="grid-text-container">
+                  <{{ containerTag }}{{ create_attribute({ class: 'd-flex flex-column-reverse justify-content-end', href: link }) }}>
+                    <strong class="h3">{{ title }}</strong>
+                    {% if imgUrl is not null %}
+                      <div class="grid-image-container grid-fill {{ imgStyle }}">
+                        <img src="{{ imgUrl }}" alt="{{ imgAlt }}">
+                      </div>
                     {% endif %}
-                    {{ item.entity.field_grid_layout_content_text|view }}
-                  </div>
-                {% endif %}
+                  </{{ containerTag }}>
+                  {{ item.entity.field_grid_layout_content_text|view }}
+                </div>
               </div>
             </div>
           {% endif %}
         {% endfor %}
       </div>
-      {# Card Grid Layout #}
-    {% elseif layoutSelection == 1 %}
-      <div class="row row-cols-lg-{{ columnNumbers }} row-cols-md-2 row-cols-1">
-        {% for key, item in content['#block_content'].field_grid_layout_content %}
-          {% if key|first != '#' %}
-            {% if (item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri is not null) and (imgStyle == "square-img") %}
-              {% set imgUrl = item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square') %}
-              {% set imgAlt = item.entity.field_grid_layout_content_image.entity.field_media_image.alt|render %}
-            {% elseif (item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri is not null) and (imgStyle == "wide-img") %}
-              {% set imgUrl = item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide') %}
-              {% set imgAlt = item.entity.field_grid_layout_content_image.entity.field_media_image.alt|render %}
-            {% endif %}
-            {% set gridLink = item.entity.field_grid_layout_content_link.0.url|render %}
-            <div class="col">
-              <div class="grid-card">
-                {% if item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri is not null %}
-                  <div class="grid-image-container grid-fill {{ imgStyle }}">
-                    {% if item.entity.field_grid_layout_content_link.0.url|render %}
-                      <a href="{{ gridLink }}">
-                        <img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
-                      </a>
-                    {% else %}
-                      <img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
-                    {% endif %}
-                  </div>
-                {% endif %}
-                {% if (item.entity.field_grid_layout_content_title.value) or (item.entity.field_grid_layout_content_text|view) %}
-                  <div class="grid-text-container">
-                    {% if item.entity.field_grid_layout_content_link.0.url|render %}
-                      <a href="{{ gridLink }}">
-                        <strong class="h3">{{ item.entity.field_grid_layout_content_title.value }}</strong>
-                      </a>
-                    {% else %}
-                      <strong class="h3">{{ item.entity.field_grid_layout_content_title.value }}</strong>
-                    {% endif %}
-                    {{ item.entity.field_grid_layout_content_text|view }}
-                  </div>
-                {% endif %}
-              </div>
-            </div>
-          {% endif %}
-        {% endfor %}
-      </div>
-      {# Overlay Grid Layout #}
+    {# Overlay Grid Layout #}
     {% elseif layoutSelection == 2 %}
       <div class="row row-cols-lg-{{ columnNumbers }} row-cols-md-2 row-cols-1">
         {% for key, item in content['#block_content'].field_grid_layout_content %}
-          {% if key|first != '#' %}
+          {% set title = item.entity.field_grid_layout_content_title.value %}
+          {% if title or item.entity.field_grid_layout_content_text|view %}
             {% if (item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri is not null) and (imgStyle == "square-img") %}
               {% set imgUrl = item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square') %}
-              {% set imgAlt = item.entity.field_grid_layout_content_image.entity.field_media_image.alt|render %}
+              {% set imgAlt = item.entity.field_grid_layout_content_image.entity.field_media_image.alt %}
             {% elseif (item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri is not null) and (imgStyle == "wide-img") %}
               {% set imgUrl = item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide') %}
-              {% set imgAlt = item.entity.field_grid_layout_content_image.entity.field_media_image.alt|render %}
+              {% set imgAlt = item.entity.field_grid_layout_content_image.entity.field_media_image.alt %}
             {% endif %}
-            {% set gridLink = item.entity.field_grid_layout_content_link.0.url|render %}
+            {% set link = item.entity.field_grid_layout_content_link.0.url.uri %}
+            {% set containerTag = gridLink ? 'a' : 'div' %}
             <div class="col">
               <div class="grid-column">
                 {% if item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri is not null %}
-                  <div class="overlay-grid-image-container grid-fill {{ imgStyle }}">
-                    {% if item.entity.field_grid_layout_content_link.0.url|render %}
-                      <a href="{{ gridLink }}">
-                        <img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
-                        <strong class="h3">{{ item.entity.field_grid_layout_content_title.value }}</strong>
-                      </a>
-                    {% else %}
-                      <img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
-                      <strong class="h3">{{ item.entity.field_grid_layout_content_title.value }}</strong>
-                    {% endif %}
-                  </div>
+                  <{{ containerTag }}{{ create_attribute({ class: 'overlay-grid-image-container grid-fill ' ~ imgStyle, href: link }) }}>
+                    <strong>{{ title }}</strong>
+                    <img src="{{ imgUrl }}" alt="{{ imgAlt }}">
+                  </{{ containerTag }}>
                 {% endif %}
                 {% if item.entity.field_grid_layout_content_text|view %}
                   <div class="overlay-grid-text">
@@ -191,25 +133,25 @@
           {% endif %}
         {% endfor %}
       </div>
-      {# Offset Grid Layout #}
+    {# Offset Grid Layout #}
     {% else %}
       <div class="row row-cols-lg-2 row-cols-1">
         {% for key, item in content['#block_content'].field_grid_layout_content %}
           {% if key|first != '#' %}
             {% if (item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri is not null) and (imgStyle == "square-img") %}
               {% set imgUrl = item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square') %}
-              {% set imgAlt = item.entity.field_grid_layout_content_image.entity.field_media_image.alt|render %}
+              {% set imgAlt = item.entity.field_grid_layout_content_image.entity.field_media_image.alt %}
             {% elseif (item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri is not null) and (imgStyle == "wide-img") %}
               {% set imgUrl = item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide') %}
-              {% set imgAlt = item.entity.field_grid_layout_content_image.entity.field_media_image.alt|render %}
+              {% set imgAlt = item.entity.field_grid_layout_content_image.entity.field_media_image.alt %}
             {% endif %}
-            {% set gridLink = item.entity.field_grid_layout_content_link.0.url|render %}
+            {% set gridLink = item.entity.field_grid_layout_content_link.0.url %}
             {% if (loop.index0 % 3 == 0) and ((loop.index0 is even) or (loop.index0 == 0)) %}
               <div class="col">
                 <div class="grid-image-container-large">
                   {% if item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri is not null %}
                     <div class="grid-image-container grid-fill {{ imgStyle }}">
-                      {% if item.entity.field_grid_layout_content_link.0.url|render %}
+                      {% if item.entity.field_grid_layout_content_link.0.url %}
                         <a href="{{ gridLink }}">
                           <img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
                         </a>
@@ -220,7 +162,7 @@
                   {% endif %}
                   {% if (item.entity.field_grid_layout_content_title.value) or (item.entity.field_grid_layout_content_text|view) %}
                     <div class="grid-text-container">
-                      {% if item.entity.field_grid_layout_content_link.0.url|render %}
+                      {% if item.entity.field_grid_layout_content_link.0.url %}
                         <a href="{{ gridLink }}">
                           <strong class="h3">{{ item.entity.field_grid_layout_content_title.value }}</strong>
                         </a>
@@ -237,7 +179,7 @@
                 <div class="grid-image-container-large">
                   {% if item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri is not null %}
                     <div class="grid-image-container grid-fill {{ imgStyle }}">
-                      {% if item.entity.field_grid_layout_content_link.0.url|render %}
+                      {% if item.entity.field_grid_layout_content_link.0.url %}
                         <a href="{{ gridLink }}">
                           <img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
                         </a>
@@ -248,7 +190,7 @@
                   {% endif %}
                   {% if (item.entity.field_grid_layout_content_title.value) or (item.entity.field_grid_layout_content_text|view) %}
                     <div class="grid-text-container">
-                      {% if item.entity.field_grid_layout_content_link.0.url|render %}
+                      {% if item.entity.field_grid_layout_content_link.0.url %}
                         <a href="{{ gridLink }}">
                           <strong class="h3">{{ item.entity.field_grid_layout_content_title.value }}</strong>
                         </a>
@@ -271,12 +213,12 @@
                         </a>
                       {% else %}
                         <img src="{{ imgUrl }}" alt="{{ imgAlt }}"/>
-                      {% endif %}å
+                      {% endif %}
                     </div>
                   {% endif %}
                   {% if (item.entity.field_grid_layout_content_title.value) or (item.entity.field_grid_layout_content_text|view) %}
                     <div class="grid-text-container">
-                      {% if item.entity.field_grid_layout_content_link.0.url|render %}
+                      {% if item.entity.field_grid_layout_content_link.0.url %}
                         <a href="{{ gridLink }}">
                           <strong class="h3">{{ item.entity.field_grid_layout_content_title.value }}</strong>
                         </a>
