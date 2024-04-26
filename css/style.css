@@ -981,6 +981,10 @@ form label {
   display: block;
 }
 
+.fieldset-wrapper {
+  box-sizing: border-box;
+}
+
 .form-item,
 .form-actions {
   margin-top: 1em;
