@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter: One Article or One Custom Content in a Section
+  ### Newsletters
+  There is a special case for if a Newsletter Section set to "Teaser" display has only one Article or one item of Section Custom Content, then it should span the full width of the web newsletter. This is only the case for a single item in a Newsletter section, odd numbered counts are still 50%. The email version of the Newsletter is unaffected.
+  
+  Resolves #895 
+---
+
 - ### Updates regions
   This update:
   - [Bug] Adds proper containers to above and below content, fixing incorrect margins. Resolves #819
