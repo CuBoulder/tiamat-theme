@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update block--system-menu-block.html.twig
+  Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/38
+  Sister PR: https://github.com/CuBoulder/tiamat10-profile/pull/119
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/135
+  
+  Added an if statement to not render menus if there is no content within. 
+  This is needed for the new layout setup.
+  This should not affect anything other than the new layout.
+  
+  Closes #897 
+---
+
 - ### Fixes Search page style regression
   Resolves CuBoulder/tiamat-theme#893
 ---

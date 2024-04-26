@@ -14,6 +14,8 @@
   'ucb-system-menu-block'
 ] %}
 
+
+{% if content|render %}
 {% block content %}
   <div{{attributes.addClass(classes)}}>
     {{ title_prefix }}
@@ -24,3 +26,4 @@
     {{ content }}
   </div>
 {% endblock content %}
+{% endif %}
