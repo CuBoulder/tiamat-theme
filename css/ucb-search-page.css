@@ -26,6 +26,11 @@
   left: -999%;
 }
 
+
+#search-form #edit-basic .form-item {
+  margin: 0;
+}
+
 #search-form #edit-basic .form-search {
   width: 100%;
   font-size: 1em;
@@ -47,6 +52,8 @@
 }
 
 #search-form #edit-basic #edit-submit {
+  color: var(--button-text-color-gold) !important;
+  background-color: var(--button-background-color-gold);
   line-height: 40px;
   height: 40px;
   padding: 0 8px;
