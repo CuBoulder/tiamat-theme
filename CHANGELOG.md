@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates regions
+  This update:
+  - [Bug] Adds proper containers to above and below content, fixing incorrect margins. Resolves #819
+  - [Change, Remove] Adds template for Layout Builder pages. Removes above content, breadcrumbs, sidebar, and below content regions from Layout Builder pages. Resolves #896
+  - [Remove] Removes above content region from search, taxonomy, user, and 403 pages. Resolves CuBoulder/tiamat-theme#877
+---
+
 - ### Adds sortable table style changes
   This update resolves two style issues with sortable tables in Webforms. It:
   - [Bug] Corrects the display of drag icons. Resolves CuBoulder/tiamat-theme#786

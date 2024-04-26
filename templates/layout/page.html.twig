@@ -33,7 +33,11 @@
  * - page.secondary_menu: Items for the secondary menu region.
  * - page.highlighted: Items for the highlighted content region.
  * - page.help: Dynamic help text, mostly for admin pages.
+ * - page.post_wide_title: Full width content above the above content.
+ * - page.above_content: Contained content above the main content.
  * - page.content: The main content of the current page.
+ * - page.below_content: Containted content below the main content
+ * - page.wide_post: Full width content below the below content..
  * - page.sidebar_first: Items for the first sidebar.
  * - page.sidebar_second: Items for the second sidebar.
  * - page.footer: Items for the footer region.
@@ -43,7 +47,6 @@
  * @see html.html.twig
  */
 #}
-
 
 
 <div class="layout-container ucb-page-container highlight-style">
@@ -93,167 +96,187 @@
       {% set header_color = 'dark' %}
     {% endif %}
 
-	{% if ucb_rave_alerts %}
-		<rave-alert feed="https://www.getrave.com/rss/cuboulder/channel1" link="https://alerts.colorado.edu"></rave-alert>
-	{% endif %}
+    {% if ucb_rave_alerts %}
+      <rave-alert feed="https://www.getrave.com/rss/cuboulder/channel1" link="https://alerts.colorado.edu"></rave-alert>
+    {% endif %}
 
-	{% if ucb_sticky_menu %}
-		{% include '@boulder_base/includes/ucb-sticky-menu.html.twig' %}
-	{% endif %}
+    {% if ucb_sticky_menu %}
+      {% include '@boulder_base/includes/ucb-sticky-menu.html.twig' %}
+    {% endif %}
 
     {{ page.header }}
     <div class="page-header">
-    {% if user.hasPermission('access administration pages') %}
-      <div class="alert alert-warning text-center ucb-admin-alert">
-        You are logged in with Elevated Privileges ... please be careful.
-      </div>
-    {% endif %}
-    <div class="background-{{ campus_header_color }} brand-bar brand-bar-{{ campus_header_color }} padding-vertical-small">
-      <div class="container">{{ attach_library('boulder_base/ucb-brand-bar') }}
-        <div class="ucb-brand-bar ucb-brand-bar-{{ campus_header_color }}">
-          <a href="https://www.colorado.edu" class="ucb-home-link">
-            <img class="ucb-logo" src="https://cdn.colorado.edu/static/brand-assets/live/images/cu-boulder-logo-text-{{ campus_header_text_color }}.svg" alt="University of Colorado Boulder">
-          </a>
-          <div class="ucb-brand-bar-controls">
-            {% if site_search.0 %}
-              <a class="ucb-search-link" href="{{ site_search.0.url }}">
-                <img class="ucb-search" alt="Search" src="https://cdn.colorado.edu/static/brand-assets/live/images/search-{{ campus_header_text_color }}.svg">
-              </a>
-            {% endif %}
+      {% if user.hasPermission('access administration pages') %}
+        <div class="alert alert-warning text-center ucb-admin-alert">
+          You are logged in with Elevated Privileges ... please be careful.
+        </div>
+      {% endif %}
+      <div class="background-{{ campus_header_color }} brand-bar brand-bar-{{ campus_header_color }} padding-vertical-small">
+        <div class="container">{{ attach_library('boulder_base/ucb-brand-bar') }}
+          <div class="ucb-brand-bar ucb-brand-bar-{{ campus_header_color }}">
+            <a href="https://www.colorado.edu" class="ucb-home-link">
+              <img class="ucb-logo" src="https://cdn.colorado.edu/static/brand-assets/live/images/cu-boulder-logo-text-{{ campus_header_text_color }}.svg" alt="University of Colorado Boulder">
+            </a>
+            <div class="ucb-brand-bar-controls">
+              {% if site_search.0 %}
+                <a class="ucb-search-link" href="{{ site_search.0.url }}">
+                  <img class="ucb-search" alt="Search" src="https://cdn.colorado.edu/static/brand-assets/live/images/search-{{ campus_header_text_color }}.svg">
+                </a>
+              {% endif %}
+            </div>
           </div>
         </div>
       </div>
-    </div>
-    {% if site_search.0 %}
-      {% include '@boulder_base/includes/ucb-search-modal.html.twig' %}
-    {% endif %}
-    <header class="ucb {{ header_color }}{% if site_affiliation.id %} ucb-site-affiliation-{{ site_affiliation.id }}{% endif %}" role="banner">
-      <div class="container ucb-menu-wrapper">
-        <div class="ucb-site-name-wrapper">
-          <a href="{{ front_page }}">{% if ucb_custom_logo %}<img role="img" class="ucb-custom-logo" srcset="{{ ucb_custom_logo.url }} {{ ucb_custom_logo.scale }}" alt="{{ site_name }}">{% else %}{{ site_name }}{% endif %}</a>
-          {% if site_affiliation.id %}
-            <div class="affiliation">
-              {% if site_affiliation.url %}<a href="{{ site_affiliation.url }}">{{ site_affiliation.label }}</a>{% else %}{{ site_affiliation.label }}{% endif %}
-            </div>
-          {% endif %}
+      {% if site_search.0 %}
+        {% include '@boulder_base/includes/ucb-search-modal.html.twig' %}
+      {% endif %}
+      <header class="ucb {{ header_color }}{% if site_affiliation.id %} ucb-site-affiliation-{{ site_affiliation.id }}{% endif %}" role="banner">
+        <div class="container ucb-menu-wrapper">
+          <div class="ucb-site-name-wrapper">
+            <a href="{{ front_page }}">
+              {% if ucb_custom_logo %}<img role="img" class="ucb-custom-logo" srcset="{{ ucb_custom_logo.url }} {{ ucb_custom_logo.scale }}" alt="{{ site_name }}">
+              {% else %}
+                {{ site_name }}
+              {% endif %}
+            </a>
+            {% if site_affiliation.id %}
+              <div class="affiliation">
+                {% if site_affiliation.url %}
+                  <a href="{{ site_affiliation.url }}">{{ site_affiliation.label }}</a>
+                {% else %}
+                  {{ site_affiliation.label }}
+                {% endif %}
+              </div>
+            {% endif %}
+          </div>
+          <button id="ucb-mobile-menu-toggle" aria-label="Toggle menu">
+            <i class="ucb-mobile-menu-open-icon fa-solid fa-bars"></i>
+            <i class="ucb-mobile-menu-close-icon fa-solid fa-xmark"></i>
+          </button>
         </div>
-        <button id="ucb-mobile-menu-toggle" aria-label="Toggle menu"><i class="ucb-mobile-menu-open-icon fa-solid fa-bars"></i><i class="ucb-mobile-menu-close-icon fa-solid fa-xmark"></i></button>
-      </div>
-    </header>
-    <section class="ucb-main-nav-section mobile ucb-header-{{ header_color }}" role="navigation">
-      <div class="ucb-main-nav-container ucb-secondary-menu-position-{{ ucb_secondary_menu_position == 'above' ? 'above' : 'inline container'}} ucb-button-{{menu_button_color}}">
-        {{ page.primary_menu }}
-        {{ page.secondary_menu }}
-      </div>
-    </section>
+      </header>
+      <section class="ucb-main-nav-section mobile ucb-header-{{ header_color }}" role="navigation">
+        <div class="ucb-main-nav-container ucb-secondary-menu-position-{{ ucb_secondary_menu_position == 'above' ? 'above' : 'inline container' }} ucb-button-{{ menu_button_color }}">
+          {{ page.primary_menu }}
+          {{ page.secondary_menu }}
+        </div>
+      </section>
     </div>
   {% endblock %}
 
   {# MAIN PAGE CONTENT #}
   <div{{ create_attribute({ class: ['ucb-page-content', ucb_heading_font == 'normal' ? 'ucb-heading-font-normal'] }) }}>
-  {% if (show_breadcrumb) and (page.breadcrumb|render|striptags|trim|length > 0) %}
-  <div class="ucb-breadcrumb-region">
-    {{ page.breadcrumb }}
-  </div>
-  {% endif %}
+    {% if (show_breadcrumb) and (page.breadcrumb|render|striptags|trim|length > 0) %}
+      <div class="ucb-breadcrumb-region">
+        {{ page.breadcrumb }}
+      </div>
+    {% endif %}
 
-  {{ page.highlighted }}
+    {{ page.highlighted }}
 
-  {{ page.help }}
+    {{ page.help }}
 
-  <main role="main">
-    <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
-    <div class="layout-content">
-     {% if page.post_wide_title|render %}
-        <div class="ucb-post-wide-title-region">
-          {{ page.post_wide_title }}
-        </div>
-      {% endif %}
-      {% if page.above_content|render %}
-        <div class="ucb-above-content-region">
-          {{ page.above_content }}
-        </div>
-      {% endif %}
-      {# We are checking for length below to make sure that the sidebars have any content. This is so that sidebar menus don't render the sidebars if the menu is empty #}
-      {% if page.sidebar|render|striptags|trim|length > 0 %}
-        {% if ucb_sidebar_position == 'left' %}
-          <div class="ucb-layout-container container g-0">
+    <main role="main">
+      <a id="main-content" tabindex="-1"></a>
+      {# link is in html.html.twig #}
+      <div class="layout-content">
+        {% if page.post_wide_title|render %}
+          <div class="ucb-post-wide-title-region">
+            {{ page.post_wide_title }}
+          </div>
+        {% endif %}
+        {% if page.above_content|render %}
+          <div class="ucb-above-content-region ucb-layout-container container ucb-contained-row">
             <div class="layout-row row">
-              <div class="ucb-left-sidebar ucb-sidebar col-sm-12 col-md-4 col-lg-3">
-                {{ page.sidebar }}
-              </div>
-              <div class="ucb-layout-main col-sm-12 col-md-8 col-lg-9 ucb-has-sidebar">
-                {{ page.content }}
-              </div>
+              {{ page.above_content }}
             </div>
           </div>
+        {% endif %}
+        {# We are checking for length below to make sure that the sidebars have any content. This is so that sidebar menus don't render the sidebars if the menu is empty #}
+        {% if page.sidebar|render|striptags|trim|length > 0 %}
+          {% if ucb_sidebar_position == 'left' %}
+            <div class="ucb-layout-container container g-0">
+              <div class="layout-row row">
+                <div class="ucb-left-sidebar ucb-sidebar col-sm-12 col-md-4 col-lg-3">
+                  {{ page.sidebar }}
+                </div>
+                <div class="ucb-layout-main col-sm-12 col-md-8 col-lg-9 ucb-has-sidebar">
+                  {{ page.content }}
+                </div>
+              </div>
+            </div>
+          {% else %}
+            <div class="ucb-layout-container container g-0">
+              <div class="layout-row row">
+                <div class="ucb-layout-main col-sm-12 col-md-8 col-lg-9 ucb-has-sidebar">
+                  {{ page.content }}
+                </div>
+                <div class="ucb-left-right ucb-sidebar col-sm-12 col-md-4 col-lg-3">
+                  {{ page.sidebar }}
+                </div>
+              </div>
+            </div>
+          {% endif %}
         {% else %}
-          <div class="ucb-layout-container container g-0">
+          {{ page.content }}
+        {% endif %}
+
+        {% if page.wide_post|render %}
+          <div class="ucb-below-content-region">
+            {{ page.wide_post }}
+          </div>
+        {% endif %}
+        {% if page.below_content|render %}
+          <div class="ucb-below-content-region ucb-layout-container container ucb-contained-row">
             <div class="layout-row row">
-              <div class="ucb-layout-main col-sm-12 col-md-8 col-lg-9 ucb-has-sidebar">
-                {{ page.content }}
-              </div>
-              <div class="ucb-left-right ucb-sidebar col-sm-12 col-md-4 col-lg-3">
-                {{ page.sidebar }}
-              </div>
+              {{ page.below_content }}
             </div>
           </div>
         {% endif %}
-      {% else %}
-        {{ page.content }}
-      {% endif %}
-
-      {% if page.wide_post|render %}
-        <div class="ucb-below-content-region">
-          {{ page.wide_post }}
-        </div>
-      {% endif %}
-      {% if page.below_content|render %}
-        <div class="ucb-below-content-region">
-          {{ page.below_content }}
-        </div>
-      {% endif %}
-      {% if page.second_below_content|render %}
-        <div class="ucb-below-content-region">
-          {{ page.second_below_content }}
-        </div>
-      {% endif %}
-    </div>{# /.layout-content #}
-  </main>
-  </div>
-
-{# FOOTER BLOCK #}
-  {% block page_footer %}
-  <footer class="ucb-homepage-footer background-black">
-    {% if page.footer|render or ucb_footer_menu_default_links %}
-      <div class="ucb-footer-top">
-        {# {% if page.footer_cta|render %}
-          <div class="ucb-footer-container footer-cta-block container">
-            {{ page.footer_cta }}
-          </div>
-        {% endif %} #}
-        {% if ucb_footer_menu_default_links %}
-          {% include "@boulder_base/includes/ucb-footer-menus.html.twig" %}
-        {% elseif page.footer|render %}
-          <div class="container ucb-footer-columns">
-            {{ page.footer }}
+        {% if page.second_below_content|render %}
+          <div class="ucb-below-content-region">
+            {{ page.second_below_content }}
           </div>
         {% endif %}
       </div>
-    {% endif %}
-	{{ page.footer_menu }}
-    <div class="ucb-footer-bottom">
-    {% if page.social|render %}
-      <div class="ucb-social-container container">
-        {{ page.social }}
+      {# /.layout-content #}
+    </main>
+  </div>
+
+  {# FOOTER BLOCK #}
+  {% block page_footer %}
+    <footer class="ucb-homepage-footer background-black">
+      {% if page.footer|render or ucb_footer_menu_default_links %}
+        <div
+          class="ucb-footer-top">
+          {# {% if page.footer_cta|render %}
+          <div class="ucb-footer-container footer-cta-block container">
+          {{ page.footer_cta }}
+          </div>
+          {% endif %} #}
+          {% if ucb_footer_menu_default_links %}
+            {% include "@boulder_base/includes/ucb-footer-menus.html.twig" %}
+          {% elseif page.footer|render %}
+            <div class="container ucb-footer-columns">
+              {{ page.footer }}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+      {{ page.footer_menu }}
+      <div class="ucb-footer-bottom">
+        {% if page.social|render %}
+          <div class="ucb-social-container container">
+            {{ page.social }}
+          </div>
+        {% endif %}
+        {% if page.site_information|render %}
+          <div class="container">
+            {{ page.site_information }}
+          </div>
+        {% endif %}
       </div>
-    {% endif %}
-    {% if page.site_information|render %}
-      <div class="container">
-        {{ page.site_information }}
-      </div>
-    {% endif %}
-    </div>
-  </footer>
+    </footer>
   {% endblock %}
-</div>{# /.layout-container #}
+</div>
+{# /.layout-container #}
