@@ -34,7 +34,7 @@
 
 {# A background image will be used over a solid color #}
 {% if content['#block_content'].field_hero_background_image.entity.field_media_image.entity is defined %}
-	{% set bgValue = "background-image:url(#{ file_url(content['#block_content'].field_hero_background_image.entity.field_media_image.entity.fileuri) });background-repeat:no-repeat;background-position:center;background-size:cover;" %}
+	{% set bgValue = "background-image:url(#{ file_url(content['#block_content'].field_hero_background_image.entity.field_media_image.entity.fileuri|image_style('wallpaper')) });background-repeat:no-repeat;background-position:center;background-size:cover;" %}
 {% endif %}
 
 {# set classes for the size of the component if using background media #}

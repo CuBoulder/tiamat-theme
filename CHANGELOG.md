@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds Wallpaper image style to hero units and video reveal
+  Resolves #804.
+  Sister pull requests in https://github.com/CuBoulder/tiamat10-profile/pull/114, https://github.com/CuBoulder/tiamat-custom-entities/pull/132.
+  
+---
+
 - ### Newsletter: One Article or One Custom Content in a Section
   ### Newsletters
   There is a special case for if a Newsletter Section set to "Teaser" display has only one Article or one item of Section Custom Content, then it should span the full width of the web newsletter. This is only the case for a single item in a Newsletter section, odd numbered counts are still 50%. The email version of the Newsletter is unaffected.
