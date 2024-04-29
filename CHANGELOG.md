@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Changes `<h5>` to `<h2>` in site footer
+  Resolves CuBoulder/tiamat-theme#911
+---
+
 - ### Update block--system-menu-block.html.twig
   Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/38
   Sister PR: https://github.com/CuBoulder/tiamat10-profile/pull/119
