@@ -12,7 +12,8 @@
   'block-' ~ configuration.provider|clean_class,
   'block-' ~ plugin_id|clean_class,
   bundle ? 'block--type-' ~ bundle|clean_class,
-  view_mode ? 'block--view-mode-' ~ view_mode|clean_class
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
+  'content-grid-block'
 ] %}
 
 {% set layoutSelection = content['#block_content'].field_grid_layout_selection.value %}

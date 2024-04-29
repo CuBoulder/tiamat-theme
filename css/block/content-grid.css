@@ -9,6 +9,12 @@
   padding: 1.5em;
 }
 
+.content-grid-block .row {
+  --bs-gutter-x: 1.5em;
+  --bs-gutter-y: 1.5em;
+  margin-bottom: 1.5em;
+}
+
 .grid-image-container {
   padding-bottom: 1em;
 }
@@ -61,13 +67,13 @@
 
 /* Card Layout CSS */
 .grid-card {
+  color: #000;
+  background-color: #FFF;
+  height: 100%;
   -webkit-box-shadow: 0 0 10px rgb(0, 0, 0, 10%);
   -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 10px rgb(0, 0, 0, 10%);
   transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
-  margin-bottom: 1.5em;
-  background: white;
-  color: black;
 }
 
 .grid-card:hover {

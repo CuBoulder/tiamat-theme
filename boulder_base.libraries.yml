@@ -136,8 +136,6 @@ ucb-expandable-content:
 
 ucb-content-grid:
   version: 1.x
-  js:
-    js/ucb-equalize-height.js: {}
   css:
     theme:
       css/block/content-grid.css: {}
