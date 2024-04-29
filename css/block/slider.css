@@ -2,6 +2,9 @@
  * CSS for slider block
  */
 
+.ucb-slider-block{
+  width: 100%;
+}
 /* Bootstrap Carousel overrides */
 .carousel-control-next,
 .carousel-control-prev {
