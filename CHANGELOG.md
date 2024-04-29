@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Slider Block: Bug Fixes + A11y Issues
+  ### Slider Block
+  Fixes various display issues surrounding the "Slider Block" including:
+  - Slider Block style for the default title `<h2>` not displaying correctly
+  - Some Slider - Block Style settings visibly rendering within the carousel slides
+  - Resolving odd and unpredictable carousel behavior
+  
+  Resolves #908 
+  Resolves #884 
+  Resolves #858 
+  Resolves #788 
+---
+
 - ### Changes `<h5>` to `<h2>` in site footer
   Resolves CuBoulder/tiamat-theme#911
 ---

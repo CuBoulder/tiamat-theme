@@ -2,6 +2,9 @@
  * CSS for slider block
  */
 
+.ucb-slider-block{
+  width: 100%;
+}
 /* Bootstrap Carousel overrides */
 .carousel-control-next,
 .carousel-control-prev {
@@ -80,6 +83,11 @@ a.slide-link {
   padding: 2rem 1rem;
   position: relative;
   max-width: 400px;
+  width: 100%;
+}
+
+.right-content .slide-image-container {
+  padding-bottom: 0px;
 }
 
 .right-content .carousel-inner {
@@ -163,6 +171,7 @@ a.slide-link i.fab {
 @media screen and (max-width: 992px) {
   .right-content .carousel-inner .carousel-caption {
     max-width: 100%;
+    width: 100%;
     top: auto;
     bottom: 0;
     background-color: var(--ucb-darker);
@@ -218,6 +227,10 @@ a.slide-link i.fab {
   }
   .carousel-caption {
     width: 100%;
+  }
+  .right-content .carousel-item-structure {
+    display: flex;
+    flex-direction: column !important;
   }
 }
 
