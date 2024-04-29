@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates Video Reveal block to not mute by default
+  Resolves CuBoulder/tiamat-theme#901
+---
+
 - ### Slider Block: Bug Fixes + A11y Issues
   ### Slider Block
   Fixes various display issues surrounding the "Slider Block" including:
