@@ -1,7 +1,6 @@
 /*
- * Styles for content grid paragraph
- *
-*/
+ * Styles the Content Grid block.
+ */
 
 .content-grid-block .row {
   --bs-gutter-x: 1.5em;
@@ -49,17 +48,8 @@
   width: 100%;
 }
 
-/* Override for Card links color to maintain accessibility (white on blue) */
-.content-grid-block .grid-card .grid-text-container a {
-  color: var(--ucb-link);
-  text-decoration: none;
-}
-.content-grid-block .grid-card .grid-text-container a:hover{
-  color: var(--ucb-link-visited);
-  text-decoration: none;
-}
-
 /* Card Layout CSS */
+
 .content-grid-block .grid-card {
   color: #000;
   background-color: #FFF;
@@ -74,6 +64,18 @@
   -webkit-box-shadow: 0 0 20px rgb(0, 0, 0, 25%);
   -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
   box-shadow: 0 0 20px rgb(0, 0, 0, 25%);
+}
+
+/* Override for Card links color to maintain accessibility (white on blue) */
+
+.content-grid-block .grid-card .grid-text-container a {
+  color: var(--ucb-link);
+  text-decoration: none;
+}
+
+.content-grid-block .grid-card .grid-text-container a:hover {
+  color: var(--ucb-link-visited);
+  text-decoration: none;
 }
 
 /* Overlay Layout CSS */
@@ -95,9 +97,4 @@
   width: 100%;
   font-size: 1em;
   font-weight: bold;
-}
-
-/*** Offest Grid Layout ***/
-.content-grid-block .grid-image-container-large .grid-fill {
-  display: initial;
 }
