@@ -7,13 +7,13 @@
 {{ attach_library('boulder_base/ucb-video-reveal') }}
 
 {% set classes = [
-    'ucb-video-reveal',
-    'block',
-    'block-' ~ configuration.provider|clean_class,
-    'block-' ~ plugin_id|clean_class,
-    bundle ? 'block--type-' ~ bundle|clean_class,
-    view_mode ? 'block--view-mode-' ~ view_mode|clean_class
-  ] %}
+  'ucb-video-reveal',
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class
+] %}
 
 {% set blockId = content['#block_content'].id() %}
 {% if content['#block_content'].field_video_reveal_video.entity.field_media_oembed_video is defined %}
@@ -28,7 +28,6 @@
   content.field_bs_icon_position|render|striptags|trim,
   content.field_bs_heading_alignment|render|striptags|trim,
   content.field_bs_title_font_scale|render|striptags|trim,
-  ''
 ] %}
 
 {% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
@@ -37,7 +36,7 @@
 {% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
 
 {% block content %}
-  <div{{attributes.addClass(classes, blockStyles)}}>
+  <div{{ attributes.addClass(classes, blockStyles) }}>
     {{ title_prefix }}
     {% if label %}
       <div class="block-title {{ headingStyle }}">
@@ -67,10 +66,10 @@
           <span class="ucb-video-reveal-icon">
             <i class="fa-solid fa-circle-play"></i>
           </span>
-          <span class="ucb-video-reveal-text">{{ content.field_video_reveal_text_overlay|render }}</span>
+          <span class="ucb-video-reveal-text">{{ content.field_video_reveal_text_overlay }}</span>
         </div>
         <div class="ucb-video-reveal-image">
-          {{ content.field_video_reveal_image|render }}
+          {{ content.field_video_reveal_image }}
         </div>
     </div>
   </div>
