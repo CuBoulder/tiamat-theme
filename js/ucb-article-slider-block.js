@@ -66,6 +66,10 @@ class ArticleSliderBlockElement extends HTMLElement {
 
         // Iterate over each Article
         data.data.map(item=>{
+          // If no thumbnail, omit from inclusion
+          if (!item.relationships.field_ucb_article_thumbnail.data) {
+            return; 
+          }
             let thisArticleCats = [];
             let thisArticleTags = [];
             // // loop through and grab all of the categories
@@ -104,27 +108,21 @@ class ArticleSliderBlockElement extends HTMLElement {
             if (doesIncludeCat.length == 0 && doesIncludeTag.length == 0) {
                 // okay to render
                 let imageSrc = "";
-      
-                  // if no thumbnail, show no image
-                  if (!item.relationships.field_ucb_article_thumbnail.data) {
-                    imageSrc = "";
-                  } else {
-                    //Use the idObj as a memo to add the corresponding image url
-                    let thumbId = item.relationships.field_ucb_article_thumbnail.data.id;
-                    imageSrc = altObj[idObj[thumbId]];
-                  }
 
-                  let title = item.attributes.title;
-                  let link = item.attributes.path.alias;
+                //Use the idObj as a memo to add the corresponding image url
+                let thumbId = item.relationships.field_ucb_article_thumbnail.data.id;
+                imageSrc = altObj[idObj[thumbId]];
 
-                  // Create an Article Object for programatic rendering
-                  const article = {
+                let title = item.attributes.title;
+                let link = item.attributes.path.alias;
+                // Create an Article Object for programatic rendering
+                const article = {
                     title,
                     link,
                     image: imageSrc,
-                  }
-                  // Adds the article object to the final array of articles chosen
-                  finalArticles.push(article)
+                }
+                // Adds the article object to the final array of articles chosen
+                finalArticles.push(article)
             }
         })
         // Case for not enough articles selected and extra articles available

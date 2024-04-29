@@ -9,6 +9,54 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update block--system-menu-block.html.twig
+  Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/38
+  Sister PR: https://github.com/CuBoulder/tiamat10-profile/pull/119
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/135
+  
+  Added an if statement to not render menus if there is no content within. 
+  This is needed for the new layout setup.
+  This should not affect anything other than the new layout.
+  
+  Closes #897 
+---
+
+- ### Fixes Search page style regression
+  Resolves CuBoulder/tiamat-theme#893
+---
+
+- ### Adds Wallpaper image style to hero units and video reveal
+  Resolves #804.
+  Sister pull requests in https://github.com/CuBoulder/tiamat10-profile/pull/114, https://github.com/CuBoulder/tiamat-custom-entities/pull/132.
+  
+---
+
+- ### Newsletter: One Article or One Custom Content in a Section
+  ### Newsletters
+  There is a special case for if a Newsletter Section set to "Teaser" display has only one Article or one item of Section Custom Content, then it should span the full width of the web newsletter. This is only the case for a single item in a Newsletter section, odd numbered counts are still 50%. The email version of the Newsletter is unaffected.
+  
+  Resolves #895 
+---
+
+- ### Updates regions
+  This update:
+  - [Bug] Adds proper containers to above and below content, fixing incorrect margins. Resolves #819
+  - [Change, Remove] Adds template for Layout Builder pages. Removes above content, breadcrumbs, sidebar, and below content regions from Layout Builder pages. Resolves #896
+  - [Remove] Removes above content region from search, taxonomy, user, and 403 pages. Resolves CuBoulder/tiamat-theme#877
+---
+
+- ### Adds sortable table style changes
+  This update resolves two style issues with sortable tables in Webforms. It:
+  - [Bug] Corrects the display of drag icons. Resolves CuBoulder/tiamat-theme#786
+  - [Change] Decreases the font size of the "Show row weights" button. Resolves CuBoulder/tiamat-theme#787
+---
+
+- ### Articles Slider: Articles without thumbnails are omitted from display
+  Article Feature: Previously, Articles without thumbnails would still show up in the slider but with a broken image. This has been adjusted so these incomplete Articles are completely omitted from display and only Articles with thumbnails are shown.
+  
+  Resolves #881 
+---
+
 - ### Removal of all how-to files
   Sister request to https://github.com/CuBoulder/tiamat-custom-entities/pull/134.
   Removes all necessary how-to files.

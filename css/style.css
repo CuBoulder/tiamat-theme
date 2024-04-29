@@ -981,6 +981,10 @@ form label {
   display: block;
 }
 
+.fieldset-wrapper {
+  box-sizing: border-box;
+}
+
 .form-item,
 .form-actions {
   margin-top: 1em;
@@ -1073,4 +1077,26 @@ form input[type="radio"]+label {
 .button.form-submit.webform-button--next {
   color: var(--button-text-color-blue) !important;
   background-color: var(--button-background-color-blue);
+}
+
+/* Overrides sortable table styles in the stable9 theme */
+
+table.table-sort {
+  width: 100%;
+}
+
+button.tabledrag-toggle-weight {
+  font-size: .75em;
+  padding: 0 .75em;
+  margin-bottom: 1em;
+}
+
+.draggable a.tabledrag-handle {
+  height: auto;
+  margin-left: -.5em;
+}
+
+a.tabledrag-handle .handle {
+  box-sizing: content-box;
+  margin: -0.25em 0.5em;
 }
