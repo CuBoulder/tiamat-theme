@@ -77,15 +77,19 @@
             {% set imgUrl = item.entity.field_grid_layout_content_image.entity.field_media_image.entity.fileuri|image_style(imgStyle) %}
             {% set imgAlt = item.entity.field_grid_layout_content_image.entity.field_media_image.alt %}
             {% set link = item.entity.field_grid_layout_content_link.0.url.uri %}
-            {% set containerTag = link ? 'a' : 'div' %}
+            {% set containerTag = link ? 'a' : 'span' %}
             <div class="col">
               <div class="grid-column">
-                <{{ containerTag }}{{ create_attribute({ class: 'overlay-grid-image-container grid-fill', href: link }) }}>
+                <div class="overlay-grid-image-container grid-fill">
                   {% if title %}
-                    <strong>{{ title }}</strong>
+                    <{{ containerTag }}{{ create_attribute({ href: link }) }}>
+                      <strong>{{ title }}</strong>
+                    </{{ containerTag }}>
                   {% endif %}
-                  <img{{ create_attribute({ src: imgUrl, alt: imgAlt }) }}>
-                </{{ containerTag }}>
+                  <{{ containerTag }}{{ create_attribute({ role: 'presentation', 'aria-hidden': 'true', href: link }) }}>
+                    <img{{ create_attribute({ src: imgUrl, alt: imgAlt }) }}>
+                  </{{ containerTag }}>
+                </div>
                 {% if item.entity.field_grid_layout_content_text|view %}
                   <div class="overlay-grid-text">
                     {{ item.entity.field_grid_layout_content_text|view }}
@@ -109,20 +113,26 @@
               {% set imgUrl = null %}
             {% endif %}
             {% set link = item.entity.field_grid_layout_content_link.0.url.uri %}
-            {% set containerTag = link ? 'a' : 'div' %}
-            <div class="grid-text-container">
-              <{{ containerTag }}{{ create_attribute({ class: 'd-flex flex-column-reverse justify-content-end', href: link }) }}>
-                {% if title %}
-                  <strong class="h3">{{ title }}</strong>
-                {% endif %}
-                {% if imgUrl %}
-                  <div class="grid-image-container grid-fill">
-                    <img{{ create_attribute({ src: imgUrl, alt: imgAlt }) }}>
-                  </div>
-                {% endif %}
-              </{{ containerTag }}>
-              {{ item.entity.field_grid_layout_content_text|view }}
+            {% set containerTag = link ? 'a' : 'span' %}
+            <div class="d-flex flex-column-reverse justify-content-end">
+              {% if title %}
+                <div class="grid-text-container">
+                  <{{ containerTag }}{{ create_attribute({ href: link }) }}>
+                    <strong class="h3">{{ title }}</strong>
+                  </{{ containerTag }}>
+                </div>
+              {% endif %}
+              {% if imgUrl %}
+                <{{ containerTag }}{{ create_attribute({ role: 'presentation', 'aria-hidden': 'true', class: 'grid-image-container grid-fill', href: link }) }}>
+                  <img{{ create_attribute({ src: imgUrl, alt: imgAlt }) }}>
+                </{{ containerTag }}>
+              {% endif %}
             </div>
+            {% if item.entity.field_grid_layout_content_text|view %}
+              <div class="grid-text-container">
+                {{ item.entity.field_grid_layout_content_text|view }}
+              </div>
+            {% endif %}
           </div>
         {% endfor %}
       </div>
@@ -140,20 +150,26 @@
                 {% set imgUrl = null %}
               {% endif %}
               {% set link = item.entity.field_grid_layout_content_link.0.url.uri %}
-              {% set containerTag = link ? 'a' : 'div' %}
-              <div class="grid-text-container">
-                <{{ containerTag }}{{ create_attribute({ class: 'd-flex flex-column-reverse justify-content-end', href: link }) }}>
-                  {% if title %}
-                    <strong class="h3">{{ title }}</strong>
-                  {% endif %}
-                  {% if imgUrl %}
-                    <div class="grid-image-container grid-fill">
-                      <img{{ create_attribute({ src: imgUrl, alt: imgAlt }) }}>
-                    </div>
-                  {% endif %}
-                </{{ containerTag }}>
-                {{ item.entity.field_grid_layout_content_text|view }}
+              {% set containerTag = link ? 'a' : 'span' %}
+              <div class="d-flex flex-column-reverse justify-content-end">
+                {% if title %}
+                  <div class="grid-text-container">
+                    <{{ containerTag }}{{ create_attribute({ href: link }) }}>
+                      <strong class="h3">{{ title }}</strong>
+                    </{{ containerTag }}>
+                  </div>
+                {% endif %}
+                {% if imgUrl %}
+                  <{{ containerTag }}{{ create_attribute({ role: 'presentation', 'aria-hidden': 'true', class: 'grid-image-container grid-fill', href: link }) }}>
+                    <img{{ create_attribute({ src: imgUrl, alt: imgAlt }) }}>
+                  </{{ containerTag }}>
+                {% endif %}
               </div>
+              {% if item.entity.field_grid_layout_content_text|view %}
+                <div class="grid-text-container">
+                  {{ item.entity.field_grid_layout_content_text|view }}
+                </div>
+              {% endif %}
             </div>
           </div>
         {% endfor %}

@@ -17,7 +17,7 @@
 }
 
 .content-grid-block .grid-card .grid-text-container {
-  padding: 1em;
+  padding: 0 1em 1em 1em;
 }
 
 .content-grid-block .grid-fill {
@@ -41,11 +41,6 @@
 .content-grid-block .grid-fill article div {
   height: 100%;
   display: flex;
-}
-
-.content-grid-block .overlay-grid-image-container a,
-.content-grid-block .grid-image-container a {
-  width: 100%;
 }
 
 /* Card Layout CSS */
