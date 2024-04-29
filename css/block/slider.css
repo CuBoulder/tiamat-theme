@@ -83,6 +83,7 @@ a.slide-link {
   padding: 2rem 1rem;
   position: relative;
   max-width: 400px;
+  width: 100%;
 }
 
 .right-content .carousel-inner {
@@ -104,7 +105,6 @@ a.slide-link {
 
 .slide-image-container {
   flex-grow: 1;
-  padding-bottom: 20px;
 }
 
 .bottom-content .carousel-inner .carousel-caption {
@@ -166,6 +166,7 @@ a.slide-link i.fab {
 @media screen and (max-width: 992px) {
   .right-content .carousel-inner .carousel-caption {
     max-width: 100%;
+    width: 100%;
     top: auto;
     bottom: 0;
     background-color: var(--ucb-darker);
@@ -221,6 +222,10 @@ a.slide-link i.fab {
   }
   .carousel-caption {
     width: 100%;
+  }
+  .right-content .carousel-item-structure {
+    display: flex;
+    flex-direction: column !important;
   }
 }
 
