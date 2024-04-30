@@ -19,7 +19,8 @@
     'block-' ~ plugin_id|clean_class,
     bundle ? 'block--type-' ~ bundle|clean_class,
     view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
-    content['#block_content'].field_slider_text_style.value
+    content['#block_content'].field_slider_text_style.value,
+	'ucb-slider-block'
   ]
 %}
 
@@ -69,7 +70,7 @@
 		{% endif %}
 		{{ title_suffix }}
 		{# <h1> {{ dump(content['#block_content'].field_slider_slide.value) }} </h1> #}
-		<div id="{{ id }}" class="carousel slide" data-bs-ride="carousel">
+		<div id="{{ id }}" class="carousel slide" data-interval="false">
 			<div class="carousel-indicators">
 				{% for i in 1..content['#block_content'].field_slider_slide.value|length %}
 					<button type="button" {% if loop.first %} class="active" {% endif %} data-bs-target="#{{ id }}" data-bs-slide-to="{{ i - 1 }}" aria-label="Slide {{ i }}"></button>
@@ -78,7 +79,7 @@
 			<div
 				class="carousel-inner">
 				{# Don't render these fields #}
-				{{ content|without('field_slider_size','field_slider_text_style') }}
+				{{ content|without('field_slider_size','field_slider_text_style', 'field_bs_heading', 'field_bs_heading_style','field_bs_heading_alignment', 'field_bs_icon_size', 'field_bs_icon_position', 'field_bs_icon_color', 'field_bs_title_font_scale', 'field_slider_text_style','field_bs_content_font_scale', 'field_bs_background_style', 'field_bs_icon' ) }}
 			</div>
 			<button class="carousel-control-prev" type="button" data-bs-target="#{{ id }}" data-bs-slide="prev">
 				<span class="carousel-control-prev-icon" aria-hidden="true"></span>

@@ -9,6 +9,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates Content Grid block
+  This update:
+  - [a11y] Removes all `<h3>` tags and replaces them with `<strong>`. Resolves CuBoulder/tiamat-theme#899
+  - [a11y] Adds two items; Resolves CuBoulder/tiamat-theme#905:
+    - Adds `role="presentation" aria-hidden="true"` to the image's container. 
+    - Reorders image and title in the DOM such that the title comes first.
+  - [Change] Refactors Content Grid block without changing its functionality:
+    - Reduces the line count of `block--content-grid.html.twig`.
+    - Removes several unnecessary files, including dead code templates and a totally unnecessary JavaScript method of setting the height on grid items.
+---
+
+- ### Updates Video Reveal block to not mute by default
+  Resolves CuBoulder/tiamat-theme#901
+---
+
+- ### Slider Block: Bug Fixes + A11y Issues
+  ### Slider Block
+  Fixes various display issues surrounding the "Slider Block" including:
+  - Slider Block style for the default title `<h2>` not displaying correctly
+  - Some Slider - Block Style settings visibly rendering within the carousel slides
+  - Resolving odd and unpredictable carousel behavior
+  
+  Resolves #908 
+  Resolves #884 
+  Resolves #858 
+  Resolves #788 
+---
+
+- ### Changes `<h5>` to `<h2>` in site footer
+  Resolves CuBoulder/tiamat-theme#911
+---
+
 - ### Update block--system-menu-block.html.twig
   Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/38
   Sister PR: https://github.com/CuBoulder/tiamat10-profile/pull/119
