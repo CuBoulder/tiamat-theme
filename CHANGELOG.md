@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates Content Grid block
+  This update:
+  - [a11y] Removes all `<h3>` tags and replaces them with `<strong>`. Resolves CuBoulder/tiamat-theme#899
+  - [a11y] Adds two items; Resolves CuBoulder/tiamat-theme#905:
+    - Adds `role="presentation" aria-hidden="true"` to the image's container. 
+    - Reorders image and title in the DOM such that the title comes first.
+  - [Change] Refactors Content Grid block without changing its functionality:
+    - Reduces the line count of `block--content-grid.html.twig`.
+    - Removes several unnecessary files, including dead code templates and a totally unnecessary JavaScript method of setting the height on grid items.
+---
+
 - ### Updates Video Reveal block to not mute by default
   Resolves CuBoulder/tiamat-theme#901
 ---

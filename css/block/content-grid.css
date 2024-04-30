@@ -1,90 +1,87 @@
 /*
- * Styles for content grid paragraph
- *
-*/
+ * Styles the Content Grid block.
+ */
 
-/* Overall Content Grid CSS */
-.ucb-above-content .paragraph--type--content-grid,
-.ucb-below-content .paragraph--type--content-grid {
-  padding: 1.5em;
+.content-grid-block .row {
+  --bs-gutter-x: 1.5em;
+  --bs-gutter-y: 1.5em;
+  margin-bottom: 1.5em;
 }
 
-.grid-image-container {
+.content-grid-block .grid-image-container {
   padding-bottom: 1em;
 }
 
-.grid-text-container {
+.content-grid-block .grid-text-container {
   padding-bottom: 1em;
 }
 
-.grid-card .grid-text-container {
-  padding: 1em;
+.content-grid-block .grid-card .grid-text-container {
+  padding: 0 1em 1em 1em;
 }
 
-.grid-fill {
+.content-grid-block .grid-fill {
   display: flex;
   overflow: hidden;
   justify-content: center;
 }
 
-.grid-fill img {
+.content-grid-block .grid-fill img {
   flex-shrink: 0;
   min-width: 100%;
   min-height: 100%;
   object-fit: cover;
 }
 
-.grid-fill article {
+.content-grid-block .grid-fill article {
   width: 100%;
   height: auto;
 }
 
-.grid-fill article div {
+.content-grid-block .grid-fill article div {
   height: 100%;
   display: flex;
 }
 
-.overlay-grid-image-container a,
-.grid-image-container a {
-  width: 100%;
-}
-
-/* Override for Card links color to maintain accessibility (white on blue) */
-.grid-card .grid-text-container a {
-  color: var(--ucb-link);
-  text-decoration: none;
-}
-.grid-card .grid-text-container a:hover{
-  color: var(--ucb-link-visited);
-  text-decoration: none;
-}
-
 /* Card Layout CSS */
-.grid-card {
+
+.content-grid-block .grid-card {
+  color: #000;
+  background-color: #FFF;
+  height: 100%;
   -webkit-box-shadow: 0 0 10px rgb(0, 0, 0, 10%);
   -moz-box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   box-shadow: 0 0 10px rgb(0, 0, 0, 10%);
   transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
-  margin-bottom: 1.5em;
-  background: white;
-  color: black;
 }
 
-.grid-card:hover {
+.content-grid-block .grid-card:hover {
   -webkit-box-shadow: 0 0 20px rgb(0, 0, 0, 25%);
   -moz-box-shadow: 0 0 20px rgba(0, 0, 0, 0.25);
   box-shadow: 0 0 20px rgb(0, 0, 0, 25%);
 }
 
+/* Override for Card links color to maintain accessibility (white on blue) */
+
+.content-grid-block .grid-card .grid-text-container a {
+  color: var(--ucb-link);
+  text-decoration: none;
+}
+
+.content-grid-block .grid-card .grid-text-container a:hover {
+  color: var(--ucb-link-visited);
+  text-decoration: none;
+}
+
 /* Overlay Layout CSS */
 
-.overlay-grid-image-container {
+.content-grid-block .overlay-grid-image-container {
   position: relative;
   width: 100%;
   margin-bottom: 1em;
 }
 
-.overlay-grid-image-container h2, .overlay-grid-image-container h3 {
+.content-grid-block .overlay-grid-image-container strong {
   padding: 0.75rem;
   position: absolute;
   bottom: 0;
@@ -93,10 +90,6 @@
   margin-bottom: 0;
   color: white;
   width: 100%;
-  font-size: 100%
-}
-
-/*** Offest Grid Layout ***/
-.grid-image-container-large .grid-fill {
-  display: initial;
+  font-size: 1em;
+  font-weight: bold;
 }
