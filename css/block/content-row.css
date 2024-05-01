@@ -145,6 +145,10 @@
   padding-bottom: 0px;
 }
 
+.row-content-tile-odd{
+  flex-direction: row-reverse;
+}
+
 @media screen and (max-width: 975px) {
   .small-feature-row {
     margin-top: 1em;
