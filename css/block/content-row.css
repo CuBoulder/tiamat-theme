@@ -112,6 +112,7 @@
 .ucb-teaser-lg-row{
   align-items: center;
   margin-bottom: 20px;
+  flex-direction: row-reverse;
 }
 
 .row-image-container{
@@ -147,6 +148,15 @@
 
   .small-feature:last-child {
     padding-right: 0;
+  }
+}
+
+@media screen and (max-width:767px) {
+  .ucb-teaser-lg-row{
+   flex-direction: column-reverse;
+  }
+  .row-image-container-lg{
+   margin-bottom: 10px;
   }
 }
 
