@@ -154,7 +154,7 @@
 						<div class="col-lg-7">
 							<div class="feature-row-image-container feature-row-fill">
 								{% if rowLink %}
-									<a href="{{ rowLink }} ">
+									<a role="presentation" aria-hidden="true" href="{{ rowLink }} ">
 										{{ item.entity.field_row_layout_content_image|view }}
 									</a>
 								{% else %}
