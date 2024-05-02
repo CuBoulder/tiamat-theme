@@ -30,7 +30,7 @@
 {% macro links(items) %}
   {% for item in items %}
     <li>
-      {% set uri = (item.content ? item.content['#url'].uri : item.url.uri)|trim %}
+      {% set uri = (item.content ? item.content['#url']|render : item.url|render)|trim %}
       {% set hostname = '' %}
       {% if uri matches '/^(http(s)?:)?\\/\\//i' %}
         {% set hostname = uri|split('/').2 %}

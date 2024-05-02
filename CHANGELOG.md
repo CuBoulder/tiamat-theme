@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes error occurring when Content Grid items or social media links are linked to a Drupal route
+  Resolves CuBoulder/tiamat-theme#921
+---
+
 - ### Updates Content Grid block
   This update:
   - [a11y] Removes all `<h3>` tags and replaces them with `<strong>`. Resolves CuBoulder/tiamat-theme#899
