@@ -71,6 +71,7 @@
 .ucb-people-list-table-photo {
   width: 100px;
   height: 100px;
+  min-width: 100px;
   object-fit: cover;
   text-align: center;
   vertical-align: middle;
@@ -81,7 +82,6 @@
 }
 
 .ucb-people-list-contact {
-  color: #0277bd;
   font-family: Roboto, Helvetica, sans-serif;
   font-weight: 400;
 }
