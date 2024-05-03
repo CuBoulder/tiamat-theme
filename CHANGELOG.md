@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### A11y for Content Rows
+  ### Content Row: Accessibility Fixes
+  - Adjusts DOM order for consistent assistive readability on the `Content Row` display options and reorganizes using pure CSS where applicable
+  - Adds `role="presentation" and aria-hidden="true"` to links on images so only the title link is read with assistive technologies
+  
+  Resolves #907 
+---
+
 - ### Adjust mobile float image size
   Closes #891 . Increases minimum floated image size to 50% on mobile and decreases the text size to 85%.
 ---
