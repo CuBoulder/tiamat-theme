@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adjust mobile float image size
+  Closes #891 . Increases minimum floated image size to 50% on mobile and decreases the text size to 85%.
+---
+
 - ### A11y Fixes: Article List page and Article List, Article Slider, and Article Grid Blocks
   Addresses the following A11y issues on the Article List page, Article List block, Article Grid Block, Article Slider Block:
   
