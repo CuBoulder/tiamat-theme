@@ -257,6 +257,8 @@ class ArticleListBlockElement extends HTMLElement {
             var imgDiv = document.createElement('div');
             var imgLink = document.createElement('a');
             imgLink.href = articleLink;
+            imgLink.setAttribute('role', 'presentation');
+            imgLink.setAttribute('aria-hidden', 'true');
             
             var articleImg = document.createElement('img')
             articleImg.classList = 'col-sm-12 ucb-article-card-img-full'
@@ -292,6 +294,7 @@ class ArticleListBlockElement extends HTMLElement {
           readMore.href = articleLink;
           readMore.classList = 'ucb-article-card-read-more'
           readMore.innerText = `Read More`;
+          readMore.setAttribute('aria-hidden', 'true');
 
           // Sr-only text
           var srOnly = document.createElement('span')
@@ -331,6 +334,8 @@ class ArticleListBlockElement extends HTMLElement {
             var imgDiv = document.createElement('div');
             var imgLink = document.createElement('a');
             imgLink.href = articleLink;
+            imgLink.setAttribute('role', 'presentation');
+            imgLink.setAttribute('aria-hidden', 'true');
             
             var articleImg = document.createElement('img')
             articleImg.classList = 'ucb-article-card-img-wide'
@@ -366,6 +371,7 @@ class ArticleListBlockElement extends HTMLElement {
           readMore.href = articleLink;
           readMore.classList = 'ucb-article-card-read-more'
           readMore.innerText = `Read More`;
+          readMore.setAttribute('aria-hidden', 'true');
           // Sr-only text
           var srOnly = document.createElement('span')
           srOnly.className = 'sr-only'
@@ -403,7 +409,9 @@ class ArticleListBlockElement extends HTMLElement {
   
               var imgLink = document.createElement('a');
               imgLink.href = articleLink;
-              
+              imgLink.setAttribute('role', 'presentation');
+              imgLink.setAttribute('aria-hidden', 'true');
+
               var articleImg = document.createElement('img')
               articleImg.src = articleImgSrc;
   
@@ -484,6 +492,8 @@ class ArticleListBlockElement extends HTMLElement {
   
               var imgLink = document.createElement('a');
               imgLink.href = articleLink;
+              imgLink.setAttribute('role', 'presentation');
+              imgLink.setAttribute('aria-hidden', 'true');
               
               var articleImg = document.createElement('img')
               articleImg.src = articleImgSrc;
@@ -522,6 +532,7 @@ class ArticleListBlockElement extends HTMLElement {
             readMore.href = articleLink;
             readMore.classList = 'ucb-article-card-read-more'
             readMore.innerText = `Read More`;
+            readMore.setAttribute('aria-hidden', 'true');
             // Sr-only text
             var srOnly = document.createElement('span')
             srOnly.className = 'sr-only'

@@ -91,7 +91,7 @@
   object-fit: cover;
 }
 
-.ucb-article-slider .ucb-article-slider-container h3 {
+.ucb-article-slider .ucb-article-slider-container span {
   position: absolute;
   left: 0;
   right: 0;
@@ -108,7 +108,7 @@
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 }
 
-.ucb-article-slider .ucb-article-slider-container a.ucb-article-img-link:hover h3 {
+.ucb-article-slider .ucb-article-slider-container a.ucb-article-img-link:hover span {
   background-color: transparent;
   background: linear-gradient(to bottom, transparent 0%, black 100%);
   /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */

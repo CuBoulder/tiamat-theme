@@ -225,6 +225,8 @@ function renderArticleList(JSONURL, ExcludeCategories = "", ExcludeTags = "") {
 
                 var imgLink = document.createElement('a')
                 imgLink.href = link;
+                imgLink.setAttribute('role', 'presentation');
+                imgLink.setAttribute('aria-hidden', 'true');
 
                 var articleImg = document.createElement('img')
                 articleImg.src = imageSrc.src;
@@ -272,6 +274,7 @@ function renderArticleList(JSONURL, ExcludeCategories = "", ExcludeTags = "") {
 
               var readMoreLink = document.createElement('a')
               readMoreLink.href = link;
+              readMoreLink.setAttribute('aria-hidden', 'true')
               readMoreLink.innerText = `Read more`
               //Screen Reader text
               var srOnly = document.createElement('span')

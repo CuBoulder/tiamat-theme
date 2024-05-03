@@ -228,6 +228,8 @@ class ArticleGridBlockElement extends HTMLElement {
           var articleImgLink = document.createElement('a')
           articleImgLink.className = 'ucb-article-grid-card-img-link'
           articleImgLink.href = article.link;
+          articleImgLink.setAttribute('role', 'presentation');
+          articleImgLink.setAttribute('aria-hidden', 'true');
 
           // Image append
           articleImgLink.appendChild(articleImg)

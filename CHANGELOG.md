@@ -9,6 +9,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### A11y Fixes: Article List page and Article List, Article Slider, and Article Grid Blocks
+  Addresses the following A11y issues on the Article List page, Article List block, Article Grid Block, Article Slider Block:
+  
+  ### Article List page, Article List block, Article Grid Block
+  
+  Changes one or both depending on the user-selected style of the block (Feature, Teaser, Grid, etc), if applicable.
+  
+  - Adds `role="presentation" aria-hidden="true"` to image links 
+  - Adds `aria-hidden="true"` to "Read More" links
+  
+  ### Article Slider
+  - Fixes DOM order of slider blocks to read Title first
+  - Adds `aria-hidden="true"` to lower slider controls, previous + next button svgs.
+  - Removes `<h3>` tags from Article card titles causing an issue with screen readers
+  - Disables `auto advance`
+  
+  Note: The Article Slider uses [Flickity ](https://flickity.metafizzy.co/) to generate and there are currently Issues related to accessibility awaiting to be addressed on their end: https://github.com/metafizzy/flickity . We may be able to remove our A11y fixes to this custom element once these changes are approved there.
+  
+  Resolves #900
+  Resolves #906
+  Half of #908 
+---
+
 - ### Fixes error occurring when Content Grid items or social media links are linked to a Drupal route
   Resolves CuBoulder/tiamat-theme#921
 ---

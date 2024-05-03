@@ -183,13 +183,13 @@ class ArticleSliderBlockElement extends HTMLElement {
             articleImg.className = 'ucb-article-slider-article-img'
             articleImg.src = article.image;
         //  Title
-        var articleTitle = document.createElement('h3')
+        var articleTitle = document.createElement('span')
             articleTitle.className = 'ucb-article-img-title'
             articleTitle.innerText = article.title;
         
         //  Append
-        articleImgLink.appendChild(articleImg)
         articleImgLink.appendChild(articleTitle)
+        articleImgLink.appendChild(articleImg)
         articleInnerContainer.appendChild(articleImgLink)
         articleContainer.appendChild(articleInnerContainer)
         fliktyInit.append(articleContainer)
@@ -197,13 +197,17 @@ class ArticleSliderBlockElement extends HTMLElement {
       this.toggleMessage('ucb-al-loading')
       this.toggleMessage('ucb-el-flick','block')
       // Make this a Flickity container -- this line appears to need to be here, creating the container before
-      new Flickity('.ucb-article-slider',{      'wrapAround': true,
-      'adaptiveHeight': true,
-      'draggable': false,
-      'cellAlign': 'left',
-      'groupCells': true,
-      'contain': true,
-      'lazyLoad': true})
+      new Flickity('.ucb-article-slider',{
+        'autoPlay': false,
+        'wrapAround': true,
+        'adaptiveHeight': true,
+        'draggable': false,
+        'cellAlign': 'left',
+        'groupCells': true,
+        'contain': true,
+        'lazyLoad': true
+      })
+     this.makeAccessibile()
     }
     // Used to toggle error messages and loader
     toggleMessage(id, display = "none") {
@@ -227,6 +231,20 @@ class ArticleSliderBlockElement extends HTMLElement {
            return response.json();
         }
     };
+    // Adds aria properties to Flickity Carousel
+    makeAccessibile(){
+      if(this.getElementsByClassName('flickity-page-dots').length){
+        const dots = this.getElementsByClassName('flickity-page-dots')[0]
+        dots.setAttribute('aria-hidden', 'true');
+      }
+
+      const sliderBtns = this.getElementsByClassName('flickity-button')
+      if(sliderBtns){
+        Array.from(sliderBtns).forEach(element=>{
+          element.firstChild.setAttribute('aria-hidden', 'true')
+        })
+      }
+    }
 }
 
 customElements.define('article-slider-block', ArticleSliderBlockElement);
