@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates People List Page
+  This update:
+   - [a11y] Adds `aria-hidden="true"` to a person photo's link, or person photo th/td in table view. Adds alt text to the person photo.
+   - [a11y] Adds `aria-live="polite"` to the region containing the list of people after a user selects an option in filters.
+   - [a11y] Adds `<span class="sr-only">Loading</span>` to describe the loading icon.
+   - [Change] Updates the email link in table view to only have the text "Email".
+   - [Change] Updates the social media link matcher to correctly display the icon for x.com URLs, as well as support the same shortened URLs supported by our social media icons block and menu.
+   - [Bug] Resolves in CSS an issue where the person photo in table view may become unusably small on mobile devices.
+  
+  Resolves CuBoulder/tiamat-theme#902
+  Resolves CuBoulder/tiamat-theme#904
+---
+
 - ### A11y for Content Rows
   ### Content Row: Accessibility Fixes
   - Adjusts DOM order for consistent assistive readability on the `Content Row` display options and reorganizes using pure CSS where applicable
