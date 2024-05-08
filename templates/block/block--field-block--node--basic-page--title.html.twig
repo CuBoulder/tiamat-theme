@@ -1,0 +1,13 @@
+{#
+/**
+ * @file Contains the template to display the visible title on a basic page.
+ */
+#}
+
+{% if not is_front %}
+  <div class="container ucb-page-title">
+    <div aria-hidden="true" class="h1">
+      {{ content }}
+    </div>
+  </div>
+{% endif %}

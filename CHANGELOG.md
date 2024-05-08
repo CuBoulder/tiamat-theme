@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Changes basic page title to enhance accessibility
+  This update:
+  - Adds an invisible `<h1>` at the top of every basic page for screen readers, tagged with `sr-only`.
+  - Converts the existing page title from `<h1>` to `<div>` with `aria-hidden="true"`.
+  
+  Resolves CuBoulder/tiamat-theme#931
+---
+
 - ### Updates People List Page
   This update:
    - [a11y] Adds `aria-hidden="true"` to a person photo's link, or person photo th/td in table view. Adds alt text to the person photo.

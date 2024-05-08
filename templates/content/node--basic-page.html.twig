@@ -79,6 +79,9 @@
 ] %}
 
 <article{{ attributes.addClass(classes) }}>
+  <h1 class="sr-only">
+    {{ label }}
+  </h1>
   {% if content %}
     <div{{ content_attributes }}>
       {{ content }}

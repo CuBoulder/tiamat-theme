@@ -101,20 +101,6 @@ function boulder_base_preprocess_page(array &$variables) {
   }
 }
 
-
-/***
- * Preprocess function to enable the current page title to display as 'sr-only', if set as site homepage
- */
-function boulder_base_preprocess_field(&$variables, $hook) {
-  $current_path = \Drupal::service('path.current')->getPath();
-  $front_page_path = \Drupal::config('system.site')->get('page.front');
-  $path_alias_manager = \Drupal::service('path_alias.manager');
-  $current_path_alias = $path_alias_manager->getAliasByPath($current_path);
-  $front_page_alias = $path_alias_manager->getAliasByPath($front_page_path);
-  $is_front_page = $current_path_alias === $front_page_alias;
-  $variables['is_front'] = $is_front_page;
-}
-
 /***
  * Preprocess function to get the variables we'll need on the page user template
  */
