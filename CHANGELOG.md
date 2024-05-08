@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fix breadcrumbs (again)
+  Removing the block is needed. It was adding extra steps that didn't need to be there.
+  
+  The `is not empty` need to be changed to `!= ""` because the empty check still sees arrays as content.
+---
+
 - ### Fixes a bug with links in Content Sequence blocks
   Links to Drupal routes would incorrectly display `internal:` URIs instead of public URLs. This update fixes the bug.
   
