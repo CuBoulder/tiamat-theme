@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes a bug with links in Content Sequence blocks
+  Links to Drupal routes would incorrectly display `internal:` URIs instead of public URLs. This update fixes the bug.
+  
+  Resolves CuBoulder/tiamat-theme#926
+---
+
 - ### Changes basic page title to enhance accessibility
   This update:
   - Adds an invisible `<h1>` at the top of every basic page for screen readers, tagged with `sr-only`.
