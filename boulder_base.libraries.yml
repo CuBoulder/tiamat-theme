@@ -219,14 +219,6 @@ ucb-sticky-menu:
   css:
     theme:
       css/ucb-sticky-menu.css: {}
-
-timelinejs:
-  version: 3.x
-  js:
-    js/timelinejs/timeline-min.js: {}
-  css:
-    theme:
-      css/timelinejs/timeline.css: {}
       
 ucb-slate-form:
   version: 1.x
