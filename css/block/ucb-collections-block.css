@@ -211,3 +211,13 @@
   background-color: #424242;
   color: #fff;
 }
+
+.ucb-collection-card-container a {
+  color: #0277BD;
+}
+.ucb-collection-card-container a:hover {
+  color: #E51C23;
+}
+.ucb-collection-card-container {
+  color: #000;
+}
