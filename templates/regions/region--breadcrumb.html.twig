@@ -21,7 +21,7 @@
 %}
 
 
-{% if (show_breadcrumb) and (content|render|striptags|trim is not empty) %}
+{% if (show_breadcrumb) and (content|render|striptags|trim != "") %}
 	<div{{ attributes.addClass(classes) }}>
 		<div class="ucb-breadcrumb-row row">
 			{{ content }}
