@@ -103,3 +103,61 @@ span.ucb-vid-reveal-icon {
     font-size: 1.25em;
   }
 }
+
+/* Block Styles CSS */
+
+/* Fix for icon breaking hero */
+.block-hero-unit .bs-icon-position-default {
+  display: block;
+  margin: 0;
+}
+
+/* Typography fixes for titles */
+
+.block.bs-background-none .block-title-text {
+  color: var(--ucb-black);
+}
+
+.block.bs-background-white .block-title-text {
+  color: var(--ucb-black);
+}
+
+.block.bs-background-gray .block-title-text {
+  color: var(--ucb-black);
+}
+
+.block.bs-background-dark-gray .block-title-text {
+  color: var(--ucb-white);
+}
+
+.block.bs-background-tan .block-title-text {
+  color: var(--ucb-black);
+}
+
+.block.bs-background-light-blue .block-title-text {
+  color: var(--ucb-black);
+}
+
+.block.bs-background-medium-blue .block-title-text {
+  color: var(--ucb-black);
+}
+
+.block.bs-background-dark-blue .block-title-text {
+  color: var(--ucb-white);
+}
+
+.block.bs-background-light-green .block-title-text {
+  color: var(--ucb-black);
+}
+
+.block.bs-background-brick .block-title-text {
+  color: var(--ucb-white);
+}
+
+.block.bs-background-outline .block-title-text {
+  color: inherit;
+}
+
+.block.bs-background-underline .block-title-text {
+  color: inherit;
+}
