@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Add in base font colors for collection grid
+  Resolves CuBoulder/tiamat-theme#929 and resolves CuBoulder/tiamat-theme#930.
+  Adds base font colors for links and text to fix bugs related to background styles.
+---
+
 - ### Fix breadcrumbs (again)
   Removing the block is needed. It was adding extra steps that didn't need to be there.
   
