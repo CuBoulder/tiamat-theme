@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Removes horizontal and advanced content sequence blocks
+  [a11y, Remove] The horizontal and advanced variants of content sequence aren't properly accessible to screenreader users. This update removes them. Resolves CuBoulder/tiamat-theme#934
+  
+  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/137)
+---
+
 - ### Add in base font colors for collection grid
   Resolves CuBoulder/tiamat-theme#929 and resolves CuBoulder/tiamat-theme#930.
   Adds base font colors for links and text to fix bugs related to background styles.
