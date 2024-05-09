@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Cleans up Collection Grid block template
+  [Bug] An issue existed where one of the `<div>` elements in the Collection Grid block template wasn't closed properly. This update cleans up the template and resolves the issue. Resolves CuBoulder/tiamat-theme#948
+---
+
 - ### Removes horizontal and advanced content sequence blocks
   [a11y, Remove] The horizontal and advanced variants of content sequence aren't properly accessible to screenreader users. This update removes them. Resolves CuBoulder/tiamat-theme#934
   
