@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Title and Scroll Fix
+  Fixes title coloring as well as the extended horizontal scroll bar for hero and video hero.
+  
+  Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/41
+  
+  Resolves #918 
+---
+
 - ### Update block--video-hero-unit.html.twig
   Fixes for the title error
   
