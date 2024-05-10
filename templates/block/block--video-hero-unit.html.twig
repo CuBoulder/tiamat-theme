@@ -76,8 +76,8 @@
 {% endif %}
 
 <div class="ucb-hero-outer-wrapper">
-		{# Block/Title/Icon Styles #}
-	{% set blockStyles = [
+  {# Block/Title/Icon Styles #}
+  {% set blockStyles = [
 	content.field_bs_background_style|render|striptags|trim,
 	content.field_bs_content_font_scale|render|striptags|trim,
 	content.field_bs_icon_position|render|striptags|trim,
@@ -86,27 +86,26 @@
 	''
 ] %}
 
-	{% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
-	{% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
-	{% set headingTag = content.field_bs_heading|render|striptags|trim %}
-	{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
+  {% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
+  {% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
+  {% set headingTag = content.field_bs_heading|render|striptags|trim %}
+  {% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
 
-	<div{{attributes.addClass(classes,blockStyles)}}>
-		{{ title_prefix }}
-		{% if label %}
-			<div class="block-title {{ headingStyle }}">
-				<{{headingTag}}{{title_attributes}}>
-					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
-						{{ content.field_bs_icon }}
-					</span>
-					<span class="block-title-text">
-						{{ label }}
-					</span>
-				</{{headingTag}}>
-			</div>
-		{% endif %}
-		{{ title_suffix }}
-		{% block content %}
+  <div{{attributes.addClass(classes,blockStyles)}}>
+    {{ title_prefix }}
+    {% if label %}
+      <div class="block-title {{ headingStyle }}">
+        <{{headingTag}}{{title_attributes}}>
+          <span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
+            {{ content.field_bs_icon }}
+          </span>
+          <span class="block-title-text">
+            {{ label }}
+          </span>
+        </{{headingTag}}>
+      </div>
+    {% endif %}
+    {{ title_suffix }}
 			<div{{attributes.addClass(classes,size,overlayClass,videoClass,containerSize).setAttribute("style","#{bgValue}")}}>
 				{% if videoURL is defined %}
 					<div hidden class="ucb-hero-unit-video-wrapper">
@@ -145,6 +144,5 @@
 					</div>
 				</div>
 			</div>
-		{% endblock %}
 	</div>
 </div>

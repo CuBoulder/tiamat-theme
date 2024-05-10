@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update block--video-hero-unit.html.twig
+  Fixes for the title error
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/138
+  
+  Resolves #874 
+---
+
 - ### Cleans up Collection Grid block template
   [Bug] An issue existed where one of the `<div>` elements in the Collection Grid block template wasn't closed properly. This update cleans up the template and resolves the issue. Resolves CuBoulder/tiamat-theme#948
 ---
