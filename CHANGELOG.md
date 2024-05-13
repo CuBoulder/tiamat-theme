@@ -9,647 +9,796 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Removes white margins from Dark Mode Article
-  Previously, a margin wrapper would apply white top and bottom margins to a dark mode article creating horizontal white bars surrounding content. This has been adjusted so the dark background color spans the entire article.
-  
-  Resolves #946 
----
-
-- ### Title and Scroll Fix
-  Fixes title coloring as well as the extended horizontal scroll bar for hero and video hero.
-  
-  Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/41
-  
-  Resolves #918 
----
-
-- ### Update block--video-hero-unit.html.twig
-  Fixes for the title error
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/138
-  
-  Resolves #874 
----
-
-- ### Cleans up Collection Grid block template
-  [Bug] An issue existed where one of the `<div>` elements in the Collection Grid block template wasn't closed properly. This update cleans up the template and resolves the issue. Resolves CuBoulder/tiamat-theme#948
----
-
-- ### Removes horizontal and advanced content sequence blocks
-  [a11y, Remove] The horizontal and advanced variants of content sequence aren't properly accessible to screenreader users. This update removes them. Resolves CuBoulder/tiamat-theme#934
-  
-  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/137)
----
-
-- ### Add in base font colors for collection grid
-  Resolves CuBoulder/tiamat-theme#929 and resolves CuBoulder/tiamat-theme#930.
-  Adds base font colors for links and text to fix bugs related to background styles.
----
-
-- ### Fix breadcrumbs (again)
-  Removing the block is needed. It was adding extra steps that didn't need to be there.
-  
-  The `is not empty` need to be changed to `!= ""` because the empty check still sees arrays as content.
----
-
-- ### Fixes a bug with links in Content Sequence blocks
-  Links to Drupal routes would incorrectly display `internal:` URIs instead of public URLs. This update fixes the bug.
-  
-  Resolves CuBoulder/tiamat-theme#926
----
-
-- ### Changes basic page title to enhance accessibility
-  This update:
-  - Adds an invisible `<h1>` at the top of every basic page for screen readers, tagged with `sr-only`.
-  - Converts the existing page title from `<h1>` to `<div>` with `aria-hidden="true"`.
-  
-  Resolves CuBoulder/tiamat-theme#931
----
-
-- ### Updates People List Page
-  This update:
-   - [a11y] Adds `aria-hidden="true"` to a person photo's link, or person photo th/td in table view. Adds alt text to the person photo.
-   - [a11y] Adds `aria-live="polite"` to the region containing the list of people after a user selects an option in filters.
-   - [a11y] Adds `<span class="sr-only">Loading</span>` to describe the loading icon.
-   - [Change] Updates the email link in table view to only have the text "Email".
-   - [Change] Updates the social media link matcher to correctly display the icon for x.com URLs, as well as support the same shortened URLs supported by our social media icons block and menu.
-   - [Bug] Resolves in CSS an issue where the person photo in table view may become unusably small on mobile devices.
-  
-  Resolves CuBoulder/tiamat-theme#902
-  Resolves CuBoulder/tiamat-theme#904
----
-
-- ### A11y for Content Rows
-  ### Content Row: Accessibility Fixes
-  - Adjusts DOM order for consistent assistive readability on the `Content Row` display options and reorganizes using pure CSS where applicable
-  - Adds `role="presentation" and aria-hidden="true"` to links on images so only the title link is read with assistive technologies
-  
-  Resolves #907 
----
-
-- ### Adjust mobile float image size
-  Closes #891 . Increases minimum floated image size to 50% on mobile and decreases the text size to 85%.
----
-
-- ### A11y Fixes: Article List page and Article List, Article Slider, and Article Grid Blocks
-  Addresses the following A11y issues on the Article List page, Article List block, Article Grid Block, Article Slider Block:
-  
-  ### Article List page, Article List block, Article Grid Block
-  
-  Changes one or both depending on the user-selected style of the block (Feature, Teaser, Grid, etc), if applicable.
-  
-  - Adds `role="presentation" aria-hidden="true"` to image links 
-  - Adds `aria-hidden="true"` to "Read More" links
-  
-  ### Article Slider
-  - Fixes DOM order of slider blocks to read Title first
-  - Adds `aria-hidden="true"` to lower slider controls, previous + next button svgs.
-  - Removes `<h3>` tags from Article card titles causing an issue with screen readers
-  - Disables `auto advance`
-  
-  Note: The Article Slider uses [Flickity ](https://flickity.metafizzy.co/) to generate and there are currently Issues related to accessibility awaiting to be addressed on their end: https://github.com/metafizzy/flickity . We may be able to remove our A11y fixes to this custom element once these changes are approved there.
-  
-  Resolves #900
-  Resolves #906
-  Half of #908 
----
-
-- ### Fixes error occurring when Content Grid items or social media links are linked to a Drupal route
-  Resolves CuBoulder/tiamat-theme#921
----
-
-- ### Updates Content Grid block
-  This update:
-  - [a11y] Removes all `<h3>` tags and replaces them with `<strong>`. Resolves CuBoulder/tiamat-theme#899
-  - [a11y] Adds two items; Resolves CuBoulder/tiamat-theme#905:
-    - Adds `role="presentation" aria-hidden="true"` to the image's container. 
-    - Reorders image and title in the DOM such that the title comes first.
-  - [Change] Refactors Content Grid block without changing its functionality:
-    - Reduces the line count of `block--content-grid.html.twig`.
-    - Removes several unnecessary files, including dead code templates and a totally unnecessary JavaScript method of setting the height on grid items.
----
-
-- ### Updates Video Reveal block to not mute by default
-  Resolves CuBoulder/tiamat-theme#901
----
-
-- ### Slider Block: Bug Fixes + A11y Issues
-  ### Slider Block
-  Fixes various display issues surrounding the "Slider Block" including:
-  - Slider Block style for the default title `<h2>` not displaying correctly
-  - Some Slider - Block Style settings visibly rendering within the carousel slides
-  - Resolving odd and unpredictable carousel behavior
-  
-  Resolves #908 
-  Resolves #884 
-  Resolves #858 
-  Resolves #788 
----
-
-- ### Changes `<h5>` to `<h2>` in site footer
-  Resolves CuBoulder/tiamat-theme#911
----
-
-- ### Update block--system-menu-block.html.twig
-  Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/38
-  Sister PR: https://github.com/CuBoulder/tiamat10-profile/pull/119
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/135
-  
-  Added an if statement to not render menus if there is no content within. 
-  This is needed for the new layout setup.
-  This should not affect anything other than the new layout.
-  
-  Closes #897 
----
-
-- ### Fixes Search page style regression
-  Resolves CuBoulder/tiamat-theme#893
----
-
-- ### Adds Wallpaper image style to hero units and video reveal
-  Resolves #804.
-  Sister pull requests in https://github.com/CuBoulder/tiamat10-profile/pull/114, https://github.com/CuBoulder/tiamat-custom-entities/pull/132.
-  
----
-
-- ### Newsletter: One Article or One Custom Content in a Section
-  ### Newsletters
-  There is a special case for if a Newsletter Section set to "Teaser" display has only one Article or one item of Section Custom Content, then it should span the full width of the web newsletter. This is only the case for a single item in a Newsletter section, odd numbered counts are still 50%. The email version of the Newsletter is unaffected.
-  
-  Resolves #895 
----
-
-- ### Updates regions
-  This update:
-  - [Bug] Adds proper containers to above and below content, fixing incorrect margins. Resolves #819
-  - [Change, Remove] Adds template for Layout Builder pages. Removes above content, breadcrumbs, sidebar, and below content regions from Layout Builder pages. Resolves #896
-  - [Remove] Removes above content region from search, taxonomy, user, and 403 pages. Resolves CuBoulder/tiamat-theme#877
----
-
-- ### Adds sortable table style changes
-  This update resolves two style issues with sortable tables in Webforms. It:
-  - [Bug] Corrects the display of drag icons. Resolves CuBoulder/tiamat-theme#786
-  - [Change] Decreases the font size of the "Show row weights" button. Resolves CuBoulder/tiamat-theme#787
----
-
-- ### Articles Slider: Articles without thumbnails are omitted from display
-  Article Feature: Previously, Articles without thumbnails would still show up in the slider but with a broken image. This has been adjusted so these incomplete Articles are completely omitted from display and only Articles with thumbnails are shown.
-  
-  Resolves #881 
----
-
-- ### Removal of all how-to files
-  Sister request to https://github.com/CuBoulder/tiamat-custom-entities/pull/134.
-  Removes all necessary how-to files.
----
-
-- ### Article Feature: Adjusts spacing
-  Adjusts spacing on Article Feature blocks between thumbnail and title. Fixes the secondary Article row so titles don't overlap into the next Article's thumbnail
-  
-  Resolves #859 
----
-
-- ### Update hero-unit.css
-  The main part of this is found in PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/35
-  
-  Added css for fixing default block style icon display It would cause the hero units to shrink like the contextual links would. This is mainly a fix for the layout builder view.
-  
-  Closes #840 
-  Closes #777 
-  Closes #745
----
-
-- ### Delete Article Hero Unit CSS
-  Removes the unused article hero unit code.
----
-
-- ### Newsletter: Adds Optional URL to Newsletter Custom Content
-  Adds the optional URL field for Newsletter Section's Custom Content.
-  
-  Includes:
-  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/882
-  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/131
-  
-  Resolves #872 
-  
-  
----
-
-- ### People Lists: Allows for more than 50 People
-  Previously a maximum of 50 People were being displayed on the People List Page and the People List Block. This has been fixed to allow all People existing on a site to be pulled into these Content Types. 
-  
-  Resolves #830 
----
-
-- ### Newsletter: Moves social links from Node to Newsletter term
-  Resolves #867 
-  
-  Includes:
-  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/871
-  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/130
----
-
-- ### Update block--content-grid.html.twig
-  Check to see if there is an image url available in `if` statements Edited the `else` to be an `elseif` for the same checks for second image_style option.
-  
-  These fix the missing image notice
-  
-  Test by creating a content grid without an image chosen, result should have no user notice in the dlog
-  
-  Closes #866 
-  
-  
----
-
-- ### Updates Image Gallery block
-  This update:
-  - Changes Image Gallery block image spacing to be consistent.
-  - Removes some styles that were redundant to the ones Bootstrap provides.
-  
-  Resolves CuBoulder/tiamat-theme#854
----
-
-- ### Fixes error thrown by Social Media Icons block email field
-  It throws a console error despite working just fine. This update removes the error.
-  
-  Resolves CuBoulder/tiamat-theme#862
----
-
-- ### Adds two minor style changes
-  This update:
-  - [Bug] Adds missing `href` attribute to links in Expandable blocks. Resolves CuBoulder/tiamat-theme#853
-  - [Change] Resets styles targeting `<abbr>` tag in Events Calendar blocks. Resolves CuBoulder/tiamat-theme#837
----
-
-- ### Adjusts spacing between sibling blocks within a column
-  Resolves #820 
----
-
-- ### Issue Page: Section Title is now optional
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/852
-  
-  Includes:
-  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/855
-  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/127
----
-
-- ### Updates Collection Grid block
-  This update:
-  - [Bug] Addresses item positioning for rows with two items. Resolves CuBoulder/tiamat-theme#833
-  - [Bug] Addresses longer filter labels not wrapping properly. Resolves CuBoulder/tiamat-theme#822
-  - [Change] Changes font sizes to match D7 Express. Resolves CuBoulder/tiamat-theme#823
-  - [Bug] Removes JavaScript error for items with no body.
-  
-  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/126)
----
-
-- ### Newsletter: Social Links in Footer now PNGs
-  Modifies the Social Menu in the Newsletter - Email HTML version footer to use fixed PNGs rather than SVG, ensuring compatibility across all email clients. 
-  
-  Resolves #828 
----
-
-- ### Fixes button color bug; Reverts Hero Unit padding
-  Resolves CuBoulder/tiamat-theme#836
----
-
-- ### Updates Social Media Icons block and Social Media menu
-  This update:
-  - Refactors the Social Media Icons block and Social Media menu to both use the same macros. Un-spaghetties the template code to make it a bit more readable.
-  - Improves the robustness of social media link platform detection. Only root domains are used for detection.
-  - Resolves an issue causing the email link to be pushed down to a new line in the inline view.
-  - Fixes a typo in Pinterest causing it to not be detected properly and show up as a generic link.
-  
-  Resolves CuBoulder/tiamat-theme#795
-  
-  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/120)
----
-
-- ### Forms: Required Fields indicated by a red asterisk
-  Resolves #825 
----
-
-- ### Adjusts style of Links in Content Grid - Cards
-  Since Content Grids with a "Cards" layout selection always have a white background, the link colors are a consistent blue following the established white background link style, rather than adopting whatever the block background's link styles are.
-  
-  Resolves #776 
----
-
-- ### Local task buttons more buttony
-  Closes #749.
-  Makes the anchor tags within the local tasks block larger to cover the whole button as a clickable link.
----
-
-- ### Remove 'Rebuild Layout' Button, Bold 'Save Layout' button on Layout UI
-  Resolves #811 
-  
-  Removes 'Rebuild Layout' button, adds bold effect to 'Save Layout' button
----
-
-- ### Form Block: Fixes bug preventing editing in Layout Builder
-  Form block was missing template markup required to allow editing in Layout Builder. This has been corrected.
-  
-  Resolves #789 
----
-
-- ### Article List Block - Display Fixes
-  - Fixes bug where more Articles would display than count specifies
-  - Articles without thumbnails aren't indented (Teaser and Title & Thumbnail styles)
-  - Adjusts alignment of thumbnails and borders to align to container (Teaser and Title & Thumbnail)
-  
-  Resolves #799 
----
-
-- ### Fixes Video Reveal block video size bug
-  Resolves CuBoulder/tiamat-theme#766
----
-
-- ### Block Styles update
-  Added block styles to video hero
-  Fix styling errors for full width
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/118
-  
-  Closes #744 
----
-
-- ### Styles Layout UI Buttons
-  Changes the style of the Layout UI buttons to mirror the appearance of the local tasks menu, to further differentiate these from buttons placed in site content and avoid confusion
-  
-  Resolves #763 
----
-
-- ### Corrects Webform button colors
-  Regular buttons are light gray, while the next and submit buttons are blue.
-  
-  Resolves CuBoulder/tiamat-theme#757
----
-
-- ### Updates Articles
-  This update:
-  - Removes margin at the top of articles with header image.
-  - Moves header image caption to immediately below header image.
-  - Removes options for black text or hiding the overlay on the header image, setting the white text on dark overlay as the default.
-  - Updates description of the article header image text field.
-  
-  Resolves CuBoulder/tiamat-theme#791
-  Resolves CuBoulder/tiamat-theme#790
-  
-  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/117)
----
-
-- ### Removed stray character typo on the video reveal block
-  Removed the "A" hard-coded in the render of the text of the video reveal block.  
----
-
-- ### Image caption fix for long captions
-  Closes #716.
-  Adds styling for dynamic sizing for images are aligned right or left.
----
-
-- ### Article Slider: Fix with 6+ Articles
-  Fixes a bug where 6+ Articles would cause the `Article Slider` to additionally repeat Articles in a long column
-  
-  ![image](https://github.com/CuBoulder/tiamat-theme/assets/85851903/b1a1e9f3-1ea7-484b-a11b-cd9205b3db60)
-  
-  Resolves #781 
----
-
-- ### Additional Issue Fixes
-  ## "Issue" Content Type Changes
-  -  Fixed a bug where all Articles in a section would link to the first Article in the section
-  -  Articles that do NOT have a thumbnail or a summary will no longer show the Categories
-  -  Fixed bug that would sometimes cause images to break display in Title + Thumbnail renders
-  -  Changed "Feature" style images to take up 100% of the available space and keep an aspect ratio consistent with other Feature images
-  -  Added spacing between Cover Image and Body, as well as between the Main Menu of the site and the Node Title of "Issue" pages
-  
-  Resolves #772 
-  
-  
-  
-  
----
-
-- ### Updates styling of Form page content type and Webform block
-  Form fields now extend full width. Fieldset labels have also been updated to be closer to the D7 Express version. Styles moved to the global scope to also apply correctly to the Webform block placed on a basic page.
-  
-  Resolves CuBoulder/tiamat-theme#755
-  Resolves CuBoulder/tiamat-theme#762
-  Resolves CuBoulder/tiamat-theme#768
----
-
-- ### Update style.css
-  Fix to oembed video alignment
-  Other styles were user error.
-  Hero Unit fixes are coming in a separate Hero Unit PR
-  
-  Test by adding a video media embed to a text block in multi-column sections (then float in any direction)
-  
-  Closes #769 
----
-
-- ### Issue Content: Bug Fixes for "Issue" (Node), Latest Issues Block
-  Fixes the following bugs related to the "Issue" content type and associated blocks.
-  
-  ## Issue Node
-  On the Issue Node - fixed visual bug for display on "Teaser" Articles with no thumbnail from displaying a broken `<img>`
-  
-  ## Latest Issues Block
-  - Fixed bug where the "Latest Issue Block" (up to 4 Issues displayed with a button to see more)  would display a "Current Issue block" (one Issue). The template was pointed at the incorrect web component.
-  - The "Latest Issue Block" adds an "Issue Archive" button below if more than 4 Issues exist on the site. Added conditional rendering to only show if an Issue Archive exists on the site.
-  
-  ## Issue Archive
-  Needs a pathauto so the button on the Latest Issues Block works by default (only one expected per site so a similar pathauto to the Class Notes will be implemented)
-  
-  Includes:
-  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/773
-  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/113
-  
-  Resolves #765 
----
-
-- ### Newsletter: Display Changes + New Features
-  A rather large update to the Newsletter Node, includes the following:
-  
-  ### New Features
-  - Unpublished articles should not display in a Newsletter, and provide a yellow content warning for users in the section they are included in on the web version.
-  - Newsletter Text Blocks previously had two fixed Text Blocks. This has been updated to a paragraph type with no limit.
-  - Custom content no longer includes a category field.
-  - Ability to add Social Media Links to the Footer area. This will use the Social Media Menu links from the site and has a simple on/off checkbox to apply.
-  
-  ### Display Changes
-  - Adds Newsletter type title in header. This is set on the Newsletter Taxonomy.
-  - 'Feature' thumbnails fixed to a 2:1 aspect ratio
-  - Section headers fixed to 20px
-  - Article titles fixed to 18px
-  - Category links fixed to 10px, and a dark gray that is accessible with the light gray background
-  - Article text should be trimmed to ~50 words plus "..." unless a summary is used
-  - Teaser - style thumbnails are max of 130px but allowed to scale downwards if viewed on a smaller device
-  
-  Includes:
-  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/770
-  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/112
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/706
----
-
-- ### content list updates
-  Closes #680. 
-  Reformats the content list to be readable and adds QoL changes.
----
-
-- ### item render fix
-  Needed to add `.content` to the item renders otherwise we get hit with lots of php errors because the attributes are trying to render for each item.
-  
-  Closes #752 
----
-
-- ### Update layout-builder-styles.css
-  Add margin replacement for content frames with background colors
-  
-  Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/28
----
-
-- ### Block Style Updates
-  Fixed hero and event calendar classes showing in content 
-  Fixed color layering and cascading
-  Added `None` as an option for `Block Style` background color
-  
-  Closes #615 
-  Closes #711 
-  Closes #737 
-  Closes #740 
-  Closes #743 
-  
-  Related PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/26
-  Related PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/109
----
-
-- ### Fixes missing video in otherwise empty text block
-  Fixes a CSS bug which caused a video in an otherwise empty text block to go missing.
-  
-  Resolves CuBoulder/tiamat-theme#741
----
-
-- ### Class Notes: Adds URL Parameter Filtering
-  Adds URL Parameters to `Class Notes List` pages. Can pass dates via `startDate` and `endDate` parameters to automatically filter retrieved `Class Notes` by date published like so:
-  
-  
-  ```
-  ?startDate=2023-12-05&endDate=2024-02-06. 
-  ```
-  (*Would retrieve class notes published between 12/5/2023 and 2/6/2024*)
-  
-  - Parameters must be passed in the following formats: `YYYY-MM-DD` or `MM-DD-YYYY`
-  - If you pass only a `startDate` parameter, `endDate` will default to today's date
-  
-  Resolves #694 
----
-
-- ### Block styles
-  Template updates for every inline block.
-  Addition of block styles (bs) fields 
-  
-  Closes #443 
-  Closes #111 
-  
-  Sister PR: https://github.com/CuBoulder/tiamat10-profile/pull/99
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/106
-  
----
-
-- ### Issue Display Changes
-  Fixes the following on Issue Content Types:
-  
-  - Removes the Secondary Image field from the form and page display. Also removes the hard-coded dark gray box with the title and body in it, as users can use CKEditor5 plugins such as Box, Button, Icons, and Media Library to achieve a variety of left-side layouts. 
-  - Fixes bug with Teaser view of Categories displaying improperly
-  - "Read More" capitzalized via CSS instead of hard-coded
-  
-  Includes:
-  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/730
-  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/107
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/704
----
-
-- ### Fix spirit menu style
-  Closes #712.
-  Small change to fix padding issue for the spirit menu style
----
-
-- ### Mobile Footer Menu Changes
-  Closes #722.
-  Adds CSS changes for the footer menu to only show in the secondary menu when it is a mobile view.
----
-
-- ### Article List Block Adjustments
-  Modifies various Article List Nodes and Blocks in the following ways:
-  
-  ## Article List -- Page
-  - Adjusts row border from 2px to 1px
-  
-  ## Article Grid
-  - Thumbnails are now a 2/1 aspect ratio
-  - Resolved bug where having count 3 and 3 articles would result a duplicated row
-  
-  ## Article List Block
-  - Adjusts header markup to use strong `<a>` tags instead of `<h2>`'s
-  
-  ## Article Feature Block
-  - Adjusts header markup to use stylized `<h3>`'s across all article cards
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/718
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/719
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/724
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/714
----
-
-- ### Issue and Issue Archive use Media Library images
-  Changes the Issue cover image field to use the Media Library images rather than the default. This change requires creating an additional consumer in `Focal Image Enable` to use un-cropped image styles from JSON:API as well as modifying the Issue Archive, Current Issue Block, and Latest Issue Block build processes to use that un-cropped image.
-  
-  A spinning loader was also added to the Issue Archive, and Issue Blocks prior to displaying results on page rather than flashing in. 
-  
-  Includes:
-  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/707
-  - `tiamat-custom-entities` =>  https://github.com/CuBoulder/tiamat-custom-entities/pull/105
-  - `ucb-focal-image-enable` => https://github.com/CuBoulder/ucb_focal_image_enable/pull/8
-  
-  Resolves [#104 ](https://github.com/CuBoulder/tiamat-custom-entities/issues/104)
----
-
-- ### Fixes Infinite Load Article List Blocks
-  Resolves #713 
-  
-  Should address the condition where too many Articles causing an issue with how JSON:API handles pagination and subsequent API calls in the Article List blocks
----
-
-- ### Resolves an issue causing the category or tag icon to appear if none are visible
-  Resolves CuBoulder/tiamat-theme#701 
----
-
-- ### Updates `block--site-info.html.twig`
-  CuBoulder/ucb_migration_shortcodes#15
-  
-  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/49)
----
-
-- ### Updates Taxonomy page styles
-  - [Bug] Headers on Taxonomy pages are now consistent with the site setting.
-  - [Change] The "Subscribe to x" link has been hidden.
-  
-  Resolves CuBoulder/tiamat-theme#697
----
-
-- ### video reveal html text
-  Closes #662.
-  Changes necessary files to enable an html text field.
-  Sister pull request in https://github.com/CuBoulder/tiamat-custom-entities/pull/100.
----
-
-- ### Collection Grid preview change
-  Helps close https://github.com/CuBoulder/tiamat-custom-entities/issues/101.
-  Adds the necessary theme changes to allow for the html preview field.
----
+## [20240513] - 2024-05-13
+
+-   ### Removes white margins from Dark Mode Article
+
+    Previously, a margin wrapper would apply white top and bottom margins to a dark mode article creating horizontal white bars surrounding content. This has been adjusted so the dark background color spans the entire article.
+
+    Resolves #946 
+
+* * *
+
+-   ### Title and Scroll Fix
+
+    Fixes title coloring as well as the extended horizontal scroll bar for hero and video hero.
+
+    Sister PR: <https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/41>
+
+    Resolves #918 
+
+* * *
+
+-   ### Update block--video-hero-unit.html.twig
+
+    Fixes for the title error
+
+    Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/138>
+
+    Resolves #874 
+
+* * *
+
+-   ### Cleans up Collection Grid block template
+    [Bug] An issue existed where one of the `<div>` elements in the Collection Grid block template wasn't closed properly. This update cleans up the template and resolves the issue. Resolves CuBoulder/tiamat-theme#948
+
+* * *
+
+-   ### Removes horizontal and advanced content sequence blocks
+
+    [a11y, Remove] The horizontal and advanced variants of content sequence aren't properly accessible to screenreader users. This update removes them. Resolves CuBoulder/tiamat-theme#934
+
+    Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/137)
+
+* * *
+
+-   ### Add in base font colors for collection grid
+    Resolves CuBoulder/tiamat-theme#929 and resolves CuBoulder/tiamat-theme#930.
+    Adds base font colors for links and text to fix bugs related to background styles.
+
+* * *
+
+-   ### Fix breadcrumbs (again)
+
+    Removing the block is needed. It was adding extra steps that didn't need to be there.
+
+    The `is not empty` need to be changed to `!= ""` because the empty check still sees arrays as content.
+
+* * *
+
+-   ### Fixes a bug with links in Content Sequence blocks
+
+    Links to Drupal routes would incorrectly display `internal:` URIs instead of public URLs. This update fixes the bug.
+
+    Resolves CuBoulder/tiamat-theme#926
+
+* * *
+
+-   ### Changes basic page title to enhance accessibility
+
+    This update:
+
+    -   Adds an invisible `<h1>` at the top of every basic page for screen readers, tagged with `sr-only`.
+    -   Converts the existing page title from `<h1>` to `<div>` with `aria-hidden="true"`.
+
+    Resolves CuBoulder/tiamat-theme#931
+
+* * *
+
+-   ### Updates People List Page
+
+    This update:
+
+    -   [a11y] Adds `aria-hidden="true"` to a person photo's link, or person photo th/td in table view. Adds alt text to the person photo.
+    -   [a11y] Adds `aria-live="polite"` to the region containing the list of people after a user selects an option in filters.
+    -   [a11y] Adds `<span class="sr-only">Loading</span>` to describe the loading icon.
+    -   [Change] Updates the email link in table view to only have the text "Email".
+    -   [Change] Updates the social media link matcher to correctly display the icon for x.com URLs, as well as support the same shortened URLs supported by our social media icons block and menu.
+    -   [Bug] Resolves in CSS an issue where the person photo in table view may become unusably small on mobile devices.
+
+    Resolves CuBoulder/tiamat-theme#902
+    Resolves CuBoulder/tiamat-theme#904
+
+* * *
+
+-   ### A11y for Content Rows
+
+    ### Content Row: Accessibility Fixes
+
+    -   Adjusts DOM order for consistent assistive readability on the `Content Row` display options and reorganizes using pure CSS where applicable
+    -   Adds `role="presentation" and aria-hidden="true"` to links on images so only the title link is read with assistive technologies
+
+    Resolves #907 
+
+* * *
+
+-   ### Adjust mobile float image size
+    Closes #891 . Increases minimum floated image size to 50% on mobile and decreases the text size to 85%.
+
+* * *
+
+-   ### A11y Fixes: Article List page and Article List, Article Slider, and Article Grid Blocks
+
+    Addresses the following A11y issues on the Article List page, Article List block, Article Grid Block, Article Slider Block:
+
+    ### Article List page, Article List block, Article Grid Block
+
+    Changes one or both depending on the user-selected style of the block (Feature, Teaser, Grid, etc), if applicable.
+
+    -   Adds `role="presentation" aria-hidden="true"` to image links 
+    -   Adds `aria-hidden="true"` to "Read More" links
+
+    ### Article Slider
+
+    -   Fixes DOM order of slider blocks to read Title first
+    -   Adds `aria-hidden="true"` to lower slider controls, previous + next button svgs.
+    -   Removes `<h3>` tags from Article card titles causing an issue with screen readers
+    -   Disables `auto advance`
+
+    Note: The Article Slider uses [Flickity ](https://flickity.metafizzy.co/) to generate and there are currently Issues related to accessibility awaiting to be addressed on their end: <https://github.com/metafizzy/flickity> . We may be able to remove our A11y fixes to this custom element once these changes are approved there.
+
+    Resolves #900
+    Resolves #906
+    Half of #908 
+
+* * *
+
+-   ### Fixes error occurring when Content Grid items or social media links are linked to a Drupal route
+    Resolves CuBoulder/tiamat-theme#921
+
+* * *
+
+-   ### Updates Content Grid block
+    This update:
+    -   [a11y] Removes all `<h3>` tags and replaces them with `<strong>`. Resolves CuBoulder/tiamat-theme#899
+    -   [a11y] Adds two items; Resolves CuBoulder/tiamat-theme#905:
+        -   Adds `role="presentation" aria-hidden="true"` to the image's container. 
+        -   Reorders image and title in the DOM such that the title comes first.
+    -   [Change] Refactors Content Grid block without changing its functionality:
+        -   Reduces the line count of `block--content-grid.html.twig`.
+        -   Removes several unnecessary files, including dead code templates and a totally unnecessary JavaScript method of setting the height on grid items.
+
+* * *
+
+-   ### Updates Video Reveal block to not mute by default
+    Resolves CuBoulder/tiamat-theme#901
+
+* * *
+
+-   ### Slider Block: Bug Fixes + A11y Issues
+
+    ### Slider Block
+
+    Fixes various display issues surrounding the "Slider Block" including:
+
+    -   Slider Block style for the default title `<h2>` not displaying correctly
+    -   Some Slider - Block Style settings visibly rendering within the carousel slides
+    -   Resolving odd and unpredictable carousel behavior
+
+    Resolves #908 
+    Resolves #884 
+    Resolves #858 
+    Resolves #788 
+
+* * *
+
+-   ### Changes `<h5>` to `<h2>` in site footer
+    Resolves CuBoulder/tiamat-theme#911
+
+* * *
+
+-   ### Update block--system-menu-block.html.twig
+
+    Sister PR: <https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/38>
+    Sister PR: <https://github.com/CuBoulder/tiamat10-profile/pull/119>
+    Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/135>
+
+    Added an if statement to not render menus if there is no content within. 
+    This is needed for the new layout setup.
+    This should not affect anything other than the new layout.
+
+    Closes #897 
+
+* * *
+
+-   ### Fixes Search page style regression
+    Resolves CuBoulder/tiamat-theme#893
+
+* * *
+
+-   ### Adds Wallpaper image style to hero units and video reveal
+    Resolves #804.
+    Sister pull requests in <https://github.com/CuBoulder/tiamat10-profile/pull/114>, <https://github.com/CuBoulder/tiamat-custom-entities/pull/132>.
+
+* * *
+
+-   ### Newsletter: One Article or One Custom Content in a Section
+
+    ### Newsletters
+
+    There is a special case for if a Newsletter Section set to "Teaser" display has only one Article or one item of Section Custom Content, then it should span the full width of the web newsletter. This is only the case for a single item in a Newsletter section, odd numbered counts are still 50%. The email version of the Newsletter is unaffected.
+
+    Resolves #895 
+
+* * *
+
+-   ### Updates regions
+    This update:
+    -   [Bug] Adds proper containers to above and below content, fixing incorrect margins. Resolves #819
+    -   [Change, Remove] Adds template for Layout Builder pages. Removes above content, breadcrumbs, sidebar, and below content regions from Layout Builder pages. Resolves #896
+    -   [Remove] Removes above content region from search, taxonomy, user, and 403 pages. Resolves CuBoulder/tiamat-theme#877
+
+* * *
+
+-   ### Adds sortable table style changes
+    This update resolves two style issues with sortable tables in Webforms. It:
+    -   [Bug] Corrects the display of drag icons. Resolves CuBoulder/tiamat-theme#786
+    -   [Change] Decreases the font size of the "Show row weights" button. Resolves CuBoulder/tiamat-theme#787
+
+* * *
+
+-   ### Articles Slider: Articles without thumbnails are omitted from display
+
+    Article Feature: Previously, Articles without thumbnails would still show up in the slider but with a broken image. This has been adjusted so these incomplete Articles are completely omitted from display and only Articles with thumbnails are shown.
+
+    Resolves #881 
+
+* * *
+
+-   ### Removal of all how-to files
+    Sister request to <https://github.com/CuBoulder/tiamat-custom-entities/pull/134>.
+    Removes all necessary how-to files.
+
+* * *
+
+-   ### Article Feature: Adjusts spacing
+
+    Adjusts spacing on Article Feature blocks between thumbnail and title. Fixes the secondary Article row so titles don't overlap into the next Article's thumbnail
+
+    Resolves #859 
+
+* * *
+
+-   ### Update hero-unit.css
+
+    The main part of this is found in PR: <https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/35>
+
+    Added css for fixing default block style icon display It would cause the hero units to shrink like the contextual links would. This is mainly a fix for the layout builder view.
+
+    Closes #840 
+    Closes #777 
+    Closes #745
+
+* * *
+
+-   ### Delete Article Hero Unit CSS
+    Removes the unused article hero unit code.
+
+* * *
+
+-   ### Newsletter: Adds Optional URL to Newsletter Custom Content
+
+    Adds the optional URL field for Newsletter Section's Custom Content.
+
+    Includes:
+
+    -   `tiamat-theme` => <https://github.com/CuBoulder/tiamat-theme/pull/882>
+    -   `custom-entities` => <https://github.com/CuBoulder/tiamat-custom-entities/pull/131>
+
+    Resolves #872 
+
+* * *
+
+-   ### People Lists: Allows for more than 50 People
+
+    Previously a maximum of 50 People were being displayed on the People List Page and the People List Block. This has been fixed to allow all People existing on a site to be pulled into these Content Types. 
+
+    Resolves #830 
+
+* * *
+
+-   ### Newsletter: Moves social links from Node to Newsletter term
+
+    Resolves #867 
+
+    Includes:
+
+    -   `tiamat-theme` => <https://github.com/CuBoulder/tiamat-theme/pull/871>
+    -   `custom-entities` => <https://github.com/CuBoulder/tiamat-custom-entities/pull/130>
+
+* * *
+
+-   ### Update block--content-grid.html.twig
+
+    Check to see if there is an image url available in `if` statements Edited the `else` to be an `elseif` for the same checks for second image_style option.
+
+    These fix the missing image notice
+
+    Test by creating a content grid without an image chosen, result should have no user notice in the dlog
+
+    Closes #866 
+
+* * *
+
+-   ### Updates Image Gallery block
+
+    This update:
+
+    -   Changes Image Gallery block image spacing to be consistent.
+    -   Removes some styles that were redundant to the ones Bootstrap provides.
+
+    Resolves CuBoulder/tiamat-theme#854
+
+* * *
+
+-   ### Fixes error thrown by Social Media Icons block email field
+
+    It throws a console error despite working just fine. This update removes the error.
+
+    Resolves CuBoulder/tiamat-theme#862
+
+* * *
+
+-   ### Adds two minor style changes
+    This update:
+    -   [Bug] Adds missing `href` attribute to links in Expandable blocks. Resolves CuBoulder/tiamat-theme#853
+    -   [Change] Resets styles targeting `<abbr>` tag in Events Calendar blocks. Resolves CuBoulder/tiamat-theme#837
+
+* * *
+
+-   ### Adjusts spacing between sibling blocks within a column
+    Resolves #820 
+
+* * *
+
+-   ### Issue Page: Section Title is now optional
+
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/852>
+
+    Includes:
+
+    -   `tiamat-theme` => <https://github.com/CuBoulder/tiamat-theme/pull/855>
+    -   `custom-entities` => <https://github.com/CuBoulder/tiamat-custom-entities/pull/127>
+
+* * *
+
+-   ### Updates Collection Grid block
+
+    This update:
+
+    -   [Bug] Addresses item positioning for rows with two items. Resolves CuBoulder/tiamat-theme#833
+    -   [Bug] Addresses longer filter labels not wrapping properly. Resolves CuBoulder/tiamat-theme#822
+    -   [Change] Changes font sizes to match D7 Express. Resolves CuBoulder/tiamat-theme#823
+    -   [Bug] Removes JavaScript error for items with no body.
+
+    Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/126)
+
+* * *
+
+-   ### Newsletter: Social Links in Footer now PNGs
+
+    Modifies the Social Menu in the Newsletter - Email HTML version footer to use fixed PNGs rather than SVG, ensuring compatibility across all email clients. 
+
+    Resolves #828 
+
+* * *
+
+-   ### Fixes button color bug; Reverts Hero Unit padding
+    Resolves CuBoulder/tiamat-theme#836
+
+* * *
+
+-   ### Updates Social Media Icons block and Social Media menu
+
+    This update:
+
+    -   Refactors the Social Media Icons block and Social Media menu to both use the same macros. Un-spaghetties the template code to make it a bit more readable.
+    -   Improves the robustness of social media link platform detection. Only root domains are used for detection.
+    -   Resolves an issue causing the email link to be pushed down to a new line in the inline view.
+    -   Fixes a typo in Pinterest causing it to not be detected properly and show up as a generic link.
+
+    Resolves CuBoulder/tiamat-theme#795
+
+    Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/120)
+
+* * *
+
+-   ### Forms: Required Fields indicated by a red asterisk
+    Resolves #825 
+
+* * *
+
+-   ### Adjusts style of Links in Content Grid - Cards
+
+    Since Content Grids with a "Cards" layout selection always have a white background, the link colors are a consistent blue following the established white background link style, rather than adopting whatever the block background's link styles are.
+
+    Resolves #776 
+
+* * *
+
+-   ### Local task buttons more buttony
+    Closes #749.
+    Makes the anchor tags within the local tasks block larger to cover the whole button as a clickable link.
+
+* * *
+
+-   ### Remove 'Rebuild Layout' Button, Bold 'Save Layout' button on Layout UI
+
+    Resolves #811 
+
+    Removes 'Rebuild Layout' button, adds bold effect to 'Save Layout' button
+
+* * *
+
+-   ### Form Block: Fixes bug preventing editing in Layout Builder
+
+    Form block was missing template markup required to allow editing in Layout Builder. This has been corrected.
+
+    Resolves #789 
+
+* * *
+
+-   ### Article List Block - Display Fixes
+
+    -   Fixes bug where more Articles would display than count specifies
+    -   Articles without thumbnails aren't indented (Teaser and Title & Thumbnail styles)
+    -   Adjusts alignment of thumbnails and borders to align to container (Teaser and Title & Thumbnail)
+
+    Resolves #799 
+
+* * *
+
+-   ### Fixes Video Reveal block video size bug
+    Resolves CuBoulder/tiamat-theme#766
+
+* * *
+
+-   ### Block Styles update
+
+    Added block styles to video hero
+    Fix styling errors for full width
+
+    Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/118>
+
+    Closes #744 
+
+* * *
+
+-   ### Styles Layout UI Buttons
+
+    Changes the style of the Layout UI buttons to mirror the appearance of the local tasks menu, to further differentiate these from buttons placed in site content and avoid confusion
+
+    Resolves #763 
+
+* * *
+
+-   ### Corrects Webform button colors
+
+    Regular buttons are light gray, while the next and submit buttons are blue.
+
+    Resolves CuBoulder/tiamat-theme#757
+
+* * *
+
+-   ### Updates Articles
+
+    This update:
+
+    -   Removes margin at the top of articles with header image.
+    -   Moves header image caption to immediately below header image.
+    -   Removes options for black text or hiding the overlay on the header image, setting the white text on dark overlay as the default.
+    -   Updates description of the article header image text field.
+
+    Resolves CuBoulder/tiamat-theme#791
+    Resolves CuBoulder/tiamat-theme#790
+
+    Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/117)
+
+* * *
+
+-   ### Removed stray character typo on the video reveal block
+    Removed the "A" hard-coded in the render of the text of the video reveal block.  
+
+* * *
+
+-   ### Image caption fix for long captions
+    Closes #716.
+    Adds styling for dynamic sizing for images are aligned right or left.
+
+* * *
+
+-   ### Article Slider: Fix with 6+ Articles
+
+    Fixes a bug where 6+ Articles would cause the `Article Slider` to additionally repeat Articles in a long column
+
+    ![image](https://github.com/CuBoulder/tiamat-theme/assets/85851903/b1a1e9f3-1ea7-484b-a11b-cd9205b3db60)
+
+    Resolves #781 
+
+* * *
+
+-   ### Additional Issue Fixes
+
+    ## "Issue" Content Type Changes
+
+    -   Fixed a bug where all Articles in a section would link to the first Article in the section
+    -   Articles that do NOT have a thumbnail or a summary will no longer show the Categories
+    -   Fixed bug that would sometimes cause images to break display in Title + Thumbnail renders
+    -   Changed "Feature" style images to take up 100% of the available space and keep an aspect ratio consistent with other Feature images
+    -   Added spacing between Cover Image and Body, as well as between the Main Menu of the site and the Node Title of "Issue" pages
+
+    Resolves #772 
+
+* * *
+
+-   ### Updates styling of Form page content type and Webform block
+
+    Form fields now extend full width. Fieldset labels have also been updated to be closer to the D7 Express version. Styles moved to the global scope to also apply correctly to the Webform block placed on a basic page.
+
+    Resolves CuBoulder/tiamat-theme#755
+    Resolves CuBoulder/tiamat-theme#762
+    Resolves CuBoulder/tiamat-theme#768
+
+* * *
+
+-   ### Update style.css
+
+    Fix to oembed video alignment
+    Other styles were user error.
+    Hero Unit fixes are coming in a separate Hero Unit PR
+
+    Test by adding a video media embed to a text block in multi-column sections (then float in any direction)
+
+    Closes #769 
+
+* * *
+
+-   ### Issue Content: Bug Fixes for "Issue" (Node), Latest Issues Block
+
+    Fixes the following bugs related to the "Issue" content type and associated blocks.
+
+    ## Issue Node
+
+    On the Issue Node - fixed visual bug for display on "Teaser" Articles with no thumbnail from displaying a broken `<img>`
+
+    ## Latest Issues Block
+
+    -   Fixed bug where the "Latest Issue Block" (up to 4 Issues displayed with a button to see more)  would display a "Current Issue block" (one Issue). The template was pointed at the incorrect web component.
+    -   The "Latest Issue Block" adds an "Issue Archive" button below if more than 4 Issues exist on the site. Added conditional rendering to only show if an Issue Archive exists on the site.
+
+    ## Issue Archive
+
+    Needs a pathauto so the button on the Latest Issues Block works by default (only one expected per site so a similar pathauto to the Class Notes will be implemented)
+
+    Includes:
+
+    -   `tiamat-theme` => <https://github.com/CuBoulder/tiamat-theme/pull/773>
+    -   `custom-entities` => <https://github.com/CuBoulder/tiamat-custom-entities/pull/113>
+
+    Resolves #765 
+
+* * *
+
+-   ### Newsletter: Display Changes + New Features
+
+    A rather large update to the Newsletter Node, includes the following:
+
+    ### New Features
+
+    -   Unpublished articles should not display in a Newsletter, and provide a yellow content warning for users in the section they are included in on the web version.
+    -   Newsletter Text Blocks previously had two fixed Text Blocks. This has been updated to a paragraph type with no limit.
+    -   Custom content no longer includes a category field.
+    -   Ability to add Social Media Links to the Footer area. This will use the Social Media Menu links from the site and has a simple on/off checkbox to apply.
+
+    ### Display Changes
+
+    -   Adds Newsletter type title in header. This is set on the Newsletter Taxonomy.
+    -   'Feature' thumbnails fixed to a 2:1 aspect ratio
+    -   Section headers fixed to 20px
+    -   Article titles fixed to 18px
+    -   Category links fixed to 10px, and a dark gray that is accessible with the light gray background
+    -   Article text should be trimmed to ~50 words plus "..." unless a summary is used
+    -   Teaser - style thumbnails are max of 130px but allowed to scale downwards if viewed on a smaller device
+
+    Includes:
+
+    -   `tiamat-theme` => <https://github.com/CuBoulder/tiamat-theme/pull/770>
+    -   `custom-entities` => <https://github.com/CuBoulder/tiamat-custom-entities/pull/112>
+
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/706>
+
+* * *
+
+-   ### content list updates
+    Closes #680. 
+    Reformats the content list to be readable and adds QoL changes.
+
+* * *
+
+-   ### item render fix
+
+    Needed to add `.content` to the item renders otherwise we get hit with lots of php errors because the attributes are trying to render for each item.
+
+    Closes #752 
+
+* * *
+
+-   ### Update layout-builder-styles.css
+
+    Add margin replacement for content frames with background colors
+
+    Sister PR: <https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/28>
+
+* * *
+
+-   ### Block Style Updates
+
+    Fixed hero and event calendar classes showing in content 
+    Fixed color layering and cascading
+    Added `None` as an option for `Block Style` background color
+
+    Closes #615 
+    Closes #711 
+    Closes #737 
+    Closes #740 
+    Closes #743 
+
+    Related PR: <https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/26>
+    Related PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/109>
+
+* * *
+
+-   ### Fixes missing video in otherwise empty text block
+
+    Fixes a CSS bug which caused a video in an otherwise empty text block to go missing.
+
+    Resolves CuBoulder/tiamat-theme#741
+
+* * *
+
+-   ### Class Notes: Adds URL Parameter Filtering
+
+    Adds URL Parameters to `Class Notes List` pages. Can pass dates via `startDate` and `endDate` parameters to automatically filter retrieved `Class Notes` by date published like so:
+
+        ?startDate=2023-12-05&endDate=2024-02-06. 
+
+    (_Would retrieve class notes published between 12/5/2023 and 2/6/2024_)
+
+    -   Parameters must be passed in the following formats: `YYYY-MM-DD` or `MM-DD-YYYY`
+    -   If you pass only a `startDate` parameter, `endDate` will default to today's date
+
+    Resolves #694 
+
+* * *
+
+-   ### Block styles
+
+    Template updates for every inline block.
+    Addition of block styles (bs) fields 
+
+    Closes #443 
+    Closes #111 
+
+    Sister PR: <https://github.com/CuBoulder/tiamat10-profile/pull/99>
+    Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/106>
+
+* * *
+
+-   ### Issue Display Changes
+
+    Fixes the following on Issue Content Types:
+
+    -   Removes the Secondary Image field from the form and page display. Also removes the hard-coded dark gray box with the title and body in it, as users can use CKEditor5 plugins such as Box, Button, Icons, and Media Library to achieve a variety of left-side layouts. 
+    -   Fixes bug with Teaser view of Categories displaying improperly
+    -   "Read More" capitzalized via CSS instead of hard-coded
+
+    Includes:
+
+    -   `tiamat-theme` => <https://github.com/CuBoulder/tiamat-theme/pull/730>
+    -   `custom-entities` => <https://github.com/CuBoulder/tiamat-custom-entities/pull/107>
+
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/704>
+
+* * *
+
+-   ### Fix spirit menu style
+    Closes #712.
+    Small change to fix padding issue for the spirit menu style
+
+* * *
+
+-   ### Mobile Footer Menu Changes
+    Closes #722.
+    Adds CSS changes for the footer menu to only show in the secondary menu when it is a mobile view.
+
+* * *
+
+-   ### Article List Block Adjustments
+
+    Modifies various Article List Nodes and Blocks in the following ways:
+
+    ## Article List -- Page
+
+    -   Adjusts row border from 2px to 1px
+
+    ## Article Grid
+
+    -   Thumbnails are now a 2/1 aspect ratio
+    -   Resolved bug where having count 3 and 3 articles would result a duplicated row
+
+    ## Article List Block
+
+    -   Adjusts header markup to use strong `<a>` tags instead of `<h2>`'s
+
+    ## Article Feature Block
+
+    -   Adjusts header markup to use stylized `<h3>`'s across all article cards
+
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/718>
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/719>
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/724>
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/714>
+
+* * *
+
+-   ### Issue and Issue Archive use Media Library images
+
+    Changes the Issue cover image field to use the Media Library images rather than the default. This change requires creating an additional consumer in `Focal Image Enable` to use un-cropped image styles from JSON:API as well as modifying the Issue Archive, Current Issue Block, and Latest Issue Block build processes to use that un-cropped image.
+
+    A spinning loader was also added to the Issue Archive, and Issue Blocks prior to displaying results on page rather than flashing in. 
+
+    Includes:
+
+    -   `tiamat-theme` => <https://github.com/CuBoulder/tiamat-theme/pull/707>
+    -   `tiamat-custom-entities` =>  <https://github.com/CuBoulder/tiamat-custom-entities/pull/105>
+    -   `ucb-focal-image-enable` => <https://github.com/CuBoulder/ucb_focal_image_enable/pull/8>
+
+    Resolves [#104 ](https://github.com/CuBoulder/tiamat-custom-entities/issues/104)
+
+* * *
+
+-   ### Fixes Infinite Load Article List Blocks
+
+    Resolves #713 
+
+    Should address the condition where too many Articles causing an issue with how JSON:API handles pagination and subsequent API calls in the Article List blocks
+
+* * *
+
+-   ### Resolves an issue causing the category or tag icon to appear if none are visible
+    Resolves CuBoulder/tiamat-theme#701 
+
+* * *
+
+-   ### Updates `block--site-info.html.twig`
+
+    CuBoulder/ucb_migration_shortcodes#15
+
+    Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/49)
+
+* * *
+
+-   ### Updates Taxonomy page styles
+
+    -   [Bug] Headers on Taxonomy pages are now consistent with the site setting.
+    -   [Change] The "Subscribe to x" link has been hidden.
+
+    Resolves CuBoulder/tiamat-theme#697
+
+* * *
+
+-   ### video reveal html text
+    Closes #662.
+    Changes necessary files to enable an html text field.
+    Sister pull request in <https://github.com/CuBoulder/tiamat-custom-entities/pull/100>.
+
+* * *
+
+-   ### Collection Grid preview change
+    Helps close <https://github.com/CuBoulder/tiamat-custom-entities/issues/101>.
+    Adds the necessary theme changes to allow for the html preview field.
+
+* * *
 
 ## [20240221] - 2024-02-21
 
@@ -2014,7 +2163,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240221...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240513...HEAD
+
+[20240513]: https://github.com/CuBoulder/tiamat-theme/compare/20240221...20240513
 
 [20240221]: https://github.com/CuBoulder/tiamat-theme/compare/20231212...20240221
 
