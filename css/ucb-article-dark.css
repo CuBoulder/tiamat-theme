@@ -30,8 +30,14 @@ main {
 }
 
 article.ucb-page-style-dark {
-	padding-top: 0.5em;
-	padding-bottom: 0.5em;
+	padding-top: 1.75em;
+	padding-bottom: 1.75em;
+}
+
+/* Override for the content wrapper on Dark Mode Articles to maintain background color */
+article.ucb-page-style-dark.ucb-content-wrapper{
+  margin-top: 0px;
+  margin-bottom: 0px;
 }
 
 /* div#block-boulderd9-base-content::after {

@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Removes white margins from Dark Mode Article
+  Previously, a margin wrapper would apply white top and bottom margins to a dark mode article creating horizontal white bars surrounding content. This has been adjusted so the dark background color spans the entire article.
+  
+  Resolves #946 
+---
+
 - ### Title and Scroll Fix
   Fixes title coloring as well as the extended horizontal scroll bar for hero and video hero.
   
