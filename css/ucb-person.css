@@ -123,3 +123,12 @@ ul.ucb-person-department li:not(:first-child):before {
 .ucb-article-card-title-only{
   border-bottom: 1px solid rgba(128, 128, 128, 0.333);
 }
+
+.ucb-article-read-more-container{
+  text-align: right;
+  padding: 10px 0px;
+}
+
+.ucb-article-read-more{
+  font-size: 85%;
+}
