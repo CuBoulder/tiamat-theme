@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes blocks not appearing in the Footer region
+  Resolves CuBoulder/tiamat-theme#945
+---
+
 ## [20240513] - 2024-05-13
 
 -   ### Removes white margins from Dark Mode Article

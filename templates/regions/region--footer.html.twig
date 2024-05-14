@@ -1,20 +1,22 @@
 {#
 /**
- * Theme layout to display a UCB Footer Region page.
+ * @file
+ * Contains the template to display the Footer region.
  *
- * Created by jnichol4 on 8/17/23
+ * Available variables:
+ * - content: The content for this region, typically blocks.
+ * - attributes: HTML attributes for the region <div>.
+ * - region: The name of the region variable as defined in the theme's
+ *   .info.yml file.
+ *
+ * @see template_preprocess_region()
  */
 #}
 
-
-{% if content|render %}
-	<div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 footer-columns">
-		{% for item in elements %}
-			{% if item.content|render|striptags|trim is not empty %}
-				<div class="col flex-fill">
-					{{ item.content }}
-				</div>
-			{% endif %}
-		{% endfor %}
-	</div>
+{% if content %}
+  <div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 footer-columns">
+    <div class="col flex-fill">
+      {{ content }}
+    </div>
+  </div>
 {% endif %}
