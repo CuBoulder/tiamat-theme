@@ -121,5 +121,5 @@ ul.ucb-person-department li:not(:first-child):before {
 }
 
 .ucb-article-card-title-only{
-  border-bottom: solid rgba(128, 128, 128, 0.333);
+  border-bottom: 1px solid rgba(128, 128, 128, 0.333);
 }
