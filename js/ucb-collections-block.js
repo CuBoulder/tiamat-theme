@@ -162,8 +162,6 @@
               }
 
               // checks to see if the current collection (item) contains a category or tag scheduled for exclusion
-              let doesIncludeCat = thisCollectionCats;
-              let doesIncludeType = thisCollectionTypes;
               if (includeTypeArray.includes(thisCollectionTypes)) {
                 typeInclusion = 1;
               }
@@ -234,15 +232,11 @@
                   link =
                     BaseURL + "/node/" + item.attributes.drupal_internal__nid;
                 }
-                let image = "";
-                let collectionSummarySize = "col-md-12";
 
                 var collectionBlock = document.createElement("div");
                 collectionBlock.className = "collections-item-block";
 
                 if (link && imageSrc) {
-                  collectionSummarySize = "col-md-10";
-
                   var imgContainer = document.createElement("div");
                   imgContainer.className = "ucb-collection-card-img";
 
@@ -262,7 +256,7 @@
 
                 // Container
                 var collectionDataContainer = document.createElement("div");
-                collectionDataContainer.className = `col-sm-12 ${collectionSummarySize} ucb-collection-card-data`;
+                collectionDataContainer.className = 'ucb-collection-card-data';
 
                 // Header
                 var collectionDataLink = document.createElement("a");
@@ -391,7 +385,7 @@
 
 })(window.customElements);
 
-function filterChecked(blockID) {
+function collectionGridFilterChecked(blockID) {
   //console.log("BlockID: ", blockID)
   let allCards = document.getElementsByClassName(
     "ucb-collection-card-container-" + blockID
@@ -436,14 +430,14 @@ function filterChecked(blockID) {
   } else {
     addedSpanData.innerHTML =
       "<strong>Selected Filters: </strong>" + addedSpanData.innerHTML.slice(0, -2) +
-      "<a href='javascript:;' data-collection='collection-28' class='collection-reset' style='display: inline;' onclick = 'resetFilters(" +
+      '<a href="javascript:;" class="collection-reset" style="display: inline;" onclick="collectionGridResetFilters(' +
       blockID +
-      ")'><i class='fa-solid fa-xmark'></i> Reset Filters</a>";
+      ')"><i class="fa-solid fa-xmark"></i> Reset Filters</a>';
     addedSpanData.removeAttribute('hidden');
   }
 }
 
-function filterSingle(currentID, blockID) {
+function collectionGridFilterSingle(currentID, blockID) {
   //Reset and hide all cards to remove previous filters
   let allCards = document.getElementsByClassName(
     "ucb-collection-card-container-" + blockID
@@ -484,7 +478,7 @@ function filterSingle(currentID, blockID) {
   }
 }
 
-function resetFilters(blockID) {
+function collectionGridResetFilters(blockID) {
   let allCards = document.getElementsByClassName(
     "ucb-collection-card-container-" + blockID
   );
@@ -506,7 +500,7 @@ function resetFilters(blockID) {
   clearSpanData.setAttribute('hidden', '');
 }
 
-function resetSingleFilters(blockID) {
+function collectionGridResetSingleFilters(blockID) {
   let allCards = document.getElementsByClassName(
     "ucb-collection-card-container-" + blockID
   );

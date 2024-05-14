@@ -92,15 +92,15 @@
                   </h3>
                   <div class="collection-category-container">
                     <div class="collection-filter-links">
-                      <button class="category-single-button collection-grid-single-active category-single-button-all-{{ blockID }}" onclick="resetSingleFilters({{ blockID }})">All</button>
+                      <button class="category-single-button collection-grid-single-active category-single-button-all-{{ blockID }}" onclick="collectionGridResetSingleFilters({{ blockID }})">All</button>
                       {% for key, cat in item.entity.field_collection_grid_category %}
-                        <button class="category-single-button collection-grid-no-display category-label-reset-{{ blockID }} category-label-{{ cat|view }}-{{ blockID }}" data-category="{{ cat|view }}" onclick="filterSingle({{ cat|view }}, {{ blockID }})"></button>
+                        <button class="category-single-button collection-grid-no-display category-label-reset-{{ blockID }} category-label-{{ cat|view }}-{{ blockID }}" data-category="{{ cat|view }}" onclick="collectionGridFilterSingle({{ cat|view }}, {{ blockID }})"></button>
                       {% endfor %}
                     </div>
                   </div>
                 </div>
               {% endfor %}
-              {# <input type="reset" value="Reset Filters" class="category-filter-reset" onclick="resetFilters()"></input> #}
+              {# <input type="reset" value="Reset Filters" class="category-filter-reset" onclick="collectionGridResetFilters()"></input> #}
             </div>
           {% elseif multiselectStyle == "collection-multiselect-multi" %}
             {% for key, item in content['#block_content'].field_collection_category_select %}
@@ -111,14 +111,14 @@
                 <div class="collection-category-container">
                   {% for key2, cat in item.entity.field_collection_grid_category %}
                     <div class="collection-category-line">
-                      <input id="category-checkbox-{{ blockID }}-{{ key }}-{{ key2 }}" class="category-checkbox collection-grid-no-display category-checkbox-{{ blockID }}" type="checkbox" data-category="{{ cat|view }}" onclick="filterChecked({{ blockID }})">
+                      <input id="category-checkbox-{{ blockID }}-{{ key }}-{{ key2 }}" class="category-checkbox collection-grid-no-display category-checkbox-{{ blockID }}" type="checkbox" data-category="{{ cat|view }}" onclick="collectionGridFilterChecked({{ blockID }})">
                       <label class="category-label category-label-{{ cat|view }}-{{ blockID }}" for ="category-checkbox-{{ blockID }}-{{ key }}-{{ key2 }}" data-category="{{ cat|view }}-label"></label>
                     </div>
                   {% endfor %}
                 </div>
               </div>
             {% endfor %}
-            <input type="reset" value="Reset Filters" class="category-filter-reset category-filter-reset-{{ blockID }}" onclick="resetFilters({{ blockID }})"></input>
+            <input type="reset" value="Reset Filters" class="category-filter-reset category-filter-reset-{{ blockID }}" onclick="collectionGridResetFilters({{ blockID }})"></input>
           {% endif %}
         </div>
         <div class="collection-grid-card-wrapper">
