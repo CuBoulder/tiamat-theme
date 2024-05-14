@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes page title not being draggable in Layout Builder
+  Resolves CuBoulder/tiamat-theme#969
+---
+
 - ### Fixes blocks not appearing in the Footer region
   Resolves CuBoulder/tiamat-theme#945
 ---
