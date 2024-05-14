@@ -8,6 +8,10 @@
   margin-bottom: 1.5em;
 }
 
+.content-grid-block .grid-column .grid-image-container {
+  padding-bottom: 1em;
+}
+
 .content-grid-block .grid-text-container {
   padding-bottom: 1em;
 }

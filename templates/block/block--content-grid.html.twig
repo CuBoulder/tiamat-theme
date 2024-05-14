@@ -114,7 +114,7 @@
             {% endif %}
             {% set link = item.entity.field_grid_layout_content_link.0.url|render %}
             {% set containerTag = link ? 'a' : 'span' %}
-            <div class="d-flex flex-column-reverse justify-content-end">
+            <div class="d-flex flex-column-reverse justify-content-end grid-column">
               {% if title %}
                 <div class="grid-text-container">
                   <{{ containerTag }}{{ create_attribute({ href: link }) }}>
