@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes missing padding at the top of Content Grid items
+  [Bug] Resolves CuBoulder/tiamat-theme#965
+---
+
 - ### Fixes page title not being draggable in Layout Builder
   Resolves CuBoulder/tiamat-theme#969
 ---

@@ -8,7 +8,7 @@
   margin-bottom: 1.5em;
 }
 
-.content-grid-block .grid-image-container {
+.content-grid-block .grid-column .grid-image-container {
   padding-bottom: 1em;
 }
 
@@ -17,7 +17,7 @@
 }
 
 .content-grid-block .grid-card .grid-text-container {
-  padding: 0 1em 1em 1em;
+  padding: 1em 1em 0 1em;
 }
 
 .content-grid-block .grid-fill {
