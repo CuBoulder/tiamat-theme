@@ -158,8 +158,7 @@ tbody.ucb-people-list-table-tablebody {
   flex-direction: column;
 }
 
-/* Overrides for some scss for tables */
-ucb-people-list .table-bordered > :not(caption) tr {
+ucb-people-list .table-bordered > :not(caption) tr{
   border-width: inherit;
 }
 
