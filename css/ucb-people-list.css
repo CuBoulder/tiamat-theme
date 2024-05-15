@@ -158,6 +158,15 @@ tbody.ucb-people-list-table-tablebody {
   flex-direction: column;
 }
 
+/* Overrides for some scss for tables */
+ucb-people-list .table-bordered > :not(caption) tr {
+  border-width: inherit;
+}
+
+ucb-people-list .table-bordered > :not(caption) td {
+  border-width: var(--bs-border-width);
+}
+
 .iconColor {
   color: #565a5c;
 }

@@ -505,10 +505,14 @@
           cardElement = document.createElement('div');
           cardHTML = `
             <div class="ucb-person-card-list row">
-              ${personPhoto ? `
+              ${
+                personPhoto
+                  ? `
                 <div aria-hidden="true" class="col-sm-12 col-md-3 ucb-person-card-img">
                   <a href="${personLink}">${personPhoto}</a>
-                </div>` : ''}
+                </div>`
+                  : ""
+              }
               <div class="col-sm-12 col-md-9 ucb-person-card-details">
                 <a href="${personLink}">
                   <span class="ucb-person-card-name">
@@ -525,27 +529,42 @@
                   ${personBody}
                 </span>
                 <div class="ucb-person-card-contact">
-                  ${personEmail ? `
+                  ${
+                    personEmail
+                      ? `
                     <span class="ucb-person-card-links ucb-person-card-email">
                       <i class="fa-solid fa-envelope iconColor"></i>
                       <a href="mailto:${personEmail}">
-                        <span class="ucb-people-list-contact">${personEmail}</span>
+                        <span aria-hidden="true" class="ucb-people-list-contact">${personEmail}</span>
+                        <span class="sr-only">Email ${personName}</span>
                       </a>
-                    </span>` : ''}
-                  ${personPhone ? `
+                    </span>`
+                      : ""
+                  }
+                  ${
+                    personPhone
+                      ? `
                     <span class="ucb-person-card-links ucb-person-card-phone">
                       <i class="fa-solid fa-phone iconColor"></i>
-                      <a href="tel:${personPhone.replace(/[^+\d]+/g, '')}">
+                      <a href="tel:${personPhone.replace(/[^+\d]+/g, "")}">
                         <span class="ucb-people-list-contact">${personPhone}</span>
                       </a>
-                    </span>` : ''}
-                  ${personPrimaryLinkURI ? `
+                    </span>`
+                      : ""
+                  }
+                  ${
+                    personPrimaryLinkURI
+                      ? `
                     <span class="ucb-person-card-links ucb-person-card-primary-link">
-                      <i class="${this.generateLinkIcon(personPrimaryLinkURI)}"></i>
+                      <i class="${this.generateLinkIcon(
+                        personPrimaryLinkURI
+                      )}"></i>
                       <a href="${personPrimaryLinkURI}">
                         <span class="ucb-people-list-contact">${personPrimaryLinkTitle}</span>
                       </a>
-                    </span>` : ''}
+                    </span>`
+                      : ""
+                  }
                 </div>
               </div>
             </div>`;
@@ -594,27 +613,42 @@
             </td>
             <td>
               <div class="ucb-person-card-contact-table">
-                ${personEmail ? `
+                ${
+                  personEmail
+                    ? `
                   <span class="ucb-person-card-links ucb-person-card-email">
                     <i class="fa-solid fa-envelope iconColor"></i>
                     <a href="mailto:${personEmail}">
-                      <span class="ucb-people-list-contact">Email</span>
+                      <span aria-hidden="true" class="ucb-people-list-contact">Email</span>
+                      <span class="sr-only">Email ${personName}</span> 
                     </a>
-                  </span>` : ''}
-                ${personPhone ? `
+                  </span>`
+                    : ""
+                }
+                ${
+                  personPhone
+                    ? `
                   <span class="ucb-person-card-links ucb-person-card-phone">
                     <i class="fa-solid fa-phone iconColor"></i>
-                    <a href="tel:${personPhone.replace(/[^+\d]+/g, '')}">
+                    <a href="tel:${personPhone.replace(/[^+\d]+/g, "")}">
                       <span class="ucb-people-list-contact">${personPhone}</span>
                     </a>
-                  </span>` : ''}
-                ${personPrimaryLinkURI ? `
+                  </span>`
+                    : ""
+                }
+                ${
+                  personPrimaryLinkURI
+                    ? `
                   <span class="ucb-person-card-links ucb-person-card-primary-link">
-                    <i class="${this.generateLinkIcon(personPrimaryLinkURI)}"></i>
+                    <i class="${this.generateLinkIcon(
+                      personPrimaryLinkURI
+                    )}"></i>
                     <a href="${personPrimaryLinkURI}">
                       <span class="ucb-people-list-contact">${personPrimaryLinkTitle}</span>
                     </a>
-                  </span>` : ''}
+                  </span>`
+                    : ""
+                }
               </div>
             </td>`;
       }
