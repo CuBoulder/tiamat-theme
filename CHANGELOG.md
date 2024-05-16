@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### People List: Table style A11y and Style Changes
+  Changes the following on the `People List Page`, specifically in "Table" style:
+  - Makes the email field have screen reader text "Email <personsName>", rather than just "Email"
+  - Fixes border style of the table
+  
+  Resolves #974
+  Resolves #975 
+---
+
 - ### Updates Collection Grid block
   [Bug] This update fixes a bug causing the text container of a collection item to be the incorrect width. Resolves CuBoulder/tiamat-theme#958
 ---
