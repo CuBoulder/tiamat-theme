@@ -1,0 +1,10 @@
+{#
+/**
+ * @file
+ * Contains the template for the `webform` element.
+ *
+ * Adds `aria-live="polite" to all webforms.
+ */
+#}
+{% set attributes = attributes.setAttribute('aria-live', 'polite') %}
+{% include '@webform/webform.html.twig' %}

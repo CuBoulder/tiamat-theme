@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Overrides Webform template
+  [a11y, Change] This update adds an `aria-live="polite"` to all webforms. Resolves CuBoulder/tiamat-theme#938
+---
+
 - ### Adds bug fixes for the dark 2 menu style
   [Bug] Resolves CuBoulder/tiamat-theme#973 
 ---
