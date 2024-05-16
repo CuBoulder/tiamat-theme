@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Removes unused `sr-only` element from article lists
+  This update:
+  - [a11y, Remove] Removes unused `sr-only` elements from article list "read more" links. Resolves CuBoulder/tiamat-theme#932
+  - [Change] Improves the readability of article list JavaScript files (no changes in functionality should be observed).
+---
+
 - ### Slider: "Right-side Content Overlay" styles
   ### Slider: "Right-side Content Overlay"
   Fixes some overlay issues on smaller screen sizes where the right side overlay wouldn't span the full height and longer strings of text was pushed into non-viewable areas of the slider due to a width setting. 
