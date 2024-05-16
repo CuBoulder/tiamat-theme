@@ -187,7 +187,8 @@ class ArticleFeatureBlockElement extends HTMLElement {
             }
       
             const data = await response.json();
-            
+            if (!data.data.attributes.field_article_text) return ""; //  needed for external articles
+
             let htmlStrip = data.data.attributes.field_article_text.processed.replace(
                 /<\/?[^>]+(>|$)/g,
                 ""

@@ -98,6 +98,10 @@
   padding: 0px;
 }
 
+.ucb-article-feature-container .ucb-article-img-link{
+  margin-right: 10px;
+}
+
 @media screen and (max-width: 767px) {
   .ucb-stacked-secondary-container > .ucb-article-card {
     margin-bottom: 10px;

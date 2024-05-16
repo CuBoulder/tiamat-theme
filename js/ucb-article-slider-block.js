@@ -155,17 +155,7 @@ class ArticleSliderBlockElement extends HTMLElement {
         }
     }
 }
-    
-    async getArticleParagraph(id) {
-        if(id) {
-          const response = await fetch(
-            `/jsonapi/paragraph/article_content/${id}`
-          );
-          return response;
-        } else {
-            return "";
-        }
-    }
+
     renderDisplay(articleArray){
       var fliktyInit = document.getElementsByClassName('ucb-article-slider')[0]
       articleArray.map(article=>{
