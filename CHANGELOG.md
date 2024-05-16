@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Slider: "Right-side Content Overlay" styles
+  ### Slider: "Right-side Content Overlay"
+  Fixes some overlay issues on smaller screen sizes where the right side overlay wouldn't span the full height and longer strings of text was pushed into non-viewable areas of the slider due to a width setting. 
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/980
+---
+
 - ### Slider: Right-side Content Breakpoint
   Previously the D10 breakpoint for the `Right-Side Content` style `Slider` block would stack the content under the image at a Tablet breakpoint. 
   

@@ -199,6 +199,11 @@ a.slide-link i.fab {
   .carousel-caption {
     width: 100%;
   }
+  .right-overlay.ucb-slider-block .carousel-caption {
+    height: 100%;
+    width: auto;
+    font-size: 75%;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -227,6 +232,10 @@ a.slide-link i.fab {
   }
   .carousel-caption {
     width: 100%;
+  }
+  .right-overlay.ucb-slider-block .carousel-caption {
+    height: 100%;
+    width: auto;
   }
 }
 
