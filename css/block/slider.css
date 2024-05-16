@@ -228,6 +228,9 @@ a.slide-link i.fab {
   .carousel-caption {
     width: 100%;
   }
+}
+
+@media screen and (max-width:576px) {
   .right-content .carousel-item-structure {
     display: flex;
     flex-direction: column !important;

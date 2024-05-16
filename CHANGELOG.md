@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Slider: Right-side Content Breakpoint
+  Previously the D10 breakpoint for the `Right-Side Content` style `Slider` block would stack the content under the image at a Tablet breakpoint. 
+  
+  This has been updated to stack under the image at a Mobile-sized breakpoint, while the 75% text size reduction will continue to apply earlier at the Tablet breakpoint to mirror D7.
+  
+  Resolves #917 
+  
+---
+
 - ### Fixes missing padding at the top of Content Grid items
   [Bug] Resolves CuBoulder/tiamat-theme#965
 ---
