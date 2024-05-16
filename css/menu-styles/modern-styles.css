@@ -34,12 +34,10 @@
   }
 
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
-    margin-left: 4px;
-    margin-right: 4px;
-    padding: 0 5px;
+    padding: 4px 5px;
   }
 
-  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item:hover {
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
     background-color: #666;
   }
 
@@ -58,8 +56,8 @@
     background-color: #666;
   }
 
-  .ucb-secondary-menu-region-container li.menu-item a.nav-link.is-active,
-  .ucb-secondary-menu-region-container li.menu-item.active a.nav-link:first-of-type {
+  .ucb-main-nav-section .ucb-secondary-menu-region-container li.menu-item a.nav-link.is-active,
+  .ucb-main-nav-section .ucb-secondary-menu-region-container li.menu-item.active a.nav-link:first-of-type {
     color: #000;
     background-color: #cfb87c;
   }
@@ -86,6 +84,7 @@
     font-weight: 600;
     color: #fff;
     border-bottom: none;
+    margin: 0;
   }
 
   .ucb-main-menu li.menu-item a.nav-link:hover {
@@ -98,6 +97,7 @@
   .ucb-main-menu li.menu-item.active a.nav-link:first-of-type {
     background-color: #cfb87c;
     color: #000;
+    border-bottom: none;
   }
 
   .ucb-main-menu li.menu-item a.nav-link.home-link,

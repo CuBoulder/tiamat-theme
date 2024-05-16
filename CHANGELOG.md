@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds bug fixes for the dark 2 menu style
+  [Bug] Resolves CuBoulder/tiamat-theme#973 
+---
+
 - ### Removes unused `sr-only` element from article lists
   This update:
   - [a11y, Remove] Removes unused `sr-only` elements from article list "read more" links. Resolves CuBoulder/tiamat-theme#932
