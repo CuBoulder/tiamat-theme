@@ -112,7 +112,7 @@ class ArticleListBlockElement extends HTMLElement {
           body = body.trim();
           let imageSrc = "";
           let imageSrcWide = "";
-          if (!body.length && bodyAndImageId != "" && !item.attributes.field_ucb_article_external_url) {
+          if (!body.length && bodyAndImageId != "") {
             body = await this.getArticleParagraph(bodyAndImageId);
           }
 
