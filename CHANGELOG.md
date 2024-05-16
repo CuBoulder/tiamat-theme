@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates Collection Grid block
+  [Bug] This update fixes a bug causing the text container of a collection item to be the incorrect width. Resolves CuBoulder/tiamat-theme#958
+---
+
 - ### Overrides Webform template
   [a11y, Change] This update adds an `aria-live="polite"` to all webforms. Resolves CuBoulder/tiamat-theme#938
 ---
