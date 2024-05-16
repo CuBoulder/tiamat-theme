@@ -618,7 +618,7 @@
                   <span class="ucb-person-card-links ucb-person-card-email">
                     <i class="fa-solid fa-envelope iconColor"></i>
                     <a href="mailto:${personEmail}">
-                      <span aria-hidden="true" class="ucb-people-list-contact">${personEmail}</span>
+                      <span aria-hidden="true" class="ucb-people-list-contact">Email</span>
                       <span class="sr-only">Email ${personName} at ${personEmail}</span> 
                     </a>
                   </span>`
