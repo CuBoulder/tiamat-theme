@@ -92,7 +92,7 @@
 			</div>
 		{% endif %}
 		{{ title_suffix }}
-		<div class="ucb-hero-unit-content container {{ classes|join(' ') }} {{ size }} {{ overlayClass }} {{ containerSize }}" style="{{ bgValue }}">
+		<div class="{{ classes|join(' ') }} {{ size }} {{ overlayClass }} {{ containerSize }}" style="{{ bgValue }}">
 			{% set linkColor = content['#block_content'].field_link_color.value %}
 			{# Dont let twig render the links #}
 			<div class="ucb-hero-unit-content container">
