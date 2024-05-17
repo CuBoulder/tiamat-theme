@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Creates Webform page template
+  [Bug, Change] Resolves CuBoulder/tiamat-theme#982
+---
+
 - ### People List: Table style A11y and Style Changes
   Changes the following on the `People List Page`, specifically in "Table" style:
   - Makes the email field have screen reader text "Email <personsName>", rather than just "Email"
