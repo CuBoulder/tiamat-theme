@@ -112,7 +112,6 @@ class ArticleListBlockElement extends HTMLElement {
           body = body.trim();
           let imageSrc = "";
           let imageSrcWide = "";
-
           if (!body.length && bodyAndImageId != "") {
             body = await this.getArticleParagraph(bodyAndImageId);
           }
@@ -188,6 +187,7 @@ class ArticleListBlockElement extends HTMLElement {
     }
 
     const data = await response.json();
+    if (!data.data.attributes.field_article_text) return ""; //  needed for external articles
 
     let htmlStrip = data.data.attributes.field_article_text.processed.replace(
       /<\/?[^>]+(>|$)/g,

@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article Blocks: A11y fixes, External Article Handling
+  ### Article List Blocks: External Article Handling ( "Article Grid Block", "Article List Block", "Article Feature Block" )
+  
+  - Adds edge case to handle Article pages displaying in the "Teaser" style `Article List Block` that may not have an Article body or summary field added, such as an external article reference with no summary added.
+  
+  #### Article Grid + Article Feature Accessibility Changes
+  - Adjusts to accessibility standards for repeated links on the "Article Grid" and "Article Feature" blocks, all links other than the title have been set to `aria-hidden = "true"`. Images with links set to `role="presentation"` to prevent screen readers from repeating link information two or three times.
+  - Some JavaScript code formatting, no functionality changes.
+  
+  #### CSS Fixes
+  - Article Feature: The secondary Articles needed additional margin between the thumbnail and the title/link of the Article
+  - Article List Block: The entire element had left/right padding preventing alignment with other blocks.
+  
+  Resolves #971 
+---
+
 - ### Creates Webform page template
   [Bug, Change] Resolves CuBoulder/tiamat-theme#982
 ---
