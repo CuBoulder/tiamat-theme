@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Person Page: Articles by Person Changes
+  ### People Page Changes
+  #### Articles by Person Block
+  - Article card border size set to `1px`
+  - Adjusts heading level of the Articles by Person block on a Person Page, from `h3` to `h2`
+  - Adds a `Read More Articles by <name>` link if >5 Articles by that Person, leading to the Article List taxonomy View to show all the Articles that Person has been set as on the Article's byline field
+  
+  Resolves #961 
+---
+
 - ### Article Blocks: A11y fixes, External Article Handling
   ### Article List Blocks: External Article Handling ( "Article Grid Block", "Article List Block", "Article Feature Block" )
   

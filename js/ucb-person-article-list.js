@@ -3,16 +3,15 @@ class PersonArticleList extends HTMLElement {
 		super();
         // Article Endpoint
         const nodeID = this.getAttribute('nodeId');
-        const API = `/jsonapi/node/ucb_article?include=field_ucb_article_byline.field_author_person_page&filter[field_ucb_article_byline.field_author_person_page.meta.drupal_internal__target_id]=${nodeID}&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published&page[limit]=10&sort[sort-created][path]=created&sort[sort-created][direction]=DESC`
-
+        const API = `/jsonapi/node/ucb_article?include=field_ucb_article_byline.field_author_person_page&filter[field_ucb_article_byline.field_author_person_page.meta.drupal_internal__target_id]=${nodeID}&filter[status][value]=1&page[limit]=10&sort=-created`;
         fetch(API)
             .then(this.handleError)
             .then((data) => this.build(data, 5))
             .catch(Error=> {
-              console.error('Articles by Person Block Error: There was an error fetching data from the API - Please try again later.')
-              console.error(Error)
-              this.toggleMessage('ucb-al-loading')
-              this.toggleMessage('ucb-al-api-error', "block")
+              console.error('Articles by Person Block Error: There was an error fetching data from the API - Please try again later.');
+              console.error(Error);
+              this.toggleMessage('ucb-al-loading');
+              this.toggleMessage('ucb-al-api-error', "block");
             });
     }
 
@@ -28,9 +27,9 @@ class PersonArticleList extends HTMLElement {
 
           // If no Articles retrieved...
         if(data.data.length == 0){
-            console.warn('Articles by Person Block Error: There are no available Articles authored by this person')
+            console.warn('Articles by Person Block Error: There are no available Articles authored by this person');
         } else {
-        this.toggleMessage('ucb-person-article-block-title', "block")
+        this.toggleMessage('ucb-person-article-block-title', "block");
         this.toggleMessage('ucb-al-loading',"block");
         // Iterate over each Article
         data.data.map(item=>{
@@ -41,38 +40,40 @@ class PersonArticleList extends HTMLElement {
           const article = {
             title,
             link,
-          }
+          };
           // Adds the article object to the final array of articles chosen
-          finalArticles.push(article)
+          finalArticles.push(article);
         })
         // Case for not enough articles selected and extra articles available
         if(finalArticles.length < count && NEXTJSONURL){
             fetch(NEXTJSONURL).then(this.handleError)
             .then((data) => this.build(data, count, display, excludeCatArray, excludeTagArray, finalArticles))
             .catch(Error=> {
-              console.error('There was an error fetching data from the API - Please try again later.')
-              console.error(Error)
-              this.toggleMessage('ucb-al-loading')
-              this.toggleMessage('ucb-al-api-error', "block")
+              console.error('There was an error fetching data from the API - Please try again later.');
+              console.error(Error);
+              this.toggleMessage('ucb-al-loading');
+              this.toggleMessage('ucb-al-api-error', "block");
             });
         }
-
+        // View
+        let bylineTerm = null;
         // Case for Too many articles
         if(finalArticles.length > count){
-            finalArticles.length = count
-            // TO DO -- create read more link, lead to Article List by Person filtered (needed)
+          bylineTerm = this.findBylineId(data.included); // if >5 then we'll need to pass the term id to link the the view
+          // TO DO -- create read more link, lead to Article List by Person filtered (needed)
+          finalArticles.length = count;
         }
 
         // Have articles and want to proceed
         if(finalArticles.length > 0 && !NEXTJSONURL){
-          this.renderDisplay(finalArticles)
+          this.renderDisplay(finalArticles, bylineTerm);
         }
     }
 }
     // Responsible for calling the render function of the appropriate display
-    renderDisplay(articleArray){
-        var container = document.createElement('div')
-        container.classList = 'ucb-article-list-block'
+    renderDisplay(articleArray, bylineTerm){
+        var container = document.createElement('div');
+        container.classList = 'ucb-article-list-block';
 
         articleArray.forEach(article=>{
           // Article Data
@@ -90,20 +91,32 @@ class PersonArticleList extends HTMLElement {
           headerLink.href = articleLink;
 
           var articleHeader = document.createElement('p');
-          articleHeader.classList = 'ucb-article-card-title'
+          articleHeader.classList = 'ucb-article-card-title';
           articleHeader.innerText = articleTitle;
 
           headerLink.appendChild(articleHeader);
 
-          articleBody.appendChild(headerLink)
+          articleBody.appendChild(headerLink);
 
-          article.appendChild(articleBody)
-          container.appendChild(article)
-          this.toggleMessage('ucb-al-loading')
-
+          article.appendChild(articleBody);
+          container.appendChild(article);
+          this.toggleMessage('ucb-al-loading');
       })
-      this.appendChild(container)
+
+      // Adds Read More link to Article List view, filtered by Byline tax term
+      if(bylineTerm != null){
+        var readMoreDiv = document.createElement('div');
+        readMoreDiv.classList.add('ucb-article-read-more-container', 'col-sm-12', 'col-md-6');
+        var readMoreLink = document.createElement('a');
+        readMoreLink.href = `/taxonomy/term/${bylineTerm.id}`;
+        readMoreLink.classList.add('ucb-article-read-more');
+        readMoreLink.innerText = `More Articles by ${bylineTerm.name}`;
+        readMoreDiv.appendChild(readMoreLink);
+        container.append(readMoreDiv);
+      }
+      this.appendChild(container);
     }
+
     // Used to toggle error messages and loader
     toggleMessage(id, display = "none") {
         if (id) {
@@ -126,6 +139,15 @@ class PersonArticleList extends HTMLElement {
            return response.json();
         }
     };
+
+    // Used to link to Article List (view)
+    findBylineId(includedData) {
+      const byline = includedData.find(item =>
+        item.type === 'taxonomy_term--byline' &&
+        item.relationships.field_author_person_page.data?.meta.drupal_internal__target_id == this.getAttribute('nodeId')
+      );
+      return byline ? {id:byline.attributes.drupal_internal__tid, name: byline.attributes.name} : null;
+    }
 }
 
 customElements.define('person-article-list', PersonArticleList);
