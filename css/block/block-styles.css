@@ -4,48 +4,48 @@
 }
 
 .bs-title-scale-decrease .block-title {
-    font-size: 80%;
+  font-size: 80%;
 }
 
 .bs-content-scale-decrease p {
-    font-size: 80%;
+  font-size: 80%;
 }
 
 .bs-title-scale-increase .block-title {
-    font-size: 110%;
+  font-size: 110%;
 }
 
 @media screen and (min-width: 768px) {
-    .bs-title-scale-increase .block-title {
-        font-size: 125%;
-    }
+  .bs-title-scale-increase .block-title {
+    font-size: 125%;
+  }
 }
 
 @media screen and (min-width: 960px) {
-    .bs-title-scale-increase .block-title {
-        font-size: 150%;
-    }
+  .bs-title-scale-increase .block-title {
+    font-size: 150%;
+  }
 }
 
 .bs-content-scale-increase p {
-    font-size: 110%;
+  font-size: 110%;
 }
 
 @media screen and (min-width: 768px) {
-    .bs-content-scale-increase p {
-        font-size: 125%;
-    }
+  .bs-content-scale-increase p {
+    font-size: 125%;
+  }
 }
 
 @media screen and (min-width: 960px) {
-    .bs-content-scale-increase p {
-        font-size: 150%;
-    }
+  .bs-content-scale-increase p {
+    font-size: 150%;
+  }
 }
 
 /*** Heading Styles ***/
 .bs-heading-align-centered .block-title {
-    text-align: center;
+  text-align: center;
 }
 
 /*** Background Color Settings ***/
@@ -122,8 +122,13 @@
   padding: 0 0 20px 0;
 }
 
-/*** Link Color Settings ***/
+.block.bs-background-alert {
+  background-color: var(--ucb-alert);
+  color: var(--ucb-black);
+  padding: 20px;
+}
 
+/*** Link Color Settings ***/
 
 .block.bs-background-white a {
   color: var(--ucb-link);
@@ -207,64 +212,64 @@
 
 /*** Icon Styles ***/
 .bs-icon-size-increase {
-    font-size: 200%;
+  font-size: 200%;
 }
 
 .bs-icon-color-default {
-    color: inherit;
+  color: inherit;
 }
 
 .bs-icon-color-gray {
-    color: #757575;
+  color: #757575;
 }
 
 .bs-icon-color-gold {
-    color: var(--ucb-gold);
+  color: var(--ucb-gold);
 }
 
 .bs-icon-color-blue {
-    color: #16a2e1;
+  color: #16a2e1;
 }
 
 .bs-icon-color-green {
-    color: #5f9c61;
+  color: #5f9c61;
 }
 
 .bs-icon-color-orange {
-    color: #ec9413;
+  color: #ec9413;
 }
 
 .bs-icon-color-purple {
-    color: #9e5aa9;
+  color: #9e5aa9;
 }
 
 .bs-icon-color-red {
-    color: #e45146;
+  color: #e45146;
 }
 
 .bs-icon-color-yellow {
-    color: #ecda13;
+  color: #ecda13;
 }
 
 .bs-icon-position-default {
-    display: inline-block;
-    margin-right: 5px;
+  display: inline-block;
+  margin-right: 5px;
 }
 
 .bs-icon-position-offset .block-title-icon {
-    display: inline-block;
-    float: left;
-    margin-bottom: 75px;
-    margin-right: 10px;
-    padding-top: 5px;
+  display: inline-block;
+  float: left;
+  margin-bottom: 75px;
+  margin-right: 10px;
+  padding-top: 5px;
 }
 
 .bs-icon-position-top .block-title-icon {
-    display: inline-block;
-    margin: 0;
-    margin-bottom: 5px;
+  display: inline-block;
+  margin: 0;
+  margin-bottom: 5px;
 }
 
 .bs-icon-position-top .block-title-text {
-    display: block;
+  display: block;
 }
