@@ -61,7 +61,7 @@
 {% endif %}
 
 <div
-	class="ucb-hero-outer-wrapper">
+	{{attributes.addClass("ucb-hero-outer-wrapper")}}>
 	{# Block/Title/Icon Styles #}
 	{% set blockStyles = [
 	content.field_bs_background_style|render|striptags|trim,
@@ -77,7 +77,7 @@
 	{% set headingTag = content.field_bs_heading|render|striptags|trim %}
 	{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
 
-	<div{{attributes.addClass(classes,blockStyles)}}>
+	<div class="{{ classes|join(' ') }} {{ blockStyles|join(' ') }}">
 		{{ title_prefix }}
 		{% if label %}
 			<div class="block-title {{ headingStyle }}">
@@ -92,7 +92,7 @@
 			</div>
 		{% endif %}
 		{{ title_suffix }}
-		<div{{attributes.addClass(classes,size,overlayClass,containerSize).setAttribute("style","#{bgValue}")}}>
+		<div class="{{ classes|join(' ') }} {{ size }} {{ overlayClass }} {{ containerSize }}" style="{{ bgValue }}">
 			{% set linkColor = content['#block_content'].field_link_color.value %}
 			{# Dont let twig render the links #}
 			<div class="ucb-hero-unit-content container">

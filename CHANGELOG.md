@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Hero Unit: Fixes Draggability in Layout Builder
+  Fixes the draggability of the "Hero Unit Block" in Layout Builder. 
+  
+  Draggability requires `{{attributes}}` to be applied to the outermost container in the Twig template. This change alters the inner containers to use different methods to apply classes and styles rather than also using the `{{attributes.addClass()}}`
+  
+  Resolves #746 
+---
+
 - ### Person Page: Articles by Person Changes
   ### People Page Changes
   #### Articles by Person Block
