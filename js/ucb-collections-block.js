@@ -9,7 +9,7 @@
    * @returns - Promise with resolve or reject
    */
 
-  function renderCollectionCategories(JSONURL, blockID) {
+  function renderCollectionCategories(JSONURL, blockID, aggregatedCategories) {
     return new Promise(function (resolve, reject) {
       // next URL if there is one, will be returned by this funtion
       let NEXTJSONURL = "";
@@ -47,15 +47,19 @@
                 "category-label-" + currentDataID + "-" + blockID;
               let categoryLabels =
                 document.getElementsByClassName(currentClassName);
-              //console.log("currentClass: ", currentClassName)
               for (let i = 0; i < categoryLabels.length; i++) {
-                //console.log("checkClass:")
+                aggregatedCategories.push(currentDataID);
                 categoryLabels[i].innerHTML = item.attributes.name;
                 categoryLabels[i].classList.remove("collection-grid-no-display");
               }
             });
+            if(NEXTJSONURL){
+            resolve(renderCollectionCategories(NEXTJSONURL, blockID, aggregatedCategories));
 
-            resolve(NEXTJSONURL);
+            }
+            else {
+              resolve(NEXTJSONURL);
+            }
           })
           .catch(function (error) {
             // catch any fetch errors and let the user know so they're not endlessly watching the spinner
@@ -65,12 +69,14 @@
       }
     });
   }
+
   function renderCollectionList(
     JSONURL,
     ExcludeTags = "",
     BodyDisplay,
     blockID,
-    BaseURL
+    BaseURL,
+    aggregatedCategories
   ) {
     return new Promise(function (resolve, reject) {
       let includeTypeArray = ExcludeTags.split(",").map(Number);
@@ -83,15 +89,12 @@
         fetch(JSONURL)
           .then((reponse) => reponse.json())
           .then((data) => {
-            // console.log("Data", data);
             // get the next URL and return that if there is one
             if (data.links.next) {
               NEXTJSONURL = data.links.next.href;
-              //console.log("NEXTJSONURL", NEXTJSONURL)
             } else {
               NEXTJSONURL = "";
             }
-            //console.log("data obj", data);
 
             // if no collections of returned, stop the loading spinner and let the user know we received no data that matches their query
             if (!data.data.length) {
@@ -122,22 +125,19 @@
                   altObj[item.id] = item.attributes.uri.url;
                 }
               });
-
               // using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
               idFilterData.map((pair) => {
                 idObj[pair.id] = pair.relationships.thumbnail.data.id;
                 altTagObj[pair.id] = pair.relationships.thumbnail.data.meta.alt;
               });
+
             }
-            // console.log("idObj", idObj);
-            // console.log("urlObj", urlObj);
-            // console.log('altObj', altObj)
             //iterate over each item in the array
             data.data.map((item) => {
-              // console.log("item", item);
               let thisCollectionCats = [];
               let thisCollectionTypes = "";
               let typeInclusion = 0;
+              let catInclusion = 0;
               // // loop through and grab all of the categories
               if (item.relationships.field_collection_item_category.data) {
                 for (
@@ -152,8 +152,12 @@
                   );
                 }
               }
-
-              // console.log("this collection cats",thisCollectionCats)
+              item.relationships.field_collection_item_category.data.map((currentCat) => {
+                let currentCatID = currentCat.meta.drupal_internal__target_id;
+                if(aggregatedCategories.includes(currentCatID)) {
+                  catInclusion = 1;
+                }
+              });
               // // loop through and grab all of the tags
               if (item.relationships.field_collection_item_page_type.data) {
                 thisCollectionTypes =
@@ -167,9 +171,8 @@
               }
 
               // render the content if there is a similar type
-              if (typeInclusion == 1) {
+              if (typeInclusion == 1 && catInclusion == 1) {
                 // we need to render the Collection Card view for this returned element
-                // **ADD DATA**
                 // this is my id of the collection body paragraph type we need only if no thumbnail or summary provided
                 //let bodyAndImageId = item.relationships.field_ucb_collection_content.data.length ? item.relationships.field_ucb_collection_content.data[0].id : "";
                 let body = "";
@@ -220,12 +223,10 @@
                     item.relationships.field_collection_item_thumbnail.data.id;
                   imageSrc = altObj[idObj[thumbId]];
                   imageAlt = altTagObj[thumbId];
-                  //console.log("Alt: ", imageAlt)
                 }
 
                 let title = item.attributes.title;
                 let link = "";
-                // console.log("Link: ", BaseURL + "/node" + item.attributes.drupal_internal__nid);
                 if (item.attributes.path.alias) {
                   link = item.attributes.path.alias;
                 } else {
@@ -305,9 +306,12 @@
               }
             });
 
-            // done loading -- hide the loading spinner graphic
-            //toggleMessage("ucb-al-loading", "none");
-            resolve(NEXTJSONURL);
+            if(NEXTJSONURL){
+              resolve(renderCollectionList(NEXTJSONURL, ExcludeTags, BodyDisplay, blockID, BaseURL, aggregatedCategories));
+              }
+              else {
+                resolve(NEXTJSONURL);
+              }
           })
           .catch(function (error) {
             // catch any fetch errors and let the user know so they're not endlessly watching the spinner
@@ -341,6 +345,7 @@
       let TagsExclude = ""; // tags to exclude
       let BodyDisplay = ""; // variable to display body text or not
       let BaseURL = "";
+      let aggregatedCategories = [];
       let blockID = this.dataset.blockid;
 
       // check to see if we have the data we need to work with.
@@ -351,28 +356,20 @@
         BodyDisplay = el.dataset.bodydisplay;
         BaseURL = el.dataset.baseurl;
       }
-      /*
-      console.log("BASEURL: ", BaseURL)
-      
-      console.log("\n JSONURL: " + JSONURL);
-      console.log("\n JSONCATURL: " + JSONCATURL);
-      console.log("\n TagsExclude: " + TagsExclude);
-      console.log("\n BodyDisplay: " + BodyDisplay);
-      */
       // attempt to render the data requested
-      renderCollectionCategories(JSONCATURL, blockID).then((response) => {
+      renderCollectionCategories(JSONCATURL, blockID, aggregatedCategories).then((response) => {
         if (response) {
           NEXTJSONURL = BaseURL + "/jsonapi/" + response;
         }
       });
-
       // attempt to render the data requested
       renderCollectionList(
         JSONURL,
         TagsExclude,
         BodyDisplay,
         blockID,
-        BaseURL
+        BaseURL,
+        aggregatedCategories
       ).then((response) => {
         if (response) {
           NEXTJSONURL = BaseURL + "/jsonapi/" + response;
@@ -386,7 +383,6 @@
 })(window.customElements);
 
 function collectionGridFilterChecked(blockID) {
-  //console.log("BlockID: ", blockID)
   let allCards = document.getElementsByClassName(
     "ucb-collection-card-container-" + blockID
   );

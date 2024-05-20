@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fix Collection Grid issues.
+  Closes #954. 
+  Now correctly generates all collection item nodes. It also now limits collection item nodes by selected category filters as well.
+---
+
 - ### Video Hero: restores draggability in LB
   ### Video Hero Block
   - Restores dragability in Layout Builder.
