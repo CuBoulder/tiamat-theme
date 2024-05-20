@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Video Hero: restores draggability in LB
+  ### Video Hero Block
+  - Restores dragability in Layout Builder.
+  
+  Includes:
+  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/989
+  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/144
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/988
+---
+
 - ### Hero Unit: Fixes Draggability in Layout Builder
   Fixes the draggability of the "Hero Unit Block" in Layout Builder. 
   
