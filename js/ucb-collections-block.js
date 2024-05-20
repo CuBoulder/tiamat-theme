@@ -54,8 +54,13 @@
                 categoryLabels[i].classList.remove("collection-grid-no-display");
               }
             });
+            if(NEXTJSONURL){
+            resolve(renderCollectionCategories(NEXTJSONURL, blockID));
 
-            resolve(NEXTJSONURL);
+            }
+            else {
+              resolve(NEXTJSONURL);
+            }
           })
           .catch(function (error) {
             // catch any fetch errors and let the user know so they're not endlessly watching the spinner
@@ -65,6 +70,7 @@
       }
     });
   }
+
   function renderCollectionList(
     JSONURL,
     ExcludeTags = "",
@@ -122,12 +128,12 @@
                   altObj[item.id] = item.attributes.uri.url;
                 }
               });
-
               // using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
               idFilterData.map((pair) => {
                 idObj[pair.id] = pair.relationships.thumbnail.data.id;
                 altTagObj[pair.id] = pair.relationships.thumbnail.data.meta.alt;
               });
+
             }
             // console.log("idObj", idObj);
             // console.log("urlObj", urlObj);
@@ -169,7 +175,6 @@
               // render the content if there is a similar type
               if (typeInclusion == 1) {
                 // we need to render the Collection Card view for this returned element
-                // **ADD DATA**
                 // this is my id of the collection body paragraph type we need only if no thumbnail or summary provided
                 //let bodyAndImageId = item.relationships.field_ucb_collection_content.data.length ? item.relationships.field_ucb_collection_content.data[0].id : "";
                 let body = "";
@@ -305,9 +310,12 @@
               }
             });
 
-            // done loading -- hide the loading spinner graphic
-            //toggleMessage("ucb-al-loading", "none");
-            resolve(NEXTJSONURL);
+            if(NEXTJSONURL){
+              resolve(renderCollectionList(NEXTJSONURL, ExcludeTags, BodyDisplay, blockID, BaseURL));
+              }
+              else {
+                resolve(NEXTJSONURL);
+              }
           })
           .catch(function (error) {
             // catch any fetch errors and let the user know so they're not endlessly watching the spinner
