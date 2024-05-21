@@ -14,28 +14,29 @@
   --ucb-light-gray: #eee;
   --ucb-light-blue: #e1f5fe;
   --ucb-medium-blue: #4FC3F7;
-  --ucb-dark-blue: #01579B; 
+  --ucb-dark-blue: #01579B;
   --ucb-light-green: #DCEDC8;
   --ucb-brick: #AE5A39;
   --ucb-amber: #FFF9C4;
+  --ucb-alert: #FFEBEE;
 }
 
 /* Needed for Font Awesome  */
  @font-face {
     font-family: 'Font Awesome 6 Free - Brands';
-    src: url('../css/webfonts/fa-brands-400.woff2') format('woff2'), 
+    src: url('../css/webfonts/fa-brands-400.woff2') format('woff2'),
 }
  @font-face {
     font-family: 'Font Awesome 6 Free - Solid';
-    src: url('../css/webfonts/fa-solid-900.woff2') format('woff2'), 
+    src: url('../css/webfonts/fa-solid-900.woff2') format('woff2'),
 }
  @font-face {
     font-family: 'Font Awesome 6 Free - Regular';
-    src: url('../css/webfonts/fa-regular-400.woff2') format('woff2'), 
+    src: url('../css/webfonts/fa-regular-400.woff2') format('woff2'),
 }
  @font-face {
     font-family: 'Font Awesome 6 Free - v4';
-    src: url('../css/webfonts/fa-v4compatibility.woff2')  format('woff2'), 
+    src: url('../css/webfonts/fa-v4compatibility.woff2')  format('woff2'),
 }
 
 body {
@@ -526,7 +527,7 @@ ul.ucb-main-menu.nav {
 .field_media_oembed_video {
   position: relative;
   overflow: hidden;
-  width: 100%; 
+  width: 100%;
   padding-top: 56.25%;
   /* 16:9 Aspect Ratio (divide 9 by 16 = 0.5625) */
 }
@@ -570,8 +571,8 @@ div.align-center .field_media_oembed_video{
   margin-right: auto;
   margin-left: auto;
 }
-div.align-center .field_media_oembed_video iframe, 
-div.align-right .field_media_oembed_video iframe, 
+div.align-center .field_media_oembed_video iframe,
+div.align-right .field_media_oembed_video iframe,
 div.align-left .field_media_oembed_video iframe {
   position: static; /* Reset position */
   top: auto; /* Reset top position */
@@ -590,9 +591,9 @@ div.align-left .field_media_oembed_video iframe {
     width: 400px;
     height: 275px;
   }
-  
-  div.align-center .field_media_oembed_video iframe, 
-  div.align-right .field_media_oembed_video iframe, 
+
+  div.align-center .field_media_oembed_video iframe,
+  div.align-right .field_media_oembed_video iframe,
   div.align-left .field_media_oembed_video iframe {
     width: 400px;
     height: 275px;
@@ -617,9 +618,9 @@ div.align-left .field_media_oembed_video iframe {
   div.align-right .field_media_oembed_video {
     width: 100%
   }
-  
+
   /* div.align-center .field_media_oembed_video iframe,  */
-  div.align-right .field_media_oembed_video iframe, 
+  div.align-right .field_media_oembed_video iframe,
   div.align-left .field_media_oembed_video iframe {
     width: 100%;
     display:block

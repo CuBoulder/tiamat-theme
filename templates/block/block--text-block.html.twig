@@ -25,9 +25,18 @@
 {% set _rendered = blockContent|view|render %}
 {# Easiest way to ensure the cache is updated when the block or a referenced node is. Resolves #387. #}
 
+{# Alert Switch for Text Block Alert Block Style #}
+{% set isAlert = content.field_bs_text_block_alert|render|striptags|trim %}
+{% set blockBackground = '' %}
+
+{% if isAlert == 'True'%}
+    {% set blockBackground = "bs-background-alert"%}
+  {% else %}
+    {% set blockBackground = 	content.field_bs_background_style|render|striptags|trim %}
+{% endif %}
 {# Block/Title/Icon Styles #}
 {% set blockStyles = [
-	content.field_bs_background_style|render|striptags|trim,
+	blockBackground,
 	content.field_bs_content_font_scale|render|striptags|trim,
 	content.field_bs_icon_position|render|striptags|trim,
 	content.field_bs_heading_alignment|render|striptags|trim,

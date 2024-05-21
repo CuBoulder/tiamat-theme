@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Text Block: Adds Alert Block Style
+  ### Text Block
+  Adds a new "Alert" style to the Text Block, useful for alerts or notifications on your site.
+  
+  
+  Includes:
+  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/991
+  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/145
+  
+  Resolves #880 
+---
+
 - ### Fix Collection Grid issues.
   Closes #954. 
   Now correctly generates all collection item nodes. It also now limits collection item nodes by selected category filters as well.
