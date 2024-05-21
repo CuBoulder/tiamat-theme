@@ -42,7 +42,7 @@
             }
 
             data.data.map((item) => {
-              let currentDataID = item.attributes.drupal_internal__revision_id;
+              let currentDataID = item.attributes.drupal_internal__tid;
               let currentClassName =
                 "category-label-" + currentDataID + "-" + blockID;
               let categoryLabels =
