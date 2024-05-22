@@ -1,43 +1,39 @@
 .ucb-site-contact-info-footer-label {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .ucb-site-contact-info-footer {
-    display: flex;
-    flex-direction: column;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
 }
 
 .ucb-site-contact-info-footer-left {
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
 }
 
 .ucb-site-contact-info-footer-general {
-    display: flex;
-    flex-direction: column;
-    margin-right: 2em;
+  display: flex;
+  flex-direction: column;
+  margin-right: 2em;
 }
 
-.ucb-site-contact-info-footer-general, .ucb-site-contact-info-footer-emails, .ucb-site-contact-info-footer-phones {
-    margin: 10px 0;
+.ucb-site-contact-info-footer-emails, .ucb-site-contact-info-footer-phones {
+  margin: 10px 0;
 }
 
 .ucb-site-contact-info-footer-email, .ucb-site-contact-info-footer-phone {
-    display: flex;
-    flex-wrap: wrap;
+  display: flex;
+  flex-wrap: wrap;
 }
 
 .ucb-site-contact-info-footer-email-label, .ucb-site-contact-info-footer-phone-label {
-    margin-right: .25em;
+  margin-right: .25em;
 }
 
 .ucb-site-contact-info-footer-email-label svg,
 .ucb-site-contact-info-footer-phone-label svg {
-    color: var(--ucb-gold);
-}
-
-.ucb-site-contact-info-footer-content * {
-	margin-bottom: 0;
+  color: var(--ucb-gold);
 }

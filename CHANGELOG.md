@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates site footer
+  This update:
+  - [Change] Allows items in the site primary contact info in the site footer to have a bottom margin.
+  - [Change] Updates the column layout of the site footer.
+  - [Change] Adds margin between columns in the site footer in case they wrap on a mobile device.
+  
+  Resolves CuBoulder/tiamat-theme#985
+---
+
 - ### Change collection categories revision id to tid
   Closes #997.
   Changes the search from collection category revision id to tid to solve an issue in migration.
