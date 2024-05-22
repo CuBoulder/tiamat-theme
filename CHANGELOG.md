@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Change collection categories revision id to tid
+  Closes #997.
+  Changes the search from collection category revision id to tid to solve an issue in migration.
+---
+
 - ### Text Block: Adds Alert Block Style
   ### Text Block
   Adds a new "Alert" style to the Text Block, useful for alerts or notifications on your site.
