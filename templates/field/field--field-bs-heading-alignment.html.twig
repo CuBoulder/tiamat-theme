@@ -1,10 +1,10 @@
-{% for item in items %}
+{% set headingAlignmentChoice = element['#object'].get('field_bs_heading_alignment').value %}
 
-	{% if item.content|render|striptags|trim == 'Centered' %}
-		{% set blockHeadingAlignment = 'bs-heading-align-centered' %}
-	{% else %}
-		{% set blockHeadingAlignment = 'bs-heading-align-default' %}
-	{% endif %}
 
-	{{ blockHeadingAlignment }}
-{% endfor %}
+{% if headingAlignmentChoice == 'bs_heading_align_centered' %}
+  {% set blockHeadingAlignment = 'bs-heading-align-centered' %}
+{% else %}
+  {% set blockHeadingAlignment = 'bs-heading-align-default' %}
+{% endif %}
+
+{{ blockHeadingAlignment }}

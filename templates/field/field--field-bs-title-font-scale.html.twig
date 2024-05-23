@@ -1,12 +1,12 @@
-{% for item in items %}
+{% set titleScaleChoice = element['#object'].get('field_bs_title_font_scale').value %}
 
-{% if item.content|render|striptags|trim == 'Increase' %}
-	{% set blockTitleScale = 'bs-title-scale-increase' %}
-{% elseif item.content|render|striptags|trim == 'Decrease' %}
-	{% set blockTitleScale = 'bs-title-scale-decrease' %}
+
+{% if titleScaleChoice == 'bs_title_font_scale_increase' %}
+  {% set blockTitleScale = 'bs-title-scale-increase' %}
+{% elseif titleScaleChoice == 'bs_title_font_scale_decrease' %}
+  {% set blockTitleScale = 'bs-title-scale-decrease' %}
 {% else %}
-	{% set blockTitleScale = 'bs-title-scale-default' %}
+  {% set blockTitleScale = 'bs-title-scale-default' %}
 {% endif %}
 
-    {{ blockTitleScale }}
-{% endfor %}
+{{ blockTitleScale }}

@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Refactors block style field templates
+  Refactored code to use machine name rather than label value. For grabbing machine name from list fields you need to use `element['#object'].get('FIELD_NAME').value` as machine names aren't in the render array.
+  
+  These changes affects all the background style field templates. 
+  Please test each background style option to make sure I didn't mislabel something.
+  
+  Resolves #1001
+---
+
 - ### Updates site footer
   This update:
   - [Change] Allows items in the site primary contact info in the site footer to have a bottom margin.

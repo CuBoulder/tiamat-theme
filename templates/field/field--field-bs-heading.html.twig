@@ -1,18 +1,18 @@
-{% for item in items %}
+{% set headingChoice = element['#object'].get('field_bs_heading').value %}
 
-{% if item.content|render|striptags|trim == 'H3' %}
-	{% set blockHeading = 'h3' %}
-{% elseif item.content|render|striptags|trim == 'H4' %}
-	{% set blockHeading = 'h4' %}
-{% elseif item.content|render|striptags|trim == 'H5' %}
-	{% set blockHeading = 'h5' %}
-{% elseif item.content|render|striptags|trim == 'H6' %}
-	{% set blockHeading = 'h6' %}
-{% elseif item.content|render|striptags|trim == 'Strong' %}
-	{% set blockHeading = 'strong' %}
+
+{% if headingChoice == 'bs_heading_h3' %}
+  {% set blockHeading = 'h3' %}
+{% elseif headingChoice == 'bs_heading_h4' %}
+  {% set blockHeading = 'h4' %}
+{% elseif headingChoice == 'bs_heading_h5' %}
+  {% set blockHeading = 'h5' %}
+{% elseif headingChoice == 'bs_heading_h6' %}
+  {% set blockHeading = 'h6' %}
+{% elseif headingChoice == 'bs_heading_strong' %}
+  {% set blockHeading = 'strong' %}
 {% else %}
-	{% set blockHeading = 'h2' %}
+  {% set blockHeading = 'h2' %}
 {% endif %}
 
-	{{ blockHeading }} 
-{% endfor %}
+{{ blockHeading }}
