@@ -1,18 +1,16 @@
-{% for item in items %}
-  {% set headingStyleChoice = element['#object'].get('field_bs_heading_style').value %}
+{% set headingStyleChoice = element['#object'].get('field_bs_heading_style').value %}
 
 
-  {% if headingStyleChoice == 'bs_heading_style_default_hero' %}
-    {% set blockHeadingStyle = 'hero' %}
-  {% elseif headingStyleChoice == 'bs_heading_style_default_hero_bold' %}
-    {% set blockHeadingStyle = 'hero strong' %}
-  {% elseif headingStyleChoice == 'bs_heading_style_default_supersize' %}
-    {% set blockHeadingStyle = 'supersize' %}
-  {% elseif headingStyleChoice == 'bs_heading_style_default_supersize_bold' %}
-    {% set blockHeadingStyle = 'supersize bold' %}
-  {% else %}
-    {% set blockHeadingStyle = 'bs-heading-style-default' %}
-  {% endif %}
+{% if headingStyleChoice == 'bs_heading_style_default_hero' %}
+  {% set blockHeadingStyle = 'hero' %}
+{% elseif headingStyleChoice == 'bs_heading_style_default_hero_bold' %}
+  {% set blockHeadingStyle = 'hero strong' %}
+{% elseif headingStyleChoice == 'bs_heading_style_default_supersize' %}
+  {% set blockHeadingStyle = 'supersize' %}
+{% elseif headingStyleChoice == 'bs_heading_style_default_supersize_bold' %}
+  {% set blockHeadingStyle = 'supersize bold' %}
+{% else %}
+  {% set blockHeadingStyle = 'bs-heading-style-default' %}
+{% endif %}
 
-  {{ blockHeadingStyle }}
-{% endfor %}
+{{ blockHeadingStyle }}

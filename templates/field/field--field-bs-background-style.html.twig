@@ -1,32 +1,29 @@
-{% for item in items %}
-  {% set backgroundChoice = element['#object'].get('field_bs_background_style').value %}
+{% set backgroundChoice = element['#object'].get('field_bs_background_style').value %}
 
-  {% if backgroundChoice == 'bs_background_style_white' %}
-    {% set blockBackground = 'bs-background-white' %}
-  {% elseif backgroundChoice == 'bs_background_style_gray' %}
-    {% set blockBackground = 'bs-background-gray' %}
-  {% elseif backgroundChoice == 'bs_background_style_dark_gray' %}
-    {% set blockBackground = 'bs-background-dark-gray' %}
-  {% elseif backgroundChoice == 'bs_background_style_tan' %}
-    {% set blockBackground = 'bs-background-tan' %}
-  {% elseif backgroundChoice == 'bs_background_style_light_blue' %}
-    {% set blockBackground = 'bs-background-light-blue' %}
-  {% elseif backgroundChoice == 'bs_background_style_medium_blue' %}
-    {% set blockBackground = 'bs-background-medium-blue' %}
-  {% elseif backgroundChoice == 'bs_background_style_dark_blue' %}
-    {% set blockBackground = 'bs-background-dark-blue' %}
-  {% elseif backgroundChoice == 'bs_background_style_light_green' %}
-    {% set blockBackground = 'bs-background-light-green' %}
-  {% elseif backgroundChoice == 'bs_background_style_brick' %}
-    {% set blockBackground = 'bs-background-brick' %}
-  {% elseif backgroundChoice == 'bs_background_style_outline' %}
-    {% set blockBackground = 'bs-background-outline' %}
-  {% elseif backgroundChoice == 'bs_background_style_underline' %}
-    {% set blockBackground = 'bs-background-underline' %}
-  {% else %}
-    {% set blockBackground = 'bs-background-none' %}
-  {% endif %}
+{% if backgroundChoice == 'bs_background_style_white' %}
+  {% set blockBackground = 'bs-background-white' %}
+{% elseif backgroundChoice == 'bs_background_style_gray' %}
+  {% set blockBackground = 'bs-background-gray' %}
+{% elseif backgroundChoice == 'bs_background_style_dark_gray' %}
+  {% set blockBackground = 'bs-background-dark-gray' %}
+{% elseif backgroundChoice == 'bs_background_style_tan' %}
+  {% set blockBackground = 'bs-background-tan' %}
+{% elseif backgroundChoice == 'bs_background_style_light_blue' %}
+  {% set blockBackground = 'bs-background-light-blue' %}
+{% elseif backgroundChoice == 'bs_background_style_medium_blue' %}
+  {% set blockBackground = 'bs-background-medium-blue' %}
+{% elseif backgroundChoice == 'bs_background_style_dark_blue' %}
+  {% set blockBackground = 'bs-background-dark-blue' %}
+{% elseif backgroundChoice == 'bs_background_style_light_green' %}
+  {% set blockBackground = 'bs-background-light-green' %}
+{% elseif backgroundChoice == 'bs_background_style_brick' %}
+  {% set blockBackground = 'bs-background-brick' %}
+{% elseif backgroundChoice == 'bs_background_style_outline' %}
+  {% set blockBackground = 'bs-background-outline' %}
+{% elseif backgroundChoice == 'bs_background_style_underline' %}
+  {% set blockBackground = 'bs-background-underline' %}
+{% else %}
+  {% set blockBackground = 'bs-background-none' %}
+{% endif %}
 
-  {{ blockBackground }}
-
-{% endfor %}
+{{ blockBackground }}

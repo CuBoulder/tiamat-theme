@@ -1,14 +1,12 @@
-{% for item in items %}
-  {% set iconPositionChoice = element['#object'].get('field_bs_icon_position').value %}
+{% set iconPositionChoice = element['#object'].get('field_bs_icon_position').value %}
 
 
-  {% if iconPositionChoice == 'bs_icon_position_offset' %}
-    {% set blockIconPosition = 'bs-icon-position-offset' %}
-  {% elseif iconPositionChoice == 'bs_icon_position_top' %}
-    {% set blockIconPosition = 'bs-icon-position-top' %}
-  {% else %}
-    {% set blockIconPosition = 'bs-icon-position-default' %}
-  {% endif %}
+{% if iconPositionChoice == 'bs_icon_position_offset' %}
+  {% set blockIconPosition = 'bs-icon-position-offset' %}
+{% elseif iconPositionChoice == 'bs_icon_position_top' %}
+  {% set blockIconPosition = 'bs-icon-position-top' %}
+{% else %}
+  {% set blockIconPosition = 'bs-icon-position-default' %}
+{% endif %}
 
-  {{ blockIconPosition }}
-{% endfor %}
+{{ blockIconPosition }}

@@ -1,12 +1,10 @@
-{% for item in items %}
-  {% set iconSizeChoice = element['#object'].get('field_bs_icon_size').value %}
+{% set iconSizeChoice = element['#object'].get('field_bs_icon_size').value %}
 
 
-  {% if iconSizeChoice == 'bs_icon_size_increase' %}
-    {% set blockIconSize = 'bs-icon-size-increase' %}
-  {% else %}
-    {% set blockIconSize = 'bs-icon-size-default' %}
-  {% endif %}
+{% if iconSizeChoice == 'bs_icon_size_increase' %}
+  {% set blockIconSize = 'bs-icon-size-increase' %}
+{% else %}
+  {% set blockIconSize = 'bs-icon-size-default' %}
+{% endif %}
 
-  {{ blockIconSize }}
-{% endfor %}
+{{ blockIconSize }}
