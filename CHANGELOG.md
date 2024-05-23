@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Collection item category filtering
+  Closes #1006.
+  Removes filtering by category in the build step of the collection grid.
+---
+
 - ### Removes padding at the bottom of Video Reveal block image
   [Bug] Resolves CuBoulder/tiamat-theme#999
 ---

@@ -9,7 +9,7 @@
    * @returns - Promise with resolve or reject
    */
 
-  function renderCollectionCategories(JSONURL, blockID, aggregatedCategories) {
+  function renderCollectionCategories(JSONURL, blockID) {
     return new Promise(function (resolve, reject) {
       // next URL if there is one, will be returned by this funtion
       let NEXTJSONURL = "";
@@ -48,13 +48,12 @@
               let categoryLabels =
                 document.getElementsByClassName(currentClassName);
               for (let i = 0; i < categoryLabels.length; i++) {
-                aggregatedCategories.push(currentDataID);
                 categoryLabels[i].innerHTML = item.attributes.name;
                 categoryLabels[i].classList.remove("collection-grid-no-display");
               }
             });
             if(NEXTJSONURL){
-            resolve(renderCollectionCategories(NEXTJSONURL, blockID, aggregatedCategories));
+            resolve(renderCollectionCategories(NEXTJSONURL, blockID));
 
             }
             else {
@@ -75,8 +74,7 @@
     ExcludeTags = "",
     BodyDisplay,
     blockID,
-    BaseURL,
-    aggregatedCategories
+    BaseURL
   ) {
     return new Promise(function (resolve, reject) {
       let includeTypeArray = ExcludeTags.split(",").map(Number);
@@ -137,7 +135,6 @@
               let thisCollectionCats = [];
               let thisCollectionTypes = "";
               let typeInclusion = 0;
-              let catInclusion = 0;
               // // loop through and grab all of the categories
               if (item.relationships.field_collection_item_category.data) {
                 for (
@@ -152,12 +149,6 @@
                   );
                 }
               }
-              item.relationships.field_collection_item_category.data.map((currentCat) => {
-                let currentCatID = currentCat.meta.drupal_internal__target_id;
-                if(aggregatedCategories.includes(currentCatID)) {
-                  catInclusion = 1;
-                }
-              });
               // // loop through and grab all of the tags
               if (item.relationships.field_collection_item_page_type.data) {
                 thisCollectionTypes =
@@ -171,7 +162,7 @@
               }
 
               // render the content if there is a similar type
-              if (typeInclusion == 1 && catInclusion == 1) {
+              if (typeInclusion == 1) {
                 // we need to render the Collection Card view for this returned element
                 // this is my id of the collection body paragraph type we need only if no thumbnail or summary provided
                 //let bodyAndImageId = item.relationships.field_ucb_collection_content.data.length ? item.relationships.field_ucb_collection_content.data[0].id : "";
@@ -345,7 +336,6 @@
       let TagsExclude = ""; // tags to exclude
       let BodyDisplay = ""; // variable to display body text or not
       let BaseURL = "";
-      let aggregatedCategories = [];
       let blockID = this.dataset.blockid;
 
       // check to see if we have the data we need to work with.
@@ -357,7 +347,7 @@
         BaseURL = el.dataset.baseurl;
       }
       // attempt to render the data requested
-      renderCollectionCategories(JSONCATURL, blockID, aggregatedCategories).then((response) => {
+      renderCollectionCategories(JSONCATURL, blockID).then((response) => {
         if (response) {
           NEXTJSONURL = BaseURL + "/jsonapi/" + response;
         }
@@ -368,8 +358,7 @@
         TagsExclude,
         BodyDisplay,
         blockID,
-        BaseURL,
-        aggregatedCategories
+        BaseURL
       ).then((response) => {
         if (response) {
           NEXTJSONURL = BaseURL + "/jsonapi/" + response;
