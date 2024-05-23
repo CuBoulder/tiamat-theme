@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Removes padding at the bottom of Video Reveal block image
+  [Bug] Resolves CuBoulder/tiamat-theme#999
+---
+
 - ### Refactors block style field templates
   Refactored code to use machine name rather than label value. For grabbing machine name from list fields you need to use `element['#object'].get('FIELD_NAME').value` as machine names aren't in the render array.
   
