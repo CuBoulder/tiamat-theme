@@ -1,12 +1,14 @@
 {% for item in items %}
+	{% set headingStyleChoice = element['#object'].get('field_bs_heading_style').value %}
 
-{% if item.content|render|striptags|trim == 'Hero' %}
+
+{% if headingStyleChoice == 'bs_heading_style_default_hero' %}
 	{% set blockHeadingStyle = 'hero' %}
-{% elseif item.content|render|striptags|trim == 'Hero Bold' %}
+{% elseif headingStyleChoice == 'bs_heading_style_default_hero_bold' %}
 	{% set blockHeadingStyle = 'hero strong' %}
-{% elseif item.content|render|striptags|trim == 'Supersize' %}
+{% elseif headingStyleChoice == 'bs_heading_style_default_supersize' %}
 	{% set blockHeadingStyle = 'supersize' %}
-{% elseif item.content|render|striptags|trim == 'Supersize Bold' %}
+{% elseif headingStyleChoice == 'bs_heading_style_default_supersize_bold' %}
 	{% set blockHeadingStyle = 'supersize bold' %}
 {% else %}
 	{% set blockHeadingStyle = 'bs-heading-style-default' %}

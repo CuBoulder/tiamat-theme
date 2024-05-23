@@ -1,7 +1,10 @@
 {% for item in items %}
-	{% if item.content|render|striptags|trim == 'Increase' %}
+	{% set scaleChoice = element['#object'].get('field_bs_content_font_scale').value %}
+
+
+	{% if scaleChoice == 'bs_content_font_scale_increase' %}
 		{% set blockContentScale = 'bs-content-scale-increase' %}
-	{% elseif item.content|render|striptags|trim == 'Decrease' %}
+	{% elseif scaleChoice == 'bs_content_font_scale_decrease' %}
 		{% set blockContentScale = 'bs-content-scale-decrease' %}
 	{% else %}
 		{% set blockContentScale = 'bs-content-scale-default' %}

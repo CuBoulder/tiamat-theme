@@ -1,8 +1,10 @@
 {% for item in items %}
+	{% set iconPositionChoice = element['#object'].get('field_bs_icon_position').value %}
 
-{% if item.content|render|striptags|trim == 'Offset' %}
+
+{% if iconPositionChoice == 'bs_icon_position_offset' %}
 	{% set blockIconPosition = 'bs-icon-position-offset' %}
-{% elseif item.content|render|striptags|trim == 'Top' %}
+{% elseif iconPositionChoice == 'bs_icon_position_top' %}
 	{% set blockIconPosition = 'bs-icon-position-top' %}
 {% else %}
 	{% set blockIconPosition = 'bs-icon-position-default' %}

@@ -1,19 +1,22 @@
 {% for item in items %}
-	{% if item.content|render|striptags|trim == 'Gray' %}
+	{% set iconColorChoice = element['#object'].get('field_bs_icon_color').value %}
+
+
+	{% if iconColorChoice == 'bs_icon_color_gray' %}
 		{% set blockIconColor = 'bs-icon-color-gray' %}
-	{% elseif item.content|render|striptags|trim == 'Gold' %}
+	{% elseif iconColorChoice == 'bs_icon_color_gold' %}
 		{% set blockIconColor = 'bs-icon-color-gold' %}
-	{% elseif item.content|render|striptags|trim == 'Blue' %}
+	{% elseif iconColorChoice == 'bs_icon_color_blue' %}
 		{% set blockIconColor = 'bs-icon-color-blue' %}
-	{% elseif item.content|render|striptags|trim == 'Green' %}
+	{% elseif iconColorChoice == 'bs_icon_color_green' %}
 		{% set blockIconColor = 'bs-icon-color-green' %}
-	{% elseif item.content|render|striptags|trim == 'Orange' %}
+	{% elseif iconColorChoice == 'bs_icon_color_orange' %}
 		{% set blockIconColor = 'bs-icon-color-orange' %}
-	{% elseif item.content|render|striptags|trim == 'Purple' %}
+	{% elseif iconColorChoice == 'bs_icon_color_purple' %}
 		{% set blockIconColor = 'bs-icon-color-purple' %}
-	{% elseif item.content|render|striptags|trim == 'Red' %}
+	{% elseif iconColorChoice == 'bs_icon_color_red' %}
 		{% set blockIconColor = 'bs-icon-color-red' %}
-	{% elseif item.content|render|striptags|trim == 'Yellow' %}
+	{% elseif iconColorChoice == 'bs_icon_color_yellow' %}
 		{% set blockIconColor = 'bs-icon-color-yellow' %}
 	{% else %}
 		{% set blockIconColor = 'bs-icon-color-default' %}
