@@ -7,5 +7,5 @@
     {% set firstIconHtml = firstIconHtml|replace({(attribute): ''}) %}
   {% endfor %}
 
-  {{ firstIconHtml|t }}
+  {{ firstIconHtml|raw }}
 {% endfor %}
