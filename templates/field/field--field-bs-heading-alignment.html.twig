@@ -1,12 +1,12 @@
 {% for item in items %}
-	{% set headingAlignmentChoice = element['#object'].get('field_bs_heading_alignment').value %}
+  {% set headingAlignmentChoice = element['#object'].get('field_bs_heading_alignment').value %}
 
 
-	{% if headingAlignmentChoice == 'bs_heading_align_centered' %}
-		{% set blockHeadingAlignment = 'bs-heading-align-centered' %}
-	{% else %}
-		{% set blockHeadingAlignment = 'bs-heading-align-default' %}
-	{% endif %}
+  {% if headingAlignmentChoice == 'bs_heading_align_centered' %}
+    {% set blockHeadingAlignment = 'bs-heading-align-centered' %}
+  {% else %}
+    {% set blockHeadingAlignment = 'bs-heading-align-default' %}
+  {% endif %}
 
-	{{ blockHeadingAlignment }}
+  {{ blockHeadingAlignment }}
 {% endfor %}
