@@ -82,9 +82,9 @@
 				{% set body = (item.entity.body.0 ?? item.entity.field_ucb_article_content.0.entity.field_article_text.0).value|render|replace({"&nbsp;": ""})|striptags|trim %}
 				{% set bodyTrimmed = body|slice(0, 512) %}
 				{% set summary = bodyTrimmed ~ (body|length > bodyTrimmed|length ? '...') %}
-				
+
 			{% endif %}
-					
+
 			{% if display == 'full' %}
 				<div class="row ucb-content-list-row ">
 					<div class="ucb-content-list-text-container ">
@@ -109,12 +109,12 @@
 							{% autoescape false %}
 								{{ summary }}
 							{% endautoescape %}
-							<a class="ucb-content-list-read-more" href="{{ item.entity.path.alias }}">Read more &raquo;</a>
+							<a aria-hidden="true" class="ucb-content-list-read-more" href="{{ item.entity.path.alias }}">Read more &raquo;</a>
 						</p>
 					</div>
 					{% if image %}
 						<div class="ucb-content-list-image-container">
-								<a href="{{ item.entity.path.alias }}">
+								<a role="presentation" aria-hidden="true" href="{{ item.entity.path.alias }}">
 									<img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}">
 								</a>
 						</div>
@@ -124,7 +124,7 @@
 			<div class="row ucb-content-list-row">
 				{% if image %}
 					<div class="ucb-content-list-image-container">
-						<a href="{{ item.entity.path.alias }}"><img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}"></a>
+						<a role="presentation" aria-hidden="true" href="{{ item.entity.path.alias }}"><img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}"></a>
 					</div>
 				{% endif %}
 				<div class="ucb-content-list-text-container container">
@@ -149,7 +149,6 @@
 						{% autoescape false %}
 							{{ summary }}
 						{% endautoescape %}
-						<a class="ucb-content-list-read-more" href="{{ item.entity.path.alias }}">Read more &raquo;</a>
 					</p>
 				</div>
 			</div>
@@ -167,7 +166,7 @@
 					</div>
 					{% if image %}
 						<div class="ucb-content-list-image-container">
-								<a href="{{ item.entity.path.alias }}"><img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}"></a>
+								<a role="presentation" aria-hidden="true" href="{{ item.entity.path.alias }}"><img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}"></a>
 						</div>
 					{% endif %}
 				</div>
