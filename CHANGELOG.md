@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Content Rows: Styling Adjustments and Feature Fix
+  Adjusts the following styles on the "Content Row" block:
+  
+  ### Teaser Large + Teaser Large Alternate
+  - Aligns image and text to top of the row on these two display types, previously the text was centered
+  
+  ### Feature
+  - Feature style display are now fixed to only show 3 items
+  
+  Resolves #1009 
+---
+
 - ### Content List Block: A11y Changes, Unpublished Content Appearing in Lists
   ### Content List Block
   - Adds `role="presentation" aria-hidden="true"` to image links for an improved screen reader experience
