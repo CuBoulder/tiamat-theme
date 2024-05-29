@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Content List Block: A11y Changes, Unpublished Content Appearing in Lists
+  ### Content List Block
+  - Adds `role="presentation" aria-hidden="true"` to image links for an improved screen reader experience
+  - Removes "Read More" link from `Teaser` and `Full` display
+  - Hides unpublished content from appearing in Content Lists if user is not authenticated
+  
+  Resolves #1008 
+---
+
 - ### Collection item category filtering
   Closes #1006.
   Removes filtering by category in the build step of the collection grid.
