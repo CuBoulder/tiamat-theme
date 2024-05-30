@@ -1,29 +1,29 @@
 {% set backgroundChoice = element['#object'].get('field_bs_background_style').value %}
 
 {% if backgroundChoice == 'bs_background_style_white' %}
-  {% set blockBackground = 'bs-background-white' %}
+  {% set blockBackground = 'bs-background-styled bs-background-white' %}
 {% elseif backgroundChoice == 'bs_background_style_gray' %}
-  {% set blockBackground = 'bs-background-gray' %}
+  {% set blockBackground = 'bs-background-styled bs-background-gray' %}
 {% elseif backgroundChoice == 'bs_background_style_dark_gray' %}
-  {% set blockBackground = 'bs-background-dark-gray' %}
+  {% set blockBackground = 'bs-background-styled bs-background-dark-gray' %}
 {% elseif backgroundChoice == 'bs_background_style_tan' %}
-  {% set blockBackground = 'bs-background-tan' %}
+  {% set blockBackground = 'bs-background-styled bs-background-tan' %}
 {% elseif backgroundChoice == 'bs_background_style_light_blue' %}
-  {% set blockBackground = 'bs-background-light-blue' %}
+  {% set blockBackground = 'bs-background-styled bs-background-light-blue' %}
 {% elseif backgroundChoice == 'bs_background_style_medium_blue' %}
-  {% set blockBackground = 'bs-background-medium-blue' %}
+  {% set blockBackground = 'bs-background-styled bs-background-medium-blue' %}
 {% elseif backgroundChoice == 'bs_background_style_dark_blue' %}
-  {% set blockBackground = 'bs-background-dark-blue' %}
+  {% set blockBackground = 'bs-background-styled bs-background-dark-blue' %}
 {% elseif backgroundChoice == 'bs_background_style_light_green' %}
-  {% set blockBackground = 'bs-background-light-green' %}
+  {% set blockBackground = 'bs-background-styled bs-background-light-green' %}
 {% elseif backgroundChoice == 'bs_background_style_brick' %}
-  {% set blockBackground = 'bs-background-brick' %}
+  {% set blockBackground = 'bs-background-styled bs-background-brick' %}
 {% elseif backgroundChoice == 'bs_background_style_outline' %}
-  {% set blockBackground = 'bs-background-outline' %}
+  {% set blockBackground = 'bs-background-styled bs-background-outline' %}
 {% elseif backgroundChoice == 'bs_background_style_underline' %}
-  {% set blockBackground = 'bs-background-underline' %}
+  {% set blockBackground = 'bs-background-styled bs-background-underline' %}
 {% else %}
-  {% set blockBackground = 'bs-background-none' %}
+  {% set blockBackground = 'bs-background-unstyled bs-background-none' %}
 {% endif %}
 
 {{ blockBackground }}
