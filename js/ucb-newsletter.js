@@ -56,7 +56,7 @@
         var style = document.getElementsByTagName('style')
         var email = document.getElementById('email-preview')
         var categories = email.getElementsByClassName("ucb-article-categories");
-
+        // Need to strip sr-only Categories text to force-hide, CSS hides don't work in Outlook Clients
         for (var i = 0; i < categories.length; i++) {
           var span = categories[i].querySelector("span.sr-only");
           if (span) {
