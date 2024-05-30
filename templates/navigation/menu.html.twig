@@ -39,16 +39,19 @@
           item.is_unpublished ? 'unpublished'
         ] %}
         <li{{ item.attributes.addClass(classes) }}>
-          {% if item.title|upper == "HOME" %}
-            <a href="{{ item.url }}" id="ucb-home-button" class="ucb-home-button nav-link" title="Home">
-              <span class="sr-only">Home</span>
+          {% if item.title|upper == 'HOME' %}
+            <a{{ create_attribute({ href: item.url|render, class: 'ucb-home-button nav-link' }) }}>
+              <span class="sr-only">{{ item.title }}</span>
               <i class="fa-solid fa-home"></i>
             </a>
-          {% elseif item.below %}
-            {{ link(item.title, item.url, { class: ['nav-link'] }) }}
-            {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
           {% else %}
-            {{ link(item.title, item.url, { class: ['nav-link'] }) }}
+            {% set title = item.is_unpublished ? {
+                '#markup': '<i class="fa-solid fa-eye-slash"></i> ' ~ item.title|e ~ ' <span class="sr-only">(Unpublished)</span>'
+              } : item.title %}
+            {{ link(title, item.url, create_attribute({ class: 'nav-link' })) }}
+            {% if item.below %}
+              {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+            {% endif %}
           {% endif %}
         </li>
       {% endfor %}
