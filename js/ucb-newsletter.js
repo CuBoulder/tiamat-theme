@@ -55,12 +55,21 @@
         // Stick the styles in the header of the email
         var style = document.getElementsByTagName('style')
         var email = document.getElementById('email-preview')
+        var categories = email.getElementsByClassName("ucb-article-categories");
+
+        for (var i = 0; i < categories.length; i++) {
+          var span = categories[i].querySelector("span.sr-only");
+          if (span) {
+            span.innerText = "";
+          }
+        }
+
         var emailStyles = ""
         for(stylesheet of style){
             emailStyles += stylesheet.innerText
         }
-        
-        var emailTemplate = 
+
+        var emailTemplate =
         `
         <!DOCTYPE html>
         <html>
@@ -85,7 +94,7 @@
     var main = document.getElementById('block-boulder-base-content')
     button.innerText = 'Click to copy your newsletter HTML'
     codeContainer.appendChild(button)
-    
+
     // Append TextArea
     var textArea = document.createElement('textarea')
     textArea.style.cssText = 'display: block;width: 100%;height: 241px;'
