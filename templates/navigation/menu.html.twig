@@ -39,7 +39,7 @@
         ] %}
         <li{{ item.attributes.addClass(classes) }}>
           {% if item.title|upper == 'HOME' %}
-            <a{{ create_attribute({ href: item.url|render, class: 'ucb-home-button nav-link' }) }}>
+            <a{{ create_attribute({ href: item.url|render, class: 'ucb-home-button nav-link', title: item.title }) }}>
               <i class="fa-solid fa-home"></i>
               <span class="sr-only">{{ item.title }}</span>
             </a>
