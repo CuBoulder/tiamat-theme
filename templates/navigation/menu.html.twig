@@ -1,15 +1,7 @@
 {#
 /**
- * Theme layout to display a CU Boulder Main Menu.
- *
- * Created by jsparks on 6/12/18
- */
-#}
-
-{#
-/**
  * @file
- * Theme override to display a menu.
+ * Contains the template to display a menu.
  *
  * Available variables:
  * - menu_name: The machine name of the menu.
@@ -24,6 +16,7 @@
  *   - is_collapsed: TRUE if the link has children within the current menu tree
  *   that are not currently visible.
  *   - in_active_trail: TRUE if the link is in the active trail.
+ *   - is_unpublished: TRUE if the link is to an unpublished node.
  */
 #}
 {% import _self as menus %}
@@ -42,7 +35,8 @@
           'menu-item',
           item.is_expanded ? 'expanded',
           item.is_collapsed ? 'collapsed',
-          item.in_active_trail ? 'active'
+          item.in_active_trail ? 'active',
+          item.is_unpublished ? 'unpublished'
         ] %}
         <li{{ item.attributes.addClass(classes) }}>
           {% if item.title|upper == "HOME" %}
@@ -51,10 +45,10 @@
               <i class="fa-solid fa-home"></i>
             </a>
           {% elseif item.below %}
-            {{ link(item.title, item.url, { 'class': ['nav-link']}) }}
+            {{ link(item.title, item.url, { class: ['nav-link'] }) }}
             {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
           {% else %}
-            {{ link(item.title, item.url, { 'class': ['nav-link']}) }}
+            {{ link(item.title, item.url, { class: ['nav-link'] }) }}
           {% endif %}
         </li>
       {% endfor %}
