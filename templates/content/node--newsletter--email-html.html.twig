@@ -16,7 +16,7 @@
     view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
     ]
 %}
-    
+
     {{ attach_library('boulder_base/ucb-page') }}
     {{ attach_library('boulder_base/ucb-newsletter-email') }}
 
@@ -106,10 +106,10 @@
         max-width:100%;
         height:auto
     }
-                
+
                 a, a:visited, a:hover, a:active {
     text-decoration: none;
-    color: inherit;
+    color: #0277bd;
 }
 
                 .tags > a{
@@ -124,7 +124,7 @@
                     margin: 0 5px 5px 0;
                     text-transform: uppercase !important;
                 };
-                
+
                 .tags{
                     padding-bottom: 10px;
                 };
@@ -257,7 +257,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
     <div id="email" style="align-items:center;{{emailBackground}}">
     <div style="margin: auto;{{divStyles}}" data-url="{{base_url}}">
         {# HEADER -- to do: might need to be different tables for styling purposes #}
-        <!-- Header --> 
+        <!-- Header -->
         {% if designType == 'lightbox' or designType == 'darkbox' %}
         <table style="{{boxBackground}}" align="center">
             <tbody>
@@ -315,7 +315,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                             <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; margin: 0; font-size: 14px; background-color: white;">
                                 <tr>
                                   <td align="center" style="padding-right:10px; padding-left:10px">
-                                <!-- Intro Img --> 
+                                <!-- Intro Img -->
                                     {% if content.field_newsletter_intro_image|render %}
                                     <img id="newsletter-email-intro-img" src="{{base_url}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" width="95%" style="{{classicImgOffset}};margin-bottom: 20px;">
                                     {% endif %}
@@ -379,7 +379,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                 </table>
                                 {% endif %}
                             {% endif %}
-                            
+
                             <!--Promo Blocks-->
                             {% set blocksToRender = [] %}
 
@@ -389,7 +389,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                     {% set paragraphItem = block['#paragraph'] %}
                                     {% set title = paragraphItem.field_newsletter_block_title.value|default('') %}
                                     {% set text = paragraphItem.field_newsletter_block_text.value|default('') %}
-                                    
+
                                     {# Check if title or text is not just a space and not empty #}
                                     {% if title|trim is not empty or text|trim is not empty %}
                                         {% set blocksToRender = blocksToRender|merge([block]) %}
@@ -432,7 +432,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                         <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
                             <tbody>
                                 <tr>
-                                    <td width="500px" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px"> 
+                                    <td width="500px" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
                                         <a href="{{ final_url }}">
                                             <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                         </a>
@@ -444,12 +444,12 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                         <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
                             <tbody>
                                 <tr>
-                                    <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px"> 
+                                    <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
                                         <img src="{{base_url}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                     </td>
                                 </tr>
                             </tbody>
-                        </table>	
+                        </table>
                         {% endif %}
                     {% endif %}
                         <!--Footer-->
@@ -493,7 +493,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                     {% if uri matches '/^(http(s)?:)?\\/\\//i' %}
                                         {% set hostname = uri|split('/')[2] %}
                                     {% endif %}
-                                    
+
                                     {% set service = 'link' %}  {# Default image if no service matches #}
                                     {% if hostname matches '/facebook\\.com$/i' %}
                                         {% set service = 'Facebook' %}
