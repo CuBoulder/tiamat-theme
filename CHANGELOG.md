@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter: Style Adjustments
+  ### Newsletter
+  - Fixes link color to default `ucb-link` color.
+  - Programmatically removes `sr-only` text from Category buttons, as Outlook clients ignore css `display:none` unless set on an outermost table so the Categories row would show up as `Categories: [Example 1] [Example 2]...` on Outlook clients. Tested on email with acid.
+  
+  Resolves #849 
+---
+
 - ### Content Rows: Styling Adjustments and Feature Fix
   Adjusts the following styles on the "Content Row" block:
   
