@@ -193,26 +193,26 @@
     border-left-color: #333;
   }
 
-  #ucb-home-button:hover,
-  #ucb-home-button:focus,
-  #ucb-home-button.active {
+  .ucb-main-menu .ucb-home-button:hover,
+  .ucb-main-menu .ucb-home-button:focus,
+  .ucb-main-menu .ucb-home-button.active {
     border-bottom: none;
     margin-bottom: 0;
   }
 
-  #ucb-home-button {
+  .ucb-main-menu .ucb-home-button {
     margin-left: -12px;
   }
 
-  #ucb-home-button {
+  .ucb-main-menu .ucb-home-button {
     background: transparent;
     filter: none;
     color: #757575;
     border-left: none;
   }
 
-  #ucb-home-button:hover,
-  #ucb-home-button.active {
+  .ucb-main-menu .ucb-home-button:hover,
+  .ucb-main-menu .ucb-home-button.active {
     color: #333;
     background: transparent;
   }

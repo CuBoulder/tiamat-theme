@@ -1,6 +1,7 @@
 <?php
 
 use Drupal\Core\Entity\ContentEntityBase;
+use Drupal\node\Entity\Node;
 
 /**
  * @file
@@ -59,6 +60,33 @@ function boulder_base_preprocess(&$variables, $hook) {
 function boulder_base_preprocess_html(array &$variables) {
   $variables['ucb_gtm_account'] = theme_get_setting('ucb_gtm_account');
   $variables['theme_path'] = base_path() . $variables['directory'];
+}
+
+/**
+ * Attaches an `is_unpublished` attribute to menu links.
+ *
+ * Implements hook_preprocess_HOOK().
+ */
+function boulder_base_preprocess_menu(array &$variables) {
+  $menuName = $variables['menu_name'];
+  // Attaches only to menu links in the `main`, `secondary`, and `footer`
+  // menus.
+  if ($menuName == 'main' || $menuName == 'secondary' || $menuName == 'footer') {
+    foreach ($variables['items'] as $key => &$value) {
+      /** @var \Drupal\Core\Url */
+      $url = $value['url'];
+      // Ignores menu links to external URLs.
+      if ($url->isRouted()) {
+        $urlParams = $url->getRouteParameters();
+        // Ignores menu links to non-node routes.
+        if (isset($urlParams['node'])) {
+          $nid = $urlParams['node'];
+          $node = Node::load($nid);
+          $value['is_unpublished'] = !$node->isPublished();
+        }
+      }
+    }
+  }
 }
 
 /***

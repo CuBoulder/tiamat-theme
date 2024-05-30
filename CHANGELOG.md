@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds visual indicator to menu links linking to unpublished content
+  Resolves CuBoulder/tiamat-theme#1004
+---
+
 - ### Newsletter: Style Adjustments
   ### Newsletter
   - Fixes link color to default `ucb-link` color.
