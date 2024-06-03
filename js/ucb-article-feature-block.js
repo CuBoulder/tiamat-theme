@@ -450,7 +450,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
         featureReadMore.innerText = "Read More";
         //Screen Reader text
         var srOnly = document.createElement("span");
-        srOnly.className = "sr-only";
+        srOnly.className = "visually-hidden";
         srOnly.innerText = ` about ${article.title}`;
         featureReadMore.appendChild(srOnly);
 
@@ -552,7 +552,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
         featureReadMore.innerText = "Read More";
         //Screen Reader text
         var srOnly = document.createElement("span");
-        srOnly.className = "sr-only";
+        srOnly.className = "visually-hidden";
         srOnly.innerText = ` about ${article.title}`;
         featureReadMore.appendChild(srOnly);
 

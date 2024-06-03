@@ -141,10 +141,10 @@
     <div class="ucb-article" itemscope itemtype="https://schema.org/Article">
       {# If using a Title Background img, render that #}
       {% if content.field_article_title_background.0 %}
-        <header><h1 class="sr-only">{{ label }}</h1></header>
+        <header><h1 class="visually-hidden">{{ label }}</h1></header>
         <div class="backgroundTitleDiv {{ overlayClass }}">
           {{ content.field_article_title_background }}
-          <div{{ title_attributes.addClass('ucb-article-heading', 'article-header-' ~ textColor, is_front ? 'sr-only') }}>
+          <div{{ title_attributes.addClass('ucb-article-heading', 'article-header-' ~ textColor, is_front ? 'visually-hidden') }}>
             <div class="container">
               <h1>{{ label }}</h1>
             </div>
@@ -154,7 +154,7 @@
       <div class="container">
         {# If NO Title Background img, render the regular title #}
         {% if not content.field_article_title_background.0 %}
-          <h1{{ title_attributes.addClass('ucb-article-heading', is_front ? 'sr-only') }}>
+          <h1{{ title_attributes.addClass('ucb-article-heading', is_front ? 'visually-hidden') }}>
             {{ label }}
           </h1>
         {% endif %}
@@ -170,7 +170,7 @@
           {% if showDate %}
             <div class="ucb-article-date">
               <i class="fa-regular fa-calendar"></i>
-              <span class="sr-only">Published:{{ date_formatted }}</span>
+              <span class="visually-hidden">Published:{{ date_formatted }}</span>
               <span itemprop="datePublished">
                 {{ date_formatted }}
               </span>
@@ -194,7 +194,7 @@
       {% if content.field_appears_in_issue|render %}
         <div role="contentinfo" class="container ucb-article-issue" itemprop="keywords">
           <div>
-            <span class="sr-only">Issues:</span>
+            <span class="visually-hidden">Issues:</span>
             <i class="fa-solid fa-book"></i>
           </div>
           {{ content.field_appears_in_issue }}

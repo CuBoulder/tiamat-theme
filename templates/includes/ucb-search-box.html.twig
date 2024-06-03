@@ -3,7 +3,7 @@
   <form action="{{ site_search.0.url }}" method="get">
     <div class="ucb-search-box-inputs">
       <div class="ucb-search-input-text">
-        <label for="ucb-search-text-field" class="sr-only">Enter the terms you wish to search for.</label>
+        <label for="ucb-search-text-field" class="visually-hidden">Enter the terms you wish to search for.</label>
         <input id="ucb-search-text-field" placeholder="{{ site_search.0.placeholder }}" type="search" name="{{ site_search.0.parameter ?? 'keys' }}" value="" size="15" maxlength="1024">
       </div>
       <div class="ucb-search-input-submit">

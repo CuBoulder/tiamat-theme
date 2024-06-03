@@ -3,10 +3,10 @@
 {#Dummy variable to ensure that all content tags are set for caching purposes#}
 {% set content_render = content|render %}
 
-{# Used for hiding site title visibly using sr-only bootstrap class, if front page #}
+{# Used for hiding site title visibly using visually-hidden bootstrap class, if front page #}
 {% set isFrontPage = '' %}
 {% if is_front %}
-	{% set isFrontPage = 'sr-only' %}
+	{% set isFrontPage = 'visually-hidden' %}
 {% endif %}
 
 {%
