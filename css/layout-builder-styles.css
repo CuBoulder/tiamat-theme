@@ -232,14 +232,14 @@
 }
 
 .ucb-boostrap-layout-section .column .block {
-  padding-bottom: 1em;
-  margin-bottom: 1.5rem;
+  padding-bottom: 1.5em;
+  margin-bottom: 12px;
 }
 
 .ucb-boostrap-layout-section .column .block:first-child {
-  padding-top: 1em;
-  padding-bottom: 1em;
-  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  padding-bottom: 1.5em;
+  margin-top: 12px;
 }
 
 /*** Content Frame ***/
@@ -251,7 +251,6 @@
 .content-frame-light-gray .column {
   background: rgba(255, 255, 255, 0.85);
   color: var(--ucb-black);
-  padding: 0 20px;
   margin: 20px 0;
 }
 
@@ -266,7 +265,6 @@
 .content-frame-dark-gray .column {
   background: rgba(0, 0, 0, 0.75);
   color: var(--ucb-white);
-  padding: 0 20px;
   margin: 20px 0;
 }
 
@@ -278,9 +276,8 @@
   color: var(--ucb-white);
 }
 
-/*** EDGE-TO-EDGE OPTIONS ***/
-.ucb-contained-row .container {
-  --bs-gutter-y: 0;
+/*** EDGE-TO-EDGE FIXES ***/
+.ucb-contained-row .bs-background-unstyled.container {
   --bs-gutter-x: 0;
 }
 

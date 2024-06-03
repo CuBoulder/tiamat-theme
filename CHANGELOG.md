@@ -9,6 +9,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Block Alignments
+  Made fixes to layout alignment so that blocks will always be synced.
+  The main thing is that the left edge and right edge of the row content should align properly. 
+  There are very slight deviations in the 3 and 4 column options but those are normal for how css handles rows more than 2 columns. (The D7 version has the same discrepancies) 
+  
+  Test by making tones of rows with different combos of frames and background colors with various different block types
+  
+  Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/43
+  
+  Resolves #847 
+  
+  <img width="1355" alt="image" src="https://github.com/CuBoulder/tiamat-theme/assets/94021017/093fb2b9-9ef0-482e-8c1c-e4619e2365b0">
+  <img width="1327" alt="image" src="https://github.com/CuBoulder/tiamat-theme/assets/94021017/47778b20-de74-464a-82df-fd6185093a34">
+  <img width="1421" alt="image" src="https://github.com/CuBoulder/tiamat-theme/assets/94021017/9b44b5be-8a94-4b7b-b75c-50afd4c8cce1">
+  <img width="1431" alt="image" src="https://github.com/CuBoulder/tiamat-theme/assets/94021017/ecf20eac-cbe2-40a4-a752-07b3b274eded">
+  
+  
+  
+  
+---
+
 - ### Adds visual indicator to menu links linking to unpublished content
   Resolves CuBoulder/tiamat-theme#1004
 ---
