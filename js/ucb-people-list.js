@@ -107,7 +107,7 @@
       messageElement.className = 'ucb-list-msg';
       messageElement.setAttribute('hidden', '');
       loadingElement.className = 'ucb-loading-data';
-      loadingElement.innerHTML = '<span class="sr-only">Loading</span><i aria-hidden="true" class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>';
+      loadingElement.innerHTML = '<span class="visually-hidden">Loading</span><i aria-hidden="true" class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>';
       chromeElement.appendChild(userFormElement);
       contentWrapperElement.appendChild(messageElement);
       contentWrapperElement.appendChild(contentElement);
@@ -619,7 +619,7 @@
                     <i class="fa-solid fa-envelope iconColor"></i>
                     <a href="mailto:${personEmail}">
                       <span aria-hidden="true" class="ucb-people-list-contact">Email</span>
-                      <span class="sr-only">Email ${personName} at ${personEmail}</span> 
+                      <span class="visually-hidden">Email ${personName} at ${personEmail}</span> 
                     </a>
                   </span>`
                     : ""

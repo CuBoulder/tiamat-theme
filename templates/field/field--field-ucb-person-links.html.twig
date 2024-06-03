@@ -20,7 +20,7 @@
 
 					{% set linkTitle = item.content['#title'] %}
 					{% if item.content['#url']|render|first == '/' %}
-						<span class="sr-only">Primary Link</span>
+						<span class="visually-hidden">Primary Link</span>
 						<i class="fa-solid fa-link primaryLinkIcon"></i>
 						<a href="{{ item.content['#url']|render }}" class="ucb-person-social-link ucb-person-other-link" title="Social Media" alt="Social Media">
 							{% if linkTitle|render %}
@@ -35,98 +35,98 @@
 						{% set linkUrlUpper = linkUrl|upper %}
 
 						{% if 'FACEBOOK' in linkUrlUpper %}
-							<span class="sr-only">Facebook</span>
+							<span class="visually-hidden">Facebook</span>
 							<i class="fa-brands fa-facebook"></i>
 							<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-facebook-link" title="Facebook" alt="Facebook">
 								<span>{{ linkTitle }}</span>
 							</a>
 
 						{% elseif 'TWITTER' in linkUrlUpper %}
-							<span class="sr-only">Twitter</span>
+							<span class="visually-hidden">Twitter</span>
 							<i class="fa-brands fa-x-twitter"></i>
 							<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-twitter-link" title="Twitter" alt="Twitter">
 								<span>{{ linkTitle }}</span>
 							</a>
 
 						{% elseif 'FLICKR' in linkUrlUpper %}
-							<span class="sr-only">Flickr</span>
+							<span class="visually-hidden">Flickr</span>
 							<i class="fa-brands fa-flickr"></i>
 							<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-flickr-link" title="Flickr" alt="Flickr">
 								<span>{{ linkTitle }}</span>
 							</a>
 
 						{% elseif 'LINKEDIN' in linkUrlUpper %}
-							<span class="sr-only">LinkedIn</span>
+							<span class="visually-hidden">LinkedIn</span>
 							<i class="fa-brands fa-linkedin"></i>
 							<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-linkedin-link" title="LinkedIn" alt="LinkedIn">
 								<span>{{ linkTitle }}</span>
 							</a>
 
 						{% elseif 'YOUTUBE' in linkUrlUpper %}
-							<span class="sr-only">YouTube</span>
+							<span class="visually-hidden">YouTube</span>
 							<i class="fa-brands fa-youtube"></i>
 							<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-youtube-link" title="YouTube" alt="YouTube">
 								<span>{{ linkTitle }}</span>
 							</a>
 
 						{% elseif 'INSTAGRAM' in linkUrlUpper %}
-							<span class="sr-only">Instagram</span>
+							<span class="visually-hidden">Instagram</span>
 							<i class="fa-brands fa-instagram"></i>
 							<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-instagram-link" title="Instagram" alt="Instagram">
 								<span>{{ linkTitle }}</span>
 							</a>
 
 						{% elseif 'DISCORD' in linkUrlUpper %}
-							<span class="sr-only">Discord</span>
+							<span class="visually-hidden">Discord</span>
 							<i class="fa-brands fa-discord"></i>
 							<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-discord-link" title="Discord" alt="Discord">
 								<span>{{ linkTitle }}</span>
 							</a>
 
 						{% elseif 'PINTREST' in linkUrlUpper %}
-							<span class="sr-only">Pintrest</span>
+							<span class="visually-hidden">Pintrest</span>
 							<i class="fa-brands fa-pinterest-p"></i>
 							<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-pintrest-link" title="Pintrest" alt="Pintrest">
 								<span>{{ linkTitle }}</span>
 							</a>
 
 						{% elseif 'VIMEO' in linkUrlUpper %}
-							<span class="sr-only">Vimeo</span>
+							<span class="visually-hidden">Vimeo</span>
 							<i class="fa-brands fa-vimeo-v"></i>
 							<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-vimeo-link" title="Vimeo" alt="Vimeo">
 								<span>{{ linkTitle }}</span>
 							</a>
 
 						{% elseif 'WORDPRESS' in linkUrlUpper %}
-							<span class="sr-only">Wordpress</span>
+							<span class="visually-hidden">Wordpress</span>
 							<i class="fa-brands fa-wordpress-simple"></i>
 							<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-wordpress-link" title="Wordpress" alt="Wordpress">
 								<span>{{ linkTitle }}</span>
 							</a>
 
 						{% elseif 'TIKTOK' in linkUrlUpper %}
-							<span class="sr-only">TikTok</span>
+							<span class="visually-hidden">TikTok</span>
 							<i class="fa-brands fa-tiktok"></i>
 							<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-tiktok-link" title="TikTok" alt="TikTok">
 								<span>{{ linkTitle }}</span>
 							</a>
 
 						{% elseif 'REDDIT' in linkUrlUpper %}
-							<span class="sr-only">Reddit</span>
+							<span class="visually-hidden">Reddit</span>
 							<i class="fa-brands fa-reddit-alien"></i>
 							<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-reddit-link" title="Reddit" alt="Reddit">
 								<span>{{ linkTitle }}</span>
 							</a>
 
 						{% elseif 'PATREON' in linkUrlUpper %}
-							<span class="sr-only">Patreon</span>
+							<span class="visually-hidden">Patreon</span>
 							<i class="fa-brands fa-patreon"></i>
 							<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-patreon-link" title="Patreon" alt="Patreon">
 								<span>{{ linkTitle }}</span>
 							</a>
 
 						{% else %}
-							<span class="sr-only">Link</span>
+							<span class="visually-hidden">Link</span>
 							<i class="fa-solid fa-up-right-from-square"></i>
 							<a href="{{ linkUrl }}" class="ucb-person-social-link ucb-person-other-link" title="Social Media" alt="Social Media">
 								{% if linkTitle|render %}

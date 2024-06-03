@@ -7,7 +7,7 @@
 {% set items = items|filter(item => item.content['#options'].entity.field_ucb_tag_display.value == '1') %}
 {% if items %}
   <div role="contentinfo" class="container ucb-article-tags" itemprop="keywords">
-    <span class="sr-only">Tags:</span>
+    <span class="visually-hidden">Tags:</span>
     <div class="ucb-article-tag-icon" aria-hidden="true">
       <i class="fa-solid fa-tags"></i>
     </div>

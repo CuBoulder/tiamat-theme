@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Replaces `sr-only` Bootstrap 4 class with `visually-hidden` Bootstrap 5 class
+  [Bug, a11y] Resolves CuBoulder/tiamat-theme#1021 Visually hidden (screenreader) elements briefly visible on page load
+---
+
 - ### Block Alignments
   Made fixes to layout alignment so that blocks will always be synced.
   The main thing is that the left edge and right edge of the row content should align properly. 

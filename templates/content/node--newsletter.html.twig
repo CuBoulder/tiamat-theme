@@ -23,7 +23,7 @@
     'class': ['container', 'ucb-newsletter'],
     'data-loggedin': logged_in ? 'true' : 'false' }) }}>
     {# Newsletter Title #}
-    <h1{{ title_attributes.addClass('ucb-newsletter-title', is_front ? 'sr-only').setAttribute('itemprop', 'name') }}>
+    <h1{{ title_attributes.addClass('ucb-newsletter-title', is_front ? 'visually-hidden').setAttribute('itemprop', 'name') }}>
       {{ label }}
     </h1>
     {# Newsletter Intro #}
