@@ -1,4 +1,4 @@
-# CU Boulder Drupal 9+ Base Theme
+# CU Boulder Drupal 10+ Base Theme
 
 All notable changes to this project will be documented in this file.
 
