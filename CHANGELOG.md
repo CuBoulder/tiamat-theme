@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Expandable Color Consistency
+  ### Expandable Blocks (Legacy Shortcode and Expandable Content Block)
+  - `Expandable` legacy shortcode style now mirrors `Expandable Content` Block
+  - Horizontal inactive tabs on the `Expandable Content` block fixed to inherit color as well.  
+  
+  Includes:
+  - `theme` => https://github.com/CuBoulder/tiamat-theme/pull/1034
+  - `migration_shortcodes` => https://github.com/CuBoulder/ucb_migration_shortcodes/pull/25
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/767
+---
+
 ## [20240604] - 2024-06-04
 
 -   ### Replaces `sr-only` Bootstrap 4 class with `visually-hidden` Bootstrap 5 class
