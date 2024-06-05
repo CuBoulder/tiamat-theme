@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Frame css
+  Updated frame css for section and block styles compatibility.
+  
+  - `theme` => https://github.com/CuBoulder/tiamat-theme/pull/1037
+  - `bootstrap_layouts` => https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/47
+---
+
 - ### Expandable Color Consistency
   ### Expandable Blocks (Legacy Shortcode and Expandable Content Block)
   - `Expandable` legacy shortcode style now mirrors `Expandable Content` Block
