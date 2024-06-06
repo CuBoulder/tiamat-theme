@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds Google Translate
+  Adds Google Translate functionality to the UCB Brand Bar
+  
+  Resolves #996 
+---
+
 - ### Frame css
   Updated frame css for section and block styles compatibility.
   
