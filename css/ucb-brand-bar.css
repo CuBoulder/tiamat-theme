@@ -71,11 +71,12 @@ div.skiptranslate iframe{
 .ucb-lang-select {
   -webkit-appearance: none;
   -moz-appearance: none;
-  text-indent: 1px;
   text-overflow: '';
   border: none;
   padding: 0 10px 0 5px;
   font-weight: bold;
+  color: inherit !important;
+  background-color: inherit !important;
 }
 
 .ucb-lang-select:active{
