@@ -66,3 +66,21 @@ div.skiptranslate iframe{
 #google_translate_element2{
   display: none;
 }
+
+.ucb-lang-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: '';
+  border: none;
+  padding: 0 10px 0 5px;
+  font-weight: bold;
+}
+
+.ucb-lang-select:active{
+  border: none;
+}
+.ucb-lang-icon{
+  display: flex;
+  align-items: center;
+}

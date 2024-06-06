@@ -119,16 +119,19 @@
             </a>
             <div class="ucb-brand-bar-controls">
               {# Google Translate #}
-              <select onchange="doGTranslate(this);">
-                <option value="">Select Language</option>
-                <option value="en|en">English</option>
-                <option value="en|es">Spanish</option>
-                <option value="en|zh-CN">Chinese</option>
-                <option value="en|fr">French</option>
-                <option value="en|de">German</option>
-                <option value="en|ko">Korean</option>
-                <option value="en|lo">Lao</option>
-                <option value="en|ne">Nepali</option>
+              <div class="ucb-lang-icon">
+                <i class="fa-solid fa-language"></i>
+              </div>
+              <select class="ucb-lang-select" onchange="doGTranslate(this);">
+                <option class="ucb-lang-option" value="">Translate</option>
+                <option class="ucb-lang-option" value="en|en">English</option>
+                <option class="ucb-lang-option" value="en|es">Spanish</option>
+                <option class="ucb-lang-option" value="en|zh-CN">Chinese</option>
+                <option class="ucb-lang-option" value="en|fr">French</option>
+                <option class="ucb-lang-option" value="en|de">German</option>
+                <option class="ucb-lang-option" value="en|ko">Korean</option>
+                <option class="ucb-lang-option" value="en|lo">Lao</option>
+                <option class="ucb-lang-option" value="en|ne">Nepali</option>
               </select>
               <div id="google_translate_element2"></div>
               <script type="text/javascript">function googleTranslateElementInit2() {new google.translate.TranslateElement({pageLanguage: 'en',autoDisplay: false}, 'google_translate_element2');}</script>
