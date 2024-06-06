@@ -58,3 +58,11 @@
   width: 20px;
   height: 20px;
 }
+/* Google Translate */
+div.skiptranslate iframe{
+  visibility: collapse !important;
+}
+
+#google_translate_element2{
+  display: none;
+}
