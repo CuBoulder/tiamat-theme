@@ -58,6 +58,7 @@
   width: 20px;
   height: 20px;
 }
+
 /* Google Translate */
 div.skiptranslate iframe{
   visibility: collapse !important;
@@ -80,6 +81,7 @@ div.skiptranslate iframe{
 .ucb-lang-select:active{
   border: none;
 }
+
 .ucb-lang-icon{
   display: flex;
   align-items: center;
