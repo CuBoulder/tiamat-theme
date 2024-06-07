@@ -11,6 +11,9 @@
 ]
 %}
 
+{# Base Url #}
+{% set baseurlJSON = url('<front>')|render|trim('/') %}
+
 {# Block/Title/Icon Styles #}
 {% set blockStyles = [
 	content.field_bs_background_style|render|striptags|trim,
@@ -41,5 +44,5 @@
 		</div>
 	{% endif %}
 	{{ title_suffix }}
-	<category-cloud-block></category-cloud-block>
+	<category-cloud-block base-uri="{{baseurlJSON}}"></category-cloud-block>
 </div>

@@ -1,16 +1,17 @@
 class CategoryCloudElement extends HTMLElement {
 	constructor() {
 		super();
-        
+    this._baseURI = this.getAttribute("base-uri");
+
         const handleError = response => {
-            if (!response.ok) { 
+            if (!response.ok) {
                throw new Error;
             } else {
                return response.json();
             }
         };
 
-        fetch(`/jsonapi/taxonomy_term/category?page[limit]=1000`)
+        fetch(`${this._baseURI}/jsonapi/taxonomy_term/category?page[limit]=1000`)
             .then(handleError)
             .then((data) => this.build(data))
             .catch(Error=> this.handleError(Error));
@@ -56,7 +57,7 @@ class CategoryCloudElement extends HTMLElement {
         this.appendChild(container)
         // Log error
             console.error(Error)
-        
+
     }
 }
 
