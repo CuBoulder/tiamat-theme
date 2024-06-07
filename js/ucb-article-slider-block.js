@@ -4,6 +4,8 @@ class ArticleSliderBlockElement extends HTMLElement {
         // Count, display and JSON API Endpoint
         var count = 6;
         var API = this.getAttribute('jsonapi');
+        this._baseURI = this.getAttribute("base-uri");
+
         // Exclusions are done on the JS side, get into arrays. Blank if no exclusions
         var excludeCatArray = this.getAttribute('exCats').split(",").map(Number);
         var excludeTagArray = this.getAttribute('exTags').split(",").map(Number);
@@ -24,7 +26,7 @@ class ArticleSliderBlockElement extends HTMLElement {
         let NEXTJSONURL = "";
         if(data.links.next) {
             let nextURL = data.links.next.href.split("/jsonapi/");
-            NEXTJSONURL = `/jsonapi/${nextURL[1]}`;
+            NEXTJSONURL = `${this._baseURI}/jsonapi/${nextURL[1]}`;
           } else {
             NEXTJSONURL = "";
           }
@@ -68,7 +70,7 @@ class ArticleSliderBlockElement extends HTMLElement {
         data.data.map(item=>{
           // If no thumbnail, omit from inclusion
           if (!item.relationships.field_ucb_article_thumbnail.data) {
-            return; 
+            return;
           }
             let thisArticleCats = [];
             let thisArticleTags = [];
@@ -80,7 +82,7 @@ class ArticleSliderBlockElement extends HTMLElement {
                     .drupal_internal__target_id
                 )
               }
-            }  
+            }
             // // loop through and grab all of the tags
             if (item.relationships.field_ucb_article_tags) {
               for (var i = 0; i < item.relationships.field_ucb_article_tags.data.length; i++) {
@@ -90,7 +92,7 @@ class ArticleSliderBlockElement extends HTMLElement {
 
             let doesIncludeCat = thisArticleCats;
             let doesIncludeTag = thisArticleTags;
-  
+
             // check to see if we need to filter on categories
             if (excludeCatArray.length && thisArticleCats.length) {
               doesIncludeCat = thisArticleCats.filter((element) =>
@@ -176,7 +178,7 @@ class ArticleSliderBlockElement extends HTMLElement {
         var articleTitle = document.createElement('span')
             articleTitle.className = 'ucb-article-img-title'
             articleTitle.innerText = article.title;
-        
+
         //  Append
         articleImgLink.appendChild(articleTitle)
         articleImgLink.appendChild(articleImg)
@@ -215,7 +217,7 @@ class ArticleSliderBlockElement extends HTMLElement {
 
     // Used for error handling within the API response
     handleError = response => {
-        if (!response.ok) { 
+        if (!response.ok) {
            throw new Error;
         } else {
            return response.json();
