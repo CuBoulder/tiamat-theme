@@ -87,3 +87,7 @@ div.skiptranslate iframe{
   display: flex;
   align-items: center;
 }
+/* needed to prevent google translate from shifting after translation */
+body {
+  top:0 !important;
+}
