@@ -38,205 +38,139 @@ class ArticleGridBlockElement extends HTMLElement {
     excludeTagArray,
     finalArticles = []
   ) {
-    // More than 10 articles? This sets up the next call if there's more articles to be retrieved but not enough post-filters
-    let NEXTJSONURL = "";
-    if (data.links.next) {
-      let nextURL = data.links.next.href.split("/jsonapi/");
-      NEXTJSONURL = `${this._baseURI}/jsonapi/${nextURL[1]}`;
-    } else {
-      NEXTJSONURL = "";
-    }
+
+    // Handle the next URL for pagination if needed
+    let NEXTJSONURL = data.links.next
+      ? `${this._baseURI}/jsonapi/${data.links.next.href.split("/jsonapi/")[1]}`
+      : "";
 
     // If no Articles retrieved...
-    if (data.data.length == 0) {
+    if (data.data.length === 0) {
       this.toggleMessage("ucb-al-loading");
       this.toggleMessage("ucb-al-error", "block");
       console.warn(
         "No Articles retrieved - please check your inclusion filters and try again"
       );
-    } else {
-      // Below objects are needed to match images with their corresponding articles. There are two endpoints => data.data (article) and data.included (incl. media), both needed to associate a media library image with its respective article
-      let idObj = {};
-      let altObj = {};
-      // Remove any blanks from our articles before map
-      if (data.included) {
-        // removes all other included data besides images in our included media
-        let idFilterData = data.included.filter((item) => {
-          return item.type == "media--image";
-        });
+      return;
+    }
 
-        let altFilterData = data.included.filter((item) => {
-          return item.type == "file--file";
-        });
-        // finds the focal point version of the thumbnail
-        altFilterData.map((item) => {
-          // checks if consumer is working, else default to standard image instead of focal image
-          if (item.links.focal_image_square != undefined) {
-            altObj[item.id] = item.links.focal_image_square.href;
-          } else {
-            altObj[item.id] = item.attributes.uri.url;
-          }
-        });
+    // Map for media image associations
+    const idObj = {};
+    const altObj = {};
 
-        // using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
-        idFilterData.map((pair) => {
+    // Process included data for media images
+    if (data.included) {
+      data.included
+        .filter((item) => item.type === "media--image")
+        .forEach((pair) => {
           idObj[pair.id] = pair.relationships.thumbnail.data.id;
         });
-      }
-      // Iterate over each Article
-      await Promise.all(
-        data.data.map(async (item) => {
-          // Article must have a thumbnail
-          if (item.relationships.field_ucb_article_thumbnail.data) {
-            let thisArticleCats = [];
-            let thisArticleTags = [];
+      data.included
+        .filter((item) => item.type === "file--file")
+        .forEach((item) => {
+          altObj[item.id] = item.links.focal_image_square
+            ? item.links.focal_image_square.href
+            : item.attributes.uri.url;
+        });
+    }
 
-            // loop through and grab all of the categories
-            if (item.relationships.field_ucb_article_categories) {
-              for (
-                let i = 0;
-                i < item.relationships.field_ucb_article_categories.data.length;
-                i++
-              ) {
-                thisArticleCats.push(
-                  item.relationships.field_ucb_article_categories.data[i].meta
-                    .drupal_internal__target_id
-                );
-              }
+    // Process each article
+    const articlesToAdd = await Promise.all(
+      data.data.map(async (item) => {
+        if (item.relationships.field_ucb_article_thumbnail.data) {
+          const thisArticleCats =
+            item.relationships.field_ucb_article_categories?.data.map(
+              (cat) => cat.meta.drupal_internal__target_id
+            ) || [];
+          const thisArticleTags =
+            item.relationships.field_ucb_article_tags?.data.map(
+              (tag) => tag.meta.drupal_internal__target_id
+            ) || [];
+
+          const doesIncludeCat = excludeCatArray.length
+            ? thisArticleCats.filter((cat) => excludeCatArray.includes(cat))
+            : [];
+          const doesIncludeTag = excludeTagArray.length
+            ? thisArticleTags.filter((tag) => excludeTagArray.includes(tag))
+            : [];
+
+          // Proceed if no excluded categories or tags are found
+          if (doesIncludeCat.length === 0 && doesIncludeTag.length === 0) {
+            const bodyAndImageId =
+              item.relationships.field_ucb_article_content?.data[0]?.id || "";
+            let body = item.attributes.field_ucb_article_summary || "";
+            if (!body && bodyAndImageId) {
+              body = await this.getArticleParagraph(bodyAndImageId);
             }
-            // loop through and grab all of the tags
-            if (item.relationships.field_ucb_article_tags) {
-              for (
-                var i = 0;
-                i < item.relationships.field_ucb_article_tags.data.length;
-                i++
-              ) {
-                thisArticleTags.push(
-                  item.relationships.field_ucb_article_tags.data[i].meta
-                    .drupal_internal__target_id
-                );
-              }
-            }
+            const imageSrc = item.relationships.field_ucb_article_thumbnail.data
+              ? altObj[
+                  idObj[item.relationships.field_ucb_article_thumbnail.data.id]
+                ]
+              : "";
 
-            let doesIncludeCat = thisArticleCats;
-            let doesIncludeTag = thisArticleTags;
-
-            // check to see if we need to filter on categories
-            if (excludeCatArray.length && thisArticleCats.length) {
-              doesIncludeCat = thisArticleCats.filter((element) =>
-                excludeCatArray.includes(element)
-              );
-            }
-            // check to see if we need to filter on tags
-            if (excludeTagArray.length && thisArticleTags.length) {
-              doesIncludeTag = thisArticleTags.filter((element) =>
-                excludeTagArray.includes(element)
-              );
-            }
-
-            // If there's no categories or tags that are in the exclusions, proceed
-            if (doesIncludeCat.length == 0 && doesIncludeTag.length == 0) {
-              // okay to render
-              let bodyAndImageId = item.relationships.field_ucb_article_content
-                .data.length
-                ? item.relationships.field_ucb_article_content.data[0].id
-                : "";
-              let body = item.attributes.field_ucb_article_summary
-                ? item.attributes.field_ucb_article_summary
-                : "";
-              body = body.trim();
-              let imageSrc = "";
-
-              if (!body.length && bodyAndImageId != "") {
-                body = await this.getArticleParagraph(bodyAndImageId);
-              }
-
-              // if no thumbnail, show no image
-              if (!item.relationships.field_ucb_article_thumbnail.data) {
-                imageSrc = "";
-              } else {
-                // Use the idObj as a memo to add the corresponding image url
-                let thumbId =
-                  item.relationships.field_ucb_article_thumbnail.data.id;
-                imageSrc = altObj[idObj[thumbId]];
-              }
-
-              // Date - make human readable
-              const options = {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              };
-              let date = new Date(item.attributes.created).toLocaleDateString(
+            return {
+              title: item.attributes.title,
+              link: item.attributes.path.alias,
+              image: imageSrc,
+              date: new Date(item.attributes.created).toLocaleDateString(
                 "en-us",
-                options
-              );
-              let title = item.attributes.title;
-              let link = item.attributes.path.alias;
-
-              // Create an Article Object for programmatic rendering
-              const article = {
-                title,
-                link,
-                image: imageSrc,
-                date,
-                body,
-              };
-              // Adds the article object to the final array of articles chosen
-              finalArticles.push(article);
-            }
+                { year: "numeric", month: "short", day: "numeric" }
+              ),
+              body: body.trim(),
+            };
           }
-        })
-      );
-      // Case for not enough articles selected and extra articles available
-      if (finalArticles.length < count && NEXTJSONURL) {
-        fetch(NEXTJSONURL)
-          .then(this.handleError)
-          .then((data) =>
-            this.build(
-              data,
-              count,
-              includeSummary,
-              excludeCatArray,
-              excludeTagArray,
-              finalArticles
-            )
+        }
+        return null;
+      })
+    );
+
+    finalArticles.push(...articlesToAdd.filter((article) => article !== null));
+
+    // Fetch more articles if needed
+    if (finalArticles.length < count && NEXTJSONURL) {
+      fetch(NEXTJSONURL)
+        .then(this.handleError)
+        .then((data) =>
+          this.build(
+            data,
+            count,
+            includeSummary,
+            excludeCatArray,
+            excludeTagArray,
+            finalArticles
           )
-          .catch((Error) => {
-            console.error(
-              "There was an error fetching data from the API - Please try again later."
-            );
-            console.error(Error);
-            this.toggleMessage("ucb-al-loading");
-            this.toggleMessage("ucb-al-api-error", "block");
-          });
-      }
+        )
+        .catch((Error) => {
+          console.error(
+            "There was an error fetching data from the API - Please try again later."
+          );
+          console.error(Error);
+          this.toggleMessage("ucb-al-loading");
+          this.toggleMessage("ucb-al-api-error", "block");
+        });
+    }
 
-      // If no chosen articles and no other options, provide error
-      if (finalArticles.length === 0 && !NEXTJSONURL) {
-        console.error(
-          "There are no available Articles that match the selected filters. Please adjust your filters and try again."
-        );
-        this.toggleMessage("ucb-al-loading");
-        this.toggleMessage("ucb-al-error", "block");
-      }
+    if (finalArticles.length === 0 && !NEXTJSONURL) {
+      console.error(
+        "There are no available Articles that match the selected filters. Please adjust your filters and try again."
+      );
+      this.toggleMessage("ucb-al-loading");
+      this.toggleMessage("ucb-al-error", "block");
+    }
 
-      // Case for Too many articles
-      if (
-        finalArticles.length >= count ||
-        (finalArticles.length >= count && NEXTJSONURL)
-      ) {
-        finalArticles.length = count;
-      }
+    if (
+      finalArticles.length >= count ||
+      (finalArticles.length >= count && NEXTJSONURL)
+    ) {
+      finalArticles.length = count;
+    }
 
-      // Have articles and want to proceed
-      if (
-        (finalArticles.length >= 0 && !NEXTJSONURL) ||
-        (finalArticles.length == count && NEXTJSONURL)
-      ) {
-        finalArticles.length = count;
-        this.renderDisplay(finalArticles, includeSummary);
-      }
+    if (
+      (finalArticles.length >= 0 && !NEXTJSONURL) ||
+      (finalArticles.length === count && NEXTJSONURL)
+    ) {
+      finalArticles.length = count;
+      this.renderDisplay(finalArticles, includeSummary);
     }
   }
 
