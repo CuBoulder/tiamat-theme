@@ -5,6 +5,8 @@ class ArticleFeatureBlockElement extends HTMLElement {
     var display = this.getAttribute("display");
     var imgSize = this.getAttribute("imgSize");
     var API = this.getAttribute("jsonapi");
+    this._baseURI = this.getAttribute("base-uri");
+
     var count = display === "stacked" ? 4 : 5;
     // Exclusions are done on the JS side, get into arrays. Blank if no exclusions
     var excludeCatArray = this.getAttribute("exCats").split(",").map(Number);
@@ -46,7 +48,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
     let NEXTJSONURL = "";
     if (data.links.next) {
       let nextURL = data.links.next.href.split("/jsonapi/");
-      NEXTJSONURL = `/jsonapi/${nextURL[1]}`;
+      NEXTJSONURL = `${this._baseURI}/jsonapi/${nextURL[1]}`;
     } else {
       NEXTJSONURL = "";
     }
@@ -249,29 +251,36 @@ class ArticleFeatureBlockElement extends HTMLElement {
       return "";
     }
 
-    const response = await fetch(`/jsonapi/paragraph/article_content/${id}`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch article paragraph");
-    }
-
-    const data = await response.json();
-    if (!data.data.attributes.field_article_text) return ""; //  needed for external articles
-
-    let htmlStrip = data.data.attributes.field_article_text.processed.replace(
-      /<\/?[^>]+(>|$)/g,
-      ""
-    );
-    let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
-    let trimmedString = lineBreakStrip.substr(0, 250);
-
-    if (trimmedString.length > 100) {
-      trimmedString = trimmedString.substr(
-        0,
-        Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
+    try {
+      const response = await fetch(
+        `${this._baseURI}/jsonapi/paragraph/article_content/${id}`
       );
-    }
+      const data = await response.json();
+      if (!data.data.attributes.field_article_text) return ""; //  needed for external articles
 
-    return trimmedString + "...";
+      let htmlStrip = data.data.attributes.field_article_text.processed.replace(
+        /<\/?[^>]+(>|$)/g,
+        ""
+      );
+      let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
+      let trimmedString = lineBreakStrip.substr(0, 250);
+
+      if (trimmedString.length > 100) {
+        trimmedString = trimmedString.substr(
+          0,
+          Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
+        );
+      }
+      return trimmedString + "...";
+    } catch (Error) {
+      console.error(
+        "There was an error fetching Article Paragraph from the API - Please try again later."
+      );
+      console.error(Error);
+      this.toggleMessage("ucb-al-loading");
+      this.toggleMessage("ucb-al-api-error", "block");
+      return ""; // Return an empty string in case of error
+    }
   }
 
   // Responsible for calling the render function of the appropriate display
