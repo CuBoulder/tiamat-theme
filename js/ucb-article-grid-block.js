@@ -8,7 +8,7 @@ class ArticleGridBlockElement extends HTMLElement {
     // Exclusions are done on the JS side, get into arrays. Blank if no exclusions
     var excludeCatArray = this.getAttribute("exCats").split(",").map(Number);
     var excludeTagArray = this.getAttribute("exTags").split(",").map(Number);
-
+    this._baseURI = this.getAttribute("base-uri");
     fetch(API)
       .then(this.handleError)
       .then((data) =>
@@ -42,7 +42,7 @@ class ArticleGridBlockElement extends HTMLElement {
     let NEXTJSONURL = "";
     if (data.links.next) {
       let nextURL = data.links.next.href.split("/jsonapi/");
-      NEXTJSONURL = `/jsonapi/${nextURL[1]}`;
+      NEXTJSONURL = `${this._baseURI}/jsonapi/${nextURL[1]}`;
     } else {
       NEXTJSONURL = "";
     }
@@ -68,7 +68,7 @@ class ArticleGridBlockElement extends HTMLElement {
         let altFilterData = data.included.filter((item) => {
           return item.type == "file--file";
         });
-        // finds the focial point version of the thumbnail
+        // finds the focal point version of the thumbnail
         altFilterData.map((item) => {
           // checks if consumer is working, else default to standard image instead of focal image
           if (item.links.focal_image_square != undefined) {
@@ -91,7 +91,7 @@ class ArticleGridBlockElement extends HTMLElement {
             let thisArticleCats = [];
             let thisArticleTags = [];
 
-            // // loop through and grab all of the categories
+            // loop through and grab all of the categories
             if (item.relationships.field_ucb_article_categories) {
               for (
                 let i = 0;
@@ -104,7 +104,7 @@ class ArticleGridBlockElement extends HTMLElement {
                 );
               }
             }
-            // // loop through and grab all of the tags
+            // loop through and grab all of the tags
             if (item.relationships.field_ucb_article_tags) {
               for (
                 var i = 0;
@@ -155,13 +155,13 @@ class ArticleGridBlockElement extends HTMLElement {
               if (!item.relationships.field_ucb_article_thumbnail.data) {
                 imageSrc = "";
               } else {
-                //Use the idObj as a memo to add the corresponding image url
+                // Use the idObj as a memo to add the corresponding image url
                 let thumbId =
                   item.relationships.field_ucb_article_thumbnail.data.id;
                 imageSrc = altObj[idObj[thumbId]];
               }
 
-              //Date - make human readable
+              // Date - make human readable
               const options = {
                 year: "numeric",
                 month: "short",
@@ -174,7 +174,7 @@ class ArticleGridBlockElement extends HTMLElement {
               let title = item.attributes.title;
               let link = item.attributes.path.alias;
 
-              // Create an Article Object for programatic rendering
+              // Create an Article Object for programmatic rendering
               const article = {
                 title,
                 link,
@@ -246,29 +246,36 @@ class ArticleGridBlockElement extends HTMLElement {
       return "";
     }
 
-    const response = await fetch(`/jsonapi/paragraph/article_content/${id}`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch article paragraph");
-    }
-
-    const data = await response.json();
-    if (!data.data.attributes.field_article_text) return ""; //  needed for external articles
-
-    let htmlStrip = data.data.attributes.field_article_text.processed.replace(
-      /<\/?[^>]+(>|$)/g,
-      ""
-    );
-    let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
-    let trimmedString = lineBreakStrip.substr(0, 250);
-
-    if (trimmedString.length > 100) {
-      trimmedString = trimmedString.substr(
-        0,
-        Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
+    try {
+      const response = await fetch(
+        `${this._baseURI}/jsonapi/paragraph/article_content/${id}`
       );
-    }
+      const data = await response.json();
+      if (!data.data.attributes.field_article_text) return ""; //  needed for external articles
 
-    return trimmedString + "...";
+      let htmlStrip = data.data.attributes.field_article_text.processed.replace(
+        /<\/?[^>]+(>|$)/g,
+        ""
+      );
+      let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
+      let trimmedString = lineBreakStrip.substr(0, 250);
+
+      if (trimmedString.length > 100) {
+        trimmedString = trimmedString.substr(
+          0,
+          Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
+        );
+      }
+      return trimmedString + "...";
+    } catch (Error) {
+      console.error(
+        "There was an error fetching Article Paragraph from the API - Please try again later."
+      );
+      console.error(Error);
+      this.toggleMessage("ucb-al-loading");
+      this.toggleMessage("ucb-al-api-error", "block");
+      return ""; // Return an empty string in case of error
+    }
   }
 
   // Responsible for calling the render function of the appropriate display
