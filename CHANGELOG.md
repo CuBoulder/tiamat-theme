@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Google Translate: Fix style bugs
+  Resolves #1042 
+  
+  - Adds Black Background / White text option
+  - Removes text-indent
+---
+
 - ### Adds Google Translate
   Adds Google Translate functionality to the UCB Brand Bar
   

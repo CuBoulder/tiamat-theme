@@ -71,11 +71,12 @@ div.skiptranslate iframe{
 .ucb-lang-select {
   -webkit-appearance: none;
   -moz-appearance: none;
-  text-indent: 1px;
   text-overflow: '';
   border: none;
   padding: 0 10px 0 5px;
   font-weight: bold;
+  color: inherit !important;
+  background-color: inherit !important;
 }
 
 .ucb-lang-select:active{
@@ -85,4 +86,8 @@ div.skiptranslate iframe{
 .ucb-lang-icon{
   display: flex;
   align-items: center;
+}
+/* needed to prevent google translate from shifting after translation */
+body {
+  top:0 !important;
 }
