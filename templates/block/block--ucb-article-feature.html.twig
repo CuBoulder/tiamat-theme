@@ -11,6 +11,9 @@
   ]
   %}
 
+{# Base Url #}
+{% set baseurlJSON = url('<front>')|render|trim('/') %}
+
 {# This block mirrors the Article List Node - constructs a JSON endpoint in TWIG using include filters #}
 {# JSON API Endpoint information #}
 {% set articlesJSON = (url('<front>')|render|trim('/'))
