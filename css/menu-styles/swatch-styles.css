@@ -1,10 +1,17 @@
 @media only screen and (min-width: 601px) {
+
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .block-system-menu-blocksocial-media-menu ul,
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region.ucb-secondary-menu-button-display .ucb-secondary-menu-region-container,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region.ucb-secondary-menu-button-display .ucb-secondary-menu-region-container .ucb-menu {
     gap: 0rem;
   }
 
   .ucb-main-menu li.menu-item a.nav-link {
     margin-top: 2px;
+  }
+
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg{
+    height: 100%;
   }
 
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
@@ -48,7 +55,7 @@
 
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
-    padding: 0 5px;
+    padding: 5px 5px 0  5px;
     display: inline-block;
     color: #fff;
     font-weight: 400;
@@ -144,5 +151,10 @@
 
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media {
     height: 100%;
+  }
+
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region-container .block-system-menu-blocksecondary {
+    display: flex;
+    align-items: end;
   }
 }

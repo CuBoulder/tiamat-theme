@@ -49,7 +49,7 @@
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
     color: #bbb;
     font-weight: 400;
-    padding: 0 0.25rem;
+    padding: 0 0.25rem 5px .25rem;
   }
 
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media,
@@ -79,5 +79,10 @@
 
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media {
     height: 100%;
+  }
+
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region-container .block-system-menu-blocksecondary {
+    display: flex;
+    align-items: end;
   }
 }
