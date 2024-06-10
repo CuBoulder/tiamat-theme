@@ -26,6 +26,9 @@
     ~ '&filter[publish-check][condition][memberOf]=published'
   %}
 
+  {# Base Url #}
+  {% set baseurlJSON = url('<front>')|render|trim('/') %}
+
   {# include and exclude options set by the user #}
   {% set includeCategories = [] %}
   {% set myCategories =
@@ -197,6 +200,7 @@
   {{ content.body }}
 {# Article Grid Main Block#}
 <article-grid-block
+  base-uri="{{baseurlJSON}}"
   jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}"
   exCats="{{ excludeCategories }}"
   exTags="{{ excludeTags }}"

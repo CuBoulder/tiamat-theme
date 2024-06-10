@@ -9,6 +9,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### JSON API Consumer Block bug fixes
+  ### Adjusts the following blocks/page using JSON API to also provide the site's base path (for proper multisite functionality) #1044 
+    - Article Grid Block
+    - Article Feature Block
+    - Article List Block
+    - Article Slider Block
+    - Current Issue Block
+    - Category Cloud
+    - Tag Cloud
+    - Article List Page
+    - Issue Archive Page
+  
+  ### Adjusted Rendering Order on Article List Blocks (Article List Block, Article Grid Block, Article Feature Block) #1049 
+  - Previously a more complete Article could finish processing before one that needs additional calls to complete, such as one with a missing summary waiting for the Article body to finish processing (shortening, stripping elements, adding a `...` .) This could lead to an inconsistent order of Articles being displayed, despite a sort filter on the API call and the data coming back in the proper order. The `build` method on these components has been updated so that adding approved articles to the array of `final articles` (after include/exclude/fetching needed pieces/assembly/etc) are rendered in the order they are served by the API (by Date created) instead of as they come in completed.
+  
+  Also fixes bug with Article pages made without Summary content not getting the trimmed Article content correctly in the Article collection blocks/pages. This was due to a race condition and corrected with proper async/await.
+  
+  Resolves #1044 
+  Resolves #1049 
+---
+
 - ### Content Row: Missing image maintains layout
   ### Content Row - Large Teaser Alternate
   

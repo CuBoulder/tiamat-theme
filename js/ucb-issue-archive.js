@@ -1,9 +1,10 @@
 class IssueArchiveElement extends HTMLElement {
 	constructor() {
 		super();
-        
+      this._baseURI = this.getAttribute("base-uri");
+
         const handleError = response => {
-            if (!response.ok) { 
+            if (!response.ok) {
                throw new Error;
             } else {
                return response.json();
@@ -11,7 +12,7 @@ class IssueArchiveElement extends HTMLElement {
         };
 
         // Pagination &page[limit]=5
-        fetch(`/jsonapi/node/ucb_issue?include=field_ucb_issue_cover_image.field_media_image&fields[file--file]=uri,url&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published&sort=-created`)
+        fetch(`${this._baseURI}/jsonapi/node/ucb_issue?include=field_ucb_issue_cover_image.field_media_image&fields[file--file]=uri,url&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published&sort=-created`)
         .then(handleError)
             .then((data) => this.build(data))
             .catch(Error=> {
@@ -61,11 +62,11 @@ class IssueArchiveElement extends HTMLElement {
                     issueImg.classList = 'ucb-archive-card-img'
                     issueImg.src = imgUrl
                     issueImg.alt = `${title} issue artwork`
-    
+
                     const IssueImgLink = document.createElement('a')
                     IssueImgLink.classList = 'ucb-archive-card-img-link'
                     IssueImgLink.href = issueUrl
-                    
+
                     IssueImgLink.appendChild(issueImg)
                     issueContainer.appendChild(IssueImgLink)
                 }
@@ -79,7 +80,7 @@ class IssueArchiveElement extends HTMLElement {
                 titleLink.href = issueUrl
                 titleLink.appendChild(issueTitle)
 
-                
+
                 issueContainer.appendChild(titleLink)
                 archiveContainer.appendChild(issueContainer)
             }

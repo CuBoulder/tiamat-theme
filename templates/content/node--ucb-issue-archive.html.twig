@@ -10,8 +10,9 @@
   view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
   'ucb-content-wrapper'
 ] %}
+  {# Base Url #}
+  {% set baseurlJSON = url('<front>')|render|trim('/') %}<div{{ attributes.addClass(classes) }}>
 
-<div{{ attributes.addClass(classes) }}>
   <div class="ucb-issue-archive-title">
     <h1{{ title_attributes.addClass(is_front ? 'visually-hidden') }}>
       {{ label }}
@@ -22,7 +23,9 @@
     {{ content.body }}
   </div>
   {% endif %}
-  <ucb-issue-archive>
+  <ucb-issue-archive
+  base-uri="{{baseurlJSON}}"
+  >
     <div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
       <i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>
     </div>

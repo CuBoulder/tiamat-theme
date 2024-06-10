@@ -5,6 +5,8 @@ class ArticleFeatureBlockElement extends HTMLElement {
     var display = this.getAttribute("display");
     var imgSize = this.getAttribute("imgSize");
     var API = this.getAttribute("jsonapi");
+    this._baseURI = this.getAttribute("base-uri");
+
     var count = display === "stacked" ? 4 : 5;
     // Exclusions are done on the JS side, get into arrays. Blank if no exclusions
     var excludeCatArray = this.getAttribute("exCats").split(",").map(Number);
@@ -42,205 +44,147 @@ class ArticleFeatureBlockElement extends HTMLElement {
     excludeTagArray,
     finalArticles = []
   ) {
-    // More than 10 articles? This sets up the next call if there's more articles to be retrieved but not enough post-filters
-    let NEXTJSONURL = "";
-    if (data.links.next) {
-      let nextURL = data.links.next.href.split("/jsonapi/");
-      NEXTJSONURL = `/jsonapi/${nextURL[1]}`;
-    } else {
-      NEXTJSONURL = "";
-    }
+
+    // Handle the next URL for pagination if needed
+    let NEXTJSONURL = data.links.next
+      ? `${this._baseURI}/jsonapi/${data.links.next.href.split("/jsonapi/")[1]}`
+      : "";
 
     // If no Articles retrieved...
-    if (data.data.length == 0) {
+    if (data.data.length === 0) {
       this.toggleMessage("ucb-al-loading");
       this.toggleMessage("ucb-al-error", "block");
       console.warn(
         "No Articles retrieved - please check your inclusion filters and try again"
       );
-    } else {
-      // Below objects are needed to match images with their corresponding articles. There are two endpoints => data.data (article) and data.included (incl. media), both needed to associate a media library image with its respective article
-      let idObj = {};
-      let altObj = {};
-      let wideObj = {};
-      // Remove any blanks from our articles before map
-      if (data.included) {
-        // removes all other included data besides images in our included media
-        let idFilterData = data.included.filter((item) => {
-          return item.type == "media--image";
-        });
+      return;
+    }
 
-        let altFilterData = data.included.filter((item) => {
-          return item.type == "file--file";
+    // Map for media image associations
+    const idObj = {};
+    const altObj = {};
+    const wideObj = {};
+
+    // Process included data for media images
+    if (data.included) {
+      data.included
+        .filter((item) => item.type === "media--image")
+        .forEach((pair) => {
+          idObj[pair.id] = pair.relationships.thumbnail.data.id;
         });
-        // finds the focial point version of the thumbnail
-        altFilterData.map((item) => {
-          // checks if consumer is working, else default to standard image instead of focal image
-          if (
-            item.links.focal_image_square != undefined &&
-            item.links.focal_image_wide != undefined
-          ) {
+      data.included
+        .filter((item) => item.type === "file--file")
+        .forEach((item) => {
+          if (item.links.focal_image_square && item.links.focal_image_wide) {
             altObj[item.id] = item.links.focal_image_square.href;
-            // This is used if a user selects the "Wide" image style
             wideObj[item.id] = item.links.focal_image_wide.href;
           } else {
             altObj[item.id] = item.attributes.uri.url;
           }
         });
+    }
 
-        // using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
-        idFilterData.map((pair) => {
-          idObj[pair.id] = pair.relationships.thumbnail.data.id;
-        });
-      }
-      // Iterate over each Article
-      await Promise.all(
-        data.data.map(async (item) => {
-          // Article must have a thumbnail
-          if (item.relationships.field_ucb_article_thumbnail.data) {
-            let thisArticleCats = [];
-            let thisArticleTags = [];
+    // Process each article
+    const articlesToAdd = await Promise.all(
+      data.data.map(async (item) => {
+        if (item.relationships.field_ucb_article_thumbnail.data) {
+          const thisArticleCats =
+            item.relationships.field_ucb_article_categories?.data.map(
+              (cat) => cat.meta.drupal_internal__target_id
+            ) || [];
+          const thisArticleTags =
+            item.relationships.field_ucb_article_tags?.data.map(
+              (tag) => tag.meta.drupal_internal__target_id
+            ) || [];
 
-            // // loop through and grab all of the categories
-            if (item.relationships.field_ucb_article_categories) {
-              for (
-                let i = 0;
-                i < item.relationships.field_ucb_article_categories.data.length;
-                i++
-              ) {
-                thisArticleCats.push(
-                  item.relationships.field_ucb_article_categories.data[i].meta
-                    .drupal_internal__target_id
-                );
-              }
+          const doesIncludeCat = excludeCatArray.length
+            ? thisArticleCats.filter((cat) => excludeCatArray.includes(cat))
+            : [];
+          const doesIncludeTag = excludeTagArray.length
+            ? thisArticleTags.filter((tag) => excludeTagArray.includes(tag))
+            : [];
+
+          // Proceed if no excluded categories or tags are found
+          if (doesIncludeCat.length === 0 && doesIncludeTag.length === 0) {
+            const bodyAndImageId =
+              item.relationships.field_ucb_article_content?.data[0]?.id || "";
+            let body = item.attributes.field_ucb_article_summary || "";
+            if (!body && bodyAndImageId) {
+              body = await this.getArticleParagraph(bodyAndImageId);
             }
-            // // loop through and grab all of the tags
-            if (item.relationships.field_ucb_article_tags) {
-              for (
-                var i = 0;
-                i < item.relationships.field_ucb_article_tags.data.length;
-                i++
-              ) {
-                thisArticleTags.push(
-                  item.relationships.field_ucb_article_tags.data[i].meta
-                    .drupal_internal__target_id
-                );
-              }
-            }
+            const imageSrc = item.relationships.field_ucb_article_thumbnail.data
+              ? altObj[
+                  idObj[item.relationships.field_ucb_article_thumbnail.data.id]
+                ]
+              : "";
+            const imageSrcWide = item.relationships.field_ucb_article_thumbnail
+              .data
+              ? wideObj[
+                  idObj[item.relationships.field_ucb_article_thumbnail.data.id]
+                ]
+              : "";
 
-            let doesIncludeCat = thisArticleCats;
-            let doesIncludeTag = thisArticleTags;
-
-            // check to see if we need to filter on categories
-            if (excludeCatArray.length && thisArticleCats.length) {
-              doesIncludeCat = thisArticleCats.filter((element) =>
-                excludeCatArray.includes(element)
-              );
-            }
-            // check to see if we need to filter on tags
-            if (excludeTagArray.length && thisArticleTags.length) {
-              doesIncludeTag = thisArticleTags.filter((element) =>
-                excludeTagArray.includes(element)
-              );
-            }
-
-            // If there's no categories or tags that are in the exclusions, proceed
-            if (doesIncludeCat.length == 0 && doesIncludeTag.length == 0) {
-              // okay to render
-              let bodyAndImageId = item.relationships.field_ucb_article_content
-                .data.length
-                ? item.relationships.field_ucb_article_content.data[0].id
-                : "";
-              let body = item.attributes.field_ucb_article_summary
-                ? item.attributes.field_ucb_article_summary
-                : "";
-              body = body.trim();
-              let imageSrc = "";
-              let imageSrcWide = "";
-
-              if (!body.length && bodyAndImageId != "") {
-                body = await this.getArticleParagraph(bodyAndImageId);
-              }
-              //Use the idObj as a memo to add the corresponding image url
-              let thumbId =
-                item.relationships.field_ucb_article_thumbnail.data.id;
-              imageSrc = altObj[idObj[thumbId]];
-              imageSrcWide = wideObj[idObj[thumbId]];
-
-              //Date - make human readable
-              const options = {
-                year: "numeric",
-                month: "short",
-                day: "numeric",
-              };
-              let date = new Date(item.attributes.created).toLocaleDateString(
+            return {
+              title: item.attributes.title,
+              link: item.attributes.path.alias,
+              imageSquare: imageSrc,
+              imageWide: imageSrcWide,
+              date: new Date(item.attributes.created).toLocaleDateString(
                 "en-us",
-                options
-              );
-              let title = item.attributes.title;
-              let link = item.attributes.path.alias;
-
-              // Create an Article Object for programatic rendering
-              const article = {
-                title,
-                link,
-                imageSquare: imageSrc,
-                imageWide: imageSrcWide,
-                date,
-                body,
-              };
-              // Adds the article object to the final array of articles chosen
-              finalArticles.push(article);
-            }
+                { year: "numeric", month: "short", day: "numeric" }
+              ),
+              body: body.trim(),
+            };
           }
-        })
-      );
-      // Case for not enough articles selected and extra articles available
-      if (finalArticles.length < count && NEXTJSONURL) {
-        fetch(NEXTJSONURL)
-          .then(this.handleError)
-          .then((data) =>
-            this.build(
-              data,
-              display,
-              count,
-              imgSize,
-              excludeCatArray,
-              excludeTagArray,
-              finalArticles
-            )
+        }
+        return null;
+      })
+    );
+
+    finalArticles.push(...articlesToAdd.filter((article) => article !== null));
+
+    // Fetch more articles if needed
+    if (finalArticles.length < count && NEXTJSONURL) {
+      fetch(NEXTJSONURL)
+        .then(this.handleError)
+        .then((data) =>
+          this.build(
+            data,
+            display,
+            count,
+            imgSize,
+            excludeCatArray,
+            excludeTagArray,
+            finalArticles
           )
-          .catch((Error) => {
-            console.error(
-              "There was an error fetching data from the API - Please try again later."
-            );
-            console.error(Error);
-            this.toggleMessage("ucb-al-loading");
-            this.toggleMessage("ucb-al-api-error", "block");
-          });
-      }
+        )
+        .catch((Error) => {
+          console.error(
+            "There was an error fetching data from the API - Please try again later."
+          );
+          console.error(Error);
+          this.toggleMessage("ucb-al-loading");
+          this.toggleMessage("ucb-al-api-error", "block");
+        });
+    }
 
-      // If no chosen articles and no other options, provide error
-      if (finalArticles.length === 0 && !NEXTJSONURL) {
-        console.error(
-          "There are no available Articles that match the selected filters. Please adjust your filters and try again."
-        );
-        this.toggleMessage("ucb-al-loading");
-        this.toggleMessage("ucb-al-error", "block");
-      }
+    if (finalArticles.length === 0 && !NEXTJSONURL) {
+      console.error(
+        "There are no available Articles that match the selected filters. Please adjust your filters and try again."
+      );
+      this.toggleMessage("ucb-al-loading");
+      this.toggleMessage("ucb-al-error", "block");
+    }
 
-      // Case for Too many articles, proceed
-      if (
-        finalArticles.length >= count ||
-        (finalArticles.length >= count && NEXTJSONURL)
-      ) {
-        finalArticles.length = count;
-      }
+    if (
+      finalArticles.length >= count ||
+      (finalArticles.length >= count && NEXTJSONURL)
+    ) {
+      finalArticles.length = count;
+    }
 
-      // Have articles and want to proceed
-      if (finalArticles.length > 0 && !NEXTJSONURL) {
-        this.renderDisplay(finalArticles, display, imgSize);
-      }
+    if (finalArticles.length > 0 && !NEXTJSONURL) {
+      this.renderDisplay(finalArticles, display, imgSize);
     }
   }
   // Responsible for fetching & processing the body of the Article if no summary provided
@@ -249,29 +193,36 @@ class ArticleFeatureBlockElement extends HTMLElement {
       return "";
     }
 
-    const response = await fetch(`/jsonapi/paragraph/article_content/${id}`);
-    if (!response.ok) {
-      throw new Error("Failed to fetch article paragraph");
-    }
-
-    const data = await response.json();
-    if (!data.data.attributes.field_article_text) return ""; //  needed for external articles
-
-    let htmlStrip = data.data.attributes.field_article_text.processed.replace(
-      /<\/?[^>]+(>|$)/g,
-      ""
-    );
-    let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
-    let trimmedString = lineBreakStrip.substr(0, 250);
-
-    if (trimmedString.length > 100) {
-      trimmedString = trimmedString.substr(
-        0,
-        Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
+    try {
+      const response = await fetch(
+        `${this._baseURI}/jsonapi/paragraph/article_content/${id}`
       );
-    }
+      const data = await response.json();
+      if (!data.data.attributes.field_article_text) return ""; //  needed for external articles
 
-    return trimmedString + "...";
+      let htmlStrip = data.data.attributes.field_article_text.processed.replace(
+        /<\/?[^>]+(>|$)/g,
+        ""
+      );
+      let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
+      let trimmedString = lineBreakStrip.substr(0, 250);
+
+      if (trimmedString.length > 100) {
+        trimmedString = trimmedString.substr(
+          0,
+          Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
+        );
+      }
+      return trimmedString + "...";
+    } catch (Error) {
+      console.error(
+        "There was an error fetching Article Paragraph from the API - Please try again later."
+      );
+      console.error(Error);
+      this.toggleMessage("ucb-al-loading");
+      this.toggleMessage("ucb-al-api-error", "block");
+      return ""; // Return an empty string in case of error
+    }
   }
 
   // Responsible for calling the render function of the appropriate display

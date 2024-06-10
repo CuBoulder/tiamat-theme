@@ -11,6 +11,9 @@
   ]
   %}
 
+{# Base Url #}
+{% set baseurlJSON = url('<front>')|render|trim('/') %}
+
 {# This block mirrors the Article List Node - constructs a JSON endpoint in TWIG using include filters #}
 {# JSON API Endpoint information #}
 {% set articlesJSON = (url('<front>')|render|trim('/'))
@@ -19,13 +22,13 @@
     ~ '&include=field_ucb_article_thumbnail.field_media_image'
     ~ '&fields[file--file]=uri,url'
   %}
-  
+
   {# Filter on only published (status = true) content #}
   {% set PublishedFilter = '&filter[publish-check][condition][path]=status'
     ~ '&filter[publish-check][condition][value]=1'
     ~ '&filter[publish-check][condition][memberOf]=published'
   %}
-  
+
   {# include and exclude options set by the user #}
   {% set includeCategories = [] %}
   {% set myCategories =
@@ -43,20 +46,20 @@
   {% set myExTags =
     content.field_article_feature_tag_excl|render|striptags|trim|split(' ')
   %}
-  
+
   {# two passes to clear out the blank entries that are mysteriously added by default #}
   {% for item in myCategories %}
     {% if item %}
       {% set includeCategories = includeCategories|merge([item]) %}
     {% endif %}
   {% endfor %}
-  
+
   {% for item in myTags %}
     {% if item %}
       {% set includeTags = includeTags|merge([item]) %}
     {% endif %}
   {% endfor %}
-  
+
   {% for item in myExCategories %}
     {% if item %}
       {% if loop.last %}
@@ -66,7 +69,7 @@
       {% endif %}
     {% endif %}
   {% endfor %}
-  
+
   {% for item in myExTags %}
     {% if item %}
       {% if loop.last %}
@@ -76,14 +79,14 @@
       {% endif %}
     {% endif %}
   {% endfor %}
-  
+
   {# placeholder variables for our include and exclude filters, default to blank strings #}
   {% set IncludeFilter = '' %}
   {% set IncludeCategoryFilter = '' %}
   {% set IncludeTagsFilter = '' %}
   {% set ExcludeCategoryFilter = '' %}
   {% set ExcludeTagsFilter = '' %}
-  
+
   {# Setup Include Category Filter using a logical OR between included category IDs #}
   {% if includeCategories|length %}
     {% set includeGroupMembers = '' %}
@@ -104,7 +107,7 @@
       ~ includeGroupMembers
     %}
   {% endif %}
-  
+
   {# Setup Include Tags Filter using a logical OR between included tag IDs #}
   {% if includeTags|length %}
     {% set includeGroupMembers = '' %}
@@ -125,7 +128,7 @@
       ~ includeGroupMembers
     %}
   {% endif %}
-  
+
   {# check to see if we have both Categories and Tags to filter on #}
   {# if so... setup a logicial AND Between both include filters #}
   {% if IncludeCategoryFilter and IncludeTagsFilter %}
@@ -151,16 +154,16 @@
       ~ PublishedFilter
       ~ IncludeTagsFilter
     %}
-  
+
   {# no includeded Categories or Tags ... still need to filter on published articles #}
   {% else %}
     {% set IncludeFilter = '&filter[status][value]=1' %}
   {% endif %}
-  
+
   {# pagination filter #}
   {% set pageCount = 10 %}
   {% set pageCountFilter = '&page[limit]=' ~ pageCount %}
-  
+
   {# sorting filter #}
   {% set sortFilter = '&sort[sort-created][path]=created&sort[sort-created][direction]=DESC' %}
 
@@ -196,6 +199,7 @@
 		{{ title_suffix }}
 {# Article Feature Main Block#}
 <article-feature-block
+  base-uri="{{baseurlJSON}}"
   jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}"
   exCats="{{ excludeCategories }}"
   exTags="{{ excludeTags }}"
