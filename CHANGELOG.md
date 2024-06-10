@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Content Row: Missing image maintains layout
+  ### Content Row - Large Teaser Alternate
+  
+  Omitting the optional image on `Large Teaser - Alternate` style Content Row Blocks does not affect the layout. Previously the missing image would cause the text content to span the full width of available block space, rather than the intended alternating left & right staggered pattern and has been corrected.
+  
+  Resolves #1048 
+---
+
 - ### Google Translate: Fix style bugs
   Resolves #1042 
   
