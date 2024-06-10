@@ -8,6 +8,8 @@
     background-color: #272727;
   }
 
+  .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
+  .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link,
   .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
     color: #000;
@@ -34,11 +36,13 @@
   }
 
 
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item {
     color: #ccc;
     font-weight: 600;
   }
 
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
     display: inline-block;
     color: #ccc;
@@ -46,6 +50,8 @@
     margin-left: 15px;
   }
 
+  .ucb-button-none.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
+  .ucb-button-none.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:focus,
   .ucb-button-none.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
   .ucb-button-none.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:focus,
   .ucb-button-none.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link.is-active,
@@ -54,7 +60,10 @@
     border-bottom: 0;
     background: transparent;
   }
-
+  .ucb-button-none.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg {
+    color: #ccc;
+  }
+  
   .ucb-main-menu li.menu-item a.nav-link,
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link {
     color: #ccc;
@@ -62,6 +71,10 @@
     border-bottom: 0;
   }
 
+  .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
+  .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg:focus,
+  .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
+  .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg:focus,
   .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link.is-active,
   .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item.active a.nav-link:first-of-type,
   .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
@@ -85,5 +98,15 @@
   .footer-wrapper,
   .ucb-footer-bottom {
     padding: 40px 0px 20px;
+  }
+
+  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media li {
+    display: flex;
+    align-items: center;
+  }
+
+  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media {
+    height: 100%;
+    padding-right: 10px;
   }
 }

@@ -31,6 +31,8 @@
     background-color: #333;
   }
 
+  .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
+  .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a,
   .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a {
     color: #666;
@@ -44,11 +46,15 @@
     box-shadow: 0 3px 1px rgba(0, 0, 0, 0.08);
   }
 
+  .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
+  .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
   .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a:hover,
   .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a:hover {
     color: #000;
   }
 
+  .ucb-header-black .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
+  .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-header-black .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a,
   .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a {
     color: #fff;
@@ -56,6 +62,8 @@
     padding: 0 10px;
   }
 
+  .ucb-header-black .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
+  .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
   .ucb-header-black .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a:hover,
   .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a:hover {
     color: #cfb87c;
@@ -136,14 +144,17 @@
     background-color: #000;
 
   }
-
+  .ucb-secondary-menu-region-container .block-system-menu-blocksecondary {
+    display: flex;
+    align-items: center;
+  }
   .ucb-header-dark .ucb-secondary-menu-region-container .ucb-main-menu li.menu-item a.nav-link,
   .ucb-header-black .ucb-secondary-menu-region-container .ucb-main-menu li.menu-item a.nav-link {
     color: #fff;
     border-bottom: none;
   }
 
-  .ucb-header-dark.ucb-secondary-menu-region-container .ucb-main-menu li.menu-item a.nav-link:hover,
+  .ucb-header-dark .ucb-secondary-menu-region-container .ucb-main-menu li.menu-item a.nav-link:hover,
   .ucb-header-dark .ucb-secondary-menu-region-container .ucb-main-menu li.menu-item a.nav-link.is-active,
   .ucb-header-dark .ucb-secondary-menu-region-container .ucb-main-menu li.menu-item.active a.nav-link:first-of-type,
   .ucb-header-black .ucb-secondary-menu-region-container .ucb-main-menu li.menu-item a.nav-link:hover,
@@ -257,7 +268,8 @@
   #navigation ul#main-menu>li>a {
     line-height: 40px;
   }
-
+  .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg,
+  .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a,
   .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
     white-space: nowrap;
@@ -265,7 +277,10 @@
     font-weight: 400;
     margin-right: 2px;
   }
-
+  .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
+  .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:focus,
+  .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
+  .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:focus,
   .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a:hover,
   .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.is-active,
   .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item.active a:first-of-type,
@@ -275,14 +290,18 @@
     color: #fff;
     background: transparent;
   }
-
+  .ucb-header-black .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg,
+  .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a,
   .ucb-header-black .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
     white-space: nowrap;
     padding-right: .5rem;
     font-weight: 400;
   }
-
+  .ucb-header-black .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
+  .ucb-header-black .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:focus,
+  .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
+  .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:focus,
   .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
   .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link.is-active,
   .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item.active a.nav-link:first-of-type,
@@ -293,11 +312,15 @@
     background: transparent;
   }
 
+  .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg,
+  .ucb-header-black .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item,
   .ucb-header-black .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item {
     background-color: #f7f7f7;
   }
 
+  .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
+  .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item,
   .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item {
     background-color: #333;

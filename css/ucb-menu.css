@@ -25,7 +25,8 @@
 #ucb-mobile-menu-toggle[aria-expanded='true'] .ucb-mobile-menu-close-icon {
   display: inline-block;
 }
-.ucb-mobile-footer-menu {
+.ucb-mobile-footer-menu,
+.ucb-mobile-social-media-menu {
   display: none;
 }
 
@@ -113,8 +114,7 @@
     border-bottom: 1px solid rgba(0, 0, 0, .09);
   }
 
-  section.ucb-main-nav-section .ucb-main-nav-container .ucb-menu .ucb-menu .menu-item,
-  section.ucb-main-nav-section > div > div:last-child .ucb-menu .menu-item:last-child  {
+  section.ucb-main-nav-section .ucb-main-nav-container .ucb-menu .ucb-menu .menu-item {
     border-bottom: none;
   }
 
@@ -284,4 +284,72 @@
 
 .ucb-page-content .ucb-menu .expanded.active > a.nav-link {
   padding-left: calc(var(--ucb-menu-indent-start) - var(--ucb-menu-indent-border-width));
+}
+
+
+
+.ucb-footer-menu-region #block-social-media-links .menu.social-media a{
+  color: #FFF;
+  font-size: 14px;
+  padding: .75rem 0;
+}
+.ucb-footer-menu-region #block-social-media-links .menu.social-media a:hover{
+  color: #cfb87c;
+}
+
+.ucb-footer-menu-region .menu.social-media {
+  gap: 0.5rem;
+  font-size: 14px;
+  line-height: 0;
+  margin-bottom: 0;
+}
+
+.ucb-secondary-menu-region-container .menu.social-media {
+  display: flex;
+  flex-direction: row;
+  justify-content: end;
+  gap: 0.5rem;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  width: fit-content;
+  margin-bottom: 0;
+}
+
+.ucb-secondary-menu-region-container .menu.social-media .icon-bg {
+  font-size: 14px;
+}
+@media only screen and (max-width:600px) {
+  .ucb-secondary-menu-region .ucb-mobile-social-media-menu {
+    display: block;
+  }
+  .ucb-secondary-menu-region-container .menu.social-media,
+  .ucb-mobile-social-media-menu .menu.social-media.hide {
+    display: none;
+  }
+
+  .ucb-mobile-social-media-menu .menu.social-media.open {
+    border-bottom: 1px solid rgba(255, 255, 255, .18);
+    justify-content: start;
+    padding-left: 10px;
+    padding-top: 5px;
+  }
+  .ucb-mobile-social-media-menu .menu.social-media.open .icon-bg{
+    color: #000;
+  }
+  .ucb-secondary-menu-region-container #block-social-media-links .menu.social-media {
+    width: 100% !important;
+    justify-content: start;
+    padding: 0 10px;
+  }
+  .ucb-secondary-menu-region-container #block-social-media-links,
+  .ucb-secondary-menu-region-container #block-boulder-base-secondary-menu {
+  width: 100% !important;
+  }
+}
+
+.ucb-footer-menu-region #block-social-media-links,
+.ucb-footer-menu-region #block-boulder-base-footer-menu,
+.ucb-secondary-menu-region-container #block-social-media-links,
+.ucb-secondary-menu-region-container #block-boulder-base-secondary-menu  {
+width: fit-content;
 }

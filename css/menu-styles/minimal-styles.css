@@ -7,6 +7,7 @@
     background-color: #fff;
   }
 
+  .ucb-main-nav-section .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-main-nav-section .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a {
     color: #757575;
     display: inline-block;
@@ -29,10 +30,13 @@
     color: #757575;
   }
 
+  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link {
     color: #757575;
   }
 
+  .ucb-button-none.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
+  .ucb-button-none.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:focus,
   .ucb-button-none.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
   .ucb-button-none.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:focus,
   .ucb-button-none.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link.is-active,
@@ -57,11 +61,22 @@
     border-bottom: none;
   }
 
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg:focus,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:focus,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link.is-active,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item.active a.nav-link:first-of-type {
     border-bottom: 4px solid rgba(128, 128, 128, 0.333);
     color: #363636;
+  }
+
+  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media li {
+    display: flex;
+    align-items: center;
+  }
+
+  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media {
+    height: 100%;
   }
 }

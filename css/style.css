@@ -495,6 +495,15 @@ ul.ucb-main-menu.nav {
   font-size: 0.9rem;
 }
 
+.ucb-footer-menu-region #block-social-media-links {
+  padding-left: 10px;
+  display: flex;
+  align-items: center;
+}
+.ucb-footer-menu-region .container {
+  display: flex;
+}
+
 .menu.social-media {
   display: flex;
   flex-direction: row;
