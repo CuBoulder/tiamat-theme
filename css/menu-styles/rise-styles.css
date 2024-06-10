@@ -11,6 +11,11 @@
     gap: 0rem;
   }
 
+  .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-secondary-menu-region-container,
+  .ucb-header-black .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-secondary-menu-region-container{
+    background-color: #f7f7f7;
+  }
+  
   .ucb-header-dark .ucb-secondary-menu-position-inline .ucb-main-menu,
   .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-inline,
   .ucb-header-black .ucb-secondary-menu-position-inline .ucb-main-menu,
@@ -21,6 +26,11 @@
     background-color: #f7f7f7;
   }
 
+  .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-secondary-menu-region-container,
+  .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-secondary-menu-region-container{
+    background-color: #333;
+  }
+  
   .ucb-header-light .ucb-secondary-menu-position-inline .ucb-main-menu,
   .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-inline,
   .ucb-header-white .ucb-secondary-menu-position-inline .ucb-main-menu,
@@ -94,6 +104,8 @@
     background-color: #424242;
   }
 
+  .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region,
+  .ucb-header-black .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region,
   .ucb-header-dark .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-menu,
   .ucb-header-black .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-menu {
     flex-wrap: nowrap;
@@ -347,5 +359,14 @@
 
   .ucb-main-nav-container.ucb-secondary-menu-position-inline {
     box-shadow: 0 2px 5px rgba(0 0 0 /10%);
+  }
+
+  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media li {
+    display: flex;
+    align-items: center;
+  }
+
+  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media {
+    height: 100%;
   }
 }
