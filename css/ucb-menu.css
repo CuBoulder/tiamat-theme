@@ -119,11 +119,13 @@
   }
 
   .ucb-main-nav-container .ucb-menu .menu-item a.nav-link,
-  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a.nav-link {
     padding: 10px 10px 10px var(--ucb-menu-indent-start);
   }
 
+  .ucb-mobile-social-media-menu .menu.social-media .icon-bg {
+    padding: 10px 10px 10px 0;
+  }
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media,
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-menu {
     gap: 0;
@@ -335,8 +337,13 @@
     padding-left: 10px;
     padding-top: 5px;
   }
-  .ucb-mobile-social-media-menu .menu.social-media.open .icon-bg{
+  .ucb-header-light .ucb-mobile-social-media-menu .menu.social-media.open .icon-bg,
+  .ucb-header-white .ucb-mobile-social-media-menu .menu.social-media.open .icon-bg {
     color: #000;
+  }
+  .ucb-header-dark .ucb-mobile-social-media-menu .menu.social-media.open .icon-bg,
+  .ucb-header-black .ucb-mobile-social-media-menu .menu.social-media.open .icon-bg {
+    color: #FFF;
   }
   .ucb-secondary-menu-region-container #block-social-media-links .menu.social-media {
     width: 100% !important;
