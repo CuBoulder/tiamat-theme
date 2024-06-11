@@ -349,6 +349,10 @@ ul.ucb-main-menu.nav {
   padding-right: 2em;
 }
 
+.ucb-footer-top .menu.social-media {
+  margin-bottom: 0;
+}
+
 .ucb-footer-nav-block .ucb-menu a.nav-link {
   color: #cfb87b;
   background: transparent;
