@@ -332,12 +332,17 @@ ul.ucb-main-menu.nav {
 
 /********** Secondary Menu **********/
 
+.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
 .ucb-menu a.nav-link:hover {
   color: var(--ucb-black);
   background: var(--ucb-light-contrast);
   border-radius: 3px;
 }
+.ucb-main-nav-container.ucb-secondary-menu-position-inline .menu.social-media .icon-bg {
+  transition: none;
+  color: var(--ucb-black);
 
+}
 .ucb-footer-nav-block .ucb-menu.nav {
   flex-direction: column;
   flex-grow: 1;

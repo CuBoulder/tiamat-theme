@@ -37,10 +37,12 @@
     gap: 1.5rem;
   }
   
+  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item a {
     margin: .25rem 0;
   }
   
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu-item a {
     color: #FFF;
     line-height: 1rem;
@@ -57,6 +59,7 @@
     border-radius: 0;
   }
 
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a:hover {
     color: var(--ucb-gold);
     background-color: transparent;
@@ -66,7 +69,10 @@
   .ucb-button-blue.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-button-gray.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg {
     border-radius: 4px;
-    padding: 5px;
+    padding: 8px;
+  }
+  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg {
+  padding: 8px;
   }
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
     border-radius: 4px;
