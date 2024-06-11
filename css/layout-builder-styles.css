@@ -269,8 +269,7 @@
 }
 
 /*** Content Frame ***/
-.content-frame-dark-gray,
-.content-frame-light-gray {
+.content-frame-styled {
   margin: 0;
 }
 
