@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Menus: Parent page highlight in navigation, even if child page isn't enabled in menu
+  Previously there were cases where the child page wouldn't highlight the parent page in menus, specifically when that child page was disabled from the menu. This has been adjusted so that the final parent element in the menu will be highlighted as active as well.
+  
+  Resolves #1032 
+---
+
 - ### JSON API Consumer Block bug fixes
   ### Adjusts the following blocks/page using JSON API to also provide the site's base path (for proper multisite functionality) #1044 
     - Article Grid Block
