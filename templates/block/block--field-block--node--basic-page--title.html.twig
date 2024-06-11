@@ -27,19 +27,16 @@
  */
 #}
 
-<div{{ attributes }}>
+
+{% if not is_front %}
   {{ title_prefix }}
   {# % if label %}
-    <h2{{ title_attributes }}>{{ label }}</h2>
-  {% endif % #}
+      <h2{{ title_attributes }}>{{ label }}</h2>
+    {% endif % #}
   {{ title_suffix }}
-  {% block content %}
-    {% if not is_front %}
-      <div class="container ucb-page-title bs-background-unstyled">
-        <div aria-hidden="true" class="h1">
-          {{ content }}
-        </div>
-      </div>
-    {% endif %}
-  {% endblock %}
-</div>
+  <div{{attributes}} class="container ucb-page-title bs-background-unstyled block">
+    <div aria-hidden="true" class="h1">
+      {{ content }}
+    </div>
+  </div>
+{% endif %}
