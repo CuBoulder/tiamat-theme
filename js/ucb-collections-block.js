@@ -298,7 +298,7 @@
             });
 
             if(NEXTJSONURL){
-              resolve(renderCollectionList(NEXTJSONURL, ExcludeTags, BodyDisplay, blockID, BaseURL, aggregatedCategories));
+              resolve(renderCollectionList(NEXTJSONURL, ExcludeTags, BodyDisplay, blockID, BaseURL));
               }
               else {
                 resolve(NEXTJSONURL);
