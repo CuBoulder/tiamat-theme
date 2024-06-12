@@ -9,94 +9,117 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Remove aggregated categories from Collection grid
-  Closes #1031.
-  Removes aggregated categories as it was causing issues when there were more than 50 collection item nodes.
----
+## [20240612] - 2024-06-12
 
-- ### Issue/802
-  Set up new vertical alignment. 
-  Aimed to use the recommended bootstrap gutters across the board. 
-  Also fixed horizontal alignment for the new frame colors. 
-  Added `content-frame-unstyled` and `content-frame-styled` classes to help needing less names for css calls.
-  
-  Also have padding options on sections for left/right fixed so it affects the frame rather than the entire section.
-  
-  - `theme` => https://github.com/CuBoulder/tiamat-theme/pull/1055
-  - `bootstrap_layouts` => https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/48
-  
-  Resolves #802 
-  Resolves #1033 
-  Resolves #1038 
-  Resolves #548 
----
+-   ### Remove aggregated categories from Collection grid
+    Closes #1031.
+    Removes aggregated categories as it was causing issues when there were more than 50 collection item nodes.
 
-- ### Menus: Parent page highlight in navigation, even if child page isn't enabled in menu
-  Previously there were cases where the child page wouldn't highlight the parent page in menus, specifically when that child page was disabled from the menu. This has been adjusted so that the final parent element in the menu will be highlighted as active as well.
-  
-  Resolves #1032 
----
+* * *
 
-- ### JSON API Consumer Block bug fixes
-  ### Adjusts the following blocks/page using JSON API to also provide the site's base path (for proper multisite functionality) #1044 
-    - Article Grid Block
-    - Article Feature Block
-    - Article List Block
-    - Article Slider Block
-    - Current Issue Block
-    - Category Cloud
-    - Tag Cloud
-    - Article List Page
-    - Issue Archive Page
-  
-  ### Adjusted Rendering Order on Article List Blocks (Article List Block, Article Grid Block, Article Feature Block) #1049 
-  - Previously a more complete Article could finish processing before one that needs additional calls to complete, such as one with a missing summary waiting for the Article body to finish processing (shortening, stripping elements, adding a `...` .) This could lead to an inconsistent order of Articles being displayed, despite a sort filter on the API call and the data coming back in the proper order. The `build` method on these components has been updated so that adding approved articles to the array of `final articles` (after include/exclude/fetching needed pieces/assembly/etc) are rendered in the order they are served by the API (by Date created) instead of as they come in completed.
-  
-  Also fixes bug with Article pages made without Summary content not getting the trimmed Article content correctly in the Article collection blocks/pages. This was due to a race condition and corrected with proper async/await.
-  
-  Resolves #1044 
-  Resolves #1049 
----
+-   ### Issue/802
 
-- ### Content Row: Missing image maintains layout
-  ### Content Row - Large Teaser Alternate
-  
-  Omitting the optional image on `Large Teaser - Alternate` style Content Row Blocks does not affect the layout. Previously the missing image would cause the text content to span the full width of available block space, rather than the intended alternating left & right staggered pattern and has been corrected.
-  
-  Resolves #1048 
----
+    Set up new vertical alignment. 
+    Aimed to use the recommended bootstrap gutters across the board. 
+    Also fixed horizontal alignment for the new frame colors. 
+    Added `content-frame-unstyled` and `content-frame-styled` classes to help needing less names for css calls.
 
-- ### Google Translate: Fix style bugs
-  Resolves #1042 
-  
-  - Adds Black Background / White text option
-  - Removes text-indent
----
+    Also have padding options on sections for left/right fixed so it affects the frame rather than the entire section.
 
-- ### Adds Google Translate
-  Adds Google Translate functionality to the UCB Brand Bar
-  
-  Resolves #996 
----
+    -   `theme` => <https://github.com/CuBoulder/tiamat-theme/pull/1055>
+    -   `bootstrap_layouts` => <https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/48>
 
-- ### Frame css
-  Updated frame css for section and block styles compatibility.
-  
-  - `theme` => https://github.com/CuBoulder/tiamat-theme/pull/1037
-  - `bootstrap_layouts` => https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/47
----
+    Resolves #802 
+    Resolves #1033 
+    Resolves #1038 
+    Resolves #548 
 
-- ### Expandable Color Consistency
-  ### Expandable Blocks (Legacy Shortcode and Expandable Content Block)
-  - `Expandable` legacy shortcode style now mirrors `Expandable Content` Block
-  - Horizontal inactive tabs on the `Expandable Content` block fixed to inherit color as well.  
-  
-  Includes:
-  - `theme` => https://github.com/CuBoulder/tiamat-theme/pull/1034
-  - `migration_shortcodes` => https://github.com/CuBoulder/ucb_migration_shortcodes/pull/25
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/767
----
+* * *
+
+-   ### Menus: Parent page highlight in navigation, even if child page isn't enabled in menu
+
+    Previously there were cases where the child page wouldn't highlight the parent page in menus, specifically when that child page was disabled from the menu. This has been adjusted so that the final parent element in the menu will be highlighted as active as well.
+
+    Resolves #1032 
+
+* * *
+
+-   ### JSON API Consumer Block bug fixes
+
+    ### Adjusts the following blocks/page using JSON API to also provide the site's base path (for proper multisite functionality) #1044
+
+    -   Article Grid Block
+    -   Article Feature Block
+    -   Article List Block
+    -   Article Slider Block
+    -   Current Issue Block
+    -   Category Cloud
+    -   Tag Cloud
+    -   Article List Page
+    -   Issue Archive Page
+
+    ### Adjusted Rendering Order on Article List Blocks (Article List Block, Article Grid Block, Article Feature Block) #1049
+
+    -   Previously a more complete Article could finish processing before one that needs additional calls to complete, such as one with a missing summary waiting for the Article body to finish processing (shortening, stripping elements, adding a `...` .) This could lead to an inconsistent order of Articles being displayed, despite a sort filter on the API call and the data coming back in the proper order. The `build` method on these components has been updated so that adding approved articles to the array of `final articles` (after include/exclude/fetching needed pieces/assembly/etc) are rendered in the order they are served by the API (by Date created) instead of as they come in completed.
+
+    Also fixes bug with Article pages made without Summary content not getting the trimmed Article content correctly in the Article collection blocks/pages. This was due to a race condition and corrected with proper async/await.
+
+    Resolves #1044 
+    Resolves #1049 
+
+* * *
+
+-   ### Content Row: Missing image maintains layout
+
+    ### Content Row - Large Teaser Alternate
+
+    Omitting the optional image on `Large Teaser - Alternate` style Content Row Blocks does not affect the layout. Previously the missing image would cause the text content to span the full width of available block space, rather than the intended alternating left & right staggered pattern and has been corrected.
+
+    Resolves #1048 
+
+* * *
+
+-   ### Google Translate: Fix style bugs
+
+    Resolves #1042 
+
+    -   Adds Black Background / White text option
+    -   Removes text-indent
+
+* * *
+
+-   ### Adds Google Translate
+
+    Adds Google Translate functionality to the UCB Brand Bar
+
+    Resolves #996 
+
+* * *
+
+-   ### Frame css
+
+    Updated frame css for section and block styles compatibility.
+
+    -   `theme` => <https://github.com/CuBoulder/tiamat-theme/pull/1037>
+    -   `bootstrap_layouts` => <https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/47>
+
+* * *
+
+-   ### Expandable Color Consistency
+
+    ### Expandable Blocks (Legacy Shortcode and Expandable Content Block)
+
+    -   `Expandable` legacy shortcode style now mirrors `Expandable Content` Block
+    -   Horizontal inactive tabs on the `Expandable Content` block fixed to inherit color as well.  
+
+    Includes:
+
+    -   `theme` => <https://github.com/CuBoulder/tiamat-theme/pull/1034>
+    -   `migration_shortcodes` => <https://github.com/CuBoulder/ucb_migration_shortcodes/pull/25>
+
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/767>
+
+* * *
 
 ## [20240604] - 2024-06-04
 
@@ -2516,7 +2539,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240604...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240612...HEAD
+
+[20240612]: https://github.com/CuBoulder/tiamat-theme/compare/20240604...20240612
 
 [20240604]: https://github.com/CuBoulder/tiamat-theme/compare/20240513...20240604
 
