@@ -1,8 +1,5 @@
 @media only screen and (min-width: 601px) {
-  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region.ucb-secondary-menu-button-display .ucb-secondary-menu-region-container .ucb-menu {
-    gap: 0rem;
-    margin-bottom: -4px;
-  }
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region.ucb-secondary-menu-button-display .ucb-secondary-menu-region-container .ucb-menu,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region.ucb-secondary-menu-button-display .ucb-secondary-menu-region-container,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region-container .menu.social-media {
     gap: 0rem;
@@ -91,6 +88,7 @@
     display: inline-block;
     font-weight: 400;
     padding: 0 10px;
+    height: 100%;
   }
 
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
