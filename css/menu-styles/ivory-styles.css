@@ -31,7 +31,7 @@
   }
 
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region.ucb-secondary-menu-button-display .ucb-secondary-menu-region-container .menu-item a {
-    box-shadow: 0 0 2px rgba(0, 0, 0, .2);
+    box-shadow: 0 0 0 rgba(0, 0, 0, .2);
   }
 
   .ucb-header-white.ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
