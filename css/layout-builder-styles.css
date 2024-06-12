@@ -237,6 +237,11 @@
   margin-bottom: calc(var(--bs-gutter-y)* .5);
 }
 
+.ucb-bootstrap-layout-section .ucb-edge-to-edge .column {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
 .content-frame-styled .column {
   padding-top: calc(var(--bs-gutter-y)* .25);
   padding-bottom: calc(var(--bs-gutter-y)* .25);
