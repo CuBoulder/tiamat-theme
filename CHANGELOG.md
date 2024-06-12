@@ -9,6 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Issue/802
+  Set up new vertical alignment. 
+  Aimed to use the recommended bootstrap gutters across the board. 
+  Also fixed horizontal alignment for the new frame colors. 
+  Added `content-frame-unstyled` and `content-frame-styled` classes to help needing less names for css calls.
+  
+  Also have padding options on sections for left/right fixed so it affects the frame rather than the entire section.
+  
+  - `theme` => https://github.com/CuBoulder/tiamat-theme/pull/1055
+  - `bootstrap_layouts` => https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/48
+  
+  Resolves #802 
+  Resolves #1033 
+  Resolves #1038 
+  Resolves #548 
+---
+
 - ### Menus: Parent page highlight in navigation, even if child page isn't enabled in menu
   Previously there were cases where the child page wouldn't highlight the parent page in menus, specifically when that child page was disabled from the menu. This has been adjusted so that the final parent element in the menu will be highlighted as active as well.
   

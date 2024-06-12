@@ -5,7 +5,6 @@
 .content-grid-block .row {
   --bs-gutter-x: 1.5em;
   --bs-gutter-y: 1.5em;
-  margin-bottom: 1.5em;
 }
 
 .content-grid-block .grid-column .grid-image-container {
