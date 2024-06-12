@@ -1,4 +1,4 @@
-@media only screen and (min-width: 601px) {
+@media only screen and (min-width: 576px) {
   .express-messages .express-message:first-of-type {
     margin-top: 40px;
   }

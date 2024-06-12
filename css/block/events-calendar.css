@@ -347,7 +347,7 @@ table.localist_minicalendar_minicalendar caption {
   color: black;
 }
 
-@media screen and (min-width: 600px) {
+@media screen and (min-width: 575px) {
   .template-5 .le-date-wrapper .le-date-month {
     font-size: 250%;
   }
