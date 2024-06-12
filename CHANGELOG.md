@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Remove aggregated categories from Collection grid
+  Closes #1031.
+  Removes aggregated categories as it was causing issues when there were more than 50 collection item nodes.
+---
+
 - ### Issue/802
   Set up new vertical alignment. 
   Aimed to use the recommended bootstrap gutters across the board. 
