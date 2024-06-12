@@ -348,6 +348,12 @@ ucb-menu:
     theme:
       css/ucb-menu.css: {}
 
+ucb-menu-style-default:
+  version: 1.x
+  css:
+    theme:
+      css/menu-styles/default-menu-styles.css: {}
+
 ucb-menu-style-highlight:
   version: 1.x
   css:

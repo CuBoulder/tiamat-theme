@@ -78,6 +78,8 @@
       {{ attach_library('boulder_base/ucb-menu-style-swatch') }}
     {% elseif menu_style == 'tradition'  %}
       {{ attach_library('boulder_base/ucb-menu-style-tradition') }}
+    {% else %}
+      {{ attach_library('boulder_base/ucb-menu-style-default') }}
     {% endif %}
     {% set header_color = 'black' %}
     {% set campus_header_color = 'black' %}
