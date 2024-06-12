@@ -16,9 +16,7 @@
     padding-right: 5px;
   }
 
-  .ucb-main-nav-section .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg{
-    height: calc(100% - 4px);
-  }
+  .ucb-main-nav-section .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-main-nav-section .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media{
     height: 100%;
   }

@@ -331,8 +331,8 @@
     background-color: #f7f7f7;
   }
 
-  .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
-  .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
+  .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg,
+  .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-header-light .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item,
   .ucb-header-white .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item {
     background-color: #333;
