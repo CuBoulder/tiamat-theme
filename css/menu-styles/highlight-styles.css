@@ -23,6 +23,9 @@
     box-shadow: none;
   }
 
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg:hover{
+    color: #000;
+  }
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:hover,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link:active {
     color: #000;
