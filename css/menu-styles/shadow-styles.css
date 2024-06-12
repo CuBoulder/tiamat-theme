@@ -52,6 +52,10 @@
     padding: 0 0.25rem 5px .25rem;
   }
 
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg {
+    padding-top: 2px;
+  }
+
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media,
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-menu {
     background-color: #444;
