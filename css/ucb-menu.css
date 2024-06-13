@@ -292,12 +292,12 @@
 
 
 
-.ucb-footer-menu-region #block-social-media-links .menu.social-media a{
+.ucb-footer-menu-region .block-menu-blocksocial-media-menu .menu.social-media a{
   color: #FFF;
   font-size: 16px;
   padding: .75rem 0;
 }
-.ucb-footer-menu-region #block-social-media-links .menu.social-media a:hover{
+.ucb-footer-menu-region .block-menu-blocksocial-media-menu .menu.social-media a:hover{
   color: #cfb87c;
 }
 
@@ -346,20 +346,20 @@
   .ucb-header-black .ucb-mobile-social-media-menu .menu.social-media.open .icon-bg {
     color: #FFF;
   }
-  .ucb-secondary-menu-region-container #block-social-media-links .menu.social-media {
+  .ucb-secondary-menu-region-container .block-menu-blocksocial-media-menu .menu.social-media {
     width: 100% !important;
     justify-content: start;
     padding: 0 10px;
   }
-  .ucb-secondary-menu-region-container #block-social-media-links,
+  .ucb-secondary-menu-region-container .block-menu-blocksocial-media-menu,
   .ucb-secondary-menu-region-container #block-boulder-base-secondary-menu {
   width: 100% !important;
   }
 }
 
-.ucb-footer-menu-region #block-social-media-links,
+.ucb-footer-menu-region .block-menu-blocksocial-media-menu,
 .ucb-footer-menu-region #block-boulder-base-footer-menu,
-.ucb-secondary-menu-region-container #block-social-media-links,
+.ucb-secondary-menu-region-container .block-menu-blocksocial-media-menu,
 .ucb-secondary-menu-region-container #block-boulder-base-secondary-menu  {
 width: fit-content;
 }

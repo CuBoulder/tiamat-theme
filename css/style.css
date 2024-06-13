@@ -504,7 +504,7 @@ ul.ucb-main-menu.nav {
   font-size: 0.9rem;
 }
 
-.ucb-footer-menu-region #block-social-media-links {
+.ucb-footer-menu-region .block-menu-blocksocial-media-menu {
   padding: 10px;
   display: flex;
   align-items: center;
