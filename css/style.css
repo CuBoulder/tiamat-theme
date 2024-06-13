@@ -505,7 +505,7 @@ ul.ucb-main-menu.nav {
 }
 
 .ucb-footer-menu-region #block-social-media-links {
-  padding-left: 10px;
+  padding: 10px;
   display: flex;
   align-items: center;
 }
