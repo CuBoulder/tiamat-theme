@@ -44,7 +44,6 @@ class ArticleFeatureBlockElement extends HTMLElement {
     excludeTagArray,
     finalArticles = []
   ) {
-
     // Handle the next URL for pagination if needed
     let NEXTJSONURL = data.links.next
       ? `${this._baseURI}/jsonapi/${data.links.next.href.split("/jsonapi/")[1]}`
@@ -175,17 +174,13 @@ class ArticleFeatureBlockElement extends HTMLElement {
       this.toggleMessage("ucb-al-loading");
       this.toggleMessage("ucb-al-error", "block");
     }
-
-    if (
-      finalArticles.length >= count ||
-      (finalArticles.length >= count && NEXTJSONURL)
-    ) {
+    // Sets final Article count to chosen count
+    if (finalArticles.length >= count) {
       finalArticles.length = count;
     }
 
-    if (finalArticles.length > 0 && !NEXTJSONURL) {
-      this.renderDisplay(finalArticles, display, imgSize);
-    }
+    // Render
+    this.renderDisplay(finalArticles, display, imgSize);
   }
   // Responsible for fetching & processing the body of the Article if no summary provided
   async getArticleParagraph(id) {

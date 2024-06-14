@@ -164,17 +164,8 @@ class ArticleListBlockElement extends HTMLElement {
       this.toggleMessage("ucb-al-error", "block");
     }
 
-    if (
-      finalArticles.length >= count ||
-      (finalArticles.length >= count && NEXTJSONURL)
-    ) {
+    if (finalArticles.length >= 0 && !NEXTJSONURL) {
       finalArticles.length = count;
-    }
-
-    if (
-      (finalArticles.length >= 0 && !NEXTJSONURL) ||
-      (finalArticles.length === count && NEXTJSONURL)
-    ) {
       this.renderDisplay(display, finalArticles);
     }
   }
