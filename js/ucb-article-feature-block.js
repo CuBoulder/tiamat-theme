@@ -165,6 +165,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
           this.toggleMessage("ucb-al-loading");
           this.toggleMessage("ucb-al-api-error", "block");
         });
+      return;
     }
 
     // Handle the case where no articles are found
@@ -174,6 +175,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
       );
       this.toggleMessage("ucb-al-loading");
       this.toggleMessage("ucb-al-error", "block");
+      return;
     }
     // Render articles if the count is met or no more articles are available
     if (finalArticles.length >= count || !NEXTJSONURL) {
