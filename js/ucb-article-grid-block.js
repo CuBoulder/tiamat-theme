@@ -201,7 +201,7 @@ class ArticleGridBlockElement extends HTMLElement {
       );
       console.error(Error);
       this.toggleMessage("ucb-al-loading");
-      this.toggleMessage("ucb-al-error", "block");
+      this.toggleMessage("ucb-al-api-error", "block");
       return ""; // Return an empty string in case of error
     }
   }
