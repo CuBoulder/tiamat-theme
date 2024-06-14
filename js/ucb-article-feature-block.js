@@ -167,6 +167,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
         });
     }
 
+    // Handle the case where no articles are found
     if (finalArticles.length === 0 && !NEXTJSONURL) {
       console.error(
         "There are no available Articles that match the selected filters. Please adjust your filters and try again."
@@ -174,13 +175,13 @@ class ArticleFeatureBlockElement extends HTMLElement {
       this.toggleMessage("ucb-al-loading");
       this.toggleMessage("ucb-al-error", "block");
     }
-    // Sets final Article count to chosen count
-    if (finalArticles.length >= count) {
-      finalArticles.length = count;
+    // Render articles if the count is met or no more articles are available
+    if (finalArticles.length >= count || !NEXTJSONURL) {
+      if (finalArticles.length > count) {
+        finalArticles.length = count;
+      }
+      this.renderDisplay(finalArticles, display, imgSize);
     }
-
-    // Render
-    this.renderDisplay(finalArticles, display, imgSize);
   }
   // Responsible for fetching & processing the body of the Article if no summary provided
   async getArticleParagraph(id) {

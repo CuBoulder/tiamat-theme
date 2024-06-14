@@ -126,44 +126,48 @@ class ArticleGridBlockElement extends HTMLElement {
 
     finalArticles.push(...articlesToAdd.filter((article) => article !== null));
 
-    // Fetch more articles if needed
-    if (finalArticles.length < count && NEXTJSONURL) {
-      fetch(NEXTJSONURL)
-        .then(this.handleError)
-        .then((data) =>
-          this.build(
-            data,
-            count,
-            includeSummary,
-            excludeCatArray,
-            excludeTagArray,
-            finalArticles
-          )
-        )
-        .catch((Error) => {
-          console.error(
-            "There was an error fetching data from the API - Please try again later."
-          );
-          console.error(Error);
-          this.toggleMessage("ucb-al-loading");
-          this.toggleMessage("ucb-al-api-error", "block");
-        });
-    }
-
-    if (finalArticles.length === 0 && !NEXTJSONURL) {
-      console.error(
-        "There are no available Articles that match the selected filters. Please adjust your filters and try again."
+  // Check if more articles are needed
+  if (finalArticles.length < count && NEXTJSONURL) {
+    try {
+      const response = await fetch(NEXTJSONURL);
+      const nextData = await this.handleError(response);
+      await this.build(
+        nextData,
+        count,
+        includeSummary,
+        excludeCatArray,
+        excludeTagArray,
+        finalArticles
       );
+    } catch (error) {
+      console.error(
+        "There was an error fetching data from the API - Please try again later."
+      );
+      console.error(error);
       this.toggleMessage("ucb-al-loading");
-      this.toggleMessage("ucb-al-error", "block");
+      this.toggleMessage("ucb-al-api-error", "block");
     }
-
-    if (finalArticles.length >= 0 && !NEXTJSONURL) {
-      finalArticles.length = count;
-      this.renderDisplay(finalArticles, includeSummary);
-    }
+    return;
   }
 
+  // Handle the case where no articles are found
+  if (finalArticles.length === 0 && !NEXTJSONURL) {
+    console.error(
+      "There are no available Articles that match the selected filters. Please adjust your filters and try again."
+    );
+    this.toggleMessage("ucb-al-loading");
+    this.toggleMessage("ucb-al-error", "block");
+    return;
+  }
+
+  // Render articles if the count is met or no more articles are available
+  if (finalArticles.length >= count || !NEXTJSONURL) {
+    if (finalArticles.length > count) {
+      finalArticles.length = count;
+    }
+    this.renderDisplay(finalArticles, includeSummary);
+  }
+}
   // Responsible for fetching & processing the body of the Article if no summary provided
   async getArticleParagraph(id) {
     if (!id) {

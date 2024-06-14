@@ -154,6 +154,7 @@ class ArticleListBlockElement extends HTMLElement {
           this.toggleMessage("ucb-al-loading");
           this.toggleMessage("ucb-al-api-error", "block");
         });
+      return;
     }
 
     if (finalArticles.length === 0 && !NEXTJSONURL) {
@@ -162,12 +163,15 @@ class ArticleListBlockElement extends HTMLElement {
       );
       this.toggleMessage("ucb-al-loading");
       this.toggleMessage("ucb-al-error", "block");
+      return;
     }
 
-    if (finalArticles.length >= 0 && !NEXTJSONURL) {
-      finalArticles.length = count;
-      this.renderDisplay(display, finalArticles);
-    }
+      if (finalArticles.length >= count || !NEXTJSONURL) {
+        if (finalArticles.length > count) {
+          finalArticles.length = count;
+        }
+        this.renderDisplay(display, finalArticles);
+      }
   }
 
   // Responsible for fetching & processing the body of the Article if no summary provided
