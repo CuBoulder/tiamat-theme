@@ -44,7 +44,6 @@ class ArticleFeatureBlockElement extends HTMLElement {
     excludeTagArray,
     finalArticles = []
   ) {
-
     // Handle the next URL for pagination if needed
     let NEXTJSONURL = data.links.next
       ? `${this._baseURI}/jsonapi/${data.links.next.href.split("/jsonapi/")[1]}`
@@ -166,24 +165,23 @@ class ArticleFeatureBlockElement extends HTMLElement {
           this.toggleMessage("ucb-al-loading");
           this.toggleMessage("ucb-al-api-error", "block");
         });
+      return;
     }
 
+    // Handle the case where no articles are found
     if (finalArticles.length === 0 && !NEXTJSONURL) {
       console.error(
         "There are no available Articles that match the selected filters. Please adjust your filters and try again."
       );
       this.toggleMessage("ucb-al-loading");
       this.toggleMessage("ucb-al-error", "block");
+      return;
     }
-
-    if (
-      finalArticles.length >= count ||
-      (finalArticles.length >= count && NEXTJSONURL)
-    ) {
-      finalArticles.length = count;
-    }
-
-    if (finalArticles.length > 0 && !NEXTJSONURL) {
+    // Render articles if the count is met or no more articles are available
+    if (finalArticles.length >= count || !NEXTJSONURL) {
+      if (finalArticles.length > count) {
+        finalArticles.length = count;
+      }
       this.renderDisplay(finalArticles, display, imgSize);
     }
   }
