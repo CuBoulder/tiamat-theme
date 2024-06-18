@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updated Mobile Menu Breakpoint
+  Closes #1059.
+  This changes the breakpoint from 600px to 576px to match bootstrap container values.
+---
+
 - ### Fixes Article Block Infinite Spin
   ### Article Feature, Article List Block, Article Grid Block
   Introduced a logic bug in https://github.com/CuBoulder/tiamat-theme/issues/1044 where the various Article Blocks on sites with a large number of Articles could be prevented from rendering the returned JSON:API data, which resulting in what seems like an infinite spinning loader. This has been corrected.

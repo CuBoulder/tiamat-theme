@@ -288,7 +288,7 @@ section.ucb-main-nav-section {
   align-items: center;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 575px) {
   .page-header {
     box-shadow: 0 2px 5px rgba(0 0 0 / 10%);
   }
