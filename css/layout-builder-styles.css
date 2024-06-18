@@ -232,7 +232,7 @@
 }
 
 .ucb-bootstrap-layout-section .column {
-  --bs-gutter-y: 6rem;
+  --bs-gutter-y: 3rem;
   margin-top: calc(var(--bs-gutter-y)* .5);
   margin-bottom: calc(var(--bs-gutter-y)* .5);
 }

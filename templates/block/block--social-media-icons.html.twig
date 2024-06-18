@@ -60,16 +60,16 @@
   <div{{ attributes.addClass(classes, blockStyles) }}>
     {{ title_prefix }}
     {% if label %}
-      <div class="block-title {{ headingStyle }}">
-        <{{ headingTag }}{{ title_attributes }}>
-          <span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
-            {{ content.field_bs_icon }}
-          </span>
-          <span class="block-title-text">
-            {{ label }}
-          </span>
-        </{{ headingTag }}>
-      </div>
+      <div class="block-title-outer">
+				<{{ headingTag }}{{title_attributes}} class="block-title">
+					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
+						{{ content.field_bs_icon }}
+					</span>
+					<span class="block-title-text {{ headingStyle }}">
+						{{ label }}
+					</span>
+				</{{ headingTag }}>
+			</div>
     {% endif %}
     {{ title_suffix }}
     {{ content.field_social_media_links }}

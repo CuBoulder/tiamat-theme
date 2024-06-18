@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Heading size fixes
+  Updated the block-title class position so that the title class name is getting applied at the right level.
+  
+  Previously the block-title was wrapping the h2/h3/h4/h5/h6 so that the font-size wasn't getting applied correctly.
+  Example: The block title is supposed to be 200% of the main font size (16px/1rem). That was getting applied on top of the 160% of h2 instead of h2.block-title just being made 200%. So instead of 32px it was becoming 52px. Essentially we were just double increasing, 16px\*160%\*200% rather than 16x\*200%.
+  
+  With the change of positioning on the block-title class that resolves this issue. It also fixes an issue with the block-title-increase/decrease options that we didn't know we had.
+  
+  This also tightens up the vertical spacing a bit with blocks/columns
+  
+  Resolves #1050 
+---
+
 - ### Updated Mobile Menu Breakpoint
   Closes #1059.
   This changes the breakpoint from 600px to 576px to match bootstrap container values.
