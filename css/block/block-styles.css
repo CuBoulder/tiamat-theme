@@ -3,9 +3,11 @@
   display: flex;
 }
 
+.block-title {
+  font-size: 200%
+}
 
-
-.bs-title-scale-decrease .block-title {
+.bs-title-scale-decrease .block-title .block-title-text {
   font-size: 80%;
 }
 
@@ -13,18 +15,18 @@
   font-size: 80%;
 }
 
-.bs-title-scale-increase .block-title {
+.bs-title-scale-increase .block-title .block-title-text {
   font-size: 110%;
 }
 
 @media screen and (min-width: 768px) {
-  .bs-title-scale-increase .block-title {
+  .bs-title-scale-increase .block-title .block-title-text {
     font-size: 125%;
   }
 }
 
 @media screen and (min-width: 960px) {
-  .bs-title-scale-increase .block-title {
+  .bs-title-scale-increase .block-title .block-title-text {
     font-size: 150%;
   }
 }
