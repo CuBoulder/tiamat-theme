@@ -41,12 +41,12 @@
 	<div{{attributes.addClass(classes,blockStyles)}}>
 		{{ title_prefix }}
 		{% if label %}
-			<div class="block-title {{ headingStyle }}">
-				<{{ headingTag }}{{title_attributes}}>
+			<div class="block-title-outer">
+				<{{ headingTag }}{{title_attributes}} class="block-title">
 					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
 						{{ content.field_bs_icon }}
 					</span>
-					<span class="block-title-text">
+					<span class="block-title-text {{ headingStyle }}">
 						{{ label }}
 					</span>
 				</{{ headingTag }}>
@@ -90,7 +90,7 @@
 				{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
 				<div class="row d-flex row-content ucb-teaser-lg-row ucb-teaser-lg-alternate ucb-teaser-lg-row-{{oddOrEven}}">
 					{% set image = item.entity.field_row_layout_content_image.0 %}
-						<div class="{{ image ? 'col-sm-7 col-xs-12' : 'col-12' }} row-text-container">
+						<div class="col-sm-7 col-xs-12 row-text-container">
 							{% if rowLink %}
 								<a href="{{ rowLink }} ">
 									<h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
@@ -110,6 +110,9 @@
 								<img alt="{{item.entity.field_row_layout_content_image.entity.field_media_image.alt}}" class="ucb-content-row-img-lg" src="{{item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide')}}"></img>
 							{% endif %}
 						</div>
+            {% else %}
+            <div class="col-sm-5 col-xs-12 row-empty-image-container-lg">
+            </div>
 						{% endif %}
 				</div>
 			{% endfor %}

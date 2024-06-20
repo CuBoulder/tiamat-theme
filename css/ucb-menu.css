@@ -30,7 +30,7 @@
   display: none;
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 575px) {
   section.ucb-main-nav-section.ucb-header-black {
     color: #FFF;
     background-color: #000;
@@ -253,7 +253,8 @@
   background-color: rgba(0, 0, 0, .09);
 }
 
-.ucb-page-content .ucb-menu li.menu-item a.nav-link.is-active {
+.ucb-page-content .ucb-menu li.menu-item a.nav-link.is-active,
+.ucb-page-content .ucb-menu .menu-item.active:last-child > a{
   color: #000;
   background-color: var(--ucb-gold);
 }

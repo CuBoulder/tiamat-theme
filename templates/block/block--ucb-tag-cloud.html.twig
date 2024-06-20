@@ -11,6 +11,9 @@
 ]
 %}
 
+{# Base Url #}
+{% set baseurlJSON = url('<front>')|render|trim('/') %}
+
 {# Block/Title/Icon Styles #}
 {% set blockStyles = [
 	content.field_bs_background_style|render|striptags|trim,
@@ -29,17 +32,17 @@
 <div{{attributes.addClass(classes,blockStyles)}}>
 	{{ title_prefix }}
 	{% if label %}
-		<div class="block-title {{ headingStyle }}">
-			<{{headingTag}}{{title_attributes}}>
-				<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
-					{{ content.field_bs_icon }}
-				</span>
-				<span class="block-title-text">
-					{{ label }}
-				</span>
-			</{{headingTag}}>
-		</div>
+		<div class="block-title-outer">
+				<{{ headingTag }}{{title_attributes}} class="block-title">
+					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
+						{{ content.field_bs_icon }}
+					</span>
+					<span class="block-title-text {{ headingStyle }}">
+						{{ label }}
+					</span>
+				</{{ headingTag }}>
+			</div>
 	{% endif %}
 	{{ title_suffix }}
-	<tag-cloud-block></tag-cloud-block>
+	<tag-cloud-block base-uri="{{baseurlJSON}}"></tag-cloud-block>
 </div>

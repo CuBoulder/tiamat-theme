@@ -1,4 +1,4 @@
-@media only screen and (min-width: 601px) {
+@media only screen and (min-width: 576px) {
   .ucb-secondary-menu-region {
     display: flex;
     flex-direction: column;

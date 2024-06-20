@@ -2,245 +2,246 @@ class ArticleListBlockElement extends HTMLElement {
   constructor() {
     super();
     // Count, display and JSON API Endpoint
-    var count = this.getAttribute('count');
-    var display = this.getAttribute('display');
-    var API = this.getAttribute('jsonapi');
+    var count = this.getAttribute("count");
+    var display = this.getAttribute("display");
+    var API = this.getAttribute("jsonapi");
+    this._baseURI = this.getAttribute("base-uri");
+
     // Exclusions are done on the JS side, get into arrays. Blank if no exclusions
-    var excludeCatArray = this.getAttribute('exCats').split(",").map(Number);
-    var excludeTagArray = this.getAttribute('exTags').split(",").map(Number);
+    var excludeCatArray = this.getAttribute("exCats").split(",").map(Number);
+    var excludeTagArray = this.getAttribute("exTags").split(",").map(Number);
 
     fetch(API)
       .then(this.handleError)
-      .then((data) => this.build(data, count, display, excludeCatArray, excludeTagArray))
-      .catch(Error => {
-        console.error('There was an error fetching data from the API - Please try again later.');
+      .then((data) =>
+        this.build(data, count, display, excludeCatArray, excludeTagArray)
+      )
+      .catch((Error) => {
+        console.error(
+          "There was an error fetching data from the API - Please try again later."
+        );
         console.error(Error);
-        this.toggleMessage('ucb-al-loading');
-        this.toggleMessage('ucb-al-api-error', "block");
+        this.toggleMessage("ucb-al-loading");
+        this.toggleMessage("ucb-al-api-error", "block");
       });
   }
 
-  async build(data, count, display, excludeCatArray, excludeTagArray, finalArticles = []) {
-    // More than 10 articles? This sets up the next call if there's more articles to be retrieved but not enough post-filters
-    let NEXTJSONURL = "";
-    if (data.links.next) {
-      let nextURL = data.links.next.href.split("/jsonapi/");
-      NEXTJSONURL = `/jsonapi/${nextURL[1]}`;
-    } else {
-      NEXTJSONURL = "";
-    }
+  async build(
+    data,
+    count,
+    display,
+    excludeCatArray,
+    excludeTagArray,
+    finalArticles = []
+  ) {
+    // Handle the next URL for pagination if needed
+    let NEXTJSONURL = data.links.next
+      ? `${this._baseURI}/jsonapi/${data.links.next.href.split("/jsonapi/")[1]}`
+      : "";
 
     // If no Articles retrieved...
-    if (data.data.length == 0) {
-      this.toggleMessage('ucb-al-loading');
-      this.toggleMessage('ucb-al-error', "block");
-      console.warn('No Articles retrieved - please check your inclusion filters and try again');
-    } else {
-      // Below objects are needed to match images with their corresponding articles. There are two endpoints => data.data (article) and data.included (incl. media), both needed to associate a media library image with its respective article
-      let idObj = {};
-      let altObj = {};
-      let wideObj = {};
-      // Remove any blanks from our articles before map
-      if (data.included) {
-        // removes all other included data besides images in our included media
-        let idFilterData = data.included.filter((item) => {
-          return item.type == "media--image";
-        });
+    if (data.data.length === 0) {
+      this.toggleMessage("ucb-al-loading");
+      this.toggleMessage("ucb-al-error", "block");
+      console.warn(
+        "No Articles retrieved - please check your inclusion filters and try again"
+      );
+      return;
+    }
 
-        let altFilterData = data.included.filter((item) => {
-          return item.type == 'file--file';
-        });
-        // finds the focial point version of the thumbnail
-        altFilterData.map((item) => {
-          // checks if consumer is working, else default to standard image instead of focal image
-          if (item.links.focal_image_square != undefined) {
-            altObj[item.id] = item.links.focal_image_square.href
-            // This is used if a user selects the "Wide" image style
-            wideObj[item.id] = item.links.focal_image_wide.href
-          } else {
-            altObj[item.id] = item.attributes.uri.url
-          }
-        });
+    // Map for media image associations
+    const idObj = {};
+    const altObj = {};
+    const wideObj = {};
 
-        // using the image-only data, creates the idObj =>  key: thumbnail id, value : data id
-        idFilterData.map((pair) => {
+    // Process included data for media images
+    if (data.included) {
+      data.included
+        .filter((item) => item.type === "media--image")
+        .forEach((pair) => {
           idObj[pair.id] = pair.relationships.thumbnail.data.id;
         });
-      }
-
-      // Iterate over each Article
-      await Promise.all(data.data.map(async (item) => {
-        let thisArticleCats = [];
-        let thisArticleTags = [];
-        // // loop through and grab all of the categories
-        if (item.relationships.field_ucb_article_categories) {
-          for (let i = 0; i < item.relationships.field_ucb_article_categories.data.length; i++) {
-            thisArticleCats.push(
-              item.relationships.field_ucb_article_categories.data[i].meta
-                .drupal_internal__target_id
-            );
-          }
-        }
-        // // loop through and grab all of the tags
-        if (item.relationships.field_ucb_article_tags) {
-          for (var i = 0; i < item.relationships.field_ucb_article_tags.data.length; i++) {
-            thisArticleTags.push(item.relationships.field_ucb_article_tags.data[i].meta.drupal_internal__target_id);
-          }
-        }
-
-        let doesIncludeCat = thisArticleCats;
-        let doesIncludeTag = thisArticleTags;
-
-        // check to see if we need to filter on categories
-        if (excludeCatArray.length && thisArticleCats.length) {
-          doesIncludeCat = thisArticleCats.filter((element) =>
-            excludeCatArray.includes(element)
-          );
-        }
-        // check to see if we need to filter on tags
-        if (excludeTagArray.length && thisArticleTags.length) {
-          doesIncludeTag = thisArticleTags.filter((element) =>
-            excludeTagArray.includes(element)
-          );
-        }
-
-        // If there's no categories or tags that are in the exclusions, proceed
-        if (doesIncludeCat.length == 0 && doesIncludeTag.length == 0) {
-          // okay to render
-          let bodyAndImageId = item.relationships.field_ucb_article_content.data.length ? item.relationships.field_ucb_article_content.data[0].id : "";
-          let body = item.attributes.field_ucb_article_summary ? item.attributes.field_ucb_article_summary : "";
-          body = body.trim();
-          let imageSrc = "";
-          let imageSrcWide = "";
-          if (!body.length && bodyAndImageId != "") {
-            body = await this.getArticleParagraph(bodyAndImageId);
-          }
-
-          // if no thumbnail, show no image
-          if (!item.relationships.field_ucb_article_thumbnail.data) {
-            imageSrc = "";
+      data.included
+        .filter((item) => item.type === "file--file")
+        .forEach((item) => {
+          if (item.links.focal_image_square && item.links.focal_image_wide) {
+            altObj[item.id] = item.links.focal_image_square.href;
+            wideObj[item.id] = item.links.focal_image_wide.href;
           } else {
-            //Use the idObj as a memo to add the corresponding image url
-            let thumbId = item.relationships.field_ucb_article_thumbnail.data.id;
-            imageSrc = altObj[idObj[thumbId]];
-            imageSrcWide = wideObj[idObj[thumbId]]
+            altObj[item.id] = item.attributes.uri.url;
           }
+        });
+    }
 
-          //Date - make human readable
-          const options = { year: 'numeric', month: 'short', day: 'numeric' };
-          let date = new Date(item.attributes.created).toLocaleDateString('en-us', options);
-          let title = item.attributes.title;
-          let link = item.attributes.path.alias;
+    // Process each article
+    const articlesToAdd = await Promise.all(
+      data.data.map(async (item) => {
+        if (item.relationships.field_ucb_article_thumbnail.data) {
+          const thisArticleCats =
+            item.relationships.field_ucb_article_categories?.data.map(
+              (cat) => cat.meta.drupal_internal__target_id
+            ) || [];
+          const thisArticleTags =
+            item.relationships.field_ucb_article_tags?.data.map(
+              (tag) => tag.meta.drupal_internal__target_id
+            ) || [];
 
-          // Create an Article Object for programatic rendering
-          const article = {
-            title,
-            link,
-            image: imageSrc,
-            imageWide: imageSrcWide,
-            date,
-            body,
+          const doesIncludeCat = excludeCatArray.length
+            ? thisArticleCats.filter((cat) => excludeCatArray.includes(cat))
+            : [];
+          const doesIncludeTag = excludeTagArray.length
+            ? thisArticleTags.filter((tag) => excludeTagArray.includes(tag))
+            : [];
+
+          // Proceed if no excluded categories or tags are found
+          if (doesIncludeCat.length === 0 && doesIncludeTag.length === 0) {
+            const bodyAndImageId =
+              item.relationships.field_ucb_article_content?.data[0]?.id || "";
+            let body = item.attributes.field_ucb_article_summary || "";
+            if (!body && bodyAndImageId) {
+              body = await this.getArticleParagraph(bodyAndImageId);
+            }
+            const imageSrc = item.relationships.field_ucb_article_thumbnail.data
+              ? altObj[
+                  idObj[item.relationships.field_ucb_article_thumbnail.data.id]
+                ]
+              : "";
+            const imageSrcWide = item.relationships.field_ucb_article_thumbnail
+              .data
+              ? wideObj[
+                  idObj[item.relationships.field_ucb_article_thumbnail.data.id]
+                ]
+              : "";
+
+            return {
+              title: item.attributes.title,
+              link: item.attributes.path.alias,
+              image: imageSrc,
+              imageWide: imageSrcWide,
+              date: new Date(item.attributes.created).toLocaleDateString(
+                "en-us",
+                { year: "numeric", month: "short", day: "numeric" }
+              ),
+              body: body.trim(),
+            };
           }
-          // Adds the article object to the final array of articles chosen
-          finalArticles.push(article);
         }
-      }));
-      // Case for not enough articles selected and extra articles available
-      if (finalArticles.length < count && NEXTJSONURL) {
-        fetch(NEXTJSONURL).then(this.handleError)
-          .then((data) => this.build(data, count, display, excludeCatArray, excludeTagArray, finalArticles))
-          .catch(Error => {
-            console.error('There was an error fetching data from the API - Please try again later.');
-            console.error(Error);
-            this.toggleMessage('ucb-al-loading');
-            this.toggleMessage('ucb-al-api-error', "block");
-          });
-      }
+        return null;
+      })
+    );
 
-      // If no chosen articles and no other options, provide error
-      if (finalArticles.length === 0 && !NEXTJSONURL) {
-        console.error('There are no available Articles that match the selected filters. Please adjust your filters and try again.');
-        this.toggleMessage('ucb-al-loading');
-        this.toggleMessage('ucb-al-error', "block");
-      }
+    finalArticles.push(...articlesToAdd.filter((article) => article !== null));
 
-      // Case for Too many articles
-      if (finalArticles.length >= count || (finalArticles.length >= count && NEXTJSONURL)) {
-        finalArticles.length = count
-      }
+    // Fetch more articles if needed
+    if (finalArticles.length < count && NEXTJSONURL) {
+      fetch(NEXTJSONURL)
+        .then(this.handleError)
+        .then((data) =>
+          this.build(
+            data,
+            count,
+            display,
+            excludeCatArray,
+            excludeTagArray,
+            finalArticles
+          )
+        )
+        .catch((Error) => {
+          console.error(
+            "There was an error fetching data from the API - Please try again later."
+          );
+          console.error(Error);
+          this.toggleMessage("ucb-al-loading");
+          this.toggleMessage("ucb-al-api-error", "block");
+        });
+      return;
+    }
 
-      // Have articles and want to proceed
-      if ((finalArticles.length >= 0 && !NEXTJSONURL) || (finalArticles.length == count && NEXTJSONURL)) {
+    if (finalArticles.length === 0 && !NEXTJSONURL) {
+      console.error(
+        "There are no available Articles that match the selected filters. Please adjust your filters and try again."
+      );
+      this.toggleMessage("ucb-al-loading");
+      this.toggleMessage("ucb-al-error", "block");
+      return;
+    }
+
+      if (finalArticles.length >= count || !NEXTJSONURL) {
+        if (finalArticles.length > count) {
+          finalArticles.length = count;
+        }
         this.renderDisplay(display, finalArticles);
       }
-    }
   }
+
   // Responsible for fetching & processing the body of the Article if no summary provided
   async getArticleParagraph(id) {
     if (!id) {
       return "";
     }
 
-    const response = await fetch(`/jsonapi/paragraph/article_content/${id}`);
-    if (!response.ok) {
-      throw new Error('Failed to fetch article paragraph');
-    }
-
-    const data = await response.json();
-    if (!data.data.attributes.field_article_text) return ""; //  needed for external articles
-
-    let htmlStrip = data.data.attributes.field_article_text.processed.replace(
-      /<\/?[^>]+(>|$)/g,
-      ""
-    );
-    let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
-    let trimmedString = lineBreakStrip.substr(0, 250);
-
-    if (trimmedString.length > 100) {
-      trimmedString = trimmedString.substr(
-        0,
-        Math.min(
-          trimmedString.length,
-          trimmedString.lastIndexOf(" ")
-        )
+    try {
+      const response = await fetch(
+        `${this._baseURI}/jsonapi/paragraph/article_content/${id}`
       );
+      const data = await response.json();
+      if (!data.data.attributes.field_article_text) return ""; //  needed for external articles
+
+      let htmlStrip = data.data.attributes.field_article_text.processed.replace(
+        /<\/?[^>]+(>|$)/g,
+        ""
+      );
+      let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
+      let trimmedString = lineBreakStrip.substr(0, 250);
+
+      if (trimmedString.length > 100) {
+        trimmedString = trimmedString.substr(
+          0,
+          Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
+        );
+      }
+      return trimmedString + "...";
+    } catch (Error) {
+      console.error(
+        "There was an error fetching Article Paragraph from the API - Please try again later."
+      );
+      console.error(Error);
+      this.toggleMessage("ucb-al-loading");
+      this.toggleMessage("ucb-al-api-error", "block");
+      return ""; // Return an empty string in case of error
     }
-
-    return trimmedString + "...";
   }
-
 
   // Responsible for calling the render function of the appropriate display
   renderDisplay(display, articleArray) {
     switch (display) {
-      case 'feature-wide':
+      case "feature-wide":
         this.renderFeatureWide(articleArray);
         break;
-      case 'feature-large':
+      case "feature-large":
         this.renderFeatureFull(articleArray);
         break;
-      case 'teaser':
+      case "teaser":
         this.renderTeaser(articleArray);
         break;
-      case 'title-thumbnail':
+      case "title-thumbnail":
         this.renderTitleThumb(articleArray);
         break;
-      case 'title-only':
+      case "title-only":
         this.renderTitleOnly(articleArray);
         break;
       default:
         this.renderTeaser(articleArray);
         break;
     }
-
   }
 
   // renderX functions are responsible for taking the final array of Articles and displaying them appropriately
   renderFeatureFull(articleArray) {
-    var container = document.createElement('div');
-    container.classList = 'ucb-article-list-block';
+    var container = document.createElement("div");
+    container.classList = "ucb-article-list-block";
 
-    articleArray.forEach(article => {
+    articleArray.forEach((article) => {
       // Article Data
       var articleDate = article.date;
       var articleLink = article.link;
@@ -249,19 +250,18 @@ class ArticleListBlockElement extends HTMLElement {
       var articleSumm = article.body;
 
       // Create and Append Elements
-      var article = document.createElement('article');
-      article.classList = 'ucb-article-card';
-
+      var article = document.createElement("article");
+      article.classList = "ucb-article-card";
 
       if (articleImgSrc) {
-        var imgDiv = document.createElement('div');
-        var imgLink = document.createElement('a');
+        var imgDiv = document.createElement("div");
+        var imgLink = document.createElement("a");
         imgLink.href = articleLink;
-        imgLink.setAttribute('role', 'presentation');
-        imgLink.setAttribute('aria-hidden', 'true');
+        imgLink.setAttribute("role", "presentation");
+        imgLink.setAttribute("aria-hidden", "true");
 
-        var articleImg = document.createElement('img');
-        articleImg.classList = 'col-sm-12 ucb-article-card-img-full';
+        var articleImg = document.createElement("img");
+        articleImg.classList = "col-sm-12 ucb-article-card-img-full";
         articleImg.src = articleImgSrc;
 
         imgLink.appendChild(articleImg);
@@ -270,31 +270,31 @@ class ArticleListBlockElement extends HTMLElement {
         article.appendChild(imgDiv);
       }
 
-      var articleBody = document.createElement('div');
-      articleBody.classList = 'col-sm-12 ucb-article-card-data';
+      var articleBody = document.createElement("div");
+      articleBody.classList = "col-sm-12 ucb-article-card-data";
 
-      var headerLink = document.createElement('a');
+      var headerLink = document.createElement("a");
       headerLink.href = articleLink;
 
-      var articleHeader = document.createElement('h3');
-      articleHeader.classList = 'ucb-article-card-title-feature';
+      var articleHeader = document.createElement("h3");
+      articleHeader.classList = "ucb-article-card-title-feature";
       articleHeader.innerText = articleTitle;
 
       headerLink.appendChild(articleHeader);
 
-      var date = document.createElement('span');
-      date.classList = 'ucb-article-card-date';
+      var date = document.createElement("span");
+      date.classList = "ucb-article-card-date";
       date.innerText = articleDate;
 
-      var articleSummary = document.createElement('p');
+      var articleSummary = document.createElement("p");
       articleSummary.innerText = articleSumm;
-      articleSummary.classList = 'ucb-article-card-summary';
+      articleSummary.classList = "ucb-article-card-summary";
 
-      var readMore = document.createElement('a');
+      var readMore = document.createElement("a");
       readMore.href = articleLink;
-      readMore.classList = 'ucb-article-card-read-more';
-      readMore.innerText = 'Read More';
-      readMore.setAttribute('aria-hidden', 'true');
+      readMore.classList = "ucb-article-card-read-more";
+      readMore.innerText = "Read More";
+      readMore.setAttribute("aria-hidden", "true");
 
       articleBody.appendChild(headerLink);
       articleBody.appendChild(date);
@@ -303,16 +303,16 @@ class ArticleListBlockElement extends HTMLElement {
 
       article.appendChild(articleBody);
 
-      this.toggleMessage('ucb-al-loading');
+      this.toggleMessage("ucb-al-loading");
       container.appendChild(article);
     });
     this.appendChild(container);
   }
   renderFeatureWide(articleArray) {
-    var container = document.createElement('div');
-    container.classList = 'ucb-article-list-block';
+    var container = document.createElement("div");
+    container.classList = "ucb-article-list-block";
 
-    articleArray.forEach(article => {
+    articleArray.forEach((article) => {
       // Article Data
       var articleDate = article.date;
       var articleLink = article.link;
@@ -321,18 +321,18 @@ class ArticleListBlockElement extends HTMLElement {
       var articleSumm = article.body;
 
       // Create and Append Elements
-      var article = document.createElement('article');
-      article.classList = 'ucb-article-card';
+      var article = document.createElement("article");
+      article.classList = "ucb-article-card";
 
       if (articleImgSrc) {
-        var imgDiv = document.createElement('div');
-        var imgLink = document.createElement('a');
+        var imgDiv = document.createElement("div");
+        var imgLink = document.createElement("a");
         imgLink.href = articleLink;
-        imgLink.setAttribute('role', 'presentation');
-        imgLink.setAttribute('aria-hidden', 'true');
+        imgLink.setAttribute("role", "presentation");
+        imgLink.setAttribute("aria-hidden", "true");
 
-        var articleImg = document.createElement('img');
-        articleImg.classList = 'ucb-article-card-img-wide';
+        var articleImg = document.createElement("img");
+        articleImg.classList = "ucb-article-card-img-wide";
         articleImg.src = articleImgSrc;
 
         imgLink.appendChild(articleImg);
@@ -341,31 +341,31 @@ class ArticleListBlockElement extends HTMLElement {
         article.appendChild(imgDiv);
       }
 
-      var articleBody = document.createElement('div');
-      articleBody.classList = 'col-sm-12 ucb-article-card-data';
+      var articleBody = document.createElement("div");
+      articleBody.classList = "col-sm-12 ucb-article-card-data";
 
-      var headerLink = document.createElement('a');
+      var headerLink = document.createElement("a");
       headerLink.href = articleLink;
 
-      var articleHeader = document.createElement('h3');
-      articleHeader.classList = 'ucb-article-card-title-feature';
+      var articleHeader = document.createElement("h3");
+      articleHeader.classList = "ucb-article-card-title-feature";
       articleHeader.innerText = articleTitle;
 
       headerLink.appendChild(articleHeader);
 
-      var date = document.createElement('span');
-      date.classList = 'ucb-article-card-date';
+      var date = document.createElement("span");
+      date.classList = "ucb-article-card-date";
       date.innerText = articleDate;
 
-      var articleSummary = document.createElement('p');
+      var articleSummary = document.createElement("p");
       articleSummary.innerText = articleSumm;
-      articleSummary.classList = 'ucb-article-card-summary';
+      articleSummary.classList = "ucb-article-card-summary";
 
-      var readMore = document.createElement('a');
+      var readMore = document.createElement("a");
       readMore.href = articleLink;
-      readMore.classList = 'ucb-article-card-read-more';
-      readMore.innerText = 'Read More';
-      readMore.setAttribute('aria-hidden', 'true');
+      readMore.classList = "ucb-article-card-read-more";
+      readMore.innerText = "Read More";
+      readMore.setAttribute("aria-hidden", "true");
 
       articleBody.appendChild(headerLink);
       articleBody.appendChild(date);
@@ -374,34 +374,34 @@ class ArticleListBlockElement extends HTMLElement {
 
       article.appendChild(articleBody);
 
-      this.toggleMessage('ucb-al-loading');
+      this.toggleMessage("ucb-al-loading");
       container.appendChild(article);
     });
     this.appendChild(container);
   }
   renderTitleThumb(articleArray) {
-    var container = document.createElement('div');
-    container.classList = 'ucb-article-list-block container';
+    var container = document.createElement("div");
+    container.classList = "ucb-article-list-block container";
 
-    articleArray.forEach(article => {
+    articleArray.forEach((article) => {
       // Article Data
       var articleLink = article.link;
       var articleImgSrc = article.image;
       var articleTitle = article.title;
 
       // Create and Append Elements
-      var article = document.createElement('article');
-      article.classList = 'ucb-article-card row';
+      var article = document.createElement("article");
+      article.classList = "ucb-article-card row";
       if (articleImgSrc) {
-        var imgDiv = document.createElement('div');
-        imgDiv.classList = 'ucb-article-card-img title-thumbnail-img';
+        var imgDiv = document.createElement("div");
+        imgDiv.classList = "ucb-article-card-img title-thumbnail-img";
 
-        var imgLink = document.createElement('a');
+        var imgLink = document.createElement("a");
         imgLink.href = articleLink;
-        imgLink.setAttribute('role', 'presentation');
-        imgLink.setAttribute('aria-hidden', 'true');
+        imgLink.setAttribute("role", "presentation");
+        imgLink.setAttribute("aria-hidden", "true");
 
-        var articleImg = document.createElement('img');
+        var articleImg = document.createElement("img");
         articleImg.src = articleImgSrc;
 
         imgLink.appendChild(articleImg);
@@ -410,60 +410,60 @@ class ArticleListBlockElement extends HTMLElement {
         article.appendChild(imgDiv);
       }
 
-      var articleBody = document.createElement('div');
+      var articleBody = document.createElement("div");
       if (articleImgSrc) {
-        articleBody.classList = 'col px-3 ucb-article-card-data';
+        articleBody.classList = "col px-3 ucb-article-card-data";
       } else {
-        articleBody.classList = 'col ucb-article-card-data';
+        articleBody.classList = "col ucb-article-card-data";
       }
 
-      var headerLink = document.createElement('a');
+      var headerLink = document.createElement("a");
       headerLink.href = articleLink;
-      headerLink.innerText = articleTitle
+      headerLink.innerText = articleTitle;
 
       articleBody.appendChild(headerLink);
 
       article.appendChild(articleBody);
 
-      this.toggleMessage('ucb-al-loading');
+      this.toggleMessage("ucb-al-loading");
       container.appendChild(article);
     });
     this.appendChild(container);
   }
   renderTitleOnly(articleArray) {
-    var container = document.createElement('div');
-    container.classList = 'ucb-article-list-block';
+    var container = document.createElement("div");
+    container.classList = "ucb-article-list-block";
 
-    articleArray.forEach(article => {
+    articleArray.forEach((article) => {
       // Article Data
       var articleLink = article.link;
       var articleTitle = article.title;
 
       // Create and Append Elements
-      var article = document.createElement('article');
-      article.classList = 'ucb-article-card-title-only';
+      var article = document.createElement("article");
+      article.classList = "ucb-article-card-title-only";
 
-      var articleBody = document.createElement('div');
-      articleBody.classList = 'col-sm-12 ucb-article-card-data';
+      var articleBody = document.createElement("div");
+      articleBody.classList = "col-sm-12 ucb-article-card-data";
 
-      var headerLink = document.createElement('a');
+      var headerLink = document.createElement("a");
       headerLink.href = articleLink;
-      headerLink.innerText = articleTitle
+      headerLink.innerText = articleTitle;
 
       articleBody.appendChild(headerLink);
 
       article.appendChild(articleBody);
 
-      this.toggleMessage('ucb-al-loading');
+      this.toggleMessage("ucb-al-loading");
       container.appendChild(article);
     });
     this.appendChild(container);
   }
   renderTeaser(articleArray) {
-    var container = document.createElement('div');
-    container.classList = 'ucb-article-list-block container';
+    var container = document.createElement("div");
+    container.classList = "ucb-article-list-block container";
 
-    articleArray.forEach(article => {
+    articleArray.forEach((article) => {
       // Article Data
       var articleDate = article.date;
       var articleLink = article.link;
@@ -472,19 +472,19 @@ class ArticleListBlockElement extends HTMLElement {
       var articleSumm = article.body;
 
       // Create and Append Elements
-      var article = document.createElement('article');
-      article.classList = 'ucb-article-card row';
+      var article = document.createElement("article");
+      article.classList = "ucb-article-card row";
 
       if (articleImgSrc) {
-        var imgDiv = document.createElement('div');
-        imgDiv.classList = 'ucb-article-card-img';
+        var imgDiv = document.createElement("div");
+        imgDiv.classList = "ucb-article-card-img";
 
-        var imgLink = document.createElement('a');
+        var imgLink = document.createElement("a");
         imgLink.href = articleLink;
-        imgLink.setAttribute('role', 'presentation');
-        imgLink.setAttribute('aria-hidden', 'true');
+        imgLink.setAttribute("role", "presentation");
+        imgLink.setAttribute("aria-hidden", "true");
 
-        var articleImg = document.createElement('img');
+        var articleImg = document.createElement("img");
         articleImg.src = articleImgSrc;
 
         imgLink.appendChild(articleImg);
@@ -493,35 +493,35 @@ class ArticleListBlockElement extends HTMLElement {
         article.appendChild(imgDiv);
       }
 
-      var articleBody = document.createElement('div');
+      var articleBody = document.createElement("div");
       if (articleImgSrc) {
-        articleBody.classList = 'col px-3 ucb-article-card-data';
+        articleBody.classList = "col px-3 ucb-article-card-data";
       } else {
-        articleBody.classList = 'col ucb-article-card-data';
+        articleBody.classList = "col ucb-article-card-data";
       }
 
-      var headerStrong = document.createElement('strong');
+      var headerStrong = document.createElement("strong");
 
-      var articleHeader = document.createElement('a');
-      articleHeader.classList = 'ucb-article-card-title-teaser';
+      var articleHeader = document.createElement("a");
+      articleHeader.classList = "ucb-article-card-title-teaser";
       articleHeader.href = articleLink;
       articleHeader.innerText = articleTitle;
 
       headerStrong.appendChild(articleHeader);
 
-      var date = document.createElement('span');
-      date.classList = 'ucb-article-card-date';
+      var date = document.createElement("span");
+      date.classList = "ucb-article-card-date";
       date.innerText = articleDate;
 
-      var articleSummary = document.createElement('p');
+      var articleSummary = document.createElement("p");
       articleSummary.innerText = articleSumm;
-      articleSummary.classList = 'ucb-article-card-summary';
+      articleSummary.classList = "ucb-article-card-summary";
 
-      var readMore = document.createElement('a');
+      var readMore = document.createElement("a");
       readMore.href = articleLink;
-      readMore.classList = 'ucb-article-card-read-more';
-      readMore.innerText = 'Read More';
-      readMore.setAttribute('aria-hidden', 'true');
+      readMore.classList = "ucb-article-card-read-more";
+      readMore.innerText = "Read More";
+      readMore.setAttribute("aria-hidden", "true");
 
       articleBody.appendChild(headerStrong);
       articleBody.appendChild(date);
@@ -530,11 +530,10 @@ class ArticleListBlockElement extends HTMLElement {
 
       article.appendChild(articleBody);
 
-      this.toggleMessage('ucb-al-loading');
+      this.toggleMessage("ucb-al-loading");
       container.appendChild(article);
     });
     this.appendChild(container);
-
   }
 
   // Used to toggle error messages and loader
@@ -552,9 +551,9 @@ class ArticleListBlockElement extends HTMLElement {
   }
 
   // Used for error handling within the API response
-  handleError = response => {
+  handleError = (response) => {
     if (!response.ok) {
-      throw new Error;
+      throw new Error();
     } else {
       return response.json();
     }

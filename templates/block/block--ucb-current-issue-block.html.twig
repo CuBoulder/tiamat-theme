@@ -10,6 +10,8 @@
     view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
 ]
 %}
+{# Base Url #}
+{% set baseurlJSON = url('<front>')|render|trim('/') %}
 
 {# Block/Title/Icon Styles #}
 {% set blockStyles = [
@@ -29,19 +31,19 @@
 <div{{attributes.addClass(classes,blockStyles)}}>
 	{{ title_prefix }}
 	{% if label %}
-		<div class="block-title {{ headingStyle }}">
-			<{{headingTag}}{{title_attributes}}>
-				<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
-					{{ content.field_bs_icon }}
-				</span>
-				<span class="block-title-text">
-					{{ label }}
-				</span>
-			</{{headingTag}}>
-		</div>
+		<div class="block-title-outer">
+				<{{ headingTag }}{{title_attributes}} class="block-title">
+					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
+						{{ content.field_bs_icon }}
+					</span>
+					<span class="block-title-text {{ headingStyle }}">
+						{{ label }}
+					</span>
+				</{{ headingTag }}>
+			</div>
 	{% endif %}
 	{{ title_suffix }}
-	<current-issue-block>
+	<current-issue-block base-uri="{{baseurlJSON}}">
 		<div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
 			<i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>
 		</div>

@@ -1,16 +1,16 @@
 class CurrentIssueElement extends HTMLElement {
 	constructor() {
 		super();
-        
+    this._baseURI = this.getAttribute("base-uri");
         const handleError = response => {
-            if (!response.ok) { 
+            if (!response.ok) {
                throw new Error;
             } else {
                return response.json();
             }
         };
 
-        fetch(`/jsonapi/node/ucb_issue?include=field_ucb_issue_cover_image.field_media_image&fields[file--file]=uri,url&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published&sort=-created`)
+        fetch(`${this._baseURI}/jsonapi/node/ucb_issue?include=field_ucb_issue_cover_image.field_media_image&fields[file--file]=uri,url&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published&sort=-created`)
             .then(handleError)
             .then((data) => this.build(data))
             .catch(Error=> {
@@ -26,20 +26,20 @@ class CurrentIssueElement extends HTMLElement {
             const title = data.data[0].attributes.title
             let imgURL
             const issueURL = data.data[0].attributes.path.alias
-    
+
             const imgLinkEL = document.createElement('a')
             imgLinkEL.href = issueURL
-    
+
             let blockDiv = document.createElement('div')
             blockDiv.classList='ucb-current-issue-block-content'
-    
+
             const imgDiv = document.createElement('div')
             imgDiv.classList = 'ucb-current-issue-block-img-container'
-    
-    
+
+
             const titleDiv = document.createElement('div')
             titleDiv.classList = 'ucb-current-issue-block-title-container'
-    
+
             const titleEl = document.createElement('h3')
             titleEl.classList = "ucb-current-issue-block-title"
             titleEl.innerText = title
@@ -67,8 +67,8 @@ class CurrentIssueElement extends HTMLElement {
             const issue = data.data[0] ? data.data[0] : null
             const linkEl = document.createElement('a')
             linkEl.href = issueURL
-    
-    
+
+
             linkEl.appendChild(titleEl)
             titleDiv.appendChild(linkEl)
 
@@ -82,8 +82,8 @@ class CurrentIssueElement extends HTMLElement {
                 imgLinkEL.appendChild(imgEL)
                 imgDiv.appendChild(imgLinkEL)
             }
-    
-            
+
+
             blockDiv.appendChild(imgDiv)
             blockDiv.appendChild(titleDiv)
             this.toggleMessage('ucb-al-loading');
@@ -109,7 +109,7 @@ class CurrentIssueElement extends HTMLElement {
 
         this.appendChild(container)
         console.error(Error)
-        
+
     }
 
     toggleMessage(id, display = "none") {

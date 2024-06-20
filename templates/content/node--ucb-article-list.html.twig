@@ -65,10 +65,10 @@
  *
  * @see template_preprocess_node()
  *
- * TODO : 
- *  - Set output on Thumbnail to be reasonable size in Article schema 
- *  - if no Thumbnail, get the image from the first included paragraph  
- *  - clean up console log message 
+ * TODO :
+ *  - Set output on Thumbnail to be reasonable size in Article schema
+ *  - if no Thumbnail, get the image from the first included paragraph
+ *  - clean up console log message
  *  - expose filters on the client side as requested
  */
 #}
@@ -76,6 +76,9 @@
 {{ attach_library('boulder_base/ucb-article-list') }}
 
 {# NEW #}
+{# Base Url #}
+{% set baseurlJSON = url('<front>')|render|trim('/') %}
+
 {# JSON API Endpoint information #}
 {% set articlesJSON = (url('<front>')|render|trim('/'))
   ~ '/jsonapi/node/ucb_article'
@@ -233,34 +236,34 @@
 {# {% if excludeCategories|length %}
   {% set excludeGroupMembers = "" %}
   {% for item in excludeCategories %}
-     {% set excludeGroupMembers = excludeGroupMembers ~ 
-       '&filter[filter-excat][condition][value][' ~ loop.index ~ ']=' ~ item 
+     {% set excludeGroupMembers = excludeGroupMembers ~
+       '&filter[filter-excat][condition][value][' ~ loop.index ~ ']=' ~ item
      %}
   {% endfor %}
-  {% set ExcludeCategoryFilter = 
+  {% set ExcludeCategoryFilter =
        '&filter[filter-excat][condition][path]=field_ucb_article_categories.meta.drupal_internal__target_id' ~
-       '&filter[filter-excat][condition][operator]=NOT%20IN' ~ 
-       excludeGroupMembers 
+       '&filter[filter-excat][condition][operator]=NOT%20IN' ~
+       excludeGroupMembers
   %}
 {% endif %} #}
-{# 
+{#
 {% if excludeCategories|length %}
   {% set excludeGroupMembers = "" %}
   {% for item in excludeCategories %}
-     {% set excludeGroupMembers = excludeGroupMembers ~ 
+     {% set excludeGroupMembers = excludeGroupMembers ~
        '&filter[filter-excat' ~ item ~'][condition][path]=field_ucb_article_categories.meta.drupal_internal__target_id' ~
        '&filter[filter-excat' ~ item ~'][condition][operator]=%3C%3E' ~
        '&filter[filter-excat' ~ item ~'][condition][value]=' ~ item ~
-       '&filter[filter-excat' ~ item ~'][condition][memberOf]=cat-exclude' 
+       '&filter[filter-excat' ~ item ~'][condition][memberOf]=cat-exclude'
      %}
-     
+
   {% endfor %}
   {% set ExcludeCategoryFilter = "&filter[cat-exclude][group][conjunction]=AND" ~ excludeGroupMembers %}
 {% endif %} #}
 
 {# JSON API Filter logic #}
 <article{{ attributes.addClass('container', 'ucb-content-wrapper') }}>
-  <h1{{ title_attributes.addClass('ucb-article-list-header', is_front ? 'sr-only') }}>
+  <h1{{ title_attributes.addClass('ucb-article-list-header', is_front ? 'visually-hidden') }}>
     {{ label }}
   </h1>
 
@@ -272,6 +275,7 @@
       id: 'ucb-article-listing',
       class: 'ucb-article-list-container',
       'data-jsonapi': articlesJSON ~ IncludeFilter ~ pageCountFilter ~ sortFilter,
+      'data-baseuri' : baseurlJSON,
       'data-excats': excludeCategories,
       'data-extags': excludeTags }) }}>
       {# No Data message #}
@@ -294,7 +298,7 @@
 
       {# Error in the response from the API endpoint, display an error #}
       <div id="ucb-al-error" class="ucb-list-msg ucb-error">
-        Error retrieving article list from the API endpoint.  Please try again later.  
+        Error retrieving article list from the API endpoint.  Please try again later.
       </div>
       <div class="ucb-article-list-button-container">
         <a id='ucb-el-load-more'class="ucb-article-list-button">

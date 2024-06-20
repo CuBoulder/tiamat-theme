@@ -3,7 +3,11 @@
   display: flex;
 }
 
-.bs-title-scale-decrease .block-title {
+.block-title {
+  font-size: 200%
+}
+
+.bs-title-scale-decrease .block-title .block-title-text {
   font-size: 80%;
 }
 
@@ -11,18 +15,18 @@
   font-size: 80%;
 }
 
-.bs-title-scale-increase .block-title {
+.bs-title-scale-increase .block-title .block-title-text {
   font-size: 110%;
 }
 
 @media screen and (min-width: 768px) {
-  .bs-title-scale-increase .block-title {
+  .bs-title-scale-increase .block-title .block-title-text {
     font-size: 125%;
   }
 }
 
 @media screen and (min-width: 960px) {
-  .bs-title-scale-increase .block-title {
+  .bs-title-scale-increase .block-title .block-title-text {
     font-size: 150%;
   }
 }
@@ -57,61 +61,61 @@
 .block.bs-background-white {
   background-color: var(--ucb-white);
   color: var(--ucb-black);
-  padding: 20px;
+
 }
 
 .block.bs-background-gray {
   background-color: var(--ucb-light-gray);
   color: var(--ucb-black);
-  padding: 20px;
+
 }
 
 .block.bs-background-dark-gray {
   background-color: var(--ucb-dark-gray);
   color: var(--ucb-white);
-  padding: 20px;
+
 }
 
 .block.bs-background-tan {
   background-color: var(--ucb-light-gold);
   color: var(--ucb-black);
-  padding: 20px;
+
 }
 
 .block.bs-background-light-blue {
   background-color: var(--ucb-light-blue);
   color: var(--ucb-black);
-  padding: 20px;
+
 }
 
 .block.bs-background-medium-blue {
   background-color: var(--ucb-medium-blue);
   color: var(--ucb-black);
-  padding: 20px;
+
 }
 
 .block.bs-background-dark-blue {
   background-color: var(--ucb-dark-blue);
   color: var(--ucb-white);
-  padding: 20px;
+
 }
 
 .block.bs-background-light-green {
   background-color: var(--ucb-light-green);
   color: var(--ucb-black);
-  padding: 20px;
+
 }
 
 .block.bs-background-brick {
   background-color: var(--ucb-brick);
   color: var(--ucb-white);
-  padding: 20px;
+
 }
 
 .block.bs-background-outline {
   background-color: transparent;
   color: inherit;
-  padding: 20px;
+
   border: 1px solid rgba(200, 200, 200, 0.5);
 }
 
@@ -125,7 +129,7 @@
 .block.bs-background-alert {
   background-color: var(--ucb-alert);
   color: var(--ucb-black);
-  padding: 20px;
+
 }
 
 /*** Link Color Settings ***/

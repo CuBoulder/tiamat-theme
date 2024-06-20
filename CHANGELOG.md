@@ -1,4 +1,4 @@
-# CU Boulder Drupal 9+ Base Theme
+# CU Boulder Drupal 10+ Base Theme
 
 All notable changes to this project will be documented in this file.
 
@@ -9,179 +9,406 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Content Rows: Styling Adjustments and Feature Fix
-  Adjusts the following styles on the "Content Row" block:
+- ### Heading size fixes
+  Updated the block-title class position so that the title class name is getting applied at the right level.
   
-  ### Teaser Large + Teaser Large Alternate
-  - Aligns image and text to top of the row on these two display types, previously the text was centered
+  Previously the block-title was wrapping the h2/h3/h4/h5/h6 so that the font-size wasn't getting applied correctly.
+  Example: The block title is supposed to be 200% of the main font size (16px/1rem). That was getting applied on top of the 160% of h2 instead of h2.block-title just being made 200%. So instead of 32px it was becoming 52px. Essentially we were just double increasing, 16px\*160%\*200% rather than 16x\*200%.
   
-  ### Feature
-  - Feature style display are now fixed to only show 3 items
+  With the change of positioning on the block-title class that resolves this issue. It also fixes an issue with the block-title-increase/decrease options that we didn't know we had.
   
-  Resolves #1009 
+  This also tightens up the vertical spacing a bit with blocks/columns
+  
+  Resolves #1050 
 ---
 
-- ### Content List Block: A11y Changes, Unpublished Content Appearing in Lists
-  ### Content List Block
-  - Adds `role="presentation" aria-hidden="true"` to image links for an improved screen reader experience
-  - Removes "Read More" link from `Teaser` and `Full` display
-  - Hides unpublished content from appearing in Content Lists if user is not authenticated
+- ### Updated Mobile Menu Breakpoint
+  Closes #1059.
+  This changes the breakpoint from 600px to 576px to match bootstrap container values.
+---
+
+- ### Fixes Article Block Infinite Spin
+  ### Article Feature, Article List Block, Article Grid Block
+  Introduced a logic bug in https://github.com/CuBoulder/tiamat-theme/issues/1044 where the various Article Blocks on sites with a large number of Articles could be prevented from rendering the returned JSON:API data, which resulting in what seems like an infinite spinning loader. This has been corrected.
   
-  Resolves #1008 
+  Resolves #1066 
 ---
 
-- ### Collection item category filtering
-  Closes #1006.
-  Removes filtering by category in the build step of the collection grid.
----
+## [20240612] - 2024-06-12
 
-- ### Removes padding at the bottom of Video Reveal block image
-  [Bug] Resolves CuBoulder/tiamat-theme#999
----
+-   ### Remove aggregated categories from Collection grid
+    Closes #1031.
+    Removes aggregated categories as it was causing issues when there were more than 50 collection item nodes.
 
-- ### Refactors block style field templates
-  Refactored code to use machine name rather than label value. For grabbing machine name from list fields you need to use `element['#object'].get('FIELD_NAME').value` as machine names aren't in the render array.
-  
-  These changes affects all the background style field templates. 
-  Please test each background style option to make sure I didn't mislabel something.
-  
-  Resolves #1001
----
+* * *
 
-- ### Updates site footer
-  This update:
-  - [Change] Allows items in the site primary contact info in the site footer to have a bottom margin.
-  - [Change] Updates the column layout of the site footer.
-  - [Change] Adds margin between columns in the site footer in case they wrap on a mobile device.
-  
-  Resolves CuBoulder/tiamat-theme#985
----
+-   ### Issue/802
 
-- ### Change collection categories revision id to tid
-  Closes #997.
-  Changes the search from collection category revision id to tid to solve an issue in migration.
----
+    Set up new vertical alignment. 
+    Aimed to use the recommended bootstrap gutters across the board. 
+    Also fixed horizontal alignment for the new frame colors. 
+    Added `content-frame-unstyled` and `content-frame-styled` classes to help needing less names for css calls.
 
-- ### Text Block: Adds Alert Block Style
-  ### Text Block
-  Adds a new "Alert" style to the Text Block, useful for alerts or notifications on your site.
-  
-  
-  Includes:
-  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/991
-  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/145
-  
-  Resolves #880 
----
+    Also have padding options on sections for left/right fixed so it affects the frame rather than the entire section.
 
-- ### Fix Collection Grid issues.
-  Closes #954. 
-  Now correctly generates all collection item nodes. It also now limits collection item nodes by selected category filters as well.
----
+    -   `theme` => <https://github.com/CuBoulder/tiamat-theme/pull/1055>
+    -   `bootstrap_layouts` => <https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/48>
 
-- ### Video Hero: restores draggability in LB
-  ### Video Hero Block
-  - Restores dragability in Layout Builder.
-  
-  Includes:
-  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/989
-  - `custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/144
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/988
----
+    Resolves #802 
+    Resolves #1033 
+    Resolves #1038 
+    Resolves #548 
 
-- ### Hero Unit: Fixes Draggability in Layout Builder
-  Fixes the draggability of the "Hero Unit Block" in Layout Builder. 
-  
-  Draggability requires `{{attributes}}` to be applied to the outermost container in the Twig template. This change alters the inner containers to use different methods to apply classes and styles rather than also using the `{{attributes.addClass()}}`
-  
-  Resolves #746 
----
+* * *
 
-- ### Person Page: Articles by Person Changes
-  ### People Page Changes
-  #### Articles by Person Block
-  - Article card border size set to `1px`
-  - Adjusts heading level of the Articles by Person block on a Person Page, from `h3` to `h2`
-  - Adds a `Read More Articles by <name>` link if >5 Articles by that Person, leading to the Article List taxonomy View to show all the Articles that Person has been set as on the Article's byline field
-  
-  Resolves #961 
----
+-   ### Menus: Parent page highlight in navigation, even if child page isn't enabled in menu
 
-- ### Article Blocks: A11y fixes, External Article Handling
-  ### Article List Blocks: External Article Handling ( "Article Grid Block", "Article List Block", "Article Feature Block" )
-  
-  - Adds edge case to handle Article pages displaying in the "Teaser" style `Article List Block` that may not have an Article body or summary field added, such as an external article reference with no summary added.
-  
-  #### Article Grid + Article Feature Accessibility Changes
-  - Adjusts to accessibility standards for repeated links on the "Article Grid" and "Article Feature" blocks, all links other than the title have been set to `aria-hidden = "true"`. Images with links set to `role="presentation"` to prevent screen readers from repeating link information two or three times.
-  - Some JavaScript code formatting, no functionality changes.
-  
-  #### CSS Fixes
-  - Article Feature: The secondary Articles needed additional margin between the thumbnail and the title/link of the Article
-  - Article List Block: The entire element had left/right padding preventing alignment with other blocks.
-  
-  Resolves #971 
----
+    Previously there were cases where the child page wouldn't highlight the parent page in menus, specifically when that child page was disabled from the menu. This has been adjusted so that the final parent element in the menu will be highlighted as active as well.
 
-- ### Creates Webform page template
-  [Bug, Change] Resolves CuBoulder/tiamat-theme#982
----
+    Resolves #1032 
 
-- ### People List: Table style A11y and Style Changes
-  Changes the following on the `People List Page`, specifically in "Table" style:
-  - Makes the email field have screen reader text "Email <personsName>", rather than just "Email"
-  - Fixes border style of the table
-  
-  Resolves #974
-  Resolves #975 
----
+* * *
 
-- ### Updates Collection Grid block
-  [Bug] This update fixes a bug causing the text container of a collection item to be the incorrect width. Resolves CuBoulder/tiamat-theme#958
----
+-   ### JSON API Consumer Block bug fixes
 
-- ### Overrides Webform template
-  [a11y, Change] This update adds an `aria-live="polite"` to all webforms. Resolves CuBoulder/tiamat-theme#938
----
+    ### Adjusts the following blocks/page using JSON API to also provide the site's base path (for proper multisite functionality) #1044
 
-- ### Adds bug fixes for the dark 2 menu style
-  [Bug] Resolves CuBoulder/tiamat-theme#973 
----
+    -   Article Grid Block
+    -   Article Feature Block
+    -   Article List Block
+    -   Article Slider Block
+    -   Current Issue Block
+    -   Category Cloud
+    -   Tag Cloud
+    -   Article List Page
+    -   Issue Archive Page
 
-- ### Removes unused `sr-only` element from article lists
-  This update:
-  - [a11y, Remove] Removes unused `sr-only` elements from article list "read more" links. Resolves CuBoulder/tiamat-theme#932
-  - [Change] Improves the readability of article list JavaScript files (no changes in functionality should be observed).
----
+    ### Adjusted Rendering Order on Article List Blocks (Article List Block, Article Grid Block, Article Feature Block) #1049
 
-- ### Slider: "Right-side Content Overlay" styles
-  ### Slider: "Right-side Content Overlay"
-  Fixes some overlay issues on smaller screen sizes where the right side overlay wouldn't span the full height and longer strings of text was pushed into non-viewable areas of the slider due to a width setting. 
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/980
----
+    -   Previously a more complete Article could finish processing before one that needs additional calls to complete, such as one with a missing summary waiting for the Article body to finish processing (shortening, stripping elements, adding a `...` .) This could lead to an inconsistent order of Articles being displayed, despite a sort filter on the API call and the data coming back in the proper order. The `build` method on these components has been updated so that adding approved articles to the array of `final articles` (after include/exclude/fetching needed pieces/assembly/etc) are rendered in the order they are served by the API (by Date created) instead of as they come in completed.
 
-- ### Slider: Right-side Content Breakpoint
-  Previously the D10 breakpoint for the `Right-Side Content` style `Slider` block would stack the content under the image at a Tablet breakpoint. 
-  
-  This has been updated to stack under the image at a Mobile-sized breakpoint, while the 75% text size reduction will continue to apply earlier at the Tablet breakpoint to mirror D7.
-  
-  Resolves #917 
-  
----
+    Also fixes bug with Article pages made without Summary content not getting the trimmed Article content correctly in the Article collection blocks/pages. This was due to a race condition and corrected with proper async/await.
 
-- ### Fixes missing padding at the top of Content Grid items
-  [Bug] Resolves CuBoulder/tiamat-theme#965
----
+    Resolves #1044 
+    Resolves #1049 
 
-- ### Fixes page title not being draggable in Layout Builder
-  Resolves CuBoulder/tiamat-theme#969
----
+* * *
 
-- ### Fixes blocks not appearing in the Footer region
-  Resolves CuBoulder/tiamat-theme#945
----
+-   ### Content Row: Missing image maintains layout
+
+    ### Content Row - Large Teaser Alternate
+
+    Omitting the optional image on `Large Teaser - Alternate` style Content Row Blocks does not affect the layout. Previously the missing image would cause the text content to span the full width of available block space, rather than the intended alternating left & right staggered pattern and has been corrected.
+
+    Resolves #1048 
+
+* * *
+
+-   ### Google Translate: Fix style bugs
+
+    Resolves #1042 
+
+    -   Adds Black Background / White text option
+    -   Removes text-indent
+
+* * *
+
+-   ### Adds Google Translate
+
+    Adds Google Translate functionality to the UCB Brand Bar
+
+    Resolves #996 
+
+* * *
+
+-   ### Frame css
+
+    Updated frame css for section and block styles compatibility.
+
+    -   `theme` => <https://github.com/CuBoulder/tiamat-theme/pull/1037>
+    -   `bootstrap_layouts` => <https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/47>
+
+* * *
+
+-   ### Expandable Color Consistency
+
+    ### Expandable Blocks (Legacy Shortcode and Expandable Content Block)
+
+    -   `Expandable` legacy shortcode style now mirrors `Expandable Content` Block
+    -   Horizontal inactive tabs on the `Expandable Content` block fixed to inherit color as well.  
+
+    Includes:
+
+    -   `theme` => <https://github.com/CuBoulder/tiamat-theme/pull/1034>
+    -   `migration_shortcodes` => <https://github.com/CuBoulder/ucb_migration_shortcodes/pull/25>
+
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/767>
+
+* * *
+
+## [20240604] - 2024-06-04
+
+-   ### Replaces `sr-only` Bootstrap 4 class with `visually-hidden` Bootstrap 5 class
+    [Bug, a11y] Resolves CuBoulder/tiamat-theme#1021 Visually hidden (screenreader) elements briefly visible on page load
+
+* * *
+
+-   ### Block Alignments
+
+    Made fixes to layout alignment so that blocks will always be synced.
+    The main thing is that the left edge and right edge of the row content should align properly. 
+    There are very slight deviations in the 3 and 4 column options but those are normal for how css handles rows more than 2 columns. (The D7 version has the same discrepancies) 
+
+    Test by making tones of rows with different combos of frames and background colors with various different block types
+
+    Sister PR: <https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/43>
+
+    Resolves #847 
+
+    <img width="1355" alt="image" src="https://github.com/CuBoulder/tiamat-theme/assets/94021017/093fb2b9-9ef0-482e-8c1c-e4619e2365b0">
+    <img width="1327" alt="image" src="https://github.com/CuBoulder/tiamat-theme/assets/94021017/47778b20-de74-464a-82df-fd6185093a34">
+    <img width="1421" alt="image" src="https://github.com/CuBoulder/tiamat-theme/assets/94021017/9b44b5be-8a94-4b7b-b75c-50afd4c8cce1">
+    <img width="1431" alt="image" src="https://github.com/CuBoulder/tiamat-theme/assets/94021017/ecf20eac-cbe2-40a4-a752-07b3b274eded">
+
+* * *
+
+-   ### Adds visual indicator to menu links linking to unpublished content
+    Resolves CuBoulder/tiamat-theme#1004
+
+* * *
+
+-   ### Newsletter: Style Adjustments
+
+    ### Newsletter
+
+    -   Fixes link color to default `ucb-link` color.
+    -   Programmatically removes `sr-only` text from Category buttons, as Outlook clients ignore css `display:none` unless set on an outermost table so the Categories row would show up as `Categories: [Example 1] [Example 2]...` on Outlook clients. Tested on email with acid.
+
+    Resolves #849 
+
+* * *
+
+-   ### Content Rows: Styling Adjustments and Feature Fix
+
+    Adjusts the following styles on the "Content Row" block:
+
+    ### Teaser Large + Teaser Large Alternate
+
+    -   Aligns image and text to top of the row on these two display types, previously the text was centered
+
+    ### Feature
+
+    -   Feature style display are now fixed to only show 3 items
+
+    Resolves #1009 
+
+* * *
+
+-   ### Content List Block: A11y Changes, Unpublished Content Appearing in Lists
+
+    ### Content List Block
+
+    -   Adds `role="presentation" aria-hidden="true"` to image links for an improved screen reader experience
+    -   Removes "Read More" link from `Teaser` and `Full` display
+    -   Hides unpublished content from appearing in Content Lists if user is not authenticated
+
+    Resolves #1008 
+
+* * *
+
+-   ### Collection item category filtering
+    Closes #1006.
+    Removes filtering by category in the build step of the collection grid.
+
+* * *
+
+-   ### Removes padding at the bottom of Video Reveal block image
+    [Bug] Resolves CuBoulder/tiamat-theme#999
+
+* * *
+
+-   ### Refactors block style field templates
+
+    Refactored code to use machine name rather than label value. For grabbing machine name from list fields you need to use `element['#object'].get('FIELD_NAME').value` as machine names aren't in the render array.
+
+    These changes affects all the background style field templates. 
+    Please test each background style option to make sure I didn't mislabel something.
+
+    Resolves #1001
+
+* * *
+
+-   ### Updates site footer
+
+    This update:
+
+    -   [Change] Allows items in the site primary contact info in the site footer to have a bottom margin.
+    -   [Change] Updates the column layout of the site footer.
+    -   [Change] Adds margin between columns in the site footer in case they wrap on a mobile device.
+
+    Resolves CuBoulder/tiamat-theme#985
+
+* * *
+
+-   ### Change collection categories revision id to tid
+    Closes #997.
+    Changes the search from collection category revision id to tid to solve an issue in migration.
+
+* * *
+
+-   ### Text Block: Adds Alert Block Style
+
+    ### Text Block
+
+    Adds a new "Alert" style to the Text Block, useful for alerts or notifications on your site.
+
+    Includes:
+
+    -   `tiamat-theme` => <https://github.com/CuBoulder/tiamat-theme/pull/991>
+    -   `custom-entities` => <https://github.com/CuBoulder/tiamat-custom-entities/pull/145>
+
+    Resolves #880 
+
+* * *
+
+-   ### Fix Collection Grid issues.
+    Closes #954. 
+    Now correctly generates all collection item nodes. It also now limits collection item nodes by selected category filters as well.
+
+* * *
+
+-   ### Video Hero: restores draggability in LB
+
+    ### Video Hero Block
+
+    -   Restores dragability in Layout Builder.
+
+    Includes:
+
+    -   `tiamat-theme` => <https://github.com/CuBoulder/tiamat-theme/pull/989>
+    -   `custom-entities` => <https://github.com/CuBoulder/tiamat-custom-entities/pull/144>
+
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/988>
+
+* * *
+
+-   ### Hero Unit: Fixes Draggability in Layout Builder
+
+    Fixes the draggability of the "Hero Unit Block" in Layout Builder. 
+
+    Draggability requires `{{attributes}}` to be applied to the outermost container in the Twig template. This change alters the inner containers to use different methods to apply classes and styles rather than also using the `{{attributes.addClass()}}`
+
+    Resolves #746 
+
+* * *
+
+-   ### Person Page: Articles by Person Changes
+
+    ### People Page Changes
+
+    #### Articles by Person Block
+
+    -   Article card border size set to `1px`
+    -   Adjusts heading level of the Articles by Person block on a Person Page, from `h3` to `h2`
+    -   Adds a `Read More Articles by <name>` link if >5 Articles by that Person, leading to the Article List taxonomy View to show all the Articles that Person has been set as on the Article's byline field
+
+    Resolves #961 
+
+* * *
+
+-   ### Article Blocks: A11y fixes, External Article Handling
+
+    ### Article List Blocks: External Article Handling ( "Article Grid Block", "Article List Block", "Article Feature Block" )
+
+    -   Adds edge case to handle Article pages displaying in the "Teaser" style `Article List Block` that may not have an Article body or summary field added, such as an external article reference with no summary added.
+
+    #### Article Grid + Article Feature Accessibility Changes
+
+    -   Adjusts to accessibility standards for repeated links on the "Article Grid" and "Article Feature" blocks, all links other than the title have been set to `aria-hidden = "true"`. Images with links set to `role="presentation"` to prevent screen readers from repeating link information two or three times.
+    -   Some JavaScript code formatting, no functionality changes.
+
+    #### CSS Fixes
+
+    -   Article Feature: The secondary Articles needed additional margin between the thumbnail and the title/link of the Article
+    -   Article List Block: The entire element had left/right padding preventing alignment with other blocks.
+
+    Resolves #971 
+
+* * *
+
+-   ### Creates Webform page template
+    [Bug, Change] Resolves CuBoulder/tiamat-theme#982
+
+* * *
+
+-   ### People List: Table style A11y and Style Changes
+
+    Changes the following on the `People List Page`, specifically in "Table" style:
+
+    -   Makes the email field have screen reader text "Email <personsName>", rather than just "Email"
+    -   Fixes border style of the table
+
+    Resolves #974
+    Resolves #975 
+
+* * *
+
+-   ### Updates Collection Grid block
+    [Bug] This update fixes a bug causing the text container of a collection item to be the incorrect width. Resolves CuBoulder/tiamat-theme#958
+
+* * *
+
+-   ### Overrides Webform template
+    [a11y, Change] This update adds an `aria-live="polite"` to all webforms. Resolves CuBoulder/tiamat-theme#938
+
+* * *
+
+-   ### Adds bug fixes for the dark 2 menu style
+    [Bug] Resolves CuBoulder/tiamat-theme#973 
+
+* * *
+
+-   ### Removes unused `sr-only` element from article lists
+    This update:
+    -   [a11y, Remove] Removes unused `sr-only` elements from article list "read more" links. Resolves CuBoulder/tiamat-theme#932
+    -   [Change] Improves the readability of article list JavaScript files (no changes in functionality should be observed).
+
+* * *
+
+-   ### Slider: "Right-side Content Overlay" styles
+
+    ### Slider: "Right-side Content Overlay"
+
+    Fixes some overlay issues on smaller screen sizes where the right side overlay wouldn't span the full height and longer strings of text was pushed into non-viewable areas of the slider due to a width setting. 
+
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/980>
+
+* * *
+
+-   ### Slider: Right-side Content Breakpoint
+
+    Previously the D10 breakpoint for the `Right-Side Content` style `Slider` block would stack the content under the image at a Tablet breakpoint. 
+
+    This has been updated to stack under the image at a Mobile-sized breakpoint, while the 75% text size reduction will continue to apply earlier at the Tablet breakpoint to mirror D7.
+
+    Resolves #917 
+
+* * *
+
+-   ### Fixes missing padding at the top of Content Grid items
+    [Bug] Resolves CuBoulder/tiamat-theme#965
+
+* * *
+
+-   ### Fixes page title not being draggable in Layout Builder
+    Resolves CuBoulder/tiamat-theme#969
+
+* * *
+
+-   ### Fixes blocks not appearing in the Footer region
+    Resolves CuBoulder/tiamat-theme#945
+
+* * *
 
 ## [20240513] - 2024-05-13
 
@@ -2337,7 +2564,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240513...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240612...HEAD
+
+[20240612]: https://github.com/CuBoulder/tiamat-theme/compare/20240604...20240612
+
+[20240604]: https://github.com/CuBoulder/tiamat-theme/compare/20240513...20240604
 
 [20240513]: https://github.com/CuBoulder/tiamat-theme/compare/20240221...20240513
 

@@ -1,23 +1,47 @@
 (function () {
-  /**  
+  /**
    * Get additional data from the paragraph content attached to the Article node
    * @param {string} id - internal id used by Drupal to get the specific paragraph
    */
   async function getArticleParagraph(id) {
-    if (id) {
-      const response = await fetch(
-        `/jsonapi/paragraph/article_content/${id}`
-      );
-      return response;
-    } else {
+    if (!id) {
       return "";
+    }
+    try {
+      const response = await fetch(
+        `${baseURI}/jsonapi/paragraph/article_content/${id}`
+      );
+      const data = await response.json();
+      if (!data.data.attributes.field_article_text) return ""; //  needed for external articles
+      let htmlStrip = data.data.attributes.field_article_text.processed.replace(
+        /<\/?[^>]+(>|$)/g,
+        ""
+      );
+      let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
+      let trimmedString = lineBreakStrip.substr(0, 250);
+
+      if (trimmedString.length > 100) {
+        trimmedString = trimmedString.substr(
+          0,
+          Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
+        );
+      }
+      return trimmedString + "...";
+    } catch (Error) {
+      console.error(
+        "There was an error fetching Article Paragraph from the API - Please try again later."
+      );
+      console.error(Error);
+      toggleMessage("ucb-al-loading");
+      toggleMessage("ucb-al-api-error", "block");
+      return ""; // Return an empty string in case of error
     }
   }
 
   /**
    * Helper function to show/hide elements in the DOM
    * @param {string} id - CSS ID of the element to target
-   * @param {string} display - display mode for that element (block | none) 
+   * @param {string} display - display mode for that element (block | none)
    */
   function toggleMessage(id, display = "none") {
     if (id) {
@@ -44,13 +68,13 @@
 
   /**
    * Main function that will load the initial data from the given URL and start processing it for display
-   * @param {string} JSONURL - URL for the JSON:API endpoint with filters, sort and pagination 
-   * @param {string} id - target DOM element to add the content to 
-   * @param {string} ExcludeCategories - array of categories to filter out when rendering 
+   * @param {string} JSONURL - URL for the JSON:API endpoint with filters, sort and pagination
+   * @param {string} id - target DOM element to add the content to
+   * @param {string} ExcludeCategories - array of categories to filter out when rendering
    * @param {string} ExcludeTags - array of tags to filter out when rendering
    * @returns - Promise with resolve or reject
    */
-  function renderArticleList(JSONURL, ExcludeCategories = "", ExcludeTags = "") {
+  async function renderArticleList(JSONURL, ExcludeCategories = "", ExcludeTags = "") {
     return new Promise(function (resolve, reject) {
       let excludeCatArray = ExcludeCategories.split(",").map(Number);
       let excludeTagArray = ExcludeTags.split(",").map(Number);
@@ -73,8 +97,6 @@
             } else {
               NEXTJSONURL = "";
             }
-
-            //console.log("data obj", data);
 
             // if no articles of returned, stop the loading spinner and let the user know we received no data that matches their query
             if (!data.data.length) {
@@ -114,11 +136,9 @@
                 altObj[thumbnailId].alt = pair.relationships.thumbnail.data.meta.alt;
               });
             }
-            // console.log("idObj", idObj);
-            // console.log("urlObj", urlObj);
-            // console.log('altObj', altObj);
+
             //iterate over each item in the array
-            data.data.map((item) => {
+            data.data.map( async (item) => {
               let thisArticleCats = [];
               let thisArticleTags = [];
               // // loop through and grab all of the categories
@@ -130,7 +150,6 @@
                   );
                 }
               }
-              // console.log("this article cats",thisArticleCats);
 
               // // loop through and grab all of the tags
               if (item.relationships.field_ucb_article_tags) {
@@ -138,7 +157,6 @@
                   thisArticleTags.push(item.relationships.field_ucb_article_tags.data[i].meta.drupal_internal__target_id)
                 }
               }
-              // console.log('this article tags',thisArticleTags);
 
               // checks to see if the current article (item) contains a category or tag scheduled for exclusion
               let doesIncludeCat = thisArticleCats;
@@ -169,33 +187,7 @@
 
                 // if no article summary, use a simplified article body
                 if (!body.length && bodyAndImageId != "") {
-                  getArticleParagraph(bodyAndImageId)
-                    .then((response) => response.json())
-                    .then((data) => {
-                      // Remove any html tags within the article
-                      let htmlStrip = data.data.attributes.field_article_text.processed.replace(
-                        /<\/?[^>]+(>|$)/g,
-                        ""
-                      );
-                      // Remove any line breaks if media is embedded in the body
-                      let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
-                      // take only the first 100 words ~ 500 chars
-                      let trimmedString = lineBreakStrip.substr(0, 250);
-                      // if in the middle of the string, take the whole word
-                      if (trimmedString.length > 100) {
-                        trimmedString = trimmedString.substr(
-                          0,
-                          Math.min(
-                            trimmedString.length,
-                            trimmedString.lastIndexOf(" ")
-                          )
-                        );
-                        body = `${trimmedString}...`;
-                      }
-                      // set the contentBody of Article Summary card to the minified body instead
-                      body = `${trimmedString}`;
-                      document.getElementById(`body-${bodyAndImageId}`).innerText = body;
-                    });
+                  body = await getArticleParagraph(bodyAndImageId);
                 }
 
                 // if no thumbnail, show no image
@@ -306,8 +298,8 @@
             resolve(NEXTJSONURL);
           }).catch(function (error) {
             // catch any fetch errors and let the user know so they're not endlessly watching the spinner
-            console.log("Fetch Error in URL : " + JSONURL);
-            console.log("Fetch Error is : " + error);
+            console.error("Fetch Error in URL : " + JSONURL);
+            console.error("Fetch Error is : " + error);
             // turn off spinner
             toggleMessage("ucb-al-loading", "none");
             // turn on default error message
@@ -323,27 +315,29 @@
   }
 
   /*
-   * Initilization and start of code 
+   * Initilization and start of code
    */
 
   // get the url from the data-jsonapi variable
   let el = document.getElementById("ucb-article-listing");
-  let JSONURL = ""; // JSON:API URL 
-  let NEXTJSONURL = ""; // next link for pagination 
+  let JSONURL = ""; // JSON:API URL
+  let NEXTJSONURL = ""; // next link for pagination
   let CategoryExclude = ""; // categories to exclude
-  let TagsExclude = ""; // tags to exclude 
+  let TagsExclude = ""; // tags to exclude
+  let baseURI = ""
 
-  // check to see if we have the data we need to work with.  
+  // check to see if we have the data we need to work with.
   if (el) {
     JSONURL = el.dataset.jsonapi;
     CategoryExclude = el.dataset.excats;
     TagsExclude = el.dataset.extags;
+    baseURI = el.dataset.baseuri;
   }
 
-  // attempt to render the data requested 
+  // attempt to render the data requested
   renderArticleList(JSONURL, CategoryExclude, TagsExclude,).then((response) => {
     if (response) {
-      NEXTJSONURL = "/jsonapi/" + response;
+      NEXTJSONURL = `${baseURI}/jsonapi/` + response;
     }
   });
 
@@ -353,7 +347,7 @@
     if (NEXTJSONURL) {
       renderArticleList(NEXTJSONURL, CategoryExclude, TagsExclude,).then((response) => {
         if (response) {
-          NEXTJSONURL = "/jsonapi/" + response;
+          NEXTJSONURL = `${baseURI}/jsonapi/` + response;
           loadingData = false;
         } else {
           NEXTJSONURL = "";

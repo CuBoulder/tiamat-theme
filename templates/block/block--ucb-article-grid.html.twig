@@ -26,6 +26,9 @@
     ~ '&filter[publish-check][condition][memberOf]=published'
   %}
 
+  {# Base Url #}
+  {% set baseurlJSON = url('<front>')|render|trim('/') %}
+
   {# include and exclude options set by the user #}
   {% set includeCategories = [] %}
   {% set myCategories =
@@ -182,12 +185,12 @@
 	<div{{attributes.addClass(classes,blockStyles)}}>
 		{{ title_prefix }}
 		{% if label %}
-			<div class="block-title {{ headingStyle }}">
-				<{{ headingTag }}{{title_attributes}}>
+			<div class="block-title-outer">
+				<{{ headingTag }}{{title_attributes}} class="block-title">
 					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
 						{{ content.field_bs_icon }}
 					</span>
-					<span class="block-title-text">
+					<span class="block-title-text {{ headingStyle }}">
 						{{ label }}
 					</span>
 				</{{ headingTag }}>
@@ -197,6 +200,7 @@
   {{ content.body }}
 {# Article Grid Main Block#}
 <article-grid-block
+  base-uri="{{baseurlJSON}}"
   jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}"
   exCats="{{ excludeCategories }}"
   exTags="{{ excludeTags }}"

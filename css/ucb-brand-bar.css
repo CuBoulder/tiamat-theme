@@ -58,3 +58,36 @@
   width: 20px;
   height: 20px;
 }
+
+/* Google Translate */
+div.skiptranslate iframe{
+  visibility: collapse !important;
+}
+
+#google_translate_element2{
+  display: none;
+}
+
+.ucb-lang-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-overflow: '';
+  border: none;
+  padding: 0 10px 0 5px;
+  font-weight: bold;
+  color: inherit !important;
+  background-color: inherit !important;
+}
+
+.ucb-lang-select:active{
+  border: none;
+}
+
+.ucb-lang-icon{
+  display: flex;
+  align-items: center;
+}
+/* needed to prevent google translate from shifting after translation */
+body {
+  top:0 !important;
+}
