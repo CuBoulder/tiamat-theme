@@ -27,4 +27,13 @@ document.addEventListener("DOMContentLoaded", () => {
       openClass: "open",
     });
   }
+  const socialSecondaryCheck = document.getElementsByClassName("ucb-mobile-social-media-menu")[0].getElementsByClassName("social-media")[0];
+  if (socialSecondaryCheck != null) {
+    const socialSecondaryMenu = new AccessibleMenu.DisclosureMenu({
+      menuElement: socialSecondaryCheck,
+      controllerElement: document.querySelector("#ucb-mobile-menu-toggle"),
+      containerElement: document.getElementsByClassName("ucb-mobile-social-media-menu")[0],
+      openClass: "open",
+    });
+  }
 });

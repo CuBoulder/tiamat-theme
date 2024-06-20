@@ -1,4 +1,7 @@
+
 @media only screen and (min-width: 576px) {
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .block-system-menu-blocksocial-media-menu ul,
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region.ucb-secondary-menu-button-display .ucb-secondary-menu-region-container,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region.ucb-secondary-menu-button-display .ucb-secondary-menu-region-container .ucb-menu {
     gap: 0rem;
   }
@@ -7,6 +10,11 @@
     margin-top: 2px;
   }
 
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg{
+    height: 100%;
+  }
+
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item {
     background-color: #333;
     transition: background-color .5 ease, color .5s ease;
@@ -45,13 +53,15 @@
     background-color: transparent;
   }
 
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
-    padding: 0 5px;
+    padding: 5px 5px 0  5px;
     display: inline-block;
     color: #fff;
     font-weight: 400;
   }
 
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
   .ucb-secondary-menu-region.ucb-secondary-menu-button-display .ucb-secondary-menu-region-container .menu-item a:hover {
     color: #cfb87c;
     background-color: transparent;
@@ -59,6 +69,8 @@
   }
 
 
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg:focus,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item:hover,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item:focus,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item.is-active {
@@ -113,10 +125,12 @@
     margin: 20px 0 20px 10px;
   }
 
+  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region,
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .ucb-secondary-menu-region-container {
     background: #222;
   }
 
+  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg,
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link {
     margin: 18px 5px;
     color: #aaa;
@@ -124,8 +138,23 @@
     font-weight: 400;
   }
 
+  .ucb-button-none.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
   .ucb-button-none.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:hover {
     color: #fff;
     background: #222;
+  }
+
+  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media li {
+    display: flex;
+    align-items: center;
+  }
+
+  .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media {
+    height: 100%;
+  }
+
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region-container .block-system-menu-blocksecondary {
+    display: flex;
+    align-items: end;
   }
 }

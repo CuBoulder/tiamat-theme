@@ -332,16 +332,25 @@ ul.ucb-main-menu.nav {
 
 /********** Secondary Menu **********/
 
+.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
 .ucb-menu a.nav-link:hover {
   color: var(--ucb-black);
   background: var(--ucb-light-contrast);
   border-radius: 3px;
 }
+.ucb-main-nav-container.ucb-secondary-menu-position-inline .menu.social-media .icon-bg {
+  transition: none;
+  color: var(--ucb-black);
 
+}
 .ucb-footer-nav-block .ucb-menu.nav {
   flex-direction: column;
   flex-grow: 1;
   padding-right: 2em;
+}
+
+.ucb-footer-top .menu.social-media {
+  margin-bottom: 0;
 }
 
 .ucb-footer-nav-block .ucb-menu a.nav-link {
@@ -493,6 +502,16 @@ ul.ucb-main-menu.nav {
   padding: 40px 0;
   text-align: left;
   font-size: 0.9rem;
+}
+
+.ucb-footer-menu-region .block-menu-blocksocial-media-menu,
+.ucb-footer-menu-region .block-system-menu-blocksocial-media-menu {
+  padding: 10px;
+  display: flex;
+  align-items: center;
+}
+.ucb-footer-menu-region .container {
+  display: flex;
 }
 
 .menu.social-media {

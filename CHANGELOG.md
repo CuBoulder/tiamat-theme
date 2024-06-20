@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Social Media Secondary and Footer Menu update
+  Closes #800.
+  Sister PR in https://github.com/CuBoulder/tiamat-theme/pull/1051#issue-2344266076.
+  Adds functionality for the social media menu to be placed in the secondary menu and the footer menu areas. This will also delete the social media menu region.
+  
+---
+
 - ### Heading size fixes
   Updated the block-title class position so that the title class name is getting applied at the right level.
   
