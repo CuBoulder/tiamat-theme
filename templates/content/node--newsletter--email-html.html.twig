@@ -34,7 +34,7 @@
 {% set boxBackground = ''%}
 {# Additional Padding used for box styles #}
 {% set addtlPad = '' %}
-
+{% set classicStyle = '' %}
 
 {# CU LOGO #}
 {% set cuLogoDark = base_url ~ '/' ~  base_path ~ directory ~ '/images/cu-boulder-logo-text-black.gif' %}
@@ -43,20 +43,21 @@
 {% set designType = node.field_newsletter_type.entity.field_newsletter_design.value %}
 {# Classic #}
 {% if designType == 'classic' %}
+{% set classicStyle = 'background: white;margin-top: -50px;'%}
 {% set divStyles = 'background-color: #fff; color: #fff;' %}
 {% set aStyles = 'color: #ff9900;' %}
 {% set pStyles = 'color:black;' %}
-{% set headerStyles = 'width:100%;background-color: black; padding-bottom:50px;' %}
+{% set headerStyles = 'width:100%;background-color: black; padding-bottom:50px;padding: 15px 25px;' %}
 {% set footerStyles = 'background-color: black; padding-top:20px' %}
 {% set cuLogoSrc = cuLogoLight %}
-{% set classicImgOffset = 'padding: 10px; background: white; margin-top: -50px;'%}
+{# {% set classicImgOffset = 'padding: 10px; background: white; margin-top: -50px;'%} #}
 {% set emailBackground = 'background-color:black;' %}
 {# Minimal #}
 {% elseif designType == 'minimal' %}
     {% set divStyles = 'background-color: #FFFFFF;margin:auto;' %}
     {% set aStyles = 'color: #ff9900;' %}
     {% set pStyles = 'color:black;' %}
-    {% set headerStyles = 'width:100%; color:black;padding-bottom:20px;' %}
+    {% set headerStyles = 'width:100%; color:black;padding-bottom:20px;padding: 15px 25px;' %}
     {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
     {% set emailBackground = 'background-color:white;' %}
@@ -65,7 +66,7 @@
     {% set divStyles = 'background-color: black; color: #fff;margin:auto;' %}
     {% set aStyles = 'color: #ff9900;' %}
     {% set pStyles = 'color:#222330;' %}
-    {% set headerStyles = 'width:100%; color:white;margin-bottom:50px;' %}
+    {% set headerStyles = 'width:100%; color:white;margin-bottom:50px;padding: 15px 25px;' %}
     {% set footerStyles = 'color:white;' %}
     {% set cuLogoSrc = cuLogoLight %}
     {% set emailBackground = 'background-color:white;' %}
@@ -77,7 +78,7 @@
     {% set divStyles = 'background-color: #E9E9E9;margin:auto;' %}
     {% set aStyles = 'color: #ff9900;' %}
     {% set pStyles = ' color: #222330;' %}
-    {% set headerStyles = 'width:100%; color:black;' %}
+    {% set headerStyles = 'width:100%; color:black;padding: 15px 25px;' %}
     {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
     {% set emailBackground = 'background-color:white;' %}
@@ -89,7 +90,7 @@
 {% set divStyles = 'background-color: #fff; color: #fff;' %}
 {% set aStyles = 'color: #ff9900;' %}
 {% set pStyles = 'color:black;' %}
-{% set headerStyles = 'width:100%;background-color: black;padding-bottom:20px;' %}
+{% set headerStyles = 'width:100%;background-color: black;padding-bottom:20px;padding: 15px 25px;' %}
 {% set footerStyles = 'background-color: black; padding-top:20px;' %}
 {% set cuLogoSrc = cuLogoLight %}
 {% set classicImgOffset = 'padding: 10px; background: white;'%}
@@ -312,12 +313,12 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                 <tbody>
                     <td>
                         <td>
-                            <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; margin: 0; font-size: 14px; background-color: white;">
+                            <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; margin: 0; font-size: 14px; background-color: white;{{classicStyle}}">
                                 <tr>
-                                  <td align="center" style="padding-right:10px; padding-left:10px">
+                                  <td align="center">
                                 <!-- Intro Img -->
                                     {% if content.field_newsletter_intro_image|render %}
-                                    <img id="newsletter-email-intro-img" src="{{base_url}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" width="95%" style="{{classicImgOffset}};margin-bottom: 20px;">
+                                    <img id="newsletter-email-intro-img" src="{{base_url}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" style="{{classicImgOffset}};margin-bottom: 20px;">
                                     {% endif %}
                                     </td>
                                 </tr>
