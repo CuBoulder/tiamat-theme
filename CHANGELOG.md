@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Removes "social share position" setting
+  [Remove] Resolves CuBoulder/tiamat-theme#1073
+  
+  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/55)
+---
+
 - ### Social Media Secondary and Footer Menu update
   Closes #800.
   Sister PR in https://github.com/CuBoulder/tiamat-theme/pull/1051#issue-2344266076.

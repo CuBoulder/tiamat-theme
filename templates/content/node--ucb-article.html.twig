@@ -90,22 +90,6 @@
 ] %}
 
 
-{% set social_share_button_position = drupal_config('ucb2021_base.settings', 'ucb_social_share_position') %}
-{% set social_share_class = "" %}
-{% if social_share_button_position == "0" %}
-  {% set social_share_class = "social-share-none" %}
-{% elseif social_share_button_position=="1" %}
-  {% set social_share_class = "social-share-left-side-below-title" %}
-{% elseif social_share_button_position=="2" %}
-  {% set social_share_class = "social-share-left-side-below-content" %}
-{% elseif social_share_button_position == "3" %}
-  {% set social_share_class = "social-share-below-content" %}
-{% elseif social_share_button_position == "4" %}
-  {% set social_share_class = "social-share-below-title" %}
-{% else %}
-  {% set social_share_class = "social-share-none" %}
-{% endif %}
-
 {% set myTags %}
 {{ content.field_ucb_article_tags }}
 {% endset %}
@@ -160,11 +144,6 @@
         {% endif %}
         {% if content.field_article_header_image_text|render %}
           <p class="ucb-article-supplemental-text">{{ content.field_article_header_image_text|render|striptags|trim }}</p>
-        {% endif %}
-        {% if social_share_button_position == "4" or social_share_button_position == "1" %}
-          <div id={{social_share_class}} class="ucb-social-share-container">
-            {{ drupal_block("social_sharing_buttons_block") }}
-          </div>
         {% endif %}
         <div role="contentinfo" class="ucb-article-meta">
           {% if showDate %}
