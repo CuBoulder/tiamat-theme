@@ -25,7 +25,7 @@ class CurrentIssueElement extends HTMLElement {
         } else {
             const title = data.data[0].attributes.title
             let imgURL
-            const issueURL = data.data[0].attributes.path.alias
+            const issueURL = this._baseURI + data.data[0].attributes.path.alias;
 
             const imgLinkEL = document.createElement('a')
             imgLinkEL.href = issueURL
