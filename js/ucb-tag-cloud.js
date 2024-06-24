@@ -2,6 +2,7 @@ class TagCloudElement extends HTMLElement {
 	constructor() {
 		super();
     this._baseURI = this.getAttribute("base-uri");
+    console.log(this._baseURI)
         const handleError = response => {
             if (!response.ok) {
                throw new Error;
@@ -29,7 +30,7 @@ class TagCloudElement extends HTMLElement {
                 const tagURL = document.createElement('a')
                 tagURL.classList = 'ucb-tag-cloud-link'
                 tagURL.innerText = tagName
-                tagURL.href = `taxonomy/term/${tag.attributes.drupal_internal__tid}`
+                tagURL.href = this._baseURI +`/taxonomy/term/${tag.attributes.drupal_internal__tid}`;
                 tagCloudContainer.appendChild(tagURL)
             })
 
