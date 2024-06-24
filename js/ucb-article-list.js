@@ -90,6 +90,7 @@
         fetch(JSONURL)
           .then((reponse) => reponse.json())
           .then((data) => {
+            console.log('am i here', baseURI)
             // get the next URL and return that if there is one
             if (data.links.next) {
               let nextURL = data.links.next.href.split("/jsonapi/");
@@ -203,7 +204,7 @@
                 const options = { year: 'numeric', month: 'short', day: 'numeric' };
                 let date = new Date(item.attributes.created).toLocaleDateString('en-us', options);
                 let title = item.attributes.title;
-                let link = item.attributes.path.alias;
+                let link = baseURI + item.attributes.path.alias;
                 let image = "";
                 let articleSummarySize = "col-md-12";
 
