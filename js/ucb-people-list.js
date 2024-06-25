@@ -87,70 +87,53 @@
      * @param {string|null|undefined} raw A raw string
      * @returns {string} An HTML-safe string (or an empty string if `raw` is `null` or `undefined`)
      */
-    static escapeHTML(raw) {
-      return raw
-        ? raw
-            .replace(/\&/g, "&amp;")
-            .replace(/"/g, "&quot;")
-            .replace(/</g, "&lt;")
-            .replace(/>/g, "&gt;")
-        : "";
-    }
-    static get observedAttributes() {
-      return ["user-config"];
-    }
+    static escapeHTML(raw) { return raw ? raw.replace(/\&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;') : ''; }
+    static get observedAttributes() { return ['user-config']; }
 
     constructor() {
       super();
       let config = {};
       try {
-        config = this._config =
-          JSON.parse(this.getAttribute("config")) || config;
-      } catch (e) {}
-      this._baseURI = this.getAttribute("base-uri");
-      const chromeElement = (this._chromeElement =
-          document.createElement("div")),
-        contentWrapperElement = (this._contentWrapperElement =
-          document.createElement("div")),
-        contentElement = (this._contentElement = document.createElement("div")),
-        userFormElement = (this._userFormElement =
-          document.createElement("div")),
-        messageElement = (this._messageElement = document.createElement("div")),
-        loadingElement = (this._loadingElement = document.createElement("div"));
-      messageElement.className = "ucb-list-msg";
-      messageElement.setAttribute("hidden", "");
-      loadingElement.className = "ucb-loading-data";
-      loadingElement.innerHTML =
-        '<span class="visually-hidden">Loading</span><i aria-hidden="true" class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>';
+        config = this._config = JSON.parse(this.getAttribute('config')) || config;
+      } catch (e) { }
+      this._baseURI = this.getAttribute('base-uri');
+      const
+        chromeElement = this._chromeElement = document.createElement('div'),
+        contentWrapperElement = this._contentWrapperElement = document.createElement('div'),
+        contentElement = this._contentElement = document.createElement('div'),
+        userFormElement = this._userFormElement = document.createElement('div'),
+        messageElement = this._messageElement = document.createElement('div'),
+        loadingElement = this._loadingElement = document.createElement('div');
+      messageElement.className = 'ucb-list-msg';
+      messageElement.setAttribute('hidden', '');
+      loadingElement.className = 'ucb-loading-data';
+      loadingElement.innerHTML = '<span class="visually-hidden">Loading</span><i aria-hidden="true" class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>';
       chromeElement.appendChild(userFormElement);
       contentWrapperElement.appendChild(messageElement);
       contentWrapperElement.appendChild(contentElement);
       chromeElement.appendChild(loadingElement);
       this.appendChild(chromeElement);
       this.appendChild(contentWrapperElement);
-      const taxonomyIds = (this._taxonomyIds = config["taxonomies"]),
-        filters = (this._filters = config["filters"] || {}),
-        groupBy = (this._groupBy = config["groupby"] || "none"),
-        orderBy = (this._orderBy = config["orderby"] || "last"),
-        syncTaxonomies = (this._syncTaxonomies = new Set(
-          orderBy == "type" ? ["job_type"] : []
-        )),
-        asyncTaxonomies = (this._asyncTaxonomies = new Set(["department"])),
-        userAccessibleFilters = (this._userAccessibleFilters = {});
-      if (groupBy != "none" && taxonomyIds[groupBy]) {
-        // The taxonomy used for groups must be fetched sync
+      const taxonomyIds = this._taxonomyIds = config['taxonomies'],
+        filters = this._filters = config['filters'] || {},
+        groupBy = this._groupBy = config['groupby'] || 'none',
+        orderBy = this._orderBy = config['orderby'] || 'last',
+        syncTaxonomies = this._syncTaxonomies = new Set(orderBy == 'type' ? ['job_type'] : []),
+        asyncTaxonomies = this._asyncTaxonomies = new Set(['department']),
+        userAccessibleFilters = this._userAccessibleFilters = {};
+      if (groupBy != 'none' && taxonomyIds[groupBy]) { // The taxonomy used for groups must be fetched sync
         syncTaxonomies.add(groupBy);
         asyncTaxonomies.delete(groupBy);
-      } else this._groupBy = "none";
+      } else this._groupBy = 'none';
       // If no filters are visitor accessible, skip the form entirely
       let formRenderBool = false; // running check
-      for (const filterName in filters) {
-        // If user filter dropdowns are necessary, they can be generated async
+      for (const filterName in filters) { // If user filter dropdowns are necessary, they can be generated async
         const filter = filters[filterName];
-        filter["includes"] = filter["includes"].filter((include) => !!include);
-        if (filter["userAccessible"]) {
+        filter['includes'] = filter['includes'].filter(include => !!include);
+        if (filter['userAccessible']) {
           userAccessibleFilters[filterName] = filter;
-          if (!syncTaxonomies.has(filterName)) asyncTaxonomies.add(filterName);
+          if (!syncTaxonomies.has(filterName))
+            asyncTaxonomies.add(filterName);
           formRenderBool = true;
         }
       }
@@ -159,99 +142,69 @@
       this._loadedTaxonomies = {};
       this._syncTaxonomiesLoaded = 0;
       this.loadSyncTaxonomies();
-      Array.from(asyncTaxonomies).forEach((taxonomyFieldName) => {
+      Array.from(asyncTaxonomies).forEach(taxonomyFieldName => {
         const taxonomyId = taxonomyIds[taxonomyFieldName];
-        this.fetchTaxonomy(taxonomyId, taxonomyFieldName)
-          .then((taxonomy) => {
-            this.onTaxonomyLoaded(taxonomyFieldName, taxonomy);
-          })
-          .catch((reason) =>
-            console.warn(
-              "Taxonomy with id `" + taxonomyId + "` failed to load!"
-            )
-          );
+        this.fetchTaxonomy(taxonomyId, taxonomyFieldName).then(taxonomy => {
+          this.onTaxonomyLoaded(taxonomyFieldName, taxonomy);
+        }).catch(reason => console.warn('Taxonomy with id `' + taxonomyId + '` failed to load!'));
       });
     }
 
     loadSyncTaxonomies() {
       if (this._syncTaxonomiesLoaded < this._syncTaxonomies.size) {
-        Array.from(this._syncTaxonomies).forEach((taxonomyFieldName) => {
+        Array.from(this._syncTaxonomies).forEach(taxonomyFieldName => {
           if (!this.taxonomyHasLoaded(taxonomyFieldName)) {
-            this.fetchTaxonomy(
-              this._taxonomyIds[taxonomyFieldName],
-              taxonomyFieldName
-            )
-              .then((taxonomy) => {
-                if (!this.taxonomyHasLoaded(taxonomyFieldName)) {
-                  this.onTaxonomyLoaded(taxonomyFieldName, taxonomy);
-                  this._syncTaxonomiesLoaded++;
-                  if (this._syncTaxonomiesLoaded >= this._syncTaxonomies.size)
-                    // Enter build method
-                    this.build();
-                }
-              })
-              .catch((reason) => this.onFatalError(reason));
+            this.fetchTaxonomy(this._taxonomyIds[taxonomyFieldName], taxonomyFieldName).then(taxonomy => {
+              if (!this.taxonomyHasLoaded(taxonomyFieldName)) {
+                this.onTaxonomyLoaded(taxonomyFieldName, taxonomy);
+                this._syncTaxonomiesLoaded++;
+                if (this._syncTaxonomiesLoaded >= this._syncTaxonomies.size) // Enter build method
+                  this.build();
+              }
+            }).catch(reason => this.onFatalError(reason));
           }
         });
       } else this.build();
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
-      if (
-        name == "user-config" &&
-        oldValue !== null &&
-        this._syncTaxonomiesLoaded >= this._syncTaxonomies.size
-      )
+      if (name == 'user-config' && oldValue !== null && this._syncTaxonomiesLoaded >= this._syncTaxonomies.size)
         this.build();
     }
 
     build() {
       let userConfig = {};
       try {
-        userConfig = this._userConfig = JSON.parse(
-          this.getAttribute("user-config")
-        );
-      } catch (e) {}
+        userConfig = this._userConfig = JSON.parse(this.getAttribute('user-config'));
+      } catch (e) { }
 
-      const config = this._config,
+      const
+        config = this._config,
         baseURI = this._baseURI,
         filters = this._filters,
         orderBy = this._orderBy,
-        userFilters = userConfig["filters"] || {},
-        peopleListProvider = (this._peopleListProvider = new PeopleListProvider(
-          baseURI,
-          filters,
-          userFilters
-        )),
-        format = (this._format =
-          userConfig["format"] || config["format"] || "list");
-      this.toggleMessageDisplay(this._messageElement, "none", null, null);
-      this.toggleMessageDisplay(this._loadingElement, "block", null, null);
+        userFilters = userConfig['filters'] || {},
+        peopleListProvider = this._peopleListProvider = new PeopleListProvider(baseURI, filters, userFilters),
+        format = this._format = userConfig['format'] || config['format'] || 'list';
+      this.toggleMessageDisplay(this._messageElement, 'none', null, null);
+      this.toggleMessageDisplay(this._loadingElement, 'block', null, null);
 
-      let groupBy = userConfig["groupby"] || config["groupby"] || "none";
+      let groupBy = userConfig['groupby'] || config['groupby'] || 'none';
 
       // Check if grouping is requested and the taxonomy data is available to do this.
-      if (groupBy != "none") {
+      if (groupBy != 'none') {
         const taxonomyData = this.getTaxonomy(groupBy);
         if (!taxonomyData || taxonomyData.length === 0) {
           // Taxonomy data required for grouping is missing, can't group by!
-          console.error(
-            `Grouping by ${groupBy} is requested, but taxonomy data is missing. Please adjust your page's 'Group By' setting or make sure taxonomy data exists for that term.`
-          );
-          this.toggleMessageDisplay(
-            this._messageElement,
-            "block",
-            "ucb-list-msg ucb-error",
-            `Cannot group by ${groupBy} because taxonomy data is missing.`
-          );
-          this.toggleMessageDisplay(this._loadingElement, "none", null, null);
+          console.error(`Grouping by ${groupBy} is requested, but taxonomy data is missing. Please adjust your page's 'Group By' setting or make sure taxonomy data exists for that term.`);
+          this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-error', `Cannot group by ${groupBy} because taxonomy data is missing.`);
+          this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
           return;
         }
       }
 
-      if (groupBy != "none" && !this._taxonomyIds[groupBy])
-        // Group by is invalid!
-        groupBy = "none";
+      if (groupBy != 'none' && !this._taxonomyIds[groupBy]) // Group by is invalid!
+        groupBy = 'none';
       // User-specified grouping is working as a feature to add in the future
       if (groupBy != this._groupBy && !this.taxonomyHasLoaded(groupBy)) {
         this._groupBy = groupBy;
@@ -262,35 +215,23 @@
       this._groupBy = groupBy;
 
       // Get our people
-      peopleListProvider
-        .fetchAllPeople(baseURI + peopleListProvider.nextPath)
-        .then((response) => {
-          this._contentElement.innerText = "";
-          const results = response["data"];
-          if (!results.length)
-            this.toggleMessageDisplay(
-              this._messageElement,
-              "block",
-              "ucb-list-msg ucb-end-of-results",
-              PeopleListProvider.noResultsMessage
-            );
-          else {
-            if (groupBy != "none") {
-              // Build person -> term mapping
-              const groupedPeople = (this._groupedPeople = new Map());
-              let hasGroupingTaxonomy = false;
-              results.forEach((person) => {
-                const groupingData = (person["relationships"][
-                  "field_ucb_person_" + groupBy
-                ] || {})["data"];
-                if (groupingData && groupingData.length) {
-                  hasGroupingTaxonomy = true;
-                }
-                (
-                  (person["relationships"]["field_ucb_person_" + groupBy] ||
-                    {})["data"] || []
-                ).forEach((termData) => {
-                  const termId = termData["meta"]["drupal_internal__target_id"];
+      peopleListProvider.fetchAllPeople(baseURI + peopleListProvider.nextPath).then(response => {
+        this._contentElement.innerText = '';
+        const results = response['data'];
+        if (!results.length)
+          this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-end-of-results', PeopleListProvider.noResultsMessage);
+        else {
+          if (groupBy != 'none') { // Build person -> term mapping
+            const groupedPeople = this._groupedPeople = new Map();
+            let hasGroupingTaxonomy = false;
+            results.forEach(person => {
+              const groupingData = (person['relationships']['field_ucb_person_' + groupBy] || {})['data'];
+              if (groupingData && groupingData.length) {
+                hasGroupingTaxonomy = true;
+              }
+              ((person['relationships']['field_ucb_person_' + groupBy] || {})['data'] || []).forEach(
+                termData => {
+                  const termId = termData['meta']['drupal_internal__target_id'];
                   let termPeople = groupedPeople.get(termId);
                   if (!termPeople) {
                     termPeople = [];
@@ -298,124 +239,59 @@
                   }
                   termPeople.push(person);
                 });
-              });
-              if (!hasGroupingTaxonomy) {
-                this.toggleMessageDisplay(
-                  this._messageElement,
-                  "block",
-                  "ucb-list-msg",
-                  `No results found for the '${groupBy}' grouping.`
-                );
-                this.toggleMessageDisplay(
-                  this._loadingElement,
-                  "none",
-                  null,
-                  null
-                );
-                return;
-              }
-            }
-            // get all of the include images id => url
-            const photoUrls = {}; // key from data.data to key from data.includes
-            const photoData = {}; // key from data.includes to URL
-            // Remove any blanks from our articles before map
-            if (response["included"]) {
-              const filteredData = response["included"].filter(
-                (url) => !!url["attributes"]["uri"]
-              );
-              // creates the photoUrls, key: data id, value: url
-              filteredData.map((pair) => {
-                // checks if consumer is working, else default to standard image instead of focal image
-                if (pair["links"]["focal_image_square"])
-                  photoUrls[pair["id"]] =
-                    pair["links"]["focal_image_square"]["href"];
-                else photoUrls[pair["id"]] = pair["attributes"]["uri"]["url"];
-              });
-              // removes all other included data besides images in our included media
-              const idFilterData = response["included"].filter(
-                (item) => item["type"] == "media--image"
-              );
-              // using the image-only data, creates the photoData => key: thumbnail id, value : data
-              idFilterData.map(
-                (pair) =>
-                  (photoData[pair["id"]] =
-                    pair["relationships"]["thumbnail"]["data"])
-              );
-            }
-            (groupBy == "none"
-              ? [null]
-              : this.getTaxonomy(groupBy) || [null]
-            ).forEach((taxonomyTerm) => {
-              const peopleInGroup = this.getPeopleInGroup(
-                results,
-                taxonomyTerm
-              );
-              if (!peopleInGroup) return;
-              const groupContainerElement = this.buildGroup(
-                format,
-                taxonomyTerm
-              );
-              if (orderBy == "type") {
-                this.displayPeople(
-                  format,
-                  peopleInGroup.sort((personA, personB) => {
-                    const jobTypeTaxonomy = this.getTaxonomy("job_type"),
-                      personAJobTypeData =
-                        personA["relationships"]["field_ucb_person_job_type"][
-                          "data"
-                        ],
-                      personBJobTypeData =
-                        personB["relationships"]["field_ucb_person_job_type"][
-                          "data"
-                        ],
-                      personAJobTypeDataLength = personAJobTypeData.length,
-                      personBJobTypeDataLength = personBJobTypeData.length;
-                    if (!personAJobTypeDataLength || !personBJobTypeDataLength)
-                      // Someone doesn't have a job type (length 0), push them to the bottom
-                      return !personAJobTypeDataLength &&
-                        personBJobTypeDataLength
-                        ? 1
-                        : personAJobTypeDataLength && !personBJobTypeDataLength
-                        ? -1
-                        : 0;
-                    const personAJobTypeName =
-                        PeopleListElement.getTaxonomyName(
-                          jobTypeTaxonomy,
-                          personAJobTypeData[0]["meta"][
-                            "drupal_internal__target_id"
-                          ]
-                        ),
-                      personBJobTypeName = PeopleListElement.getTaxonomyName(
-                        jobTypeTaxonomy,
-                        personBJobTypeData[0]["meta"][
-                          "drupal_internal__target_id"
-                        ]
-                      );
-                    return personAJobTypeName > personBJobTypeName
-                      ? 1
-                      : personAJobTypeName < personBJobTypeName
-                      ? -1
-                      : 0; // Sorts by job types alphabetically
-                  }),
-                  photoUrls,
-                  photoData,
-                  groupContainerElement
-                );
-              } else
-                this.displayPeople(
-                  format,
-                  peopleInGroup,
-                  photoUrls,
-                  photoData,
-                  groupContainerElement
-                );
             });
+            if (!hasGroupingTaxonomy) {
+              this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg', `No results found for the '${groupBy}' grouping.`);
+              this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
+              return;
+            }
           }
-          this.toggleMessageDisplay(this._loadingElement, "none", null, null);
-        })
-        .catch((reason) => this.onFatalError(reason));
+          // get all of the include images id => url
+          const photoUrls = {}; // key from data.data to key from data.includes
+          const photoData = {}; // key from data.includes to URL
+          // Remove any blanks from our articles before map
+          if (response['included']) {
+            const filteredData = response['included'].filter(url => !!url['attributes']['uri']);
+            // creates the photoUrls, key: data id, value: url
+            filteredData.map((pair) => {
+              // checks if consumer is working, else default to standard image instead of focal image
+              if (pair['links']['focal_image_square'])
+                photoUrls[pair['id']] = pair['links']['focal_image_square']['href'];
+              else
+                photoUrls[pair['id']] = pair['attributes']['uri']['url'];
+            });
+            // removes all other included data besides images in our included media
+            const idFilterData = response['included'].filter(item => item['type'] == 'media--image');
+            // using the image-only data, creates the photoData => key: thumbnail id, value : data
+            idFilterData.map(pair => photoData[pair['id']] = pair['relationships']['thumbnail']['data']);
+          }
+          (groupBy == 'none' ? [null] : this.getTaxonomy(groupBy) || [null]).forEach(taxonomyTerm => {
+            const peopleInGroup = this.getPeopleInGroup(results, taxonomyTerm);
+            if (!peopleInGroup) return;
+            const groupContainerElement = this.buildGroup(format, taxonomyTerm);
+            if (orderBy == 'type') {
+              this.displayPeople(format, peopleInGroup.sort((personA, personB) => {
+                const
+                  jobTypeTaxonomy = this.getTaxonomy('job_type'),
+                  personAJobTypeData = personA['relationships']['field_ucb_person_job_type']['data'],
+                  personBJobTypeData = personB['relationships']['field_ucb_person_job_type']['data'],
+                  personAJobTypeDataLength = personAJobTypeData.length,
+                  personBJobTypeDataLength = personBJobTypeData.length;
+                if (!personAJobTypeDataLength || !personBJobTypeDataLength) // Someone doesn't have a job type (length 0), push them to the bottom
+                  return !personAJobTypeDataLength && personBJobTypeDataLength ? 1 : personAJobTypeDataLength && !personBJobTypeDataLength ? -1 : 0;
+                const
+                  personAJobTypeName = PeopleListElement.getTaxonomyName(jobTypeTaxonomy, personAJobTypeData[0]['meta']['drupal_internal__target_id']),
+                  personBJobTypeName = PeopleListElement.getTaxonomyName(jobTypeTaxonomy, personBJobTypeData[0]['meta']['drupal_internal__target_id']);
+                return personAJobTypeName > personBJobTypeName ? 1 : personAJobTypeName < personBJobTypeName ? -1 : 0; // Sorts by job types alphabetically
+              }), photoUrls, photoData, groupContainerElement);
+            } else this.displayPeople(format, peopleInGroup, photoUrls, photoData, groupContainerElement);
+          });
+        }
+        this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
+      }).catch(reason => this.onFatalError(reason));
     }
 
+    // Getter function for Departments and Job Types
     async fetchTaxonomy(
       taxonomyId,
       taxonomyFieldName,
@@ -459,41 +335,25 @@
     }
 
     static getTaxonomyName(taxonomy, termId) {
-      if (!termId) return;
+      if (!termId) return
       return taxonomy.find(({ id }) => id === termId).name;
     }
 
     onTaxonomyLoaded(taxonomyFieldName, taxonomy) {
       this._loadedTaxonomies[taxonomyFieldName] = taxonomy;
-      const showContainerElements = this.getElementsByClassName(
-          "taxonomy-visible-" + taxonomyFieldName
-        ),
-        hideContainerElements = this.getElementsByClassName(
-          "taxonomy-hidden-" + taxonomyFieldName
-        ),
-        selectContainerElements = this.getElementsByClassName(
-          "taxonomy-select-" + taxonomyFieldName
-        ),
-        taxonomyElements = this.getElementsByClassName(
-          "taxonomy-" + taxonomyFieldName
-        );
+      const showContainerElements = this.getElementsByClassName('taxonomy-visible-' + taxonomyFieldName),
+        hideContainerElements = this.getElementsByClassName('taxonomy-hidden-' + taxonomyFieldName),
+        selectContainerElements = this.getElementsByClassName('taxonomy-select-' + taxonomyFieldName),
+        taxonomyElements = this.getElementsByClassName('taxonomy-' + taxonomyFieldName);
       for (let index = 0; index < showContainerElements.length; index++)
-        showContainerElements[index].removeAttribute("hidden");
+        showContainerElements[index].removeAttribute('hidden');
       for (let index = 0; index < hideContainerElements.length; index++)
-        showContainerElements[index].setAttribute("hidden", "");
+        showContainerElements[index].setAttribute('hidden', '');
       for (let index = 0; index < selectContainerElements.length; index++)
-        this.generateDropdown(
-          taxonomy,
-          taxonomyFieldName,
-          selectContainerElements[index]
-        );
+        this.generateDropdown(taxonomy, taxonomyFieldName, selectContainerElements[index]);
       for (let index = 0; index < taxonomyElements.length; index++) {
         const taxonomyElement = taxonomyElements[index];
-        taxonomyElement.innerText =
-          PeopleListElement.getTaxonomyName(
-            taxonomy,
-            parseInt(taxonomyElement.dataset["termId"])
-          ) || "";
+        taxonomyElement.innerText = PeopleListElement.getTaxonomyName(taxonomy, parseInt(taxonomyElement.dataset['termId'])) || '';
       }
     }
 
@@ -506,24 +366,20 @@
     }
 
     attachElementToTaxonomyTerm(element, taxonomyTerm) {
-      const taxonomyClass = "taxonomy-" + taxonomyTerm.fieldName;
-      if (element.className) element.className += " " + taxonomyClass;
+      const taxonomyClass = 'taxonomy-' + taxonomyTerm.fieldName;
+      if (element.className)
+        element.className += ' ' + taxonomyClass;
       else element.className = taxonomyClass;
-      element.dataset["termId"] = taxonomyTerm.id;
+      element.dataset['termId'] = taxonomyTerm.id;
       element.innerText = taxonomyTerm.name;
       return element;
     }
 
     buildListGroup(taxonomyTerm) {
-      const wrapper = document.createElement("section");
+      const wrapper = document.createElement('section');
       if (taxonomyTerm) {
-        const groupTitleContainer = document.createElement("div");
-        groupTitleContainer.appendChild(
-          this.attachElementToTaxonomyTerm(
-            document.createElement("h2"),
-            taxonomyTerm
-          )
-        );
+        const groupTitleContainer = document.createElement('div');
+        groupTitleContainer.appendChild(this.attachElementToTaxonomyTerm(document.createElement('h2'), taxonomyTerm));
         wrapper.appendChild(groupTitleContainer);
       }
       this._contentElement.appendChild(wrapper);
@@ -531,17 +387,12 @@
     }
 
     buildGridGroup(taxonomyTerm) {
-      const wrapper = document.createElement("section");
-      wrapper.className = "row ucb-people-list-content";
+      const wrapper = document.createElement('section');
+      wrapper.className = 'row ucb-people-list-content';
       if (taxonomyTerm) {
-        const groupTitleContainer = document.createElement("div");
-        groupTitleContainer.className = "col-12";
-        groupTitleContainer.appendChild(
-          this.attachElementToTaxonomyTerm(
-            document.createElement("h2"),
-            taxonomyTerm
-          )
-        );
+        const groupTitleContainer = document.createElement('div');
+        groupTitleContainer.className = 'col-12';
+        groupTitleContainer.appendChild(this.attachElementToTaxonomyTerm(document.createElement('h2'), taxonomyTerm));
         wrapper.appendChild(groupTitleContainer);
       }
       this._contentElement.appendChild(wrapper);
@@ -549,37 +400,30 @@
     }
 
     buildTableGroup(taxonomyTerm) {
-      let table = this._contentElement.querySelector("table"),
-        tableBody;
+      let table = this._contentElement.querySelector('table'), tableBody;
       // we only need to render the table header the first time
       // this function will be called multiple times so check to
       // see if we've already rendered the table header HTML
       if (!table) {
-        table = document.createElement("table");
-        table.classList = "table table-bordered table-striped";
-        const tableHead = document.createElement("thead");
-        tableHead.classList = "ucb-people-list-table-head";
-        const tableRow = document.createElement("tr");
-        tableRow.innerHTML =
-          '<th aria-hidden="true"></th><th>Name</th><th>Contact Information</th>';
-        tableBody = document.createElement("tbody");
-        tableBody.className = "ucb-people-list-table-tablebody";
+        table = document.createElement('table');
+        table.classList = 'table table-bordered table-striped';
+        const tableHead = document.createElement('thead');
+        tableHead.classList = 'ucb-people-list-table-head';
+        const tableRow = document.createElement('tr');
+        tableRow.innerHTML = '<th aria-hidden="true"></th><th>Name</th><th>Contact Information</th>';
+        tableBody = document.createElement('tbody');
+        tableBody.className = 'ucb-people-list-table-tablebody';
         tableHead.appendChild(tableRow);
         table.appendChild(tableHead);
         table.appendChild(tableBody);
         this._contentElement.appendChild(table);
       }
-      tableBody =
-        tableBody ||
-        table.querySelector("tbody.ucb-people-list-table-tablebody");
+      tableBody = tableBody || table.querySelector('tbody.ucb-people-list-table-tablebody');
       if (taxonomyTerm) {
-        const groupTitleContainer = document.createElement("tr"),
-          groupTitleTh = document.createElement("th");
-        groupTitleTh.className = "ucb-people-list-group-title-th";
-        groupTitleTh.setAttribute("colspan", "3");
-        groupTitleContainer.appendChild(
-          this.attachElementToTaxonomyTerm(groupTitleTh, taxonomyTerm)
-        );
+        const groupTitleContainer = document.createElement('tr'), groupTitleTh = document.createElement('th');
+        groupTitleTh.className = 'ucb-people-list-group-title-th';
+        groupTitleTh.setAttribute('colspan', '3');
+        groupTitleContainer.appendChild(this.attachElementToTaxonomyTerm(groupTitleTh, taxonomyTerm));
         tableBody.appendChild(groupTitleContainer);
       }
       return tableBody;
@@ -587,94 +431,61 @@
 
     buildGroup(format, taxonomyTerm) {
       switch (format) {
-        case "list":
-        default:
-          return this.buildListGroup(taxonomyTerm);
-        case "grid":
-          return this.buildGridGroup(taxonomyTerm);
-        case "table":
-          return this.buildTableGroup(taxonomyTerm);
+        case 'list': default: return this.buildListGroup(taxonomyTerm);
+        case 'grid': return this.buildGridGroup(taxonomyTerm);
+        case 'table': return this.buildTableGroup(taxonomyTerm);
       }
     }
 
     getPeopleInGroup(people, taxonomyTerm) {
-      return taxonomyTerm && this._groupedPeople
-        ? this._groupedPeople.get(taxonomyTerm.id)
-        : people;
+      return taxonomyTerm && this._groupedPeople ? this._groupedPeople.get(taxonomyTerm.id) : people;
     }
 
     displayPeople(format, people, photoUrls, photoData, containerElement) {
       // If grid render and no thumbnail, use a default image for the person. Else no image.
-      const defaultThumbnail = format == "grid" ? defaultAvatarURL : "";
+      const defaultThumbnail = format == 'grid' ? defaultAvatarURL : '';
 
       people.forEach((person) => {
-        const personRelationshipData = person["relationships"],
-          departmentsData =
-            personRelationshipData["field_ucb_person_department"]["data"],
-          jobTypesData =
-            personRelationshipData["field_ucb_person_department"]["data"],
-          personAttributeData = person["attributes"],
-          departments = [],
-          jobTypes = [],
-          photoId =
-            (personRelationshipData["field_ucb_person_photo"]["data"] || {})[
-              "id"
-            ] || "",
+        const personRelationshipData = person['relationships'],
+          departmentsData = personRelationshipData['field_ucb_person_department']['data'],
+          jobTypesData = personRelationshipData['field_ucb_person_department']['data'],
+          personAttributeData = person['attributes'],
+          departments = [], jobTypes = [], photoId = (personRelationshipData['field_ucb_person_photo']['data'] || {})['id'] || '',
           thisPerson = {
-            link:
-              (personAttributeData["path"] || {})["alias"] ||
-              `/node/${personAttributeData["drupal_internal__nid"]}`,
-            name: personAttributeData["title"],
-            titles: personAttributeData["field_ucb_person_title"],
+            link: (personAttributeData['path'] || {})['alias'] || `/node/${personAttributeData['drupal_internal__nid']}`,
+            name: personAttributeData['title'],
+            titles: personAttributeData['field_ucb_person_title'],
             departments: departments,
             jobTypes: jobTypes,
             photoId: photoId,
-            photoUrl: photoId
-              ? photoUrls[photoData[photoId]["id"]]
-              : defaultThumbnail,
-            photoAlt: photoId
-              ? photoData[photoId]["meta"]["alt"]
-              : "This person has no photo",
-            body: "",
-            email: personAttributeData["field_ucb_person_email"],
-            phone: personAttributeData["field_ucb_person_phone"],
-            primaryLinkURI: "",
-            primaryLinkTitle: "",
+            photoUrl: photoId ? photoUrls[photoData[photoId]['id']] : defaultThumbnail,
+            photoAlt: photoId ? photoData[photoId]['meta']['alt'] : 'This person has no photo',
+            body: '',
+            email: personAttributeData['field_ucb_person_email'],
+            phone: personAttributeData['field_ucb_person_phone'],
+            primaryLinkURI: '',
+            primaryLinkTitle: ''
           };
 
         // Builds arrays of department and job type ids
-        departmentsData.forEach((departmentData) =>
-          departments.push(departmentData["meta"]["drupal_internal__target_id"])
-        );
-        jobTypesData.forEach((jobTypeData) =>
-          jobTypes.push(jobTypeData["meta"]["drupal_internal__target_id"])
-        );
+        departmentsData.forEach(departmentData => departments.push(departmentData['meta']['drupal_internal__target_id']));
+        jobTypesData.forEach(jobTypeData => jobTypes.push(jobTypeData['meta']['drupal_internal__target_id']));
         // needed to verify if primary link exists on page
-        if (personAttributeData["field_ucb_person_primary_link"]) {
-          thisPerson.primaryLinkURI =
-            personAttributeData["field_ucb_person_primary_link"]["uri"];
-          thisPerson.primaryLinkTitle =
-            personAttributeData["field_ucb_person_primary_link"]["title"];
+        if (personAttributeData['field_ucb_person_primary_link']) {
+          thisPerson.primaryLinkURI = personAttributeData['field_ucb_person_primary_link']['uri'];
+          thisPerson.primaryLinkTitle = personAttributeData['field_ucb_person_primary_link']['title'];
         }
         // This makes relative internal urls absolute, needed for multisite with single domain
-        if (thisPerson.primaryLinkURI.startsWith("internal:/")) {
-          thisPerson.primaryLinkURI =
-            this.getAttribute("site-base") +
-            thisPerson.primaryLinkURI.replace("internal:/", "/");
+        if (thisPerson.primaryLinkURI.startsWith('internal:/')) {
+          thisPerson.primaryLinkURI = this.getAttribute('site-base') + thisPerson.primaryLinkURI.replace('internal:/', '/');
         }
         // needed to verify body exists on the Person page, if so, use that
-        if (personAttributeData["body"]) {
+        if (personAttributeData['body']) {
           // use summary if available
-          if (personAttributeData["body"]["summary"])
-            thisPerson.body = personAttributeData["body"]["summary"].replace(
-              /(\r\n|\n|\r)/gm,
-              ""
-            ); // strip out line breaks
+          if (personAttributeData['body']['summary'])
+            thisPerson.body = personAttributeData['body']['summary'].replace(/(\r\n|\n|\r)/gm, ''); // strip out line breaks
           else {
-            let htmlStrip = personAttributeData["body"]["value"].replace(
-              /<\/?[^>]+(>|$)/g,
-              ""
-            );
+            let htmlStrip = personAttributeData['body']['value'].replace(/<\/?[^>]+(>|$)/g, "");
             // Remove any line breaks if media is embedded in the body
             let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
             // take only the first 100 words ~ 500 chars
@@ -683,8 +494,11 @@
             if (trimmedString.length > 70) {
               trimmedString = trimmedString.substr(
                 0,
-                Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
-              );
+                Math.min(
+                  trimmedString.length,
+                  trimmedString.lastIndexOf(" ")
+                )
+              )
               thisPerson.body = `${trimmedString}...`;
             }
           }
@@ -695,59 +509,29 @@
     }
 
     appendPerson(format, person, containerElement) {
-      let cardElement,
-        cardHTML = "",
-        personTitleList = "",
-        personDepartmentList = "";
-      const personLink = this.getAttribute("site-base") + person.link,
+      let cardElement, cardHTML = '', personTitleList = '', personDepartmentList = '';
+      const
+        personLink = this.getAttribute('site-base') + person.link,
         personName = PeopleListElement.escapeHTML(person.name),
-        personPhoto = person.photoUrl
-          ? '<img src="' +
-            person.photoUrl +
-            '" alt="' +
-            PeopleListElement.escapeHTML(person.photoAlt) +
-            '">'
-          : "",
+        personPhoto = person.photoUrl ? '<img src="' + person.photoUrl + '" alt="' + PeopleListElement.escapeHTML(person.photoAlt) + '">' : '',
         personBody = PeopleListElement.escapeHTML(person.body),
         personEmail = PeopleListElement.escapeHTML(person.email),
         personPhone = PeopleListElement.escapeHTML(person.phone),
-        personPrimaryLinkURI = PeopleListElement.escapeHTML(
-          person.primaryLinkURI
-        ),
-        personPrimaryLinkTitle = PeopleListElement.escapeHTML(
-          person.primaryLinkTitle
-        ),
-        departmentTaxonomy = this.getTaxonomy("department");
-      person.titles.forEach((title) => {
-        personTitleList +=
-          (personTitleList ? " &bull; " : "") +
-          PeopleListElement.escapeHTML(title);
+        personPrimaryLinkURI = PeopleListElement.escapeHTML(person.primaryLinkURI),
+        personPrimaryLinkTitle = PeopleListElement.escapeHTML(person.primaryLinkTitle),
+        departmentTaxonomy = this.getTaxonomy('department');
+      person.titles.forEach(title => {
+        personTitleList += (personTitleList ? ' &bull; ' : '') + PeopleListElement.escapeHTML(title);
       });
-      person.departments.forEach((termId) => {
-        const department = departmentTaxonomy
-          ? PeopleListElement.escapeHTML(
-              PeopleListElement.getTaxonomyName(departmentTaxonomy, termId)
-            )
-          : "";
-        personDepartmentList +=
-          (personDepartmentList ? " &bull; " : "") +
-          '<span class="taxonomy-department" data-term-id="' +
-          termId +
-          '">' +
-          department +
-          "</span>";
+      person.departments.forEach(termId => {
+        const department = departmentTaxonomy ? PeopleListElement.escapeHTML(PeopleListElement.getTaxonomyName(departmentTaxonomy, termId)) : '';
+        personDepartmentList += (personDepartmentList ? ' &bull; ' : '') + '<span class="taxonomy-department" data-term-id="' + termId + '">' + department + '</span>';
       });
       if (personDepartmentList)
-        personDepartmentList =
-          "<span" +
-          (departmentTaxonomy ? "" : " hidden") +
-          ' class="taxonomy-visible-department">' +
-          personDepartmentList +
-          "</span>";
+        personDepartmentList = '<span' + (departmentTaxonomy ? '' : ' hidden') + ' class="taxonomy-visible-department">' + personDepartmentList + '</span>';
       switch (format) {
-        case "list":
-        default:
-          cardElement = document.createElement("div");
+        case 'list': default:
+          cardElement = document.createElement('div');
           cardHTML = `
             <div class="ucb-person-card-list row">
               ${
@@ -813,9 +597,9 @@
               </div>
             </div>`;
           break;
-        case "grid":
-          cardElement = document.createElement("div");
-          cardElement.className = "col-sm-12 col-md-6 col-lg-4";
+        case 'grid':
+          cardElement = document.createElement('div');
+          cardElement.className = 'col-sm-12 col-md-6 col-lg-4';
           cardHTML = `
             <div class="col-sm mb-3">
               <div aria-hidden="true" class="col-sm-12 ucb-person-card-img-grid">
@@ -836,8 +620,8 @@
               </div>
             </div>`;
           break;
-        case "table":
-          cardElement = document.createElement("tr");
+        case 'table':
+          cardElement = document.createElement('tr');
           cardHTML = `
             <td aria-hidden="true" class="ucb-people-list-table-photo">
               <a href="${personLink}">${personPhoto}</a>
@@ -902,98 +686,82 @@
     }
 
     onFatalError(reason) {
-      this.toggleMessageDisplay(
-        this._messageElement,
-        "block",
-        "ucb-list-msg ucb-error",
-        PeopleListProvider.errorMessage
-      );
-      this.toggleMessageDisplay(this._loadingElement, "none", null, null);
+      this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-error', PeopleListProvider.errorMessage);
+      this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
       throw reason;
     }
 
     toggleMessageDisplay(element, display, className, innerText) {
-      if (className) element.className = className;
-      if (innerText) element.innerText = innerText;
-      if (display === "none") element.setAttribute("hidden", "");
-      else element.removeAttribute("hidden");
+      if (className)
+        element.className = className;
+      if (innerText)
+        element.innerText = innerText;
+      if (display === 'none')
+        element.setAttribute('hidden', '');
+      else element.removeAttribute('hidden');
     }
 
     generateForm() {
       const userAccessibleFilters = this._userAccessibleFilters;
       // Create Elements
-      const form = document.createElement("form"),
-        formDiv = document.createElement("div"),
-        resetButtonContainerElement = document.createElement("div"),
-        resetButtonElement = document.createElement("button"), // Creates the reset button (see https://github.com/CuBoulder/tiamat-theme/issues/312)
-        onChange = (form) => {
+      const form = document.createElement('form'), formDiv = document.createElement('div'),
+        resetButtonContainerElement = document.createElement('div'), resetButtonElement = document.createElement('button'), // Creates the reset button (see https://github.com/CuBoulder/tiamat-theme/issues/312)
+        onChange = form => {
           const formItemsData = new FormData(form),
             userSettings = {};
           // Create a dataObject with ids for second render
           for (const formItemData of formItemsData) {
-            const filterName = formItemData[0],
-              filterInclude = formItemData[1];
-            if (filterInclude != "-1")
-              userSettings[filterName] = { includes: [filterInclude] };
+            const filterName = formItemData[0], filterInclude = formItemData[1];
+            if (filterInclude != '-1')
+              userSettings[filterName] = { 'includes': [filterInclude] };
           }
-          this._contentWrapperElement.setAttribute("aria-live", "polite");
-          this.setAttribute(
-            "user-config",
-            JSON.stringify({ filters: userSettings })
-          );
+          this._contentWrapperElement.setAttribute('aria-live', 'polite');
+          this.setAttribute('user-config', JSON.stringify({ 'filters': userSettings }));
           // Shows or hides the reset button when a non-default is selected anywhere
           let showReset = false;
-          const selectElements = form.getElementsByTagName("select");
+          const selectElements = form.getElementsByTagName('select');
           for (let index = 0; index < selectElements.length; index++) {
-            const selectElement = selectElements[index],
-              options = selectElement.options;
-            if (
-              options.length > 1 &&
-              !options[selectElement.selectedIndex].classList.contains(
-                "taxonomy-option-default"
-              )
-            ) {
+            const selectElement = selectElements[index], options = selectElement.options;
+            if (options.length > 1 && !options[selectElement.selectedIndex].classList.contains('taxonomy-option-default')) {
               showReset = true;
               break;
             }
           }
-          if (showReset) resetButtonContainerElement.removeAttribute("hidden");
-          else resetButtonContainerElement.setAttribute("hidden", "");
+          if (showReset) resetButtonContainerElement.removeAttribute('hidden');
+          else resetButtonContainerElement.setAttribute('hidden', '');
         };
-      form.className = "people-list-filter";
-      formDiv.className = "d-flex align-items-center";
+      form.className = 'people-list-filter';
+      formDiv.className = 'd-flex align-items-center';
 
       // If User-Filterable...Create Dropdowns
       for (const key in userAccessibleFilters) {
         const filter = userAccessibleFilters[key];
         // Create container
-        const container = document.createElement("div");
+        const container = document.createElement('div');
         container.className = `form-item-${key} form-item`;
         // Create label el
-        const itemLabel = document.createElement("label"),
-          itemLabelSpan = document.createElement("span");
-        itemLabelSpan.innerText = filter["label"];
+        const itemLabel = document.createElement('label'), itemLabelSpan = document.createElement('span');
+        itemLabelSpan.innerText = filter['label'];
         itemLabel.appendChild(itemLabelSpan);
         // Create select el
-        const selectFilter = document.createElement("select");
+        const selectFilter = document.createElement('select');
         selectFilter.name = key;
-        selectFilter.className = "taxonomy-select-" + key + " taxonomy-select";
-        selectFilter.onchange = (event) => onChange(event.target.form);
+        selectFilter.className = 'taxonomy-select-' + key + ' taxonomy-select';
+        selectFilter.onchange = event => onChange(event.target.form);
 
-        if (filter["includes"].length != 1) {
+        if (filter['includes'].length != 1) {
           // All option as first entry
-          const defaultOption = document.createElement("option");
-          defaultOption.value = "-1";
-          defaultOption.innerText = "All";
-          defaultOption.className =
-            "taxonomy-option-all taxonomy-option-default";
-          if (!filter["restrict"] && filter["includes"].length > 1) {
-            defaultOption.innerText = "Default";
-            defaultOption.className = "taxonomy-option-default";
-            const allOptions = document.createElement("option");
-            allOptions.innerText = "All";
-            allOptions.value = "";
-            allOptions.className = "taxonomy-option-all";
+          const defaultOption = document.createElement('option');
+          defaultOption.value = '-1';
+          defaultOption.innerText = 'All';
+          defaultOption.className = 'taxonomy-option-all taxonomy-option-default';
+          if (!filter['restrict'] && filter['includes'].length > 1) {
+            defaultOption.innerText = 'Default';
+            defaultOption.className = 'taxonomy-option-default';
+            const allOptions = document.createElement('option');
+            allOptions.innerText = 'All';
+            allOptions.value = '';
+            allOptions.className = 'taxonomy-option-all';
             selectFilter.appendChild(allOptions);
           }
           defaultOption.selected = true;
@@ -1006,21 +774,18 @@
       }
 
       // Enables the reset button
-      resetButtonContainerElement.className =
-        "form-item reset-button-form-item";
-      resetButtonContainerElement.setAttribute("hidden", ""); // Hides the reset button by default
-      resetButtonElement.className = "reset-button";
-      resetButtonElement.innerText = "Reset";
-      resetButtonElement.onclick = (event) => {
-        // Resets all <select> elements to the default option, if there is one
+      resetButtonContainerElement.className = 'form-item reset-button-form-item';
+      resetButtonContainerElement.setAttribute('hidden', ''); // Hides the reset button by default
+      resetButtonElement.className = 'reset-button';
+      resetButtonElement.innerText = 'Reset';
+      resetButtonElement.onclick = event => { // Resets all <select> elements to the default option, if there is one
         event.preventDefault();
-        const selectElements = form.getElementsByTagName("select");
+        const selectElements = form.getElementsByTagName('select');
         for (let index = 0; index < selectElements.length; index++) {
           const selectElement = selectElements[index],
-            defaultOption = selectElement.querySelector(
-              ".taxonomy-option-default"
-            );
-          if (defaultOption) defaultOption.selected = true;
+            defaultOption = selectElement.querySelector('.taxonomy-option-default');
+          if (defaultOption)
+            defaultOption.selected = true;
         }
         onChange(form);
       };
@@ -1037,74 +802,65 @@
 
     generateDropdown(taxonomy, taxonomyFieldName, selectElement) {
       if (taxonomy.length === 0) return;
-      const filters = this._filters,
+      const
+        filters = this._filters,
         taxonomyConfig = filters[taxonomyFieldName],
-        taxonomiesIncluded = taxonomyConfig["includes"].map(Number), // The data type for taxonomyTerm.id is Number, the includes may be strings
-        restrict = taxonomyConfig["restrict"] && taxonomiesIncluded.length > 0;
-      taxonomy.forEach((taxonomyTerm) => {
-        if (restrict && taxonomiesIncluded.indexOf(taxonomyTerm.id) === -1)
-          return; // Rejects a restricted option
-        const option = document.createElement("option");
+        taxonomiesIncluded = taxonomyConfig['includes'].map(Number), // The data type for taxonomyTerm.id is Number, the includes may be strings
+        restrict = taxonomyConfig['restrict'] && taxonomiesIncluded.length > 0;
+      taxonomy.forEach(taxonomyTerm => {
+        if (restrict && taxonomiesIncluded.indexOf(taxonomyTerm.id) === -1) return; // Rejects a restricted option
+        const option = document.createElement('option');
         option.value = taxonomyTerm.id;
         option.innerText = taxonomyTerm.name;
-        option.selected =
-          taxonomiesIncluded.length === 1 &&
-          taxonomiesIncluded[0] == taxonomyTerm.id;
+        option.selected = taxonomiesIncluded.length === 1 && taxonomiesIncluded[0] == taxonomyTerm.id;
         selectElement.appendChild(option);
       });
-      if (
-        !restrict &&
-        taxonomy.length > 1 &&
-        taxonomy.length === taxonomiesIncluded.length
-      ) {
-        // Removes the "Default" option if all the taxonomy terms are included
-        const defaultOption = selectElement.querySelector(
-            ".taxonomy-option-default"
-          ),
-          allOption = selectElement.querySelector(".taxonomy-option-all");
+      if (!restrict && taxonomy.length > 1 && taxonomy.length === taxonomiesIncluded.length) { // Removes the "Default" option if all the taxonomy terms are included
+        const defaultOption = selectElement.querySelector('.taxonomy-option-default'),
+          allOption = selectElement.querySelector('.taxonomy-option-all');
         if (selectElement.options[selectElement.selectedIndex] == defaultOption)
           allOption.selected = true;
         selectElement.removeChild(defaultOption);
-        allOption.classList.add("taxonomy-option-default");
+        allOption.classList.add('taxonomy-option-default');
       }
     }
     generateLinkIcon(linkURI) {
-      let linkIcon = "fa-solid fa-link";
+      let linkIcon = 'fa-solid fa-link';
 
       try {
         const hostname = new URL(linkURI).hostname;
         if (hostname.match(/facebook\\.com$/i)) {
-          linkIcon = "fa-brands fa-facebook";
+          linkIcon = 'fa-brands fa-facebook';
         } else if (hostname.match(/instagram\\.com$/i)) {
-          linkIcon = "fa-brands fa-instagram";
+          linkIcon = 'fa-brands fa-instagram';
         } else if (hostname.match(/linkedin\\.com$/i)) {
-          linkIcon = "fa-brands fa-linkedin";
+          linkIcon = 'fa-brands fa-linkedin';
         } else if (hostname.match(/youtube\\.com$/i)) {
-          linkIcon = "fa-brands fa-youtube";
+          linkIcon = 'fa-brands fa-youtube';
         } else if (hostname.match(/(pinterest\\.com|pin\\.it)$/i)) {
-          linkIcon = "fa-brands fa-pinterest-p";
+          linkIcon = 'fa-brands fa-pinterest-p';
         } else if (hostname.match(/(flickr\\.com|flic\\.kr)$/i)) {
-          linkIcon = "fa-brands fa-flickr";
+          linkIcon = 'fa-brands fa-flickr';
         } else if (hostname.match(/vimeo\\.com$/i)) {
-          linkIcon = "fa-brands fa-vimeo-v";
+          linkIcon = 'fa-brands fa-vimeo-v';
         } else if (hostname.match(/wordpress\\.com$/i)) {
-          linkIcon = "fa-brands fa-wordpress-simple";
+          linkIcon = 'fa-brands fa-wordpress-simple';
         } else if (hostname.match(/tiktok\\.com$/i)) {
-          linkIcon = "fa-brands fa-tiktok";
+          linkIcon = 'fa-brands fa-tiktok';
         } else if (hostname.match(/reddit\\.com$/i)) {
-          linkIcon = "fa-brands fa-reddit-alien";
+          linkIcon = 'fa-brands fa-reddit-alien';
         } else if (hostname.match(/patreon\\.com$/i)) {
-          linkIcon = "fa-brands fa-patreon";
+          linkIcon = 'fa-brands fa-patreon';
         } else if (hostname.match(/discord\\.(com|gg)$/i)) {
-          linkIcon = "fa-brands fa-discord";
+          linkIcon = 'fa-brands fa-discord';
         } else if (hostname.match(/(twitter|x)\\.com$/i)) {
-          linkIcon = "fa-brands fa-x-twitter";
+          linkIcon = 'fa-brands fa-x-twitter';
         }
       } catch (e) {
         console.error(`Error processing URL ${linkURI}:`, e);
       }
 
-      return linkIcon + " primaryLinkIcon";
+      return linkIcon + ' primaryLinkIcon';
     }
   }
 
