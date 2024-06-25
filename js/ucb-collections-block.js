@@ -219,7 +219,7 @@
                 let title = item.attributes.title;
                 let link = "";
                 if (item.attributes.path.alias) {
-                  link = item.attributes.path.alias;
+                  link = BaseURL + item.attributes.path.alias;
                 } else {
                   link =
                     BaseURL + "/node/" + item.attributes.drupal_internal__nid;

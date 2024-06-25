@@ -203,7 +203,7 @@
                 const options = { year: 'numeric', month: 'short', day: 'numeric' };
                 let date = new Date(item.attributes.created).toLocaleDateString('en-us', options);
                 let title = item.attributes.title;
-                let link = item.attributes.path.alias;
+                let link = baseURI + item.attributes.path.alias;
                 let image = "";
                 let articleSummarySize = "col-md-12";
 

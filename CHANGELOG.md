@@ -9,6 +9,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes Links on Blocks using JSON:API 
+  Previously, Pages and Blocks rendering content via JSON:API would use relative pathing, which resulted in content on multi-sites to 404.
+  
+  This has been corrected on the following:
+  ### Pages
+  - People List Page
+  - Article List page
+  - Issue Archive
+  
+  ### Blocks
+  - People List Block
+  
+  - Current Issue Block
+  - Latest Issue Block
+  
+  - Article List Block
+  - Article Feature
+  - Article Grid
+  - Article Slider
+  
+  - Category Cloud
+  - Tag Cloud
+  
+  - Collection Block
+  
+  Resolves #1080 
+---
+
 - ### Removes "social share position" setting
   [Remove] Resolves CuBoulder/tiamat-theme#1073
   

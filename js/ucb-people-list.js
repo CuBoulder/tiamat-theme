@@ -373,7 +373,7 @@
     buildTableGroup(taxonomyTerm) {
       let table = this._contentElement.querySelector('table'), tableBody;
       // we only need to render the table header the first time
-      // this function will be called multiple times so check to 
+      // this function will be called multiple times so check to
       // see if we've already rendered the table header HTML
       if (!table) {
         table = document.createElement('table');
@@ -482,7 +482,7 @@
     appendPerson(format, person, containerElement) {
       let cardElement, cardHTML = '', personTitleList = '', personDepartmentList = '';
       const
-        personLink = person.link,
+        personLink = this.getAttribute('site-base') + person.link,
         personName = PeopleListElement.escapeHTML(person.name),
         personPhoto = person.photoUrl ? '<img src="' + person.photoUrl + '" alt="' + PeopleListElement.escapeHTML(person.photoAlt) + '">' : '',
         personBody = PeopleListElement.escapeHTML(person.body),
@@ -523,7 +523,7 @@
                   ${personTitleList}
                 </span>
                 <span class="ucb-person-card-dept">
-                  ${personDepartmentList} 
+                  ${personDepartmentList}
                 </span>
                 <span class="ucb-person-card-body">
                   ${personBody}
@@ -619,7 +619,7 @@
                     <i class="fa-solid fa-envelope iconColor"></i>
                     <a href="mailto:${personEmail}">
                       <span aria-hidden="true" class="ucb-people-list-contact">Email</span>
-                      <span class="visually-hidden">Email ${personName} at ${personEmail}</span> 
+                      <span class="visually-hidden">Email ${personName} at ${personEmail}</span>
                     </a>
                   </span>`
                     : ""

@@ -52,7 +52,7 @@ class IssueArchiveElement extends HTMLElement {
             for(let i=0;i<issues.length;i++){
                 const issue = issues[i]
                 const title = issue.attributes.title
-                const issueUrl = issue.attributes.path.alias
+                const issueUrl = this._baseURI + issue.attributes.path.alias;
                 const issueContainer = document.createElement('div')
                 issueContainer.classList = 'ucb-issue-archive-card px-3'
                 if(issue.relationships.field_ucb_issue_cover_image.data){
