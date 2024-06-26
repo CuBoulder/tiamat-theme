@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### People Lists: Corrects API error for >50 taxonomy terms
+  The `People List Page` and the `People List Block` could run into an API error if there were >50 terms on a site for "Job Type" or "Department", due to how Drupal paginates API results to maintain performance. 
+  
+  On sites with >50 terms, this would cause a partial render of the page or block, and an error message displaying **"Error retrieving people from the API endpoint. Please try again later."** due to not having the complete list of taxonomies prior to filtering/sorting of the People.
+  
+  This has been corrected to work with an unlimited number of terms.
+  
+  Resolves #1065 
+  
+---
+
 - ### Fixes Links on Blocks using JSON:API 
   Previously, Pages and Blocks rendering content via JSON:API would use relative pathing, which resulted in content on multi-sites to 404.
   

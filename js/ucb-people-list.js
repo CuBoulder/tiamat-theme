@@ -292,17 +292,46 @@
     }
 
     // Getter function for Departments and Job Types
-    async fetchTaxonomy(taxonomyId, taxonomyFieldName) {
-      const response = await fetch(this._baseURI + '/taxonomy_term/' + taxonomyId + '?sort=weight,name'),
-        data = await response.json(),
-        results = data['data'],
-        terms = [];
-      results.map(termResult => {
-        const id = termResult['attributes']['drupal_internal__tid'],
-          name = termResult['attributes']['name'];
-        terms.push({ id: id, name: name, fieldName: taxonomyFieldName });
-      });
-      return terms;
+    async fetchTaxonomy(
+      taxonomyId,
+      taxonomyFieldName,
+      url = null,
+      aggregatedTerms = []
+    ) {
+      try {
+        const fetchUrl =
+          url ||
+          `${this._baseURI}/taxonomy_term/${taxonomyId}?sort=weight,name`;
+        const response = await fetch(fetchUrl);
+        const data = await response.json();
+        const results = data["data"];
+
+        const terms = results.map((termResult) => {
+          const id = termResult["attributes"]["drupal_internal__tid"];
+          const name = termResult["attributes"]["name"];
+          return { id: id, name: name, fieldName: taxonomyFieldName };
+        });
+
+        aggregatedTerms.push(...terms);
+        // Recursive calls for >50 Terms
+        if (
+          data["links"] &&
+          data["links"]["next"] &&
+          data["links"]["next"]["href"]
+        ) {
+          return this.fetchTaxonomy(
+            taxonomyId,
+            taxonomyFieldName,
+            data["links"]["next"]["href"],
+            aggregatedTerms
+          );
+        }
+
+        return aggregatedTerms;
+      } catch (error) {
+        console.error("Error fetching taxonomy:", error);
+        return aggregatedTerms;
+      }
     }
 
     static getTaxonomyName(taxonomy, termId) {
