@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Content List: makes URLs absolute
+  Resolves #1089 
+---
+
 - ### People Lists: Corrects API error for >50 taxonomy terms
   The `People List Page` and the `People List Block` could run into an API error if there were >50 terms on a site for "Job Type" or "Department", due to how Drupal paginates API results to maintain performance. 
   
