@@ -47,17 +47,19 @@
 {% set divStyles = 'background-color: #fff; color: #fff;' %}
 {% set aStyles = 'color: #ff9900;' %}
 {% set pStyles = 'color:black;' %}
-{% set headerStyles = 'width:100%;background-color: black; padding-bottom:50px;padding: 15px 25px;' %}
+{% set headerStyles = 'width:100%;background-color: black; padding-bottom:50px;' %}
+{# padding: 15px 25px; #}
 {% set footerStyles = 'background-color: black; padding-top:20px' %}
 {% set cuLogoSrc = cuLogoLight %}
-{# {% set classicImgOffset = 'padding: 10px; background: white; margin-top: -50px;'%} #}
+{% set classicImgOffset = 'padding: 10px; background: white; margin-top: -50px;'%}
 {% set emailBackground = 'background-color:black;' %}
 {# Minimal #}
 {% elseif designType == 'minimal' %}
     {% set divStyles = 'background-color: #FFFFFF;margin:auto;' %}
     {% set aStyles = 'color: #ff9900;' %}
     {% set pStyles = 'color:black;' %}
-    {% set headerStyles = 'width:100%; color:black;padding-bottom:20px;padding: 15px 25px;' %}
+    {% set headerStyles = 'width:100%; color:black;padding-bottom:20px;' %}
+    {# padding: 15px 25px; #}
     {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
     {% set emailBackground = 'background-color:white;' %}
@@ -66,7 +68,8 @@
     {% set divStyles = 'background-color: black; color: #fff;margin:auto;' %}
     {% set aStyles = 'color: #ff9900;' %}
     {% set pStyles = 'color:#222330;' %}
-    {% set headerStyles = 'width:100%; color:white;margin-bottom:50px;padding: 15px 25px;' %}
+    {% set headerStyles = 'width:100%; color:white;margin-bottom:50px;' %}
+    {# padding: 15px 25px; #}
     {% set footerStyles = 'color:white;' %}
     {% set cuLogoSrc = cuLogoLight %}
     {% set emailBackground = 'background-color:white;' %}
@@ -78,7 +81,8 @@
     {% set divStyles = 'background-color: #E9E9E9;margin:auto;' %}
     {% set aStyles = 'color: #ff9900;' %}
     {% set pStyles = ' color: #222330;' %}
-    {% set headerStyles = 'width:100%; color:black;padding: 15px 25px;' %}
+    {% set headerStyles = 'width:100%; color:black;' %}
+    {# padding: 15px 25px; #}
     {% set footerStyles = 'color:black;' %}
     {% set cuLogoSrc = cuLogoDark %}
     {% set emailBackground = 'background-color:white;' %}
@@ -90,7 +94,8 @@
 {% set divStyles = 'background-color: #fff; color: #fff;' %}
 {% set aStyles = 'color: #ff9900;' %}
 {% set pStyles = 'color:black;' %}
-{% set headerStyles = 'width:100%;background-color: black;padding-bottom:20px;padding: 15px 25px;' %}
+{% set headerStyles = 'width:100%;background-color: black;padding-bottom:20px;' %}
+{# padding: 15px 25px; #}
 {% set footerStyles = 'background-color: black; padding-top:20px;' %}
 {% set cuLogoSrc = cuLogoLight %}
 {% set classicImgOffset = 'padding: 10px; background: white;'%}
@@ -313,12 +318,12 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                 <tbody>
                     <td>
                         <td>
-                            <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; margin: 0; font-size: 14px; background-color: white;{{classicStyle}}">
+                            <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; margin: 0; font-size: 14px; background-color: white;">
                                 <tr>
-                                  <td align="center">
+                                  <td align="center" style="padding-right:10px; padding-left:10px">
                                 <!-- Intro Img -->
                                     {% if content.field_newsletter_intro_image|render %}
-                                    <img id="newsletter-email-intro-img" src="{{base_url}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" style="{{classicImgOffset}};margin-bottom: 20px;">
+                                    <img id="newsletter-email-intro-img" src="{{base_url}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" style="{{classicImgOffset}};margin-bottom: 20px;" width="95%">
                                     {% endif %}
                                     </td>
                                 </tr>
