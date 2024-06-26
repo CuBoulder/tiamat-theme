@@ -112,7 +112,7 @@ class PeopleListBlockElement extends HTMLElement {
 		chromeElement.appendChild(loadingElement);
 		this.appendChild(chromeElement);
 		this.appendChild(contentElement);
-		const taxonomyIds = this._taxonomyIds = config['taxonomies'], 
+		const taxonomyIds = this._taxonomyIds = config['taxonomies'],
 			filters = this._filters = config['filters'] || {},
 			groupBy = this._groupBy = config['groupby'] || 'none',
 			orderBy = this._orderBy = config['orderby'] || 'last',
@@ -130,7 +130,7 @@ class PeopleListBlockElement extends HTMLElement {
 			const taxonomyId = taxonomyIds[taxonomyFieldName];
 			this.fetchTaxonomy(taxonomyId, taxonomyFieldName).then(taxonomy => {
 				this.onTaxonomyLoaded(taxonomyFieldName, taxonomy);
-			}).catch(reason => console.warn('Taxonomy with id `' + taxonomyId + '` failed to load!'));	
+			}).catch(reason => console.warn('Taxonomy with id `' + taxonomyId + '` failed to load!'));
 		});
 	}
 
@@ -145,7 +145,7 @@ class PeopleListBlockElement extends HTMLElement {
 							if(this._syncTaxonomiesLoaded >= this._syncTaxonomies.size) // Enter build method
 								this.build();
 						}
-					}).catch(reason => this.onFatalError(reason));	
+					}).catch(reason => this.onFatalError(reason));
 				}
 			});
 		} else this.build();
@@ -161,7 +161,7 @@ class PeopleListBlockElement extends HTMLElement {
 		try {
 			userConfig = this._userConfig = JSON.parse(this.getAttribute('user-config'));
 		} catch(e) {}
-		
+
 		const
 			config = this._config,
 			baseURI = this._baseURI,
@@ -206,7 +206,7 @@ class PeopleListBlockElement extends HTMLElement {
 								termPeople.push(person);
 							});
 					});
-				}	
+				}
 				// get all of the include images id => url
 				const urlObj = {}; // key from data.data to key from data.includes
 				const idObj = {}; // key from data.includes to URL
@@ -253,18 +253,47 @@ class PeopleListBlockElement extends HTMLElement {
 	}
 
 	// Getter function for Departments and Job Types
-	async fetchTaxonomy(taxonomyId, taxonomyFieldName) {
-		const response = await fetch(this._baseURI + '/taxonomy_term/' + taxonomyId + '?sort=weight,name'),
-			data = await response.json(),
-			results = data['data'],
-			terms = [];
-		results.map(termResult => {
-			const id = termResult['attributes']['drupal_internal__tid'],
-				name = termResult['attributes']['name'];
-			terms.push({ id: id, name: name, fieldName: taxonomyFieldName });
-		});
-		return terms;
-	}
+	async fetchTaxonomy(
+    taxonomyId,
+    taxonomyFieldName,
+    url = null,
+    aggregatedTerms = []
+  ) {
+    try {
+      const fetchUrl =
+        url ||
+        `${this._baseURI}/taxonomy_term/${taxonomyId}?sort=weight,name`;
+      const response = await fetch(fetchUrl);
+      const data = await response.json();
+      const results = data["data"];
+
+      const terms = results.map((termResult) => {
+        const id = termResult["attributes"]["drupal_internal__tid"];
+        const name = termResult["attributes"]["name"];
+        return { id: id, name: name, fieldName: taxonomyFieldName };
+      });
+
+      aggregatedTerms.push(...terms);
+      // Recursive calls for >50 Terms
+      if (
+        data["links"] &&
+        data["links"]["next"] &&
+        data["links"]["next"]["href"]
+      ) {
+        return this.fetchTaxonomy(
+          taxonomyId,
+          taxonomyFieldName,
+          data["links"]["next"]["href"],
+          aggregatedTerms
+        );
+      }
+
+      return aggregatedTerms;
+    } catch (error) {
+      console.error("Error fetching taxonomy:", error);
+      return aggregatedTerms;
+    }
+  }
 
 	static getTaxonomyName(taxonomy, termId) {
 		if(!termId) return
@@ -365,7 +394,7 @@ class PeopleListBlockElement extends HTMLElement {
 		return taxonomyTerm && this._groupedPeople ? this._groupedPeople.get(taxonomyTerm.id) : people;
 	}
 
-	displayPeople(format, people, urlObj, idObj, containerElement) {		
+	displayPeople(format, people, urlObj, idObj, containerElement) {
 		// If grid render and no thumbnail, use a default image for the person. Else no image.
 		const defaultThumbnail = format == 'grid' ? defaultAvatarURL : '';
 
@@ -392,7 +421,7 @@ class PeopleListBlockElement extends HTMLElement {
 
 			// Builds arrays of department and job type ids
 			departmentsData.forEach(departmentData => departments.push(departmentData['meta']['drupal_internal__target_id']));
-			jobTypesData.forEach(jobTypeData => jobTypes.push(jobTypeData['meta']['drupal_internal__target_id']));	
+			jobTypesData.forEach(jobTypeData => jobTypes.push(jobTypeData['meta']['drupal_internal__target_id']));
 			// needed to verify if primary link exists on page
 				if (personAttributeData['field_ucb_person_primary_link']) {
 					thisPerson.primaryLinkURI =  personAttributeData['field_ucb_person_primary_link']['uri'];
@@ -429,7 +458,7 @@ class PeopleListBlockElement extends HTMLElement {
 					  }
 					}
 			}
-			
+
 			this.appendPerson(format, thisPerson, containerElement);
 		});
 	}
@@ -437,7 +466,7 @@ class PeopleListBlockElement extends HTMLElement {
 	appendPerson(format, person, containerElement) {
 		let cardElement, cardHTML = '', personTitleList = '', personDepartmentList = '';
 		const
-			personLink = person.link,
+			personLink = this.getAttribute('site-base') + person.link,
 			personName = PeopleListBlockElement.escapeHTML(person.name),
 			personPhoto = person.photoURI ? '<img src="' + person.photoURI + '">' : '',
 			personBody = PeopleListBlockElement.escapeHTML(person.body),
@@ -479,7 +508,7 @@ class PeopleListBlockElement extends HTMLElement {
 								${personTitleList}
 							</span>
 							<span class="ucb-person-card-dept">
-								${personDepartmentList} 
+								${personDepartmentList}
 							</span>
 							<span class="ucb-person-card-body">
 								${personBody}
@@ -607,7 +636,7 @@ class PeopleListBlockElement extends HTMLElement {
 			const url = new URL(linkURI);
 			const domainParts = url.hostname.toLowerCase().split('.');
 			const domain = domainParts.length > 1 ? domainParts[domainParts.length - 2] : url.hostname;
-	
+
 			switch (domain.toUpperCase()) {
 				case 'FACEBOOK':
 					linkIcon = "fa-brands fa-facebook primaryLinkIcon";
@@ -654,7 +683,7 @@ class PeopleListBlockElement extends HTMLElement {
 		} catch (e) {
 			console.error(`Error processing URL ${linkURI}:`, e);
 		}
-		
+
 		return linkIcon;
 	}
 }

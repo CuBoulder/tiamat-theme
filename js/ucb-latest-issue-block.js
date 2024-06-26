@@ -1,9 +1,9 @@
 class LatestIssueElement extends HTMLElement {
 	constructor() {
 		super();
-        
+
         const handleError = response => {
-            if (!response.ok) { 
+            if (!response.ok) {
                throw new Error;
             } else {
                return response.json();
@@ -20,6 +20,7 @@ class LatestIssueElement extends HTMLElement {
     }
 
    async build(data){
+        const baseURL = this.getAttribute("baseURL");
         if(data.data.length == 0){
             this.handleError({name : "No Issues Retrieved", message : "There are no Issues created"} , 'No Issues Found')
         } else {
@@ -49,10 +50,10 @@ class LatestIssueElement extends HTMLElement {
             for(let i=0;i<issues.length;i++){
                 const issue = issues[i]
                 const title = issue.attributes.title
-                const issueUrl = issue.attributes.path.alias
+                const issueUrl = baseURL + issue.attributes.path.alias
                 const issueContainer = document.createElement('div')
                 issueContainer.classList = 'ucb-latest-issue-card'
-                // Image 
+                // Image
                 if(issue.relationships.field_ucb_issue_cover_image.data){
                     const issueId = issue.relationships.field_ucb_issue_cover_image.data.id;
                     const imgUrl = urlObj[idObj[issueId]]
@@ -77,14 +78,13 @@ class LatestIssueElement extends HTMLElement {
                 titleLink.href = issueUrl
                 titleLink.appendChild(issueTitle)
 
-                
+
                 issueContainer.appendChild(titleLink)
                 latestIssueContainer.appendChild(issueContainer)
             }
             this.toggleMessage('ucb-al-loading');
             this.appendChild(latestIssueContainer)
             const siteTitle = this.getAttribute('siteName');
-            const baseURL = this.getAttribute('baseURL');
             // Check if Archive Exists:
             let archiveExists
             const response = await fetch(`${baseURL}/${siteTitle}/issue/archive`)
@@ -100,7 +100,7 @@ class LatestIssueElement extends HTMLElement {
                 archiveContainer.classList = 'ucb-latest-issue-archive-container'
                 const archiveLink = document.createElement('a')
                 archiveLink.classList = 'ucb-latest-issue-archive-button'
-                archiveLink.href = '/issue/archive'
+                archiveLink.href = baseURL + '/issue/archive'
                 archiveLink.innerText = 'Issue Archive'
 
                 archiveContainer.appendChild(archiveLink)
@@ -127,7 +127,7 @@ class LatestIssueElement extends HTMLElement {
 
         this.appendChild(container)
         console.error(Error)
-        
+
     }
     toggleMessage(id, display = "none") {
         if (id) {

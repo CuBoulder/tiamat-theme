@@ -116,7 +116,7 @@ class ArticleSliderBlockElement extends HTMLElement {
                 imageSrc = altObj[idObj[thumbId]];
 
                 let title = item.attributes.title;
-                let link = item.attributes.path.alias;
+                let link = this._baseURI + item.attributes.path.alias;
                 // Create an Article Object for programatic rendering
                 const article = {
                     title,

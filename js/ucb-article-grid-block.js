@@ -110,7 +110,7 @@ class ArticleGridBlockElement extends HTMLElement {
 
             return {
               title: item.attributes.title,
-              link: item.attributes.path.alias,
+              link: this._baseURI + item.attributes.path.alias,
               image: imageSrc,
               date: new Date(item.attributes.created).toLocaleDateString(
                 "en-us",

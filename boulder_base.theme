@@ -111,7 +111,6 @@ function boulder_base_preprocess_page(array &$variables) {
   $variables['ucb_campus_header_color'] = theme_get_setting('ucb_campus_header_color');
   $variables['ucb_header_color'] = $headerColor = theme_get_setting('ucb_header_color');
   $variables['ucb_be_boulder'] = theme_get_setting('ucb_be_boulder');
-  $variables['ucb_social_share_position'] = theme_get_setting('ucb_social_share_position');
   $variables['ucb_sidebar_position'] = theme_get_setting('ucb_sidebar_position');
   $variables['ucb_rave_alerts'] = theme_get_setting('ucb_rave_alerts');
   $variables['ucb_sticky_menu'] = theme_get_setting('ucb_sticky_menu');

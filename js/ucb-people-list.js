@@ -292,17 +292,46 @@
     }
 
     // Getter function for Departments and Job Types
-    async fetchTaxonomy(taxonomyId, taxonomyFieldName) {
-      const response = await fetch(this._baseURI + '/taxonomy_term/' + taxonomyId + '?sort=weight,name'),
-        data = await response.json(),
-        results = data['data'],
-        terms = [];
-      results.map(termResult => {
-        const id = termResult['attributes']['drupal_internal__tid'],
-          name = termResult['attributes']['name'];
-        terms.push({ id: id, name: name, fieldName: taxonomyFieldName });
-      });
-      return terms;
+    async fetchTaxonomy(
+      taxonomyId,
+      taxonomyFieldName,
+      url = null,
+      aggregatedTerms = []
+    ) {
+      try {
+        const fetchUrl =
+          url ||
+          `${this._baseURI}/taxonomy_term/${taxonomyId}?sort=weight,name`;
+        const response = await fetch(fetchUrl);
+        const data = await response.json();
+        const results = data["data"];
+
+        const terms = results.map((termResult) => {
+          const id = termResult["attributes"]["drupal_internal__tid"];
+          const name = termResult["attributes"]["name"];
+          return { id: id, name: name, fieldName: taxonomyFieldName };
+        });
+
+        aggregatedTerms.push(...terms);
+        // Recursive calls for >50 Terms
+        if (
+          data["links"] &&
+          data["links"]["next"] &&
+          data["links"]["next"]["href"]
+        ) {
+          return this.fetchTaxonomy(
+            taxonomyId,
+            taxonomyFieldName,
+            data["links"]["next"]["href"],
+            aggregatedTerms
+          );
+        }
+
+        return aggregatedTerms;
+      } catch (error) {
+        console.error("Error fetching taxonomy:", error);
+        return aggregatedTerms;
+      }
     }
 
     static getTaxonomyName(taxonomy, termId) {
@@ -373,7 +402,7 @@
     buildTableGroup(taxonomyTerm) {
       let table = this._contentElement.querySelector('table'), tableBody;
       // we only need to render the table header the first time
-      // this function will be called multiple times so check to 
+      // this function will be called multiple times so check to
       // see if we've already rendered the table header HTML
       if (!table) {
         table = document.createElement('table');
@@ -482,7 +511,7 @@
     appendPerson(format, person, containerElement) {
       let cardElement, cardHTML = '', personTitleList = '', personDepartmentList = '';
       const
-        personLink = person.link,
+        personLink = this.getAttribute('site-base') + person.link,
         personName = PeopleListElement.escapeHTML(person.name),
         personPhoto = person.photoUrl ? '<img src="' + person.photoUrl + '" alt="' + PeopleListElement.escapeHTML(person.photoAlt) + '">' : '',
         personBody = PeopleListElement.escapeHTML(person.body),
@@ -523,7 +552,7 @@
                   ${personTitleList}
                 </span>
                 <span class="ucb-person-card-dept">
-                  ${personDepartmentList} 
+                  ${personDepartmentList}
                 </span>
                 <span class="ucb-person-card-body">
                   ${personBody}
@@ -619,7 +648,7 @@
                     <i class="fa-solid fa-envelope iconColor"></i>
                     <a href="mailto:${personEmail}">
                       <span aria-hidden="true" class="ucb-people-list-contact">Email</span>
-                      <span class="visually-hidden">Email ${personName} at ${personEmail}</span> 
+                      <span class="visually-hidden">Email ${personName} at ${personEmail}</span>
                     </a>
                   </span>`
                     : ""

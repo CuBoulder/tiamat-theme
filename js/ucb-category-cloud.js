@@ -30,7 +30,7 @@ class CategoryCloudElement extends HTMLElement {
                 const categoryURL = document.createElement('a')
                 categoryURL.classList = 'ucb-category-cloud-link'
                 categoryURL.innerText = categoryName
-                categoryURL.href = `taxonomy/term/${category.attributes.drupal_internal__tid}`
+                categoryURL.href = this._baseURI + `/taxonomy/term/${category.attributes.drupal_internal__tid}`
                 categoryCloudContainer.appendChild(categoryURL)
             })
 

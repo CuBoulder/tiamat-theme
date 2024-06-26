@@ -115,7 +115,7 @@ class ArticleListBlockElement extends HTMLElement {
 
             return {
               title: item.attributes.title,
-              link: item.attributes.path.alias,
+              link: this._baseURI + item.attributes.path.alias,
               image: imageSrc,
               imageWide: imageSrcWide,
               date: new Date(item.attributes.created).toLocaleDateString(
