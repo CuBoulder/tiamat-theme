@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Taxonomy clouds: adds missing body field to templates
+  Adds `body` fields to the "Category Cloud" and "Tag Cloud" blocks, previously this was missing from the templates resulting in no body showing up on render even if the user entered one.
+  
+  Resolves #1090 
+---
+
 - ### Content List: makes URLs absolute
   Resolves #1089 
 ---
