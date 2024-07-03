@@ -1118,17 +1118,17 @@ a.tabledrag-handle .handle {
 
 /* Column List CSS */
 @media only screen and (min-width: 576px) {
-  .column-list.column-list-2 .ul {
+  .column-list.column-list-2 {
     -webkit-columns: 2;
     -moz-columns: 2;
     columns: 2;
   }
-  .column-list.column-list-3 .ul {
+  .column-list.column-list-3 {
     -webkit-columns: 3;
     -moz-columns: 3;
     columns: 3;
   }
-  .column-list.column-list-4 .ul {
+  .column-list.column-list-4 {
     -webkit-columns: 4;
     -moz-columns: 4;
     columns: 4;
