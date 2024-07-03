@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Add styling for webform urls
+  Closes #1096.
+  Adds the dark styling to urls and links.
+---
+
 - ### Image Gallery Masonry option changes
   Closes #1085.
   Adds a new masonry option to image galleries. Adds the masonry library from bootstrap to enable this. Users can also set a value between 2 and 5 columns.
