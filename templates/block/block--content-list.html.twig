@@ -7,6 +7,8 @@
 
 {{ attach_library('boulder_base/ucb-content-list') }}
 
+{% set baseURL = url('<front>')|render|trim('/') %}
+
 {% set blockContent = content['#block_content'] %}
 {% set _rendered = blockContent|view|render %}{# Easiest way to ensure the cache is updated when the block or a referenced node is. Resolves #377, 378. #}
 {% set sort = blockContent.field_content_list_sort.value %}
@@ -91,7 +93,7 @@
           <div class="row ucb-content-list-row ">
             <div class="ucb-content-list-text-container ">
               <h4 class="ucb-content-list-title">
-                <a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a>
+                <a href="{{ baseURL ~ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a>
               </h4>
               {% if item.entity.type.0.entity.id == 'ucb_person' %}
                 <div class="ucb-content-list-person-info">
@@ -115,7 +117,7 @@
             </div>
             {% if image %}
               <div class="ucb-content-list-image-container">
-                  <a role="presentation" aria-hidden="true" href="{{ item.entity.path.alias }}">
+                  <a role="presentation" aria-hidden="true" href="{{ baseURL ~ item.entity.path.alias }}">
                     <img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}">
                   </a>
               </div>
@@ -125,12 +127,12 @@
         <div class="row ucb-content-list-row">
           {% if image %}
             <div class="ucb-content-list-image-container">
-              <a role="presentation" aria-hidden="true" href="{{ item.entity.path.alias }}"><img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}"></a>
+              <a role="presentation" aria-hidden="true" href="{{ baseURL ~ item.entity.path.alias }}"><img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}"></a>
             </div>
           {% endif %}
           <div class="ucb-content-list-text-container container">
             <h4 class="ucb-content-list-title">
-              <a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a>
+              <a href="{{ baseURL ~ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a>
             </h4>
             {% if item.entity.type.0.entity.id == 'ucb_person' %}
               <div class="ucb-content-list-person-info">
@@ -157,17 +159,17 @@
         <ul class="ucb-content-list-list">
         {# ISSUE WE NEED TO MAKE EACH ITEM AN LI INSTEAD OF DUPLICATING THE UL #}
           <li class="ucb-content-list-row ucb-content-list-title">
-            <a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a>
+            <a href="{{ baseURL ~ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a>
           </li>
         </ul>
         {% elseif display == 'sidebar' %}
           <div class="row ucb-content-list-row">
             <div class="ucb-content-list-text-container ">
-              <span class="ucb-content-list-title"><a href="{{ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></span>
+              <span class="ucb-content-list-title"><a href="{{ baseURL ~ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></span>
             </div>
             {% if image %}
               <div class="ucb-content-list-image-container">
-                  <a role="presentation" aria-hidden="true" href="{{ item.entity.path.alias }}"><img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}"></a>
+                  <a role="presentation" aria-hidden="true" href="{{ baseURL ~ item.entity.path.alias }}"><img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}"></a>
               </div>
             {% endif %}
           </div>

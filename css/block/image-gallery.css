@@ -7,3 +7,25 @@
 .ucb-below-content .block-content--type--image-gallery {
   padding: 1.5em;
 }
+
+.masonry-option-true,
+.masonry-option-true .gallery-item {
+margin-top: 0;
+padding-top: 5px;
+}
+.masonry-option-true .gallery-item a {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  word-wrap: break-word;
+  background-color: #fff;
+  background-clip: border-box;
+  border: 1px solid rgba(0, 0, 0, .125);
+  border-radius: .25rem;
+}
+
+.masonry-option-true .media-image-caption {
+  flex: 1 1 auto;
+  padding: 1rem 1rem;
+}

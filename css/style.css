@@ -976,6 +976,7 @@ fieldset:not(.fieldgroup) legend {
 }
 
 input.form-text,
+input.form-url,
 textarea.form-textarea,
 input[type="text"],
 input[type="email"],

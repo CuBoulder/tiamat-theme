@@ -9,6 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Add styling for webform urls
+  Closes #1096.
+  Adds the dark styling to urls and links.
+---
+
+- ### Image Gallery Masonry option changes
+  Closes #1085.
+  Adds a new masonry option to image galleries. Adds the masonry library from bootstrap to enable this. Users can also set a value between 2 and 5 columns.
+---
+
+- ### Taxonomy clouds: adds missing body field to templates
+  Adds `body` fields to the "Category Cloud" and "Tag Cloud" blocks, previously this was missing from the templates resulting in no body showing up on render even if the user entered one.
+  
+  Resolves #1090 
+---
+
+- ### Content List: makes URLs absolute
+  Resolves #1089 
+---
+
 - ### People Lists: Corrects API error for >50 taxonomy terms
   The `People List Page` and the `People List Block` could run into an API error if there were >50 terms on a site for "Job Type" or "Department", due to how Drupal paginates API results to maintain performance. 
   
