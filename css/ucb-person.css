@@ -60,14 +60,8 @@ a.ucb-person-social-link i.fa-brands {
 }
 
 
-@media screen and (min-width: 768px) {
-  .ucb-person-img {
-    float: right;
-    margin-left: 20px;
-  }
-  .ucb-person-img .media-image-caption {
-    text-align: center;
-  }
+.ucb-person-img .media-image-caption {
+  text-align: center;
 }
 
 .ucb-person-section-header {
@@ -77,8 +71,7 @@ a.ucb-person-social-link i.fa-brands {
 
 .ucb-person-section.ucb-person-links,
 .ucb-person-section.ucb-person-address,
-.ucb-person-section.ucb-person-office-hours,
-.ucb-person-section.ucb-person-body {
+.ucb-person-section.ucb-person-office-hours {
   margin-top: 20px;
 }
 
@@ -100,11 +93,6 @@ ul.ucb-person-department li:not(:first-child):before {
 .ucb-person-department {
   padding-left: 0;
   margin-bottom: 0;
-}
-
-.ucb-person-img {
-  clear: both;
-  margin-bottom: 20px;
 }
 
 .ucb-person-img img {
