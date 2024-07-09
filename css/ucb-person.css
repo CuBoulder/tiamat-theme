@@ -19,7 +19,6 @@
 }
 
 .ucb-person-main img {
-  max-width: 300px;
   height: auto;
   border-radius: 2px;
 }
@@ -102,6 +101,10 @@ ul.ucb-person-department li:not(:first-child):before {
 .ucb-person-img .media-image-caption {
   display: block;
   padding-top: .2em;
+}
+
+.ucb-person-img {
+  width: fit-content;
 }
 
 .primaryLinkIcon {
