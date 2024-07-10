@@ -120,6 +120,23 @@ a, a:visited, a:hover, a:active {
     color: #0277bd;
 }
 
+.ucb-email-header-classic a,
+.ucb-email-footer-classic a,
+.ucb-email-header-simple a,
+.ucb-email-footer-simple a,
+.ucb-email-header-darkbox a,
+.ucb-email-footer-darkbox a {
+  color: var(--ucb-gold);
+}
+.ucb-email-header-classic :hover,
+.ucb-email-footer-classic a:hover,
+.ucb-email-header-simple a:hover,
+.ucb-email-footer-simple a:hover,
+.ucb-email-header-darkbox a:hover,
+.ucb-email-footer-darkbox a:hover {
+  color: var(--ucb-white);
+}
+
                 .tags > a{
                     color: #656565 !important;
                     text-decoration: none;
@@ -273,7 +290,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                     <td>
         {% endif %}
         <center>
-        <table style="{{headerStyles}}">
+        <table class="ucb-email-header-{{designType}}" style="{{headerStyles}}">
             <tbody>
                 <tr>
                     <td style='{{headerStyles}}'>
@@ -464,7 +481,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
          <!--Footer-->
          {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
          <center>
-            <table role="presentation" border="0" width="100%" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+            <table class="ucb-email-footer-{{designType}}"role="presentation" border="0" width="100%" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
                 <tbody>
                     <tr>
                         <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px; padding-top:20px">
