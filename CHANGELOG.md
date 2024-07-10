@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Redesign of person page
+  Closes #1098.
+  Changes the person page to match the new template provided.
+---
+
 - ### Add styling for webform urls
   Closes #1096.
   Adds the dark styling to urls and links.
