@@ -28,13 +28,13 @@ ul.ucb-person-links,
 ul.ucb-person-phone-numbers {
   list-style: none;
   padding: 0;
-  color: #aaa;
+  color: #111;
   margin: 0;
 }
 
 a.ucb-person-social-link i.fa-solid,
 a.ucb-person-social-link i.fa-brands {
-  color: #aaa;
+  color: #111;
 }
 
 .ucb-person-contact-section {
@@ -58,6 +58,15 @@ a.ucb-person-social-link i.fa-brands {
   margin-top: 10px;
 }
 
+@media only screen and (max-width: 767px) {
+  .ucb-person-main {
+    display: flex;
+    flex-direction: row;
+  }
+  .ucb-person-main .ucb-person-img {
+    padding-right: 10px;
+  }
+}
 
 .ucb-person-img .media-image-caption {
   text-align: center;
@@ -108,7 +117,7 @@ ul.ucb-person-department li:not(:first-child):before {
 }
 
 .primaryLinkIcon {
-  color: gray;
+  color: #111;
 }
 
 .ucb-article-card-title-only{
