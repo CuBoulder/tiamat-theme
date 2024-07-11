@@ -1,6 +1,6 @@
 class PersonArticleList extends HTMLElement {
-	constructor() {
-		super();
+    constructor() {
+        super();
         // Article Endpoint
         const nodeID = this.getAttribute('nodeId');
         const API = `/jsonapi/node/ucb_article?include=field_ucb_article_byline.field_author_person_page&filter[field_ucb_article_byline.field_author_person_page.meta.drupal_internal__target_id]=${nodeID}&filter[status][value]=1&page[limit]=10&sort=-created`;
@@ -25,10 +25,7 @@ class PersonArticleList extends HTMLElement {
             NEXTJSONURL = "";
           }
 
-          // If no Articles retrieved...
-        if(data.data.length == 0){
-            console.warn('Articles by Person Block Error: There are no available Articles authored by this person');
-        } else {
+        if(data.data.length != 0){
         this.toggleMessage('ucb-person-article-block-title', "block");
         this.toggleMessage('ucb-al-loading',"block");
         // Iterate over each Article

@@ -16,70 +16,80 @@
   'ucb-content-wrapper'
 ] %}
 
-<article{{ attributes.addClass(classes) }} itemscope itemtype="https://schema.org/Person">
-  <div class="container ucb-person-header">
-    <h1 class="ucb-person-name">
-      {{ content.field_ucb_person_first_name }}
-      {{ content.field_ucb_person_last_name }}
-    </h1>
-    {{ content.field_ucb_person_pronouns }}
-  </div>
-  <div class="container ucb-person">
-    <div class="row ucb-person-personal">
-      <div class="col ucb-person-main">
-        {{ content.field_ucb_person_photo }}
+<article{{attributes.addClass(classes)}} itemscope itemtype="https://schema.org/Person">
+    <div class="container ucb-person-header">
+        <h1 class="ucb-person-name">
+            {{ content.field_ucb_person_first_name }}
+            {{ content.field_ucb_person_last_name }}
+        </h1>
+        {{ content.field_ucb_person_pronouns }}
         {% if content.field_ucb_person_title.0 or content.field_ucb_person_department.0 %}
-          <div class="ucb-person-section ucb-person-job">
-            {{ content.field_ucb_person_title }}
-            {{ content.field_ucb_person_department }}
-          </div>
+            <div class="ucb-person-section ucb-person-job">
+                {{ content.field_ucb_person_title }}
+                {{ content.field_ucb_person_department }}
+            </div>
         {% endif %}
-        {% if content.field_ucb_person_email.0 or content.field_ucb_person_phone.0 or content.field_ucb_person_primary_link.0 %}
-          <div class="ucb-person-section ucb-person-contact">
-            {{ content.field_ucb_person_email }}
-            {{ content.field_ucb_person_phone }}
-            {{ content.field_ucb_person_primary_link }}
-          </div>
-        {% endif %}
-        {% if content.field_ucb_person_links.0 %}
-          <div class="ucb-person-section ucb-person-links">
-            {{ content.field_ucb_person_links }}
-          </div>
-        {% endif %}
-        {% if content.field_ucb_person_address.0 %}
-          <div class="ucb-person-section" aria-labelledby="headerAddress">
-            <span class="ucb-person-section-header" id="headerAddress">Address</span>
-            {{ content.field_ucb_person_address }}
-          </div>
-        {% endif %}
-        {% if content.field_ucb_person_office_hours.0 %}
-          <div class="ucb-person-section ucb-person-office-hours" aria-labelledby="headerOfficeHours">
-            <span class="ucb-person-section-header" id="headerOfficeHours">Office Hours</span>
-            {{ content.field_ucb_person_office_hours }}
-          </div>
-        {% endif %}
-        {% if content.body.0 %}
-          <div class="ucb-person-section ucb-person-body">
-            {{ content.body }}
-          </div>
-        {% endif %}
-      </div>
-      <div class="ucb-articles-by-person-block container">
-        <person-article-list nodeId="{{ node.id }}">
-          <div id="ucb-person-article-block-title" style="display:none">
-            <h2>Articles by {{ content.field_ucb_person_first_name }} {{ content.field_ucb_person_last_name }}</h2>
-          </div>
-          <div id="ucb-al-loading" style="display:none" class="ucb-list-msg ucb-loading-data">
-            <i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>
-          </div>
-          <div id="ucb-al-error" style="display:none" class="ucb-list-msg">
-            <h3>An error has occured - please check the console. </h3>
-          </div>
-          <div id="ucb-al-api-error" style="display:none" class="ucb-list-msg">
-            <h3>An error has occured with the API - please try again later</h3>
-          </div>
-        </person-article-list>
-      </div>
     </div>
-  </div>
+    <div class="container ucb-person">
+        <div class="row ucb-person-personal">
+            <div class="col col-sm-12 col-md-6 col-lg-4 ucb-person-main">
+                <div class="col col-sm-6 col-md-12">
+                    {{ content.field_ucb_person_photo }}
+                </div>
+                <div class="col col-sm-6 col-md-12">
+                    {% if content.field_ucb_person_email.0 or content.field_ucb_person_phone.0 or content.field_ucb_person_primary_link.0 %}
+                        <div class="ucb-person-section ucb-person-contact">
+                            {{ content.field_ucb_person_email }}
+                            {{ content.field_ucb_person_phone }}
+                            {{ content.field_ucb_person_primary_link }}
+                        </div>
+                    {% endif %}
+                    {% if content.field_ucb_person_links.0 %}
+                        <div class="ucb-person-section ucb-person-links">
+                            {{ content.field_ucb_person_links }}
+                        </div>
+                    {% endif %}
+                    {% if content.field_ucb_person_address.0 %}
+                        <div class="ucb-person-section" aria-labelledby="headerAddress">
+                            <span class="ucb-person-section-header" id="headerAddress">Address</span>
+                            {{ content.field_ucb_person_address }}
+                        </div>
+                    {% endif %}
+                    {% if content.field_ucb_person_office_hours.0 %}
+                        <div class="ucb-person-section ucb-person-office-hours" aria-labelledby="headerOfficeHours">
+                            <span class="ucb-person-section-header" id="headerOfficeHours">Office Hours</span>
+                            {{ content.field_ucb_person_office_hours }}
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+            <div class="col col-sm-12 col-md-6 col-lg-8">
+                {% if content.body.0 %}
+                    <div class="ucb-person-section ucb-person-body">
+                        {{ content.body }}
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+        <div class="ucb-articles-by-person-block">
+            <person-article-list nodeid="{{ node.id }}">
+                <div id="ucb-person-article-block-title" style="display:none">
+                    <h2>Articles by
+                        {{ content.field_ucb_person_first_name }}
+                        {{ content.field_ucb_person_last_name }}</h2>
+                </div>
+                <div id="ucb-al-loading" style="display:none" class="ucb-list-msg ucb-loading-data">
+                    <i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>
+                </div>
+                <div id="ucb-al-error" style="display:none" class="ucb-list-msg">
+                    <h3>An error has occured - please check the console.
+                    </h3>
+                </div>
+                <div id="ucb-al-api-error" style="display:none" class="ucb-list-msg">
+                    <h3>An error has occured with the API - please try again later</h3>
+                </div>
+            </person-article-list>
+        </div>
+
+    </div>
 </article>
