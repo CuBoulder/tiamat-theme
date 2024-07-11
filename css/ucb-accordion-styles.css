@@ -1,0 +1,365 @@
+/*
+ * Styles for the ckeditor accordion and expandable content block
+ */
+
+/*** Main Accordion Styles ***/
+
+.vertical-tab-content {
+  width: 100%;
+}
+
+.horizontal-tab-accordion .nav-tabs,
+.vertical-tab-accordion .vertical-tabs {
+  display: none;
+}
+
+.accordion-button,
+.accordion-button:not(.collapsed),
+.accordion-button:focus {
+  font-size: 110%;
+  font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  background-color: transparent;
+  box-shadow: none;
+  text-decoration: none;
+}
+
+.accordion-button:before {
+  background-color: currentColor;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3C!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath d='M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm88 200H296c13.3 0 24 10.7 24 24s-10.7 24-24 24H152c-13.3 0-24-10.7-24-24s10.7-24 24-24z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3C!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath d='M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zm88 200H296c13.3 0 24 10.7 24 24s-10.7 24-24 24H152c-13.3 0-24-10.7-24-24s10.7-24 24-24z'/%3E%3C/svg%3E");
+  content: "";
+  height: 21px;
+  width: 25px;
+  mask-repeat: no-repeat;
+}
+
+.accordion-button.collapsed:before {
+  background-color: currentColor;
+  -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3C!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath d='M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM200 344V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H248v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z'/%3E%3C/svg%3E");
+  mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 448 512'%3E%3C!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--%3E%3Cpath d='M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM200 344V280H136c-13.3 0-24-10.7-24-24s10.7-24 24-24h64V168c0-13.3 10.7-24 24-24s24 10.7 24 24v64h64c13.3 0 24 10.7 24 24s-10.7 24-24 24H248v64c0 13.3-10.7 24-24 24s-24-10.7-24-24z'/%3E%3C/svg%3E");
+  content: "";
+  height: 21px;
+  width: 25px;
+  mask-repeat: no-repeat;
+}
+
+.accordion-button:not(.collapsed) {
+  color: currentColor;
+  font-weight: bold;
+}
+
+.accordion-button:not(.collapsed)::after,
+.accordion-button::after {
+  background: none;
+}
+
+.accordion-button .ucb-accordion-button-content-icon-expand,
+.accordion-button .ucb-accordion-button-content-icon-collapse {
+  flex-shrink: 0;
+  margin-right: 0.25em;
+}
+
+.accordion-button.collapsed .ucb-accordion-button-content-icon-collapse,
+.accordion-button:not(.collapsed) .ucb-accordion-button-content-icon-expand {
+  display: none;
+}
+
+.accordion-button,
+.accordion-body {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.ucb-bootstrap-layout-section-dark .accordion-button {
+  color: var(--ucb-gold);
+}
+
+.ucb-bootstrap-layout-section-dark .accordion-button::before {
+  color: var(--ucb-gold);
+}
+
+.ucb-bootstrap-layout-section-dark .accordion-button:hover {
+  color: var(--ucb-white);
+}
+
+.ucb-bootstrap-layout-section-dark .accordion-button:hover::before {
+  color: var(--ucb-white);
+}
+
+.ucb-bootstrap-layout-section-dark .horizontal-tab-link.nav-link {
+  color: var(--ucb-white);
+}
+
+.ucb-bootstrap-layout-section-light .horizontal-tab-link.nav-link {
+  color: var(--ucb-black);
+}
+
+.horizontal-tab-link.nav-link.active {
+  color: var(--ucb-white);
+  background-color: var(--ucb-black);
+  border-radius: 0;
+}
+
+.ucb-bootstrap-layout-section-dark .horizontal-tab-link.nav-link.active {
+  color: var(--ucb-black);
+  background-color: var(--ucb-white);
+}
+
+.horizontal-tab-link.nav-link {
+  font-weight: bold;
+  line-height: 1.2em;
+  padding: 8px 15px;
+  color: inherit;
+}
+
+.horizontal-tab-link.nav-link,
+.horizontal-tab-link.nav-link:hover,
+.horizontal-tab-link.nav-link:focus {
+  border: none;
+  border-radius: 0;
+}
+
+.vertical-tab-link.nav-link {
+  color: #6a6a6a;
+  background-color: #e7e7e7;
+  font-weight: bold;
+  text-align: left;
+  border-radius: 0;
+}
+
+.ucb-bootstrap-layout-section-dark .vertical-tab-link.nav-link {
+  color: #cccccc;
+  background-color: rgba(128, 128, 128, 0.333);
+}
+
+.vertical-tab-link.nav-link.active {
+  color: var(--ucb-black);
+  background-color: var(--ucb-white);
+}
+
+.ucb-bootstrap-layout-section-dark .vertical-tab-link.nav-link.active {
+  color: var(--ucb-white);
+  background-color: var(--ucb-black);
+}
+
+.accordian-content .collapse:not(.show),
+.horizontal-tab-content .collapse:not(.show),
+.vertical-tab-content .collapse:not(.show) {
+  display: none;
+}
+
+.accordian-content .collapse.show,
+.horizontal-tab-content .collapse.show,
+.vertical-tab-content .collapse.show,
+.accordian-content .collapsing,
+.horizontal-tab-content .collapsing,
+.vertical-tab-content .collapsing {
+  display: block;
+}
+
+.ucb-bootstrap-layout__background-color--light-gray .accordion-item,
+.ucb-bootstrap-layout__background-color--light-gray .accordion-item,
+.ucb-bootstrap-layout__background-color--tan .accordion-item,
+.ucb-bootstrap-layout__background-color--light-blue .accordion-item,
+.ucb-bootstrap-layout__background-color--light-green .accordion-item,
+.content-frame-light-gray .accordion-item {
+  color: inherit;
+  background-color: inherit;
+  border-bottom: 1px solid rgba(128, 128, 128, 33%);
+}
+
+.ucb-bootstrap-layout__background-color--gold .accordion-item,
+.ucb-bootstrap-layout__background-color--dark-gray .accordion-item,
+.ucb-bootstrap-layout__background-color--black .accordion-item,
+.ucb-bootstrap-layout__background-color--medium-blue .accordion-item,
+.ucb-bootstrap-layout__background-color--dark-blue .accordion-item,
+.ucb-bootstrap-layout__background-color--brick .accordion-item,
+.content-frame-dark-gray .accordion-item {
+  color: inherit;
+  background-color: inherit;
+  border-bottom: 1px solid rgb(255 255 255 / 58%);
+}
+
+.column .block.bs-background-white.accordion-item,
+.column .block.bs-background-gray.accordion-item,
+.column .block.bs-background-tan.accordion-item,
+.column .block.bs-background-light-blue.accordion-item,
+.column .block.bs-background-light-green.accordion-item {
+  color: inherit;
+  background-color: inherit;
+  border-bottom: 1px solid rgba(128, 128, 128, 33%);
+}
+
+.column .block.bs-background-dark-gray.accordion-item,
+.column .block.bs-background-medium-blue.accordion-item,
+.column .block.bs-background-dark-blue.accordion-item,
+.column .block.bs-background-brick.accordion-item {
+  color: inherit;
+  background-color: inherit;
+  border-bottom: 1px solid rgb(255 255 255 / 58%);
+}
+
+.ucb-bootstrap-layout__background-color--light-gray
+  .block.bs-background-none.accordion-item,
+.ucb-bootstrap-layout__background-color--light-gray
+  .block.bs-background-none.accordion-item,
+.ucb-bootstrap-layout__background-color--tan
+  .block.bs-background-none.accordion-item,
+.ucb-bootstrap-layout__background-color--light-blue
+  .block.bs-background-none.accordion-item,
+.ucb-bootstrap-layout__background-color--light-green
+  .block.bs-background-none.accordion-item,
+.content-frame-light-gray .block.bs-background-none.accordion-item,
+.ucb-bootstrap-layout__background-color--light-gray
+  .block.bs-background-outline.accordion-item,
+.ucb-bootstrap-layout__background-color--light-gray
+  .block.bs-background-outline.accordion-item,
+.ucb-bootstrap-layout__background-color--tan
+  .block.bs-background-outline.accordion-item,
+.ucb-bootstrap-layout__background-color--light-blue
+  .block.bs-background-outline.accordion-item,
+.ucb-bootstrap-layout__background-color--light-green
+  .block.bs-background-outline.accordion-item,
+.content-frame-light-gray .block.bs-background-outline.accordion-item,
+.ucb-bootstrap-layout__background-color--light-gray
+  .block.bs-background-underline.accordion-item,
+.ucb-bootstrap-layout__background-color--light-gray
+  .block.bs-background-underline.accordion-item,
+.ucb-bootstrap-layout__background-color--tan
+  .block.bs-background-underline.accordion-item,
+.ucb-bootstrap-layout__background-color--light-blue
+  .block.bs-background-underline.accordion-item,
+.ucb-bootstrap-layout__background-color--light-green
+  .block.bs-background-underline.accordion-item,
+.content-frame-light-gray .block.bs-background-underline.accordion-item {
+  color: inherit;
+  background-color: inherit;
+  border-bottom: 1px solid rgba(128, 128, 128, 33%);
+}
+
+.ucb-bootstrap-layout__background-color--gold
+  .block.bs-background-none.accordion-item,
+.ucb-bootstrap-layout__background-color--dark-gray
+  .block.bs-background-none.accordion-item,
+.ucb-bootstrap-layout__background-color--black
+  .block.bs-background-none.accordion-item,
+.ucb-bootstrap-layout__background-color--medium-blue
+  .block.bs-background-none.accordion-item,
+.ucb-bootstrap-layout__background-color--dark-blue
+  .block.bs-background-none.accordion-item,
+.ucb-bootstrap-layout__background-color--brick
+  .block.bs-background-none.accordion-item,
+.content-frame-dark-gray .block.bs-background-none.accordion-item,
+.ucb-bootstrap-layout__background-color--gold
+  .block.bs-background-outline.accordion-item,
+.ucb-bootstrap-layout__background-color--dark-gray
+  .block.bs-background-outline.accordion-item,
+.ucb-bootstrap-layout__background-color--black
+  .block.bs-background-outline.accordion-item,
+.ucb-bootstrap-layout__background-color--medium-blue
+  .block.bs-background-outline.accordion-item,
+.ucb-bootstrap-layout__background-color--dark-blue
+  .block.bs-background-outline.accordion-item,
+.ucb-bootstrap-layout__background-color--brick
+  .block.bs-background-outline.accordion-item,
+.content-frame-dark-gray .block.bs-background-outline.accordion-item,
+.ucb-bootstrap-layout__background-color--gold
+  .block.bs-background-underline.accordion-item,
+.ucb-bootstrap-layout__background-color--dark-gray
+  .block.bs-background-underline.accordion-item,
+.ucb-bootstrap-layout__background-color--black
+  .block.bs-background-underline.accordion-item,
+.ucb-bootstrap-layout__background-color--medium-blue
+  .block.bs-background-underline.accordion-item,
+.ucb-bootstrap-layout__background-color--dark-blue
+  .block.bs-background-underline.accordion-item,
+.ucb-bootstrap-layout__background-color--brick
+  .block.bs-background-underline.accordion-item,
+.content-frame-dark-gray .block.bs-background-underline.accordion-item {
+  color: inherit;
+  background-color: inherit;
+  border-bottom: 1px solid rgb(255 255 255 / 58%);
+}
+
+.accordion-body {
+  overflow: auto;
+}
+
+@media (min-width: 768px) {
+  .horizontal-tab-accordion .nav-tabs,
+  .vertical-tab-accordion .vertical-tabs {
+    display: flex;
+  }
+
+  .horizontal-tab-accordion .nav-tabs {
+    border-bottom: 2px solid var(--ucb-black);
+  }
+
+  .ucb-bootstrap-layout-section-dark .horizontal-tab-accordion .nav-tabs {
+    border-bottom: 2px solid var(--ucb-white);
+  }
+
+  .horizontal-tab-content .accordion-header,
+  .vertical-tab-content .accordion-header,
+  .horizontal-tab-content .collapse.show,
+  .vertical-tab-content .collapse.show {
+    display: none;
+  }
+
+  .horizontal-tab-content .collapse.active,
+  .vertical-tab-content .collapse.active {
+    display: block;
+  }
+
+  .vertical-tab-accordion .vertical-tabs {
+    width: 100%;
+    max-width: 25%;
+    background-color: #f2f2f2;
+  }
+
+  .ucb-bootstrap-layout-section-dark .vertical-tab-accordion .vertical-tabs {
+    background-color: rgba(128, 128, 128, 0.333);
+  }
+
+  .vertical-tab-accordion .vertical-tab-content {
+    display: flex;
+    max-width: 75%;
+    padding: 0 1em;
+  }
+
+  .horizontal-tab-accordion .horizontal-accordion-tab,
+  .vertical-tab-accordion .vertical-accordion-tab {
+    display: none;
+  }
+
+  .horizontal-tab-content .accordion-item,
+  .vertical-tab-content .accordion-item {
+    border-bottom: none;
+  }
+
+  .horizontal-tab-content .accordion-body,
+  .vertical-tab-content .accordion-body {
+    padding-top: 20px;
+    padding-bottom: 0;
+  }
+
+  .vertical-tab-accordion {
+    background: none;
+    border: 1px solid rgba(128, 128, 128, 0.333);
+  }
+}
+
+/*** Flush Accordion Overrides (for ckeditor button) ***/
+.accordion .accordion-item:first-child {
+  border-top: 0;
+}
+
+.accordion .accordion-item {
+  border-right: 0;
+  border-left: 0;
+  border-radius: 0;
+}
+
+.accordion-item:last-child {
+  border-bottom: 0;
+}

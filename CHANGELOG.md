@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates accordion styling
+  These edits were made to make our current expandable/accordion styles more generic/global so that they would affect both the expandable block and the new accordion button that Tim made.
+  
+  Resolves #1106 
+---
+
 - ### Redesign of person page
   Closes #1098.
   Changes the person page to match the new template provided.

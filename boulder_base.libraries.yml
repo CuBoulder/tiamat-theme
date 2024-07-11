@@ -16,6 +16,7 @@ ucb-global:
       css/style.css: {}
       css/layout-builder-styles.css: {}
       css/block/block-styles.css: {}
+      css/ucb-accordion-styles.css: {}
   ckeditor5-stylesheets:
     - css/base-ckeditor5.css
   js:
@@ -133,7 +134,6 @@ ucb-expandable-content:
     js/expandable-content.js: {}
   css:
     theme:
-      css/block/expandable-content.css: {}
 
 ucb-content-grid:
   version: 1.x
