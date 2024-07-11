@@ -1,5 +1,5 @@
 /*
- * Styles for expandable content paragraph
+ * Styles for the ckeditor accordion and expandable content block
  */
 
 /*** Flush Accordion Overrides (for ckeditor button) ***/
@@ -27,7 +27,7 @@
 .accordion-button,
 .accordion-button:not(.collapsed),
 .accordion-button:focus {
-  font-size: 130%;
+  font-size: 110%;
   font-weight: bold;
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: transparent;
@@ -53,6 +53,10 @@
   height: 21px;
   width: 21px;
   mask-repeat: no-repeat;
+}
+
+.accordion-button:not(.collapsed) {
+  color: currentColor;
 }
 
 .accordion-button:not(.collapsed)::after,
