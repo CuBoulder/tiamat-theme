@@ -141,6 +141,33 @@ a, a:visited, a:hover, a:active {
   font-size: 20px;
 }
 
+a[x-apple-data-detectors] {
+color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+}
+
+u + #ucb-email-body a {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+}
+
+#MessageViewBody a {
+            color: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
+}
+
 
 
                 .tags > a{
@@ -286,7 +313,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
     {# END VARIABLE TESTS #}
     {# BIG Wrapper #}
     <div id="email" style="align-items:center;{{emailBackground}}">
-    <div style="margin: auto;{{divStyles}}" data-url="{{base_url}}">
+    <div id="ucb-email-body" style="margin: auto;{{divStyles}}" data-url="{{base_url}}">
         {# HEADER -- to do: might need to be different tables for styling purposes #}
         <!-- Header -->
         {% if designType == 'lightbox' or designType == 'darkbox' %}
