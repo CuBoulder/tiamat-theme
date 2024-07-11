@@ -2,7 +2,7 @@
 /**
  * @file
  * Theme to implement the newsletter section content in email friendly html
- * 
+ *
  * Notes: You must render Node data within a properly nested <td> element: <table>, <tbody>, <tr>, <td>, THEN your data within the <td> for Twig to nest it properly.
  * Otherwise your data will break out of the table and instead become a sibling element to the outer table element
  * See: https://www.w3schools.com/html/html_tables.asp
@@ -14,7 +14,7 @@
 	<tbody>
   		<tr>
 			<td align="center" style="font-size:20px;text-align: left; padding-right:10px; padding-left:10px;padding-top:20px; padding-bottom:20px;">
-      			<h2>{{ content.field_newsletter_section_title|render|striptags|trim }}</h2>
+      			<h2>{{ content.field_newsletter_section_title|render }}</h2>
 	  		</td>
  		</tr>
 	</tbody>
@@ -26,10 +26,10 @@
 			{% for key, item in paragraph.field_newsletter_section_select %}
 				{%  if key|first != '#' %}
 				{# Unpublished check #}
-				{% if (item.entity.field_newsletter_article_select.entity and 
-					item.entity.field_newsletter_article_select.entity.isPublished()) or 
-					(item.entity.field_newsletter_content_title and 
-					item.entity.field_newsletter_content_title.value|render) %}					
+				{% if (item.entity.field_newsletter_article_select.entity and
+					item.entity.field_newsletter_article_select.entity.isPublished()) or
+					(item.entity.field_newsletter_content_title and
+					item.entity.field_newsletter_content_title.value|render) %}
 					{# Code to render selected article content (thumbnail) #}
 					<!--Feature Article-->
 					<table role="presentation" style="padding-bottom: 20px;">
@@ -137,9 +137,9 @@
 				{% for key, item in paragraph.field_newsletter_section_select %}
 					{%  if key|first != '#' %}
 					{# Unpublished check #}
-					{% if (item.entity.field_newsletter_article_select.entity and 
-						item.entity.field_newsletter_article_select.entity.isPublished()) or 
-						(item.entity.field_newsletter_content_title and 
+					{% if (item.entity.field_newsletter_article_select.entity and
+						item.entity.field_newsletter_article_select.entity.isPublished()) or
+						(item.entity.field_newsletter_content_title and
 						item.entity.field_newsletter_content_title.value|render) %}
 	  					<!--Teaser Article-->
 					<center align="left">
@@ -147,26 +147,28 @@
 							<tbody>
 								<tr class="email-feature-art-row"style="border-bottom: solid rgba(128, 128, 128, 0.333);">
 									{# Image #}
+                  {% if item.entity.field_newsletter_content_image.entity.field_media_image or  item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image or tem.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image %}
 									<td valign="top" width="27%"style="text-align: left; padding-right:10px; padding-left:10px">
 											{# Code to render selected article content (thumbnail) #}
-											{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render %}
+											{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image %}
 												<img
 												width="130" style="max-width:100%; height:auto;"
 												src="{{base_url}}{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render }}"/>
-				
+
 												{# Code to render selected article content (!thumbnail) #}
-											{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render %}
+											{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image %}
 												<img
 												width="130" style="max-width:100%; height:auto;"
 												src="{{base_url}}{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render }}"/>
-				
+
 												{# Code to render user made content #}
-											{% elseif item.entity.field_newsletter_content_image.entity.field_media_image.alt|render %}
+											{% elseif item.entity.field_newsletter_content_image.entity.field_media_image %}
 												<img
 												width="130" style="max-width:100%; height:auto;"
 												 src="{{base_url}}{{ item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ item.entity.field_newsletter_content_image.entity.field_media_image.alt|render }}"/>
 											{% endif %}
 									</td>
+                  {% endif %}
 									{# Header, Summary, Cats #}
 									<td width="72%">
 										<table role="presentation">
@@ -182,7 +184,7 @@
 														</a>
 													</h3>
 													</td>
-	
+
 													{# Code to render user made content (title) #}
 												{% elseif item.entity.field_newsletter_content_title.value|render %}
 													{% if item.entity.field_newsletter_content_url.0.url %}
@@ -202,7 +204,7 @@
 												</td>
 													{% endif %}
 												{% endif %}
-												</tr>											
+												</tr>
 												{# Categories #}
 								{# Code to render selected article content (categories) #}
 								{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_categories is not empty %}
@@ -218,7 +220,7 @@
 								<tr>
 									<td>{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_summary|view }}</td>
 								</tr>
-						
+
 								{# Code to render selected article content (article text) #}
 							{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|render %}
 								<tr>

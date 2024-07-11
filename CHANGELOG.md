@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Email Newsletter: Style Changes
+  Changes the following on the Newsletter - Email HTML:
+  
+  - Newsletter Title is no longer visible
+  - Special characters render correctly in titles such as `&`
+  - Fixed an issue where sometimes Section Content Article or Content Thumbnails would not display
+  - Adjusts alignment for more uniform display on email clients (Note: the Email HTML display on the site is a preview and may not be a 1 for 1 representation of what will display.
+  - Link colors have been made to be Gold if on a dark background
+  - Adjusts `h2` heading size on emails from 32px to 20px
+  
+  Resolves #1069 
+---
+
 - ### Updates accordion styling
   These edits were made to make our current expandable/accordion styles more generic/global so that they would affect both the expandable block and the new accordion button that Tim made.
   
