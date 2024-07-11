@@ -9,126 +9,157 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Email Newsletter: Style Changes
-  Changes the following on the Newsletter - Email HTML:
-  
-  - Newsletter Title is no longer visible
-  - Special characters render correctly in titles such as `&`
-  - Fixed an issue where sometimes Section Content Article or Content Thumbnails would not display
-  - Adjusts alignment for more uniform display on email clients (Note: the Email HTML display on the site is a preview and may not be a 1 for 1 representation of what will display.
-  - Link colors have been made to be Gold if on a dark background
-  - Adjusts `h2` heading size on emails from 32px to 20px
-  
-  Resolves #1069 
----
+## [20240711] - 2024-07-11
 
-- ### Updates accordion styling
-  These edits were made to make our current expandable/accordion styles more generic/global so that they would affect both the expandable block and the new accordion button that Tim made.
-  
-  Resolves #1106 
----
+-   ### Email Newsletter: Style Changes
 
-- ### Redesign of person page
-  Closes #1098.
-  Changes the person page to match the new template provided.
----
+    Changes the following on the Newsletter - Email HTML:
 
-- ### Add styling for webform urls
-  Closes #1096.
-  Adds the dark styling to urls and links.
----
+    -   Newsletter Title is no longer visible
+    -   Special characters render correctly in titles such as `&`
+    -   Fixed an issue where sometimes Section Content Article or Content Thumbnails would not display
+    -   Adjusts alignment for more uniform display on email clients (Note: the Email HTML display on the site is a preview and may not be a 1 for 1 representation of what will display.
+    -   Link colors have been made to be Gold if on a dark background
+    -   Adjusts `h2` heading size on emails from 32px to 20px
 
-- ### Image Gallery Masonry option changes
-  Closes #1085.
-  Adds a new masonry option to image galleries. Adds the masonry library from bootstrap to enable this. Users can also set a value between 2 and 5 columns.
----
+    Resolves #1069 
 
-- ### Taxonomy clouds: adds missing body field to templates
-  Adds `body` fields to the "Category Cloud" and "Tag Cloud" blocks, previously this was missing from the templates resulting in no body showing up on render even if the user entered one.
-  
-  Resolves #1090 
----
+* * *
 
-- ### Content List: makes URLs absolute
-  Resolves #1089 
----
+-   ### Updates accordion styling
 
-- ### People Lists: Corrects API error for >50 taxonomy terms
-  The `People List Page` and the `People List Block` could run into an API error if there were >50 terms on a site for "Job Type" or "Department", due to how Drupal paginates API results to maintain performance. 
-  
-  On sites with >50 terms, this would cause a partial render of the page or block, and an error message displaying **"Error retrieving people from the API endpoint. Please try again later."** due to not having the complete list of taxonomies prior to filtering/sorting of the People.
-  
-  This has been corrected to work with an unlimited number of terms.
-  
-  Resolves #1065 
-  
----
+    These edits were made to make our current expandable/accordion styles more generic/global so that they would affect both the expandable block and the new accordion button that Tim made.
 
-- ### Fixes Links on Blocks using JSON:API 
-  Previously, Pages and Blocks rendering content via JSON:API would use relative pathing, which resulted in content on multi-sites to 404.
-  
-  This has been corrected on the following:
-  ### Pages
-  - People List Page
-  - Article List page
-  - Issue Archive
-  
-  ### Blocks
-  - People List Block
-  
-  - Current Issue Block
-  - Latest Issue Block
-  
-  - Article List Block
-  - Article Feature
-  - Article Grid
-  - Article Slider
-  
-  - Category Cloud
-  - Tag Cloud
-  
-  - Collection Block
-  
-  Resolves #1080 
----
+    Resolves #1106 
 
-- ### Removes "social share position" setting
-  [Remove] Resolves CuBoulder/tiamat-theme#1073
-  
-  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/55)
----
+* * *
 
-- ### Social Media Secondary and Footer Menu update
-  Closes #800.
-  Sister PR in https://github.com/CuBoulder/tiamat-theme/pull/1051#issue-2344266076.
-  Adds functionality for the social media menu to be placed in the secondary menu and the footer menu areas. This will also delete the social media menu region.
-  
----
+-   ### Redesign of person page
+    Closes #1098.
+    Changes the person page to match the new template provided.
 
-- ### Heading size fixes
-  Updated the block-title class position so that the title class name is getting applied at the right level.
-  
-  Previously the block-title was wrapping the h2/h3/h4/h5/h6 so that the font-size wasn't getting applied correctly.
-  Example: The block title is supposed to be 200% of the main font size (16px/1rem). That was getting applied on top of the 160% of h2 instead of h2.block-title just being made 200%. So instead of 32px it was becoming 52px. Essentially we were just double increasing, 16px\*160%\*200% rather than 16x\*200%.
-  
-  With the change of positioning on the block-title class that resolves this issue. It also fixes an issue with the block-title-increase/decrease options that we didn't know we had.
-  
-  This also tightens up the vertical spacing a bit with blocks/columns
-  
-  Resolves #1050 
----
+* * *
 
-- ### Updated Mobile Menu Breakpoint
-  Closes #1059.
-  This changes the breakpoint from 600px to 576px to match bootstrap container values.
----
+-   ### Add styling for webform urls
+    Closes #1096.
+    Adds the dark styling to urls and links.
 
-- ### Fixes Article Block Infinite Spin
-  ### Article Feature, Article List Block, Article Grid Block
-  Introduced a logic bug in https://github.com/CuBoulder/tiamat-theme/issues/1044 where the various Article Blocks on sites with a large number of Articles could be prevented from rendering the returned JSON:API data, which resulting in what seems like an infinite spinning loader. This has been corrected.
-  
-  Resolves #1066 
----
+* * *
+
+-   ### Image Gallery Masonry option changes
+    Closes #1085.
+    Adds a new masonry option to image galleries. Adds the masonry library from bootstrap to enable this. Users can also set a value between 2 and 5 columns.
+
+* * *
+
+-   ### Taxonomy clouds: adds missing body field to templates
+
+    Adds `body` fields to the "Category Cloud" and "Tag Cloud" blocks, previously this was missing from the templates resulting in no body showing up on render even if the user entered one.
+
+    Resolves #1090 
+
+* * *
+
+-   ### Content List: makes URLs absolute
+    Resolves #1089 
+
+* * *
+
+-   ### People Lists: Corrects API error for >50 taxonomy terms
+
+    The `People List Page` and the `People List Block` could run into an API error if there were >50 terms on a site for "Job Type" or "Department", due to how Drupal paginates API results to maintain performance. 
+
+    On sites with >50 terms, this would cause a partial render of the page or block, and an error message displaying **"Error retrieving people from the API endpoint. Please try again later."** due to not having the complete list of taxonomies prior to filtering/sorting of the People.
+
+    This has been corrected to work with an unlimited number of terms.
+
+    Resolves #1065 
+
+* * *
+
+-   ### Fixes Links on Blocks using JSON:API
+
+    Previously, Pages and Blocks rendering content via JSON:API would use relative pathing, which resulted in content on multi-sites to 404.
+
+    This has been corrected on the following:
+
+    ### Pages
+
+    -   People List Page
+    -   Article List page
+    -   Issue Archive
+
+    ### Blocks
+
+    -   People List Block
+
+    -   Current Issue Block
+
+    -   Latest Issue Block
+
+    -   Article List Block
+
+    -   Article Feature
+
+    -   Article Grid
+
+    -   Article Slider
+
+    -   Category Cloud
+
+    -   Tag Cloud
+
+    -   Collection Block
+
+    Resolves #1080 
+
+* * *
+
+-   ### Removes "social share position" setting
+
+    [Remove] Resolves CuBoulder/tiamat-theme#1073
+
+    Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/55)
+
+* * *
+
+-   ### Social Media Secondary and Footer Menu update
+    Closes #800.
+    Sister PR in <https://github.com/CuBoulder/tiamat-theme/pull/1051#issue-2344266076>.
+    Adds functionality for the social media menu to be placed in the secondary menu and the footer menu areas. This will also delete the social media menu region.
+
+* * *
+
+-   ### Heading size fixes
+
+    Updated the block-title class position so that the title class name is getting applied at the right level.
+
+    Previously the block-title was wrapping the h2/h3/h4/h5/h6 so that the font-size wasn't getting applied correctly.
+    Example: The block title is supposed to be 200% of the main font size (16px/1rem). That was getting applied on top of the 160% of h2 instead of h2.block-title just being made 200%. So instead of 32px it was becoming 52px. Essentially we were just double increasing, 16px\*160%\*200% rather than 16x\*200%.
+
+    With the change of positioning on the block-title class that resolves this issue. It also fixes an issue with the block-title-increase/decrease options that we didn't know we had.
+
+    This also tightens up the vertical spacing a bit with blocks/columns
+
+    Resolves #1050 
+
+* * *
+
+-   ### Updated Mobile Menu Breakpoint
+    Closes #1059.
+    This changes the breakpoint from 600px to 576px to match bootstrap container values.
+
+* * *
+
+-   ### Fixes Article Block Infinite Spin
+
+    ### Article Feature, Article List Block, Article Grid Block
+
+    Introduced a logic bug in <https://github.com/CuBoulder/tiamat-theme/issues/1044> where the various Article Blocks on sites with a large number of Articles could be prevented from rendering the returned JSON:API data, which resulting in what seems like an infinite spinning loader. This has been corrected.
+
+    Resolves #1066 
+
+* * *
 
 ## [20240612] - 2024-06-12
 
@@ -2660,7 +2691,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240612...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240711...HEAD
+
+[20240711]: https://github.com/CuBoulder/tiamat-theme/compare/20240612...20240711
 
 [20240612]: https://github.com/CuBoulder/tiamat-theme/compare/20240604...20240612
 
