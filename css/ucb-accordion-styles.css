@@ -2,17 +2,6 @@
  * Styles for the ckeditor accordion and expandable content block
  */
 
-/*** Flush Accordion Overrides (for ckeditor button) ***/
-.accordion .accordion-item:first-child {
-  border-top: 0;
-}
-
-.accordion .accordion-item {
-  border-right: 0;
-  border-left: 0;
-  border-radius: 0;
-}
-
 /*** Main Accordion Styles ***/
 
 .vertical-tab-content {
@@ -358,4 +347,19 @@
     background: none;
     border: 1px solid rgba(128, 128, 128, 0.333);
   }
+}
+
+/*** Flush Accordion Overrides (for ckeditor button) ***/
+.accordion .accordion-item:first-child {
+  border-top: 0;
+}
+
+.accordion .accordion-item {
+  border-right: 0;
+  border-left: 0;
+  border-radius: 0;
+}
+
+.accordion-item:last-child {
+  border-bottom: 0;
 }
