@@ -28,7 +28,6 @@
 .accordion-button:not(.collapsed),
 .accordion-button:focus {
   font-size: 110%;
-  font-weight: bold;
   font-family: "Roboto", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: transparent;
   box-shadow: none;
@@ -57,6 +56,7 @@
 
 .accordion-button:not(.collapsed) {
   color: currentColor;
+  font-weight: bold;
 }
 
 .accordion-button:not(.collapsed)::after,
