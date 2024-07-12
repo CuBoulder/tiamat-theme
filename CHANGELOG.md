@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Block Title Fixes
+  Moving of the block heading style class to the proper places allows the increase based on options picked (hero/supersize) to work correctly and not become gigantic.
+  
+  Added in the correct normal/bold options if hero strong or supersize bold is chosen.
+  
+  By default the hero and supersize should not be bolded.
+  
+  Resolves #1111
+---
+
 ## [20240711] - 2024-07-11
 
 -   ### Email Newsletter: Style Changes
