@@ -3,8 +3,12 @@
   display: flex;
 }
 
-.block-title {
-  font-size: 200%
+.block-title.hero, .block-title.supersize {
+  font-weight: normal;
+}
+
+.block-title.strong, .block-title.bold {
+  font-weight: bold;
 }
 
 .bs-title-scale-decrease .block-title .block-title-text {
