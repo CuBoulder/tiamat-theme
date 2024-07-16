@@ -163,21 +163,18 @@
             dimensions = calculateAspectRatioFit(videoWidth, videoHeight, heroWidth, heroHeight);
             let correctedHeight = heroHeight;
             if(window.innerWidth - heroWidth < 10 && window.innerWidth > 999) {
-                correctedHeight = correctedHeight / 2;
+                correctedHeight = (correctedHeight * 2) / 3;
             }
-            console.log(videoWrapperElement);
-            console.log(window.innerWidth);
         videoPlayerElement.width = dimensions.width;
         videoWrapperElement.style.width = dimensions.width + 'px';
         videoPlayerElement.height = dimensions.height;
-        videoWrapperElement.style.height = correctedHeight + 'px';
+        videoWrapperElement.style.height =  'fit-content';
         videoPlayerWrapperElement.style.top = ((correctedHeight - dimensions.height) / 2) + 'px';
         videoPlayerWrapperElement.style.left = ((heroWidth - dimensions.width) / 2) + 'px';
     }
 
     function calculateAspectRatioFit(srcWidth, srcHeight, maxWidth, maxHeight) {
         const ratio = Math.max(maxWidth / srcWidth, maxHeight / srcHeight);
-        console.log("Ration: ", ratio)
         return { width: srcWidth * ratio, height: srcHeight * ratio };
     }
 
