@@ -19,7 +19,7 @@
                         playerVars: { autoplay: 1, controls: 0, mute: 1, disablekb: 1, rel: 0, playsinline: 1 },
                         events: {
                             onReady: function(event){
-                                // enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, document.getElementById(videoPlayerElementId), 800, 450);
+                                enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, document.getElementById(videoPlayerElementId), 800, 450);
                                 videoWrapperElement.removeAttribute('hidden');
                             },
                             onStateChange: function(event) {
@@ -84,6 +84,7 @@
                 //     (error) => { videoHeight = 450; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); });
                 // API event calls to the Vimeo player can go here
                 videoPlayer.on('loaded', function() {
+                    enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayerElement, videoWidth, videoHeight);
                     videoWrapperElement.removeAttribute('hidden');
                 });
                 videoPlayer.on('play', function() {
@@ -160,16 +161,23 @@
             heroWidth = heroElement.offsetWidth,
             heroHeight = heroElement.offsetHeight,
             dimensions = calculateAspectRatioFit(videoWidth, videoHeight, heroWidth, heroHeight);
+            let correctedHeight = heroHeight;
+            if(window.innerWidth - heroWidth < 10 && window.innerWidth > 999) {
+                correctedHeight = correctedHeight / 2;
+            }
+            console.log(videoWrapperElement);
+            console.log(window.innerWidth);
         videoPlayerElement.width = dimensions.width;
-        videoPlayerWrapperElement.style.width = heroWidth + 'px';
+        videoWrapperElement.style.width = dimensions.width + 'px';
         videoPlayerElement.height = dimensions.height;
-        videoPlayerWrapperElement.style.height = heroHeight + 'px';
-        videoPlayerElement.style.marginTop = ((heroHeight - dimensions.height) / 2) + 'px';
-        videoPlayerElement.style.marginLeft = ((heroWidth - dimensions.width) / 2) + 'px';
+        videoWrapperElement.style.height = correctedHeight + 'px';
+        videoPlayerWrapperElement.style.top = ((correctedHeight - dimensions.height) / 2) + 'px';
+        videoPlayerWrapperElement.style.left = ((heroWidth - dimensions.width) / 2) + 'px';
     }
 
     function calculateAspectRatioFit(srcWidth, srcHeight, maxWidth, maxHeight) {
         const ratio = Math.max(maxWidth / srcWidth, maxHeight / srcHeight);
+        console.log("Ration: ", ratio)
         return { width: srcWidth * ratio, height: srcHeight * ratio };
     }
 
