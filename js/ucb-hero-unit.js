@@ -164,13 +164,17 @@
             let correctedHeight = heroHeight;
             if(window.innerWidth - heroWidth < 10 && window.innerWidth > 999) {
                 correctedHeight = (correctedHeight * 2) / 3;
+                videoWrapperElement.style.height =  'fit-content';
+                heroElement.style.aspectRatio = "auto";
+            } else {
+                videoWrapperElement.style.height =  dimensions.height + 'px';
             }
         videoPlayerElement.width = dimensions.width;
         videoWrapperElement.style.width = dimensions.width + 'px';
         videoPlayerElement.height = dimensions.height;
-        videoWrapperElement.style.height =  'fit-content';
         videoPlayerWrapperElement.style.top = ((correctedHeight - dimensions.height) / 2) + 'px';
-        videoPlayerWrapperElement.style.left = ((heroWidth - dimensions.width) / 2) + 'px';
+        videoPlayerWrapperElement.style.marginLeft = ((heroWidth - dimensions.width) / 2) + 'px';
+        videoPlayerWrapperElement.style.marginRight = ((heroWidth - dimensions.width) / 2) + 'px';
     }
 
     function calculateAspectRatioFit(srcWidth, srcHeight, maxWidth, maxHeight) {
