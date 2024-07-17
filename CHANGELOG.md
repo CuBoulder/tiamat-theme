@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Video Hero Unit Height Updates
+  Closes #1088.
+  This limits the height of the video hero unit in the edge-to-edge case. This also centers all videos to make their quality higher in all cases.
+---
+
 - ### Remove box shadow from Dark 4
   Closes #1119.
   Removes the box shadow from the dark 4 menu style.
