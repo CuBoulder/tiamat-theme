@@ -138,7 +138,6 @@
 } */
 
 .ucb-hero-unit-video {
-  aspect-ratio: 16 / 9;
   display: flex;
   align-items: center;
   position: relative;

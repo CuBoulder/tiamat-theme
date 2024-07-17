@@ -165,7 +165,6 @@
             if(window.innerWidth - heroWidth < 10 && window.innerWidth > 999) {
                 correctedHeight = (correctedHeight * 2) / 3;
                 videoWrapperElement.style.height =  'fit-content';
-                heroElement.style.aspectRatio = "auto";
             } else {
                 videoWrapperElement.style.height =  dimensions.height + 'px';
             }
