@@ -10,6 +10,7 @@
 
   section.ucb-main-nav-section {
     background-color: #444;
+    box-shadow: none;
   }
 
   .ucb-main-menu li.menu-item a.nav-link {

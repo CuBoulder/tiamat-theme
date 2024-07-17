@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Remove box shadow from Dark 4
+  Closes #1119.
+  Removes the box shadow from the dark 4 menu style.
+---
+
 - ### Block Title Fixes
   Moving of the block heading style class to the proper places allows the increase based on options picked (hero/supersize) to work correctly and not become gigantic.
   
