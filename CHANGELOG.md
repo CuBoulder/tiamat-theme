@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Column List Style for WYSIWYG
+  Helps close https://github.com/CuBoulder/tiamat10-profile/issues/155.
+  Adds the necessary css to enable the column list styles.
+  Sister PR in: https://github.com/CuBoulder/tiamat10-profile/pull/158/.
+---
+
 - ### Video Hero Unit Height Updates
   Closes #1088.
   This limits the height of the video hero unit in the edge-to-edge case. This also centers all videos to make their quality higher in all cases.
