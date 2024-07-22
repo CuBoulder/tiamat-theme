@@ -1,5 +1,6 @@
-
-* { height: auto; }
+* {
+  height: auto;
+}
 body {
   font-family: "Helvetica-Neue", Helvetica, Arial, sans-serif;
   font-size: 12pt;
@@ -14,24 +15,22 @@ body {
   display: block;
   width: 240px;
   height: auto;
-  margin-bottom:1em;
+  margin-bottom: 1em;
 }
 .site-name {
   display: none;
 }
 #print-site-name {
-  font-size:18pt;
-  padding-bottom:.5em;
-  margin-bottom:.5em;
-  border-bottom:1px solid #757575;
+  font-size: 18pt;
+  padding-bottom: 0.5em;
+  margin-bottom: 0.5em;
+  border-bottom: 1px solid #757575;
 }
-
-
 
 .print-breadcrumb {
   text-align: right;
   font-size: 10pt;
-  display:none;
+  display: none;
 }
 
 .print-hr {
@@ -47,37 +46,64 @@ th {
   color: #006;
   border-bottom: 1px solid #ccc;
 }
-tr.odd {background-color: #ddd;}
-tr.even {background-color: #fff;}
-td {padding: 5px;}
-#menu {visibility: hidden;}
-a:link {color: #0277BD;}
-a:visited {color: #0277BD;}
-a:hover {color: #0277BD;}
-a:link img, a:visited img {border: 0;}
-.print-footnote {font-size: xx-small;}
-img.print-logo {border: 0;}
+tr.odd {
+  background-color: #ddd;
+}
+tr.even {
+  background-color: #fff;
+}
+td {
+  padding: 5px;
+}
+#menu {
+  visibility: hidden;
+}
+a:link {
+  color: #0277bd;
+}
+a:visited {
+  color: #0277bd;
+}
+a:hover {
+  color: #0277bd;
+}
+a:link img,
+a:visited img {
+  border: 0;
+}
+.print-footnote {
+  font-size: xx-small;
+}
+img.print-logo {
+  border: 0;
+}
 .print-message {
   border: medium dotted blue;
   padding: 1em;
 }
-.print-source_url {font-size: small;}
-.print-links {font-size: small;}
-.print-footer {text-align: center;}
-
+.print-source_url {
+  font-size: small;
+}
+.print-links {
+  font-size: small;
+}
+.print-footer {
+  text-align: center;
+}
 
 .clearfix:before,
 .clearfix:after {
-    content: " ";
-    display: table;
+  content: " ";
+  display: table;
 }
 
 .clearfix:after {
-    clear: both;
+  clear: both;
 }
 
 /* HIDE FROM PRINTING */
 .hide-print,
+/*mobile values*/
 #mobile-menu-toggle,
 #toggle,
 #alerts-wide-wrapper,
@@ -85,6 +111,7 @@ img.print-logo {border: 0;}
 .search-toggle-wrapper,
 #secondary-menu-wrapper,
 #main-menu-wrapper,
+#block-boulder-base-main-menu,
 #mobile-navigation-wrapper,
 .sidebar,
 #after-content-wrapper,
@@ -106,8 +133,16 @@ a.print-link,
 .cu-share-sidebar,
 .cu-share-inline-mobile,
 #cu-feedback,
-#cu-footer .required-links,
-#sticky-menu {
+#sticky-menu,
+.ucb-brand-bar,
+.ucb-brand-bar-controls,
+header.ucb-dark,
+header.ucb-light,
+header.ucb-white,
+header.ucb-black,
+.ucb-main-nav-container,
+.ucb-footer-menu-region,
+.ucb-footer-bottom {
   display: none !important;
 }
 
@@ -159,7 +194,6 @@ a.print-link,
   }
 }
 
-
 .ui-accordion-content,
 .expand-content,
 .small-expand-content {
@@ -171,31 +205,30 @@ a.print-link,
   margin: 0;
 }
 
-
 /* IMAGES */
 
 .field-type-text-with-summary img,
 .field-type-text-long img {
-  max-width:100%;
+  max-width: 100%;
 }
 
 .field-type-text-with-summary img[style="float:left"],
 .field-type-text-long img[style="float:left"] {
-  float:left !important;
-  margin:0 20px 20px 0;
+  float: left !important;
+  margin: 0 20px 20px 0;
 }
 .field-type-text-with-summary img[style="float:right"],
 .field-type-text-long img[style="float:right"] {
-  float:right !important;
-  margin:0 0 20px 20px;
+  float: right !important;
+  margin: 0 0 20px 20px;
 }
 
 /* CONTENT SIDEBARS */
 
 .region-content-sidebar-right,
 .region-content-sidebar-left {
-  width:33%;
-  border:1px solid #aaa;
+  width: 33%;
+  border: 1px solid #aaa;
   padding: 20px;
   float: right;
   margin: 0 0 20px 20px;
@@ -222,7 +255,7 @@ a.print-link,
   background: #f0f0f0;
   margin: 0;
 }
-div.image-caption  p:first-child {
+div.image-caption p:first-child {
   display: block;
   margin: 0;
   padding: 0;
@@ -258,15 +291,15 @@ ul.contextual-links {
 /* Block Sections & Heroes */
 .block-section,
 .hero-unit {
-  background-image:none !important;
+  background-image: none !important;
   background-color: #eee;
-  color:#000 !important;
+  color: #000 !important;
 }
 
 a.button {
-  background-color:#0277BD;
-  color:#fff;
-  padding:4px 10px;
+  background-color: #0277bd;
+  color: #fff;
+  padding: 4px 10px;
   display: inline-block;
   text-decoration: none;
 }
