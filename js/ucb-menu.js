@@ -39,7 +39,7 @@ if (secondaryCheck != null) {
   const socialSecondaryCheck = document.getElementsByClassName("ucb-mobile-social-media-menu")[0]
   if (socialSecondaryCheck != null) {
    const socialSecondaryMenuCheck = socialSecondaryCheck.getElementsByClassName("social-media")[0];
-   if (socialSecondaryMunuCheck != null) {
+   if (socialSecondaryMenuCheck != null) {
      const socialSecondaryMenu = new AccessibleMenu.DisclosureMenu({
        menuElement: socialSecondaryMenuCheck,
        controllerElement: document.querySelector("#ucb-mobile-menu-toggle"),
