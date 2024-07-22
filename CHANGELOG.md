@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Mobile Menu Error fix
+  Closes #1136.
+  This adds extra checks to the mobile menu to eliminate errors.
+---
+
 ## [20240719] - 2024-07-19
 
 -   ### Column List Style for WYSIWYG
