@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Video Hero Unit vimeo error fix
+  Closes #1140.
+  Corrects the functionality for the video hero unit for vimeo videos.
+---
+
 - ### Mobile Menu Error fix
   Closes #1136.
   This adds extra checks to the mobile menu to eliminate errors.
