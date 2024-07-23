@@ -26,6 +26,7 @@
 ul.ucb-person-email-address,
 ul.ucb-person-links,
 ul.ucb-person-phone-numbers {
+  overflow-wrap: break-word;
   list-style: none;
   padding: 0;
   color: #111;
