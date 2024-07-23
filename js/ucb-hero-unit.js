@@ -76,15 +76,14 @@
                 });
                 // // Video width and height come back from the Vimeo player API as Promises
                 // // In case of error, it will default to 800x450 which is fine for 16:9 videos
-                // videoPlayer.getVideoWidth().then(
-                //     (value) => { videoWidth = value; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); },
-                //     (error) => { videoWidth = 800; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); });
-                // videoPlayer.getVideoHeight().then(
-                //     (value) => { videoHeight = value; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); },
-                //     (error) => { videoHeight = 450; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); });
+                 videoPlayer.getVideoWidth().then(
+                     (value) => { videoWidth = value; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); },
+                     (error) => { videoWidth = 800; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); });
+                 videoPlayer.getVideoHeight().then(
+                     (value) => { videoHeight = value; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); },
+                     (error) => { videoHeight = 450; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); });
                 // API event calls to the Vimeo player can go here
                 videoPlayer.on('loaded', function() {
-                    enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayerElement, videoWidth, videoHeight);
                     videoWrapperElement.removeAttribute('hidden');
                 });
                 videoPlayer.on('play', function() {
