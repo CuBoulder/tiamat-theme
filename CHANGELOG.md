@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates site information region
+  This update:
+  - [change, security] Changes HTTP to HTTPS in some links in the site footer. Resolves CuBoulder/tiamat-theme#1114
+  - [change] Removes a few special characters from the HTML source and replaces them with their HTML counterparts.
+---
+
 - ### Video Hero Unit vimeo error fix
   Closes #1140.
   Corrects the functionality for the video hero unit for vimeo videos.
