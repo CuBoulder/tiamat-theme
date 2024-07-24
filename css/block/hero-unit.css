@@ -26,7 +26,9 @@
   font-size: 120%;
 }
 
-.ucb-post-wide-title-region .block:first-child.block-hero-unit, .ucb-below-post-wide-region .block:first-child.block-hero-unit {
+.ucb-post-wide-title-region .block:first-child.block-hero-unit,
+.ucb-intro-wide-region .block:first-child.block-hero-unit,
+.ucb-below-post-wide-region .block:first-child.block-hero-unit {
   padding-top: 0;
   padding-bottom: 0;
   width: 100%;
@@ -50,12 +52,16 @@
   padding-bottom: 20px;
 }
 
-.ucb-post-wide-title-region .block.ucb-overlay-dark, .ucb-below-post-wide-region .block.ucb-overlay-dark {
+.ucb-post-wide-title-region .block.ucb-overlay-dark,
+.ucb-intro-wide-region .block.ucb-overlay-dark,
+.ucb-below-post-wide-region .block.ucb-overlay-dark {
   background-color: rgba(20, 20, 20, 0.5);
   background-blend-mode: overlay;
 }
 
-.ucb-post-wide-title-region .block.ucb-overlay-light, .ucb-below-post-wide-region .block.ucb-overlay-light {
+.ucb-post-wide-title-region .block.ucb-overlay-light,
+.ucb-intro-wide-region .block.ucb-overlay-light,
+.ucb-below-post-wide-region .block.ucb-overlay-light {
   background-color: rgba(200, 200, 200, 0.7);
   background-blend-mode: overlay;
 }
@@ -157,7 +163,9 @@
 }
 
 
-.ucb-post-wide-title-region .block-hero-unit .block:first-child, .ucb-below-post-wide-region .block-hero-unit .block:first-child {
+.ucb-post-wide-title-region .block-hero-unit .block:first-child,
+.ucb-intro-wide-region .block-hero-unit .block:first-child,
+.ucb-below-post-wide-region .block-hero-unit .block:first-child {
   padding-top: 0;
   padding-bottom: 0;
 }

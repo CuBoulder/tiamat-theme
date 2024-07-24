@@ -294,6 +294,10 @@ section.ucb-main-nav-section {
   }
 }
 
+/*********** Intro Wide **************/
+.ucb-intro-wide-region .block {
+  margin-bottom: 0;
+}
 /*********** Main Menu **************/
 ul.ucb-main-menu.nav {
   flex-grow: 1;

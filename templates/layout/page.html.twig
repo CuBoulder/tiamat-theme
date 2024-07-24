@@ -206,6 +206,11 @@
       <a id="main-content" tabindex="-1"></a>
       {# link is in html.html.twig #}
       <div class="layout-content">
+        {% if page.intro_wide|render %}
+          <div class="ucb-intro-wide-region edge-to-edge row g-0">
+            {{ page.intro_wide }}
+          </div>
+        {% endif %}
         {% if page.post_wide_title|render %}
           <div class="ucb-post-wide-title-region edge-to-edge row g-0">
             {{ page.post_wide_title }}
