@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Add overflow-wrap to email and links
+  Closes #1130. 
+  Adds an overflow-wrap to the email address in the person page in order to stop the email from overflowing into the content.
+---
+
 - ### Updates site information region
   This update:
   - [change, security] Changes HTTP to HTTPS in some links in the site footer. Resolves CuBoulder/tiamat-theme#1114

@@ -26,12 +26,15 @@
 ul.ucb-person-email-address,
 ul.ucb-person-links,
 ul.ucb-person-phone-numbers {
+  overflow-wrap: break-word;
   list-style: none;
   padding: 0;
   color: #111;
   margin: 0;
 }
-
+.ucb-person-email-icon {
+  display: inline-block;
+}
 a.ucb-person-social-link i.fa-solid,
 a.ucb-person-social-link i.fa-brands {
   color: #111;
