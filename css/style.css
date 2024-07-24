@@ -302,6 +302,9 @@ section.ucb-main-nav-section {
   background-color: #000;
   color: #fff;
 }
+.ucb-intro-wide-region .block-hero-unit.bs-background-none .block-title-text {
+  color: #fff;
+}
 /*********** Main Menu **************/
 ul.ucb-main-menu.nav {
   flex-grow: 1;
