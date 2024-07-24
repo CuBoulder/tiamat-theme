@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Intro Wide region implementation
+  Closes #1126.
+  This adds the intro wide region to the block layout. This will primarily be used by images and hero units for a top banner.
+---
+
 - ### Add overflow-wrap to email and links
   Closes #1130. 
   Adds an overflow-wrap to the email address in the person page in order to stop the email from overflowing into the content.

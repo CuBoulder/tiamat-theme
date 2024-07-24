@@ -294,6 +294,17 @@ section.ucb-main-nav-section {
   }
 }
 
+/*********** Intro Wide **************/
+.ucb-intro-wide-region .block {
+  margin-bottom: 0;
+}
+.ucb-intro-wide-region {
+  background-color: #000;
+  color: #fff;
+}
+.ucb-intro-wide-region .block-hero-unit.bs-background-none .block-title-text {
+  color: #fff;
+}
 /*********** Main Menu **************/
 ul.ucb-main-menu.nav {
   flex-grow: 1;
