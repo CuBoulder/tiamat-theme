@@ -33,7 +33,7 @@ ul.ucb-person-phone-numbers {
   margin: 0;
 }
 .ucb-person-email-icon {
-  padding-right: 5px;
+  display: inline-block;
 }
 a.ucb-person-social-link i.fa-solid,
 a.ucb-person-social-link i.fa-brands {

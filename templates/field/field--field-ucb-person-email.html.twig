@@ -8,7 +8,7 @@
     <ul class="ucb-person-email-address">
         {% for item in items %}{% set value = item.content['#context'].value|trim %}
         <li>
-            <i class="fa-solid fa-envelope ucb-person-email-icon"></i><a itemprop="email" href="mailto:{{ value|url_encode }}">{{ value }}</a>
+            <span class = "ucb-person-email-icon"><i class="fa-solid fa-envelope"></i>&nbsp;</span><a itemprop="email" href="mailto:{{ value|url_encode }}">{{ value }}</a>
         </li>
         {% endfor %}
     </ul>
