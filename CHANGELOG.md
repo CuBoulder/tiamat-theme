@@ -9,41 +9,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Articles by Person: Fixes API Error and Multisite lniks issue
-  ### Person Page: Article by Person block
-  
-  - Previously this block would throw an API error on multisites due to an error in the API endpoint not being adjusted for a multisite config and it would attempt to fetch a relative API path. This has been corrected. 
-  
-  - Fixes the links to add the base URL as well for correct Article linking and linking to the correct authors Articles List page for 5+ Articles.
-  
-  Resolves #1116 
----
+## [20240725] - 2024-07-25
 
-- ### Intro Wide region implementation
-  Closes #1126.
-  This adds the intro wide region to the block layout. This will primarily be used by images and hero units for a top banner.
----
+-   ### Articles by Person: Fixes API Error and Multisite lniks issue
 
-- ### Add overflow-wrap to email and links
-  Closes #1130. 
-  Adds an overflow-wrap to the email address in the person page in order to stop the email from overflowing into the content.
----
+    ### Person Page: Article by Person block
 
-- ### Updates site information region
-  This update:
-  - [change, security] Changes HTTP to HTTPS in some links in the site footer. Resolves CuBoulder/tiamat-theme#1114
-  - [change] Removes a few special characters from the HTML source and replaces them with their HTML counterparts.
----
+    -   Previously this block would throw an API error on multisites due to an error in the API endpoint not being adjusted for a multisite config and it would attempt to fetch a relative API path. This has been corrected. 
 
-- ### Video Hero Unit vimeo error fix
-  Closes #1140.
-  Corrects the functionality for the video hero unit for vimeo videos.
----
+    -   Fixes the links to add the base URL as well for correct Article linking and linking to the correct authors Articles List page for 5+ Articles.
 
-- ### Mobile Menu Error fix
-  Closes #1136.
-  This adds extra checks to the mobile menu to eliminate errors.
----
+    Resolves #1116 
+
+* * *
+
+-   ### Intro Wide region implementation
+    Closes #1126.
+    This adds the intro wide region to the block layout. This will primarily be used by images and hero units for a top banner.
+
+* * *
+
+-   ### Add overflow-wrap to email and links
+    Closes #1130. 
+    Adds an overflow-wrap to the email address in the person page in order to stop the email from overflowing into the content.
+
+* * *
+
+-   ### Updates site information region
+    This update:
+    -   [change, security] Changes HTTP to HTTPS in some links in the site footer. Resolves CuBoulder/tiamat-theme#1114
+    -   [change] Removes a few special characters from the HTML source and replaces them with their HTML counterparts.
+
+* * *
+
+-   ### Video Hero Unit vimeo error fix
+    Closes #1140.
+    Corrects the functionality for the video hero unit for vimeo videos.
+
+* * *
+
+-   ### Mobile Menu Error fix
+    Closes #1136.
+    This adds extra checks to the mobile menu to eliminate errors.
+
+* * *
 
 ## [20240719] - 2024-07-19
 
@@ -2760,7 +2769,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240719...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240725...HEAD
+
+[20240725]: https://github.com/CuBoulder/tiamat-theme/compare/20240719...20240725
 
 [20240719]: https://github.com/CuBoulder/tiamat-theme/compare/20240711...20240719
 
