@@ -16,6 +16,8 @@
   'ucb-content-wrapper'
 ] %}
 
+{% set baseurlJSON = url('<front>')|render|trim('/') %}
+
 <article{{attributes.addClass(classes)}} itemscope itemtype="https://schema.org/Person">
     <div class="container ucb-person-header">
         <h1 class="ucb-person-name">
@@ -72,7 +74,7 @@
             </div>
         </div>
         <div class="ucb-articles-by-person-block">
-            <person-article-list nodeid="{{ node.id }}">
+            <person-article-list base-uri="{{baseurlJSON}}" nodeid="{{ node.id }}">
                 <div id="ucb-person-article-block-title" style="display:none">
                     <h2>Articles by
                         {{ content.field_ucb_person_first_name }}

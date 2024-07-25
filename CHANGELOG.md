@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Articles by Person: Fixes API Error and Multisite lniks issue
+  ### Person Page: Article by Person block
+  
+  - Previously this block would throw an API error on multisites due to an error in the API endpoint not being adjusted for a multisite config and it would attempt to fetch a relative API path. This has been corrected. 
+  
+  - Fixes the links to add the base URL as well for correct Article linking and linking to the correct authors Articles List page for 5+ Articles.
+  
+  Resolves #1116 
+---
+
 - ### Intro Wide region implementation
   Closes #1126.
   This adds the intro wide region to the block layout. This will primarily be used by images and hero units for a top banner.
