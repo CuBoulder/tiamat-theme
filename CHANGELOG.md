@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter: Broken Images and Header Cleanup 
+  Resolves breaking image bug with Newsletters along with some header spacing cleanup due to template conditionals
+  
+  Resolves #1133 
+---
+
 - ### Updates Slider block
   This update:
   - [Bug] Ensures Slider block styles are applied only to the Slider block. Resolves CuBoulder/tiamat-theme#1148
