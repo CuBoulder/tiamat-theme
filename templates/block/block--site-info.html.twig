@@ -28,11 +28,11 @@
 {{ attach_library('boulder_base/ucb-site-contact-info-footer') }}
 {% set data = content['#data'] %}
 {% set icons_visible = data.icons_visible %}
-{%
-  set classes = []
-%}
-<div{{ attributes.addClass(classes) }}>
-  <h2 class="h5"><a href="/">{{ site_name }}</a></h2>
+
+<div{{ attributes }}>
+  <h2 class="h5">
+    <a href="{{ url('<front>') }}">{{ site_name }}</a>
+  </h2>
   {% block content %}
     <div class="ucb-site-contact-info-footer">
       {% if data.general_visible == '1' %}
