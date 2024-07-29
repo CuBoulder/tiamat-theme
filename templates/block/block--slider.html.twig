@@ -48,8 +48,8 @@
     {{ title_prefix }}
     {% if label %}
       <div class="block-title-outer">
-        <{{ headingTag }}{{ title_attributes }} class="block-title {{ headingStyle }}">
-          <span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
+        <{{ headingTag }}{{ title_attributes.addClass('block-title', headingStyle) }}>
+          <span class="block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}">
             {{ content.field_bs_icon }}
           </span>
           <span class="block-title-text">
@@ -63,7 +63,12 @@
     <div id="{{ id }}" class="carousel slide" data-interval="false">
       <div class="carousel-indicators">
         {% for i in 1..content['#block_content'].field_slider_slide.value|length %}
-          <button type="button" {% if loop.first %}class="active" {% endif %}data-bs-target="#{{ id }}" data-bs-slide-to="{{ i - 1 }}" aria-label="Slide {{ i }}"></button>
+          <button {{ create_attribute({
+            type: 'button',
+            'data-bs-target': '#' ~ id,
+            'data-bs-slide-to': i - 1,
+            'aria-label': 'Slide ' ~ i
+          }).addClass(loop.first ? 'active') }}></button>
         {% endfor %}
       </div>
       <div class="carousel-inner">
