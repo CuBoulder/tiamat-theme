@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates Slider block
+  This update:
+  - [Bug] Ensures Slider block styles are applied only to the Slider block. Resolves CuBoulder/tiamat-theme#1148
+  - [Change] Corrects indentation and code readability issues in the Slider block template and stylesheet.
+---
+
 ## [20240725] - 2024-07-25
 
 -   ### Articles by Person: Fixes API Error and Multisite lniks issue
