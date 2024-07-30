@@ -134,6 +134,7 @@ header.ucb-black,
 .ucb-footer-print {
   display: block;
   float: right;
+  text-align: right;
   padding-top: 20px;
   border-top: 1px solid #aaa;
   font-size: 80%;
@@ -152,12 +153,12 @@ header.ucb-black,
 .ucb-footer:not(.ucb-home-link),
 .ucb-footer:not(.ucb-site-information-print),
 .ucb-site-contact-footer-info,
-#ucb-site-contact-footer-info {
+#block-site-contact-footer-info {
   display: none;
 }
-.ucb-footer .ucb-home-link,
-.ucb-footer .ucb-site-information-print {
-  display: block !important;
+
+.ucb-footer-print .ucb-site-information-print {
+  color: #111;
 }
 
 #block-boulder-base-content {
@@ -195,7 +196,7 @@ header.ucb-black,
 .vertical-tab-content .collapse:not(.show) {
   display: block !important;
 }
-.fade:not(.show) .accordion-body{
+.ucb-expandable-content .fade:not(.show) {
   opacity: 1;
 }
 .ucb-footer h2 {
