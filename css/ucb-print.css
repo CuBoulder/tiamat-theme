@@ -133,6 +133,7 @@ header.ucb-black,
 
 .ucb-footer-print {
   display: block;
+  float: right;
   padding-top: 20px;
   border-top: 1px solid #aaa;
   font-size: 80%;
@@ -194,7 +195,7 @@ header.ucb-black,
 .vertical-tab-content .collapse:not(.show) {
   display: block !important;
 }
-.fade:not(.show) .accordian-body{
+.fade:not(.show) .accordion-body{
   opacity: 1;
 }
 .ucb-footer h2 {
