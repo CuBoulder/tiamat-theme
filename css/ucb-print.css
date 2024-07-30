@@ -153,7 +153,7 @@ header.ucb-black,
 .ucb-footer:not(.ucb-home-link),
 .ucb-footer:not(.ucb-site-information-print),
 .ucb-site-contact-footer-info,
-#block-site-contact-footer-info {
+#block-site-contact-info-footer {
   display: none;
 }
 
