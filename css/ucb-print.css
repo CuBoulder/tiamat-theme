@@ -108,20 +108,10 @@ img.print-logo {
 #ucb-mobile-menu-toggle,
 
 #alerts-wide-wrapper,
-.sidebar,
-#backstretch,
-#breadcrumb,
-.breadcrumb-wrapper,
-.element-invisible,
+.ucb-sidebar,
 #slider-wrapper,
-img.beboulder,
 #cu_back_to_top,
-a.print-link,
-.custom-logo,
-.cu-share-sidebar,
-.cu-share-inline-mobile,
-#cu-feedback,
-
+.ucb-menu,
 .ucb-sticky-menu,
 .toolbar-menu-administration,
 .ucb-admin-alert,
@@ -130,6 +120,7 @@ a.print-link,
 .ucb-lang-select,
 .ucb-footer-top,
 .ucb-footer-menu-region,
+.ucb-above-content-region,
 .ucb-below-content-region,
 .ucb-brand-bar-controls,
 header.ucb-dark,
@@ -194,26 +185,21 @@ header.ucb-black,
 .column-list {
   columns: unset;
 }
-.accordion-body,
-.accordion-collapse,
-.accordion-item .accordion-collapse.collapse {
+.accordion-header a {
+  color: #000;
+}
+.accordian-content .collapse:not(.show),
+.horizontal-tab-content .collapse:not(.show),
+.vertical-tab-content .collapse:not(.show) {
   display: block !important;
+}
+.accordian-body .fade:not(.show) {
+  opacity: 1;
 }
 .ucb-footer h2 {
   font-size: 100%;
   font-weight: bold;
   margin: 0;
-}
-
-/* CONTENT SIDEBARS */
-
-.region-content-sidebar-right,
-.region-content-sidebar-left {
-  width: 33%;
-  border: 1px solid #aaa;
-  padding: 20px;
-  float: right;
-  margin: 0 0 20px 20px;
 }
 
 .imageMediaStyle img {
