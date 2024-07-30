@@ -11,7 +11,7 @@ body {
 
 /* BRANDING */
 
-.brand-logo img {
+.ucb-logo img {
   display: block;
   width: 240px;
   height: auto;
@@ -20,13 +20,13 @@ body {
 .site-name {
   display: none;
 }
-#print-site-name {
+.ucb-site-name-wrapper {
   font-size: 18pt;
   padding-bottom: 0.5em;
   margin-bottom: 0.5em;
   border-bottom: 1px solid #757575;
 }
-
+/* -------- Archived from D7, Not implemented in D10 ---------
 .print-breadcrumb {
   text-align: right;
   font-size: 10pt;
@@ -40,7 +40,7 @@ body {
   color: #757575;
   background-color: #757575;
 }
-
+*/
 th {
   text-align: left; /* LTR */
   color: #006;
@@ -71,6 +71,7 @@ a:link img,
 a:visited img {
   border: 0;
 }
+/* -------- Archived from D7, Not implemented in D10 ---------
 .print-footnote {
   font-size: xx-small;
 }
@@ -90,7 +91,7 @@ img.print-logo {
 .print-footer {
   text-align: center;
 }
-
+*/
 .clearfix:before,
 .clearfix:after {
   content: " ";
@@ -127,26 +128,27 @@ a.print-link,
 .cu-share-sidebar,
 .cu-share-inline-mobile,
 #cu-feedback,
-#sticky-menu,
+.ucb-sticky-menu,
+.toolbar-menu-administration,
+.ucb-admin-alert,
+.ucb-local-tasks,
 .ucb-search-link,
 .ucb-lang-select,
 .ucb-homepage-footer,
 .ucb-footer-top,
 .ucb-footer-menu-region,
 .ucb-below-content-region,
-.ucb-brand-bar,
 .ucb-brand-bar-controls,
 header.ucb-dark,
 header.ucb-light,
 header.ucb-white,
 header.ucb-black,
 .ucb-main-nav-container,
-.ucb-footer-menu-region,
-.ucb-footer-bottom {
+.ucb-footer-menu-region {
   display: none !important;
 }
 
-#site-information-wrapper {
+.ucb-site-information-wrapper {
   padding-top: 20px;
   border-top: 1px solid #aaa;
   font-size: 80%;
@@ -162,10 +164,11 @@ header.ucb-black,
   }
 }
 
-#footer-section .block {
+.ucb-footer .block {
   display: none;
 }
-#footer-section .cu-boulder-block {
+.ucb-footer .ucb-home-link,
+.ucb-footer .ucb-site-information-print {
   display: block;
 }
 
