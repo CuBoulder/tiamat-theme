@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates site footer links
+  This update:
+  - [Bug] Corrects the site link in the site contact info footer block to correctly point to the active site's home page. Resolves CuBoulder/tiamat-theme#1127
+  - [Change] Changes the privacy policy link to link directly to the privacy policy. Resolves CuBoulder/tiamat-theme#1093
+---
+
 - ### Newsletter: Broken Images and Header Cleanup 
   Resolves breaking image bug with Newsletters along with some header spacing cleanup due to template conditionals
   
