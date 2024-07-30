@@ -87,7 +87,9 @@ button {
 input[type="submit"] {
   border: none;
 }
-
+.ucb-footer-print {
+  display: none;
+}
 .ucb-homepage-footer a {
   color: var(--ucb-gold);
 }

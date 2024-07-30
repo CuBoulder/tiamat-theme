@@ -127,12 +127,12 @@ header.ucb-dark,
 header.ucb-light,
 header.ucb-white,
 header.ucb-black,
-.ucb-main-nav-container,
-.ucb-footer-menu-region {
+.ucb-main-nav-container {
   display: none !important;
 }
 
-.ucb-footer {
+.ucb-footer-print {
+  display: block;
   padding-top: 20px;
   border-top: 1px solid #aaa;
   font-size: 80%;
@@ -150,7 +150,8 @@ header.ucb-black,
 
 .ucb-footer:not(.ucb-home-link),
 .ucb-footer:not(.ucb-site-information-print),
-.ucb-site-contact-footer-info {
+.ucb-site-contact-footer-info,
+#ucb-site-contact-footer-info {
   display: none;
 }
 .ucb-footer .ucb-home-link,
@@ -193,7 +194,7 @@ header.ucb-black,
 .vertical-tab-content .collapse:not(.show) {
   display: block !important;
 }
-.accordian-body .fade:not(.show) {
+.fade:not(.show) .accordian-body{
   opacity: 1;
 }
 .ucb-footer h2 {
