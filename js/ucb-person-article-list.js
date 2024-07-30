@@ -3,7 +3,8 @@ class PersonArticleList extends HTMLElement {
         super();
         // Article Endpoint
         const nodeID = this.getAttribute('nodeId');
-        const API = `/jsonapi/node/ucb_article?include=field_ucb_article_byline.field_author_person_page&filter[field_ucb_article_byline.field_author_person_page.meta.drupal_internal__target_id]=${nodeID}&filter[status][value]=1&page[limit]=10&sort=-created`;
+        this._baseURI = this.getAttribute("base-uri");
+        const API = `${this._baseURI}/jsonapi/node/ucb_article?include=field_ucb_article_byline.field_author_person_page&filter[field_ucb_article_byline.field_author_person_page.meta.drupal_internal__target_id]=${nodeID}&filter[status][value]=1&page[limit]=10&sort=-created`;
         fetch(API)
             .then(this.handleError)
             .then((data) => this.build(data, 5))
@@ -20,7 +21,7 @@ class PersonArticleList extends HTMLElement {
         let NEXTJSONURL = "";
         if(data.links.next) {
             let nextURL = data.links.next.href.split("/jsonapi/");
-            NEXTJSONURL = `/jsonapi/${nextURL[1]}`;
+            NEXTJSONURL = `${this._baseURI}/jsonapi/${nextURL[1]}`;
           } else {
             NEXTJSONURL = "";
           }
@@ -62,7 +63,7 @@ class PersonArticleList extends HTMLElement {
         }
 
         // Have articles and want to proceed
-        if(finalArticles.length > 0 && !NEXTJSONURL){
+        if(finalArticles.length > 0 && !NEXTJSONURL ){
           this.renderDisplay(finalArticles, bylineTerm);
         }
     }
@@ -74,13 +75,13 @@ class PersonArticleList extends HTMLElement {
 
         articleArray.forEach(article=>{
           // Article Data
-          var articleLink = article.link;
+          var articleLink = `${this._baseURI}${article.link}`;
           var articleTitle = article.title;
 
           // Create and Append Elements
           var article = document.createElement('article');
           article.classList = 'ucb-article-card-title-only col-sm-12 col-md-6';
-    
+
           var articleBody = document.createElement('div');
           articleBody.classList = 'ucb-article-card-data';
 
@@ -105,7 +106,7 @@ class PersonArticleList extends HTMLElement {
         var readMoreDiv = document.createElement('div');
         readMoreDiv.classList.add('ucb-article-read-more-container', 'col-sm-12', 'col-md-6');
         var readMoreLink = document.createElement('a');
-        readMoreLink.href = `/taxonomy/term/${bylineTerm.id}`;
+        readMoreLink.href = `${this._baseURI}/taxonomy/term/${bylineTerm.id}`;
         readMoreLink.classList.add('ucb-article-read-more');
         readMoreLink.innerText = `More Articles by ${bylineTerm.name}`;
         readMoreDiv.appendChild(readMoreLink);
@@ -130,7 +131,7 @@ class PersonArticleList extends HTMLElement {
 
     // Used for error handling within the API response
     handleError = response => {
-        if (!response.ok) { 
+        if (!response.ok) {
            throw new Error;
         } else {
            return response.json();

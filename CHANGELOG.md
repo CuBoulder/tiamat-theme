@@ -9,20 +9,95 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Remove box shadow from Dark 4
-  Closes #1119.
-  Removes the box shadow from the dark 4 menu style.
+- ### Newsletter: Broken Images and Header Cleanup 
+  Resolves breaking image bug with Newsletters along with some header spacing cleanup due to template conditionals
+  
+  Resolves #1133 
 ---
 
-- ### Block Title Fixes
-  Moving of the block heading style class to the proper places allows the increase based on options picked (hero/supersize) to work correctly and not become gigantic.
-  
-  Added in the correct normal/bold options if hero strong or supersize bold is chosen.
-  
-  By default the hero and supersize should not be bolded.
-  
-  Resolves #1111
+- ### Updates Slider block
+  This update:
+  - [Bug] Ensures Slider block styles are applied only to the Slider block. Resolves CuBoulder/tiamat-theme#1148
+  - [Change] Corrects indentation and code readability issues in the Slider block template and stylesheet.
 ---
+
+## [20240725] - 2024-07-25
+
+-   ### Articles by Person: Fixes API Error and Multisite lniks issue
+
+    ### Person Page: Article by Person block
+
+    -   Previously this block would throw an API error on multisites due to an error in the API endpoint not being adjusted for a multisite config and it would attempt to fetch a relative API path. This has been corrected. 
+
+    -   Fixes the links to add the base URL as well for correct Article linking and linking to the correct authors Articles List page for 5+ Articles.
+
+    Resolves #1116 
+
+* * *
+
+-   ### Intro Wide region implementation
+    Closes #1126.
+    This adds the intro wide region to the block layout. This will primarily be used by images and hero units for a top banner.
+
+* * *
+
+-   ### Add overflow-wrap to email and links
+    Closes #1130. 
+    Adds an overflow-wrap to the email address in the person page in order to stop the email from overflowing into the content.
+
+* * *
+
+-   ### Updates site information region
+    This update:
+    -   [change, security] Changes HTTP to HTTPS in some links in the site footer. Resolves CuBoulder/tiamat-theme#1114
+    -   [change] Removes a few special characters from the HTML source and replaces them with their HTML counterparts.
+
+* * *
+
+-   ### Video Hero Unit vimeo error fix
+    Closes #1140.
+    Corrects the functionality for the video hero unit for vimeo videos.
+
+* * *
+
+-   ### Mobile Menu Error fix
+    Closes #1136.
+    This adds extra checks to the mobile menu to eliminate errors.
+
+* * *
+
+## [20240719] - 2024-07-19
+
+-   ### Column List Style for WYSIWYG
+    Helps close <https://github.com/CuBoulder/tiamat10-profile/issues/155>.
+    Adds the necessary css to enable the column list styles.
+    Sister PR in: <https://github.com/CuBoulder/tiamat10-profile/pull/158/>.
+
+* * *
+
+-   ### Video Hero Unit Height Updates
+    Closes #1088.
+    This limits the height of the video hero unit in the edge-to-edge case. This also centers all videos to make their quality higher in all cases.
+
+* * *
+
+-   ### Remove box shadow from Dark 4
+    Closes #1119.
+    Removes the box shadow from the dark 4 menu style.
+
+* * *
+
+-   ### Block Title Fixes
+
+    Moving of the block heading style class to the proper places allows the increase based on options picked (hero/supersize) to work correctly and not become gigantic.
+
+    Added in the correct normal/bold options if hero strong or supersize bold is chosen.
+
+    By default the hero and supersize should not be bolded.
+
+    Resolves #1111
+
+* * *
 
 ## [20240711] - 2024-07-11
 
@@ -2706,7 +2781,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240711...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240725...HEAD
+
+[20240725]: https://github.com/CuBoulder/tiamat-theme/compare/20240719...20240725
+
+[20240719]: https://github.com/CuBoulder/tiamat-theme/compare/20240711...20240719
 
 [20240711]: https://github.com/CuBoulder/tiamat-theme/compare/20240612...20240711
 

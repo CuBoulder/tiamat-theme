@@ -22,6 +22,20 @@
 
     {% set base_url = url('<front>')|render|split('/', -1)|join('/') %}
 
+      {# Needed for Multisite #}
+      {# Get the full base URL #}
+      {% set full_base_url = url('<front>')|render %}
+
+        {# Split the URL by slashes #}
+        {% set url_parts = full_base_url|split('/') %}
+
+        {# Extract the protocol and domain #}
+        {% set protocol = url_parts[0] %}
+        {% set domain = url_parts[2] %}
+
+        {# Construct the base domain URL #}
+        {% set base_domain = protocol ~ '//' ~ domain %}
+
 {# Inline Style Switch #}
 {% set divStyles = '' %}
 {% set aStyles = '' %}
@@ -339,23 +353,23 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                     </td>
                                 </tr>
                                 {# Newsletter Taxonomy Image -- might need to be a separate table #}
-                                <tr>
+                                {% if node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value %}
+                                  <tr>
                                     <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 25px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
-                                        {% if node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value %}
-                                        <img style="object-fit:cover;-ms-interpolation-mode: bicubic; clear: both; display: block; float: left; height: 167px !important; max-width: 100% !important; outline: none; text-decoration: none; width: 250px !important; max-height: auto !important;"src="{{base_url}}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}">
-                                        {% endif %}
-                                    </td>
-                                </tr>
+                                        <img style="object-fit:cover;-ms-interpolation-mode: bicubic; clear: both; display: block; float: left; height: 167px !important; max-width: 100% !important; outline: none; text-decoration: none; width: 250px !important; max-height: auto !important;"src="{{base_domain}}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}">
+                                      </td>
+                                  </tr>
+                                {% endif %}
                                 {# Newsletter title #}
                                 <tr>
-                                    <td style="padding-left:25px; text-align:left">
+                                    <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 25px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; padding-left:25px; text-align:left">
                                         <span>{{node.field_newsletter_type.entity.label}}</span>
                                     </td>
                                 </tr>
                                 {# Date & View on Website Link #}
                                 <tr>
-                                    <td style="padding-left:25px; text-align:left">{{ node.changed.value|date("M. j, Y") }}</td>
-                                    <td style="padding-right:25px;text-align:right;">
+                                    <td style="width:50%;padding-left:25px; text-align:left">{{ node.changed.value|date("M. j, Y") }}</td>
+                                    <td style="width:50%;padding-right:25px;text-align:right;">
                                         <a style="text-wrap:nowrap" href="{{base_url}}{{ path('entity.node.canonical', {'node': node.id}) }}">View on website</a>
                                     </td>
                                 </tr>
@@ -375,7 +389,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                   <td align="center">
                                 <!-- Intro Img -->
                                     {% if content.field_newsletter_intro_image|render %}
-                                    <img id="newsletter-email-intro-img" src="{{base_url}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" style="{{classicImgOffset}}">
+                                    <img id="newsletter-email-intro-img" src="{{base_domain}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" style="{{classicImgOffset}}">
                                     {% endif %}
                                     </td>
                                 </tr>
@@ -414,7 +428,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                         <tr>
                                             <td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
                                                 <a href="{{ final_url_one}}">
-                                                    <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                                    <img width="100%" src="{{base_domain}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                                 </a>
                                             </td>
                                         </tr>
@@ -425,7 +439,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                     <tbody>
                                         <tr>
                                             <td align="center"style="text-align: left; padding-right:10px; padding-left:10px; padding-bottom:20px">
-                                                <img width="100%"src="{{base_url}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                                <img width="100%"src="{{base_domain}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -487,7 +501,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                 <tr>
                                     <td width="500px" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
                                         <a href="{{ final_url }}">
-                                            <img width="100%" src="{{base_url}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                            <img width="100%" src="{{base_domain}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                         </a>
                                     </td>
                                 </tr>
@@ -498,7 +512,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                             <tbody>
                                 <tr>
                                     <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
-                                        <img src="{{base_url}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                        <img src="{{base_domain}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                     </td>
                                 </tr>
                             </tbody>
@@ -580,7 +594,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                     {% set color = designType == 'darkbox' or designType == 'simple' or designType == 'classic' ? 'white' : 'black' %}
                                     <a{{ create_attribute({ class: 'ucb-email-social-icon', href: uri }) }}>
                                         <img{{ create_attribute({
-                                            src: base_url ~ '/' ~  base_path ~ directory ~ '/images/social_icons/' ~ color ~ '-' ~ service|lower ~ '.png',
+                                            src: base_domain ~ '/' ~  base_path ~ directory ~ '/images/social_icons/' ~ color ~ '-' ~ service|lower ~ '.png',
                                             alt: alt,
                                             style: 'width:20px;height:20px' }) }}/>
                                     </a>

@@ -15,6 +15,7 @@ regions:
   secondary_menu: "Secondary Menu"
   alerts: "Alerts"
   breadcrumb: "Breadcrumb Navigation"
+  intro_wide: "Intro Wide"
   post_wide_title: "Post Wide Title"
   above_content: "Above Content"
   content: "Content"

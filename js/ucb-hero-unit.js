@@ -19,7 +19,7 @@
                         playerVars: { autoplay: 1, controls: 0, mute: 1, disablekb: 1, rel: 0, playsinline: 1 },
                         events: {
                             onReady: function(event){
-                                // enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, document.getElementById(videoPlayerElementId), 800, 450);
+                                enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, document.getElementById(videoPlayerElementId), 800, 450);
                                 videoWrapperElement.removeAttribute('hidden');
                             },
                             onStateChange: function(event) {
@@ -76,12 +76,12 @@
                 });
                 // // Video width and height come back from the Vimeo player API as Promises
                 // // In case of error, it will default to 800x450 which is fine for 16:9 videos
-                // videoPlayer.getVideoWidth().then(
-                //     (value) => { videoWidth = value; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); },
-                //     (error) => { videoWidth = 800; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); });
-                // videoPlayer.getVideoHeight().then(
-                //     (value) => { videoHeight = value; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); },
-                //     (error) => { videoHeight = 450; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); });
+                 videoPlayer.getVideoWidth().then(
+                     (value) => { videoWidth = value; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); },
+                     (error) => { videoWidth = 800; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); });
+                 videoPlayer.getVideoHeight().then(
+                     (value) => { videoHeight = value; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); },
+                     (error) => { videoHeight = 450; enableVideoHeroAutoresize(videoWrapperElement, videoPlayerWrapperElement, videoPlayer.element, videoWidth, videoHeight); });
                 // API event calls to the Vimeo player can go here
                 videoPlayer.on('loaded', function() {
                     videoWrapperElement.removeAttribute('hidden');
@@ -160,12 +160,19 @@
             heroWidth = heroElement.offsetWidth,
             heroHeight = heroElement.offsetHeight,
             dimensions = calculateAspectRatioFit(videoWidth, videoHeight, heroWidth, heroHeight);
+            let correctedHeight = heroHeight;
+            if(window.innerWidth - heroWidth < 10 && window.innerWidth > 999) {
+                correctedHeight = (correctedHeight * 2) / 3;
+                videoWrapperElement.style.height =  'fit-content';
+            } else {
+                videoWrapperElement.style.height =  dimensions.height + 'px';
+            }
         videoPlayerElement.width = dimensions.width;
-        videoPlayerWrapperElement.style.width = heroWidth + 'px';
+        videoWrapperElement.style.width = dimensions.width + 'px';
         videoPlayerElement.height = dimensions.height;
-        videoPlayerWrapperElement.style.height = heroHeight + 'px';
-        videoPlayerElement.style.marginTop = ((heroHeight - dimensions.height) / 2) + 'px';
-        videoPlayerElement.style.marginLeft = ((heroWidth - dimensions.width) / 2) + 'px';
+        videoPlayerWrapperElement.style.top = ((correctedHeight - dimensions.height) / 2) + 'px';
+        videoPlayerWrapperElement.style.marginLeft = ((heroWidth - dimensions.width) / 2) + 'px';
+        videoPlayerWrapperElement.style.marginRight = ((heroWidth - dimensions.width) / 2) + 'px';
     }
 
     function calculateAspectRatioFit(srcWidth, srcHeight, maxWidth, maxHeight) {
