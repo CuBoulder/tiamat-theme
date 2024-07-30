@@ -106,11 +106,12 @@ img.print-logo {
 .hide-print,
 */
 #ucb-mobile-menu-toggle,
-
+/*
 #alerts-wide-wrapper,
 .ucb-sidebar,
 #slider-wrapper,
 #cu_back_to_top,
+*/
 .ucb-menu,
 .ucb-sticky-menu,
 .toolbar-menu-administration,
@@ -227,11 +228,42 @@ header.ucb-black,
   background-color: #eee;
   color: #000 !important;
 }
-
+.block-hero-unit.size-large .ucb-hero-unit-content,
+.block-hero-unit.size-small .ucb-hero-unit-content {
+  padding: 0 !important;
+}
 a.button {
   background-color: #0277bd;
   color: #fff;
   padding: 4px 10px;
   display: inline-block;
   text-decoration: none;
+}
+
+.ucb-slider-block.bottom-overlay .carousel-inner .carousel-caption,
+.ucb-slider-block.right-overlay .carousel-inner .carousel-caption,
+.ucb-slider-block.center-overlay .carousel-inner .carousel-caption,
+.ucb-slider-block.right-content .carousel-inner .carousel-caption,
+.ucb-slider-block.bottom-content .carousel-inner .carousel-caption {
+  max-width: 100%;
+  top: auto;
+  bottom: 0;
+  background-color: var(--ucb-darker);
+  right: 0;
+  left: 0;
+  text-align: left;
+  position: relative;
+}
+.ucb-slider-block .slide-image-container {
+  padding-bottom: 0;
+  flex-grow: unsetå;
+}
+
+.ucb-slider-block.right-content .carousel-item-structure {
+  display: flex;
+  flex-direction: column !important;
+}
+.carousel-control-next,
+.carousel-control-prev {
+  display: none;
 }
