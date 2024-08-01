@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article Feature: fixes 'Read More' link
+  ### Article Feature Block
+  
+  Fixes a template issue preventing the 'Read More' link from linking to the chosen url correctly. 
+  
+  Resolves #1163 
+---
+
 - ### Updates site footer links
   This update:
   - [Bug] Corrects the site link in the site contact info footer block to correctly point to the active site's home page. Resolves CuBoulder/tiamat-theme#1127
