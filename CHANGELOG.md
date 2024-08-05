@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Sidebar/Title Spacing Fixes
+  Sidebar and Title spacing changes are fixed so that they align. The Title's container is what is aligned properly rather than the text in most cases as the font has a line-height that adds a little more padding around the text. Kevin wants the containers aligned and less focus on aligning the text.
+  
+  Resolves #1128 
+  Resolves #1129 
+---
+
 - ### Article Feature: fixes 'Read More' link
   ### Article Feature Block
   
