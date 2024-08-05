@@ -9,38 +9,59 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Sidebar/Title Spacing Fixes
-  Sidebar and Title spacing changes are fixed so that they align. The Title's container is what is aligned properly rather than the text in most cases as the font has a line-height that adds a little more padding around the text. Kevin wants the containers aligned and less focus on aligning the text.
+- ### Article List: Chronological Order
+  ### Article List Page
+  Previously an `Article List Page` could sometimes display `Articles` out of chronological order. This issue was due to the asynchronous nature of the chained API calls, which could cause `Articles` that required additional processing (e.g., generating a summary from the article body) to be placed out of order after processing completed as other earlier, more complete `Articles` "finished" before them.
   
-  Resolves #1128 
-  Resolves #1129 
+  Now, all `Articles` are processed and appended to the page in their original order, ensuring the chronological display of articles. 
+  
+  Note: This did not seem to affect the other `Article List` style blocks, only the `Article List Page`
+  
+  Resolves #1176 
 ---
 
-- ### Article Feature: fixes 'Read More' link
-  ### Article Feature Block
-  
-  Fixes a template issue preventing the 'Read More' link from linking to the chosen url correctly. 
-  
-  Resolves #1163 
----
+## [20240805] - 2024-08-05
 
-- ### Updates site footer links
-  This update:
-  - [Bug] Corrects the site link in the site contact info footer block to correctly point to the active site's home page. Resolves CuBoulder/tiamat-theme#1127
-  - [Change] Changes the privacy policy link to link directly to the privacy policy. Resolves CuBoulder/tiamat-theme#1093
----
+-   ### Sidebar/Title Spacing Fixes
 
-- ### Newsletter: Broken Images and Header Cleanup 
-  Resolves breaking image bug with Newsletters along with some header spacing cleanup due to template conditionals
-  
-  Resolves #1133 
----
+    Sidebar and Title spacing changes are fixed so that they align. The Title's container is what is aligned properly rather than the text in most cases as the font has a line-height that adds a little more padding around the text. Kevin wants the containers aligned and less focus on aligning the text.
 
-- ### Updates Slider block
-  This update:
-  - [Bug] Ensures Slider block styles are applied only to the Slider block. Resolves CuBoulder/tiamat-theme#1148
-  - [Change] Corrects indentation and code readability issues in the Slider block template and stylesheet.
----
+    Resolves #1128 
+    Resolves #1129 
+
+* * *
+
+-   ### Article Feature: fixes 'Read More' link
+
+    ### Article Feature Block
+
+    Fixes a template issue preventing the 'Read More' link from linking to the chosen url correctly. 
+
+    Resolves #1163 
+
+* * *
+
+-   ### Updates site footer links
+    This update:
+    -   [Bug] Corrects the site link in the site contact info footer block to correctly point to the active site's home page. Resolves CuBoulder/tiamat-theme#1127
+    -   [Change] Changes the privacy policy link to link directly to the privacy policy. Resolves CuBoulder/tiamat-theme#1093
+
+* * *
+
+-   ### Newsletter: Broken Images and Header Cleanup
+
+    Resolves breaking image bug with Newsletters along with some header spacing cleanup due to template conditionals
+
+    Resolves #1133 
+
+* * *
+
+-   ### Updates Slider block
+    This update:
+    -   [Bug] Ensures Slider block styles are applied only to the Slider block. Resolves CuBoulder/tiamat-theme#1148
+    -   [Change] Corrects indentation and code readability issues in the Slider block template and stylesheet.
+
+* * *
 
 ## [20240725] - 2024-07-25
 
@@ -2802,7 +2823,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240725...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240805...HEAD
+
+[20240805]: https://github.com/CuBoulder/tiamat-theme/compare/20240725...20240805
 
 [20240725]: https://github.com/CuBoulder/tiamat-theme/compare/20240719...20240725
 
