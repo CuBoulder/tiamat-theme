@@ -9,38 +9,48 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Sidebar/Title Spacing Fixes
-  Sidebar and Title spacing changes are fixed so that they align. The Title's container is what is aligned properly rather than the text in most cases as the font has a line-height that adds a little more padding around the text. Kevin wants the containers aligned and less focus on aligning the text.
-  
-  Resolves #1128 
-  Resolves #1129 
----
+## [20240805] - 2024-08-05
 
-- ### Article Feature: fixes 'Read More' link
-  ### Article Feature Block
-  
-  Fixes a template issue preventing the 'Read More' link from linking to the chosen url correctly. 
-  
-  Resolves #1163 
----
+-   ### Sidebar/Title Spacing Fixes
 
-- ### Updates site footer links
-  This update:
-  - [Bug] Corrects the site link in the site contact info footer block to correctly point to the active site's home page. Resolves CuBoulder/tiamat-theme#1127
-  - [Change] Changes the privacy policy link to link directly to the privacy policy. Resolves CuBoulder/tiamat-theme#1093
----
+    Sidebar and Title spacing changes are fixed so that they align. The Title's container is what is aligned properly rather than the text in most cases as the font has a line-height that adds a little more padding around the text. Kevin wants the containers aligned and less focus on aligning the text.
 
-- ### Newsletter: Broken Images and Header Cleanup 
-  Resolves breaking image bug with Newsletters along with some header spacing cleanup due to template conditionals
-  
-  Resolves #1133 
----
+    Resolves #1128 
+    Resolves #1129 
 
-- ### Updates Slider block
-  This update:
-  - [Bug] Ensures Slider block styles are applied only to the Slider block. Resolves CuBoulder/tiamat-theme#1148
-  - [Change] Corrects indentation and code readability issues in the Slider block template and stylesheet.
----
+* * *
+
+-   ### Article Feature: fixes 'Read More' link
+
+    ### Article Feature Block
+
+    Fixes a template issue preventing the 'Read More' link from linking to the chosen url correctly. 
+
+    Resolves #1163 
+
+* * *
+
+-   ### Updates site footer links
+    This update:
+    -   [Bug] Corrects the site link in the site contact info footer block to correctly point to the active site's home page. Resolves CuBoulder/tiamat-theme#1127
+    -   [Change] Changes the privacy policy link to link directly to the privacy policy. Resolves CuBoulder/tiamat-theme#1093
+
+* * *
+
+-   ### Newsletter: Broken Images and Header Cleanup
+
+    Resolves breaking image bug with Newsletters along with some header spacing cleanup due to template conditionals
+
+    Resolves #1133 
+
+* * *
+
+-   ### Updates Slider block
+    This update:
+    -   [Bug] Ensures Slider block styles are applied only to the Slider block. Resolves CuBoulder/tiamat-theme#1148
+    -   [Change] Corrects indentation and code readability issues in the Slider block template and stylesheet.
+
+* * *
 
 ## [20240725] - 2024-07-25
 
@@ -2802,7 +2812,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240725...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240805...HEAD
+
+[20240805]: https://github.com/CuBoulder/tiamat-theme/compare/20240725...20240805
 
 [20240725]: https://github.com/CuBoulder/tiamat-theme/compare/20240719...20240725
 
