@@ -89,7 +89,7 @@
 
         fetch(JSONURL)
           .then((reponse) => reponse.json())
-          .then((data) => {
+          .then(async (data) => {
             // get the next URL and return that if there is one
             if (data.links.next) {
               let nextURL = data.links.next.href.split("/jsonapi/");
@@ -136,9 +136,8 @@
                 altObj[thumbnailId].alt = pair.relationships.thumbnail.data.meta.alt;
               });
             }
-
-            //iterate over each item in the array
-            data.data.map( async (item) => {
+            // Make these promises so they resolve in chronological order with PromiseAll
+            let promises = data.data.map(async (item) => {
               let thisArticleCats = [];
               let thisArticleTags = [];
               // // loop through and grab all of the categories
@@ -150,14 +149,12 @@
                   );
                 }
               }
-
               // // loop through and grab all of the tags
               if (item.relationships.field_ucb_article_tags) {
                 for (var i = 0; i < item.relationships.field_ucb_article_tags.data.length; i++) {
                   thisArticleTags.push(item.relationships.field_ucb_article_tags.data[i].meta.drupal_internal__target_id)
                 }
               }
-
               // checks to see if the current article (item) contains a category or tag scheduled for exclusion
               let doesIncludeCat = thisArticleCats;
               let doesIncludeTag = thisArticleTags;
@@ -183,6 +180,7 @@
                 let bodyAndImageId = item.relationships.field_ucb_article_content.data.length ? item.relationships.field_ucb_article_content.data[0].id : "";
                 let body = item.attributes.field_ucb_article_summary ? item.attributes.field_ucb_article_summary : "";
                 body = body.trim();
+
                 let imageSrc = "";
 
                 // if no article summary, use a simplified article body
@@ -204,114 +202,106 @@
                 let date = new Date(item.attributes.created).toLocaleDateString('en-us', options);
                 let title = item.attributes.title;
                 let link = baseURI + item.attributes.path.alias;
-                let image = "";
-                let articleSummarySize = "col-md-12";
 
-                var articleRow = document.createElement('div');
-                articleRow.className = 'ucb-article-card row';
-
-                if (link && imageSrc) {
-                  articleSummarySize = "col-md-10";
-
-                  var imgContainer = document.createElement('div');
-                  imgContainer.className = 'col-md-2 ucb-article-card-img';
-
-                  var imgLink = document.createElement('a');
-                  imgLink.href = link;
-                  imgLink.setAttribute('role', 'presentation');
-                  imgLink.setAttribute('aria-hidden', 'true');
-
-                  var articleImg = document.createElement('img');
-                  articleImg.src = imageSrc.src;
-                  articleImg.setAttribute('alt', imageSrc.alt);
-
-                  imgLink.appendChild(articleImg);
-                  imgContainer.appendChild(imgLink);
-
-                  // add to article row
-                  articleRow.appendChild(imgContainer);
-                }
-
-
-                // Container
-                var articleDataContainer = document.createElement('div');
-                articleDataContainer.className = `col-sm-12 ${articleSummarySize} ucb-article-card-data`;
-
-
-                // Header
-                var articleDataLink = document.createElement('a');
-                articleDataLink.href = link;
-
-                var articleDataHead = document.createElement('h2');
-                articleDataHead.className = "ucb-article-card-title";
-                articleDataHead.innerText = title;
-
-                articleDataLink.appendChild(articleDataHead);
-
-
-                // Date
-                var articleCardDate = document.createElement('span');
-                articleCardDate.className = 'ucb-article-card-date';
-                articleCardDate.innerText = date;
-
-                // Summary
-
-                var articleSummaryBody = document.createElement('p');
-                articleSummaryBody.className = 'ucb-article-card-body';
-                articleSummaryBody.id = `body-${bodyAndImageId}`;
-                articleSummaryBody.innerText = body;
-
-                // Read more & link
-                var articleSummaryReadMore = document.createElement('span');
-                articleSummaryReadMore.className = 'ucb-article-card-more';
-
-                var readMoreLink = document.createElement('a');
-                readMoreLink.href = link;
-                readMoreLink.setAttribute('aria-hidden', 'true');
-                readMoreLink.innerText = `Read more`;
-
-                articleSummaryReadMore.appendChild(readMoreLink);
-
-                //Appends
-
-                articleDataContainer.appendChild(articleDataLink);
-                articleDataContainer.appendChild(articleCardDate);
-                articleDataContainer.appendChild(articleSummaryBody);
-                articleDataContainer.appendChild(articleSummaryReadMore);
-
-                articleRow.appendChild(articleDataContainer);
-
-                let dataOutput = document.getElementById("ucb-al-data");
-                let thisArticle = document.createElement("article");
-                thisArticle.className = 'ucb-article-card-container';
-                thisArticle.appendChild(articleRow);
-                dataOutput.append(thisArticle);
-
-                if (NEXTJSONURL) {
-                  toggleMessage('ucb-el-load-more', 'inline-block');
-                }
+                // Pre-create the article rows in order
+                return {
+                  articleRow: createArticleRow(title, link, date, body, imageSrc, bodyAndImageId)
+                };
               }
             });
 
-            // done loading -- hide the loading spinner graphic
+            let results = await Promise.all(promises);
+
+            results.forEach(result => {
+              let dataOutput = document.getElementById("ucb-al-data");
+              let thisArticle = document.createElement("article");
+              thisArticle.className = 'ucb-article-card-container';
+              thisArticle.appendChild(result.articleRow);
+              dataOutput.append(thisArticle);
+            });
+
+            if (NEXTJSONURL) {
+              toggleMessage('ucb-el-load-more', 'inline-block');
+            }
             toggleMessage("ucb-al-loading", "none");
             resolve(NEXTJSONURL);
           }).catch(function (error) {
-            // catch any fetch errors and let the user know so they're not endlessly watching the spinner
             console.error("Fetch Error in URL : " + JSONURL);
             console.error("Fetch Error is : " + error);
-            // turn off spinner
             toggleMessage("ucb-al-loading", "none");
-            // turn on default error message
-            if (error) {
-              toggleMessage("ucb-al-error", "block");
-
-            }
-
+            toggleMessage("ucb-al-error", "block");
           });
-
       }
     });
+  }
+
+  // Helper function that handles the creation of article rows
+  function createArticleRow(title, link, date, body, imageSrc, bodyAndImageId) {
+    var articleRow = document.createElement('div');
+    articleRow.className = 'ucb-article-card row';
+
+    if (link && imageSrc) {
+      var articleSummarySize = "col-md-10";
+
+      var imgContainer = document.createElement('div');
+      imgContainer.className = 'col-md-2 ucb-article-card-img';
+
+      var imgLink = document.createElement('a');
+      imgLink.href = link;
+      imgLink.setAttribute('role', 'presentation');
+      imgLink.setAttribute('aria-hidden', 'true');
+
+      var articleImg = document.createElement('img');
+      articleImg.src = imageSrc.src;
+      articleImg.setAttribute('alt', imageSrc.alt);
+
+      imgLink.appendChild(articleImg);
+      imgContainer.appendChild(imgLink);
+
+      articleRow.appendChild(imgContainer);
+    } else {
+      articleSummarySize = "col-md-12";
+    }
+
+    var articleDataContainer = document.createElement('div');
+    articleDataContainer.className = `col-sm-12 ${articleSummarySize} ucb-article-card-data`;
+
+    var articleDataLink = document.createElement('a');
+    articleDataLink.href = link;
+
+    var articleDataHead = document.createElement('h2');
+    articleDataHead.className = "ucb-article-card-title";
+    articleDataHead.innerText = title;
+
+    articleDataLink.appendChild(articleDataHead);
+
+    var articleCardDate = document.createElement('span');
+    articleCardDate.className = 'ucb-article-card-date';
+    articleCardDate.innerText = date;
+
+    var articleSummaryBody = document.createElement('p');
+    articleSummaryBody.className = 'ucb-article-card-body';
+    articleSummaryBody.id = `body-${bodyAndImageId}`;
+    articleSummaryBody.innerText = body;
+
+    var articleSummaryReadMore = document.createElement('span');
+    articleSummaryReadMore.className = 'ucb-article-card-more';
+
+    var readMoreLink = document.createElement('a');
+    readMoreLink.href = link;
+    readMoreLink.setAttribute('aria-hidden', 'true');
+    readMoreLink.innerText = `Read more`;
+
+    articleSummaryReadMore.appendChild(readMoreLink);
+
+    articleDataContainer.appendChild(articleDataLink);
+    articleDataContainer.appendChild(articleCardDate);
+    articleDataContainer.appendChild(articleSummaryBody);
+    articleDataContainer.appendChild(articleSummaryReadMore);
+
+    articleRow.appendChild(articleDataContainer);
+
+    return articleRow;
   }
 
   /*
