@@ -1,0 +1,28 @@
+.ucb-mega-menu-column-wrapper {
+    display: flex;
+}
+.ucb-mega-menu-column-links-wrapper {
+    display: block;
+    padding: 0;
+    margin: 0;
+}
+
+.ucb-mega-menu-column-links-wrapper li {
+    display: block;
+    padding: 0;
+    margin: 0 0 10px 0;
+    list-style-type: none;
+}
+
+.ucb-mega-menu-text-above {
+    flex-grow: 1;
+}
+.ucb-mega-menu-column {
+    flex-grow: 1;
+}
+.ucb-mega-menu-column-links-wrapper a {
+    display: block;
+}
+.ucb-mega-menu-link-desc {
+    font-size: 75%;
+}
