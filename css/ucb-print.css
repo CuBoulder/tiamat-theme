@@ -20,11 +20,23 @@ body {
 .site-name {
   display: none;
 }
-.ucb-site-name-wrapper {
+.ucb-site-name-wrapper a {
   font-size: 18pt;
   padding-bottom: 0.5em;
   margin-bottom: 0.5em;
   border-bottom: 1px solid #757575;
+  color: #111 !important;
+}
+.bs-background-styled {
+  color: #000 !important;
+}
+
+.bs-background-styled a{
+  color: #000 !important;
+}
+
+.ucb-site-information-print-title{
+  color: #000 !important;
 }
 /* -------- Archived from D7, Not implemented in D10 ---------
 .print-breadcrumb {
@@ -192,6 +204,7 @@ header.ucb-black,
 .accordion-header a {
   color: #000;
 }
+.accordion .collapse:not(.show),
 .accordian-content .collapse:not(.show),
 .horizontal-tab-content .collapse:not(.show),
 .vertical-tab-content .collapse:not(.show) {
