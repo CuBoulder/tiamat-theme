@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Slate Form: Styles Submit Button
+  ### Slate Form Block
+  Styles the submit button similar to the Form Block
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1173
+  
+  Related: https://github.com/CuBoulder/tiamat-custom-entities/pull/156
+---
+
 - ### Favicon path change
   Closes #1081.
   Changes the favicon path to be relative to the site path.
