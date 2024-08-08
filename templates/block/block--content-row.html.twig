@@ -1,169 +1,149 @@
 {#
 /**
- * @file
- * Theme to implement the content row
- *
- * Created by Joshua Nicholson on 08/09/22
-*
+ * @file Contains the template to display the Content Row block.
+ */
 #}
-
-{{ attach_library('boulder_base/ucb-content-row') }}
-
-{%
-  set classes = [
-	'container',
-    'block',
-    'block-' ~ configuration.provider|clean_class,
-    'block-' ~ plugin_id|clean_class,
-    bundle ? 'block--type-' ~ bundle|clean_class,
-    view_mode ? 'block--view-mode-' ~ view_mode|clean_class
-  ]
-%}
+{% set classes = [
+  'container',
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class
+] %}
 
 {% set layoutSelection = content['#block_content'].field_row_layout_selection.value %}
 
-{# Block/Title/Icon Styles #}
-{% set blockStyles = [
-	content.field_bs_background_style|render|striptags|trim,
-	content.field_bs_content_font_scale|render|striptags|trim,
-	content.field_bs_icon_position|render|striptags|trim,
-	content.field_bs_heading_alignment|render|striptags|trim,
-	content.field_bs_title_font_scale|render|striptags|trim,
-	''
-] %}
-
-{% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
-{% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
-{% set headingTag = content.field_bs_heading|render|striptags|trim %}
-{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
-
+{% extends '@boulder_base/block/styled-block.html.twig' %}
 {% block content %}
-	<div{{attributes.addClass(classes,blockStyles)}}>
-		{{ title_prefix }}
-		{% if label %}
-			<div class="block-title-outer">
-				<{{ headingTag }}{{title_attributes}} class="block-title {{ headingStyle }}">
-					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
-						{{ content.field_bs_icon }}
-					</span>
-					<span class="block-title-text">
-						{{ label }}
-					</span>
-				</{{ headingTag }}>
-			</div>
-		{% endif %}
-		{{ title_suffix }}
-		{# Teaser Row Layout #}
-		{% if layoutSelection == 0 %}
-			{% for key, item in content['#block_content'].field_row_layout_content %}
-				{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
-				<div class="row-content ucb-content-row-teaser">{% set image = item.entity.field_row_layout_content_image.0 %}
-					<div class="row teaser-row">
-						<div class="{{ image ? 'col-sm-10 ' : 'col-sm-12' }} row-text-container">
-							{% if rowLink %}
-								<a href="{{ rowLink }} ">
-									<h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
-								</a>
-							{% else %}
-								<h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
-							{% endif %}
-							{{item.entity.field_row_layout_content_text|view}}
-						</div>
-					{% if image %}
-					<div class="col-sm-2 row-image-container">
-						{% if rowLink %}
-							<a role="presentation" aria-hidden="true" href="{{ rowLink }} ">
-								{{ image|view }}
-							</a>
-						{% else %}
-							{{ image|view }}
-						{% endif %}
-					</div>
-					{% endif %}
-					</div>
-				</div>
-			{% endfor %}
-			{# Teaser Large Alternate Row Layout #}
-			{% elseif layoutSelection == 1 %}
-			{% for key, item in content['#block_content'].field_row_layout_content %}
-				{% set oddOrEven = loop.index is odd ? 'odd' : 'even' %}
-				{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
-				<div class="row d-flex row-content ucb-teaser-lg-row ucb-teaser-lg-alternate ucb-teaser-lg-row-{{oddOrEven}}">
-					{% set image = item.entity.field_row_layout_content_image.0 %}
-						<div class="col-sm-7 col-xs-12 row-text-container">
-							{% if rowLink %}
-								<a href="{{ rowLink }} ">
-									<h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
-								</a>
-							{% else %}
-								<h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
-							{% endif %}
-							{{item.entity.field_row_layout_content_text|view}}
-						</div>
-						{% if image %}
-						<div class="col-sm-5 col-xs-12 row-image-container-lg">
-							{% if rowLink %}
-								<a role="presentation" aria-hidden="true" href="{{ rowLink }} ">
-									<img alt="{{item.entity.field_row_layout_content_image.entity.field_media_image.alt}}" class="ucb-content-row-img-lg" src="{{item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide')}}"></img>
-								</a>
-							{% else %}
-								<img alt="{{item.entity.field_row_layout_content_image.entity.field_media_image.alt}}" class="ucb-content-row-img-lg" src="{{item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide')}}"></img>
-							{% endif %}
-						</div>
+  {{ attach_library('boulder_base/ucb-content-row') }}
+	{# Teaser Row Layout #}
+  {% if layoutSelection == 0 %}
+    {% for key, item in content['#block_content'].field_row_layout_content %}
+      {% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
+      <div class="row-content ucb-content-row-teaser">{% set image = item.entity.field_row_layout_content_image.0 %}
+        <div class="row teaser-row">
+          <div class="{{ image ? 'col-sm-10 ' : 'col-sm-12' }} row-text-container">
+            {% if rowLink %}
+              <a href="{{ rowLink }} ">
+                <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
+              </a>
             {% else %}
-            <div class="col-sm-5 col-xs-12 row-empty-image-container-lg">
-            </div>
-						{% endif %}
-				</div>
-			{% endfor %}
-			{# Tiles Row Layout #}
-		{% elseif layoutSelection == 2 %}
-			{% for key, item in content['#block_content'].field_row_layout_content %}
-				{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
-				{% set tileBackground = "height:100%;background-image:url('" ~ file_url(item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square')) ~ "');background-repeat:no-repeat;background-position:center;background-size:cover;" %}
-				<div class="row d-flex row-content-tiles {{(loop.index is odd) ? 'row-content-tile-odd' : 'row-content-tile-even'}}">
-						<div class="col-6 row-text-container-tile">
-							{% if rowLink %}
-								<a href="{{ rowLink }} ">
-									<h3>{{item.entity.field_row_layout_content_title.0.value }}</h3>
-								</a>
-							{% else %}
-								<h3>{{item.entity.field_row_layout_content_title.0.value }}</h3>
-							{% endif %}
-							{{item.entity.field_row_layout_content_text|view}}
-						</div>
-						<div class="col-6 row-image-container-tile-{{(loop.index is odd) ? 'odd' : 'even'}}">
-							{% if rowLink %}
-								<a role="presentation" aria-hidden="true" href="{{ rowLink }} ">
-									{# TO DO -- Make this a DIV with background img #}
-									{# {{ item.entity.field_row_layout_content_image|view }} #}
-									<div style="{{tileBackground}}"></div>
-								</a>
-							{% else %}
-								{# TO DO -- Make this a DIV with background img #}
-								{# {{ item.entity.field_row_layout_content_image|view }} #}
-								<div style="{{tileBackground}}"></div>
-							{% endif %}
-						</div>
-				</div>
-			{% endfor %}
-			{# Features Row Layout #}
-		{% elseif layoutSelection == 3 %}
-			<div class="row row-col-lg-2 row-col-1 feature-row">
-				{% for key, item in content['#block_content'].field_row_layout_content %}
-        {% if loop.index0 < 3 %}
-					{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
-					{% set smallFeatureBGValue = "background-image:url(#{ file_url( item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri ) });background-repeat:no-repeat;background-position:center;background-size:cover;" %}
-            {% if (loop.index0 % 3 == 0) or (loop.index0 == 0) %}
-              <div class="col-lg-7">
-                <div class="feature-row-image-container feature-row-fill">
+              <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
+            {% endif %}
+            {{ item.entity.field_row_layout_content_text|view }}
+          </div>
+        {% if image %}
+        <div class="col-sm-2 row-image-container">
+          {% if rowLink %}
+            <a role="presentation" aria-hidden="true" href="{{ rowLink }} ">
+              {{ image|view }}
+            </a>
+          {% else %}
+            {{ image|view }}
+          {% endif %}
+        </div>
+        {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  {# Teaser Large Alternate Row Layout #}
+  {% elseif layoutSelection == 1 %}
+    {% for key, item in content['#block_content'].field_row_layout_content %}
+      {% set oddOrEven = loop.index is odd ? 'odd' : 'even' %}
+      {% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
+      <div class="row d-flex row-content ucb-teaser-lg-row ucb-teaser-lg-alternate ucb-teaser-lg-row-{{ oddOrEven }}">
+        {% set image = item.entity.field_row_layout_content_image.0 %}
+          <div class="col-sm-7 col-xs-12 row-text-container">
+            {% if rowLink %}
+              <a href="{{ rowLink }} ">
+                <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
+              </a>
+            {% else %}
+              <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
+            {% endif %}
+            {{ item.entity.field_row_layout_content_text|view }}
+          </div>
+          {% if image %}
+          <div class="col-sm-5 col-xs-12 row-image-container-lg">
+            {% if rowLink %}
+              <a role="presentation" aria-hidden="true" href="{{ rowLink }} ">
+                <img alt="{{ item.entity.field_row_layout_content_image.entity.field_media_image.alt }}" class="ucb-content-row-img-lg" src="{{ item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide') }}"></img>
+              </a>
+            {% else %}
+              <img alt="{{ item.entity.field_row_layout_content_image.entity.field_media_image.alt }}" class="ucb-content-row-img-lg" src="{{ item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide') }}"></img>
+            {% endif %}
+          </div>
+          {% else %}
+          <div class="col-sm-5 col-xs-12 row-empty-image-container-lg">
+          </div>
+          {% endif %}
+      </div>
+    {% endfor %}
+  {# Tiles Row Layout #}
+  {% elseif layoutSelection == 2 %}
+    {% for key, item in content['#block_content'].field_row_layout_content %}
+      {% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
+      {% set tileBackground = "height:100%;background-image:url('" ~ file_url(item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square')) ~ "');background-repeat:no-repeat;background-position:center;background-size:cover;" %}
+      <div class="row d-flex row-content-tiles {{ (loop.index is odd) ? 'row-content-tile-odd' : 'row-content-tile-even' }}">
+          <div class="col-6 row-text-container-tile">
+            {% if rowLink %}
+              <a href="{{ rowLink }} ">
+                <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
+              </a>
+            {% else %}
+              <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
+            {% endif %}
+            {{item.entity.field_row_layout_content_text|view}}
+          </div>
+          <div class="col-6 row-image-container-tile-{{ (loop.index is odd) ? 'odd' : 'even' }}">
+            {% if rowLink %}
+              <a role="presentation" aria-hidden="true" href="{{ rowLink }} ">
+                {# TO DO -- Make this a DIV with background img #}
+                {# {{ item.entity.field_row_layout_content_image|view }} #}
+                <div style="{{ tileBackground }}"></div>
+              </a>
+            {% else %}
+              {# TO DO -- Make this a DIV with background img #}
+              {# {{ item.entity.field_row_layout_content_image|view }} #}
+              <div style="{{ tileBackground }}"></div>
+            {% endif %}
+          </div>
+      </div>
+    {% endfor %}
+  {# Features Row Layout #}
+  {% elseif layoutSelection == 3 %}
+    <div class="row row-col-lg-2 row-col-1 feature-row">
+      {% for key, item in content['#block_content'].field_row_layout_content %}
+      {% if loop.index0 < 3 %}
+        {% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
+        {% set smallFeatureBGValue = "background-image:url(#{ file_url( item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri ) });background-repeat:no-repeat;background-position:center;background-size:cover;" %}
+          {% if (loop.index0 % 3 == 0) or (loop.index0 == 0) %}
+            <div class="col-lg-7">
+              <div class="feature-row-image-container feature-row-fill">
+                {% if rowLink %}
+                  <a role="presentation" aria-hidden="true" href="{{ rowLink }}">
+                    {{ item.entity.field_row_layout_content_image|view }}
+                  </a>
+                {% else %}
+                  {{ item.entity.field_row_layout_content_image|view }}
+                {% endif %}
+                <div class="feature-row-text">
                   {% if rowLink %}
-                    <a role="presentation" aria-hidden="true" href="{{ rowLink }} ">
-                      {{ item.entity.field_row_layout_content_image|view }}
+                    <a href="{{ rowLink }} ">
+                      <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
                     </a>
                   {% else %}
-                    {{ item.entity.field_row_layout_content_image|view }}
+                    <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
                   {% endif %}
+                  {{ item.entity.field_row_layout_content_text|view }}
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-5 row small-feature-row">
+            {% elseif loop.index0 is odd %}
+              <div class="col-lg-12 small-feature">
+                <div class="small-feature-row-image-container" style={{ smallFeatureBGValue }}>
                   <div class="feature-row-text">
                     {% if rowLink %}
                       <a href="{{ rowLink }} ">
@@ -172,73 +152,56 @@
                     {% else %}
                       <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
                     {% endif %}
-                    {{ item.entity.field_row_layout_content_text|view }}
                   </div>
                 </div>
               </div>
-              <div class="col-lg-5 row small-feature-row">
-              {% elseif loop.index0 is odd %}
-                <div class="col-lg-12 small-feature">
-                  <div class="small-feature-row-image-container" style={{ smallFeatureBGValue }}>
-                    <div class="feature-row-text">
-                      {% if rowLink %}
-                        <a href="{{ rowLink }} ">
-                          <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
-                        </a>
-                      {% else %}
+            {% else %}
+              <div class="col-lg-12 small-feature">
+                <div class="small-feature-row-image-container" style={{ smallFeatureBGValue }}>
+                  <div class="feature-row-text">
+                    {% if rowLink %}
+                      <a href="{{ rowLink }} ">
                         <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
-                      {% endif %}
-                    </div>
-                  </div>
-                </div>
-              {% else %}
-                <div class="col-lg-12 small-feature">
-                  <div class="small-feature-row-image-container" style={{ smallFeatureBGValue }}>
-                    <div class="feature-row-text">
-                      {% if rowLink %}
-                        <a href="{{ rowLink }} ">
-                          <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
-                        </a>
-                      {% else %}
-                        <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
-                      {% endif %}
-                    </div>
+                      </a>
+                    {% else %}
+                      <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
+                    {% endif %}
                   </div>
                 </div>
               </div>
-            {% endif %}
+            </div>
           {% endif %}
-				{% endfor %}
-			</div>
-		{% else %}
-		{# Teaser Large Layout #}
-		{% for key, item in content['#block_content'].field_row_layout_content %}
-			{% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
-			<div class="row row-content ucb-teaser-lg-row">
-			{% set image = item.entity.field_row_layout_content_image.0 %}
-				<div class="{{ image ? 'col-lg-8 col-md-6 col-sm-12' : 'col-sm-12' }} row-text-container">
-					{% if rowLink %}
-						<a href="{{ rowLink }} ">
-							<h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
-						</a>
-					{% else %}
-						<h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
-					{% endif %}
-					{{item.entity.field_row_layout_content_text|view}}
-				</div>
-				{% if image %}
-				<div class="col-lg-4 col-md-6 col-sm-12 row-image-container-lg">
-					{% if rowLink %}
-						<a role="presentation" aria-hidden="true" href="{{ rowLink }} ">
-							<img alt="{{item.entity.field_row_layout_content_image.entity.field_media_image.alt}}" class="ucb-content-row-img-lg" src="{{item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide')}}"></img>
-						</a>
-					{% else %}
-						{{ image|view }}
-					{% endif %}
-				</div>
-				{% endif %}
-			</div>
-		{% endfor %}
-		{% endif %}
-	</div>
+        {% endif %}
+      {% endfor %}
+    </div>
+  {% else %}
+	{# Teaser Large Layout #}
+    {% for key, item in content['#block_content'].field_row_layout_content %}
+      {% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
+      <div class="row row-content ucb-teaser-lg-row">
+      {% set image = item.entity.field_row_layout_content_image.0 %}
+        <div class="{{ image ? 'col-lg-8 col-md-6 col-sm-12' : 'col-sm-12' }} row-text-container">
+          {% if rowLink %}
+            <a href="{{ rowLink }} ">
+              <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
+            </a>
+          {% else %}
+            <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
+          {% endif %}
+          {{ item.entity.field_row_layout_content_text|view }}
+        </div>
+        {% if image %}
+        <div class="col-lg-4 col-md-6 col-sm-12 row-image-container-lg">
+          {% if rowLink %}
+            <a role="presentation" aria-hidden="true" href="{{ rowLink }} ">
+              <img alt="{{ item.entity.field_row_layout_content_image.entity.field_media_image.alt }}" class="ucb-content-row-img-lg" src="{{ item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide') }}"></img>
+            </a>
+          {% else %}
+            {{ image|view }}
+          {% endif %}
+        </div>
+        {% endif %}
+      </div>
+    {% endfor %}
+  {% endif %}
 {% endblock content %}

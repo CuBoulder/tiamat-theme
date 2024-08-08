@@ -3,16 +3,13 @@
  * @file Contains the template to display the Collection Grid block.
  */
 #}
-
-{{ attach_library('boulder_base/ucb-collections-block') }}
-
 {% set classes = [
   'block',
   'container',
   'block-' ~ configuration.provider|clean_class,
   'block-' ~ plugin_id|clean_class,
   bundle ? 'block--type-' ~ bundle|clean_class,
-  view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class
 ] %}
 
 {# This block mirrors the Article List Node - constructs a JSON endpoint in TWIG using include filters #}
@@ -49,85 +46,57 @@
 
 {% set blockID = elements.content['#block_content'].id() %}
 
-{# Block/Title/Icon Styles #}
-{% set blockStyles = [
-  content.field_bs_background_style|render|striptags|trim,
-  content.field_bs_content_font_scale|render|striptags|trim,
-  content.field_bs_icon_position|render|striptags|trim,
-  content.field_bs_heading_alignment|render|striptags|trim,
-  content.field_bs_title_font_scale|render|striptags|trim,
-] %}
-
-{% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
-{% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
-{% set headingTag = content.field_bs_heading|render|striptags|trim %}
-{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
-
+{% extends '@boulder_base/block/styled-block.html.twig' %}
 {% block content %}
-  <div{{ attributes.addClass(classes, blockStyles) }}>
-    {{ title_prefix }}
-    {% if label %}
-      <div class="block-title-outer">
-				<{{ headingTag }}{{title_attributes}} class="block-title {{ headingStyle }}">
-					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
-						{{ content.field_bs_icon }}
-					</span>
-					<span class="block-title-text">
-						{{ label }}
-					</span>
-				</{{ headingTag }}>
-			</div>
-    {% endif %}
-    {{ title_suffix }}
-    <collection-grid data-blockid="{{ blockID }}">
-      <div class="collection-grid-container collection-grid-container-{{ blockID }} {{ filterItemsStyle }} {{ multiselectStyle }}">
-        <div class="collection-filter-container">
-          {# Single Select List #}
-          {% if multiselectStyle == "collection-multiselect-single" %}
-            <div class="collections-filter-list">
-              {% for key, item in content['#block_content'].field_collection_category_select %}
-                <div class="collection-grid-filters">
-                  <h3 class="category-filter-label">
-                    {{ item.entity.field_collection_filter_label.value }}
-                  </h3>
-                  <div class="collection-category-container">
-                    <div class="collection-filter-links">
-                      <button class="category-single-button collection-grid-single-active category-single-button-all-{{ blockID }}" onclick="collectionGridResetSingleFilters({{ blockID }})">All</button>
-                      {% for key, cat in item.entity.field_collection_grid_category %}
-                        <button class="category-single-button collection-grid-no-display category-label-reset-{{ blockID }} category-label-{{ cat|view }}-{{ blockID }}" data-category="{{ cat|view }}" onclick="collectionGridFilterSingle({{ cat|view }}, {{ blockID }})"></button>
-                      {% endfor %}
-                    </div>
-                  </div>
-                </div>
-              {% endfor %}
-              {# <input type="reset" value="Reset Filters" class="category-filter-reset" onclick="collectionGridResetFilters()"></input> #}
-            </div>
-          {% elseif multiselectStyle == "collection-multiselect-multi" %}
+  {{ attach_library('boulder_base/ucb-collections-block') }}
+  <collection-grid data-blockid="{{ blockID }}">
+    <div class="collection-grid-container collection-grid-container-{{ blockID }} {{ filterItemsStyle }} {{ multiselectStyle }}">
+      <div class="collection-filter-container">
+        {# Single Select List #}
+        {% if multiselectStyle == "collection-multiselect-single" %}
+          <div class="collections-filter-list">
             {% for key, item in content['#block_content'].field_collection_category_select %}
-              <div class="collection-filter-links">
+              <div class="collection-grid-filters">
                 <h3 class="category-filter-label">
                   {{ item.entity.field_collection_filter_label.value }}
                 </h3>
                 <div class="collection-category-container">
-                  {% for key2, cat in item.entity.field_collection_grid_category %}
-                    <div class="collection-category-line">
-                      <input id="category-checkbox-{{ blockID }}-{{ key }}-{{ key2 }}" class="category-checkbox collection-grid-no-display category-checkbox-{{ blockID }}" type="checkbox" data-category="{{ cat|view }}" onclick="collectionGridFilterChecked({{ blockID }})">
-                      <label class="category-label category-label-{{ cat|view }}-{{ blockID }}" for ="category-checkbox-{{ blockID }}-{{ key }}-{{ key2 }}" data-category="{{ cat|view }}-label"></label>
-                    </div>
-                  {% endfor %}
+                  <div class="collection-filter-links">
+                    <button class="category-single-button collection-grid-single-active category-single-button-all-{{ blockID }}" onclick="collectionGridResetSingleFilters({{ blockID }})">All</button>
+                    {% for key, cat in item.entity.field_collection_grid_category %}
+                      <button class="category-single-button collection-grid-no-display category-label-reset-{{ blockID }} category-label-{{ cat|view }}-{{ blockID }}" data-category="{{ cat|view }}" onclick="collectionGridFilterSingle({{ cat|view }}, {{ blockID }})"></button>
+                    {% endfor %}
+                  </div>
                 </div>
               </div>
             {% endfor %}
-            <input type="reset" value="Reset Filters" class="category-filter-reset category-filter-reset-{{ blockID }}" onclick="collectionGridResetFilters({{ blockID }})"></input>
-          {% endif %}
-        </div>
-        <div class="collection-grid-card-wrapper">
-          <div class="collection-grid-filter-checks">
-            <span hidden class="collection-grid-filter-span-{{ blockID }}"></span>
+            {# <input type="reset" value="Reset Filters" class="category-filter-reset" onclick="collectionGridResetFilters()"></input> #}
           </div>
-          <div id="collections-grid-block-data-{{ blockID }}" data-jsonapi="{{ collectionsJSON }}" data-jsoncats="{{ collectionsCatsJSON }}" data-extags="{{ content.field_collection_grid_type|render|striptags|trim }}" data-bodydisplay="{{ displayStyle }}" data-baseurl="{{ baseurlJSON }}" class="collections-grid-block-data"></div>
-        </div>
+        {% elseif multiselectStyle == "collection-multiselect-multi" %}
+          {% for key, item in content['#block_content'].field_collection_category_select %}
+            <div class="collection-filter-links">
+              <h3 class="category-filter-label">
+                {{ item.entity.field_collection_filter_label.value }}
+              </h3>
+              <div class="collection-category-container">
+                {% for key2, cat in item.entity.field_collection_grid_category %}
+                  <div class="collection-category-line">
+                    <input id="category-checkbox-{{ blockID }}-{{ key }}-{{ key2 }}" class="category-checkbox collection-grid-no-display category-checkbox-{{ blockID }}" type="checkbox" data-category="{{ cat|view }}" onclick="collectionGridFilterChecked({{ blockID }})">
+                    <label class="category-label category-label-{{ cat|view }}-{{ blockID }}" for ="category-checkbox-{{ blockID }}-{{ key }}-{{ key2 }}" data-category="{{ cat|view }}-label"></label>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          {% endfor %}
+          <input type="reset" value="Reset Filters" class="category-filter-reset category-filter-reset-{{ blockID }}" onclick="collectionGridResetFilters({{ blockID }})"></input>
+        {% endif %}
       </div>
-    </collection-grid>
-  </div>
+      <div class="collection-grid-card-wrapper">
+        <div class="collection-grid-filter-checks">
+          <span hidden class="collection-grid-filter-span-{{ blockID }}"></span>
+        </div>
+        <div id="collections-grid-block-data-{{ blockID }}" data-jsonapi="{{ collectionsJSON }}" data-jsoncats="{{ collectionsCatsJSON }}" data-extags="{{ content.field_collection_grid_type|render|striptags|trim }}" data-bodydisplay="{{ displayStyle }}" data-baseurl="{{ baseurlJSON }}" class="collections-grid-block-data"></div>
+      </div>
+    </div>
+  </collection-grid>
 {% endblock content %}

@@ -1,45 +1,19 @@
-{{ attach_library('boulder_base/ucb-slate-form') }}
-
-{%
-  set classes = [
-    'block',
-    'container',
-    'block-' ~ configuration.provider|clean_class,
-    'block-' ~ plugin_id|clean_class,
-    bundle ? 'block--type-' ~ bundle|clean_class,
-    view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
-]
-%}
-
-{# Block/Title/Icon Styles #}
-{% set blockStyles = [
-	content.field_bs_background_style|render|striptags|trim,
-	content.field_bs_content_font_scale|render|striptags|trim,
-	content.field_bs_icon_position|render|striptags|trim,
-	content.field_bs_heading_alignment|render|striptags|trim,
-	content.field_bs_title_font_scale|render|striptags|trim,
-	''
+{#
+/**
+ * @file Contains the template to display the Slate Form block.
+ */
+#}
+{% set classes = [
+  'block',
+  'container',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class
 ] %}
 
-{% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
-{% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
-{% set headingTag = content.field_bs_heading|render|striptags|trim %}
-{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
-
-<div{{attributes.addClass(classes,blockStyles)}}>
-	{{ title_prefix }}
-	{% if label %}
-		<div class="block-title-outer">
-				<{{ headingTag }}{{title_attributes}} class="block-title {{ headingStyle }}">
-					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
-						{{ content.field_bs_icon }}
-					</span>
-					<span class="block-title-text">
-						{{ label }}
-					</span>
-				</{{ headingTag }}>
-			</div>
-	{% endif %}
-	{{ title_suffix }}
-	<slate-form slateid="{{content.field_ucb_slate_form_id|render|striptags|trim|lower}}" slatedomain="{{content.field_ucb_slate_form_domain.0['#url']}}"></slate-form>
-</div>
+{% extends '@boulder_base/block/styled-block.html.twig' %}
+{% block content %}
+  {{ attach_library('boulder_base/ucb-slate-form') }}
+  <slate-form slateid="{{ content.field_ucb_slate_form_id|render|striptags|trim|lower }}" slatedomain="{{ content.field_ucb_slate_form_domain.0['#url'] }}"></slate-form>
+{% endblock %}

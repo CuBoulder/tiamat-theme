@@ -33,7 +33,7 @@ function boulder_base_theme_suggestions_block_alter(array &$suggestions, array $
  */
 function boulder_base_page_attachments_alter(array &$page) {
   foreach($page['#attached']['html_head_link'] as $k => $v) {
-    if (array_key_exists('rel', $v[0]) && $v[0]['rel'] == 'shortcut icon') {
+    if (array_key_exists('rel', $v[0]) && $v[0]['rel'] == 'icon') {
       $page['#attached']['html_head_link'][$k][0]['href'] = base_path() . \Drupal::service('extension.list.theme')->getPath('boulder_base') . '/favicon.png';
     }
   }

@@ -1,93 +1,55 @@
 {#
 /**
- * @file
- * Theme to implement the image gallery
- *
- * Created by Joshua Nicholson on 08/09/22
-*
+ * @file Contains the template to display the Image Gallery block.
+ */
 #}
-
-
-{{ attach_library('boulder_base/ucb-image-gallery') }}
-
-{%
-  set classes = [
-    'container',
-    'block',
-    'block-' ~ configuration.provider|clean_class,
-    'block-' ~ plugin_id|clean_class,
-    bundle ? 'block--type-' ~ bundle|clean_class,
-    view_mode ? 'block--view-mode-' ~ view_mode|clean_class
-  ]
-%}
-
-{# Block/Title/Icon Styles #}
-{% set blockStyles = [
-    content.field_bs_background_style|render|striptags|trim,
-    content.field_bs_content_font_scale|render|striptags|trim,
-    content.field_bs_icon_position|render|striptags|trim,
-    content.field_bs_heading_alignment|render|striptags|trim,
-    content.field_bs_title_font_scale|render|striptags|trim,
-    ''
+{% set classes = [
+  'container',
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class
 ] %}
-
-{% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
-{% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
-{% set headingTag = content.field_bs_heading|render|striptags|trim %}
-{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
 
 {% set totalColumns = "6" %}
 {% set tabletColumns = "3" %}
 {% set masonryStyle = content.field_masonry_display[0]|render|striptags|trim %}
 
 {% if masonryStyle == "True" %}
-    {% set totalColumns = content.field_masonry_columns[0]|render %}
-    {% if totalColumns == 2 %}
-        {% set tabletColumns = 2 %}
-    {% endif %}
+  {% set totalColumns = content.field_masonry_columns[0]|render %}
+  {% if totalColumns == 2 %}
+    {% set tabletColumns = 2 %}
+  {% endif %}
 {% endif %}
 
+{% extends '@boulder_base/block/styled-block.html.twig' %}
 {% block content %}
-    <div{{attributes.addClass(classes,blockStyles)}}>
-        {{ title_prefix }}
-        {% if label %}
-            <div class="block-title {{ headingStyle }}">
-                <{{headingTag}}{{title_attributes}}>
-                    <span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
-                        {{ content.field_bs_icon }}
-                    </span>
-                    <span class="block-title-text">
-                        {{ label }}
-                    </span>
-                </{{headingTag}}>
-            </div>
+  {{ attach_library('boulder_base/ucb-image-gallery') }}
+  <div class="row row-cols-lg-{{totalColumns}} row-cols-md-{{tabletColumns}} row-cols-2 g-4 gallery-div masonry-option-true" data-masonry='{"percentPosition": true }'>
+    {% for key, item in content['#block_content'].field_image_gallery_photo  %}
+      {% if key|first != '#' %}
+        {% if item.entity.field_media_image_caption.value|render|striptags|trim %}
+          {% set photoDescription = item.entity.field_media_image_caption.value|render|striptags|trim %}
+        {% else %}
+          {% set photoDescription = "" %}
         {% endif %}
-        {{ title_suffix }}
-        <div class="row row-cols-lg-{{totalColumns}} row-cols-md-{{tabletColumns}} row-cols-2 g-4 gallery-div masonry-option-true" data-masonry='{"percentPosition": true }'>
-            {% for key, item in content['#block_content'].field_image_gallery_photo  %}
-                {% if key|first != '#' %}
-                    {% if item.entity.field_media_image_caption.value|render|striptags|trim %}
-                        {% set photoDescription = item.entity.field_media_image_caption.value|render|striptags|trim %}
-                    {% else %}
-                        {% set photoDescription = "" %}
-                    {% endif %}
-                    {% if masonryStyle == "True" %}
-                        <div class="col gallery-item">
-                            <a href="{{ file_url(item.entity.field_media_image.entity.fileuri) }}" class="glightbox ucb-gallery-lightbox" data-gallery="gallery{{ content['#block_content'].id() }}" data-glightbox="description: {{ photoDescription }} ">
-                                <div class ="imageMediaStyle large_image_style">
-                                    <img src = "{{ file_url(item.entity.field_media_image.entity.fileuri) }}" alt = "{{item.entity.field_media_image.alt|render}}" width="1500" height = "2250">
-                                </div>
-                            </a>
-                        </div>
-                    {% else %}
-                        <div class="col gallery-item">
-                            <a href="{{ file_url(item.entity.field_media_image.entity.fileuri) }}" class="glightbox ucb-gallery-lightbox" data-gallery="gallery{{ content['#block_content'].id() }}" data-glightbox="description: {{ photoDescription }} ">
-                                {{ item|view }}
-                            </a>
-                        </div>
-                    {% endif %}
-                {% endif %}
-            {% endfor %}
-        </div>
-    </div>
+        {% if masonryStyle == "True" %}
+          <div class="col gallery-item">
+            <a href="{{ file_url(item.entity.field_media_image.entity.fileuri) }}" class="glightbox ucb-gallery-lightbox" data-gallery="gallery{{ content['#block_content'].id() }}" data-glightbox="description: {{ photoDescription }} ">
+              <div class ="imageMediaStyle large_image_style">
+                <img src = "{{ file_url(item.entity.field_media_image.entity.fileuri) }}" alt = "{{item.entity.field_media_image.alt|render}}" width="1500" height = "2250">
+              </div>
+            </a>
+          </div>
+        {% else %}
+          <div class="col gallery-item">
+            <a href="{{ file_url(item.entity.field_media_image.entity.fileuri) }}" class="glightbox ucb-gallery-lightbox" data-gallery="gallery{{ content['#block_content'].id() }}" data-glightbox="description: {{ photoDescription }} ">
+              {{ item|view }}
+            </a>
+          </div>
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+  </div>
 {% endblock content %}

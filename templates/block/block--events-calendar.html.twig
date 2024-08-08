@@ -1,62 +1,25 @@
 {#
 /**
- * @file
- * Theme to implement the events calendar embedder
- *
- * Created by Joshua Nicholson on 08/09/22
-*
+ * @file Contains the template to display the Events Calender block.
+ */
 #}
-
-{{ attach_library('boulder_base/ucb-events-calendar') }}
-{%
-  set classes = [
-	'container',
-    'block',
-    'block-' ~ configuration.provider|clean_class,
-    'block-' ~ plugin_id|clean_class,
-    bundle ? 'block--type-' ~ bundle|clean_class,
-    view_mode ? 'block--view-mode-' ~ view_mode|clean_class
-  ]
-%}
-
-
-{# Block/Title/Icon Styles #}
-{% set blockStyles = [
-	content.field_bs_background_style|render|striptags|trim,
-	content.field_bs_content_font_scale|render|striptags|trim,
-	content.field_bs_icon_position|render|striptags|trim,
-	content.field_bs_heading_alignment|render|striptags|trim,
-	content.field_bs_title_font_scale|render|striptags|trim,
-	''
+{% set classes = [
+'container',
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class
 ] %}
 
-{% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
-{% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
-{% set headingTag = content.field_bs_heading|render|striptags|trim %}
-{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
-
+{% extends '@boulder_base/block/styled-block.html.twig' %}
 {% block content %}
-	<div{{attributes.addClass(classes,blockStyles)}}>
-		{{ title_prefix }}
-		{% if label %}
-			<div class="block-title-outer">
-				<{{ headingTag }}{{title_attributes}} class="block-title {{ headingStyle }}">
-					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
-						{{ content.field_bs_icon }}
-					</span>
-					<span class="block-title-text">
-						{{ label }}
-					</span>
-				</{{ headingTag }}>
-			</div>
-		{% endif %}
-		{{ title_suffix }}
-		{{ content.field_calendar_code }}
-		{# Events Link #}
-		<div class="ucb-calendar-block-link-container">
-		{% for item in content['#block_content'].field_additional_events_link.value %}
-			{{ link(item.title, item.uri, {'class': ['ucb-calendar-button']} ) }}
-		{% endfor %}
-		</div>
-	</div>
+  {{ attach_library('boulder_base/ucb-events-calendar') }}
+  {{ content.field_calendar_code }}
+  {# Events Link #}
+  <div class="ucb-calendar-block-link-container">
+    {% for item in content['#block_content'].field_additional_events_link.value %}
+      {{ link(item.title, item.uri, {'class': ['ucb-calendar-button']} ) }}
+    {% endfor %}
+  </div>
 {% endblock %}
