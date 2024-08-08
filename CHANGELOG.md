@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article List blocks: Chronological Order
+  ### Article Aggregator Blocks
+  Previously Article Aggregator Blocks (includes `Article List`, `Article Feature`, `Article Grid`, `Article Slider`) could sometimes display `Articles` out of chronological order. This issue was due to the asynchronous nature of the chained API calls, which could cause Articles that required additional processing (e.g., generating a summary from the article body) to be placed out of order after processing completed while other more field complete (but potentially chronologically earlier)  Articles "finished" before them.
+  
+  Now, all Articles are processed and appended to the page in their original order, ensuring the chronological display of articles across all Article aggregator page/blocks
+  
+  Resolves #1184 
+---
+
 - ### People Lists: Removing an Image breaks Lists
   ### People List Page & People List Block
   
