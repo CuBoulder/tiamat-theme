@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### People Lists: Removing an Image breaks Lists
+  ### People List Page & People List Block
+  
+  Previously in the case where you had a `People List Page` or `People List Block` and then removed an Image from the Media Library that was used as a thumbnail for a `Person` page, this would make that respective Person Page's thumbnail ID to become `'missing'` rather than a `null` value, which would cause the Person List Page to completely break unless that Person's thumbnail image is fixed.
+  
+  This has been corrected with additional checks in these rare cases. It will also use the Default Avatar in specific displays such as the Grid. 
+  
+  Resolves #1175 
+---
+
 - ### Slate Form: Styles Submit Button
   ### Slate Form Block
   Styles the submit button similar to the Form Block
