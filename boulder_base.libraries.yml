@@ -486,6 +486,8 @@ ucb-social-media-icons-block:
 
 ucb-mega-menu-block:
   version: 1.x
+  js:
+    js/ucb-mega-menu.js: {}
   css:
     theme:
       css/block/ucb-mega-menu.css: {}

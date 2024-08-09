@@ -25,12 +25,13 @@
   We call a macro which calls itself to render the full tree.
   @see http://twig.sensiolabs.org/doc/tags/macro.html
 #}
+{{ attach_library('boulder_base/ucb-mega-menu-block') }}
 {{ menus.menu_links(items, attributes, 0) }}
 {% macro menu_links(items, attributes, menu_level) %}
-  {% if items %}
-    <ul{{ attributes.addClass('ucb-menu nav') }}>
-      {% for item in items %}
-        {% set classes = [
+    {% if items %}
+        <ul{{attributes.addClass('ucb-menu nav')}}>
+            {% for item in items %}
+                {% set classes = [
           'menu-item',
           item.is_expanded ? 'expanded',
           item.is_collapsed ? 'collapsed',
@@ -38,27 +39,46 @@
           item.is_unpublished ? 'unpublished'
         ] %}
 
-        <li{{ item.attributes.addClass(classes) }}>
-<div class="ucb-mega-menu-wrapper">
-    <h2 class= "ucb-mega-menu-header">{{dump(item.content.field_mega_menu_select.0.content.field_mega_menu_heading)}}</h2>
-        {{item.content.field_mega_menu_select}}
-    </div>
-          {% if item.title|upper == 'HOME' %}
-            <a{{ create_attribute({ href: item.url|render, class: 'ucb-home-button nav-link', title: item.title }) }}>
-              <i class="fa-solid fa-home"></i>
-              <span class="visually-hidden">{{ item.title }}</span>
-            </a>
-          {% else %}
-            {% set title = item.is_unpublished ? {
+                <li{{item.attributes.addClass(classes)}}>
+                    {% if item.title|upper == 'HOME' %}
+                        <a{{create_attribute({href:item.url|render,class:'ucb-home-button nav-link',title:item.title})}}>
+                            <i class="fa-solid fa-home"></i>
+                            <span class="visually-hidden">{{ item.title }}</span>
+                        </a>
+                    {% else %}
+
+                        {% set title = item.is_unpublished ? {
                 '#markup': '<i class="fa-solid fa-eye-slash"></i> ' ~ item.title|e ~ ' <span class="visually-hidden">(Unpublished)</span>'
               } : item.title %}
-            {{ link(title, item.url, create_attribute({ class: 'nav-link' })) }}
-            {% if item.below %}
-              {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
-            {% endif %}
-          {% endif %}
-        </li>
-      {% endfor %}
-    </ul>
-  {% endif %}
+                        {% if item.content.field_display_mega_menu|render|striptags|trim == "On" %}
+                          <li class="menu-item">
+                            <a href="#" title='{{title}}' class="nav-link ucb-mega-menu-outer-link" onclick = "megaMenuClicked('{{title|lower|trim|replace({' ': ''})}}')">{{title}} <i class="fa fa-angle-down ucb-mega-menu-icon" aria-hidden="true"></i></a>
+                          </li>
+                        {% else %}
+                          {{ link(title, item.url, create_attribute({ class: 'nav-link' })) }}
+                          {% if item.below %}
+                              {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
+                          {% endif %}
+                        {% endif %}
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+            <div class = "ucb-mega-menu container">
+            {% for item in items %}
+                        {% if item.content.field_display_mega_menu|render|striptags|trim == "On" %}
+                            <div class="ucb-mega-menu-wrapper block-{{item.title|lower|trim|replace({' ': ''})}} collapse">
+                                <h2 class="ucb-mega-menu-header"><a href = "{{item.url}}" class = "ucb-mega-menu-heading-link">{{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_heading.value }}</a></h2>
+                                <div class="ucb-mega-menu-column-wrapper">
+                                    {{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_text_above.value|render}}
+                                    {#{{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_text_above|render}}
+                                    {{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_menu_links}}#}
+                                </div>
+                                {#{{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_text_below}}
+                                #}
+                            </div>
+                        {% endif %}
+            {% endfor %}
+            </div>
+    {% endif %}
 {% endmacro %}

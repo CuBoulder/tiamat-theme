@@ -26,3 +26,12 @@
 .ucb-mega-menu-link-desc {
     font-size: 75%;
 }
+.ucb-mega-menu-icon {
+    padding-left: 2px;
+}
+.ucb-mega-menu {
+    position: absolute;
+    border: black solid 1px;
+    z-index: 9;
+    background: #fff;
+}
