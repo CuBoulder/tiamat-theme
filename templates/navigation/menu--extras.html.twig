@@ -40,6 +40,7 @@
         ] %}
 
                 <li{{item.attributes.addClass(classes)}}>
+
                     {% if item.title|upper == 'HOME' %}
                         <a{{create_attribute({href:item.url|render,class:'ucb-home-button nav-link',title:item.title})}}>
                             <i class="fa-solid fa-home"></i>
@@ -52,7 +53,7 @@
               } : item.title %}
                         {% if item.content.field_display_mega_menu|render|striptags|trim == "On" %}
                           <li class="menu-item">
-                            <a href="#" title='{{title}}' class="nav-link ucb-mega-menu-outer-link" onclick = "megaMenuClicked('{{title|lower|trim|replace({' ': ''})}}')">{{title}} <i class="fa fa-angle-down ucb-mega-menu-icon" aria-hidden="true"></i></a>
+                            <a href="#" title='{{title}}' class="nav-link ucb-mega-menu-outer-link" onclick = "megaMenuClicked('{{title|lower|trim|replace({' ': ''})}}{{item.content.field_mega_menu_select.0['#block_content'].id.value}}')">{{title}} <i class="fa fa-angle-down ucb-mega-menu-icon" aria-hidden="true"></i></a>
                           </li>
                         {% else %}
                           {{ link(title, item.url, create_attribute({ class: 'nav-link' })) }}
@@ -67,15 +68,15 @@
             <div class = "ucb-mega-menu container">
             {% for item in items %}
                         {% if item.content.field_display_mega_menu|render|striptags|trim == "On" %}
-                            <div class="ucb-mega-menu-wrapper block-{{item.title|lower|trim|replace({' ': ''})}} collapse">
+
+                            <div class="ucb-mega-menu-wrapper block-{{item.title|lower|trim|replace({' ': ''}) ~ item.content.field_mega_menu_select.0['#block_content'].id.value}} collapse">
                                 <h2 class="ucb-mega-menu-header"><a href = "{{item.url}}" class = "ucb-mega-menu-heading-link">{{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_heading.value }}</a></h2>
                                 <div class="ucb-mega-menu-column-wrapper">
-                                    {{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_text_above.value|render}}
-                                    {#{{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_text_above|render}}
-                                    {{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_menu_links}}#}
+                                    {{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_text_above|view}}
+                                    {{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_menu_links|view}}
                                 </div>
-                                {#{{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_text_below}}
-                                #}
+                                {{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_text_below|view}}
+
                             </div>
                         {% endif %}
             {% endfor %}
