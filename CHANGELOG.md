@@ -9,31 +9,98 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Article Feature: fixes 'Read More' link
-  ### Article Feature Block
-  
-  Fixes a template issue preventing the 'Read More' link from linking to the chosen url correctly. 
-  
-  Resolves #1163 
----
-
-- ### Updates site footer links
+- ### Adds "University of Colorado Boulder" to the end of page titles
   This update:
-  - [Bug] Corrects the site link in the site contact info footer block to correctly point to the active site's home page. Resolves CuBoulder/tiamat-theme#1127
-  - [Change] Changes the privacy policy link to link directly to the privacy policy. Resolves CuBoulder/tiamat-theme#1093
+  - [change] Adds "University of Colorado Boulder" to the end of page titles. It first checks if the site is already called that to prevent this text from being duplicated on the home page. Resolves CuBoulder/tiamat-theme#1188 
+  - [change] Cleans up PHPCS errors in `boulder_base.theme`.
 ---
 
-- ### Newsletter: Broken Images and Header Cleanup 
-  Resolves breaking image bug with Newsletters along with some header spacing cleanup due to template conditionals
+- ### Article List blocks: Chronological Order
+  ### Article Aggregator Blocks
+  Previously Article Aggregator Blocks (includes `Article List`, `Article Feature`, `Article Grid`, `Article Slider`) could sometimes display `Articles` out of chronological order. This issue was due to the asynchronous nature of the chained API calls, which could cause Articles that required additional processing (e.g., generating a summary from the article body) to be placed out of order after processing completed while other more field complete (but potentially chronologically earlier)  Articles "finished" before them.
   
-  Resolves #1133 
+  Now, all Articles are processed and appended to the page in their original order, ensuring the chronological display of articles across all Article aggregator page/blocks
+  
+  Resolves #1184 
 ---
 
-- ### Updates Slider block
-  This update:
-  - [Bug] Ensures Slider block styles are applied only to the Slider block. Resolves CuBoulder/tiamat-theme#1148
-  - [Change] Corrects indentation and code readability issues in the Slider block template and stylesheet.
+- ### People Lists: Removing an Image breaks Lists
+  ### People List Page & People List Block
+  
+  Previously in the case where you had a `People List Page` or `People List Block` and then removed an Image from the Media Library that was used as a thumbnail for a `Person` page, this would make that respective Person Page's thumbnail ID to become `'missing'` rather than a `null` value, which would cause the Person List Page to completely break unless that Person's thumbnail image is fixed.
+  
+  This has been corrected with additional checks in these rare cases. It will also use the Default Avatar in specific displays such as the Grid. 
+  
+  Resolves #1175 
 ---
+
+- ### Slate Form: Styles Submit Button
+  ### Slate Form Block
+  Styles the submit button similar to the Form Block
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1173
+  
+  Related: https://github.com/CuBoulder/tiamat-custom-entities/pull/156
+---
+
+- ### Favicon path change
+  Closes #1081.
+  Changes the favicon path to be relative to the site path.
+---
+
+- ### Article List: Chronological Order
+  ### Article List Page
+  Previously an `Article List Page` could sometimes display `Articles` out of chronological order. This issue was due to the asynchronous nature of the chained API calls, which could cause `Articles` that required additional processing (e.g., generating a summary from the article body) to be placed out of order after processing completed as other earlier, more complete `Articles` "finished" before them.
+  
+  Now, all `Articles` are processed and appended to the page in their original order, ensuring the chronological display of articles. 
+  
+  Note: This did not seem to affect the other `Article List` style blocks, only the `Article List Page`
+  
+  Resolves #1176 
+---
+
+## [20240805] - 2024-08-05
+
+-   ### Sidebar/Title Spacing Fixes
+
+    Sidebar and Title spacing changes are fixed so that they align. The Title's container is what is aligned properly rather than the text in most cases as the font has a line-height that adds a little more padding around the text. Kevin wants the containers aligned and less focus on aligning the text.
+
+    Resolves #1128 
+    Resolves #1129 
+
+* * *
+
+-   ### Article Feature: fixes 'Read More' link
+
+    ### Article Feature Block
+
+    Fixes a template issue preventing the 'Read More' link from linking to the chosen url correctly. 
+
+    Resolves #1163 
+
+* * *
+
+-   ### Updates site footer links
+    This update:
+    -   [Bug] Corrects the site link in the site contact info footer block to correctly point to the active site's home page. Resolves CuBoulder/tiamat-theme#1127
+    -   [Change] Changes the privacy policy link to link directly to the privacy policy. Resolves CuBoulder/tiamat-theme#1093
+
+* * *
+
+-   ### Newsletter: Broken Images and Header Cleanup
+
+    Resolves breaking image bug with Newsletters along with some header spacing cleanup due to template conditionals
+
+    Resolves #1133 
+
+* * *
+
+-   ### Updates Slider block
+    This update:
+    -   [Bug] Ensures Slider block styles are applied only to the Slider block. Resolves CuBoulder/tiamat-theme#1148
+    -   [Change] Corrects indentation and code readability issues in the Slider block template and stylesheet.
+
+* * *
 
 ## [20240725] - 2024-07-25
 
@@ -2795,7 +2862,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240725...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240805...HEAD
+
+[20240805]: https://github.com/CuBoulder/tiamat-theme/compare/20240725...20240805
 
 [20240725]: https://github.com/CuBoulder/tiamat-theme/compare/20240719...20240725
 

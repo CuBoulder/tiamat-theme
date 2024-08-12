@@ -71,7 +71,7 @@ ucb-person:
   css:
     theme:
       css/ucb-person.css: {}
-      
+
 ucb-people-list-page:
   version: 1.x
   js:
@@ -91,7 +91,7 @@ ucb-breadcrumb:
   css:
     theme:
       css/ucb-breadcrumb.css: {}
-    
+
 ucb-footer-menu-region:
   version: 1.x
   css:
@@ -207,7 +207,7 @@ ucb-related-articles:
   css:
     theme:
       css/ucb-related-articles.css: {}
-      
+
 ucb-newsletter:
   version: 1.x
   css:
@@ -221,11 +221,14 @@ ucb-sticky-menu:
   css:
     theme:
       css/ucb-sticky-menu.css: {}
-      
+
 ucb-slate-form:
   version: 1.x
   js:
     js/ucb-slate-form.js: {}
+  css:
+    theme:
+      css/block/ucb-slate-form.css: {}
 
 ucb-status-page:
   version: 1.x
@@ -290,7 +293,7 @@ ucb-article-grid-block:
     js/ucb-article-grid-block.js: {}
   css:
     theme:
-      css/block/ucb-article-grid-block.css: {}  
+      css/block/ucb-article-grid-block.css: {}
 ucb-article-list-block:
   version: 1.x
   js:
@@ -448,7 +451,7 @@ ucb-user-page:
     theme:
       css/ucb-status-page-block.css: {}
       css/ucb-user-page.css: {}
-      
+
 ucb-faq-page:
   version: 1.x
   js:
@@ -456,7 +459,7 @@ ucb-faq-page:
   css:
     theme:
       css/ucb-faq-page.css: {}
-      
+
 ucb-class-notes:
   version: 1.x
   css:

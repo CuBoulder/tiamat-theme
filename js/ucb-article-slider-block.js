@@ -21,7 +21,7 @@ class ArticleSliderBlockElement extends HTMLElement {
             });
     }
 
-    build(data, count, excludeCatArray, excludeTagArray, finalArticles = []){
+    async build(data, count, excludeCatArray, excludeTagArray, finalArticles = []){
       // More than 10 articles? This sets up the next call if there's more articles to be retrieved but not enough post-filters
         let NEXTJSONURL = "";
         if(data.links.next) {
@@ -67,66 +67,53 @@ class ArticleSliderBlockElement extends HTMLElement {
         }
 
         // Iterate over each Article
-        data.data.map(item=>{
-          // If no thumbnail, omit from inclusion
+        const promises = data.data.map(async (item) => {
           if (!item.relationships.field_ucb_article_thumbnail.data) {
-            return;
+            return null;
           }
-            let thisArticleCats = [];
-            let thisArticleTags = [];
-            // // loop through and grab all of the categories
-            if (item.relationships.field_ucb_article_categories) {
-              for (let i = 0; i < item.relationships.field_ucb_article_categories.data.length; i++) {
-                thisArticleCats.push(
-                  item.relationships.field_ucb_article_categories.data[i].meta
-                    .drupal_internal__target_id
-                )
-              }
-            }
-            // // loop through and grab all of the tags
-            if (item.relationships.field_ucb_article_tags) {
-              for (var i = 0; i < item.relationships.field_ucb_article_tags.data.length; i++) {
-                thisArticleTags.push(item.relationships.field_ucb_article_tags.data[i].meta.drupal_internal__target_id)
-              }
-            }
 
-            let doesIncludeCat = thisArticleCats;
-            let doesIncludeTag = thisArticleTags;
+          let thisArticleCats = [];
+          let thisArticleTags = [];
 
-            // check to see if we need to filter on categories
-            if (excludeCatArray.length && thisArticleCats.length) {
-              doesIncludeCat = thisArticleCats.filter((element) =>
-                excludeCatArray.includes(element)
-              )
-            }
-            // check to see if we need to filter on tags
-            if (excludeTagArray.length && thisArticleTags.length) {
-              doesIncludeTag = thisArticleTags.filter((element) =>
-                excludeTagArray.includes(element)
-              )
-            }
+          if (item.relationships.field_ucb_article_categories) {
+            thisArticleCats = item.relationships.field_ucb_article_categories.data.map(
+              cat => cat.meta.drupal_internal__target_id
+            );
+          }
 
-            // If there's no categories or tags that are in the exclusions, proceed
-            if (doesIncludeCat.length == 0 && doesIncludeTag.length == 0) {
-                // okay to render
-                let imageSrc = "";
+          if (item.relationships.field_ucb_article_tags) {
+            thisArticleTags = item.relationships.field_ucb_article_tags.data.map(
+              tag => tag.meta.drupal_internal__target_id
+            );
+          }
 
-                //Use the idObj as a memo to add the corresponding image url
-                let thumbId = item.relationships.field_ucb_article_thumbnail.data.id;
-                imageSrc = altObj[idObj[thumbId]];
+          let doesIncludeCat = excludeCatArray.length
+            ? thisArticleCats.filter(cat => excludeCatArray.includes(cat))
+            : thisArticleCats;
 
-                let title = item.attributes.title;
-                let link = this._baseURI + item.attributes.path.alias;
-                // Create an Article Object for programatic rendering
-                const article = {
-                    title,
-                    link,
-                    image: imageSrc,
-                }
-                // Adds the article object to the final array of articles chosen
-                finalArticles.push(article)
-            }
-        })
+          let doesIncludeTag = excludeTagArray.length
+            ? thisArticleTags.filter(tag => excludeTagArray.includes(tag))
+            : thisArticleTags;
+
+          if (doesIncludeCat.length === 0 && doesIncludeTag.length === 0) {
+            let thumbId = item.relationships.field_ucb_article_thumbnail.data.id;
+            let imageSrc = altObj[idObj[thumbId]];
+            let title = item.attributes.title;
+            let link = this._baseURI + item.attributes.path.alias;
+
+            return {
+              title,
+              link,
+              image: imageSrc,
+            };
+          }
+
+          return null;
+        });
+
+        const articlesToAdd = (await Promise.all(promises)).filter(article => article !== null);
+        finalArticles.push(...articlesToAdd);
+
         // Case for not enough articles selected and extra articles available
         if(finalArticles.length < count && NEXTJSONURL){
             fetch(NEXTJSONURL).then(this.handleError)

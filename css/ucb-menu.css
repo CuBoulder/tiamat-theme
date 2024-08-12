@@ -202,8 +202,11 @@
   }
 }
 
-.ucb-page-content .ucb-system-menu-block {
-  margin-top: 20px;
+.ucb-sidebar .ucb-system-menu-block {
+  --bs-gutter-y: 3rem;
+  padding-top: 0;
+  padding-bottom: calc(var(--bs-gutter-y) * .5);
+  margin-bottom: calc(var(--bs-gutter-y) *.5);
 }
 
 .ucb-page-content .ucb-menu {
