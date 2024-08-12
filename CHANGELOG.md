@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article: Article Title Background Style Adjustments
+  ### Articles
+  Corrects the following on Articles with an `Article Title Background` set
+  
+  - On mobile sizes, the navbar hamburger menu could become unclickable due to an Articles Title Background overlay extending too far.
+  - Removes extra padding on "Dark mode" Articles with an Article Title Background image set that created an extra gap between the navbar and the image
+  
+  Resolves #1187 
+  Resolves #1195 
+---
+
 - ### Block styles: Heading Style 'Hero' Font Family Changes
   ### Block Styles
   The heading styles `Hero` and `Hero Bold` have been adjusted to both use 'Roboto Condensed', mirroring the D7 block style versions
