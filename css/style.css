@@ -1128,6 +1128,10 @@ a.tabledrag-handle .handle {
   margin: -0.25em 0.5em;
 }
 
+h1.clear-margin,h2.clear-margin,h3.clear-margin,h4.clear-margin,h5.clear-margin,h6.clear-margin,p.clear-margin{
+  margin-bottom: 0 !important;
+}
+
 /* Column List CSS */
 @media only screen and (min-width: 576px) {
   .column-list.column-list-2 {
