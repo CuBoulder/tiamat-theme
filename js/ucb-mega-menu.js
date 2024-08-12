@@ -26,3 +26,10 @@ function megaMenuClicked(blockName) {
         }
     }
 };
+
+const megaMenuLinks = document.getElementsByClassName(".ucb-mega-menu-outer-link");
+for (let i = 0; i < megaMenuLinks.length; i++) {
+    megaMenuLinks[i].addEventListener("click", function(event){
+        event.preventDefault()
+    });
+}
