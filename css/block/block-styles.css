@@ -3,9 +3,13 @@
   display: flex;
 }
 
-.block-title.hero, .block-title.supersize {
+.block-title.hero {
   font-weight: normal;
   font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; ;
+}
+
+.block-title.supersize{
+  font-weight: normal;
 }
 
 .block-title.strong, .block-title.bold {
