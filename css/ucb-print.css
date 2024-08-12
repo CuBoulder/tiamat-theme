@@ -38,6 +38,10 @@ body {
 .ucb-site-information-print-title{
   color: #000 !important;
 }
+.block-hero-unit .block-title-text {
+  color: #000 !important;
+
+}
 /* -------- Archived from D7, Not implemented in D10 ---------
 .print-breadcrumb {
   text-align: right;
