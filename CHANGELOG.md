@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes uneven accordion icon spacing
+  An issue existed with incorrect sizing and spacing between the icon and text of an accordion item header if the text had wrapped. This update resolves the issue.
+  
+  [bug] Resolves CuBoulder/tiamat-theme#1192 
+---
+
 - ### Article: Article Title Background Style Adjustments
   ### Articles
   Corrects the following on Articles with an `Article Title Background` set
