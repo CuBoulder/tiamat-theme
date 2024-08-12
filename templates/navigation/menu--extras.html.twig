@@ -50,7 +50,7 @@
                     } : item.title %}
                     {% if item.content.field_display_mega_menu|render|striptags|trim == "On" %}
                         {% set linkURL =  "megaMenuClicked('" ~ title|lower|trim|replace({' ': ''}) ~ item.content.field_mega_menu_select.0['#block_content'].id.value ~ "')" %}
-                        <a href="#" title='{{title}}' class="nav-link ucb-mega-menu-outer-link" onclick = "megaMenuClicked('{{title|lower|trim|replace({' ': ''})}}{{item.content.field_mega_menu_select.0['#block_content'].id.value}}')">{{title}} <i class="fa fa-angle-down ucb-mega-menu-icon" aria-hidden="true"></i></a>
+                        <a  title='{{title}}' class="nav-link ucb-mega-menu-outer-link" onclick = "megaMenuClicked('{{title|lower|trim|replace({' ': ''})}}{{item.content.field_mega_menu_select.0['#block_content'].id.value}}')">{{title}} <i class="fa fa-angle-down ucb-mega-menu-icon" aria-hidden="true"></i></a>
                     {% else %}
                         {{ link(title, item.url, create_attribute({ class: 'nav-link' })) }}
                         {% if item.below %}
