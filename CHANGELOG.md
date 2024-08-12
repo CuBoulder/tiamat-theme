@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Block styles: Heading Style 'Hero' Font Family Changes
+  ### Block Styles
+  The heading styles `Hero` and `Hero Bold` have been adjusted to both use 'Roboto Condensed', mirroring the D7 block style versions
+  
+  Resolves #1164 
+---
+
 - ### Adds "University of Colorado Boulder" to the end of page titles
   This update:
   - [change] Adds "University of Colorado Boulder" to the end of page titles. It first checks if the site is already called that to prevent this text from being duplicated on the home page. Resolves CuBoulder/tiamat-theme#1188 
