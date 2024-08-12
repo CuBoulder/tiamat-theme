@@ -5,6 +5,7 @@
 
 .block-title.hero, .block-title.supersize {
   font-weight: normal;
+  font-family: "Roboto Condensed", "Helvetica Neue", Helvetica, Arial, sans-serif; ;
 }
 
 .block-title.strong, .block-title.bold {
