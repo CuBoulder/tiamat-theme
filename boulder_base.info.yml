@@ -5,9 +5,12 @@ core_version_requirement: ^9 || ^10
 type: theme
 base theme: stable9
 
-libraries: 
+libraries:
   - boulder_base/ucb-global
   - boulder_base/migrate_styles # Needed for css polyfill during migration
+
+ckeditor5-stylesheets:
+  - css/colorbox-image.css
 
 regions:
   header: "Header"
