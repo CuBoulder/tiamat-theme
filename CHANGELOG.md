@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Content List Block: Updates to 'Sidebar' Style
+  Updates the look of the 'Sidebar' style of `Content List` Blocks to better match D7, as specified by Kevin in the ticket. Will swap the image to the left and make smaller on both desktop and mobile sizing.
+  
+  Resolves #1169 
+---
+
 - ### CK5: Margin Clear styles
   Adds a 'Margin Clear' style for headers and paragraphs
   
