@@ -29,7 +29,6 @@ function megaMenuClicked(blockName) {
 
 const megaMenuLinks = document.getElementsByClassName("ucb-mega-menu-outer-link");
 for (let i = 0; i < megaMenuLinks.length; i++) {
-    console.log(megaMenuLinks[i].dataset.checktt)
     if(megaMenuLinks[i].dataset.click.length > 0)
     megaMenuLinks[i].addEventListener("click", function(event){
         megaMenuClicked(megaMenuLinks[i].dataset.click);
