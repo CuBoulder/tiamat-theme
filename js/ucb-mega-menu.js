@@ -48,9 +48,22 @@ for (let i = 0; i < megaMenuLinks.length; i++) {
     }
     megaMenuColumns[i].classList.add("ucb-mega-menu-column-" + megaMenuColumnCount);
 }
-
+document.getElementById("ucb-mobile-menu-toggle").addEventListener("click", function(event){
+    resizeFn();
+});
 
 function resizeFn() {
-    console.log(window.innerWidth)
+    if(window.innerWidth < 577) {
+        if(document.getElementById("ucb-mobile-menu-toggle").ariaExpanded.toString().localeCompare("false")==0) {
+            const allMegaMenus =  document.getElementsByClassName("ucb-mega-menu-wrapper");
+            for (let i = 0; i < allMegaMenus.length; i++) {
+                if(allMegaMenus[i].classList.contains("show"))
+                {
+                    allMegaMenus[i].classList.remove("show")
+                    allMegaMenus[i].classList.add("collapse")
+                }
+            }
+        }
     }
-    window.onresize = resizeFn;
+}
+ window.onresize = resizeFn;
