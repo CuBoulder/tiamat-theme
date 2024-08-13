@@ -42,12 +42,12 @@
   margin: 0;
 }
 
-.block-hero-unit.size-large .ucb-hero-unit-content {
+.block-hero-unit .size-large .ucb-hero-unit-content {
   padding-top: 100px;
   padding-bottom: 100px;
 }
 
-.block-hero-unit.size-small .ucb-hero-unit-content {
+.block-hero-unit .size-small .ucb-hero-unit-content {
   padding-top: 20px;
   padding-bottom: 20px;
 }
@@ -179,7 +179,7 @@
 
 /* Fix for icon breaking hero */
 .block-hero-unit .bs-icon-position-default {
-  display: block;
+  display: inline-block;
   margin: 0;
 }
 

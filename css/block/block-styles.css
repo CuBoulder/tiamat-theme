@@ -269,7 +269,7 @@
   margin-right: 5px;
 }
 
-.bs-icon-position-offset .block-title-icon {
+.bs-icon-position-offset.block-title-icon {
   display: inline-block;
   float: left;
   margin-bottom: 75px;
@@ -277,7 +277,7 @@
   padding-top: 5px;
 }
 
-.bs-icon-position-top .block-title-icon {
+.bs-icon-position-top.block-title-icon {
   display: inline-block;
   margin: 0;
   margin-bottom: 5px;
