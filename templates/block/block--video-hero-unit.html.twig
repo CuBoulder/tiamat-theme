@@ -11,7 +11,8 @@
   view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
   content['#block_content'].field_text_align.value,
   content['#block_content'].field_text_color.value,
-  'block-hero-unit'
+  'block-hero-unit',
+  'ucb-hero-outer-wrapper'
 ] %}
 {% set blockId = content['#block_content'].id() %}
 
@@ -66,11 +67,6 @@
 {% endif %}
 
 {% extends '@boulder_base/block/styled-block.html.twig' %}
-{% block wrapper %}
-  <div class="ucb-hero-outer-wrapper">
-    {{ parent() }}
-  </div>
-{% endblock %}
 {% block content %}
   {{ attach_library('boulder_base/ucb-hero-unit') }}
   <div{{ create_attribute({
