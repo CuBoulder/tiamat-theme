@@ -11,13 +11,8 @@ body {
 
 /* BRANDING */
 
-.brand-bar .ucb-brand-bar img.ucb-logo {
-  padding-left: 200px;
-  width: 200px !important;
-  max-width: 200px !important;
-  height: 20px !important;
-  margin-bottom: 1em;
-  background: url(https://cdn.colorado.edu/static/brand-assets/live/images/cu-boulder-logo-text-black.svg) no-repeat;
+.ucb-brand-bar img.ucb-logo {
+  content: url(https://cdn.colorado.edu/static/brand-assets/live/images/cu-boulder-logo-text-black.svg);
 }
 .site-name {
   display: none;
