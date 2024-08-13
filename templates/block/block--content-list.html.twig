@@ -1,12 +1,8 @@
 {#
 /**
- * @file Template to implement the "Content List" block type
- * @author Timur Tripp
-*/
+ * @file Contains the template to display the Content List block.
+ */
 #}
-
-{{ attach_library('boulder_base/ucb-content-list') }}
-
 {% set baseURL = url('<front>')|render|trim('/') %}
 
 {% set blockContent = content['#block_content'] %}
@@ -15,68 +11,38 @@
 {% set display = blockContent.field_content_list_display.value %}
 {% set items = blockContent.field_content_list_content %}
 
-{# Block/Title/Icon Styles #}
-{% set blockStyles = [
-	content.field_bs_background_style|render|striptags|trim,
-	content.field_bs_content_font_scale|render|striptags|trim,
-	content.field_bs_icon_position|render|striptags|trim,
-	content.field_bs_heading_alignment|render|striptags|trim,
-	content.field_bs_title_font_scale|render|striptags|trim,
-	''
-] %}
-
-{% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
-{% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
-{% set headingTag = content.field_bs_heading|render|striptags|trim %}
-{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
-
 {# sorting #}
 {% if sort == 'created_asc' %}
-	{% set items = items|sort((a, b) => a.entity.created.value <=> b.entity.created.value) %}
+  {% set items = items|sort((a, b) => a.entity.created.value <=> b.entity.created.value) %}
 {% elseif sort == 'created_desc' %}
-	{% set items = items|sort((a, b) => b.entity.created.value <=> a.entity.created.value) %}
+  {% set items = items|sort((a, b) => b.entity.created.value <=> a.entity.created.value) %}
 {% elseif sort == 'alphabetical' %}
-	{% set items = items|sort((a, b) => a.entity.title.0.value|trim <=> b.entity.title.0.value|trim) %}
+  {% set items = items|sort((a, b) => a.entity.title.0.value|trim <=> b.entity.title.0.value|trim) %}
 {% endif %}
 
-{%
-	set classes = [
-		'container',
-		'block',
-		'block-' ~ configuration.provider|clean_class,
-		'block-' ~ plugin_id|clean_class,
-		bundle ? 'block--type-' ~ bundle|clean_class,
-		view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
-		'ucb-content-list',
-		'ucb-content-list-display-' ~ display,
-	]
-%}
+{% set classes = [
+  'container',
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
+  'ucb-content-list',
+  'ucb-content-list-display-' ~ display,
+] %}
 
+{% extends '@boulder_base/block/styled-block.html.twig' %}
 {% block content %}
-	<div{{attributes.addClass(classes,blockStyles)}}>
-		{{ title_prefix }}
-		{% if label %}
-			<div class="block-title-outer">
-				<{{ headingTag }}{{title_attributes}} class="block-title {{ headingStyle }}">
-					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
-						{{ content.field_bs_icon }}
-					</span>
-					<span class="block-title-text">
-						{{ label }}
-					</span>
-				</{{ headingTag }}>
-			</div>
-		{% endif %}
-		{{ title_suffix }}
-	<div class="ucb-content-list-container ucb-content-list-{{display}}">
-	{# Adds a ul around the content if the display is selected as 'title' #}
-		{% if display == 'title' %}
-			<ul class="ucb-content-list-list">
-		{% endif %}
+  {{ attach_library('boulder_base/ucb-content-list') }}
+  <div class="ucb-content-list-container ucb-content-list-{{display}}">
+  {# Adds a ul around the content if the display is selected as 'title' #}
+    {% if display == 'title' %}
+      <ul class="ucb-content-list-list">
+    {% endif %}
 
-		{% for item in items %}
+    {% for item in items %}
     {# Skip unpublished items if the user is not logged in #}
-			{% if item.entity.status.value == 1 or user.isAuthenticated %}
+      {% if item.entity.status.value == 1 or user.isAuthenticated %}
         {% set image = item.entity.field_ucb_article_thumbnail.entity.field_media_image ?? item.entity.field_ucb_person_photo.entity.field_media_image ?? item.entity.field_how_to_initial_image.entity.field_media_image ?? item.entity.field_social_sharing_image.entity.field_media_image %}
         {% if image %}
         {% set imageURI = image.entity.fileuri|image_style('focal_image_square') %}{% set imageAlt = image.alt|render %}
@@ -156,12 +122,12 @@
           </div>
         </div>
         {% elseif display == 'title' %}
-        <ul class="ucb-content-list-list">
-        {# ISSUE WE NEED TO MAKE EACH ITEM AN LI INSTEAD OF DUPLICATING THE UL #}
-          <li class="ucb-content-list-row ucb-content-list-title">
-            <a href="{{ baseURL ~ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a>
-          </li>
-        </ul>
+          <ul class="ucb-content-list-list">
+            {# ISSUE WE NEED TO MAKE EACH ITEM AN LI INSTEAD OF DUPLICATING THE UL #}
+            <li class="ucb-content-list-row ucb-content-list-title">
+              <a href="{{ baseURL ~ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a>
+            </li>
+          </ul>
         {% elseif display == 'sidebar' %}
           <div class="row ucb-content-list-row">
             {% if image %}
@@ -169,18 +135,17 @@
                   <a role="presentation" aria-hidden="true" href="{{ baseURL ~ item.entity.path.alias }}"><img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}"></a>
               </div>
             {% endif %}
-            <div class="ucb-content-list-text-container col-10 ">
+            <div class="ucb-content-list-text-container col-10">
               <span class="ucb-content-list-title"><a href="{{ baseURL ~ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></span>
             </div>
           </div>
         {% endif %}
       {% endif %}
-		{% endfor %}
+    {% endfor %}
 
-		{# Adds a closing ul tag around the content if the display is selected as 'title' #}
-		{% if display == 'title' %}
-			</ul>
-	{% endif %}
-	</div>
-</div>
+    {# Adds a closing ul tag around the content if the display is selected as 'title' #}
+    {% if display == 'title' %}
+      </ul>
+    {% endif %}
+  </div>
 {% endblock content %}

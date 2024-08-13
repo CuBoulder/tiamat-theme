@@ -1,105 +1,74 @@
-{{ attach_library('boulder_base/ucb-people-list-block') }}
-
-{%
-    set classes = [
-      'block',
-      'container',
-      'block-' ~ configuration.provider|clean_class,
-      'block-' ~ plugin_id|clean_class,
-      bundle ? 'block--type-' ~ bundle|clean_class,
-      view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
-  ]
-  %}
-
-  {% 
-	set config = {
-		'taxonomies' : {
-			'department': 'department',
-			'job_type': 'ucb_person_job_type',
-			'filter_1': 'filter_1',
-			'filter_2': 'filter_2',
-			'filter_3': 'filter_3'
-		},
-		'filters': {
-			'department': {
-				'includes': content.field_people_block_department|render|striptags|trim|split(' '),
-				'userAccessible': false,
-				'label': 'Department',
-				'restrict': true
-			},
-			'job_type': {
-				'includes': content.field_people_block_job_type|render|striptags|trim|split(' '),
-				'userAccessible': false,
-				'label': 'Job Type',
-				'restrict': true
-			},
-			'filter_1': {
-				'includes': content.field_people_block_filter_1|render|striptags|trim|split(' '),
-				'userAccessible': false,
-				'label': content.field_ucb_people_filter_1_label|render|striptags|trim,
-				'restrict': true
-			},
-			'filter_2': {
-				'includes': content.field_people_block_filter_2|render|striptags|trim|split(' '),
-				'userAccessible': false,
-				'label': content.field_ucb_people_filter_2_label|render|striptags|trim,
-				'restrict': true
-			},
-			'filter_3': {
-				'includes': content.field_people_block_filter_3|render|striptags|trim|split(' '),
-				'userAccessible': false,
-				'label': content.field_ucb_people_filter_3_label|render|striptags|trim,
-				'restrict': true
-			}
-		},
-		'format': content.field_people_block_display|render|striptags|trim,
-	}
-%}
-
-{# Block/Title/Icon Styles #}
-{% set blockStyles = [
-	content.field_bs_background_style|render|striptags|trim,
-	content.field_bs_content_font_scale|render|striptags|trim,
-	content.field_bs_icon_position|render|striptags|trim,
-	content.field_bs_heading_alignment|render|striptags|trim,
-	content.field_bs_title_font_scale|render|striptags|trim,
-	''
+{#
+/**
+ * @file Contains the template to display the People List block.
+ */
+#}
+{% set classes = [
+  'block',
+  'container',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class
 ] %}
 
-{% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
-{% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
-{% set headingTag = content.field_bs_heading|render|striptags|trim %}
-{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
+{% set config = {
+  'taxonomies' : {
+    'department': 'department',
+    'job_type': 'ucb_person_job_type',
+    'filter_1': 'filter_1',
+    'filter_2': 'filter_2',
+    'filter_3': 'filter_3'
+  },
+  'filters': {
+    'department': {
+      'includes': content.field_people_block_department|render|striptags|trim|split(' '),
+      'userAccessible': false,
+      'label': 'Department',
+      'restrict': true
+    },
+    'job_type': {
+      'includes': content.field_people_block_job_type|render|striptags|trim|split(' '),
+      'userAccessible': false,
+      'label': 'Job Type',
+      'restrict': true
+    },
+    'filter_1': {
+      'includes': content.field_people_block_filter_1|render|striptags|trim|split(' '),
+      'userAccessible': false,
+      'label': content.field_ucb_people_filter_1_label|render|striptags|trim,
+      'restrict': true
+    },
+    'filter_2': {
+      'includes': content.field_people_block_filter_2|render|striptags|trim|split(' '),
+      'userAccessible': false,
+      'label': content.field_ucb_people_filter_2_label|render|striptags|trim,
+      'restrict': true
+    },
+    'filter_3': {
+      'includes': content.field_people_block_filter_3|render|striptags|trim|split(' '),
+      'userAccessible': false,
+      'label': content.field_ucb_people_filter_3_label|render|striptags|trim,
+      'restrict': true
+    }
+  },
+  'format': content.field_people_block_display|render|striptags|trim
+} %}
 
-	<div{{attributes.addClass(classes,blockStyles)}}>
-		{{ title_prefix }}
-		{% if label %}
-			<div class="block-title-outer">
-				<{{ headingTag }}{{title_attributes}} class="block-title {{ headingStyle }}">
-					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
-						{{ content.field_bs_icon }}
-					</span>
-					<span class="block-title-text">
-						{{ label }}
-					</span>
-				</{{ headingTag }}>
-			</div>
-		{% endif %}
-		{{ title_suffix }}
-{# People List Block - Main Block#}
-<people-list-block
-	site-base= "{{url('<front>')|render|trim('/')}}"
+{% extends '@boulder_base/block/styled-block.html.twig' %}
+{% block content %}
+  {{ attach_library('boulder_base/ucb-people-list-block') }}
+  {# People List Block - Main Block#}
+  <people-list-block
+    site-base= "{{ url('<front>')|render|trim('/') }}"
     base-uri="{{ url('<front>')|render|trim('/') }}/jsonapi"
     config="{{ config|json_encode }}"
-    user-config="{}"
->
-  <div id="ucb-al-error" style="display:none" class="ucb-list-msg">
-    <h3>An error has occured - please check your filters and try again</h3>
-  </div>
-  <div id="ucb-al-api-error" style="display:none" class="ucb-list-msg">
-    <h3>An error has occured with the API - please try again later</h3>
-  </div>
-</people-list-block>
-</div>
-
-
+    user-config="{}">
+    <div id="ucb-al-error" style="display:none" class="ucb-list-msg">
+      <h3>An error has occured - please check your filters and try again</h3>
+    </div>
+    <div id="ucb-al-api-error" style="display:none" class="ucb-list-msg">
+      <h3>An error has occured with the API - please try again later</h3>
+    </div>
+  </people-list-block>
+{% endblock %}
