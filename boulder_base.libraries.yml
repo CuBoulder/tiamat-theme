@@ -17,8 +17,6 @@ ucb-global:
       css/layout-builder-styles.css: {}
       css/block/block-styles.css: {}
       css/ucb-accordion-styles.css: {}
-  ckeditor5-stylesheets:
-    - css/base-ckeditor5.css
   js:
     js/bootstrap/bootstrap.min.js: {}
     js/ucb-rave-alert.js: {}
