@@ -337,6 +337,10 @@
   --bs-gutter-x: 0;
 }
 
+.ucb-sidebar-container .ucb-contained-row {
+  --bs-gutter-x: 0;
+}
+
 /*** !important needed to override inline background image styles ***/
 
 .scrolling-background {
