@@ -9,6 +9,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### New Image Styles: Colorbox Image Styles
+  ### New Image Styles
+  Adds 4 new colorbox image styles: `Colorbox Small` , `Colorbox Small Square`, `Colorbox Small Thumbnail`, `Colorbox Square`. On click, these open up a modal with the full image and caption.
+  
+  Includes:
+  
+  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/1205
+  - `tiamat-custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/160
+  - `tiamat-profile` => https://github.com/CuBoulder/tiamat10-profile/pull/185
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1174
+---
+
+- ### Sidebar spacing fixes
+  Fixed sidebar spacing so that things vertically aligned. 
+  
+  Also solves the problem of a mobile horizontal scroll bar appearing because of the `g-0` class. 
+  
+  Changed the column sizes to match the same sizes as layout builder sidebars. 
+  
+  Finally fixed alignment of multi-column layoutbuilders + a sidebar. Though this should be a rare case, the new changes make it so all the content aligns as expected.
+  
+  To test the horizontal mobile scroll bar fix you'll need to have a block or menu in the block layout sidebar.
+  
+  Resolves #1198 
+---
+
 - ### Content List Block: Updates to 'Sidebar' Style
   Updates the look of the 'Sidebar' style of `Content List` Blocks to better match D7, as specified by Kevin in the ticket. Will swap the image to the left and make smaller on both desktop and mobile sizing.
   
