@@ -283,6 +283,6 @@
   margin-bottom: 5px;
 }
 
-.bs-icon-position-top .block-title-text {
+.bs-icon-position-top + .block-title-text {
   display: block;
 }
