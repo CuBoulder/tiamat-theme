@@ -35,7 +35,11 @@ body {
 .ucb-site-information-print-title{
   color: #000 !important;
 }
-.block-hero-unit .block-title-text {
+.block-title-text {
+  color: #000 !important;
+
+}
+.ucb-bootstrap-layout-section {
   color: #000 !important;
 
 }
