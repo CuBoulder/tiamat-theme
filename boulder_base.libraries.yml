@@ -486,3 +486,15 @@ ucb-social-media-icons-block:
   css:
     theme:
       css/block/social-media-icons.css: {}
+
+colorbox-image:
+  version: 1.x
+  js:
+    js/glightbox/glightbox.min.js: {}
+    js/glightbox/ucb-gallery-lightbox-settings.js: {}
+    js/masonry/masonry.pkgd.min.js: {}
+  css:
+    theme:
+      css/block/image-gallery.css: {}
+      css/colorbox-image.css: {}
+      js/glightbox/glightbox.min.css: {}
