@@ -17,6 +17,7 @@ ucb-global:
       css/layout-builder-styles.css: {}
       css/block/block-styles.css: {}
       css/ucb-accordion-styles.css: {}
+      css/ucb-print.css: { media: print }
   js:
     js/bootstrap/bootstrap.min.js: {}
     js/ucb-rave-alert.js: {}

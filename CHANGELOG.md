@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Print Stylesheets
+  Closes #1101.
+  Adds a rudimentary print css style for all pages.
+---
+
 - ### Article List: Fixes Exclusion Filters
   ### Article List
   Fixes a bug with the `Article List` introduced when we refactored Article Lists to strictly enforce chronological order despite API timings. The bug would cause exclusions to throw an API Error instead of skipping processing entirely, which they had done when chronological order was not strictly enforced. 
