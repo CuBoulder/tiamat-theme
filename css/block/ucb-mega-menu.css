@@ -82,3 +82,22 @@
     }
 
 }
+
+.ucb-header-black .ucb-mega-menu {
+    background-color: #000;
+    color: #fff;
+}
+.ucb-header-dark .ucb-mega-menu {
+    background-color: #424242;
+    color: #fff;
+}
+
+.ucb-header-black .ucb-mega-menu a,
+.ucb-header-dark .ucb-mega-menu a {
+    color: #cfb87b;
+}
+
+.ucb-header-black .ucb-mega-menu a:hover,
+.ucb-header-dark .ucb-mega-menu a:hover {
+    color: #fff;
+}
