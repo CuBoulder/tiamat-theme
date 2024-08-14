@@ -14,12 +14,15 @@
 .ucb-mega-menu-column-links-wrapper a {
     display: block;
 }
+
 .ucb-mega-menu-link-desc {
     font-size: 75%;
 }
+
 .ucb-mega-menu-icon {
     padding-left: 2px;
 }
+
 .ucb-mega-menu {
     position: absolute;
     box-shadow: 0 2px 5px rgba(0 0 0 /10%);
@@ -58,6 +61,7 @@
 .ucb-mega-menu-wrapper {
     padding: 20px;
 }
+
 .ucb-mega-menu-column-wrapper {
     display: flex;
     flex-direction: row;
@@ -81,23 +85,4 @@
         max-width: 100%;
     }
 
-}
-
-.ucb-header-black .ucb-mega-menu {
-    background-color: #000;
-    color: #fff;
-}
-.ucb-header-dark .ucb-mega-menu {
-    background-color: #424242;
-    color: #fff;
-}
-
-.ucb-header-black .ucb-mega-menu a,
-.ucb-header-dark .ucb-mega-menu a {
-    color: #cfb87b;
-}
-
-.ucb-header-black .ucb-mega-menu a:hover,
-.ucb-header-dark .ucb-mega-menu a:hover {
-    color: #fff;
 }

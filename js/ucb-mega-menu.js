@@ -1,41 +1,42 @@
 //Triggers when the mega menu link is clicked to show or hide the mega menu
 function megaMenuClicked(blockName) {
-        const blockID =  document.getElementsByClassName("block-" + blockName);
-        const allMegaMenus =  document.getElementsByClassName("ucb-mega-menu-wrapper");
-        let blockState = 0;
-        for (let i = 0; i < blockID.length; i++) {
-            if(blockID[i].classList.contains("show")) {
-                blockState = 1;
-            }
+    const blockID =  document.getElementsByClassName("block-" + blockName);
+    const allMegaMenus =  document.getElementsByClassName("ucb-mega-menu-wrapper");
+    let blockState = 0;
+    for (let i = 0; i < blockID.length; i++) {
+        if(blockID[i].classList.contains("show")) {
+            blockState = 1;
         }
-        for (let i = 0; i < allMegaMenus.length; i++) {
-            if(allMegaMenus[i].classList.contains("show"))
-            {
-                allMegaMenus[i].classList.remove("show")
-                allMegaMenus[i].classList.add("collapse")
-            }
+    }
+    for (let i = 0; i < allMegaMenus.length; i++) {
+        if(allMegaMenus[i].classList.contains("show"))
+        {
+            allMegaMenus[i].classList.remove("show")
+            allMegaMenus[i].classList.add("collapse")
         }
-        for (let i = 0; i < blockID.length; i++) {
-            if(blockState == 0)
-            {
-                blockID[i].classList.add("show")
-                blockID[i].classList.remove("collapse")
-            }
-            else {
-                blockID[i].classList.add("collapse")
-                blockID[i].classList.remove("show")
-            }
+    }
+    for (let i = 0; i < blockID.length; i++) {
+        if(blockState == 0)
+        {
+            blockID[i].classList.add("show")
+            blockID[i].classList.remove("collapse")
         }
+        else {
+            blockID[i].classList.add("collapse")
+            blockID[i].classList.remove("show")
+        }
+    }
 };
 
 //Adds the click event listener to all mega menu outer links
 const megaMenuLinks = document.getElementsByClassName("ucb-mega-menu-outer-link");
 for (let i = 0; i < megaMenuLinks.length; i++) {
-    if(megaMenuLinks[i].dataset.click.length > 0)
-    megaMenuLinks[i].addEventListener("click", function(event){
-        event.preventDefault();
-        megaMenuClicked(megaMenuLinks[i].dataset.click);
-    });
+    if(megaMenuLinks[i].dataset.click.length > 0) {
+        megaMenuLinks[i].addEventListener("click", function(event){
+            event.preventDefault();
+            megaMenuClicked(megaMenuLinks[i].dataset.click);
+        });
+    }
 }
 
 //Adds the column value to the column wrapper
@@ -70,7 +71,7 @@ function resizeFn() {
         }
     }
 }
- window.onresize = resizeFn;
+window.onresize = resizeFn;
 
  //Add an even listener to check if the user clicked outside the mega menu, then close the mega menu
  window.addEventListener('click', function(e){
