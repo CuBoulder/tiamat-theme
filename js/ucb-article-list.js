@@ -212,13 +212,16 @@
 
             let results = await Promise.all(promises);
 
-            results.forEach(result => {
+            results
+            .filter(result => result !== undefined)
+            .forEach(result => {
               let dataOutput = document.getElementById("ucb-al-data");
               let thisArticle = document.createElement("article");
               thisArticle.className = 'ucb-article-card-container';
               thisArticle.appendChild(result.articleRow);
               dataOutput.append(thisArticle);
             });
+
 
             if (NEXTJSONURL) {
               toggleMessage('ucb-el-load-more', 'inline-block');

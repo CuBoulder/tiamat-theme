@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article List: Fixes Exclusion Filters
+  ### Article List
+  Fixes a bug with the `Article List` introduced when we refactored Article Lists to strictly enforce chronological order despite API timings. The bug would cause exclusions to throw an API Error instead of skipping processing entirely, which they had done when chronological order was not strictly enforced. 
+  
+  This has been corrected and Articles flagged with Excluded Categories / Excluded Tags are properly removed with an additional check.
+  
+  Resolves #1207 
+---
+
 - ### New Image Styles: Colorbox Image Styles
   ### New Image Styles
   Adds 4 new colorbox image styles: `Colorbox Small` , `Colorbox Small Square`, `Colorbox Small Thumbnail`, `Colorbox Square`. On click, these open up a modal with the full image and caption.
