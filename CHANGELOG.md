@@ -9,136 +9,172 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Print Stylesheets
-  Closes #1101.
-  Adds a rudimentary print css style for all pages.
----
+## [20240814] - 2024-08-14
 
-- ### Article List: Fixes Exclusion Filters
-  ### Article List
-  Fixes a bug with the `Article List` introduced when we refactored Article Lists to strictly enforce chronological order despite API timings. The bug would cause exclusions to throw an API Error instead of skipping processing entirely, which they had done when chronological order was not strictly enforced. 
-  
-  This has been corrected and Articles flagged with Excluded Categories / Excluded Tags are properly removed with an additional check.
-  
-  Resolves #1207 
----
+-   ### Print Stylesheets
+    Closes #1101.
+    Adds a rudimentary print css style for all pages.
 
-- ### New Image Styles: Colorbox Image Styles
-  ### New Image Styles
-  Adds 4 new colorbox image styles: `Colorbox Small` , `Colorbox Small Square`, `Colorbox Small Thumbnail`, `Colorbox Square`. On click, these open up a modal with the full image and caption.
-  
-  Includes:
-  
-  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/1205
-  - `tiamat-custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/160
-  - `tiamat-profile` => https://github.com/CuBoulder/tiamat10-profile/pull/185
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1174
----
+* * *
 
-- ### Sidebar spacing fixes
-  Fixed sidebar spacing so that things vertically aligned. 
-  
-  Also solves the problem of a mobile horizontal scroll bar appearing because of the `g-0` class. 
-  
-  Changed the column sizes to match the same sizes as layout builder sidebars. 
-  
-  Finally fixed alignment of multi-column layoutbuilders + a sidebar. Though this should be a rare case, the new changes make it so all the content aligns as expected.
-  
-  To test the horizontal mobile scroll bar fix you'll need to have a block or menu in the block layout sidebar.
-  
-  Resolves #1198 
----
+-   ### Article List: Fixes Exclusion Filters
 
-- ### Content List Block: Updates to 'Sidebar' Style
-  Updates the look of the 'Sidebar' style of `Content List` Blocks to better match D7, as specified by Kevin in the ticket. Will swap the image to the left and make smaller on both desktop and mobile sizing.
-  
-  Resolves #1169 
----
+    ### Article List
 
-- ### CK5: Margin Clear styles
-  Adds a 'Margin Clear' style for headers and paragraphs
-  
-  Includes:
-  -`tiamat-profile` => https://github.com/CuBoulder/tiamat10-profile/pull/182
-  -`tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/1201
-  
-  Resolves https://github.com/CuBoulder/tiamat10-profile/issues/152
----
+    Fixes a bug with the `Article List` introduced when we refactored Article Lists to strictly enforce chronological order despite API timings. The bug would cause exclusions to throw an API Error instead of skipping processing entirely, which they had done when chronological order was not strictly enforced. 
 
-- ### Fixes uneven accordion icon spacing
-  An issue existed with incorrect sizing and spacing between the icon and text of an accordion item header if the text had wrapped. This update resolves the issue.
-  
-  [bug] Resolves CuBoulder/tiamat-theme#1192 
----
+    This has been corrected and Articles flagged with Excluded Categories / Excluded Tags are properly removed with an additional check.
 
-- ### Article: Article Title Background Style Adjustments
-  ### Articles
-  Corrects the following on Articles with an `Article Title Background` set
-  
-  - On mobile sizes, the navbar hamburger menu could become unclickable due to an Articles Title Background overlay extending too far.
-  - Removes extra padding on "Dark mode" Articles with an Article Title Background image set that created an extra gap between the navbar and the image
-  
-  Resolves #1187 
-  Resolves #1195 
----
+    Resolves #1207 
 
-- ### Block styles: Heading Style 'Hero' Font Family Changes
-  ### Block Styles
-  The heading styles `Hero` and `Hero Bold` have been adjusted to both use 'Roboto Condensed', mirroring the D7 block style versions
-  
-  Resolves #1164 
----
+* * *
 
-- ### Adds "University of Colorado Boulder" to the end of page titles
-  This update:
-  - [change] Adds "University of Colorado Boulder" to the end of page titles. It first checks if the site is already called that to prevent this text from being duplicated on the home page. Resolves CuBoulder/tiamat-theme#1188 
-  - [change] Cleans up PHPCS errors in `boulder_base.theme`.
----
+-   ### New Image Styles: Colorbox Image Styles
 
-- ### Article List blocks: Chronological Order
-  ### Article Aggregator Blocks
-  Previously Article Aggregator Blocks (includes `Article List`, `Article Feature`, `Article Grid`, `Article Slider`) could sometimes display `Articles` out of chronological order. This issue was due to the asynchronous nature of the chained API calls, which could cause Articles that required additional processing (e.g., generating a summary from the article body) to be placed out of order after processing completed while other more field complete (but potentially chronologically earlier)  Articles "finished" before them.
-  
-  Now, all Articles are processed and appended to the page in their original order, ensuring the chronological display of articles across all Article aggregator page/blocks
-  
-  Resolves #1184 
----
+    ### New Image Styles
 
-- ### People Lists: Removing an Image breaks Lists
-  ### People List Page & People List Block
-  
-  Previously in the case where you had a `People List Page` or `People List Block` and then removed an Image from the Media Library that was used as a thumbnail for a `Person` page, this would make that respective Person Page's thumbnail ID to become `'missing'` rather than a `null` value, which would cause the Person List Page to completely break unless that Person's thumbnail image is fixed.
-  
-  This has been corrected with additional checks in these rare cases. It will also use the Default Avatar in specific displays such as the Grid. 
-  
-  Resolves #1175 
----
+    Adds 4 new colorbox image styles: `Colorbox Small` , `Colorbox Small Square`, `Colorbox Small Thumbnail`, `Colorbox Square`. On click, these open up a modal with the full image and caption.
 
-- ### Slate Form: Styles Submit Button
-  ### Slate Form Block
-  Styles the submit button similar to the Form Block
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1173
-  
-  Related: https://github.com/CuBoulder/tiamat-custom-entities/pull/156
----
+    Includes:
 
-- ### Favicon path change
-  Closes #1081.
-  Changes the favicon path to be relative to the site path.
----
+    -   `tiamat-theme` => <https://github.com/CuBoulder/tiamat-theme/pull/1205>
+    -   `tiamat-custom-entities` => <https://github.com/CuBoulder/tiamat-custom-entities/pull/160>
+    -   `tiamat-profile` => <https://github.com/CuBoulder/tiamat10-profile/pull/185>
 
-- ### Article List: Chronological Order
-  ### Article List Page
-  Previously an `Article List Page` could sometimes display `Articles` out of chronological order. This issue was due to the asynchronous nature of the chained API calls, which could cause `Articles` that required additional processing (e.g., generating a summary from the article body) to be placed out of order after processing completed as other earlier, more complete `Articles` "finished" before them.
-  
-  Now, all `Articles` are processed and appended to the page in their original order, ensuring the chronological display of articles. 
-  
-  Note: This did not seem to affect the other `Article List` style blocks, only the `Article List Page`
-  
-  Resolves #1176 
----
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1174>
+
+* * *
+
+-   ### Sidebar spacing fixes
+
+    Fixed sidebar spacing so that things vertically aligned. 
+
+    Also solves the problem of a mobile horizontal scroll bar appearing because of the `g-0` class. 
+
+    Changed the column sizes to match the same sizes as layout builder sidebars. 
+
+    Finally fixed alignment of multi-column layoutbuilders + a sidebar. Though this should be a rare case, the new changes make it so all the content aligns as expected.
+
+    To test the horizontal mobile scroll bar fix you'll need to have a block or menu in the block layout sidebar.
+
+    Resolves #1198 
+
+* * *
+
+-   ### Content List Block: Updates to 'Sidebar' Style
+
+    Updates the look of the 'Sidebar' style of `Content List` Blocks to better match D7, as specified by Kevin in the ticket. Will swap the image to the left and make smaller on both desktop and mobile sizing.
+
+    Resolves #1169 
+
+* * *
+
+-   ### CK5: Margin Clear styles
+
+    Adds a 'Margin Clear' style for headers and paragraphs
+
+    Includes:
+    \-`tiamat-profile` => <https://github.com/CuBoulder/tiamat10-profile/pull/182>
+    \-`tiamat-theme` => <https://github.com/CuBoulder/tiamat-theme/pull/1201>
+
+    Resolves <https://github.com/CuBoulder/tiamat10-profile/issues/152>
+
+* * *
+
+-   ### Fixes uneven accordion icon spacing
+
+    An issue existed with incorrect sizing and spacing between the icon and text of an accordion item header if the text had wrapped. This update resolves the issue.
+
+    [bug] Resolves CuBoulder/tiamat-theme#1192 
+
+* * *
+
+-   ### Article: Article Title Background Style Adjustments
+
+    ### Articles
+
+    Corrects the following on Articles with an `Article Title Background` set
+
+    -   On mobile sizes, the navbar hamburger menu could become unclickable due to an Articles Title Background overlay extending too far.
+    -   Removes extra padding on "Dark mode" Articles with an Article Title Background image set that created an extra gap between the navbar and the image
+
+    Resolves #1187 
+    Resolves #1195 
+
+* * *
+
+-   ### Block styles: Heading Style 'Hero' Font Family Changes
+
+    ### Block Styles
+
+    The heading styles `Hero` and `Hero Bold` have been adjusted to both use 'Roboto Condensed', mirroring the D7 block style versions
+
+    Resolves #1164 
+
+* * *
+
+-   ### Adds "University of Colorado Boulder" to the end of page titles
+    This update:
+    -   [change] Adds "University of Colorado Boulder" to the end of page titles. It first checks if the site is already called that to prevent this text from being duplicated on the home page. Resolves CuBoulder/tiamat-theme#1188 
+    -   [change] Cleans up PHPCS errors in `boulder_base.theme`.
+
+* * *
+
+-   ### Article List blocks: Chronological Order
+
+    ### Article Aggregator Blocks
+
+    Previously Article Aggregator Blocks (includes `Article List`, `Article Feature`, `Article Grid`, `Article Slider`) could sometimes display `Articles` out of chronological order. This issue was due to the asynchronous nature of the chained API calls, which could cause Articles that required additional processing (e.g., generating a summary from the article body) to be placed out of order after processing completed while other more field complete (but potentially chronologically earlier)  Articles "finished" before them.
+
+    Now, all Articles are processed and appended to the page in their original order, ensuring the chronological display of articles across all Article aggregator page/blocks
+
+    Resolves #1184 
+
+* * *
+
+-   ### People Lists: Removing an Image breaks Lists
+
+    ### People List Page & People List Block
+
+    Previously in the case where you had a `People List Page` or `People List Block` and then removed an Image from the Media Library that was used as a thumbnail for a `Person` page, this would make that respective Person Page's thumbnail ID to become `'missing'` rather than a `null` value, which would cause the Person List Page to completely break unless that Person's thumbnail image is fixed.
+
+    This has been corrected with additional checks in these rare cases. It will also use the Default Avatar in specific displays such as the Grid. 
+
+    Resolves #1175 
+
+* * *
+
+-   ### Slate Form: Styles Submit Button
+
+    ### Slate Form Block
+
+    Styles the submit button similar to the Form Block
+
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1173>
+
+    Related: <https://github.com/CuBoulder/tiamat-custom-entities/pull/156>
+
+* * *
+
+-   ### Favicon path change
+    Closes #1081.
+    Changes the favicon path to be relative to the site path.
+
+* * *
+
+-   ### Article List: Chronological Order
+
+    ### Article List Page
+
+    Previously an `Article List Page` could sometimes display `Articles` out of chronological order. This issue was due to the asynchronous nature of the chained API calls, which could cause `Articles` that required additional processing (e.g., generating a summary from the article body) to be placed out of order after processing completed as other earlier, more complete `Articles` "finished" before them.
+
+    Now, all `Articles` are processed and appended to the page in their original order, ensuring the chronological display of articles. 
+
+    Note: This did not seem to affect the other `Article List` style blocks, only the `Article List Page`
+
+    Resolves #1176 
+
+* * *
 
 ## [20240805] - 2024-08-05
 
@@ -2943,7 +2979,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240805...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240814...HEAD
+
+[20240814]: https://github.com/CuBoulder/tiamat-theme/compare/20240805...20240814
 
 [20240805]: https://github.com/CuBoulder/tiamat-theme/compare/20240725...20240805
 
