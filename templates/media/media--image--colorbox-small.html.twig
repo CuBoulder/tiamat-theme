@@ -1,0 +1,23 @@
+{{ attach_library('boulder_base/colorbox-image') }}
+
+{% set imageStyle = 'image_style-default' %}
+{% if content.field_media_image.0['#image_style']|render %}
+  {% set imageStyle = 'image_style-' ~ content.field_media_image.0['#image_style']|render %}
+{% endif %}
+
+{# Retrieve the image URL #}
+{% set image_url = file_url(content.field_media_image.0['#item'].entity.uri.value) %}
+
+{# Access the photo description directly from content #}
+{% set field_items = content.field_media_image_caption['#items'] %}
+{% if field_items %}
+  {% set photoDescription = field_items.0.value|render|striptags|trim %}
+{% else %}
+  {% set photoDescription = '' %}
+{% endif %}
+
+<div class="col gallery-item">
+  <a href="{{ image_url }}" class="glightbox ucb-gallery-lightbox" data-gallery="gallery{{ content['#block_content'].id() }}" data-glightbox="description: {{ photoDescription }} ">
+    <img class="ucb-colorbox-small" src="{{ image_url }}" alt="{{ photoDescription }}" />
+  </a>
+</div>

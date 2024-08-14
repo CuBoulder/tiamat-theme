@@ -399,25 +399,33 @@ class PeopleListBlockElement extends HTMLElement {
 		const defaultThumbnail = format == 'grid' ? defaultAvatarURL : '';
 
 		people.forEach((person) => {
-			const personRelationshipData = person['relationships'],
-				departmentsData = personRelationshipData['field_ucb_person_department']['data'],
-				jobTypesData = personRelationshipData['field_ucb_person_department']['data'],
-				personAttributeData = person['attributes'],
-				departments = [], jobTypes = [], photoId = (personRelationshipData['field_ucb_person_photo']['data'] || {})['id'] || '',
-				thisPerson = {
-					link: (personAttributeData['path'] || {})['alias'] || `/node/${personAttributeData['drupal_internal__nid']}`,
-					name: personAttributeData['title'],
-					titles: personAttributeData['field_ucb_person_title'],
-					departments: departments,
-					jobTypes: jobTypes,
-					photoId: photoId,
-					photoURI: photoId ? urlObj[idObj[photoId]] : defaultThumbnail,
-					body: '',
-					email: personAttributeData['field_ucb_person_email'],
-					phone: personAttributeData['field_ucb_person_phone'],
-					primaryLinkURI: '',
-					primaryLinkTitle: ''
-				};
+      const personRelationshipData = person['relationships'],
+        departmentsData = personRelationshipData['field_ucb_person_department']['data'],
+        jobTypesData = personRelationshipData['field_ucb_person_department']['data'],
+        personAttributeData = person['attributes'],
+        departments = [],
+        jobTypes = [],
+        photoId = (personRelationshipData['field_ucb_person_photo']['data'] || {})['id'] || '';
+
+        // Special case for if media image was removed
+      const isPhotoMissing = photoId === 'missing';
+      const photoExists = photoId && !isPhotoMissing;
+
+      const thisPerson = {
+        link: (personAttributeData['path'] || {})['alias'] || `/node/${personAttributeData['drupal_internal__nid']}`,
+        name: personAttributeData['title'],
+        titles: personAttributeData['field_ucb_person_title'],
+        departments: departments,
+        jobTypes: jobTypes,
+        photoId: photoId,
+        photoURI: photoExists ? urlObj[idObj[photoId]] : defaultThumbnail,
+        body: '',
+        email: personAttributeData['field_ucb_person_email'],
+        phone: personAttributeData['field_ucb_person_phone'],
+        primaryLinkURI: '',
+        primaryLinkTitle: ''
+      };
+
 
 			// Builds arrays of department and job type ids
 			departmentsData.forEach(departmentData => departments.push(departmentData['meta']['drupal_internal__target_id']));

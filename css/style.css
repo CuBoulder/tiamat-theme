@@ -54,8 +54,9 @@ body {
 }
 
 .ucb-content-wrapper {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  --bs-gutter-y: 3rem;
+  margin-top: calc(var(--bs-gutter-y)* .5);
+  margin-bottom: calc(var(--bs-gutter-y)* .5);
 }
 
 main {
@@ -1125,6 +1126,10 @@ button.tabledrag-toggle-weight {
 a.tabledrag-handle .handle {
   box-sizing: content-box;
   margin: -0.25em 0.5em;
+}
+
+h2.clear-margin,h3.clear-margin,h4.clear-margin,h5.clear-margin,h6.clear-margin,p.clear-margin{
+  margin-bottom: 0 !important;
 }
 
 /* Column List CSS */

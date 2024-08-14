@@ -84,63 +84,64 @@ class ArticleFeatureBlockElement extends HTMLElement {
     }
 
     // Process each article
-    const articlesToAdd = await Promise.all(
-      data.data.map(async (item) => {
-        if (item.relationships.field_ucb_article_thumbnail.data) {
-          const thisArticleCats =
-            item.relationships.field_ucb_article_categories?.data.map(
-              (cat) => cat.meta.drupal_internal__target_id
-            ) || [];
-          const thisArticleTags =
-            item.relationships.field_ucb_article_tags?.data.map(
-              (tag) => tag.meta.drupal_internal__target_id
-            ) || [];
+    const promises = data.data.map(async (item) => {
+      if (item.relationships.field_ucb_article_thumbnail.data) {
+        const thisArticleCats =
+          item.relationships.field_ucb_article_categories?.data.map(
+            (cat) => cat.meta.drupal_internal__target_id
+          ) || [];
+        const thisArticleTags =
+          item.relationships.field_ucb_article_tags?.data.map(
+            (tag) => tag.meta.drupal_internal__target_id
+          ) || [];
 
-          const doesIncludeCat = excludeCatArray.length
-            ? thisArticleCats.filter((cat) => excludeCatArray.includes(cat))
-            : [];
-          const doesIncludeTag = excludeTagArray.length
-            ? thisArticleTags.filter((tag) => excludeTagArray.includes(tag))
-            : [];
+        const doesIncludeCat = excludeCatArray.length
+          ? thisArticleCats.filter((cat) => excludeCatArray.includes(cat))
+          : [];
+        const doesIncludeTag = excludeTagArray.length
+          ? thisArticleTags.filter((tag) => excludeTagArray.includes(tag))
+          : [];
 
-          // Proceed if no excluded categories or tags are found
-          if (doesIncludeCat.length === 0 && doesIncludeTag.length === 0) {
-            const bodyAndImageId =
-              item.relationships.field_ucb_article_content?.data[0]?.id || "";
-            let body = item.attributes.field_ucb_article_summary || "";
-            if (!body && bodyAndImageId) {
-              body = await this.getArticleParagraph(bodyAndImageId);
-            }
-            const imageSrc = item.relationships.field_ucb_article_thumbnail.data
-              ? altObj[
-                  idObj[item.relationships.field_ucb_article_thumbnail.data.id]
-                ]
-              : "";
-            const imageSrcWide = item.relationships.field_ucb_article_thumbnail
-              .data
-              ? wideObj[
-                  idObj[item.relationships.field_ucb_article_thumbnail.data.id]
-                ]
-              : "";
-
-            return {
-              title: item.attributes.title,
-              link: this._baseURI + item.attributes.path.alias,
-              imageSquare: imageSrc,
-              imageWide: imageSrcWide,
-              date: new Date(item.attributes.created).toLocaleDateString(
-                "en-us",
-                { year: "numeric", month: "short", day: "numeric" }
-              ),
-              body: body.trim(),
-            };
+        if (doesIncludeCat.length === 0 && doesIncludeTag.length === 0) {
+          const bodyAndImageId =
+            item.relationships.field_ucb_article_content?.data[0]?.id || "";
+          let body = item.attributes.field_ucb_article_summary || "";
+          if (!body && bodyAndImageId) {
+            body = await this.getArticleParagraph(bodyAndImageId);
           }
+          const imageSrc = item.relationships.field_ucb_article_thumbnail.data
+            ? altObj[
+                idObj[item.relationships.field_ucb_article_thumbnail.data.id]
+              ]
+            : "";
+          const imageSrcWide = item.relationships.field_ucb_article_thumbnail
+            .data
+            ? wideObj[
+                idObj[item.relationships.field_ucb_article_thumbnail.data.id]
+              ]
+            : "";
+
+          return {
+            title: item.attributes.title,
+            link: this._baseURI + item.attributes.path.alias,
+            imageSquare: imageSrc,
+            imageWide: imageSrcWide,
+            date: new Date(item.attributes.created).toLocaleDateString(
+              "en-us",
+              { year: "numeric", month: "short", day: "numeric" }
+            ),
+            body: body.trim(),
+          };
         }
-        return null;
-      })
+      }
+      return null;
+    });
+
+    const articlesToAdd = (await Promise.all(promises)).filter(
+      (article) => article !== null
     );
 
-    finalArticles.push(...articlesToAdd.filter((article) => article !== null));
+    finalArticles.push(...articlesToAdd);
 
     // Fetch more articles if needed
     if (finalArticles.length < count && NEXTJSONURL) {

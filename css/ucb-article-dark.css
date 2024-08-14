@@ -34,6 +34,11 @@ article.ucb-page-style-dark {
 	padding-bottom: 1.75em;
 }
 
+/* Override for Dark-style Articles with a Title Image */
+article.ucb-page-style-dark:has(.backgroundTitleDiv){
+  padding-top: 0;
+}
+
 /* Override for the content wrapper on Dark Mode Articles to maintain background color */
 article.ucb-page-style-dark.ucb-content-wrapper{
   margin-top: 0px;

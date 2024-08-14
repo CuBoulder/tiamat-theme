@@ -164,14 +164,14 @@
         </ul>
         {% elseif display == 'sidebar' %}
           <div class="row ucb-content-list-row">
-            <div class="ucb-content-list-text-container ">
-              <span class="ucb-content-list-title"><a href="{{ baseURL ~ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></span>
-            </div>
             {% if image %}
-              <div class="ucb-content-list-image-container">
+              <div class="ucb-content-list-image-container col-2">
                   <a role="presentation" aria-hidden="true" href="{{ baseURL ~ item.entity.path.alias }}"><img class="ucb-content-list-image" src="{{ imageURI }}" alt="{{ imageAlt }}"></a>
               </div>
             {% endif %}
+            <div class="ucb-content-list-text-container col-10 ">
+              <span class="ucb-content-list-title"><a href="{{ baseURL ~ item.entity.path.alias }}">{{ item.entity.title.0.value }}</a></span>
+            </div>
           </div>
         {% endif %}
       {% endif %}
