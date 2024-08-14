@@ -1,0 +1,19 @@
+img.ucb-colorbox-small{
+  width: 300px !important;
+}
+
+img.ucb-colorbox-small-square{
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+}
+
+img.ucb-colorbox-small-thumbnail{
+  width: 100px !important;
+}
+
+img.ucb-colorbox-square{
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+}

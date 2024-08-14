@@ -205,3 +205,10 @@ i.fa-regular.fa-calendar {
 .backgroundTitleDiv .imageMediaStyle img {
   padding-bottom: 0px;
 }
+
+/* Fixes the overlay covering the mobile hamburger menu */
+@media only screen and (max-width: 575px) {
+  .backgroundTitleDiv .ucb-article-heading {
+    padding: 150px 20px 30px;
+  }
+}
