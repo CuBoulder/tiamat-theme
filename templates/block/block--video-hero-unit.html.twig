@@ -9,8 +9,6 @@
   'block-' ~ plugin_id|clean_class,
   bundle ? 'block--type-' ~ bundle|clean_class,
   view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
-  content['#block_content'].field_text_align.value,
-  content['#block_content'].field_text_color.value,
   'block-hero-unit',
   'ucb-hero-outer-wrapper'
 ] %}
@@ -46,6 +44,11 @@
   {% set containerSize = 'ucb-hero-unit-text' %}
 {% endif %}
 
+{# set class for hero unit text align #}
+{% set heroTextAlign = content['#block_content'].field_text_align.value %}
+
+{# set class for hero unit text color #}
+{% set heroTextColor = content['#block_content'].field_text_color.value %}
 
 {# set classes for the size of the component #}
 {% if content['#block_content'].field_size.value is same as('0') %}
@@ -70,7 +73,7 @@
 {% block content %}
   {{ attach_library('boulder_base/ucb-hero-unit') }}
   <div{{ create_attribute({
-      class: [size, overlayClass, videoClass, containerSize],
+      class: [size, overlayClass, videoClass, containerSize, heroTextAlign, heroTextColor],
       style: bgValue
     }) }}>
     {% if videoURL is defined %}
