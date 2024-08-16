@@ -28,6 +28,10 @@
     box-shadow: 0 2px 5px rgba(0 0 0 /10%);
     z-index: 9;
     background: #fff;
+    left: 0;
+    right: 0;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .ucb-mega-menu-outer-link {
@@ -71,6 +75,9 @@
     .ucb-mega-menu-column-wrapper {
         display: flex;
         flex-direction: column;
+    }
+    .ucb-mega-menu {
+        position: relative;
     }
     .ucb-mega-menu-column-wrapper {
         display: flex;
