@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Person page: fix mobile columns
+  ### Person Page
+  Fixes a display issue where a Person Page would arrange back to 2 columns on a mobile display instead of 1.
+  
+  Resolves #1215 
+---
+
 - ### Responsive Preview: Removes admin toolbars/alerts from displaying on Responsive Preview for site editiors
   Removes admin toolbars/alerts from displaying when previewing a page using the Responsive Preview tool for site editors to preview a mobile or tablet display
   
