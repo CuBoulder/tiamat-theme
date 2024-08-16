@@ -3,7 +3,7 @@
     {% if byline_entity.field_author_person_page|length > 0 %}
         {% set author_person_page_entity = byline_entity.field_author_person_page.0.entity %}
         {% if author_person_page_entity %}
-            {% set url = path('entity.node.canonical', {'node': author_person_page_entity.id()}) %}
+        {% set url = url('entity.node.canonical', {'node': author_person_page_entity.id()}) %}
             <a href="{{ url }}">{{ byline_entity.name.value }}</a>
         {% else %}
             <span>{{ byline_entity.name.value }}</span>
