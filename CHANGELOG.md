@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article List Block: remove image requirement for all displays
+  ### Article List Block
+  Removes the Thumbnail requirement for `Article List Blocks`, which would previously filter out any Articles that do not have a thumbnail field from showing up across all displays. This change will make the block perform more like the `Article List Page` and not omit Articles missing those fields from being displayed on the final output.
+  
+  Resolves #1224 
+---
+
 - ### Person page: fix mobile columns
   ### Person Page
   Fixes a display issue where a Person Page would arrange back to 2 columns on a mobile display instead of 1.
