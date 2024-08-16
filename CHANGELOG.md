@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Content List: Image size adjustment
+  ### Content List Block
+  Adjusts size of "Sidebar" - styled Content List Block images to be exactly 75px on desktop and 50px on mobile screen sizes. Previously there was additional width added.
+  
+  Resolves #1217 
+---
+
 - ### Article List Block: remove image requirement for all displays
   ### Article List Block
   Removes the Thumbnail requirement for `Article List Blocks`, which would previously filter out any Articles that do not have a thumbnail field from showing up across all displays. This change will make the block perform more like the `Article List Page` and not omit Articles missing those fields from being displayed on the final output.
