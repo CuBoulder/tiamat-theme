@@ -55,16 +55,16 @@
               {% set linkTitle = { '#markup': title ~ '<i class="fa fa-angle-down ucb-mega-menu-icon" aria-hidden="true"></i>'} %}
               {{ link(linkTitle, item.url, linkAttr.addClass(['ucb-mega-menu-outer-link', "nav-link"]))  }}
               <div class = "ucb-mega-menu container">
-                  {% if item.content.field_display_mega_menu|render|striptags|trim == "On" %}
-                    <div id = "{{linkID}}" class="ucb-mega-menu-wrapper collapse" data-bs-parent = ".ucb-main-menu-mega-menu">
-                      <h2 class="ucb-mega-menu-header"><a href = "{{item.url}}" class = "ucb-mega-menu-heading-link">{{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_heading.value }}</a></h2>
-                      <div class="ucb-mega-menu-column-wrapper">
-                        {{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_text_above|view}}
-                        {{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_menu_links|view}}
-                      </div>
-                      {{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_text_below|view}}
+                {% if item.content.field_display_mega_menu|render|striptags|trim == "On" %}
+                  <div id = "{{linkID}}" class="ucb-mega-menu-wrapper collapse" data-bs-parent = ".ucb-main-menu-mega-menu">
+                    <h2 class="ucb-mega-menu-header"><a href = "{{item.url}}" class = "ucb-mega-menu-heading-link">{{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_heading.value }}</a></h2>
+                    <div class="ucb-mega-menu-column-wrapper">
+                      {{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_text_above|view}}
+                      {{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_menu_links|view}}
                     </div>
-                  {% endif %}
+                    {{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_text_below|view}}
+                  </div>
+                {% endif %}
               </div>
             {% else %}
               {{ link(title, item.url, create_attribute({ class: 'nav-link' })) }}
