@@ -52,7 +52,7 @@
               {%  set linkID = title|lower|trim|replace({' ': ''}) ~ item.content.field_mega_menu_select.0['#block_content'].id.value %}
               {% set linkTargetID = "#" ~ linkID %}
               {% set linkAttr = create_attribute({  "data-bs-toggle" : "collapse", "data-bs-target": linkTargetID, "aria-expanded": "false", "aria-controls" : linkID }) %}
-              {% set linkTitle = { '#markup': title ~ '<i class="fa fa-angle-down ucb-mega-menu-icon" aria-hidden="true"></i>'} %}
+              {% set linkTitle = { '#markup': title|e ~ '<i class="fa fa-angle-down ucb-mega-menu-icon" aria-hidden="true"></i>'} %}
               {{ link(linkTitle, item.url, linkAttr.addClass(['ucb-mega-menu-outer-link', "nav-link"]))  }}
               {% if item.content.field_display_mega_menu|render|striptags|trim == "On" %}
                 <div id = "{{linkID}}" class = "ucb-mega-menu container collapse" data-bs-parent = ".ucb-main-menu-mega-menu">
