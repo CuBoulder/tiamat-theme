@@ -1133,6 +1133,15 @@ a.tabledrag-handle .handle {
 h2.clear-margin,h3.clear-margin,h4.clear-margin,h5.clear-margin,h6.clear-margin,p.clear-margin{
   margin-bottom: 0 !important;
 }
+/* Responsive Preview Tool - removes addtl padding, alerts and admin menus */
+.toolbar-icon-10.toolbar-vertical.responsive-preview-frame{
+  padding-top: 0px !important;
+}
+.responsive-preview-frame #block-boulder-base-primary-local-tasks,
+.responsive-preview-frame .ucb-admin-alert {
+  display:none;
+}
+
 
 /* Column List CSS */
 @media only screen and (min-width: 576px) {

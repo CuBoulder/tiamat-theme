@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Responsive Preview: Removes admin toolbars/alerts from displaying on Responsive Preview for site editiors
+  Removes admin toolbars/alerts from displaying when previewing a page using the Responsive Preview tool for site editors to preview a mobile or tablet display
+  
+  Resolves #1218 
+---
+
 ## [20240814] - 2024-08-14
 
 -   ### Print Stylesheets
