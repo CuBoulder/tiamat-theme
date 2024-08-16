@@ -1,4 +1,4 @@
-@media only screen and (min-width: 576px) {
+@media only screen and (min-width: 577px) {
   .express-messages .express-message:first-of-type {
     margin-top: 40px;
   }
@@ -373,27 +373,4 @@
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media {
     height: 100%;
   }
-}
-
-/* Mega Menu Styles */
-.ucb-header-white .ucb-mega-menu,
-.ucb-header-light .ucb-mega-menu{
-  background-color: #333;
-  color: #fff;
-}
-
-.ucb-header-black .ucb-mega-menu,
-.ucb-header-dark .ucb-mega-menu{
-  background-color: #eee;
-  color: #000;
-}
-
-.ucb-header-white .ucb-mega-menu a,
-.ucb-header-light .ucb-mega-menu a {
-  color: #cfb87b;
-}
-
-.ucb-header-white .ucb-mega-menu a:hover,
-.ucb-header-light .ucb-mega-menu a:hover {
-  color: #fff;
 }

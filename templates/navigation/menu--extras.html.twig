@@ -29,7 +29,7 @@
 {{ menus.menu_links(items, attributes, 0) }}
 {% macro menu_links(items, attributes, menu_level) %}
   {% if items %}
-    <ul{{attributes.addClass('ucb-menu nav')}}>
+    <ul id = "ucb-main-menu-mega-menu" {{attributes.addClass('ucb-menu nav ucb-main-menu-mega-menu')}}>
       {% for item in items %}
         {% set classes = [
         'menu-item',
@@ -49,12 +49,14 @@
             '#markup': '<i class="fa-solid fa-eye-slash"></i> ' ~ item.title|e ~ '<span class="visually-hidden">(Unpublished)</span>'
             } : item.title %}
             {% if item.content.field_display_mega_menu|render|striptags|trim == "On" %}
-              {% set linkAttr = create_attribute({ 'data-click': title|lower|trim|replace({' ': ''}) ~ item.content.field_mega_menu_select.0['#block_content'].id.value}) %}
+              {%  set linkID = title|lower|trim|replace({' ': ''}) ~ item.content.field_mega_menu_select.0['#block_content'].id.value %}
+              {% set linkTargetID = "#" ~ linkID %}
+              {% set linkAttr = create_attribute({  "data-bs-toggle" : "collapse", "data-bs-target": linkTargetID, "aria-expanded": "false", "aria-controls" : linkID }) %}
               {% set linkTitle = { '#markup': title ~ '<i class="fa fa-angle-down ucb-mega-menu-icon" aria-hidden="true"></i>'} %}
               {{ link(linkTitle, item.url, linkAttr.addClass(['ucb-mega-menu-outer-link', "nav-link"]))  }}
               <div class = "ucb-mega-menu container">
                   {% if item.content.field_display_mega_menu|render|striptags|trim == "On" %}
-                    <div class="ucb-mega-menu-wrapper block-{{item.title|lower|trim|replace({' ': ''}) ~ item.content.field_mega_menu_select.0['#block_content'].id.value}} collapse">
+                    <div id = "{{linkID}}" class="ucb-mega-menu-wrapper collapse" data-bs-parent = "#ucb-main-menu-mega-menu">
                       <h2 class="ucb-mega-menu-header"><a href = "{{item.url}}" class = "ucb-mega-menu-heading-link">{{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_heading.value }}</a></h2>
                       <div class="ucb-mega-menu-column-wrapper">
                         {{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_text_above|view}}
