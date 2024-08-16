@@ -12,6 +12,9 @@ for (let i = 0; i < megaMenuLinks.length; i++) {
   megaMenuColumns[i].classList.add("ucb-mega-menu-column-" + megaMenuColumnCount);
 }
 
+const megaMenuElementList = document.querySelectorAll('.ucb-mega-menu');
+const megaMenuList = [...megaMenuElementList].map(collapseEl => new bootstrap.Collapse(collapseEl,{ toggle: false}));
+
  //Add an event listener to check if the user clicked outside the mega menu, then close the mega menu
  window.addEventListener('click', function(e){
   const allMegaMenus =  document.getElementsByClassName("ucb-mega-menu");
@@ -19,8 +22,7 @@ for (let i = 0; i < megaMenuLinks.length; i++) {
   for (let i = 0; i < allMegaMenus.length; i++) {
     for (let j = 0; j < allMainMenus.length; j++) {
       if (!allMegaMenus[i].contains(e.target) && !allMainMenus[j].contains(e.target) && allMegaMenus[i].classList.contains("show")){
-        allMegaMenus[i].classList.remove("show");
-        allMegaMenus[i].ariaExpanded = "false";
+        megaMenuList[i].hide();
       }
     }
   }
