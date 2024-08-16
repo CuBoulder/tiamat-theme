@@ -14,7 +14,7 @@ for (let i = 0; i < megaMenuLinks.length; i++) {
 
  //Add an event listener to check if the user clicked outside the mega menu, then close the mega menu
  window.addEventListener('click', function(e){
-  const allMegaMenus =  document.getElementsByClassName("ucb-mega-menu-wrapper");
+  const allMegaMenus =  document.getElementsByClassName("ucb-mega-menu");
   const allMainMenus =  document.getElementsByClassName("block-system-menu-blockmain");
   for (let i = 0; i < allMegaMenus.length; i++) {
     for (let j = 0; j < allMainMenus.length; j++) {
