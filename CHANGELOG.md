@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Articles: Bylines link to their respective connected Person Pages
+  ### Articles
+  Adjusts the byline display so it links to the connected Person Page, using the connect page on the byline's field `Author Person Page`.
+  
+  Resolves #1220 
+---
+
 - ### Content List: Image size adjustment
   ### Content List Block
   Adjusts size of "Sidebar" - styled Content List Block images to be exactly 75px on desktop and 50px on mobile screen sizes. Previously there was additional width added.

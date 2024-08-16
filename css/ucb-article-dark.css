@@ -34,6 +34,13 @@ article.ucb-page-style-dark {
 	padding-bottom: 1.75em;
 }
 
+article.ucb-page-style-dark .ucb-article-author-name a{
+  color: var(--ucb-gold)
+}
+article.ucb-page-style-dark .ucb-article-author-name a:hover{
+  color: var(--ucb-white)
+}
+
 /* Override for Dark-style Articles with a Title Image */
 article.ucb-page-style-dark:has(.backgroundTitleDiv){
   padding-top: 0;
