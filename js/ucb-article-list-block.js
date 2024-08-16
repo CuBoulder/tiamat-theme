@@ -75,7 +75,6 @@ class ArticleListBlockElement extends HTMLElement {
 
     // Process each article
     const promises = data.data.map(async (item) => {
-      if (item.relationships.field_ucb_article_thumbnail.data) {
         const thisArticleCats =
           item.relationships.field_ucb_article_categories?.data.map(
             (cat) => cat.meta.drupal_internal__target_id
@@ -124,7 +123,6 @@ class ArticleListBlockElement extends HTMLElement {
             body: body.trim(),
           };
         }
-      }
       return null;
     });
 
