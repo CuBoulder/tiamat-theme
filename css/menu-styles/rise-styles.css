@@ -1,4 +1,8 @@
-@media only screen and (min-width: 576px) {
+@media only screen and (min-width: 577px) {
+  .ucb-primary-menu-region-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
   .express-messages .express-message:first-of-type {
     margin-top: 40px;
   }

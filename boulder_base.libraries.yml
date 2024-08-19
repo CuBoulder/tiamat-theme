@@ -486,6 +486,14 @@ ucb-social-media-icons-block:
     theme:
       css/block/social-media-icons.css: {}
 
+ucb-mega-menu-block:
+  version: 1.x
+  js:
+    js/ucb-mega-menu.js: {}
+  css:
+    theme:
+      css/block/ucb-mega-menu.css: {}
+      
 colorbox-image:
   version: 1.x
   js:

@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
   
-  const mainCheck = document.getElementsByClassName("ucb-primary-menu-region-container")[0];
+  const mainCheck = document.getElementsByClassName("ucb-primary-menu-region")[0];
   if (mainCheck != null) {
   const mainMenuCheck = mainCheck.getElementsByClassName("ucb-menu")[0];
   if (mainMenuCheck != null) {
     const mainMenu = new AccessibleMenu.DisclosureMenu({
     menuElement: mainMenuCheck,
     controllerElement: document.querySelector("#ucb-mobile-menu-toggle"),
-    containerElement: document.getElementsByClassName("ucb-primary-menu-region-container")[0],
+    containerElement: document.getElementsByClassName("ucb-primary-menu-region")[0],
     openClass: "open",
   });
 }

@@ -1,0 +1,8 @@
+
+{% block content %}
+  <div class="ucb-mega-menu-column-wrapper">
+    {{content.field_mega_menu_text_above|render}}
+    {{content.field_mega_menu_menu_links}}
+  </div>
+  {{content.field_mega_menu_text_below|render}}
+{% endblock %}
