@@ -1,0 +1,52 @@
+{#
+/**
+ * @file Contains the base template for the styled block.
+ *
+ * All blocks extending this template must have the `block_styles` variable
+ * available from the CU Boulder Styled Block module.
+ */
+#}
+{% block wrapper %}
+  <div{{
+      attributes
+        .addClass(classes)
+        .addClass(
+          block_styles.background_style,
+          block_styles.title_font_scale,
+          block_styles.content_font_scale,
+          block_styles.heading_alignment
+        )
+    }}>
+    {{ title_prefix }}
+    {% if label %}
+      <div class="block-title-outer">
+        <{{ block_styles.heading }}{{
+            title_attributes
+              .addClass('block-title', block_styles.heading_style)
+          }}>
+          {% if block_styles.icon %}
+            <span{{
+                create_attribute({
+                  class: [
+                    'block-title-icon',
+                    block_styles.icon_color,
+                    block_styles.icon_position,
+                    block_styles.icon_size
+                  ]
+                })
+              }}>
+              <i{{ create_attribute({ class: block_styles.icon }) }}></i>
+            </span>
+          {% endif %}
+          <span class="block-title-text">
+            {{ label }}
+          </span>
+        </{{ block_styles.heading }}>
+      </div>
+    {% endif %}
+    {{ title_suffix }}
+    {% block content %}
+      {{ content }}
+    {% endblock %}
+  </div>
+{% endblock %}

@@ -1,148 +1,116 @@
 {#
 /**
- * @file
- * Theme to implement a Hero Unit Block
- *
- * Background settings are set inline CSS
- * All other styling done through classes
-*
-* Implemented by Joshau Nicholson on 08/09/22
+ * @file Contains the template to display the Video Hero Unit block.
+ */
 #}
-
-{{ attach_library('boulder_base/ucb-hero-unit') }}
-
-{%
-  set classes = [
-    'block',
-    'block-' ~ configuration.provider|clean_class,
-    'block-' ~ plugin_id|clean_class,
-    bundle ? 'block--type-' ~ bundle|clean_class,
-    view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
-    content['#block_content'].field_text_align.value,
-    content['#block_content'].field_text_color.value,
-	'block-hero-unit'
-  ]
-%}
+{% set classes = [
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
+  'block-hero-unit',
+  'ucb-hero-outer-wrapper'
+] %}
 {% set blockId = content['#block_content'].id() %}
 
 {# set style for backgroung settings #}
 {% if content['#block_content'].field_solid_colors.value is defined %}
-	{% set bgValue = "background: var(#{content['#block_content'].field_solid_colors.value});" %}
+  {% set bgValue = "background: var(#{content['#block_content'].field_solid_colors.value});" %}
 {% else %}
-	{% set bgValue = "background-color: inherit;" %}
+  {% set bgValue = 'background-color: inherit;' %}
 {% endif %}
 
 {# A background image will be used over a solid color #}
 {% if content['#block_content'].field_hero_background_video.entity.field_media_image.entity is defined %}
-	{% set bgValue = "background-image:url(#{ file_url(content['#block_content'].field_hero_background_video.entity.field_media_image.entity.fileuri) });background-repeat:no-repeat;background-position:center;background-size:cover;" %}
+  {% set bgValue = "background-image:url(#{ file_url(content['#block_content'].field_hero_background_video.entity.field_media_image.entity.fileuri) });background-repeat:no-repeat;background-position:center;background-size:cover;" %}
 {% endif %}
 
 {# URL if a video is used instead of an image #}
 {% if content['#block_content'].field_hero_background_video.entity.field_media_oembed_video is defined %}
-	{% set videoURL = content['#block_content'].field_hero_background_video.entity.field_media_oembed_video.value %}
+  {% set videoURL = content['#block_content'].field_hero_background_video.entity.field_media_oembed_video.value %}
 {% endif %}
 
 {% if videoURL is defined %}
-	{% set videoClass = "ucb-hero-vid-background" %}
+  {% set videoClass = 'ucb-hero-vid-background' %}
 {% else %}
-	{% set videoClass = "" %}
+  {% set videoClass = '' %}
 {% endif %}
 
 {# set classes for the size of the component if using background media #}
 {% if videoURL is defined %}
-	{% set containerSize = "ucb-hero-unit-video" %}
+  {% set containerSize = 'ucb-hero-unit-video' %}
 {% else %}
-	{% set containerSize = "ucb-hero-unit-text" %}
+  {% set containerSize = 'ucb-hero-unit-text' %}
 {% endif %}
 
+{# set class for hero unit text align #}
+{% set heroTextAlign = content['#block_content'].field_text_align.value %}
+
+{# set class for hero unit text color #}
+{% set heroTextColor = content['#block_content'].field_text_color.value %}
 
 {# set classes for the size of the component #}
-{% if content['#block_content'].field_size.value is same as("0") %}
-	{% set size = "size-large" %}
+{% if content['#block_content'].field_size.value is same as('0') %}
+  {% set size = 'size-large' %}
 {% else %}
-	{% set size = "size-small" %}
+  {% set size = 'size-small' %}
 {% endif %}
 
 {# get the state of the overlay toggle and the color of the text #}
-{% set overlayClass = "" %}
+{% set overlayClass = '' %}
 {% if content['#block_content'].field_hero_overlay.value %}
-	{# overlay requested set to dark #}
-	{% set overlayClass = "ucb-overlay-dark" %}
+  {# overlay requested set to dark #}
+  {% set overlayClass = 'ucb-overlay-dark' %}
 
-	{# dark text, so switch to the light overlay instead #}
-	{% if content['#block_content'].field_text_color.value == "text-body" %}
-		{% set overlayClass = "ucb-overlay-light" %}
-	{% endif %}
+  {# dark text, so switch to the light overlay instead #}
+  {% if content['#block_content'].field_text_color.value == 'text-body' %}
+    {% set overlayClass = 'ucb-overlay-light' %}
+  {% endif %}
 {% endif %}
 
-<div {{attributes.addClass("ucb-hero-outer-wrapper")}}>
-  {# Block/Title/Icon Styles #}
-  {% set blockStyles = [
-	content.field_bs_background_style|render|striptags|trim,
-	content.field_bs_content_font_scale|render|striptags|trim,
-	content.field_bs_icon_position|render|striptags|trim,
-	content.field_bs_heading_alignment|render|striptags|trim,
-	content.field_bs_title_font_scale|render|striptags|trim,
-	''
-] %}
-
-  {% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
-  {% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
-  {% set headingTag = content.field_bs_heading|render|striptags|trim %}
-  {% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
-
-  <div class="{{ classes|join(' ') }} {{ blockStyles|join(' ') }}">
-    {{ title_prefix }}
-    {% if label %}
-      <div class="block-title-outer">
-				<{{ headingTag }}{{title_attributes}} class="block-title {{ headingStyle }}">
-					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
-						{{ content.field_bs_icon }}
-					</span>
-					<span class="block-title-text">
-						{{ label }}
-					</span>
-				</{{ headingTag }}>
-			</div>
+{% extends '@boulder_base/block/styled-block.html.twig' %}
+{% block content %}
+  {{ attach_library('boulder_base/ucb-hero-unit') }}
+  <div{{ create_attribute({
+      class: [size, overlayClass, videoClass, containerSize, heroTextAlign, heroTextColor],
+      style: bgValue
+    }) }}>
+    {% if videoURL is defined %}
+      <div hidden class="ucb-hero-unit-video-wrapper">
+        <div class="hero-unit-video-overlay"></div>
+        <div class="ucb-hero-unit-video-player-wrapper" id="ucb_hero_unit_video_player_{{ blockId }}"></div>
+        <div class="ucb-hero-unit-video-controls-wrapper">
+          <div class="ucb-hero-unit-video-controls">
+            <span class="ucb-hero-unit-video-control-button ucb-hero-unit-video-play-pause" title="Play/Pause video">
+              <i class="fa-solid fa-play"></i>
+            </span>
+          </div>
+        </div>
+      </div>
+      <script type="text/javascript">
+        window.addEventListener('load', () => enableVideoHero('{{ videoURL }}', 'ucb_hero_unit_video_player_{{ blockId }}'));
+      </script>
     {% endif %}
-    {{ title_suffix }}
-			<div class="{{ classes|join(' ') }} {{size}} {{overlayClass}} {{videoClass}} {{containerSize}}" style="{{ bgValue }}">
-				{% if videoURL is defined %}
-					<div hidden class="ucb-hero-unit-video-wrapper">
-						<div class="hero-unit-video-overlay"></div>
-						<div class="ucb-hero-unit-video-player-wrapper" id="ucb_hero_unit_video_player_{{ blockId }}"></div>
-						<div class="ucb-hero-unit-video-controls-wrapper">
-							<div class="ucb-hero-unit-video-controls">
-								<span class="ucb-hero-unit-video-control-button ucb-hero-unit-video-play-pause" title="Play/Pause video">
-									<i class="fa-solid fa-play"></i>
-								</span>
-							</div>
-						</div>
-					</div>
-					<script type="text/javascript">
-						window.addEventListener('load', () => enableVideoHero('{{ videoURL }}', 'ucb_hero_unit_video_player_{{ blockId }}'));
-					</script>
-				{% endif %}
-				{% set linkColor = content['#block_content'].field_link_color.value %}
-				{# Dont let twig render the links #}
-				<div class="ucb-hero-unit-content container">
-					<div class="row">
-						{% if content['#block_content'].field_text_align.value == "text-righthalf" %}
-							<div class="col-12 col-md-6"></div>
-						{% endif %}
-						<div class="col ucb-hero-unit-links">
-							{{ content.field_headline }}
-							{{ content.field_text }}
-							{# Render links here #}
-							{% for item in content['#block_content'].field_links.value %}
-								{{ link(item.title, item.uri, {'class': ['button', linkColor]} ) }}
-							{% endfor %}
-						</div>
-						{% if content['#block_content'].field_text_align.value == "text-lefthalf" %}
-							<div class="col-12 col-md-6"></div>
-						{% endif %}
-					</div>
-				</div>
-			</div>
-	</div>
-</div>
+    {% set linkColor = content['#block_content'].field_link_color.value %}
+    {# Dont let twig render the links #}
+    <div class="ucb-hero-unit-content container">
+      <div class="row">
+        {% if content['#block_content'].field_text_align.value == "text-righthalf" %}
+          <div class="col-12 col-md-6"></div>
+        {% endif %}
+        <div class="col ucb-hero-unit-links">
+          {{ content.field_headline }}
+          {{ content.field_text }}
+          {# Render links here #}
+          {% for item in content['#block_content'].field_links.value %}
+            {{ link(item.title, item.uri, {'class': ['button', linkColor]} ) }}
+          {% endfor %}
+        </div>
+        {% if content['#block_content'].field_text_align.value == "text-lefthalf" %}
+          <div class="col-12 col-md-6"></div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}

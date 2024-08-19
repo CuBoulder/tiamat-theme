@@ -107,7 +107,7 @@ span.ucb-vid-reveal-icon {
 
 /* Fix for icon breaking hero */
 .block-hero-unit .bs-icon-position-default {
-  display: block;
+  display: inline-block;
   margin: 0;
 }
 

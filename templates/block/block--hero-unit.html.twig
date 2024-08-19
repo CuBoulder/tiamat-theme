@@ -1,118 +1,84 @@
 {#
 /**
- * @file
- * Theme to implement a Hero Unit Block
- *
- * Background settings are set inline CSS
- * All other styling done through classes
-*
-* Implemented by Joshau Nicholson on 08/09/22
+ * @file Contains the template to display the Hero Unit block.
+ */
 #}
-
-{{ attach_library('boulder_base/ucb-hero-unit') }}
-
-{%
-  set classes = [
-    'block',
-    'block-' ~ configuration.provider|clean_class,
-    'block-' ~ plugin_id|clean_class,
-    bundle ? 'block--type-' ~ bundle|clean_class,
-    view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
-    content['#block_content'].field_text_align.value,
-    content['#block_content'].field_text_color.value,
-	'block-hero-unit'
-  ]
-%}
-{% set blockId = content['#block_content'].id() %}
+{% set classes = [
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
+  'block-hero-unit',
+  'ucb-hero-outer-wrapper'
+] %}
 
 {# set style for backgroung settings #}
 {% if content['#block_content'].field_solid_colors.value is defined %}
-	{% set bgValue = "background: var(#{content['#block_content'].field_solid_colors.value});" %}
+  {% set bgValue = "background: var(#{content['#block_content'].field_solid_colors.value});" %}
 {% else %}
-	{% set bgValue = "background-color: inherit;" %}
+  {% set bgValue = 'background-color: inherit;' %}
 {% endif %}
 
 {# A background image will be used over a solid color #}
 {% if content['#block_content'].field_hero_background_image.entity.field_media_image.entity is defined %}
-	{% set bgValue = "background-image:url(#{ file_url(content['#block_content'].field_hero_background_image.entity.field_media_image.entity.fileuri|image_style('wallpaper')) });background-repeat:no-repeat;background-position:center;background-size:cover;" %}
+  {% set bgValue = "background-image:url(#{ file_url(content['#block_content'].field_hero_background_image.entity.field_media_image.entity.fileuri|image_style('wallpaper')) });background-repeat:no-repeat;background-position:center;background-size:cover;" %}
 {% endif %}
 
 {# set classes for the size of the component if using background media #}
-{% set containerSize = "ucb-hero-unit-text" %}
+{% set containerSize = 'ucb-hero-unit-text' %}
 
+{# set class for hero unit text align #}
+{% set heroTextAlign = content['#block_content'].field_text_align.value %}
+
+{# set class for hero unit text color #}
+{% set heroTextColor = content['#block_content'].field_text_color.value %}
 
 {# set classes for the size of the component #}
-{% if content['#block_content'].field_size.value is same as("0") %}
-	{% set size = "size-large" %}
+{% if content['#block_content'].field_size.value is same as('0') %}
+  {% set size = 'size-large' %}
 {% else %}
-	{% set size = "size-small" %}
+  {% set size = 'size-small' %}
 {% endif %}
 
 {# get the state of the overlay toggle and the color of the text #}
-{% set overlayClass = "" %}
+{% set overlayClass = '' %}
 {% if content['#block_content'].field_hero_overlay.value %}
-	{# overlay requested set to dark #}
-	{% set overlayClass = "ucb-overlay-dark" %}
+  {# overlay requested set to dark #}
+  {% set overlayClass = 'ucb-overlay-dark' %}
 
-	{# dark text, so switch to the light overlay instead #}
-	{% if content['#block_content'].field_text_color.value == "text-body" %}
-		{% set overlayClass = "ucb-overlay-light" %}
-	{% endif %}
+  {# dark text, so switch to the light overlay instead #}
+  {% if content['#block_content'].field_text_color.value == 'text-body' %}
+    {% set overlayClass = 'ucb-overlay-light' %}
+  {% endif %}
 {% endif %}
 
-<div
-	{{attributes.addClass("ucb-hero-outer-wrapper")}}>
-	{# Block/Title/Icon Styles #}
-	{% set blockStyles = [
-	content.field_bs_background_style|render|striptags|trim,
-	content.field_bs_content_font_scale|render|striptags|trim,
-	content.field_bs_icon_position|render|striptags|trim,
-	content.field_bs_heading_alignment|render|striptags|trim,
-	content.field_bs_title_font_scale|render|striptags|trim,
-	''
-] %}
-
-	{% set iconColor = content.field_bs_icon_color|render|striptags|trim %}
-	{% set iconSize = content.field_bs_icon_size|render|striptags|trim %}
-	{% set headingTag = content.field_bs_heading|render|striptags|trim %}
-	{% set headingStyle = content.field_bs_heading_style|render|striptags|trim %}
-
-	<div class="{{ classes|join(' ') }} {{ blockStyles|join(' ') }}">
-		{{ title_prefix }}
-		{% if label %}
-			<div class="block-title-outer">
-				<{{ headingTag }}{{title_attributes}} class="block-title {{ headingStyle }}">
-					<span class='block-title-icon {{ iconColor }} {{ iconPosition }} {{ iconSize }}'>
-						{{ content.field_bs_icon }}
-					</span>
-					<span class="block-title-text">
-						{{ label }}
-					</span>
-				</{{ headingTag }}>
-			</div>
-		{% endif %}
-		{{ title_suffix }}
-		<div class="{{ classes|join(' ') }} {{ size }} {{ overlayClass }} {{ containerSize }}" style="{{ bgValue }}">
-			{% set linkColor = content['#block_content'].field_link_color.value %}
-			{# Dont let twig render the links #}
-			<div class="ucb-hero-unit-content container">
-				<div class="row">
-					{% if content['#block_content'].field_text_align.value == "text-righthalf" %}
-						<div class="col-12 col-md-6"></div>
-					{% endif %}
-					<div class="col ucb-hero-unit-links">
-						{{ content.field_headline }}
-						{{ content.field_text }}
-						{# Render links here #}
-						{% for item in content['#block_content'].field_links.value %}
-							{{ link(item.title, item.uri, {'class': ['button', linkColor]} ) }}
-						{% endfor %}
-					</div>
-					{% if content['#block_content'].field_text_align.value == "text-lefthalf" %}
-						<div class="col-12 col-md-6"></div>
-					{% endif %}
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+{% extends '@boulder_base/block/styled-block.html.twig' %}
+{% block content %}
+  {{ attach_library('boulder_base/ucb-hero-unit') }}
+  <div{{ create_attribute({
+      class: [size, overlayClass, containerSize, heroTextAlign, heroTextColor ],
+      style: bgValue
+    }) }}>
+    {% set linkColor = content['#block_content'].field_link_color.value %}
+    {# Dont let twig render the links #}
+    <div class="ucb-hero-unit-content container">
+      <div class="row">
+        {% if content['#block_content'].field_text_align.value == 'text-righthalf' %}
+          <div class="col-12 col-md-6"></div>
+        {% endif %}
+        <div class="col ucb-hero-unit-links">
+          {{ content.field_headline }}
+          {{ content.field_text }}
+          {# Render links here #}
+          {% for item in content['#block_content'].field_links.value %}
+            {{ link(item.title, item.uri, {'class': ['button', linkColor]} ) }}
+          {% endfor %}
+        </div>
+        {% if content['#block_content'].field_text_align.value == 'text-lefthalf' %}
+          <div class="col-12 col-md-6"></div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endblock %}
