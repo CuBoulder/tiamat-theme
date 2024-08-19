@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Mega Menus
+  Closes #629.
+  Adds a mega menu that can be attached as a block in a menu link.
+  Entities -> https://github.com/CuBoulder/tiamat-custom-entities/pull/157
+  Profile - > https://github.com/CuBoulder/tiamat10-profile/pull/180
+  Template -> https://github.com/CuBoulder/tiamat10-project-template/pull/51
+---
+
 - ### Adds CU Boulder Styled Block custom module and updates block styles
   This update:
   - [new] Adds the new CU Boulder Styled Block custom module.
