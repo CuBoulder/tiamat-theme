@@ -30,7 +30,7 @@
 {% block content %}
   {{ attach_library('boulder_base/ucb-slider') }}
   {# <h1> {{ dump(content['#block_content'].field_slider_slide.value) }} </h1> #}
-  <div id="{{ id }}" class="carousel slide" data-interval="false">
+  <div id="{{ id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="7000" data-bs-pause="hover">
     <div class="carousel-indicators">
       {% for i in 1..content['#block_content'].field_slider_slide.value|length %}
         <button{{ create_attribute({
