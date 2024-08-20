@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Sliders: Autoplay On and Pause Functionality
+  ### Slider Blocks
+  This update modifies `Slider` blocks to Autoplay, advancing slides every 7 seconds. On hover, the autoplay is paused. Previously Sliders did not autoplay. 
+  
+  Resolves #1202 
+---
+
 - ### Mega Menus
   Closes #629.
   Adds a mega menu that can be attached as a block in a menu link.
