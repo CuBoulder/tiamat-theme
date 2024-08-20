@@ -295,6 +295,10 @@ section.ucb-main-nav-section {
   .page-header {
     box-shadow: 0 2px 5px rgba(0 0 0 / 10%);
   }
+
+  .ucb-main-nav-container {
+    flex-direction: column;
+  }
 }
 
 /*********** Intro Wide **************/

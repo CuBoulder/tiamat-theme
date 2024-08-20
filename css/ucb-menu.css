@@ -363,6 +363,15 @@
   .ucb-secondary-menu-region-container #block-boulder-base-secondary-menu {
   width: 100% !important;
   }
+
+  .ucb-main-nav-container .ucb-menu .expanded.active > a.nav-link,
+  .ucb-main-nav-container .ucb-menu .expanded.active > .ucb-menu {
+    border-left: none;
+  }
+
+  .ucb-main-nav-container .ucb-menu .expanded.active > .ucb-menu {
+    display: none;
+  }
 }
 
 .ucb-footer-menu-region .block-menu-blocksocial-media-menu,
