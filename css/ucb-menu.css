@@ -183,10 +183,12 @@
   .ucb-main-nav-container .ucb-menu .ucb-menu .ucb-menu .ucb-menu .ucb-menu li.menu-item a.nav-link {
     padding-left: calc(var(--ucb-menu-indent-start) + var(--ucb-menu-indent-inc) * 4);
   }
+
   .ucb-main-nav-container .ucb-menu .expanded.active > a.nav-link,
   .ucb-main-nav-container .ucb-menu .expanded.active > .ucb-menu {
     border-left: var(--ucb-menu-indent-border-width) solid var(--ucb-gold);
   }
+
   .ucb-main-nav-container .ucb-menu .ucb-menu .expanded.active > a.nav-link,
   .ucb-main-nav-container .ucb-menu .ucb-menu .expanded.active > .ucb-menu {
     border-left: none;
