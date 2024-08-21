@@ -337,13 +337,21 @@
     display: none;
   }
 
-  .horizontal-tab-content .accordion-item,
-  .vertical-tab-content .accordion-item {
+  .horizontal-tab-content > .accordion > .accordion-item,
+  .vertical-tab-content > .accordion > .accordion-item {
     border-bottom: none;
   }
 
-  .horizontal-tab-content .accordion-body,
-  .vertical-tab-content .accordion-body {
+  .horizontal-tab-content
+    > .accordion
+    > .accordion-item
+    > .accordion-collapse
+    > .accordion-body,
+  .vertical-tab-content
+    > .accordion
+    > .accordion-item
+    > .accordion-collapse
+    > .accordion-body {
     padding-top: 20px;
     padding-bottom: 0;
   }
