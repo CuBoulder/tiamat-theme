@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter: Missing Content - Adjusts `Newsletter Section Content` TItle Requirements
+  Allows for no titles on `Newsletter Section Content` paragraphs inserted into `Newsletter Sections` on the Email HTML render.   Previously the checks could allow for content missing a title to not render, when it used the higher level Newsletter Section title as the title. 
+  
+  Resolves #1226  
+---
+
 - ### Secondary and Mobile Menu fixes
   Closes #1197.
   Makes the secondary and mobile footer menu to stay within a column for the mobile menu. This also disables the footer menu being able to expand in the mobile menu.
