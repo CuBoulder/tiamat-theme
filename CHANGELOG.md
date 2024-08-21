@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes CSS bug causing accordions nested inside tabbed expandable blocks to be hidden
+  A CSS specificity bug existed in the expandable content block set to horizontal or vertical tab display. The bug caused accordions created using the CKEditor 5 Bootstrap Accordion plugin and nested within the content area to be unexpectedly hidden. This update resolves the issue.
+  
+  Resolves CuBoulder/tiamat-theme#1228
+---
+
 ## [20240821] - 2024-08-21
 
 -   ### Newsletter: Missing Content - Adjusts `Newsletter Section Content` TItle Requirements
