@@ -9,75 +9,101 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Newsletter: Missing Content - Adjusts `Newsletter Section Content` TItle Requirements
-  Allows for no titles on `Newsletter Section Content` paragraphs inserted into `Newsletter Sections` on the Email HTML render.   Previously the checks could allow for content missing a title to not render, when it used the higher level Newsletter Section title as the title. 
-  
-  Resolves #1226  
----
+## [20240821] - 2024-08-21
 
-- ### Secondary and Mobile Menu fixes
-  Closes #1197.
-  Makes the secondary and mobile footer menu to stay within a column for the mobile menu. This also disables the footer menu being able to expand in the mobile menu.
----
+-   ### Newsletter: Missing Content - Adjusts `Newsletter Section Content` TItle Requirements
 
-- ### Sliders: Autoplay On and Pause Functionality
-  ### Slider Blocks
-  This update modifies `Slider` blocks to Autoplay, advancing slides every 7 seconds. On hover, the autoplay is paused. Previously Sliders did not autoplay. 
-  
-  Resolves #1202 
----
+    Allows for no titles on `Newsletter Section Content` paragraphs inserted into `Newsletter Sections` on the Email HTML render.   Previously the checks could allow for content missing a title to not render, when it used the higher level Newsletter Section title as the title. 
 
-- ### Mega Menus
-  Closes #629.
-  Adds a mega menu that can be attached as a block in a menu link.
-  Entities -> https://github.com/CuBoulder/tiamat-custom-entities/pull/157
-  Profile - > https://github.com/CuBoulder/tiamat10-profile/pull/180
-  Template -> https://github.com/CuBoulder/tiamat10-project-template/pull/51
----
+    Resolves #1226  
 
-- ### Adds CU Boulder Styled Block custom module and updates block styles
-  This update:
-  - [new] Adds the new CU Boulder Styled Block custom module.
-  - [new] Converts the Campus News block to a styled block, adding new style options to match our other blocks. CuBoulder/ucb_campus_news#6 CuBoulder/ucb_campus_news#9
-  - [change] Refactors existing styled blocks to all extend the same Twig template with Twig inheritance.
-  - [change] Corrects some indentation and other minor code style issues in affected block templates.
-  
-  Sister PR in: [ucb_campus_news](https://github.com/CuBoulder/ucb_campus_news/pull/10), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/187), [tiamat10-project-template](https://github.com/CuBoulder/tiamat10-project-template/pull/55)
----
+* * *
 
-- ### Articles: Bylines link to their respective connected Person Pages
-  ### Articles
-  Adjusts the byline display so it links to the connected Person Page, using the connect page on the byline's field `Author Person Page`.
-  
-  Resolves #1220 
----
+-   ### Secondary and Mobile Menu fixes
+    Closes #1197.
+    Makes the secondary and mobile footer menu to stay within a column for the mobile menu. This also disables the footer menu being able to expand in the mobile menu.
 
-- ### Content List: Image size adjustment
-  ### Content List Block
-  Adjusts size of "Sidebar" - styled Content List Block images to be exactly 75px on desktop and 50px on mobile screen sizes. Previously there was additional width added.
-  
-  Resolves #1217 
----
+* * *
 
-- ### Article List Block: remove image requirement for all displays
-  ### Article List Block
-  Removes the Thumbnail requirement for `Article List Blocks`, which would previously filter out any Articles that do not have a thumbnail field from showing up across all displays. This change will make the block perform more like the `Article List Page` and not omit Articles missing those fields from being displayed on the final output.
-  
-  Resolves #1224 
----
+-   ### Sliders: Autoplay On and Pause Functionality
 
-- ### Person page: fix mobile columns
-  ### Person Page
-  Fixes a display issue where a Person Page would arrange back to 2 columns on a mobile display instead of 1.
-  
-  Resolves #1215 
----
+    ### Slider Blocks
 
-- ### Responsive Preview: Removes admin toolbars/alerts from displaying on Responsive Preview for site editiors
-  Removes admin toolbars/alerts from displaying when previewing a page using the Responsive Preview tool for site editors to preview a mobile or tablet display
-  
-  Resolves #1218 
----
+    This update modifies `Slider` blocks to Autoplay, advancing slides every 7 seconds. On hover, the autoplay is paused. Previously Sliders did not autoplay. 
+
+    Resolves #1202 
+
+* * *
+
+-   ### Mega Menus
+    Closes #629.
+    Adds a mega menu that can be attached as a block in a menu link.
+    Entities -> <https://github.com/CuBoulder/tiamat-custom-entities/pull/157>
+    Profile - > <https://github.com/CuBoulder/tiamat10-profile/pull/180>
+    Template -> <https://github.com/CuBoulder/tiamat10-project-template/pull/51>
+
+* * *
+
+-   ### Adds CU Boulder Styled Block custom module and updates block styles
+
+    This update:
+
+    -   [new] Adds the new CU Boulder Styled Block custom module.
+    -   [new] Converts the Campus News block to a styled block, adding new style options to match our other blocks. CuBoulder/ucb_campus_news#6 CuBoulder/ucb_campus_news#9
+    -   [change] Refactors existing styled blocks to all extend the same Twig template with Twig inheritance.
+    -   [change] Corrects some indentation and other minor code style issues in affected block templates.
+
+    Sister PR in: [ucb_campus_news](https://github.com/CuBoulder/ucb_campus_news/pull/10), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/187), [tiamat10-project-template](https://github.com/CuBoulder/tiamat10-project-template/pull/55)
+
+* * *
+
+-   ### Articles: Bylines link to their respective connected Person Pages
+
+    ### Articles
+
+    Adjusts the byline display so it links to the connected Person Page, using the connect page on the byline's field `Author Person Page`.
+
+    Resolves #1220 
+
+* * *
+
+-   ### Content List: Image size adjustment
+
+    ### Content List Block
+
+    Adjusts size of "Sidebar" - styled Content List Block images to be exactly 75px on desktop and 50px on mobile screen sizes. Previously there was additional width added.
+
+    Resolves #1217 
+
+* * *
+
+-   ### Article List Block: remove image requirement for all displays
+
+    ### Article List Block
+
+    Removes the Thumbnail requirement for `Article List Blocks`, which would previously filter out any Articles that do not have a thumbnail field from showing up across all displays. This change will make the block perform more like the `Article List Page` and not omit Articles missing those fields from being displayed on the final output.
+
+    Resolves #1224 
+
+* * *
+
+-   ### Person page: fix mobile columns
+
+    ### Person Page
+
+    Fixes a display issue where a Person Page would arrange back to 2 columns on a mobile display instead of 1.
+
+    Resolves #1215 
+
+* * *
+
+-   ### Responsive Preview: Removes admin toolbars/alerts from displaying on Responsive Preview for site editiors
+
+    Removes admin toolbars/alerts from displaying when previewing a page using the Responsive Preview tool for site editors to preview a mobile or tablet display
+
+    Resolves #1218 
+
+* * *
 
 ## [20240814] - 2024-08-14
 
@@ -3049,7 +3075,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240814...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240821...HEAD
+
+[20240821]: https://github.com/CuBoulder/tiamat-theme/compare/20240814...20240821
 
 [20240814]: https://github.com/CuBoulder/tiamat-theme/compare/20240805...20240814
 
