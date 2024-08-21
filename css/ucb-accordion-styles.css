@@ -304,15 +304,15 @@
     border-bottom: 2px solid var(--ucb-white);
   }
 
-  .horizontal-tab-content .accordion-header,
-  .vertical-tab-content .accordion-header,
-  .horizontal-tab-content .collapse.show,
-  .vertical-tab-content .collapse.show {
+  .horizontal-tab-content .tab-content > .accordion-header,
+  .vertical-tab-content .tab-content > .accordion-header,
+  .horizontal-tab-content .tab-content > .collapse.show,
+  .vertical-tab-content .tab-content > .collapse.show {
     display: none;
   }
 
-  .horizontal-tab-content .collapse.active,
-  .vertical-tab-content .collapse.active {
+  .horizontal-tab-content .tab-content > .collapse.active,
+  .vertical-tab-content .tab-content > .collapse.active {
     display: block;
   }
 
