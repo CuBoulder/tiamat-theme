@@ -15,6 +15,7 @@
 {% set totalColumns = "6" %}
 {% set tabletColumns = "3" %}
 {% set masonryStyle = content.field_masonry_display[0]|render|striptags|trim %}
+{% set galleryID = 'gallery'|clean_unique_id %}
 
 {% if masonryStyle == "True" %}
   {% set totalColumns = content.field_masonry_columns[0]|render %}
@@ -36,7 +37,7 @@
         {% endif %}
         {% if masonryStyle == "True" %}
           <div class="col gallery-item">
-            <a href="{{ file_url(item.entity.field_media_image.entity.fileuri) }}" class="glightbox ucb-gallery-lightbox" data-gallery="gallery{{ content['#block_content'].id() }}" data-glightbox="description: {{ photoDescription }} ">
+            <a href="{{ file_url(item.entity.field_media_image.entity.fileuri) }}" class="glightbox ucb-gallery-lightbox" data-gallery="{{ galleryID }}" data-glightbox="description: {{ photoDescription }} ">
               <div class ="imageMediaStyle large_image_style">
                 <img src = "{{ file_url(item.entity.field_media_image.entity.fileuri) }}" alt = "{{item.entity.field_media_image.alt|render}}" width="1500" height = "2250">
               </div>
@@ -44,7 +45,7 @@
           </div>
         {% else %}
           <div class="col gallery-item">
-            <a href="{{ file_url(item.entity.field_media_image.entity.fileuri) }}" class="glightbox ucb-gallery-lightbox" data-gallery="gallery{{ content['#block_content'].id() }}" data-glightbox="description: {{ photoDescription }} ">
+            <a href="{{ file_url(item.entity.field_media_image.entity.fileuri) }}" class="glightbox ucb-gallery-lightbox" data-gallery="{{ galleryID }}" data-glightbox="description: {{ photoDescription }} ">
               {{ item|view }}
             </a>
           </div>

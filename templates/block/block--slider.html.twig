@@ -24,7 +24,7 @@
   {% set size = 'size-large' %}
 {% endif %}
 
-{% set id = 'carousel-' ~ content['#block_content'].id() %}
+{% set id = 'carousel'|clean_unique_id %}
 
 {% extends '@boulder_base/block/styled-block.html.twig' %}
 {% block content %}
