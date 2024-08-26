@@ -7,7 +7,7 @@
 {% for item in items %}
   {% if ('text/javascript' in item.content['#context'].value) and ('src="https://calendar.colorado.edu/widget' in item.content['#context'].value) %}
 
-    {% set calendarID = 'localist-widget-' ~ random() %}
+    {% set calendarID = 'localist-widget'|clean_unique_id %}
     {% set queryParams = item.content['#context'].value|preg_replace('/localist-widget-[0-9]+/', calendarID)|split('?')[1]|split('"')[0] %}
 
     <div class="ucb-events-calendar">
