@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Events Calendar |raw removal
+  Remove `|raw` loading.
+  Replace localist widget ID with randomly generated ID Strip query strings from embed input.
+  Hardcode embed div and js using new ID and query parameters
+  
+  Resolves #842 
+---
+
 - ### Fixes CSS bug causing accordions nested inside tabbed expandable blocks to be hidden
   A CSS specificity bug existed in the expandable content block set to horizontal or vertical tab display. The bug caused accordions created using the CKEditor 5 Bootstrap Accordion plugin and nested within the content area to be unexpectedly hidden. This update resolves the issue.
   
