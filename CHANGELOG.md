@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### ID generation replace
+  Replacing our ID generation for these blocks so that reusable blocks don't run into errors with duplicate reusable blocks on the same page.
+  
+  This affects the video reveal, slider, image gallery video hero unit, and expandable content blocks.
+  
+  Closes #1245 
+  Closes #1137
+---
+
 - ### Events Calendar |raw removal
   Remove `|raw` loading.
   Replace localist widget ID with randomly generated ID Strip query strings from embed input.

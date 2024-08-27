@@ -12,7 +12,7 @@
   view_mode ? 'block--view-mode-' ~ view_mode|clean_class
 ] %}
 
-{% set blockId = content['#block_content'].id() %}
+{% set blockId = 'reveal'|clean_unique_id %}
 {% if content['#block_content'].field_video_reveal_video.entity.field_media_oembed_video is defined %}
   {% set videoURL = content['#block_content'].field_video_reveal_video.entity.field_media_oembed_video.value %}
 {% endif %}

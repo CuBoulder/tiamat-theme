@@ -12,7 +12,7 @@
   'block-hero-unit',
   'ucb-hero-outer-wrapper'
 ] %}
-{% set blockId = content['#block_content'].id() %}
+{% set blockId = 'ucb_hero_unit_video_player'|clean_unique_id %}
 
 {# set style for backgroung settings #}
 {% if content['#block_content'].field_solid_colors.value is defined %}
@@ -79,7 +79,7 @@
     {% if videoURL is defined %}
       <div hidden class="ucb-hero-unit-video-wrapper">
         <div class="hero-unit-video-overlay"></div>
-        <div class="ucb-hero-unit-video-player-wrapper" id="ucb_hero_unit_video_player_{{ blockId }}"></div>
+        <div class="ucb-hero-unit-video-player-wrapper" id="{{ blockId }}"></div>
         <div class="ucb-hero-unit-video-controls-wrapper">
           <div class="ucb-hero-unit-video-controls">
             <span class="ucb-hero-unit-video-control-button ucb-hero-unit-video-play-pause" title="Play/Pause video">
@@ -89,7 +89,7 @@
         </div>
       </div>
       <script type="text/javascript">
-        window.addEventListener('load', () => enableVideoHero('{{ videoURL }}', 'ucb_hero_unit_video_player_{{ blockId }}'));
+        window.addEventListener('load', () => enableVideoHero('{{ videoURL }}', '{{ blockId }}'));
       </script>
     {% endif %}
     {% set linkColor = content['#block_content'].field_link_color.value %}
