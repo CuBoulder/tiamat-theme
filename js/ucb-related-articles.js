@@ -9,7 +9,7 @@
 	// Global variable to store articles that are good matches. Danger!
 	let articleArrayWithScores = []
 
-	// Related Shown? 
+	// Related Shown?
 	const relatedShown = relatedArticlesBlock.getAttribute('data-relatedshown') != "Off" ? true : false;
 
 	// This function returns a total of matched categories or tags
@@ -24,7 +24,7 @@
 		})
 		return count
 	}
-	// This function takes in the tag endpoint and current array of related articles, returns the array of related articles once it has a count of 3. 
+	// This function takes in the tag endpoint and current array of related articles, returns the array of related articles once it has a count of 3.
 	async function getArticlesWithTags(url, array, articleTags ,numLeft, privateTags){
 		fetch(url)
 		.then(response => response.json())
@@ -41,7 +41,7 @@
 			let filterData = []
 			returnedArticles.map((article)=>{
 
-				
+
 
 				let thisArticleCats = article.relationships.field_ucb_article_categories.data
 					let thisArticleTags = article.relationships.field_ucb_article_tags.data
@@ -55,7 +55,7 @@
 								toInclude = false;
 								return
 							}
-						}) 
+						})
 					}
 
 					if(article.attributes.field_ucb_article_external_url){
@@ -69,26 +69,26 @@
 							if(excludeCatArr.includes(id)){ // if excluded, do not proceed
 								toInclude = false;
 								return
-							} 
+							}
 							if( urlCheck == window.location.pathname) { // if same article, do not proceed
 								toInclude = false
 								return;
 							}  // proceed
-								// create an object out of 
+								// create an object out of
 								// add to running array of possible matches
-							
-						}) 
+
+						})
 					}
 
 				if(existingIds.includes(article.id) || article.attributes.path.alias == window.location.pathname ){
 					toInclude = false
 				// filter on categories
-				} 
+				}
 				if(toInclude){
 					let articleObj ={}
 					articleObj.id = article.id
 					articleObj.catMatches = checkMatches(article.relationships.field_ucb_article_tags.data, articleTags, privateTags) // count the number of matches
-					articleObj.article = article 
+					articleObj.article = article
 					filterData.push(articleObj)
 				}
 				else{
@@ -107,7 +107,7 @@
 				filteredData.map((pair) => {
 				urlObj[pair.id] = pair.links.focal_image_square.href;
 				})
-	
+
 				// removes all other included data besides images in our included media
 				let idFilterData = data.included.filter((item) => {
 				return item.type == "media--image";
@@ -140,7 +140,7 @@
 				if( article.article.attributes.field_ucb_article_summary != null){
 					body = article.article.attributes.field_ucb_article_summary;
 				}
-		
+
 				// if image, use it
 				if (!article.article.relationships.field_ucb_article_thumbnail.data) {
 					imageSrc = "";
@@ -152,40 +152,40 @@
 
 				var artcardImgContainer = document.createElement('div');
 				artcardImgContainer.classList = 'ucb-article-card-img';
-	
+
 				var artCardImgLink = document.createElement('a');
 				artCardImgLink.href = link;
-	
+
 				var artCardImg = document.createElement('img');
 				artCardImg.src = imageSrc;
-	
+
 				var artCardDataContainer = document.createElement('div')
 				artCardDataContainer.classList = 'ucb-article-card-data'
-	
+
 				var artCardDataTitle = document.createElement('span')
 				artCardDataTitle.classList= 'ucb-article-card-title'
-	
+
 				var artCardTitleLink = document.createElement('a')
 				artCardTitleLink.href = link;
 				artCardTitleLink.innerText = title;
-	
+
 				var artCardDataBody = document.createElement('span')
 				artCardDataBody.classList = 'ucb-related-article-card-body'
 				artCardDataBody.innerText = body;
-	
-	
+
+
 				if(link && imageSrc) {
 					// image = `<a href="${link}"><img src="${imageSrc}" /></a>`;
-	
+
 					artCardImgLink.appendChild(artCardImg)
 					artcardImgContainer.appendChild(artCardImgLink)
-	
+
 				}
-	
+
 			artCardDataTitle.appendChild(artCardTitleLink)
 			artCardDataContainer.appendChild(artCardDataTitle)
 			artCardDataContainer.appendChild(artCardDataBody)
-		
+
 			articleCard.appendChild(artcardImgContainer)
 			articleCard.appendChild(artCardDataContainer)
 			relatedArticlesDiv.appendChild(articleCard)
@@ -203,7 +203,7 @@
 		} else if (relatedArticlesDiv.childElementCount == 0 && loggedIn == false){
 			let header = relatedArticlesBlock.children[0]
 			header.innerText = ''
-			
+
 		} else if(childCount > 1 && loggedIn==true){
 			var message = document.getElementById('admin-notif-message')
 			if(message){
@@ -212,7 +212,7 @@
 		}else {
 			// last check for error message
 		}
-		
+
 		})
 	}
 
@@ -269,7 +269,7 @@
 			return string
 		}
 
-		var URL = `${catQuery}`
+		var URL = `${catQuery}+&sort[sort-created][path]=created&sort[sort-created][direction]=DESC`
 
 		// Fetch
 		async function getArticles(URL){
@@ -278,8 +278,7 @@
 			fetch(URL)
 				.then(response=>response.json())
 				.then(data=> {
-
-			// Below objects are needed to match images with their corresponding articles. 
+			// Below objects are needed to match images with their corresponding articles.
 			// There are two endpoints => data.data (article) and data.included (incl. media), both needed to associate a media library image with its respective article
 			let urlObj = {};
 			let idObj = {};
@@ -325,37 +324,38 @@
 								toInclude = false;
 								return
 							}
-						}) 
+						})
 					}
 
 					if(thisArticleCats.length){ // if there are categories
 						thisArticleCats.forEach((category)=>{ // check each category
-							let id = category.meta.drupal_internal__target_id;                  
+							let id = category.meta.drupal_internal__target_id;
 							if(excludeCatArr.includes(id)){ // if excluded, do not proceed
 								toInclude = false;
 								return
-							} 
+							}
 							if( urlCheck == window.location.pathname) { // if same article, do not proceed
 								toInclude = false
 								return;
 							}  // proceed
-								// create an object out of 
+								// create an object out of
 								// add to running array of possible matches
-							
-						}) 
+
+						})
 					}
 					// if it triggered any fail conditions, do not proceed with the article
 					if(toInclude){
 					let articleObj = {}
 								articleObj.id = article.id
 								articleObj.catMatches = checkMatches(article.relationships.field_ucb_article_categories.data, myCats, privateCats) // count the number of matches
+                articleObj.tagMatches = checkMatches(article.relationships.field_ucb_article_tags.data, myTags, privateTags);
 								articleObj.article = article // contain the existing article
 								articleArrayWithScores.push(articleObj)
 					}
-					
+
 				})
 
-				//Remove current article from those availabile in the block
+				// Remove current article from those availabile in the block
 				articleArrayWithScores.filter((article)=>{
 					if(article.article.attributes.path.alias == window.location.pathname){
 						articleArrayWithScores.splice(articleArrayWithScores.indexOf(article),1)
@@ -363,8 +363,20 @@
 						return article;
 					}
 				})
-				articleArrayWithScores.sort((a, b) => a.catMatches - b.catMatches).reverse(); // sort in order
-
+				articleArrayWithScores.sort((a, b) => {
+          // First, compare by catMatches
+          if (a.catMatches !== b.catMatches) {
+              return b.catMatches - a.catMatches;
+          }
+          // If catMatches are the same, compare by tagMatches
+          if (a.tagMatches !== b.tagMatches) {
+              return b.tagMatches - a.tagMatches;
+          }
+          // If both catMatches and tagMatches are the same, compare by created date
+          const dateA = new Date(a.article.attributes.created);
+          const dateB = new Date(b.article.attributes.created);
+          return dateB - dateA;
+      });
 				//Remove articles without matches from those availabile in the block
 				var finalArr = articleArrayWithScores.filter(article=> article.catMatches > 0)
 				// if more than 3 articles, take the top 3
@@ -373,7 +385,7 @@
 				} else if(finalArr.length<3){
 					let howManyLeft = 3 - finalArr.length
 					// if less than 3, grab the most tags
-				getArticlesWithTags(tagQuery,finalArr, myTags, howManyLeft, privateTags);				
+				getArticlesWithTags(tagQuery,finalArr, myTags, howManyLeft, privateTags);
 				}
 
 
@@ -460,7 +472,7 @@
 		articleCard.appendChild(artcardImgContainer)
 		articleCard.appendChild(artCardDataContainer)
 		relatedArticlesDiv.appendChild(articleCard)
-			}) 
+			})
 
 		// Check to see what was rendered
 			// sets global counter of children
@@ -475,13 +487,13 @@
 			} else if (relatedArticlesDiv.childElementCount == 0 && loggedIn == false){
 				let header = relatedArticlesBlock.children[0]
 				header.innerText = ''
-				
+
 			} else {
 				//do nothing and proceed
 			}
 		})
 	}
-			
+
 			getArticles(URL) // init
 
 		relatedArticlesBlock.style.display = "block"
@@ -496,7 +508,7 @@ function getPrivateCategories(){
 	let privateCats = []
 		fetch('/jsonapi/taxonomy_term/category?filter[field_ucb_category_display]=false')
 		.then(response => response.json())
-		.then(data=>{ 
+		.then(data=>{
 			data.data.forEach(cat=>{
 				privateCats.push(cat.attributes.drupal_internal__tid)
 			})
@@ -508,7 +520,7 @@ function getPrivateTags(){
 	let privateTags = []
 		fetch('/jsonapi/taxonomy_term/tags?filter[field_ucb_tag_display]=false')
 		.then(response => response.json())
-		.then(data=>{ 
+		.then(data=>{
 			data.data.forEach(tag=>{
 				privateTags.push(tag.attributes.drupal_internal__tid)
 			})
