@@ -9,6 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update Slide Size/Image
+  Added three new image styles:
+  Slider Ultrawide (1600x600)
+  Slider Widescreen (1600:900)
+  Slider 3:2 (1500:1000)
+  
+  Each style has the proper sizing dictated by Kevin
+  The Slider block has been updated to have the proper names and sizes associated with them.
+  The slide paragraph now has the default image style set to Original.
+  The slider block template has had it's sizing logic moved to the paragraph slide template.
+  The paragraph slide template uses parent logic to check what side the slider is going to be and applies the appropriate style to each image.
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/165
+  
+  Closes #1240 
+---
+
 - ### ID generation replace
   Replacing our ID generation for these blocks so that reusable blocks don't run into errors with duplicate reusable blocks on the same page.
   
