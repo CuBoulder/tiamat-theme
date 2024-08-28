@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes error on person pages caused by links fields
+  [bug] An issue existed where certain person link URLs not beginning with a `/` may result in an error and break the display of a person page. The bug has been found in production on the Anthropology site and is a high-priority fix. This update refactors the person links field templates to use my Twig macro and resolves the issue.
+  
+  Resolves CuBoulder/tiamat-theme#1256
+---
+
 - ### Update Slide Size/Image
   Added three new image styles:
   Slider Ultrawide (1600x600)

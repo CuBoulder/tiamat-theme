@@ -24,18 +24,21 @@
 
 ul.ucb-person-email-address,
 ul.ucb-person-links,
-ul.ucb-person-phone-numbers {
+ul.ucb-person-phone-numbers,
+.ucb-person-contact ul {
   overflow-wrap: break-word;
   list-style: none;
   padding: 0;
   color: #111;
   margin: 0;
 }
+
 .ucb-person-email-icon {
   display: inline-block;
 }
-a.ucb-person-social-link i.fa-solid,
-a.ucb-person-social-link i.fa-brands {
+
+.ucb-person-contact a i,
+.ucb-person-contact a svg {
   color: #111;
 }
 
@@ -45,16 +48,16 @@ a.ucb-person-social-link i.fa-brands {
 
 .ucb-person-contact p {
   margin: 5px;
-  padding-top:10px;
-  padding-bottom:10px;
+  padding-top: 10px;
+  padding-bottom: 10px;
 }
 
-.ucb-articles-by-person-block{
+.ucb-articles-by-person-block {
   display: block;
   margin-bottom: 20px;
 }
 
-.ucb-article-card-title{
+.ucb-article-card-title {
   margin: 0;
   margin-bottom: 10px;
   margin-top: 10px;
@@ -85,8 +88,8 @@ a.ucb-person-social-link i.fa-brands {
   margin-top: 20px;
 }
 
-ul.ucb-person-title li:not(:first-child):before,
-ul.ucb-person-department li:not(:first-child):before {
+ul.ucb-person-title li:not(:first-child)::before,
+ul.ucb-person-department li:not(:first-child)::before {
   font-weight: 900;
   content: '\2022';
   vertical-align: middle;
@@ -122,15 +125,15 @@ ul.ucb-person-department li:not(:first-child):before {
   color: #111;
 }
 
-.ucb-article-card-title-only{
+.ucb-article-card-title-only {
   border-bottom: 1px solid rgba(128, 128, 128, 0.333);
 }
 
-.ucb-article-read-more-container{
+.ucb-article-read-more-container {
   text-align: right;
   padding: 10px 0px;
 }
 
-.ucb-article-read-more{
+.ucb-article-read-more {
   font-size: 85%;
 }
