@@ -31,7 +31,10 @@
   {% for item in items %}
     <li>
       {% set uri = (item.content ? item.content['#url']|render : item.url|render)|trim %}
-      {% set title = useTitle ? (item.content ? item.content['#title']|render : item.title|render)|trim ?? url %}
+      {% if useTitle %}
+        {% set title = (item.content ? item.content['#title']|render : item.title|render)|trim %}
+        {% set title = title ? title : uri %}
+      {% endif %}
       {% set hostname = '' %}
       {% if uri matches '/^(http(s)?:)?\\/\\//i' %}
         {% set hostname = uri|split('/').2 %}
