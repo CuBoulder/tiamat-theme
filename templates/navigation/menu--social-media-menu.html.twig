@@ -18,51 +18,52 @@
  */
 #}
 
-{% macro link(name, uri, icon, className) %}
+{% macro link(name, title, uri, icon, className) %}
   <a{{ create_attribute({ 'aria-label': name, href: uri, title: name }) }}>
     <span{{ create_attribute({ class: ['icon-bg', 'icon-bg-' ~ className] }) }}>
       <i{{ create_attribute({ class: [icon, 'icon-foreground'] }) }}></i>
     </span>
-    <span class="icon-label">{{ name }}</span>
+    <span class="icon-label">{{ title ? title : name }}</span>
   </a>
 {% endmacro %}
 
-{% macro links(items) %}
+{% macro links(items, useTitle = false) %}
   {% for item in items %}
     <li>
+      {% set title = useTitle ? (item.content ? item.content['#title']|render : item.title|render)|trim %}
       {% set uri = (item.content ? item.content['#url']|render : item.url|render)|trim %}
       {% set hostname = '' %}
       {% if uri matches '/^(http(s)?:)?\\/\\//i' %}
         {% set hostname = uri|split('/').2 %}
       {% endif %}
       {% if hostname matches '/facebook\\.com$/i' %}
-        {{ _self.link('Facebook', uri, 'fa-brands fa-facebook-f', 'facebook') }}
+        {{ _self.link('Facebook', title, uri, 'fa-brands fa-facebook-f', 'facebook') }}
       {% elseif hostname matches '/instagram\\.com$/i' %}
-        {{ _self.link('Instagram', uri, 'fa-brands fa-instagram', 'instagram') }}
+        {{ _self.link('Instagram', title, uri, 'fa-brands fa-instagram', 'instagram') }}
       {% elseif hostname matches '/linkedin\\.com$/i' %}
-        {{ _self.link('LinkedIn', uri, 'fa-brands fa-linkedin-in', 'linkedin') }}
+        {{ _self.link('LinkedIn', title, uri, 'fa-brands fa-linkedin-in', 'linkedin') }}
       {% elseif hostname matches '/youtube\\.com$/i' %}
-        {{ _self.link('YouTube', uri, 'fa-brands fa-youtube', 'youtube') }}
+        {{ _self.link('YouTube', title, uri, 'fa-brands fa-youtube', 'youtube') }}
       {% elseif hostname matches '/(pinterest\\.com|pin\\.it)$/i' %}
-        {{ _self.link('Pinterest', uri, 'fa-brands fa-pinterest-p', 'pinterest') }}
+        {{ _self.link('Pinterest', title, uri, 'fa-brands fa-pinterest-p', 'pinterest') }}
       {% elseif hostname matches '/(flickr\\.com|flic\\.kr)$/i' %}
-        {{ _self.link('Flickr', uri, 'fa-brands fa-flickr', 'flickr') }}
+        {{ _self.link('Flickr', title, uri, 'fa-brands fa-flickr', 'flickr') }}
       {% elseif hostname matches '/vimeo\\.com$/i' %}
-        {{ _self.link('Vimeo', uri, 'fa-brands fa-vimeo-v', 'vimeo') }}
+        {{ _self.link('Vimeo', title, uri, 'fa-brands fa-vimeo-v', 'vimeo') }}
       {% elseif hostname matches '/wordpress\\.com$/i' %}
-        {{ _self.link('WordPress', uri, 'fa-brands fa-wordpress-simple', 'wordpress') }}
+        {{ _self.link('WordPress', title, uri, 'fa-brands fa-wordpress-simple', 'wordpress') }}
       {% elseif hostname matches '/tiktok\\.com$/i' %}
-        {{ _self.link('TikTok', uri, 'fa-brands fa-tiktok', 'tiktok') }}
+        {{ _self.link('TikTok', title, uri, 'fa-brands fa-tiktok', 'tiktok') }}
       {% elseif hostname matches '/reddit\\.com$/i' %}
-        {{ _self.link('Reddit', uri, 'fa-brands fa-reddit-alien', 'reddit') }}
+        {{ _self.link('Reddit', title, uri, 'fa-brands fa-reddit-alien', 'reddit') }}
       {% elseif hostname matches '/patreon\\.com$/i' %}
-        {{ _self.link('Patreon', uri, 'fa-brands fa-patreon', 'patreon') }}
+        {{ _self.link('Patreon', title, uri, 'fa-brands fa-patreon', 'patreon') }}
       {% elseif hostname matches '/discord\\.(com|gg)$/i' %}
-        {{ _self.link('Discord', uri, 'fa-brands fa-discord', 'discord') }}
+        {{ _self.link('Discord', title, uri, 'fa-brands fa-discord', 'discord') }}
       {% elseif hostname matches '/(twitter|x)\\.com$/i'  %}
-        {{ _self.link('X', uri, 'fa-brands fa-x-twitter', 'twitter') }}
+        {{ _self.link('X', title, uri, 'fa-brands fa-x-twitter', 'twitter') }}
       {% else %}
-        {{ _self.link('Link', uri, 'fa-solid fa-up-right-from-square', 'link') }}
+        {{ _self.link('Link', title, uri, 'fa-solid fa-up-right-from-square', 'link') }}
       {% endif %}
     </li>
   {% endfor %}
