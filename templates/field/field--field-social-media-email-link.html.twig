@@ -10,7 +10,7 @@
   <ul>
     {% for item in items %}
       <li>
-        {{ socialMediaMenu.link('Email', 'mailto:' ~ item.content|render, 'fa-solid fa-envelope', 'email') }}
+        {{ socialMediaMenu.link('Email', 'Email', 'mailto:' ~ item.content|render, 'fa-solid fa-envelope', 'email') }}
       </li>
     {% endfor %}
   </ul>
