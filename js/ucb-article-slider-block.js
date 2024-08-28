@@ -5,6 +5,7 @@ class ArticleSliderBlockElement extends HTMLElement {
         var count = 6;
         var API = this.getAttribute('jsonapi');
         this._baseURI = this.getAttribute("base-uri");
+        this._id = this.getAttribute("id")
 
         // Exclusions are done on the JS side, get into arrays. Blank if no exclusions
         var excludeCatArray = this.getAttribute('exCats').split(",").map(Number);
@@ -146,7 +147,7 @@ class ArticleSliderBlockElement extends HTMLElement {
 }
 
     renderDisplay(articleArray){
-      var fliktyInit = document.getElementsByClassName('ucb-article-slider')[0]
+      var fliktyInit = document.getElementsByClassName(`ucb-article-slider${this._id}`)[0]
       articleArray.map(article=>{
         var articleContainer = document.createElement('div')
         articleContainer.className = 'ucb-article-slider-container carousel-cell'
@@ -176,7 +177,7 @@ class ArticleSliderBlockElement extends HTMLElement {
       this.toggleMessage('ucb-al-loading')
       this.toggleMessage('ucb-el-flick','block')
       // Make this a Flickity container -- this line appears to need to be here, creating the container before
-      new Flickity('.ucb-article-slider',{
+      new Flickity(`.ucb-article-slider${this._id}`,{
         'autoPlay': false,
         'wrapAround': true,
         'adaptiveHeight': true,
