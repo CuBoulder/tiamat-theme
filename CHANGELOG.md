@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article Slider: Fixes Issue with Multiple Reuseable Article Slider Blocks on the same Page
+  While a rare situation, if a user happens to add two copies of a re-useable `Article Slider` block to the same page, it would cause them both to break. Similar to the other JavaScript blocks, this issue has been corrected by giving every instance of the block a Unique ID. 
+  
+  Resolves #1247 
+---
+
 - ### Fixes error on person pages caused by links fields
   [bug] An issue existed where certain person link URLs not beginning with a `/` may result in an error and break the display of a person page. The bug has been found in production on the Anthropology site and is a high-priority fix. This update refactors the person links field templates to use my Twig macro and resolves the issue.
   
