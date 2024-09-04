@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Related Articles Block: Refines 'Relatedness' calculations
+  Refines the relatedness calculations of the `Related Articles` block. The block will now check Category matches as most relevant, tag matches, and in the event of a tie in "relatedness score" it will take the more recent Article as the more related choice.
+  
+  Previously the block almost exclusively took only the category matches under consideration and if there were none, would then check tag matches. Date was not included in these calculations and would reflect Articles in the order returned from the API.
+  
+  Resolves #1242 
+  
+  Will create a separate ticket for addressing global on/off settings, is a larger discussion that will most likely involve a custom module to re-write settings across the site. 
+---
+
 - ### Mobile Menu
   Closes #1231.
   Solves the problem of a split mobile menu by combining the various mobile menus into one. This should resolve the bug in all situations.
