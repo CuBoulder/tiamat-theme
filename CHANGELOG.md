@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Content list changes
+  Resolves #1251.
+  Adds the ability to add collection item pages to the content list.
+  
+  Custom Entities -> https://github.com/CuBoulder/tiamat-custom-entities/pull/168
+---
+
 - ### Article Slider: Fixes Issue with Multiple Reuseable Article Slider Blocks on the same Page
   While a rare situation, if a user happens to add two copies of a re-useable `Article Slider` block to the same page, it would cause them both to break. Similar to the other JavaScript blocks, this issue has been corrected by giving every instance of the block a Unique ID. 
   
