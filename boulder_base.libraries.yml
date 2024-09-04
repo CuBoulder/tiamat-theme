@@ -493,7 +493,13 @@ ucb-mega-menu-block:
   css:
     theme:
       css/block/ucb-mega-menu.css: {}
-      
+
+ucb-pager:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-pager.css: {}
+
 colorbox-image:
   version: 1.x
   js:
