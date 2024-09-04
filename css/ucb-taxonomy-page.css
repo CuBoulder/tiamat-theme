@@ -1,4 +1,4 @@
-.ucb-layout-main {
+#block-boulder-base-content {
   --bs-gutter-y: 3rem;
 
   margin-top: calc(var(--bs-gutter-y) * 0.5);
