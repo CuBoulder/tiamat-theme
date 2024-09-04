@@ -25,6 +25,7 @@
   color: #fff;
   border: 1px solid #0277bd;
   background-color: #0277bd;
+  font-weight: bold;
 }
 
 .ucb-pager li a:hover,
