@@ -51,15 +51,13 @@
 {{ attach_library('boulder_base/ucb-taxonomy-page') }}
 
 <div class="layout-container ucb-page-container">
-  {{ block("page_header", "page.html.twig") }}
+  {{ block('page_header', 'page.html.twig') }}
   <div{{ create_attribute({ class: ['ucb-page-content', ucb_heading_font == 'normal' ? 'ucb-heading-font-normal'] }) }}>
     {{ page.highlighted }}
     {{ page.help }}
     <main role="main">
-      <div class="ucb-content-wrapper ucb-search-page-content container">
-        {{ page.content }}
-      </div>
+      {{ block('content_sidebar', 'page.html.twig') }}
     </main>
   </div>
-  {{ block("page_footer", "page.html.twig") }}
+  {{ block('page_footer', 'page.html.twig') }}
 </div>
