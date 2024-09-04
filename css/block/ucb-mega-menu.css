@@ -63,6 +63,16 @@
   max-width: 16%;
 }
 
+.ucb-mega-menu-column-wrapper .ucb-mega-menu-text-above div {
+  min-width: 100%;
+  width: 100%;
+  max-width: 100%;
+}
+
+.ucb-mega-menu-text-above {
+  padding-right: 10px;
+}
+
 .ucb-mega-menu-wrapper {
   padding: 20px;
 }
@@ -70,6 +80,23 @@
 .ucb-mega-menu-column-wrapper {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+}
+
+@media only screen and (max-width: 767px) {
+
+  .ucb-mega-menu-column-3 div,
+  .ucb-mega-menu-column-4 div,
+  .ucb-mega-menu-column-5 div,
+  .ucb-mega-menu-column-6 div {
+    min-width: 100%;
+    width: 100%;
+    max-width: 100%;
+  }
+  .ucb-mega-menu-text-above {
+    padding-bottom: 10px;
+
+  }
 }
 
 @media only screen and (max-width: 576px) {

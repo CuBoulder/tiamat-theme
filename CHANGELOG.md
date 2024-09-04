@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Mega Menu Tablet changes
+  Resolves #1238.
+  Adds css to make images span the width of the text-above div, and changes the columns to be reduced to one in tablet width.
+---
+
 - ### Content list changes
   Resolves #1251.
   Adds the ability to add collection item pages to the content list.
