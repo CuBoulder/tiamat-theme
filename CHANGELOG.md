@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds sidebar region to taxonomy pages
+  [bug] Resolves CuBoulder/tiamat-theme#1263
+---
+
 - ### Related Articles Block: Refines 'Relatedness' calculations
   Refines the relatedness calculations of the `Related Articles` block. The block will now check Category matches as most relevant, tag matches, and in the event of a tie in "relatedness score" it will take the more recent Article as the more related choice.
   
