@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Mobile Menu
+  Closes #1231.
+  Solves the problem of a split mobile menu by combining the various mobile menus into one. This should resolve the bug in all situations.
+---
+
 - ### Mega Menu Tablet changes
   Resolves #1238.
   Adds css to make images span the width of the text-above div, and changes the columns to be reduced to one in tablet width.
