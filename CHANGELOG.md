@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Mobile Menu: Adds conditional to toggle
+  Resolves #1212.
+  Adds a conditional to the mobile menu toggle to only appear when there is a menu on the page.
+---
+
 - ### Adds sidebar region to taxonomy pages
   [bug] Resolves CuBoulder/tiamat-theme#1263
 ---

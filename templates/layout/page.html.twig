@@ -174,10 +174,12 @@
               </div>
             {% endif %}
           </div>
-          <button id="ucb-mobile-menu-toggle" aria-label="Toggle menu">
-            <i class="ucb-mobile-menu-open-icon fa-solid fa-bars"></i>
-            <i class="ucb-mobile-menu-close-icon fa-solid fa-xmark"></i>
-          </button>
+          {% if (page.primary_menu|render and drupal_menu('main')|render) or (page.secondary_menu|render and (drupal_menu('secondary')|render or drupal_menu('social-media-menu')|render)) or (page.footer_menu|render and (drupal_menu('footer')|render or drupal_menu('social-media-menu')|render)) %}
+            <button id="ucb-mobile-menu-toggle" aria-label="Toggle menu">
+              <i class="ucb-mobile-menu-open-icon fa-solid fa-bars"></i>
+              <i class="ucb-mobile-menu-close-icon fa-solid fa-xmark"></i>
+            </button>
+          {% endif %}
         </div>
       </header>
       <section class="ucb-main-nav-section mobile ucb-header-{{ header_color }}" role="navigation">
