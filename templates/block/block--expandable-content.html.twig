@@ -14,7 +14,7 @@
   'ucb-expandable-content'
 ] %}
 
-{% set entity = content['#block_content'] %}{% set id = entity.uuid.value %}
+{% set entity = content['#block_content'] %}{% set id = '-id'|clean_unique_id %}
 {% set layoutSelection = entity.field_expandable_content_type.value %}
 
 {% set accordianContent %}

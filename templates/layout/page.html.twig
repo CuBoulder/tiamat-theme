@@ -37,9 +37,8 @@
  * - page.above_content: Contained content above the main content.
  * - page.content: The main content of the current page.
  * - page.below_content: Containted content below the main content
- * - page.wide_post: Full width content below the below content..
- * - page.sidebar_first: Items for the first sidebar.
- * - page.sidebar_second: Items for the second sidebar.
+ * - page.wide_post: Full width content below the below content.
+ * - page.sidebar: Items for the sidebar.
  * - page.footer: Items for the footer region.
  * - page.breadcrumb: Items for the breadcrumb region.
  *
@@ -175,10 +174,12 @@
               </div>
             {% endif %}
           </div>
-          <button id="ucb-mobile-menu-toggle" aria-label="Toggle menu">
-            <i class="ucb-mobile-menu-open-icon fa-solid fa-bars"></i>
-            <i class="ucb-mobile-menu-close-icon fa-solid fa-xmark"></i>
-          </button>
+          {% if (page.primary_menu|render and drupal_menu('main')|render) or (page.secondary_menu|render and (drupal_menu('secondary')|render or drupal_menu('social-media-menu')|render)) or (page.footer_menu|render and (drupal_menu('footer')|render or drupal_menu('social-media-menu')|render)) %}
+            <button id="ucb-mobile-menu-toggle" aria-label="Toggle menu">
+              <i class="ucb-mobile-menu-open-icon fa-solid fa-bars"></i>
+              <i class="ucb-mobile-menu-close-icon fa-solid fa-xmark"></i>
+            </button>
+          {% endif %}
         </div>
       </header>
       <section class="ucb-main-nav-section mobile ucb-header-{{ header_color }}" role="navigation">
@@ -225,34 +226,36 @@
             </div>
           </div>
         {% endif %}
-        {# We are checking for length below to make sure that the sidebars have any content. This is so that sidebar menus don't render the sidebars if the menu is empty #}
-        {% if page.sidebar|render|striptags|trim|length > 0 %}
-          {% if ucb_sidebar_position == 'left' %}
-            <div class="ucb-layout-container ucb-sidebar-container container">
-              <div class="layout-row row">
-                <div class="ucb-left-sidebar ucb-sidebar col-12 col-lg-4">
-                  {{ page.sidebar }}
-                </div>
-                <div class="ucb-layout-main col-12 col-lg-8 ucb-has-sidebar">
-                  {{ page.content }}
+        {% block content_sidebar %}
+          {# We are checking for length below to make sure that the sidebars have any content. This is so that sidebar menus don't render the sidebars if the menu is empty #}
+          {% if page.sidebar|render|striptags|trim|length > 0 %}
+            {% if ucb_sidebar_position == 'left' %}
+              <div class="ucb-layout-container ucb-sidebar-container container">
+                <div class="layout-row row">
+                  <div class="ucb-left-sidebar ucb-sidebar col-12 col-lg-4">
+                    {{ page.sidebar }}
+                  </div>
+                  <div class="ucb-layout-main col-12 col-lg-8 ucb-has-sidebar">
+                    {{ page.content }}
+                  </div>
                 </div>
               </div>
-            </div>
+            {% else %}
+              <div class="ucb-layout-container ucb-sidebar-container container">
+                <div class="layout-row row">
+                  <div class="ucb-layout-main col-12 col-lg-8 ucb-has-sidebar">
+                    {{ page.content }}
+                  </div>
+                  <div class="ucb-left-right ucb-sidebar col-12 col-lg-4">
+                    {{ page.sidebar }}
+                  </div>
+                </div>
+              </div>
+            {% endif %}
           {% else %}
-            <div class="ucb-layout-container ucb-sidebar-container container">
-              <div class="layout-row row">
-                <div class="ucb-layout-main col-12 col-lg-8 ucb-has-sidebar">
-                  {{ page.content }}
-                </div>
-                <div class="ucb-left-right ucb-sidebar col-12 col-lg-4">
-                  {{ page.sidebar }}
-                </div>
-              </div>
-            </div>
+            {{ page.content }}
           {% endif %}
-        {% else %}
-          {{ page.content }}
-        {% endif %}
+        {% endblock %}
 
         {% if page.wide_post|render %}
           <div class="ucb-below-post-wide-region edge-to-edge row g-0">

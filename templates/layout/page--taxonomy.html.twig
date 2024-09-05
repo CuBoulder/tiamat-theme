@@ -37,9 +37,8 @@
  * - page.above_content: Contained content above the main content.
  * - page.content: The main content of the current page.
  * - page.below_content: Containted content below the main content
- * - page.wide_post: Full width content below the below content..
- * - page.sidebar_first: Items for the first sidebar.
- * - page.sidebar_second: Items for the second sidebar.
+ * - page.wide_post: Full width content below the below content.
+ * - page.sidebar: Items for the sidebar.
  * - page.footer: Items for the footer region.
  * - page.breadcrumb: Items for the breadcrumb region.
  *
@@ -51,15 +50,13 @@
 {{ attach_library('boulder_base/ucb-taxonomy-page') }}
 
 <div class="layout-container ucb-page-container">
-  {{ block("page_header", "page.html.twig") }}
+  {{ block('page_header', 'page.html.twig') }}
   <div{{ create_attribute({ class: ['ucb-page-content', ucb_heading_font == 'normal' ? 'ucb-heading-font-normal'] }) }}>
     {{ page.highlighted }}
     {{ page.help }}
     <main role="main">
-      <div class="ucb-content-wrapper ucb-search-page-content container">
-        {{ page.content }}
-      </div>
+      {{ block('content_sidebar', 'page.html.twig') }}
     </main>
   </div>
-  {{ block("page_footer", "page.html.twig") }}
+  {{ block('page_footer', 'page.html.twig') }}
 </div>

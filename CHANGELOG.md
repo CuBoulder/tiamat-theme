@@ -9,11 +9,115 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Fixes CSS bug causing accordions nested inside tabbed expandable blocks to be hidden
-  A CSS specificity bug existed in the expandable content block set to horizontal or vertical tab display. The bug caused accordions created using the CKEditor 5 Bootstrap Accordion plugin and nested within the content area to be unexpectedly hidden. This update resolves the issue.
-  
-  Resolves CuBoulder/tiamat-theme#1228
----
+## [20240904] - 2024-09-04
+
+-   ### Mobile Menu: Adds conditional to toggle
+    Resolves #1212.
+    Adds a conditional to the mobile menu toggle to only appear when there is a menu on the page.
+
+* * *
+
+-   ### Adds sidebar region to taxonomy pages
+    [bug] Resolves CuBoulder/tiamat-theme#1263
+
+* * *
+
+-   ### Related Articles Block: Refines 'Relatedness' calculations
+
+    Refines the relatedness calculations of the `Related Articles` block. The block will now check Category matches as most relevant, tag matches, and in the event of a tie in "relatedness score" it will take the more recent Article as the more related choice.
+
+    Previously the block almost exclusively took only the category matches under consideration and if there were none, would then check tag matches. Date was not included in these calculations and would reflect Articles in the order returned from the API.
+
+    Resolves #1242 
+
+    Will create a separate ticket for addressing global on/off settings, is a larger discussion that will most likely involve a custom module to re-write settings across the site. 
+
+* * *
+
+-   ### Mobile Menu
+    Closes #1231.
+    Solves the problem of a split mobile menu by combining the various mobile menus into one. This should resolve the bug in all situations.
+
+* * *
+
+-   ### Mega Menu Tablet changes
+    Resolves #1238.
+    Adds css to make images span the width of the text-above div, and changes the columns to be reduced to one in tablet width.
+
+* * *
+
+-   ### Content list changes
+
+    Resolves #1251.
+    Adds the ability to add collection item pages to the content list.
+
+    Custom Entities -> <https://github.com/CuBoulder/tiamat-custom-entities/pull/168>
+
+* * *
+
+-   ### Article Slider: Fixes Issue with Multiple Reuseable Article Slider Blocks on the same Page
+
+    While a rare situation, if a user happens to add two copies of a re-useable `Article Slider` block to the same page, it would cause them both to break. Similar to the other JavaScript blocks, this issue has been corrected by giving every instance of the block a Unique ID. 
+
+    Resolves #1247 
+
+* * *
+
+-   ### Fixes error on person pages caused by links fields
+
+    [bug] An issue existed where certain person link URLs not beginning with a `/` may result in an error and break the display of a person page. The bug has been found in production on the Anthropology site and is a high-priority fix. This update refactors the person links field templates to use my Twig macro and resolves the issue.
+
+    Resolves CuBoulder/tiamat-theme#1256
+
+* * *
+
+-   ### Update Slide Size/Image
+
+    Added three new image styles:
+    Slider Ultrawide (1600x600)
+    Slider Widescreen (1600:900)
+    Slider 3:2 (1500:1000)
+
+    Each style has the proper sizing dictated by Kevin
+    The Slider block has been updated to have the proper names and sizes associated with them.
+    The slide paragraph now has the default image style set to Original.
+    The slider block template has had it's sizing logic moved to the paragraph slide template.
+    The paragraph slide template uses parent logic to check what side the slider is going to be and applies the appropriate style to each image.
+
+    Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/165>
+
+    Closes #1240 
+
+* * *
+
+-   ### ID generation replace
+
+    Replacing our ID generation for these blocks so that reusable blocks don't run into errors with duplicate reusable blocks on the same page.
+
+    This affects the video reveal, slider, image gallery video hero unit, and expandable content blocks.
+
+    Closes #1245 
+    Closes #1137
+
+* * *
+
+-   ### Events Calendar |raw removal
+
+    Remove `|raw` loading.
+    Replace localist widget ID with randomly generated ID Strip query strings from embed input.
+    Hardcode embed div and js using new ID and query parameters
+
+    Resolves #842 
+
+* * *
+
+-   ### Fixes CSS bug causing accordions nested inside tabbed expandable blocks to be hidden
+
+    A CSS specificity bug existed in the expandable content block set to horizontal or vertical tab display. The bug caused accordions created using the CKEditor 5 Bootstrap Accordion plugin and nested within the content area to be unexpectedly hidden. This update resolves the issue.
+
+    Resolves CuBoulder/tiamat-theme#1228
+
+* * *
 
 ## [20240821] - 2024-08-21
 
@@ -3081,7 +3185,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240821...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240904...HEAD
+
+[20240904]: https://github.com/CuBoulder/tiamat-theme/compare/20240821...20240904
 
 [20240821]: https://github.com/CuBoulder/tiamat-theme/compare/20240814...20240821
 

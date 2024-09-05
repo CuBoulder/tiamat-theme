@@ -24,7 +24,8 @@
 
 ul.ucb-person-email-address,
 ul.ucb-person-links,
-ul.ucb-person-phone-numbers {
+ul.ucb-person-phone-numbers,
+.ucb-person-contact ul {
   overflow-wrap: break-word;
   list-style: none;
   padding: 0;
@@ -36,8 +37,8 @@ ul.ucb-person-phone-numbers {
   display: inline-block;
 }
 
-a.ucb-person-social-link i.fa-solid,
-a.ucb-person-social-link i.fa-brands {
+.ucb-person-contact a i,
+.ucb-person-contact a svg {
   color: #111;
 }
 

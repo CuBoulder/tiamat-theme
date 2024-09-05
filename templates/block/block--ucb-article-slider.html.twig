@@ -12,6 +12,9 @@
   view_mode ? 'block--view-mode-' ~ view_mode|clean_class
 ] %}
 
+{# Unique Id #}
+{% set id = ''|clean_unique_id %}
+
 {# This block mirrors the Article List Node - constructs a JSON endpoint in TWIG using include filters #}
 {# JSON API Endpoint information #}
 {% set articlesJSON = (url('<front>')|render|trim('/'))
@@ -173,7 +176,7 @@
   {{ attach_library('boulder_base/ucb-article-slider-block') }}
   {{ content.body }}
   {# Article Slider Main Block#}
-  <article-slider-block base-uri="{{ baseurlJSON }}" jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}" excats="{{ excludeCategories }}" extags="{{ excludeTags }}">
+  <article-slider-block id="{{id}}" base-uri="{{ baseurlJSON }}" jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}" excats="{{ excludeCategories }}" extags="{{ excludeTags }}">
     <div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
       <i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>
     </div>
@@ -183,6 +186,6 @@
     <div id="ucb-al-api-error" style="display:none" class="ucb-list-msg">
       <h3>An error has occured with the API - please try again later</h3>
     </div>
-    <div id='ucb-el-flick' style="display:none" class="ucb-article-slider"></div>
+    <div id='ucb-el-flick' style="display:none" class="ucb-article-slider ucb-article-slider{{id}}"></div>
   </article-slider-block>
 {% endblock %}

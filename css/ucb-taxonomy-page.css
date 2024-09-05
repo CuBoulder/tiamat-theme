@@ -1,3 +1,10 @@
+#block-boulder-base-content {
+  --bs-gutter-y: 3rem;
+
+  margin-top: calc(var(--bs-gutter-y) * 0.5);
+  margin-bottom: calc(var(--bs-gutter-y) * 0.5);
+}
+
 .item-list.container ul li {
   border-bottom: 2px solid rgba(128, 128, 128, 0.333);
   margin-bottom: 20px;

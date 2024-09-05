@@ -13,37 +13,55 @@
   ]
 %}
 
+{# set paragraph's parent for field information #}
+{% set parent = paragraph._referringItem.parent.parent.entity %}
+
+{# set classes for the image style  #}
+{% if parent.field_slider_size.value == '0' %}
+  {% set imgStyle = 'slider_ultrawide' %}
+{% elseif parent.field_slider_size.value == '1' %}
+  {% set imgStyle = 'slider_widescreen' %}
+{% elseif parent.field_slider_size.value == '2' %}
+  {% set imgStyle = 'slider_3_2' %}
+{% else %}
+  {% set imgStyle = 'original_image_size' %}
+{% endif %}
+
+{# set classes for the size of the component #}
+{% set imgUrl = paragraph.field_slide_image.entity.field_media_image.entity.fileuri|image_style(imgStyle) %}
+{% set imgAlt = paragraph.field_slide_image.entity.field_media_image.alt %}
+
+
 {% block paragraph %}
-	{% block content %}
+  {% block content %}
     <div class="slide-image-container">
       {% if paragraph.field_slide_link.0.url is not empty %}
         <a href="{{ paragraph.field_slide_link.0.url }}">
-          {{ content.field_slide_image|render }}
-        </a>
-      {% else %}
-        {{ content.field_slide_image|render }}
-      {% endif %}
-    </div>
-		{% if paragraph.field_slide_title.value is not empty or paragraph.field_slide_image_text is not empty %}
-			<div class="carousel-caption d-md-block">
-      <div class="slide-text-container">
-				{% if paragraph.field_slide_title is not empty %}
-					<span>
-						<h3>{{ content.field_slide_title|render|striptags|trim }}
-							{% if paragraph.field_slide_link.0.url is not empty %}
-								<a href="{{ paragraph.field_slide_link.0.url }}" class="slide-link">
-									<i class="fa-solid fa-up-right-from-square"></i>
-								</a>
-							{% endif %}
-						</h3>
-					</span>
+          <img{{create_attribute({src:imgUrl,alt:imgAlt})}}></a>
+        {% else %}
+          <img{{create_attribute({src:imgUrl,alt:imgAlt})}}>
+          {% endif %}
+        </div>
+        {% if paragraph.field_slide_title.value is not empty or paragraph.field_slide_image_text is not empty %}
+          <div class="carousel-caption d-md-block">
+            <div class="slide-text-container">
+              {% if paragraph.field_slide_title is not empty %}
+                <span>
+                  <h3>{{ content.field_slide_title|render|striptags|trim }}
+                    {% if paragraph.field_slide_link.0.url is not empty %}
+                      <a href="{{ paragraph.field_slide_link.0.url }}" class="slide-link">
+                        <i class="fa-solid fa-up-right-from-square"></i>
+                      </a>
+                    {% endif %}
+                  </h3>
+                </span>
 
-				{% endif %}
-				{% if paragraph.field_slide_image_text.value is not empty %}
-					<p>{{ content.field_slide_image_text|render }}</p>
-				{% endif %}
-			</div>
-      </div>
-		{% endif %}
-	{% endblock %}
-{% endblock paragraph %}
+              {% endif %}
+              {% if paragraph.field_slide_image_text.value is not empty %}
+                <p>{{ content.field_slide_image_text|render }}</p>
+              {% endif %}
+            </div>
+          </div>
+        {% endif %}
+      {% endblock %}
+    {% endblock paragraph %}

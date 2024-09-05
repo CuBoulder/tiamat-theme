@@ -43,11 +43,11 @@
     {% for item in items %}
     {# Skip unpublished items if the user is not logged in #}
       {% if item.entity.status.value == 1 or user.isAuthenticated %}
-        {% set image = item.entity.field_ucb_article_thumbnail.entity.field_media_image ?? item.entity.field_ucb_person_photo.entity.field_media_image ?? item.entity.field_how_to_initial_image.entity.field_media_image ?? item.entity.field_social_sharing_image.entity.field_media_image %}
+        {% set image = item.entity.field_ucb_article_thumbnail.entity.field_media_image ?? item.entity.field_ucb_person_photo.entity.field_media_image ?? item.entity.field_how_to_initial_image.entity.field_media_image ?? item.entity.field_social_sharing_image.entity.field_media_image ?? item.entity.field_collection_item_thumbnail.entity.field_media_image %}
         {% if image %}
         {% set imageURI = image.entity.fileuri|image_style('focal_image_square') %}{% set imageAlt = image.alt|render %}
         {% endif %}
-        {% set summary = item.entity.body.0.summary ?? item.entity.field_ucb_article_summary.0.value %}
+        {% set summary = item.entity.field_collection_item_summary.0.value ?? item.entity.body.0.summary ?? item.entity.field_ucb_article_summary.0.value %}
         {% if not summary %}
           {% set body = (item.entity.body.0 ?? item.entity.field_ucb_article_content.0.entity.field_article_text.0).value|render|replace({"&nbsp;": ""})|striptags|trim %}
           {% set bodyTrimmed = body|slice(0, 512) %}
