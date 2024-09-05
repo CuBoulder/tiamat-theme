@@ -1,0 +1,45 @@
+.ucb-pager {
+  display: inline-flex;
+  overflow: hidden;
+  flex-direction: row;
+  margin: 0 0 20px 0;
+  padding: 0;
+  list-style: none;
+}
+
+.ucb-pager li:not(:first-child) {
+  display: block;
+  margin-left: -1px;
+}
+
+.ucb-pager li.ucb-pager-current,
+.ucb-pager li a {
+  position: relative;
+  display: inline-block;
+  padding: 4px 8px;
+  border: 1px solid rgba(128, 128, 128, 0.333);
+}
+
+.ucb-pager li.ucb-pager-current {
+  z-index: 1;
+  color: #fff;
+  border: 1px solid #0277bd;
+  background-color: #0277bd;
+  font-weight: bold;
+}
+
+.ucb-pager li a:hover,
+.ucb-pager li a:focus {
+  color: #01579b;
+  background-color: #eee;
+}
+
+.ucb-pager li:first-child.ucb-pager-current,
+.ucb-pager li:first-child a {
+  border-radius: 3px 0 0 3px;
+}
+
+.ucb-pager li:last-child.ucb-pager-current,
+.ucb-pager li:last-child a {
+  border-radius: 0 3px 3px 0;
+}

@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Styles pager on Taxonomy pages
+  [bug, change] Resolves CuBoulder/tiamat-theme#1262 
+---
+
 ## [20240904] - 2024-09-04
 
 -   ### Mobile Menu: Adds conditional to toggle
