@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Styles pager on Taxonomy pages (addendum)
+  This update corrects the folder structure of the previous update, Styles pager on Taxonomy pages CuBoulder/tiamat-theme#1275, and has no additional changes.
+---
+
 - ### Styles pager on Taxonomy pages
   [bug, change] Resolves CuBoulder/tiamat-theme#1262 
 ---
