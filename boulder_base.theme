@@ -149,6 +149,7 @@ function boulder_base_preprocess_page__user(array &$variables) {
   $variables['ucb_campus_header_color'] = theme_get_setting('ucb_campus_header_color');
   $variables['ucb_header_color'] = theme_get_setting('ucb_header_color');
   $variables['ucb_be_boulder'] = theme_get_setting('ucb_be_boulder');
+  $variables['web_express_version'] = theme_get_setting('web_express_version');
 }
 
 /**

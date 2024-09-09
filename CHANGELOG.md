@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds `web_express_version` theme variable
+  [new] Resolves CuBoulder/tiamat-theme#1274
+---
+
 - ### Corrects Person node photo display on mobile
   [bug, mobile] An issue existed which sometimes caused photos on Person nodes to be too small to see on mobile devices. This update resolves the issue.
   
