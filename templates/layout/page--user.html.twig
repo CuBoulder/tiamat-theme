@@ -50,7 +50,7 @@
 {{ attach_library('boulder_base/ucb-user-page') }}
 
 <div class="layout-container ucb-page-container">
-  {{ block("page_header", "page.html.twig") }}
+  {{ block('page_header', 'page.html.twig') }}
   <div{{ create_attribute({ class: ['ucb-page-content', ucb_heading_font == 'normal' ? 'ucb-heading-font-normal'] }) }}>
     {{ page.highlighted }}
     {{ page.help }}
@@ -62,7 +62,8 @@
         </div>
         <div class="ucb-content-wrapper ucb-user-web-status-div">
           <h2>System Status</h2>
-            <status-page-block page-id="9sm03v9xr9m6"></status-page-block>
+          <status-page-block page-id="9sm03v9xr9m6"></status-page-block>
+          <p>Web Express version: {{ web_express_version ?? 'Unknown' }}</p>
           <div class="ucb-user-documentation">
             <h2>Documentation</h2>
             <a href="https://www.colorado.edu/webcentral/">User Documentation </a>
@@ -71,5 +72,5 @@
       </div>
     </main>
   </div>
-  {{ block("page_footer", "page.html.twig") }}
-</div>{# /.layout-container #}
+  {{ block('page_footer', 'page.html.twig') }}
+</div>
