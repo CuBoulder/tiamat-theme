@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Corrects Person node photo display on mobile
+  [bug, mobile] An issue existed which sometimes caused photos on Person nodes to be too small to see on mobile devices. This update resolves the issue.
+  
+  Resolves CuBoulder/tiamat-theme#1241
+---
+
 - ### Styles pager on Taxonomy pages (addendum)
   This update corrects the folder structure of the previous update, Styles pager on Taxonomy pages CuBoulder/tiamat-theme#1275, and has no additional changes.
 ---

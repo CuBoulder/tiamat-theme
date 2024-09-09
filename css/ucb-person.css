@@ -63,16 +63,6 @@ ul.ucb-person-phone-numbers,
   margin-top: 10px;
 }
 
-@media only screen and (max-width: 767px) {
-  .ucb-person-main {
-    display: flex;
-    flex-direction: row;
-  }
-  .ucb-person-main .ucb-person-img {
-    padding-right: 10px;
-  }
-}
-
 .ucb-person-img .media-image-caption {
   text-align: center;
 }
