@@ -1,5 +1,5 @@
 # tiamat-theme
-Drupal 9+ Base theme for CU Boulder web properties
+Drupal 10+ Base theme for CU Boulder web properties
 
 ## Installation
 Add below to `composer.json` require section:
