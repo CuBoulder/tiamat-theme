@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Print css to force black text
+  Resolves #1276.
+  Adds css to force the hero and video reveal to have black text at all times.
+---
+
 - ### Adds `web_express_version` theme variable
   [new] Resolves CuBoulder/tiamat-theme#1274
 ---
