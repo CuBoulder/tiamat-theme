@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Dark 3 Secondary Menu CSS change
+  Resolves #1282.
+  Corrects the Dark 3 menu style to have the secondary menu links be in line when the secondary menu is above.
+---
+
 - ### Print css to force black text
   Resolves #1276.
   Adds css to force the hero and video reveal to have black text at all times.
