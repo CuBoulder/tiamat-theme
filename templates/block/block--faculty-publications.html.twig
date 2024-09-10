@@ -1,0 +1,20 @@
+{#
+/**
+ * @file Contains the template to display the Faculty Publications block.
+ */
+#}
+{% set classes = [
+  'container',
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
+  'ucb-faculty-publications'
+] %}
+
+{% extends '@boulder_base/block/styled-block.html.twig' %}
+{% block content %}
+  {{ attach_library('boulder_base/ucb-faculty-publications') }}
+  <faculty-publications></faculty-publications>
+{% endblock %}

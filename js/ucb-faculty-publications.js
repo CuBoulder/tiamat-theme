@@ -12,7 +12,8 @@
     constructor() {
       super();
       this.getResults()
-        .then(results => this.displayResults(results));
+        .then(results => this.displayResults(results))
+        .catch(() => this.displayError());
     }
 
     /**
@@ -45,6 +46,10 @@
      */
     displayResults(results) {
       const publications = results.publications;
+      if (!publications) {
+        this.displayNoResults();
+        return;
+      }
       let publicationsHTML = '';
       publications.forEach(publication => {
         const publicatonName = safe(publication['_source']['name']);
@@ -54,6 +59,20 @@
         publicationsHTML += '</div>';
       });
       this.innerHTML = publicationsHTML;
+    }
+
+    /**
+     * Displays an error message if an error occurred.
+     */
+    displayError() {
+      this.innerHTML = '<p><strong>There was a problem fetching the publication data. Please try again later.</strong></p>';
+    }
+
+    /**
+     * Displays an error message if no publications were returned.
+     */
+    displayNoResults() {
+      this.innerHTML = '<p><strong>There were no publications returned.</strong></p>';
     }
 
   }
