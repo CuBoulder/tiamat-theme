@@ -77,6 +77,10 @@
     color: #363636;
   }
 
+  .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item {
+    line-height: 1rem;
+  }
+
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg {
     color: #363636;
     display: flex;
@@ -87,7 +91,7 @@
     color: #363636;
     display: inline-block;
     font-weight: 400;
-    padding: 0 10px;
+    padding: 2px 10px;
     height: 100%;
   }
 
