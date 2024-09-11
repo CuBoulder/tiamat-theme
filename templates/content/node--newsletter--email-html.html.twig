@@ -594,7 +594,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                     {% set color = designType == 'darkbox' or designType == 'simple' or designType == 'classic' ? 'white' : 'black' %}
                                     <a{{ create_attribute({ class: 'ucb-email-social-icon', href: uri }) }}>
                                         <img{{ create_attribute({
-                                            src: base_domain ~ '/' ~  base_path ~ directory ~ '/images/social_icons/' ~ color ~ '-' ~ service|lower ~ '.png',
+                                            src: base_url ~ '/' ~  base_path ~ directory ~ '/images/social_icons/' ~ color ~ '-' ~ service|lower ~ '.png',
                                             alt: alt,
                                             style: 'width:20px;height:20px' }) }}/>
                                     </a>
