@@ -23,9 +23,30 @@
      *   The returned list of publications.
      */
     async getResults() {
-      // TODO: Query parameters.
+      const
+        from = this.getAttribute('from'),
+        to = this.getAttribute('to'),
+        department = this.getAttribute('department'),
+        departmentId = parseInt(department),
+        email = this.getAttribute('email'),
+        query = [],
+        params = new URLSearchParams();
+      if (from || to) {
+        const currentDate = new Date();
+        query.push(`publicationDate:[${from || currentDate.toISOString()} TO ${to || currentDate.toISOString()}]`);
+      }
+      if (department) {
+        query.push(`authors.organization.${isNaN(departmentId) ? 'name:' + department : 'id:' + departmentId}`);
+      }
+      if (email) {
+        query.push(`authors.email:${email}`);
+      }
+      if (query.length > 0) {
+        params.set('q', query.join(' AND '));
+      }
+      const paramsToString = params.toString();
       const response = await fetch(
-        'https://search-experts-direct-cz3fpq4rlxcbn5z27vzq4mpzaa.us-east-2.es.amazonaws.com/fispubs-v1/_search',
+        `https://search-experts-direct-cz3fpq4rlxcbn5z27vzq4mpzaa.us-east-2.es.amazonaws.com/fispubs-v1/_search${paramsToString ? '?' + paramsToString : ''}`,
         {
           headers: {
             Authorization: 'Basic YW5vbjphbm9ueU0wdXMh'
@@ -52,9 +73,11 @@
       }
       let publicationsHTML = '';
       publications.forEach(publication => {
-        const publicatonName = safe(publication['_source']['name']);
+        const publicatonName = preserveItalics(safe(publication['_source']['name']));
         const publicatonLink = safe(publication['_source']['uri']);
-        publicationsHTML += `<div><h3 class="h5"><a target="_blank" href="${publicatonLink}">${publicatonName}</a></h3>`;
+        publicationsHTML += '<div><h3 class="h5">';
+        publicationsHTML += publicatonLink ? `<a target="_blank" href="${publicatonLink}">${publicatonName}</a>` : publicatonName;
+        publicationsHTML += '</h3>';
         // TODO: More info here.
         publicationsHTML += '</div>';
       });
@@ -91,6 +114,20 @@
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
       .replace(/"/g, '&quot;');
+  }
+
+  /**
+   * Preserves `<i>` italics in HTML-safe text.
+   *
+   * @param {string} safeText
+   *   Text that has been made HTML-safe.
+   * @returns
+   *   The text with italics preserved.
+   */
+  function preserveItalics(safeText) {
+    return safeText
+      .replace(/&lt;i&gt;/g, '<span class="fst-italic">')
+      .replace(/&lt;\/i&gt;/g, '</span>')
   }
 
   // Registers the `<faculty-publications>` element as a web component
