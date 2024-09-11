@@ -1,0 +1,18 @@
+faculty-publications > div {
+  margin-bottom: 20px;
+}
+
+faculty-publications .faculty-publications-authors {
+  display: inline-block;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+faculty-publications .faculty-publications-authors li {
+  display: inline-block;
+}
+
+faculty-publications .faculty-publications-authors li:not(:last-child)::after {
+  content: ";";
+}
