@@ -9,33 +9,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Dark 3 Secondary Menu CSS change
-  Resolves #1282.
-  Corrects the Dark 3 menu style to have the secondary menu links be in line when the secondary menu is above.
----
+## [20240911] - 2024-09-11
 
-- ### Print css to force black text
-  Resolves #1276.
-  Adds css to force the hero and video reveal to have black text at all times.
----
+-   ### Dark 3 Secondary Menu CSS change
+    Resolves #1282.
+    Corrects the Dark 3 menu style to have the secondary menu links be in line when the secondary menu is above.
 
-- ### Adds `web_express_version` theme variable
-  [new] Resolves CuBoulder/tiamat-theme#1274
----
+* * *
 
-- ### Corrects Person node photo display on mobile
-  [bug, mobile] An issue existed which sometimes caused photos on Person nodes to be too small to see on mobile devices. This update resolves the issue.
-  
-  Resolves CuBoulder/tiamat-theme#1241
----
+-   ### Print css to force black text
+    Resolves #1276.
+    Adds css to force the hero and video reveal to have black text at all times.
 
-- ### Styles pager on Taxonomy pages (addendum)
-  This update corrects the folder structure of the previous update, Styles pager on Taxonomy pages CuBoulder/tiamat-theme#1275, and has no additional changes.
----
+* * *
 
-- ### Styles pager on Taxonomy pages
-  [bug, change] Resolves CuBoulder/tiamat-theme#1262 
----
+-   ### Adds `web_express_version` theme variable
+    [new] Resolves CuBoulder/tiamat-theme#1274
+
+* * *
+
+-   ### Corrects Person node photo display on mobile
+
+    [bug, mobile] An issue existed which sometimes caused photos on Person nodes to be too small to see on mobile devices. This update resolves the issue.
+
+    Resolves CuBoulder/tiamat-theme#1241
+
+* * *
+
+-   ### Styles pager on Taxonomy pages (addendum)
+    This update corrects the folder structure of the previous update, Styles pager on Taxonomy pages CuBoulder/tiamat-theme#1275, and has no additional changes.
+
+* * *
+
+-   ### Styles pager on Taxonomy pages
+    [bug, change] Resolves CuBoulder/tiamat-theme#1262 
+
+* * *
 
 ## [20240904] - 2024-09-04
 
@@ -3213,7 +3222,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240904...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240911...HEAD
+
+[20240911]: https://github.com/CuBoulder/tiamat-theme/compare/20240904...20240911
 
 [20240904]: https://github.com/CuBoulder/tiamat-theme/compare/20240821...20240904
 
