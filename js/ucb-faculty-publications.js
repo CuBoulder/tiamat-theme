@@ -7,10 +7,63 @@
   class FacultyPublicationsElement extends HTMLElement {
 
     /**
+     * The offset to load from when a user presses the load more button.
+     */
+    offset = 0;
+
+    /**
+     * The element in which to display results.
+     */
+    resultsElement = document.createElement('div');
+
+    /**
+     * The element in which to display error or other messages.
+     */
+    messagesElement = document.createElement('div');
+
+    /**
+     * The element in which to display user controls.
+     */
+    controlsElement = document.createElement('div');
+
+    /**
+     * The loading throbber to display while results are loading.
+     */
+    throbberElement = document.createElement('div');
+
+    /**
      * Constructs a new FacultyPublicationsElement.
      */
     constructor() {
       super();
+
+      this.controlsElement.innerHTML = '<a role="button" class="faculty-publications-load" href="#"></a>';
+      this.controlsElement.setAttribute('hidden', '');
+      this.throbberElement.innerHTML = '<span class="visually-hidden">Loading</span>'
+        + '<i aria-hidden="true" class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>';
+
+      this.appendChild(this.resultsElement);
+      this.appendChild(this.messagesElement);
+      this.appendChild(this.controlsElement);
+      this.appendChild(this.throbberElement);
+
+      /**
+       * The button the user can click to load more results.
+       */
+      this.loadButtonElement = this.controlsElement.querySelector('.faculty-publications-load');
+      this.loadButtonElement.addEventListener('click', event => {
+        event.preventDefault();
+        this.load()
+      });
+
+      // Loads the initial list of publications.
+      this.load();
+    }
+
+    /**
+     * Performs a load request to load results.
+     */
+    load() {
       this.getResults()
         .then(results => this.displayResults(results))
         .catch(error => {
@@ -26,7 +79,10 @@
      *   The returned list of publications.
      */
     async getResults() {
-      this.displayLoader();
+      this.messagesElement.setAttribute('hidden', '');
+      this.controlsElement.setAttribute('hidden', '');
+      this.throbberElement.removeAttribute('hidden');
+
       const
         from = this.getAttribute('from'),
         to = this.getAttribute('to'),
@@ -34,12 +90,14 @@
         departmentId = parseInt(department),
         email = this.getAttribute('email'),
         sort = this.getAttribute('sort'),
+        count = this.getAttribute('count'),
         query = [],
         params = new URLSearchParams();
+
+      // Sets up query string and other params.
       if (from || to) {
         // Defaults to the current date for a field that isn't set.
-        const currentDate = new Date();
-        query.push(`publicationDate:[${from || currentDate.toISOString()} TO ${to || currentDate.toISOString()}]`);
+        query.push(`publicationDate:[${from || new Date().toISOString()} TO ${to || new Date().toISOString()}]`);
       }
       if (department) {
         query.push(`authors.organization.${isNaN(departmentId) ? 'name:' + department : 'id:' + departmentId}`);
@@ -53,6 +111,9 @@
       }
       // TODO: Figure out why this seems to disable the filters.
       // params.set('sort', sort == 'date-asc' ? 'publicationDate:asc' : 'publicationDate:desc');
+      params.set('from', this.offset);
+      params.set('size', count || '25');
+
       const paramsToString = params.toString();
       const response = await fetch(
         `https://search-experts-direct-cz3fpq4rlxcbn5z27vzq4mpzaa.us-east-2.es.amazonaws.com/fispubs-v1/_search?${paramsToString}`,
@@ -63,9 +124,11 @@
           }
         }
       );
+
       const json = await response.json();
       return {
-        publications: json['hits']['hits']
+        publications: json['hits']['hits'],
+        count: json['hits']['total']['value']
       };
     }
 
@@ -76,76 +139,79 @@
      *   The returned list of publications.
      */
     displayResults(results) {
-      const publications = results.publications;
+      this.messagesElement.setAttribute('hidden', '');
+      this.controlsElement.setAttribute('hidden', '');
+      this.throbberElement.setAttribute('hidden', '');
+
+      const { publications, count } = results;
       if (!publications) {
-        this.displayNoResults();
+        if (this.offset === 0) {
+          this.displayNoResults();
+        }
         return;
       }
       let publicationsHTML = '';
       publications.forEach(publication => {
         publication = publication['_source'];
-        publicationsHTML += '<div>\n'
-          + '<h3 class="h5">\n'
-          + `${link(preserveItalics(safe(publication['name'])), publication['uri'])}\n`
-          + '</h3>\n'
-          + '<div>\n'
-          + '<strong>CU Boulder Authors:</strong>\n'
-          + '<ul class="faculty-publications-authors">\n';
-        publication['authors'].forEach(author => {
-          publicationsHTML += `<li>${link(safe(author['name']), author['uri'])}</li>\n`;
-        });
-        publicationsHTML += '</ul>\n'
-          + '</div>\n'
-          + '<div>\n'
-          + '<strong>All Authors:</strong>\n'
-          + '<ul class="faculty-publications-authors">\n';
-        publication['citedAuthors'].split(';').forEach(citedAuthor => {
-          publicationsHTML += `<li>${citedAuthor}</li>\n`;
-        });
-        publicationsHTML += '</ul>\n'
-          + '</div>\n'
-          + '<div>\n'
-          + '<strong>Published in:</strong>\n'
-          + `${link(safe(publication['publishedIn']['name']), publication['publishedIn']['uri'])}\n`
-          + '</div>\n'
-          + '<div>\n'
-          + '<strong>Publication Date:</strong>\n'
-          + `${safe(publication['publicationDate'])}\n`
-          + '</div>\n'
-          + '<div>\n'
-          + '<strong>Type:</strong>\n'
-          + `${safe(publication['mostSpecificType'])}\n`
-          + '</div>\n'
-          + '</div>\n'
+        publicationsHTML += '<div>'
+          + '<h3 class="h5">'
+          + link(preserveAllowedHTML(safe(publication['name'])), publication['uri'])
+          + '</h3>'
+          + '<div>'
+          + '<strong>CU Boulder Authors:</strong> '
+          + publication['authors']
+              .map(author => link(safe(author['name']), author['uri']))
+              .join('; ')
+          + '</div>'
+          + '<div>'
+          + '<strong>All Authors:</strong> '
+          + safe(publication['citedAuthors'])
+          + '</div>'
+          + '<div>';
+        if (publication['publishedIn']) {
+          publicationsHTML += '<strong>Published in:</strong> '
+            + link(safe(publication['publishedIn']['name']), publication['publishedIn']['uri']);
+        }
+        publicationsHTML += '</div>'
+          + '<div>'
+          + '<strong>Publication Date:</strong> '
+          + safe(publication['publicationDate'])
+          + '</div>'
+          + '<div>'
+          + '<strong>Type:</strong> '
+          + safe(publication['mostSpecificType'])
+          + '</div>'
+          + '</div>'
           + '</div>';
       });
-      this.innerHTML = publicationsHTML;
-    }
-
-    /**
-     * Displays the loader while the publications are being fetched.
-     */
-    displayLoader() {
-      this.innerHTML = '<span class="visually-hidden">Loading</span>\n'
-        + '<i aria-hidden="true" class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>';
+      this.resultsElement.innerHTML += publicationsHTML;
+      this.offset += publications.length;
+      if (this.offset < count) {
+        this.controlsElement.removeAttribute('hidden', '');
+        this.loadButtonElement.innerHTML = '<i class="fa-solid fa-chevron-down"></i> More publications';
+      }
     }
 
     /**
      * Displays an error message if an error occurred.
      */
     displayError() {
-      this.innerHTML = '<p>\n'
-        + '<strong>There was a problem fetching the publication data. Please try again later.</strong>\n'
+      this.messagesElement.innerHTML = '<p>'
+        + '<strong>There was a problem fetching the publication data. Please try again later.</strong>'
         + '</p>';
+      this.loadButtonElement.innerText = '<i class="fa-solid fa-rotate-right"></i> Retry';
+      this.messagesElement.removeAttribute('hidden');
+      this.controlsElement.removeAttribute('hidden', '');
     }
 
     /**
      * Displays an error message if no publications were returned.
      */
     displayNoResults() {
-      this.innerHTML = '<p>\n'
-        + '<strong>There were no publications returned.</strong>\n'
+      this.messagesElement.innerHTML = '<p>'
+        + '<strong>There were no publications returned.</strong>'
         + '</p>';
+      this.messagesElement.removeAttribute('hidden');
     }
 
   }
@@ -160,6 +226,9 @@
    */
   function safe(text) {
     return text
+      // Strips unsupported MathML tags.
+      .replace(/<\/?mml[^>]*>/gi, '')
+      // Escapes HTML characters.
       .replace(/&/g, '&amp;')
       .replace(/</g, '&lt;')
       .replace(/>/g, '&gt;')
@@ -167,17 +236,21 @@
   }
 
   /**
-   * Preserves `<i>` italics in HTML-safe text.
+   * Preserves allowed tags in HTML-safe text.
    *
    * @param {string} safeText
    *   Text that has been made HTML-safe.
    * @returns
-   *   The text with italics preserved.
+   *   The text with allowed tags preserved.
    */
-  function preserveItalics(safeText) {
+  function preserveAllowedHTML(safeText) {
     return safeText
-      .replace(/&lt;i&gt;/g, '<span class="fst-italic">')
-      .replace(/&lt;\/i&gt;/g, '</span>')
+      .replace(/&lt;i&gt;/gi, '<span class="fst-italic">')
+      .replace(/&lt;\/i&gt;/gi, '</span>')
+      .replace(/&lt;sub&gt;/gi, '<sub>')
+      .replace(/&lt;\/sub&gt;/gi, '</sub>')
+      .replace(/&lt;sup&gt;/gi, '<sup>')
+      .replace(/&lt;\/sup&gt;/gi, '</sup>');
   }
 
   /**

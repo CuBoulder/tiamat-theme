@@ -24,5 +24,11 @@
     to: fieldTo ? fieldTo|date('Y-m-d') : null,
     department: fieldDpt ? fieldDpt|trim : null,
     email: blockContent.field_faculty_publications_email.value
-  }) }}></faculty-publications>
+  }) }}>
+    <noscript>
+      <p>
+        <strong>JavaScript is required to display the publications.</strong>
+      </p>
+    </noscript>
+  </faculty-publications>
 {% endblock %}
