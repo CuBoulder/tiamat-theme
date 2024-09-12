@@ -167,7 +167,7 @@ color: inherit !important;
             line-height: inherit !important;
 }
 
-u + #ucb-email-body a {
+u + #ucb-email-body a, u + #ucb-email-body .ii a[href]{
             color: inherit !important;
             text-decoration: none !important;
             font-size: inherit !important;
@@ -176,7 +176,7 @@ u + #ucb-email-body a {
             line-height: inherit !important;
 }
 
-#MessageViewBody a {
+#MessageViewBody a, #MessageViewBody .ii a[href] {
             color: inherit !important;
             text-decoration: none !important;
             font-size: inherit !important;
@@ -187,7 +187,7 @@ u + #ucb-email-body a {
 
 
 
-                .tags > a{
+                .tags > a, .tags > .ii a[href]{
                     color: #656565 !important;
                     text-decoration: none;
                     background-color: #e7e7e7 !important;
@@ -247,7 +247,7 @@ u + #ucb-email-body a {
     -moz-box-shadow: 0 3px 15px rgba(0,0,0,0.35);
     box-shadow: 0 3px 15px rgba(0,0,0,0.35);
 };
-a:link,a:visited {
+a:link,a:visited,.ii a[href] {
     color: #0277BD !important;
     transition: background-color 0.25s ease,border-color 0.25s ease,color 0.25s ease;
     text-decoration: none;
@@ -255,13 +255,13 @@ a:link,a:visited {
     -webkit-text-decoration-color: rgba(2,119,189,0.65);
 }
 
-a:hover {
+a:hover,.ii a[href]:hover {
     color: #B71C1C;
     text-decoration-color: rgba(183,28,28,0.65);
     -webkit-text-decoration-color: rgba(183,28,28,0.65);
 }
 
-a:active {
+a:active, .ii a[href]:active {
     color: #B71C1C;
     text-decoration-color: rgba(183,28,28,0.65);
     -webkit-text-decoration-color: rgba(183,28,28,0.65);
