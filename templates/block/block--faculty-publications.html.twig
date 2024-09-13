@@ -16,6 +16,8 @@
 {% set fieldFrom = blockContent.field_faculty_publications_from.value %}
 {% set fieldTo = blockContent.field_faculty_publications_to.value %}
 {% set fieldDpt = blockContent.field_faculty_publications_dpt.value %}
+{% set fieldP = blockContent.field_faculty_publications_p %}
+{% set people = fieldP ? fieldP|map(item => item.entity)|merge(faculty_publications_jt_people ?? []) : faculty_publications_jt_people %}
 {% extends '@boulder_base/block/styled-block.html.twig' %}
 {% block content %}
   {{ attach_library('boulder_base/ucb-faculty-publications') }}
@@ -23,7 +25,10 @@
     from: fieldFrom ? fieldFrom|date('Y-m-d') : null,
     to: fieldTo ? fieldTo|date('Y-m-d') : null,
     department: fieldDpt ? fieldDpt|trim : null,
-    email: blockContent.field_faculty_publications_email.value
+    email: blockContent.field_faculty_publications_email.value,
+    count: blockContent.field_faculty_publications_count.value,
+    sort: blockContent.field_faculty_publications_sort.value,
+    emails: people ? people|map(person => person.field_ucb_person_email.value)|json_encode : null
   }) }}>
     <noscript>
       <p>

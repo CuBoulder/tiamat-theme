@@ -1,3 +1,7 @@
+/**
+ * @file Contains the Faculty Publications web component.
+ */
+
 (function(customElements) {
 
   /**
@@ -91,6 +95,8 @@
         email = this.getAttribute('email'),
         sort = this.getAttribute('sort'),
         count = parseInt(this.getAttribute('count') || '25'),
+        emails = this.getAttribute('emails'),
+        emailQuotedStrings = [],
         query = [],
         params = new URLSearchParams();
 
@@ -100,10 +106,16 @@
         query.push(`publicationDate:[${new Date(from).toISOString()} TO ${(to ? new Date(to) : new Date()).toISOString()}]`);
       }
       if (department) {
-        query.push(`authors.organization.${isNaN(departmentId) ? `name:"${department.replace(/"/g, '')}"` : `id:${departmentId}`}`);
+        query.push(`authors.organization.${isNaN(departmentId) ? `name:${quotedString(department)}` : `id:${departmentId}`}`);
       }
       if (email) {
-        query.push(`authors.email:("${email.replace(/"/g, '')}")`);
+        emailQuotedStrings.push(quotedString(email));
+      }
+      if (emails) {
+        JSON.parse(emails).forEach(email => emailQuotedStrings.push(quotedString(email)));
+      }
+      if (emailQuotedStrings.length > 0) {
+        query.push(`authors.email:(${emailQuotedStrings.join(',')})`);
       }
 
       if (query.length > 0) {
@@ -144,7 +156,7 @@
       this.throbberElement.setAttribute('hidden', '');
 
       const { publications, count } = results;
-      if (!publications) {
+      if (publications.length === 0) {
         if (this.offset === 0) {
           this.displayNoResults();
         }
@@ -273,6 +285,21 @@
    */
   function link(safeText, uri) {
     return uri ? `<a target="_blank" href="${safe(uri)}">${safeText}</a>` : safeText;
+  }
+
+  /**
+   * Converts text to a quoted string.
+   *
+   * @param {string} text
+   *   The text.
+   * @returns
+   *   The text as a quoted string.
+   */
+  function quotedString(text) {
+    return '"' + text
+      .toLowerCase()
+      .replace(/\\/g, '\\\\')
+      .replace(/"/g, '\\"') + '"';
   }
 
   // Registers the `<faculty-publications>` element as a web component

@@ -103,6 +103,29 @@ function boulder_base_preprocess_menu(array &$variables) {
 function boulder_base_preprocess_block(array &$variables) {
   $config = \Drupal::config('system.site');
   $variables['site_name'] = $config->get('name');
+  // Makes job type filter work correctly for Faculty Publications blocks.
+  if (isset($variables['elements']['content']['field_faculty_publications_jt'])) {
+    $query = \Drupal::entityQuery('node');
+    $group = $query->orConditionGroup();
+    $fieldJt = $variables['elements']['content']['#block_content']->field_faculty_publications_jt;
+    if (count($fieldJt) > 0) {
+      $jobTypeIds = [];
+      for ($i = 0; $i < count($fieldJt); $i++) {
+        $jobTypeIds[] = $fieldJt[$i]->entity->id();
+      }
+      $group->condition('field_ucb_person_job_type', $jobTypeIds, 'IN');
+      $results = $query
+        ->condition($group)
+        ->accessCheck(TRUE)
+        ->execute();
+      $variables['faculty_publications_jt_people'] = array_filter(
+        array_values(Node::loadMultiple(array_values($results))), 
+        function ($item) {
+          return $item->field_ucb_person_email !== NULL;
+        }
+      );
+    }
+  }
 }
 
 /**
