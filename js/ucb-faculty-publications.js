@@ -90,29 +90,29 @@
         departmentId = parseInt(department),
         email = this.getAttribute('email'),
         sort = this.getAttribute('sort'),
-        count = this.getAttribute('count'),
+        count = parseInt(this.getAttribute('count') || '25'),
         query = [],
         params = new URLSearchParams();
 
-      // Sets up query string and other params.
+      // Sets up query string.
       if (from || to) {
         // Defaults to the current date for a field that isn't set.
-        query.push(`publicationDate:[${from || new Date().toISOString()} TO ${to || new Date().toISOString()}]`);
+        query.push(`publicationDate:[${new Date(from).toISOString()} TO ${(to ? new Date(to) : new Date()).toISOString()}]`);
       }
       if (department) {
-        query.push(`authors.organization.${isNaN(departmentId) ? 'name:' + department : 'id:' + departmentId}`);
+        query.push(`authors.organization.${isNaN(departmentId) ? `name:"${department.replace(/"/g, '')}"` : `id:${departmentId}`}`);
       }
       if (email) {
-        query.push(`authors.email:${email}`);
+        query.push(`authors.email:("${email.replace(/"/g, '')}")`);
       }
+
       if (query.length > 0) {
         // Joins filters with AND.
         params.set('q', query.join(' AND '));
       }
-      // TODO: Figure out why this seems to disable the filters.
-      // params.set('sort', sort == 'date-asc' ? 'publicationDate:asc' : 'publicationDate:desc');
+      params.set('sort', sort == 'date-asc' ? 'publicationDate:asc' : 'publicationDate:desc');
       params.set('from', this.offset);
-      params.set('size', count || '25');
+      params.set('size', `${count > 0 ? count : 25}`);
 
       const paramsToString = params.toString();
       const response = await fetch(
@@ -156,38 +156,45 @@
         publicationsHTML += '<div>'
           + '<h3 class="h5">'
           + link(preserveAllowedHTML(safe(publication['name'])), publication['uri'])
-          + '</h3>'
-          + '<div>'
-          + '<strong>CU Boulder Authors:</strong> '
-          + publication['authors']
-              .map(author => link(safe(author['name']), author['uri']))
-              .join('; ')
-          + '</div>'
-          + '<div>'
-          + '<strong>All Authors:</strong> '
-          + safe(publication['citedAuthors'])
-          + '</div>'
-          + '<div>';
-        if (publication['publishedIn']) {
-          publicationsHTML += '<strong>Published in:</strong> '
-            + link(safe(publication['publishedIn']['name']), publication['publishedIn']['uri']);
+          + '</h3>';
+        if (publication['authors']) {
+          publicationsHTML += '<div>'
+            + '<strong>CU Boulder Authors:</strong> '
+            + publication['authors']
+                .map(author => link(safe(author['name']), author['uri']))
+                .join('; ')
+            + '</div>';
         }
-        publicationsHTML += '</div>'
-          + '<div>'
-          + '<strong>Publication Date:</strong> '
-          + safe(publication['publicationDate'])
-          + '</div>'
-          + '<div>'
-          + '<strong>Type:</strong> '
-          + safe(publication['mostSpecificType'])
-          + '</div>'
-          + '</div>'
-          + '</div>';
+        if (publication['citedAuthors']) {
+          publicationsHTML += '<div>'
+            + '<strong>All Authors:</strong> '
+            + safe(publication['citedAuthors'])
+            + '</div>';
+        }
+        if (publication['publishedIn']) {
+          publicationsHTML += '<div>'
+            + '<strong>Published in:</strong> '
+            + link(safe(publication['publishedIn']['name']), publication['publishedIn']['uri'])
+            + '</div>';
+        }
+        if (publication['publicationDate']) {
+          publicationsHTML += '<div>'
+            + '<strong>Publication Date:</strong> '
+            + safe(publication['publicationDate'])
+            + '</div>';
+        }
+        if (publication['mostSpecificType']) {
+          publicationsHTML += '<div>'
+            + '<strong>Type:</strong> '
+            + safe(publication['mostSpecificType'])
+            + '</div>';
+        }
+        publicationsHTML += '</div>';
       });
       this.resultsElement.innerHTML += publicationsHTML;
       this.offset += publications.length;
       if (this.offset < count) {
-        this.controlsElement.removeAttribute('hidden', '');
+        this.controlsElement.removeAttribute('hidden');
         this.loadButtonElement.innerHTML = '<i class="fa-solid fa-chevron-down"></i> More publications';
       }
     }
@@ -199,9 +206,10 @@
       this.messagesElement.innerHTML = '<p>'
         + '<strong>There was a problem fetching the publication data. Please try again later.</strong>'
         + '</p>';
-      this.loadButtonElement.innerText = '<i class="fa-solid fa-rotate-right"></i> Retry';
+      this.loadButtonElement.innerHTML = '<i class="fa-solid fa-rotate-right"></i> Retry';
       this.messagesElement.removeAttribute('hidden');
-      this.controlsElement.removeAttribute('hidden', '');
+      this.controlsElement.removeAttribute('hidden');
+      this.throbberElement.setAttribute('hidden', '');
     }
 
     /**
