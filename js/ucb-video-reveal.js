@@ -199,12 +199,13 @@
   function resizeVideo(videoWrapperElement, videoPlayerWrapperElement, videoPlayerElement) {
     const
       controlsElement = videoWrapperElement.parentElement.getElementsByClassName('ucb-video-reveal-controls')[0],
-      videoRevealWidth = controlsElement.width,
-      videoRevealHeight = controlsElement.height;
-    videoPlayerElement.width = videoRevealWidth;
-    videoPlayerElement.style.width = videoPlayerWrapperElement.width;
-    videoPlayerElement.height = videoRevealHeight;
-    videoPlayerElement.style.height = videoPlayerWrapperElement.height;
+      videoRevealWidth = controlsElement.parentElement.offsetWidth,
+      videoRevealHeight = videoRevealWidth*9/16;
+      console.log(controlsElement.parentElement.height);
+      videoPlayerElement.width = videoRevealWidth;
+      videoPlayerWrapperElement.style.width = videoRevealWidth;
+      videoPlayerElement.height = videoRevealHeight + "px";
+      videoPlayerWrapperElement.style.height = videoRevealHeight + "px";
   }
 
   window.enableVideoReveal = enableVideoReveal;
