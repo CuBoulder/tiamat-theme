@@ -334,17 +334,17 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
         {# HEADER -- to do: might need to be different tables for styling purposes #}
         <!-- Header -->
         {% if designType == 'lightbox' or designType == 'darkbox' %}
-        <table style="{{boxBackground}}" align="center">
+        <table style="{{boxBackground}}" align="center" width="600">
             <tbody>
                 <tr>
                     <td>
         {% endif %}
         <center>
-        <table class="ucb-email-header-{{designType}}" style="{{headerStyles}}">
+        <table width="600" class="ucb-email-header-{{designType}}" style="{{headerStyles}}">
             <tbody>
                 <tr>
                     <td style='{{headerStyles}}'>
-                        <table role='presentation' align="center" style="max-width:600px;">
+                        <table width="600" role='presentation' align="center" style="max-width:600px;">
                             <tbody>
                                 {# CU LOGO #}
                                 <tr>
@@ -383,11 +383,11 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
             </tbody>
         </table>
         <center align="center" style="background-color: white;{{addtlPad}}">
-            <table style="max-width:600px;" align="center">
+            <table width="600" style="max-width:600px;" align="center">
                 <tbody>
                     <td>
                         <td>
-                            <table role="presentation" border="0" width="100%" cellspacing="0" style="text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; margin: 0; font-size: 14px; background-color: white;{{classicTableOffset}}">
+                            <table role="presentation" border="0" width="600" cellspacing="0" style="text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; margin: 0; font-size: 14px; background-color: white;{{classicTableOffset}}">
                                 <tr>
                                   <td align="center">
                                 <!-- Intro Img -->
@@ -426,7 +426,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                 {# It's an internal link; prepend the base URL #}
                                 {% set final_url_one = base_url ~ link_url_one %}
                             {% endif %}
-                                <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
+                                <table role="presentation"  border="0" width="600" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
                                     <tbody>
                                         <tr>
                                             <td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
@@ -469,7 +469,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
 
                             {# Render the blocks side by side #}
                             {% if blocksToRender %}
-                                <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white" class="row row-content ucb-newsletter-blocks">
+                                <table role="presentation" border="0" width="600" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white" class="row row-content ucb-newsletter-blocks">
                                     <tbody>
                                         {% for i in 0..(blocksToRender|length - 1) %}
                                             {% if loop.index is odd %}
@@ -499,7 +499,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                 {# It's an internal link; prepend the base URL #}
                                 {% set final_url = base_url ~ link_url %}
                             {% endif %}
-                        <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
+                        <table role="presentation"  border="0" width="600" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
                             <tbody>
                                 <tr>
                                     <td width="500px" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
@@ -511,7 +511,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                             </tbody>
                         </table>
                         {% else %}
-                        <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
+                        <table role="presentation" border="0" width="600" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
                             <tbody>
                                 <tr>
                                     <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
@@ -531,11 +531,11 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
          <!--Footer-->
          {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
          <center>
-            <table class="ucb-email-footer-{{designType}}"role="presentation" border="0" width="100%" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+            <table class="ucb-email-footer-{{designType}}"role="presentation" border="0" width="600" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
                 <tbody>
                     <tr>
                         <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px; padding-top:20px">
-                            <table align="center" style="max-width:600px;">
+                            <table align="center" width="600" style="max-width:600px;">
                                 <tbody>
                                     <tr>
                                     <td>
@@ -552,7 +552,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
         {% endif %}
         {# Social share #}
             {% if node.field_newsletter_type.entity.field_newsletter_social_link is defined and node.field_newsletter_type.entity.field_newsletter_social_link is not empty %}
-                <table role="presentation" border="0" width="100%" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+                <table role="presentation" border="0" width="600" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
                 <tbody>
                         <tr class="newsletter-social-{{designType}}">
                             <td>
