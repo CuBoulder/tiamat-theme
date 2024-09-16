@@ -34,7 +34,6 @@
 			{% endfor %}
 		{% endif %}
 		{% if paragraph.field_newsletter_section_style.value is same as("0") %}
-      <p>feature</p>
 			{% for key, item in paragraph.field_newsletter_section_select %}
 				{%  if key|first != '#' %}
 					<div class="ucb-newsletter-section-article {{unpublishedClass}}">
