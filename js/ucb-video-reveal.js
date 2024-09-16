@@ -154,7 +154,7 @@
       pauseCallback();
       videoEl.style.display = "none";
       closeBtn.setAttribute('hidden', '');
-      imgWrapper.style.visibility = 'visible';
+      imgWrapper.style.display = 'flex';
     };
 
     const playBtn = videoWrapperElement.getElementsByClassName('ucb-video-reveal-controls')[0];
@@ -162,7 +162,7 @@
       playCallback();
       videoEl.style.display = "block";
       closeBtn.removeAttribute('hidden');
-      imgWrapper.style.visibility = 'hidden';
+      imgWrapper.style.display = 'none';
     };
   }
 
@@ -202,9 +202,9 @@
       videoRevealWidth = controlsElement.width,
       videoRevealHeight = controlsElement.height;
     videoPlayerElement.width = videoRevealWidth;
-    videoPlayerElement.style.width = videoPlayerWrapperElement.style.width = videoRevealWidth + 'px';
+    videoPlayerElement.style.width = videoPlayerWrapperElement.width;
     videoPlayerElement.height = videoRevealHeight;
-    videoPlayerElement.style.height = videoPlayerWrapperElement.style.height = videoRevealHeight + 'px';
+    videoPlayerElement.style.height = videoPlayerWrapperElement.height;
   }
 
   window.enableVideoReveal = enableVideoReveal;
