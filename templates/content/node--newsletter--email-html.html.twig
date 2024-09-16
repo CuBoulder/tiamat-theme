@@ -125,6 +125,17 @@
             {# This should force browsers to stop using DarkMode overrides #}
             <meta name="color-scheme" content="light">
             <meta name="supported-color-schemes" content="light">
+            <meta name="color-scheme" content="only">
+            <meta name="supported-color-scheme" content="only">
+            {# This should override Outlook on Mac #}
+            <style type="text/css">
+              .body, .darkmode, .darkmode div { /* With class body on the body tag, and all elements represented here that have a background color */
+                  background-image: linear-gradient(#ffffff,#ffffff) !important;
+              }
+              .darkmode p { /* Add other selectors for other text elements */
+                  -webkit-text-fill-color: #000000 !important;
+              }
+            </style>
             <style>
 
                 img{
