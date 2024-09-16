@@ -149,13 +149,11 @@
     const videoEl = videoWrapperElement.getElementsByClassName('ucb-video-reveal-video-wrapper')[0];
     const closeBtn = videoWrapperElement.getElementsByClassName('ucb-video-reveal-close')[0];
     const imgWrapper = videoWrapperElement.getElementsByClassName('ucb-video-reveal-controls')[0];
-    const imgEl = videoWrapperElement.getElementsByClassName('ucb-video-reveal-image')[0];
 
     closeBtn.onclick = function () {
       pauseCallback();
       videoEl.style.display = "none";
       closeBtn.setAttribute('hidden', '');
-      imgEl.style.visibility = 'visible';
       imgWrapper.style.visibility = 'visible';
     };
 
@@ -164,7 +162,6 @@
       playCallback();
       videoEl.style.display = "block";
       closeBtn.removeAttribute('hidden');
-      imgEl.style.visibility = 'hidden';
       imgWrapper.style.visibility = 'hidden';
     };
   }
@@ -201,9 +198,9 @@
 
   function resizeVideo(videoWrapperElement, videoPlayerWrapperElement, videoPlayerElement) {
     const
-      imageElement = videoWrapperElement.parentElement.getElementsByClassName('ucb-video-reveal-image')[0],
-      videoRevealWidth = imageElement.offsetWidth,
-      videoRevealHeight = imageElement.offsetHeight;
+      controlsElement = videoWrapperElement.parentElement.getElementsByClassName('ucb-video-reveal-controls')[0],
+      videoRevealWidth = controlsElement.width,
+      videoRevealHeight = controlsElement.height;
     videoPlayerElement.width = videoRevealWidth;
     videoPlayerElement.style.width = videoPlayerWrapperElement.style.width = videoRevealWidth + 'px';
     videoPlayerElement.height = videoRevealHeight;

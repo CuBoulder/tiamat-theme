@@ -17,6 +17,11 @@
   {% set videoURL = content['#block_content'].field_video_reveal_video.entity.field_media_oembed_video.value %}
 {% endif %}
 
+{% set imageURL = "" %}
+{% if content.field_video_reveal_image|render is not empty %}
+  {% set imageURL = file_url(content.field_video_reveal_image[0]['#media'].field_media_image.entity.uri.value) %}
+{% endif %}
+
 {% extends '@boulder_base/block/styled-block.html.twig' %}
 {% block content %}
   {{ attach_library('boulder_base/ucb-video-reveal') }}
@@ -31,14 +36,11 @@
           window.addEventListener('load', () => enableVideoReveal('{{ videoURL }}', 'ucb-video-reveal-video-wrapper-{{ blockId }}'));
         </script>
       </div>
-      <div role="button" aria-label="Play video" class="ucb-video-reveal-controls">
+      <div role="button" aria-label="Play video" class="ucb-video-reveal-controls" style = 'background-image: url("{{imageURL}}")' >
         <span class="ucb-video-reveal-icon">
           <i class="fa-solid fa-circle-play"></i>
         </span>
         <span class="ucb-video-reveal-text">{{ content.field_video_reveal_text_overlay }}</span>
-      </div>
-      <div class="ucb-video-reveal-image">
-        {{ content.field_video_reveal_image }}
       </div>
   </div>
 {% endblock content %}
