@@ -149,14 +149,12 @@
     const videoEl = videoWrapperElement.getElementsByClassName('ucb-video-reveal-video-wrapper')[0];
     const closeBtn = videoWrapperElement.getElementsByClassName('ucb-video-reveal-close')[0];
     const imgWrapper = videoWrapperElement.getElementsByClassName('ucb-video-reveal-controls')[0];
-    const imgEl = videoWrapperElement.getElementsByClassName('ucb-video-reveal-image')[0];
 
     closeBtn.onclick = function () {
       pauseCallback();
       videoEl.style.display = "none";
       closeBtn.setAttribute('hidden', '');
-      imgEl.style.visibility = 'visible';
-      imgWrapper.style.visibility = 'visible';
+      imgWrapper.style.display = 'flex';
     };
 
     const playBtn = videoWrapperElement.getElementsByClassName('ucb-video-reveal-controls')[0];
@@ -164,8 +162,7 @@
       playCallback();
       videoEl.style.display = "block";
       closeBtn.removeAttribute('hidden');
-      imgEl.style.visibility = 'hidden';
-      imgWrapper.style.visibility = 'hidden';
+      imgWrapper.style.display = 'none';
     };
   }
 
@@ -201,13 +198,14 @@
 
   function resizeVideo(videoWrapperElement, videoPlayerWrapperElement, videoPlayerElement) {
     const
-      imageElement = videoWrapperElement.parentElement.getElementsByClassName('ucb-video-reveal-image')[0],
-      videoRevealWidth = imageElement.offsetWidth,
-      videoRevealHeight = imageElement.offsetHeight;
-    videoPlayerElement.width = videoRevealWidth;
-    videoPlayerElement.style.width = videoPlayerWrapperElement.style.width = videoRevealWidth + 'px';
-    videoPlayerElement.height = videoRevealHeight;
-    videoPlayerElement.style.height = videoPlayerWrapperElement.style.height = videoRevealHeight + 'px';
+      controlsElement = videoWrapperElement.parentElement.getElementsByClassName('ucb-video-reveal-controls')[0],
+      videoRevealWidth = controlsElement.parentElement.offsetWidth,
+      videoRevealHeight = videoRevealWidth*9/16;
+      console.log(controlsElement.parentElement.height);
+      videoPlayerElement.width = videoRevealWidth;
+      videoPlayerWrapperElement.style.width = videoRevealWidth;
+      videoPlayerElement.height = videoRevealHeight + "px";
+      videoPlayerWrapperElement.style.height = videoRevealHeight + "px";
   }
 
   window.enableVideoReveal = enableVideoReveal;

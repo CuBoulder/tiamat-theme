@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Video Reveal height solution
+  Resolves #1204 and #1286.
+  Changes the video reveal to have the image as a background images and limits the height to 160px larger than the text content.
+---
+
 ## [20240911] - 2024-09-11
 
 -   ### Dark 3 Secondary Menu CSS change
