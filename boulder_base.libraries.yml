@@ -323,10 +323,10 @@ ucb-article-feature-block:
 ucb-faculty-publications:
   version: 1.x
   js:
-    js/ucb-faculty-publications.js: {}
+    js/faculty-publications.js: {}
   css:
     theme:
-      css/ucb-faculty-publications.css: {}
+      css/block/faculty-publications.css: {}
 
 ucb-brand-bar:
   version: 1.x

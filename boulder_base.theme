@@ -103,12 +103,30 @@ function boulder_base_preprocess_menu(array &$variables) {
 function boulder_base_preprocess_block(array &$variables) {
   $config = \Drupal::config('system.site');
   $variables['site_name'] = $config->get('name');
-  // Makes job type filter work correctly for Faculty Publications blocks.
-  if (isset($variables['elements']['content']['field_faculty_publications_jt'])) {
-    $query = \Drupal::entityQuery('node');
-    $group = $query->orConditionGroup();
-    $fieldJt = $variables['elements']['content']['#block_content']->field_faculty_publications_jt;
+  // Provides some extra functionality for the Faculty Publications blocks.
+  if (isset($variables['elements']['content']['field_faculty_publications_email'])) {
+    $blockContent = $variables['elements']['content']['#block_content'];
+    $fieldP = $blockContent->field_faculty_publications_p;
+    $fieldJt = $blockContent->field_faculty_publications_jt;
+    if ($blockContent->field_faculty_publications_auto->value === '1') {
+      $node = \Drupal::routeMatch()->getParameter('node');
+      // Checks if the block is included on a person page.
+      if ($node instanceof NodeInterface && $node->getType() == 'ucb_person') {
+        // Gets the email of the person page and provides it to the block
+        // template.
+        $email = $node->field_ucb_person_email->value;
+        $variables['faculty_publications_auto_email'] = $email;
+      }
+      // Updates the block on each different page.
+      $variables['#cache']['contexts'][] = 'url.path';
+      // Updates the block whenever any person page is saved or deleted.
+      $variables['#cache']['tags'][] = 'node_list:ucb_person';
+    }
+    // Enables the job type filter if it's specified. Includes all people with
+    // that specific job type.
     if (count($fieldJt) > 0) {
+      $query = \Drupal::entityQuery('node');
+      $group = $query->orConditionGroup();
       $jobTypeIds = [];
       for ($i = 0; $i < count($fieldJt); $i++) {
         $jobTypeIds[] = $fieldJt[$i]->entity->id();
@@ -124,6 +142,15 @@ function boulder_base_preprocess_block(array &$variables) {
           return $item->field_ucb_person_email !== NULL;
         }
       );
+      // Updates the block whenever any person page is saved or deleted.
+      $variables['#cache']['tags'][] = 'node_list:ucb_person';
+    }
+    elseif (count($fieldP) > 0) {
+      for ($i = 0; $i < count($fieldP); $i++) {
+        // Updates the block whenever one of the referenced person pages is
+        // saved or deleted.
+        $variables['#cache']['tags'][] = 'node:' . $fieldP[$i]->entity->id();
+      }
     }
   }
 }
