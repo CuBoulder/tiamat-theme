@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes link color on alert-style text blocks
+  [bug] Resolves CuBoulder/tiamat-theme#1267
+---
+
 - ### Update hero-unit.css
   CSS needed updating for proper targeting after changes to block styles. 
   These changes should fix the overlay for all hero units with overlays.
