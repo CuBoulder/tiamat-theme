@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Secondary Menu Button functionality change
+  Resolves #1285.
+  Changes the functionality for the buttons to only show when it is the active link. This change eliminates social media buttons and adds the functionality of the no button css to non-active links.
+---
+
 - ### Fixes link color on alert-style text blocks
   [bug] Resolves CuBoulder/tiamat-theme#1267
 ---
