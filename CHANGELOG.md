@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Corrects Social Media Icons block to not be inline
+  [bug] Resolves CuBoulder/tiamat-theme#1295
+---
+
 - ### Video Reveal height solution
   Resolves #1204 and #1286.
   Changes the video reveal to have the image as a background images and limits the height to 160px larger than the text content.

@@ -33,15 +33,20 @@
   'block-' ~ configuration.provider|clean_class,
   'block-' ~ plugin_id|clean_class,
   bundle ? 'block--type-' ~ bundle|clean_class,
-  view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
-  'social-media-icons-block',
-  layoutSelection ~ '-orientation',
-  imageSize
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class
 ] %}
 
 {% extends '@boulder_base/block/styled-block.html.twig' %}
 {% block content %}
   {{ attach_library('boulder_base/ucb-social-media-icons-block') }}
-  {{ content.field_social_media_links }}
-  {{ content.field_social_media_email_link }}
+  <div{{ create_attribute({
+    class: [
+      'social-media-icons-block',
+      layoutSelection ~ '-orientation',
+      imageSize
+    ]
+  }) }}>
+    {{ content.field_social_media_links }}
+    {{ content.field_social_media_email_link }}
+  </div>
 {% endblock content %}
