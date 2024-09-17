@@ -115,20 +115,18 @@
 							  <div class="teaser-article-img px-2">
 								<img
 								src="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render }}"/>
-              </div>
 								{# Code to render selected article content (!thumbnail) #}
 							{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render %}
 							<div class="teaser-article-img px-2">
               <img
 								src="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render }}"/>
-              </div>
 								{# Code to render user made content #}
 							{% elseif item.entity.field_newsletter_content_image.entity.field_media_image.alt|render %}
 							<div class="teaser-article-img px-2">
               <img src="{{ item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ item.entity.field_newsletter_content_image.entity.field_media_image.alt|render }}"/>
-							</div>
               {% endif %}
-						</div>
+            </div>
+
 
 							{# Code to render selected article title/url #}
 							{% if item.entity.field_newsletter_article_select.entity.title.value|render %}
@@ -169,7 +167,7 @@
 								{# Code to render selected article content (article text) #}
 							{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|render %}
 								<div class="article-summary">
-									{% set textContent = item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|striptags %}
+                  {% set textContent = item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|striptags|replace({'&nbsp;': ' '}) %}
 									{% set maxLength = 300 %}
 									{% if textContent|length > maxLength %}
 										{% set trimmedText = textContent|slice(0, maxLength)|trim ~ '...' %}

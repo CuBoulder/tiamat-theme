@@ -111,7 +111,7 @@
 						{# Code to render selected article content (article text) #}
 					{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|render %}
 						<tr id="feature-article-summary-text-email-{{key}}">
-							{% set textContent = item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|striptags %}
+              {% set textContent = item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|striptags|replace({'&nbsp;': ' '}) %}
 							{% set maxLength = 300 %}
 							{% if textContent|length > maxLength %}
 								{% set trimmedText = textContent|slice(0, maxLength)|trim ~ '...' %}
@@ -229,7 +229,7 @@
 								{# Code to render selected article content (article text) #}
 							{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|render %}
 								<tr>
-									{% set textContent = item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|striptags %}
+                  {% set textContent = item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_text.value|striptags|replace({'&nbsp;': ' '}) %}
 									{% set maxLength = 300 %}
 									{% if textContent|length > maxLength %}
 										{% set trimmedText = textContent|slice(0, maxLength)|trim ~ '...' %}
