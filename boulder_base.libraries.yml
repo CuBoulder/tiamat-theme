@@ -271,6 +271,7 @@ ucb-latest-issue:
   css:
     theme:
       css/block/ucb-latest-issue-block.css: {}
+
 ucb-issue-archive:
   version: 1.x
   js:
@@ -278,6 +279,7 @@ ucb-issue-archive:
   css:
     theme:
       css/ucb-issue-archive.css: {}
+
 ucb-newsletter-email:
   version: 1.x
   js:
@@ -285,6 +287,7 @@ ucb-newsletter-email:
   css:
     theme:
       css/ucb-newsletter.css: {}
+
 ucb-article-grid-block:
   version: 1.x
   js:
@@ -292,6 +295,7 @@ ucb-article-grid-block:
   css:
     theme:
       css/block/ucb-article-grid-block.css: {}
+
 ucb-article-list-block:
   version: 1.x
   js:
@@ -299,6 +303,7 @@ ucb-article-list-block:
   css:
     theme:
       css/block/ucb-article-list-block.css: {}
+
 ucb-content-sequence:
   version: 1.x
   js:
@@ -306,6 +311,7 @@ ucb-content-sequence:
   css:
     theme:
       css/block/ucb-content-sequence.css: {}
+
 ucb-article-feature-block:
   version: 1.x
   js:
@@ -313,6 +319,14 @@ ucb-article-feature-block:
   css:
     theme:
       css/block/ucb-article-feature-block.css: {}
+
+ucb-faculty-publications:
+  version: 1.x
+  js:
+    js/faculty-publications.js: {}
+  css:
+    theme:
+      css/block/faculty-publications.css: {}
 
 ucb-brand-bar:
   version: 1.x
