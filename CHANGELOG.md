@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update hero-unit.css
+  CSS needed updating for proper targeting after changes to block styles. 
+  These changes should fix the overlay for all hero units with overlays.
+  
+  Resolves #1278
+---
+
 - ### Corrects Social Media Icons block to not be inline
   [bug] Resolves CuBoulder/tiamat-theme#1295
 ---
