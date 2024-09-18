@@ -9,75 +9,94 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Separates person first and last name with space instead of newline
-  [bug] Resolves CuBoulder/tiamat-theme#1304
----
+## [20240918] - 2024-09-18
 
-- ### Newsletter: Major bug fixes and style adjustments
-  ### Newsletter - Node
-  - Centering on Newsletter pages (the page, not the email version)  was not working correctly for user-created content in Teaser, only if an image was not supplied. This has been corrected. Resolves https://github.com/CuBoulder/tiamat-theme/issues/1264
-  
-  ### Newsletter -  Email Version
-  #### Major Fixes
-  - Articles added to newsletters were showing `&nbsp;`  as plain text in strange places that do not appear in the original articles. This has been corrected - this would happen with Articles where no summary field is provided. The `&nbsp` was caused by how we handle generating a summary to put in place of that missing field in Twig specifically and has been adjusted
-  - Newsletters are limited to 600 px wide in the preview window but when sent through Marketing Cloud and opened in Windows Outlook, and always were the full width of the window, breaking formatting. This was due to how Outlook handles image styles, needs a width attribute on the element instead of css. 
-  - Additional updates have been made to try to force our colors to come through despite user selected light/dark modes on their email clients. This will likely be an ongoing process to iron out how every client handles styling base elements in their own way and how each handles light/dark mode user settings differently.
-  - An issue where Footer Social media link icons appear to be broken has been fixed, this is due to an error in the path. 
-  
-  #### Minor Style Fixes
-  - The CU Boulder logo at the top of newsletters is extremely large in Outlook but very tiny when the same newsletter is opened on an iPhone. Same issue as above, Outlook needed specific size attributes specified in the element itself instead of handling via CSS. 
-  
-  - Newsletter text appears as Arial in the preview window, but are Times New Roman when opened on Outlook. More Outlook specific styles have been applied, again this will likely be an ongoing process to dial in settings that work across the maximum number of browsers.
-  
-  - The horizontal rules separating sections appear in the preview window but are missing when pasted to Marketing Cloud. This has been corrected, RGBA is not a valid style and it needed to be applied to a `<table>` element instead of a `<tr>` element. 
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1254
----
+-   ### Separates person first and last name with space instead of newline
+    [bug] Resolves CuBoulder/tiamat-theme#1304
 
-- ### Update ucb-accordion-styles.css
-  Updated specificity to fix the colors on vertical tabs. 
-  Horizontal tabs seem to be working correctly.
-  Normal accordions are working as intended.
-  
-  Resolves #1287 
----
+* * *
 
-- ### Adds the Faculty Publications block
-  [new] This update adds the Faculty Publications block. Faculty Publications blocks pull results from [CU Experts](https://experts.colorado.edu/). A variety of filters are available to bring near feature-parity with the version in D7. Notable changes in this version:
-  
-  - Adds an option to detect when the block has been added to a faculty member's person page, and automatically use that person's email address for the author filter.
-  - Replaces the pager with a "More publications" button which loads the next batch of publications. Results are loaded fast and no longer require a reload of the page to view.
-  - Removes "Any" for number of results to prevent poor client performance. 10, 25, 50, or 100 are available options.
-  
-  Resolves CuBoulder/tiamat-theme#1146
-  
-  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/172), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/201)
----
+-   ### Newsletter: Major bug fixes and style adjustments
 
-- ### Secondary Menu Button functionality change
-  Resolves #1285.
-  Changes the functionality for the buttons to only show when it is the active link. This change eliminates social media buttons and adds the functionality of the no button css to non-active links.
----
+    ### Newsletter - Node
 
-- ### Fixes link color on alert-style text blocks
-  [bug] Resolves CuBoulder/tiamat-theme#1267
----
+    -   Centering on Newsletter pages (the page, not the email version)  was not working correctly for user-created content in Teaser, only if an image was not supplied. This has been corrected. Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1264>
 
-- ### Update hero-unit.css
-  CSS needed updating for proper targeting after changes to block styles. 
-  These changes should fix the overlay for all hero units with overlays.
-  
-  Resolves #1278
----
+    ### Newsletter -  Email Version
 
-- ### Corrects Social Media Icons block to not be inline
-  [bug] Resolves CuBoulder/tiamat-theme#1295
----
+    #### Major Fixes
 
-- ### Video Reveal height solution
-  Resolves #1204 and #1286.
-  Changes the video reveal to have the image as a background images and limits the height to 160px larger than the text content.
----
+    -   Articles added to newsletters were showing `&nbsp;`  as plain text in strange places that do not appear in the original articles. This has been corrected - this would happen with Articles where no summary field is provided. The `&nbsp` was caused by how we handle generating a summary to put in place of that missing field in Twig specifically and has been adjusted
+    -   Newsletters are limited to 600 px wide in the preview window but when sent through Marketing Cloud and opened in Windows Outlook, and always were the full width of the window, breaking formatting. This was due to how Outlook handles image styles, needs a width attribute on the element instead of css. 
+    -   Additional updates have been made to try to force our colors to come through despite user selected light/dark modes on their email clients. This will likely be an ongoing process to iron out how every client handles styling base elements in their own way and how each handles light/dark mode user settings differently.
+    -   An issue where Footer Social media link icons appear to be broken has been fixed, this is due to an error in the path. 
+
+    #### Minor Style Fixes
+
+    -   The CU Boulder logo at the top of newsletters is extremely large in Outlook but very tiny when the same newsletter is opened on an iPhone. Same issue as above, Outlook needed specific size attributes specified in the element itself instead of handling via CSS. 
+
+    -   Newsletter text appears as Arial in the preview window, but are Times New Roman when opened on Outlook. More Outlook specific styles have been applied, again this will likely be an ongoing process to dial in settings that work across the maximum number of browsers.
+
+    -   The horizontal rules separating sections appear in the preview window but are missing when pasted to Marketing Cloud. This has been corrected, RGBA is not a valid style and it needed to be applied to a `<table>` element instead of a `<tr>` element. 
+
+    Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1254>
+
+* * *
+
+-   ### Update ucb-accordion-styles.css
+
+    Updated specificity to fix the colors on vertical tabs. 
+    Horizontal tabs seem to be working correctly.
+    Normal accordions are working as intended.
+
+    Resolves #1287 
+
+* * *
+
+-   ### Adds the Faculty Publications block
+
+    [new] This update adds the Faculty Publications block. Faculty Publications blocks pull results from [CU Experts](https://experts.colorado.edu/). A variety of filters are available to bring near feature-parity with the version in D7. Notable changes in this version:
+
+    -   Adds an option to detect when the block has been added to a faculty member's person page, and automatically use that person's email address for the author filter.
+    -   Replaces the pager with a "More publications" button which loads the next batch of publications. Results are loaded fast and no longer require a reload of the page to view.
+    -   Removes "Any" for number of results to prevent poor client performance. 10, 25, 50, or 100 are available options.
+
+    Resolves CuBoulder/tiamat-theme#1146
+
+    Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/172), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/201)
+
+* * *
+
+-   ### Secondary Menu Button functionality change
+    Resolves #1285.
+    Changes the functionality for the buttons to only show when it is the active link. This change eliminates social media buttons and adds the functionality of the no button css to non-active links.
+
+* * *
+
+-   ### Fixes link color on alert-style text blocks
+    [bug] Resolves CuBoulder/tiamat-theme#1267
+
+* * *
+
+-   ### Update hero-unit.css
+
+    CSS needed updating for proper targeting after changes to block styles. 
+    These changes should fix the overlay for all hero units with overlays.
+
+    Resolves #1278
+
+* * *
+
+-   ### Corrects Social Media Icons block to not be inline
+    [bug] Resolves CuBoulder/tiamat-theme#1295
+
+* * *
+
+-   ### Video Reveal height solution
+    Resolves #1204 and #1286.
+    Changes the video reveal to have the image as a background images and limits the height to 160px larger than the text content.
+
+* * *
 
 ## [20240911] - 2024-09-11
 
@@ -3292,7 +3311,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240911...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240918...HEAD
+
+[20240918]: https://github.com/CuBoulder/tiamat-theme/compare/20240911...20240918
 
 [20240911]: https://github.com/CuBoulder/tiamat-theme/compare/20240904...20240911
 
