@@ -95,6 +95,7 @@
       let config = {};
       try {
         config = this._config = JSON.parse(this.getAttribute('config')) || config;
+        console.log(config)
       } catch (e) { }
       this._baseURI = this.getAttribute('base-uri');
       const
@@ -229,16 +230,19 @@
               if (groupingData && groupingData.length) {
                 hasGroupingTaxonomy = true;
               }
-              ((person['relationships']['field_ucb_person_' + groupBy] || {})['data'] || []).forEach(
-                termData => {
-                  const termId = termData['meta']['drupal_internal__target_id'];
+
+              ((person['relationships']['field_ucb_person_' + groupBy] || {})['data'] || []).forEach(termData => {
+                const termId = termData['meta']['drupal_internal__target_id'];
+                // If there are filters applied to the current groupBy field (e.g., job_type), apply them so unwanted groups don't show up
+                if (!this._filters[groupBy] || this._filters[groupBy].includes.length === 0 || this._filters[groupBy].includes.map(Number).includes(termId)) {
                   let termPeople = groupedPeople.get(termId);
                   if (!termPeople) {
                     termPeople = [];
                     groupedPeople.set(termId, termPeople);
                   }
                   termPeople.push(person);
-                });
+                }
+              });
             });
             if (!hasGroupingTaxonomy) {
               this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg', `No results found for the '${groupBy}' grouping.`);
