@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Separates person first and last name with space instead of newline
+  [bug] Resolves CuBoulder/tiamat-theme#1304
+---
+
 - ### Newsletter: Major bug fixes and style adjustments
   ### Newsletter - Node
   - Centering on Newsletter pages (the page, not the email version)  was not working correctly for user-created content in Teaser, only if an image was not supplied. This has been corrected. Resolves https://github.com/CuBoulder/tiamat-theme/issues/1264
