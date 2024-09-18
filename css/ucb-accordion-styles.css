@@ -132,6 +132,10 @@
   border-radius: 0;
 }
 
+.block .vertical-tab-link.nav-link:hover {
+  color: #6a6a6a;
+}
+
 .ucb-bootstrap-layout-section-dark .block .vertical-tab-link.nav-link {
   color: #cccccc;
   background-color: rgba(128, 128, 128, 0.333);
@@ -185,102 +189,102 @@
   border-bottom: 1px solid rgb(255 255 255 / 58%);
 }
 
-.column .block.bs-background-white.accordion-item,
-.column .block.bs-background-gray.accordion-item,
-.column .block.bs-background-tan.accordion-item,
-.column .block.bs-background-light-blue.accordion-item,
-.column .block.bs-background-light-green.accordion-item {
+.block.bs-background-white .accordion-item,
+.block.bs-background-gray .accordion-item,
+.block.bs-background-tan .accordion-item,
+.block.bs-background-light-blue .accordion-item,
+.block.bs-background-light-green .accordion-item {
   color: inherit;
   background-color: inherit;
   border-bottom: 1px solid rgba(128, 128, 128, 33%);
 }
 
-.column .block.bs-background-dark-gray.accordion-item,
-.column .block.bs-background-medium-blue.accordion-item,
-.column .block.bs-background-dark-blue.accordion-item,
-.column .block.bs-background-brick.accordion-item {
+.block.bs-background-dark-gray .accordion-item,
+.block.bs-background-medium-blue .accordion-item,
+.block.bs-background-dark-blue .accordion-item,
+.block.bs-background-brick .accordion-item {
   color: inherit;
   background-color: inherit;
   border-bottom: 1px solid rgb(255 255 255 / 58%);
 }
 
 .ucb-bootstrap-layout__background-color--light-gray
-  .block.bs-background-none.accordion-item,
+  .block.bs-background-none .accordion-item,
 .ucb-bootstrap-layout__background-color--light-gray
-  .block.bs-background-none.accordion-item,
+  .block.bs-background-none .accordion-item,
 .ucb-bootstrap-layout__background-color--tan
-  .block.bs-background-none.accordion-item,
+  .block.bs-background-none .accordion-item,
 .ucb-bootstrap-layout__background-color--light-blue
-  .block.bs-background-none.accordion-item,
+  .block.bs-background-none .accordion-item,
 .ucb-bootstrap-layout__background-color--light-green
-  .block.bs-background-none.accordion-item,
-.content-frame-light-gray .block.bs-background-none.accordion-item,
+  .block.bs-background-none .accordion-item,
+.content-frame-light-gray .block.bs-background-none .accordion-item,
 .ucb-bootstrap-layout__background-color--light-gray
-  .block.bs-background-outline.accordion-item,
+  .block.bs-background-outline .accordion-item,
 .ucb-bootstrap-layout__background-color--light-gray
-  .block.bs-background-outline.accordion-item,
+  .block.bs-background-outline .accordion-item,
 .ucb-bootstrap-layout__background-color--tan
-  .block.bs-background-outline.accordion-item,
+  .block.bs-background-outline .accordion-item,
 .ucb-bootstrap-layout__background-color--light-blue
-  .block.bs-background-outline.accordion-item,
+  .block.bs-background-outline .accordion-item,
 .ucb-bootstrap-layout__background-color--light-green
-  .block.bs-background-outline.accordion-item,
-.content-frame-light-gray .block.bs-background-outline.accordion-item,
+  .block.bs-background-outline .accordion-item,
+.content-frame-light-gray .block.bs-background-outline .accordion-item,
 .ucb-bootstrap-layout__background-color--light-gray
-  .block.bs-background-underline.accordion-item,
+  .block.bs-background-underline .accordion-item,
 .ucb-bootstrap-layout__background-color--light-gray
-  .block.bs-background-underline.accordion-item,
+  .block.bs-background-underline .accordion-item,
 .ucb-bootstrap-layout__background-color--tan
-  .block.bs-background-underline.accordion-item,
+  .block.bs-background-underline .accordion-item,
 .ucb-bootstrap-layout__background-color--light-blue
-  .block.bs-background-underline.accordion-item,
+  .block.bs-background-underline .accordion-item,
 .ucb-bootstrap-layout__background-color--light-green
-  .block.bs-background-underline.accordion-item,
-.content-frame-light-gray .block.bs-background-underline.accordion-item {
+  .block.bs-background-underline .accordion-item,
+.content-frame-light-gray .block.bs-background-underline .accordion-item {
   color: inherit;
   background-color: inherit;
   border-bottom: 1px solid rgba(128, 128, 128, 33%);
 }
 
 .ucb-bootstrap-layout__background-color--gold
-  .block.bs-background-none.accordion-item,
+  .block.bs-background-none .accordion-item,
 .ucb-bootstrap-layout__background-color--dark-gray
-  .block.bs-background-none.accordion-item,
+  .block.bs-background-none .accordion-item,
 .ucb-bootstrap-layout__background-color--black
-  .block.bs-background-none.accordion-item,
+  .block.bs-background-none .accordion-item,
 .ucb-bootstrap-layout__background-color--medium-blue
-  .block.bs-background-none.accordion-item,
+  .block.bs-background-none .accordion-item,
 .ucb-bootstrap-layout__background-color--dark-blue
-  .block.bs-background-none.accordion-item,
+  .block.bs-background-none .accordion-item,
 .ucb-bootstrap-layout__background-color--brick
-  .block.bs-background-none.accordion-item,
-.content-frame-dark-gray .block.bs-background-none.accordion-item,
+  .block.bs-background-none .accordion-item,
+.content-frame-dark-gray .block.bs-background-none .accordion-item,
 .ucb-bootstrap-layout__background-color--gold
-  .block.bs-background-outline.accordion-item,
+  .block.bs-background-outline .accordion-item,
 .ucb-bootstrap-layout__background-color--dark-gray
-  .block.bs-background-outline.accordion-item,
+  .block.bs-background-outline .accordion-item,
 .ucb-bootstrap-layout__background-color--black
-  .block.bs-background-outline.accordion-item,
+  .block.bs-background-outline .accordion-item,
 .ucb-bootstrap-layout__background-color--medium-blue
-  .block.bs-background-outline.accordion-item,
+  .block.bs-background-outline .accordion-item,
 .ucb-bootstrap-layout__background-color--dark-blue
-  .block.bs-background-outline.accordion-item,
+  .block.bs-background-outline .accordion-item,
 .ucb-bootstrap-layout__background-color--brick
-  .block.bs-background-outline.accordion-item,
-.content-frame-dark-gray .block.bs-background-outline.accordion-item,
+  .block.bs-background-outline .accordion-item,
+.content-frame-dark-gray .block.bs-background-outline .accordion-item,
 .ucb-bootstrap-layout__background-color--gold
-  .block.bs-background-underline.accordion-item,
+  .block.bs-background-underline .accordion-item,
 .ucb-bootstrap-layout__background-color--dark-gray
-  .block.bs-background-underline.accordion-item,
+  .block.bs-background-underline .accordion-item,
 .ucb-bootstrap-layout__background-color--black
-  .block.bs-background-underline.accordion-item,
+  .block.bs-background-underline .accordion-item,
 .ucb-bootstrap-layout__background-color--medium-blue
-  .block.bs-background-underline.accordion-item,
+  .block.bs-background-underline .accordion-item,
 .ucb-bootstrap-layout__background-color--dark-blue
-  .block.bs-background-underline.accordion-item,
+  .block.bs-background-underline .accordion-item,
 .ucb-bootstrap-layout__background-color--brick
-  .block.bs-background-underline.accordion-item,
-.content-frame-dark-gray .block.bs-background-underline.accordion-item {
+  .block.bs-background-underline .accordion-item,
+.content-frame-dark-gray .block.bs-background-underline .accordion-item {
   color: inherit;
   background-color: inherit;
   border-bottom: 1px solid rgb(255 255 255 / 58%);
