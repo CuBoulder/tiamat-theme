@@ -18,8 +18,7 @@
 <article{{ attributes.addClass(classes) }} itemscope itemtype="https://schema.org/Person">
   <div class="container ucb-person-header">
     <h1 class="ucb-person-name">
-      {{ content.field_ucb_person_first_name }}
-      {{ content.field_ucb_person_last_name }}
+      {{ content.field_ucb_person_first_name }} {{ content.field_ucb_person_last_name }}
     </h1>
     {{ content.field_ucb_person_pronouns }}
     {% if content.field_ucb_person_title.0 or content.field_ucb_person_department.0 %}
