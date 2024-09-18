@@ -9,6 +9,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds the Faculty Publications block
+  [new] This update adds the Faculty Publications block. Faculty Publications blocks pull results from [CU Experts](https://experts.colorado.edu/). A variety of filters are available to bring near feature-parity with the version in D7. Notable changes in this version:
+  
+  - Adds an option to detect when the block has been added to a faculty member's person page, and automatically use that person's email address for the author filter.
+  - Replaces the pager with a "More publications" button which loads the next batch of publications. Results are loaded fast and no longer require a reload of the page to view.
+  - Removes "Any" for number of results to prevent poor client performance. 10, 25, 50, or 100 are available options.
+  
+  Resolves CuBoulder/tiamat-theme#1146
+  
+  Sister PR in: [tiamat-custom-entities](https://github.com/CuBoulder/tiamat-custom-entities/pull/172), [tiamat10-profile](https://github.com/CuBoulder/tiamat10-profile/pull/201)
+---
+
+- ### Secondary Menu Button functionality change
+  Resolves #1285.
+  Changes the functionality for the buttons to only show when it is the active link. This change eliminates social media buttons and adds the functionality of the no button css to non-active links.
+---
+
+- ### Fixes link color on alert-style text blocks
+  [bug] Resolves CuBoulder/tiamat-theme#1267
+---
+
+- ### Update hero-unit.css
+  CSS needed updating for proper targeting after changes to block styles. 
+  These changes should fix the overlay for all hero units with overlays.
+  
+  Resolves #1278
+---
+
+- ### Corrects Social Media Icons block to not be inline
+  [bug] Resolves CuBoulder/tiamat-theme#1295
+---
+
 - ### Video Reveal height solution
   Resolves #1204 and #1286.
   Changes the video reveal to have the image as a background images and limits the height to 160px larger than the text content.
