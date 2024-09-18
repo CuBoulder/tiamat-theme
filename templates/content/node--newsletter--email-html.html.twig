@@ -122,6 +122,20 @@
 <div class="container" id="email-preview" style="background-color: grey; display: flex; justify-content:center">
     <html>
         <head>
+            {# This should force browsers to stop using DarkMode overrides #}
+            <meta name="color-scheme" content="light">
+            <meta name="supported-color-schemes" content="light">
+            <meta name="color-scheme" content="only">
+            <meta name="supported-color-scheme" content="only">
+            {# This should override Outlook on Mac #}
+            <style type="text/css">
+              .body, .darkmode, .darkmode div { /* With class body on the body tag, and all elements represented here that have a background color */
+                  background-image: linear-gradient(#ffffff,#ffffff) !important;
+              }
+              .darkmode p { /* Add other selectors for other text elements */
+                  -webkit-text-fill-color: #000000 !important;
+              }
+            </style>
             <style>
 
                 img{
@@ -164,7 +178,7 @@ color: inherit !important;
             line-height: inherit !important;
 }
 
-u + #ucb-email-body a {
+u + #ucb-email-body a, u + #ucb-email-body .ii a[href]{
             color: inherit !important;
             text-decoration: none !important;
             font-size: inherit !important;
@@ -173,7 +187,7 @@ u + #ucb-email-body a {
             line-height: inherit !important;
 }
 
-#MessageViewBody a {
+#MessageViewBody a, #MessageViewBody .ii a[href] {
             color: inherit !important;
             text-decoration: none !important;
             font-size: inherit !important;
@@ -184,7 +198,7 @@ u + #ucb-email-body a {
 
 
 
-                .tags > a{
+                .tags > a, .tags > .ii a[href]{
                     color: #656565 !important;
                     text-decoration: none;
                     background-color: #e7e7e7 !important;
@@ -244,7 +258,7 @@ u + #ucb-email-body a {
     -moz-box-shadow: 0 3px 15px rgba(0,0,0,0.35);
     box-shadow: 0 3px 15px rgba(0,0,0,0.35);
 };
-a:link,a:visited {
+a:link,a:visited,.ii a[href] {
     color: #0277BD !important;
     transition: background-color 0.25s ease,border-color 0.25s ease,color 0.25s ease;
     text-decoration: none;
@@ -252,13 +266,13 @@ a:link,a:visited {
     -webkit-text-decoration-color: rgba(2,119,189,0.65);
 }
 
-a:hover {
+a:hover,.ii a[href]:hover {
     color: #B71C1C;
     text-decoration-color: rgba(183,28,28,0.65);
     -webkit-text-decoration-color: rgba(183,28,28,0.65);
 }
 
-a:active {
+a:active, .ii a[href]:active {
     color: #B71C1C;
     text-decoration-color: rgba(183,28,28,0.65);
     -webkit-text-decoration-color: rgba(183,28,28,0.65);
@@ -331,17 +345,17 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
         {# HEADER -- to do: might need to be different tables for styling purposes #}
         <!-- Header -->
         {% if designType == 'lightbox' or designType == 'darkbox' %}
-        <table style="{{boxBackground}}" align="center">
+        <table style="{{boxBackground}}" align="center" width="600">
             <tbody>
                 <tr>
                     <td>
         {% endif %}
         <center>
-        <table class="ucb-email-header-{{designType}}" style="{{headerStyles}}">
+        <table width="600" class="ucb-email-header-{{designType}}" style="{{headerStyles}}">
             <tbody>
                 <tr>
                     <td style='{{headerStyles}}'>
-                        <table role='presentation' align="center" style="max-width:600px;">
+                        <table width="600" role='presentation' align="center" style="max-width:600px;">
                             <tbody>
                                 {# CU LOGO #}
                                 <tr>
@@ -380,11 +394,11 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
             </tbody>
         </table>
         <center align="center" style="background-color: white;{{addtlPad}}">
-            <table style="max-width:600px;" align="center">
+            <table width="600" style="max-width:600px;" align="center">
                 <tbody>
                     <td>
                         <td>
-                            <table role="presentation" border="0" width="100%" cellspacing="0" style="text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; margin: 0; font-size: 14px; background-color: white;{{classicTableOffset}}">
+                            <table role="presentation" border="0" width="600" cellspacing="0" style="text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; margin: 0; font-size: 14px; background-color: white;{{classicTableOffset}}">
                                 <tr>
                                   <td align="center">
                                 <!-- Intro Img -->
@@ -423,12 +437,12 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                 {# It's an internal link; prepend the base URL #}
                                 {% set final_url_one = base_url ~ link_url_one %}
                             {% endif %}
-                                <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
+                                <table role="presentation"  border="0" width="600" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
                                     <tbody>
                                         <tr>
                                             <td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
                                                 <a href="{{ final_url_one}}">
-                                                    <img width="100%" src="{{base_domain}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                                    <img width="600" src="{{base_domain}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                                 </a>
                                             </td>
                                         </tr>
@@ -439,7 +453,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                     <tbody>
                                         <tr>
                                             <td align="center"style="text-align: left; padding-right:10px; padding-left:10px; padding-bottom:20px">
-                                                <img width="100%"src="{{base_domain}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                                <img width="600"src="{{base_domain}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                             </td>
                                         </tr>
                                     </tbody>
@@ -466,7 +480,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
 
                             {# Render the blocks side by side #}
                             {% if blocksToRender %}
-                                <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white" class="row row-content ucb-newsletter-blocks">
+                                <table role="presentation" border="0" width="600" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white" class="row row-content ucb-newsletter-blocks">
                                     <tbody>
                                         {% for i in 0..(blocksToRender|length - 1) %}
                                             {% if loop.index is odd %}
@@ -496,23 +510,23 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                 {# It's an internal link; prepend the base URL #}
                                 {% set final_url = base_url ~ link_url %}
                             {% endif %}
-                        <table role="presentation"  border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
+                        <table role="presentation"  border="0" width="600" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
                             <tbody>
                                 <tr>
-                                    <td width="500px" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
+                                    <td width="600" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
                                         <a href="{{ final_url }}">
-                                            <img width="100%" src="{{base_domain}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                            <img width="600" src="{{base_domain}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                         </a>
                                     </td>
                                 </tr>
                             </tbody>
                         </table>
                         {% else %}
-                        <table role="presentation" border="0" width="100%" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
+                        <table role="presentation" border="0" width="600" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
                             <tbody>
                                 <tr>
                                     <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
-                                        <img src="{{base_domain}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                        <img width="600" src="{{base_domain}}{{file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
                                     </td>
                                 </tr>
                             </tbody>
@@ -528,11 +542,11 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
          <!--Footer-->
          {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
          <center>
-            <table class="ucb-email-footer-{{designType}}"role="presentation" border="0" width="100%" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+            <table class="ucb-email-footer-{{designType}}"role="presentation" border="0" width="600" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
                 <tbody>
                     <tr>
                         <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px; padding-top:20px">
-                            <table align="center" style="max-width:600px;">
+                            <table align="center" width="600" style="max-width:600px;">
                                 <tbody>
                                     <tr>
                                     <td>
@@ -549,7 +563,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
         {% endif %}
         {# Social share #}
             {% if node.field_newsletter_type.entity.field_newsletter_social_link is defined and node.field_newsletter_type.entity.field_newsletter_social_link is not empty %}
-                <table role="presentation" border="0" width="100%" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+                <table role="presentation" border="0" width="600" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
                 <tbody>
                         <tr class="newsletter-social-{{designType}}">
                             <td>
@@ -594,7 +608,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                     {% set color = designType == 'darkbox' or designType == 'simple' or designType == 'classic' ? 'white' : 'black' %}
                                     <a{{ create_attribute({ class: 'ucb-email-social-icon', href: uri }) }}>
                                         <img{{ create_attribute({
-                                            src: base_domain ~ '/' ~  base_path ~ directory ~ '/images/social_icons/' ~ color ~ '-' ~ service|lower ~ '.png',
+                                            src: base_url ~ '/' ~  base_path ~ directory ~ '/images/social_icons/' ~ color ~ '-' ~ service|lower ~ '.png',
                                             alt: alt,
                                             style: 'width:20px;height:20px' }) }}/>
                                     </a>
@@ -617,3 +631,9 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
     </div>
     </html>
 </div>
+
+<!--[if mso]>
+<style type="text/css">
+body, table, td {font-family: Arial, Helvetica, sans-serif !important;}
+</style>
+<![endif]-->

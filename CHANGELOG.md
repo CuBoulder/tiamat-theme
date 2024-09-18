@@ -9,6 +9,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter: Major bug fixes and style adjustments
+  ### Newsletter - Node
+  - Centering on Newsletter pages (the page, not the email version)  was not working correctly for user-created content in Teaser, only if an image was not supplied. This has been corrected. Resolves https://github.com/CuBoulder/tiamat-theme/issues/1264
+  
+  ### Newsletter -  Email Version
+  #### Major Fixes
+  - Articles added to newsletters were showing `&nbsp;`  as plain text in strange places that do not appear in the original articles. This has been corrected - this would happen with Articles where no summary field is provided. The `&nbsp` was caused by how we handle generating a summary to put in place of that missing field in Twig specifically and has been adjusted
+  - Newsletters are limited to 600 px wide in the preview window but when sent through Marketing Cloud and opened in Windows Outlook, and always were the full width of the window, breaking formatting. This was due to how Outlook handles image styles, needs a width attribute on the element instead of css. 
+  - Additional updates have been made to try to force our colors to come through despite user selected light/dark modes on their email clients. This will likely be an ongoing process to iron out how every client handles styling base elements in their own way and how each handles light/dark mode user settings differently.
+  - An issue where Footer Social media link icons appear to be broken has been fixed, this is due to an error in the path. 
+  
+  #### Minor Style Fixes
+  - The CU Boulder logo at the top of newsletters is extremely large in Outlook but very tiny when the same newsletter is opened on an iPhone. Same issue as above, Outlook needed specific size attributes specified in the element itself instead of handling via CSS. 
+  
+  - Newsletter text appears as Arial in the preview window, but are Times New Roman when opened on Outlook. More Outlook specific styles have been applied, again this will likely be an ongoing process to dial in settings that work across the maximum number of browsers.
+  
+  - The horizontal rules separating sections appear in the preview window but are missing when pasted to Marketing Cloud. This has been corrected, RGBA is not a valid style and it needed to be applied to a `<table>` element instead of a `<tr>` element. 
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1254
+---
+
 - ### Update ucb-accordion-styles.css
   Updated specificity to fix the colors on vertical tabs. 
   Horizontal tabs seem to be working correctly.
