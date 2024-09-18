@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Person Page: Corrects 'Articles by Person' Section Full Name Missing Space
+  Resolves #1306 
+---
+
 ## [20240918] - 2024-09-18
 
 -   ### Separates person first and last name with space instead of newline
