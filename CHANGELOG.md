@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update ucb-accordion-styles.css
+  Updated specificity to fix the colors on vertical tabs. 
+  Horizontal tabs seem to be working correctly.
+  Normal accordions are working as intended.
+  
+  Resolves #1287 
+---
+
 - ### Adds the Faculty Publications block
   [new] This update adds the Faculty Publications block. Faculty Publications blocks pull results from [CU Experts](https://experts.colorado.edu/). A variety of filters are available to bring near feature-parity with the version in D7. Notable changes in this version:
   
