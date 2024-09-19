@@ -125,9 +125,9 @@
     <div class="ucb-article" itemscope itemtype="https://schema.org/Article">
       {# If using a Title Background img, render that #}
       {% if content.field_article_title_background.0 %}
+      {% set titleBackground = node.field_article_title_background|file_uri|image_style('section_background') %}
         <header><h1 class="visually-hidden">{{ label }}</h1></header>
-        <div class="backgroundTitleDiv {{ overlayClass }}">
-          {{ content.field_article_title_background }}
+        <div style="background-image: url('{{ titleBackground }}'); background-position: {{ position_vars }};" class="backgroundTitleDiv {{ overlayClass }}">
           <div{{ title_attributes.addClass('ucb-article-heading', 'article-header-' ~ textColor, is_front ? 'visually-hidden') }}>
             <div class="container">
               <h1>{{ label }}</h1>

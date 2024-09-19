@@ -277,6 +277,7 @@ function boulder_base_preprocess_node__organization(array &$variables) {
 
 /**
  * Exposes a variable to indicate if a user can edit a node.
+ * Exposes a variable for positioning data of title background images.
  */
 function boulder_base_preprocess_node__ucb_article(array &$variables) {
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
@@ -284,6 +285,31 @@ function boulder_base_preprocess_node__ucb_article(array &$variables) {
     $userCanEdit = $node->access('update', $user);
     $variables['user_can_edit'] = $userCanEdit;
   }
+
+  // Get the media image positioning
+  if ($node->hasField('field_article_title_background') && $node->get('field_article_title_background')->entity) {
+    $media_entity = $node->get('field_article_title_background')->entity;
+    $fid = $media_entity->getSource()->getSourceFieldValue($media_entity);
+    $file = \Drupal::entityTypeManager()->getStorage('file')->load($fid);
+
+  $crop = \Drupal::service('focal_point.manager')->getCropEntity($file, 'focal_point');
+  if ($crop) {
+    // Get the x and y position from the crop.
+    $fp_abs = $crop->position();
+    $x = $fp_abs['x'];
+    $y = $fp_abs['y'];
+
+    // Get the original width and height from the image.
+    $image_factory = \Drupal::service('image.factory');
+    $image = $image_factory->get($file->getFileUri());
+    $width = $image->getWidth();
+    $height = $image->getHeight();
+
+    // Convert the absolute x and y positions to relative values.
+    $fp_rel = \Drupal::service('focal_point.manager')->absoluteToRelative($x, $y, $width, $height);
+    $variables['position_vars'] =  $fp_rel['x'] . '% ' . $fp_rel['y'] . '%;';
+  }
+}
 }
 
 /**

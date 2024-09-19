@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article Title Background Update
+  Removed div displayed image and set it as a background image. Set the background image to use the `section_background` image style to avoid large image files.
+  
+  Set background positioning using new preprocess in .theme Preprocess works like it does in the layout builder sections except it will update immediately if the file image's focal point is updated.
+  
+  Updated css to reflect new changes. Removal of `absolute` positioning fixes the problem with the navigation being covered by the title. Everything should scale well now.
+  
+  Changed the top padding to be 300px vs 200px to imitate the old version's bigger title image.
+  
+  Resolves #1292 
+---
+
 - ### Person Page: Corrects 'Articles by Person' Section Full Name Missing Space
   Resolves #1306 
 ---
