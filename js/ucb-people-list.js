@@ -95,7 +95,6 @@
       let config = {};
       try {
         config = this._config = JSON.parse(this.getAttribute('config')) || config;
-        console.log(config)
       } catch (e) { }
       this._baseURI = this.getAttribute('base-uri');
       const
