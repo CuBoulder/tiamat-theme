@@ -710,8 +710,16 @@ article .align-left .media-image-caption p {
 }
 
 /* Center image above caption that has been floated */
-.align-left .imageMediaStyle, .align-right .imageMediaStyle {
+.align-center .imageMediaStyle {
   text-align: center;
+}
+
+.align-left .imageMediaStyle{
+  text-align: left;
+}
+
+.align-right .imageMediaStyle {
+  text-align: right;
 }
 
 .align-right.image_style-large_image_style,
