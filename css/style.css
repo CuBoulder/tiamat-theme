@@ -1029,8 +1029,8 @@ form label {
   display: inline;
 }
 
-.form-type-checkbox .field-label label,
-.form-type-radio .field-label label {
+.form-type-checkbox .field-label-after label,
+.form-type-radio .field-label-after label {
   display: inline-block;
   font-weight: normal;
 }
