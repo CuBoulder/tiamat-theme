@@ -1024,20 +1024,13 @@ form label {
   margin-bottom: 1em;
 }
 
-.form-type-radio .field-prefix,
-.form-type-checkbox .field-prefix,
-.form-checkbox,
-.form-radio {
-  margin-right: 0.333rem;
-}
-
 .webform-container-inline div,
 .webform-container-inline div.form-item {
   display: inline;
 }
 
-form input[type="checkbox"]+label,
-form input[type="radio"]+label {
+.form-type-checkbox .field-label label,
+.form-type-radio .field-label label {
   display: inline-block;
   font-weight: normal;
 }
