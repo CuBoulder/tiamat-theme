@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### People List Page: Selecting 'Group by Job Type or Department' with Filters applied to that term, only shows allowed groupings
+  Previously if you had a People List Page with `Group by` set to Department or Job Type, and had filter on that term, you could possibly see groupings of people for terms not selected in the filter, if the Person pages had multiple terms.
+  
+  For example: on [https://www.colorado.edu/alc/our-people/undergraduate-advising](https://www.colorado.edu/alc/our-people/undergraduate-advising), the Faculty group should not show up as it is a term applied to every Person Page, but NOT included in the filters.
+  
+  This has been corrected so only the filtered groups in the `Includes` for that term show up as a Group.
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1259
+---
+
 - ### Webform Block: Adds Required field indicator
   Previously the required field indicator (red asterisk) was missing from Forms added as a `Webform block` (not to be confused with Form blocks).  This has been corrected so they are visible.
   
