@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Remove Mega menu from Sticky menus and add default link color
+  Resolves #1317 and #1316.
+  Removes mega menus from the sticky menu and converts them into normal links. It also adds base default colors for links in mega menus to account for site settings.
+---
+
 - ### body template move
   The basic page body block wasn't being rendered at the right level. This caused it not to be editable or removable at the layout builder level. If multiple body sections were added they couldn't be deleted and a "body" title was added to each new addition.
   

@@ -83,6 +83,14 @@
   flex-wrap: wrap;
 }
 
+.ucb-main-nav-container .ucb-mega-menu .menu-item .mega-menu-wrapper a{
+  color: #0277bd;
+}
+
+.ucb-main-nav-container .ucb-mega-menu .menu-item .mega-menu-wrapper a:hover{
+  color: #B71C1C;
+}
+
 @media only screen and (max-width: 767px) {
 
   .ucb-mega-menu-column-3 div,
