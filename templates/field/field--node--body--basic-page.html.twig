@@ -1,15 +1,14 @@
 {#
-/**
+/*
  * Theme layout to display main body copy on basic page
- * Created by jnichol on 1/11/22
  */
 #}
 
 {{ title_prefix }}
-{# % if label %}
+{# {% if label %}
       <h2{{ title_attributes }}>{{ label }}</h2>
-    {% endif % #}
+   {% endif %} #}
 {{ title_suffix }}
 <div{{attributes}} class="container bs-background-unstyled block">
-  {{ content|render }}
+  {{ items|render }}
 </div>
