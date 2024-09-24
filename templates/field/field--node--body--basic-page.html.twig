@@ -10,5 +10,7 @@
    {% endif %} #}
 {{ title_suffix }}
 <div{{attributes}} class="container bs-background-unstyled block">
-  {{ items|render }}
+  {% for item in items %}
+    {{ item.content|render }}
+  {% endfor %}
 </div>
