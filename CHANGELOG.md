@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fix for alignment of floated images with long captions
+  Add proper alignment on floated images.
+   Should only affect images with large amounts of caption text.
+  
+  Resolves #1314 
+  Resolves #1249
+---
+
 - ### Remove Mega menu from Sticky menus and add default link color
   Resolves #1317 and #1316.
   Removes mega menus from the sticky menu and converts them into normal links. It also adds base default colors for links in mega menus to account for site settings.
