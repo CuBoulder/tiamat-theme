@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Webform Block: Adds Required field indicator
+  Previously the required field indicator (red asterisk) was missing from Forms added as a `Webform block` (not to be confused with Form blocks).  This has been corrected so they are visible.
+  
+  Resolves #1321 
+---
+
 - ### Fix for alignment of floated images with long captions
   Add proper alignment on floated images.
    Should only affect images with large amounts of caption text.

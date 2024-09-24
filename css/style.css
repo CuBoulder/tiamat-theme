@@ -1042,6 +1042,15 @@ form label {
   display: inline;
 }
 
+/* Required * for Webform */
+form.webform-submission-form .form-required::after {
+  display: inline-block;
+  margin-inline: 0.15em;
+  content: "*";
+  color: #f00;
+  font-size: 0.875rem;
+}
+
 form input[type="checkbox"]+label,
 form input[type="radio"]+label {
   display: inline-block;
