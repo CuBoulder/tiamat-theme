@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### body template move
+  The basic page body block wasn't being rendered at the right level. This caused it not to be editable or removable at the layout builder level. If multiple body sections were added they couldn't be deleted and a "body" title was added to each new addition.
+  
+  Closes #1280 
+---
+
 - ### Article Title Background Update
   Removed div displayed image and set it as a background image. Set the background image to use the `section_background` image style to avoid large image files.
   
