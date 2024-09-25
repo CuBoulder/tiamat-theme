@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Video Reveal fix for floating images
+  Resolves #1313.
+  Adds an inline-style to the body field to resolve the issue with video reveals expanding larger than their expected size.
+---
+
 - ### Corrects spacing issue for checkboxes and radio buttons on webforms
   [bug] Resolves CuBoulder/tiamat-theme#1318
 ---
