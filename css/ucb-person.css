@@ -25,12 +25,20 @@
 ul.ucb-person-email-address,
 ul.ucb-person-links,
 ul.ucb-person-phone-numbers,
-.ucb-person-contact ul {
+ul.ucb-person-primary-link,
+.ucb-person-links ul {
   overflow-wrap: break-word;
   list-style: none;
   padding: 0;
   color: #111;
   margin: 0;
+}
+
+ul.ucb-person-primary-link li a,
+.ucb-person-links ul li a {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 0.25em;
 }
 
 .ucb-person-email-icon {
