@@ -14,11 +14,13 @@
 ] %}
 
 {% set baseurlJSON = url('<front>')|render|trim('/') %}
+{% set firstName = content.field_ucb_person_first_name['#items'].0.value|trim %}
+{% set lastName = content.field_ucb_person_last_name['#items'].0.value|trim %}
 
 <article{{ attributes.addClass(classes) }} itemscope itemtype="https://schema.org/Person">
   <div class="container ucb-person-header">
     <h1 class="ucb-person-name">
-      <span itemprop="givenName">{{ content.field_ucb_person_first_name.0 }}</span> <span itemprop="familyName">{{ content.field_ucb_person_last_name.0 }}</span>
+      <span itemprop="givenName">{{ firstName }}</span>&nbsp;<span itemprop="familyName">{{ lastName }}</span>
     </h1>
     {{ content.field_ucb_person_pronouns }}
     {% if content.field_ucb_person_title.0 or content.field_ucb_person_department.0 %}
@@ -74,7 +76,7 @@
     <div class="ucb-articles-by-person-block">
       <person-article-list base-uri="{{ baseurlJSON }}" nodeid="{{ node.id }}">
         <div id="ucb-person-article-block-title" style="display:none">
-          <h2>Articles by {{ content.field_ucb_person_first_name.0 }} {{ content.field_ucb_person_last_name.0 }}</h2>
+          <h2>Articles by {{ firstName }} {{ lastName }}</h2>
         </div>
         <div id="ucb-al-loading" style="display:none" class="ucb-list-msg ucb-loading-data">
           <i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>
