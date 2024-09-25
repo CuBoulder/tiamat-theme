@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Places first name and last name on the same line to prevent trimming of the space between them
+  [bug] An issue existed where a space was trimmed between the first name and last name on person pages due to the names being separated by a newline. This update resolves the issue. Resolves CuBoulder/tiamat-theme#1304
+---
+
 - ### People List Page: Selecting 'Group by Job Type or Department' with Filters applied to that term, only shows allowed groupings
   Previously if you had a People List Page with `Group by` set to Department or Job Type, and had filter on that term, you could possibly see groupings of people for terms not selected in the filter, if the Person pages had multiple terms.
   
