@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const checkMenuExistence = document.getElementsByClassName("ucb-main-nav-container")[0];
   if (checkMenuExistence != null) {
     const quantityMenus = checkMenuExistence.getElementsByClassName("menu-item");
-    if(quantityMenus.length < 1) {
+    if(quantityMenus.length < 1 && document.getElementById("ucb-mobile-menu-toggle") != null) {
       document.getElementById("ucb-mobile-menu-toggle").style.display = "none";
     }
   }
