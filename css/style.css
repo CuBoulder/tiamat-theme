@@ -1051,8 +1051,8 @@ form.webform-submission-form .form-required::after {
   font-size: 0.875rem;
 }
 
-form input[type="checkbox"]+label,
-form input[type="radio"]+label {
+.form-type-checkbox .field-label-after label,
+.form-type-radio .field-label-after label {
   display: inline-block;
   font-weight: normal;
 }

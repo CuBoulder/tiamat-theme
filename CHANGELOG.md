@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Corrects spacing issue for checkboxes and radio buttons on webforms
+  [bug] Resolves CuBoulder/tiamat-theme#1318
+---
+
 - ### Remove console log from video reveal
   Resolves #1334. 
   Removes the console log from the video reveal
