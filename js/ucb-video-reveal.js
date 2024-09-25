@@ -201,7 +201,6 @@
       controlsElement = videoWrapperElement.parentElement.getElementsByClassName('ucb-video-reveal-controls')[0],
       videoRevealWidth = controlsElement.parentElement.offsetWidth,
       videoRevealHeight = videoRevealWidth*9/16;
-      console.log(controlsElement.parentElement.height);
       videoPlayerElement.width = videoRevealWidth;
       videoPlayerWrapperElement.style.width = videoRevealWidth;
       videoPlayerElement.height = videoRevealHeight + "px";

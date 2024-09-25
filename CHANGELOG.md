@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Remove console log from video reveal
+  Resolves #1334. 
+  Removes the console log from the video reveal
+---
+
 - ### Places first name and last name on the same line to prevent trimming of the space between them
   [bug] An issue existed where a space was trimmed between the first name and last name on person pages due to the names being separated by a newline. This update resolves the issue. Resolves CuBoulder/tiamat-theme#1304
 ---
