@@ -27,3 +27,15 @@ const megaMenuList = [...megaMenuElementList].map(collapseEl => new bootstrap.Co
     }
   }
 })
+
+// Disable Sticky Menu Mega Menus
+const stickyMenu = document.getElementsByClassName("ucb-sticky-menu");
+for (let i = 0; i < stickyMenu.length; i++) {
+  const allMegaMenus =  stickyMenu[i].getElementsByClassName("ucb-mega-menu-outer-link");
+  for (let j = 0; j < allMegaMenus.length; j++) {
+    allMegaMenus[j].removeAttribute("data-bs-toggle");
+    allMegaMenus[j].removeAttribute("data-bs-target");
+    allMegaMenus[j].removeAttribute("aria-expanded");
+    allMegaMenus[j].removeAttribute("aria-controls");
+  }
+}

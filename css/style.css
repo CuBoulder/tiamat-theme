@@ -709,6 +709,19 @@ article .align-left .media-image-caption p {
   font-size: 85%;
 }
 
+/* Center image above caption that has been floated */
+.align-center .imageMediaStyle {
+  text-align: center;
+}
+
+.align-left .imageMediaStyle{
+  text-align: left;
+}
+
+.align-right .imageMediaStyle {
+  text-align: right;
+}
+
 .align-right.image_style-large_image_style,
 .align-left.image_style-large_image_style {
   max-width: 100%;
@@ -1027,6 +1040,15 @@ form label {
 .webform-container-inline div,
 .webform-container-inline div.form-item {
   display: inline;
+}
+
+/* Required * for Webform */
+form.webform-submission-form .form-required::after {
+  display: inline-block;
+  margin-inline: 0.15em;
+  content: "*";
+  color: #f00;
+  font-size: 0.875rem;
 }
 
 .form-type-checkbox .field-label-after label,

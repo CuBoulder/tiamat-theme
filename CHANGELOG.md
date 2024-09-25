@@ -9,6 +9,45 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Places first name and last name on the same line to prevent trimming of the space between them
+  [bug] An issue existed where a space was trimmed between the first name and last name on person pages due to the names being separated by a newline. This update resolves the issue. Resolves CuBoulder/tiamat-theme#1304
+---
+
+- ### People List Page: Selecting 'Group by Job Type or Department' with Filters applied to that term, only shows allowed groupings
+  Previously if you had a People List Page with `Group by` set to Department or Job Type, and had filter on that term, you could possibly see groupings of people for terms not selected in the filter, if the Person pages had multiple terms.
+  
+  For example: on [https://www.colorado.edu/alc/our-people/undergraduate-advising](https://www.colorado.edu/alc/our-people/undergraduate-advising), the Faculty group should not show up as it is a term applied to every Person Page, but NOT included in the filters.
+  
+  This has been corrected so only the filtered groups in the `Includes` for that term show up as a Group.
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1259
+---
+
+- ### Webform Block: Adds Required field indicator
+  Previously the required field indicator (red asterisk) was missing from Forms added as a `Webform block` (not to be confused with Form blocks).  This has been corrected so they are visible.
+  
+  Resolves #1321 
+---
+
+- ### Fix for alignment of floated images with long captions
+  Add proper alignment on floated images.
+   Should only affect images with large amounts of caption text.
+  
+  Resolves #1314 
+  Resolves #1249
+---
+
+- ### Remove Mega menu from Sticky menus and add default link color
+  Resolves #1317 and #1316.
+  Removes mega menus from the sticky menu and converts them into normal links. It also adds base default colors for links in mega menus to account for site settings.
+---
+
+- ### body template move
+  The basic page body block wasn't being rendered at the right level. This caused it not to be editable or removable at the layout builder level. If multiple body sections were added they couldn't be deleted and a "body" title was added to each new addition.
+  
+  Closes #1280 
+---
+
 - ### Article Title Background Update
   Removed div displayed image and set it as a background image. Set the background image to use the `section_background` image style to avoid large image files.
   
