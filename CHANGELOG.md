@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds padding below article title background on articles
+  [change, minor] Resolves CuBoulder/tiamat-theme#1331
+---
+
 ## [20240925] - 2024-09-25
 
 -   ### Video Reveal fix for floating images
