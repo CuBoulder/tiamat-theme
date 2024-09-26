@@ -63,7 +63,7 @@ class PersonArticleList extends HTMLElement {
         }
 
         // Have articles and want to proceed
-        if(finalArticles.length > 0 && !NEXTJSONURL ){
+        if(finalArticles.length > 0 && (!NEXTJSONURL || finalArticles.length >= count)){
           this.renderDisplay(finalArticles, bylineTerm);
         }
     }
