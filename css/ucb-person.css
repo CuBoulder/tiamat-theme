@@ -23,9 +23,9 @@
 }
 
 ul.ucb-person-email-address,
-ul.ucb-person-links,
 ul.ucb-person-phone-numbers,
-.ucb-person-contact ul {
+ul.ucb-person-primary-link,
+.ucb-person-links ul {
   overflow-wrap: break-word;
   list-style: none;
   padding: 0;
@@ -33,12 +33,21 @@ ul.ucb-person-phone-numbers,
   margin: 0;
 }
 
+ul.ucb-person-primary-link li a,
+.ucb-person-links ul li a {
+  display: inline-flex;
+  flex-direction: row;
+  gap: 0.25em;
+}
+
 .ucb-person-email-icon {
   display: inline-block;
 }
 
 .ucb-person-contact a i,
-.ucb-person-contact a svg {
+.ucb-person-contact a svg,
+.ucb-person-links a i,
+.ucb-person-links a svg {
   color: #111;
 }
 

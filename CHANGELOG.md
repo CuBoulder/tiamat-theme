@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes styling issues of social links on the person page
+  [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1337
+---
+
 - ### Adds padding below article title background on articles
   [change, minor] Resolves CuBoulder/tiamat-theme#1331
 ---
