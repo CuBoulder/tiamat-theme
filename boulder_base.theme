@@ -175,8 +175,9 @@ function boulder_base_preprocess_page(array &$variables) {
   $variables['ucb_heading_font'] = theme_get_setting('ucb_heading_font');
   $useCustomLogo = theme_get_setting('ucb_use_custom_logo');
   if ($useCustomLogo) {
-    $logoDarkURL = file_create_url(theme_get_setting('ucb_custom_logo_dark_path'));
-    $logoLightURL = file_create_url(theme_get_setting('ucb_custom_logo_light_path'));
+    $fileUrlGenerator = \Drupal::service('file_url_generator');
+    $logoDarkURL = $fileUrlGenerator->generateAbsoluteString(theme_get_setting('ucb_custom_logo_dark_path'));
+    $logoLightURL = $fileUrlGenerator->generateAbsoluteString(theme_get_setting('ucb_custom_logo_light_path'));
     $variables['ucb_custom_logo'] = [
       'dark_url' => $logoDarkURL,
       'light_url' => $logoLightURL,
