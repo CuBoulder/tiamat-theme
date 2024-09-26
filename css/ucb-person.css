@@ -45,7 +45,9 @@ ul.ucb-person-primary-link li a,
 }
 
 .ucb-person-contact a i,
-.ucb-person-contact a svg {
+.ucb-person-contact a svg,
+.ucb-person-links a i,
+.ucb-person-links a svg {
   color: #111;
 }
 
