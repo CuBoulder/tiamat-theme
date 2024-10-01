@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Articles by Person Block: Fixes Infinite Spinning Load on Person Page
+  In cases where a Person has over 10 Articles with their linked byline term set on the Articles, the logic on the Articles by Person block could cause an infinite spinning loader due to logic in how the block should handle pagination. This has been corrected to match the other Article aggregator build processes. 
+  
+  Resolves #1332 
+---
+
 - ### Replaces deprecated function call on sites with a custom logo image
   [bug, severity:moderate] An issue existed where a site would crash if it contained a custom logo. This was due to the use of a [deprecated function call removed in newer versions of Drupal](https://www.drupal.org/node/2940031). This update resolves the issue by replacing the deprecated function call with the correct call. Resolves CuBoulder/tiamat-theme#1342
 ---
