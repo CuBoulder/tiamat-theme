@@ -353,6 +353,7 @@
 // })();
 
 (function (customElements) {
+  // Handles construction of endpoints, and fetching of articles and taxonomies
   class ArticleListProvider {
     static get noResultsMessage() {
       return 'No results matching your filters.';
@@ -499,6 +500,7 @@
       }
     }
   }
+// Article List Component: Handles the rendering and client side exclusion filtering
   class ArticleListElement extends HTMLElement {
     static get observedAttributes() {
       return ['base-uri', 'exclude-categories', 'exclude-tags', 'include-categories', 'include-tags'];
