@@ -370,6 +370,8 @@
       this.excludeCategories = excludeCategories || [];
       this.excludeTags = excludeTags || [];
       this.pageCount = pageCount;
+      this._categoryTerms = null;
+      this._tagTerms = null;
 
       // Build the endpoint path, now in JS
       this.endpoint = this.buildEndpointPath();
@@ -433,9 +435,38 @@
 
       return `${this.baseURI}${endpoint}${fullQueryString}`;
     }
+    // Method to fetch and cache taxonomies by their machine name
+    async fetchTaxonomies() {
+      if (!this._categoryTerms) {
+        this._categoryTerms = await this.fetchTaxonomy('category');
+      }
+      if (!this._tagTerms) {
+        this._tagTerms = await this.fetchTaxonomy('tags');
+      }
+    }
 
+    // Fetches taxonomy terms by machine name
+    async fetchTaxonomy(taxonomyMachineName, url = null, aggregatedTerms = []) {
+      const fetchUrl = url || `${this.baseURI}/jsonapi/taxonomy_term/${taxonomyMachineName}?sort=weight,name`;
+      const response = await fetch(fetchUrl);
+      const data = await response.json();
+      const results = data["data"];
 
+      const terms = results.map((termResult) => {
+        const id = termResult["attributes"]["drupal_internal__tid"];
+        const name = termResult["attributes"]["name"];
+        return { id, name };
+      });
 
+      aggregatedTerms.push(...terms);
+
+      // Recursive call for pagination if there are more than 50 terms
+      if (data["links"] && data["links"]["next"] && data["links"]["next"]["href"]) {
+        return this.fetchTaxonomy(taxonomyMachineName, data["links"]["next"]["href"], aggregatedTerms);
+      }
+
+      return aggregatedTerms;
+    }
     /**
      * Fetches articles recursively, handling pagination and aggregating the results.
      */
@@ -489,6 +520,9 @@
         ? this.getAttribute('exclude-tags').split(',').map(Number)
         : [];
 
+      this._exposeCategory = this.getAttribute('expose-categories') === "True";
+      this._exposeTag = this.getAttribute('expose-tags') === "True";
+
       this._provider = new ArticleListProvider(
         this._baseURI,
         this._includeCategories,
@@ -497,29 +531,50 @@
         this._excludeTags
       );
 
+      // User Dropdown Form Element
+      this._filterFormElement = document.createElement('form');
+      this._filterFormElement.className = 'article-list-filter-form';
+      this.appendChild(this._filterFormElement);
+
+      if (this._exposeCategory || this._exposeTag) {
+        this.generateFilterForm();
+      }
+      // Article List Content
       this._contentElement = document.createElement('div');
       this._contentElement.className = 'article-list';
       this.appendChild(this._contentElement);
-
+      // Loader
       this._loadingElement = document.createElement('div');
       this._loadingElement.innerHTML = `<i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>`;
       this._loadingElement.className = 'ucb-list-msg ucb-loading-data';
       this._loadingElement.id = 'ucb-al-loading'
       this._loadingElement.style.display = 'none';
       this.appendChild(this._loadingElement);
-
+      // Error
       this._errorElement = document.createElement('div');
       this._errorElement.innerText = ArticleListProvider.errorMessage;
       this._errorElement.className = 'ucb-list-msg ucb-error';
       this._errorElement.id = 'ucb-al-error'
       this._errorElement.style.display = 'none';
       this.appendChild(this._errorElement);
+      // No Results Found
+      this._noResultsElement = document.createElement('div');
+      this._noResultsElement.className = 'ucb-list-msg ucb-no-results';
+      this._noResultsElement.innerText = 'No results found.';
+      this._noResultsElement.style.display = 'none';
+      this.appendChild(this._noResultsElement);
 
       this._nextURL = '';
     }
 
-    connectedCallback() {
-      this.loadArticles();
+    async connectedCallback() {
+      try {
+        await this._provider.fetchTaxonomies();
+        this.generateFilterForm();
+        this.loadArticles();
+      } catch (error) {
+        console.error('Error fetching taxonomies:', error);
+      }
     }
 
     attributeChangedCallback(name, oldValue, newValue) {
@@ -527,11 +582,100 @@
         this._baseURI = newValue;
       }
       if (name === 'exclude-categories') {
-        this._excludeCategories = newValue.split(',');
+        this._excludeCategories = newValue
+          ? newValue.split(',').filter(Boolean).map(Number)
+          : [];
       }
       if (name === 'exclude-tags') {
-        this._excludeTags = newValue.split(',');
+        this._excludeTags = newValue
+          ? newValue.split(',').filter(Boolean).map(Number)
+          : [];
       }
+    }
+      /**
+   * Generates the user-accessible filter form for categories and/or tags.
+   */
+    generateFilterForm() {
+      this._filterFormElement.innerHTML = '';
+
+      // Filter categories
+      if (this._exposeCategory && this._provider._categoryTerms) {
+        const categoryFilter = document.createElement('select');
+        categoryFilter.name = 'categoryFilter';
+        categoryFilter.id = 'category-filter';
+        categoryFilter.onchange = this.applyFilters.bind(this);
+
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = 'All Categories';
+        categoryFilter.appendChild(defaultOption);
+
+        // If no includes are selected (empty array), load all except excluded
+        const includeCategories = this._includeCategories.length > 0
+          ? this._includeCategories
+          : this._provider._categoryTerms.map(({ id }) => id); // Load all if includes is empty
+
+        this._provider._categoryTerms
+          .filter(({ id }) => includeCategories.includes(id)) // Load all if no includes
+          .filter(({ id }) => !this._excludeCategories.includes(id)) // Exclude the excluded
+          .forEach(({ id, name }) => {
+            const option = document.createElement('option');
+            option.value = id;
+            option.textContent = name;
+            categoryFilter.appendChild(option);
+          });
+
+        this._filterFormElement.appendChild(categoryFilter);
+      }
+
+      // Filter tags
+      if (this._exposeTag && this._provider._tagTerms) {
+        const tagFilter = document.createElement('select');
+        tagFilter.name = 'tagFilter';
+        tagFilter.id = 'tag-filter';
+        tagFilter.onchange = this.applyFilters.bind(this);
+
+        const defaultOption = document.createElement('option');
+        defaultOption.value = '';
+        defaultOption.textContent = 'All Tags';
+        tagFilter.appendChild(defaultOption);
+
+        // If no includes are selected (empty array), load all except excluded
+        const includeTags = this._includeTags.length > 0
+          ? this._includeTags
+          : this._provider._tagTerms.map(({ id }) => id); // Load all if includes is empty
+
+        this._provider._tagTerms
+          .filter(({ id }) => includeTags.includes(id)) // Load all if no includes
+          .filter(({ id }) => !this._excludeTags.includes(id)) // Exclude the excluded
+          .forEach(({ id, name }) => {
+            const option = document.createElement('option');
+            option.value = id;
+            option.textContent = name;
+            tagFilter.appendChild(option);
+          });
+
+        this._filterFormElement.appendChild(tagFilter);
+      }
+    }
+
+
+    // Reload component using new term filters
+    applyFilters() {
+      const selectedCategory = document.getElementById('category-filter')?.value || '';
+      const selectedTag = document.getElementById('tag-filter')?.value || '';
+
+      this._includeCategories = selectedCategory ? [Number(selectedCategory)] : [];
+      this._includeTags = selectedTag ? [Number(selectedTag)] : [];
+
+      this._provider = new ArticleListProvider(
+        this._baseURI,
+        this._includeCategories,
+        this._includeTags,
+        this._excludeCategories,
+        this._excludeTags
+      );
+      this.loadArticles();
     }
 
     async loadArticles() {
@@ -575,6 +719,16 @@
 
     async renderArticles(articles, included) {
       this._contentElement.innerHTML = ''; // Clear the content element
+
+      // If no results
+      if (articles.length === 0) {
+        this._noResultsElement.style.display = 'block';
+        this._contentElement.style.display = 'none';
+        return;
+      } else {
+        this._noResultsElement.style.display = 'none';
+        this._contentElement.style.display = 'block';
+      }
 
       let excludeCatArray = this._excludeCategories;
       let excludeTagArray = this._excludeTags;
@@ -625,47 +779,46 @@
           );
         }
 
-        // Filter out articles based on excluded categories and tags
-        let doesIncludeCat = excludeCatArray.length
-          ? thisArticleCats.filter((cat) => excludeCatArray.includes(cat))
-          : [];
-        let doesIncludeTag = excludeTagArray.length
-          ? thisArticleTags.filter((tag) => excludeTagArray.includes(tag))
-          : [];
+        // Check if the article's categories or tags overlap with the excluded categories/tags
+        const hasExcludedCategory = excludeCatArray.length && thisArticleCats.some(cat => excludeCatArray.includes(cat));
+        const hasExcludedTag = excludeTagArray.length && thisArticleTags.some(tag => excludeTagArray.includes(tag));
 
-        if (doesIncludeCat.length === 0 && doesIncludeTag.length === 0) {
-          // Get article body and thumbnail
-          let body = item.attributes.field_ucb_article_summary
-            ? item.attributes.field_ucb_article_summary.trim()
-            : '';
-          if (!body && item.relationships.field_ucb_article_content.data.length) {
-            const bodyId = item.relationships.field_ucb_article_content.data[0].id;
-            body = await this.getArticleParagraph(bodyId);
-          }
-
-          let imageSrc = "";
-
-          // if no thumbnail, show no image
-          if (!item.relationships.field_ucb_article_thumbnail.data) {
-            imageSrc = null;
-          } else {
-          //Use the idObj as a memo to add the corresponding image url
-          let thumbId = item.relationships.field_ucb_article_thumbnail.data.id;
-            imageSrc = altObj[idObj[thumbId]];
-          }
-
-          // Format date
-          const date = new Date(item.attributes.created).toLocaleDateString('en-us', {
-            year: 'numeric',
-            month: 'short',
-            day: 'numeric',
-          });
-          const title = item.attributes.title;
-          const link = `${this._baseURI}${item.attributes.path.alias}`;
-
-          // Return article row
-          return this.createArticleRow(title, link, date, body, imageSrc);
+        // If the article has an excluded category or tag, skip it
+        if (hasExcludedCategory || hasExcludedTag) {
+          return undefined;
         }
+
+        // Get article body and thumbnail
+        let body = item.attributes.field_ucb_article_summary
+          ? item.attributes.field_ucb_article_summary.trim()
+          : '';
+        if (!body && item.relationships.field_ucb_article_content.data.length) {
+          const bodyId = item.relationships.field_ucb_article_content.data[0].id;
+          body = await this.getArticleParagraph(bodyId);
+        }
+
+        let imageSrc = "";
+
+        // If no thumbnail, show no image
+        if (!item.relationships.field_ucb_article_thumbnail.data) {
+          imageSrc = null;
+        } else {
+          // Use the idObj as a memo to add the corresponding image URL
+          let thumbId = item.relationships.field_ucb_article_thumbnail.data.id;
+          imageSrc = altObj[idObj[thumbId]];
+        }
+
+        // Format date
+        const date = new Date(item.attributes.created).toLocaleDateString('en-us', {
+          year: 'numeric',
+          month: 'short',
+          day: 'numeric',
+        });
+        const title = item.attributes.title;
+        const link = `${this._baseURI}${item.attributes.path.alias}`;
+
+        // Return article row
+        return this.createArticleRow(title, link, date, body, imageSrc);
       });
 
       let results = await Promise.all(promises);
@@ -691,7 +844,6 @@
       }
       return null;
     }
-
 
     createArticleRow(title, link, date, body, imageSrc) {
       const articleRow = document.createElement('div');

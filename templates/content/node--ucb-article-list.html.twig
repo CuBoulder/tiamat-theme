@@ -145,6 +145,11 @@
   {% endif %}
 {% endfor %}
 
+{% set exposeCategory = content.field_ucb_expose_category|render|striptags|trim %}
+{% set exposeTag = content.field_ucb_expose_tag|render|striptags|trim %}
+<p>expose cat filter :: {{content.field_ucb_expose_category}}</p>
+<p>expose tag filter :: {{content.field_ucb_expose_tag}}</p>
+
 {# placeholder variables for our include and exclude filters, default to blank strings
 {% set IncludeFilter = '' %}
 {% set IncludeCategoryFilter = '' %}
@@ -272,6 +277,8 @@
       {{ content.body }}
     </div>
     {# PUT ART-LIST COMPONENT HERE #}
+    <p>expose cat filter :: {{content.field_ucb_expose_category}}</p>
+    <p>expose tag filter :: {{content.field_ucb_expose_tag}}</p>
     <article-list{{ create_attribute({
       id: 'ucb-article-listing',
       class: 'ucb-article-list-container',
@@ -279,9 +286,11 @@
       'include-categories' : includeCategories,
       'include-tags' : includeTags,
       'exclude-categories': excludeCategories,
-      'exclude-tags': excludeTags }) }}>
-
-
+      'exclude-tags': excludeTags,
+      'expose-categories' : exposeCategory,
+      'expose-tags': exposeTag,
+      }) }}
+      >
       {# No Data message
       <div id="ucb-al-no-results" class="ucb-list-msg ucb-no-data">
         No articles were returned, please check your filters and try again.
