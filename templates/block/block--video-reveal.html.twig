@@ -1,16 +1,16 @@
 {#
-/**
- * @file Contains the template to display the Video Reveal block type.
- */
-#}
+  /**
+  * @file Contains the template to display the Video Reveal block type.
+  */
+  #}
 {% set classes = [
-  'ucb-video-reveal',
-  'block',
-  'block-' ~ configuration.provider|clean_class,
-  'block-' ~ plugin_id|clean_class,
-  bundle ? 'block--type-' ~ bundle|clean_class,
-  view_mode ? 'block--view-mode-' ~ view_mode|clean_class
-] %}
+    'ucb-video-reveal',
+    'block',
+    'block-' ~ configuration.provider|clean_class,
+    'block-' ~ plugin_id|clean_class,
+    bundle ? 'block--type-' ~ bundle|clean_class,
+    view_mode ? 'block--view-mode-' ~ view_mode|clean_class
+  ] %}
 
 {% set blockId = 'reveal'|clean_unique_id %}
 {% if content['#block_content'].field_video_reveal_video.entity.field_media_oembed_video is defined %}
@@ -26,21 +26,21 @@
 {% block content %}
   {{ attach_library('boulder_base/ucb-video-reveal') }}
   <div id="ucb-video-block-{{ blockId }}" class="ucb-video-text-div">
-      <div hidden class="ucb-video-reveal-close">
-        <button aria-label="Hide video" class="ucb-video-reveal-close-button">
-          <i class="fa-solid fa-circle-xmark ucb-video-reveal-close-button"></i>
-        </button>
-      </div>
-      <div class="ucb-video-reveal-video-wrapper" id="ucb-video-reveal-video-wrapper-{{ blockId }}">
-        <script type="text/javascript">
-          window.addEventListener('load', () => enableVideoReveal('{{ videoURL }}', 'ucb-video-reveal-video-wrapper-{{ blockId }}'));
-        </script>
-      </div>
-      <div role="button" aria-label="Play video" class="ucb-video-reveal-controls" style = 'background-image: url("{{imageURL}}")' >
-        <span class="ucb-video-reveal-icon">
-          <i class="fa-solid fa-circle-play"></i>
-        </span>
-        <span class="ucb-video-reveal-text">{{ content.field_video_reveal_text_overlay }}</span>
-      </div>
+    <div hidden class="ucb-video-reveal-close">
+      <button aria-label="Hide video" class="ucb-video-reveal-close-button">
+        <i class="fa-solid fa-circle-xmark ucb-video-reveal-close-button"></i>
+      </button>
+    </div>
+    <div class="ucb-video-reveal-video-wrapper" id="ucb-video-reveal-video-wrapper-{{ blockId }}" data-video-url="{{ videoURL }}">
+      <script type="text/javascript">
+        window.addEventListener('DOMContentLoaded', () => enableVideoReveal('{{ videoURL }}', 'ucb-video-reveal-video-wrapper-{{ blockId }}'));
+      </script>
+    </div>
+    <div role="button" aria-label="Play video" class="ucb-video-reveal-controls" style='background-image: url("{{imageURL}}")'>
+      <span class="ucb-video-reveal-icon">
+        <i class="fa-solid fa-circle-play"></i>
+      </span>
+      <span class="ucb-video-reveal-text">{{ content.field_video_reveal_text_overlay }}</span>
+    </div>
   </div>
 {% endblock content %}
