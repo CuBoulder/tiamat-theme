@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Removes padding below article title image header and changes to margin
+  [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1358
+---
+
 ## [20241002] - 2024-10-02
 
 -   ### Articles by Person Block: Fixes Infinite Spinning Load on Person Page
