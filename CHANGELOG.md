@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fix Preview Error
+  Image position needed checks for if the route was in preview or not for the proper node id.
+  
+  Resolves #1361
+---
+
 - ### Removes padding below article title image header and changes to margin
   [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1358
 ---
