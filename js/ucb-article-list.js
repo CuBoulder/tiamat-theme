@@ -541,6 +541,9 @@
 
       if (this._exposeCategory || this._exposeTag) {
         this.generateFilterForm();
+        this._filterFormElement.style.display = 'flex';
+        this._filterFormElement.style.alignItems = 'center';
+
       }
       // Article List Content
       this._contentElement = document.createElement('div');
