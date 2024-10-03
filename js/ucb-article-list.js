@@ -535,8 +535,9 @@
 
       // User Dropdown Form Element
       this._filterFormElement = document.createElement('form');
-      this._filterFormElement.classList = 'article-list-filter-form d-flex align-items-center';
+      this._filterFormElement.classList = 'article-list-filter-form';
       this.appendChild(this._filterFormElement);
+      this._filterFormElement.style.display = 'none';
 
       if (this._exposeCategory || this._exposeTag) {
         this.generateFilterForm();
