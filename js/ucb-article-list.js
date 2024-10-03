@@ -605,7 +605,6 @@
         const categoryFilter = document.createElement('select');
         categoryFilter.name = 'categoryFilter';
         categoryFilter.id = 'category-filter';
-        categoryFilter.onchange = this.applyFilters.bind(this);
 
         const defaultOption = document.createElement('option');
         defaultOption.value = '';
@@ -635,7 +634,6 @@
         const tagFilter = document.createElement('select');
         tagFilter.name = 'tagFilter';
         tagFilter.id = 'tag-filter';
-        tagFilter.onchange = this.applyFilters.bind(this);
 
         const defaultOption = document.createElement('option');
         defaultOption.value = '';
@@ -659,7 +657,16 @@
 
         this._filterFormElement.appendChild(tagFilter);
       }
+
+      // Filter button
+      const filterButton = document.createElement('button');
+      filterButton.type = 'button';
+      filterButton.textContent = 'Apply Filters';
+      filterButton.onclick = this.applyFilters.bind(this);
+
+      this._filterFormElement.appendChild(filterButton);
     }
+
 
 
     // Reload component using new term filters
