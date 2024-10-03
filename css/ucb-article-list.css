@@ -81,3 +81,35 @@
   background-color: #0277BD;
   color: white !important;
 }
+
+/* Form */
+.form-item {
+  margin: 0;
+  margin-right: 15px;
+  margin-bottom: 10px;
+}
+
+.form-item > label span {
+  display: block;
+  font-size: 75%;
+  font-weight: 500;
+}
+
+.article-list-filter-form {
+  padding: 10px 10px 0;
+  margin-bottom: 20px;
+  overflow: hidden;
+  background-color: #e7e7e7;
+}
+
+.form-item > .form-submit-btn {
+  margin-top: 21px;
+  font-size: 11px;
+  font-weight: 500;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 20%);
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 5px 10px;
+  color: #222;
+  background: #eeeeee;
+}

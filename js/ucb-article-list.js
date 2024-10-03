@@ -535,7 +535,7 @@
 
       // User Dropdown Form Element
       this._filterFormElement = document.createElement('form');
-      this._filterFormElement.className = 'article-list-filter-form';
+      this._filterFormElement.classList = 'article-list-filter-form d-flex align-items-center';
       this.appendChild(this._filterFormElement);
 
       if (this._exposeCategory || this._exposeTag) {
@@ -594,7 +594,7 @@
           : [];
       }
     }
-      /**
+   /**
    * Generates the user-accessible filter form for categories and/or tags.
    */
     generateFilterForm() {
@@ -602,6 +602,17 @@
 
       // Filter categories
       if (this._exposeCategory && this._provider._categoryTerms) {
+        // Container
+        const categoryFilterContainer = document.createElement('div');
+        categoryFilterContainer.classList = "form-item-categories form-item";
+        // Label
+        const categoryFilterLabel = document.createElement('label');
+        const categoryFilterLabelContent = document.createElement('span');
+        categoryFilterLabelContent.innerText = "Category";
+        categoryFilterLabel.appendChild(categoryFilterLabelContent);
+        categoryFilterContainer.appendChild(categoryFilterLabel)
+
+        // Filter
         const categoryFilter = document.createElement('select');
         categoryFilter.name = 'categoryFilter';
         categoryFilter.id = 'category-filter';
@@ -625,12 +636,23 @@
             option.textContent = name;
             categoryFilter.appendChild(option);
           });
-
-        this._filterFormElement.appendChild(categoryFilter);
+        categoryFilterContainer.appendChild(categoryFilter)
+        this._filterFormElement.appendChild(categoryFilterContainer);
       }
 
       // Filter tags
       if (this._exposeTag && this._provider._tagTerms) {
+        // Container
+        const tagFilterContainer = document.createElement('div');
+        tagFilterContainer.classList = "form-item-tags form-item";
+        // Label
+        const tagFilterLabel = document.createElement('label');
+        const tagFilterLabelContent = document.createElement('span');
+        tagFilterLabelContent.innerText = "Tags";
+        tagFilterLabel.appendChild(tagFilterLabelContent);
+        tagFilterContainer.appendChild(tagFilterLabel)
+
+        // Filter
         const tagFilter = document.createElement('select');
         tagFilter.name = 'tagFilter';
         tagFilter.id = 'tag-filter';
@@ -655,19 +677,19 @@
             tagFilter.appendChild(option);
           });
 
-        this._filterFormElement.appendChild(tagFilter);
+        tagFilterContainer.appendChild(tagFilter)
+        this._filterFormElement.appendChild(tagFilterContainer);
       }
 
       // Filter button
       const filterButton = document.createElement('button');
       filterButton.type = 'button';
+      filterButton.className = 'form-submit-btn'
       filterButton.textContent = 'Apply Filters';
       filterButton.onclick = this.applyFilters.bind(this);
 
       this._filterFormElement.appendChild(filterButton);
     }
-
-
 
     // Reload component using new term filters
     applyFilters() {
@@ -840,7 +862,7 @@
         this._contentElement.append(articleElement);
       });
     }
-
+    // Thumbnail helper
     getThumbnail(article, idObj, altObj) {
       if (article.relationships.field_ucb_article_thumbnail) {
         const thumbnailId = article.relationships.field_ucb_article_thumbnail.data.id;
@@ -853,7 +875,7 @@
       }
       return null;
     }
-
+    // Create the Article Row - image, body, read more link
     createArticleRow(title, link, date, body, imageSrc) {
       const articleRow = document.createElement('div');
       articleRow.className = 'ucb-article-card row';
@@ -917,7 +939,7 @@
 
       return articleRow;
     }
-
+    // Helper function to fetch the Article body if no summary and do the processing
     async getArticleParagraph(id) {
       if (!id) {
         return '';

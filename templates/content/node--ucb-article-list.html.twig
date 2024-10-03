@@ -64,12 +64,6 @@
  *   is an administrator.
  *
  * @see template_preprocess_node()
- *
- * TODO :
- *  - Set output on Thumbnail to be reasonable size in Article schema
- *  - if no Thumbnail, get the image from the first included paragraph
- *  - clean up console log message
- *  - expose filters on the client side as requested
  */
 #}
 
@@ -147,126 +141,7 @@
 
 {% set exposeCategory = content.field_ucb_expose_category|render|striptags|trim %}
 {% set exposeTag = content.field_ucb_expose_tag|render|striptags|trim %}
-<p>expose cat filter :: {{content.field_ucb_expose_category}}</p>
-<p>expose tag filter :: {{content.field_ucb_expose_tag}}</p>
 
-{# placeholder variables for our include and exclude filters, default to blank strings
-{% set IncludeFilter = '' %}
-{% set IncludeCategoryFilter = '' %}
-{% set IncludeTagsFilter = '' %}
-{% set ExcludeCategoryFilter = '' %}
-{% set ExcludeTagsFilter = '' %}
-
-{# Setup Include Category Filter using a logical OR between included category IDs #}
-{# {% if includeCategories|length %}
-  {% set includeGroupMembers = '' %}
-  {% for item in includeCategories %}
-    {% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-cat'
-      ~ (item|trim)
-      ~ '][condition][path]=field_ucb_article_categories.meta.drupal_internal__target_id'
-      ~ '&filter[filter-cat'
-      ~ (item|trim)
-      ~ '][condition][value]='
-      ~ (item|trim)
-      ~ '&filter[filter-cat'
-      ~ (item|trim)
-      ~ '][condition][memberOf]=cat-include'
-    %}
-  {% endfor %}
-  {% set IncludeCategoryFilter = '&filter[cat-include][group][conjunction]=OR'
-    ~ includeGroupMembers
-  %}
-{% endif %} #}
-
-{# Setup Include Tags Filter using a logical OR between included tag IDs #}
-{# {% if includeTags|length %}
-  {% set includeGroupMembers = '' %}
-  {% for item in includeTags %}
-    {% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-tag'
-      ~ (item|trim)
-      ~ '][condition][path]=field_ucb_article_tags.meta.drupal_internal__target_id'
-      ~ '&filter[filter-tag'
-      ~ (item|trim)
-      ~ '][condition][value]='
-      ~ (item|trim)
-      ~ '&filter[filter-tag'
-      ~ (item|trim)
-      ~ '][condition][memberOf]=tag-include'
-    %}
-  {% endfor %}
-  {% set IncludeTagsFilter = '&filter[tag-include][group][conjunction]=OR'
-    ~ includeGroupMembers
-  %}
-{% endif %} #}
-
-{# check to see if we have both Categories and Tags to filter on #}
-{# if so... setup a logicial AND Between both include filters #}
-{# {% if IncludeCategoryFilter and IncludeTagsFilter %}
-  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
-    ~ PublishedFilter
-    ~ '&filter[include-group][group][conjunction]=AND'
-    ~ '&filter[include-group][group][memberOf]=published'
-    ~ IncludeCategoryFilter
-    ~ '&filter[cat-include][group][memberOf]=include-group'
-    ~ IncludeTagsFilter
-    ~ '&filter[tag-include][group][memberOf]=include-group'
-  %} #}
-  {# Otherwise default to either the Category filter or the Tag filter as defined #}
-{# {% elseif IncludeCategoryFilter %}
-  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
-    ~ '&filter[cat-include][group][memberOf]=published'
-    ~ PublishedFilter
-    ~ IncludeCategoryFilter
-  %}
-{% elseif IncludeTagsFilter %}
-  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
-    ~ '&filter[tag-include][group][memberOf]=published'
-    ~ PublishedFilter
-    ~ IncludeTagsFilter
-  %} #}
-
-{# no includeded Categories or Tags ... still need to filter on published articles #}
-{# {% else %}
-  {% set IncludeFilter = '&filter[status][value]=1' %}
-{% endif %}
-
-{# pagination filter #}
-{# {% set pageCount = 10 %}
-{% set pageCountFilter = '&page[limit]=' ~ pageCount %} #}
-
-{# sorting filter #}
-{# {% set sortFilter = '&sort[sort-created][path]=created&sort[sort-created][direction]=DESC' %} #} #} #}
-
-
-{# Check for Exclude Categories and setup the filter to exclude anything that matches "NOT IN SET" #}
-{# {% if excludeCategories|length %}
-  {% set excludeGroupMembers = "" %}
-  {% for item in excludeCategories %}
-     {% set excludeGroupMembers = excludeGroupMembers ~
-       '&filter[filter-excat][condition][value][' ~ loop.index ~ ']=' ~ item
-     %}
-  {% endfor %}
-  {% set ExcludeCategoryFilter =
-       '&filter[filter-excat][condition][path]=field_ucb_article_categories.meta.drupal_internal__target_id' ~
-       '&filter[filter-excat][condition][operator]=NOT%20IN' ~
-       excludeGroupMembers
-  %}
-{% endif %}
-{% if excludeCategories|length %}
-  {% set excludeGroupMembers = "" %}
-  {% for item in excludeCategories %}
-     {% set excludeGroupMembers = excludeGroupMembers ~
-       '&filter[filter-excat' ~ item ~'][condition][path]=field_ucb_article_categories.meta.drupal_internal__target_id' ~
-       '&filter[filter-excat' ~ item ~'][condition][operator]=%3C%3E' ~
-       '&filter[filter-excat' ~ item ~'][condition][value]=' ~ item ~
-       '&filter[filter-excat' ~ item ~'][condition][memberOf]=cat-exclude'
-     %}
-
-  {% endfor %}
-  {% set ExcludeCategoryFilter = "&filter[cat-exclude][group][conjunction]=AND" ~ excludeGroupMembers %}
-{% endif %}
-
-{# JSON API Filter logic #}
 <article{{ attributes.addClass('container', 'ucb-content-wrapper') }}>
   <h1{{ title_attributes.addClass('ucb-article-list-header', is_front ? 'visually-hidden') }}>
     {{ label }}
@@ -276,9 +151,6 @@
     <div class="ucb-article-list-body">
       {{ content.body }}
     </div>
-    {# PUT ART-LIST COMPONENT HERE #}
-    <p>expose cat filter :: {{content.field_ucb_expose_category}}</p>
-    <p>expose tag filter :: {{content.field_ucb_expose_tag}}</p>
     <article-list{{ create_attribute({
       id: 'ucb-article-listing',
       class: 'ucb-article-list-container',
@@ -291,33 +163,6 @@
       'expose-tags': exposeTag,
       }) }}
       >
-      {# No Data message
-      <div id="ucb-al-no-results" class="ucb-list-msg ucb-no-data">
-        No articles were returned, please check your filters and try again.
-      </div>
-
-      {# dynamically loaded data goes here... #}
-      {# <div id="ucb-al-data"></div> #}
-
-      {# Loading message #}
-      {# <div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
-        <i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>
-      </div> #}
-
-      {# No more Data #}
-      {# <div id="ucb-al-end-of-data" class="ucb-list-msg ucb-end-of-results">
-        No more results matching your filters.
-      </div> #}
-
-      {# Error in the response from the API endpoint, display an error #}
-      {# <div id="ucb-al-error" class="ucb-list-msg ucb-error">
-        Error retrieving article list from the API endpoint.  Please try again later.
-      </div>
-      <div class="ucb-article-list-button-container">
-        <a id='ucb-el-load-more'class="ucb-article-list-button">
-          Load More
-        </a>
-      </div> #}
     </article-list>
   </div>
 </article>
