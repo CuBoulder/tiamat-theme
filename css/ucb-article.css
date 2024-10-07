@@ -135,13 +135,12 @@ i.fa-regular.fa-calendar {
   content: ",";
 }
 
-
 .backgroundTitleDiv {
   position: relative;
   z-index: 0;
   object-fit: fill;
   background-size: cover;
-  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .backgroundTitleDiv .ucb-article-heading {

@@ -9,6 +9,24 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes Slider block link color and special character rendering
+  [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1356
+---
+
+- ### Create developers-sandbox-ci.yml
+  Add new workflow
+---
+
+- ### Fix Preview Error
+  Image position needed checks for if the route was in preview or not for the proper node id.
+  
+  Resolves #1361
+---
+
+- ### Removes padding below article title image header and changes to margin
+  [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1358
+---
+
 ## [20241002] - 2024-10-02
 
 -   ### Articles by Person Block: Fixes Infinite Spinning Load on Person Page

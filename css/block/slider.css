@@ -138,6 +138,17 @@
   max-width: calc(100% - 100px);
 }
 
+.ucb-slider-block .slide-text-container .slide-text a:link,
+.ucb-slider-block .slide-text-container .slide-text a:visited {
+  color: var(--ucb-gold);
+}
+
+.ucb-slider-block .slide-text-container .slide-text a:hover,
+.ucb-slider-block .slide-text-container .slide-text a:active,
+.ucb-slider-block .slide-text-container .slide-text a:focus {
+  color: #FFF;
+}
+
 .ucb-slider-block .carousel-inner a:hover {
   cursor: pointer;
 }
