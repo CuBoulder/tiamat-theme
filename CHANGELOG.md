@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Sorts by job type weight instead of alphabetical in people lists
+  [change] Previously, job type sorting on people lists was limited to alphabetical by job type name. This update changes job type sorting to respect the order for job types shown on the job type taxonomy page. Resolves CuBoulder/tiamat-theme#1368
+---
+
 - ### Fixes Slider block link color and special character rendering
   [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1356
 ---
