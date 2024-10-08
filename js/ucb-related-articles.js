@@ -1,3 +1,6 @@
+const relatedArticlesBlock = document.querySelector(".ucb-related-articles-block");
+const baseURL = relatedArticlesBlock ? relatedArticlesBlock.getAttribute('data-baseurl') : '';
+
 (function(relatedArticlesBlock) {
 	if (!relatedArticlesBlock) return;
 	const loggedIn = relatedArticlesBlock.getAttribute('data-loggedin') == 'true' ? true : false;
