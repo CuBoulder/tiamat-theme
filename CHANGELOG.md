@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Only footer menu in the mobile menu fix.
+  Resolves #1336.
+  Adds the ability to use footer menus while using no other menus and have them show up in the mobile menu.
+---
+
 - ### Related Articles: Fix base path
   Resolves #1375 
 ---
