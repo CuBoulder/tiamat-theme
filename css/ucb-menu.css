@@ -28,6 +28,7 @@
 .ucb-mobile-footer-menu,
 .ucb-mobile-social-media-menu {
   display: none;
+  width: 100%;
 }
 
 @media only screen and (max-width: 575px) {
@@ -135,6 +136,8 @@
   .ucb-main-nav-container .ucb-primary-menu-region li.menu-item.active a.nav-link.is-active,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link,
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link,
+  .ucb-main-nav-container .ucb-mobile-footer-menu li.menu-item a.nav-link,
+  .ucb-main-nav-container .ucb-mobile-social-media-menu li.menu-item a.nav-link,
   .ucb-main-menu li.menu-item a.nav-link:hover,
   .ucb-main-menu li.menu-item a.nav-link.is-active,
   .ucb-main-menu li.menu-item.active a.nav-link:first-of-type {
@@ -151,6 +154,8 @@
     background-color: var(--ucb-gold);
   }
 
+  .ucb-main-nav-container .ucb-mobile-footer-menu li.menu-item a.nav-link:hover,
+  .ucb-main-nav-container .ucb-mobile-social-media-menu li.menu-item a.nav-link:hover,
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item:not(.active) a.nav-link,
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item:not(.active) a.nav-link {
     background-color: transparent;
