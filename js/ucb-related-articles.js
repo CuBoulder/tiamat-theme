@@ -2,6 +2,7 @@
 	if (!relatedArticlesBlock) return;
 	const loggedIn = relatedArticlesBlock.getAttribute('data-loggedin') == 'true' ? true : false;
 	let childCount = 0;
+  const baseURL = relatedArticlesBlock.getAttribute('data-baseurl');
 
 	const excludeCatArr = JSON.parse(relatedArticlesBlock.getAttribute('data-catexclude'))
 	const excludeTagArr = JSON.parse(relatedArticlesBlock.getAttribute('data-tagexclude'))
@@ -242,7 +243,7 @@
 		var myCats = myCatsID.map((id)=> id.replace(/\D/g,''))// remove blanks, get only the cat ID#s
 
 		// Using tags and categories, construct an API call
-		var rootURL = `/jsonapi/node/ucb_article?include[node--ucb_article]=uid,title,ucb_article_content,created,field_ucb_article_summary,field_ucb_article_categories,field_ucb_article_tags,field_ucb_article_thumbnail&include=field_ucb_article_thumbnail.field_media_image&fields[file--file]=uri,url%20&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published`;
+		var rootURL = `${baseURL}/jsonapi/node/ucb_article?include[node--ucb_article]=uid,title,ucb_article_content,created,field_ucb_article_summary,field_ucb_article_categories,field_ucb_article_tags,field_ucb_article_thumbnail&include=field_ucb_article_thumbnail.field_media_image&fields[file--file]=uri,url%20&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published`;
 
 		var tagQuery = buildTagFilter(myTags)
 		var catQuery = buildCatFilter(myCats)
@@ -506,7 +507,7 @@
 // These functions get the privated Categories and tags to not include them on the match count for their respective taxonomies
 function getPrivateCategories(){
 	let privateCats = []
-		fetch('/jsonapi/taxonomy_term/category?filter[field_ucb_category_display]=false')
+		fetch(`${baseURL}/jsonapi/taxonomy_term/category?filter[field_ucb_category_display]=false`)
 		.then(response => response.json())
 		.then(data=>{
 			data.data.forEach(cat=>{
@@ -518,7 +519,7 @@ function getPrivateCategories(){
 
 function getPrivateTags(){
 	let privateTags = []
-		fetch('/jsonapi/taxonomy_term/tags?filter[field_ucb_tag_display]=false')
+		fetch(`${baseURL}/jsonapi/taxonomy_term/tags?filter[field_ucb_tag_display]=false`)
 		.then(response => response.json())
 		.then(data=>{
 			data.data.forEach(tag=>{
