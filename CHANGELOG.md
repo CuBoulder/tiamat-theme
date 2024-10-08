@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Corrects padding and icon of Aggregator Feed block
+  [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1366
+---
+
 - ### Secondary menu button appearance rework
   Resolves #1367.
   Adds a new style for the buttons in the secondary menu.
