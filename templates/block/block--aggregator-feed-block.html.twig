@@ -24,7 +24,7 @@
   {% block content %}
     {{ attach_library('boulder_base/aggregator-feed-block') }}
     {{ content.list }}
-	  <a{{ create_attribute({ href: content.more_link['#url'].options.entity.url.value, class: 'rss-site-link' }) }}>
+    <a{{ create_attribute({ href: content.more_link['#url'].options.entity.url.value, class: 'rss-site-link' }) }}>
       <span class="rss-icon"><i class="fa-solid fa-square-rss"></i></span> {{ content.more_link['#url'].options.entity.title.value }}
     </a>
   {% endblock %}
