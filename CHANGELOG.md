@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Mega menu changes for Description
+  Resolves #1348.
+  Changes the mega menu descriptions to take up the full width of its area.
+---
+
 - ### Sorts by job type weight instead of alphabetical in people lists
   [change] Previously, job type sorting on people lists was limited to alphabetical by job type name. This update changes job type sorting to respect the order for job types shown on the job type taxonomy page. Resolves CuBoulder/tiamat-theme#1368
 ---
