@@ -76,7 +76,7 @@
 
         return { data: aggregatedData, included: aggregatedIncluded };
       } catch (error) {
-        console.error('PeopleListProvider: ' + PeopleListProvider.errorMessage)
+        console.error('PeopleListProvider: ' + PeopleListProvider.errorMessage);
         throw error;
       }
     }
@@ -283,9 +283,10 @@
                 if (!personAJobTypeDataLength || !personBJobTypeDataLength) // Someone doesn't have a job type (length 0), push them to the bottom
                   return !personAJobTypeDataLength && personBJobTypeDataLength ? 1 : personAJobTypeDataLength && !personBJobTypeDataLength ? -1 : 0;
                 const
-                  personAJobTypeName = PeopleListElement.getTaxonomyName(jobTypeTaxonomy, personAJobTypeData[0]['meta']['drupal_internal__target_id']),
-                  personBJobTypeName = PeopleListElement.getTaxonomyName(jobTypeTaxonomy, personBJobTypeData[0]['meta']['drupal_internal__target_id']);
-                return personAJobTypeName > personBJobTypeName ? 1 : personAJobTypeName < personBJobTypeName ? -1 : 0; // Sorts by job types alphabetically
+                  personAJobTypeWeight = PeopleListElement.getTaxonomyWeight(jobTypeTaxonomy, personAJobTypeData[0]['meta']['drupal_internal__target_id']),
+                  personBJobTypeWeight = PeopleListElement.getTaxonomyWeight(jobTypeTaxonomy, personBJobTypeData[0]['meta']['drupal_internal__target_id']);
+                // Sorts by job type weights.
+                return personAJobTypeWeight > personBJobTypeWeight ? 1 : personAJobTypeWeight < personBJobTypeWeight ? -1 : 0;
               }), photoUrls, photoData, groupContainerElement);
             } else this.displayPeople(format, peopleInGroup, photoUrls, photoData, groupContainerElement);
           });
@@ -312,7 +313,8 @@
         const terms = results.map((termResult) => {
           const id = termResult["attributes"]["drupal_internal__tid"];
           const name = termResult["attributes"]["name"];
-          return { id: id, name: name, fieldName: taxonomyFieldName };
+          const weight = termResult["attributes"]["weight"];
+          return { id, name, weight, fieldName: taxonomyFieldName };
         });
 
         aggregatedTerms.push(...terms);
@@ -340,6 +342,11 @@
     static getTaxonomyName(taxonomy, termId) {
       if (!termId) return
       return taxonomy.find(({ id }) => id === termId).name;
+    }
+
+    static getTaxonomyWeight(taxonomy, termId) {
+      if (!termId) return
+      return taxonomy.find(({ id }) => id === termId).weight;
     }
 
     onTaxonomyLoaded(taxonomyFieldName, taxonomy) {
