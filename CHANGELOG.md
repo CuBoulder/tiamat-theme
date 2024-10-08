@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Related Articles: Fix base path
+  Resolves #1375 
+---
+
 - ### Corrects padding and icon of Aggregator Feed block
   [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1366
 ---
