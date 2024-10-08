@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Secondary menu button appearance rework
+  Resolves #1367.
+  Adds a new style for the buttons in the secondary menu.
+---
+
 - ### Remove striptags render from mega menu desc
   Resolves #1372.
   Removes the render and strip tags from the mega menu link description
