@@ -115,36 +115,28 @@
       return aggregatedTerms;
     }
     /**
-     * Fetches articles recursively, handling pagination and aggregating the results.
+     * Fetches articles
      */
-    async fetchAllArticles(url, aggregatedData = [], aggregatedIncluded = []) {
+    async fetchAllArticles(url) {
       try {
         const response = await fetch(url);
         const data = await response.json();
 
-        // If no articles are found, log a warning
-        if (!data['data'] || data['data'].length === 0) {
-          console.warn(ArticleListProvider.noResultsMessage);
-        } else {
-          aggregatedData.push(...data['data']);
-        }
+        // Aggregate data for current page only
+        const articles = data['data'] || [];
+        const included = data['included'] || [];
 
-        // Aggregate included data if present
-        if (data['included']) {
-          aggregatedIncluded.push(...data['included']);
-        }
-
-        // Handle pagination (check if there's a "next" link)
-        if (data['links'] && data['links']['next'] && data['links']['next']['href']) {
-          return this.fetchAllArticles(data['links']['next']['href'], aggregatedData, aggregatedIncluded);
-        }
-
-        return { data: aggregatedData, included: aggregatedIncluded };
+        // Update the next URL if available, otherwise set it to null
+        this._nextURL = data['links']?.next?.href || null;
+        console.log(articles)
+        console.log(this._nextURL);
+        return { data: articles, included: included };
       } catch (error) {
         console.error(ArticleListProvider.errorMessage);
         throw error;
       }
     }
+
   }
 // Article List Component: Handles the rendering and client side exclusion filtering
   class ArticleListElement extends HTMLElement {
@@ -185,19 +177,20 @@
       this.appendChild(this._filterFormElement);
       this._filterFormElement.style.display = 'none';
 
+      // Article List Content
+      this._contentElement = document.createElement('div');
+      this._contentElement.className = 'article-list';
+
       if (this._exposeCategory || this._exposeTag) {
         this.generateFilterForm();
         this._filterFormElement.style.display = 'flex';
         this._filterFormElement.style.alignItems = 'center';
-
+        this._contentElement.setAttribute('aria-live', 'polite');
       }
-      // Article List Content
-      this._contentElement = document.createElement('div');
-      this._contentElement.className = 'article-list';
       this.appendChild(this._contentElement);
       // Loader
       this._loadingElement = document.createElement('div');
-      this._loadingElement.innerHTML = `<i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>`;
+      this._loadingElement.innerHTML = `<span class="visually-hidden">Loading</span><i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>`;
       this._loadingElement.className = 'ucb-list-msg ucb-loading-data';
       this._loadingElement.id = 'ucb-al-loading'
       this._loadingElement.style.display = 'none';
@@ -215,10 +208,20 @@
       this._noResultsElement.innerText = 'No results found.';
       this._noResultsElement.style.display = 'none';
       this.appendChild(this._noResultsElement);
+      // Add Load More button + container
+      const loadMoreButtonContainer = document.createElement('div');
+      loadMoreButtonContainer.classList = 'ucb-article-list-button-container';
+      this._loadMoreButton = document.createElement('button');
+      this._loadMoreButton.textContent = 'Load More';
+      this._loadMoreButton.className = 'ucb-article-list-button load-more-button';
+      this._loadMoreButton.style.display = 'none'; // Initially hidden
+      this._loadMoreButton.onclick = () => this.loadMoreArticles();
+      loadMoreButtonContainer.appendChild(this._loadMoreButton);
+      this.appendChild(loadMoreButtonContainer);
 
       this._nextURL = '';
     }
-
+    // Part of web component API, called on attribute change
     async connectedCallback() {
       try {
         await this._provider.fetchTaxonomies();
@@ -245,9 +248,7 @@
           : [];
       }
     }
-   /**
-   * Generates the user-accessible filter form for categories and/or tags.
-   */
+   // Generates the user-accessible filter form for categories and/or tags.
     generateFilterForm() {
       this._filterFormElement.innerHTML = '';
 
@@ -342,7 +343,7 @@
       this._filterFormElement.appendChild(filterButton);
     }
 
-    // Reload component using new term filters
+    // Reload component using new term filters, force re-render
     applyFilters() {
       const selectedCategory = document.getElementById('category-filter')?.value || '';
       const selectedTag = document.getElementById('tag-filter')?.value || '';
@@ -357,50 +358,54 @@
         this._excludeCategories,
         this._excludeTags
       );
-      this.loadArticles();
+      this.loadArticles(true); // We need to pass true here to kick off the re-render instead of just adding addtl articles
     }
 
-    async loadArticles() {
+    async loadArticles(clearContent = true) {
       const url = this._provider.endpoint;
       this.toggleLoading(true);
+
       try {
-        const response = await this._provider.fetchAllArticles(url);
-        this.renderArticles(response.data, response.included);
-        if (response.links && response.links.next) {
-          this._nextURL = response.links.next.href;
-        }
-        this.toggleLoading(false);
+          const response = await this._provider.fetchAllArticles(url);
+
+          this.renderArticles(response.data, response.included, clearContent);
+
+          this._nextURL = this._provider._nextURL;
+          this.toggleLoadMoreButton(!!this._nextURL);
+          this.toggleLoading(false);
       } catch (error) {
-        this.toggleError(true);
-        this.toggleLoading(false);
+          this.toggleError(true);
+          this.toggleLoading(false);
       }
     }
 
     async loadMoreArticles() {
       if (this._nextURL) {
-        try {
-          this.toggleLoading(true);
-          const response = await this._provider.fetchAllArticles(this._nextURL);
-          this.renderArticles(response.data, response.included);
-          this._nextURL = response.links?.next?.href || '';
+          try {
+              this.toggleLoading(true);
+              const response = await this._provider.fetchAllArticles(this._nextURL);
 
-          // Update Load More button visibility based on the next URL
-          this.toggleLoadMoreButton(!!this._nextURL);
-          this.toggleLoading(false);
-        } catch (error) {
-          this.toggleError(true);
-          this.toggleLoading(false);
-        }
-      } else {
-        // No more content
-        this._loadMoreButton.innerText = 'End of results';
-        this._loadMoreButton.style.pointerEvents = 'none';
-        this._loadMoreButton.classList.add('disabled'); // Optional styling for disabled state
+              // Do not clear content for loadMoreArticles, append to existing content
+              this.renderArticles(response.data, response.included, false);
+
+              // Update the element’s next URL again after loading more articles
+              this._nextURL = this._provider._nextURL;
+
+              // Show or hide the Load More button based on the updated next URL
+              this.toggleLoadMoreButton(!!this._nextURL);
+              this.toggleLoading(false);
+          } catch (error) {
+              this.toggleError(true);
+              this.toggleLoading(false);
+          }
       }
     }
 
-    async renderArticles(articles, included) {
-      this._contentElement.innerHTML = ''; // Clear the content element
+    async renderArticles(articles, included, clearContent = false) {
+      // Clear content if specified -- only when applyFilters is called
+      if (clearContent) {
+        this._contentElement.innerHTML = '';
+      }
 
       // If no results
       if (articles.length === 0) {
@@ -578,6 +583,7 @@
       const readMoreLink = document.createElement('a');
       readMoreLink.href = link;
       readMoreLink.innerText = 'Read more';
+      readMoreLink.setAttribute("aria-hidden", "true");
 
       articleSummaryReadMore.appendChild(readMoreLink);
 
@@ -612,6 +618,7 @@
       }
     }
 
+    // Various toggles
     toggleLoading(show) {
       this._loadingElement.style.display = show ? 'block' : 'none';
     }
@@ -619,6 +626,11 @@
     toggleError(show) {
       this._errorElement.style.display = show ? 'block' : 'none';
     }
+
+    toggleLoadMoreButton(show) {
+      this._loadMoreButton.style.display = show ? 'inline' : 'none';
+    }
+
   }
 
   customElements.define('article-list', ArticleListElement);
