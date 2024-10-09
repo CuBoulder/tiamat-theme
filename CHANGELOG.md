@@ -9,55 +9,69 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Only footer menu in the mobile menu fix.
-  Resolves #1336.
-  Adds the ability to use footer menus while using no other menus and have them show up in the mobile menu.
----
+## [20241009] - 2024-10-09
 
-- ### Related Articles: Fix base path
-  Resolves #1375 
----
+-   ### Only footer menu in the mobile menu fix.
+    Resolves #1336.
+    Adds the ability to use footer menus while using no other menus and have them show up in the mobile menu.
 
-- ### Corrects padding and icon of Aggregator Feed block
-  [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1366
----
+* * *
 
-- ### Secondary menu button appearance rework
-  Resolves #1367.
-  Adds a new style for the buttons in the secondary menu.
----
+-   ### Related Articles: Fix base path
+    Resolves #1375 
 
-- ### Remove striptags render from mega menu desc
-  Resolves #1372.
-  Removes the render and strip tags from the mega menu link description
----
+* * *
 
-- ### Mega menu changes for Description
-  Resolves #1348.
-  Changes the mega menu descriptions to take up the full width of its area.
----
+-   ### Corrects padding and icon of Aggregator Feed block
+    [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1366
 
-- ### Sorts by job type weight instead of alphabetical in people lists
-  [change] Previously, job type sorting on people lists was limited to alphabetical by job type name. This update changes job type sorting to respect the order for job types shown on the job type taxonomy page. Resolves CuBoulder/tiamat-theme#1368
----
+* * *
 
-- ### Fixes Slider block link color and special character rendering
-  [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1356
----
+-   ### Secondary menu button appearance rework
+    Resolves #1367.
+    Adds a new style for the buttons in the secondary menu.
 
-- ### Create developers-sandbox-ci.yml
-  Add new workflow
----
+* * *
 
-- ### Fix Preview Error
-  Image position needed checks for if the route was in preview or not for the proper node id.
-  
-  Resolves #1361
----
+-   ### Remove striptags render from mega menu desc
+    Resolves #1372.
+    Removes the render and strip tags from the mega menu link description
 
-- ### Removes padding below article title image header and changes to margin
-  [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1358
----
+* * *
+
+-   ### Mega menu changes for Description
+    Resolves #1348.
+    Changes the mega menu descriptions to take up the full width of its area.
+
+* * *
+
+-   ### Sorts by job type weight instead of alphabetical in people lists
+    [change] Previously, job type sorting on people lists was limited to alphabetical by job type name. This update changes job type sorting to respect the order for job types shown on the job type taxonomy page. Resolves CuBoulder/tiamat-theme#1368
+
+* * *
+
+-   ### Fixes Slider block link color and special character rendering
+    [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1356
+
+* * *
+
+-   ### Create developers-sandbox-ci.yml
+    Add new workflow
+
+* * *
+
+-   ### Fix Preview Error
+
+    Image position needed checks for if the route was in preview or not for the proper node id.
+
+    Resolves #1361
+
+* * *
+
+-   ### Removes padding below article title image header and changes to margin
+    [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1358
+
+* * *
 
 ## [20241002] - 2024-10-02
 
@@ -3473,7 +3487,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241002...HEAD
+[Unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241009...HEAD
+
+[20241009]: https://github.com/CuBoulder/tiamat-theme/compare/20241002...20241009
 
 [20241002]: https://github.com/CuBoulder/tiamat-theme/compare/20240925...20241002
 
