@@ -186,6 +186,12 @@
         <div class="ucb-main-nav-container ucb-secondary-menu-position-{{ ucb_secondary_menu_position == 'above' ? 'above' : 'inline container' }} ucb-button-{{ menu_button_color }}">
           {{ page.primary_menu }}
           {{ page.secondary_menu }}
+          <div class="ucb-mobile-footer-menu">
+            {{ drupal_menu('footer') }}
+          </div>
+          <div class="ucb-mobile-social-media-menu">
+            {{ drupal_menu('social-media-menu') }}
+          </div>
         </div>
       </section>
     </div>

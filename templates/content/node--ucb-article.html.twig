@@ -10,6 +10,9 @@
 {{ attach_library('boulder_base/ucb-related-articles') }}
 {# Added class to article class 'pageStyleCSS' to control page style #}
 
+{# Base Url #}
+{% set baseURL = url('<front>')|render|trim('/') %}
+
 {% set excludeCats = related_articles_exclude_categories %}
 {% set excludeTags = related_articles_exclude_tags %}
 
@@ -183,6 +186,7 @@
       {# Related Articles Block #}
       <div{{ create_attribute({
           class: ['container', 'ucb-related-articles-block'],
+          'data-baseurl' : baseURL,
           'data-loggedin': logged_in ? 'true' : 'false',
           'data-catsjson': content.field_ucb_article_categories|json_encode(constant('JSON_PRETTY_PRINT')),
           'data-tagsjson': content.field_ucb_article_tags|json_encode(constant('JSON_PRETTY_PRINT')),

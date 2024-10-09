@@ -77,30 +77,51 @@
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a {
     border-radius: 4px;
   }
-  .ucb-button-gold.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.is-active {
+  .ucb-button-gold.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg,
+  .ucb-button-gold.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a:not(.is-active) {
     background-color: #CFB87C;
     color: #000;
     transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
   }
- .ucb-button-blue.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.is-active {
+  .ucb-button-blue.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg,
+  .ucb-button-blue.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a:not(.is-active) {
     background-color: #0277BD;
     color: #FFF;
     transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
   }
-  .ucb-button-gray.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.is-active {
+  .ucb-button-gray.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg,
+  .ucb-button-gray.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a:not(.is-active) {
     background-color: #444;
     color: #fff;
     transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
   }
-  .ucb-button-gray.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link.is-active:hover {
+  .ucb-button-gray.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
+  .ucb-button-gray.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:not(.is-active):hover {
     background-color: #5e5e5e;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   }
 
-  .ucb-button-gold.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link.is-active:hover {
+  .ucb-button-gold.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
+  .ucb-button-gold.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:not(.is-active):hover {
     background-color: #d3be87;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   }
 
-  .ucb-button-blue.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link.is-active:hover {
+  .ucb-button-blue.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media .icon-bg:hover,
+  .ucb-button-blue.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.nav-link:not(.is-active):hover {
     background-color: #026dae;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  }
+  .ucb-button-gray.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.is-active,
+  .ucb-button-gold.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.is-active,
+  .ucb-button-blue.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.is-active {
+    background-color: #000 !important;
+    color: #fff !important;
+    transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+  }
+  .ucb-button-gray.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.is-active:hover,
+  .ucb-button-gold.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.is-active:hover,
+  .ucb-button-blue.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region li.menu-item a.is-active:hover {
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
   }
 }
