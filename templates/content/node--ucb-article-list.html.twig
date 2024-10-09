@@ -64,204 +64,72 @@
  *   is an administrator.
  *
  * @see template_preprocess_node()
- *
- * TODO :
- *  - Set output on Thumbnail to be reasonable size in Article schema
- *  - if no Thumbnail, get the image from the first included paragraph
- *  - clean up console log message
- *  - expose filters on the client side as requested
  */
 #}
 
 {{ attach_library('boulder_base/ucb-article-list') }}
 
-{# NEW #}
 {# Base Url #}
 {% set baseurlJSON = url('<front>')|render|trim('/') %}
 
-{# JSON API Endpoint information #}
-{% set articlesJSON = (url('<front>')|render|trim('/'))
-  ~ '/jsonapi/node/ucb_article'
-  ~ '?include[node--ucb_article]=uid,title,ucb_article_content,created,field_ucb_article_summary,field_ucb_article_categories,field_ucb_article_tags,field_ucb_article_thumbnail'
-  ~ '&include=field_ucb_article_thumbnail.field_media_image'
-  ~ '&fields[file--file]=uri,url'
-%}
-
-{# Filter on only published (status = true) content #}
-{% set PublishedFilter = '&filter[publish-check][condition][path]=status'
-  ~ '&filter[publish-check][condition][value]=1'
-  ~ '&filter[publish-check][condition][memberOf]=published'
-%}
-
 {# include and exclude options set by the user #}
-{% set includeCategories = [] %}
-{% set myCategories =
-  content.field_ucb_filter_by_category|render|striptags|trim|split(' ')
-%}
-{% set includeTags = [] %}
-{% set myTags =
-  content.field_ucb_filter_by_tag|render|striptags|trim|split(' ')
-%}
-{% set excludeCategories = '' %}
-{% set myExCategories =
-  content.field_ucb_exclude_category|render|striptags|trim|split(' ')
-%}
-{% set excludeTags = '' %}
-{% set myExTags =
-  content.field_ucb_exclude_tag|render|striptags|trim|split(' ')
-%}
+{% set includeCategories = '' %}
+{% set myCategories = content.field_ucb_filter_by_category|render|striptags|trim|split(' ') %}
 
-{# two passes to clear out the blank entries that are mysteriously added by default #}
+{% set includeTags = '' %}
+{% set myTags = content.field_ucb_filter_by_tag|render|striptags|trim|split(' ') %}
+
+{% set excludeCategories = '' %}
+{% set myExCategories = content.field_ucb_exclude_category|render|striptags|trim|split(' ') %}
+
+{% set excludeTags = '' %}
+{% set myExTags = content.field_ucb_exclude_tag|render|striptags|trim|split(' ') %}
+
+{# Process include categories and tags as comma-separated strings #}
 {% for item in myCategories %}
   {% if item %}
-    {% set includeCategories = includeCategories|merge([item]) %}
+    {% if loop.first %}
+      {% set includeCategories = (item|trim) %}
+    {% else %}
+      {% set includeCategories = includeCategories ~ ',' ~ (item|trim) %}
+    {% endif %}
   {% endif %}
 {% endfor %}
 
 {% for item in myTags %}
   {% if item %}
-    {% set includeTags = includeTags|merge([item]) %}
+    {% if loop.first %}
+      {% set includeTags = (item|trim) %}
+    {% else %}
+      {% set includeTags = includeTags ~ ',' ~ (item|trim) %}
+    {% endif %}
   {% endif %}
 {% endfor %}
 
+{# Process exclude categories and tags as comma-separated strings #}
 {% for item in myExCategories %}
   {% if item %}
-    {% if loop.last %}
-      {% set excludeCategories = excludeCategories ~ (item|trim) %}
+    {% if loop.first %}
+      {% set excludeCategories = (item|trim) %}
     {% else %}
-      {% set excludeCategories = excludeCategories ~ (item|trim) ~ ',' %}
+      {% set excludeCategories = excludeCategories ~ ',' ~ (item|trim) %}
     {% endif %}
   {% endif %}
 {% endfor %}
 
 {% for item in myExTags %}
   {% if item %}
-    {% if loop.last %}
-      {% set excludeTags = excludeTags ~ (item|trim) %}
+    {% if loop.first %}
+      {% set excludeTags = (item|trim) %}
     {% else %}
-      {% set excludeTags = excludeTags ~ (item|trim) ~ ',' %}
+      {% set excludeTags = excludeTags ~ ',' ~ (item|trim) %}
     {% endif %}
   {% endif %}
 {% endfor %}
 
-{# placeholder variables for our include and exclude filters, default to blank strings #}
-{% set IncludeFilter = '' %}
-{% set IncludeCategoryFilter = '' %}
-{% set IncludeTagsFilter = '' %}
-{% set ExcludeCategoryFilter = '' %}
-{% set ExcludeTagsFilter = '' %}
+{% set exposeCategory = content.field_ucb_expose_category|render|striptags|trim %}
+{% set exposeTag = content.field_ucb_expose_tag|render|striptags|trim %}
 
-{# Setup Include Category Filter using a logical OR between included category IDs #}
-{% if includeCategories|length %}
-  {% set includeGroupMembers = '' %}
-  {% for item in includeCategories %}
-    {% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-cat'
-      ~ (item|trim)
-      ~ '][condition][path]=field_ucb_article_categories.meta.drupal_internal__target_id'
-      ~ '&filter[filter-cat'
-      ~ (item|trim)
-      ~ '][condition][value]='
-      ~ (item|trim)
-      ~ '&filter[filter-cat'
-      ~ (item|trim)
-      ~ '][condition][memberOf]=cat-include'
-    %}
-  {% endfor %}
-  {% set IncludeCategoryFilter = '&filter[cat-include][group][conjunction]=OR'
-    ~ includeGroupMembers
-  %}
-{% endif %}
-
-{# Setup Include Tags Filter using a logical OR between included tag IDs #}
-{% if includeTags|length %}
-  {% set includeGroupMembers = '' %}
-  {% for item in includeTags %}
-    {% set includeGroupMembers = includeGroupMembers ~ '&filter[filter-tag'
-      ~ (item|trim)
-      ~ '][condition][path]=field_ucb_article_tags.meta.drupal_internal__target_id'
-      ~ '&filter[filter-tag'
-      ~ (item|trim)
-      ~ '][condition][value]='
-      ~ (item|trim)
-      ~ '&filter[filter-tag'
-      ~ (item|trim)
-      ~ '][condition][memberOf]=tag-include'
-    %}
-  {% endfor %}
-  {% set IncludeTagsFilter = '&filter[tag-include][group][conjunction]=OR'
-    ~ includeGroupMembers
-  %}
-{% endif %}
-
-{# check to see if we have both Categories and Tags to filter on #}
-{# if so... setup a logicial AND Between both include filters #}
-{% if IncludeCategoryFilter and IncludeTagsFilter %}
-  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
-    ~ PublishedFilter
-    ~ '&filter[include-group][group][conjunction]=AND'
-    ~ '&filter[include-group][group][memberOf]=published'
-    ~ IncludeCategoryFilter
-    ~ '&filter[cat-include][group][memberOf]=include-group'
-    ~ IncludeTagsFilter
-    ~ '&filter[tag-include][group][memberOf]=include-group'
-  %}
-  {# Otherwise default to either the Category filter or the Tag filter as defined #}
-{% elseif IncludeCategoryFilter %}
-  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
-    ~ '&filter[cat-include][group][memberOf]=published'
-    ~ PublishedFilter
-    ~ IncludeCategoryFilter
-  %}
-{% elseif IncludeTagsFilter %}
-  {% set IncludeFilter = '&filter[published][group][conjunction]=AND'
-    ~ '&filter[tag-include][group][memberOf]=published'
-    ~ PublishedFilter
-    ~ IncludeTagsFilter
-  %}
-
-{# no includeded Categories or Tags ... still need to filter on published articles #}
-{% else %}
-  {% set IncludeFilter = '&filter[status][value]=1' %}
-{% endif %}
-
-{# pagination filter #}
-{% set pageCount = 10 %}
-{% set pageCountFilter = '&page[limit]=' ~ pageCount %}
-
-{# sorting filter #}
-{% set sortFilter = '&sort[sort-created][path]=created&sort[sort-created][direction]=DESC' %}
-
-
-{# Check for Exclude Categories and setup the filter to exclude anything that matches "NOT IN SET" #}
-{# {% if excludeCategories|length %}
-  {% set excludeGroupMembers = "" %}
-  {% for item in excludeCategories %}
-     {% set excludeGroupMembers = excludeGroupMembers ~
-       '&filter[filter-excat][condition][value][' ~ loop.index ~ ']=' ~ item
-     %}
-  {% endfor %}
-  {% set ExcludeCategoryFilter =
-       '&filter[filter-excat][condition][path]=field_ucb_article_categories.meta.drupal_internal__target_id' ~
-       '&filter[filter-excat][condition][operator]=NOT%20IN' ~
-       excludeGroupMembers
-  %}
-{% endif %} #}
-{#
-{% if excludeCategories|length %}
-  {% set excludeGroupMembers = "" %}
-  {% for item in excludeCategories %}
-     {% set excludeGroupMembers = excludeGroupMembers ~
-       '&filter[filter-excat' ~ item ~'][condition][path]=field_ucb_article_categories.meta.drupal_internal__target_id' ~
-       '&filter[filter-excat' ~ item ~'][condition][operator]=%3C%3E' ~
-       '&filter[filter-excat' ~ item ~'][condition][value]=' ~ item ~
-       '&filter[filter-excat' ~ item ~'][condition][memberOf]=cat-exclude'
-     %}
-
-  {% endfor %}
-  {% set ExcludeCategoryFilter = "&filter[cat-exclude][group][conjunction]=AND" ~ excludeGroupMembers %}
-{% endif %} #}
-
-{# JSON API Filter logic #}
 <article{{ attributes.addClass('container', 'ucb-content-wrapper') }}>
   <h1{{ title_attributes.addClass('ucb-article-list-header', is_front ? 'visually-hidden') }}>
     {{ label }}
@@ -271,40 +139,18 @@
     <div class="ucb-article-list-body">
       {{ content.body }}
     </div>
-    <div{{ create_attribute({
+    <article-list{{ create_attribute({
       id: 'ucb-article-listing',
       class: 'ucb-article-list-container',
-      'data-jsonapi': articlesJSON ~ IncludeFilter ~ pageCountFilter ~ sortFilter,
-      'data-baseuri' : baseurlJSON,
-      'data-excats': excludeCategories,
-      'data-extags': excludeTags }) }}>
-      {# No Data message #}
-      <div id="ucb-al-no-results" class="ucb-list-msg ucb-no-data">
-        No articles were returned, please check your filters and try again.
-      </div>
-
-      {# dynamically loaded data goes here... #}
-      <div id="ucb-al-data"></div>
-
-      {# Loading message #}
-      <div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
-        <i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>
-      </div>
-
-      {# No more Data #}
-      <div id="ucb-al-end-of-data" class="ucb-list-msg ucb-end-of-results">
-        No more results matching your filters.
-      </div>
-
-      {# Error in the response from the API endpoint, display an error #}
-      <div id="ucb-al-error" class="ucb-list-msg ucb-error">
-        Error retrieving article list from the API endpoint.  Please try again later.
-      </div>
-      <div class="ucb-article-list-button-container">
-        <a id='ucb-el-load-more'class="ucb-article-list-button">
-          Load More
-        </a>
-      </div>
-    </div>
+      'base-uri' : baseurlJSON,
+      'include-categories' : includeCategories,
+      'include-tags' : includeTags,
+      'exclude-categories': excludeCategories,
+      'exclude-tags': excludeTags,
+      'expose-categories' : exposeCategory,
+      'expose-tags': exposeTag,
+      }) }}
+      >
+    </article-list>
   </div>
 </article>
