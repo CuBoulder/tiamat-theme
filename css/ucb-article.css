@@ -32,7 +32,7 @@ i.fa-regular.fa-calendar {
   line-height: 1em;
 }
 
-.ucb-article-category-icon, .ucb-article-tag-icon {
+.ucb-article-category-icon, .ucb-article-tag-icon, .ucb-article-issue-icon {
   background-color: #555555;
   color: #e7e7e7;
   padding: 6px;
