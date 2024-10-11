@@ -17,6 +17,7 @@
 .ucb-site-contact-info-footer-general {
   display: flex;
   flex-direction: column;
+  width: 100%;
   margin-right: 2em;
 }
 
