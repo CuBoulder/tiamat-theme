@@ -8,16 +8,26 @@
 {# Retrieve the image URL #}
 {% set image_url = file_url(content.field_media_image.0['#item'].entity.uri.value) %}
 
+{# Retrieve the alt attribute #}
+{% set alt_text = content.field_media_image.0['#item'].alt %}
+
 {# Access the photo description directly from content #}
 {% set field_items = content.field_media_image_caption['#items'] %}
 {% if field_items %}
   {% set photoDescription = field_items.0.value|render|striptags|trim %}
+{% elseif alt_text %}
+  {% set photoDescription = alt_text %}
 {% else %}
-  {% set photoDescription = '' %}
+  {% set photoDescription = "" %}
 {% endif %}
 
-<div class="col gallery-item">
+{# Manually add alignment classes if they are not being applied automatically #}
+{% set alignment_class = attributes.hasClass('align-left') or attributes.hasClass('align-right') ? '' : 'align-left' %}
+
+{% if attributes != "" %}
+<div {{ attributes.addClass(alignment_class, 'col', 'gallery-item') }}>
   <a href="{{ image_url }}" class="glightbox ucb-gallery-lightbox" data-gallery="gallery{{ content['#block_content'].id() }}" data-glightbox="description: {{ photoDescription }} ">
     <img class="ucb-colorbox-small" src="{{ image_url }}" alt="{{ photoDescription }}" />
   </a>
 </div>
+{% endif %}

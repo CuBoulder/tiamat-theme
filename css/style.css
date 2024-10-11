@@ -682,6 +682,22 @@ article .align-left .media-image-caption p {
   padding-right: 1em;
 }
 
+/**** Colorbox Image Overrides, these need some snowflake css because of how different they are ******/
+article .align-left .ucb-colorbox-small-square,
+article .align-left .ucb-colorbox-small-thumbnail,
+article .align-left .ucb-colorbox-small,
+article .align-left .ucb-colorbox-square{
+  margin-right: 1em;
+  padding-right: 0em;
+}
+article .align-right .ucb-colorbox-small-square,
+article .align-right .ucb-colorbox-small-thumbnail,
+article .align-right .ucb-colorbox-small,
+article .align-right .ucb-colorbox-square{
+  margin-left: 1em;
+  padding-left: 0em;
+}
+
 /* Adjusts list elements when a left-floated image (.align-left) is a preceeding sibling, aligns list indicators with other elements  */
 .align-left+ol,
 .align-left+ul {
