@@ -522,12 +522,17 @@ ul.ucb-main-menu.nav {
   font-size: 0.9rem;
 }
 
+.ucb-footer-bottom .block.bs-background-unstyled.container {
+  --bs-gutter-x: 0;
+}
+
 .ucb-footer-menu-region .block-menu-blocksocial-media-menu,
 .ucb-footer-menu-region .block-system-menu-blocksocial-media-menu {
   padding: 10px;
   display: flex;
   align-items: center;
 }
+
 .ucb-footer-menu-region .container {
   display: flex;
 }
