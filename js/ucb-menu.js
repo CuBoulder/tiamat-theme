@@ -8,6 +8,7 @@ for (let i = 0; i < belowContentRegion.length; i++) {
   totalMenus =  allBelowContentMenus.length;
   for (let j = 0; j < allBelowContentMenus.length; j++) {
     allBelowContentMenus[j].classList.add("ucb-menu-column-" + totalMenus);
+  allBelowContentMenus[j].parentElement.classList.add("ucb-menu-column-wrapper");
   }
 }
 // Add columns for Footer Menus
@@ -18,6 +19,7 @@ for (let i = 0; i < footerRegion.length; i++) {
   totalMenus =  footerMenus.length;
   for (let j = 0; j < footerMenus.length; j++) {
     footerMenus[j].classList.add("ucb-menu-column-" + totalMenus);
+    footerMenus[j].parentElement.classList.add("ucb-menu-column-wrapper");
   }
 }
 
