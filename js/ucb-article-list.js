@@ -128,8 +128,6 @@
 
         // Update the next URL if available, otherwise set it to null
         this._nextURL = data['links']?.next?.href || null;
-        console.log(articles)
-        console.log(this._nextURL);
         return { data: articles, included: included };
       } catch (error) {
         console.error(ArticleListProvider.errorMessage);
