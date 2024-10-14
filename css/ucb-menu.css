@@ -425,6 +425,14 @@ width: fit-content;
 	display: none;
 }
 
+.ucb-menu-column-2,
+.ucb-menu-column-3,
+.ucb-menu-column-4,
+.ucb-menu-column-5,
+.ucb-menu-column-6 {
+  padding-right: 5px;
+}
+
 .ucb-menu-column-1 {
   min-width: 100%;
   width: 100%;
@@ -494,5 +502,6 @@ width: fit-content;
     min-width: 100%;
     width: 100%;
     max-width: 100%;
+    padding-right: 0px;
   }
 }
