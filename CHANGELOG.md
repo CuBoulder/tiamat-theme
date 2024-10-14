@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article List Page: Adds user-accessible Category and Tag filters
+  Adds two new toggles to the Article List Page settings, which will expose filters on Categories and Tags for page visitors. This will allow visitors to the page to further filter Articles.
+  
+  If an Article List Page has "Include" filters set on Category and/or Tag terms, only those Included terms appear as filter options in the dropdown presented to the user. If a term is set to be hidden, that term will not appear in the exposed filter, even if it's being used to initially filter the Articles.
+  
+  Includes:
+  - `tiamat-theme` => https://github.com/CuBoulder/tiamat-theme/pull/1387
+  - `tiamat-custom-entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/180
+  
+  Resolves #1261 
+---
+
 ## [20241009] - 2024-10-09
 
 -   ### Only footer menu in the mobile menu fix.
