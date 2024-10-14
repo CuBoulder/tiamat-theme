@@ -9,6 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article Aggregators: Fixes Summary Generation of handling special characters and HTML entities. Additional Article List Block Image fixes.
+  ### Fixes Summary Generation Process on Article Aggregators
+  Previously when an Article aggregator block had a missing `summary` field, a summary using the `body` field would be generated as a substitution it could result in HTML entities and special characters showing up incorrectly, such as `&nbsp` and `&amp`.  This has been corrected.
+  
+  This affects the following blocks: `Article List Block`, `Article Grid Block`, `Article Feature Block` as well as the `Article List Page` Content type. 
+  
+  Resolves #1386
+  Resolves #1351 
+  
+  ---
+  
+  ### Article List Blocks set to 'Feature Wide' display image corrected
+  
+  Previously `Article List Blocks` set to Feature Wide Image display had a height limitation, which would display the wide image style incorrectly. This has been adjusted to maintain proportions, mirroring D7
+  
+  Resolves #1390 
+  
+---
+
 - ### Article List Page: Adds user-accessible Category and Tag filters
   Adds two new toggles to the Article List Page settings, which will expose filters on Categories and Tags for page visitors. This will allow visitors to the page to further filter Articles.
   

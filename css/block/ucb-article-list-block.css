@@ -42,7 +42,7 @@
 }
 
 .ucb-article-card-img-wide {
-  height: 500px !important;
+  /* height: 500px !important; */
   object-fit: cover !important;
   margin-bottom: 10px;
   width: 100%;
