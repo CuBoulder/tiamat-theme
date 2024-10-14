@@ -595,26 +595,48 @@
       return articleRow;
     }
     // Helper function to fetch the Article body if no summary and do the processing
-    async getArticleParagraph(id) {
-      if (!id) {
-        return '';
-      }
-      try {
-        const response = await fetch(`${this._baseURI}/jsonapi/paragraph/article_content/${id}`);
-        const data = await response.json();
-        if (!data.data.attributes.field_article_text) return '';
-        let htmlStrip = data.data.attributes.field_article_text.processed.replace(/<\/?[^>]+(>|$)/g, '');
-        let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, '');
-        let trimmedString = lineBreakStrip.substr(0, 250);
-        if (trimmedString.length > 100) {
-          trimmedString = trimmedString.substr(0, Math.min(trimmedString.length, trimmedString.lastIndexOf(' ')));
-        }
-        return trimmedString + '...';
-      } catch (error) {
-        console.error('Error fetching Article Paragraph:', error);
-        return '';
-      }
+// Fixes special characters such as & and nbsp
+decodeHtmlEntities(text) {
+  const parser = new DOMParser();
+  const doc = parser.parseFromString(text, "text/html");
+  return doc.documentElement.textContent;
+}
+
+// Responsible for fetching & processing the body of the Article if no summary provided
+async getArticleParagraph(id) {
+  if (!id) {
+    return "";
+  }
+
+  try {
+    const response = await fetch(
+      `${this._baseURI}/jsonapi/paragraph/article_content/${id}`
+    );
+    const data = await response.json();
+    if (!data.data.attributes.field_article_text) return ""; //  needed for external articles
+    let htmlStrip = data.data.attributes.field_article_text.processed.replace(
+      /<\/?[^>]+(>|$)/g,
+      ""
+    );
+    let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
+    let decodedString = this.decodeHtmlEntities(lineBreakStrip); // Decode HTML entities here
+    let trimmedString = decodedString.substring(0, 250);
+
+    if (trimmedString.length > 100) {
+      trimmedString = trimmedString.substring(
+        0,
+        Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
+      );
     }
+    return trimmedString + "...";
+  } catch (Error) {
+    console.error(
+      "There was an error fetching Article Paragraph from the API - Please try again later."
+    );
+    console.error(Error);
+    return ""; // Return an empty string in case of error
+  }
+}
 
     // Various toggles
     toggleLoading(show) {
