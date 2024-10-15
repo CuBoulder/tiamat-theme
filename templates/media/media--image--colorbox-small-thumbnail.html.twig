@@ -1,9 +1,9 @@
 {{ attach_library('boulder_base/colorbox-image') }}
 
-{% set imageStyle = 'image_style-default' %}
+{# {% set imageStyle = 'image_style-default' %}
 {% if content.field_media_image.0['#image_style']|render %}
   {% set imageStyle = 'image_style-' ~ content.field_media_image.0['#image_style']|render %}
-{% endif %}
+{% endif %} #}
 
 {# Retrieve the image URL #}
 {% set image_url = file_url(content.field_media_image.0['#item'].entity.uri.value) %}
@@ -22,12 +22,10 @@
 {% endif %}
 
 {# Manually add alignment classes if they are not being applied automatically #}
-{% set alignment_class = attributes.hasClass('align-left') or attributes.hasClass('align-right') ? '' : 'align-left' %}
+{% set alignment_class = alignment is defined and alignment in ['align-left', 'align-right'] ? alignment : 'align-left' %}
 
-{% if attributes != "" %}
 <div {{ attributes.addClass(alignment_class, 'col', 'gallery-item') }}>
   <a href="{{ image_url }}" class="glightbox ucb-gallery-lightbox" data-gallery="gallery{{ content['#block_content'].id() }}" data-glightbox="description: {{ photoDescription }} ">
     <img class="ucb-colorbox-small-thumbnail" src="{{ image_url }}" alt="{{ photoDescription }}" />
   </a>
 </div>
-{% endif %}
