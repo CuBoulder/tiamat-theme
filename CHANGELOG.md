@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Colorbox Image Styles: Allows 'alt' tag fallback for Caption, Fixes Floats
+  These changes affect `Colorbox Small - Square`, `Colorbox Small - Thumbnail`, `Colorbox Square`, and `Colorbox Small` image styles.
+  
+  1. Previously the 4 Colorbox image styles would only use a caption for the lower description of the click to zoom functionality  that appears when zoomed. We have enabled a fallback such that if no caption is added, it will use the alt tag of the image. If no alt tag exists either, it will be blank. Resolves #1393 
+  2. The Colorbox Image float left and float right were not being applied due to these being 'snowflake' images using a different template to enable the click to zoom functionality. This has been corrected and should float left or right as expected. Resolves #1379 
+---
+
 - ### Article Aggregators: Fixes Summary Generation of handling special characters and HTML entities. Additional Article List Block Image fixes.
   ### Fixes Summary Generation Process on Article Aggregators
   Previously when an Article aggregator block had a missing `summary` field, a summary using the `body` field would be generated as a substitution it could result in HTML entities and special characters showing up incorrectly, such as `&nbsp` and `&amp`.  This has been corrected.
