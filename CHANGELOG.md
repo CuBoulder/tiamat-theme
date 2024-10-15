@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Menu Styles for Footer and After Content regions
+  Resolves #1120.
+  Adds styling for the footer and after content regions for menus to be added.
+---
+
 - ### Updates linter workflow
   Updates the linter workflow to use the new parent workflow in action-collection.
   

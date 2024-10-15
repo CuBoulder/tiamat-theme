@@ -337,12 +337,6 @@ ul.ucb-main-menu.nav {
   margin: 2px 0 0 0;
 }
 
-.ucb-footer-top .ucb-menu a.nav-link {
-  color: white;
-  font-size: 1.25em;
-  padding: 0.5rem;
-  border-radius: 0.2rem;
-}
 
 .mobile-menu-toggle {
   display: none;
@@ -471,9 +465,6 @@ ul.ucb-main-menu.nav {
   text-align: center;
 }
 
-.ucb-footer-top .ucb-menu a.nav-link:hover {
-  box-shadow: 0 2px 5px rgba(0 0 0 /30%);
-}
 
 .ucb-footer-nav-block {
   display: flex;
@@ -1211,4 +1202,8 @@ h2.clear-margin,h3.clear-margin,h4.clear-margin,h5.clear-margin,h6.clear-margin,
 
 .ucb-basic-page-body {
   display: inline-block;
+}
+
+.footer-columns {
+  display: flex;
 }
