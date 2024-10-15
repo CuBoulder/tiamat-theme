@@ -1,0 +1,9 @@
+name: Lint Code Base
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+jobs:
+  lint:
+    uses: CuBoulder/action-collection/.github/workflows/lint.yml@main

@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updates linter workflow
+  Updates the linter workflow to use the new parent workflow in action-collection.
+  
+  CuBoulder/action-collection#7
+  
+  Sister PR in: All the things
+---
+
 - ### Corrects minor layout problems in the site footer
   This update:
   
