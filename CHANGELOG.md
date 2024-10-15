@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Corrects minor layout problems in the site footer
+  This update:
+  
+  - [bug, severity:minor] Forces Site Contact Info Footer block to occupy the full available width. Resolves CuBoulder/tiamat-theme#1394
+  - [bug, severity:minor] Fixes alignment of styled blocks in the Site Information region. Resolves CuBoulder/tiamat-theme#1395
+---
+
 - ### Issue Fixes: "Link to Issue" on Articles tag style, Issue page images, Latest Issues Block
   ### Article Page
   The tag showing that an Article appears in an Issue (below Categories and Tags) on Article pages previously had the icon appearing differently than the Category and Tag icons due to missing CSS. This has been corrected. (You will need to link an existing Issue to an Article to test via the 'Link To Issue' tab)
