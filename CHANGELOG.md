@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Issue Fixes: "Link to Issue" on Articles tag style, Issue page images, Latest Issues Block
+  ### Article Page
+  The tag showing that an Article appears in an Issue (below Categories and Tags) on Article pages previously had the icon appearing differently than the Category and Tag icons due to missing CSS. This has been corrected. (You will need to link an existing Issue to an Article to test via the 'Link To Issue' tab)
+  
+  ### Issue Pages
+  Previously, images placed in the footer (or anywhere else for that matter) on an Issue page were showing up at 100% sizing due to not specific enough CSS being applied to all images. This has been corrected.
+  
+  ### Latest Issues Block
+  We have resized the images of Issue covers that appear in the `Latest Issue` block to a larger size, mirroring the D7 version where each card takes up 25% of the horizontal container.
+  
+  Resolves #1382 
+  Resolves #1383 
+  Resolves #1384 
+---
+
 - ### Colorbox Image Styles: Allows 'alt' tag fallback for Caption, Fixes Floats
   These changes affect `Colorbox Small - Square`, `Colorbox Small - Thumbnail`, `Colorbox Square`, and `Colorbox Small` image styles.
   
