@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article Aggregators: Adds Node ID fallback for Nodes with No Alias
+  Previously there was no fallback setting on Aggregators to handle `Article` pages using `/node/#`. This could happen in situations where pathauto patterns had been turned off, and no url alias had been set. This lack of a fallback resulted in broken Article Aggregator block / page renders or broken links to these Articles. This has been corrected so both aliased and non-aliased Article pages will display with correct links for these pages across all the Content types.
+  
+  This change affects `Article List Page`, `Article List Block`, `Article Grid Block`, `Article Feature Block`, `Related Articles Block`, `Article by Person Block`, `Article Slider Block`. 
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1410
+---
+
 - ### Google Translate: Adds Japanese and Tibetan language options to sites
   Resolves https://github.com/CuBoulder/tiamat-theme/issues/1409
 ---

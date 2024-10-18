@@ -32,7 +32,7 @@ class PersonArticleList extends HTMLElement {
         // Iterate over each Article
         data.data.map(item=>{
           let title = item.attributes.title;
-          let link = item.attributes.path.alias;
+          let link = item.attributes.path.alias ? item.attributes.path.alias : `/node/${item.attributes.drupal_internal__nid}`;
 
         // Create an Article Object for programatic rendering
           const article = {

@@ -500,7 +500,10 @@
           day: 'numeric',
         });
         const title = item.attributes.title;
-        const link = `${this._baseURI}${item.attributes.path.alias}`;
+        // If no path alias set, use defaults
+        const path = item.attributes.path.alias ? item.attributes.path.alias : `/node/${item.attributes.drupal_internal__nid}`;
+
+        const link = `${this._baseURI}${path}`;
 
         // Return article row
         return this.createArticleRow(title, link, date, body, imageSrc);

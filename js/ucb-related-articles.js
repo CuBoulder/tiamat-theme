@@ -49,7 +49,7 @@ const baseURL = relatedArticlesBlock ? relatedArticlesBlock.getAttribute('data-b
 
 				let thisArticleCats = article.relationships.field_ucb_article_categories.data
 					let thisArticleTags = article.relationships.field_ucb_article_tags.data
-					let urlCheck = article.attributes.path.alias;
+					let urlCheck = article.attributes.path.alias ? article.attributes.path.alias : `/node/${article.attributes.drupal_internal__nid}`;
 					let toInclude = true;
 					//remove excluded category & tagss
 					if(thisArticleTags.length){ // if there are categories
@@ -84,7 +84,7 @@ const baseURL = relatedArticlesBlock ? relatedArticlesBlock.getAttribute('data-b
 						})
 					}
 
-				if(existingIds.includes(article.id) || article.attributes.path.alias == window.location.pathname ){
+				if(existingIds.includes(article.id) || urlCheck == window.location.pathname ){
 					toInclude = false
 				// filter on categories
 				}
@@ -130,7 +130,8 @@ const baseURL = relatedArticlesBlock ? relatedArticlesBlock.getAttribute('data-b
 				let articleCard = document.createElement('div')
 				articleCard.classList = "ucb-article-card col-sm-12 col-md-6 col-lg-4"
 				let title = article.article.attributes.title;
-				let link = article.article.attributes.path.alias;
+				let link = article.article.attributes.path.alias ? article.article.attributes.path.alias : `/node/${article.attributes.drupal_internal__nid}`;
+
 						// if no thumbnail, show no image
 						if (!article.article.relationships.field_ucb_article_thumbnail.data) {
 							image = "";
@@ -309,9 +310,9 @@ const baseURL = relatedArticlesBlock ? relatedArticlesBlock.getAttribute('data-b
 				let returnedArticles = data.data
 				// Create an array of options to render with additional checks
 				returnedArticles.map((article)=> {
-					let thisArticleCats = article.relationships.field_ucb_article_categories.data
-					let thisArticleTags = article.relationships.field_ucb_article_tags.data
-					let urlCheck = article.attributes.path.alias;
+					let thisArticleCats = article.relationships.field_ucb_article_categories.data;
+					let thisArticleTags = article.relationships.field_ucb_article_tags.data;
+					let urlCheck = article.attributes.path.alias ? article.attributes.path.alias : `/node/${article.attributes.drupal_internal__nid}`;
 					let toInclude = true;
 
 					// If article is external,
@@ -360,8 +361,10 @@ const baseURL = relatedArticlesBlock ? relatedArticlesBlock.getAttribute('data-b
 				})
 
 				// Remove current article from those availabile in the block
+
 				articleArrayWithScores.filter((article)=>{
-					if(article.article.attributes.path.alias == window.location.pathname){
+          let urlCheck = article.article.attributes.path.alias ? article.article.attributes.path.alias : `/node/${article.article.attributes.drupal_internal__nid}`;
+					if(urlCheck == window.location.pathname){
 						articleArrayWithScores.splice(articleArrayWithScores.indexOf(article),1)
 					} else {
 						return article;
@@ -406,7 +409,8 @@ const baseURL = relatedArticlesBlock ? relatedArticlesBlock.getAttribute('data-b
 			let articleCard = document.createElement('div')
 			articleCard.classList = "ucb-article-card col-sm-12 col-md-6 col-lg-4"
 			let title = article.article.attributes.title;
-			let link = article.article.attributes.path.alias;
+
+			let link = article.article.attributes.path.alias ? article.article.attributes.path.alias : `/node/${article.article.attributes.drupal_internal__nid}`;
 					// if no thumbnail, show no image
 					if (!article.article.relationships.field_ucb_article_thumbnail.data) {
 						image = "";

@@ -106,9 +106,12 @@ class ArticleGridBlockElement extends HTMLElement {
               ]
             : "";
 
+          // If no path alias set, use defaults
+          const path = item.attributes.path.alias ? item.attributes.path.alias : `/node/${item.attributes.drupal_internal__nid}`;
+
           return {
             title: item.attributes.title,
-            link: this._baseURI + item.attributes.path.alias,
+            link: this._baseURI + path,
             image: imageSrc,
             date: new Date(item.attributes.created).toLocaleDateString(
               "en-us",
