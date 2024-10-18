@@ -111,9 +111,12 @@ class ArticleListBlockElement extends HTMLElement {
               ]
             : "";
 
-          return {
+            // If no path alias set, use defaults
+            const path = item.attributes.path.alias ? item.attributes.path.alias : `/node/${item.attributes.drupal_internal__nid}`;
+
+            return {
             title: item.attributes.title,
-            link: this._baseURI + item.attributes.path.alias,
+            link: this._baseURI + path,
             image: imageSrc,
             imageWide: imageSrcWide,
             date: new Date(item.attributes.created).toLocaleDateString(
