@@ -39,3 +39,27 @@ for (let i = 0; i < stickyMenu.length; i++) {
     allMegaMenus[j].removeAttribute("aria-controls");
   }
 }
+
+// Disable Footer Menu Mega Menus
+const footerMenus = document.getElementsByClassName("ucb-footer-top");
+for (let i = 0; i < footerMenus.length; i++) {
+  const allMegaMenus =  footerMenus[i].getElementsByClassName("ucb-mega-menu-outer-link");
+  for (let j = 0; j < allMegaMenus.length; j++) {
+    allMegaMenus[j].removeAttribute("data-bs-toggle");
+    allMegaMenus[j].removeAttribute("data-bs-target");
+    allMegaMenus[j].removeAttribute("aria-expanded");
+    allMegaMenus[j].removeAttribute("aria-controls");
+  }
+}
+
+// Disable Below Content Menu Mega Menus
+const belowContentMenus = document.getElementsByClassName("ucb-below-content-region");
+for (let i = 0; i < belowContentMenus.length; i++) {
+  const allMegaMenus =  belowContentMenus[i].getElementsByClassName("ucb-mega-menu-outer-link");
+  for (let j = 0; j < allMegaMenus.length; j++) {
+    allMegaMenus[j].removeAttribute("data-bs-toggle");
+    allMegaMenus[j].removeAttribute("data-bs-target");
+    allMegaMenus[j].removeAttribute("aria-expanded");
+    allMegaMenus[j].removeAttribute("aria-controls");
+  }
+}
