@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Google Translate: Adds Japanese and Tibetan language options to sites
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1409
+---
+
 ## [20241017] - 2024-10-17
 
 - ### Menu Styles for Footer and After Content regions
