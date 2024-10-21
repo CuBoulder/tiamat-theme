@@ -1,10 +1,28 @@
+{#
+/**
+ * @file Contains the template to display the search box.
+ *
+ * The search box is shown by opening the search modal via the search icon on
+ * the top left of the page.
+ */
+#}
 {{ attach_library('boulder_base/ucb-search-box') }}
 <div class="ucb-search-box" role="search">
-  <form action="{{ site_search.0.url }}" method="get">
+  <form{{ create_attribute({ method: 'get', action: site_search.0.url }) }}>
     <div class="ucb-search-box-inputs">
       <div class="ucb-search-input-text">
         <label for="ucb-search-text-field" class="visually-hidden">Enter the terms you wish to search for.</label>
-        <input id="ucb-search-text-field" placeholder="{{ site_search.0.placeholder }}" type="search" name="{{ site_search.0.parameter ?? 'keys' }}" value="" size="15" maxlength="1024">
+        <input{{
+          create_attribute({
+            id: 'ucb-search-text-field',
+            placeholder: site_search.0.placeholder,
+            type: 'search',
+            name: site_search.0.parameter ?? 'keys',
+            value: '',
+            size: '15',
+            maxlength: '1024'
+          })
+        }}>
       </div>
       <div class="ucb-search-input-submit">
         <input type="submit" value="Search">
@@ -14,7 +32,18 @@
       <div class="ucb-search-box-options">
         {% for index, search in site_search %}
           <div>
-            <input {{ index == 0 ? 'checked ' }}id="search-{{ search.name }}" class="me-1" name="search-box-option" type="radio" value="{{ search.name }}" data-placeholder="{{ search.placeholder }}" data-parameter="{{ search.parameter ?? 'keys' }}" data-action="{{ search.url }}"> <label for="search-{{ search.name }}">{{ search.label }}</label>
+            <input{{
+              create_attribute({
+                id: 'search-' ~ search.name,
+                name: 'search-box-option',
+                type: 'radio',
+                checked: index == 0 ? '' : null,
+                value: search.name,
+                'data-placeholder': search.placeholder,
+                'data-parameter': search.parameter ?? 'keys',
+                'data-action': search.url
+              })
+            }}> <label{{ create_attribute({ for: 'search-' ~ search.name }) }}>{{ search.label }}</label>
           </div>
         {% endfor %}
       </div>

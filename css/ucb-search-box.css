@@ -12,7 +12,6 @@
   margin-right: .25rem;
 }
 
-
 .ucb-search-box .ucb-search-box-links ul li:not(:first-child):before {
   display: inline-block;
   content: '\2022';
@@ -33,6 +32,7 @@
 
 .ucb-search-box .ucb-search-box-options label,
 .ucb-search-box .ucb-search-input-submit input {
+  display: inline-block;
   font-size: .9em;
   font-weight: bold;
 }
@@ -94,5 +94,5 @@
 
 .ucb-search-box .ucb-search-input-submit input:hover,
 .ucb-search-box .ucb-search-input-submit input:focus {
-    background-color: #a6a6a6;
+  background-color: #a6a6a6;
 }
