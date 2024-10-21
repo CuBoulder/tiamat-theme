@@ -16,7 +16,6 @@
   ]
 %}
 
-
 {% block paragraph %}
 	<div{{attributes.addClass(classes)}}>
 		<h2>{{ content.field_newsletter_section_title }}</h2>
@@ -24,7 +23,6 @@
 		{% if logged_in == 'true' %}
 				{% for key, item in paragraph.field_newsletter_section_select %}
 				{%  if key|first != '#' %}
-				{# TO DO : need to fix for user made content #}
 					{% if not item.entity.field_newsletter_article_select.entity.isPublished() %}
 						{% if item.entity.field_newsletter_article_select.entity.bundle() == 'ucb_article' %}
 						<p class="ucb-article-unpublished"> Section Content Warning: {{ item.entity.field_newsletter_article_select.entity.title.value|render|striptags|trim }} is unpublished. </p>
@@ -33,6 +31,7 @@
 				{% endif %}
 			{% endfor %}
 		{% endif %}
+    {# Feature #}
 		{% if paragraph.field_newsletter_section_style.value is same as("0") %}
 			{% for key, item in paragraph.field_newsletter_section_select %}
 				{%  if key|first != '#' %}
@@ -106,6 +105,7 @@
 				{% endif %}
 			{% endfor %}
 		{% else %}
+    {# Teaser #}
 			<div class="row row-content">
 				{% for key, item in paragraph.field_newsletter_section_select %}
 					{%  if key|first != '#' %}
@@ -115,18 +115,19 @@
 							  <div class="teaser-article-img px-2">
 								<img
 								src="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render }}"/>
-								{# Code to render selected article content (!thumbnail) #}
+								</div>
+                {# Code to render selected article content (!thumbnail) #}
 							{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render %}
 							<div class="teaser-article-img px-2">
               <img
 								src="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render }}"/>
 								{# Code to render user made content #}
-							{% elseif item.entity.field_newsletter_content_image.entity.field_media_image.alt|render %}
+							</div>
+              {% elseif item.entity.field_newsletter_content_image.entity.field_media_image.alt|render %}
 							<div class="teaser-article-img px-2">
               <img src="{{ item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}" alt="{{ item.entity.field_newsletter_content_image.entity.field_media_image.alt|render }}"/>
+              </div>
               {% endif %}
-            </div>
-
 
 							{# Code to render selected article title/url #}
 							{% if item.entity.field_newsletter_article_select.entity.title.value|render %}

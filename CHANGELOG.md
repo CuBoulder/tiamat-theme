@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter (Web Version): Fixes desktop version display
+  - Corrects an issue where a certain number of `Teaser` sections and content items with images could cause the section to "break out" of the parent container and get displayed pinned to the left, due to an error in the html template that would close the section too early if specific conditions were met.
+  - If there is only one content item in a Teaser section, it will take up 100% of the space. Otherwise they will fall side by side taking up 50% of the space. This not working was also partially attributed to the above error.
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1354
+---
+
 - ### Article Aggregators: Adds Node ID fallback for Nodes with No Alias
   Previously there was no fallback setting on Aggregators to handle `Article` pages using `/node/#`. This could happen in situations where pathauto patterns had been turned off, and no url alias had been set. This lack of a fallback resulted in broken Article Aggregator block / page renders or broken links to these Articles. This has been corrected so both aliased and non-aliased Article pages will display with correct links for these pages across all the Content types.
   
