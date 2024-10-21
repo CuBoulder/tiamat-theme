@@ -10,7 +10,15 @@
 }
 
 .ucb-article-author-name {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   font-weight: 700;
+}
+
+.ucb-article-author-name a,
+.ucb-article-author-name span {
+  display: block;
 }
 
 i.fa-regular.fa-calendar {
@@ -129,10 +137,6 @@ i.fa-regular.fa-calendar {
   border-bottom: 1px solid transparent;
   padding-top: 20px;
   margin-bottom: 20px;
-}
-
-.ucb-article-author-name span:not(:last-of-type):after {
-  content: ",";
 }
 
 .backgroundTitleDiv {

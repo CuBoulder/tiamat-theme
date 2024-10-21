@@ -1,0 +1,28 @@
+{#
+/**
+ * @file Contains the template to display the Article node's Byline field.
+ */
+#}
+{% for index, item in items %}
+  {% set byline_entity = item.content['#entity'] %}
+  {% if byline_entity.field_author_person_page|length > 0 %}
+    {% set author_person_page_entity = byline_entity.field_author_person_page.0.entity %}
+    {% if author_person_page_entity %}
+      {% set url = url('entity.node.canonical', { 'node': author_person_page_entity.id() }) %}
+      {% if index != 0 %}
+        <span>,&nbsp;</span>
+      {% endif %}
+      <a{{ create_attribute({ href: url|render }) }}>{{ byline_entity.name.value }}</a>
+    {% else %}
+      {% if index != 0 %}
+        <span>,&nbsp;</span>
+      {% endif %}
+      <span>{{ byline_entity.name.value }}</span>
+    {% endif %}
+  {% else %}
+    {% if index != 0 %}
+      <span>,&nbsp;</span>
+    {% endif %}
+    <span>{{ byline_entity.name.value }}</span>
+  {% endif %}
+{% endfor %}
