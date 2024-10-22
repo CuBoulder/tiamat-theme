@@ -104,7 +104,12 @@
   align-items: center;
 }
 
-.form-submit-btn {
+.article-list-filter-form .form-submit-btn{
+  margin-right: 10px;
+}
+
+
+.article-list-filter-form .form-submit-btn, .article-list-filter-form .form-reset-btn {
   font-size: 11px;
   font-weight: 500;
   box-shadow: 0 1px 2px rgb(0 0 0 / 20%);

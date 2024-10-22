@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article List Page: Adds Reset button to Exposed Article List Filters and Minor Bug/QoL Fixes
+  - Adds a Reset button to the user-accessible filters for Category and Tag on an Article List Page that will reset the component to the initial state
+  - Fixes a bug that could present when clicking Apply Filters with 'All Category' and 'All Tags' selected that could bring in additional outside Terms from what the component initialized with and originally filtered on. This seemed to happen if you clicked Apply Filters right as the component loaded, but has been corrected.
+  - Adds an error message for `No Results Found` if the provider returns any number of Articles with filters applied, but all those results get filtered out in the exclusion process. Previously there was not a case built for this with the new filters and a user could be presented with a blank component.
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1406
+---
+
 - ### Adds missing commas and spaces between authors in article byline
   [bug, severity:minor] An issue existed where commas and spaces wouldn't be added between multiple authors in an article byline. This update resolves the issue. Resolves CuBoulder/tiamat-theme#1418
 ---

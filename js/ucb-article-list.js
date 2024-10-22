@@ -145,15 +145,19 @@
     constructor() {
       super();
       this._baseURI = this.getAttribute('base-uri');
-      this._includeCategories = this.getAttribute('include-categories')
+      // Store the initial values for resetting to 'All'
+      this._initialIncludeCategories = this.getAttribute('include-categories')
         ? this.getAttribute('include-categories').split(',').map(Number)
         : [];
+      this._initialIncludeTags = this.getAttribute('include-tags')
+        ? this.getAttribute('include-tags').split(',').map(Number)
+        : [];
+
+      this._includeCategories = [...this._initialIncludeCategories]; // Set the current categories to the initial state
       this._excludeCategories = this.getAttribute('exclude-categories')
         ? this.getAttribute('exclude-categories').split(',').map(Number)
         : [];
-      this._includeTags = this.getAttribute('include-tags')
-        ? this.getAttribute('include-tags').split(',').map(Number)
-        : [];
+      this._includeTags = [...this._initialIncludeTags]; // Set the current tags to the initial state
       this._excludeTags = this.getAttribute('exclude-tags')
         ? this.getAttribute('exclude-tags').split(',').map(Number)
         : [];
@@ -178,7 +182,7 @@
       // Article List Content
       this._contentElement = document.createElement('div');
       this._contentElement.className = 'article-list';
-
+      // Only generate the filters/buttons if something is exposed
       if (this._exposeCategory || this._exposeTag) {
         this.generateFilterForm();
         this._filterFormElement.style.display = 'flex';
@@ -339,16 +343,46 @@
       filterButton.onclick = this.applyFilters.bind(this);
 
       this._filterFormElement.appendChild(filterButton);
+
+      // Reset button
+      const resetButton = document.createElement('button');
+      resetButton.type = 'button';
+      resetButton.className = 'form-reset-btn';
+      resetButton.textContent = 'Reset Filters';
+      resetButton.onclick = () => {
+        // Reset dropdowns to default (All)
+        if(this._exposeCategory){
+          document.getElementById('category-filter').value = '';
+        }
+        if(this._exposeTag){
+          document.getElementById('tag-filter').value = '';
+        }
+
+        // Automatically apply default filters after reset
+        this.applyFilters();
+      };
+      this._filterFormElement.appendChild(resetButton);
     }
 
     // Reload component using new term filters, force re-render
     applyFilters() {
       const selectedCategory = document.getElementById('category-filter')?.value || '';
       const selectedTag = document.getElementById('tag-filter')?.value || '';
+      // If the user selects the "All Categories" option, revert to the initial includeCategories
+      if (selectedCategory === '') {
+        this._includeCategories = [...this._initialIncludeCategories];
+      } else {
+        this._includeCategories = [Number(selectedCategory)];
+      }
 
-      this._includeCategories = selectedCategory ? [Number(selectedCategory)] : [];
-      this._includeTags = selectedTag ? [Number(selectedTag)] : [];
+      // If the user selects the "All Tags" option, revert to the initial includeTags
+      if (selectedTag === '') {
+        this._includeTags = [...this._initialIncludeTags];
+      } else {
+        this._includeTags = [Number(selectedTag)];
+      }
 
+      // Rebuild the provider with updated filters
       this._provider = new ArticleListProvider(
         this._baseURI,
         this._includeCategories,
@@ -356,8 +390,11 @@
         this._excludeCategories,
         this._excludeTags
       );
-      this.loadArticles(true); // We need to pass true here to kick off the re-render instead of just adding addtl articles
+
+      // Load the articles based on the new filters
+      this.loadArticles(true); // Pass true to clear existing content and re-render with new filters
     }
+
 
     async loadArticles(clearContent = true) {
       const url = this._provider.endpoint;
@@ -511,13 +548,25 @@
 
       let results = await Promise.all(promises);
 
-      // Filter out undefined results and render the rest
-      results.filter((result) => result !== undefined).forEach((result) => {
-        let articleElement = document.createElement('article');
-        articleElement.className = 'ucb-article-card-container';
-        articleElement.appendChild(result);
-        this._contentElement.append(articleElement);
-      });
+      // Filter out undefined results (those excluded) and check if there are any remaining
+      const filteredResults = results.filter((result) => result !== undefined);
+
+      // If all articles were filtered out post-exclusion, show a "No results found"
+      if (filteredResults.length === 0) {
+        this._noResultsElement.style.display = 'block';
+        this._contentElement.style.display = 'none';
+      } else {
+        this._noResultsElement.style.display = 'none';
+        this._contentElement.style.display = 'block';
+
+        // Render the filtered articles
+        filteredResults.forEach((result) => {
+          let articleElement = document.createElement('article');
+          articleElement.className = 'ucb-article-card-container';
+          articleElement.appendChild(result);
+          this._contentElement.append(articleElement);
+        });
+      }
     }
     // Thumbnail helper
     getThumbnail(article, idObj, altObj) {
@@ -597,7 +646,8 @@
 
       return articleRow;
     }
-    // Helper function to fetch the Article body if no summary and do the processing
+
+// Helper function to fetch the Article body if no summary and do the processing
 // Fixes special characters such as & and nbsp
 decodeHtmlEntities(text) {
   const parser = new DOMParser();
