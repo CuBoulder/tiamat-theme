@@ -380,3 +380,8 @@
 .accordion-item:last-child {
   border-bottom: 0;
 }
+
+/*** Flush Accordion Overrides (for ckeditor columns) ***/
+.accordion-body:has(.ucb-column-container) {
+  overflow: hidden;
+}
