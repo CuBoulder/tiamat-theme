@@ -477,6 +477,7 @@ width: fit-content;
 .ucb-menu-column-wrapper {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
 }
 
 @media only screen and (max-width: 767px) {

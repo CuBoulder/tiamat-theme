@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Responsive menus in the below content regions 
+  Fixes spacing issues for blocks in above and below content.
+  Also adds proper stacking for menus in different regions
+  
+  Resolves #1407
+---
+
 - ### Newsletter (Web Version): Fixes desktop version display
   - Corrects an issue where a certain number of `Teaser` sections and content items with images could cause the section to "break out" of the parent container and get displayed pinned to the left, due to an error in the html template that would close the section too early if specific conditions were met.
   - If there is only one content item in a Teaser section, it will take up 100% of the space. Otherwise they will fall side by side taking up 50% of the space. This not working was also partially attributed to the above error.
