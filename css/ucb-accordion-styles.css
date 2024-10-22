@@ -382,6 +382,13 @@
 }
 
 /*** Flush Accordion Overrides (for ckeditor columns) ***/
-.accordion-body:has(.ucb-column-container) {
-  overflow: hidden;
+.accordion-body .row.ucb-column-container {
+  margin-left: 0px;
+  margin-right: 0px;
+}
+.accordion-body .row.ucb-column-container .col.ucb-column:first-of-type{
+  padding-left: 0px;
+}
+.accordion-body .row.ucb-column-container .col.ucb-column:last-of-type{
+  padding-right: 0px;
 }
