@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds missing commas and spaces between authors in article byline
+  [bug, severity:minor] An issue existed where commas and spaces wouldn't be added between multiple authors in an article byline. This update resolves the issue. Resolves CuBoulder/tiamat-theme#1418
+---
+
 - ### Update content list teaser image sizing
   Update basic teaser max width for teasers to 100px like D7 
   Have teaser max width be 50px
