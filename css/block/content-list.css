@@ -26,7 +26,12 @@
 	height: auto;
 	margin-bottom: 20px;
 }
+
 .ucb-content-list-teaser .ucb-content-list-image {
+	max-width: 100px;
+}
+
+.ucb-content-list-display-sidebar .ucb-content-list-teaser .ucb-content-list-image {
 	max-width: 50px;
 }
 

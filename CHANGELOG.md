@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update content list teaser image sizing
+  Update basic teaser max width for teasers to 100px like D7 
+  Have teaser max width be 50px
+  
+  Resolves #1349
+---
+
 - ### Responsive menus in the below content regions 
   Fixes spacing issues for blocks in above and below content.
   Also adds proper stacking for menus in different regions
