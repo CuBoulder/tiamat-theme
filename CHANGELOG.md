@@ -9,70 +9,89 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20241023] - 2024-10-23
+
 - ### Remove double borders on menus
   Resolves #1408.
   Removes the double borders on menus in the above and below content regions.
----
+
+* * *
 
 - ### Make video hero vertically centered
   Resolves #1352.
   Makes the video hero more vertically centered
----
+
+* * *
 
 - ### Fixes radio button / label alignment in search modals
   [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1413
----
+
+* * *
 
 - ### Accordions: Fixes Accordions containing Columns Overflow
+
   Fixes visual issue where inserting a Column into an Accordion would cause a horizontal scrollbar to appear within the Accordion body. 
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1421
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1421>
+
+* * *
 
 - ### Article List Page: Adds Reset button to Exposed Article List Filters and Minor Bug/QoL Fixes
+
   - Adds a Reset button to the user-accessible filters for Category and Tag on an Article List Page that will reset the component to the initial state
   - Fixes a bug that could present when clicking Apply Filters with 'All Category' and 'All Tags' selected that could bring in additional outside Terms from what the component initialized with and originally filtered on. This seemed to happen if you clicked Apply Filters right as the component loaded, but has been corrected.
   - Adds an error message for `No Results Found` if the provider returns any number of Articles with filters applied, but all those results get filtered out in the exclusion process. Previously there was not a case built for this with the new filters and a user could be presented with a blank component.
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1406
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1406>
+
+* * *
 
 - ### Adds missing commas and spaces between authors in article byline
   [bug, severity:minor] An issue existed where commas and spaces wouldn't be added between multiple authors in an article byline. This update resolves the issue. Resolves CuBoulder/tiamat-theme#1418
----
+
+* * *
 
 - ### Update content list teaser image sizing
+
   Update basic teaser max width for teasers to 100px like D7 
   Have teaser max width be 50px
-  
-  Resolves #1349
----
 
-- ### Responsive menus in the below content regions 
+  Resolves #1349
+
+* * *
+
+- ### Responsive menus in the below content regions
+
   Fixes spacing issues for blocks in above and below content.
   Also adds proper stacking for menus in different regions
-  
+
   Resolves #1407
----
+
+* * *
 
 - ### Newsletter (Web Version): Fixes desktop version display
+
   - Corrects an issue where a certain number of `Teaser` sections and content items with images could cause the section to "break out" of the parent container and get displayed pinned to the left, due to an error in the html template that would close the section too early if specific conditions were met.
   - If there is only one content item in a Teaser section, it will take up 100% of the space. Otherwise they will fall side by side taking up 50% of the space. This not working was also partially attributed to the above error.
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1354
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1354>
+
+* * *
 
 - ### Article Aggregators: Adds Node ID fallback for Nodes with No Alias
+
   Previously there was no fallback setting on Aggregators to handle `Article` pages using `/node/#`. This could happen in situations where pathauto patterns had been turned off, and no url alias had been set. This lack of a fallback resulted in broken Article Aggregator block / page renders or broken links to these Articles. This has been corrected so both aliased and non-aliased Article pages will display with correct links for these pages across all the Content types.
-  
+
   This change affects `Article List Page`, `Article List Block`, `Article Grid Block`, `Article Feature Block`, `Related Articles Block`, `Article by Person Block`, `Article Slider Block`. 
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1410
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1410>
+
+* * *
 
 - ### Google Translate: Adds Japanese and Tibetan language options to sites
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1409
----
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1409>
+
+* * *
 
 ## [20241017] - 2024-10-17
 
@@ -3644,7 +3663,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241017...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241023...HEAD
+[20241023]: https://github.com/CuBoulder/tiamat-theme/compare/20241017...20241023
 [20241017]: https://github.com/CuBoulder/tiamat-theme/compare/20241009...20241017
 [20241009]: https://github.com/CuBoulder/tiamat-theme/compare/20241002...20241009
 [20241002]: https://github.com/CuBoulder/tiamat-theme/compare/20240925...20241002
