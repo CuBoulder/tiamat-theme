@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fixes radio button / label alignment in search modals
+  [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1413
+---
+
 - ### Accordions: Fixes Accordions containing Columns Overflow
   Fixes visual issue where inserting a Column into an Accordion would cause a horizontal scrollbar to appear within the Accordion body. 
   
