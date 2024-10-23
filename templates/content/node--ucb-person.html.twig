@@ -32,12 +32,17 @@
   </div>
   <div class="container ucb-person">
     <div class="row ucb-person-personal">
+    {% if content.field_ucb_person_email.0 or content.field_ucb_person_phone.0 or content.field_ucb_person_primary_link.0 or content.field_ucb_person_photo.0 or content.field_ucb_person_links.0 or content.field_ucb_person_address.0 or content.field_ucb_person_office_hours.0 %}
       <div class="col-sm-12 col-md-6 col-lg-4 ucb-person-main">
         <div class="row">
-          <div class="col-sm-6 col-md-12">
-            {{ content.field_ucb_person_photo }}
-          </div>
-          <div class="col-sm-6 col-md-12">
+          {% if content.field_ucb_person_photo.0 %}
+            <div class="col-6 col-sm-6 col-md-12">
+              {{ content.field_ucb_person_photo }}
+            </div>
+          <div class="col-6 col-sm-6 col-md-12">
+          {% else %}
+          <div class="col-sm-12 col-md-12">
+          {% endif %}
             {% if content.field_ucb_person_email.0 or content.field_ucb_person_phone.0 or content.field_ucb_person_primary_link.0 %}
               <div class="ucb-person-section ucb-person-contact">
                 {{ content.field_ucb_person_email }}
@@ -72,6 +77,15 @@
           </div>
         {% endif %}
       </div>
+    {% else %}
+      <div>
+        {% if content.body.0 %}
+          <div class="ucb-person-section ucb-person-body">
+            {{ content.body }}
+          </div>
+        {% endif %}
+       </div>
+    {% endif %}
     </div>
     <div class="ucb-articles-by-person-block">
       <person-article-list base-uri="{{ baseurlJSON }}" nodeid="{{ node.id }}">

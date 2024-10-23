@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Add conditions for person pages with no images
+  Resolves #1388.
+  Adds a conditional based on the images and information fields to decide on the design of the person page.
+---
+
 ## [20241023] - 2024-10-23
 
 - ### Remove double borders on menus
