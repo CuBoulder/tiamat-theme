@@ -234,38 +234,38 @@
             </div>
           </div>
         {% endif %}
-        <div class="clearfix">
-          {% block content_sidebar %}
-            {# We are checking for length below to make sure that the sidebars have any content. This is so that sidebar menus don't render the sidebars if the menu is empty #}
-            {% if page.sidebar|render|striptags|trim|length > 0 %}
-              {% if ucb_sidebar_position == 'left' %}
-                <div class="ucb-layout-container ucb-sidebar-container container">
-                  <div class="layout-row row">
-                    <div class="ucb-left-sidebar ucb-sidebar col-12 col-lg-4">
-                      {{ page.sidebar }}
-                    </div>
-                    <div class="ucb-layout-main col-12 col-lg-8 ucb-has-sidebar">
-                      {{ page.content }}
-                    </div>
+        {% block content_sidebar %}
+          {# We are checking for length below to make sure that the sidebars have any content. This is so that sidebar menus don't render the sidebars if the menu is empty #}
+          {% if page.sidebar|render|striptags|trim|length > 0 %}
+            {% if ucb_sidebar_position == 'left' %}
+              <div class="ucb-layout-container ucb-sidebar-container container">
+                <div class="layout-row row">
+                  <div class="ucb-left-sidebar ucb-sidebar col-12 col-lg-4">
+                    {{ page.sidebar }}
+                  </div>
+                  <div class="ucb-layout-main col-12 col-lg-8 ucb-has-sidebar">
+                    {{ page.content }}
                   </div>
                 </div>
-              {% else %}
-                <div class="ucb-layout-container ucb-sidebar-container container">
-                  <div class="layout-row row">
-                    <div class="ucb-layout-main col-12 col-lg-8 ucb-has-sidebar">
-                      {{ page.content }}
-                    </div>
-                    <div class="ucb-left-right ucb-sidebar col-12 col-lg-4">
-                      {{ page.sidebar }}
-                    </div>
-                  </div>
-                </div>
-              {% endif %}
+              </div>
             {% else %}
-              {{ page.content }}
+              <div class="ucb-layout-container ucb-sidebar-container container">
+                <div class="layout-row row">
+                  <div class="ucb-layout-main col-12 col-lg-8 ucb-has-sidebar">
+                    {{ page.content }}
+                  </div>
+                  <div class="ucb-left-right ucb-sidebar col-12 col-lg-4">
+                    {{ page.sidebar }}
+                  </div>
+                </div>
+              </div>
             {% endif %}
-          {% endblock %}
-        </div>
+          {% else %}
+            <div class="clearfix">
+              {{ page.content }}
+            </div>
+          {% endif %}
+        {% endblock %}
 
         {% if page.wide_post|render %}
           <div class="ucb-below-post-wide-region edge-to-edge row g-0">
