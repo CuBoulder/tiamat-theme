@@ -41,7 +41,9 @@
   height: 100%;
   display: flex;
 }
-
+.ucb-content-grid-content-wrapper {
+  width: 100%;
+}
 /* Card Layout CSS */
 
 .content-grid-block .grid-card {
