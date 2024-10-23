@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Accordions: Fixes Accordions containing Columns Overflow
+  Fixes visual issue where inserting a Column into an Accordion would cause a horizontal scrollbar to appear within the Accordion body. 
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1421
+---
+
 - ### Article List Page: Adds Reset button to Exposed Article List Filters and Minor Bug/QoL Fixes
   - Adds a Reset button to the user-accessible filters for Category and Tag on an Article List Page that will reset the component to the initial state
   - Fixes a bug that could present when clicking Apply Filters with 'All Category' and 'All Tags' selected that could bring in additional outside Terms from what the component initialized with and originally filtered on. This seemed to happen if you clicked Apply Filters right as the component loaded, but has been corrected.
