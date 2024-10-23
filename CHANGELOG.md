@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Make video hero vertically centered
+  Resolves #1352.
+  Makes the video hero more vertically centered
+---
+
 - ### Fixes radio button / label alignment in search modals
   [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1413
 ---
