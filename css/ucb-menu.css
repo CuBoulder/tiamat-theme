@@ -420,6 +420,7 @@ width: fit-content;
   margin-bottom: -1px;
   text-align: left;
 }
+.ucb-above-content-region .ucb-menu a,
 .ucb-below-content-region .ucb-menu a {
   display: block;
   padding: 10px 0;
@@ -427,6 +428,8 @@ width: fit-content;
   margin-bottom: -1px;
 }
 
+.ucb-above-content-region .ucb-mega-menu,
+.ucb-above-content-region .ucb-mega-menu-icon,
 .ucb-below-content-region .ucb-mega-menu,
 .ucb-below-content-region .ucb-mega-menu-icon,
 .ucb-footer-top .ucb-mega-menu,
