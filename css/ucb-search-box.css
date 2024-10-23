@@ -31,8 +31,10 @@
 }
 
 .ucb-search-box .ucb-search-box-options label,
+.ucb-search-box .ucb-search-box-options input,
 .ucb-search-box .ucb-search-input-submit input {
   display: inline-block;
+  vertical-align: middle;
   font-size: .9em;
   font-weight: bold;
 }
