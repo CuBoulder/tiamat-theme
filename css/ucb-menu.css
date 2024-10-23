@@ -234,6 +234,10 @@
 .ucb-page-content .ucb-menu li.menu-item {
   border-bottom: 1px solid rgba(0, 0, 0, .09);
 }
+.ucb-above-content-region .ucb-menu li.menu-item,
+.ucb-below-content-region .ucb-menu li.menu-item {
+  border-bottom: none;
+}
 
 .ucb-page-content .ucb-menu li.menu-item.active {
   background-color: inherit;
@@ -416,6 +420,7 @@ width: fit-content;
   margin-bottom: -1px;
   text-align: left;
 }
+.ucb-above-content-region .ucb-menu a,
 .ucb-below-content-region .ucb-menu a {
   display: block;
   padding: 10px 0;
@@ -423,6 +428,8 @@ width: fit-content;
   margin-bottom: -1px;
 }
 
+.ucb-above-content-region .ucb-mega-menu,
+.ucb-above-content-region .ucb-mega-menu-icon,
 .ucb-below-content-region .ucb-mega-menu,
 .ucb-below-content-region .ucb-mega-menu-icon,
 .ucb-footer-top .ucb-mega-menu,

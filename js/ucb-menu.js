@@ -8,9 +8,22 @@ for (let i = 0; i < belowContentRegion.length; i++) {
   totalMenus =  allBelowContentMenus.length;
   for (let j = 0; j < allBelowContentMenus.length; j++) {
     allBelowContentMenus[j].classList.add("ucb-menu-column-" + totalMenus);
-  allBelowContentMenus[j].parentElement.classList.add("ucb-menu-column-wrapper");
+    allBelowContentMenus[j].parentElement.classList.add("ucb-menu-column-wrapper");
   }
 }
+
+// Add columns for Above Content Menus
+ totalMenus = 0;
+const aboveContentRegion = document.getElementsByClassName("ucb-above-content-region");
+for (let i = 0; i < aboveContentRegion.length; i++) {
+  const allAboveContentMenus =  aboveContentRegion[i].getElementsByClassName("ucb-system-menu-block");
+  totalMenus =  allAboveContentMenus.length;
+  for (let j = 0; j < allAboveContentMenus.length; j++) {
+    allAboveContentMenus[j].classList.add("ucb-menu-column-" + totalMenus);
+    allAboveContentMenus[j].parentElement.classList.add("ucb-menu-column-wrapper");
+  }
+}
+
 // Add columns for Footer Menus
 totalMenus = 0;
 const footerRegion = document.getElementsByClassName("ucb-footer-top");

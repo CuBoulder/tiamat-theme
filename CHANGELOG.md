@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Remove double borders on menus
+  Resolves #1408.
+  Removes the double borders on menus in the above and below content regions.
+---
+
 - ### Make video hero vertically centered
   Resolves #1352.
   Makes the video hero more vertically centered

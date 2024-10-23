@@ -63,3 +63,15 @@ for (let i = 0; i < belowContentMenus.length; i++) {
     allMegaMenus[j].removeAttribute("aria-controls");
   }
 }
+
+// Disable Above Content Menu Mega Menus
+const aboveContentMenus = document.getElementsByClassName("ucb-above-content-region");
+for (let i = 0; i < aboveContentMenus.length; i++) {
+  const allMegaMenus =  aboveContentMenus[i].getElementsByClassName("ucb-mega-menu-outer-link");
+  for (let j = 0; j < allMegaMenus.length; j++) {
+    allMegaMenus[j].removeAttribute("data-bs-toggle");
+    allMegaMenus[j].removeAttribute("data-bs-target");
+    allMegaMenus[j].removeAttribute("aria-expanded");
+    allMegaMenus[j].removeAttribute("aria-controls");
+  }
+}
