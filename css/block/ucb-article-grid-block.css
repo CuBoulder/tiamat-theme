@@ -29,8 +29,3 @@
 .ucb-article-grid-summary {
   font-size: 85%;
 }
-
-.ucb-article-grid-card-img {
-  object-fit: cover !important;
-  aspect-ratio: 2/1;
-}
