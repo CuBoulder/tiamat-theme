@@ -217,8 +217,8 @@
       <div class="layout-content">
         {% if page.intro_wide|render %}
           <div class="ucb-intro-wide-region edge-to-edge g-0">
-           <div class = "ucb-layout-container container">
-            {{ page.intro_wide }}
+            <div class="ucb-layout-container container">
+              {{ page.intro_wide }}
             </div>
           </div>
         {% endif %}
@@ -261,7 +261,9 @@
               </div>
             {% endif %}
           {% else %}
-            {{ page.content }}
+            <div class="clearfix">
+              {{ page.content }}
+            </div>
           {% endif %}
         {% endblock %}
 
