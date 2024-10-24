@@ -68,8 +68,8 @@ class ArticleGridBlockElement extends HTMLElement {
       data.included
         .filter((item) => item.type === "file--file")
         .forEach((item) => {
-          altObj[item.id] = item.links.focal_image_square
-            ? item.links.focal_image_square.href
+          altObj[item.id] = item.links.focal_image_wide
+            ? item.links.focal_image_wide.href
             : item.attributes.uri.url;
         });
     }
