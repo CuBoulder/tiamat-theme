@@ -592,14 +592,7 @@ div.align-center .field_media_oembed_video {
   object-fit: cover;
   max-width: 100%; /* Stop embed from spanning across columns */
 }
-div.align-right .field_media_oembed_video{
-  margin-left: 20px;
-  margin-bottom: 20px;
-}
-div.align-left .field_media_oembed_video{
-  margin-right: 20px;
-  margin-bottom: 20px;
-}
+
 div.align-center .field_media_oembed_video{
   margin-right: auto;
   margin-left: auto;
@@ -616,26 +609,42 @@ div.align-left .field_media_oembed_video iframe {
   aspect-ratio: 16/9;
   max-width: 100%;
 }
-/* Responsive sizing for overriding inserted video media if aligned/floated */
-@media only screen and (max-width:980px) {
-  div.align-center .field_media_oembed_video,
-  div.align-left .field_media_oembed_video,
-  div.align-right .field_media_oembed_video {
-    width: 400px;
-    height: 275px;
+
+/* Embedded Video Floats - Remove Float at Mobile Sizing */
+div.align-left:has(.field_media_oembed_video){
+  margin-right: 1em;
+}
+div.align-right:has(.field_media_oembed_video){
+  margin-left: 1em;
+}
+/* Removes float on small screens so videos don't get too small */
+@media only screen and (max-width:650px) {
+  div.align-left:has(.field_media_oembed_video),
+  div.align-right:has(.field_media_oembed_video){
+    max-width: 100%;
+    float: none;
+    margin-left: 0em;
+    margin-right: 0em;
+    margin-bottom: 1em;
   }
 
-  div.align-center .field_media_oembed_video iframe,
   div.align-right .field_media_oembed_video iframe,
   div.align-left .field_media_oembed_video iframe {
-    width: 400px;
-    height: 275px;
+    width: 100%;
+    height: auto;
+    margin-left: 0em !important;
+    margin-right: 0em !important;
   }
 
-  div.align-center:has(.field_media_oembed_video){
-    width: fit-content;
+  div.align-right .field_media_oembed_video,
+  div.align-left .field_media_oembed_video{
+    margin-left: 0em !important;
+    margin-right: 0em !important;
   }
+}
 
+/* Responsive sizing for overriding inserted video media if aligned/floated */
+@media only screen and (max-width:980px) {
   div.align-right .field_media_oembed_video{
     margin-left: 10px;
     margin-bottom: 10px;
@@ -645,27 +654,6 @@ div.align-left .field_media_oembed_video iframe {
     margin-bottom:10px;
   }
 }
-@media only screen and (max-width:530px) {
-  /* div.align-center .field_media_oembed_video, */
-  div.align-left .field_media_oembed_video,
-  div.align-right .field_media_oembed_video {
-    width: 100%
-  }
-
-  /* div.align-center .field_media_oembed_video iframe,  */
-  div.align-right .field_media_oembed_video iframe,
-  div.align-left .field_media_oembed_video iframe {
-    width: 100%;
-    display:block
-  }
-
-  div.align-right .field_media_oembed_video,
-  div.align-left .field_media_oembed_video{
-    margin-left: 0px;
-    margin-right:0px;
-  }
-}
-
 /**** Responsive Images ******/
 
 article .align-right img,

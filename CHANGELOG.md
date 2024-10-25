@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Video Media: Fix floated video spacing, remove alignments on mobile screens
+  - Adds spacing surrounding left and right aligned video media and the text.
+  - On mobile screens-- left, right, and center alignments are removed and the video spans the full-width of the content. This prevents videos from becoming too small when floated and adjusts the Center-aligned videos to mirror the full-width look instead of maintaining pillarboxed 'centered' spacing on mobile.
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1433
+---
+
 - ### Add conditions for person pages with no images
   Resolves #1388.
   Adds a conditional based on the images and information fields to decide on the design of the person page.
