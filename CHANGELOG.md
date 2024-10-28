@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article Grid: Replaces styled square thumbnail image with wide image
+  Replaces the Article Grid Block's list of Article thumbnails with the `focal_image_wide` image style, which eliminates the need for applied CSS styles on the thumbnail verion, which was not consistent across browsers.
+  
+  Previously the block was using a CSS styled version of the `focal_image_square` because our `UCB Focal Image Enable` module, which enables access to our variety of image styles via API, did not yet have access to the wide image style at the time of the Article Grid block's development. 
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1403
+---
+
 - ### Adds `clearfix` for main content region
   [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1420
 ---
