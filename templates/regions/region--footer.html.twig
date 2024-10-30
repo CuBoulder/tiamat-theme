@@ -14,7 +14,13 @@
 #}
 
 {% if content %}
-  <div class="footer-columns">
-      {{ content }}
-  </div>
+	<div class="row row-cols-lg-4 row-cols-md-2 row-cols-1 footer-columns">
+		{% for item in elements %}
+			{% if item.content|render|striptags|trim is not empty %}
+				<div class="col flex-fill">
+					{{ item }}
+				</div>
+			{% endif %}
+		{% endfor %}
+	</div>
 {% endif %}

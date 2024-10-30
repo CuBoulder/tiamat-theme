@@ -1170,7 +1170,7 @@ h2.clear-margin,h3.clear-margin,h4.clear-margin,h5.clear-margin,h6.clear-margin,
 
 
 /* Column List CSS */
-@media only screen and (min-width: 576px) {
+/* @media only screen and (min-width: 576px) {
   .column-list.column-list-2 {
     -webkit-columns: 2;
     -moz-columns: 2;
@@ -1194,4 +1194,4 @@ h2.clear-margin,h3.clear-margin,h4.clear-margin,h5.clear-margin,h6.clear-margin,
 
 .footer-columns {
   display: flex;
-}
+} */

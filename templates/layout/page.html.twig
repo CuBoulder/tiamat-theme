@@ -303,8 +303,8 @@
           {% if ucb_footer_menu_default_links %}
             {% include "@boulder_base/includes/ucb-footer-menus.html.twig" %}
           {% elseif page.footer|render %}
-            <div class="container ucb-footer-columns">
-              {{ page.footer }}
+            <div class="container ucb-layout-container container ucb-contained-row">
+                {{ page.footer }}
             </div>
           {% endif %}
         </div>
