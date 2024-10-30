@@ -9,39 +9,50 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20241030] - 2024-10-30
+
 - ### Articles by Person: On/off toggle
+
   Adds an on / off toggle to make the Articles by Person block on a Person page optional.
-  
+
   Includes:
-  - theme => https://github.com/CuBoulder/tiamat-theme/pull/1437
-  - custom_entities => https://github.com/CuBoulder/tiamat-custom-entities/pull/186
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1398
----
+
+  - theme => <https://github.com/CuBoulder/tiamat-theme/pull/1437>
+  - custom_entities => <https://github.com/CuBoulder/tiamat-custom-entities/pull/186>
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1398>
+
+* * *
 
 - ### Article Grid: Replaces styled square thumbnail image with wide image
+
   Replaces the Article Grid Block's list of Article thumbnails with the `focal_image_wide` image style, which eliminates the need for applied CSS styles on the thumbnail verion, which was not consistent across browsers.
-  
+
   Previously the block was using a CSS styled version of the `focal_image_square` because our `UCB Focal Image Enable` module, which enables access to our variety of image styles via API, did not yet have access to the wide image style at the time of the Article Grid block's development. 
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1403
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1403>
+
+* * *
 
 - ### Adds `clearfix` for main content region
   [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1420
----
+
+* * *
 
 - ### Video Media: Fix floated video spacing, remove alignments on mobile screens
+
   - Adds spacing surrounding left and right aligned video media and the text.
   - On mobile screens-- left, right, and center alignments are removed and the video spans the full-width of the content. This prevents videos from becoming too small when floated and adjusts the Center-aligned videos to mirror the full-width look instead of maintaining pillarboxed 'centered' spacing on mobile.
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1433
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1433>
+
+* * *
 
 - ### Add conditions for person pages with no images
   Resolves #1388.
   Adds a conditional based on the images and information fields to decide on the design of the person page.
----
+
+* * *
 
 ## [20241023] - 2024-10-23
 
@@ -3697,7 +3708,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241023...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241030...HEAD
+[20241030]: https://github.com/CuBoulder/tiamat-theme/compare/20241023...20241030
 [20241023]: https://github.com/CuBoulder/tiamat-theme/compare/20241017...20241023
 [20241017]: https://github.com/CuBoulder/tiamat-theme/compare/20241009...20241017
 [20241009]: https://github.com/CuBoulder/tiamat-theme/compare/20241002...20241009
