@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Articles by Person: On/off toggle
+  Adds an on / off toggle to make the Articles by Person block on a Person page optional.
+  
+  Includes:
+  - theme => https://github.com/CuBoulder/tiamat-theme/pull/1437
+  - custom_entities => https://github.com/CuBoulder/tiamat-custom-entities/pull/186
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1398
+---
+
 - ### Article Grid: Replaces styled square thumbnail image with wide image
   Replaces the Article Grid Block's list of Article thumbnails with the `focal_image_wide` image style, which eliminates the need for applied CSS styles on the thumbnail verion, which was not consistent across browsers.
   
