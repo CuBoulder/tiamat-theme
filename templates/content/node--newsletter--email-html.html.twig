@@ -355,40 +355,36 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
             <tbody>
                 <tr>
                     <td style='{{headerStyles}}'>
-                        <table width="600" role='presentation' align="center" style="max-width:600px;">
-                            <tbody>
-                                {# CU LOGO #}
+                      {# NEW #}
+                      <center>
+                        <table width="600" class="ucb-email-header-classic" style="width:100%;{{boxBackground}} padding-bottom:50px;">
+                          <tr>
+                            <td style="width:100%;{{boxBackground}}; padding-bottom:50px;">
+                              <table width="600" role="presentation" align="center" style="max-width:600px;">
                                 <tr>
-                                    <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 25px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
-                                        <a href="http://www.colorado.edu">
-                                            {# TO DO -- need to swap between this and the white one depending on the color #}
-                                            <img style="max-width:35%" src="{{cuLogoSrc}}">
-                                        </a>
-                                    </td>
+                                  <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 10px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+                                    <a href="http://www.colorado.edu">
+                                      <img style="max-width:85%" src="{{cuLogoSrc}}">
+                                    </a>
+                                  </td>
                                 </tr>
-                                {# Newsletter Taxonomy Image -- might need to be a separate table #}
-                                {% if node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value %}
-                                  <tr>
-                                    <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 25px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
-                                        <img style="object-fit:cover;-ms-interpolation-mode: bicubic; clear: both; display: block; float: left; height: 167px !important; max-width: 100% !important; outline: none; text-decoration: none; width: 250px !important; max-height: auto !important;"src="{{base_domain}}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}">
-                                      </td>
-                                  </tr>
-                                {% endif %}
-                                {# Newsletter title #}
                                 <tr>
-                                    <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 25px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; padding-left:25px; text-align:left">
-                                        <span>{{node.field_newsletter_type.entity.label}}</span>
-                                    </td>
+                                  <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 20px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 20px; padding-left:10px; text-align:left">
+                                    <span>{{node.field_newsletter_type.entity.label}}</span>
+                                  </td>
                                 </tr>
-                                {# Date & View on Website Link #}
                                 <tr>
-                                    <td style="width:50%;padding-left:25px; text-align:left">{{ node.changed.value|date("M. j, Y") }}</td>
-                                    <td style="width:50%;padding-right:25px;text-align:right;">
-                                        <a style="text-wrap:nowrap" href="{{base_url}}{{ path('entity.node.canonical', {'node': node.id}) }}">View on website</a>
-                                    </td>
+                                  <td style="width:50%;padding: 20px;padding-left:10px; text-align:left; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 12px; margin: 0; font-size: 12px; width: 50%; {{boxBackground}}">{{ node.changed.value|date("M. j, Y") }}</td>
+                                  <td style="line-height: 12px; margin: 0; font-size: 12px; width:50%;padding-right:10px;text-align:right;">
+                                    <a style="text-wrap:nowrap" href="https://www.colorado.edu/cwa/cwa/newsletter/cwanews/september-newsletter">View on website</a>
+                                  </td>
                                 </tr>
-                            </tbody>
+                              </table>
+                            </td>
+                          </tr>
                         </table>
+                      </center>
+                      {# END NEW #}
                     </td>
                 </tr>
             </tbody>
