@@ -65,7 +65,7 @@
 {% set headerStyles = 'width:100%;background-color: black; padding-bottom:50px;' %}
 {% set classicTableOffset = 'margin-top: -50px;padding:10px;' %}
 {# padding: 15px 25px; #}
-{% set footerStyles = 'background-color: black; padding-top:20px' %}
+{% set footerStyles = 'background-color: black !important; padding-top:20px;' %}
 {% set cuLogoSrc = cuLogoLight %}
 {% set classicImgOffset = 'width:100%'%}
 {% set emailBackground = 'background-color:black;' %}
@@ -166,7 +166,7 @@ a, a:visited, a:hover, a:active {
 }
 .ucb-email-header-minimal a:hover,
 .ucb-email-footer.minimal a:hover {
-  color: #000000;
+  color: #0000;
 }
 
 #email h2{
@@ -541,15 +541,15 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
         </center>
          <!--Footer-->
          {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
-         <center>
+         <center width="600" style="{{boxBackground}}">
             <table class="ucb-email-footer-{{designType}}"role="presentation" border="0" width="600" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
                 <tbody>
                     <tr>
-                        <td style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px; padding-top:20px">
-                            <table align="center" width="600" style="max-width:600px;">
-                                <tbody>
-                                    <tr>
-                                    <td>
+                        <td style="{{boxBackground}}text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px; padding-top:20px">
+                            <table align="center" width="600" style="max-width:600px;{{boxBackground}}">
+                                <tbody style="max-width:600px;{{boxBackground}}">
+                                    <tr style="max-width:600px;{{boxBackground}}">
+                                    <td style="max-width:600px;{{boxBackground}}">
                                         {{node.field_newsletter_type.entity.field_newsletter_footer.0.processed}}
                                     </td>
                                 </tr>
@@ -564,10 +564,10 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
         {# Social share #}
             {% if node.field_newsletter_type.entity.field_newsletter_social_link is defined and node.field_newsletter_type.entity.field_newsletter_social_link is not empty %}
                 <table role="presentation" border="0" width="600" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
-                <tbody>
-                        <tr class="newsletter-social-{{designType}}">
+                <tbody style="{{boxBackground}}">
+                        <tr style="{{boxBackground}}" width="600" class="newsletter-social-{{designType}}">
                             <td>
-                                <center style="margin-bottom: 1em;font-size: 1.25rem; line-height: 1.25;" class="social-media-menu newsletter-social-media-menu" data-style="{{designType}}" data-url="{{base_url}}">
+                                <center width="600" style="{{boxBackground}}" style="margin-bottom: 1em;font-size: 1.25rem; line-height: 1.25;" class="social-media-menu newsletter-social-media-menu" data-style="{{designType}}" data-url="{{base_url}}">
                                 {% for link in node.field_newsletter_type.entity.field_newsletter_social_link %}
                                     {% set uri = link.url.toString() %}
                                     {% set hostname = '' %}
@@ -606,7 +606,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
 
                                     {% set alt = service == 'link' ? 'Social link' : service %}
                                     {% set color = designType == 'darkbox' or designType == 'simple' or designType == 'classic' ? 'white' : 'black' %}
-                                    <a{{ create_attribute({ class: 'ucb-email-social-icon', href: uri }) }}>
+                                    <a style="{{boxBackground}}" {{ create_attribute({ class: 'ucb-email-social-icon', href: uri }) }}>
                                         <img{{ create_attribute({
                                             src: base_url ~ '/' ~  base_path ~ directory ~ '/images/social_icons/' ~ color ~ '-' ~ service|lower ~ '.png',
                                             alt: alt,
