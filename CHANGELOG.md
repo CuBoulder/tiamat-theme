@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds spacing between items in a no-bullet list
+  [change] Resolves CuBoulder/tiamat-theme#1444
+---
+
 ## [20241030] - 2024-10-30
 
 - ### Articles by Person: On/off toggle
