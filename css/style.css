@@ -795,6 +795,7 @@ ul.list-style-nobullet {
 ul.list-style-nobullet>li {
   list-style: none;
   list-style-image: none;
+  margin-bottom: 10px;
 }
 
 

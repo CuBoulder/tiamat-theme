@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Webform: Adjusts max width at different column widths
+  Fixes issue where webform blocks placed in Sections with column width 50/50 or 33/66 were too narrow. This was due to styles applied so the form would not span the full width on a single column container. 
+  
+  Adjusted so that one column layout will continue to span the 66% of the container but smaller multi-column layouts span the entire width.
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1440
+---
+
+- ### Adds spacing between items in a no-bullet list
+  [change] Resolves CuBoulder/tiamat-theme#1444
+---
+
 ## [20241030] - 2024-10-30
 
 - ### Articles by Person: On/off toggle
