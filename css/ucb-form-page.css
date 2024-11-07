@@ -12,9 +12,14 @@
 }
 
 form .form-required::after {
-  display: inline-block; 
-  margin-inline: 0.15em; 
-  content: "*"; 
-  color: #f00; 
-  font-size: 0.875rem; 
-} 
+  display: inline-block;
+  margin-inline: 0.15em;
+  content: "*";
+  color: #f00;
+  font-size: 0.875rem;
+}
+
+/* Max sizing for full column, 50/50 and 33/66 use full width */
+.ucb-bootstrap-layout__row-width--12 .ucb-form-body{
+  max-width: 66.66%;
+}
