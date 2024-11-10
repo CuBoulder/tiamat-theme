@@ -228,9 +228,11 @@
           </div>
         {% endif %}
         {% if page.above_content|render %}
-          <div class="ucb-above-content-region ucb-layout-container container ucb-contained-row">
-            <div class="layout-row row">
-              {{ page.above_content }}
+          <div class="ucb-above-content-region ucb-bootstrap-layout__background-color--{{ucb_above_content_region_color}}">
+            <div class="ucb-layout-container container ucb-contained-row">
+              <div class="layout-row row">
+                {{ page.above_content }}
+              </div>
             </div>
           </div>
         {% endif %}
@@ -273,15 +275,21 @@
           </div>
         {% endif %}
         {% if page.below_content|render %}
-          <div class="ucb-below-content-region ucb-layout-container container ucb-contained-row">
-            <div class="layout-row row">
-              {{ page.below_content }}
+          <div class="ucb-below-content-region ucb-bootstrap-layout__background-color--{{ ucb_after_content_one_region_color }}">
+            <div class="ucb-layout-container container ucb-contained-row">
+              <div class="layout-row row">
+                {{ page.below_content }}
+              </div>
             </div>
           </div>
         {% endif %}
         {% if page.second_below_content|render %}
-          <div class="ucb-below-content-region ucb-layout-container container ucb-contained-row">
-            {{ page.second_below_content }}
+          <div class="ucb-below-content-region ucb-bootstrap-layout__background-color--{{ ucb_after_content_two_region_color }}">
+            <div class="ucb-layout-container container ucb-contained-row">
+              <div class="layout-row row">
+                {{ page.second_below_content }}
+              </div>
+            </div>
           </div>
         {% endif %}
       </div>

@@ -173,6 +173,9 @@ function boulder_base_preprocess_page(array &$variables) {
   $variables['ucb_rave_alerts'] = theme_get_setting('ucb_rave_alerts');
   $variables['ucb_sticky_menu'] = theme_get_setting('ucb_sticky_menu');
   $variables['ucb_heading_font'] = theme_get_setting('ucb_heading_font');
+  $variables['ucb_above_content_region_color'] = theme_get_setting('ucb_above_content_region_color');
+  $variables['ucb_after_content_one_region_color'] = theme_get_setting('ucb_after_content_one_region_color');
+  $variables['ucb_after_content_two_region_color'] = theme_get_setting('ucb_after_content_two_region_color');
   $useCustomLogo = theme_get_setting('ucb_use_custom_logo');
   if ($useCustomLogo) {
     $fileUrlGenerator = \Drupal::service('file_url_generator');
