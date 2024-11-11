@@ -575,7 +575,7 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                 <table role="presentation" border="0" width="600" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;margin-bottom:20px;{{boxBackground}}">
                 <tbody style="{{boxBackground}}">
                         <tr style="{{boxBackground}}" width="600" class="newsletter-social-{{designType}}">
-                            <td width="600" style="{{boxBackground}}">
+                            <td width="600" style="padding-right:10px; padding-left:10px;{{boxBackground}}">
                                 <center width="600" style="{{boxBackground}}" style="margin-bottom: 20px;font-size: 1.25rem; line-height: 1.25;" class="social-media-menu newsletter-social-media-menu" data-style="{{designType}}" data-url="{{base_url}}">
                                 {% for link in node.field_newsletter_type.entity.field_newsletter_social_link %}
                                     {% set uri = link.url.toString() %}
