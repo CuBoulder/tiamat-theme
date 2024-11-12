@@ -1,0 +1,25 @@
+{% set classes = [
+  'block',
+  'container',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
+] %}
+
+{% extends '@boulder_base/block/styled-block.html.twig' %}
+
+{% set baseurlJSON = url('<front>')|render|trim('/') %}
+
+{% block content %}
+{{ attach_library('boulder_base/ucb-newsletter-list-block') }}
+  {{ content.body }}
+  <p>List type: {{content.field_select_newsletter_lis_type|render|striptags|trim}}</p>
+  <p>count: {{content.field_ucb_newsletter_list_count|render|striptags|trim}}</p>
+  <ucb-newsletter-list
+    baseURI="{{baseurlJSON}}"
+    count="{{content.field_ucb_newsletter_list_count|render|striptags|trim}}"
+    newsletter-type="{{content.field_select_newsletter_lis_type|render|striptags|trim}}"
+  >
+  </ucb-newsletter-list>
+{% endblock %}
