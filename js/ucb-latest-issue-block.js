@@ -1,7 +1,7 @@
 class LatestIssueElement extends HTMLElement {
 	constructor() {
 		super();
-
+    const baseURL = this.getAttribute("baseURL");
         const handleError = response => {
             if (!response.ok) {
                throw new Error;
@@ -10,7 +10,7 @@ class LatestIssueElement extends HTMLElement {
             }
         };
 
-        fetch(`/jsonapi/node/ucb_issue?include=field_ucb_issue_cover_image.field_media_image&fields[file--file]=uri,url&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published&page[limit]=4&sort=-created`)
+        fetch(`${baseURL}/jsonapi/node/ucb_issue?include=field_ucb_issue_cover_image.field_media_image&fields[file--file]=uri,url&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published&page[limit]=4&sort=-created`)
             .then(handleError)
             .then((data) => this.build(data))
             .catch(Error=> {
