@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Related Articles: fix relative path response
+  Previously the Related Articles block would use the Article link provided by the JSON API response unmodified, which was relative and missing the subpath. This would lead to broken URLs on sites with subpaths. This has been corrected.
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1464
+---
+
 - ### Homepage updates
   Handful of updates for the above and below content regions as well as the homepage footer style
   
