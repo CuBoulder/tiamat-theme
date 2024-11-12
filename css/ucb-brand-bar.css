@@ -31,6 +31,10 @@
   .ucb-brand-bar img.ucb-logo {
     max-width: 240px;
   }
+
+  .ucb-brand-bar img.ucb-logo.ucb-homepage {
+    max-width: 320px;
+  }
 }
 
 .ucb-brand-bar .ucb-brand-bar-controls {

@@ -97,6 +97,12 @@
       {% set header_color = 'dark' %}
     {% endif %}
 
+    {% if ucb_homepage_header %}
+      {% set hompeage_logo_size = "ucb-homepage" %}
+    {% else %}
+      {% set hompeage_logo_size = "" %}
+    {% endif %}
+
     {% if ucb_rave_alerts %}
       <rave-alert feed="https://www.getrave.com/rss/cuboulder/channel1" link="https://alerts.colorado.edu"></rave-alert>
     {% endif %}
@@ -116,7 +122,7 @@
         <div class="container">{{ attach_library('boulder_base/ucb-brand-bar') }}
           <div class="ucb-brand-bar ucb-brand-bar-{{ campus_header_color }}">
             <a href="https://www.colorado.edu" class="ucb-home-link">
-              <img class="ucb-logo" src="https://cdn.colorado.edu/static/brand-assets/live/images/cu-boulder-logo-text-{{ campus_header_text_color }}.svg" alt="University of Colorado Boulder">
+              <img class="ucb-logo {{ hompeage_logo_size }}" src="https://cdn.colorado.edu/static/brand-assets/live/images/cu-boulder-logo-text-{{ campus_header_text_color }}.svg" alt="University of Colorado Boulder">
             </a>
             <div class="ucb-brand-bar-controls">
               {# Google Translate #}
@@ -157,7 +163,7 @@
       {% if site_search.0 %}
         {% include '@boulder_base/includes/ucb-search-modal.html.twig' %}
       {% endif %}
-      {% if ucb_homepage_header %}
+      {% if not ucb_homepage_header %}
         <header class="ucb  {{ header_color }}{% if site_affiliation.id %} ucb-site-affiliation-{{ site_affiliation.id }}{% endif %}" role="banner">
           <div class="container ucb-menu-wrapper">
             <div class="ucb-site-name-wrapper">
