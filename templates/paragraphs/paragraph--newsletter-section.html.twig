@@ -180,7 +180,7 @@
 
 								{# Code to render user made content (content text) #}
 							{% elseif item.entity.field_newsletter_content_text.value|render %}
-								<div class="article-summary" id="teaser-article-summary-user-text--{{kkey}}">
+								<div class="article-summary" id="teaser-article-summary-user-text--{{key}}">
 									{{ item.entity.field_newsletter_content_text|view }}
 								</div>
 							{% endif %}
