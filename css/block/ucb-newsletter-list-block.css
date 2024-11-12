@@ -1,1 +1,14 @@
+.ucb-newsletter-list-text{
+  font-weight: bold;
+  margin-bottom: 0px;
+}
 
+.ucb-newsletter-row{
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.333);
+  padding-bottom: 20px;
+}
+
+.ucb-newsletter-list-summary{
+  margin-bottom: 0px;
+}

@@ -19,8 +19,6 @@
             return map;
           }, {});
 
-          console.log("Taxonomy Map:", this.taxonomyMap);
-
           // Now that the taxonomyMap is ready, fetch newsletters
           this.fetchNewsletters();
         })
@@ -30,9 +28,12 @@
     }
 
     fetchNewsletters() {
-      console.log(`Fetching ${this.count} article(s) of the type: ${this.newsletterType} from ${this._baseURI}`);
-      fetch(`${this._baseURI}/jsonapi/node/newsletter?include=field_newsletter_section_block.field_newsletter_section_select.field_newsletter_article_select&filter[status][value]=1&filter[field_newsletter_type.meta.drupal_internal__target_id][value]=${this.newsletterType}&sort=-created`)
-        .then(this.handleError)
+      const publishedParams = '&filter[published][group][conjunction]=AND'
+      + '&filter[publish-check][condition][path]=status'
+      + '&filter[publish-check][condition][value]=1'
+      + '&filter[publish-check][condition][memberOf]=published';
+
+    fetch(`${this._baseURI}/jsonapi/node/newsletter?include=field_newsletter_section_block.field_newsletter_section_select.field_newsletter_article_select${publishedParams}&filter[field_newsletter_type.meta.drupal_internal__target_id][value]=${this.newsletterType}&sort=-created`)        .then(this.handleError)
         .then((data) => this.build(data, this.count))
         .catch(error => {
           console.log(error);
@@ -113,24 +114,25 @@
     renderNewsletters(newsletterElements) {
       newsletterElements.forEach(newsletter => {
         const newsletterElement = document.createElement('div');
-        newsletterElement.classList.add('newsletter-item');
-
-        const titleElement = document.createElement('h2');
-        titleElement.textContent = newsletter.title;
-
-        const summaryElement = document.createElement('p');
-        summaryElement.textContent = newsletter.summary;
+        newsletterElement.classList.add('ucb-newsletter-row');
 
         const linkElement = document.createElement('a');
         linkElement.href = newsletter.path;
-        linkElement.textContent = "Read More";
-        linkElement.classList.add('newsletter-link');
+        linkElement.classList.add('ucb-newsletter-list-link');
 
-        newsletterElement.appendChild(titleElement);
-        newsletterElement.appendChild(summaryElement);
+
+        const titleElement = document.createElement('p');
+        titleElement.textContent = newsletter.title;
+        titleElement.classList.add('ucb-newsletter-list-text')
+
+        linkElement.appendChild(titleElement);
+
+        const summaryElement = document.createElement('p');
+        summaryElement.textContent = newsletter.summary;
+        summaryElement.classList.add('ucb-newsletter-list-summary');
+
         newsletterElement.appendChild(linkElement);
-
-        // Append to the component's shadow DOM or directly to the element
+        newsletterElement.appendChild(summaryElement);
         this.appendChild(newsletterElement);
       });
     }

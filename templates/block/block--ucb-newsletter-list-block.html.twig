@@ -14,8 +14,6 @@
 {% block content %}
 {{ attach_library('boulder_base/ucb-newsletter-list-block') }}
   {{ content.body }}
-  <p>List type: {{content.field_select_newsletter_lis_type|render|striptags|trim}}</p>
-  <p>count: {{content.field_ucb_newsletter_list_count|render|striptags|trim}}</p>
   <ucb-newsletter-list
     baseURI="{{baseurlJSON}}"
     count="{{content.field_ucb_newsletter_list_count|render|striptags|trim}}"
