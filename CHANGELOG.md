@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Latest Issue Block: fix missing site subpath
+  Prevents an error in the Latest Issue Block where it would fail to fetch due to a missing subpath. This has been corrected. 
+  
+  Resolves #1462 
+---
+
 - ### Webform: Adjusts max width at different column widths
   Fixes issue where webform blocks placed in Sections with column width 50/50 or 33/66 were too narrow. This was due to styles applied so the form would not span the full width on a single column container. 
   
