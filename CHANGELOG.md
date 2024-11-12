@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter: Additional Style Fixes
+  - Header issues fixed including: Campus logo too small, Website link wrong color, Newsletter title too small, and date and website link should be smaller. Email header too large. Provided correct email header from Lissa ( thanks!).   **NOTE**: Link color SHOULD have all the correct client-specific and dark/light mode overrides being applied to force brand colors... but is not guaranteed to work across all clients equally due to email HTML having zero standards between clients. 
+  - Fixes spacing  between border and next articles in a series of Articles or User-content. Previously the top spacing was too small.
+  - Fixes a footer issue where sometimes the background wouldn't apply and there would present white text on a white background. 
+  - Fixes header images cropping oddly
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1311
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1450
+---
+
 - ### Collection Grid Fixes
   Resolves #1439 and #1446.
   Adds a condition for the collection items to be published, and adds a condition to force the columns to always be equal length.
