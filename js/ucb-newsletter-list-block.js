@@ -1,89 +1,141 @@
-console.log("WHATTUP");
 (function (customElements) {
   class NewsletterListElement extends HTMLElement {
-    constructor(){
+    constructor() {
       super();
       this._baseURI = this.getAttribute('baseURI');
-      this.count = this.getAttribute('count');
+      this.count = parseInt(this.getAttribute('count'));
       this.newsletterType = this.getAttribute('newsletter-type');
 
-      console.log(`I am fetching ${this.count} article(s) of the type: ${this.newsletterType} from ${this.baseURI}`);
+      // Fetch taxonomy terms to build the map first
+      fetch(`${this._baseURI}/jsonapi/taxonomy_term/newsletter`)
+        .then(response => {
+          if (!response.ok) throw new Error("Network response was not ok");
+          return response.json();
+        })
+        .then(data => {
+          // Create the ID-to-name map
+          this.taxonomyMap = data.data.reduce((map, term) => {
+            map[term.id] = term.attributes.name;
+            return map;
+          }, {});
+
+          console.log("Taxonomy Map:", this.taxonomyMap);
+
+          // Now that the taxonomyMap is ready, fetch newsletters
+          this.fetchNewsletters();
+        })
+        .catch(error => {
+          console.log("Failed to fetch taxonomy terms:", error);
+        });
+    }
+
+    fetchNewsletters() {
+      console.log(`Fetching ${this.count} article(s) of the type: ${this.newsletterType} from ${this._baseURI}`);
       fetch(`${this._baseURI}/jsonapi/node/newsletter?include=field_newsletter_section_block.field_newsletter_section_select.field_newsletter_article_select&filter[status][value]=1&filter[field_newsletter_type.meta.drupal_internal__target_id][value]=${this.newsletterType}&sort=-created`)
-      .then(this.handleError)
+        .then(this.handleError)
         .then((data) => this.build(data, this.count))
-        .catch(Error=> {
-            console.log(Error)
+        .catch(error => {
+          console.log(error);
         });
     }
 
     handleError = response => {
       if (!response.ok) {
-         throw new Error;
+        throw new Error("Network response was not ok");
       } else {
-         return response.json();
+        return response.json();
       }
-  };
+    };
 
-  build(data) {
-    const newsletters = data["data"];
-    const references = data["included"];
+    // Traverses through nested paragraphs to grab the first one Newsletter -> First Section -> First Newsletter Article or First Newsletter Content. If first article -> get the article
+    build(data, count) {
+      const newsletters = data["data"];
+      const references = data["included"];
+      const newsletterElements = []; // Array to hold newsletter elements
 
-    newsletters.forEach(newsletter => {
-      // Get the newsletter title
-      const newsletterTitle = newsletter.attributes.title;
+      // Loop through newsletters up to the specified count
+      for (let i = 0; i < Math.min(newsletters.length, count); i++) {
+        const newsletter = newsletters[i];
+        const newsletterTitle = newsletter.attributes.title;
 
-      // Access the first section block reference
-      const sectionBlockRef = newsletter.relationships.field_newsletter_section_block?.data[0];
-      if (sectionBlockRef) {
-        const sectionBlock = references.find(ref => ref.id === sectionBlockRef.id && ref.type === 'paragraph--newsletter_section');
+        // Get the path using taxonomy and title
+        const taxonomyId = newsletter.relationships.field_newsletter_type?.data.id;
+        const taxonomyPath = this.taxonomyMap[taxonomyId];
+        const path = newsletter.attributes.path.alias ? newsletter.attributes.path.alias : `/node/${newsletter.attributes.drupal_internal__nid}`;
 
-        if (sectionBlock) {
-          // Access the array of section items in the section block
-          const sectionSelectRefs = sectionBlock.relationships?.field_newsletter_section_select?.data;
+        // Access the first section block reference
+        const sectionBlockRef = newsletter.relationships.field_newsletter_section_block?.data[0];
+        if (sectionBlockRef) {
+          const sectionBlock = references.find(ref => ref.id === sectionBlockRef.id && ref.type === 'paragraph--newsletter_section');
 
-          if (sectionSelectRefs && sectionSelectRefs.length > 0) {
-            // Loop through section items and stop once we find the first valid content
-            for (const sectionSelectRef of sectionSelectRefs) {
-              const sectionContent = references.find(ref => ref.id === sectionSelectRef.id);
+          if (sectionBlock) {
+            // Access the array of section items in the section block
+            const sectionSelectRefs = sectionBlock.relationships?.field_newsletter_section_select?.data;
 
-              if (sectionContent) {
-                let contentTitle = null;
+            if (sectionSelectRefs && sectionSelectRefs.length > 0) {
+              // Loop through section items and find the first valid content
+              for (const sectionSelectRef of sectionSelectRefs) {
+                const sectionContent = references.find(ref => ref.id === sectionSelectRef.id);
 
-                // Check if the section content is a paragraph or article and get the title
-                if (sectionContent.type === 'paragraph--newsletter_section_content') {
-                  contentTitle = sectionContent.attributes.field_newsletter_content_title;
-                } else if (sectionContent.type === 'paragraph--newsletter_section_article') {
-                  const articleRef = sectionContent.relationships?.field_newsletter_article_select?.data;
+                if (sectionContent) {
+                  let contentTitle = null;
 
-                  if (articleRef) {
-                    const article = references.find(ref => ref.id === articleRef.id && ref.type === 'node--ucb_article');
-                    if (article) {
-                      contentTitle = article.attributes.title;
+                  // Check if the section content is a paragraph or article and get the title
+                  if (sectionContent.type === 'paragraph--newsletter_section_content') {
+                    contentTitle = sectionContent.attributes.field_newsletter_content_title;
+                  } else if (sectionContent.type === 'paragraph--newsletter_section_article') {
+                    const articleRef = sectionContent.relationships?.field_newsletter_article_select?.data;
+
+                    if (articleRef) {
+                      const article = references.find(ref => ref.id === articleRef.id && ref.type === 'node--ucb_article');
+                      if (article) {
+                        contentTitle = article.attributes.title;
+                      }
                     }
                   }
-                }
 
-                // We've got the first Article/Content and can break out with this one
-                if (contentTitle) {
-                  console.log("Newsletter Title:", newsletterTitle);
-                  console.log("Content/Article Title:", contentTitle);
-                  break;
+                  // Store the title, summary, and path
+                  if (contentTitle) {
+                    newsletterElements.push({ title: newsletterTitle, summary: contentTitle, path });
+                    break; // Exit once we have the first valid content for this newsletter
+                  }
                 }
               }
             }
           }
         }
       }
-    });
+
+      // Call a method to build DOM elements for each newsletter
+      this.renderNewsletters(newsletterElements);
+    }
+
+    renderNewsletters(newsletterElements) {
+      newsletterElements.forEach(newsletter => {
+        const newsletterElement = document.createElement('div');
+        newsletterElement.classList.add('newsletter-item');
+
+        const titleElement = document.createElement('h2');
+        titleElement.textContent = newsletter.title;
+
+        const summaryElement = document.createElement('p');
+        summaryElement.textContent = newsletter.summary;
+
+        const linkElement = document.createElement('a');
+        linkElement.href = newsletter.path;
+        linkElement.textContent = "Read More";
+        linkElement.classList.add('newsletter-link');
+
+        newsletterElement.appendChild(titleElement);
+        newsletterElement.appendChild(summaryElement);
+        newsletterElement.appendChild(linkElement);
+
+        // Append to the component's shadow DOM or directly to the element
+        this.appendChild(newsletterElement);
+      });
+    }
   }
 
-
-
-
-
-
-
-  }
   customElements.define('ucb-newsletter-list', NewsletterListElement);
 
 })(window.customElements);
