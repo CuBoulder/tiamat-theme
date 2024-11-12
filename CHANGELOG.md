@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Collection Grid Fixes
+  Resolves #1439 and #1446.
+  Adds a condition for the collection items to be published, and adds a condition to force the columns to always be equal length.
+---
+
 - ### Resolves special characters not rendering correctly in article title image captions
   This update:
   
