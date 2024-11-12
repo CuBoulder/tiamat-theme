@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Resolves special characters not rendering correctly in article title image captions
+  This update:
+  
+  - Removes instance of `render|striptags|trim` from article title image caption template.
+  
+  [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1459
+---
+
 - ### Latest Issue Block: fix missing site subpath
   Prevents an error in the Latest Issue Block where it would fail to fetch due to a missing subpath. This has been corrected. 
   
