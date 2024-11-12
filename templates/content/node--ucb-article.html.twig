@@ -145,8 +145,10 @@
             {{ label }}
           </h1>
         {% endif %}
-        {% if content.field_article_header_image_text|render %}
-          <p class="ucb-article-supplemental-text">{{ content.field_article_header_image_text|render|striptags|trim }}</p>
+        {% if content.field_article_header_image_text %}
+          <p class="ucb-article-supplemental-text">
+            {{ content.field_article_header_image_text.0['#context'].value }}
+          </p>
         {% endif %}
         <div role="contentinfo" class="ucb-article-meta">
           {% if showDate %}
