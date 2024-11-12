@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Homepage updates
+  Handful of updates for the above and below content regions as well as the homepage footer style
+  
+  Sister PR: https://github.com/CuBoulder/ucb_site_configuration/pull/71
+  
+  Resolves #1435 
+---
+
 - ### Newsletter: Additional Style Fixes
   - Header issues fixed including: Campus logo too small, Website link wrong color, Newsletter title too small, and date and website link should be smaller. Email header too large. Provided correct email header from Lissa ( thanks!).   **NOTE**: Link color SHOULD have all the correct client-specific and dark/light mode overrides being applied to force brand colors... but is not guaranteed to work across all clients equally due to email HTML having zero standards between clients. 
   - Fixes spacing  between border and next articles in a series of Articles or User-content. Previously the top spacing was too small.
