@@ -363,8 +363,8 @@ const baseURL = relatedArticlesBlock ? relatedArticlesBlock.getAttribute('data-b
 				// Remove current article from those availabile in the block
 
 				articleArrayWithScores.filter((article)=>{
-          let urlCheck = article.article.attributes.path.alias ? article.article.attributes.path.alias : `/node/${article.article.attributes.drupal_internal__nid}`;
-					if(urlCheck == window.location.pathname){
+          let urlCheck = article.article.attributes.path.alias ? baseURL + article.article.attributes.path.alias : `${baseURL}/node/${article.article.attributes.drupal_internal__nid}`;
+          if(urlCheck == window.location.origin + window.location.pathname){
 						articleArrayWithScores.splice(articleArrayWithScores.indexOf(article),1)
 					} else {
 						return article;
