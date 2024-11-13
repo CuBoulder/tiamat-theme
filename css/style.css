@@ -337,12 +337,6 @@ ul.ucb-main-menu.nav {
   margin: 2px 0 0 0;
 }
 
-.ucb-footer-top .ucb-menu a.nav-link {
-  color: white;
-  font-size: 1.25em;
-  padding: 0.5rem;
-  border-radius: 0.2rem;
-}
 
 .mobile-menu-toggle {
   display: none;
@@ -471,9 +465,6 @@ ul.ucb-main-menu.nav {
   text-align: center;
 }
 
-.ucb-footer-top .ucb-menu a.nav-link:hover {
-  box-shadow: 0 2px 5px rgba(0 0 0 /30%);
-}
 
 .ucb-footer-nav-block {
   display: flex;
@@ -522,12 +513,17 @@ ul.ucb-main-menu.nav {
   font-size: 0.9rem;
 }
 
+.ucb-footer-bottom .block.bs-background-unstyled.container {
+  --bs-gutter-x: 0;
+}
+
 .ucb-footer-menu-region .block-menu-blocksocial-media-menu,
 .ucb-footer-menu-region .block-system-menu-blocksocial-media-menu {
   padding: 10px;
   display: flex;
   align-items: center;
 }
+
 .ucb-footer-menu-region .container {
   display: flex;
 }
@@ -596,14 +592,7 @@ div.align-center .field_media_oembed_video {
   object-fit: cover;
   max-width: 100%; /* Stop embed from spanning across columns */
 }
-div.align-right .field_media_oembed_video{
-  margin-left: 20px;
-  margin-bottom: 20px;
-}
-div.align-left .field_media_oembed_video{
-  margin-right: 20px;
-  margin-bottom: 20px;
-}
+
 div.align-center .field_media_oembed_video{
   margin-right: auto;
   margin-left: auto;
@@ -620,26 +609,42 @@ div.align-left .field_media_oembed_video iframe {
   aspect-ratio: 16/9;
   max-width: 100%;
 }
-/* Responsive sizing for overriding inserted video media if aligned/floated */
-@media only screen and (max-width:980px) {
-  div.align-center .field_media_oembed_video,
-  div.align-left .field_media_oembed_video,
-  div.align-right .field_media_oembed_video {
-    width: 400px;
-    height: 275px;
+
+/* Embedded Video Floats - Remove Float at Mobile Sizing */
+div.align-left:has(.field_media_oembed_video){
+  margin-right: 1em;
+}
+div.align-right:has(.field_media_oembed_video){
+  margin-left: 1em;
+}
+/* Removes float on small screens so videos don't get too small */
+@media only screen and (max-width:650px) {
+  div.align-left:has(.field_media_oembed_video),
+  div.align-right:has(.field_media_oembed_video){
+    max-width: 100%;
+    float: none;
+    margin-left: 0em;
+    margin-right: 0em;
+    margin-bottom: 1em;
   }
 
-  div.align-center .field_media_oembed_video iframe,
   div.align-right .field_media_oembed_video iframe,
   div.align-left .field_media_oembed_video iframe {
-    width: 400px;
-    height: 275px;
+    width: 100%;
+    height: auto;
+    margin-left: 0em !important;
+    margin-right: 0em !important;
   }
 
-  div.align-center:has(.field_media_oembed_video){
-    width: fit-content;
+  div.align-right .field_media_oembed_video,
+  div.align-left .field_media_oembed_video{
+    margin-left: 0em !important;
+    margin-right: 0em !important;
   }
+}
 
+/* Responsive sizing for overriding inserted video media if aligned/floated */
+@media only screen and (max-width:980px) {
   div.align-right .field_media_oembed_video{
     margin-left: 10px;
     margin-bottom: 10px;
@@ -649,27 +654,6 @@ div.align-left .field_media_oembed_video iframe {
     margin-bottom:10px;
   }
 }
-@media only screen and (max-width:530px) {
-  /* div.align-center .field_media_oembed_video, */
-  div.align-left .field_media_oembed_video,
-  div.align-right .field_media_oembed_video {
-    width: 100%
-  }
-
-  /* div.align-center .field_media_oembed_video iframe,  */
-  div.align-right .field_media_oembed_video iframe,
-  div.align-left .field_media_oembed_video iframe {
-    width: 100%;
-    display:block
-  }
-
-  div.align-right .field_media_oembed_video,
-  div.align-left .field_media_oembed_video{
-    margin-left: 0px;
-    margin-right:0px;
-  }
-}
-
 /**** Responsive Images ******/
 
 article .align-right img,
@@ -680,6 +664,22 @@ article .align-right .media-image-caption p {
 article .align-left img,
 article .align-left .media-image-caption p {
   padding-right: 1em;
+}
+
+/**** Colorbox Image Overrides, these need some snowflake css because of how different they are ******/
+article .align-left .ucb-colorbox-small-square,
+article .align-left .ucb-colorbox-small-thumbnail,
+article .align-left .ucb-colorbox-small,
+article .align-left .ucb-colorbox-square{
+  margin-right: 1em;
+  padding-right: 0em;
+}
+article .align-right .ucb-colorbox-small-square,
+article .align-right .ucb-colorbox-small-thumbnail,
+article .align-right .ucb-colorbox-small,
+article .align-right .ucb-colorbox-square{
+  margin-left: 1em;
+  padding-left: 0em;
 }
 
 /* Adjusts list elements when a left-floated image (.align-left) is a preceeding sibling, aligns list indicators with other elements  */
@@ -795,6 +795,7 @@ ul.list-style-nobullet {
 ul.list-style-nobullet>li {
   list-style: none;
   list-style-image: none;
+  margin-bottom: 10px;
 }
 
 
@@ -1190,4 +1191,8 @@ h2.clear-margin,h3.clear-margin,h4.clear-margin,h5.clear-margin,h6.clear-margin,
 
 .ucb-basic-page-body {
   display: inline-block;
+}
+
+.footer-columns {
+  display: flex;
 }

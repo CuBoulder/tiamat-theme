@@ -58,7 +58,8 @@
 
 .collections-grid-block-data {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  word-wrap: break-word;
   gap: 10px;
 }
 
@@ -88,13 +89,13 @@
 
 @media (min-width: 768px) and (max-width: 1199px) {
   .collections-grid-block-data {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 991px) {
   .collections-grid-block-data {
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(1, minmax(0, 1fr));
   }
 }
 

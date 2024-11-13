@@ -97,6 +97,12 @@
       {% set header_color = 'dark' %}
     {% endif %}
 
+    {% if ucb_homepage_header %}
+      {% set hompeage_logo_size = "ucb-homepage" %}
+    {% else %}
+      {% set hompeage_logo_size = "" %}
+    {% endif %}
+
     {% if ucb_rave_alerts %}
       <rave-alert feed="https://www.getrave.com/rss/cuboulder/channel1" link="https://alerts.colorado.edu"></rave-alert>
     {% endif %}
@@ -116,7 +122,7 @@
         <div class="container">{{ attach_library('boulder_base/ucb-brand-bar') }}
           <div class="ucb-brand-bar ucb-brand-bar-{{ campus_header_color }}">
             <a href="https://www.colorado.edu" class="ucb-home-link">
-              <img class="ucb-logo" src="https://cdn.colorado.edu/static/brand-assets/live/images/cu-boulder-logo-text-{{ campus_header_text_color }}.svg" alt="University of Colorado Boulder">
+              <img class="ucb-logo {{ hompeage_logo_size }}" src="https://cdn.colorado.edu/static/brand-assets/live/images/cu-boulder-logo-text-{{ campus_header_text_color }}.svg" alt="University of Colorado Boulder">
             </a>
             <div class="ucb-brand-bar-controls">
               {# Google Translate #}
@@ -133,6 +139,8 @@
                 <option class="ucb-lang-option" value="en|ko">Korean</option>
                 <option class="ucb-lang-option" value="en|lo">Lao</option>
                 <option class="ucb-lang-option" value="en|ne">Nepali</option>
+                <option class="ucb-lang-option" value="en|ja">Japanese</option>
+                <option class="ucb-lang-option" value="en|bo">Tibetan</option>
               </select>
               <div id="google_translate_element2"></div>
               <script type="text/javascript">function googleTranslateElementInit2() {new google.translate.TranslateElement({pageLanguage: 'en',autoDisplay: false}, 'google_translate_element2');}</script>
@@ -155,37 +163,45 @@
       {% if site_search.0 %}
         {% include '@boulder_base/includes/ucb-search-modal.html.twig' %}
       {% endif %}
-      <header class="ucb {{ header_color }}{% if site_affiliation.id %} ucb-site-affiliation-{{ site_affiliation.id }}{% endif %}" role="banner">
-        <div class="container ucb-menu-wrapper">
-          <div class="ucb-site-name-wrapper">
-            <a href="{{ front_page }}">
-              {% if ucb_custom_logo %}<img role="img" class="ucb-custom-logo" srcset="{{ ucb_custom_logo.url }} {{ ucb_custom_logo.scale }}" alt="{{ site_name }}">
-              {% else %}
-                {{ site_name }}
-              {% endif %}
-            </a>
-            {% if site_affiliation.id %}
-              <div class="affiliation">
-                {% if site_affiliation.url %}
-                  <a href="{{ site_affiliation.url }}">{{ site_affiliation.label }}</a>
+      {% if not ucb_homepage_header %}
+        <header class="ucb  {{ header_color }}{% if site_affiliation.id %} ucb-site-affiliation-{{ site_affiliation.id }}{% endif %}" role="banner">
+          <div class="container ucb-menu-wrapper">
+            <div class="ucb-site-name-wrapper">
+              <a href="{{ front_page }}">
+                {% if ucb_custom_logo %}<img role="img" class="ucb-custom-logo" srcset="{{ ucb_custom_logo.url }} {{ ucb_custom_logo.scale }}" alt="{{ site_name }}">
                 {% else %}
-                  {{ site_affiliation.label }}
+                  {{ site_name }}
                 {% endif %}
-              </div>
+              </a>
+              {% if site_affiliation.id %}
+                <div class="affiliation">
+                  {% if site_affiliation.url %}
+                    <a href="{{ site_affiliation.url }}">{{ site_affiliation.label }}</a>
+                  {% else %}
+                    {{ site_affiliation.label }}
+                  {% endif %}
+                </div>
+              {% endif %}
+            </div>
+            {% if (page.primary_menu|render and drupal_menu('main')|render) or (page.secondary_menu|render and (drupal_menu('secondary')|render or drupal_menu('social-media-menu')|render)) or (page.footer_menu|render and (drupal_menu('footer')|render or drupal_menu('social-media-menu')|render)) %}
+              <button id="ucb-mobile-menu-toggle" aria-label="Toggle menu">
+                <i class="ucb-mobile-menu-open-icon fa-solid fa-bars"></i>
+                <i class="ucb-mobile-menu-close-icon fa-solid fa-xmark"></i>
+              </button>
             {% endif %}
           </div>
-          {% if (page.primary_menu|render and drupal_menu('main')|render) or (page.secondary_menu|render and (drupal_menu('secondary')|render or drupal_menu('social-media-menu')|render)) or (page.footer_menu|render and (drupal_menu('footer')|render or drupal_menu('social-media-menu')|render)) %}
-            <button id="ucb-mobile-menu-toggle" aria-label="Toggle menu">
-              <i class="ucb-mobile-menu-open-icon fa-solid fa-bars"></i>
-              <i class="ucb-mobile-menu-close-icon fa-solid fa-xmark"></i>
-            </button>
-          {% endif %}
-        </div>
-      </header>
+        </header>
+      {% endif %}
       <section class="ucb-main-nav-section mobile ucb-header-{{ header_color }}" role="navigation">
         <div class="ucb-main-nav-container ucb-secondary-menu-position-{{ ucb_secondary_menu_position == 'above' ? 'above' : 'inline container' }} ucb-button-{{ menu_button_color }}">
           {{ page.primary_menu }}
           {{ page.secondary_menu }}
+          <div class="ucb-mobile-footer-menu">
+            {{ drupal_menu('footer') }}
+          </div>
+          <div class="ucb-mobile-social-media-menu">
+            {{ drupal_menu('social-media-menu') }}
+          </div>
         </div>
       </section>
     </div>
@@ -209,8 +225,8 @@
       <div class="layout-content">
         {% if page.intro_wide|render %}
           <div class="ucb-intro-wide-region edge-to-edge g-0">
-           <div class = "ucb-layout-container container">
-            {{ page.intro_wide }}
+            <div class="ucb-layout-container container">
+              {{ page.intro_wide }}
             </div>
           </div>
         {% endif %}
@@ -220,9 +236,11 @@
           </div>
         {% endif %}
         {% if page.above_content|render %}
-          <div class="ucb-above-content-region ucb-layout-container container ucb-contained-row">
-            <div class="layout-row row">
-              {{ page.above_content }}
+          <div class="ucb-above-content-region ucb-bootstrap-layout__background-color--{{ucb_above_content_region_color}}">
+            <div class="ucb-layout-container container ucb-contained-row">
+              <div class="layout-row row">
+                {{ page.above_content }}
+              </div>
             </div>
           </div>
         {% endif %}
@@ -253,7 +271,9 @@
               </div>
             {% endif %}
           {% else %}
-            {{ page.content }}
+            <div class="clearfix">
+              {{ page.content }}
+            </div>
           {% endif %}
         {% endblock %}
 
@@ -263,15 +283,21 @@
           </div>
         {% endif %}
         {% if page.below_content|render %}
-          <div class="ucb-below-content-region ucb-layout-container container ucb-contained-row">
-            <div class="layout-row row">
-              {{ page.below_content }}
+          <div class="ucb-below-content-region ucb-bootstrap-layout__background-color--{{ ucb_after_content_one_region_color }}">
+            <div class="ucb-layout-container container ucb-contained-row">
+              <div class="layout-row row">
+                {{ page.below_content }}
+              </div>
             </div>
           </div>
         {% endif %}
         {% if page.second_below_content|render %}
-          <div class="ucb-below-content-region">
-            {{ page.second_below_content }}
+          <div class="ucb-below-content-region ucb-bootstrap-layout__background-color--{{ ucb_after_content_two_region_color }}">
+            <div class="ucb-layout-container container ucb-contained-row">
+              <div class="layout-row row">
+                {{ page.second_below_content }}
+              </div>
+            </div>
           </div>
         {% endif %}
       </div>

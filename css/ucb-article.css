@@ -10,7 +10,15 @@
 }
 
 .ucb-article-author-name {
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   font-weight: 700;
+}
+
+.ucb-article-author-name a,
+.ucb-article-author-name span {
+  display: block;
 }
 
 i.fa-regular.fa-calendar {
@@ -32,7 +40,7 @@ i.fa-regular.fa-calendar {
   line-height: 1em;
 }
 
-.ucb-article-category-icon, .ucb-article-tag-icon {
+.ucb-article-category-icon, .ucb-article-tag-icon, .ucb-article-issue-icon {
   background-color: #555555;
   color: #e7e7e7;
   padding: 6px;
@@ -131,17 +139,12 @@ i.fa-regular.fa-calendar {
   margin-bottom: 20px;
 }
 
-.ucb-article-author-name span:not(:last-of-type):after {
-  content: ",";
-}
-
-
 .backgroundTitleDiv {
   position: relative;
   z-index: 0;
   object-fit: fill;
   background-size: cover;
-  padding-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .backgroundTitleDiv .ucb-article-heading {

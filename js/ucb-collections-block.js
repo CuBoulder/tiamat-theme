@@ -160,9 +160,8 @@
               if (includeTypeArray.includes(thisCollectionTypes)) {
                 typeInclusion = 1;
               }
-
-              // render the content if there is a similar type
-              if (typeInclusion == 1) {
+              // render the content if there is a similar type and if the content is published
+              if (typeInclusion == 1 && item.attributes.status) {
                 // we need to render the Collection Card view for this returned element
                 // this is my id of the collection body paragraph type we need only if no thumbnail or summary provided
                 //let bodyAndImageId = item.relationships.field_ucb_collection_content.data.length ? item.relationships.field_ucb_collection_content.data[0].id : "";

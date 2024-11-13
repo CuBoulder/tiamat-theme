@@ -377,4 +377,10 @@
   .ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu.social-media {
     height: 100%;
   }
+  .ucb-button-gold.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item,
+  .ucb-button-blue.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item,
+  .ucb-button-gray.ucb-main-nav-container.ucb-secondary-menu-position-inline .ucb-secondary-menu-region .menu-item {
+    padding-left: 2px;
+    padding-right: 2px;
+  }
 }

@@ -1,17 +1,14 @@
 {#
 /**
- * @file
- * Theme to format images that appear within the Image Slider Paragraph
- *
+ * @file Contains the template to render a Slider Image paragraph.
+ */
 #}
-{%
-  set classes = [
-    'paragraph',
-    'paragraph--type--' ~ paragraph.bundle|clean_class,
-    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
-    not paragraph.isPublished() ? 'paragraph--unpublished'
-  ]
-%}
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+] %}
 
 {# set paragraph's parent for field information #}
 {% set parent = paragraph._referringItem.parent.parent.entity %}
@@ -31,37 +28,39 @@
 {% set imgUrl = paragraph.field_slide_image.entity.field_media_image.entity.fileuri|image_style(imgStyle) %}
 {% set imgAlt = paragraph.field_slide_image.entity.field_media_image.alt %}
 
-
 {% block paragraph %}
   {% block content %}
     <div class="slide-image-container">
       {% if paragraph.field_slide_link.0.url is not empty %}
-        <a href="{{ paragraph.field_slide_link.0.url }}">
-          <img{{create_attribute({src:imgUrl,alt:imgAlt})}}></a>
-        {% else %}
-          <img{{create_attribute({src:imgUrl,alt:imgAlt})}}>
+        <a{{ create_attribute({ href: paragraph.field_slide_link.0.url|render }) }}>
+          <img{{ create_attribute({ src: imgUrl, alt: imgAlt }) }}>
+        </a>
+      {% else %}
+        <img{{ create_attribute({ src: imgUrl, alt: imgAlt }) }}>
+      {% endif %}
+    </div>
+    {% if paragraph.field_slide_title.value is not empty or paragraph.field_slide_image_text is not empty %}
+      <div class="carousel-caption d-md-block">
+        <div class="slide-text-container">
+          {% if paragraph.field_slide_title is not empty %}
+            <span>
+              <h3>
+                {{ content.field_slide_title['#items'].0.value|trim }}
+                {% if paragraph.field_slide_link.0.url is not empty %}
+                  <a{{ create_attribute({ href: paragraph.field_slide_link.0.url|render, class: 'slide-link' }) }}>
+                    <i class="fa-solid fa-up-right-from-square"></i>
+                  </a>
+                {% endif %}
+              </h3>
+            </span>
+          {% endif %}
+          {% if paragraph.field_slide_image_text.value is not empty %}
+            <div class="slide-text">
+              {{ content.field_slide_image_text }}
+            </div>
           {% endif %}
         </div>
-        {% if paragraph.field_slide_title.value is not empty or paragraph.field_slide_image_text is not empty %}
-          <div class="carousel-caption d-md-block">
-            <div class="slide-text-container">
-              {% if paragraph.field_slide_title is not empty %}
-                <span>
-                  <h3>{{ content.field_slide_title|render|striptags|trim }}
-                    {% if paragraph.field_slide_link.0.url is not empty %}
-                      <a href="{{ paragraph.field_slide_link.0.url }}" class="slide-link">
-                        <i class="fa-solid fa-up-right-from-square"></i>
-                      </a>
-                    {% endif %}
-                  </h3>
-                </span>
-
-              {% endif %}
-              {% if paragraph.field_slide_image_text.value is not empty %}
-                <p>{{ content.field_slide_image_text|render }}</p>
-              {% endif %}
-            </div>
-          </div>
-        {% endif %}
-      {% endblock %}
-    {% endblock paragraph %}
+      </div>
+    {% endif %}
+  {% endblock %}
+{% endblock %}

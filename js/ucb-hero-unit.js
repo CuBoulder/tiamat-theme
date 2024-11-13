@@ -161,7 +161,7 @@
             heroHeight = heroElement.offsetHeight,
             dimensions = calculateAspectRatioFit(videoWidth, videoHeight, heroWidth, heroHeight);
             let correctedHeight = heroHeight;
-            if(window.innerWidth - heroWidth < 10 && window.innerWidth > 999) {
+            if(window.innerWidth - heroWidth < 10) {
                 correctedHeight = (correctedHeight * 2) / 3;
                 videoWrapperElement.style.height =  'fit-content';
             } else {

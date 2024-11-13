@@ -1,0 +1,9 @@
+name: developers-sanbox-ci
+on:
+  push:
+    branches: [main]
+
+jobs:
+  run-ci:
+    uses: CuBoulder/action-collection/.github/workflows/trigger-dev-ci.yml@main
+    secrets: inherit

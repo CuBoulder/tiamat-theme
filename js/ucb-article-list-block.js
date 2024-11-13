@@ -111,9 +111,12 @@ class ArticleListBlockElement extends HTMLElement {
               ]
             : "";
 
-          return {
+            // If no path alias set, use defaults
+            const path = item.attributes.path.alias ? item.attributes.path.alias : `/node/${item.attributes.drupal_internal__nid}`;
+
+            return {
             title: item.attributes.title,
-            link: this._baseURI + item.attributes.path.alias,
+            link: this._baseURI + path,
             image: imageSrc,
             imageWide: imageSrcWide,
             date: new Date(item.attributes.created).toLocaleDateString(
@@ -174,6 +177,13 @@ class ArticleListBlockElement extends HTMLElement {
       }
   }
 
+  // Fixes special characters such as & and nbsp
+  decodeHtmlEntities(text) {
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(text, "text/html");
+    return doc.documentElement.textContent;
+  }
+
   // Responsible for fetching & processing the body of the Article if no summary provided
   async getArticleParagraph(id) {
     if (!id) {
@@ -186,16 +196,16 @@ class ArticleListBlockElement extends HTMLElement {
       );
       const data = await response.json();
       if (!data.data.attributes.field_article_text) return ""; //  needed for external articles
-
       let htmlStrip = data.data.attributes.field_article_text.processed.replace(
         /<\/?[^>]+(>|$)/g,
         ""
       );
       let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
-      let trimmedString = lineBreakStrip.substr(0, 250);
+      let decodedString = this.decodeHtmlEntities(lineBreakStrip); // Decode HTML entities here
+      let trimmedString = decodedString.substring(0, 250);
 
       if (trimmedString.length > 100) {
-        trimmedString = trimmedString.substr(
+        trimmedString = trimmedString.substring(
           0,
           Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
         );

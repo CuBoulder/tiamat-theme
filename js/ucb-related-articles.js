@@ -1,7 +1,11 @@
+const relatedArticlesBlock = document.querySelector(".ucb-related-articles-block");
+const baseURL = relatedArticlesBlock ? relatedArticlesBlock.getAttribute('data-baseurl') : '';
+
 (function(relatedArticlesBlock) {
 	if (!relatedArticlesBlock) return;
 	const loggedIn = relatedArticlesBlock.getAttribute('data-loggedin') == 'true' ? true : false;
 	let childCount = 0;
+  const baseURL = relatedArticlesBlock.getAttribute('data-baseurl');
 
 	const excludeCatArr = JSON.parse(relatedArticlesBlock.getAttribute('data-catexclude'))
 	const excludeTagArr = JSON.parse(relatedArticlesBlock.getAttribute('data-tagexclude'))
@@ -45,7 +49,7 @@
 
 				let thisArticleCats = article.relationships.field_ucb_article_categories.data
 					let thisArticleTags = article.relationships.field_ucb_article_tags.data
-					let urlCheck = article.attributes.path.alias;
+					let urlCheck = article.attributes.path.alias ? article.attributes.path.alias : `/node/${article.attributes.drupal_internal__nid}`;
 					let toInclude = true;
 					//remove excluded category & tagss
 					if(thisArticleTags.length){ // if there are categories
@@ -80,7 +84,7 @@
 						})
 					}
 
-				if(existingIds.includes(article.id) || article.attributes.path.alias == window.location.pathname ){
+				if(existingIds.includes(article.id) || urlCheck == window.location.pathname ){
 					toInclude = false
 				// filter on categories
 				}
@@ -126,7 +130,8 @@
 				let articleCard = document.createElement('div')
 				articleCard.classList = "ucb-article-card col-sm-12 col-md-6 col-lg-4"
 				let title = article.article.attributes.title;
-				let link = article.article.attributes.path.alias;
+				let link = article.article.attributes.path.alias ? baseURL + article.article.attributes.path.alias : `${baseURL}/node/${article.attributes.drupal_internal__nid}`;
+
 						// if no thumbnail, show no image
 						if (!article.article.relationships.field_ucb_article_thumbnail.data) {
 							image = "";
@@ -242,7 +247,7 @@
 		var myCats = myCatsID.map((id)=> id.replace(/\D/g,''))// remove blanks, get only the cat ID#s
 
 		// Using tags and categories, construct an API call
-		var rootURL = `/jsonapi/node/ucb_article?include[node--ucb_article]=uid,title,ucb_article_content,created,field_ucb_article_summary,field_ucb_article_categories,field_ucb_article_tags,field_ucb_article_thumbnail&include=field_ucb_article_thumbnail.field_media_image&fields[file--file]=uri,url%20&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published`;
+		var rootURL = `${baseURL}/jsonapi/node/ucb_article?include[node--ucb_article]=uid,title,ucb_article_content,created,field_ucb_article_summary,field_ucb_article_categories,field_ucb_article_tags,field_ucb_article_thumbnail&include=field_ucb_article_thumbnail.field_media_image&fields[file--file]=uri,url%20&filter[published][group][conjunction]=AND&filter[publish-check][condition][path]=status&filter[publish-check][condition][value]=1&filter[publish-check][condition][memberOf]=published`;
 
 		var tagQuery = buildTagFilter(myTags)
 		var catQuery = buildCatFilter(myCats)
@@ -305,9 +310,9 @@
 				let returnedArticles = data.data
 				// Create an array of options to render with additional checks
 				returnedArticles.map((article)=> {
-					let thisArticleCats = article.relationships.field_ucb_article_categories.data
-					let thisArticleTags = article.relationships.field_ucb_article_tags.data
-					let urlCheck = article.attributes.path.alias;
+					let thisArticleCats = article.relationships.field_ucb_article_categories.data;
+					let thisArticleTags = article.relationships.field_ucb_article_tags.data;
+					let urlCheck = article.attributes.path.alias ? article.attributes.path.alias : `/node/${article.attributes.drupal_internal__nid}`;
 					let toInclude = true;
 
 					// If article is external,
@@ -356,8 +361,10 @@
 				})
 
 				// Remove current article from those availabile in the block
+
 				articleArrayWithScores.filter((article)=>{
-					if(article.article.attributes.path.alias == window.location.pathname){
+          let urlCheck = article.article.attributes.path.alias ? baseURL + article.article.attributes.path.alias : `${baseURL}/node/${article.article.attributes.drupal_internal__nid}`;
+          if(urlCheck == window.location.origin + window.location.pathname){
 						articleArrayWithScores.splice(articleArrayWithScores.indexOf(article),1)
 					} else {
 						return article;
@@ -402,7 +409,8 @@
 			let articleCard = document.createElement('div')
 			articleCard.classList = "ucb-article-card col-sm-12 col-md-6 col-lg-4"
 			let title = article.article.attributes.title;
-			let link = article.article.attributes.path.alias;
+
+			let link = article.article.attributes.path.alias ? baseURL + article.article.attributes.path.alias : `${baseURL}/node/${article.article.attributes.drupal_internal__nid}`;
 					// if no thumbnail, show no image
 					if (!article.article.relationships.field_ucb_article_thumbnail.data) {
 						image = "";
@@ -506,7 +514,7 @@
 // These functions get the privated Categories and tags to not include them on the match count for their respective taxonomies
 function getPrivateCategories(){
 	let privateCats = []
-		fetch('/jsonapi/taxonomy_term/category?filter[field_ucb_category_display]=false')
+		fetch(`${baseURL}/jsonapi/taxonomy_term/category?filter[field_ucb_category_display]=false`)
 		.then(response => response.json())
 		.then(data=>{
 			data.data.forEach(cat=>{
@@ -518,7 +526,7 @@ function getPrivateCategories(){
 
 function getPrivateTags(){
 	let privateTags = []
-		fetch('/jsonapi/taxonomy_term/tags?filter[field_ucb_tag_display]=false')
+		fetch(`${baseURL}/jsonapi/taxonomy_term/tags?filter[field_ucb_tag_display]=false`)
 		.then(response => response.json())
 		.then(data=>{
 			data.data.forEach(tag=>{

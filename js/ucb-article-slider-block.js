@@ -100,7 +100,9 @@ class ArticleSliderBlockElement extends HTMLElement {
             let thumbId = item.relationships.field_ucb_article_thumbnail.data.id;
             let imageSrc = altObj[idObj[thumbId]];
             let title = item.attributes.title;
-            let link = this._baseURI + item.attributes.path.alias;
+            // If no path alias set, use defaults
+            let path = item.attributes.path.alias ? item.attributes.path.alias : `/node/${item.attributes.drupal_internal__nid}`;
+            let link = this._baseURI + path;
 
             return {
               title,

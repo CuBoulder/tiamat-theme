@@ -10,6 +10,9 @@
 {{ attach_library('boulder_base/ucb-related-articles') }}
 {# Added class to article class 'pageStyleCSS' to control page style #}
 
+{# Base Url #}
+{% set baseURL = url('<front>')|render|trim('/') %}
+
 {% set excludeCats = related_articles_exclude_categories %}
 {% set excludeTags = related_articles_exclude_tags %}
 
@@ -142,8 +145,10 @@
             {{ label }}
           </h1>
         {% endif %}
-        {% if content.field_article_header_image_text|render %}
-          <p class="ucb-article-supplemental-text">{{ content.field_article_header_image_text|render|striptags|trim }}</p>
+        {% if content.field_article_header_image_text %}
+          <p class="ucb-article-supplemental-text">
+            {{ content.field_article_header_image_text.0['#context'].value }}
+          </p>
         {% endif %}
         <div role="contentinfo" class="ucb-article-meta">
           {% if showDate %}
@@ -172,7 +177,7 @@
       {{ content.field_ucb_article_tags }}
       {% if content.field_appears_in_issue|render %}
         <div role="contentinfo" class="container ucb-article-issue" itemprop="keywords">
-          <div>
+          <div class="ucb-article-issue-icon" aria-hidden="true">
             <span class="visually-hidden">Issues:</span>
             <i class="fa-solid fa-book"></i>
           </div>
@@ -183,6 +188,7 @@
       {# Related Articles Block #}
       <div{{ create_attribute({
           class: ['container', 'ucb-related-articles-block'],
+          'data-baseurl' : baseURL,
           'data-loggedin': logged_in ? 'true' : 'false',
           'data-catsjson': content.field_ucb_article_categories|json_encode(constant('JSON_PRETTY_PRINT')),
           'data-tagsjson': content.field_ucb_article_tags|json_encode(constant('JSON_PRETTY_PRINT')),
