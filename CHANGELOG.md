@@ -9,60 +9,76 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20241113] - 2024-11-13
+
 - ### Related Articles: fix relative path response
+
   Previously the Related Articles block would use the Article link provided by the JSON API response unmodified, which was relative and missing the subpath. This would lead to broken URLs on sites with subpaths. This has been corrected.
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1464
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1464>
+
+* * *
 
 - ### Homepage updates
+
   Handful of updates for the above and below content regions as well as the homepage footer style
-  
-  Sister PR: https://github.com/CuBoulder/ucb_site_configuration/pull/71
-  
+
+  Sister PR: <https://github.com/CuBoulder/ucb_site_configuration/pull/71>
+
   Resolves #1435 
----
+
+* * *
 
 - ### Newsletter: Additional Style Fixes
+
   - Header issues fixed including: Campus logo too small, Website link wrong color, Newsletter title too small, and date and website link should be smaller. Email header too large. Provided correct email header from Lissa ( thanks!).   **NOTE**: Link color SHOULD have all the correct client-specific and dark/light mode overrides being applied to force brand colors... but is not guaranteed to work across all clients equally due to email HTML having zero standards between clients. 
   - Fixes spacing  between border and next articles in a series of Articles or User-content. Previously the top spacing was too small.
   - Fixes a footer issue where sometimes the background wouldn't apply and there would present white text on a white background. 
   - Fixes header images cropping oddly
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1311
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1450
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1311>
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1450>
+
+* * *
 
 - ### Collection Grid Fixes
   Resolves #1439 and #1446.
   Adds a condition for the collection items to be published, and adds a condition to force the columns to always be equal length.
----
+
+* * *
 
 - ### Resolves special characters not rendering correctly in article title image captions
+
   This update:
-  
+
   - Removes instance of `render|striptags|trim` from article title image caption template.
-  
+
   [bug, severity:minor] Resolves CuBoulder/tiamat-theme#1459
----
+
+* * *
 
 - ### Latest Issue Block: fix missing site subpath
+
   Prevents an error in the Latest Issue Block where it would fail to fetch due to a missing subpath. This has been corrected. 
-  
+
   Resolves #1462 
----
+
+* * *
 
 - ### Webform: Adjusts max width at different column widths
+
   Fixes issue where webform blocks placed in Sections with column width 50/50 or 33/66 were too narrow. This was due to styles applied so the form would not span the full width on a single column container. 
-  
+
   Adjusted so that one column layout will continue to span the 66% of the container but smaller multi-column layouts span the entire width.
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1440
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1440>
+
+* * *
 
 - ### Adds spacing between items in a no-bullet list
   [change] Resolves CuBoulder/tiamat-theme#1444
----
+
+* * *
 
 ## [20241030] - 2024-10-30
 
@@ -3763,7 +3779,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241030...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241113...HEAD
+[20241113]: https://github.com/CuBoulder/tiamat-theme/compare/20241030...20241113
 [20241030]: https://github.com/CuBoulder/tiamat-theme/compare/20241023...20241030
 [20241023]: https://github.com/CuBoulder/tiamat-theme/compare/20241017...20241023
 [20241017]: https://github.com/CuBoulder/tiamat-theme/compare/20241009...20241017
