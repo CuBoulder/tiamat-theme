@@ -5,7 +5,8 @@
       this._baseURI = this.getAttribute('baseURI');
       this.count = parseInt(this.getAttribute('count'));
       this.newsletterType = this.getAttribute('newsletter-type');
-
+      this.taxonomyMap;
+      this.taxonomyName;
       // Fetch taxonomy terms to build the map first
       fetch(`${this._baseURI}/jsonapi/taxonomy_term/newsletter`)
         .then(response => {
@@ -33,7 +34,8 @@
       + '&filter[publish-check][condition][value]=1'
       + '&filter[publish-check][condition][memberOf]=published';
 
-    fetch(`${this._baseURI}/jsonapi/node/newsletter?include=field_newsletter_section_block.field_newsletter_section_select.field_newsletter_article_select${publishedParams}&filter[field_newsletter_type.meta.drupal_internal__target_id][value]=${this.newsletterType}&sort=-created`)        .then(this.handleError)
+    fetch(`${this._baseURI}/jsonapi/node/newsletter?include=field_newsletter_section_block.field_newsletter_section_select.field_newsletter_article_select${publishedParams}&filter[field_newsletter_type.meta.drupal_internal__target_id][value]=${this.newsletterType}&sort=-created`)
+        .then(this.handleError)
         .then((data) => this.build(data, this.count))
         .catch(error => {
           console.log(error);
@@ -61,7 +63,7 @@
 
         // Get the path using taxonomy and title
         const taxonomyId = newsletter.relationships.field_newsletter_type?.data.id;
-        const taxonomyPath = this.taxonomyMap[taxonomyId];
+        this.taxonomyName = this.taxonomyMap[taxonomyId];
         const path = newsletter.attributes.path.alias ? newsletter.attributes.path.alias : `/node/${newsletter.attributes.drupal_internal__nid}`;
 
         // Access the first section block reference
@@ -109,6 +111,7 @@
 
       // Call a method to build DOM elements for each newsletter
       this.renderNewsletters(newsletterElements);
+      this.renderButton(this.taxonomyName)
     }
 
     renderNewsletters(newsletterElements) {
@@ -135,6 +138,14 @@
         newsletterElement.appendChild(summaryElement);
         this.appendChild(newsletterElement);
       });
+    }
+
+    renderButton(taxonomyName){
+      const buttonElement = document.createElement('a');
+      const urlName = taxonomyName.toLowerCase().replace(/\s+/g, '-');
+      buttonElement.href = `${this._baseURI}/newsletter/${urlName}`;
+      buttonElement.innerText = `${taxonomyName} Archive`;
+      this.appendChild(buttonElement);
     }
   }
 
