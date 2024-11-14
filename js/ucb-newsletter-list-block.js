@@ -126,7 +126,7 @@
 
         const titleElement = document.createElement('p');
         titleElement.textContent = newsletter.title;
-        titleElement.classList.add('ucb-newsletter-list-text')
+        titleElement.classList.add('ucb-newsletter-list-text');
 
         linkElement.appendChild(titleElement);
 
@@ -142,7 +142,10 @@
 
     renderButton(taxonomyName){
       const buttonElement = document.createElement('a');
-      const urlName = taxonomyName.toLowerCase().replace(/\s+/g, '-');
+      const urlName = taxonomyName
+        .toLowerCase() // lower
+        .replace(/[^\w\s-]/g, '') // remove special chars
+        .replace(/\s+/g, '-'); // spaces => -
       buttonElement.href = `${this._baseURI}/newsletter/${urlName}`;
       buttonElement.innerText = `${taxonomyName} Archive`;
       this.appendChild(buttonElement);

@@ -78,3 +78,7 @@
 .ucb-newsletter-list-summary{
   margin-bottom: 0px;
 }
+
+.ucb-newsletter-row .row p{
+  margin-bottom: 0;
+}
