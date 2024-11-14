@@ -130,7 +130,7 @@ const baseURL = relatedArticlesBlock ? relatedArticlesBlock.getAttribute('data-b
 				let articleCard = document.createElement('div')
 				articleCard.classList = "ucb-article-card col-sm-12 col-md-6 col-lg-4"
 				let title = article.article.attributes.title;
-				let link = article.article.attributes.path.alias ? article.article.attributes.path.alias : `/node/${article.attributes.drupal_internal__nid}`;
+				let link = article.article.attributes.path.alias ? baseURL + article.article.attributes.path.alias : `${baseURL}/node/${article.attributes.drupal_internal__nid}`;
 
 						// if no thumbnail, show no image
 						if (!article.article.relationships.field_ucb_article_thumbnail.data) {
@@ -363,8 +363,8 @@ const baseURL = relatedArticlesBlock ? relatedArticlesBlock.getAttribute('data-b
 				// Remove current article from those availabile in the block
 
 				articleArrayWithScores.filter((article)=>{
-          let urlCheck = article.article.attributes.path.alias ? article.article.attributes.path.alias : `/node/${article.article.attributes.drupal_internal__nid}`;
-					if(urlCheck == window.location.pathname){
+          let urlCheck = article.article.attributes.path.alias ? baseURL + article.article.attributes.path.alias : `${baseURL}/node/${article.article.attributes.drupal_internal__nid}`;
+          if(urlCheck == window.location.origin + window.location.pathname){
 						articleArrayWithScores.splice(articleArrayWithScores.indexOf(article),1)
 					} else {
 						return article;
@@ -410,7 +410,7 @@ const baseURL = relatedArticlesBlock ? relatedArticlesBlock.getAttribute('data-b
 			articleCard.classList = "ucb-article-card col-sm-12 col-md-6 col-lg-4"
 			let title = article.article.attributes.title;
 
-			let link = article.article.attributes.path.alias ? article.article.attributes.path.alias : `/node/${article.article.attributes.drupal_internal__nid}`;
+			let link = article.article.attributes.path.alias ? baseURL + article.article.attributes.path.alias : `${baseURL}/node/${article.article.attributes.drupal_internal__nid}`;
 					// if no thumbnail, show no image
 					if (!article.article.relationships.field_ucb_article_thumbnail.data) {
 						image = "";

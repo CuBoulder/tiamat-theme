@@ -166,6 +166,7 @@ function boulder_base_preprocess_page(array &$variables) {
   $variables['ucb_footer_menu_default_links'] = theme_get_setting('ucb_footer_menu_default_links');
   $variables['show_breadcrumb'] = theme_get_setting('ucb_breadcrumb_nav');
   $variables['theme_path'] = base_path() . $variables['directory'];
+  $variables['ucb_homepage_header'] = theme_get_setting('ucb_homepage_header');
   $variables['ucb_campus_header_color'] = theme_get_setting('ucb_campus_header_color');
   $variables['ucb_header_color'] = $headerColor = theme_get_setting('ucb_header_color');
   $variables['ucb_be_boulder'] = theme_get_setting('ucb_be_boulder');
@@ -173,6 +174,9 @@ function boulder_base_preprocess_page(array &$variables) {
   $variables['ucb_rave_alerts'] = theme_get_setting('ucb_rave_alerts');
   $variables['ucb_sticky_menu'] = theme_get_setting('ucb_sticky_menu');
   $variables['ucb_heading_font'] = theme_get_setting('ucb_heading_font');
+  $variables['ucb_above_content_region_color'] = theme_get_setting('ucb_above_content_region_color');
+  $variables['ucb_after_content_one_region_color'] = theme_get_setting('ucb_after_content_one_region_color');
+  $variables['ucb_after_content_two_region_color'] = theme_get_setting('ucb_after_content_two_region_color');
   $useCustomLogo = theme_get_setting('ucb_use_custom_logo');
   if ($useCustomLogo) {
     $fileUrlGenerator = \Drupal::service('file_url_generator');
