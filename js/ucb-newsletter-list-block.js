@@ -64,56 +64,68 @@
         // Get the path using taxonomy and title
         const taxonomyId = newsletter.relationships.field_newsletter_type?.data.id;
         this.taxonomyName = this.taxonomyMap[taxonomyId];
-        const path = newsletter.attributes.path.alias ? newsletter.attributes.path.alias : `/node/${newsletter.attributes.drupal_internal__nid}`;
+        const path = newsletter.attributes.path.alias
+          ? newsletter.attributes.path.alias
+          : `/node/${newsletter.attributes.drupal_internal__nid}`;
 
-        // Access the first section block reference
-        const sectionBlockRef = newsletter.relationships.field_newsletter_section_block?.data[0];
-        if (sectionBlockRef) {
-          const sectionBlock = references.find(ref => ref.id === sectionBlockRef.id && ref.type === 'paragraph--newsletter_section');
+        // Check for a summary field in the newsletter
+        let summary = newsletter.attributes.field_newsletter_summary;
+        // If no summary is present, fall back to content processing
+        if (!summary) {
+          const sectionBlockRef = newsletter.relationships.field_newsletter_section_block?.data[0];
+          if (sectionBlockRef) {
+            const sectionBlock = references.find(
+              ref => ref.id === sectionBlockRef.id && ref.type === 'paragraph--newsletter_section'
+            );
 
-          if (sectionBlock) {
-            // Access the array of section items in the section block
-            const sectionSelectRefs = sectionBlock.relationships?.field_newsletter_section_select?.data;
+            if (sectionBlock) {
+              // Access the array of section items in the section block
+              const sectionSelectRefs = sectionBlock.relationships?.field_newsletter_section_select?.data;
 
-            if (sectionSelectRefs && sectionSelectRefs.length > 0) {
-              // Loop through section items and find the first valid content
-              for (const sectionSelectRef of sectionSelectRefs) {
-                const sectionContent = references.find(ref => ref.id === sectionSelectRef.id);
+              if (sectionSelectRefs && sectionSelectRefs.length > 0) {
+                // Loop through section items and find the first valid content
+                for (const sectionSelectRef of sectionSelectRefs) {
+                  const sectionContent = references.find(ref => ref.id === sectionSelectRef.id);
 
-                if (sectionContent) {
-                  let contentTitle = null;
+                  if (sectionContent) {
+                    // Check if the section content is a paragraph or article and get the title
+                    if (sectionContent.type === 'paragraph--newsletter_section_content') {
+                      summary = sectionContent.attributes.field_newsletter_content_title;
+                    } else if (sectionContent.type === 'paragraph--newsletter_section_article') {
+                      const articleRef = sectionContent.relationships?.field_newsletter_article_select?.data;
 
-                  // Check if the section content is a paragraph or article and get the title
-                  if (sectionContent.type === 'paragraph--newsletter_section_content') {
-                    contentTitle = sectionContent.attributes.field_newsletter_content_title;
-                  } else if (sectionContent.type === 'paragraph--newsletter_section_article') {
-                    const articleRef = sectionContent.relationships?.field_newsletter_article_select?.data;
-
-                    if (articleRef) {
-                      const article = references.find(ref => ref.id === articleRef.id && ref.type === 'node--ucb_article');
-                      if (article) {
-                        contentTitle = article.attributes.title;
+                      if (articleRef) {
+                        const article = references.find(
+                          ref => ref.id === articleRef.id && ref.type === 'node--ucb_article'
+                        );
+                        if (article) {
+                          summary = article.attributes.title;
+                        }
                       }
                     }
-                  }
 
-                  // Store the title, summary, and path
-                  if (contentTitle) {
-                    newsletterElements.push({ title: newsletterTitle, summary: contentTitle, path });
-                    break; // Exit once we have the first valid content for this newsletter
+                    // Exit the loop once a valid summary is found
+                    if (summary) {
+                      break;
+                    }
                   }
                 }
               }
             }
           }
         }
+
+        // Store the newsletter information
+        newsletterElements.push({ title: newsletterTitle, summary, path });
       }
 
-      // Call a method to build DOM elements for each newsletter
+      // Build DOM elements for each newsletter
       this.renderNewsletters(newsletterElements);
-      this.renderButton(this.taxonomyName)
+      this.renderButton(this.taxonomyName);
     }
 
+
+    // This will create the Newsletter Rows
     renderNewsletters(newsletterElements) {
       newsletterElements.forEach(newsletter => {
         const newsletterElement = document.createElement('div');
@@ -140,6 +152,7 @@
       });
     }
 
+    // This will create the Archive Link
     renderButton(taxonomyName){
       const buttonElement = document.createElement('a');
       const urlName = taxonomyName
