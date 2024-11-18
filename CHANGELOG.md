@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Change footer to be sorted into rows
+  Changes the direction of the footer to be flexed into rows instead.
+---
+
 ## [20241113] - 2024-11-13
 
 - ### Related Articles: fix relative path response
