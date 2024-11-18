@@ -31,10 +31,6 @@
 	max-width: 100px;
 }
 
-.ucb-content-list-sidebar .ucb-content-list-text-container {
-  flex-grow: 1;
-}
-
 .ucb-content-list-display-sidebar .ucb-content-list-teaser .ucb-content-list-image {
 	max-width: 50px;
 }
@@ -124,7 +120,7 @@
 }
 
 .ucb-content-list-sidebar .ucb-content-list-text-container {
-	width: fit-content;
+	width: min-content;
 	flex-grow: 1;
 }
 
