@@ -9,21 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20241118] - 2024-11-18
+
 - ### Content List: Fixes the sidebar display's text
+
   Fixes text wrapping of the text on Sidebar display. Text will remain all on one row with the thumbnail image.
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1169
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1169>
+
+* * *
 
 - ### Adds missing regions to search pages
+
   Previously, some regions were missing from search pages, such as the sidebar regions. This update adds those regions to search pages to match our other pages, allowing blocks to be placed in the sidebar using block layout. This fix is needed ASAP for the homepage site.
-  
+
   [bug] Resolves CuBoulder/tiamat-theme#1453
----
+
+* * *
 
 - ### Change footer to be sorted into rows
   Changes the direction of the footer to be flexed into rows instead.
----
+
+* * *
 
 ## [20241113] - 2024-11-13
 
@@ -3795,7 +3802,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241113...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241118...HEAD
+[20241118]: https://github.com/CuBoulder/tiamat-theme/compare/20241113...20241118
 [20241113]: https://github.com/CuBoulder/tiamat-theme/compare/20241030...20241113
 [20241030]: https://github.com/CuBoulder/tiamat-theme/compare/20241023...20241030
 [20241023]: https://github.com/CuBoulder/tiamat-theme/compare/20241017...20241023
