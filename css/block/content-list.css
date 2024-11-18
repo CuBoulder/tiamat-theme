@@ -120,7 +120,7 @@
 }
 
 .ucb-content-list-sidebar .ucb-content-list-text-container {
-	width: fit-content;
+	width: min-content;
 	flex-grow: 1;
 }
 

@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Content List: Fixes the sidebar display's text
+  Fixes text wrapping of the text on Sidebar display. Text will remain all on one row with the thumbnail image.
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1169
+---
+
 - ### Adds missing regions to search pages
   Previously, some regions were missing from search pages, such as the sidebar regions. This update adds those regions to search pages to match our other pages, allowing blocks to be placed in the sidebar using block layout. This fix is needed ASAP for the homepage site.
   
