@@ -1195,4 +1195,5 @@ h2.clear-margin,h3.clear-margin,h4.clear-margin,h5.clear-margin,h6.clear-margin,
 
 .footer-columns {
   display: flex;
+  flex-direction: column;
 }
