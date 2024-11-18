@@ -94,7 +94,7 @@
     {% endif %}
     {% set linkColor = content['#block_content'].field_link_color.value %}
     {# Dont let twig render the links #}
-    <div class="ucb-hero-unit-content container">
+    <div class="ucb-hero-unit-content container" style="padding-top: {{ content.field_hero_top_padding }}; padding-bottom: {{ content.field_hero_bottom_padding }};">
       <div class="row">
         {% if content['#block_content'].field_text_align.value == "text-righthalf" %}
           <div class="col-12 col-md-6"></div>
