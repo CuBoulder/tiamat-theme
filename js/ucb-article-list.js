@@ -530,8 +530,8 @@
           imageSrc = altObj[idObj[thumbId]];
         }
 
-        // Format date
-        const date = new Date(item.attributes.created).toLocaleDateString('en-us', {
+        // Format
+        const date = item.attributes.field_ucb_article_date_override == "7" ? null : new Date(item.attributes.created).toLocaleDateString('en-us', {
           year: 'numeric',
           month: 'short',
           day: 'numeric',
