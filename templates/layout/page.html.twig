@@ -209,11 +209,13 @@
 
   {# MAIN PAGE CONTENT #}
   <div{{ create_attribute({ class: ['ucb-page-content', ucb_heading_font == 'normal' ? 'ucb-heading-font-normal'] }) }}>
-    {% if (show_breadcrumb) and (page.breadcrumb|render|striptags|trim|length > 0) %}
-      <div class="ucb-breadcrumb-region">
-        {{ page.breadcrumb }}
-      </div>
-    {% endif %}
+    {% block breadcrumb_region %}
+      {% if show_breadcrumb and page.breadcrumb|render|striptags|trim|length > 0 %}
+        <div class="ucb-breadcrumb-region">
+          {{ page.breadcrumb }}
+        </div>
+      {% endif %}
+    {% endblock %}
 
     {{ page.highlighted }}
 
@@ -254,7 +256,7 @@
                     {{ page.sidebar }}
                   </div>
                   <div class="ucb-layout-main col-12 col-lg-8 ucb-has-sidebar">
-                    {{ page.content }}
+                    {{ block('content') }}
                   </div>
                 </div>
               </div>
@@ -262,7 +264,7 @@
               <div class="ucb-layout-container ucb-sidebar-container container">
                 <div class="layout-row row">
                   <div class="ucb-layout-main col-12 col-lg-8 ucb-has-sidebar">
-                    {{ page.content }}
+                    {{ block('content') }}
                   </div>
                   <div class="ucb-left-right ucb-sidebar col-12 col-lg-4">
                     {{ page.sidebar }}
@@ -272,7 +274,9 @@
             {% endif %}
           {% else %}
             <div class="clearfix">
-              {{ page.content }}
+              {% block content %}
+                {{ page.content }}
+              {% endblock %}
             </div>
           {% endif %}
         {% endblock %}
@@ -309,8 +313,7 @@
   {% block page_footer %}
     <footer class="ucb-homepage-footer background-black">
       {% if page.footer|render or ucb_footer_menu_default_links %}
-        <div
-          class="ucb-footer-top">
+        <div class="ucb-footer-top">
           {# {% if page.footer_cta|render %}
           <div class="ucb-footer-container footer-cta-block container">
           {{ page.footer_cta }}
