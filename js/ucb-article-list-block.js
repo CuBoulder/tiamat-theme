@@ -114,17 +114,6 @@ class ArticleListBlockElement extends HTMLElement {
             // If no path alias set, use defaults
             const path = item.attributes.path.alias ? item.attributes.path.alias : `/node/${item.attributes.drupal_internal__nid}`;
 
-
-            /**
-             *
-             *
-             *
-             *         const date = item.attributes.field_ucb_article_date_override == "7" ? null : new Date(item.attributes.created).toLocaleDateString('en-us', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-        });
-             */
             return {
             title: item.attributes.title,
             link: this._baseURI + path,
