@@ -47,19 +47,12 @@
  */
 #}
 
-{{ attach_library('boulder_base/ucb-search-page') }}
-
-<div class="layout-container ucb-page-container">
-  {{ block("page_header", "page.html.twig") }}
-  <div{{ create_attribute({ class: ['ucb-page-content', ucb_heading_font == 'normal' ? 'ucb-heading-font-normal'] }) }}>
-    {{ page.highlighted }}
-    {{ page.help }}
-    <main role="main">
-      <div class="ucb-content-wrapper ucb-search-page-content container">
-        <h1>Search</h1>
-        {{ page.content }}
-      </div>
-    </main>
+{% extends 'page.html.twig' %}
+{% block breadcrumb_region %}{% endblock %}
+{% block content %}
+  {{ attach_library('boulder_base/ucb-search-page') }}
+  <div class="container ucb-content-wrapper ucb-search-page-content ucb-contained-row">
+    <h1>Search</h1>
+    {{ page.content }}
   </div>
-  {{ block("page_footer", "page.html.twig") }}
-</div>
+{% endblock %}
