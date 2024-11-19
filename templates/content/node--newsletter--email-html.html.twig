@@ -520,10 +520,14 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                 <td align="center" valign="top" style="padding: 0;">
 
                     {# Wrapper table for layout #}
-                    <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; text-align: center; max-width: 600px; table-layout: fixed;">
-                        <tr>
+                    <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; max-width: 600px; table-layout: fixed;">
+                        <tbody>
                             {% for i in 0..(blocksToRender|length - 1) %}
-                                <td align="left" valign="top" style="width: 50%; padding: 10px; box-sizing: border-box; vertical-align: top; display: inline-block;">
+                                {% if loop.index is odd %}
+                                <tr>
+                                {% endif %}
+
+                                <td align="left" valign="top" style="width: 50%; padding: 10px; box-sizing: border-box; vertical-align: top;">
                                     <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; table-layout: fixed;">
                                         <tr>
                                             <td style="padding: 10px; vertical-align: top; color: #000000;">
@@ -533,20 +537,32 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                     </table>
                                 </td>
 
-                                {# Close row after every two items or at the end of the blocks #}
+                                {# Add filler block if it's the last block in an odd-numbered list #}
+                                {% if loop.last and loop.index is odd %}
+                                <td align="left" valign="top" style="width: 50%; padding: 10px; box-sizing: border-box; vertical-align: top;">
+                                    <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; table-layout: fixed;">
+                                        <tr>
+                                            <td style="padding: 10px; vertical-align: top; color: #000000;">
+                                                &nbsp; {# Empty filler block #}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+                                {% endif %}
+
                                 {% if loop.index is even or loop.last %}
-                                    {% if loop.index is even and not loop.last %}
-                                        </tr><tr>
-                                    {% endif %}
+                                </tr>
                                 {% endif %}
                             {% endfor %}
-                        </tr>
+                        </tbody>
                     </table>
                 </td>
             </tr>
         </tbody>
     </table>
 {% endif %}
+
+
 
 
                         <!--Ad Two-->
