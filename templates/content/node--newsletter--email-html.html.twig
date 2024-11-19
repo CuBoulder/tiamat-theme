@@ -170,6 +170,11 @@ a, a:visited, a:hover, a:active {
   color: #0000;
 }
 
+.ucb-email-footer .text-align-right,
+.ucb-email-footer .text-align-left{
+  text-align: center !important;
+}
+
 #email h2{
   font-size: 20px;
 }
@@ -568,14 +573,14 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
          <!--Footer-->
          {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
          <center width="600" style="{{boxBackground}}">
-            <table class="ucb-email-footer-{{designType}}"role="presentation" border="0" width="600" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+            <table class="ucb-email-footer-{{designType}} ucb-email-footer"role="presentation" border="0" width="600" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; text-align:center !important;">
                 <tbody style="{{boxBackground}}">
                     <tr style="{{boxBackground}}">
-                        <td style="{{boxBackground}}text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px; padding-top:20px">
+                        <td style="{{boxBackground}}text-align: center; padding-right:10px; padding-left:10px;padding-bottom:20px; padding-top:20px">
                             <table align="center" width="600" style="max-width:600px;{{boxBackground}}">
                                 <tbody style="max-width:600px;{{boxBackground}}">
                                     <tr style="max-width:600px;{{boxBackground}}">
-                                    <td style="max-width:600px;{{boxBackground}}">
+                                    <td style="max-width:600px;{{boxBackground}} text-align:center;">
                                         {{node.field_newsletter_type.entity.field_newsletter_footer.0.processed}}
                                     </td>
                                 </tr>
