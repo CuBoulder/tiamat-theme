@@ -137,7 +137,7 @@ function boulder_base_preprocess_block(array &$variables) {
         ->accessCheck(TRUE)
         ->execute();
       $variables['faculty_publications_jt_people'] = array_filter(
-        array_values(Node::loadMultiple(array_values($results))), 
+        array_values(Node::loadMultiple(array_values($results))),
         function ($item) {
           return $item->field_ucb_person_email !== NULL;
         }
@@ -254,6 +254,16 @@ function boulder_base_preprocess_breadcrumb(array &$variables) {
   $node = \Drupal::routeMatch()->getParameter('node');
   if ($node instanceof NodeInterface) {
     $variables['#cache']['tags'][] = 'node:' . $node->id();
+  }
+}
+
+/**
+ * Preprocess function to enable the current site name to show up on Nodes -- newsletter
+ */
+function boulder_base_preprocess_node(array &$variables) {
+  if (!isset($variables['site_name'])) {
+    $config = \Drupal::config('system.site');
+    $variables['site_name'] = $config->get('name');
   }
 }
 

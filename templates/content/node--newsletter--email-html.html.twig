@@ -64,8 +64,9 @@
 {% set pStyles = 'color:black;' %}
 {% set headerStyles = 'width:100%;background-color: black; padding-bottom:10px;' %}
 {% set classicTableOffset = 'margin-top: -50px;padding:10px;' %}
+{% set footerStyles = 'border-top: solid 1px #cccccc;'%}
 {# padding: 15px 25px; #}
-{% set footerStyles = 'background-color: black !important; padding-top:20px;' %}
+{% set footerStyles = 'background-color: black !important; padding-top:20px;border-top: solid 1px #cccccc;' %}
 {% set cuLogoSrc = cuLogoLight %}
 {% set classicImgOffset = 'width:100%'%}
 {% set emailBackground = 'background-color:black;' %}
@@ -77,7 +78,7 @@
     {% set pStyles = 'color:black;' %}
     {% set headerStyles = 'width:100%; color:black;padding-bottom:20px;' %}
     {# padding: 15px 25px; #}
-    {% set footerStyles = 'color:black;' %}
+    {% set footerStyles = 'color:black;border-top: solid 1px #cccccc;' %}
     {% set cuLogoSrc = cuLogoDark %}
     {% set emailBackground = 'background-color:white;' %}
 {# Darkbox #}
@@ -87,7 +88,7 @@
     {% set pStyles = 'color:#222330;' %}
     {% set headerStyles = 'width:100%; color:white;margin-bottom:50px;' %}
     {# padding: 15px 25px; #}
-    {% set footerStyles = 'color:white;' %}
+    {% set footerStyles = 'color:white;border-top: solid 1px #cccccc;' %}
     {% set cuLogoSrc = cuLogoLight %}
     {% set emailBackground = 'background-color:white;' %}
     {% set boxBackground = 'background-color:black;'%}
@@ -100,7 +101,7 @@
     {% set pStyles = ' color: #222330;' %}
     {% set headerStyles = 'width:100%; color:black;' %}
     {# padding: 15px 25px; #}
-    {% set footerStyles = 'color:black;' %}
+    {% set footerStyles = 'color:black;border-top: solid 1px #cccccc;' %}
     {% set cuLogoSrc = cuLogoDark %}
     {% set emailBackground = 'background-color:white;' %}
     {% set boxBackground = 'background-color:white;'%}
@@ -113,7 +114,7 @@
 {% set pStyles = 'color:black;' %}
 {% set headerStyles = 'width:100%;background-color: black;padding-bottom:20px;' %}
 {# padding: 15px 25px; #}
-{% set footerStyles = 'background-color: black; padding-top:20px;' %}
+{% set footerStyles = 'background-color: black; padding-top:20px;border-top: solid 1px #cccccc;' %}
 {% set cuLogoSrc = cuLogoLight %}
 {% set classicImgOffset = 'padding: 10px; background: white;'%}
 {% set emailBackground = 'background-color:black;' %}
@@ -574,8 +575,15 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
          <!--Footer-->
          {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
          <center width="600" style="{{boxBackground}}">
-            <table class="ucb-email-footer-{{designType}} ucb-email-footer"role="presentation" border="0" width="600" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; text-align:center !important;">
+            <table class="ucb-email-footer-{{designType}} ucb-email-footer"role="presentation" border="0" width="600" cellspacing="0" style="{{footerStyles}} border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; text-align:center !important;">
                 <tbody style="{{boxBackground}}">
+         <!--Site Link-->
+                  <tr style="{{boxBackground}}">
+                    <td>
+                      <a style="font-family: Helvetica, Arial, sans-serif;line-height: 19px; margin: 0; font-size: 18px; font-weight:bold;" href="{{base_domain}}">{{ site_name }}
+                      </a>
+                    </td>
+                  </tr>
                     <tr style="{{boxBackground}}">
                         <td style="{{boxBackground}}text-align: center; padding-right:10px; padding-left:10px;padding-bottom:20px; padding-top:20px">
                             <table align="center" width="600" style="max-width:600px;{{boxBackground}}">
