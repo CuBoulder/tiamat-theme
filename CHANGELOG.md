@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Video Hero Unit Content Padding
+  Adding content padding for the video hero unit to extend height more easily for users. 
+  Overrides css with inline style.
+  
+  Options were added in the Design tab
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/193
+  
+  Resolves #1477 
+---
+
 - ### Newsletters: New `Newsletter List Block` and `Newsletter Archive`.  Summary field added to Newsletter: Email
   Adds the `Newsletter List Block`, which allows aggregation of 1-10 of the most recent Newsletters of the selected type. Will link to the Newsletter Archive. 
   
