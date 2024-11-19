@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Padding for mega menu columns
+  Resolves #1468
+  Adds padding to the mega menu columns to prevent content overlap.
+---
+
 - ### Video Hero Unit Content Padding
   Adding content padding for the video hero unit to extend height more easily for users. 
   Overrides css with inline style.
