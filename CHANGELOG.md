@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Back to Black
+  Change the black variable from `#222` to `#000`
+  
+  Resolves #1478 
+---
+
 - ### Padding for mega menu columns
   Resolves #1468
   Adds padding to the mega menu columns to prevent content overlap.
