@@ -39,6 +39,10 @@
   cursor: pointer;
 }
 
+.ucb-mega-menu-column {
+  padding-right: 10px;
+}
+
 .ucb-mega-menu-column-3 .ucb-mega-menu-column {
   min-width: 33%;
   width: 33%;
@@ -61,11 +65,6 @@
   min-width: 16%;
   width: 16%;
   max-width: 16%;
-}
-
-
-.ucb-mega-menu-text-above {
-  padding-right: 10px;
 }
 
 .ucb-mega-menu-wrapper {
