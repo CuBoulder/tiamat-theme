@@ -512,23 +512,43 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                             {% endfor %}
 
                             {# Render the blocks side by side #}
-                            {% if blocksToRender %}
-                                <table role="presentation" border="0" width="600" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white" class="row row-content ucb-newsletter-blocks">
-                                    <tbody>
-                                        {% for i in 0..(blocksToRender|length - 1) %}
-                                            {% if loop.index is odd %}
-                                                <tr>
-                                            {% endif %}
-                                                    <td class="promo-block-row" align="center" style=" width:50%;align-content:baseline;text-align: left; padding-right:10px; padding-left:10px">
-                                                        {{ blocksToRender[i] }}
-                                                    </td>
-                                            {% if loop.index is even or loop.last %}
-                                                </tr>
-                                            {% endif %}
-                                        {% endfor %}
-                                    </tbody>
-                                </table>
-                            {% endif %}
+{# Check if there are blocks to render #}
+{% if blocksToRender %}
+    <table role="presentation" border="0" cellspacing="0" cellpadding="0" width="100%" style="border-collapse: collapse; margin: 0 auto; width: 100%; max-width: 600px; text-align: center; font-family: Helvetica, Arial, sans-serif; font-size: 14px; background-color: white;" class="row row-content ucb-newsletter-blocks">
+        <tbody>
+            <tr>
+                <td align="center" valign="top" style="padding: 0;">
+
+                    {# Wrapper table for layout #}
+                    <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; text-align: center; max-width: 600px; table-layout: fixed;">
+                        <tr>
+                            {% for i in 0..(blocksToRender|length - 1) %}
+                                <td align="left" valign="top" style="width: 50%; padding: 10px; box-sizing: border-box; vertical-align: top; display: inline-block;">
+                                    <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; table-layout: fixed;">
+                                        <tr>
+                                            <td style="padding: 10px; vertical-align: top; color: #000000;">
+                                                {{ blocksToRender[i] }}
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </td>
+
+                                {# Close row after every two items or at the end of the blocks #}
+                                {% if loop.index is even or loop.last %}
+                                    {% if loop.index is even and not loop.last %}
+                                        </tr><tr>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </tr>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endif %}
+
+
                         <!--Ad Two-->
                         {% if content.field_newsletter_promo_image_two|render %}
                         {% if content.field_newsletter_promo_link_two|render %}
