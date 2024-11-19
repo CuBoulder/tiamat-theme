@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Expandable url has updates
+  Series of updates to add functionality to expendables and ckeditor accordions for address bar hash updates.
+  
+  Removed the duplicate expandable block js.
+  Works for expandable block's accordion/horizontal/vertical options.
+  Made global so that ckeditor accordions on any page type are affected
+  
+  This does not handle nested accordions within expandable/accordion content. It doesn't need to at this moment.
+  This does not affect the FAQ page's hash stuff
+  
+  Resolves #1353
+---
+
 ## [20241118] - 2024-11-18
 
 - ### Content List: Fixes the sidebar display's text
