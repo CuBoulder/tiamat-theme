@@ -519,3 +519,11 @@ colorbox-image:
       css/block/image-gallery.css: {}
       css/colorbox-image.css: {}
       js/glightbox/glightbox.min.css: {}
+
+ucb-newsletter-list-block:
+  version: 1.x
+  js:
+    js/ucb-newsletter-list-block.js: {}
+  css:
+    theme:
+      css/block/ucb-newsletter-list-block.css: {}

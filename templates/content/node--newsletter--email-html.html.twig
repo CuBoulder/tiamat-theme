@@ -341,11 +341,28 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
     display: block;
   }
 }
+
+/* Preheader Style -- this appears after the subject line */
+.preheader{
+  display: none !important;
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
             </style>
         </head>
     {# END VARIABLE TESTS #}
     {# BIG Wrapper #}
     <div id="email" style="align-items:center;{{emailBackground}}">
+      <!--PRE-HEADER TEXT-->
+      {% if node.field_newsletter_summary.value %}
+      <span
+        style="display: none !important;visibility: hidden;opacity: 0;height: 0;width: 0;"
+        class="preheader">
+      {{ node.field_newsletter_summary.value }}
+      </span>
+      {% endif %}
     <div id="ucb-email-body" style="margin: auto;{{divStyles}}" data-url="{{base_url}}">
         {# HEADER -- to do: might need to be different tables for styling purposes #}
         <!-- Header -->
