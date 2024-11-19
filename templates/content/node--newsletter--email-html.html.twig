@@ -399,15 +399,16 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                             {% if node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value %}
                                 <tr>
                                   <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 10px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
-                                      <img style="object-fit:contain;-ms-interpolation-mode: bicubic; clear: both; display: block; float: left; height: 167px !important; max-width: 100% !important; outline: none; text-decoration: none; width: 250px !important; max-height: auto !important;"src="{{base_domain}}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}">
+                                      <img alt="{{node.field_newsletter_type.entity.label}}" style="object-fit:contain;-ms-interpolation-mode: bicubic; clear: both; display: block; float: left; height: 167px !important; max-width: 100% !important; outline: none; text-decoration: none; width: 250px !important; max-height: auto !important;"src="{{base_domain}}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}">
                                     </td>
                                 </tr>
-                            {% endif %}
+                            {% else %}
                                 <tr>
                                   <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 20px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 20px; padding-left:10px; text-align:left">
                                     <span>{{node.field_newsletter_type.entity.label}}</span>
                                   </td>
                                 </tr>
+                            {% endif %}
                                 <tr>
                                   <td style="width:50%;padding: 20px;padding-left:10px; text-align:left; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 12px; margin: 0; font-size: 12px; width: 50%; {{boxBackground}}">{{ node.created.value|date("M. j, Y") }}</td>
                                   <td style="line-height: 12px; margin: 0; font-size: 12px; width:50%;padding-right:10px;text-align:right;">
