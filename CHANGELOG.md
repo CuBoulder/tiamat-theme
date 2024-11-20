@@ -9,10 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20241120] - 2024-11-20
+
 - ### Updated menu style fixes
   Fixes some menu style issues in the shadow and highlight styles.
   Removes the gap in the highlight style and lowers the text in the shadow style.
----
+
+* * *
 
 ## [20241120] - 2024-11-20
 
@@ -3873,6 +3876,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.20221109] - 2022-11-09
 
 [unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241120...HEAD
+[20241120]: https://github.com/CuBoulder/tiamat-theme/compare/20241120...20241120
 [20241120]: https://github.com/CuBoulder/tiamat-theme/compare/20241118...20241120
 [20241118]: https://github.com/CuBoulder/tiamat-theme/compare/20241113...20241118
 [20241113]: https://github.com/CuBoulder/tiamat-theme/compare/20241030...20241113
