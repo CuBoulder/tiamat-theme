@@ -50,7 +50,7 @@
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region li.menu-item a.nav-link {
     color: #bbb;
     font-weight: 400;
-    padding: 0 0.25rem 5px .25rem;
+    padding: 5px 0.25rem 0 .25rem;
   }
 
   .ucb-main-nav-container.ucb-secondary-menu-position-above .ucb-secondary-menu-region .menu.social-media .icon-bg {
