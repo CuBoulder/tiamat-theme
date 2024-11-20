@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Updated menu style fixes
+  Fixes some menu style issues in the shadow and highlight styles.
+  Removes the gap in the highlight style and lowers the text in the shadow style.
+---
+
 ## [20241120] - 2024-11-20
 
 - ### Back to Black
