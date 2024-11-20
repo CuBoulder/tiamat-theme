@@ -9,58 +9,70 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20241120] - 2024-11-20
+
 - ### Back to Black
+
   Change the black variable from `#222` to `#000`
-  
+
   Resolves #1478 
----
+
+* * *
 
 - ### Padding for mega menu columns
   Resolves #1468
   Adds padding to the mega menu columns to prevent content overlap.
----
+
+* * *
 
 - ### Video Hero Unit Content Padding
+
   Adding content padding for the video hero unit to extend height more easily for users. 
   Overrides css with inline style.
-  
+
   Options were added in the Design tab
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/193
-  
+
+  Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/193>
+
   Resolves #1477 
----
+
+* * *
 
 - ### Newsletters: New `Newsletter List Block` and `Newsletter Archive`.  Summary field added to Newsletter: Email
+
   Adds the `Newsletter List Block`, which allows aggregation of 1-10 of the most recent Newsletters of the selected type. Will link to the Newsletter Archive. 
-  
+
   The Newsletter Archive isn't a content type, it is a route that will exist for any newsletters of the specified type listing them in a paginated view with the title and the summary. The summary will use either the summary field or the first piece of content's title. You can find the Newsletter Archive at  `/newsletter/<Newsletter-Type>`
-  
+
   Also adds a Summary field to the Newsletter page, which will be used as a pre-header on the emails and used as a Summary on the Newsletter List Block and Newsletter Archive page. 
-  
+
   This should show up after the Subject on an Email in specific clients such as Gmail, iOS, and others ( this will require prod - testing )
-  
+
   Includes:
-  - `theme` => https://github.com/CuBoulder/tiamat-theme/pull/1476
-  - `profile` => https://github.com/CuBoulder/tiamat10-profile/pull/231
-  - `custom-entities`  => https://github.com/CuBoulder/tiamat-custom-entities/pull/192
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1391
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1475
----
+
+  - `theme` => <https://github.com/CuBoulder/tiamat-theme/pull/1476>
+  - `profile` => <https://github.com/CuBoulder/tiamat10-profile/pull/231>
+  - `custom-entities`  => <https://github.com/CuBoulder/tiamat-custom-entities/pull/192>
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1391>
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1475>
+
+* * *
 
 - ### Expandable url has updates
+
   Series of updates to add functionality to expendables and ckeditor accordions for address bar hash updates.
-  
+
   Removed the duplicate expandable block js.
   Works for expandable block's accordion/horizontal/vertical options.
   Made global so that ckeditor accordions on any page type are affected
-  
+
   This does not handle nested accordions within expandable/accordion content. It doesn't need to at this moment.
   This does not affect the FAQ page's hash stuff
-  
+
   Resolves #1353
----
+
+* * *
 
 ## [20241118] - 2024-11-18
 
@@ -3855,7 +3867,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241118...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241120...HEAD
+[20241120]: https://github.com/CuBoulder/tiamat-theme/compare/20241118...20241120
 [20241118]: https://github.com/CuBoulder/tiamat-theme/compare/20241113...20241118
 [20241113]: https://github.com/CuBoulder/tiamat-theme/compare/20241030...20241113
 [20241030]: https://github.com/CuBoulder/tiamat-theme/compare/20241023...20241030
