@@ -21,6 +21,7 @@ ucb-global:
   js:
     js/bootstrap/bootstrap.min.js: {}
     js/ucb-rave-alert.js: {}
+    js/ucb-expandable-content.js: {}
   dependencies:
     - core/drupal
 
@@ -126,13 +127,6 @@ ucb-image-gallery:
     theme:
       css/block/image-gallery.css: {}
       js/glightbox/glightbox.min.css: {}
-
-ucb-expandable-content:
-  version: 1.x
-  js:
-    js/expandable-content.js: {}
-  css:
-    theme:
 
 ucb-content-grid:
   version: 1.x
@@ -525,3 +519,11 @@ colorbox-image:
       css/block/image-gallery.css: {}
       css/colorbox-image.css: {}
       js/glightbox/glightbox.min.css: {}
+
+ucb-newsletter-list-block:
+  version: 1.x
+  js:
+    js/ucb-newsletter-list-block.js: {}
+  css:
+    theme:
+      css/block/ucb-newsletter-list-block.css: {}
