@@ -60,7 +60,7 @@
 {% if designType == 'classic' %}
 {% set classicStyle = 'background: white;margin-top: -50px;'%}
 {% set divStyles = 'background-color: #fff; color: #fff;' %}
-{% set aStyles = 'color: #ff9900;' %}
+{% set aStyles = 'color: #cfb87b;' %}
 {% set pStyles = 'color:black;' %}
 {% set headerStyles = 'width:100%;background-color: black; padding-bottom:10px;' %}
 {% set classicTableOffset = 'margin-top: -50px;padding:10px;' %}
@@ -74,7 +74,7 @@
 {# Minimal #}
 {% elseif designType == 'minimal' %}
     {% set divStyles = 'background-color: #FFFFFF;margin:auto;' %}
-    {% set aStyles = 'color: #ff9900;' %}
+    {% set aStyles = 'color: #0277BD;' %}
     {% set pStyles = 'color:black;' %}
     {% set headerStyles = 'width:100%; color:black;padding-bottom:20px;' %}
     {# padding: 15px 25px; #}
@@ -84,7 +84,7 @@
 {# Darkbox #}
 {% elseif designType == 'darkbox' %}
     {% set divStyles = 'background-color: black; color: #fff;margin:auto;' %}
-    {% set aStyles = 'color: #ff9900;' %}
+    {% set aStyles = 'color: #cfb87b;;' %}
     {% set pStyles = 'color:#222330;' %}
     {% set headerStyles = 'width:100%; color:white;margin-bottom:50px;' %}
     {# padding: 15px 25px; #}
@@ -97,7 +97,7 @@
 {# Lightbox #}
 {% elseif designType == 'lightbox' %}
     {% set divStyles = 'background-color: #E9E9E9;margin:auto;' %}
-    {% set aStyles = 'color: #ff9900;' %}
+    {% set aStyles = 'color: #0277BD;' %}
     {% set pStyles = ' color: #222330;' %}
     {% set headerStyles = 'width:100%; color:black;' %}
     {# padding: 15px 25px; #}
@@ -110,12 +110,13 @@
 {# Simple #}
 {% else %}
 {% set divStyles = 'background-color: #fff; color: #fff;' %}
-{% set aStyles = 'color: #ff9900;' %}
+{% set aStyles = 'color: #cfb87b;' %}
 {% set pStyles = 'color:black;' %}
 {% set headerStyles = 'width:100%;background-color: black;padding-bottom:20px;' %}
 {# padding: 15px 25px; #}
 {% set footerStyles = 'background-color: black; padding-top:20px;border-top: solid 1px #cccccc;' %}
 {% set cuLogoSrc = cuLogoLight %}
+{% set boxBackground = 'background-color:black;'%}
 {% set classicImgOffset = 'padding: 10px; background: white;'%}
 {% set emailBackground = 'background-color:black;' %}
 
@@ -153,11 +154,12 @@
             .ucb-email-footer-simple a:hover,
             .ucb-email-header-darkbox a:hover,
             .ucb-email-footer-darkbox a:hover {
-              color: #fff;
+              color: white;
             }
+
             .ucb-email-header-minimal a:hover,
-            .ucb-email-footer.minimal a:hover {
-              color: #0000;
+            .ucb-email-footer-minimal a:hover {
+              color: black;
             }
 
             .ucb-email-footer .text-align-right,
@@ -336,34 +338,35 @@
             .container > .ucb-button-group > .ucb-link-button-large{
               padding: 20px;
             }
-            a:link,a:visited,.ii a[href] {
-                color: #0277BD !important;
+
+            /* #ucb-email-body a:link,#ucb-email-body a:visited,#ucb-email-body.ii a[href] {
+                color: #0277BD;
                 transition: background-color 0.25s ease,border-color 0.25s ease,color 0.25s ease;
                 text-decoration: none;
                 text-decoration-color: rgba(2,119,189,0.65);
                 -webkit-text-decoration-color: rgba(2,119,189,0.65);
             }
 
-            a:hover,.ii a[href]:hover {
+            #ucb-email-body a:hover,.ii a[href]:hover {
                 color: #B71C1C;
                 text-decoration-color: rgba(183,28,28,0.65);
                 -webkit-text-decoration-color: rgba(183,28,28,0.65);
             }
 
-            a:active, .ii a[href]:active {
+            #ucb-email-body a:active, #ucb-email-body .ii a[href]:active {
                 color: #B71C1C;
                 text-decoration-color: rgba(183,28,28,0.65);
                 -webkit-text-decoration-color: rgba(183,28,28,0.65);
-            }
+            } */
 
-            h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
+            #ucb-email-body h1,#ucb-email-body h2,#ucb-email-body h3,#ucb-email-body h4,#ucb-email-body h5,#ucb-email-body h6,#ucb-email-body .h1,#ucb-email-body .h2,#ucb-email-body .h3,#ucb-email-body .h4,#ucb-email-body .h5,#ucb-email-body .h6 {
                 /* line-height: 1.3; */
                 margin: 0 0 10px 0;
                 font-family:Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
                 text-decoration: none;
             }
 
-            *{
+            #ucb-email-body *{
               font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
             }
 
@@ -480,7 +483,7 @@
                                 <tr>
                                   <td style="width:50%;padding: 20px;padding-left:10px; text-align:left; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 12px; margin: 0; font-size: 12px; width: 50%; {{boxBackground}}">{{ node.created.value|date("M. j, Y") }}</td>
                                   <td style="line-height: 12px; margin: 0; font-size: 12px; width:50%;padding-right:10px;text-align:right;">
-                                    <a style="text-wrap:nowrap" href="https://www.colorado.edu/cwa/cwa/newsletter/cwanews/september-newsletter">View on website</a>
+                                    <a style="text-wrap:nowrap{{aStyles}}" href="https://www.colorado.edu/cwa/cwa/newsletter/cwanews/september-newsletter">View on website</a>
                                   </td>
                                 </tr>
                               </table>
@@ -704,7 +707,7 @@
          <!--Site Link-->
                   <tr style="{{boxBackground}}">
                     <td style="text-align: center">
-                      <a style="font-family: Helvetica, Arial, sans-serif;line-height: 19px; margin: 0; font-size: 18px; font-weight:bold;text-align: center;" href="{{base_domain}}">{{ site_name }}
+                      <a style="font-family: Helvetica, Arial, sans-serif;line-height: 19px; margin: 0; font-size: 18px; font-weight:bold;text-align: center;{{aStyles}}" href="{{base_domain}}">{{ site_name }}
                       </a>
                     </td>
                   </tr>
