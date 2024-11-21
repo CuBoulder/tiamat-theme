@@ -6,7 +6,7 @@ class ArticleListBlockElement extends HTMLElement {
     var display = this.getAttribute("display");
     var API = this.getAttribute("jsonapi");
     this._baseURI = this.getAttribute("base-uri");
-
+    this.globalDateSetting = this.getAttribute('global-date-format');
     // Exclusions are done on the JS side, get into arrays. Blank if no exclusions
     var excludeCatArray = this.getAttribute("exCats").split(",").map(Number);
     var excludeTagArray = this.getAttribute("exTags").split(",").map(Number);
@@ -119,11 +119,14 @@ class ArticleListBlockElement extends HTMLElement {
             link: this._baseURI + path,
             image: imageSrc,
             imageWide: imageSrcWide,
-            date: item.attributes.field_ucb_article_date_override == "7" ? null : new Date(item.attributes.created).toLocaleDateString('en-us', {
-              year: 'numeric',
-              month: 'short',
-              day: 'numeric',
-            }),
+            date: (item.attributes.field_ucb_article_date_override != "7" &&
+              (this.globalDateSetting != 6 || item.attributes.field_ucb_article_date_override != "0"))
+              ? new Date(item.attributes.created).toLocaleDateString('en-us', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              })
+              : null,
             body: body.trim(),
           };
         }
