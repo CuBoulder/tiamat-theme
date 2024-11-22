@@ -60,12 +60,13 @@
 {% if designType == 'classic' %}
 {% set classicStyle = 'background: white;margin-top: -50px;'%}
 {% set divStyles = 'background-color: #fff; color: #fff;' %}
-{% set aStyles = 'color: #ff9900;' %}
+{% set aStyles = 'color: #cfb87b;' %}
 {% set pStyles = 'color:black;' %}
-{% set headerStyles = 'width:100%;background-color: black; padding-bottom:50px;' %}
+{% set headerStyles = 'width:100%;background-color: black; padding-bottom:10px;' %}
 {% set classicTableOffset = 'margin-top: -50px;padding:10px;' %}
+{% set footerStyles = 'border-top: solid 1px #cccccc;'%}
 {# padding: 15px 25px; #}
-{% set footerStyles = 'background-color: black !important; padding-top:20px;' %}
+{% set footerStyles = 'background-color: black !important; padding-top:20px;border-top: solid 1px #cccccc;' %}
 {% set cuLogoSrc = cuLogoLight %}
 {% set classicImgOffset = 'width:100%'%}
 {% set emailBackground = 'background-color:black;' %}
@@ -73,21 +74,21 @@
 {# Minimal #}
 {% elseif designType == 'minimal' %}
     {% set divStyles = 'background-color: #FFFFFF;margin:auto;' %}
-    {% set aStyles = 'color: #ff9900;' %}
+    {% set aStyles = 'color: #0277BD;' %}
     {% set pStyles = 'color:black;' %}
     {% set headerStyles = 'width:100%; color:black;padding-bottom:20px;' %}
     {# padding: 15px 25px; #}
-    {% set footerStyles = 'color:black;' %}
+    {% set footerStyles = 'color:black;border-top: solid 1px #cccccc;' %}
     {% set cuLogoSrc = cuLogoDark %}
     {% set emailBackground = 'background-color:white;' %}
 {# Darkbox #}
 {% elseif designType == 'darkbox' %}
     {% set divStyles = 'background-color: black; color: #fff;margin:auto;' %}
-    {% set aStyles = 'color: #ff9900;' %}
+    {% set aStyles = 'color: #cfb87b;;' %}
     {% set pStyles = 'color:#222330;' %}
     {% set headerStyles = 'width:100%; color:white;margin-bottom:50px;' %}
     {# padding: 15px 25px; #}
-    {% set footerStyles = 'color:white;' %}
+    {% set footerStyles = 'color:white;border-top: solid 1px #cccccc;' %}
     {% set cuLogoSrc = cuLogoLight %}
     {% set emailBackground = 'background-color:white;' %}
     {% set boxBackground = 'background-color:black;'%}
@@ -96,11 +97,11 @@
 {# Lightbox #}
 {% elseif designType == 'lightbox' %}
     {% set divStyles = 'background-color: #E9E9E9;margin:auto;' %}
-    {% set aStyles = 'color: #ff9900;' %}
+    {% set aStyles = 'color: #0277BD;' %}
     {% set pStyles = ' color: #222330;' %}
     {% set headerStyles = 'width:100%; color:black;' %}
     {# padding: 15px 25px; #}
-    {% set footerStyles = 'color:black;' %}
+    {% set footerStyles = 'color:black;border-top: solid 1px #cccccc;' %}
     {% set cuLogoSrc = cuLogoDark %}
     {% set emailBackground = 'background-color:white;' %}
     {% set boxBackground = 'background-color:white;'%}
@@ -109,12 +110,13 @@
 {# Simple #}
 {% else %}
 {% set divStyles = 'background-color: #fff; color: #fff;' %}
-{% set aStyles = 'color: #ff9900;' %}
+{% set aStyles = 'color: #cfb87b;' %}
 {% set pStyles = 'color:black;' %}
 {% set headerStyles = 'width:100%;background-color: black;padding-bottom:20px;' %}
 {# padding: 15px 25px; #}
-{% set footerStyles = 'background-color: black; padding-top:20px;' %}
+{% set footerStyles = 'background-color: black; padding-top:20px;border-top: solid 1px #cccccc;' %}
 {% set cuLogoSrc = cuLogoLight %}
+{% set boxBackground = 'background-color:black;'%}
 {% set classicImgOffset = 'padding: 10px; background: white;'%}
 {% set emailBackground = 'background-color:black;' %}
 
@@ -138,218 +140,292 @@
               }
             </style>
             <style>
+            .ucb-email-header-classic a,
+            .ucb-email-footer-classic a,
+            .ucb-email-header-simple a,
+            .ucb-email-footer-simple a,
+            .ucb-email-header-darkbox a,
+            .ucb-email-footer-darkbox a {
+              color: #cfb87b;
+            }
+            .ucb-email-header-classic a:hover,
+            .ucb-email-footer-classic a:hover,
+            .ucb-email-header-simple a:hover,
+            .ucb-email-footer-simple a:hover,
+            .ucb-email-header-darkbox a:hover,
+            .ucb-email-footer-darkbox a:hover {
+              color: white;
+            }
 
-                img{
-        max-width:100%;
-        height:auto
-    }
+            .ucb-email-header-minimal a:hover,
+            .ucb-email-footer-minimal a:hover {
+              color: black;
+            }
 
-a, a:visited, a:hover, a:active {
-    text-decoration: none;
-    color: #0277bd;
-}
+            .ucb-email-footer .text-align-right,
+            .ucb-email-footer .text-align-left{
+              text-align: center !important;
+            }
 
-.ucb-email-header-classic a,
-.ucb-email-footer-classic a,
-.ucb-email-header-simple a,
-.ucb-email-footer-simple a,
-.ucb-email-header-darkbox a,
-.ucb-email-footer-darkbox a {
-  color: #cfb87b;
-}
-.ucb-email-header-classic a:hover,
-.ucb-email-footer-classic a:hover,
-.ucb-email-header-simple a:hover,
-.ucb-email-footer-simple a:hover,
-.ucb-email-header-darkbox a:hover,
-.ucb-email-footer-darkbox a:hover {
-  color: #fff;
-}
-.ucb-email-header-minimal a:hover,
-.ucb-email-footer.minimal a:hover {
-  color: #0000;
-}
+            #email h2{
+              font-size: 20px;
+            }
 
-#email h2{
-  font-size: 20px;
-}
-
-a[x-apple-data-detectors] {
-color: inherit !important;
-            text-decoration: none !important;
-            font-size: inherit !important;
-            font-family: inherit !important;
-            font-weight: inherit !important;
-            line-height: inherit !important;
-}
-
-u + #ucb-email-body a, u + #ucb-email-body .ii a[href]{
+            a[x-apple-data-detectors] {
             color: inherit !important;
-            text-decoration: none !important;
-            font-size: inherit !important;
-            font-family: inherit !important;
-            font-weight: inherit !important;
-            line-height: inherit !important;
-}
+                        text-decoration: none !important;
+                        font-size: inherit !important;
+                        font-family: inherit !important;
+                        font-weight: inherit !important;
+                        line-height: inherit !important;
+            }
 
-#MessageViewBody a, #MessageViewBody .ii a[href] {
-            color: inherit !important;
-            text-decoration: none !important;
-            font-size: inherit !important;
-            font-family: inherit !important;
-            font-weight: inherit !important;
-            line-height: inherit !important;
-}
+            u + #ucb-email-body a, u + #ucb-email-body .ii a[href]{
+                        color: inherit !important;
+                        text-decoration: none !important;
+                        font-size: inherit !important;
+                        font-family: inherit !important;
+                        font-weight: inherit !important;
+                        line-height: inherit !important;
+            }
 
+            #MessageViewBody a, #MessageViewBody .ii a[href] {
+                        color: inherit !important;
+                        text-decoration: none !important;
+                        font-size: inherit !important;
+                        font-family: inherit !important;
+                        font-weight: inherit !important;
+                        line-height: inherit !important;
+            }
 
+            .tags > a, .tags > .ii a[href]{
+                color: #656565 !important;
+                text-decoration: none;
+                background-color: #e7e7e7 !important;
+                border-color: #e7e7e7;
+                border-style: solid;
+                border-width: 4px;
+                font-size: 10px;
+                font-weight: bold;
+                margin: 0 5px 5px 0;
+                text-transform: uppercase !important;
+            };
 
-                .tags > a, .tags > .ii a[href]{
-                    color: #656565 !important;
-                    text-decoration: none;
-                    background-color: #e7e7e7 !important;
-                    border-color: #e7e7e7;
-                    border-style: solid;
-                    border-width: 4px;
-                    font-size: 10px;
-                    font-weight: bold;
-                    margin: 0 5px 5px 0;
-                    text-transform: uppercase !important;
-                };
-
-                .tags{
-                    padding-bottom: 10px;
-                };
-
-                a.button.button-full,a.button.button-block,.button.button-full,.button.button-block,a.button-ghost.button-full,a.button-ghost.button-block,.button-ghost.button-full,.button-ghost.button-block {
-    display: block;
-    text-align: center;
-};
-
-.button.button-blue,.button-blue,.buttons-color-blue a,.buttons-color-blue a.button, td> .button {
-    background-color: #0277BD !important;
-    color: #fff !important;
-    display: inline-block !important;
-    padding: 5px 10px !important;
-    font-weight: bold !important;
-    transition: background-color 0.5s ease !important;
-    margin-bottom: 5px !important;
-    text-decoration: none !important;
-    -webkit-border-radius: 3px !important;
-    -moz-border-radius: 3px !important;
-    border-radius: 3px !important;
-    -webkit-background-clip: padding-box !important;
-    -moz-background-clip: padding;
-    background-clip: padding-box;
-    -webkit-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    -moz-box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    box-shadow: 0 1px 2px rgba(0,0,0,0.2);
-    transition: -webkit-box-shadow 0.5s ease,background-color 0.5s ease,color 0.5s ease;
-    transition: -moz-box-shadow 0.5s ease,background-color 0.5s ease,color 0.5s ease;
-    transition: box-shadow 0.5s ease,background-color 0.5s ease,color 0.5s ease;
-    background-color: #0277BD;
-    color: #fff !important;
-};
-
-.button.button-blue:hover,.button.button-blue:focus,.buttons-color-blue a:hover,.buttons-color-blue a:focus,.buttons-color-blue a.button:hover,.buttons-color-blue a.button:focus {
-    background-color: #026dae !important;
-    background-color: #026baa !important;
-    -webkit-box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    -moz-box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-    box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-};
-
-.button.button-blue:active,.buttons-color-blue a:active,.buttons-color-blue a.button:active {
-    -webkit-box-shadow: 0 3px 15px rgba(0,0,0,0.35);
-    -moz-box-shadow: 0 3px 15px rgba(0,0,0,0.35);
-    box-shadow: 0 3px 15px rgba(0,0,0,0.35);
-};
-a:link,a:visited,.ii a[href] {
-    color: #0277BD !important;
-    transition: background-color 0.25s ease,border-color 0.25s ease,color 0.25s ease;
-    text-decoration: none;
-    text-decoration-color: rgba(2,119,189,0.65);
-    -webkit-text-decoration-color: rgba(2,119,189,0.65);
-}
-
-a:hover,.ii a[href]:hover {
-    color: #B71C1C;
-    text-decoration-color: rgba(183,28,28,0.65);
-    -webkit-text-decoration-color: rgba(183,28,28,0.65);
-}
-
-a:active, .ii a[href]:active {
-    color: #B71C1C;
-    text-decoration-color: rgba(183,28,28,0.65);
-    -webkit-text-decoration-color: rgba(183,28,28,0.65);
-}
-
-h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
-    /* line-height: 1.3; */
-    margin: 0 0 10px 0;
-    font-family:Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
-    text-decoration: none;
-}
-
-*{
-   font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
-}
-
-/* td>h3>a{
-    text-decoration: none;
-    color: #0277BD;
-} */
-
-.ucb-article-categories{
-    padding: 0;
-}
-
-.ucb-article-categories .ucb-article-category-icon{
-    display: none;
-}
-
-.ucb-article-categories a{
-    color: #666;
-    background-color: #e7e7e7;
-    padding: 3px;
-    line-height: 100%;
-    margin: 0 5px 5px 0;
-    font-weight: 600;
-    text-decoration: none;
-    display: inline-block;
-    text-transform: uppercase;
-    font-size: 10px;
-}
-
-.newsletter-social-media-menu li {
-    display: inline-block;
-    padding: 10px;
-    list-style: none;
-}
-
-.icon-label{
-    display: none;
-}
-
-.ucb-email-social-icon{
-    padding: 0px 10px;
-}
+            .tags{
+                padding-bottom: 10px;
+            };
+            /* This should force GMAIL to show buttons */
+            u ~ .ucb-link-button {
+              display: inline-block;
+              padding: 15px 30px !important;
+              background-color: #0277BD !important;
+              color: #fff !important;
+              text-decoration: none !important;
+              border-radius: 3px !important;
+              line-height: 1.5em !important;
+            }
 
 
+            .ucb-link-button {
+              transition: box-shadow 0.5s ease, background-color 0.5s ease, color 0.5s ease;
+              box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+              background-clip: padding-box;
+              border-radius: 3px;
+              text-decoration: none !important;
+              display: inline-block;
+              padding: 5px 10px;
+              font-weight: bold;
+              line-height: 1.5em;
+            }
 
-@media only screen and (max-width: 500px) {
-  .promo-block-row {
-    display: block;
-  }
-}
+            .container > .ucb-button-group{
+              display: flex;
+              margin-top: 10px;
+              margin-bottom: 10px;
+            }
+            .container > .ucb-button-group > .ucb-link-button {
+              flex-grow: 1;
+              border-radius: 0px;
+              background-clip: padding-box;
+              text-align: center;
+              vertical-align: middle;
+              border-style: solid;
+              position: relative;
+              border: none;
+              overflow: hidden;
+              width: 100%;
+              margin-bottom: 0;
+              border-radius: 0px !important;
+            }
 
-/* Preheader Style -- this appears after the subject line */
-.preheader{
-  display: none !important;
-  visibility: hidden;
-  opacity: 0;
-  height: 0;
-  width: 0;
-}
+            /* Colors */
+            .ucb-link-button.ucb-link-button-blue {
+              color: #fff !important;
+              background-color: #0277BD;
+            }
+
+            .ucb-link-button.ucb-link-button-black {
+              color: #fff !important;
+              background-color: #000;
+            }
+
+            .ucb-link-button.ucb-link-button-gray {
+              color: #111111 !important;
+              background-color: #EEEEEE;
+            }
+
+            .ucb-link-button.ucb-link-button-white {
+              color: #111111 !important;
+              background-color: #fff;
+            }
+
+            .ucb-link-button.ucb-link-button-gold {
+              color: #111111 !important;
+              background-color: #cfb87c;
+            }
+
+            /* Size */
+            .ucb-link-button.ucb-link-button-large {
+              font-size: 130%;
+            }
+
+            .ucb-link-button.ucb-link-button-regular {
+              font-size: 100%;
+            }
+
+            .ucb-link-button.ucb-link-button-small {
+              font-size: 85%;
+              padding: 1px 6px;
+            }
+
+
+            /* Width */
+            .ucb-link-button.ucb-link-button-full {
+              display: block;
+              text-align: center;
+            }
+
+            /* Hover + Focus */
+            .ucb-link-button:hover{
+              box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3)
+
+            }
+            .ucb-link-button.ucb-link-button-blue:hover,.ucb-link-button.ucb-link-button-blue:focus {
+              color: #fff !important;
+              background-color: #026baa;
+            }
+
+            .ucb-link-button.ucb-link-button-black:hover,.ucb-link-button.ucb-link-button-black:focus {
+              color: #fff !important;
+              background-color: #333333;
+            }
+
+            .ucb-link-button.ucb-link-button-gray:hover,.ucb-link-button.ucb-link-button-gray:focus {
+              color: #111111 !important;
+              background-color: #d6d6d6;
+            }
+
+            .ucb-link-button.ucb-link-button-white:hover,.ucb-link-button.ucb-link-button-white:focus {
+              color: #111111 !important;
+              background-color: #e6e6e6;
+            }
+
+            .ucb-link-button.ucb-link-button-gold:hover,.ucb-link-button.ucb-link-button-gold:focus {
+              color: #111111 !important;
+              background-color: #a6a6a6;
+            }
+
+            .container > .ucb-button-group > .ucb-link-button-large{
+              padding: 20px;
+            }
+
+            /* #ucb-email-body a:link,#ucb-email-body a:visited,#ucb-email-body.ii a[href] {
+                color: #0277BD;
+                transition: background-color 0.25s ease,border-color 0.25s ease,color 0.25s ease;
+                text-decoration: none;
+                text-decoration-color: rgba(2,119,189,0.65);
+                -webkit-text-decoration-color: rgba(2,119,189,0.65);
+            }
+
+            #ucb-email-body a:hover,.ii a[href]:hover {
+                color: #B71C1C;
+                text-decoration-color: rgba(183,28,28,0.65);
+                -webkit-text-decoration-color: rgba(183,28,28,0.65);
+            }
+
+            #ucb-email-body a:active, #ucb-email-body .ii a[href]:active {
+                color: #B71C1C;
+                text-decoration-color: rgba(183,28,28,0.65);
+                -webkit-text-decoration-color: rgba(183,28,28,0.65);
+            } */
+
+            #ucb-email-body h1,#ucb-email-body h2,#ucb-email-body h3,#ucb-email-body h4,#ucb-email-body h5,#ucb-email-body h6,#ucb-email-body .h1,#ucb-email-body .h2,#ucb-email-body .h3,#ucb-email-body .h4,#ucb-email-body .h5,#ucb-email-body .h6 {
+                /* line-height: 1.3; */
+                margin: 0 0 10px 0;
+                font-family:Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+                text-decoration: none;
+            }
+
+            #ucb-email-body *{
+              font-family: Roboto,"Helvetica Neue",Helvetica,Arial,sans-serif;
+            }
+
+            /* td>h3>a{
+                text-decoration: none;
+                color: #0277BD;
+            } */
+
+            .ucb-article-categories{
+                padding: 0;
+            }
+
+            .ucb-article-categories .ucb-article-category-icon{
+                display: none;
+            }
+
+            .ucb-article-categories a{
+                color: #666;
+                background-color: #e7e7e7;
+                padding: 3px;
+                line-height: 100%;
+                margin: 0 5px 5px 0;
+                font-weight: 600;
+                text-decoration: none;
+                display: inline-block;
+                text-transform: uppercase;
+                font-size: 10px;
+            }
+
+            .newsletter-social-media-menu li {
+                display: inline-block;
+                padding: 10px;
+                list-style: none;
+            }
+
+            .icon-label{
+                display: none;
+            }
+
+            .ucb-email-social-icon{
+                padding: 0px 10px;
+            }
+
+
+
+            @media only screen and (max-width: 500px) {
+              .promo-block-row {
+                display: block;
+              }
+            }
+
+            /* Preheader Style -- this appears after the subject line */
+            .preheader{
+              display: none !important;
+              visibility: hidden;
+              opacity: 0;
+              height: 0;
+              width: 0;
+            }
             </style>
         </head>
     {# END VARIABLE TESTS #}
@@ -379,9 +455,9 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                     <td style='{{headerStyles}}'>
                       {# NEW #}
                       <center>
-                        <table width="600" class="ucb-email-header-classic" style="width:100%;{{boxBackground}};{{headerStyles}}; padding-bottom:50px;">
+                        <table width="600" style="width:100%;{{boxBackground}};{{headerStyles}}; padding-bottom:50px;">
                           <tr>
-                            <td style="width:100%;{{boxBackground}}; padding-bottom:50px;">
+                            <td style="width:100%;{{boxBackground}};">
                               <table width="600" role="presentation" align="center" style="max-width:600px;">
                                 <tr>
                                   <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 10px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
@@ -394,19 +470,20 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                             {% if node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value %}
                                 <tr>
                                   <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 10px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
-                                      <img style="object-fit:contain;-ms-interpolation-mode: bicubic; clear: both; display: block; float: left; height: 167px !important; max-width: 100% !important; outline: none; text-decoration: none; width: 250px !important; max-height: auto !important;"src="{{base_domain}}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}">
+                                      <img alt="{{node.field_newsletter_type.entity.label}}" style="object-fit:contain;-ms-interpolation-mode: bicubic; clear: both; display: block; float: left; height: 167px !important; max-width: 100% !important; outline: none; text-decoration: none; width: 250px !important; max-height: auto !important;"src="{{base_domain}}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}">
                                     </td>
                                 </tr>
-                            {% endif %}
+                            {% else %}
                                 <tr>
                                   <td style="-moz-hyphens: none; -webkit-hyphens: none; border-collapse: collapse !important; hyphens: none; word-break: break-word; padding: 20px; text-align: left; vertical-align: top; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 20px; padding-left:10px; text-align:left">
                                     <span>{{node.field_newsletter_type.entity.label}}</span>
                                   </td>
                                 </tr>
+                            {% endif %}
                                 <tr>
-                                  <td style="width:50%;padding: 20px;padding-left:10px; text-align:left; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 12px; margin: 0; font-size: 12px; width: 50%; {{boxBackground}}">{{ node.changed.value|date("M. j, Y") }}</td>
+                                  <td style="width:50%;padding: 20px;padding-left:10px; text-align:left; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 12px; margin: 0; font-size: 12px; width: 50%; {{boxBackground}}">{{ node.created.value|date("M. j, Y") }}</td>
                                   <td style="line-height: 12px; margin: 0; font-size: 12px; width:50%;padding-right:10px;text-align:right;">
-                                    <a style="text-wrap:nowrap" href="https://www.colorado.edu/cwa/cwa/newsletter/cwanews/september-newsletter">View on website</a>
+                                    <a style="text-wrap:nowrap{{aStyles}}" href="https://www.colorado.edu/cwa/cwa/newsletter/cwanews/september-newsletter">View on website</a>
                                   </td>
                                 </tr>
                               </table>
@@ -429,7 +506,18 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                   <td align="center">
                                 <!-- Intro Img -->
                                     {% if content.field_newsletter_intro_image|render %}
-                                    <img id="newsletter-email-intro-img" src="{{base_domain}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}" style="{{classicImgOffset}}">
+                                    <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 600px;">
+                                      <tr>
+                                        <td style="padding: 0; text-align: center; width: 600px;">
+                                          <img
+                                            id="newsletter-email-intro-img"
+                                            src="{{base_domain}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}"
+                                            width="600"
+                                            style="display: block; width: 100%; max-width: 600px; height: auto; border: 0; outline: none;"
+                                            alt="{{ node.field_newsletter_intro_image.entity.field_media_image.alt|render }}" />
+                                        </td>
+                                      </tr>
+                                    </table>
                                     {% endif %}
                                     </td>
                                 </tr>
@@ -468,7 +556,12 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                         <tr>
                                             <td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
                                                 <a href="{{ final_url_one}}">
-                                                    <img width="600" src="{{base_domain}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                                  <img
+                                                  src="{{base_domain}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"
+                                                  width="600"
+                                                  height="600"
+                                                  style="display: block; width: 600px; height: 600px; object-fit: cover; border: 0; outline: none;"
+                                                  alt="{{ node.field_newsletter_promo_image_one.entity.field_media_image.alt|render }}" />
                                                 </a>
                                             </td>
                                         </tr>
@@ -479,7 +572,12 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                                     <tbody>
                                         <tr>
                                             <td align="center"style="text-align: left; padding-right:10px; padding-left:10px; padding-bottom:20px">
-                                                <img width="600"src="{{base_domain}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"/>
+                                              <img
+                                              src="{{base_domain}}{{file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square'))}}"
+                                              width="600"
+                                              height="600"
+                                              style="display: block; width: 600px; height: 600px; object-fit: cover; border: 0; outline: none;"
+                                              alt="{{ node.field_newsletter_promo_image_one.entity.field_media_image.alt|render }}" />
                                             </td>
                                         </tr>
                                     </tbody>
@@ -505,23 +603,59 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
                             {% endfor %}
 
                             {# Render the blocks side by side #}
+                            {# Check if there are blocks to render #}
                             {% if blocksToRender %}
-                                <table role="presentation" border="0" width="600" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white" class="row row-content ucb-newsletter-blocks">
+                                <table role="presentation" border="0" cellspacing="0" cellpadding="0" width="100%" style="border-collapse: collapse; margin: 0 auto; width: 100%; max-width: 600px; text-align: center; font-family: Helvetica, Arial, sans-serif; font-size: 14px; background-color: white;" class="row row-content ucb-newsletter-blocks">
                                     <tbody>
-                                        {% for i in 0..(blocksToRender|length - 1) %}
-                                            {% if loop.index is odd %}
-                                                <tr>
-                                            {% endif %}
-                                                    <td class="promo-block-row" align="center" style=" width:50%;align-content:baseline;text-align: left; padding-right:10px; padding-left:10px">
-                                                        {{ blocksToRender[i] }}
-                                                    </td>
-                                            {% if loop.index is even or loop.last %}
-                                                </tr>
-                                            {% endif %}
-                                        {% endfor %}
+                                        <tr>
+                                            <td align="center" valign="top" style="padding: 0;">
+
+                                                {# Wrapper table for layout #}
+                                                <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; max-width: 600px; table-layout: fixed;">
+                                                    <tbody>
+                                                        {% for i in 0..(blocksToRender|length - 1) %}
+                                                            {% if loop.index is odd %}
+                                                            <tr>
+                                                            {% endif %}
+
+                                                            <td align="left" valign="top" style="width: 50%; padding: 10px; box-sizing: border-box; vertical-align: top;">
+                                                                <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; table-layout: fixed;">
+                                                                    <tr>
+                                                                        <td style="padding: 10px; vertical-align: top; color: #000000;">
+                                                                            {{ blocksToRender[i] }}
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+
+                                                            {# Add filler block if it's the last block in an odd-numbered list #}
+                                                            {% if loop.last and loop.index is odd %}
+                                                            <td align="left" valign="top" style="width: 50%; padding: 10px; box-sizing: border-box; vertical-align: top;">
+                                                                <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; table-layout: fixed;">
+                                                                    <tr>
+                                                                        <td style="padding: 10px; vertical-align: top; color: #000000;">
+                                                                            &nbsp; {# Empty filler block #}
+                                                                        </td>
+                                                                    </tr>
+                                                                </table>
+                                                            </td>
+                                                            {% endif %}
+
+                                                            {% if loop.index is even or loop.last %}
+                                                            </tr>
+                                                            {% endif %}
+                                                        {% endfor %}
+                                                    </tbody>
+                                                </table>
+                                            </td>
+                                        </tr>
                                     </tbody>
                                 </table>
                             {% endif %}
+
+
+
+
                         <!--Ad Two-->
                         {% if content.field_newsletter_promo_image_two|render %}
                         {% if content.field_newsletter_promo_link_two|render %}
@@ -568,14 +702,21 @@ h1,h2,h3,h4,h5,h6,.h1,.h2,.h3,.h4,.h5,.h6 {
          <!--Footer-->
          {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
          <center width="600" style="{{boxBackground}}">
-            <table class="ucb-email-footer-{{designType}}"role="presentation" border="0" width="600" cellspacing="0" style="{{footerStyles}}border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px;">
+            <table class="ucb-email-footer-{{designType}} ucb-email-footer"role="presentation" border="0" width="600" cellspacing="0" style="{{footerStyles}} border-collapse: collapse; border-spacing: 0; padding: 0; text-align: left; vertical-align: top; height: 100%; width: 100%; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; text-align:center !important;">
                 <tbody style="{{boxBackground}}">
+         <!--Site Link-->
+                  <tr style="{{boxBackground}}">
+                    <td style="text-align: center">
+                      <a style="font-family: Helvetica, Arial, sans-serif;line-height: 19px; margin: 0; font-size: 18px; font-weight:bold;text-align: center;{{aStyles}}" href="{{base_domain}}">{{ site_name }}
+                      </a>
+                    </td>
+                  </tr>
                     <tr style="{{boxBackground}}">
-                        <td style="{{boxBackground}}text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px; padding-top:20px">
+                        <td style="{{boxBackground}}text-align: center; padding-right:10px; padding-left:10px;padding-bottom:20px; padding-top:20px">
                             <table align="center" width="600" style="max-width:600px;{{boxBackground}}">
                                 <tbody style="max-width:600px;{{boxBackground}}">
                                     <tr style="max-width:600px;{{boxBackground}}">
-                                    <td style="max-width:600px;{{boxBackground}}">
+                                    <td style="max-width:600px;{{boxBackground}} text-align:center;">
                                         {{node.field_newsletter_type.entity.field_newsletter_footer.0.processed}}
                                     </td>
                                 </tr>
