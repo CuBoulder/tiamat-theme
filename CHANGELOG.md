@@ -9,6 +9,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update Homepage Footer
+  Removal of the `ucb-home-link` as the `{{ content }}` generates that link properly for the homepage.
+  
+  This also means we do not hide the Site Contact Info Footer in the Block Layout. The homepage is currently configured this way so that's no worry there. When they add social media links they'll just need to make sure that it is the first item in the Site Information region to stack properly.
+  
+  Updated various links to the new ones provided by Wendy
+  
+  Resolves #1493 
+---
+
+- ### Newsletter: Header and Footer Changes, Major Style Adjustments, Bug Fixes
+  ### Changes
+  - Changes the Newsletter-type title in the header to be conditional, will only appear if there is no Newsletter taxonomy image such as a logo. Previously both the newsletter-type title AND image would always display.
+  - The Newsletter date will use the published date rather than update date, so it can be modified by users.
+  - Footer section is now center-aligned and has a link back to the site. Also has a border top which should better indicate content separation to readers.
+  
+  ### Style Adjustments
+  - Adjusts the generation of the two-column Content Block section. Some observed bugs with this includes: on iOS specifically they would not display side by side, and on some versions of Outlook they would not align correctly. This has been adjusted with better enforcement and should resolve these specific two and other Content Block section visual issues
+  - Added additional email client-style override CSS so CU brand buttons should show up in more email clients.
+  - Added additional email client-style overrides to try to force and ensure brand color links. Gold links on black backgrounds and blue links on white backgrounds should display in more email clients now, instead of using the Email Client's default blue for everything
+  - Added additional image styles to enforce image sizing on iOS (Feature content images, teaser content images and intro images would be forced to the same size).  This may need additional production testing to further refine if issues still present
+  
+  ### Bug Fixes
+  - Removes the large empty space after the header, this was due to duplicated styles being applied. 
+  - Fixes an issue where the `Simple` style footer would have a white bar and white icons where the Social links should be, resulting in invisible icons
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1486
+---
+
 ## [20241120] - 2024-11-20
 
 - ### Updated menu style fixes
