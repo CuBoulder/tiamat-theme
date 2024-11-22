@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update Homepage Footer
+  Removal of the `ucb-home-link` as the `{{ content }}` generates that link properly for the homepage.
+  
+  This also means we do not hide the Site Contact Info Footer in the Block Layout. The homepage is currently configured this way so that's no worry there. When they add social media links they'll just need to make sure that it is the first item in the Site Information region to stack properly.
+  
+  Updated various links to the new ones provided by Wendy
+  
+  Resolves #1493 
+---
+
 - ### Newsletter: Header and Footer Changes, Major Style Adjustments, Bug Fixes
   ### Changes
   - Changes the Newsletter-type title in the header to be conditional, will only appear if there is no Newsletter taxonomy image such as a logo. Previously both the newsletter-type title AND image would always display.
