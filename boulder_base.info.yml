@@ -1,6 +1,7 @@
 name: "University of Colorado Boulder base theme"
 description: "Drupal 10+ theme for CU Boulder branded web properties"
-package: Custom
+version: '20241122'
+package: CU Boulder
 core_version_requirement: ^10.1
 type: theme
 base theme: stable9
