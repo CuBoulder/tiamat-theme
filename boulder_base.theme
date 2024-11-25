@@ -31,6 +31,8 @@ function boulder_base_theme_suggestions_block_alter(array &$suggestions, array $
 }
 
 /**
+ * Implements hook_page_attachments_alter().
+ *
  * This a helper function to set the favicon appropriately.
  */
 function boulder_base_page_attachments_alter(array &$page) {
@@ -44,7 +46,10 @@ function boulder_base_page_attachments_alter(array &$page) {
 }
 
 /**
- * Preprocess function to check if this page is set as front page, available to all nodes.
+ * Implements hook_preprocess().
+ *
+ * Preprocess function to check if this page is set as front page, available to
+ * all nodes.
  */
 function boulder_base_preprocess(&$variables, $hook) {
   try {
@@ -58,6 +63,8 @@ function boulder_base_preprocess(&$variables, $hook) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK().
+ *
  * Preprocess function to get the variables we'll need on the html template.
  */
 function boulder_base_preprocess_html(array &$variables) {
@@ -71,16 +78,16 @@ function boulder_base_preprocess_html(array &$variables) {
 }
 
 /**
- * Attaches an `is_unpublished` attribute to menu links.
- *
  * Implements hook_preprocess_HOOK().
+ *
+ * Attaches an `is_unpublished` attribute to menu links.
  */
 function boulder_base_preprocess_menu(array &$variables) {
   $menuName = $variables['menu_name'];
   // Attaches only to menu links in the `main`, `secondary`, and `footer`
   // menus.
   if ($menuName == 'main' || $menuName == 'secondary' || $menuName == 'footer') {
-    foreach ($variables['items'] as $key => &$value) {
+    foreach ($variables['items'] as &$value) {
       /** @var \Drupal\Core\Url */
       $url = $value['url'];
       // Ignores menu links to external URLs.
@@ -98,6 +105,8 @@ function boulder_base_preprocess_menu(array &$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK().
+ *
  * Preprocess function to get the variables we'll need on the block template.
  */
 function boulder_base_preprocess_block(array &$variables) {
@@ -156,6 +165,8 @@ function boulder_base_preprocess_block(array &$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK().
+ *
  * Preprocess function to get the variables we'll need on the page template.
  */
 function boulder_base_preprocess_page(array &$variables) {
@@ -192,7 +203,10 @@ function boulder_base_preprocess_page(array &$variables) {
 }
 
 /**
- * Preprocess function to get the variables we'll need on the page user template.
+ * Implements hook_preprocess_HOOK().
+ *
+ * Preprocess function to get the variables we'll need on the page user
+ * template.
  */
 function boulder_base_preprocess_page__user(array &$variables) {
   $config = \Drupal::config('system.site');
@@ -208,7 +222,10 @@ function boulder_base_preprocess_page__user(array &$variables) {
 }
 
 /**
- * Preprocess function to get the variables we'll need on the page user login template.
+ * Implements hook_preprocess_HOOK().
+ *
+ * Preprocess function to get the variables we'll need on the page user login
+ * template.
  */
 function boulder_base_preprocess_page__user__login(array &$variables) {
   $config = \Drupal::config('system.site');
@@ -223,6 +240,8 @@ function boulder_base_preprocess_page__user__login(array &$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK().
+ *
  * Exposes theme variables to the primary menu region.
  */
 function boulder_base_preprocess_region__primary_menu(array &$variables) {
@@ -230,6 +249,8 @@ function boulder_base_preprocess_region__primary_menu(array &$variables) {
 }
 
 /**
+ * Implements hook_preprocess_HOOK().
+ *
  * Exposes theme variables to the secondary menu region.
  */
 function boulder_base_preprocess_region__secondary_menu(array &$variables) {
@@ -239,14 +260,20 @@ function boulder_base_preprocess_region__secondary_menu(array &$variables) {
 }
 
 /**
- * Preprocess function to show or hide the breadcrumb nav based on the selected setting.
+ * Implements hook_preprocess_HOOK().
+ *
+ * Preprocess function to show or hide the breadcrumb nav based on the selected
+ * setting.
  */
 function boulder_base_preprocess_region__breadcrumb(array &$variables) {
   $variables['show_breadcrumb'] = theme_get_setting('ucb_breadcrumb_nav');
 }
 
 /**
- * Preprocess function to enable the current page title to show up in the breadcrumb nav.
+ * Implements hook_preprocess_HOOK().
+ *
+ * Preprocess function to enable the current page title to show up in the
+ * breadcrumb nav.
  */
 function boulder_base_preprocess_breadcrumb(array &$variables) {
   $variables['current_page_title'] = \Drupal::service('title_resolver')->getTitle(\Drupal::request(), \Drupal::routeMatch()->getRouteObject());
@@ -258,7 +285,10 @@ function boulder_base_preprocess_breadcrumb(array &$variables) {
 }
 
 /**
- * Preprocess function to enable the current site name to show up on Nodes -- newsletter
+ * Implements hook_preprocess_HOOK().
+ *
+ * Preprocess function to enable the current site name to show up on Nodes --
+ * newsletter.
  */
 function boulder_base_preprocess_node(array &$variables) {
   if (!isset($variables['site_name'])) {
@@ -268,7 +298,10 @@ function boulder_base_preprocess_node(array &$variables) {
 }
 
 /**
- * Preprocess function to get the variables we'll need on the header region template.
+ * Implements hook_preprocess_HOOK().
+ *
+ * Preprocess function to get the variables we'll need on the header region
+ * template.
  */
 function boulder_base_preprocess_region__header(array &$variables) {
   $variables['theme_path'] = base_path() . $variables['directory'];
@@ -276,7 +309,10 @@ function boulder_base_preprocess_region__header(array &$variables) {
 }
 
 /**
- * Preprocess function to get the variables we'll need on the footer region template.
+ * Implements hook_preprocess_HOOK().
+ *
+ * Preprocess function to get the variables we'll need on the footer region
+ * template.
  */
 function boulder_base_preprocess_region__site_information(array &$variables) {
   $variables['theme_path'] = base_path() . $variables['directory'];
@@ -284,15 +320,20 @@ function boulder_base_preprocess_region__site_information(array &$variables) {
 }
 
 /**
- * Preprocess function to get the variables we'll need on the Organization node template.
+ * Implements hook_preprocess_HOOK().
+ *
+ * Preprocess function to get the variables we'll need on the Organization node
+ * template.
  */
 function boulder_base_preprocess_node__organization(array &$variables) {
   $variables['uuid'] = $variables['node']->uuid();
 }
 
 /**
- * Exposes a variable to indicate if a user can edit a node.
- * Exposes a variable for positioning data of title background images.
+ * Implements hook_preprocess_HOOK().
+ *
+ * Exposes a variable to indicate if a user can edit a node, and for
+ * positioning data of title background images.
  */
 function boulder_base_preprocess_node__ucb_article(array &$variables) {
   if ($node = \Drupal::routeMatch()->getParameter('node')) {
@@ -301,7 +342,6 @@ function boulder_base_preprocess_node__ucb_article(array &$variables) {
     $variables['user_can_edit'] = $userCanEdit;
   }
 
-
   $route_name = \Drupal::routeMatch()->getRouteName();
   if ($route_name == 'entity.node.canonical') {
     $node = \Drupal::routeMatch()->getParameter('node');
@@ -309,33 +349,35 @@ function boulder_base_preprocess_node__ucb_article(array &$variables) {
   elseif ($route_name == 'entity.node.preview') {
     $node = \Drupal::routeMatch()->getParameter('node_preview');
   }
-  // Get the media image positioning
+  // Get the media image positioning.
   if ($node->hasField('field_article_title_background') && $node->get('field_article_title_background')->entity) {
     $media_entity = $node->get('field_article_title_background')->entity;
     $fid = $media_entity->getSource()->getSourceFieldValue($media_entity);
     $file = \Drupal::entityTypeManager()->getStorage('file')->load($fid);
 
-  $crop = \Drupal::service('focal_point.manager')->getCropEntity($file, 'focal_point');
-  if ($crop) {
-    // Get the x and y position from the crop.
-    $fp_abs = $crop->position();
-    $x = $fp_abs['x'];
-    $y = $fp_abs['y'];
+    $crop = \Drupal::service('focal_point.manager')->getCropEntity($file, 'focal_point');
+    if ($crop) {
+      // Get the x and y position from the crop.
+      $fp_abs = $crop->position();
+      $x = $fp_abs['x'];
+      $y = $fp_abs['y'];
 
-    // Get the original width and height from the image.
-    $image_factory = \Drupal::service('image.factory');
-    $image = $image_factory->get($file->getFileUri());
-    $width = $image->getWidth();
-    $height = $image->getHeight();
+      // Get the original width and height from the image.
+      $image_factory = \Drupal::service('image.factory');
+      $image = $image_factory->get($file->getFileUri());
+      $width = $image->getWidth();
+      $height = $image->getHeight();
 
-    // Convert the absolute x and y positions to relative values.
-    $fp_rel = \Drupal::service('focal_point.manager')->absoluteToRelative($x, $y, $width, $height);
-    $variables['position_vars'] =  $fp_rel['x'] . '% ' . $fp_rel['y'] . '%;';
+      // Convert the absolute x and y positions to relative values.
+      $fp_rel = \Drupal::service('focal_point.manager')->absoluteToRelative($x, $y, $width, $height);
+      $variables['position_vars'] = $fp_rel['x'] . '% ' . $fp_rel['y'] . '%;';
+    }
   }
-}
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ *
  * Custom theme settings worker function.
  */
 function boulder_base_form_system_theme_settings_alter(&$form, FormStateInterface &$form_state, $form_id = NULL) {
@@ -356,6 +398,8 @@ function boulder_base_form_system_theme_settings_alter(&$form, FormStateInterfac
 }
 
 /**
+ * Implements hook_page_attachments().
+ *
  * This is for list styles during migration.
  */
 function boulder_base_page_attachments(array &$attachments) {
