@@ -18,6 +18,17 @@
   padding: 1rem 0;
 }
 
+.ucb-home-link {
+  width: 100%;
+  max-width: 200px;
+  min-width: 160px;
+  height: auto;
+}
+
+.ucb-home-link:has(.ucb-homepage) {
+  max-width: 320px;
+}
+
 .ucb-brand-bar img.ucb-logo {
   width: 100%;
   max-width: 200px;
@@ -28,6 +39,14 @@
 }
 
 @media screen and (min-width: 768px) {
+  .ucb-home-link {
+    max-width: 240px;
+  }
+
+  .ucb-home-link:has(.ucb-homepage) {
+    max-width: 320px;
+  }
+
   .ucb-brand-bar img.ucb-logo {
     max-width: 240px;
   }
