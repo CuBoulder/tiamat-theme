@@ -86,7 +86,7 @@
     {% set divStyles = 'background-color: black; color: #fff;margin:auto;' %}
     {% set aStyles = 'color: #cfb87b;;' %}
     {% set pStyles = 'color:#222330;' %}
-    {% set headerStyles = 'width:100%; color:white;margin-bottom:50px;' %}
+    {% set headerStyles = 'width:100%; color:white;' %}
     {# padding: 15px 25px; #}
     {% set footerStyles = 'color:white;border-top: solid 1px #cccccc;' %}
     {% set cuLogoSrc = cuLogoLight %}
@@ -147,6 +147,10 @@
             .ucb-email-header-darkbox a,
             .ucb-email-footer-darkbox a {
               color: #cfb87b;
+            }
+            .ucb-email-footer-lightbox a,
+            .ucb-email-footer-minimal {
+              color: #0277BD;
             }
             .ucb-email-header-classic a:hover,
             .ucb-email-footer-classic a:hover,
@@ -501,11 +505,12 @@
                 <tbody>
                     <td>
                         <td>
+                          {% if content.field_newsletter_intro_image|render or content.field_newsletter_intro_body|render%}
                             <table role="presentation" border="0" width="600" cellspacing="0" style="text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; margin: 0; font-size: 14px; background-color: white;{{classicTableOffset}}">
+                              {% if content.field_newsletter_intro_image|render %}
                                 <tr>
                                   <td align="center">
                                 <!-- Intro Img -->
-                                    {% if content.field_newsletter_intro_image|render %}
                                     <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 600px;">
                                       <tr>
                                         <td style="padding: 0; text-align: center; width: 600px;">
@@ -518,18 +523,19 @@
                                         </td>
                                       </tr>
                                     </table>
-                                    {% endif %}
-                                    </td>
+                                  </td>
                                 </tr>
+                                {% endif %}
+                                {% if content.field_newsletter_intro_body|render %}
                                 <tr>
                                     <td>
                                     <!-- Intro Text-->
-                                    {% if content.field_newsletter_intro_body|render %}
                                     <div id="newsletter-intro-body">{{ content.field_newsletter_intro_body }}</div>
-                                    {% endif %}
-                                    </td>
+                                  </td>
                                 </tr>
+                                {% endif %}
                             </table>
+                          {% endif %}
                         <!--Second table-->
                         {% if content.field_newsletter_section_block|render %}
                         <!--Newsletter Section-->
@@ -716,7 +722,7 @@
                             <table align="center" width="600" style="max-width:600px;{{boxBackground}}">
                                 <tbody style="max-width:600px;{{boxBackground}}">
                                     <tr style="max-width:600px;{{boxBackground}}">
-                                    <td style="max-width:600px;{{boxBackground}} text-align:center;">
+                                    <td class="ucb-email-footer-content" style="max-width:600px;{{boxBackground}} text-align:center;">
                                         {{node.field_newsletter_type.entity.field_newsletter_footer.0.processed}}
                                     </td>
                                 </tr>
