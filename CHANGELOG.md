@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Class Notes List: special character fixes
+  Previously special characters from Class Notes wouldn't escape properly, such as `&nbsp`. They are now correctly decoded.
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1518
+---
+
 ## [20241122] - 2024-11-22
 
 - ### Update Homepage Footer
