@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article Feature: Fixes aspect ratio for Wide images
+  Previously Article Feature Blocks with the Image Size set to `Wide (slider image style)` would come through as 3:2 aspect ratio rather than 16:9, which is used for the slider. 
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1501
+---
+
 - ### Update ucb-brand-bar.css
   Adding consistent `max-width` and `width` to the logo's link container allows for the SVG to scale properly throughout all browsers.
   
