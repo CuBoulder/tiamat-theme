@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update ucb-brand-bar.css
+  Adding consistent `max-width` and `width` to the logo's link container allows for the SVG to scale properly throughout all browsers.
+  
+  Resolves #1505 
+---
+
 - ### Class Notes List: special character fixes
   Previously special characters from Class Notes wouldn't escape properly, such as `&nbsp`. They are now correctly decoded.
   
