@@ -1,7 +1,7 @@
 class ClassNotesListElement extends HTMLElement {
 	constructor() {
 		super();
-		const 			
+		const
 			chromeElement = this._chromeElement = document.createElement('div'),
 			userFormElement = this._userFormElement = document.createElement('div'),
 			notesListElement = this._notesListElement = document.createElement('div'),
@@ -117,10 +117,10 @@ class ClassNotesListElement extends HTMLElement {
 				idObj[pair.id] = pair.relationships.thumbnail.data.id;
 				altObj[thumbnailId].alt = pair.relationships.thumbnail.data.meta.alt;
 			}
-			
+
 		  })
 		}
-		
+
 		// Build Notes
 		if(!data.length){
 			this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
@@ -190,7 +190,7 @@ class ClassNotesListElement extends HTMLElement {
 				// Class Note Text
 				const classNoteParagraph = document.createElement('p')
 					classNoteParagraph.classList.add('ucb-class-note-body')
-					classNoteParagraph.innerHTML = this.escapeHTML(note.attributes.body.processed)
+					classNoteParagraph.innerHTML = this.sanitizeHTML(note.attributes.body.processed);
 					textDiv.appendChild(classNoteParagraph)
 				// Date posted
 				const classNotePosted = document.createElement('p')
@@ -201,7 +201,7 @@ class ClassNotesListElement extends HTMLElement {
 				classNote.appendChild(imgAndTextDiv)
 					this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
 
-				classNotesContainer.appendChild(classNote)				
+				classNotesContainer.appendChild(classNote)
 			})
 		}
 		// Makes the next button
@@ -218,7 +218,7 @@ class ClassNotesListElement extends HTMLElement {
 			// Append the button to the container, then the element
 			nextButtonContainer.appendChild(nextButton)
 			this._notesListElement.appendChild(nextButtonContainer);
-		} 
+		}
 	}
 	// Used for toggling the error messages/loader on/off
 	toggleMessageDisplay(element, display, className, innerText) {
@@ -233,7 +233,7 @@ class ClassNotesListElement extends HTMLElement {
 	// Builds the user forms
     generateForm(dates){
 		// Create Elements
-		const form = document.createElement('form'), 
+		const form = document.createElement('form'),
         	formDiv = document.createElement('div');
 			form.className = 'class-notes-list-filter';
 			formDiv.className = 'd-flex align-items-center';
@@ -241,7 +241,7 @@ class ClassNotesListElement extends HTMLElement {
 		const container = document.createElement('div');
 			container.className = `form-item`;
 		// Create label el
-		const itemLabel = document.createElement('label'), 
+		const itemLabel = document.createElement('label'),
 			itemLabelSpan = document.createElement('span');
 			itemLabelSpan.classList.add('filter-by-label','ucb-class-notes-filter-label')
 			itemLabelSpan.innerText = "Filter by Year:";
@@ -257,7 +257,7 @@ class ClassNotesListElement extends HTMLElement {
 		// Appends
 		this.generateDropdown(dates, selectFilter)
 		form.appendChild(formDiv);
-		this._userFormElement.appendChild(form);   
+		this._userFormElement.appendChild(form);
 
 		// Sort By : Create container
 		const sortContainer = document.createElement('div');
@@ -276,7 +276,7 @@ class ClassNotesListElement extends HTMLElement {
 			formDiv.appendChild(container);
 			this.generateDropdown(["Class Year", "Date Posted"],sortSelectFilter)
 
-	
+
 		// Add 'View All Notes' Link
 		const viewAllLinkContainer = document.createElement('div')
 			viewAllLinkContainer.classList.add('ucb-class-notes-view-all-container')
@@ -286,7 +286,7 @@ class ClassNotesListElement extends HTMLElement {
 			viewAllLink.addEventListener('click', this.viewAllNotes.bind(this));
 			viewAllLinkContainer.appendChild(viewAllLink)
 			form.appendChild(viewAllLinkContainer);
-			this._userFormElement.appendChild(form);  
+			this._userFormElement.appendChild(form);
 	}
 	// Generates the Dropdowns, on the user form
 	generateDropdown(dates, selectElement){
@@ -345,20 +345,16 @@ class ClassNotesListElement extends HTMLElement {
 		this.getData(JSONURL, "", "Class Year")
 	}
 	// Prevents malicious user input
-	escapeHTML(raw) {
-		if (!raw) return '';
-	
-		// First, escape all HTML to prevent execution of unwanted tags or JavaScript.
-		let escapedHTML = raw.replace(/\&/g, '&amp;').replace(/"/g, '&quot;')
-							 .replace(/</g, '&lt;').replace(/>/g, '&gt;');
-	
-		// Unescape the allowed tags (p, strong, em)
-		escapedHTML = escapedHTML.replace(/&lt;(\/?p)&gt;/g, '<$1>')
-								 .replace(/&lt;(\/?strong)&gt;/g, '<$1>')
-								 .replace(/&lt;(\/?em)&gt;/g, '<$1>');
-	
-		return escapedHTML;
-	}
+  sanitizeHTML(input) {
+    if (!input) return '';
+    let sanitized = input.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
+                         .replace(/<style[\s\S]*?>[\s\S]*?<\/style>/gi, '');
+    sanitized = sanitized.replace(/\s*on\w+="[^"]*"/gi, '')
+                         .replace(/\s*on\w+='[^']*'/gi, '');
+    sanitized = sanitized.replace(/href\s*=\s*(['"])\s*javascript:[^'"]*\1/gi, '');
+
+    return sanitized;
+}
 	// Date formatter
 	formatDateString(dateString) {
 		const options = { year: 'numeric', month: 'short', day: 'numeric' };
@@ -372,7 +368,7 @@ class ClassNotesListElement extends HTMLElement {
 		if (loadMoreButton) {
 			loadMoreButton.remove();
 		}
-	
+
 		// Call API and update data
 		this.getData(nextURL);
 	}
@@ -388,7 +384,7 @@ class ClassNotesListElement extends HTMLElement {
 	resetDropdowns() {
 		const yearDropdown = this.querySelector('.class-note-year-select');
 		const sortDropdown = this.querySelector('.class-note-sort-select');
-	
+
 		if (yearDropdown && sortDropdown) {
 			yearDropdown.value = '';
 			sortDropdown.value = 'Class Year';
@@ -396,7 +392,7 @@ class ClassNotesListElement extends HTMLElement {
 	}
 	// Error handler
 	handleError = response => {
-        if (!response.ok) { 
+        if (!response.ok) {
            throw new Error;
         } else {
            return response.json();
