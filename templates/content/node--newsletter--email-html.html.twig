@@ -619,56 +619,71 @@
                                 {% endif %}
                             {% endfor %}
 
-                            {# Render the blocks side by side #}
-                            {# Check if there are blocks to render #}
-                            {% if blocksToRender %}
-                                <table role="presentation" border="0" cellspacing="0" cellpadding="0" width="100%" style="border-collapse: collapse; margin: 0 auto; width: 100%; max-width: 600px; text-align: center; font-family: Helvetica, Arial, sans-serif; font-size: 14px; background-color: white;" class="row row-content ucb-newsletter-blocks">
-                                    <tbody>
-                                        <tr>
-                                            <td align="center" valign="top" style="padding: 0;">
+{# Render the blocks side by side #}
+{# Check if there are blocks to render #}
+{% if blocksToRender %}
+    <table role="presentation" border="0" cellspacing="0" cellpadding="0" width="100%" style="border-collapse: collapse; margin: 0 auto; width: 100%; max-width: 600px; text-align: center; font-family: Helvetica, Arial, sans-serif; font-size: 14px; background-color: white;" class="row row-content ucb-newsletter-blocks">
+        <tbody>
+            <tr>
+                <td align="center" valign="top" style="padding: 0;">
+                    {# Wrapper table for layout #}
+                    <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; max-width: 600px; table-layout: fixed;">
+                        <tbody>
+                            {% for i in 0..(blocksToRender|length - 1) %}
+                                {# If there's only one block, make it take up the full width #}
+                                {% if blocksToRender|length == 1 %}
+                                    <tr>
+                                        <td align="left" valign="top" style="width: 100%; padding: 10px; box-sizing: border-box; vertical-align: top;">
+                                            <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; table-layout: fixed;">
+                                                <tr>
+                                                    <td style="vertical-align: top; color: #000000;">
+                                                        {{ blocksToRender[i] }}
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    {% if loop.index is odd %}
+                                    <tr>
+                                    {% endif %}
 
-                                                {# Wrapper table for layout #}
-                                                <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; max-width: 600px; table-layout: fixed;">
-                                                    <tbody>
-                                                        {% for i in 0..(blocksToRender|length - 1) %}
-                                                            {% if loop.index is odd %}
-                                                            <tr>
-                                                            {% endif %}
+                                    <td align="left" valign="top" style="width: 50%; padding: 10px; box-sizing: border-box; vertical-align: top;">
+                                        <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; table-layout: fixed;">
+                                            <tr>
+                                                <td style="padding: 10px; vertical-align: top; color: #000000;">
+                                                    {{ blocksToRender[i] }}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
 
-                                                            <td align="left" valign="top" style="width: 50%; padding: 10px; box-sizing: border-box; vertical-align: top;">
-                                                                <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; table-layout: fixed;">
-                                                                    <tr>
-                                                                        <td style="padding: 10px; vertical-align: top; color: #000000;">
-                                                                            {{ blocksToRender[i] }}
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
+                                    {# Add filler block if it's the last block in an odd-numbered list #}
+                                    {% if loop.last and loop.index is odd %}
+                                    <td align="left" valign="top" style="width: 50%; padding: 10px; box-sizing: border-box; vertical-align: top;">
+                                        <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; table-layout: fixed;">
+                                            <tr>
+                                                <td style="padding: 10px; vertical-align: top; color: #000000;">
+                                                    &nbsp; {# Empty filler block #}
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </td>
+                                    {% endif %}
 
-                                                            {# Add filler block if it's the last block in an odd-numbered list #}
-                                                            {% if loop.last and loop.index is odd %}
-                                                            <td align="left" valign="top" style="width: 50%; padding: 10px; box-sizing: border-box; vertical-align: top;">
-                                                                <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; table-layout: fixed;">
-                                                                    <tr>
-                                                                        <td style="padding: 10px; vertical-align: top; color: #000000;">
-                                                                            &nbsp; {# Empty filler block #}
-                                                                        </td>
-                                                                    </tr>
-                                                                </table>
-                                                            </td>
-                                                            {% endif %}
+                                    {% if loop.index is even or loop.last %}
+                                    </tr>
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+{% endif %}
 
-                                                            {% if loop.index is even or loop.last %}
-                                                            </tr>
-                                                            {% endif %}
-                                                        {% endfor %}
-                                                    </tbody>
-                                                </table>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            {% endif %}
 
 
 
@@ -723,7 +738,7 @@
                 <tbody style="{{boxBackground}}">
          <!--Site Link-->
                   <tr style="{{boxBackground}}">
-                    <td style="text-align: center">
+                    <td style="text-align: center; text-align: center; padding-top:10px;">
                       <a style="font-family: Helvetica, Arial, sans-serif;line-height: 19px; margin: 0; font-size: 18px; font-weight:bold;text-align: center;text-decoration:none;{{aStyles}}" href="{{base_domain}}">{{ site_name }}
                       </a>
                     </td>
