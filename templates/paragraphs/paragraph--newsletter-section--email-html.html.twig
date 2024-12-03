@@ -9,7 +9,7 @@
 #}
 
 
-{% set base_url = url('<front>', {'absolute': true})|trim('/') %}
+{% set base_url = url('<front>')|render|split('/', -1)|join('/') %}
 <table role="presentation"  border="0" width="600" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
 	<tbody>
   		<tr>
@@ -78,7 +78,7 @@
 					<tr id="feature-article-title-email-{{key}}">
 						<td align="center" style="font-size:18px;text-align: left; padding-right:10px; padding-left:10px"align="center" style="text-align: left; padding-right:10px; padding-left:10px">
 							<h3>
-								<a href="{{base_url}}{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
+								<a style="text-decoration: none;" href="{{base_url}}{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
 									{{ item.entity.field_newsletter_article_select.entity.title.value|render|striptags|trim }}
 								</a>
 							</h3>
@@ -94,7 +94,7 @@
 							<tr id="feature-article-user-title-email-{{ key }}">
 								<td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
 									<h3>
-										<a class="ucb-newsletter-content-title" href="{{ final_url }}">
+										<a style="text-decoration: none;" class="ucb-newsletter-content-title" href="{{ final_url }}">
 											{{ item.entity.field_newsletter_content_title|view }}
 										</a>
 									</h3>
@@ -206,7 +206,7 @@
 													{% if item.entity.field_newsletter_article_select.entity.title.value|render %}
 													<td>
 														<h3 style="font-size: 18px;">
-														<a href="{{base_url}}{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
+														<a style="text-decoration: none;" href="{{base_url}}{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
 															{{ item.entity.field_newsletter_article_select.entity.title.value|render|striptags|trim }}
 														</a>
 													</h3>
@@ -219,7 +219,7 @@
 														{% set is_absolute = (actual_url starts with 'http://' or actual_url starts with 'https://') %}
 														{% set final_url = is_absolute ? actual_url : (base_url ~ actual_url) %}
 														<h3 style="font-size: 18px;">
-															<a class="ucb-newsletter-content-title" href="{{ final_url }}">
+															<a style="text-decoration: none;" class="ucb-newsletter-content-title" href="{{ final_url }}">
 																{{ item.entity.field_newsletter_content_title|view }}
 															</a>
 														</h3>

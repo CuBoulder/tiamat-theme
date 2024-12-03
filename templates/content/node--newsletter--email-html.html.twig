@@ -60,7 +60,7 @@
 {% if designType == 'classic' %}
 {% set classicStyle = 'background: white;margin-top: -50px;'%}
 {% set divStyles = 'background-color: #fff; color: #fff;' %}
-{% set aStyles = 'color: #cfb87b;' %}
+{% set aStyles = 'color: #cfb87b;text-decoration: none;' %}
 {% set pStyles = 'color:black;' %}
 {% set headerStyles = 'width:100%;background-color: black; padding-bottom:10px;' %}
 {% set classicTableOffset = 'margin-top: -50px;padding:10px;' %}
@@ -74,7 +74,7 @@
 {# Minimal #}
 {% elseif designType == 'minimal' %}
     {% set divStyles = 'background-color: #FFFFFF;margin:auto;' %}
-    {% set aStyles = 'color: #0277BD;' %}
+    {% set aStyles = 'color: #0277BD;text-decoration: none;' %}
     {% set pStyles = 'color:black;' %}
     {% set headerStyles = 'width:100%; color:black;padding-bottom:20px;' %}
     {# padding: 15px 25px; #}
@@ -84,7 +84,7 @@
 {# Darkbox #}
 {% elseif designType == 'darkbox' %}
     {% set divStyles = 'background-color: black; color: #fff;margin:auto;' %}
-    {% set aStyles = 'color: #cfb87b;;' %}
+    {% set aStyles = 'color: #cfb87b;text-decoration: none;' %}
     {% set pStyles = 'color:#222330;' %}
     {% set headerStyles = 'width:100%; color:white;' %}
     {# padding: 15px 25px; #}
@@ -97,7 +97,7 @@
 {# Lightbox #}
 {% elseif designType == 'lightbox' %}
     {% set divStyles = 'background-color: #E9E9E9;margin:auto;' %}
-    {% set aStyles = 'color: #0277BD;' %}
+    {% set aStyles = 'color: #0277BD;text-decoration: none;' %}
     {% set pStyles = ' color: #222330;' %}
     {% set headerStyles = 'width:100%; color:black;' %}
     {# padding: 15px 25px; #}
@@ -110,7 +110,7 @@
 {# Simple #}
 {% else %}
 {% set divStyles = 'background-color: #fff; color: #fff;' %}
-{% set aStyles = 'color: #cfb87b;' %}
+{% set aStyles = 'color: #cfb87b;text-decoration: none;' %}
 {% set pStyles = 'color:black;' %}
 {% set headerStyles = 'width:100%;background-color: black;padding-bottom:20px;' %}
 {# padding: 15px 25px; #}
@@ -176,6 +176,14 @@
 
             #email h2{
               font-size: 20px;
+            }
+
+            #email .ucb-email-body-content.ucb-email-body-content-td a{
+              text-decoration: none !important;
+            }
+
+            #ucb-email-body center center a{
+              color: #0277BD !important;
             }
 
             a[x-apple-data-detectors] {
@@ -490,7 +498,7 @@
                                 <tr>
                                   <td style="width:50%;padding: 20px;padding-left:10px; text-align:left; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 12px; margin: 0; font-size: 12px; width: 50%; {{boxBackground}}">{{ node.created.value|date("M. j, Y") }}</td>
                                   <td style="line-height: 12px; margin: 0; font-size: 12px; width:50%;padding-right:10px;text-align:right;">
-                                    <a style="text-wrap:nowrap{{aStyles}}" href="{{base_url}}{{ path('entity.node.canonical', {'node': node.id}) }}">View on website</a>
+                                    <a style="text-wrap:nowrap;text-decoration: none;{{aStyles}}" href="{{base_url}}{{ path('entity.node.canonical', {'node': node.id}) }}">View on website</a>
                                   </td>
                                 </tr>
                               </table>
@@ -507,7 +515,7 @@
             <table width="600" style="max-width:600px;" align="center">
                 <tbody>
                     <td>
-                        <td>
+                        <td class="ucb-email-body-content ucb-email-body-content-td">
                           {% if content.field_newsletter_intro_image|render or content.field_newsletter_intro_body|render%}
                             <table role="presentation" border="0" width="600" cellspacing="0" style="text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; padding-bottom:20px;font-weight: normal; margin: 0; font-size: 14px; background-color: white;{{classicTableOffset}}">
                               {% if content.field_newsletter_intro_image|render %}
@@ -716,7 +724,7 @@
          <!--Site Link-->
                   <tr style="{{boxBackground}}">
                     <td style="text-align: center">
-                      <a style="font-family: Helvetica, Arial, sans-serif;line-height: 19px; margin: 0; font-size: 18px; font-weight:bold;text-align: center;{{aStyles}}" href="{{base_domain}}">{{ site_name }}
+                      <a style="font-family: Helvetica, Arial, sans-serif;line-height: 19px; margin: 0; font-size: 18px; font-weight:bold;text-align: center;text-decoration:none;{{aStyles}}" href="{{base_domain}}">{{ site_name }}
                       </a>
                     </td>
                   </tr>
