@@ -19,7 +19,6 @@
       this.pageCount = pageCount;
       this._categoryTerms = null;
       this._tagTerms = null;
-
       // Build the endpoint path, now in JS
       this.endpoint = this.buildEndpointPath();
     }
@@ -189,6 +188,8 @@
         this._filterFormElement.style.alignItems = 'center';
         this._contentElement.setAttribute('aria-live', 'polite');
       }
+      // Date format
+      this.globalDateSetting = this.getAttribute('global-date-format');
       this.appendChild(this._contentElement);
       // Loader
       this._loadingElement = document.createElement('div');
@@ -530,12 +531,15 @@
           imageSrc = altObj[idObj[thumbId]];
         }
 
-        // Format date
-        const date = new Date(item.attributes.created).toLocaleDateString('en-us', {
-          year: 'numeric',
-          month: 'short',
-          day: 'numeric',
-        });
+        // Format
+        const date = (item.attributes.field_ucb_article_date_override != "7" &&
+          (this.globalDateSetting != 6 || item.attributes.field_ucb_article_date_override != "0"))
+          ? new Date(item.attributes.created).toLocaleDateString('en-us', {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+          })
+          : null;
         const title = item.attributes.title;
         // If no path alias set, use defaults
         const path = item.attributes.path.alias ? item.attributes.path.alias : `/node/${item.attributes.drupal_internal__nid}`;

@@ -72,6 +72,9 @@
 {# Base Url #}
 {% set baseurlJSON = url('<front>')|render|trim('/') %}
 
+{# Show/Hide Date #}
+{% set global_date_format = drupal_config('ucb_site_configuration.settings', 'article_date_format') %}
+
 {# include and exclude options set by the user #}
 {% set includeCategories = '' %}
 {% set myCategories = content.field_ucb_filter_by_category|render|striptags|trim|split(' ') %}
@@ -149,6 +152,7 @@
       'exclude-tags': excludeTags,
       'expose-categories' : exposeCategory,
       'expose-tags': exposeTag,
+      'global-date-format': global_date_format,
       }) }}
       >
     </article-list>
