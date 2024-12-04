@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Modify Image Styles in Content Rows
+  Updated content rows so that teasers are using the correct image style with the right 2:1 ratio.
+  A new image style was created to support this update. 
+  There was also a bug with the code in which the large teasers would display as squares if the rows were unlinked. That has been updated to show correctly as wide.
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/196
+  
+  Resolves #1503 
+---
+
 - ### Newsletters: Bug Fixes, Layout Adjustments
   ### Bug Fixes
   - Removed the hard-coded "View on Website" link. This will link correctly to the Newsletter page it is generated from. The hard-coded link was due to a completely re-written header and was left in unintentionally from development.  
