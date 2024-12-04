@@ -50,6 +50,8 @@
 {% set addtlPad = '' %}
 {% set classicStyle = "margin-bottom: 20px; width:95%" %}
 {% set classicTableOffset = 'border-collapse: collapse; border-spacing: 0; padding: 0;' %}
+{% set addtlPadding = '' %}
+{% set addtlImgPadding = '' %}
 
 {# CU LOGO #}
 {% set cuLogoDark = base_url ~ '/' ~  base_path ~ directory ~ '/images/cu-boulder-logo-text-black.gif' %}
@@ -64,8 +66,8 @@
 {% set pStyles = 'color:black;' %}
 {% set headerStyles = 'width:100%;background-color: black; padding-bottom:10px;' %}
 {% set classicTableOffset = 'margin-top: -50px;padding:10px;' %}
+{% set addtlPadding = 'padding-bottom:50px;'%}
 {% set footerStyles = 'border-top: solid 1px #cccccc;'%}
-{# padding: 15px 25px; #}
 {% set footerStyles = 'background-color: black !important; padding-top:20px;border-top: solid 1px #cccccc;' %}
 {% set cuLogoSrc = cuLogoLight %}
 {% set classicImgOffset = 'width:100%'%}
@@ -76,7 +78,7 @@
     {% set divStyles = 'background-color: #FFFFFF;margin:auto;' %}
     {% set aStyles = 'color: #0277BD;text-decoration: none;' %}
     {% set pStyles = 'color:black;' %}
-    {% set headerStyles = 'width:100%; color:black;padding-bottom:20px;' %}
+    {% set headerStyles = 'width:100%; color:black;' %}
     {# padding: 15px 25px; #}
     {% set footerStyles = 'color:black;border-top: solid 1px #cccccc;' %}
     {% set cuLogoSrc = cuLogoDark %}
@@ -92,7 +94,7 @@
     {% set cuLogoSrc = cuLogoLight %}
     {% set emailBackground = 'background-color:white;' %}
     {% set boxBackground = 'background-color:black;'%}
-    {% set addtlPad = 'padding-top:20px;' %}
+    {% set addtlPad = 'padding-top:10px;' %}
 
 {# Lightbox #}
 {% elseif designType == 'lightbox' %}
@@ -105,20 +107,22 @@
     {% set cuLogoSrc = cuLogoDark %}
     {% set emailBackground = 'background-color:white;' %}
     {% set boxBackground = 'background-color:white;'%}
-    {% set addtlPad = 'padding-top:20px;' %}
+    {% set addtlPad = 'padding-top:10px;' %}
 
 {# Simple #}
 {% else %}
 {% set divStyles = 'background-color: #fff; color: #fff;' %}
 {% set aStyles = 'color: #cfb87b;text-decoration: none;' %}
 {% set pStyles = 'color:black;' %}
-{% set headerStyles = 'width:100%;background-color: black;padding-bottom:20px;' %}
+{% set headerStyles = 'width:100%;background-color: black;' %}
 {# padding: 15px 25px; #}
 {% set footerStyles = 'background-color: black; padding-top:20px;border-top: solid 1px #cccccc;' %}
 {% set cuLogoSrc = cuLogoLight %}
 {% set boxBackground = 'background-color:black;'%}
 {% set classicImgOffset = 'padding: 10px; background: white;'%}
 {% set emailBackground = 'background-color:black;' %}
+{% set addtlPad = 'padding-top:10px;' %}
+
 
 {% endif %}
 
@@ -141,6 +145,11 @@
               .darkmode p { /* Add other selectors for other text elements */
                   -webkit-text-fill-color: #000000 !important;
               }
+
+            body {
+              margin: 0;
+            }
+
             </style>
             <style>
             .ucb-email-header-classic a,
@@ -180,9 +189,6 @@
 
             #email .ucb-email-body-content.ucb-email-body-content-td a{
               text-decoration: none !important;
-            }
-
-            #ucb-email-body center center a{
               color: #0277BD !important;
             }
 
@@ -470,7 +476,7 @@
                     <td style='{{headerStyles}}'>
                       {# NEW #}
                       <center>
-                        <table width="600" style="width:100%;{{boxBackground}};{{headerStyles}}; padding-bottom:50px;">
+                        <table width="600" style="width:100%;{{boxBackground}}{{headerStyles}}{{addtlPadding}}">
                           <tr>
                             <td style="width:100%;{{boxBackground}};">
                               <table width="600" role="presentation" align="center" style="max-width:600px;">
@@ -524,7 +530,7 @@
                                 <!-- Intro Img -->
                                     <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 600px;">
                                       <tr>
-                                        <td style="padding: 0; text-align: center; width: 600px;">
+                                        <td style="padding: 0; text-align: center; width: 600px;{{addtlImgPadding}}">
                                           <img
                                             id="newsletter-email-intro-img"
                                             src="{{base_domain}}{{file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri)}}"
