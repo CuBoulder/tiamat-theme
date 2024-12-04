@@ -9,6 +9,29 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletters: Bug Fixes, Layout Adjustments
+  ### Bug Fixes
+  - Removed the hard-coded "View on Website" link. This will link correctly to the Newsletter page it is generated from. The hard-coded link was due to a completely re-written header and was left in unintentionally from development.  
+  - Added stricter styling rules to force iOS devices to show images at the proper width. Previously they would all take on the same width on iPhones only. 
+  - The blue link color should now be consistent across the Newsletter, along with removing the underline link decoration. 
+  - Missing images should be fixed for complex site urls, but will need to be tested in production. 
+  
+  ### Layout Fixes
+  - Adjusts spacing on the top of the newsletter. Previously there could be a large gap in between the header and the content if you intentionally left out fields such as the Intro Image or Intro Text. The conditional spacing has been tightened up to include for this case.
+  - Text blocks will display at full width if there is only one in the section. Previously they would only take up 50% even if there was only one
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1515
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1514
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1511
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1508
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1507
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1528
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1510
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1522
+  
+  
+---
+
 - ### Article Feature: Fixes aspect ratio for Wide images
   Previously Article Feature Blocks with the Image Size set to `Wide (slider image style)` would come through as 3:2 aspect ratio rather than 16:9, which is used for the slider. 
   

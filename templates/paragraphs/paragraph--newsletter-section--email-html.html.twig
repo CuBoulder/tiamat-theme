@@ -42,10 +42,10 @@
 								<td align="center" style="text-align: left; padding-right:10px; padding-left:10px; padding-bottom:20px">
 									<a href="{{base_url}}{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
                     <img
-                    src="{{base_url}}{{file_url(item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri|image_style('focal_image_wide'))}}"
+                    src="{{base_url}}{{file_url(item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri|image_style('focal_image_wide'))|replace({'//': '/'})}}"
                     width="600"
                     height="300"
-                    style="display: block; width: 600px; height: 300px; object-fit: cover; border: 0; outline: none;"
+                    style="display: block !important; width: 600px !important; height: 300px !important; object-fit: cover !important; border: 0 !important; outline: none !important;"
                     alt="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render }}" />
                   </a>
 								</td>
@@ -54,10 +54,10 @@
 								<td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px">
 									<a href="{{base_url}}{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
                     <img
-                    src="{{base_url}}{{file_url(item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri|image_style('focal_image_wide'))}}"
+                    src="{{base_url}}{{file_url(item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri|image_style('focal_image_wide'))|replace({'//': '/'})}}"
                     width="600"
                     height="300"
-                    style="display: block; width: 600px; height: 300px; object-fit: cover; border: 0; outline: none;"
+                    style="display: block !important; width: 600px !important; height: 300px !important; object-fit: cover !important; border: 0 !important; outline: none !important;"
                     alt="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render }}" />
                   </a>
 								</td>
@@ -65,10 +65,10 @@
 								{% elseif item.entity.field_newsletter_content_image.entity.field_media_image.alt|render %}
 								<td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px;">
                   <img
-                  src="{{base_url}}{{file_url(item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide'))}}"
+                  src="{{base_url}}{{file_url(item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_wide'))|replace({'//': '/'})}}"
                   width="600"
                   height="300"
-                  style="display: block; width: 600px; height: 300px; object-fit: cover; border: 0; outline: none;"
+                  style="display: block !important; width: 600px !important; height: 300px !important; object-fit: cover !important; border: 0 !important; outline: none !important;"
                   alt="{{ item.entity.field_newsletter_content_image.entity.field_media_image.alt|render }}" />
                 </td>
 								{% endif %}
@@ -78,7 +78,7 @@
 					<tr id="feature-article-title-email-{{key}}">
 						<td align="center" style="font-size:18px;text-align: left; padding-right:10px; padding-left:10px"align="center" style="text-align: left; padding-right:10px; padding-left:10px">
 							<h3>
-								<a href="{{base_url}}{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
+								<a style="text-decoration: none;" href="{{base_url}}{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
 									{{ item.entity.field_newsletter_article_select.entity.title.value|render|striptags|trim }}
 								</a>
 							</h3>
@@ -94,7 +94,7 @@
 							<tr id="feature-article-user-title-email-{{ key }}">
 								<td align="center" style="text-align: left; padding-right:10px; padding-left:10px">
 									<h3>
-										<a class="ucb-newsletter-content-title" href="{{ final_url }}">
+										<a style="text-decoration: none;" class="ucb-newsletter-content-title" href="{{ final_url }}">
 											{{ item.entity.field_newsletter_content_title|view }}
 										</a>
 									</h3>
@@ -172,26 +172,26 @@
 											{# Code to render selected article content (thumbnail) #}
 											{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image %}
                       <img
-                      src="{{base_url}}{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}"
+                      src="{{base_url}}{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri|image_style('focal_image_square')|replace({'//': '/'}) }}"
                       width="130"
                       height="130"
-                      style="display: block; width: 130px; height: 130px; object-fit: cover; border: 0; outline: none;"
+                      style="display: block !important; width: 130px !important; height: 130px !important; object-fit: cover !important; border: 0 !important; outline: none !important;"
                       alt="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.alt|render }}" />
 												{# Code to render selected article content (!thumbnail) #}
 											{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image %}
                       <img
-                      src="{{base_url}}{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}"
+                      src="{{base_url}}{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri|image_style('focal_image_square')|replace({'//': '/'}) }}"
                       width="130"
                       height="130"
-                      style="display: block; width: 130px; height: 130px; object-fit: cover; border: 0; outline: none;"
+                      style="display: block !important; width: 130px !important; height: 130px !important; object-fit: cover !important; border: 0 !important; outline: none !important;"
                       alt="{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt|render }}" />
 												{# Code to render user made content #}
 											{% elseif item.entity.field_newsletter_content_image.entity.field_media_image %}
                       <img
-                      src="{{base_url}}{{ item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square') }}"
+                      src="{{base_url}}{{ item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square')|replace({'//': '/'}) }}"
                       width="130"
                       height="130"
-                      style="display: block; width: 130px; height: 130px; object-fit: cover; border: 0; outline: none;"
+                      style="display: block !important; width: 130px !important; height: 130px !important; object-fit: cover !important; border: 0 !important; outline: none !important;"
                       alt="{{ item.entity.field_newsletter_content_image.entity.field_media_image.alt|render }}" />
 											{% endif %}
 									</td>
@@ -206,7 +206,7 @@
 													{% if item.entity.field_newsletter_article_select.entity.title.value|render %}
 													<td>
 														<h3 style="font-size: 18px;">
-														<a href="{{base_url}}{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
+														<a style="text-decoration: none;" href="{{base_url}}{{ path('entity.node.canonical', {'node': item.entity.field_newsletter_article_select.target_id}) }}">
 															{{ item.entity.field_newsletter_article_select.entity.title.value|render|striptags|trim }}
 														</a>
 													</h3>
@@ -219,7 +219,7 @@
 														{% set is_absolute = (actual_url starts with 'http://' or actual_url starts with 'https://') %}
 														{% set final_url = is_absolute ? actual_url : (base_url ~ actual_url) %}
 														<h3 style="font-size: 18px;">
-															<a class="ucb-newsletter-content-title" href="{{ final_url }}">
+															<a style="text-decoration: none;" class="ucb-newsletter-content-title" href="{{ final_url }}">
 																{{ item.entity.field_newsletter_content_title|view }}
 															</a>
 														</h3>
@@ -264,7 +264,7 @@
 								{# Code to render user made content (content text) #}
 							{% elseif item.entity.field_newsletter_content_text.value|render %}
 								<tr>
-									<td style="padding-left: 0px;">{{ item.entity.field_newsletter_content_text|view }}</td>
+									<td>{{ item.entity.field_newsletter_content_text|view }}</td>
 								</tr>
 							{% endif %}
 											</tbody>
