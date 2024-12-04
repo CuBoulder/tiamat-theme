@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Class Notes List: Allow WYSIWYG Class Notes to display correctly
+  Previously the Class Notes List page would strip out WYSIWYG HTML from the aggregate display. This has been adjusted so that images, links, etc added to a Class Note page via WYSIWYG editor are allowed to display while malicious input is not. 
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1523
+---
+
 - ### Modify Image Styles in Content Rows
   Updated content rows so that teasers are using the correct image style with the right 2:1 ratio.
   A new image style was created to support this update. 

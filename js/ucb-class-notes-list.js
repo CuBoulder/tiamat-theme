@@ -190,7 +190,7 @@ class ClassNotesListElement extends HTMLElement {
 				// Class Note Text
 				const classNoteParagraph = document.createElement('p')
 					classNoteParagraph.classList.add('ucb-class-note-body')
-					classNoteParagraph.innerHTML = this.decodeHtmlEntities(this.escapeHTML(note.attributes.body.processed));
+					classNoteParagraph.innerHTML = this.sanitizeHTML(note.attributes.body.processed);
 					textDiv.appendChild(classNoteParagraph)
 				// Date posted
 				const classNotePosted = document.createElement('p')
@@ -345,26 +345,16 @@ class ClassNotesListElement extends HTMLElement {
 		this.getData(JSONURL, "", "Class Year")
 	}
 	// Prevents malicious user input
-	escapeHTML(raw) {
-		if (!raw) return '';
+  sanitizeHTML(input) {
+    if (!input) return '';
+    let sanitized = input.replace(/<script[\s\S]*?>[\s\S]*?<\/script>/gi, '')
+                         .replace(/<style[\s\S]*?>[\s\S]*?<\/style>/gi, '');
+    sanitized = sanitized.replace(/\s*on\w+="[^"]*"/gi, '')
+                         .replace(/\s*on\w+='[^']*'/gi, '');
+    sanitized = sanitized.replace(/href\s*=\s*(['"])\s*javascript:[^'"]*\1/gi, '');
 
-		// First, escape all HTML to prevent execution of unwanted tags or JavaScript.
-		let escapedHTML = raw.replace(/\&/g, '&amp;').replace(/"/g, '&quot;')
-							 .replace(/</g, '&lt;').replace(/>/g, '&gt;');
-
-		// Unescape the allowed tags (p, strong, em)
-		escapedHTML = escapedHTML.replace(/&lt;(\/?p)&gt;/g, '<$1>')
-								 .replace(/&lt;(\/?strong)&gt;/g, '<$1>')
-								 .replace(/&lt;(\/?em)&gt;/g, '<$1>');
-
-		return escapedHTML;
-	}
-  // Fixes special characters such as & and nbsp
-  decodeHtmlEntities(text) {
-    const parser = new DOMParser();
-    const doc = parser.parseFromString(text, "text/html");
-    return doc.documentElement.textContent;
-  }
+    return sanitized;
+}
 	// Date formatter
 	formatDateString(dateString) {
 		const options = { year: 'numeric', month: 'short', day: 'numeric' };
