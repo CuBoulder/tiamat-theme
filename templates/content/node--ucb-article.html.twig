@@ -185,6 +185,50 @@
         </div>
       {% endif %}
 
+
+{# Extract category and tag IDs as arrays and convert to a string format like "[1, 2, 3, 4]" #}
+{# Ensure the fields are not null before applying map and join #}
+
+{% set category_ids = content.field_ucb_article_categories['#items'] is defined and content.field_ucb_article_categories['#items'] is not empty
+    ? '[' ~ content.field_ucb_article_categories['#items']|map(item => item.entity.id)|join(', ') ~ ']'
+    : '[]' %}
+
+{% set tag_ids = content.field_ucb_article_tags['#items'] is defined and content.field_ucb_article_tags['#items'] is not empty
+    ? '[' ~ content.field_ucb_article_tags['#items']|map(item => item.entity.id)|join(', ') ~ ']'
+    : '[]' %}
+
+{% set exclude_categories = content.related_articles_exclude_categories['#items'] is defined and content.related_articles_exclude_categories['#items'] is not empty
+    ? '[' ~ content.related_articles_exclude_categories['#items']|map(item => item.entity.id)|join(', ') ~ ']'
+    : '[]' %}
+
+{% set exclude_tags = content.related_articles_exclude_tags['#items'] is defined and content.related_articles_exclude_tags['#items'] is not empty
+    ? '[' ~ content.related_articles_exclude_tags['#items']|map(item => item.entity.id)|join(', ') ~ ']'
+    : '[]' %}
+
+{# Test zone #}
+        <pre>
+        "this article has categories:" {{category_ids}}
+        "this article has tags:"{{tag_ids}}
+        "exclude cats:" {{exclude_categories}}
+        "exclude tags:" {{exclude_tags}}
+        {{ content.field_ucb_related_articles_parag }}
+        </pre>
+{# NEW BLOCK #}
+<related-articles
+  {{ create_attribute({
+    class: ['container', 'ucb-related-articles-block'],
+    'baseurl': baseURL,
+    'loggedin': logged_in ? 'true' : 'false',
+    'related-shown': showRelated|striptags|trim,
+    'categories': category_ids,
+    'tags': tag_ids,
+    'category-exclude': exclude_categories,
+    'tag-exclude': exclude_tags
+  }) }}>
+  {{ content.field_ucb_related_articles_parag }}
+</related-articles>
+
+{# OLD BLOCK #}
       {# Related Articles Block #}
       <div{{ create_attribute({
           class: ['container', 'ucb-related-articles-block'],
