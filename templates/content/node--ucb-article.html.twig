@@ -13,8 +13,8 @@
 {# Base Url #}
 {% set baseURL = url('<front>')|render|trim('/') %}
 
-{% set excludeCats = related_articles_exclude_categories %}
-{% set excludeTags = related_articles_exclude_tags %}
+{% set exclude_categories = related_articles_exclude_categories %}
+{% set exclude_tags = related_articles_exclude_tags %}
 
 {# DATE FORMATTER - use global setting for all, unless override in article provided #}
 {% set global_date_format = article_date_format %}
@@ -197,21 +197,12 @@
     ? '[' ~ content.field_ucb_article_tags['#items']|map(item => item.entity.id)|join(', ') ~ ']'
     : '[]' %}
 
-{% set exclude_categories = content.related_articles_exclude_categories['#items'] is defined and content.related_articles_exclude_categories['#items'] is not empty
-    ? '[' ~ content.related_articles_exclude_categories['#items']|map(item => item.entity.id)|join(', ') ~ ']'
-    : '[]' %}
-
-{% set exclude_tags = content.related_articles_exclude_tags['#items'] is defined and content.related_articles_exclude_tags['#items'] is not empty
-    ? '[' ~ content.related_articles_exclude_tags['#items']|map(item => item.entity.id)|join(', ') ~ ']'
-    : '[]' %}
-
 {# Test zone #}
         <pre>
         "this article has categories:" {{category_ids}}
         "this article has tags:"{{tag_ids}}
-        "exclude cats:" {{exclude_categories}}
-        "exclude tags:" {{exclude_tags}}
-        {{ content.field_ucb_related_articles_parag }}
+        "exclude cats:" {{exclude_cats|json_encode() }}
+        "exclude tags:" {{exclude_tags|json_encode() }}
         </pre>
 {# NEW BLOCK #}
 <related-articles
@@ -222,15 +213,15 @@
     'related-shown': showRelated|striptags|trim,
     'categories': category_ids,
     'tags': tag_ids,
-    'category-exclude': exclude_categories,
-    'tag-exclude': exclude_tags
+    'category-exclude': exclude_categories|json_encode(),
+    'tag-exclude': exclude_tags|json_encode(),
   }) }}>
   {{ content.field_ucb_related_articles_parag }}
 </related-articles>
 
 {# OLD BLOCK #}
       {# Related Articles Block #}
-      <div{{ create_attribute({
+      {# <div{{ create_attribute({
           class: ['container', 'ucb-related-articles-block'],
           'data-baseurl' : baseURL,
           'data-loggedin': logged_in ? 'true' : 'false',
@@ -242,7 +233,7 @@
           'data-tagExclude': related_articles_exclude_tags|json_encode(),
           'data-catExclude': related_articles_exclude_categories|json_encode() }) }}>
         {{ content.field_ucb_related_articles_parag }}
-      </div>
+      </div> #}
     </div>
   </article>
 {% else %}
