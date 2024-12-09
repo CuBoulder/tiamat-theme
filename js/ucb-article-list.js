@@ -1,4 +1,45 @@
 (function (customElements) {
+
+  /**
+   * Creates a taxonomy filter group to filter by specific taxonomy terms.
+   *
+   * @param {string} params
+   *   The URL params to add the filter group to.
+   * @param {number[]} termIds
+   *   The terms to include in the filter (joined with OR).
+   * @param {string} groupName
+   *   The name of the filter group.
+   * @param {string} fieldName
+   *   The name of the Drupal field.
+   */
+  function jsonAPICreateFilterGroup(params, termIds, groupName, fieldName) {
+    if (termIds.length > 0) {
+      params += `&filter[${groupName}][condition][path]=${fieldName}.meta.drupal_internal__target_id`;
+      params += `&filter[${groupName}][condition][operator]=IN`;
+      for (let i = 0; i < termIds.length; i++) {
+        params += `&filter[${groupName}][condition][value][${i + 1}]=${termIds[i]}`;
+      }
+      return params;
+    }
+  }
+
+  /**
+   * Converts a string to an array of term ids.
+   *
+   * @param {string} input
+   *   The input string of term ids separated by a delimiter.
+   * @param {string} delimiter
+   *   The delimiter.
+   * @returns {number[]}
+   *   The term ids.
+   */
+  function stringToTermIds(input, delimiter = ',') {
+    if (input) {
+      return input.split(delimiter).map(Number);
+    }
+    return [];
+  }
+
   // Handles construction of endpoints, and fetching of articles and taxonomies
   class ArticleListProvider {
     static get noResultsMessage() {
@@ -9,13 +50,15 @@
       return 'Error retrieving articles from the API endpoint. Please try again later.';
     }
 
-    constructor(baseURI, includeCategories, includeTags, excludeCategories = '', excludeTags = '', pageCount = 10) {
+    constructor(baseURI, includeCategories = [], includeTags = [], excludeCategories = [], excludeTags = [], includeSyndicationAudiences = [], includeSyndicationUnits = [], pageCount = 10) {
       this.baseURI = baseURI;
       this.nextURL = '';
-      this.includeCategories = includeCategories || [];
-      this.includeTags = includeTags || [];
-      this.excludeCategories = excludeCategories || [];
-      this.excludeTags = excludeTags || [];
+      this.includeCategories = includeCategories;
+      this.includeTags = includeTags;
+      this.excludeCategories = excludeCategories;
+      this.excludeTags = excludeTags;
+      this.includeSyndicationAudiences = includeSyndicationAudiences;
+      this.includeSyndicationUnits = includeSyndicationUnits;
       this.pageCount = pageCount;
       this._categoryTerms = null;
       this._tagTerms = null;
@@ -29,59 +72,28 @@
      */
     buildEndpointPath() {
       const endpoint = '';
-      let queryString = '';
 
       // Include base fields
-      queryString += '/jsonapi/node/ucb_article?include[node--ucb_article]=uid,title,ucb_article_content,created,field_ucb_article_summary,field_ucb_article_categories,field_ucb_article_tags,field_ucb_article_thumbnail&include=field_ucb_article_thumbnail.field_media_image&fields[file--file]=uri,url';
+      let queryString = '/jsonapi/node/ucb_article?include[node--ucb_article]=uid,title,ucb_article_content,created,field_ucb_article_summary,field_ucb_article_categories,field_ucb_article_tags,field_ucb_article_thumbnail&include=field_ucb_article_thumbnail.field_media_image&fields[file--file]=uri,url';
 
       // Add published filter
-      const publishedFilter = '&filter[status][value]=1';
+      queryString += '&filter[status][value]=1';
 
       // Placeholder for filters
-      let IncludeFilter = '';
-      let IncludeCategoryFilter = '';
-      let IncludeTagsFilter = '';
-      let ExcludeCategoryFilter = '';
-      let ExcludeTagsFilter = '';
-
-      // Handle Include Categories Filter
-      if (this.includeCategories && this.includeCategories.length > 0) {
-        let includeGroupMembers = this.includeCategories.map(category => {
-          return `&filter[filter-cat${category}][condition][path]=field_ucb_article_categories.meta.drupal_internal__target_id&filter[filter-cat${category}][condition][value]=${category}&filter[filter-cat${category}][condition][memberOf]=cat-include`;
-        }).join('');
-        IncludeCategoryFilter = `&filter[cat-include][group][conjunction]=OR${includeGroupMembers}`;
-      }
-
-      // Handle Include Tags Filter
-      if (this.includeTags && this.includeTags.length > 0) {
-        let includeGroupMembers = this.includeTags.map(tag => {
-          return `&filter[filter-tag${tag}][condition][path]=field_ucb_article_tags.meta.drupal_internal__target_id&filter[filter-tag${tag}][condition][value]=${tag}&filter[filter-tag${tag}][condition][memberOf]=tag-include`;
-        }).join('');
-        IncludeTagsFilter = `&filter[tag-include][group][conjunction]=OR${includeGroupMembers}`;
-      }
-
-      // Combine Include Filters
-      if (IncludeCategoryFilter && IncludeTagsFilter) {
-        IncludeFilter = `${publishedFilter}&filter[include-group][group][conjunction]=AND&filter[include-group][group][memberOf]=published${IncludeCategoryFilter}${IncludeTagsFilter}`;
-      } else if (IncludeCategoryFilter) {
-        IncludeFilter = `${publishedFilter}${IncludeCategoryFilter}`;
-      } else if (IncludeTagsFilter) {
-        IncludeFilter = `${publishedFilter}${IncludeTagsFilter}`;
-      } else {
-        IncludeFilter = publishedFilter; // No include filters, just published
-      }
+      queryString += jsonAPICreateFilterGroup(queryString, this.includeCategories, 'category', 'field_ucb_article_categories');
+      queryString += jsonAPICreateFilterGroup(queryString, this.includeTags, 'tag', 'field_ucb_article_tags');
+      queryString += jsonAPICreateFilterGroup(queryString, this.includeSyndicationAudiences, 'audience', 'field_syndication_audience');
+      queryString += jsonAPICreateFilterGroup(queryString, this.includeSyndicationUnits, 'unit', 'field_syndication_unit');
 
       // Pagination filter
-      const pageCountFilter = `&page[limit]=${this.pageCount}`;
+      queryString += `&page[limit]=${this.pageCount}`;
 
       // Sorting filter
-      const sortFilter = "&sort[sort-created][path]=created&sort[sort-created][direction]=DESC";
+      queryString += '&sort[sort-created][path]=created&sort[sort-created][direction]=DESC';
 
-      // Combine all filters
-      const fullQueryString = `${queryString}${IncludeFilter}${ExcludeCategoryFilter}${ExcludeTagsFilter}${pageCountFilter}${sortFilter}`;
-
-      return `${this.baseURI}${endpoint}${fullQueryString}`;
+      return `${this.baseURI}${endpoint}${queryString}`;
     }
+
     // Method to fetch and cache taxonomies by their machine name
     async fetchTaxonomies() {
       if (!this._categoryTerms) {
@@ -134,9 +146,9 @@
         throw error;
       }
     }
-
   }
-// Article List Component: Handles the rendering and client side exclusion filtering
+
+  // Article List Component: Handles the rendering and client side exclusion filtering
   class ArticleListElement extends HTMLElement {
     static get observedAttributes() {
       return ['base-uri', 'exclude-categories', 'exclude-tags', 'include-categories', 'include-tags'];
@@ -145,22 +157,30 @@
     constructor() {
       super();
       this._baseURI = this.getAttribute('base-uri');
-      // Store the initial values for resetting to 'All'
-      this._initialIncludeCategories = this.getAttribute('include-categories')
-        ? this.getAttribute('include-categories').split(',').map(Number)
-        : [];
-      this._initialIncludeTags = this.getAttribute('include-tags')
-        ? this.getAttribute('include-tags').split(',').map(Number)
-        : [];
 
-      this._includeCategories = [...this._initialIncludeCategories]; // Set the current categories to the initial state
-      this._excludeCategories = this.getAttribute('exclude-categories')
-        ? this.getAttribute('exclude-categories').split(',').map(Number)
-        : [];
-      this._includeTags = [...this._initialIncludeTags]; // Set the current tags to the initial state
-      this._excludeTags = this.getAttribute('exclude-tags')
-        ? this.getAttribute('exclude-tags').split(',').map(Number)
-        : [];
+      // Store the initial values for resetting to 'All'.
+      this._initialIncludeCategories = stringToTermIds(this.getAttribute('include-categories'));
+      this._initialIncludeTags = stringToTermIds(this.getAttribute('include-tags'));
+
+      const pathname = window.location.pathname.split('/');
+      // Adds the functionality for a "read more" page in article syndication.
+      if (pathname[pathname.length - 1] === 'syndicate') {
+        const params = new URL(window.location.href).searchParams;
+        this._initialIncludeCategories = stringToTermIds(params.get('category', ' '));
+        this._includeSyndicationAudiences = stringToTermIds(params.get('audience', ' '));
+        this._includeSyndicationUnits = stringToTermIds(params.get('unit', ' '));
+      } else {
+        this._includeSyndicationAudiences = [];
+        this._includeSyndicationUnits = [];
+      }
+
+      // Set the current tags to the initial state.
+      this._includeTags = [...this._initialIncludeTags];
+      // Set the current categories to the initial state.
+      this._includeCategories = [...this._initialIncludeCategories];
+
+      this._excludeCategories = stringToTermIds(this.getAttribute('exclude-categories'))
+      this._excludeTags = stringToTermIds(this.getAttribute('exclude-tags'));
 
       this._exposeCategory = this.getAttribute('expose-categories') === "True";
       this._exposeTag = this.getAttribute('expose-tags') === "True";
@@ -170,7 +190,9 @@
         this._includeCategories,
         this._includeTags,
         this._excludeCategories,
-        this._excludeTags
+        this._excludeTags,
+        this._includeSyndicationAudiences,
+        this._includeSyndicationUnits
       );
 
       // User Dropdown Form Element
@@ -223,6 +245,7 @@
 
       this._nextURL = '';
     }
+
     // Part of web component API, called on attribute change
     async connectedCallback() {
       try {
@@ -250,7 +273,8 @@
           : [];
       }
     }
-   // Generates the user-accessible filter form for categories and/or tags.
+
+    // Generates the user-accessible filter form for categories and/or tags.
     generateFilterForm() {
       this._filterFormElement.innerHTML = '';
 
@@ -351,10 +375,10 @@
       resetButton.textContent = 'Reset Filters';
       resetButton.onclick = () => {
         // Reset dropdowns to default (All)
-        if(this._exposeCategory){
+        if (this._exposeCategory) {
           document.getElementById('category-filter').value = '';
         }
-        if(this._exposeTag){
+        if (this._exposeTag) {
           document.getElementById('tag-filter').value = '';
         }
 
@@ -401,38 +425,38 @@
       this.toggleLoading(true);
 
       try {
-          const response = await this._provider.fetchAllArticles(url);
+        const response = await this._provider.fetchAllArticles(url);
 
-          this.renderArticles(response.data, response.included, clearContent);
+        this.renderArticles(response.data, response.included, clearContent);
 
-          this._nextURL = this._provider._nextURL;
-          this.toggleLoadMoreButton(!!this._nextURL);
-          this.toggleLoading(false);
+        this._nextURL = this._provider._nextURL;
+        this.toggleLoadMoreButton(!!this._nextURL);
+        this.toggleLoading(false);
       } catch (error) {
-          this.toggleError(true);
-          this.toggleLoading(false);
+        this.toggleError(true);
+        this.toggleLoading(false);
       }
     }
 
     async loadMoreArticles() {
       if (this._nextURL) {
-          try {
-              this.toggleLoading(true);
-              const response = await this._provider.fetchAllArticles(this._nextURL);
+        try {
+          this.toggleLoading(true);
+          const response = await this._provider.fetchAllArticles(this._nextURL);
 
-              // Do not clear content for loadMoreArticles, append to existing content
-              this.renderArticles(response.data, response.included, false);
+          // Do not clear content for loadMoreArticles, append to existing content
+          this.renderArticles(response.data, response.included, false);
 
-              // Update the element’s next URL again after loading more articles
-              this._nextURL = this._provider._nextURL;
+          // Update the element’s next URL again after loading more articles
+          this._nextURL = this._provider._nextURL;
 
-              // Show or hide the Load More button based on the updated next URL
-              this.toggleLoadMoreButton(!!this._nextURL);
-              this.toggleLoading(false);
-          } catch (error) {
-              this.toggleError(true);
-              this.toggleLoading(false);
-          }
+          // Show or hide the Load More button based on the updated next URL
+          this.toggleLoadMoreButton(!!this._nextURL);
+          this.toggleLoading(false);
+        } catch (error) {
+          this.toggleError(true);
+          this.toggleLoading(false);
+        }
       }
     }
 
@@ -647,49 +671,49 @@
       return articleRow;
     }
 
-// Helper function to fetch the Article body if no summary and do the processing
-// Fixes special characters such as & and nbsp
-decodeHtmlEntities(text) {
-  const parser = new DOMParser();
-  const doc = parser.parseFromString(text, "text/html");
-  return doc.documentElement.textContent;
-}
-
-// Responsible for fetching & processing the body of the Article if no summary provided
-async getArticleParagraph(id) {
-  if (!id) {
-    return "";
-  }
-
-  try {
-    const response = await fetch(
-      `${this._baseURI}/jsonapi/paragraph/article_content/${id}`
-    );
-    const data = await response.json();
-    if (!data.data.attributes.field_article_text) return ""; //  needed for external articles
-    let htmlStrip = data.data.attributes.field_article_text.processed.replace(
-      /<\/?[^>]+(>|$)/g,
-      ""
-    );
-    let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
-    let decodedString = this.decodeHtmlEntities(lineBreakStrip); // Decode HTML entities here
-    let trimmedString = decodedString.substring(0, 250);
-
-    if (trimmedString.length > 100) {
-      trimmedString = trimmedString.substring(
-        0,
-        Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
-      );
+    // Helper function to fetch the Article body if no summary and do the processing
+    // Fixes special characters such as & and nbsp
+    decodeHtmlEntities(text) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, "text/html");
+      return doc.documentElement.textContent;
     }
-    return trimmedString + "...";
-  } catch (Error) {
-    console.error(
-      "There was an error fetching Article Paragraph from the API - Please try again later."
-    );
-    console.error(Error);
-    return ""; // Return an empty string in case of error
-  }
-}
+
+    // Responsible for fetching & processing the body of the Article if no summary provided
+    async getArticleParagraph(id) {
+      if (!id) {
+        return "";
+      }
+
+      try {
+        const response = await fetch(
+          `${this._baseURI}/jsonapi/paragraph/article_content/${id}`
+        );
+        const data = await response.json();
+        if (!data.data.attributes.field_article_text) return ""; //  needed for external articles
+        let htmlStrip = data.data.attributes.field_article_text.processed.replace(
+          /<\/?[^>]+(>|$)/g,
+          ""
+        );
+        let lineBreakStrip = htmlStrip.replace(/(\r\n|\n|\r)/gm, "");
+        let decodedString = this.decodeHtmlEntities(lineBreakStrip); // Decode HTML entities here
+        let trimmedString = decodedString.substring(0, 250);
+
+        if (trimmedString.length > 100) {
+          trimmedString = trimmedString.substring(
+            0,
+            Math.min(trimmedString.length, trimmedString.lastIndexOf(" "))
+          );
+        }
+        return trimmedString + "...";
+      } catch (Error) {
+        console.error(
+          "There was an error fetching Article Paragraph from the API - Please try again later."
+        );
+        console.error(Error);
+        return ""; // Return an empty string in case of error
+      }
+    }
 
     // Various toggles
     toggleLoading(show) {
