@@ -26,7 +26,7 @@
   /**
    * Converts a string to an array of term ids.
    *
-   * @param {string} input
+   * @param {string | null} input
    *   The input string of term ids separated by a delimiter.
    * @param {string} delimiter
    *   The delimiter.
@@ -34,10 +34,7 @@
    *   The term ids.
    */
   function stringToTermIds(input, delimiter = ',') {
-    if (input) {
-      return input.split(delimiter).map(Number);
-    }
-    return [];
+    return input ? input.split(delimiter).map(Number) : [];
   }
 
   // Handles construction of endpoints, and fetching of articles and taxonomies
