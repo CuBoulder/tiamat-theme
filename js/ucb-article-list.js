@@ -163,7 +163,10 @@
       // Adds the functionality for a "read more" page in article syndication.
       if (pathname[pathname.length - 1] === 'syndicate') {
         const params = new URL(window.location.href).searchParams;
-        this._initialIncludeCategories = stringToTermIds(params.get('category'), ' ');
+        const categories = stringToTermIds(params.get('category'), ' ');
+        if (categories.length > 0) {
+          this._initialIncludeCategories = categories;
+        }
         this._includeSyndicationAudiences = stringToTermIds(params.get('audience'), ' ');
         this._includeSyndicationUnits = stringToTermIds(params.get('unit'), ' ');
       } else {
