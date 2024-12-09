@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Remove wrap from info footer
+  Resolves #1525.
+  Removes wrapping from the site info contact footer to remove the extra space.
+---
+
 ## [20241204] - 2024-12-04
 
 - ### Class Notes List: Allow WYSIWYG Class Notes to display correctly
