@@ -25,14 +25,6 @@
 		<!--Feature Style Section-->
 			{% for key, item in paragraph.field_newsletter_section_select %}
 				{%  if key|first != '#' %}
-				{# Unpublished check #}
-				{% if (item.entity.field_newsletter_article_select.entity and
-					item.entity.field_newsletter_article_select.entity.isPublished()) or
-					(item.entity.field_newsletter_content_title and
-					item.entity.field_newsletter_content_title.value|render)
-          or
-          item.entity.field_newsletter_content_text.value|render
-          %}
 					{# Code to render selected article content (thumbnail) #}
 					<!--Feature Article-->
 					<table role="presentation"  width="600" style="padding-bottom: 20px;">
@@ -148,19 +140,11 @@
 						</tbody>
 					</table>
 				{% endif %}
-				{% endif %}
 			{% endfor %}
 		{% else %}
 		<!--Teaser Section-->
 				{% for key, item in paragraph.field_newsletter_section_select %}
 					{%  if key|first != '#' %}
-					{# Unpublished check #}
-					{% if (item.entity.field_newsletter_article_select.entity and
-						item.entity.field_newsletter_article_select.entity.isPublished()) or
-						(item.entity.field_newsletter_content_title and
-						item.entity.field_newsletter_content_title.value|render)
-            or
-            item.entity.field_newsletter_content_text.value|render %}
 	  					<!--Teaser Article-->
 					<center align="left">
 						<table role="presentation" width="600" style="padding-top:20px; padding-bottom: 20px; border-bottom: solid 1px #cccccc;">
@@ -274,7 +258,6 @@
 							</tbody>
 						</table>
 					</center>
-					{% endif %}
 				{% endif %}
 			{% endfor %}
 		{% endif %}
