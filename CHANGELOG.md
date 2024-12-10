@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletters: allow unpublished to show in Email HTML preview
+  Previously the Email HTML of Newsletters would not display unpublished Articles. Now they will display so site-editors can verify and proof content before mailing. There is a content warning on the Node of any Articles that are unpublished. 
+  
+  Note: Articles must still be manually published before sending the email, or could result in email recipients getting broken links. 
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1517
+---
+
 - ### Remove wrap from info footer
   Resolves #1525.
   Removes wrapping from the site info contact footer to remove the extra space.
