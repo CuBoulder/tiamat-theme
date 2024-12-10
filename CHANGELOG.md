@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Mega menu Link color changes
+  Resolves #1530.
+  Forces the color of links in the mega menu to be blue to resolve issues of links not showing up.
+---
+
 - ### Newsletters: allow unpublished to show in Email HTML preview
   Previously the Email HTML of Newsletters would not display unpublished Articles. Now they will display so site-editors can verify and proof content before mailing. There is a content warning on the Node of any Articles that are unpublished. 
   

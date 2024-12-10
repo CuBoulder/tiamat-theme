@@ -77,11 +77,11 @@
   flex-wrap: wrap;
 }
 
-.ucb-main-nav-container .ucb-mega-menu .menu-item .mega-menu-wrapper a{
-  color: #0277bd;
+.ucb-main-nav-container .ucb-main-menu-mega-menu .menu-item .ucb-mega-menu-column-wrapper a{
+  color: #0277bd !important;
 }
 
-.ucb-main-nav-container .ucb-mega-menu .menu-item .mega-menu-wrapper a:hover{
+.ucb-main-nav-container .ucb-main-menu-mega-menu .menu-item .ucb-mega-menu-column-wrapper a:hover{
   color: #B71C1C;
 }
 
