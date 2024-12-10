@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Article Lists: Hides Dates, Decodes Special Characters in Titles of Taxonomy Term Pages
+  If an Article has it's date set to 'Hide' this update will hide the date on `Category` and `Tag` Taxonomy pages as well as on the `Article List Page` and `Article List Block` displays that show the date (Teaser, Feature)
+  
+  Additionally fixes the display of special characters on Taxonomy term pages from not decoding correctly.
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1465
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1429
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1509
+  
+  Profile -> https://github.com/CuBoulder/tiamat10-profile/pull/239
+---
+
 - ### Mega menu Link color changes
   Resolves #1530.
   Forces the color of links in the mega menu to be blue to resolve issues of links not showing up.
