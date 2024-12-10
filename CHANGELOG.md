@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds Article Syndication "read more" article list
+  This update adds the Article Syndication "read more" article list, for use with the Campus News block. The article list is automatically created on sites using the CU Boulder Article Syndication module (if it doesn't already exist) and aliased to `/syndicate`. It allows URL parameters to specify category, audience, and unit filters.
+  
+  [new] CuBoulder/ucb_article_syndication#3
+  
+  Sister PR in: [ucb_article_syndication](https://github.com/CuBoulder/ucb_article_syndication/pull/6)
+---
+
 - ### Article Lists: Hides Dates, Decodes Special Characters in Titles of Taxonomy Term Pages
   If an Article has it's date set to 'Hide' this update will hide the date on `Category` and `Tag` Taxonomy pages as well as on the `Article List Page` and `Article List Block` displays that show the date (Teaser, Feature)
   
