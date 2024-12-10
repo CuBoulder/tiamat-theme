@@ -1,8 +1,8 @@
 .ucb-related-articles-block {
   display: none;
 	margin-top: 20px;
-  --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 0;
+  --bs-gutter-x: 0 !important;
+  --bs-gutter-y: 0 !important;
 }
 
 .ucb-article-card-img {
