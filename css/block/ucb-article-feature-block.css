@@ -92,6 +92,11 @@
   max-width: 100%;
 }
 
+.feature-img-wide{
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+}
+
 .ucb-stacked-secondary-container > .ucb-article-card {
   margin-bottom: 0px;
   border-bottom: none;

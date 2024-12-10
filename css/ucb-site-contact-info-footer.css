@@ -5,7 +5,6 @@
 .ucb-site-contact-info-footer {
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
 }
 
 .ucb-site-contact-info-footer-left {
