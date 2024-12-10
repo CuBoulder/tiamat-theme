@@ -92,19 +92,21 @@
   'ucb-content-wrapper'
 ] %}
 
-
-{% set myTags %}
-{{ content.field_ucb_article_tags }}
-{% endset %}
-{% set myCats %}
-{{ content.field_ucb_article_categories }}
-{% endset %}
+{# Show Related - will flag "Off" or "Related Articles", controls visibility of the block #}
 {% set showRelated %}
 {{ content.field_ucb_related_articles_parag.0 }}
 {% endset %}
 
+{# Extract category and tag IDs as arrays and convert to a string format like "[1, 2, 3, 4]" #}
+{# Ensure the fields are not null before applying map and join #}
 
-{# {% set publishedDate = node.created.value|date('F d, Y') %} #}
+{% set category_ids = content.field_ucb_article_categories['#items'] is defined and content.field_ucb_article_categories['#items'] is not empty
+    ? '[' ~ content.field_ucb_article_categories['#items']|map(item => item.entity.id)|join(', ') ~ ']'
+    : '[]' %}
+
+{% set tag_ids = content.field_ucb_article_tags['#items'] is defined and content.field_ucb_article_tags['#items'] is not empty
+    ? '[' ~ content.field_ucb_article_tags['#items']|map(item => item.entity.id)|join(', ') ~ ']'
+    : '[]' %}
 
 {#Dummy variable to ensure that all content tags are set for caching purposes#}
 {% set content_render = content|render %}
@@ -184,57 +186,25 @@
           {{ content.field_appears_in_issue }}
         </div>
       {% endif %}
-
-
-{# Extract category and tag IDs as arrays and convert to a string format like "[1, 2, 3, 4]" #}
-{# Ensure the fields are not null before applying map and join #}
-
-{% set category_ids = content.field_ucb_article_categories['#items'] is defined and content.field_ucb_article_categories['#items'] is not empty
-    ? '[' ~ content.field_ucb_article_categories['#items']|map(item => item.entity.id)|join(', ') ~ ']'
-    : '[]' %}
-
-{% set tag_ids = content.field_ucb_article_tags['#items'] is defined and content.field_ucb_article_tags['#items'] is not empty
-    ? '[' ~ content.field_ucb_article_tags['#items']|map(item => item.entity.id)|join(', ') ~ ']'
-    : '[]' %}
-
-{# Test zone #}
-        <pre>
-        "this article has categories:" {{category_ids}}
-        "this article has tags:"{{tag_ids}}
-        "exclude cats:" {{exclude_cats|json_encode() }}
-        "exclude tags:" {{exclude_tags|json_encode() }}
-        </pre>
-{# NEW BLOCK #}
-<related-articles
-  {{ create_attribute({
-    class: ['container', 'ucb-related-articles-block'],
-    'baseurl': baseURL,
-    'loggedin': logged_in ? 'true' : 'false',
-    'related-shown': showRelated|striptags|trim,
-    'categories': category_ids,
-    'tags': tag_ids,
-    'category-exclude': exclude_categories|json_encode(),
-    'tag-exclude': exclude_tags|json_encode(),
-  }) }}>
-  {{ content.field_ucb_related_articles_parag }}
-</related-articles>
-
-{# OLD BLOCK #}
-      {# Related Articles Block #}
-      {# <div{{ create_attribute({
-          class: ['container', 'ucb-related-articles-block'],
-          'data-baseurl' : baseURL,
-          'data-loggedin': logged_in ? 'true' : 'false',
-          'data-catsjson': content.field_ucb_article_categories|json_encode(constant('JSON_PRETTY_PRINT')),
-          'data-tagsjson': content.field_ucb_article_tags|json_encode(constant('JSON_PRETTY_PRINT')),
-          'data-relatedshown': showRelated|striptags|trim,
-          'data-tags': myTags|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""}),
-          'data-cats': myCats|render|striptags|trim|replace({"\n": "", "\r": "", "\t": ""}),
-          'data-tagExclude': related_articles_exclude_tags|json_encode(),
-          'data-catExclude': related_articles_exclude_categories|json_encode() }) }}>
-        {{ content.field_ucb_related_articles_parag }}
-      </div> #}
-    </div>
+{% if showRelated|striptags|trim != 'Off' %}
+<div class="container">
+  {# Related Articles Block #}
+  <related-articles #}
+    {{ create_attribute({
+      class: ['container', 'ucb-related-articles-block'],
+      'baseurl': baseURL,
+      'loggedin': logged_in ? 'true' : 'false',
+      'related-shown': showRelated|striptags|trim,
+      'categories': category_ids,
+      'tags': tag_ids,
+      'category-exclude': exclude_categories|json_encode(),
+      'tag-exclude': exclude_tags|json_encode(),
+    }) }}>
+    {{ content.field_ucb_related_articles_parag }}
+  </related-articles>
+</div>
+{% endif %}
+  </div>
   </article>
 {% else %}
   <article{{attributes.addClass(classes)}}>

@@ -19,14 +19,14 @@ class RelatedArticles extends HTMLElement {
     this._tags = [];
     this._excludeCategories = [];
     this._excludeTags = [];
-    this._relatedShown = this.getAttribute('related-shown') !== 'Off';
+    this._relatedShown = this.getAttribute('related-shown') !== 'Off'; // will either be 'Related Articles' or 'Off'
 
     // Create container for related articles
     this._container = document.createElement('div');
     this._container.className = 'row related-articles-container';
     this.style.display = this._relatedShown ? 'block' : 'none';
 
-    // Append container only if relatedShown is true
+    // Append container only if relatedShown is true, else hide this whole component
     if (this._relatedShown) {
       this.appendChild(this._container);
 
@@ -34,6 +34,7 @@ class RelatedArticles extends HTMLElement {
       this._loadingElement = document.createElement('div');
       this._loadingElement.innerHTML = `<span class="visually-hidden">Loading</span><i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>`;
       this.appendChild(this._loadingElement);
+      this.toggleLoading(true);
 
       // Error element
       this._errorElement = document.createElement('div');
@@ -51,18 +52,15 @@ class RelatedArticles extends HTMLElement {
         this.style.display = this._relatedShown ? 'block' : 'none';
 
         if (!this._relatedShown) {
-          console.log('Hiding RelatedArticles component and stopping further processing.');
           // Cleanup or early exit logic if needed
           this._container.innerHTML = '';
           return;
         }
-
-        // If related-shown becomes true, re-fetch articles
         this.fetchAndDisplayArticles();
       }
     }
 
-    if (!this._relatedShown) return; // Early exit if not shown
+    if (!this._relatedShown) return; // Early exit if not shown, skip processing
 
     if (name === 'baseurl') this._baseURL = newValue || '';
     if (name === 'loggedin') this._loggedIn = newValue === 'true';
@@ -76,20 +74,9 @@ class RelatedArticles extends HTMLElement {
 
   connectedCallback() {
     if (!this._relatedShown) {
-      console.log('RelatedArticles not shown. Hiding component and skipping processing.');
       this.style.display = 'none';
       return;
     }
-    console.log('ConnectedCallback: RelatedArticles initialized.');
-    console.log('Attributes:', {
-      baseurl: this._baseURL,
-      loggedin: this._loggedIn,
-      relatedShown: this._relatedShown,
-      categories: this._categories,
-      tags: this._tags,
-      excludeCategories: this._excludeCategories,
-      excludeTags: this._excludeTags,
-    });
 
     if (this._relatedShown) {
       this.fetchAndDisplayArticles();
@@ -102,11 +89,8 @@ class RelatedArticles extends HTMLElement {
       return;
     }
 
-    this.toggleLoading(true);
-
     try {
       const endpoint = this.buildEndpoint();
-      console.log('Fetching articles from:', endpoint);
 
       const response = await fetch(endpoint);
       if (!response.ok) {
@@ -114,11 +98,9 @@ class RelatedArticles extends HTMLElement {
       }
 
       const data = await response.json();
-      console.log('Fetched data:', data);
 
       const { articles, thumbnails } = this.processIncludedData(data.data, data.included);
       const rankedArticles = this.rankArticles(articles);
-      console.log('Ranked articles:', rankedArticles);
 
       this.renderArticles(rankedArticles.slice(0, 3), thumbnails);
     } catch (error) {
@@ -154,8 +136,6 @@ class RelatedArticles extends HTMLElement {
         .join('');
       endpoint += `&filter[tags][group][conjunction]=OR${tagFilters}`;
     }
-
-    console.log('Generated endpoint:', endpoint);
     return endpoint;
   }
 
@@ -200,7 +180,6 @@ class RelatedArticles extends HTMLElement {
 
         // Exclude the current article
         if (urlCheck === window.location.pathname) {
-          console.log(`Excluding current article: ${urlCheck}`);
           return null;
         }
 
@@ -213,14 +192,12 @@ class RelatedArticles extends HTMLElement {
 
         const categoryMatches = categories.filter((cat) => this._categories.includes(cat)).length;
         const tagMatches = tags.filter((tag) => this._tags.includes(tag)).length;
-        console.log('excluded', this._excludeCategories)
 
 
         const hasExcludedCategory = categories.some((cat) => this._excludeCategories.includes(cat));
         const hasExcludedTag = tags.some((tag) => this._excludeTags.includes(tag));
 
         if (hasExcludedCategory || hasExcludedTag) {
-          console.log(`Excluding article with excluded category or tag: ${urlCheck}`);
           return null;
         }
 
@@ -241,8 +218,6 @@ class RelatedArticles extends HTMLElement {
 
 
   renderArticles(articles, thumbnails) {
-    console.log('Rendering articles:', articles);
-
     this._container.innerHTML = '';
 
     if (articles.length === 0) {
@@ -253,17 +228,20 @@ class RelatedArticles extends HTMLElement {
     articles.forEach(({ article }) => {
       const title = article.attributes.title;
       const summary = article.attributes.field_ucb_article_summary || '';
-      const link = `${this._baseURL}${article.attributes.path.alias}`;
+      const link = article.attributes.path.alias ? this._baseURL + article.attributes.path.alias : `${baseURL}/node/${article.attributes.drupal_internal__nid}`;
       const thumbnail = thumbnails[article.relationships?.field_ucb_article_thumbnail?.data?.id];
 
       const articleElement = document.createElement('div');
       articleElement.className = "ucb-article-card col-sm-12 col-md-6 col-lg-4";
 
       if (thumbnail) {
+        const imgLink = document.createElement('a');
+        imgLink.href = link;
         const img = document.createElement('img');
         img.src = thumbnail.src;
         img.alt = thumbnail.alt;
-        articleElement.appendChild(img);
+        imgLink.appendChild(img)
+        articleElement.appendChild(imgLink);
       }
 
       const titleElement = document.createElement('span');
