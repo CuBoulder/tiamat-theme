@@ -5,7 +5,8 @@ ucb-global:
       css/bootstrap/bootstrap.min.css: {}
       css/layout.css: {}
     theme:
-      https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap: { type: external }
+      https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap:
+        { type: external }
       css/style-responsive.css: {}
       css/styleguide/global.css: {}
       css/styleguide/branding.css: {}
@@ -527,3 +528,9 @@ ucb-newsletter-list-block:
   css:
     theme:
       css/block/ucb-newsletter-list-block.css: {}
+
+ucb-sidebar-menu-style-gray:
+  version: 1.x
+  css:
+    theme:
+      css/menu-styles/ucb-sidebar-gray-styles.css: {weight: 50}
