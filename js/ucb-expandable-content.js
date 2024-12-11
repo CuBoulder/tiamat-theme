@@ -5,7 +5,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // Add event listeners for all accordion or tab elements
-  document.querySelectorAll('.accordion-button, .ucb-menu-link').forEach(function (link) {
+  document.querySelectorAll('.accordion-button').forEach(function (link) {
     link.addEventListener("click", function () {
       const href = this.getAttribute("href");
       if (href) {
