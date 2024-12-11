@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Resolve URL Hash for mega menus
+  Resolves #1536.
+  Changes the functionality of the hash set function to only affect menus that are not mega menus.
+---
+
 - ### Related Articles: Refactors block for better relatedness scoring, faster generation
   Previously the Related Articles block could produce results that were older than expected while more recent related Articles could be missing. The block has been completely reworked to use a modern Web Component style of the other Article List blocks we've developed as well as produce better and more recent Article matches by picking through a pool of the most 50 semi-related to find the top 3.
   
