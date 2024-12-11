@@ -80,6 +80,10 @@
     {% else %}
       {{ attach_library('boulder_base/ucb-menu-style-default') }}
     {% endif %}
+    {% set sidebar_menu_style = drupal_config('boulder_base.settings', 'ucb_sidebar_menu_style') %}
+    {% if sidebar_menu_style == 'light-gray'  %}
+      {{ attach_library('boulder_base/ucb-sidebar-menu-style-gray') }}
+    {% endif %}
     {% set header_color = 'black' %}
     {% set campus_header_color = 'black' %}
     {% set campus_header_text_color = 'white' %}

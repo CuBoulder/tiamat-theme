@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Sidebar menu theme styles
+  Styles applied when the light gray sidebar menu style option is picked in the theme configuration. Styles override basic options with new css file.
+  
+  Sister PR: https://github.com/CuBoulder/ucb_site_configuration/pull/75
+  
+  Resolves Issue #1513 
+---
+
 - ### Resolve URL Hash for mega menus
   Resolves #1536.
   Changes the functionality of the hash set function to only affect menus that are not mega menus.
