@@ -12,3 +12,8 @@
 .ucb-newsletter-list-summary{
   margin-bottom: 0px;
 }
+
+.ucb-list-msg {
+  font-size: 1.25em;
+  font-weight: bolder;
+}
