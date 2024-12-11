@@ -9,62 +9,77 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20241211] - 2024-12-11
+
 - ### Sidebar menu theme styles
+
   Styles applied when the light gray sidebar menu style option is picked in the theme configuration. Styles override basic options with new css file.
-  
-  Sister PR: https://github.com/CuBoulder/ucb_site_configuration/pull/75
-  
+
+  Sister PR: <https://github.com/CuBoulder/ucb_site_configuration/pull/75>
+
   Resolves Issue #1513 
----
+
+* * *
 
 - ### Resolve URL Hash for mega menus
   Resolves #1536.
   Changes the functionality of the hash set function to only affect menus that are not mega menus.
----
+
+* * *
 
 - ### Related Articles: Refactors block for better relatedness scoring, faster generation
+
   Previously the Related Articles block could produce results that were older than expected while more recent related Articles could be missing. The block has been completely reworked to use a modern Web Component style of the other Article List blocks we've developed as well as produce better and more recent Article matches by picking through a pool of the most 50 semi-related to find the top 3.
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1526
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1526>
+
+* * *
 
 - ### Adds Article Syndication "read more" article list
+
   This update adds the Article Syndication "read more" article list, for use with the Campus News block. The article list is automatically created on sites using the CU Boulder Article Syndication module (if it doesn't already exist) and aliased to `/syndicate`. It allows URL parameters to specify category, audience, and unit filters.
-  
+
   [new] CuBoulder/ucb_article_syndication#3
-  
+
   Sister PR in: [ucb_article_syndication](https://github.com/CuBoulder/ucb_article_syndication/pull/6)
----
+
+* * *
 
 - ### Article Lists: Hides Dates, Decodes Special Characters in Titles of Taxonomy Term Pages
+
   If an Article has it's date set to 'Hide' this update will hide the date on `Category` and `Tag` Taxonomy pages as well as on the `Article List Page` and `Article List Block` displays that show the date (Teaser, Feature)
-  
+
   Additionally fixes the display of special characters on Taxonomy term pages from not decoding correctly.
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1465
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1429
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1509
-  
-  Profile -> https://github.com/CuBoulder/tiamat10-profile/pull/239
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1465>
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1429>
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1509>
+
+  Profile -> <https://github.com/CuBoulder/tiamat10-profile/pull/239>
+
+* * *
 
 - ### Mega menu Link color changes
   Resolves #1530.
   Forces the color of links in the mega menu to be blue to resolve issues of links not showing up.
----
+
+* * *
 
 - ### Newsletters: allow unpublished to show in Email HTML preview
+
   Previously the Email HTML of Newsletters would not display unpublished Articles. Now they will display so site-editors can verify and proof content before mailing. There is a content warning on the Node of any Articles that are unpublished. 
-  
+
   Note: Articles must still be manually published before sending the email, or could result in email recipients getting broken links. 
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1517
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1517>
+
+* * *
 
 - ### Remove wrap from info footer
   Resolves #1525.
   Removes wrapping from the site info contact footer to remove the extra space.
----
+
+* * *
 
 ## [20241204] - 2024-12-04
 
@@ -4041,7 +4056,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241204...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241211...HEAD
+[20241211]: https://github.com/CuBoulder/tiamat-theme/compare/20241204...20241211
 [20241204]: https://github.com/CuBoulder/tiamat-theme/compare/20241122...20241204
 [20241122]: https://github.com/CuBoulder/tiamat-theme/compare/20241120...20241122
 [20241120]: https://github.com/CuBoulder/tiamat-theme/compare/20241120...20241120
