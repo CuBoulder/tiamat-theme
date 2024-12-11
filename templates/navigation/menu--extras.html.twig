@@ -40,7 +40,7 @@
         ] %}
         <li{{item.attributes.addClass(classes)}}>
           {% if item.title|upper == 'HOME' %}
-            <a{{create_attribute({href:item.url|render,class:'ucb-home-button nav-link ucb-menu-link',title:item.title})}}>
+            <a{{create_attribute({href:item.url|render,class:'ucb-home-button nav-link',title:item.title})}}>
               <i class="fa-solid fa-home"></i>
               <span class="visually-hidden">{{ item.title }}</span>
             </a>
@@ -67,7 +67,7 @@
                 </div>
               {% endif %}
             {% else %}
-              {{ link(title, item.url, create_attribute({ class: 'nav-link ucb-menu-link' })) }}
+              {{ link(title, item.url, create_attribute({ class: 'nav-link' })) }}
               {% if item.below %}
                 {{ menus.menu_links(item.below, attributes, menu_level + 1) }}
               {% endif %}
