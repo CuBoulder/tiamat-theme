@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Related Articles: Refactors block for better relatedness scoring, faster generation
+  Previously the Related Articles block could produce results that were older than expected while more recent related Articles could be missing. The block has been completely reworked to use a modern Web Component style of the other Article List blocks we've developed as well as produce better and more recent Article matches by picking through a pool of the most 50 semi-related to find the top 3.
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1526
+---
+
 - ### Adds Article Syndication "read more" article list
   This update adds the Article Syndication "read more" article list, for use with the Campus News block. The article list is automatically created on sites using the CU Boulder Article Syndication module (if it doesn't already exist) and aliased to `/syndicate`. It allows URL parameters to specify category, audience, and unit filters.
   
