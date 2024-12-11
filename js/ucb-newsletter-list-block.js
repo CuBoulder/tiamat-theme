@@ -1,5 +1,14 @@
 (function (customElements) {
   class NewsletterListElement extends HTMLElement {
+
+    static get errorMessage() {
+      return 'Error retrieving Newsletters from the API endpoint. Please try again later.';
+    }
+
+    static get noResultsMessage() {
+      return 'No results matching your filters.';
+    }
+
     constructor() {
       super();
       this._baseURI = this.getAttribute('baseURI');
@@ -7,6 +16,24 @@
       this.newsletterType = this.getAttribute('newsletter-type');
       this.taxonomyMap;
       this.taxonomyName;
+
+      // Loader
+      this._loadingElement = document.createElement('div');
+      this._loadingElement.innerHTML = `<span class="visually-hidden">Loading</span><i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>`;
+      this._loadingElement.className = 'ucb-list-msg ucb-loading-data';
+      this._loadingElement.id = 'ucb-al-loading'
+      this._loadingElement.style.display = 'none';
+      this.appendChild(this._loadingElement);
+      this.toggleLoading(true);
+
+      // Error
+      this._errorElement = document.createElement('div');
+      this._errorElement.innerText = NewsletterListElement.errorMessage;
+      this._errorElement.className = 'ucb-list-msg ucb-error';
+      this._errorElement.id = 'ucb-al-error'
+      this._errorElement.style.display = 'none';
+      this.appendChild(this._errorElement);
+
       // Fetch taxonomy terms to build the map first
       fetch(`${this._baseURI}/jsonapi/taxonomy_term/newsletter`)
         .then(response => {
@@ -25,6 +52,8 @@
         })
         .catch(error => {
           console.log("Failed to fetch taxonomy terms:", error);
+          this.toggleLoading(false);
+          this.toggleError(true);
         });
     }
 
@@ -55,6 +84,14 @@
       const newsletters = data["data"];
       const references = data["included"];
       const newsletterElements = []; // Array to hold newsletter elements
+
+      if(newsletters.length == 0){
+        this.toggleLoading(false);
+        this.toggleError(true);
+        this._errorElement.innerText = NewsletterListElement.noResultsMessage;
+        ;
+        return;
+      }
 
       // Loop through newsletters up to the specified count
       for (let i = 0; i < Math.min(newsletters.length, count); i++) {
@@ -127,6 +164,7 @@
 
     // This will create the Newsletter Rows
     renderNewsletters(newsletterElements) {
+      this.toggleLoading(false);
       newsletterElements.forEach(newsletter => {
         const newsletterElement = document.createElement('div');
         newsletterElement.classList.add('ucb-newsletter-row');
@@ -162,6 +200,14 @@
       buttonElement.href = `${this._baseURI}/newsletter/${urlName}`;
       buttonElement.innerText = `${taxonomyName} Archive`;
       this.appendChild(buttonElement);
+    }
+
+    toggleLoading(show) {
+      this._loadingElement.style.display = show ? 'block' : 'none';
+    }
+
+    toggleError(show) {
+      this._errorElement.style.display = show ? 'block' : 'none';
     }
   }
 
