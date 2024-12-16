@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Remove all menu hashes
+  Resolves #1536
+  Removes all mentions to menus and the functionality of a hash being added to menus.
+---
+
 ## [20241211] - 2024-12-11
 
 - ### Sidebar menu theme styles
