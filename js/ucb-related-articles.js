@@ -174,15 +174,14 @@ class RelatedArticles extends HTMLElement {
   rankArticles(articles) {
     return articles
       .map((article) => {
+        // Filter out self
         const urlCheck = article.attributes.path.alias
-          ? article.attributes.path.alias
-          : `/node/${article.attributes.drupal_internal__nid}`;
+        ? this._baseURL + article.attributes.path.alias
+        : `${this._baseURL}/node/${article.attributes.drupal_internal__nid}`;
 
-        // Exclude the current article
-        if (urlCheck === window.location.pathname) {
+      if (urlCheck === window.location.origin + window.location.pathname) {
           return null;
-        }
-
+      }
         const categories = article.relationships?.field_ucb_article_categories?.data.map(
           (cat) => cat.meta.drupal_internal__target_id
         ) || [];

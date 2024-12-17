@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Related Articles: Will Not Include Self
+  Fixes an issue with v2 of the Related Articles block where it could include itself in Related display.
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1549
+---
+
 - ### Remove all menu hashes
   Resolves #1536
   Removes all mentions to menus and the functionality of a hash being added to menus.
