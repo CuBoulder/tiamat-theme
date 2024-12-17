@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter List Block: Adds loader and error message handling
+  Previously there was no spinning loader element on the Newsletter Archive, which could present a blank screen for an uncomfortable amount of time with no feedback. This had been added, along with proper error handling for No Results, API errors, etc. 
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1506
+  
+  ## Troubleshooting Issue Archive Pages 
+  If your Newsletter List Block is not correctly linking to the Newsletter Archive of the type you've selected, this is likely due to the creation of the term before the automatic page was created. You will need to edit the term and scroll to the bottom and select `General automatic URL Alias` which will let the pathauto module take over, and link your Block to the Archive correctly. 
+  
+  <img width="758" alt="Screenshot 2024-12-11 at 3 12 25 PM" src="https://github.com/user-attachments/assets/f8f7de60-a630-41e5-a955-28747739c730" />
+  
+---
+
 - ### Related Articles: Will Not Include Self
   Fixes an issue with v2 of the Related Articles block where it could include itself in Related display.
   Resolves https://github.com/CuBoulder/tiamat-theme/issues/1549
