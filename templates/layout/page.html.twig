@@ -316,20 +316,16 @@
   {# FOOTER BLOCK #}
   {% block page_footer %}
     <footer class="ucb-homepage-footer background-black">
-      {% if page.footer|render or ucb_footer_menu_default_links %}
+      {% if page.footer|render %}
         <div class="ucb-footer-top">
           {# {% if page.footer_cta|render %}
           <div class="ucb-footer-container footer-cta-block container">
           {{ page.footer_cta }}
           </div>
           {% endif %} #}
-          {% if ucb_footer_menu_default_links %}
-            {% include "@boulder_base/includes/ucb-footer-menus.html.twig" %}
-          {% elseif page.footer|render %}
-            <div class="container ucb-footer-columns">
-              {{ page.footer }}
-            </div>
-          {% endif %}
+          <div class="container ucb-footer-columns">
+            {{ page.footer }}
+          </div>
         </div>
       {% endif %}
       {{ page.footer_menu }}
