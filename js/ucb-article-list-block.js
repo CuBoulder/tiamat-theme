@@ -6,7 +6,7 @@ class ArticleListBlockElement extends HTMLElement {
     var display = this.getAttribute("display");
     var API = this.getAttribute("jsonapi");
     this._baseURI = this.getAttribute("base-uri");
-
+    this.globalDateSetting = this.getAttribute('global-date-format');
     // Exclusions are done on the JS side, get into arrays. Blank if no exclusions
     var excludeCatArray = this.getAttribute("exCats").split(",").map(Number);
     var excludeTagArray = this.getAttribute("exTags").split(",").map(Number);
@@ -119,10 +119,14 @@ class ArticleListBlockElement extends HTMLElement {
             link: this._baseURI + path,
             image: imageSrc,
             imageWide: imageSrcWide,
-            date: new Date(item.attributes.created).toLocaleDateString(
-              "en-us",
-              { year: "numeric", month: "short", day: "numeric" }
-            ),
+            date: (item.attributes.field_ucb_article_date_override != "7" &&
+              (this.globalDateSetting != 6 || item.attributes.field_ucb_article_date_override != "0"))
+              ? new Date(item.attributes.created).toLocaleDateString('en-us', {
+                year: 'numeric',
+                month: 'short',
+                day: 'numeric',
+              })
+              : null,
             body: body.trim(),
           };
         }
@@ -288,13 +292,18 @@ class ArticleListBlockElement extends HTMLElement {
 
       var articleHeader = document.createElement("h3");
       articleHeader.classList = "ucb-article-card-title-feature";
+      if(!articleDate){
+        articleHeader.classList.add("ucb-article-card-title-no-date");
+      }
       articleHeader.innerText = articleTitle;
 
       headerLink.appendChild(articleHeader);
 
-      var date = document.createElement("span");
-      date.classList = "ucb-article-card-date";
-      date.innerText = articleDate;
+      if(articleDate){
+        var date = document.createElement("span");
+        date.classList = "ucb-article-card-date";
+        date.innerText = articleDate;
+      }
 
       var articleSummary = document.createElement("p");
       articleSummary.innerText = articleSumm;
@@ -307,7 +316,7 @@ class ArticleListBlockElement extends HTMLElement {
       readMore.setAttribute("aria-hidden", "true");
 
       articleBody.appendChild(headerLink);
-      articleBody.appendChild(date);
+      if (articleDate){articleBody.appendChild(date)};
       articleBody.appendChild(articleSummary);
       articleBody.appendChild(readMore);
 
@@ -359,13 +368,18 @@ class ArticleListBlockElement extends HTMLElement {
 
       var articleHeader = document.createElement("h3");
       articleHeader.classList = "ucb-article-card-title-feature";
+      if(!articleDate){
+        articleHeader.classList.add("ucb-article-card-title-no-date");
+      }
       articleHeader.innerText = articleTitle;
 
       headerLink.appendChild(articleHeader);
 
-      var date = document.createElement("span");
-      date.classList = "ucb-article-card-date";
-      date.innerText = articleDate;
+      if(articleDate){
+        var date = document.createElement("span");
+        date.classList = "ucb-article-card-date";
+        date.innerText = articleDate;
+      }
 
       var articleSummary = document.createElement("p");
       articleSummary.innerText = articleSumm;
@@ -378,7 +392,7 @@ class ArticleListBlockElement extends HTMLElement {
       readMore.setAttribute("aria-hidden", "true");
 
       articleBody.appendChild(headerLink);
-      articleBody.appendChild(date);
+      if(articleDate){articleBody.appendChild(date)};
       articleBody.appendChild(articleSummary);
       articleBody.appendChild(readMore);
 
@@ -514,14 +528,19 @@ class ArticleListBlockElement extends HTMLElement {
 
       var articleHeader = document.createElement("a");
       articleHeader.classList = "ucb-article-card-title-teaser";
+      if(!articleDate){
+        articleHeader.classList.add("ucb-article-card-title-no-date");
+      }
       articleHeader.href = articleLink;
       articleHeader.innerText = articleTitle;
 
       headerStrong.appendChild(articleHeader);
 
-      var date = document.createElement("span");
-      date.classList = "ucb-article-card-date";
-      date.innerText = articleDate;
+      if(articleDate){
+        var date = document.createElement("span");
+        date.classList = "ucb-article-card-date";
+        date.innerText = articleDate;
+      }
 
       var articleSummary = document.createElement("p");
       articleSummary.innerText = articleSumm;
@@ -534,7 +553,7 @@ class ArticleListBlockElement extends HTMLElement {
       readMore.setAttribute("aria-hidden", "true");
 
       articleBody.appendChild(headerStrong);
-      articleBody.appendChild(date);
+      if(articleDate){articleBody.appendChild(date)};
       articleBody.appendChild(articleSummary);
       articleBody.appendChild(readMore);
 

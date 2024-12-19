@@ -398,6 +398,20 @@ function boulder_base_form_system_theme_settings_alter(&$form, FormStateInterfac
 }
 
 /**
+ * Implements hook_preprocess_views_view().
+ */
+function boulder_base_preprocess_views_view(&$variables) {
+  // Adjust header content for the taxonomy_term view.
+  // Needed because the Full HTML text filter doesn't escape special HTML entities like &amp
+  if ($variables['view']->id() === 'taxonomy_term') {
+    if (isset($variables['header']['area']['#text'])) {
+      // Decode HTML entities in the header text.
+      $variables['header']['area']['#text'] = html_entity_decode($variables['header']['area']['#text']);
+    }
+  }
+}
+
+/**
  * Implements hook_page_attachments().
  *
  * This is for list styles during migration.

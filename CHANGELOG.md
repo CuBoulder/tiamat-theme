@@ -9,6 +9,171 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter List Block: Adds loader and error message handling
+  Previously there was no spinning loader element on the Newsletter Archive, which could present a blank screen for an uncomfortable amount of time with no feedback. This had been added, along with proper error handling for No Results, API errors, etc. 
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1506
+  
+  ## Troubleshooting Issue Archive Pages 
+  If your Newsletter List Block is not correctly linking to the Newsletter Archive of the type you've selected, this is likely due to the creation of the term before the automatic page was created. You will need to edit the term and scroll to the bottom and select `General automatic URL Alias` which will let the pathauto module take over, and link your Block to the Archive correctly. 
+  
+  <img width="758" alt="Screenshot 2024-12-11 at 3 12 25 PM" src="https://github.com/user-attachments/assets/f8f7de60-a630-41e5-a955-28747739c730" />
+  
+---
+
+- ### Related Articles: Will Not Include Self
+  Fixes an issue with v2 of the Related Articles block where it could include itself in Related display.
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1549
+---
+
+- ### Remove all menu hashes
+  Resolves #1536
+  Removes all mentions to menus and the functionality of a hash being added to menus.
+---
+
+## [20241211] - 2024-12-11
+
+- ### Sidebar menu theme styles
+
+  Styles applied when the light gray sidebar menu style option is picked in the theme configuration. Styles override basic options with new css file.
+
+  Sister PR: <https://github.com/CuBoulder/ucb_site_configuration/pull/75>
+
+  Resolves Issue #1513 
+
+* * *
+
+- ### Resolve URL Hash for mega menus
+  Resolves #1536.
+  Changes the functionality of the hash set function to only affect menus that are not mega menus.
+
+* * *
+
+- ### Related Articles: Refactors block for better relatedness scoring, faster generation
+
+  Previously the Related Articles block could produce results that were older than expected while more recent related Articles could be missing. The block has been completely reworked to use a modern Web Component style of the other Article List blocks we've developed as well as produce better and more recent Article matches by picking through a pool of the most 50 semi-related to find the top 3.
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1526>
+
+* * *
+
+- ### Adds Article Syndication "read more" article list
+
+  This update adds the Article Syndication "read more" article list, for use with the Campus News block. The article list is automatically created on sites using the CU Boulder Article Syndication module (if it doesn't already exist) and aliased to `/syndicate`. It allows URL parameters to specify category, audience, and unit filters.
+
+  [new] CuBoulder/ucb_article_syndication#3
+
+  Sister PR in: [ucb_article_syndication](https://github.com/CuBoulder/ucb_article_syndication/pull/6)
+
+* * *
+
+- ### Article Lists: Hides Dates, Decodes Special Characters in Titles of Taxonomy Term Pages
+
+  If an Article has it's date set to 'Hide' this update will hide the date on `Category` and `Tag` Taxonomy pages as well as on the `Article List Page` and `Article List Block` displays that show the date (Teaser, Feature)
+
+  Additionally fixes the display of special characters on Taxonomy term pages from not decoding correctly.
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1465>
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1429>
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1509>
+
+  Profile -> <https://github.com/CuBoulder/tiamat10-profile/pull/239>
+
+* * *
+
+- ### Mega menu Link color changes
+  Resolves #1530.
+  Forces the color of links in the mega menu to be blue to resolve issues of links not showing up.
+
+* * *
+
+- ### Newsletters: allow unpublished to show in Email HTML preview
+
+  Previously the Email HTML of Newsletters would not display unpublished Articles. Now they will display so site-editors can verify and proof content before mailing. There is a content warning on the Node of any Articles that are unpublished. 
+
+  Note: Articles must still be manually published before sending the email, or could result in email recipients getting broken links. 
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1517>
+
+* * *
+
+- ### Remove wrap from info footer
+  Resolves #1525.
+  Removes wrapping from the site info contact footer to remove the extra space.
+
+* * *
+
+## [20241204] - 2024-12-04
+
+- ### Class Notes List: Allow WYSIWYG Class Notes to display correctly
+
+  Previously the Class Notes List page would strip out WYSIWYG HTML from the aggregate display. This has been adjusted so that images, links, etc added to a Class Note page via WYSIWYG editor are allowed to display while malicious input is not. 
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1523>
+
+* * *
+
+- ### Modify Image Styles in Content Rows
+
+  Updated content rows so that teasers are using the correct image style with the right 2:1 ratio.
+  A new image style was created to support this update. 
+  There was also a bug with the code in which the large teasers would display as squares if the rows were unlinked. That has been updated to show correctly as wide.
+
+  Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/196>
+
+  Resolves #1503 
+
+* * *
+
+- ### Newsletters: Bug Fixes, Layout Adjustments
+
+  ### Bug Fixes
+
+  - Removed the hard-coded "View on Website" link. This will link correctly to the Newsletter page it is generated from. The hard-coded link was due to a completely re-written header and was left in unintentionally from development.  
+  - Added stricter styling rules to force iOS devices to show images at the proper width. Previously they would all take on the same width on iPhones only. 
+  - The blue link color should now be consistent across the Newsletter, along with removing the underline link decoration. 
+  - Missing images should be fixed for complex site urls, but will need to be tested in production. 
+
+  ### Layout Fixes
+
+  - Adjusts spacing on the top of the newsletter. Previously there could be a large gap in between the header and the content if you intentionally left out fields such as the Intro Image or Intro Text. The conditional spacing has been tightened up to include for this case.
+  - Text blocks will display at full width if there is only one in the section. Previously they would only take up 50% even if there was only one
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1515>
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1514>
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1511>
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1508>
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1507>
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1528>
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1510>
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1522>
+
+* * *
+
+- ### Article Feature: Fixes aspect ratio for Wide images
+
+  Previously Article Feature Blocks with the Image Size set to `Wide (slider image style)` would come through as 3:2 aspect ratio rather than 16:9, which is used for the slider. 
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1501>
+
+* * *
+
+- ### Update ucb-brand-bar.css
+
+  Adding consistent `max-width` and `width` to the logo's link container allows for the SVG to scale properly throughout all browsers.
+
+  Resolves #1505 
+
+* * *
+
+- ### Class Notes List: special character fixes
+
+  Previously special characters from Class Notes wouldn't escape properly, such as `&nbsp`. They are now correctly decoded.
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1518>
+
+* * *
+
 ## [20241122] - 2024-11-22
 
 - ### Update Homepage Footer
@@ -3913,7 +4078,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241122...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20241211...HEAD
+[20241211]: https://github.com/CuBoulder/tiamat-theme/compare/20241204...20241211
+[20241204]: https://github.com/CuBoulder/tiamat-theme/compare/20241122...20241204
 [20241122]: https://github.com/CuBoulder/tiamat-theme/compare/20241120...20241122
 [20241120]: https://github.com/CuBoulder/tiamat-theme/compare/20241120...20241120
 [20241120]: https://github.com/CuBoulder/tiamat-theme/compare/20241118...20241120

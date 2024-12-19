@@ -76,6 +76,11 @@
   margin: 0;
   line-height: 1.3;
 }
+
+.ucb-article-card-title-no-date{
+  margin-bottom: 12px;
+}
+
 .ucb-article-card-title-feature {
     font-size: 130%;
     font-weight: bolder;

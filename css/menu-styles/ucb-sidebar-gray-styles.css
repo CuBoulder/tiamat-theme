@@ -1,0 +1,17 @@
+.ucb-page-content .ucb-menu {
+  border-width: 1px 0px 1px 1px;
+  border-style: solid;
+  border-color: var(--ucb-light-gray);
+}
+
+.ucb-page-content .ucb-menu li.menu-item a.nav-link.is-active, .ucb-page-content .ucb-menu .menu-item.active:last-child > a {
+  background-color: var(--ucb-light-gray);
+}
+
+.ucb-page-content .ucb-menu .expanded.active > a.nav-link, .ucb-page-content .ucb-menu .expanded.active > .ucb-menu {
+  border: none;
+}
+
+.ucb-page-content .ucb-menu li.menu-item {
+  border: none;
+}
