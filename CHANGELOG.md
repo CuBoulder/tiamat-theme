@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Removes unused include templates and settings
+  This update removes the unused includes and settings originally intended for the CU Boulder homepage secondary and footer menus. They have instead built these out using the appropriate mechanisms available in Web Express and don't need custom code to support it.
+  
+  Resolves CuBoulder/tiamat-theme#1537
+  
+  Sister PR in: [ucb_site_configuration](https://github.com/CuBoulder/ucb_site_configuration/pull/77)
+---
+
 - ### Newsletter List Block: Adds loader and error message handling
   Previously there was no spinning loader element on the Newsletter Archive, which could present a blank screen for an uncomfortable amount of time with no feedback. This had been added, along with proper error handling for No Results, API errors, etc. 
   
