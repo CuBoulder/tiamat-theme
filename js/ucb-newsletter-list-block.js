@@ -170,7 +170,7 @@
         newsletterElement.classList.add('ucb-newsletter-row');
 
         const linkElement = document.createElement('a');
-        linkElement.href = newsletter.path;
+        linkElement.href = this._baseURI + newsletter.path;
         linkElement.classList.add('ucb-newsletter-list-link');
 
 
