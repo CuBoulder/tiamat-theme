@@ -1197,3 +1197,12 @@ h2.clear-margin,h3.clear-margin,h4.clear-margin,h5.clear-margin,h6.clear-margin,
   display: flex;
   flex-direction: column;
 }
+
+@media only screen and (min-width: 576px) {
+.ucb.ucb-header-hidden-title {
+  padding: 0;
+}
+}
+.ucb.ucb-header-hidden-title .ucb-menu-wrapper {
+  justify-content: right;
+}

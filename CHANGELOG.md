@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Homepage Mobile Menu fix
+  Resolves #1496.
+  Adds the mobile menu toggle when the header is removed on the homepage.
+---
+
 - ### Removes unused include templates and settings
   This update removes the unused includes and settings originally intended for the CU Boulder homepage secondary and footer menus. They have instead built these out using the appropriate mechanisms available in Web Express and don't need custom code to support it.
   

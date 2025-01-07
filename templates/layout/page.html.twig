@@ -195,6 +195,17 @@
             {% endif %}
           </div>
         </header>
+      {% else %}
+        <header class="ucb ucb-header-hidden-title {{ header_color }}{% if site_affiliation.id %} ucb-site-affiliation-{{ site_affiliation.id }}{% endif %}" role="banner">
+          <div class="container ucb-menu-wrapper">
+            {% if (page.primary_menu|render and drupal_menu('main')|render) or (page.secondary_menu|render and (drupal_menu('secondary')|render or drupal_menu('social-media-menu')|render)) or (page.footer_menu|render and (drupal_menu('footer')|render or drupal_menu('social-media-menu')|render)) %}
+              <button id="ucb-mobile-menu-toggle" class="ucb-mobile-menu-toggle-alone" aria-label="Toggle menu">
+                <i class="ucb-mobile-menu-open-icon fa-solid fa-bars"></i>
+                <i class="ucb-mobile-menu-close-icon fa-solid fa-xmark"></i>
+              </button>
+            {% endif %}
+          </div>
+        </header>
       {% endif %}
       <section class="ucb-main-nav-section mobile ucb-header-{{ header_color }}" role="navigation">
         <div class="ucb-main-nav-container ucb-secondary-menu-position-{{ ucb_secondary_menu_position == 'above' ? 'above' : 'inline container' }} ucb-button-{{ menu_button_color }}">
