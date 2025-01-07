@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter List Block: fixes pathing of linked Newsletters
+  Previously the Newsletter List Block would just use the path returned via the API, which presented an issue on multisite. This has been corrected
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1556
+---
+
 - ### Homepage Mobile Menu fix
   Resolves #1496.
   Adds the mobile menu toggle when the header is removed on the homepage.
