@@ -280,26 +280,31 @@
             }
 
             /* Colors */
+            #email .ucb-email-body-content.ucb-email-body-content-td a.ucb-link-button.ucb-link-button-blue,
             .ucb-link-button.ucb-link-button-blue {
               color: #fff !important;
               background-color: #0277BD;
             }
 
-            .ucb-link-button.ucb-link-button-black {
+            #email .ucb-email-body-content.ucb-email-body-content-td .ucb-link-button.ucb-link-button-black,
+            a.ucb-link-button.ucb-link-button-black {
               color: #fff !important;
               background-color: #000;
             }
 
+            #email .ucb-email-body-content.ucb-email-body-content-td a.ucb-link-button.ucb-link-button-gray,
             .ucb-link-button.ucb-link-button-gray {
               color: #111111 !important;
               background-color: #EEEEEE;
             }
 
+            #email .ucb-email-body-content.ucb-email-body-content-td a.ucb-link-button.ucb-link-button-white,
             .ucb-link-button.ucb-link-button-white {
               color: #111111 !important;
               background-color: #fff;
             }
 
+            #email .ucb-email-body-content.ucb-email-body-content-td a.ucb-link-button.ucb-link-button-gold,
             .ucb-link-button.ucb-link-button-gold {
               color: #111111 !important;
               background-color: #cfb87c;
@@ -745,7 +750,7 @@
          <!--Site Link-->
                   <tr style="{{boxBackground}}">
                     <td style="text-align: center; text-align: center; padding-top:10px;">
-                      <a style="font-family: Helvetica, Arial, sans-serif;line-height: 19px; margin: 0; font-size: 18px; font-weight:bold;text-align: center;text-decoration:none;{{aStyles}}" href="{{base_domain}}">{{ site_name }}
+                      <a style="font-family: Helvetica, Arial, sans-serif;line-height: 19px; margin: 0; font-size: 18px; font-weight:bold;text-align: center;text-decoration:none;{{aStyles}}" href="{{ url('<front>', {}, {'absolute': true}) }}">{{ site_name }}
                       </a>
                     </td>
                   </tr>

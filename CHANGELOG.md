@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletters: Fixes Absolute Pathing, Allows buttons in intro text
+  
+  
+  Resolves #1552 
+---
+
 - ### Newsletter List Block: fixes pathing of linked Newsletters
   Previously the Newsletter List Block would just use the path returned via the API, which presented an issue on multisite. This has been corrected
   
