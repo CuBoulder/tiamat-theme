@@ -11,9 +11,8 @@
 
     button.onclick = function(){
         // Get baseURL
-        var emailContainer = document.getElementById('email')
+        var emailContainer = document.getElementById('ucb-email-body')
         var baseURL = emailContainer.dataset.url
-
         // Tags -  make absolute
         var tags = document.getElementsByClassName('tags')
         // Iterate through all tags and create an absolute url
@@ -24,6 +23,18 @@
             }
         }
 
+      // Images in the intro - make absolute
+      var introBody = document.getElementById('newsletter-intro-body');
+      if (introBody) {
+          var images = introBody.getElementsByClassName('imageMediaStyle');
+          for (let imgContainer of images) {
+              var img = imgContainer.children[0];
+              var endurl = img.getAttribute('src');
+              img.setAttribute('src', `${baseURL}${endurl}`);
+              // Ensure the image fits within 600px while maintaining proportions
+              img.setAttribute('style', 'max-width: 600px; width: 100%; height: auto; display: block;');
+          }
+      }
         // Section Link - make blue (gets overridden by user agent style)
         var moreLinks = document.getElementsByClassName('article-link')
         for(link of moreLinks){
