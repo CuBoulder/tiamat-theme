@@ -9,17 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250121] - 2025-01-21
+
 - ### #1562 - Mega Menu: fix Button color being over-written
+
   CU Buttons placed in a Mega Menu could have their text color overwritten to the default link blue due to overly aggressive css rules. This has been corrected so menu links retain their intended colors and Buttons receive their expected styles
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1562
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1562>
+
+* * *
 
 - ### Newsletter: Re-add domain to Article Thumbnails (Wide and Teaser) referenced in a Newsletter
+
   We changed how Newsletter Article images are referenced for better generation on multi-site domains in particular. With this change the primary (www.colorado.edu) domain was dropped. This has been re-added. 
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1561
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1561>
+
+* * *
 
 ## [20250115] - 2025-01-15
 
@@ -4126,7 +4132,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250115...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250121...HEAD
+[20250121]: https://github.com/CuBoulder/tiamat-theme/compare/20250115...20250121
 [20250115]: https://github.com/CuBoulder/tiamat-theme/compare/20241211...20250115
 [20241211]: https://github.com/CuBoulder/tiamat-theme/compare/20241204...20241211
 [20241204]: https://github.com/CuBoulder/tiamat-theme/compare/20241122...20241204
