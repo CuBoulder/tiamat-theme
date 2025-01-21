@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter: Re-add domain to Article Thumbnails (Wide and Teaser) referenced in a Newsletter
+  We changed how Newsletter Article images are referenced for better generation on multi-site domains in particular. With this change the primary (www.colorado.edu) domain was dropped. This has been re-added. 
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1561
+---
+
 ## [20250115] - 2025-01-15
 
 - ### Newsletters: Fixes Absolute Pathing, Allows buttons in intro text
