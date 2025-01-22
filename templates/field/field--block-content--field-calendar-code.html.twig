@@ -6,13 +6,12 @@
 
 {% for item in items %}
   {% if ('text/javascript' in item.content['#context'].value) and ('src="https://calendar.colorado.edu/widget' in item.content['#context'].value) %}
-
+    {% set widgetType = '/widget/combo' in item.content['#context'].value ? 'combo' : 'view' %}
     {% set calendarID = 'localist-widget'|clean_unique_id %}
     {% set queryParams = item.content['#context'].value|preg_replace('/localist-widget-[0-9]+/', calendarID)|split('?')[1]|split('"')[0] %}
-
     <div class="ucb-events-calendar">
       <div id="{{ calendarID }}" class="localist-widget"></div>
-      <script type="text/javascript" src="https://calendar.colorado.edu/widget/view?{{ queryParams }}"></script>
+      <script type="text/javascript" src="https://calendar.colorado.edu/widget/{{widgetType}}?{{ queryParams }}"></script>
     </div>
   {% else %}
     <strong>Error: Only calendar.colorado.edu events embed code is allowed.</strong>

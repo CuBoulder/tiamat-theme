@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1567 Events Calendar: Allow Mini Calendar + List option
+  Previously the Events Calendar block would only allow the "List" type Widget as configured by `https://calendar.colorado.edu/help/widget` and would not correctly display the "Mini Calendar + List" widget option -- which adds an interactive mini calendar to the Events Calendar block. 
+  
+  This has been corrected so both 'Widget Types' will work with the block.
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1567
+---
+
 ## [20250121] - 2025-01-21
 
 - ### #1562 - Mega Menu: fix Button color being over-written
