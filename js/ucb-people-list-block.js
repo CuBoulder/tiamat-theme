@@ -471,6 +471,8 @@
                   )
                 );
                 thisPerson.body = `${trimmedString}...`;
+              } else {
+                thisPerson.body = trimmedString;
               }
             }
         }

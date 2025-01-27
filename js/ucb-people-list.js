@@ -276,19 +276,51 @@
               this.displayPeople(format, peopleInGroup.sort((personA, personB) => {
                 const
                   jobTypeTaxonomy = this.getTaxonomy('job_type'),
-                  personAJobTypeData = personA['relationships']['field_ucb_person_job_type']['data'],
-                  personBJobTypeData = personB['relationships']['field_ucb_person_job_type']['data'],
-                  personAJobTypeDataLength = personAJobTypeData.length,
-                  personBJobTypeDataLength = personBJobTypeData.length;
-                if (!personAJobTypeDataLength || !personBJobTypeDataLength) // Someone doesn't have a job type (length 0), push them to the bottom
-                  return !personAJobTypeDataLength && personBJobTypeDataLength ? 1 : personAJobTypeDataLength && !personBJobTypeDataLength ? -1 : 0;
-                const
-                  personAJobTypeWeight = PeopleListElement.getTaxonomyWeight(jobTypeTaxonomy, personAJobTypeData[0]['meta']['drupal_internal__target_id']),
-                  personBJobTypeWeight = PeopleListElement.getTaxonomyWeight(jobTypeTaxonomy, personBJobTypeData[0]['meta']['drupal_internal__target_id']);
-                // Sorts by job type weights.
-                return personAJobTypeWeight > personBJobTypeWeight ? 1 : personAJobTypeWeight < personBJobTypeWeight ? -1 : 0;
+                  personAJobTypeData = personA['relationships']['field_ucb_person_job_type']['data'] || [],
+                  personBJobTypeData = personB['relationships']['field_ucb_person_job_type']['data'] || [];
+
+                // Get job type names
+                const personAJobTypeName = personAJobTypeData.length
+                  ? PeopleListElement.getTaxonomyName(jobTypeTaxonomy, personAJobTypeData[0]['meta']['drupal_internal__target_id'])
+                  : '';
+                const personBJobTypeName = personBJobTypeData.length
+                  ? PeopleListElement.getTaxonomyName(jobTypeTaxonomy, personBJobTypeData[0]['meta']['drupal_internal__target_id'])
+                  : '';
+
+                // Primary sort: Alphabetical by Job Type
+                if (personAJobTypeName !== personBJobTypeName) {
+                  return personAJobTypeName < personBJobTypeName ? -1 : 1;
+                }
+
+                // Secondary sort: Alphabetical by Last Name
+                const lastNameA = (personA['attributes']['field_ucb_person_last_name'] || '').toLowerCase();
+                const lastNameB = (personB['attributes']['field_ucb_person_last_name'] || '').toLowerCase();
+                if (lastNameA !== lastNameB) {
+                  return lastNameA < lastNameB ? -1 : 1;
+                }
+
+                // Tertiary sort: Alphabetical by First Name (optional)
+                const firstNameA = (personA['attributes']['field_ucb_person_first_name'] || '').toLowerCase();
+                const firstNameB = (personB['attributes']['field_ucb_person_first_name'] || '').toLowerCase();
+                return firstNameA < firstNameB ? -1 : firstNameA > firstNameB ? 1 : 0;
               }), photoUrls, photoData, groupContainerElement);
-            } else this.displayPeople(format, peopleInGroup, photoUrls, photoData, groupContainerElement);
+            } else {
+              this.displayPeople(format, peopleInGroup.sort((personA, personB) => {
+                const lastNameA = personA['attributes']['field_ucb_person_last_name'] || '';
+                const lastNameB = personB['attributes']['field_ucb_person_last_name'] || '';
+                const firstNameA = personA['attributes']['field_ucb_person_first_name'] || '';
+                const firstNameB = personB['attributes']['field_ucb_person_first_name'] || '';
+
+                if (lastNameA.toLowerCase() < lastNameB.toLowerCase()) return -1;
+                if (lastNameA.toLowerCase() > lastNameB.toLowerCase()) return 1;
+
+                // If last names are the same, sort by first name
+                if (firstNameA.toLowerCase() < firstNameB.toLowerCase()) return -1;
+                if (firstNameA.toLowerCase() > firstNameB.toLowerCase()) return 1;
+
+                return 0; // If both are the same
+              }), photoUrls, photoData, groupContainerElement);
+            }
           });
         }
         this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
@@ -518,7 +550,9 @@
                   trimmedString.lastIndexOf(" ")
                 )
               )
-              thisPerson.body = `${trimmedString}...`;
+              thisPerson.body = `${trimmedString}...`; // shortened
+            } else {
+              thisPerson.body = trimmedString; // not shortened
             }
           }
         }
