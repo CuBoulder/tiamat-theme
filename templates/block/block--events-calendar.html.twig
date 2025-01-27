@@ -17,9 +17,9 @@
   {{ attach_library('boulder_base/ucb-events-calendar') }}
   {{ content.field_calendar_code }}
   {# Events Link #}
-  <div class="ucb-calendar-block-link-container">
+  <events-calendar-block class="ucb-calendar-block-link-container">
     {% for item in content['#block_content'].field_additional_events_link.value %}
       {{ link(item.title, item.uri, {'class': ['ucb-calendar-button']} ) }}
     {% endfor %}
-  </div>
+  </events-calendar-block>
 {% endblock %}
