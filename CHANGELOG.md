@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update block--events-calendar.html.twig
+  Switching the block container to a web component name to handle the block being stripped from columns before loading content.
+  
+  Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/71
+  
+  Resolves #1574 
+---
+
 - ### Update ucb-brand-bar.css
   Updated padding to be `0!important` for the brand bar to avoid styleguide interference.
   
