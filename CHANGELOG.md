@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adjusting weights for CSS files and removing weights from JS libraries
+  Additional work to get the CSS files loading the proper order after the 10.4 update.  
+  
+  Among other issues will resolve #1577 
+---
+
 - ### Update boulder_base.libraries.yml
   Updated the weights in libraries to work properly in `10.4.1`
   
