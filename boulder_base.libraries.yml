@@ -110,13 +110,13 @@ ucb-hero-unit:
     js/ucb-hero-unit.js: { weight: -5 }
   css:
     theme:
-      css/block/hero-unit.css: { weight: -4 }
+      css/block/hero-unit.css: { weight: 5 }
 
 ucb-events-calendar:
   version: 1.x
   css:
     theme:
-      css/block/events-calendar.css: { weight: 0 }
+      css/block/events-calendar.css: { weight: 5 }
 
 ucb-image-gallery:
   version: 1.x
@@ -126,32 +126,32 @@ ucb-image-gallery:
     js/masonry/masonry.pkgd.min.js: { weight: -3 }
   css:
     theme:
-      css/block/image-gallery.css: { weight: -2 }
-      js/glightbox/glightbox.min.css: { weight: -1 }
+      css/block/image-gallery.css: { weight: 5 }
+      js/glightbox/glightbox.min.css: { weight: 4 }
 
 ucb-content-grid:
   version: 1.x
   css:
     theme:
-      css/block/content-grid.css: { weight: 0 }
+      css/block/content-grid.css: { weight: 5 }
 
 ucb-content-list:
   version: 1.x
   css:
     theme:
-      css/block/content-list.css: { weight: 1 }
+      css/block/content-list.css: { weight: 5 }
 
 ucb-content-row:
   version: 1.x
   css:
     theme:
-      css/block/content-row.css: { weight: 2 }
+      css/block/content-row.css: { weight: 5 }
 
 ucb-content-sequence-advanced:
   version: 1.x
   css:
     theme:
-      css/block/content-sequence-advanced.css: { weight: 3 }
+      css/block/content-sequence-advanced.css: { weight: 5 }
 
 ucb-video-reveal:
   version: 1.x
@@ -159,25 +159,25 @@ ucb-video-reveal:
     js/ucb-video-reveal.js: { weight: -5 }
   css:
     theme:
-      css/block/video-reveal.css: { weight: -4 }
+      css/block/video-reveal.css: { weight: 5 }
 
 ucb-slider:
   version: 1.x
   css:
     theme:
-      css/block/slider.css: { weight: 0 }
+      css/block/slider.css: { weight: 5 }
 
 ucb-text-block:
   version: 1.x
   css:
     theme:
-      css/block/text-block.css: { weight: 1 }
+      css/block/text-block.css: { weight: 5 }
 
 aggregator-feed-block:
   version: 1.x
   css:
     theme:
-      css/block/aggregator-feed.css: { weight: 0 }
+      css/block/aggregator-feed.css: { weight: 5 }
 
 ucb-form-page:
   version: 1.x
@@ -221,7 +221,7 @@ ucb-slate-form:
     js/ucb-slate-form.js: { weight: -5 }
   css:
     theme:
-      css/block/ucb-slate-form.css: { weight: -4 }
+      css/block/ucb-slate-form.css: { weight: 5 }
 
 ucb-status-page:
   version: 1.x
@@ -243,7 +243,7 @@ ucb-current-issue:
     js/ucb-current-issue-block.js: { weight: -5 }
   css:
     theme:
-      css/block/ucb-current-issue-block.css: { weight: -4 }
+      css/block/ucb-current-issue-block.css: { weight: 5 }
 
 ucb-category-cloud:
   version: 1.x
@@ -267,7 +267,7 @@ ucb-latest-issue:
     js/ucb-latest-issue-block.js: { weight: -5 }
   css:
     theme:
-      css/block/ucb-latest-issue-block.css: { weight: -4 }
+      css/block/ucb-latest-issue-block.css: { weight: 5 }
 
 ucb-issue-archive:
   version: 1.x
@@ -291,7 +291,7 @@ ucb-article-grid-block:
     js/ucb-article-grid-block.js: { weight: -5 }
   css:
     theme:
-      css/block/ucb-article-grid-block.css: { weight: -4 }
+      css/block/ucb-article-grid-block.css: { weight: 5 }
 
 ucb-article-list-block:
   version: 1.x
@@ -299,7 +299,7 @@ ucb-article-list-block:
     js/ucb-article-list-block.js: { weight: -5 }
   css:
     theme:
-      css/block/ucb-article-list-block.css: { weight: -4 }
+      css/block/ucb-article-list-block.css: { weight: 5 }
 
 ucb-content-sequence:
   version: 1.x
@@ -307,7 +307,7 @@ ucb-content-sequence:
     js/ucb-content-sequence.js: { weight: -5 }
   css:
     theme:
-      css/block/ucb-content-sequence.css: { weight: -4 }
+      css/block/ucb-content-sequence.css: { weight: 5 }
 
 ucb-article-feature-block:
   version: 1.x
@@ -315,7 +315,7 @@ ucb-article-feature-block:
     js/ucb-article-feature-block.js: { weight: -5 }
   css:
     theme:
-      css/block/ucb-article-feature-block.css: { weight: -4 }
+      css/block/ucb-article-feature-block.css: { weight: 5 }
 
 ucb-faculty-publications:
   version: 1.x
@@ -323,7 +323,7 @@ ucb-faculty-publications:
     js/faculty-publications.js: { weight: -5 }
   css:
     theme:
-      css/block/faculty-publications.css: { weight: -4 }
+      css/block/faculty-publications.css: { weight: 5 }
 
 ucb-brand-bar:
   version: 1.x
@@ -372,67 +372,67 @@ ucb-menu-style-highlight:
   version: 1.x
   css:
     theme:
-      css/menu-styles/highlight-styles.css: { weight: 5 }
+      css/menu-styles/highlight-styles.css: { weight: 6 }
 
 ucb-menu-style-ivory:
   version: 1.x
   css:
     theme:
-      css/menu-styles/ivory-styles.css: { weight: 5 }
+      css/menu-styles/ivory-styles.css: { weight: 6 }
 
 ucb-menu-style-layers:
   version: 1.x
   css:
     theme:
-      css/menu-styles/layers-styles.css: { weight: 5 }
+      css/menu-styles/layers-styles.css: { weight: 6 }
 
 ucb-menu-style-minimal:
   version: 1.x
   css:
     theme:
-      css/menu-styles/minimal-styles.css: { weight: 5 }
+      css/menu-styles/minimal-styles.css: { weight: 6 }
 
 ucb-menu-style-modern:
   version: 1.x
   css:
     theme:
-      css/menu-styles/modern-styles.css: { weight: 5 }
+      css/menu-styles/modern-styles.css: { weight: 6 }
 
 ucb-menu-style-rise:
   version: 1.x
   css:
     theme:
-      css/menu-styles/rise-styles.css: { weight: 5 }
+      css/menu-styles/rise-styles.css: { weight: 6 }
 
 ucb-menu-style-shadow:
   version: 1.x
   css:
     theme:
-      css/menu-styles/shadow-styles.css: { weight: 5 }
+      css/menu-styles/shadow-styles.css: { weight: 6 }
 
 ucb-menu-style-simple:
   version: 1.x
   css:
     theme:
-      css/menu-styles/simple-styles.css: { weight: 5 }
+      css/menu-styles/simple-styles.css: { weight: 6 }
 
 ucb-menu-style-spirit:
   version: 1.x
   css:
     theme:
-      css/menu-styles/spirit-styles.css: { weight: 5 }
+      css/menu-styles/spirit-styles.css: { weight: 6 }
 
 ucb-menu-style-swatch:
   version: 1.x
   css:
     theme:
-      css/menu-styles/swatch-styles.css: { weight: 5 }
+      css/menu-styles/swatch-styles.css: { weight: 6 }
 
 ucb-menu-style-tradition:
   version: 1.x
   css:
     theme:
-      css/menu-styles/tradition-styles.css: { weight: 5 }
+      css/menu-styles/tradition-styles.css: { weight: 6 }
 
 ucb-article-slider-block:
   version: 1.x
@@ -442,7 +442,7 @@ ucb-article-slider-block:
   css:
     theme:
       css/flickity/flickity.min.css: { weight: -3 }
-      css/block/ucb-article-slider-block.css: { weight: -2 }
+      css/block/ucb-article-slider-block.css: { weight: 5 }
 
 ucb-people-list-block:
   version: 1.x
@@ -450,7 +450,7 @@ ucb-people-list-block:
     js/ucb-people-list-block.js: { weight: -5 }
   css:
     theme:
-      css/block/ucb-people-list-block.css: { weight: -4 }
+      css/block/ucb-people-list-block.css: { weight: 5 }
 
 ucb-user-page:
   version: 1.x
@@ -489,13 +489,13 @@ ucb-collections-block:
     js/ucb-collections-block.js: { weight: -5 }
   css:
     theme:
-      css/block/ucb-collections-block.css: { weight: -4 }
+      css/block/ucb-collections-block.css: { weight: 5 }
 
 ucb-social-media-icons-block:
   version: 1.x
   css:
     theme:
-      css/block/social-media-icons.css: { weight: 0 }
+      css/block/social-media-icons.css: { weight: 5 }
 
 ucb-mega-menu-block:
   version: 1.x
@@ -503,7 +503,7 @@ ucb-mega-menu-block:
     js/ucb-mega-menu.js: { weight: -5 }
   css:
     theme:
-      css/block/ucb-mega-menu.css: { weight: -2 }
+      css/block/ucb-mega-menu.css: { weight: 5 }
 
 ucb-pager:
   version: 1.x
@@ -519,7 +519,7 @@ colorbox-image:
     js/masonry/masonry.pkgd.min.js: { weight: -3 }
   css:
     theme:
-      css/block/image-gallery.css: { weight: -2 }
+      css/block/image-gallery.css: { weight: 5 }
       css/colorbox-image.css: { weight: -1 }
       js/glightbox/glightbox.min.css: { weight: 0 }
 
@@ -529,7 +529,7 @@ ucb-newsletter-list-block:
     js/ucb-newsletter-list-block.js: { weight: -5 }
   css:
     theme:
-      css/block/ucb-newsletter-list-block.css: { weight: -4 }
+      css/block/ucb-newsletter-list-block.css: { weight: 5 }
 
 ucb-sidebar-menu-style-gray:
   version: 1.x
