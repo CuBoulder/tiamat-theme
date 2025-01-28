@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update boulder_base.libraries.yml
+  Updated the weights in libraries to work properly in `10.4.1`
+  
+  Main problems we've seen so far were regions not being ordered properly which messed up the menus and font colors on backgrounds. This should solve those problems.
+  
+  This will need some testing. On my dev environment it looks like all my blocks and regions are appearing correctly now. 
+  I don't know if this is still a stop-gap for `D11` or not? I didn't think the weights were supposed to work this way but this seems to have done it.
+  
+  Resolves #1579 
+  Resolves #1578
+  Resolves #1577
+  Resolves #1576
+---
+
 - ### Update block--events-calendar.html.twig
   Switching the block container to a web component name to handle the block being stripped from columns before loading content.
   
