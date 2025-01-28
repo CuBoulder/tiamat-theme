@@ -2,27 +2,27 @@ ucb-global:
   version: 1.x
   css:
     layout:
-      css/bootstrap/bootstrap.min.css: { weight: -10 }
-      css/layout.css: { weight: -9 }
+      css/bootstrap/bootstrap.min.css: { weight: -25 }
+      css/layout.css: { weight: -20 }
     theme:
       https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap:
         { type: external, weight: -8 }
-      css/style-responsive.css: { weight: -7 }
-      css/styleguide/global.css: { weight: -6 }
-      css/styleguide/branding.css: { weight: -5 }
-      css/styleguide/buttons.css: { weight: -4 }
-      css/styleguide/colors.css: { weight: -3 }
-      css/styleguide/type.css: { weight: -2 }
-      css/styleguide/icons.css: { weight: -1 }
+      css/style-responsive.css: { weight: -17 }
+      css/styleguide/global.css: { weight: -16 }
+      css/styleguide/branding.css: { weight: -15  }
+      css/styleguide/buttons.css: { weight: -14 }
+      css/styleguide/colors.css: { weight: -13 }
+      css/styleguide/type.css: { weight: -12 }
+      css/styleguide/icons.css: { weight: -11 }
       css/style.css: { weight: 0 }
       css/layout-builder-styles.css: { weight: 1 }
       css/block/block-styles.css: { weight: 2 }
       css/ucb-accordion-styles.css: { weight: 3 }
       css/ucb-print.css: { media: print, weight: 4 }
   js:
-    js/bootstrap/bootstrap.min.js: { weight: -10 }
-    js/ucb-rave-alert.js: { weight: -9 }
-    js/ucb-expandable-content.js: { weight: -8 }
+    js/bootstrap/bootstrap.min.js: { }
+    js/ucb-rave-alert.js: { }
+    js/ucb-expandable-content.js: { }
   dependencies:
     - core/drupal
 
@@ -30,7 +30,7 @@ migrate_styles: # just for migration
   version: 1.x
   css:
     theme:
-      css/migrate-list-styles.css: { weight: -5 }
+      css/migrate-list-styles.css: { weight: 5 }
 
 ucb-page:
   version: 1.x
@@ -48,66 +48,66 @@ ucb-article-dark:
   version: 1.x
   css:
     theme:
-      css/ucb-article-dark.css: { weight: 1 }
+      css/ucb-article-dark.css: { weight: 5 }
 
 ucb-article-list:
   version: 1.x
   js:
-    js/ucb-article-list.js: { weight: -5 }
+    js/ucb-article-list.js: { }
   css:
     theme:
-      css/ucb-article-list.css: { weight: -4 }
+      css/ucb-article-list.css: { weight: 5}
 
 ucb-user-login:
   version: 1.x
   css:
     theme:
-      css/ucb-user-login.css: { weight: 0 }
+      css/ucb-user-login.css: { weight: 5 }
 
 ucb-person:
   version: 1.x
   js:
-    js/ucb-person-article-list.js: { weight: -5 }
+    js/ucb-person-article-list.js: { }
   css:
     theme:
-      css/ucb-person.css: { weight: -4 }
+      css/ucb-person.css: { weight: 5 }
 
 ucb-people-list-page:
   version: 1.x
   js:
-    js/ucb-people-list.js: { weight: -5 }
+    js/ucb-people-list.js: { }
   css:
     theme:
-      css/ucb-people-list.css: { weight: -4 }
+      css/ucb-people-list.css: { weight: 5 }
 
 ucb-secondary-menu-region:
   version: 1.x
   css:
     theme:
-      css/ucb-secondary-menu-region.css: { weight: 0 }
+      css/ucb-secondary-menu-region.css: { weight: 5 }
 
 ucb-breadcrumb:
   version: 1.x
   css:
     theme:
-      css/ucb-breadcrumb.css: { weight: 0 }
+      css/ucb-breadcrumb.css: { weight: 5 }
 
 ucb-footer-menu-region:
   version: 1.x
   css:
     theme:
-      css/ucb-footer-menu-region.css: { weight: 0 }
+      css/ucb-footer-menu-region.css: { weight: 5 }
 
 ucb-site-contact-info-footer:
   version: 1.x
   css:
     theme:
-      css/ucb-site-contact-info-footer.css: { weight: 1 }
+      css/ucb-site-contact-info-footer.css: { weight: 5 }
 
 ucb-hero-unit:
   version: 1.x
   js:
-    js/ucb-hero-unit.js: { weight: -5 }
+    js/ucb-hero-unit.js: { }
   css:
     theme:
       css/block/hero-unit.css: { weight: 5 }
@@ -121,9 +121,9 @@ ucb-events-calendar:
 ucb-image-gallery:
   version: 1.x
   js:
-    js/glightbox/glightbox.min.js: { weight: -5 }
-    js/glightbox/ucb-gallery-lightbox-settings.js: { weight: -4 }
-    js/masonry/masonry.pkgd.min.js: { weight: -3 }
+    js/glightbox/glightbox.min.js: { }
+    js/glightbox/ucb-gallery-lightbox-settings.js: { }
+    js/masonry/masonry.pkgd.min.js: { }
   css:
     theme:
       css/block/image-gallery.css: { weight: 5 }
@@ -156,7 +156,7 @@ ucb-content-sequence-advanced:
 ucb-video-reveal:
   version: 1.x
   js:
-    js/ucb-video-reveal.js: { weight: -5 }
+    js/ucb-video-reveal.js: { }
   css:
     theme:
       css/block/video-reveal.css: { weight: 5 }
@@ -182,43 +182,43 @@ aggregator-feed-block:
 ucb-form-page:
   version: 1.x
   js:
-    js/ucb-form-page.js: { weight: -5 }
+    js/ucb-form-page.js: { }
   css:
     theme:
-      css/ucb-form-page.css: { weight: -4 }
+      css/ucb-form-page.css: { weight: 5 }
 
 ucb-taxonomy-page:
   version: 1.x
   css:
     theme:
-      css/ucb-taxonomy-page.css: { weight: 0 }
+      css/ucb-taxonomy-page.css: { weight: 5 }
 
 ucb-related-articles:
   version: 1.x
   js:
-    js/ucb-related-articles.js: { weight: -5 }
+    js/ucb-related-articles.js: { }
   css:
     theme:
-      css/ucb-related-articles.css: { weight: -4 }
+      css/ucb-related-articles.css: { weight: 5 }
 
 ucb-newsletter:
   version: 1.x
   css:
     theme:
-      css/ucb-newsletter.css: { weight: 0 }
+      css/ucb-newsletter.css: { weight: 5 }
 
 ucb-sticky-menu:
   version: 1.x
   js:
-    js/ucb-sticky-menu.js: { weight: -5 }
+    js/ucb-sticky-menu.js: { }
   css:
     theme:
-      css/ucb-sticky-menu.css: { weight: -4 }
+      css/ucb-sticky-menu.css: { weight: 5 }
 
 ucb-slate-form:
   version: 1.x
   js:
-    js/ucb-slate-form.js: { weight: -5 }
+    js/ucb-slate-form.js: { }
   css:
     theme:
       css/block/ucb-slate-form.css: { weight: 5 }
@@ -226,21 +226,21 @@ ucb-slate-form:
 ucb-status-page:
   version: 1.x
   js:
-    js/ucb-status-page-block.js: { weight: -5 }
+    js/ucb-status-page-block.js: { }
   css:
     theme:
-      css/ucb-status-page-block.css: { weight: -4 }
+      css/ucb-status-page-block.css: { weight: 5 }
 
 ucb-issue:
   version: 1.x
   css:
     theme:
-      css/ucb-issue.css: { weight: 0 }
+      css/ucb-issue.css: { weight: 5 }
 
 ucb-current-issue:
   version: 1.x
   js:
-    js/ucb-current-issue-block.js: { weight: -5 }
+    js/ucb-current-issue-block.js: { }
   css:
     theme:
       css/block/ucb-current-issue-block.css: { weight: 5 }
@@ -248,23 +248,23 @@ ucb-current-issue:
 ucb-category-cloud:
   version: 1.x
   js:
-    js/ucb-category-cloud.js: { weight: -5 }
+    js/ucb-category-cloud.js: { }
   css:
     theme:
-      css/ucb-category-cloud.css: { weight: -4 }
+      css/ucb-category-cloud.css: { weight: 5 }
 
 ucb-tag-cloud:
   version: 1.x
   js:
-    js/ucb-tag-cloud.js: { weight: -5 }
+    js/ucb-tag-cloud.js: { }
   css:
     theme:
-      css/ucb-tag-cloud.css: { weight: -4 }
+      css/ucb-tag-cloud.css: { weight: 5 }
 
 ucb-latest-issue:
   version: 1.x
   js:
-    js/ucb-latest-issue-block.js: { weight: -5 }
+    js/ucb-latest-issue-block.js: {  }
   css:
     theme:
       css/block/ucb-latest-issue-block.css: { weight: 5 }
@@ -272,23 +272,23 @@ ucb-latest-issue:
 ucb-issue-archive:
   version: 1.x
   js:
-    js/ucb-issue-archive.js: { weight: -5 }
+    js/ucb-issue-archive.js: { }
   css:
     theme:
-      css/ucb-issue-archive.css: { weight: -4 }
+      css/ucb-issue-archive.css: { weight: 5 }
 
 ucb-newsletter-email:
   version: 1.x
   js:
-    js/ucb-newsletter.js: { weight: -5 }
+    js/ucb-newsletter.js: { }
   css:
     theme:
-      css/ucb-newsletter.css: { weight: -4 }
+      css/ucb-newsletter.css: { weight: 5 }
 
 ucb-article-grid-block:
   version: 1.x
   js:
-    js/ucb-article-grid-block.js: { weight: -5 }
+    js/ucb-article-grid-block.js: { }
   css:
     theme:
       css/block/ucb-article-grid-block.css: { weight: 5 }
@@ -296,7 +296,7 @@ ucb-article-grid-block:
 ucb-article-list-block:
   version: 1.x
   js:
-    js/ucb-article-list-block.js: { weight: -5 }
+    js/ucb-article-list-block.js: { }
   css:
     theme:
       css/block/ucb-article-list-block.css: { weight: 5 }
@@ -304,7 +304,7 @@ ucb-article-list-block:
 ucb-content-sequence:
   version: 1.x
   js:
-    js/ucb-content-sequence.js: { weight: -5 }
+    js/ucb-content-sequence.js: {  }
   css:
     theme:
       css/block/ucb-content-sequence.css: { weight: 5 }
@@ -312,7 +312,7 @@ ucb-content-sequence:
 ucb-article-feature-block:
   version: 1.x
   js:
-    js/ucb-article-feature-block.js: { weight: -5 }
+    js/ucb-article-feature-block.js: {  }
   css:
     theme:
       css/block/ucb-article-feature-block.css: { weight: 5 }
@@ -320,7 +320,7 @@ ucb-article-feature-block:
 ucb-faculty-publications:
   version: 1.x
   js:
-    js/faculty-publications.js: { weight: -5 }
+    js/faculty-publications.js: {  }
   css:
     theme:
       css/block/faculty-publications.css: { weight: 5 }
@@ -329,44 +329,44 @@ ucb-brand-bar:
   version: 1.x
   css:
     theme:
-      css/ucb-brand-bar.css: { weight: 0 }
+      css/ucb-brand-bar.css: { weight: 5 }
 
 ucb-search-box:
   version: 1.x
   js:
-    js/ucb-search-box.js: { weight: -5 }
+    js/ucb-search-box.js: {  }
   css:
     theme:
-      css/ucb-search-box.css: { weight: -4 }
+      css/ucb-search-box.css: { weight: 5 }
 
 ucb-search-modal:
   version: 1.x
   js:
-    js/ucb-search-modal.js: { weight: -5 }
+    js/ucb-search-modal.js: {  }
   css:
     theme:
-      css/ucb-search-modal.css: { weight: -4 }
+      css/ucb-search-modal.css: { weight: 5 }
 
 ucb-search-page:
   version: 1.x
   css:
     theme:
-      css/ucb-search-page.css: { weight: 0 }
+      css/ucb-search-page.css: { weight: 5 }
 
 ucb-menu:
   version: 1.x
   js:
-    js/ucb-menu.js: { weight: -5 }
-    js/ucb-access-menu.min.js: { weight: -4 }
+    js/ucb-menu.js: {  }
+    js/ucb-access-menu.min.js: {  }
   css:
     theme:
-      css/ucb-menu.css: { weight: -3 }
+      css/ucb-menu.css: { weight: 5 }
 
 ucb-menu-style-default:
   version: 1.x
   css:
     theme:
-      css/menu-styles/default-menu-styles.css: { weight: 0 }
+      css/menu-styles/default-menu-styles.css: { weight: 5 }
 
 ucb-menu-style-highlight:
   version: 1.x
@@ -437,17 +437,17 @@ ucb-menu-style-tradition:
 ucb-article-slider-block:
   version: 1.x
   js:
-    js/flickity/flickity.pkgd.min.js: { weight: -5 }
-    js/ucb-article-slider-block.js: { weight: -4 }
+    js/flickity/flickity.pkgd.min.js: {  }
+    js/ucb-article-slider-block.js: {  }
   css:
     theme:
-      css/flickity/flickity.min.css: { weight: -3 }
+      css/flickity/flickity.min.css: { weight: 4 }
       css/block/ucb-article-slider-block.css: { weight: 5 }
 
 ucb-people-list-block:
   version: 1.x
   js:
-    js/ucb-people-list-block.js: { weight: -5 }
+    js/ucb-people-list-block.js: {  }
   css:
     theme:
       css/block/ucb-people-list-block.css: { weight: 5 }
@@ -455,19 +455,19 @@ ucb-people-list-block:
 ucb-user-page:
   version: 1.x
   js:
-    js/ucb-status-page-block.js: { weight: -5 }
+    js/ucb-status-page-block.js: {  }
   css:
     theme:
-      css/ucb-status-page-block.css: { weight: -4 }
-      css/ucb-user-page.css: { weight: -3 }
+      css/ucb-status-page-block.css: { weight: 4 }
+      css/ucb-user-page.css: { weight: 5 }
 
 ucb-faq-page:
   version: 1.x
   js:
-    js/ucb-faq-page.js: { weight: -5 }
+    js/ucb-faq-page.js: {  }
   css:
     theme:
-      css/ucb-faq-page.css: { weight: -4 }
+      css/ucb-faq-page.css: { weight: 5 }
 
 ucb-class-notes:
   version: 1.x
@@ -478,15 +478,15 @@ ucb-class-notes:
 ucb-class-notes-list-page:
   version: 1.x
   js:
-    js/ucb-class-notes-list.js: { weight: -5 }
+    js/ucb-class-notes-list.js: {  }
   css:
     theme:
-      css/ucb-class-notes-list.css: { weight: -4 }
+      css/ucb-class-notes-list.css: { weight: 5 }
 
 ucb-collections-block:
   version: 1.x
   js:
-    js/ucb-collections-block.js: { weight: -5 }
+    js/ucb-collections-block.js: {  }
   css:
     theme:
       css/block/ucb-collections-block.css: { weight: 5 }
@@ -500,7 +500,7 @@ ucb-social-media-icons-block:
 ucb-mega-menu-block:
   version: 1.x
   js:
-    js/ucb-mega-menu.js: { weight: -5 }
+    js/ucb-mega-menu.js: {  }
   css:
     theme:
       css/block/ucb-mega-menu.css: { weight: 5 }
@@ -514,19 +514,19 @@ ucb-pager:
 colorbox-image:
   version: 1.x
   js:
-    js/glightbox/glightbox.min.js: { weight: -5 }
-    js/glightbox/ucb-gallery-lightbox-settings.js: { weight: -4 }
-    js/masonry/masonry.pkgd.min.js: { weight: -3 }
+    js/glightbox/glightbox.min.js: {  }
+    js/glightbox/ucb-gallery-lightbox-settings.js: { }
+    js/masonry/masonry.pkgd.min.js: { }
   css:
     theme:
-      css/block/image-gallery.css: { weight: 5 }
-      css/colorbox-image.css: { weight: -1 }
-      js/glightbox/glightbox.min.css: { weight: 0 }
+      css/block/image-gallery.css: { weight: 4 }
+      css/colorbox-image.css: { weight: 4 }
+      js/glightbox/glightbox.min.css: { weight: 4 }
 
 ucb-newsletter-list-block:
   version: 1.x
   js:
-    js/ucb-newsletter-list-block.js: { weight: -5 }
+    js/ucb-newsletter-list-block.js: {  }
   css:
     theme:
       css/block/ucb-newsletter-list-block.css: { weight: 5 }
@@ -535,4 +535,4 @@ ucb-sidebar-menu-style-gray:
   version: 1.x
   css:
     theme:
-      css/menu-styles/ucb-sidebar-gray-styles.css: {weight: -4}
+      css/menu-styles/ucb-sidebar-gray-styles.css: {weight: 5 }
