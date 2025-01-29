@@ -480,9 +480,9 @@
                   )
                 );
 
-                thisPerson.body = `${PeopleListBlockElement.decodeHtmlEntities(trimmedString)}...`;
+                thisPerson.body = `${trimmedString}...`;
               } else {
-                thisPerson.body = PeopleListBlockElement.decodeHtmlEntities(trimmedString);
+                thisPerson.body = trimmedString;
               }
             }
         }
