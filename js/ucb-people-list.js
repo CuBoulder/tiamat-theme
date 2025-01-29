@@ -288,32 +288,43 @@
                   personAJobTypeData = personA['relationships']['field_ucb_person_job_type']['data'] || [],
                   personBJobTypeData = personB['relationships']['field_ucb_person_job_type']['data'] || [];
 
-                // Get job type names
-                const personAJobTypeName = personAJobTypeData.length
-                  ? PeopleListElement.getTaxonomyName(jobTypeTaxonomy, personAJobTypeData[0]['meta']['drupal_internal__target_id'])
-                  : '';
-                const personBJobTypeName = personBJobTypeData.length
-                  ? PeopleListElement.getTaxonomyName(jobTypeTaxonomy, personBJobTypeData[0]['meta']['drupal_internal__target_id'])
-                  : '';
+                // Handle cases where one or both people have no job type
+                if (!personAJobTypeData.length || !personBJobTypeData.length) {
+                  return personAJobTypeData.length ? -1 : 1; // Push people without job type to the bottom
+                }
 
-                // Primary sort: Alphabetical by Job Type
+                // Get job type weights
+                const personAJobTypeWeight = PeopleListElement.getTaxonomyWeight(jobTypeTaxonomy, personAJobTypeData[0]['meta']['drupal_internal__target_id']);
+                const personBJobTypeWeight = PeopleListElement.getTaxonomyWeight(jobTypeTaxonomy, personBJobTypeData[0]['meta']['drupal_internal__target_id']);
+
+                // Primary sort: By Job Type Weight (lower weight = higher priority)
+                if (personAJobTypeWeight !== personBJobTypeWeight) {
+                  return personAJobTypeWeight - personBJobTypeWeight;
+                }
+
+                // Get job type names
+                const personAJobTypeName = PeopleListElement.getTaxonomyName(jobTypeTaxonomy, personAJobTypeData[0]['meta']['drupal_internal__target_id']) || '';
+                const personBJobTypeName = PeopleListElement.getTaxonomyName(jobTypeTaxonomy, personBJobTypeData[0]['meta']['drupal_internal__target_id']) || '';
+
+                // Secondary sort: Alphabetical by Job Type Name
                 if (personAJobTypeName !== personBJobTypeName) {
                   return personAJobTypeName < personBJobTypeName ? -1 : 1;
                 }
 
-                // Secondary sort: Alphabetical by Last Name
+                // Tertiary sort: Alphabetical by Last Name
                 const lastNameA = (personA['attributes']['field_ucb_person_last_name'] || '').toLowerCase();
                 const lastNameB = (personB['attributes']['field_ucb_person_last_name'] || '').toLowerCase();
                 if (lastNameA !== lastNameB) {
                   return lastNameA < lastNameB ? -1 : 1;
                 }
 
-                // Tertiary sort: Alphabetical by First Name (optional)
+                // Final sort: Alphabetical by First Name (optional)
                 const firstNameA = (personA['attributes']['field_ucb_person_first_name'] || '').toLowerCase();
                 const firstNameB = (personB['attributes']['field_ucb_person_first_name'] || '').toLowerCase();
                 return firstNameA < firstNameB ? -1 : firstNameA > firstNameB ? 1 : 0;
               }), photoUrls, photoData, groupContainerElement);
-            } else {
+            }
+             else {
               this.displayPeople(format, peopleInGroup.sort((personA, personB) => {
                 const lastNameA = personA['attributes']['field_ucb_person_last_name'] || '';
                 const lastNameB = personB['attributes']['field_ucb_person_last_name'] || '';
