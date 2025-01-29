@@ -89,6 +89,15 @@
      */
     static escapeHTML(raw) { return raw ? raw.replace(/\&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;') : ''; }
     static get observedAttributes() { return ['user-config']; }
+    /**
+     * @param {string|null|undefined} text A raw body string
+     * @returns {string} An HTML-safe body
+     */
+    static decodeHtmlEntities(text) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, "text/html");
+      return doc.documentElement.textContent;
+    }
 
     constructor() {
       super();
@@ -567,7 +576,7 @@
         personLink = this.getAttribute('site-base') + person.link,
         personName = PeopleListElement.escapeHTML(person.name),
         personPhoto = person.photoUrl ? '<img src="' + person.photoUrl + '" alt="' + PeopleListElement.escapeHTML(person.photoAlt) + '">' : '',
-        personBody = PeopleListElement.escapeHTML(person.body),
+        personBody = PeopleListElement.decodeHtmlEntities(person.body),
         personEmail = PeopleListElement.escapeHTML(person.email),
         personPhone = PeopleListElement.escapeHTML(person.phone),
         personPrimaryLinkURI = PeopleListElement.escapeHTML(person.primaryLinkURI),
