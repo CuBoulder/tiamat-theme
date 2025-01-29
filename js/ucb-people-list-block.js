@@ -90,6 +90,15 @@
      */
     static escapeHTML(raw) { return raw ? raw.replace(/\&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;').replace(/>/g, '&gt;') : ''; }
     static get observedAttributes() { return ['user-config']; }
+    /**
+     * @param {string|null|undefined} text A raw body string
+     * @returns {string} An HTML-safe body
+     */
+    static decodeHtmlEntities(text) {
+      const parser = new DOMParser();
+      const doc = parser.parseFromString(text, "text/html");
+      return doc.documentElement.textContent;
+    }
 
     constructor() {
       super();
@@ -470,7 +479,10 @@
                     trimmedString.lastIndexOf(" ")
                   )
                 );
+
                 thisPerson.body = `${trimmedString}...`;
+              } else {
+                thisPerson.body = trimmedString;
               }
             }
         }
@@ -485,7 +497,7 @@
         personLink = this.getAttribute('site-base') + person.link,
         personName = PeopleListBlockElement.escapeHTML(person.name),
         personPhoto = person.photoURI ? '<img src="' + person.photoURI + '">' : '',
-        personBody = PeopleListBlockElement.escapeHTML(person.body),
+        personBody = PeopleListBlockElement.decodeHtmlEntities(person.body),
         personEmail = PeopleListBlockElement.escapeHTML(person.email),
         personPhone = PeopleListBlockElement.escapeHTML(person.phone),
         personPrimaryLinkURI = PeopleListBlockElement.escapeHTML(person.primaryLinkURI),

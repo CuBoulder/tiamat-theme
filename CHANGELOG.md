@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### People Lists: Fix short body fields not displaying. Refines Alphabetical sorting of lists
+  - On the People List Page and People List Block, previously Person pages with a short body field would not show that in these aggregator displays due to a logic bug which would only trigger if the Person page returned had to generate a summary, in cases where the body was too long. This would lead to short Person page body fields not displaying. This bug has been corrected. Resolves https://github.com/CuBoulder/tiamat-theme/issues/1572
+  - Previously on the People List Page  if the People were sorted by Last Name but some People shared a Last Name, it would display them in order of creation. This has been corrected so that it will sort by Last Name, and then First Name in cases of shared last names. Resolves https://github.com/CuBoulder/tiamat-theme/issues/1573
+---
+
 - ### Adjusting weights for CSS files and removing weights from JS libraries
   Additional work to get the CSS files loading the proper order after the 10.4 update.  
   
