@@ -9,52 +9,65 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250129] - 2025-01-29
+
 - ### People Lists: Fix short body fields not displaying. Refines Alphabetical sorting of lists
-  - On the People List Page and People List Block, previously Person pages with a short body field would not show that in these aggregator displays due to a logic bug which would only trigger if the Person page returned had to generate a summary, in cases where the body was too long. This would lead to short Person page body fields not displaying. This bug has been corrected. Resolves https://github.com/CuBoulder/tiamat-theme/issues/1572
-  - Previously on the People List Page  if the People were sorted by Last Name but some People shared a Last Name, it would display them in order of creation. This has been corrected so that it will sort by Last Name, and then First Name in cases of shared last names. Resolves https://github.com/CuBoulder/tiamat-theme/issues/1573
----
+  - On the People List Page and People List Block, previously Person pages with a short body field would not show that in these aggregator displays due to a logic bug which would only trigger if the Person page returned had to generate a summary, in cases where the body was too long. This would lead to short Person page body fields not displaying. This bug has been corrected. Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1572>
+  - Previously on the People List Page  if the People were sorted by Last Name but some People shared a Last Name, it would display them in order of creation. This has been corrected so that it will sort by Last Name, and then First Name in cases of shared last names. Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1573>
+
+* * *
 
 - ### Adjusting weights for CSS files and removing weights from JS libraries
+
   Additional work to get the CSS files loading the proper order after the 10.4 update.  
-  
+
   Among other issues will resolve #1577 
----
+
+* * *
 
 - ### Update boulder_base.libraries.yml
+
   Updated the weights in libraries to work properly in `10.4.1`
-  
+
   Main problems we've seen so far were regions not being ordered properly which messed up the menus and font colors on backgrounds. This should solve those problems.
-  
+
   This will need some testing. On my dev environment it looks like all my blocks and regions are appearing correctly now. 
   I don't know if this is still a stop-gap for `D11` or not? I didn't think the weights were supposed to work this way but this seems to have done it.
-  
+
   Resolves #1579 
   Resolves #1578
   Resolves #1577
   Resolves #1576
----
+
+* * *
 
 - ### Update block--events-calendar.html.twig
+
   Switching the block container to a web component name to handle the block being stripped from columns before loading content.
-  
-  Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/71
-  
+
+  Sister PR: <https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/71>
+
   Resolves #1574 
----
+
+* * *
 
 - ### Update ucb-brand-bar.css
+
   Updated padding to be `0!important` for the brand bar to avoid styleguide interference.
-  
+
   Resolves #1570 
----
+
+* * *
 
 - ### #1567 Events Calendar: Allow Mini Calendar + List option
+
   Previously the Events Calendar block would only allow the "List" type Widget as configured by `https://calendar.colorado.edu/help/widget` and would not correctly display the "Mini Calendar + List" widget option -- which adds an interactive mini calendar to the Events Calendar block. 
-  
+
   This has been corrected so both 'Widget Types' will work with the block.
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1567
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1567>
+
+* * *
 
 ## [20250121] - 2025-01-21
 
@@ -4179,7 +4192,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250121...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250129...HEAD
+[20250129]: https://github.com/CuBoulder/tiamat-theme/compare/20250121...20250129
 [20250121]: https://github.com/CuBoulder/tiamat-theme/compare/20250115...20250121
 [20250115]: https://github.com/CuBoulder/tiamat-theme/compare/20241211...20250115
 [20241211]: https://github.com/CuBoulder/tiamat-theme/compare/20241204...20241211
