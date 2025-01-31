@@ -1,3 +1,5 @@
+(function (customElements) {
+
 class ArticleGridBlockElement extends HTMLElement {
   constructor() {
     super();
@@ -27,6 +29,7 @@ class ArticleGridBlockElement extends HTMLElement {
         console.error(Error);
         this.toggleMessage("ucb-al-loading");
         this.toggleMessage("ucb-al-api-error", "block");
+        this.classList.add("ucb-block-error");
       });
   }
 
@@ -48,6 +51,7 @@ class ArticleGridBlockElement extends HTMLElement {
     if (data.data.length === 0) {
       this.toggleMessage("ucb-al-loading");
       this.toggleMessage("ucb-al-error", "block");
+      this.classList.add("ucb-block-error");
       console.warn(
         "No Articles retrieved - please check your inclusion filters and try again"
       );
@@ -150,6 +154,7 @@ class ArticleGridBlockElement extends HTMLElement {
       console.error(error);
       this.toggleMessage("ucb-al-loading");
       this.toggleMessage("ucb-al-api-error", "block");
+      this.classList.add("ucb-block-error");
     }
     return;
   }
@@ -161,6 +166,7 @@ class ArticleGridBlockElement extends HTMLElement {
     );
     this.toggleMessage("ucb-al-loading");
     this.toggleMessage("ucb-al-error", "block");
+    this.classList.add("ucb-block-error");
     return;
   }
 
@@ -213,6 +219,7 @@ async getArticleParagraph(id) {
     console.error(Error);
     this.toggleMessage("ucb-al-loading");
     this.toggleMessage("ucb-al-api-error", "block");
+    this.classList.add("ucb-block-error");
     return ""; // Return an empty string in case of error
   }
 }
@@ -300,3 +307,4 @@ async getArticleParagraph(id) {
 }
 
 customElements.define("article-grid-block", ArticleGridBlockElement);
+})(window.customElements);

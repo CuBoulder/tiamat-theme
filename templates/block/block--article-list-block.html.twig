@@ -12,6 +12,10 @@
   view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
 ] %}
 
+{# Logged In - Used for showing errors to only authenticated #}
+{% set logged_in_class = logged_in ? 'ucb-authenticated' : 'ucb-anonymous' %}
+
+
 {# Base Url #}
 {% set baseurlJSON = url('<front>')|render|trim('/') %}
 
@@ -177,6 +181,7 @@
   {{ content.body }}
   {# Article List Main Block#}
   <article-list-block
+    class="{{logged_in_class}}"
     base-uri="{{ baseurlJSON }}"
     jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}"
     exCats="{{ excludeCategories }}"

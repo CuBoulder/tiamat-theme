@@ -1,3 +1,4 @@
+(function (customElements) {
 class ArticleListBlockElement extends HTMLElement {
   constructor() {
     super();
@@ -23,6 +24,7 @@ class ArticleListBlockElement extends HTMLElement {
         console.error(Error);
         this.toggleMessage("ucb-al-loading");
         this.toggleMessage("ucb-al-api-error", "block");
+        this.classList.add("ucb-block-error");
       });
   }
 
@@ -43,6 +45,7 @@ class ArticleListBlockElement extends HTMLElement {
     if (data.data.length === 0) {
       this.toggleMessage("ucb-al-loading");
       this.toggleMessage("ucb-al-error", "block");
+      this.classList.add("ucb-block-error");
       console.warn(
         "No Articles retrieved - please check your inclusion filters and try again"
       );
@@ -170,6 +173,7 @@ class ArticleListBlockElement extends HTMLElement {
       );
       this.toggleMessage("ucb-al-loading");
       this.toggleMessage("ucb-al-error", "block");
+      this.classList.add("ucb-block-error");
       return;
     }
 
@@ -222,6 +226,7 @@ class ArticleListBlockElement extends HTMLElement {
       console.error(Error);
       this.toggleMessage("ucb-al-loading");
       this.toggleMessage("ucb-al-api-error", "block");
+      this.classList.add("ucb-block-error");
       return ""; // Return an empty string in case of error
     }
   }
@@ -590,3 +595,4 @@ class ArticleListBlockElement extends HTMLElement {
 }
 
 customElements.define('article-list-block', ArticleListBlockElement);
+})(window.customElements);

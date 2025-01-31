@@ -292,3 +292,13 @@
 .bs-icon-position-top + .block-title-text {
   display: block;
 }
+
+/* Block Error Message - Display to Authenticated Only */
+.ucb-anonymous.ucb-block-error{
+  display: none;
+}
+
+.block:has(.ucb-anonymous.ucb-block-error) {
+  display: none;
+}
+

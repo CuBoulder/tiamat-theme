@@ -12,6 +12,9 @@
   view_mode ? 'block--view-mode-' ~ view_mode|clean_class
 ] %}
 
+{# Logged In - Used for showing errors to only authenticated #}
+{% set logged_in_class = logged_in ? 'ucb-authenticated' : 'ucb-anonymous' %}
+
 {# This block mirrors the Article List Node - constructs a JSON endpoint in TWIG using include filters #}
 {# JSON API Endpoint information #}
 {% set articlesJSON = (url('<front>')|render|trim('/'))
@@ -174,6 +177,7 @@
   {{ content.body }}
   {# Article Grid Main Block#}
   <article-grid-block
+    class="{{logged_in_class}}"
     base-uri="{{ baseurlJSON }}"
     jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}"
     exCats="{{ excludeCategories }}"
