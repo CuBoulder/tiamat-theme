@@ -1,3 +1,4 @@
+(function (customElements) {
 class CurrentIssueElement extends HTMLElement {
 	constructor() {
 		super();
@@ -15,13 +16,13 @@ class CurrentIssueElement extends HTMLElement {
             .then((data) => this.build(data))
             .catch(Error=> {
                 this.toggleMessage('ucb-al-loading');
-                this.handleError(Error)
+                this.handleError(Error);
             });
     }
 
     build(data){
         if(data.data.length == 0){
-            this.handleError({name : "No Issues Retrieved", message : "There are no Issues created"} , 'No Issues Found')
+            this.handleError({name : "No Issues Retrieved", message : "There are no Issues created"} , 'No Issues Found');
         } else {
             const title = data.data[0].attributes.title
             let imgURL
@@ -92,6 +93,8 @@ class CurrentIssueElement extends HTMLElement {
     }
 
     handleError(Error, ErrorMsg = 'Error Fetching issues - Check the console'){
+        this.classList.add("ucb-block-error");
+        this.toggleMessage('ucb-al-loading');
         const container = document.createElement('div');
         container.className = 'ucb-current-issue-block-content';
         const span = document.createElement('span')
@@ -128,3 +131,4 @@ class CurrentIssueElement extends HTMLElement {
 
 
 customElements.define('current-issue-block', CurrentIssueElement);
+})(window.customElements);

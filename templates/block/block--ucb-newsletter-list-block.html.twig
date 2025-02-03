@@ -11,10 +11,14 @@
 
 {% set baseurlJSON = url('<front>')|render|trim('/') %}
 
+{# Logged In - Used for showing errors to only authenticated #}
+{% set logged_in_class = logged_in ? 'ucb-authenticated' : 'ucb-anonymous' %}
+
 {% block content %}
 {{ attach_library('boulder_base/ucb-newsletter-list-block') }}
   {{ content.body }}
   <ucb-newsletter-list
+    class="{{logged_in_class}}"
     baseURI="{{baseurlJSON}}"
     count="{{content.field_ucb_newsletter_list_count|render|striptags|trim}}"
     newsletter-type="{{content.field_select_newsletter_lis_type|render|striptags|trim}}"

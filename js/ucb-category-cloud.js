@@ -1,3 +1,5 @@
+(function (customElements) {
+
 class CategoryCloudElement extends HTMLElement {
 	constructor() {
 		super();
@@ -39,6 +41,7 @@ class CategoryCloudElement extends HTMLElement {
 }
 
     handleError(Error, ErrorMsg = 'Error Fetching Categories - Check the console'){
+        this.classList.add("ucb-block-error");
         const container = document.createElement('div');
         container.className = 'ucb-category-cloud-container';
         const span = document.createElement('span')
@@ -56,9 +59,10 @@ class CategoryCloudElement extends HTMLElement {
 
         this.appendChild(container)
         // Log error
-            console.error(Error)
+        console.error(Error)
 
     }
 }
 
 customElements.define('category-cloud-block', CategoryCloudElement);
+})(window.customElements);

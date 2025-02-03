@@ -1,3 +1,4 @@
+(function (customElements) {
 class LatestIssueElement extends HTMLElement {
 	constructor() {
 		super();
@@ -110,6 +111,8 @@ class LatestIssueElement extends HTMLElement {
     }
 
     handleError(Error, ErrorMsg = 'Error Fetching issues - Check the console'){
+        this.classList.add("ucb-block-error");
+        this.toggleMessage('ucb-al-loading');
         const container = document.createElement('div');
         container.className = 'ucb-current-issue-block-content';
         const span = document.createElement('span')
@@ -145,3 +148,4 @@ class LatestIssueElement extends HTMLElement {
 
 
 customElements.define('latest-issue-block', LatestIssueElement);
+})(window.customElements);

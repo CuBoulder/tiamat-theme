@@ -12,6 +12,9 @@
   view_mode ? 'block--view-mode-' ~ view_mode|clean_class
 ] %}
 
+{# Logged In - Used for showing errors to only authenticated #}
+{% set logged_in_class = logged_in ? 'ucb-authenticated' : 'ucb-anonymous' %}
+
 {# Base Url #}
 {% set baseurlJSON = url('<front>')|render|trim('/') %}
 
@@ -19,5 +22,5 @@
 {% block content %}
   {{ attach_library('boulder_base/ucb-tag-cloud') }}
   {{ content.body }}
-  <tag-cloud-block base-uri="{{ baseurlJSON }}"></tag-cloud-block>
+  <tag-cloud-block class="{{logged_in_class}}" base-uri="{{ baseurlJSON }}"></tag-cloud-block>
 {% endblock %}

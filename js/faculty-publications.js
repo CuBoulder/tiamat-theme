@@ -220,6 +220,7 @@
         + '</p>';
       this.loadButtonElement.innerHTML = '<i class="fa-solid fa-rotate-right"></i> Retry';
       this.messagesElement.removeAttribute('hidden');
+      this.messagesElement.classList.add('ucb-block-error');
       this.controlsElement.removeAttribute('hidden');
       this.throbberElement.setAttribute('hidden', '');
     }
@@ -232,6 +233,7 @@
         + '<strong>There were no publications returned.</strong>'
         + '</p>';
       this.messagesElement.removeAttribute('hidden');
+      this.messagesElement.classList.add('ucb-block-error');
     }
 
   }
@@ -278,7 +280,7 @@
    *
    * @param {string} safeText
    *   The link text.
-   * @param {string|undefined} uri 
+   * @param {string|undefined} uri
    *   The URI to link to.
    * @returns
    *   The HTML link, if `uri` is valid.

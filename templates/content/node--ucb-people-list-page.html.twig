@@ -2,13 +2,16 @@
 /**
  * Theme layout to display a People List Page.
  *
- * TODO: 
+ * TODO:
  *  - Image styles (try : https://www.drupal.org/project/consumer_image_styles )
- *  - Display filters on rendered page 
+ *  - Display filters on rendered page
  */
 #}
 
 {{ attach_library('boulder_base/ucb-people-list-page') }}
+
+{# Logged In - Used for showing errors to only authenticated #}
+{% set logged_in_class = logged_in ? 'ucb-authenticated' : 'ucb-anonymous' %}
 
 {% set classes = [
   'node',
@@ -76,6 +79,7 @@
   </div>
   {% endif %}
   <ucb-people-list{{ create_attribute({
+    'class' : logged_in_class,
     'site-base': url('<front>')|render|trim('/'),
     'base-uri': url('<front>')|render|trim('/') ~ '/jsonapi',
     config: config|json_encode,

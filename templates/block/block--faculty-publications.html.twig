@@ -12,6 +12,10 @@
   view_mode ? 'block--view-mode-' ~ view_mode|clean_class,
   'ucb-faculty-publications'
 ] %}
+
+{# Logged In - Used for showing errors to only authenticated #}
+{% set logged_in_class = logged_in ? 'ucb-authenticated' : 'ucb-anonymous' %}
+
 {% set blockContent = content['#block_content'] %}
 {% set fieldFrom = blockContent.field_faculty_publications_from.value %}
 {% set fieldTo = blockContent.field_faculty_publications_to.value %}
@@ -23,6 +27,7 @@
 {% block content %}
   {{ attach_library('boulder_base/ucb-faculty-publications') }}
   <faculty-publications{{ create_attribute({
+    class: logged_in_class,
     from: fieldFrom ? fieldFrom|date('Y-m-d') : null,
     to: fieldTo ? fieldTo|date('Y-m-d') : null,
     department: fieldDpt ? fieldDpt|trim : null,

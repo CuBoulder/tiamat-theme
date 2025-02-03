@@ -294,11 +294,6 @@
 }
 
 /* Block Error Message - Display to Authenticated Only */
-.ucb-anonymous.ucb-block-error{
-  display: none;
+.ucb-anonymous.ucb-block-error, .ucb-anonymous .ucb-block-error{
+  display: none !important;
 }
-
-.block:has(.ucb-anonymous.ucb-block-error) {
-  display: none;
-}
-

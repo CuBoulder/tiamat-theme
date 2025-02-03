@@ -138,6 +138,7 @@
         this._nextURL = data['links']?.next?.href || null;
         return { data: articles, included: included };
       } catch (error) {
+        this.classList.add("ucb-block-error", this.getAttribute('logged-in'));
         console.error(ArticleListProvider.errorMessage);
         throw error;
       }
@@ -223,13 +224,13 @@
       // Error
       this._errorElement = document.createElement('div');
       this._errorElement.innerText = ArticleListProvider.errorMessage;
-      this._errorElement.className = 'ucb-list-msg ucb-error';
+      this._errorElement.className = 'ucb-list-msg ucb-block-error';
       this._errorElement.id = 'ucb-al-error'
       this._errorElement.style.display = 'none';
       this.appendChild(this._errorElement);
       // No Results Found
       this._noResultsElement = document.createElement('div');
-      this._noResultsElement.className = 'ucb-list-msg ucb-no-results';
+      this._noResultsElement.className = 'ucb-list-msg ucb-no-results ucb-block-error';
       this._noResultsElement.innerText = 'No results found.';
       this._noResultsElement.style.display = 'none';
       this.appendChild(this._noResultsElement);
@@ -254,6 +255,7 @@
         this.generateFilterForm();
         this.loadArticles();
       } catch (error) {
+        this.classList.add("ucb-block-error");
         console.error('Error fetching taxonomies:', error);
       }
     }
@@ -711,6 +713,7 @@
         }
         return trimmedString + "...";
       } catch (Error) {
+        this.classList.add("ucb-block-error", this.getAttribute('logged-in'));
         console.error(
           "There was an error fetching Article Paragraph from the API - Please try again later."
         );
