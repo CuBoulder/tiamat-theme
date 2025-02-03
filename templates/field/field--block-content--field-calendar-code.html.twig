@@ -3,6 +3,8 @@
  * Theme layout to display a CU Events Calendar
  **
 #}
+{# Logged In - Used for showing errors to only authenticated #}
+{% set logged_in_class = logged_in ? 'ucb-authenticated' : 'ucb-anonymous' %}
 
 {% for item in items %}
   {% if ('text/javascript' in item.content['#context'].value) and ('src="https://calendar.colorado.edu/widget' in item.content['#context'].value) %}
@@ -14,6 +16,6 @@
       <script type="text/javascript" src="https://calendar.colorado.edu/widget/{{widgetType}}?{{ queryParams }}"></script>
     </div>
   {% else %}
-    <strong>Error: Only calendar.colorado.edu events embed code is allowed.</strong>
+    <strong class="{{logged_in_class}} ucb-block-error">Error: Only calendar.colorado.edu events embed code is allowed.</strong>
   {% endif %}
 {% endfor %}
