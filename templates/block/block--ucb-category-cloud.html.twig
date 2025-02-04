@@ -15,9 +15,12 @@
 {# Base Url #}
 {% set baseurlJSON = url('<front>')|render|trim('/') %}
 
+{# Logged In - Used for showing errors to only authenticated #}
+{% set logged_in_class = logged_in ? 'ucb-authenticated' : 'ucb-anonymous' %}
+
 {% extends '@boulder_base/block/styled-block.html.twig' %}
 {% block content %}
   {{ attach_library('boulder_base/ucb-category-cloud') }}
   {{ content.body }}
-  <category-cloud-block base-uri="{{ baseurlJSON }}"></category-cloud-block>
+  <category-cloud-block class={{logged_in_class}} base-uri="{{ baseurlJSON }}"></category-cloud-block>
 {% endblock %}

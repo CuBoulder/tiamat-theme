@@ -207,6 +207,7 @@
     }
 
     toggleError(show) {
+      this.classList.add("ucb-block-error");
       this._errorElement.style.display = show ? 'block' : 'none';
     }
   }

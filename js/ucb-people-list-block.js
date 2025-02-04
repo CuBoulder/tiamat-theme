@@ -61,6 +61,7 @@
         // Warn if no results are returned in the 'data' section
         if (!data['data'] || data['data'].length === 0) {
           console.warn('PeopleListProvider: ' + PeopleListProvider.noResultsMessage);
+          this.classList.add("ucb-block-error");
         } else {
           aggregatedData.push(...data['data']);
         }
@@ -78,6 +79,7 @@
         return { data: aggregatedData, included: aggregatedIncluded };
       } catch (error) {
         console.error('PeopleListProvider: ' + PeopleListProvider.errorMessage);
+        this.classList.add("ucb-block-error");
         throw error;
       }
     }
@@ -199,9 +201,10 @@
       peopleListProvider.fetchAllPeople(baseURI + peopleListProvider.nextPath).then(response => {
         this._contentElement.innerText = '';
         const results = response['data'];
-        if (!results.length)
+        if (!results.length){
           this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-end-of-results', PeopleListProvider.noResultsMessage);
-        else {
+          this.classList.add("ucb-block-error");
+        } else {
           if (groupBy != 'none') { // Build person -> term mapping
             const groupedPeople = this._groupedPeople = new Map();
             results.forEach(person => {
@@ -643,6 +646,7 @@
     }
 
     onFatalError(reason) {
+      this.classList.add("ucb-block-error");
       this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-error', PeopleListProvider.errorMessage);
       this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
       throw reason;

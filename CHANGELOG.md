@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Aggregators will only display error messages to Authenticated Users
+  Previously Aggregator/ API-driven content would show various Error messaging to reflect Content-Aggregator blocks failure to display results, such as No Results found, API errors, overly aggressive filtering, etc. intended to prompt site-editors to take action and intervene to fix the content to display properly. These errors would show indiscriminately of a user's role. 
+  
+  This has been adjusted so Anonymous users don't see the Error messaging and only show it to Authenticated users. This includes pages such as the Article List Page, the People List Page as well as blocks such as Article aggregator blocks, People List block, taxonomy clouds, and more. 
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1392
+---
+
 ## [20250129] - 2025-01-29
 
 - ### People Lists: Fix short body fields not displaying. Refines Alphabetical sorting of lists

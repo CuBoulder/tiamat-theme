@@ -12,6 +12,9 @@
   view_mode ? 'block--view-mode-' ~ view_mode|clean_class
 ] %}
 
+{# Logged In - Used for showing errors to only authenticated #}
+{% set logged_in_class = logged_in ? 'ucb-authenticated' : 'ucb-anonymous' %}
+
 {# Unique Id #}
 {% set id = ''|clean_unique_id %}
 
@@ -176,7 +179,7 @@
   {{ attach_library('boulder_base/ucb-article-slider-block') }}
   {{ content.body }}
   {# Article Slider Main Block#}
-  <article-slider-block id="{{id}}" base-uri="{{ baseurlJSON }}" jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}" excats="{{ excludeCategories }}" extags="{{ excludeTags }}">
+  <article-slider-block id="{{id}}" class="{{logged_in_class}}" base-uri="{{ baseurlJSON }}" jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}" excats="{{ excludeCategories }}" extags="{{ excludeTags }}">
     <div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
       <i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>
     </div>

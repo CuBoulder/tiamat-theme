@@ -1,8 +1,8 @@
+(function (customElements) {
 class TagCloudElement extends HTMLElement {
 	constructor() {
 		super();
     this._baseURI = this.getAttribute("base-uri");
-    console.log(this._baseURI)
         const handleError = response => {
             if (!response.ok) {
                throw new Error;
@@ -39,6 +39,7 @@ class TagCloudElement extends HTMLElement {
 }
 
     handleError(Error, ErrorMsg = 'Error Fetching Tags - Check the console'){
+        this.classList.add("ucb-block-error");
         const container = document.createElement('div');
         container.className = 'ucb-tag-cloud-container';
         const span = document.createElement('span')
@@ -62,3 +63,4 @@ class TagCloudElement extends HTMLElement {
 }
 
 customElements.define('tag-cloud-block', TagCloudElement);
+})(window.customElements);

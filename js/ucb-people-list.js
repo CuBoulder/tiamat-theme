@@ -207,6 +207,7 @@
           // Taxonomy data required for grouping is missing, can't group by!
           console.error(`Grouping by ${groupBy} is requested, but taxonomy data is missing. Please adjust your page's 'Group By' setting or make sure taxonomy data exists for that term.`);
           this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-error', `Cannot group by ${groupBy} because taxonomy data is missing.`);
+          this._messageElement.classList.add('ucb-block-error')
           this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
           return;
         }
@@ -227,9 +228,10 @@
       peopleListProvider.fetchAllPeople(baseURI + peopleListProvider.nextPath).then(response => {
         this._contentElement.innerText = '';
         const results = response['data'];
-        if (!results.length)
+        if (!results.length){
           this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-end-of-results', PeopleListProvider.noResultsMessage);
-        else {
+          this._messageElement.classList.add('ucb-block-error')
+        } else {
           if (groupBy != 'none') { // Build person -> term mapping
             const groupedPeople = this._groupedPeople = new Map();
             let hasGroupingTaxonomy = false;
@@ -254,6 +256,7 @@
             });
             if (!hasGroupingTaxonomy) {
               this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg', `No results found for the '${groupBy}' grouping.`);
+              this._messageElement.classList.add('ucb-block-error');
               this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
               return;
             }
@@ -760,6 +763,7 @@
 
     onFatalError(reason) {
       this.toggleMessageDisplay(this._messageElement, 'block', 'ucb-list-msg ucb-error', PeopleListProvider.errorMessage);
+      this._messageElement.classList.add('ucb-block-error');
       this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
       throw reason;
     }

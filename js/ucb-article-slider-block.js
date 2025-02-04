@@ -1,3 +1,4 @@
+(function (customElements) {
 class ArticleSliderBlockElement extends HTMLElement {
 	constructor() {
 		super();
@@ -18,7 +19,8 @@ class ArticleSliderBlockElement extends HTMLElement {
               console.error('There was an error fetching data from the API - Please try again later.')
               console.error(Error)
               this.toggleMessage('ucb-al-loading')
-              this.toggleMessage('ucb-al-api-error', "block")
+              this.toggleMessage('ucb-al-api-error', "block");
+              this.classList.add("ucb-block-error");
             });
     }
 
@@ -36,6 +38,7 @@ class ArticleSliderBlockElement extends HTMLElement {
         if(data.data.length == 0){
             this.toggleMessage('ucb-al-loading')
             this.toggleMessage('ucb-al-error',"block")
+            this.classList.add("ucb-block-error");
             console.warn('No Articles retrieved - please check your inclusion filters and try again')
         } else {
         // Below objects are needed to match images with their corresponding articles. There are two endpoints => data.data (article) and data.included (incl. media), both needed to associate a media library image with its respective article
@@ -125,7 +128,8 @@ class ArticleSliderBlockElement extends HTMLElement {
               console.error('There was an error fetching data from the API - Please try again later.')
               console.error(Error)
               this.toggleMessage('ucb-al-loading')
-              this.toggleMessage('ucb-al-api-error', "block")
+              this.toggleMessage('ucb-al-api-error', "block");
+              this.classList.add("ucb-block-error");
             });
         }
 
@@ -133,7 +137,8 @@ class ArticleSliderBlockElement extends HTMLElement {
         if(finalArticles.length === 0 && !NEXTJSONURL){
           console.error('There are no available Articles that match the selected filters. Please adjust your filters and try again.')
           this.toggleMessage('ucb-al-loading')
-          this.toggleMessage('ucb-al-error', "block")
+          this.toggleMessage('ucb-al-error', "block");
+          this.classList.add("ucb-block-error");
         }
 
         // Case for Too many articles
@@ -230,3 +235,4 @@ class ArticleSliderBlockElement extends HTMLElement {
 }
 
 customElements.define('article-slider-block', ArticleSliderBlockElement);
+})(window.customElements);

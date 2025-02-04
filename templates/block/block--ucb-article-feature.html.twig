@@ -12,6 +12,9 @@
   view_mode ? 'block--view-mode-' ~ view_mode|clean_class
 ] %}
 
+{# Logged In - Used for showing errors to only authenticated #}
+{% set logged_in_class = logged_in ? 'ucb-authenticated' : 'ucb-anonymous' %}
+
 {# Base Url #}
 {% set baseurlJSON = url('<front>')|render|trim('/') %}
 
@@ -173,6 +176,7 @@
   {{ attach_library('boulder_base/ucb-article-feature-block') }}
   {# Article Feature Main Block#}
   <article-feature-block
+    class="{{logged_in_class}}"
     base-uri="{{ baseurlJSON }}"
     jsonapi="{{ articlesJSON }}{{ IncludeFilter }}{{ pageCountFilter }}{{ sortFilter }}"
     exCats="{{ excludeCategories }}"

@@ -72,6 +72,9 @@
 {# Base Url #}
 {% set baseurlJSON = url('<front>')|render|trim('/') %}
 
+{# Logged In - Used for showing errors to only authenticated #}
+{% set logged_in_class = logged_in ? 'ucb-authenticated' : 'ucb-anonymous' %}
+
 {# Show/Hide Date #}
 {% set global_date_format = drupal_config('ucb_site_configuration.settings', 'article_date_format') %}
 
@@ -144,8 +147,9 @@
     </div>
     <article-list{{ create_attribute({
       id: 'ucb-article-listing',
-      class: 'ucb-article-list-container',
+      class: ['ucb-article-list-container', logged_in_class],
       'base-uri' : baseurlJSON,
+      'logged-in' : logged_in_class,
       'include-categories' : includeCategories,
       'include-tags' : includeTags,
       'exclude-categories': excludeCategories,

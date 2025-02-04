@@ -15,10 +15,13 @@
 {# Base Url #}
 {% set baseurlJSON = url('<front>')|render|trim('/') %}
 
+{# Logged In - Used for showing errors to only authenticated #}
+{% set logged_in_class = logged_in ? 'ucb-authenticated' : 'ucb-anonymous' %}
+
 {% extends '@boulder_base/block/styled-block.html.twig' %}
 {% block content %}
   {{ attach_library('boulder_base/ucb-current-issue') }}
-  <current-issue-block base-uri="{{ baseurlJSON }}">
+  <current-issue-block class="{{logged_in_class}}" base-uri="{{ baseurlJSON }}">
     <div id="ucb-al-loading" class="ucb-list-msg ucb-loading-data">
       <i class="fa-solid fa-spinner fa-3x fa-spin-pulse"></i>
     </div>
