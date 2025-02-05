@@ -9,27 +9,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250205] - 2025-02-05
+
 - ### Adds the Bluesky logos to Newsletter Social Media options, adds files
+
   This enables the Newsletter to include Bluesky links in the Social Media area of the footer with the proper Bluesky Logo. Adds in a black and a white bluesky logo pngs.
-  
-  Helps resolves https://github.com/CuBoulder/tiamat-theme/issues/1587
----
+
+  Helps resolves <https://github.com/CuBoulder/tiamat-theme/issues/1587>
+
+* * *
 
 - ### Update menu--social-media-menu.html.twig
+
   Add bluesky as an option to the social media menus
-  
+
   Resolves #1587 
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-libraries/pull/7
----
+
+  Sister PR: <https://github.com/CuBoulder/tiamat-libraries/pull/7>
+
+* * *
 
 - ### Aggregators will only display error messages to Authenticated Users
+
   Previously Aggregator/ API-driven content would show various Error messaging to reflect Content-Aggregator blocks failure to display results, such as No Results found, API errors, overly aggressive filtering, etc. intended to prompt site-editors to take action and intervene to fix the content to display properly. These errors would show indiscriminately of a user's role. 
-  
+
   This has been adjusted so Anonymous users don't see the Error messaging and only show it to Authenticated users. This includes pages such as the Article List Page, the People List Page as well as blocks such as Article aggregator blocks, People List block, taxonomy clouds, and more. 
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1392
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1392>
+
+* * *
 
 ## [20250129] - 2025-01-29
 
@@ -4214,7 +4222,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250129...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250205...HEAD
+[20250205]: https://github.com/CuBoulder/tiamat-theme/compare/20250129...20250205
 [20250129]: https://github.com/CuBoulder/tiamat-theme/compare/20250121...20250129
 [20250121]: https://github.com/CuBoulder/tiamat-theme/compare/20250115...20250121
 [20250115]: https://github.com/CuBoulder/tiamat-theme/compare/20241211...20250115
