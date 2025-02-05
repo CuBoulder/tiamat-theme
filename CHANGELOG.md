@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update menu--social-media-menu.html.twig
+  Add bluesky as an option to the social media menus
+  
+  Resolves #1587 
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-libraries/pull/7
+---
+
 - ### Aggregators will only display error messages to Authenticated Users
   Previously Aggregator/ API-driven content would show various Error messaging to reflect Content-Aggregator blocks failure to display results, such as No Results found, API errors, overly aggressive filtering, etc. intended to prompt site-editors to take action and intervene to fix the content to display properly. These errors would show indiscriminately of a user's role. 
   
