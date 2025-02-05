@@ -65,7 +65,7 @@
         {{ _self.link('Discord', title, uri, 'fa-brands fa-discord', 'discord') }}
       {% elseif hostname matches '/(twitter|x)\\.com$/i'  %}
         {{ _self.link('X', title, uri, 'fa-brands fa-x-twitter', 'twitter') }}
-        {% elseif hostname matches '/bsky\\.app$/i' %}
+      {% elseif hostname matches '/bsky\\.app$/i' %}
         {{ _self.link('Bluesky', title, uri, 'fa-brands fa-bluesky', 'bluesky') }}
       {% else %}
         {{ _self.link('Link', title, uri, 'fa-solid fa-up-right-from-square', 'link') }}
