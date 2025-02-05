@@ -812,6 +812,8 @@
                                         {% set service = 'Discord' %}
                                     {% elseif hostname matches '/(twitter\\.com|x\\.com)$/i' %}
                                         {% set service = 'X' %}
+                                    {% elseif hostname matches '/(bsky\\.app)$/i' %}
+                                        {% set service = 'Bluesky' %}
                                     {% endif %}
 
                                     {% set alt = service == 'link' ? 'Social link' : service %}

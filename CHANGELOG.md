@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds the Bluesky logos to Newsletter Social Media options, adds files
+  This enables the Newsletter to include Bluesky links in the Social Media area of the footer with the proper Bluesky Logo. Adds in a black and a white bluesky logo pngs.
+  
+  Helps resolves https://github.com/CuBoulder/tiamat-theme/issues/1587
+---
+
 - ### Update menu--social-media-menu.html.twig
   Add bluesky as an option to the social media menus
   
