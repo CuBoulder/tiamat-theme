@@ -108,9 +108,12 @@ i.fa-regular.fa-calendar {
 }
 
 .ucb-article-content-media {
+  margin-bottom: 20px;
+}
+
+.ucb-article-content-media:has(.ucb-article-blockquote) {
   align-self: center;
   text-align: center;
-  margin-bottom: 20px;
 }
 
 .ucb-article-content-media.ucb-article-content-media-above,
