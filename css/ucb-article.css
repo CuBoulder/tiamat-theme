@@ -108,13 +108,16 @@ i.fa-regular.fa-calendar {
 }
 
 .ucb-article-content-media {
-  align-self: center;
-  text-align: center;
   margin-bottom: 20px;
 }
 
-.ucb-article-content-media.ucb-article-content-media-above,
-.ucb-article-content-media.ucb-article-content-media-below {
+.ucb-article-content-media:has(.ucb-article-blockquote) {
+  align-self: center;
+  text-align: center;
+}
+
+.ucb-article-content-media.ucb-article-content-media-above:has(.paragraph--type--media),
+.ucb-article-content-media.ucb-article-content-media-below:has(.paragraph--type--media) {
   text-align: center;
 }
 

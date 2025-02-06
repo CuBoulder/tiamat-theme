@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### New Article Paragraph
+  Added new paragraph template for secondary article content.
+  
+  Updated css on articles so that content isn't justified and aligned for everything, just blockquotes
+  
+  Resolves #1597 
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/200
+---
+
 ## [20250205] - 2025-02-05
 
 - ### Adds the Bluesky logos to Newsletter Social Media options, adds files

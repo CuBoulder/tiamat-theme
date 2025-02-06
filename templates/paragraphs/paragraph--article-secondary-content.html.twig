@@ -1,0 +1,22 @@
+{#
+/**
+ * @file
+ * Theme to implement secondary article text
+*/
+#}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    not paragraph.isPublished() ? 'paragraph--unpublished',
+    paragraph.field_article_media_location.value, 
+    paragraph.field_article_blockquote_icon.value,
+  ]
+%}
+
+{% block paragraph %}
+  <div class="ucb-article-secondary-text">
+    {{ content.field_article_secondary_text }}
+  </div>
+{% endblock paragraph %}
