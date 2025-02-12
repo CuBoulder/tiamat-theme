@@ -9,15 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20240212] - 2025-02-12
+
 - ### New Article Paragraph
+
   Added new paragraph template for secondary article content.
-  
+
   Updated css on articles so that content isn't justified and aligned for everything, just blockquotes
-  
+
   Resolves #1597 
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/200
----
+
+  Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/200>
+
+* * *
 
 ## [20250205] - 2025-02-05
 
@@ -4232,7 +4236,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250205...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240212...HEAD
+[20240212]: https://github.com/CuBoulder/tiamat-theme/compare/20250205...20240212
 [20250205]: https://github.com/CuBoulder/tiamat-theme/compare/20250129...20250205
 [20250129]: https://github.com/CuBoulder/tiamat-theme/compare/20250121...20250129
 [20250121]: https://github.com/CuBoulder/tiamat-theme/compare/20250115...20250121
