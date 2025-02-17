@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Remove stray JS that breaks forms
+  Think this is the culprit behind broken forms -- need to test to see what config we enabled just to work around this issue-casuing bit of code can stay and what can go from `profile`
+---
+
 ## [20240212] - 2025-02-12
 
 - ### New Article Paragraph
