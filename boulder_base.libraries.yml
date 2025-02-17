@@ -19,10 +19,10 @@ ucb-global:
       css/block/block-styles.css: { weight: 2 }
       css/ucb-accordion-styles.css: { weight: 3 }
       css/ucb-print.css: { media: print, weight: 4 }
-  # js:
-  #   # js/bootstrap/bootstrap.min.js: { }
-  #   # js/ucb-rave-alert.js: { }
-  #   # js/ucb-expandable-content.js: { }
+  js:
+    js/bootstrap/bootstrap.min.js: { }
+    js/ucb-rave-alert.js: { }
+    js/ucb-expandable-content.js: { }
   dependencies:
     - core/drupal
 
