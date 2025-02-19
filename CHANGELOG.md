@@ -9,9 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250219] - 2025-02-19
+
 - ### Remove stray JS that breaks forms
   Think this is the culprit behind broken forms -- need to test to see what config we enabled just to work around this issue-casuing bit of code can stay and what can go from `profile`
----
+
+* * *
 
 ## [20240212] - 2025-02-12
 
@@ -4240,7 +4243,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20240212...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250219...HEAD
+[20250219]: https://github.com/CuBoulder/tiamat-theme/compare/20240212...20250219
 [20240212]: https://github.com/CuBoulder/tiamat-theme/compare/20250205...20240212
 [20250205]: https://github.com/CuBoulder/tiamat-theme/compare/20250129...20250205
 [20250129]: https://github.com/CuBoulder/tiamat-theme/compare/20250121...20250129
