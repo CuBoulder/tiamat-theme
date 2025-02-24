@@ -1206,3 +1206,8 @@ h2.clear-margin,h3.clear-margin,h4.clear-margin,h5.clear-margin,h6.clear-margin,
 .ucb.ucb-header-hidden-title .ucb-menu-wrapper {
   justify-content: right;
 }
+
+/*** KLARO Override ***/
+.klaro.ucb-klaro-styles {
+  --klaro-primary-color: #0277bd!important;
+}
