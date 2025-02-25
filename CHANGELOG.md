@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update style.css
+  Klaro override style needed for brand color.
+  
+  Resolves #331
+  
+  Sister PR: https://github.com/CuBoulder/tiamat10-project-template/pull/75
+  Sister PR: https://github.com/CuBoulder/tiamat10-profile/pull/263
+---
+
 ## [20250219] - 2025-02-19
 
 - ### Remove stray JS that breaks forms
