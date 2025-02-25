@@ -633,7 +633,7 @@
 {# Render the blocks side by side #}
 {# Check if there are blocks to render #}
 {% if blocksToRender %}
-    <table role="presentation" border="0" cellspacing="0" cellpadding="0" width="100%" style="border-collapse: collapse; margin: 0 auto; width: 100%; max-width: 600px; text-align: center; font-family: Helvetica, Arial, sans-serif; font-size: 14px; background-color: white;" class="row row-content ucb-newsletter-blocks">
+    <table role="presentation" border="0" cellspacing="0" cellpadding="0" width="100%" style="border-collapse: collapse; margin: 0 auto; width: 100%; max-width: 600px; text-align: center; font-family: Helvetica, Arial, sans-serif; font-size: 14px; background-color: white;" class="row row-content ucb-newsletter-blocks" id="ucb-newsletter-block-table">
         <tbody>
             <tr>
                 <td align="center" valign="top" style="padding: 0;">
@@ -645,7 +645,7 @@
                                 {% if blocksToRender|length == 1 %}
                                     <tr>
                                         <td align="left" valign="top" style="width: 100%; padding: 10px; box-sizing: border-box; vertical-align: top;">
-                                            <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; table-layout: fixed;">
+                                            <table role="presentation" border="0" cellspacing="0" cellpadding="0" style="border-collapse: collapse; width: 100%; table-layout: fixed;" id="ucb-single-newsletter-block">
                                                 <tr>
                                                     <td style="vertical-align: top; color: #000000;">
                                                         {{ blocksToRender[i] }}

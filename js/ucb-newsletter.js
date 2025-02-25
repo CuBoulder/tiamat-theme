@@ -35,6 +35,21 @@
               img.setAttribute('style', 'max-width: 600px; width: 100%; height: auto; display: block;');
           }
       }
+
+      // Images in the blocks -- make absolute
+            var blockSection = document.getElementById('ucb-newsletter-block-table');
+            if (blockSection) {
+                var images = blockSection.getElementsByClassName('imageMediaStyle');
+                for (let imgContainer of images) {
+                    var img = imgContainer.children[0];
+                    var endurl = img.getAttribute('src');
+                    img.setAttribute('src', `${baseURL}${endurl}`);
+                    // Ensure the image fits within 300/600px while maintaining proportions
+                    var imgSize = document.getElementById('ucb-single-newsletter-block') ? '600px' : '300px'
+                    img.setAttribute('style', `max-width: ${imgSize}; width: 100%; height: auto; display: block;`);
+                }
+            }
+
         // Section Link - make blue (gets overridden by user agent style)
         var moreLinks = document.getElementsByClassName('article-link')
         for(link of moreLinks){

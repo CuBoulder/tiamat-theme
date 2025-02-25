@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter: Fixes pathing and size of images within Newsletter Content Blocks 
+  Previously images placed in the Newsletter Blocks `Newsletter Block Text` section would show up in the Email HTML with relative pathing and no fixed style sizes, resulting in very broken images. This has been corrected so images should render at full-width of their section at both options -- one Block at full width OR multiple Blocks side by side. 
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1605
+---
+
 - ### Update style.css
   Klaro override style needed for brand color.
   
