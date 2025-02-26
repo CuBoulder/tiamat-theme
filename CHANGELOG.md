@@ -9,20 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Newsletter: Fixes pathing and size of images within Newsletter Content Blocks 
+## [20250226] - 2025-02-26
+
+- ### Newsletter: Fixes pathing and size of images within Newsletter Content Blocks
+
   Previously images placed in the Newsletter Blocks `Newsletter Block Text` section would show up in the Email HTML with relative pathing and no fixed style sizes, resulting in very broken images. This has been corrected so images should render at full-width of their section at both options -- one Block at full width OR multiple Blocks side by side. 
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1605
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1605>
+
+* * *
 
 - ### Update style.css
+
   Klaro override style needed for brand color.
-  
+
   Resolves #331
-  
-  Sister PR: https://github.com/CuBoulder/tiamat10-project-template/pull/75
-  Sister PR: https://github.com/CuBoulder/tiamat10-profile/pull/263
----
+
+  Sister PR: <https://github.com/CuBoulder/tiamat10-project-template/pull/75>
+  Sister PR: <https://github.com/CuBoulder/tiamat10-profile/pull/263>
+
+* * *
 
 ## [20250219] - 2025-02-19
 
@@ -4258,7 +4264,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250219...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250226...HEAD
+[20250226]: https://github.com/CuBoulder/tiamat-theme/compare/20250219...20250226
 [20250219]: https://github.com/CuBoulder/tiamat-theme/compare/20240212...20250219
 [20240212]: https://github.com/CuBoulder/tiamat-theme/compare/20250205...20240212
 [20250205]: https://github.com/CuBoulder/tiamat-theme/compare/20250129...20250205
