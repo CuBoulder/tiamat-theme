@@ -60,70 +60,68 @@
 {% set designType = node.field_newsletter_type.entity.field_newsletter_design.value %}
 {# Classic #}
 {% if designType == 'classic' %}
-{% set classicStyle = 'background: white;margin-top: -50px;'%}
-{% set divStyles = 'background-color: #fff; color: #fff;' %}
-{% set aStyles = 'color: #cfb87b;text-decoration: none;' %}
-{% set pStyles = 'color:black;' %}
-{% set headerStyles = 'width:100%;background-color: black; padding-bottom:10px;' %}
-{% set classicTableOffset = 'margin-top: -50px;padding:10px;' %}
-{% set addtlPadding = 'padding-bottom:50px;'%}
-{% set footerStyles = 'border-top: solid 1px #cccccc;'%}
-{% set footerStyles = 'background-color: black !important; padding-top:20px;border-top: solid 1px #cccccc;' %}
-{% set cuLogoSrc = cuLogoLight %}
-{% set classicImgOffset = 'width:100%'%}
-{% set emailBackground = 'background-color:black;' %}
-{% set boxBackground = 'background-color:black !important;'%}
+  {% set classicStyle = 'background: white;margin-top: -50px; mso-background-alt: #fff !important;'%}
+  {% set divStyles = 'background-color: #fff; color: #fff; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: #fff !important;' %}
+  {% set aStyles = 'color: white; text-decoration: none;  mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: #cfb87b !important;' %}
+  {% set pStyles = 'color:black; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: black !important;' %}
+  {% set headerStyles = 'width:100%;background-color: black; padding-bottom:10px; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: black !important;' %}
+  {% set classicTableOffset = 'margin-top: -50px;padding:10px;' %}
+  {% set addtlPadding = 'padding-bottom:50px;'%}
+  {% set footerStyles = 'border-top: solid 1px #cccccc;'%}
+  {% set footerStyles = 'background-color: black !important; mso-background-alt: black !important; padding-top:20px;border-top: solid 1px #cccccc;' %}
+  {% set cuLogoSrc = cuLogoLight %}
+  {% set classicImgOffset = 'width:100%'%}
+  {% set emailBackground = 'background-color:black; mso-background-alt: black !important;' %}
+  {% set boxBackground = 'background-color:black !important; mso-background-alt: black !important;'%}
 {# Minimal #}
 {% elseif designType == 'minimal' %}
-    {% set divStyles = 'background-color: #FFFFFF;margin:auto;' %}
-    {% set aStyles = 'color: #0277BD;text-decoration: none;' %}
-    {% set pStyles = 'color:black;' %}
-    {% set headerStyles = 'width:100%; color:black;' %}
+    {% set divStyles = 'background-color: #FFFFFF; margin:auto; mso-background-alt: #FFFFFF !important;' %}
+    {% set aStyles = 'color: #0277BD; text-decoration: none; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: #0277BD !important;' %}
+    {% set pStyles = 'color:black; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: black !important;' %}
+    {% set headerStyles = 'width:100%; color:black; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: black !important;' %}
     {# padding: 15px 25px; #}
-    {% set footerStyles = 'color:black;border-top: solid 1px #cccccc;' %}
+    {% set footerStyles = 'color:black; border-top: solid 1px #cccccc; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: black !important;' %}
     {% set cuLogoSrc = cuLogoDark %}
-    {% set emailBackground = 'background-color:white;' %}
+    {% set emailBackground = 'background-color:white; mso-background-alt: white !important;' %}
 {# Darkbox #}
 {% elseif designType == 'darkbox' %}
-    {% set divStyles = 'background-color: black; color: #fff;margin:auto;' %}
-    {% set aStyles = 'color: #cfb87b;text-decoration: none;' %}
-    {% set pStyles = 'color:#222330;' %}
-    {% set headerStyles = 'width:100%; color:white;' %}
+    {% set divStyles = 'background-color: black; color: #fff; margin:auto; mso-background-alt: black !important; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: #fff !important;' %}
+    {% set aStyles = 'color: #cfb87b; text-decoration: none; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: #cfb87b !important;' %}
+    {% set pStyles = 'color:#222330; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: #222330 !important;' %}
+    {% set headerStyles = 'width:100%; color:white; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: white !important;' %}
     {# padding: 15px 25px; #}
-    {% set footerStyles = 'color:white;border-top: solid 1px #cccccc;' %}
+    {% set footerStyles = 'color:white; border-top: solid 1px #cccccc; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: white !important;' %}
     {% set cuLogoSrc = cuLogoLight %}
-    {% set emailBackground = 'background-color:white;' %}
-    {% set boxBackground = 'background-color:black;'%}
+    {% set emailBackground = 'background-color:white; mso-background-alt: white !important;' %}
+    {% set boxBackground = 'background-color:black; mso-background-alt: black !important;'%}
     {% set addtlPad = 'padding-top:10px;' %}
 
 {# Lightbox #}
 {% elseif designType == 'lightbox' %}
-    {% set divStyles = 'background-color: #E9E9E9;margin:auto;' %}
-    {% set aStyles = 'color: #0277BD;text-decoration: none;' %}
-    {% set pStyles = ' color: #222330;' %}
-    {% set headerStyles = 'width:100%; color:black;' %}
+    {% set divStyles = 'background-color: #E9E9E9; margin:auto; mso-background-alt: #E9E9E9 !important;' %}
+    {% set aStyles = 'color: #0277BD; text-decoration: none; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: #0277BD !important;' %}
+    {% set pStyles = ' color: #222330; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: #222330 !important;' %}
+    {% set headerStyles = 'width:100%; color:black; so-style-textfill-type:solid !important; mso-style-textfill-fill-color: black !important;' %}
     {# padding: 15px 25px; #}
-    {% set footerStyles = 'color:black;border-top: solid 1px #cccccc;' %}
+    {% set footerStyles = 'color:black; border-top: solid 1px #cccccc; so-style-textfill-type:solid !important; mso-style-textfill-fill-color: black !important;' %}
     {% set cuLogoSrc = cuLogoDark %}
-    {% set emailBackground = 'background-color:white;' %}
-    {% set boxBackground = 'background-color:white;'%}
+    {% set emailBackground = 'background-color:white; mso-background-alt: white !important;' %}
+    {% set boxBackground = 'background-color:white; mso-background-alt: white !important;'%}
     {% set addtlPad = 'padding-top:10px;' %}
 
 {# Simple #}
 {% else %}
-{% set divStyles = 'background-color: #fff; color: #fff;' %}
-{% set aStyles = 'color: #cfb87b;text-decoration: none;' %}
-{% set pStyles = 'color:black;' %}
-{% set headerStyles = 'width:100%;background-color: black;' %}
-{# padding: 15px 25px; #}
-{% set footerStyles = 'background-color: black; padding-top:20px;border-top: solid 1px #cccccc;' %}
-{% set cuLogoSrc = cuLogoLight %}
-{% set boxBackground = 'background-color:black;'%}
-{% set classicImgOffset = 'padding: 10px; background: white;'%}
-{% set emailBackground = 'background-color:black;' %}
-{% set addtlPad = 'padding-top:10px;' %}
-
-
+  {% set divStyles = 'background-color: #fff; color: #fff; mso-background-alt: #fff !important; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: #fff !important;' %}
+  {% set aStyles = 'color: #cfb87b; text-decoration: none; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: #cfb87b !important;' %}
+  {% set pStyles = 'color:black; mso-style-textfill-type:solid !important; mso-style-textfill-fill-color: black !important;' %}
+  {% set headerStyles = 'width:100%;background-color: black; mso-background-alt: black !important;' %}
+  {# padding: 15px 25px; #}
+  {% set footerStyles = 'background-color: black; padding-top:20px;border-top: solid 1px #cccccc; mso-background-alt: black !important;' %}
+  {% set cuLogoSrc = cuLogoLight %}
+  {% set boxBackground = 'background-color:black; mso-background-alt: black !important;'%}
+  {% set classicImgOffset = 'padding: 10px; background: white; mso-background-alt: white !important;'%}
+  {% set emailBackground = 'background-color:black; mso-background-alt: black !important;' %}
+  {% set addtlPad = 'padding-top:10px;' %}
 {% endif %}
 
 <div class="container" id="email-preview" style="background-color: grey; display: flex; justify-content:center">
@@ -159,10 +157,14 @@
             .ucb-email-header-darkbox a,
             .ucb-email-footer-darkbox a {
               color: #cfb87b;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: #cfb87b !important;
             }
             .ucb-email-footer-lightbox a,
             .ucb-email-footer-minimal {
               color: #0277BD;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: #0277BD !important;
             }
             .ucb-email-header-classic a:hover,
             .ucb-email-footer-classic a:hover,
@@ -171,11 +173,15 @@
             .ucb-email-header-darkbox a:hover,
             .ucb-email-footer-darkbox a:hover {
               color: white;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: white !important;
             }
 
             .ucb-email-header-minimal a:hover,
             .ucb-email-footer-minimal a:hover {
               color: black;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: black !important;
             }
 
             .ucb-email-footer .text-align-right,
@@ -190,15 +196,24 @@
             #email .ucb-email-body-content.ucb-email-body-content-td a{
               text-decoration: none !important;
               color: #0277BD !important;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: #0277BD !important;
             }
+
+            #email .ucb-email-body-content.ucb-email-body-content-td a.button{
+              color: white !important;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: white !important;
+            }
+
 
             a[x-apple-data-detectors] {
             color: inherit !important;
-                        text-decoration: none !important;
-                        font-size: inherit !important;
-                        font-family: inherit !important;
-                        font-weight: inherit !important;
-                        line-height: inherit !important;
+            text-decoration: none !important;
+            font-size: inherit !important;
+            font-family: inherit !important;
+            font-weight: inherit !important;
+            line-height: inherit !important;
             }
 
             u + #ucb-email-body a, u + #ucb-email-body .ii a[href]{
@@ -223,6 +238,7 @@
                 color: #656565 !important;
                 text-decoration: none;
                 background-color: #e7e7e7 !important;
+                mso-background-alt: #e7e7e7 !important;
                 border-color: #e7e7e7;
                 border-style: solid;
                 border-width: 4px;
@@ -230,6 +246,8 @@
                 font-weight: bold;
                 margin: 0 5px 5px 0;
                 text-transform: uppercase !important;
+                mso-style-textfill-type:solid !important;
+                mso-style-textfill-fill-color: #656565 !important;
             };
 
             .tags{
@@ -244,6 +262,9 @@
               text-decoration: none !important;
               border-radius: 3px !important;
               line-height: 1.5em !important;
+              mso-background-alt: #0277BD !important;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: #fff !important;
             }
 
 
@@ -284,30 +305,45 @@
             .ucb-link-button.ucb-link-button-blue {
               color: #fff !important;
               background-color: #0277BD;
+              mso-background-alt: #0277BD !important;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: #fff !important;
             }
 
             #email .ucb-email-body-content.ucb-email-body-content-td .ucb-link-button.ucb-link-button-black,
             a.ucb-link-button.ucb-link-button-black {
               color: #fff !important;
               background-color: #000;
+              mso-background-alt: #000 !important;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: #fff !important;
             }
 
             #email .ucb-email-body-content.ucb-email-body-content-td a.ucb-link-button.ucb-link-button-gray,
             .ucb-link-button.ucb-link-button-gray {
               color: #111111 !important;
               background-color: #EEEEEE;
+              mso-background-alt: #EEEEEE !important;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: #111111 !important;
             }
 
             #email .ucb-email-body-content.ucb-email-body-content-td a.ucb-link-button.ucb-link-button-white,
             .ucb-link-button.ucb-link-button-white {
               color: #111111 !important;
               background-color: #fff;
+              mso-background-alt: #fff !important;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: #111111 !important;
             }
 
             #email .ucb-email-body-content.ucb-email-body-content-td a.ucb-link-button.ucb-link-button-gold,
             .ucb-link-button.ucb-link-button-gold {
               color: #111111 !important;
               background-color: #cfb87c;
+              mso-background-alt: #cfb87c !important;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: #111111 !important;
             }
 
             /* Size */
@@ -339,26 +375,41 @@
             .ucb-link-button.ucb-link-button-blue:hover,.ucb-link-button.ucb-link-button-blue:focus {
               color: #fff !important;
               background-color: #026baa;
+              mso-background-alt: #026baa !important;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: #fff !important;
             }
 
             .ucb-link-button.ucb-link-button-black:hover,.ucb-link-button.ucb-link-button-black:focus {
               color: #fff !important;
               background-color: #333333;
+              mso-background-alt: #333333 !important;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: #fff !important;
             }
 
             .ucb-link-button.ucb-link-button-gray:hover,.ucb-link-button.ucb-link-button-gray:focus {
               color: #111111 !important;
               background-color: #d6d6d6;
+              mso-background-alt: #d6d6d6 !important;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: #111111 !important;
             }
 
             .ucb-link-button.ucb-link-button-white:hover,.ucb-link-button.ucb-link-button-white:focus {
               color: #111111 !important;
               background-color: #e6e6e6;
+              mso-background-alt: #e6e6e6 !important;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: #111111 !important;
             }
 
             .ucb-link-button.ucb-link-button-gold:hover,.ucb-link-button.ucb-link-button-gold:focus {
               color: #111111 !important;
               background-color: #a6a6a6;
+              mso-background-alt: #e6e6e6 !important;
+              mso-style-textfill-type:solid !important;
+              mso-style-textfill-fill-color: #111111 !important;
             }
 
             .container > .ucb-button-group > .ucb-link-button-large{
@@ -412,6 +463,9 @@
             .ucb-article-categories a{
                 color: #666;
                 background-color: #e7e7e7;
+                mso-background-alt: #e7e7e7 !important;
+                mso-style-textfill-type:solid !important;
+                mso-style-textfill-fill-color: #666 !important;
                 padding: 3px;
                 line-height: 100%;
                 margin: 0 5px 5px 0;
