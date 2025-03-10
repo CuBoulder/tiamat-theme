@@ -27,6 +27,12 @@
 				{%  if key|first != '#' %}
 					{# Code to render selected article content (thumbnail) #}
 					<!--Feature Article-->
+          <!--[if mso]>
+            <table class="mso-force-colors" bgcolor="white" style="mso-background-alt: white !important">
+              <tbody>
+                <tr>
+                  <td bgcolor="white" style="mso-background-alt: white !important">
+          <![endif]-->
 					<table role="presentation"  width="600" style="padding-bottom: 20px;">
 						<tbody>
 							<tr>
@@ -161,6 +167,12 @@
 					{% endif %}
 						</tbody>
 					</table>
+          <!--[if mso]>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <![endif]-->
 				{% endif %}
 			{% endfor %}
 		{% else %}
@@ -169,6 +181,12 @@
 					{%  if key|first != '#' %}
 	  					<!--Teaser Article-->
 					<center align="left">
+                      <!--[if mso]>
+            <table class="mso-force-colors" bgcolor="white" style="mso-background-alt: white !important">
+              <tbody>
+                <tr>
+                  <td bgcolor="white" style="mso-background-alt: white !important">
+          <![endif]-->
 						<table role="presentation" width="600" style="padding-top:20px; padding-bottom: 20px; border-bottom: solid 1px #cccccc;">
 							<tbody>
 								<tr class="email-feature-art-row">
@@ -297,12 +315,24 @@
 								</tr>
 							</tbody>
 						</table>
+                    <!--[if mso]>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <![endif]-->
 					</center>
 				{% endif %}
 			{% endfor %}
 		{% endif %}
 		<!--Article Section Link-->
 		{% if content.field_newsletter_section_link|render %}
+              <!--[if mso]>
+            <table class="mso-force-colors" bgcolor="white" style="mso-background-alt: white !important">
+              <tbody>
+                <tr>
+                  <td bgcolor="white" style="mso-background-alt: white !important">
+          <![endif]-->
 		<table>
 			<tbody>
 				<tr>
@@ -312,4 +342,10 @@
 				</tr>
 			</tbody>
 		</table>
+              <!--[if mso]>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <![endif]-->
 		{% endif %}

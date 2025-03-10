@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter: Dark Boxed email's Article sections in Outlook on PC have no background
+  Due to how Microsoft Outlook on Windows 10/11 uses a custom render engine based on Microsoft Word instead of anything standardized, the `Dark-Box` style of email was hard to read and would come through with missing backgrounds. This has been adjusted to conditionally render wrapping elements to help try to enforce background.
+  
+  Resolves #1608 
+---
+
 - ### D11 version bump
   D11 version bump
 ---
