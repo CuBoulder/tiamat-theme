@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Background color addition
+  Add white background color to content sequence cards so they aren't transparent on background images.
+  
+  Resolves #1611 
+---
+
 ## [20250226] - 2025-02-26
 
 - ### Newsletter: Fixes pathing and size of images within Newsletter Content Blocks
