@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### D11 version bump
+  D11 version bump
+---
+
 - ### Background color addition
   Add white background color to content sequence cards so they aren't transparent on background images.
   
