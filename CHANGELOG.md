@@ -9,21 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250312] - 2025-03-12
+
 - ### Newsletter: Dark Boxed email's Article sections in Outlook on PC have no background
+
   Due to how Microsoft Outlook on Windows 10/11 uses a custom render engine based on Microsoft Word instead of anything standardized, the `Dark-Box` style of email was hard to read and would come through with missing backgrounds. This has been adjusted to conditionally render wrapping elements to help try to enforce background.
-  
+
   Resolves #1608 
----
+
+* * *
 
 - ### D11 version bump
   D11 version bump
----
+
+* * *
 
 - ### Background color addition
+
   Add white background color to content sequence cards so they aren't transparent on background images.
-  
+
   Resolves #1611 
----
+
+* * *
 
 ## [20250226] - 2025-02-26
 
@@ -4280,7 +4287,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250226...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250312...HEAD
+[20250312]: https://github.com/CuBoulder/tiamat-theme/compare/20250226...20250312
 [20250226]: https://github.com/CuBoulder/tiamat-theme/compare/20250219...20250226
 [20250219]: https://github.com/CuBoulder/tiamat-theme/compare/20240212...20250219
 [20240212]: https://github.com/CuBoulder/tiamat-theme/compare/20250205...20240212
