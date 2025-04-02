@@ -26,31 +26,31 @@
 
 /* Default text color styles */
 .ucb-hero-slider .carousel-caption p {
-  color: #fff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: var(--color-white);
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
   position: relative;
   z-index: 1;
 }
 
 /* Override text color styles */
 .ucb-hero-slider .hero_slide_text_light .carousel-caption p{
-  color: #fff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: var(--color-white);
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
 }
 
 .ucb-hero-slider .hero_slide_text_dark .carousel-caption p {
-  color: #000;
-  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+  color: var(--color-black);
+  text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
 }
 
 .ucb-hero-slider .hero_slide_text_light_override .carousel-caption p {
-  color: #fff;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+  color: var(--color-white);
+  text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
 }
 
 .ucb-hero-slider .hero_slide_text_dark_override .carousel-caption p {
-  color: #000;
-  text-shadow: 2px 2px 4px rgba(255, 255, 255, 0.5);
+  color: var(--color-black);
+  text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
 }
 
 /* Caption container positioning */
@@ -65,12 +65,15 @@
   text-align: center;
   padding: 2rem;
   z-index: 1;
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-top: 10%;
+  padding-bottom: 10%;
 }
 
 /* Vertical positioning */
 .ucb-hero-slider .hero_slide_text_top .carousel-caption {
   align-content: flex-start;
-  padding-top: 10%;
 }
 
 .ucb-hero-slider .hero_slide_text_middle .carousel-caption {
@@ -79,13 +82,11 @@
 
 .ucb-hero-slider .hero_slide_text_bottom .carousel-caption {
   align-content: flex-end;
-  padding-bottom: 10%;
 }
 
 /* Horizontal positioning */
 .ucb-hero-slider .hero_slide_text_left .carousel-caption {
   text-align: left;
-  padding-left: 10%;
 }
 
 .ucb-hero-slider .hero_slide_text_center .carousel-caption {
@@ -94,7 +95,13 @@
 
 .ucb-hero-slider .hero_slide_text_right .carousel-caption {
   text-align: right;
-  padding-right: 10%;
+}
+
+/* Hide carousel controls */
+.ucb-hero-slider .carousel-indicators,
+.ucb-hero-slider .carousel-control-prev,
+.ucb-hero-slider .carousel-control-next {
+  display: none;
 }
 
 /* Responsive adjustments */
