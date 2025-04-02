@@ -1,0 +1,55 @@
+{#
+/**
+ * @file Contains the template to display the Hero Slider block.
+ */
+#}
+{% set classes = [
+  'block',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode--' ~ view_mode|clean_class,
+  'ucb-hero-slider'
+] %}
+
+{% set id = 'hero-carousel'|clean_unique_id %}
+{% set slide_duration = content['#block_content'].field_slide_duration.value|default(5000) %}
+{% set default_text_color = content['#block_content'].field_default_text_color.value|default('hero_slide_text_light') %}
+
+{{ attach_library('boulder_base/ucb-hero-slider') }}
+
+{% block content %}
+    <div{{attributes.addClass(classes)}} class="container ucb-page-title bs-background-unstyled block">
+        {{ title_prefix }}
+        {% if label %}
+            <h2{{title_attributes}}>{{ label }}</h2>
+        {% endif %}
+        {{ title_suffix }}
+        <div id="{{ id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="{{ slide_duration }}" data-bs-pause="hover">
+            <div class="carousel-indicators">
+                {% for i in 1..content['#block_content'].field_hero_slides.value|length %}
+                    <button{{create_attribute({type:'button','data-bs-target':'#'~id,'data-bs-slide-to':i-1,'aria-label':'Slide'~i}).addClass(loop.first?'active')}}></button>
+                {% endfor %}
+            </div>
+            <div class="carousel-inner">
+                {% for key, item in content.field_hero_slides['#items'] %}
+                    {% set slide_entity = item.entity %}
+                    {% set text_vertical = slide_entity.field_hero_text_vertical.value|default('hero_slide_text_middle') %}
+                    {% set text_horizontal = slide_entity.field_hero_text_horizontal.value|default('hero_slide_text_center') %}
+                    {% set text_color_override = slide_entity.field_hero_slide_text_color_over.value %}
+                    <div class="carousel-item{{ loop.first ? ' active' }} {{ text_vertical }} {{ text_horizontal }} {{ default_text_color }} {{ text_color_override }}">
+                        {{ content.field_hero_slides[key] }}
+                    </div>
+                {% endfor %}
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#{{ id }}" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#{{ id }}" data-bs-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+{% endblock %}

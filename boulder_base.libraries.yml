@@ -167,6 +167,12 @@ ucb-slider:
     theme:
       css/block/slider.css: { weight: 5 }
 
+ucb-hero-slider:
+  version: 1.x
+  css:
+    theme:
+      css/block/hero-slider.css: { weight: 5 }
+
 ucb-text-block:
   version: 1.x
   css:
