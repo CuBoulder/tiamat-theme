@@ -25,7 +25,7 @@
             <h2{{title_attributes}}>{{ label }}</h2>
         {% endif %}
         {{ title_suffix }}
-        <div id="{{ id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="{{ slide_duration }}">
+        <div id="{{ id }}" class="carousel slide" data-bs-ride="carousel" data-bs-interval="{{ slide_duration }}" data-bs-pause="false">
             <div class="carousel-indicators">
                 {% for i in 1..content['#block_content'].field_hero_slides.value|length %}
                     <button{{create_attribute({type:'button','data-bs-target':'#'~id,'data-bs-slide-to':i-1,'aria-label':'Slide'~i}).addClass(loop.first?'active')}}></button>
