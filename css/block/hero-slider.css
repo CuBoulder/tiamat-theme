@@ -26,7 +26,7 @@
 
 /* Default text color styles */
 .ucb-hero-slider .carousel-caption p {
-  color: var(--color-white);
+  color: var(--ucb-white);
   text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
   position: relative;
   z-index: 1;
@@ -34,22 +34,22 @@
 
 /* Override text color styles */
 .ucb-hero-slider .hero_slide_text_light .carousel-caption p{
-  color: var(--color-white);
+  color: var(--ucb-white);
   text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
 }
 
 .ucb-hero-slider .hero_slide_text_dark .carousel-caption p {
-  color: var(--color-black);
+  color: var(--ucb-black);
   text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
 }
 
 .ucb-hero-slider .hero_slide_text_light_override .carousel-caption p {
-  color: var(--color-white);
+  color: var(--ucb-white);
   text-shadow: 2px 2px 0px rgba(0, 0, 0, 0.5);
 }
 
 .ucb-hero-slider .hero_slide_text_dark_override .carousel-caption p {
-  color: var(--color-black);
+  color: var(--ucb-black);
   text-shadow: 2px 2px 0px rgba(255, 255, 255, 0.5);
 }
 
