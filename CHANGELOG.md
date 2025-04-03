@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1618 - Fixes missing Search Icon on Mobile size screens
+  Previously on www.colorado.edu,  the Search Icon could dissapear on small screen sizes. This has been corrected. 
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1618
+---
+
 ## [20250312] - 2025-03-12
 
 - ### Newsletter: Dark Boxed email's Article sections in Outlook on PC have no background

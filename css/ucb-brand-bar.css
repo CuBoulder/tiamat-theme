@@ -25,10 +25,6 @@
   height: auto;
 }
 
-.ucb-home-link:has(.ucb-homepage) {
-  max-width: 320px;
-}
-
 .ucb-brand-bar img.ucb-logo {
   width: 100%;
   max-width: 200px;
