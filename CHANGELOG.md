@@ -9,6 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Issue/1617
+  Hero Slider Content Type
+  Create the new Hero Slider block and paragraph, along with relevant styling.
+  
+  Block information :
+  
+  time per slide (probably a integer input for number of ms between 500 and 6000 or something reasonable. Open to other suggestions though). This will dictate how long each slide should display.
+  Default Text Color (I think we allow light and dark options here). This will be the default font color (white with a black text shadow or black with a light text shadow).
+  Slides (entity reference to Hero Slide paragraph content type)
+  Paragraph should include :
+  
+  Text (plain text, no html )
+  Override color (light or dark) if this slide should deviate from the default color for text on slides
+  Image (media reference)
+  Text Vertical (top, middle, bottom)
+  Text Horizontal (left, center, right)
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/205
+  
+  Resolves #1617
+---
+
 - ### #1618 - Fixes missing Search Icon on Mobile size screens
   Previously on www.colorado.edu,  the Search Icon could dissapear on small screen sizes. This has been corrected. 
   

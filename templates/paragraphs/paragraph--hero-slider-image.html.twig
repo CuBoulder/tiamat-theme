@@ -1,0 +1,33 @@
+{#
+/**
+ * @file Contains the template to render a Hero Slider Image paragraph.
+ */
+#}
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished'
+] %}
+
+{% set imgUrl = paragraph.field_hero_slide_image.entity.field_media_image.entity.fileuri|image_style('hero_slider') %}
+{% set imgAlt = paragraph.field_hero_slide_image.entity.field_media_image.alt %}
+
+{% block paragraph %}
+  {% block content %}
+    <div class="hero-slider-image">
+      <div class="hero-slider-image__image">
+        <img{{ create_attribute({ src: imgUrl, alt: imgAlt }) }}>
+      </div>
+      {% if paragraph.field_hero_slide_image_text.value is not empty %}
+        <div class="carousel-caption d-md-block">
+          <div class="hero-slider-image__content">
+            <span class="hero-slider-image__text">
+              <p class="hero">{{ content.field_hero_slide_image_text|render|striptags|trim }}</p>
+            </span>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+  {% endblock %}
+{% endblock %}
