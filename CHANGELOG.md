@@ -9,33 +9,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250409] - 2025-04-09
+
 - ### Issue/1617
+
   Hero Slider Content Type
   Create the new Hero Slider block and paragraph, along with relevant styling.
-  
+
   Block information :
-  
+
   time per slide (probably a integer input for number of ms between 500 and 6000 or something reasonable. Open to other suggestions though). This will dictate how long each slide should display.
   Default Text Color (I think we allow light and dark options here). This will be the default font color (white with a black text shadow or black with a light text shadow).
   Slides (entity reference to Hero Slide paragraph content type)
   Paragraph should include :
-  
+
   Text (plain text, no html )
   Override color (light or dark) if this slide should deviate from the default color for text on slides
   Image (media reference)
   Text Vertical (top, middle, bottom)
   Text Horizontal (left, center, right)
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/205
-  
+
+  Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/205>
+
   Resolves #1617
----
+
+* * *
 
 - ### #1618 - Fixes missing Search Icon on Mobile size screens
+
   Previously on www.colorado.edu,  the Search Icon could dissapear on small screen sizes. This has been corrected. 
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1618
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1618>
+
+* * *
 
 ## [20250312] - 2025-03-12
 
@@ -4315,7 +4321,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250312...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250409...HEAD
+[20250409]: https://github.com/CuBoulder/tiamat-theme/compare/20250312...20250409
 [20250312]: https://github.com/CuBoulder/tiamat-theme/compare/20250226...20250312
 [20250226]: https://github.com/CuBoulder/tiamat-theme/compare/20250219...20250226
 [20250219]: https://github.com/CuBoulder/tiamat-theme/compare/20240212...20250219
