@@ -125,23 +125,25 @@
   flex-direction: row;
   gap: 10px;
   position: absolute;
-  bottom: 20px;
-  left: 20px;
+  bottom: 2em;
+  right: 10%;
   z-index: 2;
 }
 
 .ucb-hero-slider .carousel-control-restart,
 .ucb-hero-slider .carousel-control-playpause {
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+  border: 1px solid whitesmoke;
+  border-radius: 5%;
+  width: 2em;
+  height: 2em;
   display: flex;
   align-items: center;
   justify-content: center;
   background: rgba(0, 0, 0, 0.5);
   cursor: pointer;
   transition: background-color 0.3s ease;
+  scale: 1.5;
+  margin-right: 2em;
 }
 
 .ucb-hero-slider .carousel-control-restart .fa-rotate,
