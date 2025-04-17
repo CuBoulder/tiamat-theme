@@ -23,6 +23,11 @@
             }
         }
 
+        function stripBasePath(baseURL, endurl) {
+          const basePath = new URL(baseURL).pathname.replace(/\/$/, ''); // e.g. "/center/altec"
+          return endurl.startsWith(basePath) ? endurl.slice(basePath.length) : endurl;
+        }
+
         // Intro images - make absolute
         const introBody = document.getElementById('newsletter-intro-body');
         if (introBody) {
