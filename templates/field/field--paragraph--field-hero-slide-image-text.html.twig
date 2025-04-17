@@ -1,0 +1,12 @@
+{#
+/**
+ * @file
+ * Theme override for field_hero_slide_image_text field.
+ *
+ * This template renders only the field value without wrapping HTML
+ * while maintaining proper Drupal sanitization.
+ */
+#}
+{% for item in items %}
+  {{- item.content -}}
+{% endfor %} 

@@ -5,8 +5,10 @@
 }
 
 .ucb-hero-slider .carousel {
-  height: 100vh;
-  margin-bottom: 0;
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  max-height: 100vh;
 }
 
 .ucb-hero-slider .carousel-inner {
@@ -14,13 +16,13 @@
 }
 
 .ucb-hero-slider .carousel-item {
-  height: 100vh;
   position: relative;
+  height: 100%;
 }
 
 .ucb-hero-slider .carousel-item img {
-  height: 100%;
   width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
@@ -97,15 +99,71 @@
   text-align: right;
 }
 
-/* Hide carousel controls */
-.ucb-hero-slider .carousel-indicators,
-.ucb-hero-slider .carousel-control-prev,
-.ucb-hero-slider .carousel-control-next {
+/* Hide carousel indicators only */
+.ucb-hero-slider .carousel-indicators {
   display: none;
+}
+
+/* Carousel control styles */
+.ucb-hero-slider .carousel-control-prev,
+.ucb-hero-slider .carousel-control-next,
+.ucb-hero-slider .carousel-control-restart,
+.ucb-hero-slider .carousel-control-playpause {
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.ucb-hero-slider .carousel-control-prev:hover,
+.ucb-hero-slider .carousel-control-next:hover,
+.ucb-hero-slider .carousel-control-restart:hover,
+.ucb-hero-slider .carousel-control-playpause:hover {
+  opacity: 1;
+}
+
+.ucb-hero-slider .carousel-controls {
+  display: flex;
+  flex-direction: row;
+  gap: 10px;
+  position: absolute;
+  bottom: 2em;
+  right: 10%;
+  z-index: 2;
+}
+
+.ucb-hero-slider .carousel-control-restart,
+.ucb-hero-slider .carousel-control-playpause {
+  border: 1px solid var(--ucb-white);
+  border-radius: 5%;
+  width: 2em;
+  height: 2em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  scale: 1.5;
+  margin-right: 2em;
+}
+
+.ucb-hero-slider .carousel-control-restart .fa-rotate,
+.ucb-hero-slider .carousel-control-playpause .fa-pause,
+.ucb-hero-slider .carousel-control-playpause .fa-play {
+  font-size: 18px;
+  color: var(--ucb-white);
+}
+
+.ucb-hero-slider .carousel-control-restart:hover,
+.ucb-hero-slider .carousel-control-playpause:hover {
+  background: rgba(0, 0, 0, 0.7);
 }
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
+  .ucb-hero-slider .carousel {
+    aspect-ratio: 4/3;
+  }
+
   .ucb-hero-slider .carousel-caption {
     padding: 1rem;
   }
@@ -114,5 +172,11 @@
   .ucb-hero-slider .hero_slide_text_right .carousel-caption {
     padding-left: 5%;
     padding-right: 5%;
+  }
+}
+
+@media (max-width: 480px) {
+  .ucb-hero-slider .carousel {
+    aspect-ratio: 3/4;
   }
 }

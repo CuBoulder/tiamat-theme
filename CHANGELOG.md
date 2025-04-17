@@ -9,6 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Hero Slider Updates
+  Update the paragraph to not striptags and trim. Rather we create a new template for the field so that special characters aren't broken on render.
+  
+  Add `data-bs-wrap="false"` to stop the looping of the slider
+  
+  Replaced fixed 100vh height with responsive aspect-ratio (16/9 desktop, 4/3 tablet, 3/4 mobile). Set max-height: 100vh, used relative positioning, and ensured images scale properly with object-fit: cover.
+  
+  Added restart and pause/play buttons
+  
+  Add unstyled class so extra padding is removed.
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/207
+  
+  Resolves #1625 
+  
+---
+
 ## [20250409] - 2025-04-09
 
 - ### Issue/1617
