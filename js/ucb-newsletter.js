@@ -23,8 +23,9 @@
             }
         }
 
+        // Used to normalize relative to absolute pathing
         function stripBasePath(baseURL, endurl) {
-          const basePath = new URL(baseURL).pathname.replace(/\/$/, ''); // e.g. "/center/altec"
+          const basePath = new URL(baseURL).pathname.replace(/\/$/, '');
           return endurl.startsWith(basePath) ? endurl.slice(basePath.length) : endurl;
         }
 
