@@ -132,7 +132,7 @@
 
 .ucb-hero-slider .carousel-control-restart,
 .ucb-hero-slider .carousel-control-playpause {
-  border: 1px solid whitesmoke;
+  border: 1px solid var(--ucb-white);
   border-radius: 5%;
   width: 2em;
   height: 2em;
