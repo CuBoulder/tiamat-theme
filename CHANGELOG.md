@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter: Adjust Relative to Absolute pathing of WYSIWYG Images
+  Previously the helper functionality to try to mitigate broken image src paths due to relative links in WYSIWYG fields could cause sites like `colorado.edu/<sub>/<addtl-sub>` to duplicate pathing information in the transition into absolute paths, leading to broken absolute links and images. This functionality has been adjusted and refined. 
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1626
+---
+
 - ### Hero Slider Updates
   Update the paragraph to not striptags and trim. Rather we create a new template for the field so that special characters aren't broken on render.
   

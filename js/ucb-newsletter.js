@@ -23,32 +23,43 @@
             }
         }
 
-      // Images in the intro - make absolute
-      var introBody = document.getElementById('newsletter-intro-body');
-      if (introBody) {
-          var images = introBody.getElementsByClassName('imageMediaStyle');
-          for (let imgContainer of images) {
-              var img = imgContainer.children[0];
-              var endurl = img.getAttribute('src');
-              img.setAttribute('src', `${baseURL}${endurl}`);
-              // Ensure the image fits within 600px while maintaining proportions
-              img.setAttribute('style', 'max-width: 600px; width: 100%; height: auto; display: block;');
-          }
-      }
+        // Used to normalize relative to absolute pathing
+        function stripBasePath(baseURL, endurl) {
+          const basePath = new URL(baseURL).pathname.replace(/\/$/, '');
+          return endurl.startsWith(basePath) ? endurl.slice(basePath.length) : endurl;
+        }
 
-      // Images in the blocks -- make absolute
-            var blockSection = document.getElementById('ucb-newsletter-block-table');
-            if (blockSection) {
-                var images = blockSection.getElementsByClassName('imageMediaStyle');
-                for (let imgContainer of images) {
-                    var img = imgContainer.children[0];
-                    var endurl = img.getAttribute('src');
-                    img.setAttribute('src', `${baseURL}${endurl}`);
-                    // Ensure the image fits within 300/600px while maintaining proportions
-                    var imgSize = document.getElementById('ucb-single-newsletter-block') ? '600px' : '300px'
-                    img.setAttribute('style', `max-width: ${imgSize}; width: 100%; height: auto; display: block;`);
-                }
-            }
+        // Intro images - make absolute
+        const introBody = document.getElementById('newsletter-intro-body');
+        if (introBody) {
+          const images = introBody.getElementsByClassName('imageMediaStyle');
+          for (let imgContainer of images) {
+            const img = imgContainer.children[0];
+            if (!img) continue;
+            let endurl = img.getAttribute('src');
+            if (!endurl) continue;
+            endurl = stripBasePath(baseURL, endurl);
+
+            img.setAttribute('src', `${baseURL.replace(/\/$/, '')}/${endurl.replace(/^\//, '')}`);
+            img.setAttribute('style', 'max-width: 600px; width: 100%; height: auto; display: block;');
+          }
+        }
+
+        // Block images - make absolute
+        const blockSection = document.getElementById('ucb-newsletter-block-table');
+        if (blockSection) {
+          const images = blockSection.getElementsByClassName('imageMediaStyle');
+          for (let imgContainer of images) {
+            const img = imgContainer.children[0];
+            if (!img) continue;
+            let endurl = img.getAttribute('src');
+            if (!endurl) continue;
+            endurl = stripBasePath(baseURL, endurl);
+            img.setAttribute('src', `${baseURL.replace(/\/$/, '')}/${endurl.replace(/^\//, '')}`);
+            const imgSize = document.getElementById('ucb-single-newsletter-block') ? '600px' : '300px';
+            img.setAttribute('style', `max-width: ${imgSize}; width: 100%; height: auto; display: block;`);
+          }
+        }
 
         // Section Link - make blue (gets overridden by user agent style)
         var moreLinks = document.getElementsByClassName('article-link')
