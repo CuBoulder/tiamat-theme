@@ -9,28 +9,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250423] - 2025-04-23
+
 - ### Newsletter: Adjust Relative to Absolute pathing of WYSIWYG Images
+
   Previously the helper functionality to try to mitigate broken image src paths due to relative links in WYSIWYG fields could cause sites like `colorado.edu/<sub>/<addtl-sub>` to duplicate pathing information in the transition into absolute paths, leading to broken absolute links and images. This functionality has been adjusted and refined. 
-  
-  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1626
----
+
+  Resolves <https://github.com/CuBoulder/tiamat-theme/issues/1626>
+
+* * *
 
 - ### Hero Slider Updates
+
   Update the paragraph to not striptags and trim. Rather we create a new template for the field so that special characters aren't broken on render.
-  
+
   Add `data-bs-wrap="false"` to stop the looping of the slider
-  
+
   Replaced fixed 100vh height with responsive aspect-ratio (16/9 desktop, 4/3 tablet, 3/4 mobile). Set max-height: 100vh, used relative positioning, and ensured images scale properly with object-fit: cover.
-  
+
   Added restart and pause/play buttons
-  
+
   Add unstyled class so extra padding is removed.
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/207
-  
+
+  Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/207>
+
   Resolves #1625 
-  
----
+
+* * *
 
 ## [20250409] - 2025-04-09
 
@@ -4344,7 +4349,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250409...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250423...HEAD
+[20250423]: https://github.com/CuBoulder/tiamat-theme/compare/20250409...20250423
 [20250409]: https://github.com/CuBoulder/tiamat-theme/compare/20250312...20250409
 [20250312]: https://github.com/CuBoulder/tiamat-theme/compare/20250226...20250312
 [20250226]: https://github.com/CuBoulder/tiamat-theme/compare/20250219...20250226
