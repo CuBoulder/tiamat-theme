@@ -459,6 +459,13 @@
         if (thisPerson.primaryLinkURI.startsWith('internal:/')) {
           thisPerson.primaryLinkURI = this.getAttribute('site-base') + thisPerson.primaryLinkURI.replace('internal:/', '/');
         }
+
+        // This makes internal node references URLS
+        if (thisPerson.primaryLinkURI.startsWith('entity:node/')) {
+          const nodeId = thisPerson.primaryLinkURI.split('/')[1];
+          thisPerson.primaryLinkURI = this.getAttribute('site-base') + `/node/${nodeId}`;
+        }
+
         // needed to verify body exists on the Person page, if so, use that
         if (personAttributeData['body']) {
           // use summary if available
