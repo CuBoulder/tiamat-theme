@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### People Lists: Fix linking of internal pages
+  Previously on the `Person Page` form, linking to an internal page or node for a Person's Primary Link could result in broken links depending on how the linked page was referenced -- either by internal url or entity node ID. Drupal would store this link either as `internal:/` or `entity:node:/`, depending on how it was input (such as`/home` versus `Home (1)` selected via autocomplete) and they would each be returned differently to the aggregators content types.
+  
+  The `People List page` and `People List block` only correctly handled one of these two ways in the final render, but this has been corrected to handle both.
+  
+  Resolves #1631 
+---
+
 ## [20250423] - 2025-04-23
 
 - ### Newsletter: Adjust Relative to Absolute pathing of WYSIWYG Images
