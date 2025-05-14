@@ -9,6 +9,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250514] - 2025-05-14
+
 ## [20250430] - 2025-04-30
 
 - ### People Lists: Fix linking of internal pages
@@ -4361,7 +4363,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250430...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250514...HEAD
+[20250514]: https://github.com/CuBoulder/tiamat-theme/compare/20250430...20250514
 [20250430]: https://github.com/CuBoulder/tiamat-theme/compare/20250423...20250430
 [20250423]: https://github.com/CuBoulder/tiamat-theme/compare/20250409...20250423
 [20250409]: https://github.com/CuBoulder/tiamat-theme/compare/20250312...20250409
