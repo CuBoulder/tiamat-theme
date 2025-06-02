@@ -34,15 +34,29 @@
 
 .ucb-content-sequence .vertical-timeline-card-body {
   padding: 0 20px 20px 20px;
+  color: var(--ucb-black);
 }
 
 .ucb-content-sequence .vertical-timeline-card-title {
   font-size: 150%;
 }
 
+.ucb-content-sequence .vertical-timeline-card-title a {
+  color: var(--ucb-link);
+}
+
+.ucb-content-sequence .vertical-timeline-card-title a:hover {
+  color: var(--ucb-link-visited);
+} 
+
+.ucb-content-sequence .vertical-timeline-card-title a:visited {
+  color: var(--ucb-link-visited);
+} 
+
 .ucb-content-sequence .vertical-timeline-card-date {
   font-size: 85%;
   margin-bottom: 10px;
+  color: var(--ucb-black);
 }
 
 .ucb-content-sequence .vertical-timeline-card-wrapper::before {
