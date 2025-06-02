@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update scrolling styles
+  Fixed mislabeled `fixed-background` css label
+  
+  Create max width scroll change for `scrolling-background` so that images are fixed on mobile and table to avoid bad scaling.
+  
+  Resolves #1640
+---
+
 - ### Content sequence card colors
   Updated the content sequence text card colors so that they are standardized.
   
