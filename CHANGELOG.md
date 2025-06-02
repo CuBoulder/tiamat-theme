@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Content sequence card colors
+  Updated the content sequence text card colors so that they are standardized.
+  
+  Cards are only white backgrounds so colors can be hard set rather than changing depending on background/frame colors
+  
+  Resolves #1643
+---
+
 ## [20250514] - 2025-05-14
 
 ## [20250430] - 2025-04-30
