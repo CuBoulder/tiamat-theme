@@ -9,21 +9,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250604] - 2025-06-04
+
 - ### Update scrolling styles
+
   Fixed mislabeled `fixed-background` css label
-  
+
   Create max width scroll change for `scrolling-background` so that images are fixed on mobile and table to avoid bad scaling.
-  
+
   Resolves #1640
----
+
+* * *
 
 - ### Content sequence card colors
+
   Updated the content sequence text card colors so that they are standardized.
-  
+
   Cards are only white backgrounds so colors can be hard set rather than changing depending on background/frame colors
-  
+
   Resolves #1643
----
+
+* * *
 
 ## [20250514] - 2025-05-14
 
@@ -4379,7 +4385,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250514...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250604...HEAD
+[20250604]: https://github.com/CuBoulder/tiamat-theme/compare/20250514...20250604
 [20250514]: https://github.com/CuBoulder/tiamat-theme/compare/20250430...20250514
 [20250430]: https://github.com/CuBoulder/tiamat-theme/compare/20250423...20250430
 [20250423]: https://github.com/CuBoulder/tiamat-theme/compare/20250409...20250423
