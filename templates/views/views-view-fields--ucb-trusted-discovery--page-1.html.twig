@@ -1,0 +1,34 @@
+<article class="ucb-card container">
+  <div class="row ucb-card-inner">
+{% if fields.focal_image_square.content %}
+    <div class="col-md-2 ucb-card-image">
+      <a href="{{ fields.source_url.content }}" role="presentation" aria-hidden="true">
+        <img
+          src="{{ fields.focal_image_square.content|render|striptags }}"
+          alt="{{ fields.title.content|striptags }}"
+        >
+      </a>
+    </div>
+{% endif %}
+
+    <div class="col-sm-12 col-md-10 ucb-card-content">
+      <a href="{{ fields.source_url.content }}">
+        <h2 class="ucb-card-title">{{ fields.title.content|striptags }}</h2>
+      </a>
+
+      {% if fields.changed is defined %}
+        <span class="ucb-card-date">{{ fields.changed.content|striptags }}</span>
+      {% endif %}
+
+      <p class="ucb-card-summary">{{ fields.summary.content|striptags }}</p>
+      <p> For the endpoint: </p>
+        <p>{{ fields.source_site.content }}</p>
+        <p>{{ fields.remote_type.content }}</p>
+        <p>{{ fields.remote_uuid.content }}</p>
+      <span class="ucb-card-readmore">
+        <a href="{{ fields.source_url.content }}" aria-hidden="true">Read more</a>
+      </span>
+    </div>
+
+  </div>
+</article>

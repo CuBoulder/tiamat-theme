@@ -1,0 +1,35 @@
+<div class="trusted-content-wrapper">
+
+  {# Exposed filters (form) #}
+  {% if exposed %}
+    <div class="trusted-content-filters container">
+      {{ exposed }}
+    </div>
+  {% endif %}
+
+  {# View header (optional) #}
+  {% if header %}
+    <div class="view-header">
+      {{ header }}
+    </div>
+  {% endif %}
+
+  {# Results (cards), rendered via views-view-fields--*.html.twig #}
+  {% if rows %}
+    <div class="trusted-content-cards">
+      {{ rows }}
+    </div>
+  {% elseif empty %}
+    <div class="no-results">
+      {{ empty }}
+    </div>
+  {% endif %}
+
+  {# Pager (optional) #}
+  {% if pager %}
+    <div class="pagination">
+      {{ pager }}
+    </div>
+  {% endif %}
+
+</div>
