@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update style.css
+  Update styles for block layout images to have padding on float.
+  
+  Resolves #1648
+---
+
 ## [20250604] - 2025-06-04
 
 - ### Update scrolling styles
