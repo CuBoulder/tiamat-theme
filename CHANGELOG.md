@@ -9,11 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250611] - 2025-06-11
+
 - ### Update style.css
+
   Update styles for block layout images to have padding on float.
-  
+
   Resolves #1648
----
+
+* * *
 
 ## [20250604] - 2025-06-04
 
@@ -4391,7 +4395,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250604...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250611...HEAD
+[20250611]: https://github.com/CuBoulder/tiamat-theme/compare/20250604...20250611
 [20250604]: https://github.com/CuBoulder/tiamat-theme/compare/20250514...20250604
 [20250514]: https://github.com/CuBoulder/tiamat-theme/compare/20250430...20250514
 [20250430]: https://github.com/CuBoulder/tiamat-theme/compare/20250423...20250430
