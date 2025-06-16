@@ -542,3 +542,9 @@ ucb-sidebar-menu-style-gray:
   css:
     theme:
       css/menu-styles/ucb-sidebar-gray-styles.css: {weight: 5 }
+
+trusted-share-button:
+  version: 1.x
+  js:
+    js/ucb-trusted-content-share.js: {   }
+

@@ -1,3 +1,5 @@
+{{ attach_library('boulder_base/trusted-share-button') }}
+
 {% set full_url = fields.source_site.content ~ fields.remote_path.content %}
 
 <article class="ucb-card container">
@@ -32,7 +34,12 @@
       <span class="ucb-card-readmore">
         <a href="{{full_url}}" aria-hidden="true">Read more</a>
       </span>
-      <share-button>Share on your site</share-button>
+      <trusted-share-button {{ create_attribute({
+          'base-uri' : fields.source_site.content,
+          'nid' : fields.remote_nid.content,
+          'node-type' : fields.remote_type.content
+          }) }}
+        ><i class="fa-solid fa-share"></i>Share on your site</trusted-share-button>
     </div>
 
   </div>
