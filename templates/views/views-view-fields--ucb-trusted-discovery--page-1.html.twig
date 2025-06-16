@@ -1,4 +1,5 @@
 {{ attach_library('boulder_base/trusted-share-button') }}
+{{ attach_library('boulder_base/ucb-discovery-view') }}
 
 {% set full_url = fields.source_site.content ~ fields.remote_path.content %}
 
@@ -14,7 +15,8 @@
       </a>
     </div>
 {% endif %}
-
+    {# Article Teaser Section #}
+    <div class="ucb-discover-card-container">
     <div class="col-sm-12 col-md-10 ucb-card-content">
       <a href="{{full_url}}">
         <h2 class="ucb-card-title">{{ fields.title.content|striptags }}</h2>
@@ -25,21 +27,17 @@
       {% endif %}
 
       <p class="ucb-card-summary">{{ fields.summary.content|striptags }}</p>
-      <p> For the endpoint: </p>
-        <p>{{ fields.source_site.content }}</p>
-        <p>{{ fields.remote_type.content }}</p>
-        <p>{{ fields.remote_uuid.content }}</p>
-        <p>id</p>
-        <p>{{ fields.remote_nid.content }}</p>
       <span class="ucb-card-readmore">
         <a href="{{full_url}}" aria-hidden="true">Read more</a>
       </span>
-      <trusted-share-button {{ create_attribute({
+    </div>
+    {# Share section #}
+          <trusted-share-button {{ create_attribute({
           'base-uri' : fields.source_site.content,
           'nid' : fields.remote_nid.content,
           'node-type' : fields.remote_type.content
           }) }}
-        ><i class="fa-solid fa-share"></i>Share on your site</trusted-share-button>
+        ></trusted-share-button>
     </div>
 
   </div>

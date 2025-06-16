@@ -71,7 +71,8 @@ connectedCallback() {
 
     renderUI(url) {
       this.innerHTML = `
-        <div style="margin-top: 0.5rem;">
+        <div class="ucb-discover-card-share-section">
+          <i class="fa-solid fa-share"></i>
           <input type="text" value="${url}" readonly style="width: 100%; padding: 4px;" />
           <button type="button">Copy Link</button>
         </div>

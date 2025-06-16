@@ -548,3 +548,8 @@ trusted-share-button:
   js:
     js/ucb-trusted-content-share.js: {   }
 
+ucb-discovery-view:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-discovery-view.css : {weight: 5}

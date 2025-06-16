@@ -1,0 +1,16 @@
+.ucb-discover-card-container {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.333);
+  margin-bottom: 20px;
+}
+
+.ucb-discover-card-share-section{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.ucb-discover-card-share-section svg{
+  margin-right: 10px;
+}
