@@ -9,8 +9,20 @@
   flex-wrap: nowrap;
   align-items: center;
   margin-bottom: 10px;
+  margin-top: 10px;
 }
 
 .ucb-discover-card-share-section svg{
   margin-right: 10px;
+}
+
+.ucb-discover-card-share-section input{
+  margin-right: 10px;
+}
+
+.ucb-discover-card-share-section button{
+  white-space: nowrap;
+  padding: 5px;
+  font-weight: bolder;
+  margin-bottom: 0;
 }

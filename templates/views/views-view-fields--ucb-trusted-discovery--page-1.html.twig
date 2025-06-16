@@ -4,41 +4,41 @@
 {% set full_url = fields.source_site.content ~ fields.remote_path.content %}
 
 <article class="ucb-card container">
-  <div class="row ucb-card-inner">
-{% if fields.focal_image_square.content %}
-    <div class="col-md-2 ucb-card-image">
-      <a href="{{full_url}}" role="presentation" aria-hidden="true">
-        <img
-          src="{{ fields.focal_image_square.content|render|striptags }}"
-          alt="{{ fields.title.content|striptags }}"
-        >
-      </a>
-    </div>
-{% endif %}
-    {# Article Teaser Section #}
-    <div class="ucb-discover-card-container">
-    <div class="col-sm-12 col-md-10 ucb-card-content">
-      <a href="{{full_url}}">
-        <h2 class="ucb-card-title">{{ fields.title.content|striptags }}</h2>
-      </a>
-
-      {% if fields.changed is defined %}
-        <span class="ucb-card-date">{{ fields.changed.content|striptags }}</span>
+  <div class="ucb-discover-card-container">
+    <div class="row ucb-card-inner">
+      {% if fields.focal_image_square.content %}
+        <div class="col-md-2 ucb-card-image">
+          <a href="{{ full_url }}" role="presentation" aria-hidden="true">
+            <img
+              src="{{ fields.focal_image_square.content|render|striptags }}"
+              alt="{{ fields.title.content|striptags }}"
+            >
+          </a>
+        </div>
       {% endif %}
 
-      <p class="ucb-card-summary">{{ fields.summary.content|striptags }}</p>
-      <span class="ucb-card-readmore">
-        <a href="{{full_url}}" aria-hidden="true">Read more</a>
-      </span>
-    </div>
-    {# Share section #}
-          <trusted-share-button {{ create_attribute({
-          'base-uri' : fields.source_site.content,
-          'nid' : fields.remote_nid.content,
-          'node-type' : fields.remote_type.content
-          }) }}
-        ></trusted-share-button>
+      <div class="col-sm-12 col-md-10 ucb-card-content">
+        <a href="{{ full_url }}">
+          <h2 class="ucb-card-title">{{ fields.title.content|striptags }}</h2>
+        </a>
+
+        {% if fields.changed is defined %}
+          <span class="ucb-card-date">{{ fields.changed.content|striptags }}</span>
+        {% endif %}
+
+        <p class="ucb-card-summary">{{ fields.summary.content|striptags }}</p>
+        <span class="ucb-card-readmore">
+          <a href="{{ full_url }}" aria-hidden="true">Read more</a>
+        </span>
+      </div>
     </div>
 
+    {# Share button outside row if full-width #}
+    <trusted-share-button {{ create_attribute({
+      'base-uri' : fields.source_site.content,
+      'nid' : fields.remote_nid.content,
+      'node-type' : fields.remote_type.content
+    }) }}></trusted-share-button>
   </div>
 </article>
+
