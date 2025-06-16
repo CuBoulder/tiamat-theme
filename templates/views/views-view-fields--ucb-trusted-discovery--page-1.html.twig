@@ -1,8 +1,10 @@
+{% set full_url = fields.source_site.content ~ fields.remote_path.content %}
+
 <article class="ucb-card container">
   <div class="row ucb-card-inner">
 {% if fields.focal_image_square.content %}
     <div class="col-md-2 ucb-card-image">
-      <a href="{{ fields.source_url.content }}" role="presentation" aria-hidden="true">
+      <a href="{{full_url}}" role="presentation" aria-hidden="true">
         <img
           src="{{ fields.focal_image_square.content|render|striptags }}"
           alt="{{ fields.title.content|striptags }}"
@@ -12,7 +14,7 @@
 {% endif %}
 
     <div class="col-sm-12 col-md-10 ucb-card-content">
-      <a href="{{ fields.source_url.content }}">
+      <a href="{{full_url}}">
         <h2 class="ucb-card-title">{{ fields.title.content|striptags }}</h2>
       </a>
 
@@ -25,8 +27,10 @@
         <p>{{ fields.source_site.content }}</p>
         <p>{{ fields.remote_type.content }}</p>
         <p>{{ fields.remote_uuid.content }}</p>
+        <p>id</p>
+        <p>{{ fields.remote_nid.content }}</p>
       <span class="ucb-card-readmore">
-        <a href="{{ fields.source_url.content }}" aria-hidden="true">Read more</a>
+        <a href="{{full_url}}" aria-hidden="true">Read more</a>
       </span>
       <share-button>Share on your site</share-button>
     </div>
