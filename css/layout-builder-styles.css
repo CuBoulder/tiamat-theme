@@ -343,7 +343,7 @@
 
 /*** !important needed to override inline background image styles ***/
 
-.scrolling-background {
+.fixed-background {
   background-attachment: scroll !important;
 }
 
@@ -375,4 +375,10 @@
 [data-layout-content-preview-placeholder-label*="Title"],
 [data-layout-content-preview-placeholder-label*="Body"] {
   background-color: transparent;
+}
+
+@media screen and (max-width: 992px) {
+  .scrolling-background {
+    background-attachment: scroll !important;
+  }
 }

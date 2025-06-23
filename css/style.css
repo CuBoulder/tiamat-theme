@@ -657,12 +657,16 @@ div.align-right:has(.field_media_oembed_video){
 /**** Responsive Images ******/
 
 article .align-right img,
-article .align-right .media-image-caption p {
+article .align-right .media-image-caption p,
+.align-right img,
+.align-right .media-image-caption p {
   padding-left: 1em;
 }
 
 article .align-left img,
-article .align-left .media-image-caption p {
+article .align-left .media-image-caption p,
+.align-left img,
+.align-left .media-image-caption p {
   padding-right: 1em;
 }
 
