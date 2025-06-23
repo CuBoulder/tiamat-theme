@@ -26,25 +26,24 @@ connectedCallback() {
   };
 
   const includeFields = {
-    ucb_article: 'field_ucb_article_thumbnail,field_ucb_article_thumbnail.field_media_image',
+    ucb_article: 'field_ucb_article_thumbnail.field_media_image',
     ucb_person: 'field_ucb_person_photo,field_ucb_person_photo.field_media_image',
     basic_page: ''
   };
 
-  const query = new URLSearchParams();
+// Build query string manually
+let query = new URLSearchParams();
+query.set(`fields[node--${shortType}]`, fieldList);
+query.set('fields[media--image]', 'field_media_image');
+query.set('fields[file--file]', 'uri,url');
+query.set('filter[nid]', nid);
 
-  const fieldList = baseFields[shortType];
-  if (fieldList) {
-    query.set(`fields[node--${shortType}]`, fieldList);
-  }
+// Manually append `include` to the final URL to preserve commas and periods correctly
+let fullUrl = `${this._baseURI}/jsonapi/node/${shortType}?${query.toString()}`;
+if (includes) {
+  fullUrl += `&include=${includes}`;
+}
 
-  query.set('fields[media--image]', 'field_media_image');
-  query.set('fields[file--file]', 'uri,url');
-
-  const includes = includeFields[shortType];
-  if (includes) {
-    query.set('include', includes);
-  }
 
 // filter by nid
   query.set('filter[nid]', nid);

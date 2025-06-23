@@ -553,3 +553,11 @@ ucb-discovery-view:
   css:
     theme:
       css/ucb-discovery-view.css : {weight: 5}
+
+ucb-trusted-content-share-block:
+  version: 1.x
+  js:
+    js/ucb-trusted-content-share-block.js: {  }
+  css:
+    theme:
+      css/block/ucb-article-list-block.css : {weight: 5}
