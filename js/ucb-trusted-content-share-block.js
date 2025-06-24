@@ -66,8 +66,6 @@
         node.attributes?.field_ucb_article_summary ||
         node.attributes?.body?.summary ||
         '';
-      const date = node.attributes?.changed || null;
-
 
       let mediaId = null;
       if (type === 'ucb_article') {
@@ -86,7 +84,6 @@
         title,
         link,
         summary,
-        date,
         images: {
           focal_image_square: file?.links?.focal_image_square?.href || null,
           focal_image_wide: file?.links?.focal_image_wide?.href || null,
@@ -127,25 +124,10 @@ renderTeaser(entry) {
   const strong = document.createElement("strong");
   const headerLink = document.createElement("a");
   headerLink.classList = "ucb-article-card-title-teaser";
-  if (!entry.date) headerLink.classList.add("ucb-article-card-title-no-date");
   headerLink.href = entry.link;
   headerLink.innerText = entry.title;
   strong.appendChild(headerLink);
   articleBody.appendChild(strong);
-
-  if (entry.date) {
-  const dateSpan = document.createElement("span");
-  dateSpan.className = "ucb-article-card-date";
-
-  const formattedDate = new Date(entry.date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
-
-  dateSpan.innerText = formattedDate;
-  articleBody.appendChild(dateSpan);
-}
 
   const summary = document.createElement("p");
   summary.classList = "ucb-article-card-summary";
