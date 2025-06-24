@@ -72,7 +72,9 @@
       let mediaId = null;
       if (type === 'ucb_article') {
         mediaId = node.relationships?.field_ucb_article_thumbnail?.data?.id;
-      } else if (type === 'ucb_person') {
+      } else if (type === 'basic_page') {
+        mediaId = node.relationships?.field_social_sharing_image?.data?.id;
+      } else if (type === 'ucb_person'){
         mediaId = node.relationships?.field_ucb_person_photo?.data?.id;
       }
 
