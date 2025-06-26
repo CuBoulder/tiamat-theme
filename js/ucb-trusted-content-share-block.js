@@ -15,7 +15,6 @@
     }
 
     build(data) {
-      console.log(data)
       const node = this.normalizeSingleEntry(data)
       switch (this._display) {
         case "Teaser":
