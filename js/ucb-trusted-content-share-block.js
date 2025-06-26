@@ -59,7 +59,7 @@
       const type = node.type.replace('node--', '');
 
       const title = node.attributes?.title || '';
-      const urlBase = new URL(this._shareURL).origin;
+      const urlBase = this._shareURL.split('/jsonapi/')[0];
       const relativePath = node.attributes?.path.alias ? node.attributes?.path.alias : `/node/${node.attributes?.drupal_internal__nid}`;
       const link = urlBase + relativePath;
       const summary =
