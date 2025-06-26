@@ -15,6 +15,7 @@
     }
 
     build(data) {
+      console.log(data)
       const node = this.normalizeSingleEntry(data)
       switch (this._display) {
         case "Teaser":
@@ -79,6 +80,7 @@
       const media = included.find(item => item.type === 'media--image' && item.id === mediaId);
       const fileId = media?.relationships?.field_media_image?.data?.id;
       const file = included.find(item => item.type === 'file--file' && item.id === fileId);
+      const alt = media?.relationships?.field_media_image?.data?.meta?.alt || '';
 
       return {
         title,
@@ -87,6 +89,7 @@
         images: {
           focal_image_square: file?.links?.focal_image_square?.href || null,
           focal_image_wide: file?.links?.focal_image_wide?.href || null,
+          alt: alt
         }
       };
     }
@@ -110,6 +113,7 @@ renderTeaser(entry) {
 
     const img = document.createElement("img");
     img.src = entry.images.focal_image_square;
+    img.alt = entry.images.alt;
 
     imgLink.appendChild(img);
     imgDiv.appendChild(imgLink);
@@ -167,6 +171,8 @@ renderFeature(entry) {
     const img = document.createElement("img");
     img.classList = "ucb-article-card-img-wide";
     img.src = entry.images.focal_image_wide;
+    img.alt = entry.images.alt;
+
 
     imgLink.appendChild(img);
     imgDiv.appendChild(imgLink);
