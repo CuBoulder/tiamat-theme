@@ -19,12 +19,8 @@
 
       <div class="col-sm-12 col-md-10 ucb-card-content">
         <a href="{{ full_url }}">
-          <h2 class="ucb-card-title">{{ fields.title.content|striptags }}</h2>
+          <h2 class="ucb-card-title">{{ fields.title.content }}</h2>
         </a>
-
-        {% if fields.changed is defined %}
-          <span class="ucb-card-date">{{ fields.changed.content|striptags }}</span>
-        {% endif %}
 
         <p class="ucb-card-summary">{{ fields.summary.content }}</p>
         <span class="ucb-card-readmore">
