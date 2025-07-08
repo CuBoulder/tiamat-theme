@@ -111,8 +111,10 @@
       <rave-alert feed="https://www.getrave.com/rss/cuboulder/channel1" link="https://alerts.colorado.edu"></rave-alert>
     {% endif %}
 
-    {% if ucb_sticky_menu %}
+    {% if (ucb_sticky_menu and not ucb_homepage_header) %}
       {% include '@boulder_base/includes/ucb-sticky-menu.html.twig' %}
+    {% elseif ucb_sticky_menu and ucb_homepage_header %}
+      {% include '@boulder_base/includes/ucb-homepage-sticky-menu.html.twig' %}
     {% endif %}
 
     {{ page.header }}
