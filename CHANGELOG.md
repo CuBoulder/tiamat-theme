@@ -9,18 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250709] - 2025-07-09
+
 - ### Add homepage sticky menu
+
   Adding the homepage sticky menu options
-  
+
   To test:
+
   > /admin/config/cu-boulder/appearance
   > select "Show sticky menu"
   > in advanced options select "Hide the normal header bar. For the CU Homepage only."
-  
+
   The navigation should show the logo and menu in the same bar
-  
+
   Resolves #1641 
----
+
+* * *
 
 ## [20250611] - 2025-06-11
 
@@ -4408,7 +4413,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250611...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250709...HEAD
+[20250709]: https://github.com/CuBoulder/tiamat-theme/compare/20250611...20250709
 [20250611]: https://github.com/CuBoulder/tiamat-theme/compare/20250604...20250611
 [20250604]: https://github.com/CuBoulder/tiamat-theme/compare/20250514...20250604
 [20250514]: https://github.com/CuBoulder/tiamat-theme/compare/20250430...20250514
