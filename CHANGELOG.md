@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update ucb-content-sequence.css
+  This update makes the link colors use only our `ucb-link` colors for this block. 
+  The will block always have white backgrounds so the text needs to be blue.
+  
+  Resolves #1658
+---
+
 ## [20250709] - 2025-07-09
 
 - ### Add homepage sticky menu
