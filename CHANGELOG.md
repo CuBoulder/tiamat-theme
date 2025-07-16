@@ -9,12 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250716] - 2025-07-16
+
 - ### Update ucb-content-sequence.css
+
   This update makes the link colors use only our `ucb-link` colors for this block. 
   The will block always have white backgrounds so the text needs to be blue.
-  
+
   Resolves #1658
----
+
+* * *
 
 ## [20250709] - 2025-07-09
 
@@ -4420,7 +4424,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250709...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250716...HEAD
+[20250716]: https://github.com/CuBoulder/tiamat-theme/compare/20250709...20250716
 [20250709]: https://github.com/CuBoulder/tiamat-theme/compare/20250611...20250709
 [20250611]: https://github.com/CuBoulder/tiamat-theme/compare/20250604...20250611
 [20250604]: https://github.com/CuBoulder/tiamat-theme/compare/20250514...20250604
