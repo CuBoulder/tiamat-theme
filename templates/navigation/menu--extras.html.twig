@@ -45,11 +45,19 @@
               <span class="visually-hidden">{{ item.title }}</span>
             </a>
           {% else %}
-            {% set title = item.is_unpublished ? {
-            '#markup': '<i class="fa-solid fa-eye-slash"></i> ' ~ item.title|e ~ '<span class="visually-hidden">(Unpublished)</span>'
-            } : item.title %}
+            {% set title_string = item.title is iterable ? item.title['#markup'] : item.title %}
+            {% set title = item.is_unpublished
+              ? { '#markup': '<i class="fa-solid fa-eye-slash"></i> ' ~ title_string|e ~ ' <span class="visually-hidden">(Unpublished)</span>' }
+              : title_string
+            %}
             {% if item.content.field_display_mega_menu|render|striptags|trim == "On" %}
-              {%  set linkID = title|lower|trim|replace({' ': ''}) ~ item.content.field_mega_menu_select.0['#block_content'].id.value %}
+            {% set sanitized_title = title_string|lower|replace({
+              ' ': '-', "'": '', '"': '', '&': 'and', '/': '-', '\\': '-', '.': '', ',': '',
+              '!': '', '?': '', '(': '', ')': '', '[': '', ']': '', '{': '', '}': '',
+              ':': '', ';': '', '#': '', '@': '', '%': '', '+': '', '=': '', '*': '',
+              '^': '', '`': '', '~': ''
+            }) %}
+            {% set linkID = sanitized_title ~ item.content.field_mega_menu_select.0['#block_content'].id.value %}
               {% set linkTargetID = "#" ~ linkID %}
               {% set linkAttr = create_attribute({  "data-bs-toggle" : "collapse", "data-bs-target": linkTargetID, "aria-expanded": "false", "aria-controls" : linkID }) %}
               {% set linkTitle = { '#markup': title|e ~ '<i class="fa fa-angle-down ucb-mega-menu-icon" aria-hidden="true"></i>'} %}
