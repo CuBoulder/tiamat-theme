@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1659 - Adds scroll margin offset for Sticky Menu
+  When using CK Editor Anchor tags on a site with a Sticky Menu, clicking the link to jump to the anchor tag would result in the Sticky Menu covering the actual anchor position, resulting in the need to scroll back up to find the intended destination. This change adds an offset to account for the menu and will jump to the correct position.
+  
+  Resolves #1659 
+---
+
 ## [20250716] - 2025-07-16
 
 - ### Update ucb-content-sequence.css
