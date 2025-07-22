@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1649 - Resolves Mega Menu cases for special characters and hidden icons
+  Previously adding special characters like apostrophes, ampersands, etc. to a Mega Menu item or disabling the page so the 'Hidden' icon would show for site editors could prevent the Mega Menu from functioning properly -- leading to WSOD errors or JavaScript errors. 
+  
+  The logic for assembling these menus has been adjusted to handle these cases
+  
+  Resolves #1649 
+---
+
 - ### #1659 - Adds scroll margin offset for Sticky Menu
   When using CK Editor Anchor tags on a site with a Sticky Menu, clicking the link to jump to the anchor tag would result in the Sticky Menu covering the actual anchor position, resulting in the need to scroll back up to find the intended destination. This change adds an offset to account for the menu and will jump to the correct position.
   
