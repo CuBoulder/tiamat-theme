@@ -243,8 +243,8 @@
 }
 
 .content-frame-styled .column {
-  padding-top: calc(var(--bs-gutter-y)* .25);
-  padding-bottom: calc(var(--bs-gutter-y)* .25);
+  padding-top: calc(var(--bs-gutter-y)* .5);
+  padding-bottom: calc(var(--bs-gutter-y)* .5);
 }
 
 .container.ucb-page-title.bs-background-unstyled.block.ucb-page-title {
@@ -282,16 +282,12 @@
   background: var(--ucb-white);
   color: var(--ucb-black);
   margin: 20px 0;
-  padding: 24px;
-
 }
 
 .content-frame-light-gray .column {
   background: rgba(255, 255, 255, 0.85);
   color: var(--ucb-black);
   margin: 20px 0;
-  padding: 24px;
-
 }
 
 .content-frame-light-gray a,
@@ -308,14 +304,12 @@
   background: var(--ucb-black);
   color: var(--ucb-white);
   margin: 20px 0;
-  padding: 24px;
 }
 
 .content-frame-dark-gray .column {
   background: rgba(0, 0, 0, 0.75);
   color: var(--ucb-white);
   margin: 20px 0;
-  padding: 24px;
 }
 
 .content-frame-dark-gray a,
