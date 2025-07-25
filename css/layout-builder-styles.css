@@ -282,12 +282,16 @@
   background: var(--ucb-white);
   color: var(--ucb-black);
   margin: 20px 0;
+  padding: 24px;
+
 }
 
 .content-frame-light-gray .column {
   background: rgba(255, 255, 255, 0.85);
   color: var(--ucb-black);
   margin: 20px 0;
+  padding: 24px;
+
 }
 
 .content-frame-light-gray a,
