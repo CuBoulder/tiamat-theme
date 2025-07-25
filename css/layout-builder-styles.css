@@ -304,14 +304,14 @@
   background: var(--ucb-black);
   color: var(--ucb-white);
   margin: 20px 0;
-  padding: 20px;
+  padding: 24px;
 }
 
 .content-frame-dark-gray .column {
   background: rgba(0, 0, 0, 0.75);
   color: var(--ucb-white);
   margin: 20px 0;
-  padding: 20px;
+  padding: 24px;
 }
 
 .content-frame-dark-gray a,
