@@ -243,8 +243,8 @@
 }
 
 .content-frame-styled .column {
-  padding-top: calc(var(--bs-gutter-y)* .25);
-  padding-bottom: calc(var(--bs-gutter-y)* .25);
+  padding-top: calc(var(--bs-gutter-y)* .5);
+  padding-bottom: calc(var(--bs-gutter-y)* .5);
 }
 
 .container.ucb-page-title.bs-background-unstyled.block.ucb-page-title {

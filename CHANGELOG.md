@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Section Content Frame Padding
+  Previously Layout Builder sections with a Content Frame Color applied lacked padding - resulting in a very small frame applied to the inner content. This has been adjusted to create equal padding on all sides of the framed content.
+  
+  Resolves #1667 
+---
+
 ## [20250723] - 2025-07-23
 
 - ### #1649 - Resolves Mega Menu cases for special characters and hidden icons
