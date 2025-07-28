@@ -603,10 +603,12 @@
                                 </tr>
                                 {% endif %}
                                 {% if content.field_newsletter_intro_body|render %}
+                                  {% set intro_body = content.field_newsletter_intro_body|render %}
+                                  {% set updated_intro_body = intro_body|replace({'href="/': 'href="' ~ base_domain ~ '/'}) %}
                                 <tr>
                                     <td>
                                     <!-- Intro Text-->
-                                    <div id="newsletter-intro-body">{{ content.field_newsletter_intro_body }}</div>
+                                    <div id="newsletter-intro-body">{{ updated_intro_body|raw }}</div>
                                   </td>
                                 </tr>
                                 {% endif %}
