@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1669 - Adds Link Processing to Intro Body for relative hrefs
+  Previously the 'Intro Text' field did not process relative urls for links created in the Intro Text WYSIWYG field. This would cause urls to show up in the Email HTML version as `colorado.edu/<your-relative-href>` instead of `colorado.edu/<subdomain>/<your-relative-rul>` , which led to broken links on most sites. The Newsletter has been adjusted to process these links as well. 
+  
+  Resolves #1669 
+---
+
 - ### Section Content Frame Padding
   Previously Layout Builder sections with a Content Frame Color applied lacked padding - resulting in a very small frame applied to the inner content. This has been adjusted to create equal padding on all sides of the framed content.
   
