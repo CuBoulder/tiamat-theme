@@ -10,12 +10,18 @@
           if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
           return response.json();
         })
-        .then((data) => this.build(data))
-        .catch((error) => this.handleError(error));
+        .then((data) => {
+          this.build(data);
+        })
+        .catch((error) => {
+          console.error('🔍 TrustedContentShare: Error fetching data:', error);
+          this.handleError(error);
+        });
     }
 
     build(data) {
       const node = this.normalizeSingleEntry(data)
+      
       switch (this._display) {
         case "Teaser":
           this.renderTeaser(node);
@@ -28,6 +34,80 @@
           this.renderTeaser(node);
           break;
       }
+
+      // Report view to source site
+      this.reportView(data);
+    }
+
+    reportView(data) {
+      if (!data.data || !data.data.length) {
+        return;
+      }
+
+      const node = data.data[0];
+      
+      // Try multiple ways to get the node ID
+      let nodeId = null;
+      
+      // Method 1: Try drupal_internal__nid from attributes
+      if (node.attributes && node.attributes.drupal_internal__nid) {
+        nodeId = node.attributes.drupal_internal__nid;
+      }
+      // Method 2: Try to extract from the self link URL
+      else if (node.links && node.links.self && node.links.self.href) {
+        const urlMatch = node.links.self.href.match(/\/node\/(\d+)/);
+        if (urlMatch) {
+          nodeId = urlMatch[1];
+        }
+      }
+      // Method 3: Try to extract from the original shareURL if it has a filter
+      else {
+        const urlMatch = this._shareURL.match(/filter\[nid\]=(\d+)/);
+        if (urlMatch) {
+          nodeId = urlMatch[1];
+        }
+      }
+      // Method 4: Try using URLSearchParams for more robust parsing
+      if (!nodeId) {
+        try {
+          const url = new URL(this._shareURL);
+          const params = new URLSearchParams(url.search);
+          const filterNid = params.get('filter[nid]');
+          if (filterNid) {
+            nodeId = filterNid;
+          }
+        } catch (error) {
+          // Error parsing URL with URLSearchParams
+        }
+      }
+      
+      if (!nodeId) {
+        return;
+      }
+
+      // Extract source site URL from the shareURL
+      const sourceSiteUrl = this._shareURL.split('/jsonapi/')[0];
+      const reportUrl = `${sourceSiteUrl}/api/trust-schema/${nodeId}/report-view`;
+      
+      // Get current site domain for reporting
+      const consumerSite = window.location.hostname;
+
+      fetch(reportUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Consumer-Site': consumerSite,
+        },
+      })
+      .then(response => {
+        if (!response.ok) {
+          console.warn('🔍 TrustedContentShare: Failed to report view to source site:', response.status);
+        }
+        return response.json();
+      })
+      .catch(error => {
+        console.error('🔍 TrustedContentShare: Error reporting view:', error);
+      });
     }
 
     handleError(error, errorMsg = 'Error Fetching Tags - Check the console') {
