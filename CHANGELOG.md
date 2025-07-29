@@ -9,6 +9,38 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1669 - Adds Link Processing to Intro Body for relative hrefs
+  Previously the 'Intro Text' field did not process relative urls for links created in the Intro Text WYSIWYG field. This would cause urls to show up in the Email HTML version as `colorado.edu/<your-relative-href>` instead of `colorado.edu/<subdomain>/<your-relative-rul>` , which led to broken links on most sites. The Newsletter has been adjusted to process these links as well. 
+  
+  Resolves #1669 
+---
+
+- ### Section Content Frame Padding
+  Previously Layout Builder sections with a Content Frame Color applied lacked padding - resulting in a very small frame applied to the inner content. This has been adjusted to create equal padding on all sides of the framed content.
+  
+  Resolves #1667 
+---
+
+## [20250723] - 2025-07-23
+
+- ### #1649 - Resolves Mega Menu cases for special characters and hidden icons
+
+  Previously adding special characters like apostrophes, ampersands, etc. to a Mega Menu item or disabling the page so the 'Hidden' icon would show for site editors could prevent the Mega Menu from functioning properly -- leading to WSOD errors or JavaScript errors. 
+
+  The logic for assembling these menus has been adjusted to handle these cases
+
+  Resolves #1649 
+
+* * *
+
+- ### #1659 - Adds scroll margin offset for Sticky Menu
+
+  When using CK Editor Anchor tags on a site with a Sticky Menu, clicking the link to jump to the anchor tag would result in the Sticky Menu covering the actual anchor position, resulting in the need to scroll back up to find the intended destination. This change adds an offset to account for the menu and will jump to the correct position.
+
+  Resolves #1659 
+
+* * *
+
 ## [20250716] - 2025-07-16
 
 - ### Update ucb-content-sequence.css
@@ -4424,7 +4456,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250716...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250723...HEAD
+[20250723]: https://github.com/CuBoulder/tiamat-theme/compare/20250716...20250723
 [20250716]: https://github.com/CuBoulder/tiamat-theme/compare/20250709...20250716
 [20250709]: https://github.com/CuBoulder/tiamat-theme/compare/20250611...20250709
 [20250611]: https://github.com/CuBoulder/tiamat-theme/compare/20250604...20250611
