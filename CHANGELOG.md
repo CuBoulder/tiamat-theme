@@ -9,27 +9,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250730] - 2025-07-30
+
 - ### People List Page - Default Photo Fix
+
   Previously, an issue presented where anonymous users could wind up with page-breaking JavaScript, which happened when the People List Page tries to associate an image to a Person Page that did not actually have them due to a logical bug. This would prevent render of the final display for these users, and wind up with a partially-rendered People List Page
-  
+
   This has been corrected to ensure People pages with missing photos always get the Default Avatar photo.
-  
+
   This change was not necessary on the People List Block
-  
+
   Resolves #1672 
----
+
+* * *
 
 - ### #1669 - Adds Link Processing to Intro Body for relative hrefs
+
   Previously the 'Intro Text' field did not process relative urls for links created in the Intro Text WYSIWYG field. This would cause urls to show up in the Email HTML version as `colorado.edu/<your-relative-href>` instead of `colorado.edu/<subdomain>/<your-relative-rul>` , which led to broken links on most sites. The Newsletter has been adjusted to process these links as well. 
-  
+
   Resolves #1669 
----
+
+* * *
 
 - ### Section Content Frame Padding
+
   Previously Layout Builder sections with a Content Frame Color applied lacked padding - resulting in a very small frame applied to the inner content. This has been adjusted to create equal padding on all sides of the framed content.
-  
+
   Resolves #1667 
----
+
+* * *
 
 ## [20250723] - 2025-07-23
 
@@ -4466,7 +4474,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250723...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250730...HEAD
+[20250730]: https://github.com/CuBoulder/tiamat-theme/compare/20250723...20250730
 [20250723]: https://github.com/CuBoulder/tiamat-theme/compare/20250716...20250723
 [20250716]: https://github.com/CuBoulder/tiamat-theme/compare/20250709...20250716
 [20250709]: https://github.com/CuBoulder/tiamat-theme/compare/20250611...20250709
