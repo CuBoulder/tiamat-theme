@@ -531,8 +531,22 @@
           departments: departments,
           jobTypes: jobTypes,
           photoId: photoId,
-          photoUrl: photoExists ? photoUrls[photoData[photoId]['id']] : defaultThumbnail,
-          photoAlt: photoExists ? photoData[photoId]['meta']['alt'] : 'This person has no photo',
+          photoUrl: (() => {
+            try {
+              const media = photoData[photoId];
+              const imageId = media?.id;
+              return (imageId && photoUrls[imageId]) || defaultThumbnail;
+            } catch {
+              return defaultThumbnail;
+            }
+          })(),
+          photoAlt: (() => {
+              try {
+                return photoData[photoId]?.meta?.alt || 'This person has no photo';
+              } catch {
+                return 'This person has no photo';
+              }
+            })(),
           body: '',
           email: personAttributeData['field_ucb_person_email'],
           phone: personAttributeData['field_ucb_person_phone'],
@@ -595,7 +609,7 @@
       const
         personLink = this.getAttribute('site-base') + person.link,
         personName = PeopleListElement.escapeHTML(person.name),
-        personPhoto = person.photoUrl ? '<img src="' + person.photoUrl + '" alt="' + PeopleListElement.escapeHTML(person.photoAlt) + '">' : '',
+        personPhoto = `<img src="${person.photoUrl || defaultAvatarURL}" alt="${PeopleListElement.escapeHTML(person.photoAlt || 'This person has no photo')}">`,
         personBody = PeopleListElement.decodeHtmlEntities(person.body),
         personEmail = PeopleListElement.escapeHTML(person.email),
         personPhone = PeopleListElement.escapeHTML(person.phone),
