@@ -7,7 +7,10 @@
 
       fetch(`${this._shareURL}`)
         .then((response) => {
-          if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
+          if (!response.ok) {
+            this.handleError(response.status, "Error Fetching from Source - Check the console for error logs.");
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
           return response.json();
         })
         .then((data) => {
@@ -15,7 +18,7 @@
         })
         .catch((error) => {
           console.error('🔍 TrustedContentShare: Error fetching data:', error);
-          this.handleError(error);
+          this.handleError(error, "Error Fetching Data");
         });
     }
 
@@ -78,6 +81,7 @@
           }
         } catch (error) {
           // Error parsing URL with URLSearchParams
+          this.handleError(error, "TrustedContentShare: Error parsing URL with Search Parameters");
         }
       }
       
@@ -106,6 +110,7 @@
         return response.json();
       })
       .catch(error => {
+        this.handleError(error, "TrustedContentShare: Error reporting view");
         console.error('🔍 TrustedContentShare: Error reporting view:', error);
       });
     }

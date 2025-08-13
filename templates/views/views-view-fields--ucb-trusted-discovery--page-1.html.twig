@@ -26,6 +26,18 @@
         <span class="ucb-card-readmore">
           <a href="{{ full_url }}" aria-hidden="true">Read more</a>
         </span>
+
+        <div class="ucb-card-metrics text-muted mt-1" style="font-size: 0.9em;">
+        <span class="me-3">
+          <i class="fa fa-eye" aria-hidden="true"></i>
+          {{ fields.total_views.content }}
+        </span>
+        <span>
+          <i class="fa fa-sitemap" aria-hidden="true"></i>
+          {{ fields.consumer_site_count.content }}
+        </span>
+      </div>
+
       </div>
     </div>
 
@@ -37,4 +49,3 @@
     }) }}></trusted-share-button>
   </div>
 </article>
-
