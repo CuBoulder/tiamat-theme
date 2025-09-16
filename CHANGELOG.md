@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1679 - Adds CSS for diff module
+  Adds styling for revision page used by the diff module
+  
+  Includes
+  - `profile` => https://github.com/CuBoulder/tiamat10-profile/pull/293
+  - `template` => https://github.com/CuBoulder/tiamat10-project-template/pull/86
+  - `theme` => https://github.com/CuBoulder/tiamat-theme/pull/1680
+  
+  Resolves #1679 
+  Resolves https://github.com/CuBoulder/tiamat10-profile/issues/292
+---
+
 ## [20250730] - 2025-07-30
 
 - ### People List Page - Default Photo Fix
