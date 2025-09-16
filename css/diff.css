@@ -1,0 +1,9 @@
+/* Used for the diff module */
+.diffins, .diffdel {
+    display: block;
+    padding: 10px;
+}
+
+.diffmod {
+    background-color: #FFE570
+}
