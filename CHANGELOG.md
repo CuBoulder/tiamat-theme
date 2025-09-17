@@ -9,17 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250917] - 2025-09-17
+
 - ### #1679 - Adds CSS for diff module
+
   Adds styling for revision page used by the diff module
-  
+
   Includes
-  - `profile` => https://github.com/CuBoulder/tiamat10-profile/pull/293
-  - `template` => https://github.com/CuBoulder/tiamat10-project-template/pull/86
-  - `theme` => https://github.com/CuBoulder/tiamat-theme/pull/1680
-  
+
+  - `profile` => <https://github.com/CuBoulder/tiamat10-profile/pull/293>
+  - `template` => <https://github.com/CuBoulder/tiamat10-project-template/pull/86>
+  - `theme` => <https://github.com/CuBoulder/tiamat-theme/pull/1680>
+
   Resolves #1679 
-  Resolves https://github.com/CuBoulder/tiamat10-profile/issues/292
----
+  Resolves <https://github.com/CuBoulder/tiamat10-profile/issues/292>
+
+* * *
 
 ## [20250730] - 2025-07-30
 
@@ -4486,7 +4491,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250730...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250917...HEAD
+[20250917]: https://github.com/CuBoulder/tiamat-theme/compare/20250730...20250917
 [20250730]: https://github.com/CuBoulder/tiamat-theme/compare/20250723...20250730
 [20250723]: https://github.com/CuBoulder/tiamat-theme/compare/20250716...20250723
 [20250716]: https://github.com/CuBoulder/tiamat-theme/compare/20250709...20250716
