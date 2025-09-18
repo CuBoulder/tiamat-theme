@@ -6,7 +6,7 @@
 #}
 {# Only shows Taxonomy terms with display = true #}
 {% set items = items|filter(item => item.content['#options'].entity.field_ucb_category_display.value == '1') %}
-{% set sorted_items = items|sort %}
+{% set sorted_items = items|sort((a, b) => a.content['#title'] <=> b.content['#title']) %}
 {% if items %}
   <div role="contentinfo" class="container ucb-article-categories" itemprop="about">
     <span class="visually-hidden">Categories:</span>
