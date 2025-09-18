@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Itemsort bug
+  Updated item sorting for `item|sort` in loops in 10.5.2
+  
+  
+---
+
 ## [20250917] - 2025-09-17
 
 - ### #1679 - Adds CSS for diff module
