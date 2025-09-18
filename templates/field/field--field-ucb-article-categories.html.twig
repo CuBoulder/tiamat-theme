@@ -6,13 +6,14 @@
 #}
 {# Only shows Taxonomy terms with display = true #}
 {% set items = items|filter(item => item.content['#options'].entity.field_ucb_category_display.value == '1') %}
+{% set sorted_items = items|sort %}
 {% if items %}
   <div role="contentinfo" class="container ucb-article-categories" itemprop="about">
     <span class="visually-hidden">Categories:</span>
     <div class="ucb-article-category-icon" aria-hidden="true">
       <i class="fa-solid fa-folder-open"></i>
     </div>
-    {% for item in items|sort %}
+    {% for item in sorted_items %}
       {# This canonical URL setting is needed for the Newsletter HTML, otherwise the links get rendered as relative such as `file:///taxonomy/term/1` #}
       {% set term_id = item.content['#options'].entity.id %}
       {% set term_url = url('entity.taxonomy_term.canonical', {'taxonomy_term': term_id}) %}
