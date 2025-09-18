@@ -9,11 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250918] - 2025-09-18
+
 - ### Itemsort bug
   Updated item sorting for `item|sort` in loops in 10.5.2
-  
-  
----
+
+* * *
 
 ## [20250917] - 2025-09-17
 
@@ -4497,7 +4498,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250917...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250918...HEAD
+[20250918]: https://github.com/CuBoulder/tiamat-theme/compare/20250917...20250918
 [20250917]: https://github.com/CuBoulder/tiamat-theme/compare/20250730...20250917
 [20250730]: https://github.com/CuBoulder/tiamat-theme/compare/20250723...20250730
 [20250723]: https://github.com/CuBoulder/tiamat-theme/compare/20250716...20250723
