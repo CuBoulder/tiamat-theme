@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Slider Link Update
+  Added logic so title text is linked if applicable
+  Added css to keep the colors white on title links.
+  
+  Resolves #1677
+---
+
 ## [20250918] - 2025-09-18
 
 - ### Itemsort bug
