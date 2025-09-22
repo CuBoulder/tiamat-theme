@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Issue/1678
+  Updated the Tiles Row Layout to be responsive.
+  On mobile the images have a set min height as they are rendered as background images rather than img.
+  
+  Resolves #1678 
+---
+
 - ### Slider Link Update
   Added logic so title text is linked if applicable
   Added css to keep the colors white on title links.
