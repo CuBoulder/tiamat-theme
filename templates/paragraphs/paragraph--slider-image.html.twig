@@ -44,14 +44,18 @@
         <div class="slide-text-container">
           {% if paragraph.field_slide_title is not empty %}
             <span>
-              <h3>
-                {{ content.field_slide_title['#items'].0.value|trim }}
-                {% if paragraph.field_slide_link.0.url is not empty %}
-                  <a{{ create_attribute({ href: paragraph.field_slide_link.0.url|render, class: 'slide-link' }) }}>
+              {% if paragraph.field_slide_link.0.url is not empty %}
+                <h3>
+                  <a{{ create_attribute({ href: paragraph.field_slide_link.0.url|render, class: 'slide-title-link' }) }}>
+                    {{ content.field_slide_title['#items'].0.value|trim }}
                     <i class="fa-solid fa-up-right-from-square"></i>
                   </a>
-                {% endif %}
-              </h3>
+                </h3>
+              {% else %}
+                <h3>
+                  {{ content.field_slide_title['#items'].0.value|trim }}
+                </h3>
+              {% endif %}
             </span>
           {% endif %}
           {% if paragraph.field_slide_image_text.value is not empty %}
