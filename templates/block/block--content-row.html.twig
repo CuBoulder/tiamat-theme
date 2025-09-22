@@ -86,7 +86,7 @@
       {% set rowLink = item.entity.field_row_layout_content_link.0.url|render %}
       {% set tileBackground = "height:100%;background-image:url('" ~ file_url(item.entity.field_row_layout_content_image.entity.field_media_image.entity.fileuri|image_style('focal_image_square')) ~ "');background-repeat:no-repeat;background-position:center;background-size:cover;" %}
       <div class="row d-flex flex-lg-row flex-md-column row-content-tiles {{ (loop.index is odd) ? 'flex-lg-row-reverse' : '' }}">
-          <div class="col-lg-6 col-md-12 row-text-container-tile order-lg-2 order-md-2">
+          <div class="col-lg-6 col-md-12 row-text-container-tile">
             {% if rowLink %}
               <a href="{{ rowLink }} ">
                 <h3>{{ item.entity.field_row_layout_content_title.0.value }}</h3>
@@ -96,7 +96,7 @@
             {% endif %}
             {{item.entity.field_row_layout_content_text|view}}
           </div>
-          <div class="col-lg-6 col-md-12 row-image-container-tile-{{ (loop.index is odd) ? 'odd' : 'even' }} order-lg-1 order-md-1">
+          <div class="col-lg-6 col-md-12 row-image-container-tile-{{ (loop.index is odd) ? 'odd' : 'even' }}">
             {% if rowLink %}
               <a role="presentation" aria-hidden="true" href="{{ rowLink }} ">
                 {# TO DO -- Make this a DIV with background img #}
