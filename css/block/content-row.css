@@ -145,9 +145,6 @@
   padding-bottom: 0px;
 }
 
-.row-content-tile-odd{
-  flex-direction: row-reverse;
-}
 
 @media screen and (max-width: 975px) {
   .small-feature-row {
@@ -186,6 +183,37 @@
   }
   .ucb-teaser-lg-row.ucb-teaser-lg-alternate .row-image-container-lg{
     margin-bottom: 10px;
+  }
+}
+
+/* Tiles Row Layout Mobile Responsiveness */
+@media screen and (max-width: 991px) {
+  .row-text-container-tile {
+    padding: 40px 20px;
+    order: 2;
+  }
+  
+  .row-image-container-tile-odd,
+  .row-image-container-tile-even {
+    padding: 0;
+    order: 1;
+    margin-bottom: 20px;
+  }
+  
+  .row-image-container-tile-odd div,
+  .row-image-container-tile-even div {
+    min-height: 250px;
+  }
+}
+
+@media screen and (max-width: 576px) {
+  .row-text-container-tile {
+    padding: 20px 15px;
+  }
+  
+  .row-image-container-tile-odd div,
+  .row-image-container-tile-even div {
+    min-height: 200px;
   }
 }
 
