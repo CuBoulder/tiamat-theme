@@ -9,19 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250924] - 2025-09-24
+
 - ### Issue/1678
+
   Updated the Tiles Row Layout to be responsive.
   On mobile the images have a set min height as they are rendered as background images rather than img.
-  
+
   Resolves #1678 
----
+
+* * *
 
 - ### Slider Link Update
+
   Added logic so title text is linked if applicable
   Added css to keep the colors white on title links.
-  
+
   Resolves #1677
----
+
+* * *
 
 ## [20250918] - 2025-09-18
 
@@ -4512,7 +4518,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250918...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250924...HEAD
+[20250924]: https://github.com/CuBoulder/tiamat-theme/compare/20250918...20250924
 [20250918]: https://github.com/CuBoulder/tiamat-theme/compare/20250917...20250918
 [20250917]: https://github.com/CuBoulder/tiamat-theme/compare/20250730...20250917
 [20250730]: https://github.com/CuBoulder/tiamat-theme/compare/20250723...20250730
