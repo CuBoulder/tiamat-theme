@@ -24,7 +24,7 @@
         <div class="ucb-discover-card-share-section">
           <i class="fa-solid fa-share"></i>
           <input type="text" value="${pattern}" readonly style="width: 100%; padding: 4px;" />
-          <button class="button" type="button">Copy Pattern</button>
+          <button class="button" type="button">Share</button>
         </div>
       `;
 
@@ -33,8 +33,8 @@
       button.addEventListener('click', () => {
         input.select();
         document.execCommand('copy');
-        button.textContent = 'Copied!';
-        setTimeout(() => (button.textContent = 'Copy Pattern'), 1500);
+        button.textContent = 'Copied Syndication Pattern!';
+        setTimeout(() => (button.textContent = 'Share'), 1500);
       });
     }
   }
