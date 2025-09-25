@@ -9,6 +9,11 @@
 	padding: .5rem 0;
 }
 
+/* Jumping to anchor tag isn't hidden by Sticky Menu */
+a.ck-anchor{
+	scroll-margin-top: 100px;
+}
+
 @media only screen and (max-width: 960px) {
 	.ucb-sticky-menu {
 		display: none;

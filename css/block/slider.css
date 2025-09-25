@@ -43,6 +43,14 @@
   color: white;
 }
 
+a.slide-title-link {
+  color: white;
+}
+
+a.slide-title-link:hover {
+  color: white;
+}
+
 .ucb-slider-block .carousel-caption {
   padding: 1em;
 }

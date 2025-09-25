@@ -4,6 +4,7 @@ ucb-global:
     layout:
       css/bootstrap/bootstrap.min.css: { weight: -25 }
       css/layout.css: { weight: -20 }
+      css/diff.css: { weight: -20 }
     theme:
       https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@400;700&family=Roboto:wght@400;500;700&display=swap:
         { type: external, weight: -8 }

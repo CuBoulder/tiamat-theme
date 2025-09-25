@@ -9,6 +9,129 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20250924] - 2025-09-24
+
+- ### Issue/1678
+
+  Updated the Tiles Row Layout to be responsive.
+  On mobile the images have a set min height as they are rendered as background images rather than img.
+
+  Resolves #1678 
+
+* * *
+
+- ### Slider Link Update
+
+  Added logic so title text is linked if applicable
+  Added css to keep the colors white on title links.
+
+  Resolves #1677
+
+* * *
+
+## [20250918] - 2025-09-18
+
+- ### Itemsort bug
+  Updated item sorting for `item|sort` in loops in 10.5.2
+
+* * *
+
+## [20250917] - 2025-09-17
+
+- ### #1679 - Adds CSS for diff module
+
+  Adds styling for revision page used by the diff module
+
+  Includes
+
+  - `profile` => <https://github.com/CuBoulder/tiamat10-profile/pull/293>
+  - `template` => <https://github.com/CuBoulder/tiamat10-project-template/pull/86>
+  - `theme` => <https://github.com/CuBoulder/tiamat-theme/pull/1680>
+
+  Resolves #1679 
+  Resolves <https://github.com/CuBoulder/tiamat10-profile/issues/292>
+
+* * *
+
+## [20250730] - 2025-07-30
+
+- ### People List Page - Default Photo Fix
+
+  Previously, an issue presented where anonymous users could wind up with page-breaking JavaScript, which happened when the People List Page tries to associate an image to a Person Page that did not actually have them due to a logical bug. This would prevent render of the final display for these users, and wind up with a partially-rendered People List Page
+
+  This has been corrected to ensure People pages with missing photos always get the Default Avatar photo.
+
+  This change was not necessary on the People List Block
+
+  Resolves #1672 
+
+* * *
+
+- ### #1669 - Adds Link Processing to Intro Body for relative hrefs
+
+  Previously the 'Intro Text' field did not process relative urls for links created in the Intro Text WYSIWYG field. This would cause urls to show up in the Email HTML version as `colorado.edu/<your-relative-href>` instead of `colorado.edu/<subdomain>/<your-relative-rul>` , which led to broken links on most sites. The Newsletter has been adjusted to process these links as well. 
+
+  Resolves #1669 
+
+* * *
+
+- ### Section Content Frame Padding
+
+  Previously Layout Builder sections with a Content Frame Color applied lacked padding - resulting in a very small frame applied to the inner content. This has been adjusted to create equal padding on all sides of the framed content.
+
+  Resolves #1667 
+
+* * *
+
+## [20250723] - 2025-07-23
+
+- ### #1649 - Resolves Mega Menu cases for special characters and hidden icons
+
+  Previously adding special characters like apostrophes, ampersands, etc. to a Mega Menu item or disabling the page so the 'Hidden' icon would show for site editors could prevent the Mega Menu from functioning properly -- leading to WSOD errors or JavaScript errors. 
+
+  The logic for assembling these menus has been adjusted to handle these cases
+
+  Resolves #1649 
+
+* * *
+
+- ### #1659 - Adds scroll margin offset for Sticky Menu
+
+  When using CK Editor Anchor tags on a site with a Sticky Menu, clicking the link to jump to the anchor tag would result in the Sticky Menu covering the actual anchor position, resulting in the need to scroll back up to find the intended destination. This change adds an offset to account for the menu and will jump to the correct position.
+
+  Resolves #1659 
+
+* * *
+
+## [20250716] - 2025-07-16
+
+- ### Update ucb-content-sequence.css
+
+  This update makes the link colors use only our `ucb-link` colors for this block. 
+  The will block always have white backgrounds so the text needs to be blue.
+
+  Resolves #1658
+
+* * *
+
+## [20250709] - 2025-07-09
+
+- ### Add homepage sticky menu
+
+  Adding the homepage sticky menu options
+
+  To test:
+
+  > /admin/config/cu-boulder/appearance
+  > select "Show sticky menu"
+  > in advanced options select "Hide the normal header bar. For the CU Homepage only."
+
+  The navigation should show the logo and menu in the same bar
+
+  Resolves #1641 
+
+* * *
+
 ## [20250611] - 2025-06-11
 
 - ### Update style.css
@@ -4395,7 +4518,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250611...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250924...HEAD
+[20250924]: https://github.com/CuBoulder/tiamat-theme/compare/20250918...20250924
+[20250918]: https://github.com/CuBoulder/tiamat-theme/compare/20250917...20250918
+[20250917]: https://github.com/CuBoulder/tiamat-theme/compare/20250730...20250917
+[20250730]: https://github.com/CuBoulder/tiamat-theme/compare/20250723...20250730
+[20250723]: https://github.com/CuBoulder/tiamat-theme/compare/20250716...20250723
+[20250716]: https://github.com/CuBoulder/tiamat-theme/compare/20250709...20250716
+[20250709]: https://github.com/CuBoulder/tiamat-theme/compare/20250611...20250709
 [20250611]: https://github.com/CuBoulder/tiamat-theme/compare/20250604...20250611
 [20250604]: https://github.com/CuBoulder/tiamat-theme/compare/20250514...20250604
 [20250514]: https://github.com/CuBoulder/tiamat-theme/compare/20250430...20250514

@@ -49,7 +49,15 @@
             '#markup': '<i class="fa-solid fa-eye-slash"></i> ' ~ item.title|e ~ '<span class="visually-hidden">(Unpublished)</span>'
             } : item.title %}
             {% if item.content.field_display_mega_menu|render|striptags|trim == "On" %}
-              {%  set linkID = title|lower|trim|replace({' ': ''}) ~ item.content.field_mega_menu_select.0['#block_content'].id.value %}
+              {% set base_title = item.title is iterable ? item.title['#markup'] : item.title %}
+              {% set sanitized_title = base_title|lower
+                |replace({' ': '-', '&': 'and', '/': '-', '\\': '-'})
+                |replace({'"': '', "'": '', '.': '', ',': '', '!': '', '?': '', '(': '', ')': '',
+                          '[': '', ']': '', '{': '', '}': '', ':': '', ';': '', '#': '', '@': '',
+                          '%': '', '+': '', '=': '', '*': '', '^': '', '`': '', '~': '', '<': '',
+                          '>': '', '|': '', '$': ''})
+              %}
+              {% set linkID = sanitized_title ~ item.content.field_mega_menu_select.0['#block_content'].id.value %}
               {% set linkTargetID = "#" ~ linkID %}
               {% set linkAttr = create_attribute({  "data-bs-toggle" : "collapse", "data-bs-target": linkTargetID, "aria-expanded": "false", "aria-controls" : linkID }) %}
               {% set linkTitle = { '#markup': title|e ~ '<i class="fa fa-angle-down ucb-mega-menu-icon" aria-hidden="true"></i>'} %}

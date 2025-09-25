@@ -41,15 +41,15 @@
   font-size: 150%;
 }
 
-.ucb-content-sequence .vertical-timeline-card-title a {
+.vertical-timeline-card-header a, .vertical-timeline-card-body a {
   color: var(--ucb-link);
 }
 
-.ucb-content-sequence .vertical-timeline-card-title a:hover {
+.vertical-timeline-card-header a:hover, .vertical-timeline-card-body a:hover {
   color: var(--ucb-link-visited);
 } 
 
-.ucb-content-sequence .vertical-timeline-card-title a:visited {
+.vertical-timeline-card-header a:visited, .vertical-timeline-card-body a:visited {
   color: var(--ucb-link-visited);
 } 
 
