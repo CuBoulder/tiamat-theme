@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1688: Accessible color contrast for Diff revision classes
+  Fixes text color for better color contrast with the `Diff` modules highlighting classes in revision view. Previously, dark section backgrounds could cause white font on light yellow highlights resulting in changed content being very difficult to read.
+  
+  Resolves #1688 
+---
+
 ## [20250924] - 2025-09-24
 
 - ### Issue/1678
