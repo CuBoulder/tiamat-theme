@@ -10,15 +10,18 @@
 
 
 {% set base_url = url('<front>')|render|split('/', -1)|join('/') %}
-<table role="presentation"  border="0" width="600" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
-	<tbody>
-  		<tr>
-			<td align="center" style="font-size:20px;text-align: left; padding-right:10px; padding-left:10px;padding-top:20px; padding-bottom:20px;">
-      			<h2>{{ content.field_newsletter_section_title|render }}</h2>
-	  		</td>
- 		</tr>
-	</tbody>
- </table>
+
+{% if content.field_newsletter_section_title|render  %}
+	<table role="presentation"  border="0" width="600" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
+		<tbody>
+			<tr>
+				<td align="center" style="font-size:20px;text-align: left; padding-right:10px; padding-left:10px;padding-top:20px; padding-bottom:20px;">
+					<h2>{{ content.field_newsletter_section_title|render }}</h2>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+ {% endif %}
     {# Article #}
     {# If feature #}
 		{% if paragraph.field_newsletter_section_style.value is same as("0") %}

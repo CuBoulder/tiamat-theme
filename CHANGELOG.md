@@ -9,6 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20251001] - 2025-10-01
+
+- ### #1690: Newsletter Section title spacing
+
+  Moves the conditional check for a Newsletter Section title higher in template, to avoid spacing issues with omission. Previously omitting the optional Newsletter Section's title would lead to empty elements adding to additional spacing between sections
+
+  Link for reference: <https://www.colorado.edu/crdds/newsletter/crdds/your-october-2025-crdds-newsletter>
+
+  Resolves #1690 
+
+* * *
+
+- ### #1688: Accessible color contrast for Diff revision classes
+
+  Fixes text color for better color contrast with the `Diff` modules highlighting classes in revision view. Previously, dark section backgrounds could cause white font on light yellow highlights resulting in changed content being very difficult to read.
+
+  Resolves #1688 
+
+* * *
+
 ## [20250924] - 2025-09-24
 
 - ### Issue/1678
@@ -4518,7 +4538,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20250924...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20251001...HEAD
+[20251001]: https://github.com/CuBoulder/tiamat-theme/compare/20250924...20251001
 [20250924]: https://github.com/CuBoulder/tiamat-theme/compare/20250918...20250924
 [20250918]: https://github.com/CuBoulder/tiamat-theme/compare/20250917...20250918
 [20250917]: https://github.com/CuBoulder/tiamat-theme/compare/20250730...20250917
