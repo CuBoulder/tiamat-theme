@@ -36,6 +36,12 @@
           <i class="fa fa-sitemap" aria-hidden="true"></i>
           {{ fields.syndication_consumer_sites.content }}
         </span>
+
+        <span class="me-3">
+            <i class="fas fa-clock"></i> 
+            {{ fields.last_updated.content }}
+        </span>
+
         {% if fields.content_authority is defined %}
         <span class="me-3">
           <a class="ucb-discover-source" target="_blank" href="{{fields.source_site.content}}">
@@ -43,6 +49,7 @@
             {{ fields.content_authority.content }}
           </a>
         </span>
+
           {# <p class="ucb-discover-source"></p> #}
         {% endif %}
             {# Share button outside row if full-width #}
