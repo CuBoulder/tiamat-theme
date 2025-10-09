@@ -85,7 +85,19 @@
     // Report view
     const sourceSiteUrl = this._endpoint.split("/jsonapi/")[0];
     const reportUrl = `${sourceSiteUrl}/api/trust-schema/${nodeId}/report-view`;
-    const consumerSite = window.location.hostname;
+    
+    // Get consumer site with Drupal base path for multisite support
+    // Drupal exposes base path in drupalSettings or we can derive it from pathPrefix
+    // e.g., "colorado.edu/biden" or "colorado.edu/trust/discovery"
+    let basePath = '';
+    if (typeof drupalSettings !== 'undefined' && drupalSettings.path) {
+      basePath = drupalSettings.path.baseUrl || drupalSettings.path.pathPrefix || '';
+      basePath = basePath.replace(/^\/|\/$/g, ''); // Remove leading/trailing slashes
+    }
+    
+    const consumerSite = basePath 
+      ? window.location.hostname + '/' + basePath
+      : window.location.hostname;
 
     fetch(reportUrl, {
       method: "POST",
