@@ -174,27 +174,9 @@
       container.classList = "ucb-article-list-block container";
 
       const article = document.createElement("article");
-      article.classList = "ucb-article-card row";
+      article.classList = "ucb-article-card ucb-article-card-teaser row";
 
       const hasImage = entry.images?.focal_image_square;
-
-      if (hasImage) {
-        const imgDiv = document.createElement("div");
-        imgDiv.classList = "ucb-article-card-img";
-
-        const imgLink = document.createElement("a");
-        imgLink.href = entry.link;
-        imgLink.setAttribute("role", "presentation");
-        imgLink.setAttribute("aria-hidden", "true");
-
-        const img = document.createElement("img");
-        img.src = entry.images.focal_image_square;
-        img.alt = entry.images.alt;
-
-        imgLink.appendChild(img);
-        imgDiv.appendChild(imgLink);
-        article.appendChild(imgDiv);
-      }
 
       const articleBody = document.createElement("div");
       articleBody.classList = hasImage
@@ -222,6 +204,23 @@
       articleBody.appendChild(readMore);
 
       article.appendChild(articleBody);
+      if (hasImage) {
+        const imgDiv = document.createElement("div");
+        imgDiv.classList = "ucb-article-card-img";
+
+        const imgLink = document.createElement("a");
+        imgLink.href = entry.link;
+        imgLink.setAttribute("role", "presentation");
+        imgLink.setAttribute("aria-hidden", "true");
+
+        const img = document.createElement("img");
+        img.src = entry.images.focal_image_square;
+        img.alt = entry.images.alt;
+
+        imgLink.appendChild(img);
+        imgDiv.appendChild(imgLink);
+        article.appendChild(imgDiv);
+      }
       this.toggleMessage("ucb-al-loading");
       container.appendChild(article);
       this.appendChild(container);
@@ -232,28 +231,7 @@
     container.classList = "ucb-article-list-block";
 
     const article = document.createElement("article");
-    article.classList = "ucb-article-card";
-
-    const hasImage = entry.images?.focal_image_wide;
-
-    if (hasImage) {
-      const imgDiv = document.createElement("div");
-
-      const imgLink = document.createElement("a");
-      imgLink.href = entry.link;
-      imgLink.setAttribute("role", "presentation");
-      imgLink.setAttribute("aria-hidden", "true");
-
-      const img = document.createElement("img");
-      img.classList = "ucb-article-card-img-wide";
-      img.src = entry.images.focal_image_wide;
-      img.alt = entry.images.alt;
-
-
-      imgLink.appendChild(img);
-      imgDiv.appendChild(imgLink);
-      article.appendChild(imgDiv);
-    }
+    article.classList = "ucb-article-card ucb-article-card-feature";
 
     const articleBody = document.createElement("div");
     articleBody.classList = "col-sm-12 ucb-article-card-data";
@@ -261,7 +239,7 @@
     const headerLink = document.createElement("a");
     headerLink.href = entry.link;
 
-    const header = document.createElement("h3");
+    const header = document.createElement("p");
     header.classList = "ucb-article-card-title-feature";
     if (!entry.date) header.classList.add("ucb-article-card-title-no-date");
     header.innerText = entry.title;
@@ -293,8 +271,31 @@
     readMore.innerText = "Read More";
     readMore.setAttribute("aria-hidden", "true");
     articleBody.appendChild(readMore);
-
     article.appendChild(articleBody);
+
+    // Image
+    const hasImage = entry.images?.focal_image_wide;
+
+    if (hasImage) {
+      const imgDiv = document.createElement("div");
+
+      const imgLink = document.createElement("a");
+      imgLink.href = entry.link;
+      imgLink.setAttribute("role", "presentation");
+      imgLink.setAttribute("aria-hidden", "true");
+
+      const img = document.createElement("img");
+      img.classList = "ucb-article-card-img-wide";
+      img.src = entry.images.focal_image_wide;
+      img.alt = entry.images.alt;
+
+
+      imgLink.appendChild(img);
+      imgDiv.appendChild(imgLink);
+      console.log("Add imag")
+      article.appendChild(imgDiv);
+    }
+
     this.toggleMessage("ucb-al-loading");
     container.appendChild(article);
     this.appendChild(container);

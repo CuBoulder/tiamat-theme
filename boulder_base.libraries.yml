@@ -561,4 +561,4 @@ ucb-trusted-content-share-block:
     js/ucb-trusted-content-share-block.js: {  }
   css:
     theme:
-      css/block/ucb-article-list-block.css : {weight: 5}
+      css/block/ucb-trusted-content-block.css : {weight: 5}
