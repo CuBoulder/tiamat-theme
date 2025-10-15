@@ -35,8 +35,10 @@
 
   build(data) {
     const node = this.normalizeSingleEntry(data);
-
     switch (this._display) {
+      case "Abstract":
+        this.renderAbstract(node);
+        break;
       case "Feature":
         this.renderFeature(node);
         break;
@@ -142,6 +144,7 @@
     const relativePath = node.attributes?.path.alias || `/node/${node.attributes?.drupal_internal__nid}`;
     const link = urlBase + relativePath;
     const summary = node.attributes?.field_ucb_article_summary || node.attributes?.body?.summary || "";
+    const abstract = node.attributes?.field_abstract?.processed || null;
 
     let mediaId = null;
     if (type === "ucb_article") {
@@ -161,6 +164,7 @@
       title,
       link,
       summary,
+      abstract,
       images: {
         focal_image_square: file?.links?.focal_image_square?.href || null,
         focal_image_wide: file?.links?.focal_image_wide?.href || null,
@@ -191,10 +195,19 @@
       strong.appendChild(headerLink);
       articleBody.appendChild(strong);
 
-      const summary = document.createElement("p");
-      summary.classList = "ucb-article-card-summary";
-      summary.innerText = entry.summary;
-      articleBody.appendChild(summary);
+      if (entry.abstract) {
+        // call link normalizer, append summary
+        const summary = document.createElement("div");
+        summary.classList = "ucb-article-card-summary";
+        summary.innerHTML = entry.abstract;
+        this.normalizeLinks(summary);
+        articleBody.appendChild(summary);
+      } else {
+        let summary = document.createElement("p");
+        summary.classList = "ucb-article-card-summary";
+        summary.innerText = entry.summary;
+        articleBody.appendChild(summary);
+      }
 
       const readMore = document.createElement("a");
       readMore.href = entry.link;
@@ -260,10 +273,18 @@
       articleBody.appendChild(dateSpan);
     }
 
-    const summary = document.createElement("p");
-    summary.classList = "ucb-article-card-summary";
-    summary.innerText = entry.summary;
-    articleBody.appendChild(summary);
+    if (entry.abstract){
+      let summary = document.createElement("div");
+      summary.classList = "ucb-article-card-summary";
+      summary.innerHTML = entry.abstract;
+      this.normalizeLinks(summary);
+      articleBody.appendChild(summary);
+    } else {
+      let summary = document.createElement("p");
+      summary.classList = "ucb-article-card-summary";
+      summary.innerText = entry.summary;
+      articleBody.appendChild(summary);
+    }
 
     const readMore = document.createElement("a");
     readMore.href = entry.link;
@@ -292,7 +313,6 @@
 
       imgLink.appendChild(img);
       imgDiv.appendChild(imgLink);
-      console.log("Add imag")
       article.appendChild(imgDiv);
     }
 
@@ -316,9 +336,9 @@
 
   buildTrustedContentShareURL(site, type, nid) {
     const baseFields = {
-      ucb_article: 'title,body,field_ucb_article_summary,field_ucb_article_thumbnail,changed,nid,path',
-      ucb_person: 'title,body,changed,field_ucb_person_photo,nid,path',
-      basic_page: 'title,body,changed,nid,path,field_social_sharing_image',
+      ucb_article: 'title,body,field_abstract, field_ucb_article_summary,field_ucb_article_thumbnail,changed,nid,path',
+      ucb_person: 'title,body,field_abstract, changed,field_ucb_person_photo,nid,path',
+      basic_page: 'title,body,field_abstract, changed,nid,path,field_social_sharing_image',
     };
 
     const includeFields = {
@@ -344,6 +364,36 @@
     }
 
     return `${site}/jsonapi/node/${shortType}?${params.join('&')}`;
+  }
+
+  normalizeLinks(container) {
+    const links = container.querySelectorAll('a[href]');
+    links.forEach(link => {
+      const href = link.getAttribute('href');
+      if (!href) return;
+
+      try {
+        const url = new URL(href, this._host);
+
+        // Already valid absolute URL with domain
+        if (/^https?:\/\//i.test(href) && /^[a-z0-9.-]+\.[a-z]{2,}$/i.test(url.hostname)) {
+          return;
+        }
+
+        // Missing TLD — treat as relative
+        if (/^https?:\/\/[a-z0-9-]+$/i.test(href)) {
+          link.href = new URL(href.replace(/^https?:\/\//, '/'), this._host).href;
+          return;
+        }
+
+        // Normal relative path
+        if (!/^https?:\/\//i.test(href) && !href.startsWith('//')) {
+          link.href = url.href;
+        }
+      } catch (e) {
+        console.warn("Bad link href:", href, e);
+      }
+    });
   }
 }
   customElements.define("trusted-content-share", TrustedContentShare);
