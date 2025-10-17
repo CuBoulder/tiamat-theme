@@ -1,68 +1,79 @@
 {{ attach_library('boulder_base/trusted-share-button') }}
 {{ attach_library('boulder_base/ucb-discovery-view') }}
+{{ attach_library('boulder_base/ucb-trusted-content-preview') }}
 
 {% set full_url = fields.source_site.content ~ fields.remote_path.content %}
-
-<article class="ucb-card container">
-  <div class="ucb-discover-card-container">
-    <div class="row ucb-card-inner">
-      {% if fields.focal_image_square.content %}
-        <div class="col-md-2 ucb-card-image">
-          <a href="{{ full_url }}" role="presentation" aria-hidden="true">
-            <img
-              src="{{ fields.focal_image_square.content }}"
-              alt="{{ fields.focal_image_alt.content }}"
-            >
-          </a>
-        </div>
-      {% endif %}
-
-      <div class="col-sm-12 col-md-10 ucb-card-content">
-        <a href="{{ full_url }}">
-          <h2 class="ucb-card-title">{{ fields.title.content }}</h2>
-        </a>
-
-        <p class="ucb-card-summary">{{ fields.summary.content }}</p>
-        <span class="ucb-card-readmore">
-          <a href="{{ full_url }}" aria-hidden="true">Read more</a>
-        </span>
-
-      <div class="ucb-card-metrics text-muted mt-1" style="font-size: 0.9em;">
-        <span class="me-3">
-          <i class="fa fa-eye" aria-hidden="true"></i>
-          {{ fields.syndication_total_views.content }}
-        </span>
-        <span class="me-3">
-          <i class="fa fa-sitemap" aria-hidden="true"></i>
-          {{ fields.syndication_consumer_sites.content }}
-        </span>
-
-        <span class="me-3">
-            <i class="fas fa-clock"></i> 
-            {{ fields.last_updated.content }}
-        </span>
-
-        {% if fields.content_authority is defined %}
-        <span class="me-3">
-          <a class="ucb-discover-source" target="_blank" href="{{fields.source_site.content}}">
-            <i class="fas fa-university"></i> 
-            {{ fields.content_authority.content }}
-          </a>
-        </span>
-
-          {# <p class="ucb-discover-source"></p> #}
+<ucb-trusted-preview {{ create_attribute({
+    'base-uri' : fields.source_site.content,
+    'nid' : fields.remote_nid.content,
+    'node-type' : fields.remote_type.content,
+    'focal-image-square' : fields.focal_image_square.content,
+    'focal-image-wide' : fields.focal_image_wide.content,
+    'focal-image-alt' : fields.focal_image_alt.content,
+    'title' : fields.title.content,
+    'full-url' : full_url,
+}) }}>
+  <article class="ucb-card container">
+    <div class="ucb-discover-card-container container">
+      <div class="row ucb-card-inner">
+        {% if fields.focal_image_square.content %}
+          <div class="col-md-2 ucb-card-image">
+            <a href="{{ full_url }}" role="presentation" aria-hidden="true">
+              <img
+                src="{{ fields.focal_image_square.content }}"
+                alt="{{ fields.focal_image_alt.content }}"
+              >
+            </a>
+          </div>
         {% endif %}
-            {# Share button outside row if full-width #}
-    <trusted-share-button {{ create_attribute({
-      'base-uri' : fields.source_site.content,
-      'nid' : fields.remote_nid.content,
-      'node-type' : fields.remote_type.content
-    }) }}></trusted-share-button>
-      </div>
-      </div>
-    </div>
-      <div>
 
+        <div class="col-sm-12 col-md-10 ucb-card-content container">
+          <a href="{{ full_url }}">
+            <h2 class="ucb-card-title">{{ fields.title.content }}</h2>
+          </a>
+
+          <p class="ucb-card-summary">{{ fields.summary.content }}</p>
+          <span class="ucb-card-readmore">
+            <a href="{{ full_url }}" aria-hidden="true">Read more</a>
+          </span>
+
+        <div class="ucb-card-metrics text-muted mt-1" style="font-size: 0.9em;">
+          <span class="me-3">
+            <i class="fa fa-eye" aria-hidden="true"></i>
+            {{ fields.syndication_total_views.content }}
+          </span>
+          <span class="me-3">
+            <i class="fa fa-sitemap" aria-hidden="true"></i>
+            {{ fields.syndication_consumer_sites.content }}
+          </span>
+
+          <span class="me-3">
+              <i class="fas fa-clock"></i> 
+              {{ fields.last_updated.content }}
+          </span>
+
+          {% if fields.content_authority is defined %}
+          <span class="me-3">
+            <a class="ucb-discover-source" target="_blank" href="{{fields.source_site.content}}">
+              <i class="fas fa-university"></i> 
+              {{ fields.content_authority.content }}
+            </a>
+          </span>
+            {# <p class="ucb-discover-source"></p> #}
+          {% endif %}
+          {# PLACE HERE #}
+              {# Share button outside row if full-width #}
+      <trusted-share-button {{ create_attribute({
+        'base-uri' : fields.source_site.content,
+        'nid' : fields.remote_nid.content,
+        'node-type' : fields.remote_type.content
+      }) }}></trusted-share-button>
+        </div>
+        </div>
       </div>
-  </div>
-</article>
+        <div>
+
+        </div>
+    </div>
+  </article>
+</ucb-trusted-preview>
