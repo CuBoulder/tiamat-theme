@@ -22,6 +22,7 @@
   <trusted-content-share{{ create_attribute({
       'display' : content.field_trusted_content_display|render|striptags|trim,
       'shareURL' : content.field_trusted_content_link|render|striptags|trim,
+      'abstract' : content.field_ucb_show_abstract|render|striptags|trim
     })}}
 
   ></trusted-content-share>
