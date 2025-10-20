@@ -5,6 +5,7 @@
 
       // Raw input (pipe format)
       this._shareInput = this.getAttribute("shareURL");
+      this._showAbstract = this.getAttribute("abstract") == "Abstract" ? true : false;
 
       // Parse parts
       const [host, type, nid] = this._shareInput.split("|");
@@ -36,9 +37,6 @@
   build(data) {
     const node = this.normalizeSingleEntry(data);
     switch (this._display) {
-      case "Abstract":
-        this.renderAbstract(node);
-        break;
       case "Feature":
         this.renderFeature(node);
         break;
@@ -195,11 +193,11 @@
       strong.appendChild(headerLink);
       articleBody.appendChild(strong);
 
-      if (entry.abstract) {
+      if (this._showAbstract && entry.abstract) {
         // call link normalizer, append summary
         const summary = document.createElement("div");
         summary.classList = "ucb-article-card-summary";
-        summary.innerHTML = entry.abstract;
+        summary.innerHTML = this._showAbstract && entry.abstract ? entry.abstract : entry.summary;
         this.normalizeLinks(summary);
         articleBody.appendChild(summary);
       } else {
@@ -276,7 +274,7 @@
     if (entry.abstract){
       let summary = document.createElement("div");
       summary.classList = "ucb-article-card-summary";
-      summary.innerHTML = entry.abstract;
+      summary.innerHTML = this._showAbstract && entry.abstract ? entry.abstract : entry.summary;
       this.normalizeLinks(summary);
       articleBody.appendChild(summary);
     } else {
