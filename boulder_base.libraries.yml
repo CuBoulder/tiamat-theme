@@ -562,3 +562,11 @@ ucb-trusted-content-share-block:
   css:
     theme:
       css/block/ucb-trusted-content-block.css : {weight: 5}
+
+ucb-trusted-content-preview:
+  version: 1.x
+  js:
+    js/ucb-trusted-content-preview.js: {  }
+  css:
+    theme:
+      css/block/ucb-trusted-content-block.css : {weight: 5}

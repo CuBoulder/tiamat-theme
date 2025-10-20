@@ -3,6 +3,7 @@
 {{ attach_library('boulder_base/ucb-trusted-content-preview') }}
 
 {% set full_url = fields.source_site.content ~ fields.remote_path.content %}
+{% set hasImg = "" %}
 <ucb-trusted-preview {{ create_attribute({
     'base-uri' : fields.source_site.content,
     'nid' : fields.remote_nid.content,
@@ -27,7 +28,12 @@
           </div>
         {% endif %}
 
-        <div class="col-sm-12 col-md-10 ucb-card-content container">
+      {# Switch for no image #}
+      {% if fields.focal_image_square.content %}
+        {% set hasImg = "col-md-10" %}
+      {% endif %}
+
+        <div class="col-sm-12 {{hasImg}} ucb-card-content container">
           <a href="{{ full_url }}">
             <h2 class="ucb-card-title">{{ fields.title.content }}</h2>
           </a>

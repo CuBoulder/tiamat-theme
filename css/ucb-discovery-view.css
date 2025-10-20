@@ -4,6 +4,10 @@
   padding-bottom: 20px;
 }
 
+.ucb-article-card {
+  border-bottom: none !important;
+}
+
 .ucb-discover-card-share-section{
   display: inline-flex;
   flex-direction: row;
@@ -69,6 +73,21 @@
   flex: 1 1 100%;
   text-align: right;
 }
+
+.ucb-preview-toolbar .btn {
+  background-color: #fff;
+  color: #0277BD;
+  border-color: #0277BD;
+  font-weight: bolder;
+}
+
+/* Active (checked) button */
+.ucb-preview-toolbar .btn-check:checked + .btn {
+  background-color: #0277BD;
+  color: #fff;
+  border-color: #0277BD;
+}
+
 
 /* Responsive: stack filters at mobile */
 @media (max-width: 599px) {
