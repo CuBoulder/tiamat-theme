@@ -9,6 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Discovery View: Update 2
+  Includes the following changes to the Discovery View and Syndicated Content Block:
+  - Overall Discovery View layout enhancements
+  - New User Accesible Filters for `Audience` and `Timeliness`
+  - Adds Source site link
+  - Shortened Share link on View's Syndicated Content cards
+  - Moves JSON:API endpoint assembly to Syndicated Block
+  - Enhances Error Messaging in Syndicated Block
+  - Adds Abstract
+  - Adds Discovery Preview toggle for Teaser/Feature
+  
+  Resolves #1675 
+  Resolves #1699 
+  Resolves #1696 
+  Resolves #1697 
+  
+  Includes:
+  - `custom entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/212
+  - `theme` => https://github.com/CuBoulder/tiamat-theme/issues/1675
+  - `ucb_trusted_content_discovery` => https://github.com/CuBoulder/ucb_trusted_content_discovery/pull/2
+---
+
 ## [20251001] - 2025-10-01
 
 - ### #1690: Newsletter Section title spacing

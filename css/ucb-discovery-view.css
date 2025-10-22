@@ -1,0 +1,110 @@
+.ucb-discover-card-container {
+  border-bottom: 1px solid rgba(128, 128, 128, 0.333);
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+}
+
+.ucb-article-card {
+  border-bottom: none !important;
+}
+
+.ucb-discover-card-share-section{
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  margin-bottom: 10px;
+  margin-top: 10px;
+}
+
+.ucb-discover-card-share-section svg{
+  margin-right: 10px;
+}
+
+.ucb-discover-card-share-section input{
+  margin-right: 10px;
+}
+
+.ucb-discover-card-share-section button{
+  white-space: nowrap;
+  padding: 5px;
+  font-weight: bolder;
+  margin-bottom: 0;
+}
+
+/* Filters */
+/* Base layout overrides*/
+.trusted-content-filters form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.form-item {
+  margin: 0;
+}
+
+.trusted-content-filters form .form-actions {
+  text-align: left !important;
+}
+
+/* Default filters */
+.trusted-content-filters form .form-item {
+  flex: 1 1 45%;
+  min-width: 250px;
+}
+
+/* Force Sort by + Order to stay together */
+.trusted-content-filters form .form-item-sort-by,
+.trusted-content-filters form .form-item-sort-order {
+  flex: 0 0 auto;
+  min-width: 160px;
+  max-width: 220px;
+  display: inline-block;
+  vertical-align: top;
+}
+
+.trusted-content-filters form .form-item-sort-by {
+  margin-right: 1rem;
+}
+
+/* Apply button - new row */
+.trusted-content-filters form .form-actions {
+  flex: 1 1 100%;
+  text-align: right;
+}
+
+.ucb-preview-toolbar .btn {
+  background-color: #fff;
+  color: #0277BD;
+  border-color: #0277BD;
+  font-weight: bolder;
+}
+
+/* Active (checked) button */
+.ucb-preview-toolbar .btn-check:checked + .btn {
+  background-color: #0277BD;
+  color: #fff;
+  border-color: #0277BD;
+}
+
+
+/* Responsive: stack filters at mobile */
+@media (max-width: 599px) {
+  .trusted-content-filters form .form-item {
+    flex: 1 1 100%;
+  }
+
+  .trusted-content-filters form .form-item-sort-by,
+  .trusted-content-filters form .form-item-sort-order {
+    flex: 1 1 auto;
+  }
+  .trusted-content-filters form .form-actions {
+    text-align: center;
+  }
+  .trusted-content-filters form .form-actions input {
+    width: 100%;
+  }
+}
+
+

@@ -543,3 +543,30 @@ ucb-sidebar-menu-style-gray:
   css:
     theme:
       css/menu-styles/ucb-sidebar-gray-styles.css: {weight: 5 }
+
+trusted-share-button:
+  version: 1.x
+  js:
+    js/ucb-trusted-content-share.js: {   }
+
+ucb-discovery-view:
+  version: 1.x
+  css:
+    theme:
+      css/ucb-discovery-view.css : {weight: 5}
+
+ucb-trusted-content-share-block:
+  version: 1.x
+  js:
+    js/ucb-trusted-content-share-block.js: {  }
+  css:
+    theme:
+      css/block/ucb-trusted-content-block.css : {weight: 5}
+
+ucb-trusted-content-preview:
+  version: 1.x
+  js:
+    js/ucb-trusted-content-preview.js: {  }
+  css:
+    theme:
+      css/block/ucb-trusted-content-block.css : {weight: 5}

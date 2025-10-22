@@ -1,0 +1,29 @@
+{#
+/**
+ * @file Contains the template to display the Tag Cloud block.
+ */
+#}
+{% set classes = [
+  'block',
+  'container',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class
+] %}
+
+{# Logged In - Used for showing errors to only authenticated #}
+{% set logged_in_class = logged_in ? 'ucb-authenticated' : 'ucb-anonymous' %}
+
+{% extends '@boulder_base/block/styled-block.html.twig' %}
+{% block content %}
+  {{ attach_library('boulder_base/ucb-trusted-content-share-block') }}
+  {{ content.body }}
+  <trusted-content-share{{ create_attribute({
+      'display' : content.field_trusted_content_display|render|striptags|trim,
+      'shareURL' : content.field_trusted_content_link|render|striptags|trim,
+      'abstract' : content.field_ucb_show_abstract|render|striptags|trim
+    })}}
+
+  ></trusted-content-share>
+{% endblock %}
