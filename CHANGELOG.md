@@ -9,8 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20251022] - 2025-10-22
+
 - ### Discovery View: Update 2
+
   Includes the following changes to the Discovery View and Syndicated Content Block:
+
   - Overall Discovery View layout enhancements
   - New User Accesible Filters for `Audience` and `Timeliness`
   - Adds Source site link
@@ -19,17 +23,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Enhances Error Messaging in Syndicated Block
   - Adds Abstract
   - Adds Discovery Preview toggle for Teaser/Feature
-  
+
   Resolves #1675 
   Resolves #1699 
   Resolves #1696 
   Resolves #1697 
-  
+
   Includes:
-  - `custom entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/212
-  - `theme` => https://github.com/CuBoulder/tiamat-theme/issues/1675
-  - `ucb_trusted_content_discovery` => https://github.com/CuBoulder/ucb_trusted_content_discovery/pull/2
----
+
+  - `custom entities` => <https://github.com/CuBoulder/tiamat-custom-entities/pull/212>
+  - `theme` => <https://github.com/CuBoulder/tiamat-theme/issues/1675>
+  - `ucb_trusted_content_discovery` => <https://github.com/CuBoulder/ucb_trusted_content_discovery/pull/2>
+
+* * *
 
 ## [20251001] - 2025-10-01
 
@@ -4560,7 +4566,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20251001...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20251022...HEAD
+[20251022]: https://github.com/CuBoulder/tiamat-theme/compare/20251001...20251022
 [20251001]: https://github.com/CuBoulder/tiamat-theme/compare/20250924...20251001
 [20250924]: https://github.com/CuBoulder/tiamat-theme/compare/20250918...20250924
 [20250918]: https://github.com/CuBoulder/tiamat-theme/compare/20250917...20250918
