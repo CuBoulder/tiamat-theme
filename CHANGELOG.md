@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1700 - Adds Loader to Discovery View's Content Toggle Preview
+  Due to (potentially) large image size or a slow network connection, the Teaser/Feature preview may take additional time to render the content preview - which may look like the toggle is not working to a user as the component reloads and re-arranges the content preview display of Discoverable Content on the Discovery View
+  
+  This change adds a loading icon that will display in-between replacing the existing render with the newly arranged version. Also adjusts formatting (indentation) of the component's code, without any major functionality changes, for better developer readability
+  
+  Resolves #1700 
+  
+---
+
 ## [20251022] - 2025-10-22
 
 - ### Discovery View: Update 2
