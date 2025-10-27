@@ -275,10 +275,17 @@
               else
                 photoUrls[pair['id']] = pair['attributes']['uri']['url'];
             });
-            // removes all other included data besides images in our included media
-            const idFilterData = response['included'].filter(item => item['type'] == 'media--image');
-            // using the image-only data, creates the photoData => key: thumbnail id, value : data
-            idFilterData.map(pair => photoData[pair['id']] = pair['relationships']['thumbnail']['data']);
+            const idFilterData = response['included'].filter((item) => item['type'] === 'media--image');
+            idFilterData.forEach((media) => {
+              // Try to get the file ID and alt text
+              const fileRel = media.relationships?.field_media_image?.data;
+              const fileId = fileRel?.id || null;
+              const altText = fileRel?.meta?.alt || '';
+              photoData[media.id] = {
+                id: fileId,
+                alt: altText,
+              };
+            });
           }
           (groupBy == 'none' ? [null] : this.getTaxonomy(groupBy) || [null]).forEach(taxonomyTerm => {
             const peopleInGroup = this.getPeopleInGroup(results, taxonomyTerm);
@@ -542,11 +549,11 @@
           })(),
           photoAlt: (() => {
               try {
-                return photoData[photoId]?.meta?.alt || 'This person has no photo';
+                  return photoData[photoId]?.alt || 'This person has no photo';
               } catch {
-                return 'This person has no photo';
+                  return 'This person has no photo';
               }
-            })(),
+          })(),
           body: '',
           email: personAttributeData['field_ucb_person_email'],
           phone: personAttributeData['field_ucb_person_phone'],
@@ -634,7 +641,7 @@
                 personPhoto
                   ? `
                 <div aria-hidden="true" class="col-sm-12 col-md-3 ucb-person-card-img">
-                  <a href="${personLink}">${personPhoto}</a>
+                  ${personPhoto}
                 </div>`
                   : ""
               }
@@ -699,7 +706,7 @@
           cardHTML = `
             <div class="col-sm mb-3">
               <div aria-hidden="true" class="col-sm-12 ucb-person-card-img-grid">
-                <a href="${personLink}">${personPhoto}</a>
+                ${personPhoto}
               </div>
               <div>
                 <a href="${personLink}">
@@ -720,7 +727,7 @@
           cardElement = document.createElement('tr');
           cardHTML = `
             <td aria-hidden="true" class="ucb-people-list-table-photo">
-              <a href="${personLink}">${personPhoto}</a>
+              ${personPhoto}
             </td>
             <td>
               <a href="${personLink}">
