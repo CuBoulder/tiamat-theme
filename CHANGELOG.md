@@ -9,24 +9,30 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20251029] - 2025-10-29
+
 - ### People List Page: Removes linked thumbnail images, Fixes missing `alt` tags
+
   Two accessibility modifications to the People List page:
+
   - Removes link wrapper from a Person's thumbnail image on People List Page. Resolves #1702 
   - **Alt Text:** Some person photos were missing alt text when displayed, despite being included. This was caused by the alt tag appearing in two possible locations in the JSON response, likely an artifact of migration:
     - field_ucb_person_photo.data.meta.alt
     - field_media_image.data.meta.alt
-  
+
   We previously handled only the first case. The updated logic now supports both structures to ensure alt text is correctly displayed for all records. Resolves #1704 
----
+
+* * *
 
 - ### #1700 - Adds Loader to Discovery View's Content Toggle Preview
+
   Due to (potentially) large image size or a slow network connection, the Teaser/Feature preview may take additional time to render the content preview - which may look like the toggle is not working to a user as the component reloads and re-arranges the content preview display of Discoverable Content on the Discovery View
-  
+
   This change adds a loading icon that will display in-between replacing the existing render with the newly arranged version. Also adjusts formatting (indentation) of the component's code, without any major functionality changes, for better developer readability
-  
+
   Resolves #1700 
-  
----
+
+* * *
 
 ## [20251022] - 2025-10-22
 
@@ -4585,7 +4591,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20251022...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20251029...HEAD
+[20251029]: https://github.com/CuBoulder/tiamat-theme/compare/20251022...20251029
 [20251022]: https://github.com/CuBoulder/tiamat-theme/compare/20251001...20251022
 [20251001]: https://github.com/CuBoulder/tiamat-theme/compare/20250924...20251001
 [20250924]: https://github.com/CuBoulder/tiamat-theme/compare/20250918...20250924
