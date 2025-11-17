@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1710 - Newsletter image absolute pathing bug
+  Resolves a recent issue with `Newsletter Section` Teaser and Feature images getting duplicate pathing that resulted in broken images in the Email HTML version. This was likely due to a recent security update that may have changed how the absolute pathing was assembled using the Symphony framework.
+  
+  Also resolves a typo in a rarely hit conditional where the Teaser Image may not render if its within an Article's `content` rather than set as the Article's `Thumbnail`
+  
+  Resolves #1710 
+---
+
 ## [20251029] - 2025-10-29
 
 - ### People List Page: Removes linked thumbnail images, Fixes missing `alt` tags

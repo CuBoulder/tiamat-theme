@@ -11,6 +11,17 @@
 
 {% set base_url = url('<front>')|render|split('/', -1)|join('/') %}
 
+{# Needed for Multisite #}
+{# Get the full base URL #}
+{% set full_base_url = url('<front>')|render %}
+{# Split the URL by slashes #}
+{% set url_parts = full_base_url|split('/') %}
+{# Extract the protocol and domain #}
+{% set protocol = url_parts[0] %}
+{% set domain = url_parts[2] %}
+{# Construct the base domain URL #}
+{% set base_domain = protocol ~ '//' ~ domain %}
+
 {% if content.field_newsletter_section_title|render  %}
 	<table role="presentation"  border="0" width="600" cellspacing="0" style="border-collapse: collapse; border-spacing: 0; text-align: left; vertical-align: top; width: 100%; color: #222222; font-family: Helvetica, Arial, sans-serif; font-weight: normal; line-height: 19px; margin: 0; font-size: 14px; background-color: white;">
 		<tbody>
@@ -45,12 +56,7 @@
                     'node': item.entity.field_newsletter_article_select.target_id
                   }, {'absolute': true}) }}">
                   <img
-                  src="{{base_url}}{{
-                    request.schemeAndHttpHost ~ file_url(
-                      item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri
-                      | image_style('focal_image_wide')
-                    )
-                  }}"
+                  src="{{ base_domain }}{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri | image_style('focal_image_wide') }}"
                     width="600"
                     height="300"
                     style="display: block !important; width: 600px !important; height: 300px !important; object-fit: cover !important; border: 0 !important; outline: none !important;"
@@ -64,12 +70,7 @@
                     'node': item.entity.field_newsletter_article_select.target_id
                   }, {'absolute': true}) }}">
                   <img
-                  src="{{base_url}}{{
-                    request.schemeAndHttpHost ~ file_url(
-                      item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri
-                      | image_style('focal_image_wide')
-                    )
-                  }}"
+                  src="{{ base_domain }}{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri | image_style('focal_image_wide') }}"
                     width="600"
                     height="300"
                     style="display: block !important; width: 600px !important; height: 300px !important; object-fit: cover !important; border: 0 !important; outline: none !important;"
@@ -80,12 +81,7 @@
 								{% elseif item.entity.field_newsletter_content_image.entity.field_media_image.alt|render %}
 								<td align="center" style="text-align: left; padding-right:10px; padding-left:10px;padding-bottom:20px;">
                   <img
-                  src="{{base_url}}{{
-                    request.schemeAndHttpHost ~ file_url(
-                      item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri
-                      | image_style('focal_image_wide')
-                    )
-                  }}"
+                  src="{{ base_domain }}{{ item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri | image_style('focal_image_wide') }}"
                   width="600"
                   height="300"
                   style="display: block !important; width: 600px !important; height: 300px !important; object-fit: cover !important; border: 0 !important; outline: none !important;"
@@ -194,17 +190,12 @@
 							<tbody>
 								<tr class="email-feature-art-row">
 									{# Image #}
-                  {% if item.entity.field_newsletter_content_image.entity.field_media_image or  item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image or tem.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image %}
+                  {% if item.entity.field_newsletter_content_image.entity.field_media_image or  item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image or item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image %}
 									<td valign="top" width="27%"style="text-align: left; padding-right:10px; padding-left:10px">
 											{# Code to render selected article content (thumbnail) #}
 											{% if item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image %}
                       <img
-                      src="{{base_url}}{{
-                        request.schemeAndHttpHost ~ file_url(
-                          item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri
-                          | image_style('focal_image_square')
-                        )
-                      }}"
+                      src="{{ base_domain }}{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri | image_style('focal_image_square') }}"
                       width="130"
                       height="130"
                       style="display: block !important; width: 130px !important; height: 130px !important; object-fit: cover !important; border: 0 !important; outline: none !important;"
@@ -212,12 +203,7 @@
 												{# Code to render selected article content (!thumbnail) #}
 											{% elseif item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image %}
                       <img
-                      src="{{base_url}}{{
-                        request.schemeAndHttpHost ~ file_url(
-                          item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri
-                          | image_style('focal_image_square')
-                        )
-                      }}"
+                      src="{{ base_domain }}{{ item.entity.field_newsletter_article_select.entity.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri | image_style('focal_image_square') }}"
                       width="130"
                       height="130"
                       style="display: block !important; width: 130px !important; height: 130px !important; object-fit: cover !important; border: 0 !important; outline: none !important;"
@@ -225,12 +211,7 @@
 												{# Code to render user made content #}
 											{% elseif item.entity.field_newsletter_content_image.entity.field_media_image %}
                       <img
-                      src="{{base_url}}{{
-                        request.schemeAndHttpHost ~ file_url(
-                          item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri
-                          | image_style('focal_image_square')
-                        )
-                      }}"
+                      src="{{ base_domain }}{{ item.entity.field_newsletter_content_image.entity.field_media_image.entity.fileuri | image_style('focal_image_square') }}"
                       width="130"
                       height="130"
                       style="display: block !important; width: 130px !important; height: 130px !important; object-fit: cover !important; border: 0 !important; outline: none !important;"
