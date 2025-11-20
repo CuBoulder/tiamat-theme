@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1713 - Remove header element from block in site footer
+  This change removes the header element from the site info footer for accessibility purposes, but maintains the visual styling
+  
+  Resolves #1713 
+---
+
 ## [20251119] - 2025-11-19
 
 - ### #1710 - Newsletter image absolute pathing bug
