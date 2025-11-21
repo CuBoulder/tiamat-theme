@@ -30,9 +30,9 @@
 {% set icons_visible = data.icons_visible %}
 
 <div{{ attributes }}>
-  <h2 class="h5">
+  <span class="h5">
     <a href="{{ url('<front>') }}">{{ site_name }}</a>
-  </h2>
+  </span>
   {% block content %}
     <div class="ucb-site-contact-info-footer">
       {% if data.general_visible == '1' %}

@@ -9,13 +9,23 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### #1710 - Newsletter image absolute pathing bug
-  Resolves a recent issue with `Newsletter Section` Teaser and Feature images getting duplicate pathing that resulted in broken images in the Email HTML version. This was likely due to a recent security update that may have changed how the absolute pathing was assembled using the Symphony framework.
+- ### #1713 - Remove header element from block in site footer
+  This change removes the header element from the site info footer for accessibility purposes, but maintains the visual styling
   
-  Also resolves a typo in a rarely hit conditional where the Teaser Image may not render if its within an Article's `content` rather than set as the Article's `Thumbnail`
-  
-  Resolves #1710 
+  Resolves #1713 
 ---
+
+## [20251119] - 2025-11-19
+
+- ### #1710 - Newsletter image absolute pathing bug
+
+  Resolves a recent issue with `Newsletter Section` Teaser and Feature images getting duplicate pathing that resulted in broken images in the Email HTML version. This was likely due to a recent security update that may have changed how the absolute pathing was assembled using the Symphony framework.
+
+  Also resolves a typo in a rarely hit conditional where the Teaser Image may not render if its within an Article's `content` rather than set as the Article's `Thumbnail`
+
+  Resolves #1710 
+
+* * *
 
 ## [20251029] - 2025-10-29
 
@@ -4599,7 +4609,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20251029...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20251119...HEAD
+[20251119]: https://github.com/CuBoulder/tiamat-theme/compare/20251029...20251119
 [20251029]: https://github.com/CuBoulder/tiamat-theme/compare/20251022...20251029
 [20251022]: https://github.com/CuBoulder/tiamat-theme/compare/20251001...20251022
 [20251001]: https://github.com/CuBoulder/tiamat-theme/compare/20250924...20251001
