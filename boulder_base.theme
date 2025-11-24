@@ -63,6 +63,13 @@ function boulder_base_preprocess(&$variables, $hook) {
 function boulder_base_preprocess_html(array &$variables) {
   $variables['ucb_gtm_account'] = theme_get_setting('ucb_gtm_account');
   $variables['theme_path'] = base_path() . $variables['directory'];
+  // Adding `unpublished` class to Nodes
+  $route_match = \Drupal::routeMatch();
+  $node = $route_match->getParameter('node');
+  if ($node instanceof \Drupal\node\NodeInterface && !$node->isPublished()) {
+    $variables['attributes']['class'][] = 'unpublished';
+  }
+
   if (\Drupal::config('system.site')->get('name') != 'University of Colorado Boulder') {
     // Adds "University of Colorado Boulder" to the title of the page if the
     // site isn't already called that. Resolves tiamat-theme#1188.
