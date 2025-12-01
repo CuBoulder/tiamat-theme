@@ -641,7 +641,7 @@
                 personPhoto
                   ? `
                 <div aria-hidden="true" class="col-sm-12 col-md-3 ucb-person-card-img">
-                  ${personPhoto}
+                  <a role="presentation" aria-hidden="true" href="${personLink}">${personPhoto}</a>
                 </div>`
                   : ""
               }
@@ -706,7 +706,7 @@
           cardHTML = `
             <div class="col-sm mb-3">
               <div aria-hidden="true" class="col-sm-12 ucb-person-card-img-grid">
-                ${personPhoto}
+                <a role="presentation" aria-hidden="true" href="${personLink}">${personPhoto}</a>
               </div>
               <div>
                 <a href="${personLink}">
@@ -727,7 +727,7 @@
           cardElement = document.createElement('tr');
           cardHTML = `
             <td aria-hidden="true" class="ucb-people-list-table-photo">
-              ${personPhoto}
+              <a role="presentation" aria-hidden="true" href="${personLink}">${personPhoto}</a>
             </td>
             <td>
               <a href="${personLink}">
