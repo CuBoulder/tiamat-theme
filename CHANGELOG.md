@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1716 - People List Page image links re-added, but hidden for screen-readers
+  Partially reverts the change made via https://github.com/CuBoulder/tiamat-theme/issues/1702, which removed link-wrapping on Images. 
+  
+  This update re-adds the link wrapper on People List page image thumbnails on List, Grid, Table, but hides them from screen-reader with `role="presentation" aria-hidden="true"` to make them more accesibile. 
+  
+  Resolves #1716 
+---
+
 - ### #1713 - Remove header element from block in site footer
   This change removes the header element from the site info footer for accessibility purposes, but maintains the visual styling
   
