@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1718 - Adds Unpublished Indicator to Nodes
+  Adds a unpublished indicator via adding a class through a `preprocess_html` hook, as `node` and subsequently `node.isPublished()` is not available in the `html.html.twig` template
+  
+  Resolves #1718 
+---
+
 - ### #1716 - People List Page image links re-added, but hidden for screen-readers
   Partially reverts the change made via https://github.com/CuBoulder/tiamat-theme/issues/1702, which removed link-wrapping on Images. 
   
