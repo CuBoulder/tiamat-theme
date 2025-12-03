@@ -9,25 +9,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20251203] - 2025-12-03
+
 - ### #1718 - Adds Unpublished Indicator to Nodes
+
   Adds a unpublished indicator via adding a class through a `preprocess_html` hook, as `node` and subsequently `node.isPublished()` is not available in the `html.html.twig` template
-  
+
   Resolves #1718 
----
+
+* * *
 
 - ### #1716 - People List Page image links re-added, but hidden for screen-readers
-  Partially reverts the change made via https://github.com/CuBoulder/tiamat-theme/issues/1702, which removed link-wrapping on Images. 
-  
+
+  Partially reverts the change made via <https://github.com/CuBoulder/tiamat-theme/issues/1702>, which removed link-wrapping on Images. 
+
   This update re-adds the link wrapper on People List page image thumbnails on List, Grid, Table, but hides them from screen-reader with `role="presentation" aria-hidden="true"` to make them more accesibile. 
-  
+
   Resolves #1716 
----
+
+* * *
 
 - ### #1713 - Remove header element from block in site footer
+
   This change removes the header element from the site info footer for accessibility purposes, but maintains the visual styling
-  
+
   Resolves #1713 
----
+
+* * *
 
 ## [20251119] - 2025-11-19
 
@@ -4623,7 +4631,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20251119...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20251203...HEAD
+[20251203]: https://github.com/CuBoulder/tiamat-theme/compare/20251119...20251203
 [20251119]: https://github.com/CuBoulder/tiamat-theme/compare/20251029...20251119
 [20251029]: https://github.com/CuBoulder/tiamat-theme/compare/20251022...20251029
 [20251022]: https://github.com/CuBoulder/tiamat-theme/compare/20251001...20251022
