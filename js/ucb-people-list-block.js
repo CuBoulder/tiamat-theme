@@ -245,21 +245,46 @@
             const groupContainerElement = this.buildGroup(format, taxonomyTerm);
             if (orderBy == 'type') {
               this.displayPeople(format, peopleInGroup.sort((personA, personB) => {
-                const
-                  jobTypeTaxonomy = this.getTaxonomy('job_type'),
-                  personAJobTypeData = personA['relationships']['field_ucb_person_job_type']['data'],
-                  personBJobTypeData = personB['relationships']['field_ucb_person_job_type']['data'],
-                  personAJobTypeDataLength = personAJobTypeData.length,
-                  personBJobTypeDataLength = personBJobTypeData.length;
-                if (!personAJobTypeDataLength || !personBJobTypeDataLength) // Someone doesn't have a job type (length 0), push them to the bottom
-                  return !personAJobTypeDataLength && personBJobTypeDataLength ? 1 : personAJobTypeDataLength && !personBJobTypeDataLength ? -1 : 0;
-                const
-                  personAJobTypeWeight = PeopleListBlockElement.getTaxonomyWeight(jobTypeTaxonomy, personAJobTypeData[0]['meta']['drupal_internal__target_id']),
-                  personBJobTypeWeight = PeopleListBlockElement.getTaxonomyWeight(jobTypeTaxonomy, personBJobTypeData[0]['meta']['drupal_internal__target_id']);
-                // Sorts by job type weights.
-                return personAJobTypeWeight > personBJobTypeWeight ? 1 : personAJobTypeWeight < personBJobTypeWeight ? -1 : 0;
+                const jobTypeTaxonomy = this.getTaxonomy('job_type'),
+                  personAJobTypeData = (personA['relationships']['field_ucb_person_job_type'] || {})['data'] || [],
+                  personBJobTypeData = (personB['relationships']['field_ucb_person_job_type'] || {})['data'] || [];
+                // If one or both have no job type, push the one without to the bottom
+                if (!personAJobTypeData.length || !personBJobTypeData.length)
+                  return personAJobTypeData.length ? -1 : 1;
+                const personAJobTypeId = personAJobTypeData[0]['meta']['drupal_internal__target_id'],
+                  personBJobTypeId = personBJobTypeData[0]['meta']['drupal_internal__target_id'],
+                  personAJobTypeWeight = PeopleListBlockElement.getTaxonomyWeight(jobTypeTaxonomy, personAJobTypeId),
+                  personBJobTypeWeight = PeopleListBlockElement.getTaxonomyWeight(jobTypeTaxonomy, personBJobTypeId);
+                // Primary: job type weight (lower first)
+                if (personAJobTypeWeight !== personBJobTypeWeight)
+                  return personAJobTypeWeight - personBJobTypeWeight;
+                // Secondary: job type name (alpha)
+                const personAJobTypeName = PeopleListBlockElement.getTaxonomyName(jobTypeTaxonomy, personAJobTypeId) || '',
+                  personBJobTypeName = PeopleListBlockElement.getTaxonomyName(jobTypeTaxonomy, personBJobTypeId) || '';
+                if (personAJobTypeName !== personBJobTypeName)
+                  return personAJobTypeName < personBJobTypeName ? -1 : 1;
+                // Tertiary: last name (alpha)
+                const lastNameA = (personA['attributes']['field_ucb_person_last_name'] || '').toLowerCase(),
+                  lastNameB = (personB['attributes']['field_ucb_person_last_name'] || '').toLowerCase();
+                if (lastNameA !== lastNameB)
+                  return lastNameA < lastNameB ? -1 : 1;
+                // Final: first name (alpha)
+                const firstNameA = (personA['attributes']['field_ucb_person_first_name'] || '').toLowerCase(),
+                  firstNameB = (personB['attributes']['field_ucb_person_first_name'] || '').toLowerCase();
+                return firstNameA < firstNameB ? -1 : firstNameA > firstNameB ? 1 : 0;
               }), urlObj, idObj, groupContainerElement);
-            } else this.displayPeople(format, peopleInGroup, urlObj, idObj, groupContainerElement);
+            } else {
+              // Default: Last Name, then First Name
+              this.displayPeople(format, peopleInGroup.sort((personA, personB) => {
+                const lastNameA = (personA['attributes']['field_ucb_person_last_name'] || '').toLowerCase(),
+                  lastNameB = (personB['attributes']['field_ucb_person_last_name'] || '').toLowerCase(),
+                  firstNameA = (personA['attributes']['field_ucb_person_first_name'] || '').toLowerCase(),
+                  firstNameB = (personB['attributes']['field_ucb_person_first_name'] || '').toLowerCase();
+                if (lastNameA !== lastNameB) return lastNameA < lastNameB ? -1 : 1;
+                if (firstNameA !== firstNameB) return firstNameA < firstNameB ? -1 : 1;
+                return 0;
+              }), urlObj, idObj, groupContainerElement);
+            }
           });
         }
         this.toggleMessageDisplay(this._loadingElement, 'none', null, null);
