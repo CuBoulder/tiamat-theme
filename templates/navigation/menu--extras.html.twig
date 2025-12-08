@@ -63,7 +63,7 @@
               {% set linkTitle = { '#markup': title|e ~ '<i class="fa fa-angle-down ucb-mega-menu-icon" aria-hidden="true"></i>'} %}
               {{ link(linkTitle, item.url, linkAttr.addClass(['ucb-mega-menu-outer-link', "nav-link"]))  }}
               {% if item.content.field_display_mega_menu|render|striptags|trim == "On" %}
-                <div id = "{{linkID}}" class = "ucb-mega-menu container collapse" data-bs-parent = ".ucb-main-menu-mega-menu">
+                <div id = "{{linkID}}" class = "ucb-mega-menu container collapse" data-bs-parent = ".ucb-main-menu-mega-menu" data-nosnippet>
                   <div class="ucb-mega-menu-wrapper">
                     <h2 class="ucb-mega-menu-header"><a href = "{{item.url}}" class = "ucb-mega-menu-heading-link">{{item.content.field_mega_menu_select.0['#block_content'].field_mega_menu_heading.value }}</a></h2>
                     <div class="ucb-mega-menu-column-wrapper">
