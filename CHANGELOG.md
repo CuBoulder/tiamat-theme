@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### People List Block: Adds 'Sort By' 
+  Previously the People List Block would only sort by Last Name. This update enables the option to choose whether to sort by Job Type,  then Last Name, OR Last Name only, mirroring the option on the People List Page.
+  
+  Includes:
+  - `custom_entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/220
+  - `theme` => https://github.com/CuBoulder/tiamat-theme/pull/1721
+  - `ucb_dev_workspace` => https://github.com/CuBoulder/ucb-dev-workspace/pull/4
+  
+  
+  Resolves #1717 
+  Resolves #1676 
+---
+
 ## [20251203] - 2025-12-03
 
 - ### #1718 - Adds Unpublished Indicator to Nodes
