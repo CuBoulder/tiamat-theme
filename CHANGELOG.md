@@ -9,18 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### People List Block: Adds 'Sort By' 
+## [20251210] - 2025-12-10
+
+- ### People List Block: Adds 'Sort By'
+
   Previously the People List Block would only sort by Last Name. This update enables the option to choose whether to sort by Job Type,  then Last Name, OR Last Name only, mirroring the option on the People List Page.
-  
+
   Includes:
-  - `custom_entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/220
-  - `theme` => https://github.com/CuBoulder/tiamat-theme/pull/1721
-  - `ucb_dev_workspace` => https://github.com/CuBoulder/ucb-dev-workspace/pull/4
-  
-  
+
+  - `custom_entities` => <https://github.com/CuBoulder/tiamat-custom-entities/pull/220>
+  - `theme` => <https://github.com/CuBoulder/tiamat-theme/pull/1721>
+  - `ucb_dev_workspace` => <https://github.com/CuBoulder/ucb-dev-workspace/pull/4>
+
   Resolves #1717 
   Resolves #1676 
----
+
+* * *
 
 ## [20251203] - 2025-12-03
 
@@ -4644,7 +4648,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20251203...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20251210...HEAD
+[20251210]: https://github.com/CuBoulder/tiamat-theme/compare/20251203...20251210
 [20251203]: https://github.com/CuBoulder/tiamat-theme/compare/20251119...20251203
 [20251119]: https://github.com/CuBoulder/tiamat-theme/compare/20251029...20251119
 [20251029]: https://github.com/CuBoulder/tiamat-theme/compare/20251022...20251029
