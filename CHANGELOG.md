@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### TOS Modal Update
+  Modal creation for TOS acceptance on user log in. 
+  The modal only shows until the user accepts the terms of service.
+  
+  Sister PR: https://github.com/CuBoulder/ucb_user_invite/pull/18
+  Sister PR: https://github.com/CuBoulder/ucb_drush_commands/pull/7
+  Sister PR: https://github.com/CuBoulder/ucb_site_configuration/pull/100
+  
+  Resolves #1723 
+---
+
 ## [20251210] - 2025-12-10
 
 - ### People List Block: Adds 'Sort By'
