@@ -9,16 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20251216] - 2025-12-16
+
 - ### TOS Modal Update
+
   Modal creation for TOS acceptance on user log in. 
   The modal only shows until the user accepts the terms of service.
-  
-  Sister PR: https://github.com/CuBoulder/ucb_user_invite/pull/18
-  Sister PR: https://github.com/CuBoulder/ucb_drush_commands/pull/7
-  Sister PR: https://github.com/CuBoulder/ucb_site_configuration/pull/100
-  
+
+  Sister PR: <https://github.com/CuBoulder/ucb_user_invite/pull/18>
+  Sister PR: <https://github.com/CuBoulder/ucb_drush_commands/pull/7>
+  Sister PR: <https://github.com/CuBoulder/ucb_site_configuration/pull/100>
+
   Resolves #1723 
----
+
+* * *
 
 ## [20251210] - 2025-12-10
 
@@ -4659,7 +4663,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20251210...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20251216...HEAD
+[20251216]: https://github.com/CuBoulder/tiamat-theme/compare/20251210...20251216
 [20251210]: https://github.com/CuBoulder/tiamat-theme/compare/20251203...20251210
 [20251203]: https://github.com/CuBoulder/tiamat-theme/compare/20251119...20251203
 [20251119]: https://github.com/CuBoulder/tiamat-theme/compare/20251029...20251119
