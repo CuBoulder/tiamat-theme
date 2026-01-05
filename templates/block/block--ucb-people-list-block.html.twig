@@ -56,7 +56,9 @@
       'restrict': true
     }
   },
-  'format': content.field_people_block_display|render|striptags|trim
+  'format': content.field_people_block_display|render|striptags|trim,
+  'orderby': content.field_people_list_block_order_by|render|striptags|trim
+
 } %}
 
 {% extends '@boulder_base/block/styled-block.html.twig' %}

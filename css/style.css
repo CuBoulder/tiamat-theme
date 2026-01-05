@@ -1173,6 +1173,16 @@ h2.clear-margin,h3.clear-margin,h4.clear-margin,h5.clear-margin,h6.clear-margin,
   display:none;
 }
 
+/* Unpublished message on Unpublished nodes */
+body.unpublished:before {
+  content: "This content is unpublished.";
+  padding: 10px;
+  text-align: center;
+  font-weight: bold;
+  background-color: pink;
+  color: black;
+  display: block;
+}
 
 /* Column List CSS */
 @media only screen and (min-width: 576px) {

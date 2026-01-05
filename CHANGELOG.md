@@ -9,11 +9,65 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20251216] - 2025-12-16
+
+- ### TOS Modal Update
+
+  Modal creation for TOS acceptance on user log in. 
+  The modal only shows until the user accepts the terms of service.
+
+  Sister PR: <https://github.com/CuBoulder/ucb_user_invite/pull/18>
+  Sister PR: <https://github.com/CuBoulder/ucb_drush_commands/pull/7>
+  Sister PR: <https://github.com/CuBoulder/ucb_site_configuration/pull/100>
+
+  Resolves #1723 
+
+* * *
+
+## [20251210] - 2025-12-10
+
+- ### People List Block: Adds 'Sort By'
+
+  Previously the People List Block would only sort by Last Name. This update enables the option to choose whether to sort by Job Type,  then Last Name, OR Last Name only, mirroring the option on the People List Page.
+
+  Includes:
+
+  - `custom_entities` => <https://github.com/CuBoulder/tiamat-custom-entities/pull/220>
+  - `theme` => <https://github.com/CuBoulder/tiamat-theme/pull/1721>
+  - `ucb_dev_workspace` => <https://github.com/CuBoulder/ucb-dev-workspace/pull/4>
+
+  Resolves #1717 
+  Resolves #1676 
+
+* * *
+
+## [20251203] - 2025-12-03
+
+- ### #1718 - Adds Unpublished Indicator to Nodes
+
+  Adds a unpublished indicator via adding a class through a `preprocess_html` hook, as `node` and subsequently `node.isPublished()` is not available in the `html.html.twig` template
+
+  Resolves #1718 
+
+* * *
+
+- ### #1716 - People List Page image links re-added, but hidden for screen-readers
+
+  Partially reverts the change made via <https://github.com/CuBoulder/tiamat-theme/issues/1702>, which removed link-wrapping on Images. 
+
+  This update re-adds the link wrapper on People List page image thumbnails on List, Grid, Table, but hides them from screen-reader with `role="presentation" aria-hidden="true"` to make them more accesibile. 
+
+  Resolves #1716 
+
+* * *
+
 - ### #1713 - Remove header element from block in site footer
+
   This change removes the header element from the site info footer for accessibility purposes, but maintains the visual styling
-  
+
   Resolves #1713 
----
+
+* * *
 
 ## [20251119] - 2025-11-19
 
@@ -4609,7 +4663,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20251119...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20251216...HEAD
+[20251216]: https://github.com/CuBoulder/tiamat-theme/compare/20251210...20251216
+[20251210]: https://github.com/CuBoulder/tiamat-theme/compare/20251203...20251210
+[20251203]: https://github.com/CuBoulder/tiamat-theme/compare/20251119...20251203
 [20251119]: https://github.com/CuBoulder/tiamat-theme/compare/20251029...20251119
 [20251029]: https://github.com/CuBoulder/tiamat-theme/compare/20251022...20251029
 [20251022]: https://github.com/CuBoulder/tiamat-theme/compare/20251001...20251022

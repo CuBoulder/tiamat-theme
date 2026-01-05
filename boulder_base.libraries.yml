@@ -570,3 +570,11 @@ ucb-trusted-content-preview:
   css:
     theme:
       css/block/ucb-trusted-content-block.css : {weight: 5}
+
+ucb-tos-acceptance:
+  version: 1.x
+  js:
+    js/ucb-tos-acceptance.js: { }
+  css:
+    theme:
+      css/ucb-tos-acceptance.css: { weight: 5 }
