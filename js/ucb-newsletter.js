@@ -60,30 +60,7 @@
             img.setAttribute('style', `max-width: ${imgSize}; width: 100%; height: auto; display: block;`);
           }
         }
-
-        // Inline Links - Outlook
-          const emailRoot = document.getElementById('email-preview');
-          if (!emailRoot) return;
-
-          const linkColor = '#0277BD';
-
-          const links = emailRoot.querySelectorAll('.ucb-email-body-content a[href]');
-          for (const a of links) {
-            // Skip your button links; those are handled above via `.article-link`
-            if (a.closest('.article-link')) continue;
-
-            // Append (don't overwrite) inline styles
-            const existing = (a.getAttribute('style') || '').trim();
-            const patch = [
-              `color:${linkColor} !important`,
-              `text-decoration:none !important`,
-              `mso-style-textfill-type:solid`,
-              `mso-style-textfill-fill-color:${linkColor}`
-            ].join('; ');
-
-            a.setAttribute('style', existing ? `${existing}; ${patch}` : patch);
-          }
-
+        
         // Section Link - make blue (gets overridden by user agent style)
         var moreLinks = document.getElementsByClassName('article-link')
         for(link of moreLinks){
