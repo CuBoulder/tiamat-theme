@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1731 - Fixes issue where Sidebar region does not display
+  This replaces Twig conditionals for `Sidebar` and `Breadcrumbs` region that checked rendered output length via`|render|striptags|trim|length > 0` with structural checks using `is not empty`. 
+  
+  When updating to D11, the previous length conditional would cause the region to not display while `is not empty` works as expected. Also adjusted this logic on `Breadcrumbs` since it had the same faulty logic, but did not appear to have the same effect with the previous conditional
+  
+  Resolves #1731 
+  
+---
+
 ## [20251216] - 2025-12-16
 
 - ### TOS Modal Update
