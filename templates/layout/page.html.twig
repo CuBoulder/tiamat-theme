@@ -227,7 +227,7 @@
   {# MAIN PAGE CONTENT #}
   <div{{ create_attribute({ class: ['ucb-page-content', ucb_heading_font == 'normal' ? 'ucb-heading-font-normal'] }) }}>
     {% block breadcrumb_region %}
-      {% if show_breadcrumb and page.breadcrumb|render|striptags|trim|length > 0 %}
+      {% if show_breadcrumb and page.breadcrumb is not empty %}
         <div class="ucb-breadcrumb-region">
           {{ page.breadcrumb }}
         </div>
@@ -265,7 +265,7 @@
         {% endif %}
         {% block content_sidebar %}
           {# We are checking for length below to make sure that the sidebars have any content. This is so that sidebar menus don't render the sidebars if the menu is empty #}
-          {% if page.sidebar|render|striptags|trim|length > 0 %}
+          {% if page.sidebar is not empty %}
             {% if ucb_sidebar_position == 'left' %}
               <div class="ucb-layout-container ucb-sidebar-container container">
                 <div class="layout-row row">
