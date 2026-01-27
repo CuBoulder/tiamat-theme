@@ -53,6 +53,11 @@ body {
   padding: 10px 0;
 }
 
+/* Wrapper is only displayed if content exists (has children elements), needed for Twigs 'is not empty' check */
+.ucb-breadcrumb-region:empty {
+  display: none;
+}
+
 .ucb-content-wrapper {
   --bs-gutter-y: 3rem;
   margin-top: calc(var(--bs-gutter-y)* .5);
