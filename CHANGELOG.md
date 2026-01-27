@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1736 - Breadcrumb region display
+  Fixes an issue where the breadcrumb region would display a white bar under the navigation, even with no breadcrumb content. 
+  Resolves #1736 
+---
+
 ## [20260123] - 2026-01-23
 
 - ### #1731 - Fixes issue where Sidebar region does not display
