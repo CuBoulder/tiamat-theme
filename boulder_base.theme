@@ -316,8 +316,11 @@ function boulder_base_preprocess_node__ucb_article(array &$variables) {
   elseif ($route_name == 'entity.node.preview') {
     $node = \Drupal::routeMatch()->getParameter('node_preview');
   }
+  else {
+    $node = $variables['node'];
+  }
   // Get the media image positioning
-  if ($node->hasField('field_article_title_background') && $node->get('field_article_title_background')->entity) {
+  if ($node && $node->hasField('field_article_title_background') && $node->get('field_article_title_background')->entity) {
     $media_entity = $node->get('field_article_title_background')->entity;
     $fid = $media_entity->getSource()->getSourceFieldValue($media_entity);
     $file = \Drupal::entityTypeManager()->getStorage('file')->load($fid);
