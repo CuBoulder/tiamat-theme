@@ -9,15 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260128a] - 2026-01-28
+
 - ### #1739 - Prevent null from being passed in preprocess hook
+
   Due to a change in D11, it seems a `null` in a preprocess function is breaking Taxonomy views (Category List, Tag List, Newsletter Archive) -- Views seem to be partially broken or completely WSOD-ing and provide this error:
-  
-  Error: Call to a member function hasField() on null in boulder_base_preprocess_node__ucb_article() (line 320 of /code/web/themes/custom/boulder_base/boulder_base.theme).
-  
+
+  Error: Call to a member function hasField() on null in boulder_base_preprocess_node\_\_ucb_article() (line 320 of /code/web/themes/custom/boulder_base/boulder_base.theme).
+
   This change attempts to short circuit the hook if `null` is about to be passed.
-  
+
   Resolves #1739 
----
+
+* * *
 
 ## [20260128] - 2026-01-28
 
@@ -4693,7 +4697,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260128...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260128a...HEAD
+[20260128a]: https://github.com/CuBoulder/tiamat-theme/compare/20260128...20260128a
 [20260128]: https://github.com/CuBoulder/tiamat-theme/compare/20260123...20260128
 [20260123]: https://github.com/CuBoulder/tiamat-theme/compare/20251216...20260123
 [20251216]: https://github.com/CuBoulder/tiamat-theme/compare/20251210...20251216
