@@ -9,10 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260128] - 2026-01-28
+
 - ### #1736 - Breadcrumb region display
   Fixes an issue where the breadcrumb region would display a white bar under the navigation, even with no breadcrumb content. 
   Resolves #1736 
----
+
+* * *
 
 ## [20260123] - 2026-01-23
 
@@ -4680,7 +4683,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260123...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260128...HEAD
+[20260128]: https://github.com/CuBoulder/tiamat-theme/compare/20260123...20260128
 [20260123]: https://github.com/CuBoulder/tiamat-theme/compare/20251216...20260123
 [20251216]: https://github.com/CuBoulder/tiamat-theme/compare/20251210...20251216
 [20251210]: https://github.com/CuBoulder/tiamat-theme/compare/20251203...20251210
