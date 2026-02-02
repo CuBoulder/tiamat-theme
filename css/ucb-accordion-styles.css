@@ -171,6 +171,8 @@
 .ucb-bootstrap-layout__background-color--tan .accordion-item,
 .ucb-bootstrap-layout__background-color--light-blue .accordion-item,
 .ucb-bootstrap-layout__background-color--light-green .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-orange .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-yellow .accordion-item,
 .content-frame-light-gray .accordion-item {
   color: inherit;
   background-color: inherit;
@@ -183,6 +185,7 @@
 .ucb-bootstrap-layout__background-color--medium-blue .accordion-item,
 .ucb-bootstrap-layout__background-color--dark-blue .accordion-item,
 .ucb-bootstrap-layout__background-color--brick .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-red .accordion-item,
 .content-frame-dark-gray .accordion-item {
   color: inherit;
   background-color: inherit;
@@ -240,6 +243,18 @@
   .block.bs-background-underline .accordion-item,
 .ucb-bootstrap-layout__background-color--light-green
   .block.bs-background-underline .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-orange
+  .block.bs-background-none .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-orange
+  .block.bs-background-outline .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-orange
+  .block.bs-background-underline .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-yellow
+  .block.bs-background-none .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-yellow
+  .block.bs-background-outline .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-yellow
+  .block.bs-background-underline .accordion-item,
 .content-frame-light-gray .block.bs-background-underline .accordion-item {
   color: inherit;
   background-color: inherit;
@@ -271,6 +286,12 @@
   .block.bs-background-outline .accordion-item,
 .ucb-bootstrap-layout__background-color--brick
   .block.bs-background-outline .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-red
+  .block.bs-background-none .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-red
+  .block.bs-background-outline .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-red
+  .block.bs-background-underline .accordion-item,
 .content-frame-dark-gray .block.bs-background-outline .accordion-item,
 .ucb-bootstrap-layout__background-color--gold
   .block.bs-background-underline .accordion-item,
@@ -283,6 +304,8 @@
 .ucb-bootstrap-layout__background-color--dark-blue
   .block.bs-background-underline .accordion-item,
 .ucb-bootstrap-layout__background-color--brick
+  .block.bs-background-underline .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-red
   .block.bs-background-underline .accordion-item,
 .content-frame-dark-gray .block.bs-background-underline .accordion-item {
   color: inherit;

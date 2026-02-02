@@ -19,6 +19,9 @@
   --ucb-brick: #AE5A39;
   --ucb-amber: #FFF9C4;
   --ucb-alert: #FFEBEE;
+  --ucb-alert-red: #D32F2F;
+  --ucb-alert-orange: #FB8C00;
+  --ucb-alert-yellow: #FDD835;
 }
 
 /* Needed for Font Awesome  */

@@ -104,6 +104,21 @@
   color: var(--ucb-white);
 }
 
+.ucb-bootstrap-layout__background-color--alert-red {
+  background-color: var(--ucb-alert-red);
+  color: var(--ucb-white);
+}
+
+.ucb-bootstrap-layout__background-color--alert-orange {
+  background-color: var(--ucb-alert-orange);
+  color: var(--ucb-black);
+}
+
+.ucb-bootstrap-layout__background-color--alert-yellow {
+  background-color: var(--ucb-alert-yellow);
+  color: var(--ucb-black);
+}
+
 .ucb-bootstrap-layout__background-color--gold a {
   color: #111111;
   text-decoration: underline;
@@ -201,6 +216,24 @@
   color: var(--ucb-white);
   text-decoration: underline;
   text-decoration-color: rgba(221, 221, 221, 0.65);
+}
+
+.ucb-bootstrap-layout__background-color--alert-red a,
+.ucb-bootstrap-layout__background-color--alert-red a:hover {
+  color: var(--ucb-white);
+  text-decoration: underline;
+}
+
+.ucb-bootstrap-layout__background-color--alert-orange a,
+.ucb-bootstrap-layout__background-color--alert-orange a:hover {
+  color: var(--ucb-black);
+  text-decoration: underline;
+}
+
+.ucb-bootstrap-layout__background-color--alert-yellow a,
+.ucb-bootstrap-layout__background-color--alert-yellow a:hover {
+  color: var(--ucb-black);
+  text-decoration: underline;
 }
 
 .ucb-bootstrap-layout-section-overlay-dark {

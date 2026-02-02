@@ -121,6 +121,24 @@
 
 }
 
+.block.bs-background-alert-red {
+  background-color: var(--ucb-alert-red);
+  color: var(--ucb-white);
+
+}
+
+.block.bs-background-alert-orange {
+  background-color: var(--ucb-alert-orange);
+  color: var(--ucb-black);
+
+}
+
+.block.bs-background-alert-yellow {
+  background-color: var(--ucb-alert-yellow);
+  color: var(--ucb-black);
+
+}
+
 .block.bs-background-outline {
   background-color: transparent;
   color: inherit;
@@ -223,6 +241,25 @@
   text-decoration-color: rgba(221, 221, 221, 0.65);
 }
 
+.block.bs-background-alert-red a,
+.block.bs-background-alert-red a:hover {
+  color: var(--ucb-white);
+  text-decoration: underline;
+  text-decoration-color: rgba(221, 221, 221, 0.65);
+}
+
+.block.bs-background-alert-orange a,
+.block.bs-background-alert-orange a:hover {
+  color: var(--ucb-black);
+  text-decoration: underline;
+}
+
+.block.bs-background-alert-yellow a,
+.block.bs-background-alert-yellow a:hover {
+  color: var(--ucb-black);
+  text-decoration: underline;
+}
+
 .block.bs-background-alert a,
 .block.bs-background-alert a:hover {
   color: var(--ucb-black);
@@ -255,7 +292,7 @@
 }
 
 .bs-icon-color-orange {
-  color: #ec9413;
+  color: var(--ucb-alert-orange);
 }
 
 .bs-icon-color-purple {
@@ -263,11 +300,11 @@
 }
 
 .bs-icon-color-red {
-  color: #e45146;
+  color: var(--ucb-alert-red);
 }
 
 .bs-icon-color-yellow {
-  color: #ecda13;
+  color: var(--ucb-alert-yellow);
 }
 
 .bs-icon-position-default {
