@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1743 - Article Grid: Adds spacing between all cards
+  This change fixes spacing between cards displayed in an `Article Grid` block so that all Articles rendered in the Grid have a uniform spacing. 
+  
+  Previously, the spacing would only apply to Articles with a summary, as it would add the default spacing style to the text. However, Articles displayed in the Grid without a summary would receive no spacing. 
+  
+  Resolves #1743 
+---
+
 - ### New background alert colors
   Added css work for the new alert background color options.
   Switched icon colors to match the alert red/orange/yellow colors in css.
