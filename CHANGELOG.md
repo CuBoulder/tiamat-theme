@@ -9,6 +9,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### New background alert colors
+  Added css work for the new alert background color options.
+  Switched icon colors to match the alert red/orange/yellow colors in css.
+  
+  Testing a new site install should be easy. All color options should be available in the section backgrounds as well as block backgrounds.
+  
+  Testing on a current site will require making sure Alert overrides and color options are showing up properly after a `ddev drush updb`
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/222
+  Sister PR: https://github.com/CuBoulder/ucb_styled_block/pull/5
+  Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/78
+  
+  Resolves #1729
+  Resolves #1742 
+---
+
 ## [20260128a] - 2026-01-28
 
 - ### #1739 - Prevent null from being passed in preprocess hook
