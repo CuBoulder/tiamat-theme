@@ -151,6 +151,90 @@
   background-color: var(--ucb-black);
 }
 
+/* Alert Red: same accordion styling as brick (section-dark). */
+.ucb-bootstrap-layout__background-color--alert-red .accordion-button {
+  color: var(--ucb-gold);
+}
+
+.ucb-bootstrap-layout__background-color--alert-red .accordion-button::before {
+  color: var(--ucb-gold);
+}
+
+.ucb-bootstrap-layout__background-color--alert-red .accordion-button:hover {
+  color: var(--ucb-white);
+}
+
+.ucb-bootstrap-layout__background-color--alert-red .accordion-button:hover::before {
+  color: var(--ucb-white);
+}
+
+.ucb-bootstrap-layout__background-color--alert-red .horizontal-tab-link.nav-link {
+  color: var(--ucb-white);
+}
+
+.ucb-bootstrap-layout__background-color--alert-red .horizontal-tab-link.nav-link.active {
+  color: var(--ucb-black);
+  background-color: var(--ucb-white);
+}
+
+.ucb-bootstrap-layout__background-color--alert-red .block .vertical-tab-link.nav-link {
+  color: #cccccc;
+  background-color: rgba(128, 128, 128, 0.333);
+}
+
+.ucb-bootstrap-layout__background-color--alert-red .block .vertical-tab-link.nav-link.active {
+  color: var(--ucb-white);
+  background-color: var(--ucb-black);
+}
+
+/* Alert Orange and Alert Yellow: same accordion styling as light green (section-light). */
+.ucb-bootstrap-layout__background-color--alert-orange .horizontal-tab-link.nav-link,
+.ucb-bootstrap-layout__background-color--alert-yellow .horizontal-tab-link.nav-link {
+  color: var(--ucb-black);
+}
+
+/* Block-level accordion: Alert Red (like brick). */
+.block.bs-background-alert-red .accordion-button {
+  color: var(--ucb-white);
+}
+
+.block.bs-background-alert-red .accordion-button::before {
+  color: var(--ucb-white);
+}
+
+.block.bs-background-alert-red .accordion-button:hover {
+  color: var(--ucb-white);
+}
+
+.block.bs-background-alert-red .accordion-button:hover::before {
+  color: var(--ucb-white);
+}
+
+.block.bs-background-alert-red .horizontal-tab-link.nav-link {
+  color: var(--ucb-white);
+}
+
+.block.bs-background-alert-red .horizontal-tab-link.nav-link.active {
+  color: var(--ucb-black);
+  background-color: var(--ucb-white);
+}
+
+.block.bs-background-alert-red .block .vertical-tab-link.nav-link {
+  color: #cccccc;
+  background-color: rgba(128, 128, 128, 0.333);
+}
+
+.block.bs-background-alert-red .block .vertical-tab-link.nav-link.active {
+  color: var(--ucb-white);
+  background-color: var(--ucb-black);
+}
+
+/* Block-level accordion: Alert Orange and Alert Yellow (like light green). */
+.block.bs-background-alert-orange .horizontal-tab-link.nav-link,
+.block.bs-background-alert-yellow .horizontal-tab-link.nav-link {
+  color: var(--ucb-black);
+}
+
 .accordian-content .collapse:not(.show),
 .horizontal-tab-content .collapse:not(.show),
 .vertical-tab-content .collapse:not(.show) {
@@ -196,7 +280,9 @@
 .block.bs-background-gray .accordion-item,
 .block.bs-background-tan .accordion-item,
 .block.bs-background-light-blue .accordion-item,
-.block.bs-background-light-green .accordion-item {
+.block.bs-background-light-green .accordion-item,
+.block.bs-background-alert-orange .accordion-item,
+.block.bs-background-alert-yellow .accordion-item {
   color: inherit;
   background-color: inherit;
   border-bottom: 1px solid rgba(128, 128, 128, 33%);
@@ -205,7 +291,8 @@
 .block.bs-background-dark-gray .accordion-item,
 .block.bs-background-medium-blue .accordion-item,
 .block.bs-background-dark-blue .accordion-item,
-.block.bs-background-brick .accordion-item {
+.block.bs-background-brick .accordion-item,
+.block.bs-background-alert-red .accordion-item {
   color: inherit;
   background-color: inherit;
   border-bottom: 1px solid rgb(255 255 255 / 58%);
@@ -327,7 +414,9 @@
     border-bottom: 2px solid var(--ucb-black);
   }
 
-  .ucb-bootstrap-layout-section-dark .horizontal-tab-accordion .nav-tabs {
+  .ucb-bootstrap-layout-section-dark .horizontal-tab-accordion .nav-tabs,
+  .ucb-bootstrap-layout__background-color--alert-red .horizontal-tab-accordion .nav-tabs,
+  .block.bs-background-alert-red .horizontal-tab-accordion .nav-tabs {
     border-bottom: 2px solid var(--ucb-white);
   }
 
@@ -349,7 +438,9 @@
     background-color: #f2f2f2;
   }
 
-  .ucb-bootstrap-layout-section-dark .vertical-tab-accordion .vertical-tabs {
+  .ucb-bootstrap-layout-section-dark .vertical-tab-accordion .vertical-tabs,
+  .ucb-bootstrap-layout__background-color--alert-red .vertical-tab-accordion .vertical-tabs,
+  .block.bs-background-alert-red .vertical-tab-accordion .vertical-tabs {
     background-color: rgba(128, 128, 128, 0.333);
   }
 
