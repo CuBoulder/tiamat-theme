@@ -9,29 +9,35 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260204] - 2026-02-04
+
 - ### #1743 - Article Grid: Adds spacing between all cards
+
   This change fixes spacing between cards displayed in an `Article Grid` block so that all Articles rendered in the Grid have a uniform spacing. 
-  
+
   Previously, the spacing would only apply to Articles with a summary, as it would add the default spacing style to the text. However, Articles displayed in the Grid without a summary would receive no spacing. 
-  
+
   Resolves #1743 
----
+
+* * *
 
 - ### New background alert colors
+
   Added css work for the new alert background color options.
   Switched icon colors to match the alert red/orange/yellow colors in css.
-  
+
   Testing a new site install should be easy. All color options should be available in the section backgrounds as well as block backgrounds.
-  
+
   Testing on a current site will require making sure Alert overrides and color options are showing up properly after a `ddev drush updb`
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/222
-  Sister PR: https://github.com/CuBoulder/ucb_styled_block/pull/5
-  Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/78
-  
+
+  Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/222>
+  Sister PR: <https://github.com/CuBoulder/ucb_styled_block/pull/5>
+  Sister PR: <https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/78>
+
   Resolves #1729
   Resolves #1742 
----
+
+* * *
 
 ## [20260128a] - 2026-01-28
 
@@ -4721,7 +4727,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260128a...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260204...HEAD
+[20260204]: https://github.com/CuBoulder/tiamat-theme/compare/20260128a...20260204
 [20260128a]: https://github.com/CuBoulder/tiamat-theme/compare/20260128...20260128a
 [20260128]: https://github.com/CuBoulder/tiamat-theme/compare/20260123...20260128
 [20260123]: https://github.com/CuBoulder/tiamat-theme/compare/20251216...20260123
