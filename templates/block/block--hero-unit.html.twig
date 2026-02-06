@@ -20,6 +20,9 @@
   {% set bgValue = 'background-color: inherit;' %}
 {% endif %}
 
+{# Need to normalize from array -> string #}
+{% if bgValue is iterable %}{% set bgValue = bgValue|first %}{% endif %}
+
 {# A background image will be used over a solid color #}
 {% if content['#block_content'].field_hero_background_image.entity.field_media_image.entity is defined %}
   {% set bgValue = "background-image:url(#{ file_url(content['#block_content'].field_hero_background_image.entity.field_media_image.entity.fileuri|image_style('wallpaper')) });background-repeat:no-repeat;background-position:center;background-size:cover;" %}
@@ -29,10 +32,14 @@
 {% set containerSize = 'ucb-hero-unit-text' %}
 
 {# set class for hero unit text align #}
-{% set heroTextAlign = content['#block_content'].field_text_align.value %}
+{% set heroTextAlign = content['#block_content'].field_text_align.value|default('') %}
+{# Normalize from array -> string #}
+{% if heroTextAlign is iterable %}{% set heroTextAlign = heroTextAlign|first %}{% endif %}
 
 {# set class for hero unit text color #}
-{% set heroTextColor = content['#block_content'].field_text_color.value %}
+{% set heroTextColor = content['#block_content'].field_text_color.value|default('') %}
+{# Normalize from array -> string #}
+{% if heroTextColor is iterable %}{% set heroTextColor = heroTextColor|first %}{% endif %}
 
 {# set classes for the size of the component #}
 {% if content['#block_content'].field_size.value is same as('0') %}
@@ -61,6 +68,12 @@
       style: bgValue
     }) }}>
     {% set linkColor = content['#block_content'].field_link_color.value %}
+
+    {# Normalize link color from array -> string #}
+    {% if linkColor is iterable %}
+      {% set linkColor = linkColor|first %}
+    {% endif %}
+
     {# Dont let twig render the links #}
     <div class="ucb-hero-unit-content container">
       <div class="row">
