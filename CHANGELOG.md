@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1747 - Hero Unit warnings suppressed
+  This change resolves 2 noisy PHP warnings regarding the Hero Unit. 
+  
+  
+  - First, where variables would be passed as single item arrays :`Warning: Array to string conversion in block--hero-unit.html.twig`. We have normalized the variables into and extract only the first item to silence this warning. 
+  - Second, `Warning: Undefined array key "label" in Drupal\layout_builder\Form\ConfigureSectionForm->buildForm() (line 136 of /var/www/html/web/core/modules/layout_builder/src/Form/ConfigureSectionForm.php)`. This seemed to be caused by our plugin’s configuration not including a label key, but Layout Builder’s ConfigureSectionForm expected it.
+  
+  Includes:
+  - `bootstrap_layout` => https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/79
+  - `theme` =>  https://github.com/CuBoulder/tiamat-theme/pull/1751
+  
+  Resolves #1747
+  
+---
+
 ## [20260204] - 2026-02-04
 
 - ### #1743 - Article Grid: Adds spacing between all cards
