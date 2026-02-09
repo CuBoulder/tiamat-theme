@@ -172,6 +172,12 @@ function boulder_base_preprocess_page(array &$variables) {
   $variables['ucb_secondary_menu_position'] = theme_get_setting('ucb_secondary_menu_position');
   $variables['ucb_footer_menu_default_links'] = theme_get_setting('ucb_footer_menu_default_links');
   $variables['show_breadcrumb'] = theme_get_setting('ucb_breadcrumb_nav');
+  // Only show the breadcrumb region when the setting is on and breadcrumb has content.
+  $variables['show_breadcrumb_region'] = FALSE;
+  if (!empty($variables['show_breadcrumb'])) {
+    $breadcrumb = \Drupal::service('breadcrumb')->build(\Drupal::routeMatch());
+    $variables['show_breadcrumb_region'] = count($breadcrumb->getLinks()) > 1;
+  }
   $variables['theme_path'] = base_path() . $variables['directory'];
   $variables['ucb_homepage_header'] = theme_get_setting('ucb_homepage_header');
   $variables['ucb_campus_header_color'] = theme_get_setting('ucb_campus_header_color');

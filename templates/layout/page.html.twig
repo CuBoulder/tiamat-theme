@@ -227,7 +227,7 @@
   {# MAIN PAGE CONTENT #}
   <div{{ create_attribute({ class: ['ucb-page-content', ucb_heading_font == 'normal' ? 'ucb-heading-font-normal'] }) }}>
     {% block breadcrumb_region %}
-      {% if show_breadcrumb and page.breadcrumb|render|striptags|trim|length > 0 %}
+      {% if show_breadcrumb_region %}
         <div class="ucb-breadcrumb-region">
           {{ page.breadcrumb }}
         </div>

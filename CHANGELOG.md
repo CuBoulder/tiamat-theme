@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update Breadcrumbs
+  Changed breadcrumbs to have their display logic in the .theme instead of across several template files.
+  
+  Resolves #1752
+---
+
 - ### #1747 - Hero Unit warnings suppressed
   This change resolves 2 noisy PHP warnings regarding the Hero Unit. 
   
