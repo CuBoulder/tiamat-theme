@@ -9,6 +9,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### CSS updates for Alert Pink
+  Added CSS updates for Alert Pink color. Uses the `--ucb-alert` variable color.
+  
+  Testing a new site install should be easy. All color options should be available in the section backgrounds as well as block backgrounds.
+  
+  Testing on a current site will require making sure Alert overrides and color options are showing up properly after a ddev `drush updb`
+  
+  Sister PR: https://github.com/CuBoulder/ucb_styled_block/pull/6
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/224
+  Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/80
+  
+  Resolves #1754 
+---
+
 - ### Update Breadcrumbs
   Changed breadcrumbs to have their display logic in the .theme instead of across several template files.
   

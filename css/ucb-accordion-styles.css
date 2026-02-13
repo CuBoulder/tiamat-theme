@@ -187,9 +187,10 @@
   background-color: var(--ucb-black);
 }
 
-/* Alert Orange and Alert Yellow: same accordion styling as light green (section-light). */
+/* Alert Orange, Alert Yellow, and Alert Pink: same accordion styling as light green (section-light). */
 .ucb-bootstrap-layout__background-color--alert-orange .horizontal-tab-link.nav-link,
-.ucb-bootstrap-layout__background-color--alert-yellow .horizontal-tab-link.nav-link {
+.ucb-bootstrap-layout__background-color--alert-yellow .horizontal-tab-link.nav-link,
+.ucb-bootstrap-layout__background-color--alert-pink .horizontal-tab-link.nav-link {
   color: var(--ucb-black);
 }
 
@@ -229,9 +230,10 @@
   background-color: var(--ucb-black);
 }
 
-/* Block-level accordion: Alert Orange and Alert Yellow (like light green). */
+/* Block-level accordion: Alert Orange, Alert Yellow, and Alert Pink (like light green). */
 .block.bs-background-alert-orange .horizontal-tab-link.nav-link,
-.block.bs-background-alert-yellow .horizontal-tab-link.nav-link {
+.block.bs-background-alert-yellow .horizontal-tab-link.nav-link,
+.block.bs-background-alert-pink .horizontal-tab-link.nav-link {
   color: var(--ucb-black);
 }
 
@@ -257,6 +259,7 @@
 .ucb-bootstrap-layout__background-color--light-green .accordion-item,
 .ucb-bootstrap-layout__background-color--alert-orange .accordion-item,
 .ucb-bootstrap-layout__background-color--alert-yellow .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-pink .accordion-item,
 .content-frame-light-gray .accordion-item {
   color: inherit;
   background-color: inherit;
@@ -282,7 +285,8 @@
 .block.bs-background-light-blue .accordion-item,
 .block.bs-background-light-green .accordion-item,
 .block.bs-background-alert-orange .accordion-item,
-.block.bs-background-alert-yellow .accordion-item {
+.block.bs-background-alert-yellow .accordion-item,
+.block.bs-background-alert-pink .accordion-item {
   color: inherit;
   background-color: inherit;
   border-bottom: 1px solid rgba(128, 128, 128, 33%);
@@ -341,6 +345,12 @@
 .ucb-bootstrap-layout__background-color--alert-yellow
   .block.bs-background-outline .accordion-item,
 .ucb-bootstrap-layout__background-color--alert-yellow
+  .block.bs-background-underline .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-pink
+  .block.bs-background-none .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-pink
+  .block.bs-background-outline .accordion-item,
+.ucb-bootstrap-layout__background-color--alert-pink
   .block.bs-background-underline .accordion-item,
 .content-frame-light-gray .block.bs-background-underline .accordion-item {
   color: inherit;
