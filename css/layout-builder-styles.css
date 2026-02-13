@@ -119,6 +119,11 @@
   color: var(--ucb-black);
 }
 
+.ucb-bootstrap-layout__background-color--alert-pink {
+  background-color: var(--ucb-alert);
+  color: var(--ucb-black);
+}
+
 .ucb-bootstrap-layout__background-color--gold a {
   color: #111111;
   text-decoration: underline;
@@ -232,6 +237,12 @@
 
 .ucb-bootstrap-layout__background-color--alert-yellow a,
 .ucb-bootstrap-layout__background-color--alert-yellow a:hover {
+  color: var(--ucb-black);
+  text-decoration: underline;
+}
+
+.ucb-bootstrap-layout__background-color--alert-pink a,
+.ucb-bootstrap-layout__background-color--alert-pink a:hover {
   color: var(--ucb-black);
   text-decoration: underline;
 }

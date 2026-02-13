@@ -139,6 +139,12 @@
 
 }
 
+.block.bs-background-alert-pink {
+  background-color: var(--ucb-alert);
+  color: var(--ucb-black);
+
+}
+
 .block.bs-background-outline {
   background-color: transparent;
   color: inherit;
@@ -256,6 +262,12 @@
 
 .block.bs-background-alert-yellow a,
 .block.bs-background-alert-yellow a:hover {
+  color: var(--ucb-black);
+  text-decoration: underline;
+}
+
+.block.bs-background-alert-pink a,
+.block.bs-background-alert-pink a:hover {
   color: var(--ucb-black);
   text-decoration: underline;
 }
