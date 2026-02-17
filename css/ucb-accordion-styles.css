@@ -414,6 +414,11 @@
   overflow: auto;
 }
 
+.accordion-body .field_media_oembed_video {
+  min-width: 620px;
+  max-width: 100%;
+}
+
 @media (min-width: 768px) {
   .horizontal-tab-accordion .nav-tabs,
   .vertical-tab-accordion .vertical-tabs {

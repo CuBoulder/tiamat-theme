@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Vertical expandable content
+  A min width is needed for accordion bodies with embedded videos.
+  
+  Kevin was right, the content area is set to be 100% width of the content added into it, and the embeds are set to expand to 100% of the width of the content area. So a tab without any other content would technically be 0pxx0px and you wouldn't see the video. Easiest way to fix it was just by adding a mobile friendly min-width. I tested some screen resizing and it still scales automatically as needed.
+  
+  Resolves #1756 
+---
+
 - ### CSS updates for Alert Pink
   Added CSS updates for Alert Pink color. Uses the `--ucb-alert` variable color.
   
