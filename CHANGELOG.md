@@ -9,48 +9,57 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260218] - 2026-02-18
+
 - ### Vertical expandable content
+
   A min width is needed for accordion bodies with embedded videos.
-  
+
   Kevin was right, the content area is set to be 100% width of the content added into it, and the embeds are set to expand to 100% of the width of the content area. So a tab without any other content would technically be 0pxx0px and you wouldn't see the video. Easiest way to fix it was just by adding a mobile friendly min-width. I tested some screen resizing and it still scales automatically as needed.
-  
+
   Resolves #1756 
----
+
+* * *
 
 - ### CSS updates for Alert Pink
+
   Added CSS updates for Alert Pink color. Uses the `--ucb-alert` variable color.
-  
+
   Testing a new site install should be easy. All color options should be available in the section backgrounds as well as block backgrounds.
-  
+
   Testing on a current site will require making sure Alert overrides and color options are showing up properly after a ddev `drush updb`
-  
-  Sister PR: https://github.com/CuBoulder/ucb_styled_block/pull/6
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/224
-  Sister PR: https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/80
-  
+
+  Sister PR: <https://github.com/CuBoulder/ucb_styled_block/pull/6>
+  Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/224>
+  Sister PR: <https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/80>
+
   Resolves #1754 
----
+
+* * *
 
 - ### Update Breadcrumbs
+
   Changed breadcrumbs to have their display logic in the .theme instead of across several template files.
-  
+
   Resolves #1752
----
+
+* * *
 
 - ### #1747 - Hero Unit warnings suppressed
+
   This change resolves 2 noisy PHP warnings regarding the Hero Unit. 
-  
-  
+
   - First, where variables would be passed as single item arrays :`Warning: Array to string conversion in block--hero-unit.html.twig`. We have normalized the variables into and extract only the first item to silence this warning. 
   - Second, `Warning: Undefined array key "label" in Drupal\layout_builder\Form\ConfigureSectionForm->buildForm() (line 136 of /var/www/html/web/core/modules/layout_builder/src/Form/ConfigureSectionForm.php)`. This seemed to be caused by our plugin’s configuration not including a label key, but Layout Builder’s ConfigureSectionForm expected it.
-  
+
   Includes:
-  - `bootstrap_layout` => https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/79
-  - `theme` =>  https://github.com/CuBoulder/tiamat-theme/pull/1751
-  
+
+  - `bootstrap_layout` => <https://github.com/CuBoulder/ucb_bootstrap_layouts/pull/79>
+  - `theme` =>  <https://github.com/CuBoulder/tiamat-theme/pull/1751>
+
   Resolves #1747
-  
----
+
+* * *
 
 ## [20260204] - 2026-02-04
 
@@ -4770,7 +4779,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260204...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260218...HEAD
+[20260218]: https://github.com/CuBoulder/tiamat-theme/compare/20260204...20260218
 [20260204]: https://github.com/CuBoulder/tiamat-theme/compare/20260128a...20260204
 [20260128a]: https://github.com/CuBoulder/tiamat-theme/compare/20260128...20260128a
 [20260128]: https://github.com/CuBoulder/tiamat-theme/compare/20260123...20260128
