@@ -159,18 +159,19 @@
             heroElement = videoWrapperElement.parentElement,
             heroWidth = heroElement.offsetWidth,
             heroHeight = heroElement.offsetHeight,
-            dimensions = calculateAspectRatioFit(videoWidth, videoHeight, heroWidth, heroHeight);
-            let correctedHeight = heroHeight;
-            if(window.innerWidth - heroWidth < 10) {
-                correctedHeight = (correctedHeight * 2) / 3;
-                videoWrapperElement.style.height =  'fit-content';
-            } else {
-                videoWrapperElement.style.height =  dimensions.height + 'px';
-            }
-        videoPlayerElement.width = dimensions.width;
+            // Ensure we have valid dimensions; on mobile the hero may not have height yet
+            effectiveHeight = heroHeight > 0 ? heroHeight : (heroWidth * (videoHeight / videoWidth)),
+            dimensions = calculateAspectRatioFit(videoWidth, videoHeight, heroWidth, effectiveHeight);
+
         videoWrapperElement.style.width = dimensions.width + 'px';
-        videoPlayerElement.height = dimensions.height;
-        videoPlayerWrapperElement.style.top = ((correctedHeight - dimensions.height) / 2) + 'px';
+        videoWrapperElement.style.height = dimensions.height + 'px';
+        videoPlayerElement.style.width = dimensions.width + 'px';
+        videoPlayerElement.style.height = dimensions.height + 'px';
+        if (videoPlayerElement.setAttribute) {
+            videoPlayerElement.setAttribute('width', dimensions.width);
+            videoPlayerElement.setAttribute('height', dimensions.height);
+        }
+        videoPlayerWrapperElement.style.top = ((effectiveHeight - dimensions.height) / 2) + 'px';
         videoPlayerWrapperElement.style.marginLeft = ((heroWidth - dimensions.width) / 2) + 'px';
         videoPlayerWrapperElement.style.marginRight = ((heroWidth - dimensions.width) / 2) + 'px';
     }

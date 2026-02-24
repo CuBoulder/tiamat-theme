@@ -83,6 +83,8 @@
 
 .ucb-hero-unit-video-wrapper {
   position: absolute;
+  top: 0;
+  left: 0;
   display: block;
   overflow: hidden;
 }
@@ -160,6 +162,19 @@
   width: 100%;
   max-height: 100%;
   height: 100%;
+}
+
+/* Ensure video hero has dimensions on mobile for proper scaling */
+@media screen and (max-width: 768px) {
+  .ucb-hero-unit-video {
+    min-height: 56.25vw; /* 16:9 aspect ratio for consistent video scaling */
+  }
+
+  /* Cap user-defined padding on mobile to prevent cutoff from fixed px values */
+  .ucb-hero-unit-video .ucb-hero-unit-content {
+    padding-top: clamp(1.5rem, 5vw, 4rem) !important;
+    padding-bottom: clamp(2rem, 6vw, 5rem) !important;
+  }
 }
 
 
