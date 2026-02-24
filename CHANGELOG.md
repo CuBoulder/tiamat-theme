@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Video Hero Unit Resizing
+  Fixed mobile issues for the video hero unit. Clamping made it much easier than before with weird js checks.
+  
+  Resolves #1660
+---
+
 ## [20260218] - 2026-02-18
 
 - ### Vertical expandable content
