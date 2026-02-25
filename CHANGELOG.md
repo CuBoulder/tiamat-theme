@@ -9,11 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260225] - 2026-02-25
+
 - ### Video Hero Unit Resizing
+
   Fixed mobile issues for the video hero unit. Clamping made it much easier than before with weird js checks.
-  
+
   Resolves #1660
----
+
+* * *
 
 ## [20260218] - 2026-02-18
 
@@ -4785,7 +4789,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260218...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260225...HEAD
+[20260225]: https://github.com/CuBoulder/tiamat-theme/compare/20260218...20260225
 [20260218]: https://github.com/CuBoulder/tiamat-theme/compare/20260204...20260218
 [20260204]: https://github.com/CuBoulder/tiamat-theme/compare/20260128a...20260204
 [20260128a]: https://github.com/CuBoulder/tiamat-theme/compare/20260128...20260128a
