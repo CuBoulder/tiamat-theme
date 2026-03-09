@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### ToS Decline Button
+  Added decline button to the Terms of Service modal popup on the user page. If declined any session cookie (there shouldn't be one) created will be deleted and the user will be logged out.
+  
+  Sister PR: https://github.com/CuBoulder/ucb_user_invite/pull/19
+  
+  Resolves #1755
+  
+---
+
 ## [20260225] - 2026-02-25
 
 - ### Video Hero Unit Resizing

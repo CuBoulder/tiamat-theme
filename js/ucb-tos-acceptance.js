@@ -37,12 +37,21 @@
   function attachEventListeners(modal) {
     const dialog = modal.querySelector('.ucb-tos-modal-dialog');
     const acceptButton = modal.querySelector('.ucb-tos-accept-button');
+    const declineButton = modal.querySelector('.ucb-tos-decline-button');
     
     // Handle accept button.
     if (acceptButton) {
       acceptButton.addEventListener('click', function(e) {
         e.preventDefault();
         handleAcceptance(acceptButton, modal);
+      });
+    }
+
+    // Handle decline button.
+    if (declineButton) {
+      declineButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        handleDecline(modal);
       });
     }
 
@@ -119,6 +128,7 @@
             </p>
           </div>
           <div class="ucb-tos-modal-footer">
+            <button type="button" class="ucb-tos-decline-button btn btn-secondary">Decline</button>
             <button type="button" class="ucb-tos-accept-button btn btn-primary">Accept</button>
           </div>
         </div>
@@ -170,6 +180,22 @@
     if (modal.liveRegion) {
       modal.liveRegion.textContent = '';
     }
+  }
+
+  /**
+   * Handles TOS decline - logs user out and redirects to homepage.
+   */
+  function handleDecline(modal) {
+    hideModal(modal);
+
+    const tosData = typeof drupalSettings !== 'undefined' ? (drupalSettings.ucb_tos_acceptance || {}) : {};
+    // Use decline_url from backend to bypass logout confirmation page.
+    const basePath = (typeof drupalSettings !== 'undefined' && drupalSettings.path?.baseUrl)
+      ? drupalSettings.path.baseUrl.replace(/\/$/, '')
+      : '';
+    const declineUrl = tosData.decline_url || tosData.logout_url || basePath + '/user/logout';
+
+    window.location.href = declineUrl;
   }
 
   /**
