@@ -9,14 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260310] - 2026-03-10
+
 - ### ToS Decline Button
+
   Added decline button to the Terms of Service modal popup on the user page. If declined any session cookie (there shouldn't be one) created will be deleted and the user will be logged out.
-  
-  Sister PR: https://github.com/CuBoulder/ucb_user_invite/pull/19
-  
+
+  Sister PR: <https://github.com/CuBoulder/ucb_user_invite/pull/19>
+
   Resolves #1755
-  
----
+
+* * *
 
 ## [20260225] - 2026-02-25
 
@@ -4798,7 +4801,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260225...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260310...HEAD
+[20260310]: https://github.com/CuBoulder/tiamat-theme/compare/20260225...20260310
 [20260225]: https://github.com/CuBoulder/tiamat-theme/compare/20260218...20260225
 [20260218]: https://github.com/CuBoulder/tiamat-theme/compare/20260204...20260218
 [20260204]: https://github.com/CuBoulder/tiamat-theme/compare/20260128a...20260204
