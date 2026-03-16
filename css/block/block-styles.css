@@ -59,6 +59,7 @@
 /*** Heading Styles ***/
 .bs-heading-align-centered .block-title {
   text-align: center;
+  display: block;
 }
 
 /*** Background Color Settings ***/
