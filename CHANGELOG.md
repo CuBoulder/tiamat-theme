@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1771 - Secondary Menu increase padding between menu-items
+  The padding on the menu items in the Secondary Menu increased from 5px to 8px to give a little more space between the items. 
+  
+  The primary issue presented with the background color not applying to the entire menu, as shown below, is not present on new installs and on the site shown was corrected on the live site with a re-save of the secondary menu. 
+  <img width="2740" height="456" alt="image" src="https://github.com/user-attachments/assets/77700a0a-9f5b-42f8-8c0c-efdbe64ba353" />
+  
+  
+  Resolves #1771 
+---
+
 - ### #1768 - Fixes 'strong' header not centering
   Adds `display: block` to center-aligned block header (within block styles) to fix issue with `<strong>` styled headers not aligning correctly.
   
