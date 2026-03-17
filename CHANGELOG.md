@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1768 - Fixes 'strong' header not centering
+  Adds `display: block` to center-aligned block header (within block styles) to fix issue with `<strong>` styled headers not aligning correctly.
+  
+  Resolves #1768 
+---
+
 ## [20260310] - 2026-03-10
 
 - ### ToS Decline Button
