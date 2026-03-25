@@ -1,0 +1,56 @@
+{#
+/**
+ * @file
+ * Image gallery for article secondary content (grid + GLightbox; no block style options).
+ */
+#}
+{% set classes = [
+  'paragraph',
+  'paragraph--type--' ~ paragraph.bundle|clean_class,
+  view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+  not paragraph.isPublished() ? 'paragraph--unpublished',
+] %}
+
+{% set totalColumns = '6' %}
+{% set tabletColumns = '3' %}
+{% set masonryOn = paragraph.field_masonry_display.value %}
+{% set galleryID = 'gallery'|clean_unique_id %}
+
+{% if masonryOn %}
+  {% set totalColumns = paragraph.field_masonry_columns.value|default(2) %}
+  {% if totalColumns == 2 %}
+    {% set tabletColumns = 2 %}
+  {% endif %}
+{% endif %}
+
+{% block paragraph %}
+  <div{{ attributes.addClass(classes) }}>
+    {{ attach_library('boulder_base/ucb-image-gallery') }}
+    <div class="row row-cols-lg-{{ totalColumns }} row-cols-md-{{ tabletColumns }} row-cols-2 g-4 gallery-div masonry-option-true" data-masonry='{"percentPosition": true }'>
+      {% for key, item in paragraph.field_image_gallery_photo %}
+        {% if key|first != '#' %}
+          {% if item.entity.field_media_image_caption.value|render|striptags|trim %}
+            {% set photoDescription = item.entity.field_media_image_caption.value|render|striptags|trim %}
+          {% else %}
+            {% set photoDescription = '' %}
+          {% endif %}
+          {% if masonryOn %}
+            <div class="col gallery-item">
+              <a href="{{ file_url(item.entity.field_media_image.entity.fileuri) }}" class="glightbox ucb-gallery-lightbox" data-gallery="{{ galleryID }}" data-glightbox="description: {{ photoDescription }} ">
+                <div class="imageMediaStyle large_image_style">
+                  <img src="{{ file_url(item.entity.field_media_image.entity.fileuri) }}" alt="{{ item.entity.field_media_image.alt|render }}" width="1500" height="2250">
+                </div>
+              </a>
+            </div>
+          {% else %}
+            <div class="col gallery-item">
+              <a href="{{ file_url(item.entity.field_media_image.entity.fileuri) }}" class="glightbox ucb-gallery-lightbox" data-gallery="{{ galleryID }}" data-glightbox="description: {{ photoDescription }} ">
+                {{ item.entity|view }}
+              </a>
+            </div>
+          {% endif %}
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+{% endblock paragraph %}
