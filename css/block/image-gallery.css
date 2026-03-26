@@ -29,3 +29,24 @@ padding-top: 5px;
   flex: 1 1 auto;
   padding: 1rem 1rem;
 }
+
+/*
+ * Article secondary content: the article layout uses flex row + stretch, and
+ * ucb-article.css applies max-height: 100% to all media images. That caps each
+ * image to the column height and breaks multi-row galleries (rows collapse /
+ * overlap). Reset for the gallery paragraph only.
+ */
+.ucb-article-content-media .paragraph--type--article-image-gallery .gallery-div .gallery-item img {
+  max-height: none;
+}
+
+/* Let the image column height follow gallery content in left/right layouts. */
+.ucb-article-row-subrow .ucb-article-content-media:has(.paragraph--type--article-image-gallery) {
+  align-self: flex-start;
+}
+
+/* Flex link wrapper: allow the image stack to define row height naturally. */
+.masonry-option-true .paragraph--type--article-image-gallery .gallery-item a .imageMediaStyle {
+  min-width: 0;
+  width: 100%;
+}

@@ -1,0 +1,13 @@
+{#
+/**
+ * @file
+ * Theme override for slider slides on article_slider paragraph (carousel items).
+ */
+#}
+{% for item in items %}
+  <div class="carousel-item {{ loop.first ? "active" : "" }}">
+    <div class="carousel-item-structure">
+      {{ item.content }}
+    </div>
+  </div>
+{% endfor %}

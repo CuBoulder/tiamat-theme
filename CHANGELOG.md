@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Issue/1766
+  Add Slider paragraph to the Article page as a secondary media option
+  Add Image Gallery paragraph to the Article page as a secondary media option
+  Both paragraphs function like their block counter parts.
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/229
+  
+  Resolves #1766
+  Resolves #1767 
+---
+
 - ### #1771 - Secondary Menu increase padding between menu-items
   The padding on the menu items in the Secondary Menu increased from 5px to 8px to give a little more space between the items. 
   
