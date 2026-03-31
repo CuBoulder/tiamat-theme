@@ -373,7 +373,7 @@
 
 .ucb-contained-row .ucb-hero-unit-content {
   --bs-gutter-y: 1.5rem;
-  --bs-gutter-x: 1.5rem;
+  --bs-gutter-x: 3rem;
 }
 
 .ucb-contained-row .ucb-hero-outer-wrapper,

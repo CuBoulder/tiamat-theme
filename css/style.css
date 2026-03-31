@@ -24,6 +24,27 @@
   --ucb-alert-yellow: #FDD835;
 }
 
+/*
+ * Double the default Bootstrap horizontal gutter (1.5rem -> 3rem). Containers use
+ * padding-x: calc(var(--bs-gutter-x) * 0.5); rows use matching negative margins and
+ * columns use half-gutter padding, so all must share the same variable.
+ * Gutter utility classes are re-listed afterward so they still override .row (our rules
+ * load after bootstrap.min.css).
+ */
+.container,
+.container-fluid,
+.container-lg,
+.container-md,
+.container-sm,
+.container-xl,
+.container-xxl {
+  --bs-gutter-x: 3rem;
+}
+
+.row {
+  --bs-gutter-x: 3rem;
+}
+
 /* Needed for Font Awesome  */
  @font-face {
     font-family: 'Font Awesome 6 Free - Brands';

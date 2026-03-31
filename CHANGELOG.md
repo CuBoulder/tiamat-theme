@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Double left/right padding
+  Updated base gutter x to be double the width so that padding on left/right of content is double and aligned.
+  
+  Should be clean alignment across all section options, block styles, and block layout placements (hopefully)
+  
+  Resolves #1777 
+---
+
 - ### Issue/1766
   Add Slider paragraph to the Article page as a secondary media option
   Add Image Gallery paragraph to the Article page as a secondary media option
