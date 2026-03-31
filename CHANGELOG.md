@@ -9,40 +9,49 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260331] - 2026-03-31
+
 - ### Double left/right padding
+
   Updated base gutter x to be double the width so that padding on left/right of content is double and aligned.
-  
+
   Should be clean alignment across all section options, block styles, and block layout placements (hopefully)
-  
+
   Resolves #1777 
----
+
+* * *
 
 - ### Issue/1766
+
   Add Slider paragraph to the Article page as a secondary media option
   Add Image Gallery paragraph to the Article page as a secondary media option
   Both paragraphs function like their block counter parts.
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/229
-  
+
+  Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/229>
+
   Resolves #1766
   Resolves #1767 
----
+
+* * *
 
 - ### #1771 - Secondary Menu increase padding between menu-items
+
   The padding on the menu items in the Secondary Menu increased from 5px to 8px to give a little more space between the items. 
-  
+
   The primary issue presented with the background color not applying to the entire menu, as shown below, is not present on new installs and on the site shown was corrected on the live site with a re-save of the secondary menu. 
   <img width="2740" height="456" alt="image" src="https://github.com/user-attachments/assets/77700a0a-9f5b-42f8-8c0c-efdbe64ba353" />
-  
-  
+
   Resolves #1771 
----
+
+* * *
 
 - ### #1768 - Fixes 'strong' header not centering
+
   Adds `display: block` to center-aligned block header (within block styles) to fix issue with `<strong>` styled headers not aligning correctly.
-  
+
   Resolves #1768 
----
+
+* * *
 
 ## [20260310] - 2026-03-10
 
@@ -4836,7 +4845,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260310...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260331...HEAD
+[20260331]: https://github.com/CuBoulder/tiamat-theme/compare/20260310...20260331
 [20260310]: https://github.com/CuBoulder/tiamat-theme/compare/20260225...20260310
 [20260225]: https://github.com/CuBoulder/tiamat-theme/compare/20260218...20260225
 [20260218]: https://github.com/CuBoulder/tiamat-theme/compare/20260204...20260218
