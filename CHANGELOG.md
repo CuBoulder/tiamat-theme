@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Issue/1780
+  Fixed the image focal render issue for the article image gallery
+  Adjusted both margin and padding options for the article image gallery
+  - Padding changes required custom gutter settings for image gallery only they should not affect any other gutters
+  - Padding changes affect both article and block image galleries
+  Found and fixed a render php bug on the block image gallery when using masonry options.
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/231
+  
+  Resolves #1780 
+---
+
 ## [20260331] - 2026-03-31
 
 - ### Double left/right padding

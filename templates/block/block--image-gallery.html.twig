@@ -18,8 +18,8 @@
 {% set galleryID = 'gallery'|clean_unique_id %}
 
 {% if masonryStyle == "True" %}
-  {% set totalColumns = content.field_masonry_columns[0]|render %}
-  {% if totalColumns == 2 %}
+  {% set totalColumns = content.field_masonry_columns[0]|render|striptags|trim %}
+  {% if totalColumns == '2' %}
     {% set tabletColumns = 2 %}
   {% endif %}
 {% endif %}
@@ -27,7 +27,7 @@
 {% extends '@boulder_base/block/styled-block.html.twig' %}
 {% block content %}
   {{ attach_library('boulder_base/ucb-image-gallery') }}
-  <div class="row row-cols-lg-{{totalColumns}} row-cols-md-{{tabletColumns}} row-cols-2 g-4 gallery-div masonry-option-true" data-masonry='{"percentPosition": true }'>
+  <div class="row row-cols-lg-{{totalColumns}} row-cols-md-{{tabletColumns}} row-cols-2 gallery-div masonry-option-true" data-masonry='{"percentPosition": true }'>
     {% for key, item in content['#block_content'].field_image_gallery_photo  %}
       {% if key|first != '#' %}
         {% if item.entity.field_media_image_caption.value|render|striptags|trim %}
