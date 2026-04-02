@@ -18,8 +18,8 @@
 {% set galleryID = 'gallery'|clean_unique_id %}
 
 {% if masonryStyle == "True" %}
-  {% set totalColumns = content.field_masonry_columns[0]|render %}
-  {% if totalColumns == 2 %}
+  {% set totalColumns = content.field_masonry_columns[0]|render|striptags|trim %}
+  {% if totalColumns == '2' %}
     {% set tabletColumns = 2 %}
   {% endif %}
 {% endif %}
