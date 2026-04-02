@@ -31,6 +31,15 @@ padding-top: 5px;
 }
 
 /*
+ * Article body: match block vertical rhythm from layout-builder-styles.css
+ * (.ucb-bootstrap-layout-section .column .block margin-bottom).
+ */
+.ucb-article-body .paragraph--type--article-image-gallery {
+  --bs-gutter-y: 3rem;
+  margin-bottom: calc(var(--bs-gutter-y) * 0.5);
+}
+
+/*
  * Article secondary content: the article layout uses flex row + stretch, and
  * ucb-article.css applies max-height: 100% to all media images. That caps each
  * image to the column height and breaks multi-row galleries (rows collapse /
