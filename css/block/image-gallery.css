@@ -3,16 +3,23 @@
   height: auto;
 }
 
+/*
+ * Block + article paragraph galleries: equal horizontal and vertical gaps between
+ * thumbnails. 1.5rem each axis (matches Bootstrap g-4).
+ * Do not zero out column margin-top here — Bootstrap rows rely on --bs-gutter-y for
+ * vertical spacing between wrapped rows.
+ */
+.row.gallery-div {
+  --ucb-gallery-thumb-gutter: 1.5rem;
+  --bs-gutter-x: var(--ucb-gallery-thumb-gutter);
+  --bs-gutter-y: var(--ucb-gallery-thumb-gutter);
+}
+
 .ucb-above-content .block-content--type--image-gallery,
 .ucb-below-content .block-content--type--image-gallery {
   padding: 1.5em;
 }
 
-.masonry-option-true,
-.masonry-option-true .gallery-item {
-margin-top: 0;
-padding-top: 5px;
-}
 .masonry-option-true .gallery-item a {
   position: relative;
   display: flex;
@@ -35,8 +42,8 @@ padding-top: 5px;
  * (.ucb-bootstrap-layout-section .column .block margin-bottom).
  */
 .ucb-article-body .paragraph--type--article-image-gallery {
-  --bs-gutter-y: 3rem;
-  margin-bottom: calc(var(--bs-gutter-y) * 0.5);
+  --ucb-article-block-spacing: 3rem;
+  margin-bottom: calc(var(--ucb-article-block-spacing) * 0.5);
 }
 
 /*
