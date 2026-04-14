@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fix article feature spacing
+  Updated display option fix for article feature cards.
+  
+  Fixed stacked card spacing.
+  Previous spacing changes affected this.
+  
+  Resolves #1783 
+---
+
 ## [20260402] - 2026-04-02
 
 - ### Issue/1780

@@ -328,7 +328,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
 
         // Row
         var articleContainer = document.createElement("article");
-        articleContainer.className = "ucb-article-card row";
+        articleContainer.className = "ucb-article-card";
 
         //Img
         var articleImg = document.createElement("img");
@@ -433,7 +433,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
 
         // Row
         var articleContainer = document.createElement("article");
-        articleContainer.className = "ucb-article-card row";
+        articleContainer.className = "ucb-article-card";
 
         //Img
         var articleImg = document.createElement("img");
@@ -535,7 +535,7 @@ class ArticleFeatureBlockElement extends HTMLElement {
 
         // Row
         var articleContainer = document.createElement("article");
-        articleContainer.className = "ucb-article-card col-md-4 col-sm-12 row";
+        articleContainer.className = "ucb-article-card col-md-4 col-sm-12";
 
         //Img
         var articleImg = document.createElement("img");
