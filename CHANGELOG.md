@@ -9,14 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260421] - 2026-04-21
+
 - ### Fix article feature spacing
+
   Updated display option fix for article feature cards.
-  
+
   Fixed stacked card spacing.
   Previous spacing changes affected this.
-  
+
   Resolves #1783 
----
+
+* * *
 
 ## [20260402] - 2026-04-02
 
@@ -4871,7 +4875,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260402...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260421...HEAD
+[20260421]: https://github.com/CuBoulder/tiamat-theme/compare/20260402...20260421
 [20260402]: https://github.com/CuBoulder/tiamat-theme/compare/20260331...20260402
 [20260331]: https://github.com/CuBoulder/tiamat-theme/compare/20260310...20260331
 [20260310]: https://github.com/CuBoulder/tiamat-theme/compare/20260225...20260310
