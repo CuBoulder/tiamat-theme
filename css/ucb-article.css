@@ -217,3 +217,24 @@ i.fa-regular.fa-calendar {
     padding: 150px 20px 30px;
   }
 }
+
+/* Advanced "Narrow" page style: shorter line length in Article Text paragraphs (article_content). */
+@media (min-width: 768px) {
+  .ucb-page-style-narrow .ucb-article-body .paragraph--type--article-content .ucb-article-text {
+    font-size: 19px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  .ucb-page-style-narrow .ucb-article-body .paragraph--type--article-content .ucb-article-text {
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
+
+@media (min-width: 992px) {
+  .ucb-page-style-narrow .ucb-article-body .paragraph--type--article-content .ucb-article-text {
+    margin-left: 20%;
+    margin-right: 20%;
+  }
+}
