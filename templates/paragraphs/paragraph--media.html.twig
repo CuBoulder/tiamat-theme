@@ -1,0 +1,57 @@
+{#
+/**
+ * @file
+ * Media paragraph: custom image (style + class from field_media_image_style) or
+ * default rendered media (video) via the paragraph view display (content.field_media).
+ */
+#}
+{%
+  set classes = [
+    'paragraph',
+    'paragraph--type--' ~ paragraph.bundle|clean_class,
+    view_mode ? 'paragraph--view-mode--' ~ view_mode|clean_class,
+    'ucb-article-media-paragraph',
+  ]
+%}
+{% set style_key = paragraph.field_media_image_style.value|default('original') %}
+{% set image_style_map = {
+  'original': 'original_image_size',
+  'wide': 'wide_image_style',
+  'square': 'focal_image_square',
+  'focal_wide_4_3': 'focal_image_wide',
+} %}
+{% set img_class_map = {
+  'original': 'ucb-article-media-img ucb-article-media-img--original',
+  'wide': 'ucb-content-row-img-lg',
+  'square': 'ucb-article-media-img ucb-article-media-img--square',
+  'focal_wide_4_3': 'ucb-article-media-img ucb-article-media-img--focal-wide',
+} %}
+{% set image_style = image_style_map[style_key]|default(image_style_map['original']) %}
+{% set img_class = img_class_map[style_key]|default(img_class_map['original']) %}
+{% set media = paragraph.field_media.entity %}
+
+<div{{ attributes.addClass(classes) }}>
+  {% if media and media.field_media_image is not empty and media.field_media_image.entity %}
+    {% if 'ucb-content-row-img-lg' in img_class %}
+      {{ attach_library('boulder_base/ucb-content-row') }}
+    {% endif %}
+    <div class="ucb-paragraph-media__image">
+      <img
+        class="{{ img_class }}"
+        src="{{ media.field_media_image.entity.fileuri|image_style(image_style) }}"
+        alt="{{ media.field_media_image.alt|e('html_attr') }}"
+        loading="lazy"
+      />
+      {% if media.field_media_image_caption.0 is not empty
+        and (media.field_media_image_caption.0.value|default('')|striptags|trim|length > 0) %}
+        <div class="ucb-paragraph-media__caption ucb-article-content-media__caption text-muted small">
+          {{ media.field_media_image_caption|render }}
+        </div>
+      {% endif %}
+    </div>
+  {% elseif content.field_media %}
+    <div class="ucb-paragraph-media__video">
+      {{ content.field_media }}
+    </div>
+  {% endif %}
+</div>

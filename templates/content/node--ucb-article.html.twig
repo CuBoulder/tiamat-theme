@@ -80,6 +80,8 @@
   {{ attach_library('boulder_base/ucb-article-dark') }}
 {% elseif pageStyleInt =="Zebra Striped"%}
   {% set pageStyleCSS = "ucb-page-style-striped" %}
+{% elseif pageStyleInt == "Narrow" %}
+  {% set pageStyleCSS = "ucb-page-style-narrow" %}
 {% endif %}
 
 
