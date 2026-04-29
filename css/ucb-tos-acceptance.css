@@ -78,6 +78,25 @@
   margin-bottom: 1rem;
 }
 
+.ucb-tos-modal-subheading {
+  margin: 1.25rem 0 0.75rem;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.ucb-tos-modal-list {
+  margin: 0 0 1rem;
+  padding-left: 1.25rem;
+}
+
+.ucb-tos-modal-list li {
+  margin-bottom: 0.75rem;
+}
+
+.ucb-tos-modal-list li:last-child {
+  margin-bottom: 0;
+}
+
 .ucb-tos-modal-body a {
   color: #005fcc;
   text-decoration: underline;

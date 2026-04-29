@@ -119,13 +119,19 @@
       <div class="ucb-tos-modal-dialog">
         <div class="ucb-tos-modal-content">
           <div class="ucb-tos-modal-header">
-            <h2 id="ucb-tos-modal-title" class="ucb-tos-modal-title">Terms of Service</h2>
+            <h2 id="ucb-tos-modal-title" class="ucb-tos-modal-title">Web Express Terms of Service</h2>
           </div>
           <div class="ucb-tos-modal-body" id="ucb-tos-modal-description">
-            <p>Please review and accept our Terms of Service to continue using this site.</p>
-            <p>
-              <a href="${tosUrl}" target="_blank" rel="noopener noreferrer">View Terms of Service</a>
-            </p>
+            <p>These terms are the binding rules and guidelines for using the University of Colorado Boulder Web Express service. Agreement to these terms is required for access to creating and maintaining websites on the platform.</p>
+            <h3 class="ucb-tos-modal-subheading">Key Takeaways</h3>
+            <ul class="ucb-tos-modal-list">
+              <li><strong>Secure, University-Managed Platform:</strong> CU Boulder hosts and maintains Web Express, handling security updates, system monitoring, and emergency backups. Only users with a campus IdentiKey can access site editing tools.</li>
+              <li><strong>Prohibited Data:</strong> Private or sensitive information (like student records or health data) is strictly prohibited from being collected or posted.</li>
+              <li><strong>No Technical Skills Required:</strong> The platform allows the community to create professional sites without coding. Users cannot install custom software or themes to ensure security and brand consistency.</li>
+              <li><strong>Support and Training:</strong> Strategic Relations and Communications (SRC) provides hosting, setup, documentation, training, and regular feature updates.</li>
+              <li><strong>Analytics:</strong> Sites can use Google Analytics 4 and Google Tag Manager. Site owners must manage their own accounts and ensure no personal information is collected.</li>
+              <li><strong>Policy Compliance:</strong> Sites must follow accessibility, branding, copyright, and acceptable-use policies. Abandoned or non-compliant sites may be archived or removed.</li>
+            </ul>
           </div>
           <div class="ucb-tos-modal-footer">
             <button type="button" class="ucb-tos-decline-button btn btn-secondary">Decline</button>
@@ -162,7 +168,7 @@
     
     // Announce modal to screen readers.
     if (modal.liveRegion) {
-      modal.liveRegion.textContent = 'Terms of Service dialog opened. Please review and accept the Terms of Service to continue.';
+      modal.liveRegion.textContent = 'Web Express Terms of Service dialog opened. Please review and accept the terms to continue.';
     }
   }
 
