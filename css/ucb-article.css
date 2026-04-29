@@ -219,6 +219,12 @@ i.fa-regular.fa-calendar {
 }
 
 /* Advanced "Narrow" page style: shorter line length in Article Text paragraphs (article_content). */
+.ucb-page-style-narrow .ucb-article-body .paragraph--type--article-content .ucb-article-text {
+  line-height: 1.5;
+  padding-top: 40px;
+  padding-bottom: 40px;
+}
+
 @media (min-width: 768px) {
   .ucb-page-style-narrow .ucb-article-body .paragraph--type--article-content .ucb-article-text {
     font-size: 19px;

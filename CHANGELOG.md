@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Issue/1795
+  Fixes the bug of the article page breaking if an image with a caption is added to the secondary media.
+  
+  Update spacing on the advanced `Narrow` style so that the text will have more breathing room.
+  
+  Resolves #1795 
+  Resolves #1796 
+---
+
 ## [20260429] - 2026-04-29
 
 - ### Text for Web Express Terms of Service
