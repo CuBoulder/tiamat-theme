@@ -9,28 +9,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260429] - 2026-04-29
+
 - ### Text for Web Express Terms of Service
+
   Updated the ToS copy language.
   Fix CSS for modal. Make modal wider and update the responsiveness of it.
-  
-  Sister PR: https://github.com/CuBoulder/ucb_site_configuration/pull/103
-  
+
+  Sister PR: <https://github.com/CuBoulder/ucb_site_configuration/pull/103>
+
   Resolves #1792 
----
+
+* * *
 
 - ### Article updates
+
   Addition of Narrow advanced article style
-  
+
   Addition of media style options for secondary image
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/233
-  Sister PR: https://github.com/CuBoulder/tiamat10-profile/pull/322
-  
+
+  Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/233>
+  Sister PR: <https://github.com/CuBoulder/tiamat10-profile/pull/322>
+
   Resolves #1786 
   Resolves #1787
   Resolves #1788
-  
----
+
+* * *
 
 ## [20260421] - 2026-04-21
 
@@ -4898,7 +4903,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260421...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260429...HEAD
+[20260429]: https://github.com/CuBoulder/tiamat-theme/compare/20260421...20260429
 [20260421]: https://github.com/CuBoulder/tiamat-theme/compare/20260402...20260421
 [20260402]: https://github.com/CuBoulder/tiamat-theme/compare/20260331...20260402
 [20260331]: https://github.com/CuBoulder/tiamat-theme/compare/20260310...20260331
