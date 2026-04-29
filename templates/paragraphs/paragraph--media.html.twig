@@ -42,12 +42,6 @@
         alt="{{ media.field_media_image.alt|e('html_attr') }}"
         loading="lazy"
       />
-      {% if media.field_media_image_caption.0 is not empty
-        and (media.field_media_image_caption.0.value|default('')|striptags|trim|length > 0) %}
-        <div class="ucb-paragraph-media__caption ucb-article-content-media__caption text-muted small">
-          {{ media.field_media_image_caption|render }}
-        </div>
-      {% endif %}
     </div>
   {% elseif content.field_media %}
     <div class="ucb-paragraph-media__video">
