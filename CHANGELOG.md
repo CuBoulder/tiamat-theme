@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Text for Web Express Terms of Service
+  Updated the ToS copy language.
+  Fix CSS for modal. Make modal wider and update the responsiveness of it.
+  
+  Sister PR: https://github.com/CuBoulder/ucb_site_configuration/pull/103
+  
+  Resolves #1792 
+---
+
 - ### Article updates
   Addition of Narrow advanced article style
   
