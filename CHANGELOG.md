@@ -9,22 +9,28 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260430] - 2026-04-30
+
 - ### Secondary article image fix
+
   Update the secondary article images so that they have a set min width and that flex shrinking doesn't occur.
-  
+
   Set the min width for tablet sizes to be 50 so text doesn't get mega squished, but mobile bounces back to 80 as the template changes.
-  
+
   Resolves #1798 
----
+
+* * *
 
 - ### Issue/1795
+
   Fixes the bug of the article page breaking if an image with a caption is added to the secondary media.
-  
+
   Update spacing on the advanced `Narrow` style so that the text will have more breathing room.
-  
+
   Resolves #1795 
   Resolves #1796 
----
+
+* * *
 
 ## [20260429] - 2026-04-29
 
@@ -4920,7 +4926,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260429...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260430...HEAD
+[20260430]: https://github.com/CuBoulder/tiamat-theme/compare/20260429...20260430
 [20260429]: https://github.com/CuBoulder/tiamat-theme/compare/20260421...20260429
 [20260421]: https://github.com/CuBoulder/tiamat-theme/compare/20260402...20260421
 [20260402]: https://github.com/CuBoulder/tiamat-theme/compare/20260331...20260402
