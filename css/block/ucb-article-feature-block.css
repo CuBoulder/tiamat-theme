@@ -21,9 +21,19 @@
 }
 
 .ucb-article-img-link {
+  flex-shrink: 0;
+  min-width: 80px;
   width: 80px !important;
   height: 80px !important;
   padding: 0;
+  overflow: hidden;
+}
+
+.ucb-article-feature-secondary-img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 .ucb-article-feature-container .ucb-article-card {
@@ -106,6 +116,14 @@
 
 .ucb-article-feature-container .ucb-article-img-link{
   margin-right: 10px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 991.98px) {
+  .ucb-article-img-link {
+    min-width: 50px;
+    width: 50px !important;
+    height: 50px !important;
+  }
 }
 
 @media screen and (max-width: 767px) {
