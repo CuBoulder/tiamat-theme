@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Secondary article image fix
+  Update the secondary article images so that they have a set min width and that flex shrinking doesn't occur.
+  
+  Set the min width for tablet sizes to be 50 so text doesn't get mega squished, but mobile bounces back to 80 as the template changes.
+  
+  Resolves #1798 
+---
+
 - ### Issue/1795
   Fixes the bug of the article page breaking if an image with a caption is added to the secondary media.
   
