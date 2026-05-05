@@ -578,3 +578,9 @@ ucb-tos-acceptance:
   css:
     theme:
       css/ucb-tos-acceptance.css: { weight: 5 }
+
+ucb-fixit-survey:
+  version: 1.x
+  css: 
+    theme:
+      css/ucb-fixit-survey.css : { weight: 5}

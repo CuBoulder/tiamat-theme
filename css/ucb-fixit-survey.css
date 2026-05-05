@@ -1,0 +1,50 @@
+/* This fixes the conditional post-Fixit survey rendered on the two form pages on Fixit sites. */
+/* This block is placed via Block Layout, and will be nested after the existing form, which creates a bunch of containers */
+#block-boulder-base-survey.container,
+#block-boulder-base-survey > .container,
+#block-boulder-base-survey .container.mb-4 {
+  max-width: none;
+  width: auto;
+  padding-left: 0;
+  padding-right: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+/* Remove bootstrap row gutters ONLY inside this block */
+#block-boulder-base-survey .row {
+  --bs-gutter-x: 0;
+  margin-left: 0;
+  margin-right: 0;
+}
+
+
+#block-boulder-base-fixitsurvey {
+  width: 100vw;
+  max-width: none;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Remove the extra Bootstrap container behavior inside this block */
+#block-boulder-base-fixitsurvey .container {
+  max-width: none;
+  width: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* Fix the font */
+.webform-submission-fix-it-survey-form,
+.webform-submission-fix-it-survey-form * {
+font-family: Roboto, "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+/* Emoji override */
+.webform-submission-fix-it-survey-form label.option {
+  font-family: "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", sans-serif !important;
+}
