@@ -17,10 +17,16 @@
 }
 
 .views-field-field-ucb-article-thumbnail {
-  width: calc(100px + var(--bs-gutter-x));
-  height: auto;
+  flex: 0 0 auto;
   margin-bottom: 20px;
   padding-top: 5px;
+}
+
+.views-field-field-ucb-article-thumbnail img {
+  width: 100px;
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 .ucb-view-wrapper {
@@ -51,10 +57,15 @@
 }
 
 .ucb-taxonomy-thumbnail {
-  width: calc(100px + var(--bs-gutter-x));
-  height: auto;
+  flex: 0 0 auto;
   margin-bottom: 20px;
-  min-width: calc(100px + var(--bs-gutter-x));
+}
+
+.ucb-taxonomy-thumbnail img {
+  width: 100px;
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 .item-list .views-field .field-content {

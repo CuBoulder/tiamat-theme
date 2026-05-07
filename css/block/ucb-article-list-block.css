@@ -30,15 +30,20 @@
 }
 
 .ucb-article-card-img {
-  width: 100px;
-  height: 100px;
+  flex: 0 0 auto;
   padding: 0px;
+  align-self: flex-start;
 }
 
-.ucb-article-card-img.title-thumbnail-img {
+.ucb-article-card-img img {
+  width: 100px;
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.ucb-article-card-img.title-thumbnail-img img {
   width: 65px;
-  height: 65px;
-  padding: 0px;
 }
 
 .ucb-article-card-img-wide {
@@ -104,15 +109,11 @@
 }
 
 @media only screen and (max-width: 575px) {
-  .ucb-article-card-img {
+  .ucb-article-card-img img {
     width: 50px;
-    height: 50px;
-    padding: 0px;
   }
 
-  .ucb-article-card-img.title-thumbnail-img {
+  .ucb-article-card-img.title-thumbnail-img img {
     width: 50px;
-    height: 50px;
-    padding: 0px;
   }
 }

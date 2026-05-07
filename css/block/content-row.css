@@ -126,9 +126,15 @@
 }
 
 .row-image-container{
-  width: calc(100px + var(--bs-gutter-x));
   height: auto;
   margin-bottom: 20px;
+}
+
+.row-image-container img {
+  max-width: 100px;
+  width: 100%;
+  height: auto;
+  display: block;
 }
 
 .row-image-container-tile-even {

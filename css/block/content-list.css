@@ -22,7 +22,7 @@
 }
 
 .ucb-content-list-image {
-	max-width: calc(100px + var(--bs-gutter-x));
+	max-width: 100px;
 	height: auto;
 	margin-bottom: 20px;
 }

@@ -47,9 +47,14 @@
 }
 
 .ucb-article-card-img {
-  width: calc(100px + var(--bs-gutter-x));
-  height: auto;
   margin-bottom: 20px;
+}
+
+.ucb-article-card-img img {
+  width: 100px;
+  max-width: 100%;
+  height: auto;
+  display: block;
 }
 
 .ucb-article-card-more {
