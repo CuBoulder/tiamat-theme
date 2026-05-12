@@ -132,6 +132,9 @@
               <li><strong>Analytics:</strong> Sites can use Google Analytics 4 and Google Tag Manager. Site owners must manage their own accounts and ensure no personal information is collected.</li>
               <li><strong>Policy Compliance:</strong> Sites must follow accessibility, branding, copyright, and acceptable-use policies. Abandoned or non-compliant sites may be archived or removed.</li>
             </ul>
+            <p class="ucb-tos-modal-full-terms-link">
+              <a href="https://www.colorado.edu/webcentral/web-express-terms-service" target="_blank" rel="noopener noreferrer">Read full terms of service</a>
+            </p>
           </div>
           <div class="ucb-tos-modal-footer">
             <button type="button" class="ucb-tos-decline-button btn btn-secondary">Decline</button>

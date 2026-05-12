@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update ucb-tos-acceptance.js
+  Add link to full ToS terms and conditions
+  
+  Resolves #1807 
+---
+
 ## [20260512] - 2026-05-12
 
 - ### Update ucb-tos-acceptance.js
