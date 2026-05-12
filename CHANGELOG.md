@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fix row media sizing problems
+  Updated content rows to size properly for `teaser` style. Now matches the layout of article/content lists. Also updated article lists to size properly if a block layout sidebar is being used alongside it.
+  
+  Please test content row `teaser` style and `article list` pages + those with a sidebar
+  
+  Resolves #1790 
+---
+
 ## [20260512a] - 2026-05-12
 
 - ### Update ucb-tos-acceptance.js
