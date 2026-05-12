@@ -229,6 +229,7 @@
         return fetch(acceptUrl, {
           method: 'POST',
           headers: {
+            'Accept': 'application/json',
             'Content-Type': 'application/json',
             'X-CSRF-Token': csrfToken,
           },
@@ -286,8 +287,14 @@
    * Gets the CSRF token from Drupal.
    */
   function getCsrfToken() {
-    // Fetch token from Drupal's session/token endpoint.
-    return fetch('/session/token', {
+    // Use base path + pathPrefix (Drupal.url) so subdirectory/multisite installs
+    // hit the real endpoint; a bare '/session/token' breaks on non-root sites.
+    const tokenUrl = (typeof Drupal !== 'undefined' && typeof Drupal.url === 'function')
+      ? Drupal.url('session/token')
+      : ((typeof drupalSettings !== 'undefined' && drupalSettings.path)
+        ? drupalSettings.path.baseUrl + (drupalSettings.path.pathPrefix || '') + 'session/token'
+        : '/session/token');
+    return fetch(tokenUrl, {
       method: 'GET',
       credentials: 'same-origin',
     })
