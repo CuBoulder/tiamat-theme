@@ -9,11 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260512] - 2026-05-12
+
 - ### Update ucb-tos-acceptance.js
+
   Update accept type header as well as session token information to use base path on `colorado.edu` but also extend the token for sub directory paths like `colorado.edu/biden`
-  
+
   Resolves #1803 
----
+
+* * *
 
 ## [20260430] - 2026-04-30
 
@@ -4932,7 +4936,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260430...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260512...HEAD
+[20260512]: https://github.com/CuBoulder/tiamat-theme/compare/20260430...20260512
 [20260430]: https://github.com/CuBoulder/tiamat-theme/compare/20260429...20260430
 [20260429]: https://github.com/CuBoulder/tiamat-theme/compare/20260421...20260429
 [20260421]: https://github.com/CuBoulder/tiamat-theme/compare/20260402...20260421
