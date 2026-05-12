@@ -9,11 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260512a] - 2026-05-12
+
 - ### Update ucb-tos-acceptance.js
+
   Add link to full ToS terms and conditions
-  
+
   Resolves #1807 
----
+
+* * *
 
 ## [20260512] - 2026-05-12
 
@@ -4942,7 +4946,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260512...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260512a...HEAD
+[20260512a]: https://github.com/CuBoulder/tiamat-theme/compare/20260512...20260512a
 [20260512]: https://github.com/CuBoulder/tiamat-theme/compare/20260430...20260512
 [20260430]: https://github.com/CuBoulder/tiamat-theme/compare/20260429...20260430
 [20260429]: https://github.com/CuBoulder/tiamat-theme/compare/20260421...20260429
