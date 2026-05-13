@@ -9,13 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260513] - 2026-05-13
+
 - ### Fix row media sizing problems
+
   Updated content rows to size properly for `teaser` style. Now matches the layout of article/content lists. Also updated article lists to size properly if a block layout sidebar is being used alongside it.
-  
+
   Please test content row `teaser` style and `article list` pages + those with a sidebar
-  
+
   Resolves #1790 
----
+
+* * *
 
 ## [20260512a] - 2026-05-12
 
@@ -4954,7 +4958,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260512a...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260513...HEAD
+[20260513]: https://github.com/CuBoulder/tiamat-theme/compare/20260512a...20260513
 [20260512a]: https://github.com/CuBoulder/tiamat-theme/compare/20260512...20260512a
 [20260512]: https://github.com/CuBoulder/tiamat-theme/compare/20260430...20260512
 [20260430]: https://github.com/CuBoulder/tiamat-theme/compare/20260429...20260430
