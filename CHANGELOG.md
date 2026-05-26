@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update ucb-tos-acceptance.js
+  Updated ToS text for Prohibited Data
+  
+  Resolves #1811 
+---
+
 ## [20260513] - 2026-05-13
 
 - ### Fix row media sizing problems

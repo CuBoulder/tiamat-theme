@@ -126,7 +126,7 @@
             <h3 class="ucb-tos-modal-subheading">Key Takeaways</h3>
             <ul class="ucb-tos-modal-list">
               <li><strong>Secure, University-Managed Platform:</strong> CU Boulder hosts and maintains Web Express, handling security updates, system monitoring, and emergency backups. Only users with a campus IdentiKey can access site editing tools.</li>
-              <li><strong>Prohibited Data:</strong> Private or sensitive information (like student records or health data) is strictly prohibited from being collected or posted.</li>
+              <li><strong>Prohibited Data:</strong> Highly Confidential Data (like student records or health data) is strictly prohibited from being collected or posted.</li>
               <li><strong>No Technical Skills Required:</strong> The platform allows the community to create professional sites without coding. Users cannot install custom software or themes to ensure security and brand consistency.</li>
               <li><strong>Support and Training:</strong> Strategic Relations and Communications (SRC) provides hosting, setup, documentation, training, and regular feature updates.</li>
               <li><strong>Analytics:</strong> Sites can use Google Analytics 4 and Google Tag Manager. Site owners must manage their own accounts and ensure no personal information is collected.</li>
