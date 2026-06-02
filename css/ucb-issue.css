@@ -59,8 +59,7 @@
   font-size: 75%;
 }
 
-.feature-article-thumbnail>div>div>div>img {
-  aspect-ratio: 2 / 1;
+.feature-article-thumbnail>div>div>img {
   object-fit: cover;
   margin-bottom: 10px;
 }
