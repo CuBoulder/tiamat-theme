@@ -9,6 +9,21 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Remove aspect ratios from image css styling
+  To better preserve Focal Point intent on images, this change removes the `aspect-ratio` css attribute present on the following images:
+  - Article Feature (Block)
+  - Issue (Content Type)
+  
+  Also fixes a css logic bug on Issue (content type) where a set of styling wasn't being applied
+  
+  Reviewing the change log, It seems to be required for js libraries responsible for slider behavior on the following blocks:
+  - Article Slider (block)
+  - Hero Slider (block)
+  
+  Resolves #1818 
+  
+---
+
 - ### #1820 - Adds captions to Paragraph - Media
   This change displays the caption on media placed via paragraphs, such as Secondary Content on Article nodes.
   
