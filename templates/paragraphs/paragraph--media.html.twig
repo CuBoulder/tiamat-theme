@@ -29,20 +29,26 @@
 {% set image_style = image_style_map[style_key]|default(image_style_map['original']) %}
 {% set img_class = img_class_map[style_key]|default(img_class_map['original']) %}
 {% set media = paragraph.field_media.entity %}
+{% set caption = media.field_media_image_caption %}
 
 <div{{ attributes.addClass(classes) }}>
   {% if media and media.field_media_image is not empty and media.field_media_image.entity %}
     {% if 'ucb-content-row-img-lg' in img_class %}
       {{ attach_library('boulder_base/ucb-content-row') }}
     {% endif %}
-    <div class="ucb-paragraph-media__image">
+    <figure class="ucb-paragraph-media__image">
       <img
         class="{{ img_class }}"
         src="{{ media.field_media_image.entity.fileuri|image_style(image_style) }}"
         alt="{{ media.field_media_image.alt|e('html_attr') }}"
         loading="lazy"
       />
-    </div>
+    {% if caption %}
+      <figcaption class="ucb-paragraph-media__caption" style="text-align: left;">
+        {{ caption|view }}
+      </figcaption>
+    {% endif %}
+    </figure>
   {% elseif content.field_media %}
     <div class="ucb-paragraph-media__video">
       {{ content.field_media }}
