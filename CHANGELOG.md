@@ -9,26 +9,33 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260603] - 2026-06-03
+
 - ### Remove aspect ratios from image css styling
+
   To better preserve Focal Point intent on images, this change removes the `aspect-ratio` css attribute present on the following images:
+
   - Article Feature (Block)
   - Issue (Content Type)
-  
+
   Also fixes a css logic bug on Issue (content type) where a set of styling wasn't being applied
-  
+
   Reviewing the change log, It seems to be required for js libraries responsible for slider behavior on the following blocks:
+
   - Article Slider (block)
   - Hero Slider (block)
-  
+
   Resolves #1818 
-  
----
+
+* * *
 
 - ### #1820 - Adds captions to Paragraph - Media
+
   This change displays the caption on media placed via paragraphs, such as Secondary Content on Article nodes.
-  
+
   Resolves #1820 
----
+
+* * *
 
 ## [20260527] - 2026-05-27
 
@@ -4989,7 +4996,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260527...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260603...HEAD
+[20260603]: https://github.com/CuBoulder/tiamat-theme/compare/20260527...20260603
 [20260527]: https://github.com/CuBoulder/tiamat-theme/compare/20260513...20260527
 [20260513]: https://github.com/CuBoulder/tiamat-theme/compare/20260512a...20260513
 [20260512a]: https://github.com/CuBoulder/tiamat-theme/compare/20260512...20260512a
