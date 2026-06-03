@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1820 - Adds captions to Paragraph - Media
+  This change displays the caption on media placed via paragraphs, such as Secondary Content on Article nodes.
+  
+  Resolves #1820 
+---
+
 ## [20260527] - 2026-05-27
 
 - ### Update ucb-tos-acceptance.js
