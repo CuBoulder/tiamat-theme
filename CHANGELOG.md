@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1653 - Hamburger menu breakpoint takes effect sooner
+  Adjusts the full -> mobile menu breakpoint triggering the hamburger menu to take effect at 767px instead of 575px widths, to prevent the main or secondary menus from wrapping. 
+  
+  Resolves #1653 
+---
+
 ## [20260603] - 2026-06-03
 
 - ### Remove aspect ratios from image css styling

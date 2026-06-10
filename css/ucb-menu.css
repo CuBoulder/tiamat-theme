@@ -31,7 +31,7 @@
   width: 100%;
 }
 
-@media only screen and (max-width: 575px) {
+@media only screen and (max-width: 767px) {
   section.ucb-main-nav-section.ucb-header-black {
     color: #FFF;
     background-color: #000;
