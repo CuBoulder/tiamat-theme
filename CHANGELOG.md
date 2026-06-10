@@ -9,11 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260610] - 2026-06-10
+
 - ### #1653 - Hamburger menu breakpoint takes effect sooner
+
   Adjusts the full -> mobile menu breakpoint triggering the hamburger menu to take effect at 767px instead of 575px widths, to prevent the main or secondary menus from wrapping. 
-  
+
   Resolves #1653 
----
+
+* * *
 
 ## [20260603] - 2026-06-03
 
@@ -5002,7 +5006,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260603...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260610...HEAD
+[20260610]: https://github.com/CuBoulder/tiamat-theme/compare/20260603...20260610
 [20260603]: https://github.com/CuBoulder/tiamat-theme/compare/20260527...20260603
 [20260527]: https://github.com/CuBoulder/tiamat-theme/compare/20260513...20260527
 [20260513]: https://github.com/CuBoulder/tiamat-theme/compare/20260512a...20260513
