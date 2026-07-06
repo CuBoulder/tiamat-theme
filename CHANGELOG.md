@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Image Gallery Block - remove captions
+  Update item display entity so only the images show on the image gallery by default. Then when they're opened up the captions show in the lightbox as expected.
+  
+  Resolves #1827
+---
+
 ## [20260610] - 2026-06-10
 
 - ### #1653 - Hamburger menu breakpoint takes effect sooner
