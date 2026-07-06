@@ -1,0 +1,259 @@
+{%
+    set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    ]
+%}
+
+
+{# Site base URL for absolute links #}
+{% set base_url = url('<front>')|render|split('/', -1)|join('/') %}
+
+{# Full front URL so we can extract protocol + domain for absolute media URLs. #}
+{% set full_base_url = url('<front>')|render %}
+{% set url_parts = full_base_url|split('/') %}
+{% set protocol = url_parts[0] %}
+{% set domain = url_parts[2] %}
+{% set base_domain = protocol ~ '//' ~ domain %}
+
+{# Design type = won't use #}
+{% set designType = node.field_newsletter_type.entity.field_newsletter_design.value %}
+
+{# Dark / Light Mode logo #}
+{% set cuLogoDark = base_url ~ '/' ~ base_path ~ directory ~ '/images/cu-boulder-logo-text-black.gif' %}
+{% set cuLogoLight = base_url ~ '/' ~ base_path ~ directory ~ '/images/cu-boulder-logo-text-white.gif' %}
+
+{% if designType == 'minimal' or designType == 'lightbox' %}
+  {% set cuLogoSrc = cuLogoDark %}
+{% else %}
+  {% set cuLogoSrc = cuLogoLight %}
+{% endif %}
+
+<div class="container">
+
+{# Preheader / newsletter summary text #}
+{% if node.field_newsletter_summary.value %}
+  {{ node.field_newsletter_summary.value }}
+{% endif %}
+
+
+{# CU Boulder logo image. #}
+<img src="{{ cuLogoSrc }}" alt="CU Boulder">
+
+{# Newsletter name image from Newsletter Type taxonomy term, if available #}
+{% if node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value %}
+  <img
+    src="{{ base_domain }}{{ file_url(node.field_newsletter_type.entity.field_newsletter_name_image.entity.uri.value) }}"
+    alt="{{ node.field_newsletter_type.entity.label }}"
+  >
+{% else %}
+  {# Injects newsletter type label as fallback when no newsletter name image exists. #}
+  {{ node.field_newsletter_type.entity.label }}
+{% endif %}
+
+
+{# Newsletter created date. #}
+{{ node.created.value|date("M. j, Y") }}
+
+
+{# Absolute canonical node URL for "View on website" #}
+<a href="{{ base_url }}{{ path('entity.node.canonical', {'node': node.id}) }}">
+  View on website
+</a>
+
+
+{# Intro image, if present. #}
+{% if content.field_newsletter_intro_image|render %}
+  <img
+    src="{{ base_domain }}{{ file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri) }}"
+    alt="{{ node.field_newsletter_intro_image.entity.field_media_image.alt|render }}"
+  >
+{% endif %}
+
+
+{# Intro body, converting root-relative links to absolute links #}
+{% if content.field_newsletter_intro_body|render %}
+  {% set intro_body = content.field_newsletter_intro_body|render %}
+  {% set updated_intro_body = intro_body|replace({'href="/': 'href="' ~ base_domain ~ '/'}) %}
+  {{ updated_intro_body|raw }}
+{% endif %}
+
+
+{# Rendered newsletter section block field #}
+{% if content.field_newsletter_section_block|render %}
+  {{ content.field_newsletter_section_block|render }}
+{% endif %}
+
+
+{# Promo image one, optionally wrapped in promo link one. #}
+{% if content.field_newsletter_promo_image_one|render %}
+
+  {% if content.field_newsletter_promo_link_one|render %}
+
+    {# Promo link one and normalizes internal links to absolute URLs #}
+    {% set link_url_one = content.field_newsletter_promo_link_one|render|striptags|trim %}
+
+    {% if link_url_one starts with 'http' or link_url_one starts with 'www' %}
+      {% set final_url_one = link_url_one %}
+    {% else %}
+      {% set final_url_one = base_url ~ link_url_one %}
+    {% endif %}
+
+    <a href="{{ final_url_one }}">
+      <img
+        src="{{ base_domain }}{{ file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square')) }}"
+        alt="{{ node.field_newsletter_promo_image_one.entity.field_media_image.alt|render }}"
+      >
+    </a>
+
+  {% else %}
+
+    {# Promo image one without a link. #}
+    <img
+      src="{{ base_domain }}{{ file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square')) }}"
+      alt="{{ node.field_newsletter_promo_image_one.entity.field_media_image.alt|render }}"
+    >
+
+  {% endif %}
+
+{% endif %}
+
+
+{# Builds a filtered list of content blocks that actually have title or text. #}
+{% set blocksToRender = [] %}
+
+{% for key, block in content.field_newsletter_content_blocks %}
+  {% if key|first != '#' %}
+    {% set paragraphItem = block['#paragraph'] %}
+    {% set title = paragraphItem.field_newsletter_block_title.value|default('') %}
+    {% set text = paragraphItem.field_newsletter_block_text.value|default('') %}
+
+    {% if title|trim is not empty or text|trim is not empty %}
+      {% set blocksToRender = blocksToRender|merge([block]) %}
+    {% endif %}
+  {% endif %}
+{% endfor %}
+
+{# Injects filtered newsletter content blocks. #}
+{% if blocksToRender %}
+  {% for block in blocksToRender %}
+    {{ block }}
+  {% endfor %}
+{% endif %}
+
+
+{# Promo image two, optionally wrapped in promo link two #}
+{% if content.field_newsletter_promo_image_two|render %}
+
+  {% if content.field_newsletter_promo_link_two|render %}
+
+    {# Promo link two and normalizes internal links to absolute URLs #}
+    {% set link_url_two = content.field_newsletter_promo_link_two|render|striptags|trim %}
+
+    {% if link_url_two starts with 'http://' or link_url_two starts with 'https://' %}
+      {% set final_url_two = link_url_two %}
+    {% else %}
+      {% set final_url_two = base_url ~ link_url_two %}
+    {% endif %}
+
+    <a href="{{ final_url_two }}">
+      <img
+        src="{{ base_domain }}{{ file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square')) }}"
+        alt="{{ node.field_newsletter_promo_image_two.entity.field_media_image.alt|render }}"
+      >
+    </a>
+
+  {% else %}
+
+    {# Promo image two without a link #}
+    <img
+      src="{{ base_domain }}{{ file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square')) }}"
+      alt="{{ node.field_newsletter_promo_image_two.entity.field_media_image.alt|render }}"
+    >
+
+  {% endif %}
+
+{% endif %}
+
+
+{# Footer content from Newsletter Type taxonomy term #}
+{% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
+
+  {# Injects site homepage link. #}
+  <a href="{{ url('<front>', {}, {'absolute': true}) }}">
+    {{ site_name }}
+  </a>
+
+  {# Injects processed newsletter footer body. #}
+  {{ node.field_newsletter_type.entity.field_newsletter_footer.0.processed|raw }}
+
+{% endif %}
+
+
+{# Social links from Newsletter Type taxonomy term. #}
+{% if node.field_newsletter_type.entity.field_newsletter_social_link is defined and node.field_newsletter_type.entity.field_newsletter_social_link is not empty %}
+
+  {% for link in node.field_newsletter_type.entity.field_newsletter_social_link %}
+
+    {# Injects the social link URL. #}
+    {% set uri = link.url.toString() %}
+
+    {# Extracts hostname from absolute social URL #}
+    {% set hostname = '' %}
+    {% if uri matches '/^(http(s)?:)?\\/\\//i' %}
+      {% set hostname = uri|split('/')[2] %}
+    {% endif %}
+
+    {# Determines which social icon to inject based on hostname #}
+    {% set service = 'link' %}
+
+    {% if hostname matches '/facebook\\.com$/i' %}
+      {% set service = 'Facebook' %}
+    {% elseif hostname matches '/instagram\\.com$/i' %}
+      {% set service = 'Instagram' %}
+    {% elseif hostname matches '/linkedin\\.com$/i' %}
+      {% set service = 'LinkedIn' %}
+    {% elseif hostname matches '/youtube\\.com$/i' %}
+      {% set service = 'YouTube' %}
+    {% elseif hostname matches '/(pinterest\\.com|pin\\.it)$/i' %}
+      {% set service = 'Pinterest' %}
+    {% elseif hostname matches '/(flickr\\.com|flic\\.kr)$/i' %}
+      {% set service = 'Flickr' %}
+    {% elseif hostname matches '/vimeo\\.com$/i' %}
+      {% set service = 'Vimeo' %}
+    {% elseif hostname matches '/wordpress\\.com$/i' %}
+      {% set service = 'Wordpress' %}
+    {% elseif hostname matches '/tiktok\\.com$/i' %}
+      {% set service = 'TikTok' %}
+    {% elseif hostname matches '/reddit\\.com$/i' %}
+      {% set service = 'Reddit' %}
+    {% elseif hostname matches '/patreon\\.com$/i' %}
+      {% set service = 'Patreon' %}
+    {% elseif hostname matches '/discord\\.(com|gg)$/i' %}
+      {% set service = 'Discord' %}
+    {% elseif hostname matches '/(twitter\\.com|x\\.com)$/i' %}
+      {% set service = 'X' %}
+    {% elseif hostname matches '/bsky\\.app$/i' %}
+      {% set service = 'Bluesky' %}
+    {% endif %}
+
+    {# Social icon alt text #}
+    {% set alt = service == 'link' ? 'Social link' : service %}
+
+    {# Icon color variant based on newsletter design type - TODO - Won't use#}
+    {% set color = designType == 'darkbox' or designType == 'simple' or designType == 'classic' ? 'white' : 'black' %}
+
+    {# Social link with matching icon image #}
+    <a href="{{ uri }}">
+      <img
+        src="{{ base_url ~ '/' ~ base_path ~ directory ~ '/images/social_icons/' ~ color ~ '-' ~ service|lower ~ '.png' }}"
+        alt="{{ alt }}"
+      >
+    </a>
+
+  {% endfor %}
+
+{% endif %}
+</div>

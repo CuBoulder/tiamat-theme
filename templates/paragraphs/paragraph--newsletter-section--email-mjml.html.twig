@@ -1,0 +1,314 @@
+{#
+/**
+ * MJML template for Newsletter Section paragraphs.
+ *
+ * Outputs MJML fragments only.
+ * Parent node template owns <mjml>, <mj-head>, and <mj-body>.
+ */
+#}
+
+{# Site base URL for internal links #}
+{% set base_url = url('<front>')|render|split('/', -1)|join('/') %}
+
+{# Absolute media URL base #}
+{% set full_base_url = url('<front>')|render %}
+{% set url_parts = full_base_url|split('/') %}
+{% set base_domain = url_parts[0] ~ '//' ~ url_parts[2] %}
+
+
+{# Newsletter section title #}
+{% if paragraph.field_newsletter_section_title.value %}
+  <mj-section>
+    <mj-column>
+      <mj-text>
+        <h2>{{ paragraph.field_newsletter_section_title.value }}</h2>
+      </mj-text>
+    </mj-column>
+  </mj-section>
+{% endif %}
+
+
+{# Feature style section. field_newsletter_section_style value 0 = Feature. #}
+{% if paragraph.field_newsletter_section_style.value == '0' %}
+
+  {% for item in paragraph.field_newsletter_section_select %}
+    {% set section_item = item.entity %}
+
+    {% if section_item %}
+
+      {# Selected article, if this section item references an article #}
+      {% set article = section_item.field_newsletter_article_select.entity %}
+
+      {# Shared injected values for either selected article or custom content #}
+      {% set title = '' %}
+      {% set href = '' %}
+      {% set summary = '' %}
+      {% set image_uri = '' %}
+      {% set image_alt = '' %}
+
+      {% if article %}
+
+        {# Selected article title #}
+        {% set title = article.title.value %}
+
+        {# Absolute selected article URL #}
+        {% set href = url('entity.node.canonical', {
+          'node': section_item.field_newsletter_article_select.target_id
+        }, {'absolute': true}) %}
+
+        {# Selected article thumbnail image, if present #}
+        {% if article.field_ucb_article_thumbnail.entity.field_media_image.entity %}
+          {% set image_uri = article.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri %}
+          {% set image_alt = article.field_ucb_article_thumbnail.entity.field_media_image.alt %}
+
+        {# Fallback article media image, if no thumbnail exists #}
+        {% elseif article.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity %}
+          {% set image_uri = article.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri %}
+          {% set image_alt = article.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt %}
+        {% endif %}
+
+        {# Selected article summary, or trimmed article body fallback #}
+        {% if article.field_ucb_article_summary.value %}
+          {% set summary = article.field_ucb_article_summary.value %}
+        {% elseif article.field_ucb_article_content.entity.field_article_text.value %}
+          {% set text_content = article.field_ucb_article_content.entity.field_article_text.value|striptags|replace({'&nbsp;': ' '}) %}
+          {% set summary = text_content|length > 300 ? text_content|slice(0, 300)|trim ~ '...' : text_content %}
+        {% endif %}
+
+      {% else %}
+
+        {# Custom content title #}
+        {% set title = section_item.field_newsletter_content_title.value %}
+
+        {# Custom content text #}
+        {% if section_item.field_newsletter_content_text.value %}
+          {% set summary = section_item.field_newsletter_content_text.processed %}
+        {% endif %}
+
+        {# Custom content URL and normalizes internal URLs #}
+        {% if section_item.field_newsletter_content_url.0.url %}
+          {% set actual_url = section_item.field_newsletter_content_url.0.url.toString() %}
+          {% set href = actual_url starts with 'http://' or actual_url starts with 'https://' ? actual_url : base_url ~ actual_url %}
+        {% endif %}
+
+        {# Custom content image #}
+        {% if section_item.field_newsletter_content_image.entity.field_media_image.entity %}
+          {% set image_uri = section_item.field_newsletter_content_image.entity.field_media_image.entity.fileuri %}
+          {% set image_alt = section_item.field_newsletter_content_image.entity.field_media_image.alt %}
+        {% endif %}
+
+      {% endif %}
+
+      <mj-section>
+        <mj-column>
+
+          {# Feature image #}
+          {% if image_uri %}
+            {% if href %}
+              <mj-image
+                src="{{ base_domain }}{{ file_url(image_uri|image_style('focal_image_wide')) }}"
+                alt="{{ image_alt|e }}"
+                href="{{ href }}"
+                width="600px"
+              />
+            {% else %}
+              <mj-image
+                src="{{ base_domain }}{{ file_url(image_uri|image_style('focal_image_wide')) }}"
+                alt="{{ image_alt|e }}"
+                width="600px"
+              />
+            {% endif %}
+          {% endif %}
+
+          {# Feature title, optionally linked #}
+          {% if title %}
+            <mj-text>
+              <h3>
+                {% if href %}
+                  <a href="{{ href }}">{{ title }}</a>
+                {% else %}
+                  {{ title }}
+                {% endif %}
+              </h3>
+            </mj-text>
+          {% endif %}
+
+          {# Selected article categories without Drupal field wrappers #}
+          {% if article and article.field_ucb_article_categories is not empty %}
+            <mj-text>
+              {% for category in article.field_ucb_article_categories %}
+                {% if category.entity %}
+                  <a href="{{ url('entity.taxonomy_term.canonical', {'taxonomy_term': category.target_id}, {'absolute': true}) }}">
+                    {{ category.entity.label }}
+                  </a>{% if not loop.last %}&nbsp;&nbsp;{% endif %}
+                {% endif %}
+              {% endfor %}
+            </mj-text>
+          {% endif %}
+
+          {# Feature summary or custom content text #}
+          {% if summary %}
+            <mj-text>
+              {{ summary|raw }}
+            </mj-text>
+          {% endif %}
+
+        </mj-column>
+      </mj-section>
+
+    {% endif %}
+  {% endfor %}
+
+
+{# Teaser style section. Anything other than 0 = Teaser. #}
+{% else %}
+
+  {% for item in paragraph.field_newsletter_section_select %}
+    {% set section_item = item.entity %}
+
+    {% if section_item %}
+
+      {# Selected article, if this section item references an article. #}
+      {% set article = section_item.field_newsletter_article_select.entity %}
+
+      {# Shared injected values for either selected article or custom content. #}
+      {% set title = '' %}
+      {% set href = '' %}
+      {% set summary = '' %}
+      {% set image_uri = '' %}
+      {% set image_alt = '' %}
+
+      {% if article %}
+
+        {# Selected article title #}
+        {% set title = article.title.value %}
+
+        {# Absolute selected article URL. #}
+        {% set href = url('entity.node.canonical', {
+          'node': section_item.field_newsletter_article_select.target_id
+        }, {'absolute': true}) %}
+
+        {# Article thumbnail image, if present #}
+        {% if article.field_ucb_article_thumbnail.entity.field_media_image.entity %}
+          {% set image_uri = article.field_ucb_article_thumbnail.entity.field_media_image.entity.fileuri %}
+          {% set image_alt = article.field_ucb_article_thumbnail.entity.field_media_image.alt %}
+
+        {# Fallback article media image, if no thumbnail exists #}
+        {% elseif article.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity %}
+          {% set image_uri = article.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.entity.fileuri %}
+          {% set image_alt = article.field_ucb_article_content.entity.field_article_media_selection.entity.field_media.entity.field_media_image.alt %}
+        {% endif %}
+
+        {# Selected article summary, or trimmed article body fallback. #}
+        {% if article.field_ucb_article_summary.value %}
+          {% set summary = article.field_ucb_article_summary.value %}
+        {% elseif article.field_ucb_article_content.entity.field_article_text.value %}
+          {% set text_content = article.field_ucb_article_content.entity.field_article_text.value|striptags|replace({'&nbsp;': ' '}) %}
+          {% set summary = text_content|length > 300 ? text_content|slice(0, 300)|trim ~ '...' : text_content %}
+        {% endif %}
+
+      {% else %}
+
+        {# Custom content title. #}
+        {% set title = section_item.field_newsletter_content_title.value %}
+
+        {# Custom content text. #}
+        {% if section_item.field_newsletter_content_text.value %}
+          {% set summary = section_item.field_newsletter_content_text.processed %}
+        {% endif %}
+
+        {# Custom content URL and normalizes internal URLs #}
+        {% if section_item.field_newsletter_content_url.0.url %}
+          {% set actual_url = section_item.field_newsletter_content_url.0.url.toString() %}
+          {% set href = actual_url starts with 'http://' or actual_url starts with 'https://' ? actual_url : base_url ~ actual_url %}
+        {% endif %}
+
+        {# Custom content image #}
+        {% if section_item.field_newsletter_content_image.entity.field_media_image.entity %}
+          {% set image_uri = section_item.field_newsletter_content_image.entity.field_media_image.entity.fileuri %}
+          {% set image_alt = section_item.field_newsletter_content_image.entity.field_media_image.alt %}
+        {% endif %}
+
+      {% endif %}
+
+      <mj-section>
+
+        {# Teaser image column #}
+        {% if image_uri %}
+          <mj-column width="28%">
+            {% if href %}
+              <mj-image
+                src="{{ base_domain }}{{ file_url(image_uri|image_style('focal_image_square')) }}"
+                alt="{{ image_alt|e }}"
+                href="{{ href }}"
+                width="130px"
+              />
+            {% else %}
+              <mj-image
+                src="{{ base_domain }}{{ file_url(image_uri|image_style('focal_image_square')) }}"
+                alt="{{ image_alt|e }}"
+                width="130px"
+              />
+            {% endif %}
+          </mj-column>
+        {% endif %}
+
+        {# Teaser text column #}
+        <mj-column width="{{ image_uri ? '72%' : '100%' }}">
+
+          {# Teaser title, optionally linked #}
+          {% if title %}
+            <mj-text>
+              <h3>
+                {% if href %}
+                  <a href="{{ href }}">{{ title }}</a>
+                {% else %}
+                  {{ title }}
+                {% endif %}
+              </h3>
+            </mj-text>
+          {% endif %}
+
+          {# Selected article categories without Drupal field wrappers #}
+          {% if article and article.field_ucb_article_categories is not empty %}
+            <mj-text>
+              {% for category in article.field_ucb_article_categories %}
+                {% if category.entity %}
+                  <a href="{{ url('entity.taxonomy_term.canonical', {'taxonomy_term': category.target_id}, {'absolute': true}) }}">
+                    {{ category.entity.label }}
+                  </a>{% if not loop.last %}&nbsp;&nbsp;{% endif %}
+                {% endif %}
+              {% endfor %}
+            </mj-text>
+          {% endif %}
+
+          {# Teaser summary or custom content text #}
+          {% if summary %}
+            <mj-text>
+              {{ summary|raw }}
+            </mj-text>
+          {% endif %}
+
+        </mj-column>
+      </mj-section>
+
+    {% endif %}
+  {% endfor %}
+
+{% endif %}
+
+
+{# Article section link as MJML button #}
+{% if paragraph.field_newsletter_section_link.0.url %}
+  {% set section_link_url = paragraph.field_newsletter_section_link.0.url.toString() %}
+  {% set section_link_href = section_link_url starts with 'http://' or section_link_url starts with 'https://' ? section_link_url : base_url ~ section_link_url %}
+  {% set section_link_title = paragraph.field_newsletter_section_link.0.title|default('Read more') %}
+
+  <mj-section>
+    <mj-column>
+      <mj-button href="{{ section_link_href }}">
+        {{ section_link_title }}
+      </mj-button>
+    </mj-column>
+  </mj-section>
+{% endif %}
