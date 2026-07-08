@@ -46,7 +46,7 @@
         {% else %}
           <div class="col gallery-item">
             <a href="{{ file_url(item.entity.field_media_image.entity.fileuri) }}" class="glightbox ucb-gallery-lightbox" data-gallery="{{ galleryID }}" data-glightbox="description: {{ photoDescription }} ">
-              {{ item|view }}
+              {{ item.entity.field_media_image|view }}
             </a>
           </div>
         {% endif %}
