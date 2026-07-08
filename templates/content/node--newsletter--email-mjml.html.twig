@@ -191,69 +191,64 @@
 
 {% endif %}
 
-
-{# Social links from Newsletter Type taxonomy term. #}
+{# Social links from Newsletter Type taxonomy term #}
 {% if node.field_newsletter_type.entity.field_newsletter_social_link is defined and node.field_newsletter_type.entity.field_newsletter_social_link is not empty %}
+  {% set mjmlIconNames = {
+    'facebook': 'facebook-noshare',
+    'instagram': 'instagram',
+    'linkedin': 'linkedin-noshare',
+    'youtube': 'youtube',
+    'pinterest': 'pinterest-noshare',
+    'vimeo': 'vimeo',
+    'twitter': 'twitter-noshare',
+    'x': 'twitter-noshare'
+  } %}
 
-  {% for link in node.field_newsletter_type.entity.field_newsletter_social_link %}
+  <mj-section>
+    <mj-column>
+      <mj-social mode="horizontal" icon-size="20px" font-size="0px" padding="0px">
 
-    {# Injects the social link URL. #}
-    {% set uri = link.url.toString() %}
+        {% for link in node.field_newsletter_type.entity.field_newsletter_social_link %}
 
-    {# Extracts hostname from absolute social URL #}
-    {% set hostname = '' %}
-    {% if uri matches '/^(http(s)?:)?\\/\\//i' %}
-      {% set hostname = uri|split('/')[2] %}
-    {% endif %}
+          {# Injects the social link URL. #}
+          {% set uri = link.url.toString() %}
 
-    {# Determines which social icon to inject based on hostname #}
-    {% set service = 'link' %}
+          {# Extracts hostname from absolute social URL #}
+          {% set hostname = '' %}
+          {% if uri matches '/^(http(s)?:)?\\/\\//i' %}
+            {% set hostname = uri|split('/')[2] %}
+          {% endif %}
 
-    {% if hostname matches '/facebook\\.com$/i' %}
-      {% set service = 'Facebook' %}
-    {% elseif hostname matches '/instagram\\.com$/i' %}
-      {% set service = 'Instagram' %}
-    {% elseif hostname matches '/linkedin\\.com$/i' %}
-      {% set service = 'LinkedIn' %}
-    {% elseif hostname matches '/youtube\\.com$/i' %}
-      {% set service = 'YouTube' %}
-    {% elseif hostname matches '/(pinterest\\.com|pin\\.it)$/i' %}
-      {% set service = 'Pinterest' %}
-    {% elseif hostname matches '/(flickr\\.com|flic\\.kr)$/i' %}
-      {% set service = 'Flickr' %}
-    {% elseif hostname matches '/vimeo\\.com$/i' %}
-      {% set service = 'Vimeo' %}
-    {% elseif hostname matches '/wordpress\\.com$/i' %}
-      {% set service = 'Wordpress' %}
-    {% elseif hostname matches '/tiktok\\.com$/i' %}
-      {% set service = 'TikTok' %}
-    {% elseif hostname matches '/reddit\\.com$/i' %}
-      {% set service = 'Reddit' %}
-    {% elseif hostname matches '/patreon\\.com$/i' %}
-      {% set service = 'Patreon' %}
-    {% elseif hostname matches '/discord\\.(com|gg)$/i' %}
-      {% set service = 'Discord' %}
-    {% elseif hostname matches '/(twitter\\.com|x\\.com)$/i' %}
-      {% set service = 'X' %}
-    {% elseif hostname matches '/bsky\\.app$/i' %}
-      {% set service = 'Bluesky' %}
-    {% endif %}
+          {# Resolves the MJML built-in icon name from the hostname. #}
+          {% set iconName = 'web' %}
 
-    {# Social icon alt text #}
-    {% set alt = service == 'link' ? 'Social link' : service %}
+          {% if hostname matches '/facebook\\.com$/i' %}
+            {% set iconName = mjmlIconNames['facebook'] %}
+          {% elseif hostname matches '/instagram\\.com$/i' %}
+            {% set iconName = mjmlIconNames['instagram'] %}
+          {% elseif hostname matches '/linkedin\\.com$/i' %}
+            {% set iconName = mjmlIconNames['linkedin'] %}
+          {% elseif hostname matches '/youtube\\.com$/i' %}
+            {% set iconName = mjmlIconNames['youtube'] %}
+          {% elseif hostname matches '/(pinterest\\.com|pin\\.it)$/i' %}
+            {% set iconName = mjmlIconNames['pinterest'] %}
+          {% elseif hostname matches '/vimeo\\.com$/i' %}
+            {% set iconName = mjmlIconNames['vimeo'] %}
+          {% elseif hostname matches '/(twitter\\.com|x\\.com)$/i' %}
+            {% set iconName = mjmlIconNames['x'] %}
+          {% endif %}
 
-    {# Icon color variant based on newsletter design type - TODO - Won't use#}
-    {% set color = designType == 'darkbox' or designType == 'simple' or designType == 'classic' ? 'white' : 'black' %}
+          {# Uses MJML's built-in icon set via name; href points at the profile. #}
+          <mj-social-element
+            name="{{ iconName }}"
+            href="{{ uri }}"
+          ></mj-social-element>
 
-    {# Social link with matching icon image #}
-    <a href="{{ uri }}">
-      <img
-        src="{{ base_url ~ '/' ~ base_path ~ directory ~ '/images/social_icons/' ~ color ~ '-' ~ service|lower ~ '.png' }}"
-        alt="{{ alt }}"
-      >
-    </a>
+        {% endfor %}
 
-  {% endfor %}
+      </mj-social>
+    </mj-column>
+  </mj-section>
 
 {% endif %}
 </div>
