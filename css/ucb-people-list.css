@@ -141,6 +141,7 @@ tbody.ucb-people-list-table-tablebody {
 
 .people-list-filter .taxonomy-select {
   max-width: 150px;
+  width: 100%;
 }
 
 .ucb-person-card-img {
@@ -156,10 +157,6 @@ tbody.ucb-people-list-table-tablebody {
 .ucb-person-card-contact-table {
   display: flex;
   flex-direction: column;
-}
-
-ucb-people-list .table-bordered > :not(caption) tr{
-  border-width: inherit;
 }
 
 ucb-people-list .table-bordered > :not(caption) td {
@@ -204,8 +201,37 @@ ucb-people-list .table-bordered > :not(caption) td {
   box-shadow: 0 3px 15px rgba(0, 0, 0, 0.35);
 }
 
+.people-list-filter .d-flex {
+  flex-wrap: wrap;
+}
+
 @media (max-width: 767px) {
   .ucb-person-card-contact {
     flex-direction: column;
+  }
+  /* Stack filters on mobile */
+  .people-list-filter .d-flex {
+    flex-direction: column;
+    align-items: stretch !important;
+  }
+
+  .people-list-filter .form-item {
+    width: 100%;
+    margin-right: 0;
+  }
+
+  .people-list-filter .form-item > label {
+    width: 100%;
+  }
+
+  .people-list-filter .taxonomy-select {
+    max-width: none;
+    width: 100%;
+  }
+
+  .people-list-filter .reset-button {
+    width: 100%;
+    margin-top: 0.5rem;
+    padding: 0.5em 1em;
   }
 }
