@@ -9,6 +9,25 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### People List Page: Stack filters on mobile-sized screens & Thick Table Borders
+  Previously the user-accessible filters on the People List Page did not stack on mobile sizing, resulting in some of the filters being inaccessible when viewed on a small screen. This has been adjusted so they will stack as the screen size decreases.
+  
+  Also fixes an issue where the Table display would have thick borders. 
+  
+  Resolves #1832 
+  Resolves #1833 
+---
+
+## [20260708] - 2026-07-08
+
+- ### Image Gallery Block - remove captions
+
+  Update item display entity so only the images show on the image gallery by default. Then when they're opened up the captions show in the lightbox as expected.
+
+  Resolves #1827
+
+* * *
+
 ## [20260610] - 2026-06-10
 
 - ### #1653 - Hamburger menu breakpoint takes effect sooner
@@ -5006,7 +5025,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260610...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260708...HEAD
+[20260708]: https://github.com/CuBoulder/tiamat-theme/compare/20260610...20260708
 [20260610]: https://github.com/CuBoulder/tiamat-theme/compare/20260603...20260610
 [20260603]: https://github.com/CuBoulder/tiamat-theme/compare/20260527...20260603
 [20260527]: https://github.com/CuBoulder/tiamat-theme/compare/20260513...20260527
