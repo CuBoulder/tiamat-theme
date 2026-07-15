@@ -9,20 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260715] - 2026-07-15
+
 - ### Updated anniversary logo
+
   The logo url has been updated for the new 150 version
-  
+
   Resolves #1828 
----
+
+* * *
 
 - ### People List Page: Stack filters on mobile-sized screens & Thick Table Borders
+
   Previously the user-accessible filters on the People List Page did not stack on mobile sizing, resulting in some of the filters being inaccessible when viewed on a small screen. This has been adjusted so they will stack as the screen size decreases.
-  
+
   Also fixes an issue where the Table display would have thick borders. 
-  
+
   Resolves #1832 
   Resolves #1833 
----
+
+* * *
 
 ## [20260708] - 2026-07-08
 
@@ -5031,7 +5037,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260708...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260715...HEAD
+[20260715]: https://github.com/CuBoulder/tiamat-theme/compare/20260708...20260715
 [20260708]: https://github.com/CuBoulder/tiamat-theme/compare/20260610...20260708
 [20260610]: https://github.com/CuBoulder/tiamat-theme/compare/20260603...20260610
 [20260603]: https://github.com/CuBoulder/tiamat-theme/compare/20260527...20260603
