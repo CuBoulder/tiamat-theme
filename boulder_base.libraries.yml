@@ -292,6 +292,14 @@ ucb-newsletter-email:
     theme:
       css/ucb-newsletter.css: { weight: 5 }
 
+ucb-newsletter-mjml-preview:
+  version: 1.x
+  js:
+    js/ucb-newsletter-mjml-preview.js: { }
+  css:
+    theme:
+      css/ucb-newsletter-mjml-preview.css: { weight: 5 }
+
 ucb-article-grid-block:
   version: 1.x
   js:

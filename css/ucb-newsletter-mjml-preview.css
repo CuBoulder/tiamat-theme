@@ -1,0 +1,44 @@
+.ucb-mjml-preview {
+  display: block;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.ucb-mjml-preview-controls {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  padding: 10px 0;
+}
+
+.ucb-mjml-preview-button {
+  background-color: gold;
+  width: 100%;
+  max-width: 60%;
+  padding: 10px;
+  margin: 10px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.ucb-mjml-preview-button:disabled {
+  background-color: #ccc;
+  cursor: not-allowed;
+}
+
+.ucb-mjml-preview-loading,
+.ucb-mjml-preview-error {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.ucb-mjml-preview-frame {
+  display: block;
+  width: 100%;
+  min-height: 800px;
+  margin: 0 auto;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}

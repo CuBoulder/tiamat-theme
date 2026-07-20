@@ -31,7 +31,9 @@
   {% set cuLogoSrc = cuLogoLight %}
 {% endif %}
 
-<div class="container">
+{# Capture the MJML body markup so it can be handed to the render endpoint as
+   raw text instead of being parsed (and mangled) by the browser as DOM. #}
+{% set mjml_body %}
 
 {# Preheader / newsletter summary text #}
 {% if node.field_newsletter_summary.value %}
@@ -251,4 +253,22 @@
   </mj-section>
 
 {% endif %}
-</div>
+{% endset %}
+
+{# Newsletter MJML email preview.
+
+   The web component reads the MJML source from the <script type="text/mjml">
+   below, POSTs it to the server-side MJML render  (provided by
+   ucb_site_configuration) module, and shows the compiled email HTML in a preview
+   iframe #}
+{{ attach_library('boulder_base/ucb-newsletter-mjml-preview') }}
+
+<newsletter-mjml-preview class="ucb-mjml-preview" data-endpoint="{{ path('ucb_site_configuration.newsletter_mjml_render') }}">
+  <script type="text/mjml">
+<mjml>
+  <mj-body>
+    {{ mjml_body }}
+  </mj-body>
+</mjml>
+  </script>
+</newsletter-mjml-preview>
