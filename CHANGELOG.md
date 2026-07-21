@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Fix masonry options on image gallery.
+  The image gallery defaults to having masonry on whether or not the block is set to it.
+  
+  Fix boolean and logic to avoid breaking the block styles.
+  Also fix the non-masonry image style. Remove from logic check and add into the section itself.
+  
+  Resolves #1839 
+---
+
 ## [20260715] - 2026-07-15
 
 - ### Updated anniversary logo
