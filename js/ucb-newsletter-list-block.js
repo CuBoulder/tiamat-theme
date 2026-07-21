@@ -182,6 +182,7 @@
         }
 
         // Resolve the intro image (focal point square), if present
+        let image = null;
         const introImageRef = newsletter.relationships.field_newsletter_intro_image?.data;
         if (introImageRef) {
           image = altObj[idObj[introImageRef.id]] || null;
