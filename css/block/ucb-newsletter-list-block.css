@@ -4,9 +4,27 @@
 }
 
 .ucb-newsletter-row{
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
   margin-bottom: 20px;
   border-bottom: 1px solid rgba(128, 128, 128, 0.333);
   padding-bottom: 20px;
+}
+
+.ucb-newsletter-list-image-link {
+  flex: 0 0 auto;
+  line-height: 0;
+}
+
+.ucb-newsletter-list-image {
+  width: 100px;
+  height: auto;
+  display: block;
+}
+
+.ucb-newsletter-list-data {
+  flex: 1 1 auto;
 }
 
 .ucb-newsletter-list-summary{

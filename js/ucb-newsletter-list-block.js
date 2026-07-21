@@ -63,7 +63,7 @@
       + '&filter[publish-check][condition][value]=1'
       + '&filter[publish-check][condition][memberOf]=published';
 
-    fetch(`${this._baseURI}/jsonapi/node/newsletter?include=field_newsletter_section_block.field_newsletter_section_select.field_newsletter_article_select${publishedParams}&filter[field_newsletter_type.meta.drupal_internal__target_id][value]=${this.newsletterType}&sort=-created`)
+    fetch(`${this._baseURI}/jsonapi/node/newsletter?include=field_newsletter_section_block.field_newsletter_section_select.field_newsletter_article_select,field_newsletter_intro_image.field_media_image&fields[file--file]=uri,url${publishedParams}&filter[field_newsletter_type.meta.drupal_internal__target_id][value]=${this.newsletterType}&sort=-created`)
         .then(this.handleError)
         .then((data) => this.build(data, this.count))
         .catch(error => {
@@ -84,6 +84,35 @@
       const newsletters = data["data"];
       const references = data["included"];
       const newsletterElements = []; // Array to hold newsletter elements
+
+      // Media image mapping for the newsletter intro image (focal point square).
+      // altObj: keyed by file id => { src, alt }.
+      // idObj: keyed by media id => thumbnail file id.
+      const idObj = {};
+      const altObj = {};
+      if (references) {
+        // Focal img square
+        references
+          .filter((item) => item.type === 'file--file')
+          .forEach((item) => {
+            if (item.links && item.links.focal_image_square) {
+              altObj[item.id] = { src: item.links.focal_image_square.href };
+            } else {
+              altObj[item.id] = { src: item.attributes.uri.url };
+            }
+          });
+
+        // Associate each media image with its file and alt text
+        references
+          .filter((item) => item.type === 'media--image')
+          .forEach((pair) => {
+            if (pair.relationships.thumbnail.data) {
+              const thumbnailId = pair.relationships.thumbnail.data.id;
+              idObj[pair.id] = thumbnailId;
+              altObj[thumbnailId].alt = pair.relationships.thumbnail.data.meta.alt;
+            }
+          });
+      }
 
       if(newsletters.length == 0){
         this.toggleLoading(false);
@@ -152,8 +181,15 @@
           }
         }
 
+        // Resolve the intro image (focal point square), if present
+        let image = null;
+        const introImageRef = newsletter.relationships.field_newsletter_intro_image?.data;
+        if (introImageRef) {
+          image = altObj[idObj[introImageRef.id]] || null;
+        }
+
         // Store the newsletter information
-        newsletterElements.push({ title: newsletterTitle, summary, path });
+        newsletterElements.push({ title: newsletterTitle, summary, path, image });
       }
 
       // Build DOM elements for each newsletter
@@ -169,10 +205,30 @@
         const newsletterElement = document.createElement('div');
         newsletterElement.classList.add('ucb-newsletter-row');
 
+        // Intro image
+        if (newsletter.image) {
+          const imageLinkElement = document.createElement('a');
+          imageLinkElement.href = this._baseURI + newsletter.path;
+          imageLinkElement.classList.add('ucb-newsletter-list-image-link');
+          imageLinkElement.setAttribute('role', 'presentation');
+          imageLinkElement.setAttribute('aria-hidden', 'true');
+
+          const imageElement = document.createElement('img');
+          imageElement.src = newsletter.image.src;
+          imageElement.alt = newsletter.image.alt || '';
+          imageElement.classList.add('ucb-newsletter-list-image');
+
+          imageLinkElement.appendChild(imageElement);
+          newsletterElement.appendChild(imageLinkElement);
+        }
+
+        // Content with the title link and summary.
+        const dataContainer = document.createElement('div');
+        dataContainer.classList.add('ucb-newsletter-list-data');
+
         const linkElement = document.createElement('a');
         linkElement.href = this._baseURI + newsletter.path;
         linkElement.classList.add('ucb-newsletter-list-link');
-
 
         const titleElement = document.createElement('p');
         titleElement.textContent = newsletter.title;
@@ -184,8 +240,10 @@
         summaryElement.textContent = newsletter.summary;
         summaryElement.classList.add('ucb-newsletter-list-summary');
 
-        newsletterElement.appendChild(linkElement);
-        newsletterElement.appendChild(summaryElement);
+        dataContainer.appendChild(linkElement);
+        dataContainer.appendChild(summaryElement);
+        newsletterElement.appendChild(dataContainer);
+
         this.appendChild(newsletterElement);
       });
     }

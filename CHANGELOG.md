@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Newsletter List Block: Adds Image Thumbnails
+  Previously, the Newsletter List Block would only show title and summary text in the aggregated list display. We've enhanced the Newsletter List Block to add in display of thumbnail images of the Intro Image field from each Newsletter rendered in a Teaser style, mirroring the Article List Block and other aggregator blocks. 
+  
+  Resolves #1841 
+---
+
 - ### Fix masonry options on image gallery.
   The image gallery defaults to having masonry on whether or not the block is set to it.
   
