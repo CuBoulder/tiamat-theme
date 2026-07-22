@@ -9,20 +9,26 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260722] - 2026-07-22
+
 - ### Newsletter List Block: Adds Image Thumbnails
+
   Previously, the Newsletter List Block would only show title and summary text in the aggregated list display. We've enhanced the Newsletter List Block to add in display of thumbnail images of the Intro Image field from each Newsletter rendered in a Teaser style, mirroring the Article List Block and other aggregator blocks. 
-  
+
   Resolves #1841 
----
+
+* * *
 
 - ### Fix masonry options on image gallery.
+
   The image gallery defaults to having masonry on whether or not the block is set to it.
-  
+
   Fix boolean and logic to avoid breaking the block styles.
   Also fix the non-masonry image style. Remove from logic check and add into the section itself.
-  
+
   Resolves #1839 
----
+
+* * *
 
 ## [20260715] - 2026-07-15
 
@@ -5052,7 +5058,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260715...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260722...HEAD
+[20260722]: https://github.com/CuBoulder/tiamat-theme/compare/20260715...20260722
 [20260715]: https://github.com/CuBoulder/tiamat-theme/compare/20260708...20260715
 [20260708]: https://github.com/CuBoulder/tiamat-theme/compare/20260610...20260708
 [20260610]: https://github.com/CuBoulder/tiamat-theme/compare/20260603...20260610
