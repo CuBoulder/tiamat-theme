@@ -67,6 +67,11 @@
   max-width: 16%;
 }
 
+strong.ucb-mega-menu-column-label {
+  display: block;
+  border-bottom: 1px solid #d5d5d5;
+  margin-bottom: 10px;
+
 .ucb-mega-menu-wrapper {
   padding: 20px;
 }
