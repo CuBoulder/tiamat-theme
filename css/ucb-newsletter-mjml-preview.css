@@ -28,6 +28,21 @@
   cursor: not-allowed;
 }
 
+.ucb-mjml-preview-toggle {
+  padding: 10px 16px;
+  margin: 10px;
+  border: 1px solid #565656;
+  background-color: #fff;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.ucb-mjml-preview-toggle[aria-pressed="true"] {
+  background-color: #000;
+  color: #fff;
+}
+
 .ucb-mjml-preview-loading,
 .ucb-mjml-preview-error {
   text-align: center;

@@ -55,7 +55,23 @@
       this._button.textContent = 'Preview email';
       this._button.onclick = () => this.renderPreview();
       this._controls.appendChild(this._button);
+
+      // Light/dark toggle. Simulates how a mail client renders the email in each
+      // color scheme by forcing the compiled email's prefers-color-scheme rules
+      // on or off. Defaults to light so the preview never starts all-dark.
+      this._scheme = 'light';
+      this._schemeToggle = document.createElement('button');
+      this._schemeToggle.type = 'button';
+      this._schemeToggle.className = 'ucb-mjml-preview-toggle';
+      this._schemeToggle.setAttribute('aria-pressed', 'false');
+      this._schemeToggle.textContent = 'Dark mode';
+      this._schemeToggle.onclick = () => this.toggleScheme();
+      this._controls.appendChild(this._schemeToggle);
+
       this.appendChild(this._controls);
+
+      // Last compiled HTML, kept so the toggle can re-render without re-fetching.
+      this._lastHtml = '';
 
       // Load
       this._loadingElement = document.createElement('div');
@@ -177,8 +193,53 @@
      *   The compiled email HTML.
      */
     showPreview(html) {
-      this._previewFrame.srcdoc = html;
+      this._lastHtml = html;
+      this.renderFrame();
       this._previewFrame.style.display = 'block';
+    }
+
+    /**
+     * Flips the preview between light and dark, re-rendering the last compiled
+     * email if one is already showing.
+     */
+    toggleScheme() {
+      this._scheme = this._scheme === 'dark' ? 'light' : 'dark';
+      const isDark = this._scheme === 'dark';
+      this._schemeToggle.textContent = isDark ? 'Light mode' : 'Dark mode';
+      this._schemeToggle.setAttribute('aria-pressed', String(isDark));
+      if (this._lastHtml) {
+        this.renderFrame();
+      }
+    }
+
+    /**
+     * Renders the last compiled email into the iframe for the selected color
+     * scheme. Mail clients switch dark styles via prefers-color-scheme media
+     * queries, which follow the OS rather than a per-iframe setting, so the
+     * compiled CSS is rewritten to force those rules on (dark) or off (light).
+     */
+    renderFrame() {
+      if (!this._lastHtml) {
+        return;
+      }
+
+      const isDark = this._scheme === 'dark';
+      const darkMediaQuery = /@media[^{]*prefers-color-scheme\s*:\s*dark[^{]*\)/gi;
+      let html = this._lastHtml;
+
+      if (isDark) {
+        // Force every dark-mode block to always apply.
+        html = html.replace(darkMediaQuery, '@media all');
+        html = html.replace(/content=(["'])light dark\1/gi, 'content="dark"');
+      } else {
+        // Disable dark-mode blocks so an OS set to dark can't leak in.
+        html = html.replace(darkMediaQuery, '@media (max-width: 0px)');
+        html = html.replace(/content=(["'])light dark\1/gi, 'content="light"');
+      }
+
+      this._previewFrame.style.colorScheme = isDark ? 'dark' : 'light';
+      this._previewFrame.style.backgroundColor = isDark ? '#222222' : '#ffffff';
+      this._previewFrame.srcdoc = html;
     }
 
     toggleLoading(show) {
