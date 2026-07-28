@@ -7,7 +7,7 @@
    * (node--newsletter--email-mjml.html.twig and
    * paragraph--newsletter-section--email-mjml.html.twig), sends it to an MJML
    * render endpoint, and shows the compiled email HTML in a preview iframe when
-   * the user clicks the preview button.
+   * the user clicks the preview button, along with the MJML and HTML for easy copy/ pasting.
    *
    * The MJML source is read from a <script type="text/mjml"> child so the
    * browser does not parse the MJML tags as DOM (which would mangle
@@ -56,9 +56,7 @@
       this._button.onclick = () => this.renderPreview();
       this._controls.appendChild(this._button);
 
-      // Light/dark toggle. Simulates how a mail client renders the email in each
-      // color scheme by forcing the compiled email's prefers-color-scheme rules
-      // on or off. Defaults to light so the preview never starts all-dark.
+      // Light/dark toggle
       this._scheme = 'light';
       this._schemeToggle = document.createElement('button');
       this._schemeToggle.type = 'button';
@@ -70,7 +68,7 @@
 
       this.appendChild(this._controls);
 
-      // Last compiled HTML, kept so the toggle can re-render without re-fetching.
+      // Last compiled HTML, kept so the toggle can re-render without re-fetching
       this._lastHtml = '';
 
       // Load
@@ -94,6 +92,87 @@
       this._previewFrame.setAttribute('sandbox', 'allow-same-origin');
       this._previewFrame.style.display = 'none';
       this.appendChild(this._previewFrame);
+
+      // Copy/paste boxes holding the compiled MJML document and the email HTML
+      this._sources = document.createElement('div');
+      this._sources.className = 'ucb-mjml-preview-sources';
+      this._sources.style.display = 'none';
+
+      this._mjmlField = this.createSourceField('MJML source');
+      this._htmlField = this.createSourceField('Email HTML');
+      this._sources.appendChild(this._mjmlField.container);
+      this._sources.appendChild(this._htmlField.container);
+      this.appendChild(this._sources);
+    }
+
+    /**
+     * Builds a labelled read-only textarea with its own copy button
+     *
+     * @param {string} label
+     *   Visible label, also used as the field's accessible name
+     * @returns {{container: HTMLElement, textarea: HTMLTextAreaElement}}
+     *   The field wrapper and the textarea holding the source
+     */
+    createSourceField(label) {
+      const container = document.createElement('div');
+      container.className = 'ucb-mjml-preview-source';
+
+      const header = document.createElement('div');
+      header.className = 'ucb-mjml-preview-source-header';
+
+      const heading = document.createElement('span');
+      heading.className = 'ucb-mjml-preview-source-label';
+      heading.textContent = label;
+      header.appendChild(heading);
+
+      const copyButton = document.createElement('button');
+      copyButton.type = 'button';
+      copyButton.className = 'ucb-mjml-preview-copy';
+      copyButton.textContent = 'Copy';
+      header.appendChild(copyButton);
+
+      const textarea = document.createElement('textarea');
+      textarea.className = 'ucb-mjml-preview-source-text';
+      textarea.readOnly = true;
+      textarea.spellcheck = false;
+      textarea.setAttribute('wrap', 'off');
+      textarea.setAttribute('aria-label', label);
+
+      copyButton.onclick = () => this.copyToClipboard(textarea, copyButton);
+
+      container.appendChild(header);
+      container.appendChild(textarea);
+
+      return { container: container, textarea: textarea };
+    }
+
+    /**
+     * Copies a source field to the clipboard
+     *
+     * @param {HTMLTextAreaElement} textarea
+     *   The field to copy from.
+     * @param {HTMLButtonElement} button
+     *   The button to report the result on.
+     */
+    async copyToClipboard(textarea, button) {
+      try {
+        if (navigator.clipboard && window.isSecureContext) {
+          await navigator.clipboard.writeText(textarea.value);
+        } else {
+          textarea.select();
+          document.execCommand('copy');
+        }
+        button.textContent = 'Copied';
+      } catch (error) {
+        console.error(error);
+        // Leave the text selected
+        textarea.select();
+        button.textContent = 'Copy failed';
+      }
+
+      window.setTimeout(() => {
+        button.textContent = 'Copy';
+      }, 2000);
     }
 
     /**
@@ -121,7 +200,7 @@
     }
 
     /**
-     * Compiles the MJML source and renders the resulting email HTML.
+     * Compiles the MJML source and renders the resulting email HTML
      */
     async renderPreview() {
       const mjml = this.getMjmlSource();
@@ -137,6 +216,7 @@
       try {
         const html = await this.fetchRenderedHtml(mjml);
         this.showPreview(html);
+        this.showSources(mjml, html);
         this.toggleLoading(false);
       } catch (error) {
         console.error(NewsletterMjmlPreviewElement.errorMessage);
@@ -199,8 +279,21 @@
     }
 
     /**
-     * Flips the preview between light and dark, re-rendering the last compiled
-     * email if one is already showing.
+     * Fills the copy/paste boxes with the MJML and Email HTML from transpiler
+     *
+     * @param {string} mjml
+     *   The MJML document that was submitted.
+     * @param {string} html
+     *   The compiled email HTML returned by the renderer.
+     */
+    showSources(mjml, html) {
+      this._htmlField.textarea.value = html;
+      this._mjmlField.textarea.value = mjml;
+      this._sources.style.display = 'block';
+    }
+
+    /**
+     * Flips the preview between light and dark
      */
     toggleScheme() {
       this._scheme = this._scheme === 'dark' ? 'light' : 'dark';
@@ -214,9 +307,6 @@
 
     /**
      * Renders the last compiled email into the iframe for the selected color
-     * scheme. Mail clients switch dark styles via prefers-color-scheme media
-     * queries, which follow the OS rather than a per-iframe setting, so the
-     * compiled CSS is rewritten to force those rules on (dark) or off (light).
      */
     renderFrame() {
       if (!this._lastHtml) {
@@ -228,11 +318,11 @@
       let html = this._lastHtml;
 
       if (isDark) {
-        // Force every dark-mode block to always apply.
+        // Force every dark-mode block to always apply
         html = html.replace(darkMediaQuery, '@media all');
         html = html.replace(/content=(["'])light dark\1/gi, 'content="dark"');
       } else {
-        // Disable dark-mode blocks so an OS set to dark can't leak in.
+        // Disable dark-mode blocks so an OS set to dark can't leak in
         html = html.replace(darkMediaQuery, '@media (max-width: 0px)');
         html = html.replace(/content=(["'])light dark\1/gi, 'content="light"');
       }
