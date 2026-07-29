@@ -9,15 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20260729] - 2026-07-29
+
 - ### Mega Menu link on label
+
   Updated template to handle mega menu link on label
-  
+
   Added css for updated link
-  
-  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/236
-  
+
+  Sister PR: <https://github.com/CuBoulder/tiamat-custom-entities/pull/236>
+
   Resolves #1834 
----
+
+* * *
 
 ## [20260722] - 2026-07-22
 
@@ -5068,7 +5072,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260722...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20260729...HEAD
+[20260729]: https://github.com/CuBoulder/tiamat-theme/compare/20260722...20260729
 [20260722]: https://github.com/CuBoulder/tiamat-theme/compare/20260715...20260722
 [20260715]: https://github.com/CuBoulder/tiamat-theme/compare/20260708...20260715
 [20260708]: https://github.com/CuBoulder/tiamat-theme/compare/20260610...20260708
