@@ -30,7 +30,7 @@
 {% set mjml_body %}
 
   {# ============================ HEADER ============================ #}
-  <mj-section full-width="full-width" background-color="#010101" padding="20px 10px" padding-bottom="10px">
+  <mj-section full-width="full-width" background-color="#010101" css-class="header" padding="20px 10px" padding-bottom="10px">
     <mj-column width="50%" padding="0px" vertical-align="middle">
       <mj-image width="200px" src="{{ cuLogoWhite }}" align="left" alt="University of Colorado Boulder" />
     </mj-column>
@@ -41,7 +41,7 @@
   </mj-section>
 
   {# Gold accent divider strip #}
-  <mj-section full-width="full-width" background-color="#cfb87c" padding="2px"></mj-section>
+  <mj-section full-width="full-width" background-color="#cfb87c" css-class="gold-band" padding="2px"></mj-section>
 
   {# ============================ INTRO ============================ #}
   {% if content.field_newsletter_intro_image|render or content.field_newsletter_intro_body|render %}
@@ -265,6 +265,7 @@
     <mj-style> .fancy-links a:hover { border-bottom:none !important; background-color:#cfb87c; } </mj-style>
     <mj-style inline="inline"> .desktop { display: none !important; mso-hide: none; } </mj-style>
     <mj-style> @media only screen and (min-width:480px) { .desktop { display: block !important; } } </mj-style>
+    <mj-style> .header, [data-ogsb] .header, [data-ogsc] .header { background:#010101 !important; background-color:#010101 !important; } .gold-band, [data-ogsb] .gold-band, [data-ogsc] .gold-band { background:#cfb87c !important; background-color:#cfb87c !important; } .footer, [data-ogsb] .footer, [data-ogsc] .footer { background:#333333 !important; background-color:#333333 !important; } [data-ogsc] .header div, [data-ogsc] .footer div { color:#ffffff !important; } [data-ogsc] .footer a { color:#cfb87c !important; } </mj-style>
     <mj-style> .headline h3 { font-size:18px; font-weight:bold; margin:0; padding:0;} .article a, .headline a { text-decoration:none; color: #1565C0; } .article p { font-size:14px;} h2 { padding:0px; margin: 0px; } .pills { padding: 0px; } .pills span { display:inline-block; font-size:10px; line-height:100%; font-weight:bold; background:#dddddd; color: #333333; padding:5px; margin:0 0 5px 0; text-transform: uppercase;} </mj-style>
     <mj-style>
       :root {
