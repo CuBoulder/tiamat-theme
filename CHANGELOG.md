@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Mega Menu link on label
+  Updated template to handle mega menu link on label
+  
+  Added css for updated link
+  
+  Sister PR: https://github.com/CuBoulder/tiamat-custom-entities/pull/236
+  
+  Resolves #1834 
+---
+
 ## [20260722] - 2026-07-22
 
 - ### Newsletter List Block: Adds Image Thumbnails
