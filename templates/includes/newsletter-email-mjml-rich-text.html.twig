@@ -1,0 +1,160 @@
+{#
+/**
+ * @file
+ * Prepares WYSIWYG field output for use inside <mj-text>.
+ *
+ * prepare() fixes URLs; styles() makes the markup match the rest of the email.
+ * The site's presentational classes are left inert, so display type, column
+ * lists, table variants and button colours collapse into newsletter styling.
+ */
+#}
+
+{#
+ The no-op "//" pairs shield external URLs from being prefixed: Twig's replace uses strtr, which matches the longest key first and never rescans.
+
+ srcset is renamed rather than rewritten, since a string replace cannot safely prefix a comma-separated candidate list. Clients then fall back to src.
+
+ icon_color takes 'white' to suit the footer's dark background
+#}
+{% macro prepare(html, base_domain, icon_color = 'black') %}
+
+{% set icon_src = 'https://images.weserv.nl/?url=cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/svgs/$1/$2.svg&amp;w=320&amp;h=320&amp;fit=contain&amp;cbg=transparent&amp;output=png' %}
+{% if icon_color == 'white' %}
+  {% set icon_src = icon_src ~ '&amp;filt=negate' %}
+{% endif %}
+{{ html|replace({
+  'src="//': 'src="//',
+  'href="//': 'href="//',
+  "src='//": "src='//",
+  "href='//": "href='//",
+  'url(//': 'url(//',
+  'url("//': 'url("//',
+  "url('//": "url('//",
+  'src="/': 'src="' ~ base_domain ~ '/',
+  'href="/': 'href="' ~ base_domain ~ '/',
+  "src='/": "src='" ~ base_domain ~ '/',
+  "href='/": "href='" ~ base_domain ~ '/',
+  'url(/': 'url(' ~ base_domain ~ '/',
+  'url("/': 'url("' ~ base_domain ~ '/',
+  "url('/": "url('" ~ base_domain ~ '/',
+  'srcset="': 'data-srcset="',
+  "srcset='": "data-srcset='",
+})|preg_replace(
+  '#<i class="fa-(solid|regular|brands) fa-([a-z0-9-]+)([^"]*)"[^>]*>[^<]*</i>#',
+  '<img class="icon$3" src="' ~ icon_src ~ '" width="16" height="16" alt="" />'
+)|raw }}
+{% endmacro %}
+
+{#
+ Include once inside <mj-head>, and add rich-text to the css-class of any
+ <mj-text> holding WYSIWYG output:
+
+<mj-text css-class="text-black rich-text">
+#}
+{% macro styles() %}
+<mj-style inline="inline">
+  .rich-text a { color: #1565C0; text-decoration: none; }
+
+  /* Reproduces what MJML puts on an <mj-image> img. Embedded media cannot be
+     promoted to a real component from inside <mj-text>, and the bottom margin
+     stands in for the padding an <mj-image> gets from its td. */
+  .rich-text img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    border: 0;
+    border-radius: 8px;
+    outline: none;
+    text-decoration: none;
+    font-size: 13px;
+    margin: 0 0 10px 0;
+  }
+  /* Icons sit in a run of text, so they opt back out of the block rules */
+  .rich-text img.icon {
+    display: inline;
+    width: 16px;
+    max-width: 16px;
+    height: 16px;
+    border-radius: 0;
+    margin: 0 2px;
+    vertical-align: middle;
+  }
+
+  /* prepare() keeps the editor's sizing classes on the img so the sizes stay
+     declarative here. These tie with the rule above, so they must follow it.
+     Font Awesome scales against the 16px body copy set in <mj-attributes>. */
+{% for class, px in {
+  'fa-2xs': 10, 'fa-xs': 12, 'fa-sm': 14, 'fa-lg': 20, 'fa-xl': 24, 'fa-2xl': 32,
+  'fa-1x': 16, 'fa-2x': 32, 'fa-3x': 48, 'fa-4x': 64, 'fa-5x': 80,
+  'fa-6x': 96, 'fa-7x': 112, 'fa-8x': 128, 'fa-9x': 144, 'fa-10x': 160,
+} %}
+  .rich-text img.{{ class }} { width: {{ px }}px; max-width: {{ px }}px; height: {{ px }}px; }
+{% endfor %}
+
+  .rich-text figure { margin: 0 0 10px 0; }
+  .rich-text figcaption { font-size: 13px; line-height: 1.4; color: #666666; padding-top: 5px; }
+
+  /* Changes ucb buttons to mjml buttons */
+  .rich-text a.ucb-link-button {
+    display: inline-block;
+    background-color: #cfb87c;
+    color: #000000 !important;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 120%;
+    padding: 10px 25px;
+    border-radius: 3px;
+    text-decoration: none !important;
+    mso-padding-alt: 0;
+  }
+
+  .rich-text a.ucb-link-button span { color: #000000 !important; }
+
+  .rich-text table { border-collapse: collapse; width: 100%; }
+  .rich-text table th, .rich-text table td { padding: 8px; border: 1px solid #dddddd; text-align: left; }
+  .rich-text table th { background-color: #eeeeee; font-weight: bold; }
+
+  /* Outlook drops list indentation without this */
+  .rich-text ul, .rich-text ol { margin: 0 0 10px 0; padding-left: 22px; }
+
+  /* Accordion panels keep Bootstrap's collapsed state */
+  .rich-text .accordion-button { display: block; font-weight: bold; color: #000000 !important; text-decoration: none !important; }
+  .rich-text .accordion-collapse,
+  .rich-text .accordion-collapse.collapse { display: block !important; height: auto !important; visibility: visible !important; }
+
+  /* No email equivalent. Any <i> left here is an icon prepare() could not map to a free Font Awesome style */
+  .rich-text iframe,
+  .rich-text .ucb-map,
+  .rich-text .ucb-calendar,
+  .rich-text ucb-jump-menu,
+  .rich-text .visually-hidden,
+  .rich-text i { display: none !important; }
+</mj-style>
+<mj-style>
+  @media (prefers-color-scheme: dark) {
+    /* Prevent button label from turning white */
+    .rich-text a.ucb-link-button,
+    .rich-text a.ucb-link-button span {
+      color: #000000 !important;
+    }
+    .rich-text a.ucb-link-button {
+      background-color: #cfb87c !important;
+    }
+    .rich-text figcaption {
+      color: #cccccc !important;
+    }
+  }
+
+  /* Outlook.com stuff rewrites colors instead of honouring above */
+  [data-ogsb] .rich-text a.ucb-link-button,
+  [data-ogsc] .rich-text a.ucb-link-button {
+    color: #000000 !important;
+    background-color: #cfb87c !important;
+  }
+  [data-ogsb] .rich-text a.ucb-link-button span,
+  [data-ogsc] .rich-text a.ucb-link-button span {
+    color: #000000 !important;
+  }
+</mj-style>
+{% endmacro %}

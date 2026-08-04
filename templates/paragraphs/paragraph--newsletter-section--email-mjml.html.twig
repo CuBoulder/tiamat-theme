@@ -6,6 +6,9 @@
  */
 #}
 
+{# Rich text helpers for WYSIWYG fields placed inside <mj-text>, supports WYSIWYG inserted things #}
+{% import '@boulder_base/includes/newsletter-email-mjml-rich-text.html.twig' as richtext %}
+
 {# Site base URL for internal links #}
 {% set base_url = url('<front>')|render|split('/', -1)|join('/') %}
 
@@ -84,7 +87,7 @@
 
           {# Custom content text #}
           {% if section_item.field_newsletter_content_text.value %}
-            {% set summary = section_item.field_newsletter_content_text.processed %}
+            {% set summary = richtext.prepare(section_item.field_newsletter_content_text.processed, base_domain) %}
           {% endif %}
 
           {# Custom content URL and normalizes internal URLs #}
@@ -139,7 +142,7 @@
 
             {# Feature summary or custom content text #}
             {% if summary %}
-              <mj-text css-class="text-black">
+              <mj-text css-class="text-black rich-text">
                 {{ summary|raw }}
               </mj-text>
             {% endif %}
@@ -205,7 +208,7 @@
 
           {# Custom content text. #}
           {% if section_item.field_newsletter_content_text.value %}
-            {% set summary = section_item.field_newsletter_content_text.processed %}
+            {% set summary = richtext.prepare(section_item.field_newsletter_content_text.processed, base_domain) %}
           {% endif %}
 
           {# Custom content URL and normalizes internal URLs #}
@@ -266,7 +269,7 @@
 
               {# Teaser summary or custom content text #}
               {% if summary %}
-                <mj-text css-class="summary text-black" font-size="13px">
+                <mj-text css-class="summary text-black rich-text" font-size="13px">
                   {{ summary|raw }}
                 </mj-text>
               {% endif %}

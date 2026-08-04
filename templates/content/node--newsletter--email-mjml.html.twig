@@ -8,6 +8,9 @@
 %}
 
 
+{# Rich text helpers for WYSIWYG fields #}
+{% import '@boulder_base/includes/newsletter-email-mjml-rich-text.html.twig' as richtext %}
+
 {# Site base URL for absolute links #}
 {% set base_url = url('<front>')|render|split('/', -1)|join('/') %}
 
@@ -55,9 +58,7 @@
               border-radius="8px" />
           {% endif %}
           {% if content.field_newsletter_intro_body|render %}
-            {% set intro_body = content.field_newsletter_intro_body|render %}
-            {% set updated_intro_body = intro_body|replace({'href="/': 'href="' ~ base_domain ~ '/'}) %}
-            <mj-text css-class="text-black">{{ updated_intro_body|raw }}</mj-text>
+            <mj-text css-class="text-black rich-text">{{ richtext.prepare(content.field_newsletter_intro_body|render, base_domain) }}</mj-text>
           {% endif %}
         </mj-column>
       </mj-section>
@@ -118,12 +119,12 @@
         {% for block in blocksToRender %}
           {% set paragraphItem = block['#paragraph'] %}
           <mj-column>
-            <mj-text css-class="text-black">
+            <mj-text css-class="text-black rich-text">
               {% if paragraphItem.field_newsletter_block_title.value %}
                 <h2>{{ paragraphItem.field_newsletter_block_title.value }}</h2>
               {% endif %}
               {% if paragraphItem.field_newsletter_block_text.processed %}
-                {{ paragraphItem.field_newsletter_block_text.processed|raw }}
+                {{ richtext.prepare(paragraphItem.field_newsletter_block_text.processed, base_domain) }}
               {% endif %}
             </mj-text>
           </mj-column>
@@ -224,8 +225,8 @@
   {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
     <mj-section full-width="full-width" background-color="#333333" css-class="footer">
       <mj-column>
-        <mj-text color="#FFFFFF" font-size="12px" align="center">
-          {{ node.field_newsletter_type.entity.field_newsletter_footer.0.processed|raw }}
+        <mj-text color="#FFFFFF" font-size="12px" align="center" css-class="rich-text">
+          {{ richtext.prepare(node.field_newsletter_type.entity.field_newsletter_footer.0.processed, base_domain, 'white') }}
         </mj-text>
       </mj-column>
     </mj-section>
@@ -261,6 +262,8 @@
       <mj-navbar-link font-weight="bold" />
       <mj-divider border-color="#cfb87c" border-width="5px" width="100px" />
     </mj-attributes>
+    {# WYSIWYG styles first, so the brand rules below win on overlap #}
+    {{ richtext.styles() }}
     <mj-style inline="inline"> .fancy-links a { text-decoration:none; font-weight:bold; color:#000; border-bottom:2px solid #cfb87c; } .footer > div { color:#ffffff; } .footer a { color: #cfb87c; text-decoration: none; } .blocks a { text-decoration:none; color: #1565C0; } </mj-style>
     <mj-style> .fancy-links a:hover { border-bottom:none !important; background-color:#cfb87c; } </mj-style>
     <mj-style inline="inline"> .desktop { display: none !important; mso-hide: none; } </mj-style>
