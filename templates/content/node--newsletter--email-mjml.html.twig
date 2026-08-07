@@ -157,7 +157,7 @@
     <mj-column>
       <mj-text align="center" color="#ffffff" font-weight="bold">{{ newsletterLabel|default(site_name) }}</mj-text>
 
-      {# Social share (cubt.mjml style: custom light icons, transparent). #}
+      {# Footer social-- always theme white PNGs #}
       {% if node.field_newsletter_type.entity.field_newsletter_social_link is defined and node.field_newsletter_type.entity.field_newsletter_social_link is not empty %}
         <mj-social align="center" icon-size="30px">
           {% for link in node.field_newsletter_type.entity.field_newsletter_social_link %}
@@ -171,7 +171,7 @@
               {% set hostname = uri|split('/')[2] %}
             {% endif %}
 
-            {# Resolves an icon slug (matches selfhst icon names) from the hostname. #}
+            {# Slug matches images/social_icons/white-{slug}.png (see email-html template). #}
             {% set slug = '' %}
             {% if hostname matches '/facebook\\.com$/i' %}
               {% set slug = 'facebook' %}
@@ -203,17 +203,14 @@
               {% set slug = 'bluesky' %}
             {% endif %}
 
-            {% if slug %}
-              <mj-social-element
-                src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/{{ slug }}-light.png"
-                name="{{ slug }}-noshare"
-                href="{{ uri }}"
-                background-color="transparent"
-                alt="{{ slug|capitalize }}"></mj-social-element>
-            {% else %}
-              {# Unknown service: fall back to MJML's built-in globe icon. #}
-              <mj-social-element name="web" href="{{ uri }}" background-color="transparent" alt="Social link"></mj-social-element>
-            {% endif %}
+            {% set icon_slug = slug ? slug : 'link' %}
+            {% set icon_src = base_url ~ '/' ~ base_path ~ directory ~ '/images/social_icons/white-' ~ icon_slug ~ '.png' %}
+            <mj-social-element
+              src="{{ icon_src }}"
+              name="{{ icon_slug }}-noshare"
+              href="{{ uri }}"
+              background-color="#333333"
+              alt="{{ slug ? slug|capitalize : 'Social link' }}"></mj-social-element>
 
           {% endfor %}
         </mj-social>
@@ -226,7 +223,7 @@
     <mj-section full-width="full-width" background-color="#333333" css-class="footer">
       <mj-column>
         <mj-text color="#FFFFFF" font-size="12px" align="center" css-class="rich-text">
-          {{ richtext.prepare(node.field_newsletter_type.entity.field_newsletter_footer.0.processed, base_domain, 'white') }}
+          {{ richtext.prepare(node.field_newsletter_type.entity.field_newsletter_footer.0.processed, base_domain) }}
         </mj-text>
       </mj-column>
     </mj-section>
@@ -304,17 +301,39 @@
         .fancy-links a {
           color: #cfb87c !important;
         }
-        /* Section CTA buttons stay black on gold in both schemes. */
+        /* Every button white on blue */
         .section-button a,
-        a.section-button {
-          color: #000000 !important;
-          background-color: #cfb87c !important;
+        a.section-button,
+        .rich-text a.ucb-link-button,
+        .rich-text a.ucb-link-button span,
+        .rich-text table.ucb-link-button-table td {
+          color: #ffffff !important;
+          background-color: #0277BD !important;
+        }
+        /* Captions on the darker canvas */
+        .rich-text figcaption {
+          color: #cccccc !important;
         }
         /* Category pills */
         .pills span {
           background: #444444 !important;
           color: #ffffff !important;
         }
+      }
+
+      /* Outlook.com rewrites colors, force */
+      [data-ogsb] .section-button a,
+      [data-ogsc] .section-button a,
+      [data-ogsb] a.section-button,
+      [data-ogsc] a.section-button,
+      [data-ogsb] .rich-text a.ucb-link-button,
+      [data-ogsc] .rich-text a.ucb-link-button,
+      [data-ogsb] .rich-text a.ucb-link-button span,
+      [data-ogsc] .rich-text a.ucb-link-button span,
+      [data-ogsb] .rich-text table.ucb-link-button-table td,
+      [data-ogsc] .rich-text table.ucb-link-button-table td {
+        color: #ffffff !important;
+        background-color: #0277BD !important;
       }
     </mj-style>
   </mj-head>
