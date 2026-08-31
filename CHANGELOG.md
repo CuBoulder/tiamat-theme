@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Update paragraph--mega-menu-links-list.html.twig
+  Updated/uploaded the correct template for the mega menu links.
+  This links the label properly in mega menu sections.
+  
+  Resolves #1846 
+---
+
 ## [20260729] - 2026-07-29
 
 - ### Mega Menu link on label
