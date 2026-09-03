@@ -87,18 +87,28 @@ div.skiptranslate iframe{
   display: none;
 }
 
-.ucb-lang-select {
+.ucb-gtranslate {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.ucb-lang-select,
+.ucb-gtranslate .gt_selector {
   -webkit-appearance: none;
   -moz-appearance: none;
+  appearance: none;
   text-overflow: '';
   border: none;
   padding: 0 10px 0 5px;
   font-weight: bold;
   color: inherit !important;
   background-color: inherit !important;
+  cursor: pointer;
 }
 
-.ucb-lang-select:active{
+.ucb-lang-select:active,
+.ucb-gtranslate .gt_selector:active {
   border: none;
 }
 
