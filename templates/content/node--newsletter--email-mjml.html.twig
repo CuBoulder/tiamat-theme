@@ -25,9 +25,10 @@
 {% set cuLogoWhite = base_url ~ '/' ~ base_path ~ directory ~ '/images/cu-boulder-logo-text-white.gif' %}
 {% set beBoulderWhite = base_url ~ '/' ~ base_path ~ directory ~ '/images/be-boulder-white.svg' %}
 
-{# Newsletter top: title + edition date #}
+{# Newsletter top: title + edition date + absolute web URL for email #}
 {% set newsletterLabel = node.field_newsletter_type.entity.label %}
 {% set editionDate = node.created.value|date("n/j/Y") %}
+{% set newsletterUrl = url('entity.node.canonical', {'node': node.id}, {'absolute': true}) %}
 
 {# MJML body markup - for passing to render endpoint #}
 {% set mjml_body %}
@@ -40,6 +41,7 @@
     <mj-column width="50%" vertical-align="middle" padding="0px">
       <mj-text font-size="24px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" line-height="24px" font-weight="700">{{ site_name }}</mj-text>
       <mj-text font-size="12px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" text-transform="uppercase" font-weight="700">{{ newsletterLabel }} &bull; {{ editionDate }}</mj-text>
+      <mj-text font-size="12px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#cfb87c" font-weight="700" padding-top="0"><a href="{{ newsletterUrl }}">View on website</a></mj-text>
     </mj-column>
   </mj-section>
 
@@ -265,11 +267,11 @@
     </mj-attributes>
     {# WYSIWYG styles first, so the brand rules below win on overlap #}
     {{ richtext.styles() }}
-    <mj-style inline="inline"> .fancy-links a { text-decoration:none; font-weight:bold; color:#000; border-bottom:2px solid #cfb87c; } .footer > div { color:#ffffff; } .footer a { color: #cfb87c; text-decoration: none; } .blocks a { text-decoration:none; color: #1565C0; } </mj-style>
+    <mj-style inline="inline"> .fancy-links a { text-decoration:none; font-weight:bold; color:#000; border-bottom:2px solid #cfb87c; } .header a { color: #cfb87c; text-decoration: none; } .footer > div { color:#ffffff; } .footer a { color: #cfb87c; text-decoration: none; } .blocks a { text-decoration:none; color: #1565C0; } </mj-style>
     <mj-style> .fancy-links a:hover { border-bottom:none !important; background-color:#cfb87c; } </mj-style>
     <mj-style inline="inline"> .desktop { display: none !important; mso-hide: none; } </mj-style>
     <mj-style> @media only screen and (min-width:480px) { .desktop { display: block !important; } } </mj-style>
-    <mj-style> .header, [data-ogsb] .header, [data-ogsc] .header { background:#010101 !important; background-color:#010101 !important; } .gold-band, [data-ogsb] .gold-band, [data-ogsc] .gold-band { background:#cfb87c !important; background-color:#cfb87c !important; } .footer, [data-ogsb] .footer, [data-ogsc] .footer { background:#010101 !important; background-color:#010101 !important; } [data-ogsc] .header div, [data-ogsc] .footer div { color:#ffffff !important; } [data-ogsc] .footer a { color:#cfb87c !important; } </mj-style>
+    <mj-style> .header, [data-ogsb] .header, [data-ogsc] .header { background:#010101 !important; background-color:#010101 !important; } .gold-band, [data-ogsb] .gold-band, [data-ogsc] .gold-band { background:#cfb87c !important; background-color:#cfb87c !important; } .footer, [data-ogsb] .footer, [data-ogsc] .footer { background:#010101 !important; background-color:#010101 !important; } [data-ogsc] .header div, [data-ogsc] .footer div { color:#ffffff !important; } [data-ogsc] .header a, [data-ogsc] .footer a { color:#cfb87c !important; } </mj-style>
     <mj-style> .headline h3 { font-size:18px; font-weight:bold; margin:0; padding:0;} .article a, .headline a { text-decoration:none; color: #1565C0; } .article p { font-size:14px;} h2 { padding:0px; margin: 0px; } .pills { padding: 0px; } .pills span { display:inline-block; font-size:10px; line-height:100%; font-weight:bold; background:#dddddd; color: #333333; padding:5px; margin:0 0 5px 0; text-transform: uppercase;} </mj-style>
     <mj-style>
       :root {
