@@ -37,6 +37,12 @@
   '#<a class="([^"]*\\baccordion-button\\b[^"]*)"[^>]*>(.*?)</a>#s',
   '<span class="$1">$2</span>'
 )|preg_replace(
+  '#<(p|h[1-6]|div|blockquote|ul|ol)([^>]*\\btext-align-(left|center|right|justify)\\b[^>]*)>#i',
+  '<$1$2 align="$3">'
+)|preg_replace(
+  '#<p[^>]*\\balign="(left|center|right|justify)"[^>]*>\\s*<a class="([^"]*\\bucb-link-button\\b[^"]*)"([^>]*)>(.*?)</a>\\s*</p>#s',
+  '<table class="ucb-link-button-table" align="$1" border="0" cellpadding="0" cellspacing="0" role="presentation"><tr><td align="center" bgcolor="#0277BD"><a class="$2"$3>$4</a></td></tr></table>'
+)|preg_replace(
   '#<p[^>]*>\\s*<a class="([^"]*\\bucb-link-button\\b[^"]*)"([^>]*)>(.*?)</a>\\s*</p>#s',
   '<table class="ucb-link-button-table" border="0" cellpadding="0" cellspacing="0" role="presentation"><tr><td align="center" bgcolor="#0277BD"><a class="$1"$2>$3</a></td></tr></table>'
 )|raw }}
@@ -87,6 +93,12 @@
   }
 
   .rich-text a.ucb-link-button span { color: #ffffff !important; }
+
+  /* Text Align */
+  .rich-text .text-align-left { text-align: left; }
+  .rich-text .text-align-center { text-align: center; }
+  .rich-text .text-align-right { text-align: right; }
+  .rich-text .text-align-justify { text-align: justify; }
 
   .rich-text table { border-collapse: collapse; width: 100%; }
   .rich-text table th, .rich-text table td { padding: 8px; border: 1px solid #dddddd; text-align: left; }
