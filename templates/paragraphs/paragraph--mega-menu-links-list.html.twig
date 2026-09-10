@@ -1,5 +1,13 @@
 <div class = "ucb-mega-menu-column">
-  <strong class = "ucb-mega-menu-column-label">{{ content.field_mega_menu_links_list_label|render}}</strong>
+  <strong class = "ucb-mega-menu-column-label">
+    {% if paragraph.field_mega_menu_list_label_link.0.url is not empty %}
+      <a href="{{ paragraph.field_mega_menu_list_label_link.0.url }}">
+        {{ content.field_mega_menu_links_list_label|render }}
+      </a>
+    {% else %}
+      {{ content.field_mega_menu_links_list_label|render }}
+    {% endif %}
+  </strong>
   <ul class = "ucb-mega-menu-column-links-wrapper">
     {{ content.field_mega_menu_links_list_links|render }}
   </ul>
