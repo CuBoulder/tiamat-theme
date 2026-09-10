@@ -40,6 +40,9 @@
   '#<(p|h[1-6]|div|blockquote|ul|ol)([^>]*\\btext-align-(left|center|right|justify)\\b[^>]*)>#i',
   '<$1$2 align="$3">'
 )|preg_replace(
+  '#<(img|div|figure|article|p)([^>]*(?<!text-)align-(left|center|right)\\b[^>]*)>#i',
+  '<$1$2 align="$3">'
+)|preg_replace(
   '#<p[^>]*\\balign="(left|center|right|justify)"[^>]*>\\s*<a class="([^"]*\\bucb-link-button\\b[^"]*)"([^>]*)>(.*?)</a>\\s*</p>#s',
   '<table class="ucb-link-button-table" align="$1" border="0" cellpadding="0" cellspacing="0" role="presentation"><tr><td align="center" bgcolor="#0277BD"><a class="$2"$3>$4</a></td></tr></table>'
 )|preg_replace(
@@ -60,13 +63,11 @@
 <mj-style inline="inline">
   .rich-text a { color: #1565C0; text-decoration: none; }
 
-  /* Reproduces what MJML puts on an <mj-image> img. Embedded media cannot be
-     promoted to a real component from inside <mj-text>, and the bottom margin
-     stands in for the padding an <mj-image> gets from its td. */
+  /* Half-width so CKEditor left/right/center alignment is visible. Full-width mj-image components (intro, articles, promos) are unchanged. */
   .rich-text img {
     display: block;
-    width: 100%;
-    max-width: 100%;
+    width: 50%;
+    max-width: 50%;
     height: auto;
     border: 0;
     border-radius: 8px;
@@ -77,6 +78,47 @@
   }
   .rich-text figure { margin: 0 0 10px 0; }
   .rich-text figcaption { font-size: 13px; line-height: 1.4; color: #666666; padding-top: 5px; }
+
+  /* Drupal filter_align and media embed wrappers */
+  .rich-text .align-left,
+  .rich-text .align-right,
+  .rich-text .align-center {
+    width: 50%;
+    max-width: 50%;
+  }
+  .rich-text .align-left img,
+  .rich-text .align-right img,
+  .rich-text .align-center img {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+  }
+  .rich-text .align-left {
+    float: left;
+    margin: 0 10px 10px 0;
+  }
+  .rich-text .align-right {
+    float: right;
+    margin: 0 0 10px 10px;
+  }
+  .rich-text .align-center {
+    display: block;
+    margin: 0 auto 10px auto;
+  }
+
+  /* Paragraph text-align: block images ignore inherited text-align */
+  .rich-text[align="center"] img,
+  .rich-text .text-align-center img,
+  .rich-text [align="center"] img {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .rich-text[align="right"] img,
+  .rich-text .text-align-right img,
+  .rich-text [align="right"] img {
+    margin-left: auto;
+    margin-right: 0;
+  }
 
   /* Changes ucb buttons to mjml buttons */
   .rich-text a.ucb-link-button {
