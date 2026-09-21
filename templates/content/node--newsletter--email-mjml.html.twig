@@ -35,13 +35,12 @@
 
   {# ============================ HEADER ============================ #}
   <mj-section full-width="full-width" background-color="#010101" css-class="header" padding="20px 10px" padding-bottom="10px">
-    <mj-column width="50%" padding="0px" vertical-align="middle">
+    <mj-column width="50%" css-class="header-logo" padding="0px" vertical-align="middle">
       <mj-image width="200px" src="{{ cuLogoWhite }}" align="left" alt="University of Colorado Boulder" />
     </mj-column>
-    <mj-column width="50%" vertical-align="middle" padding="0px">
-      <mj-text font-size="24px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" line-height="24px" font-weight="700">{{ site_name }}</mj-text>
-      <mj-text font-size="12px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" text-transform="uppercase" font-weight="700">{{ newsletterLabel }} &bull; {{ editionDate }}</mj-text>
-      <mj-text font-size="12px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#cfb87c" font-weight="700" padding-top="0"><a href="{{ newsletterUrl }}">View on website</a></mj-text>
+    <mj-column width="50%" css-class="header-meta" vertical-align="middle" padding="0px">
+      <mj-text css-class="header-meta-text" align="right" font-size="16px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" text-transform="uppercase" font-weight="700">{{ newsletterLabel }}</mj-text>
+      <mj-text css-class="header-meta-text" align="right" font-size="12px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#cfb87c" font-weight="700" padding-top="0"><a href="{{ newsletterUrl }}">View on website</a></mj-text>
     </mj-column>
   </mj-section>
 
@@ -161,27 +160,27 @@
       <mj-text align="center" color="#ffffff" font-weight="bold">{{ newsletterLabel|default(site_name) }}</mj-text>
 
       {% if node.field_newsletter_type.entity.field_newsletter_social_link is defined and node.field_newsletter_type.entity.field_newsletter_social_link is not empty %}
+        {# MJML stock icons (Mailjet PNGs), plus each network's default circle color #}
         {% set mjml_social_names = {
-          'facebook': 'facebook-noshare',
+          'facebook': 'facebook',
           'instagram': 'instagram',
-          'linkedin': 'linkedin-noshare',
+          'linkedin': 'linkedin',
           'youtube': 'youtube',
-          'pinterest': 'pinterest-noshare',
+          'pinterest': 'pinterest',
           'vimeo': 'vimeo',
-          'x': 'x-noshare',
+          'x': 'x',
           'github': 'github',
           'snapchat': 'snapchat',
           'medium': 'medium',
           'soundcloud': 'soundcloud',
           'dribbble': 'dribbble',
-          'google': 'google-noshare',
-          'tumblr': 'tumblr-noshare',
-          'xing': 'xing-noshare',
+          'google': 'google',
+          'tumblr': 'tumblr',
+          'xing': 'xing',
         } %}
-        {% set ucb_button_blue = '#0277BD' %}
-        {# Networks MJML renders with a blue button #}
-        {% set ucb_blue_social_slugs = ['x', 'facebook', 'linkedin', 'vimeo', 'instagram'] %}
-        <mj-social align="center" icon-size="30px" mode="horizontal">
+        {# MJML defaults these to black circles, which disappear on the black footer #}
+        {% set mjml_dark_icons = ['x', 'github'] %}
+        <mj-social align="center" icon-size="32px" icon-padding="6px" inner-padding="4px" border-radius="16px" mode="horizontal">
           {% for link in node.field_newsletter_type.entity.field_newsletter_social_link %}
 
             {% set uri = link.url.toString() %}
@@ -198,7 +197,7 @@
               {% set slug = 'instagram' %}
             {% elseif hostname matches '/linkedin\\.com$/i' %}
               {% set slug = 'linkedin' %}
-            {% elseif hostname matches '/youtube\\.com$/i' %}
+            {% elseif hostname matches '/(youtube\\.com|youtu\\.be)$/i' %}
               {% set slug = 'youtube' %}
             {% elseif hostname matches '/(pinterest\\.com|pin\\.it)$/i' %}
               {% set slug = 'pinterest' %}
@@ -211,11 +210,11 @@
             {% endif %}
 
             {% set icon_label = slug ? slug|capitalize : 'Website' %}
-            {% set social_bg = (slug == '' or slug in ucb_blue_social_slugs) ? ucb_button_blue : '' %}
+            {% set mjml_name = mjml_social_names[slug]|default('web') %}
             <mj-social-element
-              name="{{ mjml_social_names[slug]|default('web') }}"
+              name="{{ mjml_name }}"
               href="{{ uri }}"
-              {% if social_bg %}background-color="{{ social_bg }}"{% endif %}
+              {% if slug in mjml_dark_icons %}background-color="#4d4d4d"{% endif %}
               alt="{{ icon_label }}"></mj-social-element>
 
           {% endfor %}
@@ -245,7 +244,7 @@
 
 {% endset %}
 
-{# Newsletter MJML email preview. Shows the compiled email HTML in a preview iframe on button click. #}
+{# Newsletter MJML email preview. Shows the compiled email HTML in a preview iframe on button click #}
 {{ attach_library('boulder_base/ucb-newsletter-mjml-preview') }}
 
 <newsletter-mjml-preview class="ucb-mjml-preview" data-endpoint="{{ path('ucb_site_configuration.newsletter_mjml_render') }}">
@@ -272,6 +271,24 @@
     <mj-style inline="inline"> .desktop { display: none !important; mso-hide: none; } </mj-style>
     <mj-style> @media only screen and (min-width:480px) { .desktop { display: block !important; } } </mj-style>
     <mj-style> .header, [data-ogsb] .header, [data-ogsc] .header { background:#010101 !important; background-color:#010101 !important; } .gold-band, [data-ogsb] .gold-band, [data-ogsc] .gold-band { background:#cfb87c !important; background-color:#cfb87c !important; } .footer, [data-ogsb] .footer, [data-ogsc] .footer { background:#010101 !important; background-color:#010101 !important; } [data-ogsc] .header div, [data-ogsc] .footer div { color:#ffffff !important; } [data-ogsc] .header a, [data-ogsc] .footer a { color:#cfb87c !important; } </mj-style>
+    /* Stack header on mobile */
+    <mj-style>
+      @media only screen and (max-width: 600px) {
+        .header-logo,
+        .header-meta {
+          width: 100% !important;
+          max-width: 100% !important;
+          display: block !important;
+        }
+        .header-meta {
+          padding-top: 8px !important;
+        }
+        .header-meta-text,
+        .header-meta div {
+          text-align: left !important;
+        }
+      }
+    </mj-style>
     <mj-style> .headline h3 { font-size:18px; font-weight:bold; margin:0; padding:0;} .article a, .headline a { text-decoration:none; color: #1565C0; } .article p { font-size:14px;} h2 { padding:0px; margin: 0px; } .pills { padding: 0px; } .pills span { display:inline-block; font-size:10px; line-height:100%; font-weight:bold; background:#dddddd; color: #333333; padding:5px; margin:0 0 5px 0; text-transform: uppercase;} </mj-style>
     <mj-style>
       :root {
@@ -325,11 +342,6 @@
           background: #444444 !important;
           color: #ffffff !important;
         }
-        /* Footer social icons */
-        .footer table[style*="#0277BD"],
-        .footer td[bgcolor="#0277BD"] {
-          background-color: #0277BD !important;
-        }
       }
 
       /* Outlook.com rewrites colors, force */
@@ -344,12 +356,6 @@
       [data-ogsb] .rich-text table.ucb-link-button-table td,
       [data-ogsc] .rich-text table.ucb-link-button-table td {
         color: #ffffff !important;
-        background-color: #0277BD !important;
-      }
-      [data-ogsb] .footer table[style*="#0277BD"],
-      [data-ogsc] .footer table[style*="#0277BD"],
-      [data-ogsb] .footer td[bgcolor="#0277BD"],
-      [data-ogsc] .footer td[bgcolor="#0277BD"] {
         background-color: #0277BD !important;
       }
     </mj-style>
