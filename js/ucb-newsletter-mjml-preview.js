@@ -93,15 +93,15 @@
       this._previewFrame.style.display = 'none';
       this.appendChild(this._previewFrame);
 
-      // Copy/paste boxes holding the compiled MJML document and the email HTML
+      // Copy/paste boxes -> HTML displayed, MJML under advanced
       this._sources = document.createElement('div');
       this._sources.className = 'ucb-mjml-preview-sources';
       this._sources.style.display = 'none';
 
-      this._mjmlField = this.createSourceField('MJML source');
       this._htmlField = this.createSourceField('Email HTML');
-      this._sources.appendChild(this._mjmlField.container);
+      this._mjmlField = this.createSourceField('MJML source');
       this._sources.appendChild(this._htmlField.container);
+      this._sources.appendChild(this.createAdvancedAccordion(this._mjmlField.container));
       this.appendChild(this._sources);
     }
 
@@ -147,6 +147,53 @@
     }
 
     /**
+     * This wraps the MJML source in an accordion
+     *
+     * @param {HTMLElement} content
+     *   The element to place in the accordion body.
+     * @returns {HTMLElement}
+     *   The accordion root.
+     */
+    createAdvancedAccordion(content) {
+      const accordionId = (window.crypto && window.crypto.randomUUID)
+        ? window.crypto.randomUUID()
+        : String(Date.now());
+      const rootId = 'accordion-' + accordionId;
+      const collapseId = rootId + '-1';
+
+      const wrapper = document.createElement('div');
+      wrapper.innerHTML =
+        '<div class="accordion" data-accordion-id="' + accordionId + '">' +
+          '<div class="accordion-item">' +
+            '<div class="accordion-header">' +
+              '<a class="accordion-button collapsed" href="#" tabindex="0">Advanced</a>' +
+            '</div>' +
+            '<div class="accordion-collapse collapse">' +
+              '<div class="accordion-body"></div>' +
+            '</div>' +
+          '</div>' +
+        '</div>';
+
+      const accordion = wrapper.firstElementChild;
+      accordion.id = rootId;
+      accordion.querySelector('.accordion-body').appendChild(content);
+
+      const button = accordion.querySelector('.accordion-button');
+      button.setAttribute('role', 'button');
+      button.setAttribute('data-bs-toggle', 'collapse');
+      button.setAttribute('data-bs-target', '#' + collapseId);
+      button.setAttribute('aria-expanded', 'false');
+      button.setAttribute('aria-controls', collapseId);
+      button.setAttribute('href', '#' + collapseId);
+
+      const collapse = accordion.querySelector('.accordion-collapse');
+      collapse.id = collapseId;
+      collapse.setAttribute('data-bs-parent', '#' + rootId);
+
+      return accordion;
+    }
+
+    /**
      * Copies a source field to the clipboard
      *
      * @param {HTMLTextAreaElement} textarea
@@ -176,8 +223,7 @@
     }
 
     /**
-     * Reads the raw MJML source from the <script type="text/mjml"> child and
-     * ensures it is wrapped in a complete <mjml> document.
+     * Reads the raw MJML source from the <script type="text/mjml"> child and ensures it is wrapped in a complete <mjml> document.
      *
      * @returns {string} The MJML document, or an empty string if none exists.
      */
