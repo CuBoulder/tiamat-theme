@@ -48,6 +48,12 @@
 )|preg_replace(
   '#<p[^>]*>\\s*<a class="([^"]*\\bucb-link-button\\b[^"]*)"([^>]*)>(.*?)</a>\\s*</p>#s',
   '<table class="ucb-link-button-table" border="0" cellpadding="0" cellspacing="0" role="presentation"><tr><td align="center" bgcolor="#0277BD"><a class="$1"$2>$3</a></td></tr></table>'
+)|preg_replace(
+  '#<a(?![^>]*\\bucb-link-button\\b)([^>]*\\bstyle=")([^"]*)"([^>]*)>#i',
+  '<a$1$2;text-decoration:none;"$3>'
+)|preg_replace(
+  '#<a(?![^>]*\\bucb-link-button\\b)(?![^>]*\\bstyle=)([^>]*)>#i',
+  '<a$1 style="text-decoration:none;">'
 )|raw }}
 {% endmacro %}
 
@@ -60,8 +66,14 @@
  node template alongside the rest of the scheme, so one block defines both.
 #}
 {% macro styles() %}
+{# Decoration is inlined so Outlook's Word engine drops the default underline. Color stays in a stylesheet so dark mode can swap blue to gold. #}
 <mj-style inline="inline">
-  .rich-text a { color: #1565C0; text-decoration: none; }
+  .rich-text a { text-decoration: none; }
+</mj-style>
+<mj-style>
+  .rich-text a { color: #0277BD; }
+</mj-style>
+<mj-style inline="inline">
 
   /* Half-width so CKEditor left/right/center alignment is visible. Full-width mj-image components (intro, articles, promos) are unchanged. */
   .rich-text img {

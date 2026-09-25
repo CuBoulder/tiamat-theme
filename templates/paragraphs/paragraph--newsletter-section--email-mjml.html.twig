@@ -121,7 +121,7 @@
               <mj-text css-class="headline text-black">
                 <h2>
                   {% if href %}
-                    <a href="{{ href }}">{{ title }}</a>
+                    <a href="{{ href }}" style="text-decoration:none;">{{ title }}</a>
                   {% else %}
                     {{ title }}
                   {% endif %}
@@ -248,7 +248,7 @@
                 <mj-text font-weight="700" color="#000000" css-class="headline text-black">
                   <h3>
                     {% if href %}
-                      <a href="{{ href }}">{{ title }}</a>
+                      <a href="{{ href }}" style="text-decoration:none;">{{ title }}</a>
                     {% else %}
                       {{ title }}
                     {% endif %}
