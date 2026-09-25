@@ -27,6 +27,7 @@
 
 {# Newsletter top: title + edition date + absolute web URL for email #}
 {% set newsletterLabel = node.field_newsletter_type.entity.label %}
+{% set addSiteNameToHeader = node.field_newsletter_type.entity.field_add_site_name_to_header.value %}
 {% set editionDate = node.created.value|date("n/j/Y") %}
 {% set newsletterUrl = url('entity.node.canonical', {'node': node.id}, {'absolute': true}) %}
 
@@ -39,7 +40,10 @@
       <mj-image width="200px" src="{{ cuLogoWhite }}" align="left" alt="University of Colorado Boulder" />
     </mj-column>
     <mj-column width="50%" css-class="header-meta" vertical-align="middle" padding="0px">
-      <mj-text css-class="header-meta-text" align="right" font-size="16px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" text-transform="uppercase" font-weight="700">{{ newsletterLabel }}</mj-text>
+      {% if addSiteNameToHeader %}
+        <mj-text css-class="header-meta-text" align="right" font-size="16px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" text-transform="uppercase" font-weight="700" padding-bottom="0">{{ site_name }}</mj-text>
+      {% endif %}
+      <mj-text css-class="header-meta-text" align="right" font-size="16px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" text-transform="uppercase" font-weight="700"{% if addSiteNameToHeader %} padding-top="0"{% endif %}>{{ newsletterLabel }}</mj-text>
       <mj-text css-class="header-meta-text" align="right" font-size="12px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#cfb87c" font-weight="700" padding-top="0"><a href="{{ newsletterUrl }}">View on website</a></mj-text>
     </mj-column>
   </mj-section>
@@ -157,8 +161,7 @@
   <mj-section full-width="full-width" background-color="#cfb87c" css-class="gold-band" padding="2px"></mj-section>
   <mj-section full-width="full-width" background-color="#010101" css-class="footer">
     <mj-column>
-      <mj-text align="center" color="#ffffff" font-weight="bold">{{ newsletterLabel|default(site_name) }}</mj-text>
-
+      <mj-text align="center" color="#ffffff" font-weight="bold"><a href="{{ url('<front>', {}, {'absolute': true}) }}">{{ site_name }}</a></mj-text>
       {% if node.field_newsletter_type.entity.field_newsletter_social_link is defined and node.field_newsletter_type.entity.field_newsletter_social_link is not empty %}
         {# MJML stock icons (Mailjet PNGs), plus each network's default circle color #}
         {% set mjml_social_names = {
@@ -238,7 +241,6 @@
   <mj-section full-width="full-width" background-color="#010101" css-class="footer">
     <mj-column>
       <mj-image src="{{ beBoulderWhite }}" align="center" width="200px" alt="Be Boulder." />
-      <mj-text align="center" font-size="12px"><a href="{{ url('<front>', {}, {'absolute': true}) }}">{{ site_name }}</a></mj-text>
     </mj-column>
   </mj-section>
 
