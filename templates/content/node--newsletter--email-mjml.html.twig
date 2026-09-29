@@ -43,10 +43,11 @@
       <mj-image width="200px" src="{{ cuLogoWhite }}" align="left" alt="University of Colorado Boulder" />
     </mj-column>
     <mj-column width="50%" css-class="header-meta" vertical-align="middle" padding="0px">
+      {# Outlook Windows dark mode inverts #ffffff inside the locked header VML. mso-color-alt:auto stays white against that dark fill #}
       {% if addSiteNameToHeader %}
-        <mj-text css-class="header-meta-text" align="right" font-size="16px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" text-transform="uppercase" font-weight="700" padding-bottom="0">{{ site_name }}</mj-text>
+        <mj-text css-class="header-meta-text header-chrome-label" align="right" font-size="16px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" text-transform="uppercase" font-weight="700" padding-bottom="0"><span style="color:#ffffff;mso-color-alt:auto;">{{ site_name }}</span></mj-text>
       {% endif %}
-      <mj-text css-class="header-meta-text" align="right" font-size="16px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" text-transform="uppercase" font-weight="700"{% if addSiteNameToHeader %} padding-top="0"{% endif %}>{{ newsletterLabel }}</mj-text>
+      <mj-text css-class="header-meta-text header-chrome-label" align="right" font-size="16px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" text-transform="uppercase" font-weight="700"{% if addSiteNameToHeader %} padding-top="0"{% endif %}><span style="color:#ffffff;mso-color-alt:auto;">{{ newsletterLabel }}</span></mj-text>
       <mj-text css-class="header-meta-text" align="right" font-size="12px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#cfb87c" font-weight="700" padding-top="0"><a href="{{ newsletterUrl }}" style="text-decoration:none; color:#cfb87c;">View on website</a></mj-text>
     </mj-column>
   </mj-section>
@@ -280,6 +281,7 @@
     <mj-style inline="inline"> .desktop { display: none !important; mso-hide: none; } </mj-style>
     <mj-style> @media only screen and (min-width:480px) { .desktop { display: block !important; } } </mj-style>
     <mj-style> .header, [data-ogsb] .header, [data-ogsc] .header, .footer, [data-ogsb] .footer, [data-ogsc] .footer { background:{{ chrome_black }} !important; background-color:{{ chrome_black }} !important; background-image:linear-gradient({{ chrome_black }}, {{ chrome_black }}) !important; } .gold-band, [data-ogsb] .gold-band, [data-ogsc] .gold-band { background:#cfb87c !important; background-color:#cfb87c !important; } [data-ogsc] .header div, [data-ogsc] .footer div { color:#ffffff !important; } [data-ogsc] .header a, [data-ogsc] .footer a { color:#cfb87c !important; } </mj-style>
+    <mj-style inline="inline"> .header-chrome-label, .header-chrome-label span { color:#ffffff; mso-color-alt:auto; } </mj-style>
     {# Stack header on mobile #}
     <mj-style>
       @media only screen and (max-width: 600px) {
