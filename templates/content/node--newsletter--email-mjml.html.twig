@@ -236,7 +236,8 @@
   {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
     <mj-section full-width="full-width" background-color="{{ chrome_black }}" css-class="footer">
       <mj-column>
-        <mj-text color="#FFFFFF" font-size="12px" align="center" css-class="rich-text">
+        {# Outlook Windows dark mode inverts #ffffff inside the locked footer so mso-color-alt:auto stays white against dark bg #}
+        <mj-text color="#FFFFFF" font-size="12px" align="center" css-class="rich-text footer-chrome-text">
           {{ richtext.prepare(node.field_newsletter_type.entity.field_newsletter_footer.0.processed, base_domain) }}
         </mj-text>
       </mj-column>
@@ -281,7 +282,7 @@
     <mj-style inline="inline"> .desktop { display: none !important; mso-hide: none; } </mj-style>
     <mj-style> @media only screen and (min-width:480px) { .desktop { display: block !important; } } </mj-style>
     <mj-style> .header, [data-ogsb] .header, [data-ogsc] .header, .footer, [data-ogsb] .footer, [data-ogsc] .footer { background:{{ chrome_black }} !important; background-color:{{ chrome_black }} !important; background-image:linear-gradient({{ chrome_black }}, {{ chrome_black }}) !important; } .gold-band, [data-ogsb] .gold-band, [data-ogsc] .gold-band { background:#cfb87c !important; background-color:#cfb87c !important; } [data-ogsc] .header div, [data-ogsc] .footer div { color:#ffffff !important; } [data-ogsc] .header a, [data-ogsc] .footer a { color:#cfb87c !important; } </mj-style>
-    <mj-style inline="inline"> .header-chrome-label, .header-chrome-label span { color:#ffffff; mso-color-alt:auto; } </mj-style>
+    <mj-style inline="inline"> .header-chrome-label, .header-chrome-label span { color:#ffffff; mso-color-alt:auto; } .footer-chrome-text { color:#ffffff; mso-color-alt:auto; } </mj-style>
     {# Stack header on mobile #}
     <mj-style>
       @media only screen and (max-width: 600px) {
