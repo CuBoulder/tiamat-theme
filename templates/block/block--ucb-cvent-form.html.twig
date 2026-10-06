@@ -15,5 +15,6 @@
 {% extends '@boulder_base/block/styled-block.html.twig' %}
 {% block content %}
   {{ attach_library('boulder_base/ucb-cvent-form') }}
+  {{ content.body }}
   <cvent-form cventid="{{ content.field_ucb_cvent_embed_id|render|striptags|trim|lower }}"></cvent-form>
 {% endblock %}

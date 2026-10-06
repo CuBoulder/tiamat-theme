@@ -3,6 +3,17 @@ cvent-form {
   width: 100%;
 }
 
+cvent-form .ucb-loading-data {
+  color: #01579b;
+  text-align: center;
+  display: block;
+}
+
+cvent-form .ucb-loading-data[hidden],
+cvent-form [data-cvt-embed][hidden] {
+  display: none;
+}
+
 cvent-form [data-cvt-embed] {
   width: 100%;
   min-height: 70vh;
