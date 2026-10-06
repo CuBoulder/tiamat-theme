@@ -230,6 +230,14 @@ ucb-slate-form:
     theme:
       css/block/ucb-slate-form.css: { weight: 5 }
 
+ucb-cvent-form:
+  version: 1.x
+  js:
+    js/ucb-cvent-form.js: { }
+  css:
+    theme:
+      css/block/ucb-cvent-form.css: { weight: 5 }
+
 ucb-status-page:
   version: 1.x
   js:

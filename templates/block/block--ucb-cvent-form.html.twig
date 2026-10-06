@@ -1,0 +1,19 @@
+{#
+/**
+ * @file Contains the template to display the Cvent Form block.
+ */
+#}
+{% set classes = [
+  'block',
+  'container',
+  'block-' ~ configuration.provider|clean_class,
+  'block-' ~ plugin_id|clean_class,
+  bundle ? 'block--type-' ~ bundle|clean_class,
+  view_mode ? 'block--view-mode-' ~ view_mode|clean_class
+] %}
+
+{% extends '@boulder_base/block/styled-block.html.twig' %}
+{% block content %}
+  {{ attach_library('boulder_base/ucb-cvent-form') }}
+  <cvent-form cventid="{{ content.field_ucb_cvent_embed_id|render|striptags|trim|lower }}"></cvent-form>
+{% endblock %}
