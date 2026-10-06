@@ -45,9 +45,11 @@
     <mj-column width="50%" css-class="header-meta" vertical-align="middle" padding="0px">
       {# Outlook Windows dark mode inverts #ffffff inside the locked header VML. mso-color-alt:auto stays white against that dark fill #}
       {% if addSiteNameToHeader %}
-        <mj-text css-class="header-meta-text header-chrome-label" align="right" font-size="16px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" text-transform="uppercase" font-weight="700" padding-bottom="0"><span style="color:#ffffff;mso-color-alt:auto;">{{ site_name }}</span></mj-text>
+        <mj-text css-class="header-meta-text header-chrome-label" align="right" font-size="24px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" font-weight="700" padding-bottom="0"><span style="color:#ffffff;mso-color-alt:auto;">{{ site_name }}</span></mj-text>
+        <mj-text css-class="header-meta-text header-chrome-label" align="right" font-size="12px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" text-transform="uppercase" font-weight="700" padding-top="0"><span style="color:#ffffff;mso-color-alt:auto;">{{ newsletterLabel }}</span></mj-text>
+      {% else %}
+        <mj-text css-class="header-meta-text header-chrome-label" align="right" font-size="24px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" font-weight="700" padding-bottom="0"><span style="color:#ffffff;mso-color-alt:auto;">{{ newsletterLabel }}</span></mj-text>
       {% endif %}
-      <mj-text css-class="header-meta-text header-chrome-label" align="right" font-size="16px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" text-transform="uppercase" font-weight="700"{% if addSiteNameToHeader %} padding-top="0"{% endif %}><span style="color:#ffffff;mso-color-alt:auto;">{{ newsletterLabel }}</span></mj-text>
       <mj-text css-class="header-meta-text" align="right" font-size="12px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#cfb87c" font-weight="700" padding-top="0"><a href="{{ newsletterUrl }}" style="text-decoration:none; color:#cfb87c;">View on website</a></mj-text>
     </mj-column>
   </mj-section>
