@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds New Newsletter MJML Engine
+  This adds in MJML functionality to the Newsletter node with a parallel version of Newsletter. The existing version will continue to work as usual alongside the MJML version. 
+  
+  This new version should allow greater Email Client compatibility and ensures better rendered display across clients.  This is all handled under the new Edit -> View Mode -> MJML which will render using the new engine. 
+---
+
 - ### New Block: Cvent Form Block
   Adds the ability to add a Cvent Form block to Web Express
   

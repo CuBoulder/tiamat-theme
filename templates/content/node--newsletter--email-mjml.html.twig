@@ -1,0 +1,404 @@
+{%
+    set classes = [
+    'node',
+    'node--type-' ~ node.bundle|clean_class,
+    not node.isPublished() ? 'node--unpublished',
+    view_mode ? 'node--view-mode-' ~ view_mode|clean_class,
+    ]
+%}
+
+
+{# Rich text helpers for WYSIWYG fields #}
+{% import '@boulder_base/includes/newsletter-email-mjml-rich-text.html.twig' as richtext %}
+
+{# Site base URL for absolute links #}
+{% set base_url = url('<front>')|render|split('/', -1)|join('/') %}
+
+{# Full front URL so we can extract protocol + domain for absolute media URLs. #}
+{% set full_base_url = url('<front>')|render %}
+{% set url_parts = full_base_url|split('/') %}
+{% set protocol = url_parts[0] %}
+{% set domain = url_parts[2] %}
+{% set base_domain = protocol ~ '//' ~ domain %}
+
+{# Brand assets #}
+{% set cuLogoWhite = base_url ~ '/' ~ base_path ~ directory ~ '/images/cu-boulder-logo-text-white.gif' %}
+{% set beBoulderWhite = base_url ~ '/' ~ base_path ~ directory ~ '/images/be-boulder-white.svg' %}
+{# Slightly lifted black. Pure #000/#010101 is what Outlook Windows inverts to white. #}
+{% set chrome_black = '#1A1A1A' %}
+
+{# Newsletter top: title + edition date + absolute web URL for email #}
+{% set newsletterLabel = node.field_newsletter_type.entity.label %}
+{% set addSiteNameToHeader = node.field_newsletter_type.entity.field_add_site_name_to_header.value %}
+{% set editionDate = node.created.value|date("n/j/Y") %}
+{% set newsletterUrl = url('entity.node.canonical', {'node': node.id}, {'absolute': true}) %}
+
+{# MJML body markup - for passing to render endpoint #}
+{% set mjml_body %}
+
+  {# ============================ HEADER ============================ #}
+  <mj-raw><!-- ucb-header-lock-start --></mj-raw>
+  <mj-section full-width="full-width" background-color="{{ chrome_black }}" css-class="header" padding="20px 10px" padding-bottom="10px">
+    <mj-column width="50%" css-class="header-logo" padding="0px" vertical-align="middle">
+      <mj-image width="200px" src="{{ cuLogoWhite }}" align="left" alt="University of Colorado Boulder" />
+    </mj-column>
+    <mj-column width="50%" css-class="header-meta" vertical-align="middle" padding="0px">
+      {# Outlook Windows dark mode inverts #ffffff inside the locked header VML. mso-color-alt:auto stays white against that dark fill #}
+      {% if addSiteNameToHeader %}
+        <mj-text css-class="header-meta-text header-chrome-label" align="right" font-size="24px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" font-weight="700" padding-bottom="0"><span style="color:#ffffff;mso-color-alt:auto;">{{ site_name }}</span></mj-text>
+        <mj-text css-class="header-meta-text header-chrome-label" align="right" font-size="12px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" text-transform="uppercase" font-weight="700" padding-top="0"><span style="color:#ffffff;mso-color-alt:auto;">{{ newsletterLabel }}</span></mj-text>
+      {% else %}
+        <mj-text css-class="header-meta-text header-chrome-label" align="right" font-size="24px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#ffffff" font-weight="700" padding-bottom="0"><span style="color:#ffffff;mso-color-alt:auto;">{{ newsletterLabel }}</span></mj-text>
+      {% endif %}
+      <mj-text css-class="header-meta-text" align="right" font-size="12px" font-family="&quot;Roboto Condensed&quot;, Arial Narrow, Helvetica, Arial" color="#cfb87c" font-weight="700" padding-top="0"><a href="{{ newsletterUrl }}" style="text-decoration:none; color:#cfb87c;">View on website</a></mj-text>
+    </mj-column>
+  </mj-section>
+  <mj-raw><!-- ucb-header-lock-end --></mj-raw>
+
+  {# Gold accent divider strip #}
+  <mj-section full-width="full-width" background-color="#cfb87c" css-class="gold-band" padding="2px"></mj-section>
+
+  {# ============================ INTRO ============================ #}
+  {% if content.field_newsletter_intro_image|render or content.field_newsletter_intro_body|render %}
+    <mj-wrapper>
+      <mj-section padding="0">
+        <mj-column padding="0">
+          {% if content.field_newsletter_intro_image|render %}
+            <mj-image
+              src="{{ base_domain }}{{ file_url(node.field_newsletter_intro_image.entity.field_media_image.entity.fileuri) }}"
+              alt="{{ node.field_newsletter_intro_image.entity.field_media_image.alt|render }}"
+              border-radius="8px" />
+          {% endif %}
+          {% if content.field_newsletter_intro_body|render %}
+            <mj-text css-class="text-black rich-text">{{ richtext.prepare(content.field_newsletter_intro_body|render, base_domain) }}</mj-text>
+          {% endif %}
+        </mj-column>
+      </mj-section>
+    </mj-wrapper>
+  {% endif %}
+
+  {# ===================== NEWSLETTER SECTIONS ===================== #}
+  {# Rendered by paragraph--newsletter-section--email-mjml.html.twig #}
+  {% if content.field_newsletter_section_block|render %}
+    {% for key, section in content.field_newsletter_section_block %}
+      {% if key|first != '#' %}
+        {{ section }}
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+
+  {# ========================== PROMO ONE ========================== #}
+  {% if content.field_newsletter_promo_image_one|render %}
+    {% set promo_one_img %}
+      <mj-image
+        src="{{ base_domain }}{{ file_url(node.field_newsletter_promo_image_one.entity.field_media_image.entity.fileuri|image_style('focal_image_square')) }}"
+        alt="{{ node.field_newsletter_promo_image_one.entity.field_media_image.alt|render }}"
+        border-radius="8px"
+        {% if content.field_newsletter_promo_link_one|render %}
+          {% set link_url_one = content.field_newsletter_promo_link_one|render|striptags|trim %}
+          href="{{ link_url_one starts with 'http' or link_url_one starts with 'www' ? link_url_one : base_url ~ link_url_one }}"
+        {% endif %} />
+    {% endset %}
+    <mj-wrapper>
+      <mj-section padding="0">
+        <mj-column padding="0">{{ promo_one_img }}</mj-column>
+      </mj-section>
+    </mj-wrapper>
+  {% endif %}
+
+  {# ======================= CONTENT BLOCKS ======================= #}
+  {# Block Text Content Section #}
+  {% set blocksToRender = [] %}
+  {% for key, block in content.field_newsletter_content_blocks %}
+    {% if key|first != '#' %}
+      {% set paragraphItem = block['#paragraph'] %}
+      {% set title = paragraphItem.field_newsletter_block_title.value|default('') %}
+      {% set text = paragraphItem.field_newsletter_block_text.value|default('') %}
+      {% if title|trim is not empty or text|trim is not empty %}
+        {% set blocksToRender = blocksToRender|merge([block]) %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+
+  {% if blocksToRender %}
+    <mj-wrapper>
+      <mj-section>
+        <mj-column>
+          <mj-divider />
+        </mj-column>
+      </mj-section>
+      <mj-section css-class="blocks">
+        {% for block in blocksToRender %}
+          {% set paragraphItem = block['#paragraph'] %}
+          <mj-column>
+            <mj-text css-class="text-black rich-text">
+              {% if paragraphItem.field_newsletter_block_title.value %}
+                <h2>{{ paragraphItem.field_newsletter_block_title.value }}</h2>
+              {% endif %}
+              {% if paragraphItem.field_newsletter_block_text.processed %}
+                {{ richtext.prepare(paragraphItem.field_newsletter_block_text.processed, base_domain) }}
+              {% endif %}
+            </mj-text>
+          </mj-column>
+        {% endfor %}
+      </mj-section>
+    </mj-wrapper>
+  {% endif %}
+
+  {# ========================== PROMO TWO ========================== #}
+  {% if content.field_newsletter_promo_image_two|render %}
+    {% set promo_two_img %}
+      <mj-image
+        src="{{ base_domain }}{{ file_url(node.field_newsletter_promo_image_two.entity.field_media_image.entity.fileuri|image_style('focal_image_square')) }}"
+        alt="{{ node.field_newsletter_promo_image_two.entity.field_media_image.alt|render }}"
+        border-radius="8px"
+        {% if content.field_newsletter_promo_link_two|render %}
+          {% set link_url_two = content.field_newsletter_promo_link_two|render|striptags|trim %}
+          href="{{ link_url_two starts with 'http://' or link_url_two starts with 'https://' ? link_url_two : base_url ~ link_url_two }}"
+        {% endif %} />
+    {% endset %}
+    <mj-wrapper>
+      <mj-section padding="0">
+        <mj-column padding="0">{{ promo_two_img }}</mj-column>
+      </mj-section>
+    </mj-wrapper>
+  {% endif %}
+
+  {# ============================ FOOTER ============================ #}
+  <mj-section full-width="full-width" background-color="#cfb87c" css-class="gold-band" padding="2px"></mj-section>
+  <mj-raw><!-- ucb-footer-lock-start --></mj-raw>
+  <mj-section full-width="full-width" background-color="{{ chrome_black }}" css-class="footer">
+    <mj-column>
+      <mj-text align="center" color="#ffffff" font-weight="bold"><a href="{{ url('<front>', {}, {'absolute': true}) }}" style="text-decoration:none; color:#cfb87c;">{{ site_name }}</a></mj-text>
+      {% if node.field_newsletter_type.entity.field_newsletter_social_link is defined and node.field_newsletter_type.entity.field_newsletter_social_link is not empty %}
+        {# MJML stock icons (Mailjet PNGs), plus each network's default circle color #}
+        {% set mjml_social_names = {
+          'facebook': 'facebook',
+          'instagram': 'instagram',
+          'linkedin': 'linkedin',
+          'youtube': 'youtube',
+          'pinterest': 'pinterest',
+          'vimeo': 'vimeo',
+          'x': 'x',
+          'github': 'github',
+          'snapchat': 'snapchat',
+          'medium': 'medium',
+          'soundcloud': 'soundcloud',
+          'dribbble': 'dribbble',
+          'google': 'google',
+          'tumblr': 'tumblr',
+          'xing': 'xing',
+        } %}
+        {# MJML defaults these to black circles, which disappear on the black footer #}
+        {% set mjml_dark_icons = ['x', 'github'] %}
+        <mj-social align="center" icon-size="32px" icon-padding="6px" inner-padding="4px" border-radius="16px" mode="horizontal">
+          {% for link in node.field_newsletter_type.entity.field_newsletter_social_link %}
+
+            {% set uri = link.url.toString() %}
+
+            {% set hostname = '' %}
+            {% if uri matches '/^(http(s)?:)?\\/\\//i' %}
+              {% set hostname = uri|split('/')[2] %}
+            {% endif %}
+
+            {% set slug = '' %}
+            {% if hostname matches '/facebook\\.com$/i' %}
+              {% set slug = 'facebook' %}
+            {% elseif hostname matches '/instagram\\.com$/i' %}
+              {% set slug = 'instagram' %}
+            {% elseif hostname matches '/linkedin\\.com$/i' %}
+              {% set slug = 'linkedin' %}
+            {% elseif hostname matches '/(youtube\\.com|youtu\\.be)$/i' %}
+              {% set slug = 'youtube' %}
+            {% elseif hostname matches '/(pinterest\\.com|pin\\.it)$/i' %}
+              {% set slug = 'pinterest' %}
+            {% elseif hostname matches '/vimeo\\.com$/i' %}
+              {% set slug = 'vimeo' %}
+            {% elseif hostname matches '/github\\.com$/i' %}
+              {% set slug = 'github' %}
+            {% elseif hostname matches '/(twitter\\.com|x\\.com)$/i' %}
+              {% set slug = 'x' %}
+            {% endif %}
+
+            {% set icon_label = slug ? slug|capitalize : 'Website' %}
+            {% set mjml_name = mjml_social_names[slug]|default('web') %}
+            <mj-social-element
+              name="{{ mjml_name }}"
+              href="{{ uri }}"
+              {% if slug in mjml_dark_icons %}background-color="#4d4d4d"{% endif %}
+              alt="{{ icon_label }}"></mj-social-element>
+
+          {% endfor %}
+        </mj-social>
+      {% endif %}
+    </mj-column>
+  </mj-section>
+
+  {# Footer body from the Newsletter Type taxonomy term #}
+  {% if node.field_newsletter_type.entity.field_newsletter_footer.value %}
+    <mj-section full-width="full-width" background-color="{{ chrome_black }}" css-class="footer">
+      <mj-column>
+        {# Outlook Windows dark mode inverts #ffffff inside the locked footer so mso-color-alt:auto stays white against dark bg #}
+        <mj-text color="#FFFFFF" font-size="12px" align="center" css-class="rich-text footer-chrome-text">
+          {{ richtext.prepare(node.field_newsletter_type.entity.field_newsletter_footer.0.processed, base_domain) }}
+        </mj-text>
+      </mj-column>
+    </mj-section>
+  {% endif %}
+
+  {# Be Boulder & Site link #}
+  <mj-section full-width="full-width" background-color="{{ chrome_black }}" css-class="footer">
+    <mj-column>
+      <mj-image src="{{ beBoulderWhite }}" align="center" width="200px" alt="Be Boulder." />
+    </mj-column>
+  </mj-section>
+  <mj-raw><!-- ucb-footer-lock-end --></mj-raw>
+
+{% endset %}
+
+{# Newsletter MJML email preview. Shows the compiled email HTML in a preview iframe on button click #}
+{{ attach_library('boulder_base/ucb-newsletter-mjml-preview') }}
+
+<newsletter-mjml-preview class="ucb-mjml-preview" data-endpoint="{{ path('ucb_site_configuration.newsletter_mjml_render') }}">
+  <script type="text/mjml">
+<mjml>
+  <mj-head>
+    <mj-font name="&quot;Roboto Condensed&quot;" href="https://fonts.googleapis.com/css2?family=Roboto+Condensed:wght@700" />
+    {% if node.field_newsletter_summary.value %}
+      <mj-preview>{{ node.field_newsletter_summary.value }}</mj-preview>
+    {% endif %}
+    <mj-raw>
+      <meta name="color-scheme" content="light dark">
+      <meta name="supported-color-schemes" content="light dark">
+    </mj-raw>
+    <mj-attributes>
+      <mj-text font-size="16px" line-height="150%" />
+      <mj-navbar-link font-weight="bold" />
+      <mj-divider border-color="#cfb87c" border-width="5px" width="100px" />
+    </mj-attributes>
+    {# WYSIWYG styles first, so the brand rules below win on overlap #}
+    {{ richtext.styles() }}
+    <mj-style inline="inline"> .fancy-links a { text-decoration:none; font-weight:bold; color:#000; border-bottom:2px solid #cfb87c; } .header a { color: #cfb87c; text-decoration: none; } .footer > div { color:#ffffff; } .footer a { color: #cfb87c; text-decoration: none; } .blocks a { text-decoration:none; } </mj-style>
+    <mj-style> .article a, .headline a, .blocks a, .rich-text a, .text-black a, .summary a { color: #0277BD; text-decoration: none; } </mj-style>
+    <mj-style> .fancy-links a:hover { border-bottom:none !important; background-color:#cfb87c; } </mj-style>
+    <mj-style inline="inline"> .desktop { display: none !important; mso-hide: none; } </mj-style>
+    <mj-style> @media only screen and (min-width:480px) { .desktop { display: block !important; } } </mj-style>
+    <mj-style> .header, [data-ogsb] .header, [data-ogsc] .header, .footer, [data-ogsb] .footer, [data-ogsc] .footer { background:{{ chrome_black }} !important; background-color:{{ chrome_black }} !important; background-image:linear-gradient({{ chrome_black }}, {{ chrome_black }}) !important; } .gold-band, [data-ogsb] .gold-band, [data-ogsc] .gold-band { background:#cfb87c !important; background-color:#cfb87c !important; } [data-ogsc] .header div, [data-ogsc] .footer div { color:#ffffff !important; } [data-ogsc] .header a, [data-ogsc] .footer a { color:#cfb87c !important; } </mj-style>
+    <mj-style inline="inline"> .header-chrome-label, .header-chrome-label span { color:#ffffff; mso-color-alt:auto; } .footer-chrome-text { color:#ffffff; mso-color-alt:auto; } </mj-style>
+    {# Stack header on mobile #}
+    <mj-style>
+      @media only screen and (max-width: 600px) {
+        .header-logo,
+        .header-meta {
+          width: 100% !important;
+          max-width: 100% !important;
+          display: block !important;
+        }
+        .header-meta {
+          padding-top: 8px !important;
+        }
+        .header-meta-text,
+        .header-meta div {
+          text-align: left !important;
+        }
+      }
+    </mj-style>
+    <mj-style> .headline h3 { font-size:18px; font-weight:bold; margin:0; padding:0;} .article p { font-size:14px;} h2 { padding:0px; margin: 0px; } .pills { padding: 0px; } .pills span { display:inline-block; font-size:10px; line-height:100%; font-weight:bold; background:#dddddd; color: #333333; padding:5px; margin:0 0 5px 0; text-transform: uppercase;} </mj-style>
+    <mj-style>
+      :root {
+        color-scheme: light dark;
+        supported-color-schemes: light dark;
+      }
+
+      @media (prefers-color-scheme: dark) {
+        /* Dark canvas for the content area (header/footer keep their own color). */
+        body,
+        .bg-white {
+          background-color: #222222 !important;
+        }
+        /* Content text turns white */
+        .text-black,
+        .text-black div,
+        .text-black p,
+        .text-black span,
+        .text-black h1,
+        .text-black h2,
+        .text-black h3,
+        .blocks,
+        .blocks div,
+        .blocks p,
+        .blocks h2 {
+          color: #ffffff !important;
+        }
+        /* Links render in CU gold */
+        a,
+        .article a,
+        .headline a,
+        .blocks a,
+        .rich-text a,
+        .text-black a,
+        .text-black a span,
+        .summary a,
+        .fancy-links a {
+          color: #cfb87c !important;
+          text-decoration: none !important;
+        }
+        /* Every button white on blue */
+        .section-button a,
+        a.section-button,
+        .rich-text a.ucb-link-button,
+        .rich-text a.ucb-link-button span,
+        .rich-text table.ucb-link-button-table td {
+          color: #ffffff !important;
+          background-color: #0277BD !important;
+        }
+        /* Captions on the darker canvas */
+        .rich-text figcaption {
+          color: #cccccc !important;
+        }
+        /* Category pills */
+        .pills span {
+          background: #444444 !important;
+          color: #ffffff !important;
+        }
+      }
+
+      /* Outlook.com / Outlook 365 web dark mode */
+      [data-ogsc] .article a,
+      [data-ogsc] .headline a,
+      [data-ogsc] .blocks a,
+      [data-ogsc] .rich-text a,
+      [data-ogsc] .text-black a,
+      [data-ogsc] .text-black a span,
+      [data-ogsc] .summary a,
+      [data-ogsb] .article a,
+      [data-ogsb] .headline a,
+      [data-ogsb] .blocks a,
+      [data-ogsb] .rich-text a,
+      [data-ogsb] .text-black a {
+        color: #cfb87c !important;
+        text-decoration: none !important;
+      }
+
+      /* Outlook.com rewrites colors, force */
+      [data-ogsb] .section-button a,
+      [data-ogsc] .section-button a,
+      [data-ogsb] a.section-button,
+      [data-ogsc] a.section-button,
+      [data-ogsb] .rich-text a.ucb-link-button,
+      [data-ogsc] .rich-text a.ucb-link-button,
+      [data-ogsb] .rich-text a.ucb-link-button span,
+      [data-ogsc] .rich-text a.ucb-link-button span,
+      [data-ogsb] .rich-text table.ucb-link-button-table td,
+      [data-ogsc] .rich-text table.ucb-link-button-table td {
+        color: #ffffff !important;
+        background-color: #0277BD !important;
+      }
+    </mj-style>
+  </mj-head>
+  <mj-body>
+    {{ mjml_body }}
+  </mj-body>
+</mjml>
+  </script>
+</newsletter-mjml-preview>

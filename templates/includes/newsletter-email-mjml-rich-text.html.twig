@@ -1,0 +1,183 @@
+{#
+/**
+ * @file
+ * Prepares WYSIWYG field output for use inside <mj-text>.
+ *
+ * prepare() fixes URLs; styles() makes the markup match the rest of the email.
+ * The site's presentational classes are left inert, so display type, column
+ * lists, table variants and button colours collapse into newsletter styling.
+ */
+#}
+
+{#
+ The no-op "//" pairs shield external URLs from being prefixed: Twig's replace uses strtr, which matches the longest key first and never rescans.
+
+ srcset is renamed rather than rewritten, since a string replace cannot safely prefix a comma-separated candidate list. Clients then fall back to src.
+#}
+{% macro prepare(html, base_domain) %}
+{# Accordion toggles become spans: the panels are open, so the link led nowhere. #}
+{{ html|replace({
+  'src="//': 'src="//',
+  'href="//': 'href="//',
+  "src='//": "src='//",
+  "href='//": "href='//",
+  'url(//': 'url(//',
+  'url("//': 'url("//',
+  "url('//": "url('//",
+  'src="/': 'src="' ~ base_domain ~ '/',
+  'href="/': 'href="' ~ base_domain ~ '/',
+  "src='/": "src='" ~ base_domain ~ '/',
+  "href='/": "href='" ~ base_domain ~ '/',
+  'url(/': 'url(' ~ base_domain ~ '/',
+  'url("/': 'url("' ~ base_domain ~ '/',
+  "url('/": "url('" ~ base_domain ~ '/',
+  'srcset="': 'data-srcset="',
+  "srcset='": "data-srcset='",
+})|preg_replace(
+  '#<a class="([^"]*\\baccordion-button\\b[^"]*)"[^>]*>(.*?)</a>#s',
+  '<span class="$1">$2</span>'
+)|preg_replace(
+  '#<(p|h[1-6]|div|blockquote|ul|ol)([^>]*\\btext-align-(left|center|right|justify)\\b[^>]*)>#i',
+  '<$1$2 align="$3">'
+)|preg_replace(
+  '#<(img|div|figure|article|p)([^>]*(?<!text-)align-(left|center|right)\\b[^>]*)>#i',
+  '<$1$2 align="$3">'
+)|preg_replace(
+  '#<p[^>]*\\balign="(left|center|right|justify)"[^>]*>\\s*<a class="([^"]*\\bucb-link-button\\b[^"]*)"([^>]*)>(.*?)</a>\\s*</p>#s',
+  '<table class="ucb-link-button-table" align="$1" border="0" cellpadding="0" cellspacing="0" role="presentation"><tr><td align="center" bgcolor="#0277BD"><a class="$2"$3>$4</a></td></tr></table>'
+)|preg_replace(
+  '#<p[^>]*>\\s*<a class="([^"]*\\bucb-link-button\\b[^"]*)"([^>]*)>(.*?)</a>\\s*</p>#s',
+  '<table class="ucb-link-button-table" border="0" cellpadding="0" cellspacing="0" role="presentation"><tr><td align="center" bgcolor="#0277BD"><a class="$1"$2>$3</a></td></tr></table>'
+)|preg_replace(
+  '#<a(?![^>]*\\bucb-link-button\\b)([^>]*\\bstyle=")([^"]*)"([^>]*)>#i',
+  '<a$1$2;text-decoration:none;"$3>'
+)|preg_replace(
+  '#<a(?![^>]*\\bucb-link-button\\b)(?![^>]*\\bstyle=)([^>]*)>#i',
+  '<a$1 style="text-decoration:none;">'
+)|raw }}
+{% endmacro %}
+
+{#
+ Include once inside <mj-head>, and add rich-text to the css-class of any
+ <mj-text> holding WYSIWYG output:
+
+<mj-text css-class="text-black rich-text">
+ These are the light scheme only. The dark overrides for .rich-text live in the
+ node template alongside the rest of the scheme, so one block defines both.
+#}
+{% macro styles() %}
+{# Decoration is inlined so Outlook's Word engine drops the default underline. Color stays in a stylesheet so dark mode can swap blue to gold. #}
+<mj-style inline="inline">
+  .rich-text a { text-decoration: none; }
+</mj-style>
+<mj-style>
+  .rich-text a { color: #0277BD; }
+</mj-style>
+<mj-style inline="inline">
+
+  /* Half-width so CKEditor left/right/center alignment is visible. Full-width mj-image components (intro, articles, promos) are unchanged. */
+  .rich-text img {
+    display: block;
+    width: 50%;
+    max-width: 50%;
+    height: auto;
+    border: 0;
+    border-radius: 8px;
+    outline: none;
+    text-decoration: none;
+    font-size: 13px;
+    margin: 0 0 10px 0;
+  }
+  .rich-text figure { margin: 0 0 10px 0; }
+  .rich-text figcaption { font-size: 13px; line-height: 1.4; color: #666666; padding-top: 5px; }
+
+  /* Drupal filter_align and media embed wrappers */
+  .rich-text .align-left,
+  .rich-text .align-right,
+  .rich-text .align-center {
+    width: 50%;
+    max-width: 50%;
+  }
+  .rich-text .align-left img,
+  .rich-text .align-right img,
+  .rich-text .align-center img {
+    width: 100%;
+    max-width: 100%;
+    margin-bottom: 0;
+  }
+  .rich-text .align-left {
+    float: left;
+    margin: 0 10px 10px 0;
+  }
+  .rich-text .align-right {
+    float: right;
+    margin: 0 0 10px 10px;
+  }
+  .rich-text .align-center {
+    display: block;
+    margin: 0 auto 10px auto;
+  }
+
+  /* Paragraph text-align: block images ignore inherited text-align */
+  .rich-text[align="center"] img,
+  .rich-text .text-align-center img,
+  .rich-text [align="center"] img {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .rich-text[align="right"] img,
+  .rich-text .text-align-right img,
+  .rich-text [align="right"] img {
+    margin-left: auto;
+    margin-right: 0;
+  }
+
+  /* Changes ucb buttons to mjml buttons */
+  .rich-text a.ucb-link-button {
+    display: inline-block;
+    background-color: #0277BD;
+    color: #ffffff !important;
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 120%;
+    padding: 10px 25px;
+    border-radius: 3px;
+    text-decoration: none !important;
+    mso-padding-alt: 0;
+  }
+
+  .rich-text a.ucb-link-button span { color: #ffffff !important; }
+
+  /* Text Align */
+  .rich-text .text-align-left { text-align: left; }
+  .rich-text .text-align-center { text-align: center; }
+  .rich-text .text-align-right { text-align: right; }
+  .rich-text .text-align-justify { text-align: justify; }
+
+  .rich-text table { border-collapse: collapse; width: 100%; }
+  .rich-text table th, .rich-text table td { padding: 8px; border: 1px solid #dddddd; text-align: left; }
+  .rich-text table th { background-color: #eeeeee; font-weight: bold; }
+
+  /* prepare() rebuilds buttons as the table MJML emits for <mj-button>. Outranks the rules above! */
+  .rich-text table.ucb-link-button-table { width: auto; border-collapse: separate; line-height: 100%; margin: 0 0 10px 0; }
+  .rich-text table.ucb-link-button-table td { padding: 0; border: 0; background-color: #0277BD; border-radius: 3px; mso-padding-alt: 10px 25px; }
+
+  /* Outlook drops list indentation without this */
+  .rich-text ul, .rich-text ol { margin: 0 0 10px 0; padding-left: 22px; }
+
+  /* Accordion panels keep Bootstrap's collapsed state. The heading needs no
+     colour of its own now that prepare() has taken the link away, which leaves
+     it legible in either scheme. */
+  .rich-text .accordion-button { display: block; font-weight: bold; }
+  .rich-text .accordion-collapse,
+  .rich-text .accordion-collapse.collapse { display: block !important; height: auto !important; visibility: visible !important; }
+
+  /* No email equivalent */
+  .rich-text iframe,
+  .rich-text .ucb-map,
+  .rich-text .ucb-calendar,
+  .rich-text ucb-jump-menu,
+  .rich-text .visually-hidden,
+  .rich-text i { display: none !important; }
+</mj-style>
+{% endmacro %}
