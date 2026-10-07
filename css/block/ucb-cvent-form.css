@@ -1,0 +1,29 @@
+cvent-form {
+  display: block;
+  width: 100%;
+}
+
+cvent-form .ucb-loading-data {
+  color: #01579b;
+  text-align: center;
+  display: block;
+}
+
+cvent-form .ucb-loading-data[hidden],
+cvent-form [data-cvt-embed][hidden] {
+  display: none;
+}
+
+cvent-form [data-cvt-embed] {
+  width: 100%;
+  min-height: 70vh;
+}
+
+cvent-form [data-cvt-embed] .cvt-embed {
+  display: block;
+  width: 100%;
+  height: 70vh;
+  min-height: 640px;
+  border: 0;
+  flex: 1 1 auto;
+}

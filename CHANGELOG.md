@@ -9,6 +9,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### New Block: Cvent Form Block
+  Adds the ability to add a Cvent Form block to Web Express
+  
+  Resolves #1860 
+  
+  Includes:
+  - `theme` => https://github.com/CuBoulder/tiamat-theme/pull/1866
+  - `custom_entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/240
+  
+---
+
 ## [20260909] - 2026-09-09
 
 - ### Google Translate Depreciated, Move Translator to GTranslate
