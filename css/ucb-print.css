@@ -249,8 +249,11 @@ header.ucb-black,
   background-color: #eee;
   color: #000 !important;
 }
+.block-hero-unit.size-tiny .ucb-hero-unit-content,
+.block-hero-unit.size-small .ucb-hero-unit-content,
+.block-hero-unit.size-medium .ucb-hero-unit-content,
 .block-hero-unit.size-large .ucb-hero-unit-content,
-.block-hero-unit.size-small .ucb-hero-unit-content {
+.block-hero-unit.size-very-large .ucb-hero-unit-content {
   padding: 0 !important;
 }
 a.button {
