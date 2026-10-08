@@ -84,6 +84,19 @@
   padding-bottom: 240px;
 }
 
+.block-hero-unit .size-maximum {
+  aspect-ratio: 16 / 9;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.block-hero-unit .size-maximum .ucb-hero-unit-content {
+  width: 100%;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
 @media screen and (max-width: 768px) {
   .block-hero-unit .size-large .ucb-hero-unit-content {
     padding-top: 120px;
