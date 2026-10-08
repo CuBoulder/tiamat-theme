@@ -42,11 +42,15 @@
 {% if heroTextColor is iterable %}{% set heroTextColor = heroTextColor|first %}{% endif %}
 
 {# set classes for the size of the component #}
-{% if content['#block_content'].field_size.value is same as('0') %}
-  {% set size = 'size-large' %}
-{% else %}
-  {% set size = 'size-small' %}
-{% endif %}
+{% set sizeClasses = {
+  '0': 'size-medium',
+  '1': 'size-tiny',
+  '2': 'size-small',
+  '3': 'size-large',
+  '4': 'size-very-large',
+  '5': 'size-maximum'
+} %}
+{% set size = sizeClasses[content['#block_content'].field_size.value|default('')]|default('size-tiny') %}
 
 {# get the state of the overlay toggle and the color of the text #}
 {% set overlayClass = '' %}

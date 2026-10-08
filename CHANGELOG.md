@@ -9,6 +9,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Video Hero and Hero Unit padding
+  Updated the video reveal and hero units to have the new size options. video reveal - small, medium, large
+  
+  hero unit - tiny, small, medium, large, very large
+  
+  Resolves #1858 
+  
+  Includes:
+  - `theme` => https://github.com/CuBoulder/tiamat-theme/pull/1869
+  - `custom_entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/243
+  
+---
+
 ## [20261007] - 2026-10-07
 
 - ### Adds New Newsletter MJML Engine
