@@ -45,6 +45,13 @@
   --bs-gutter-x: 3rem;
 }
 
+.g-0, .gx-0 { --bs-gutter-x: 0; }
+.g-1, .gx-1 { --bs-gutter-x: 0.25rem; }
+.g-2, .gx-2 { --bs-gutter-x: 0.5rem; }
+.g-3, .gx-3 { --bs-gutter-x: 1rem; }
+.g-4, .gx-4 { --bs-gutter-x: 1.5rem; }
+.g-5, .gx-5 { --bs-gutter-x: 3rem; }
+
 /* Needed for Font Awesome  */
  @font-face {
     font-family: 'Font Awesome 6 Free - Brands';
