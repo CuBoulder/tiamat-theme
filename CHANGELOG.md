@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Gutter fixes
+  Gutter fixes for edge-to-edge styles to get rid of horizontal scroll bar.
+  
+  All alignments should be correct.
+  
+  Resolves #1870 
+---
+
 - ### Video Hero and Hero Unit padding
   Updated the video reveal and hero units to have the new size options. video reveal - small, medium, large
   
