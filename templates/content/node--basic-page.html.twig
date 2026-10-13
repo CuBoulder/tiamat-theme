@@ -84,7 +84,7 @@
   </h1>
   {% if content %}
     <div{{ content_attributes }}>
-      {{ content }}
+      {{ content|without('field_color_categorization') }}
     </div>
   {% endif %}
 </article>
