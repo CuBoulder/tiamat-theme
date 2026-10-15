@@ -9,6 +9,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### Adds Color Categories to Basic Pages
+  This change adds a new field to Basic Pages -- "Color Category", which allows content editors to assign color categories to Basic Pages. These colors can represent whatever you decide for your site to enable additional user-accessible filtering on the `/admin/content` View.
+  
+  Includes:
+  - `theme` : https://github.com/CuBoulder/tiamat-theme/pull/1876
+  - `profile` : https://github.com/CuBoulder/tiamat10-profile/pull/360
+  - `custom_entities` : https://github.com/CuBoulder/tiamat-custom-entities/pull/245
+  - `express_admin` :  https://github.com/CuBoulder/express_admin/pull/24
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1872
+---
+
 ## [20261014] - 2026-10-14
 
 - ### Gutter fixes
