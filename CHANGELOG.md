@@ -9,26 +9,44 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
-- ### Gutter fixes
-  Gutter fixes for edge-to-edge styles to get rid of horizontal scroll bar.
-  
-  All alignments should be correct.
-  
-  Resolves #1870 
----
-
-- ### Video Hero and Hero Unit padding
-  Updated the video reveal and hero units to have the new size options. video reveal - small, medium, large
-  
-  hero unit - tiny, small, medium, large, very large
-  
-  Resolves #1858 
+- ### Adds Color Categories to Basic Pages
+  This change adds a new field to Basic Pages -- "Color Category", which allows content editors to assign color categories to Basic Pages. These colors can represent whatever you decide for your site to enable additional user-accessible filtering on the `/admin/content` View.
   
   Includes:
+  - `theme` : https://github.com/CuBoulder/tiamat-theme/pull/1876
+  - `profile` : https://github.com/CuBoulder/tiamat10-profile/pull/360
+  - `custom_entities` : https://github.com/CuBoulder/tiamat-custom-entities/pull/245
+  - `express_admin` :  https://github.com/CuBoulder/express_admin/pull/24
+  
+  Resolves https://github.com/CuBoulder/tiamat-theme/issues/1872
+---
+
+## [20261014] - 2026-10-14
+
+- ### Gutter fixes
+
+  Gutter fixes for edge-to-edge styles to get rid of horizontal scroll bar.
+
+  All alignments should be correct.
+
+  Resolves #1870
+
+***
+
+- ### Video Hero and Hero Unit padding
+
+  Updated the video reveal and hero units to have the new size options. video reveal - small, medium, large
+
+  hero unit - tiny, small, medium, large, very large
+
+  Resolves #1858
+
+  Includes:
+
   - `theme` => https://github.com/CuBoulder/tiamat-theme/pull/1869
   - `custom_entities` => https://github.com/CuBoulder/tiamat-custom-entities/pull/243
-  
----
+
+***
 
 ## [20261007] - 2026-10-07
 
@@ -5144,7 +5162,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20261007...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20261014...HEAD
+[20261014]: https://github.com/CuBoulder/tiamat-theme/compare/20261007...20261014
 [20261007]: https://github.com/CuBoulder/tiamat-theme/compare/20260909...20261007
 [20260909]: https://github.com/CuBoulder/tiamat-theme/compare/20260729...20260909
 [20260729]: https://github.com/CuBoulder/tiamat-theme/compare/20260722...20260729
