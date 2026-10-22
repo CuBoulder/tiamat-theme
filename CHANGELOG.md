@@ -9,6 +9,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### MJML Newsletters: Adjust WYSIWYG list styling, Adjust Button label on Dark/Light toggle
+  - Fixes an issue where MJML Newsletters would over-indent text lists placed in WYSIWYG fields on Outlook Email Clients
+  - Changes `Dark Mode / Light Mode` toggle label to `Dark Mode preview / Light Mode preview` to accurately reflect toggle behavior. Note: This button is for a visual preview for Newsletter content to check what it will look like in different displays, it does NOT set the Newsletter's theme. That is handled by the email recipients' personalized email client settings.
+  
+  Resolves #1875 
+  Resolves #1877 
+---
+
 - ### Adds Color Categories to Basic Pages
   This change adds a new field to Basic Pages -- "Color Category", which allows content editors to assign color categories to Basic Pages. These colors can represent whatever you decide for your site to enable additional user-accessible filtering on the `/admin/content` View.
   

@@ -62,7 +62,7 @@
       this._schemeToggle.type = 'button';
       this._schemeToggle.className = 'ucb-mjml-preview-toggle';
       this._schemeToggle.setAttribute('aria-pressed', 'false');
-      this._schemeToggle.textContent = 'Dark mode';
+      this._schemeToggle.textContent = 'Dark mode preview';
       this._schemeToggle.onclick = () => this.toggleScheme();
       this._controls.appendChild(this._schemeToggle);
 
@@ -344,7 +344,7 @@
     toggleScheme() {
       this._scheme = this._scheme === 'dark' ? 'light' : 'dark';
       const isDark = this._scheme === 'dark';
-      this._schemeToggle.textContent = isDark ? 'Light mode' : 'Dark mode';
+      this._schemeToggle.textContent = isDark ? 'Light mode preview' : 'Dark mode preview';
       this._schemeToggle.setAttribute('aria-pressed', String(isDark));
       if (this._lastHtml) {
         this.renderFrame();
