@@ -9,33 +9,42 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20261022] - 2026-10-22
+
 - ### #1880 - Fix link element sizing on Article Lists
-  A change to thumbnail columns set the thumbnail column grow to one sixth of the row, and the link stretched across that extra space beside the 100px image, which resulting in odd spacing issues on the Article List page. 
-  
+
+  A change to thumbnail columns set the thumbnail column grow to one sixth of the row, and the link stretched across that extra space beside the 100px image, which resulting in odd spacing issues on the Article List page.
+
   This has been adjusted to a fixed size, with the image remaining 100px as the viewport scales down.
-  
-  Resolves #1880 
----
+
+  Resolves #1880
+
+***
 
 - ### MJML Newsletters: Adjust WYSIWYG list styling, Adjust Button label on Dark/Light toggle
+
   - Fixes an issue where MJML Newsletters would over-indent text lists placed in WYSIWYG fields on Outlook Email Clients
   - Changes `Dark Mode / Light Mode` toggle label to `Dark Mode preview / Light Mode preview` to accurately reflect toggle behavior. Note: This button is for a visual preview for Newsletter content to check what it will look like in different displays, it does NOT set the Newsletter's theme. That is handled by the email recipients' personalized email client settings.
-  
-  Resolves #1875 
-  Resolves #1877 
----
+
+  Resolves #1875
+  Resolves #1877
+
+***
 
 - ### Adds Color Categories to Basic Pages
+
   This change adds a new field to Basic Pages -- "Color Category", which allows content editors to assign color categories to Basic Pages. These colors can represent whatever you decide for your site to enable additional user-accessible filtering on the `/admin/content` View.
-  
+
   Includes:
+
   - `theme` : https://github.com/CuBoulder/tiamat-theme/pull/1876
   - `profile` : https://github.com/CuBoulder/tiamat10-profile/pull/360
   - `custom_entities` : https://github.com/CuBoulder/tiamat-custom-entities/pull/245
-  - `express_admin` :  https://github.com/CuBoulder/express_admin/pull/24
-  
+  - `express_admin` :  https://github.com/CuBoulder/express\_admin/pull/24
+
   Resolves https://github.com/CuBoulder/tiamat-theme/issues/1872
----
+
+***
 
 ## [20261014] - 2026-10-14
 
@@ -5178,7 +5187,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20261014...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20261022...HEAD
+[20261022]: https://github.com/CuBoulder/tiamat-theme/compare/20261014...20261022
 [20261014]: https://github.com/CuBoulder/tiamat-theme/compare/20261007...20261014
 [20261007]: https://github.com/CuBoulder/tiamat-theme/compare/20260909...20261007
 [20260909]: https://github.com/CuBoulder/tiamat-theme/compare/20260729...20260909
