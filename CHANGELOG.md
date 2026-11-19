@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+- ### #1885 - Slate Forms: Remove jQuery reference that throws errors and breaks render for anonymous Users
+  Removed a jquery reference within the Slate Form code so that anonymous users get a correct Slate form render. Previously the Slate Form used jQuery to find an html comment, which can also be done with vanilla JavaScript. 
+  
+  Resolves #1885 
+---
+
 ## [20261022] - 2026-10-22
 
 - ### #1880 - Fix link element sizing on Article Lists

@@ -13,11 +13,18 @@ class SlateFormElement extends HTMLElement {
         let outerScript = document.createElement('script')
         outerScript.innerText = `
             var script = document.createElement('script');
-            var div = jQuery('.field-item'),
-            comment = div.contents().filter(function() {
-            return this.nodeType === 8;
-            }).get(0);
-        
+            var comment;
+            var fieldItems = document.querySelectorAll('.field-item');
+            for (var i = 0; i < fieldItems.length && !comment; i++) {
+                var nodes = fieldItems[i].childNodes;
+                for (var j = 0; j < nodes.length; j++) {
+                    if (nodes[j].nodeType === 8) {
+                        comment = nodes[j];
+                        break;
+                    }
+                }
+            }
+
         if (typeof comment !== "undefined") {
             var options = comment.nodeValue.split(":");
             var optionsquery = '&sys:field:' + options[0] + '=' + options[1];
