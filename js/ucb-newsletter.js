@@ -1,4 +1,4 @@
-(function ($, Drupal) {
+(function () {
 //     // Create the admin button for copying HTML and the admin messages
     var codeContainer = document.createElement('div')
     codeContainer.classList = 'container email-button-container'
@@ -17,7 +17,7 @@
         var tags = document.getElementsByClassName('tags')
         // Iterate through all tags and create an absolute url
         for(let tag of tags){
-            for(child of tag.children){
+            for(let child of tag.children){
                 var endurl = child.getAttribute('href')
                 child.href = `${baseURL}${endurl}`
             }
@@ -63,8 +63,8 @@
 
         // Section Link - make blue (gets overridden by user agent style)
         var moreLinks = document.getElementsByClassName('article-link')
-        for(link of moreLinks){
-            for(child of link.children)
+        for(let link of moreLinks){
+            for(let child of link.children)
             child.style.cssText = `background-color: #0277BD !important;
             color: #fff !important;
             display: inline-block !important;
@@ -102,7 +102,7 @@
         }
 
         var emailStyles = ""
-        for(stylesheet of style){
+        for(let stylesheet of style){
             emailStyles += stylesheet.innerText
         }
 
@@ -137,5 +137,4 @@
     textArea.style.cssText = 'display: block;width: 100%;height: 241px;'
     codeContainer.appendChild(textArea)
     main.appendChild(codeContainer)
-
-})(jQuery, Drupal);
+})();
