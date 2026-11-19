@@ -1,4 +1,4 @@
-(function ($, Drupal) {
+(function () {
 //     // Create the admin button for copying HTML and the admin messages
     var codeContainer = document.createElement('div')
     codeContainer.classList = 'container email-button-container'
@@ -137,5 +137,4 @@
     textArea.style.cssText = 'display: block;width: 100%;height: 241px;'
     codeContainer.appendChild(textArea)
     main.appendChild(codeContainer)
-
-})(jQuery, Drupal);
+})();
