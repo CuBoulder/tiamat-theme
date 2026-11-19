@@ -9,11 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [20261119] - 2026-11-19
+
 - ### #1885 - Slate Forms: Remove jQuery reference that throws errors and breaks render for anonymous Users
-  Removed a jquery reference within the Slate Form code so that anonymous users get a correct Slate form render. Previously the Slate Form used jQuery to find an html comment, which can also be done with vanilla JavaScript. 
-  
-  Resolves #1885 
----
+
+  Removed a jquery reference within the Slate Form code so that anonymous users get a correct Slate form render. Previously the Slate Form used jQuery to find an html comment, which can also be done with vanilla JavaScript.
+
+  Resolves #1885
+
+***
 
 ## [20261022] - 2026-10-22
 
@@ -5193,7 +5197,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [0.20221109] - 2022-11-09
 
-[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20261022...HEAD
+[unreleased]: https://github.com/CuBoulder/tiamat-theme/compare/20261119...HEAD
+[20261119]: https://github.com/CuBoulder/tiamat-theme/compare/20261022...20261119
 [20261022]: https://github.com/CuBoulder/tiamat-theme/compare/20261014...20261022
 [20261014]: https://github.com/CuBoulder/tiamat-theme/compare/20261007...20261014
 [20261007]: https://github.com/CuBoulder/tiamat-theme/compare/20260909...20261007
